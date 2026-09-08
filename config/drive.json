@@ -1,0 +1,66 @@
+{
+  "$comment": "Verified read-only against the live Drive on 2026-09-07. Owner: mshull@jagschools.org. Structure locked by SHULL-CHG-0005; do not restructure without a Secretary change record.",
+  "root": {
+    "name": "SHULL Science",
+    "id": "1FsFiaYfkwgSLnA62bpIHt2zGosFwcPec"
+  },
+  "brand": {
+    "id": "14Epgk_qgvxzSDljBABn72lSLYY6erF1Q",
+    "children": {
+      "Templates": "1cFgdQbW8SSJaaXxzfCCr-IZMFjvaMg6J",
+      "Standards": "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+      "Image Library": "1RBK23kn2fcmBWiYidUDXSsVGk5NWXy3L"
+    },
+    "imageLibraryChildren": {
+      "Chemistry": "1zazjtB-6j0G-YMgIziESVT6I5CkMrkKI",
+      "Physics": "16VDK-gPK92AAY3MZawB8cyJzvZrtkcC5",
+      "Geology": "1aMMH5WEVy382MqQwd338XjwsLVdfc2bw",
+      "Shared": "1krQiGBTXid30u6O-u8qYa3gSqqdI7wwe"
+    }
+  },
+  "courses": {
+    "chemistry": {
+      "id": "1dA5kKA9vQxaWX0CZMhXIoBMYGfDhMxH6",
+      "unitFolders": 16,
+      "state": "all 16 unit folders present, Unit 00 through Unit 15"
+    },
+    "physics": {
+      "id": "1NOjl2nEZ1bjcjm32G55V265uGUoTErlk",
+      "unitFolders": 1,
+      "state": "only Unit 01 - Motion in One Dimension exists; 10 of 11 unit folders missing"
+    },
+    "geology": {
+      "id": "1lqHHql9cSqOZDGej2ff_121bITWOKZvr",
+      "unitFolders": 0,
+      "state": "empty. Unblocked by SHULL-CHG-0004 (Plate Tectonics = U4); folders may now be created"
+    }
+  },
+  "folderGrammar": {
+    "unit": "Unit ## - Unit Name",
+    "section": "Section ##.# - Section Name",
+    "separator": "hyphen-minus, never an en dash",
+    "contentFolders": [
+      "Homework",
+      "Presentations",
+      "Guided Notes",
+      "Tests-Quizizz",
+      "Labs-Case Studies-Projects"
+    ],
+    "contentFolderRule": "Exactly these five, same spelling, same order, every time. Reuse existing folders case-insensitively. Never create 'Tests' beside 'Tests-Quizizz'. Section subfolders are created on demand."
+  },
+  "operations": {
+    "search": "search_files with parentId = '<ID>' is the reliable folder-verification query",
+    "createFolder": "create_file with mimeType application/vnd.google-apps.folder",
+    "saveMarkdown": "disableConversionToGoogleType: true AND contentMimeType: text/plain, or Drive converts it to a Google Doc",
+    "move": "UNVERIFIED. Test T-3 must confirm update_file can reparent before the Librarian executes any move. copy_file + trash_file changes the file ID and breaks links.",
+    "delete": "trash_file only. There is no permanent-delete tool. Emptying the trash is the user's action."
+  },
+  "knownDefects": [
+    "GEO_U1_S1.2-S1.4_Guided_Cornell_Notes.docx is misfiled in _Brand/Templates/ and is misnamed",
+    "_Brand/Templates/ holds 15 PNGs, make_art.py, regrade.py and demo_u1.js that are not templates",
+    "Template source (tokens.js, tokens.phys.js, build.js) sits flat in Templates/ rather than Templates/src/",
+    "Chemistry Unit 00 has a bare Labs/ folder instead of a Section folder with the five content folders",
+    "SHULL_Color_Palette_Library.md and SHULL_Image_Prompt_Pack.md are referenced by filed standards but do not exist",
+    "SHULL_Physics_Unit_Map_1.pdf is cited as the source of the confirmed Physics map but is not in Drive"
+  ]
+}
