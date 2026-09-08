@@ -9,4 +9,5 @@
 A task is complete only when the deliverable has been **verified to exist at a verified location**.
 A returned message is not a completed task. If any step failed, the report says INCOMPLETE.
 
-*Status: not yet written. Phase 11.*
+*Status: all three written (Phase 11). Both schemas are behaviour-tested by
+`scripts/validate_schemas.py`.*

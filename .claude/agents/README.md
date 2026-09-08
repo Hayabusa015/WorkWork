@@ -19,4 +19,4 @@ a top-level `agents/`.
 Authority is enforced three ways: the `tools:` grant in each agent's frontmatter, a PreToolUse hook
 in `.claude/settings.json`, and the validators in `scripts/`. See `governance/GOVERNANCE.md`.
 
-*Status: not yet written. Phase 8.*
+*Status: all seven written and validated against the authority matrix (Phase 8).*

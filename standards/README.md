@@ -16,4 +16,4 @@ in Claude Project Knowledge, which Claude Code cannot read, and the fallback fil
 at did not exist — so the system's most important quality rule was unreachable by the skill that
 mandated it. The verbatim source is already in `legacy/drive-standards/`.
 
-*Status: not yet written. Phase 8.*
+*Status: all five written (Phase 8). No raw hex appears in any of them.*

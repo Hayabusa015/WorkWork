@@ -15,4 +15,5 @@ which nobody caught until the numbers were computed.
 
 **Trade Gothic Next is Monotype-licensed and must never be committed here.**
 
-*Status: not yet written. Phase 8, unblocked.*
+*Status: written (Phase 8). `tokens.json` carries computed measurements; the archive holds all
+five superseded palettes; the fonts are installed by the SessionStart hook.*

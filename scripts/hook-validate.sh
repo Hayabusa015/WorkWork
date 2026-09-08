@@ -10,7 +10,7 @@ set -uo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO" || exit 0
 fail=0
-for v in validate_layers validate_codes validate_tokens validate_agents validate_schemas; do
+for v in validate_layers validate_codes validate_tokens validate_agents validate_schemas validate_references; do
   if ! out=$(python3 "scripts/$v.py" 2>&1); then
     echo "── $v ──"; echo "$out"; fail=1
   fi
