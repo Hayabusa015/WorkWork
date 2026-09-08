@@ -10,9 +10,9 @@
 | **Supersedes** | `tokens.js` · `tokens.phys.js` · `SHULL_Slide_System_v2.md` §1 (the medium split) and §6 (the `SHULL_TOKENS` mechanism) |
 | **Affected Skills** | `build-presentation`, `apply-shull-design`, `audit-deliverable` |
 | **Affected Courses** | All three |
-| **Risk** | Medium — eight findings below, two of which need the user |
-| **Decision** | **PROPOSED** |
-| **Status** | **IMPLEMENTED except finding 3** |
+| **Risk** | Medium — nine findings below. All closed. |
+| **Decision** | **Approved by the user, 2026-09-08.** Finding 3: v2 stands, the chip stays withdrawn. Finding 8: option (b), darken the token. |
+| **Status** | **IMPLEMENTED** |
 
 Legacy source snapshotted byte-exact at `legacy/slide-template/`. Every claim below is diffable
 against it.
@@ -114,9 +114,11 @@ records it as "the same chip family as the practice-set banner chip" — a delib
 between a projected slide and the printed handout for the same section.
 
 Dropping it is a real design decision that was made somewhere between v1 and v2 with no record of
-why. The template implements v2, because v2 is what shipped and what the user approved. **Whether
-the slide→print chip link should come back is the user's call, not mine** — restoring it would be a
-design-system change, which Part 47 does not authorise me to make on my own.
+why. The template implements v2, because v2 is what shipped and what the user approved.
+
+**CLOSED 2026-09-08.** The user confirmed v2 stands. The chip is not restored, and
+`slideGeometry.footerChip` stays WITHDRAWN — now by decision rather than by default, which is the
+whole difference. If a slide-to-print link is wanted later it starts as a new proposal.
 
 ---
 
@@ -202,7 +204,7 @@ authorise that autonomously, and doing it quietly inside a slide-template migrat
 the kind of silent scope creep this system exists to stop. The slide template sidesteps it by using
 `ground.graphite` (11.05:1) for its own footer, which changes no token.
 
-**Three options, measured, for the user:**
+**Three options were put to the user, measured:**
 
 | Option | Effect | On white |
 |---|---|---|
@@ -210,9 +212,43 @@ the kind of silent scope creep this system exists to stop. The slide template si
 | (b) Darken `ground.footer` to clear 5.5 | One token moves; every lab handout footer gets slightly darker | ≥5.5:1 |
 | (c) Write a footer exemption into `rules` | The rule matches practice; the check learns about it | 4.98:1, declared |
 
-I recommend **(b)**: the footer is already the smallest type on a student page, and a token that
-cannot pass the rule it is measured against will keep failing this check on every deliverable
-forever. But it is a design decision and it is the user's.
+**CLOSED 2026-09-08 — the user approved (b).** `ground.footer` is now `#61675B`: **5.83:1 on white**,
+grayscale 100, status LOCKED.
+
+### One thing the darkening could not do, and it is recorded rather than hidden
+
+It clears the target on **white only**. On parchment it reaches 5.06:1 — better than the 4.31:1 it
+started at, still short of 5.5.
+
+It cannot be darkened further without a worse problem. `ground.label` (`#55604F`) is the next
+neutral down and already clears both grounds at grayscale 91. Any footer value dark enough to clear
+parchment lands within a few grey levels of `label`, and two small-type roles that close together
+are not two roles — the design system's own 20-level separation rule would flag them if they ever
+carried a categorical distinction.
+
+So the token targets its actual ground. White is the default background under SHULL-CHG-0008 and is
+what the lab template uses. **A running footer does not belong on a parchment surface**, and the
+token's `role` now says exactly that, so the constraint is a stated rule rather than a trap.
+
+---
+
+## Finding 9 — one character was pulling Liberation Sans into every lab PDF
+
+Found while re-rendering the lab template to verify the finding 8 change. **Pre-existing, not caused
+by it** — the committed PDF has it too.
+
+`pdffonts` on the lab template listed **Liberation Sans** alongside the four Archivo weights. One
+glyph was responsible: `▪` U+25AA, the `ul.dot` bullet, at 10pt on page 1. Archivo does not contain
+it, so the run fell through the stack to the last resort.
+
+Harmless in appearance — a square bullet rendered as a square bullet. Not harmless as a rule: it
+meant the font stack was not self-sufficient, "Archivo embedded and nothing else" could not be used
+as a QA rule because it had a standing exception, and on a machine without Liberation Sans it would
+have fallen further to something unpredictable.
+
+**Resolved:** the bullet is drawn, not typed — a 3.4pt `background` box on the `::before`. No glyph,
+no font, no fallback. Both lab templates now embed Archivo and nothing else, so the font rule holds
+with no exceptions.
 
 ---
 
@@ -225,8 +261,11 @@ Trade Gothic Next → DejaVu Sans substitution behind SHULL-CHG-0006.
 
 ## Not authorised, and not done
 
-Restoring the footer chip (finding 3), changing `ground.footer` (finding 8), changing the twelve
-layouts, changing the type scale, or changing any locked colour.
+Changing the twelve layouts, changing the type scale, or changing any locked course colour. None of
+that happened.
 
-**Two open items, both waiting on the user: finding 3 and finding 8.** Neither blocks the template;
-both are recorded so they cannot quietly become permanent by being forgotten.
+`ground.footer` did change, and only because the user approved it explicitly — the record of what it
+was, what it is, why, and what the change could not achieve is above and in the token's own `source`
+field.
+
+**Nothing is left open.**

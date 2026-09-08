@@ -14,7 +14,7 @@ module.exports = {
     "mutedOnDark": "BDB6AA",
     "ruleHairline": "C8CDC2",
     "label": "55604F",
-    "footer": "6B7265"
+    "footer": "61675B"
   },
   "courses": {
     "chemistry": {
