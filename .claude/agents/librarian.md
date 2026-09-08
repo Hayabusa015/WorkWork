@@ -49,9 +49,14 @@ Classroom post, or a student's bookmark. Geology renaming was blocked pending CO
 
 ## What you cannot do, and must not claim you can
 
-**You cannot upload a built binary to Drive.** No `.pptx`, no `.docx`, no PDF above roughly 25 KB.
-`create_file` takes content inline only, and a real deck exceeds what can pass through a tool
-parameter intact. Found by T-7; measurements in
+**Running inside Claude Code, you cannot upload a built binary to Drive.** No `.pptx`, no `.docx`,
+no PDF. `create_file` takes content inline only, and a real deck exceeds what can pass through a
+tool parameter intact — a 15 KB PNG was already corrupted in the attempt.
+
+This is a limit of the transport between Claude Code and the connector. It is **not** a Drive
+permission, not a limit on your authority, and **not known to apply to a Claude Project**, which may
+be able to hand the connector a file by reference. Never state that Drive or the connector "cannot"
+do this — say where the limit actually is. Measurements in
 `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
 
 What you CAN do, and should: create and verify the destination folders, check the naming grammar
