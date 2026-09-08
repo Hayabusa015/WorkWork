@@ -3,7 +3,10 @@
 A source-controlled operating system for Matthew Shull's teaching workflow —
 Chemistry, Physics, and Geology at James A. Garfield Local Schools.
 
-**Status: Phase 6 of 14 — architecture and migration analysis complete. Nothing is built yet.**
+**Status: Phase 8 of 14 — governance, design system, standards, and agents exist. Skills do not yet.**
+
+Do not build classroom deliverables from this repository until Phase 14 passes. The installed
+legacy SHULL skills are still the working system.
 
 ## What this repository is for
 
@@ -23,9 +26,25 @@ system itself. Claude Projects are working context, not storage.
 **The governing rule:** a fact lives in exactly one place. Where duplication is unavoidable,
 the duplicate must point at the authoritative source.
 
-## Current contents
+## What exists
 
-Analysis only. Read in this order:
+| | |
+|---|---|
+| `brand/` | `tokens.json` — the only place a hex is written, every colour carrying computed contrast and grayscale — plus the design system, the five archived palettes, and the Archivo fonts |
+| `standards/` | Anti-slop, voice, naming, Drive architecture, QA gate |
+| `governance/` | The two-layer rule, precedence, authority matrix, change control |
+| `.claude/agents/` | All seven agents, validated against the authority matrix |
+| `.claude/settings.json` | SessionStart hook that builds the environment |
+| `legacy/` | Verbatim snapshot of the pre-migration system. Read only. |
+| `config/drive.json` | Verified folder IDs, folder grammar, known filing defects |
+| `scripts/` | `measure_tokens.py`, `validate_agents.py` |
+
+**Not yet built:** the twelve skills, the workflows, the three course decisions files, the layer and
+code validators, and the weekly review.
+
+## The analysis behind it
+
+Read in this order:
 
 | Document | What it is |
 |---|---|
