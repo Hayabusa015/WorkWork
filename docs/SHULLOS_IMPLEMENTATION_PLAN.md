@@ -893,6 +893,7 @@ S1.2–S1.5, so there is real material to check against.
 | Design tokens | `tokens.json` is versioned; the archive holds every superseded palette | seconds |
 | Agents / skills | Versioned files; revert | seconds |
 | Drive **create** | `trash_file` the created object | minutes |
+| Drive **upload of a built binary** | Not possible through the connector — see §21 item 0 | — |
 | Drive **rename** | `update_file` back to the recorded prior name — **the Librarian must log the prior name before renaming** | minutes |
 | Drive **move** | Reparent back — **only if T-3 passes.** If moves are done by copy+trash, the file ID changes and rollback is imperfect. | see T-3 |
 | Drive **trash** | Restore from Drive trash | minutes |
@@ -912,6 +913,19 @@ S1.2–S1.5, so there is real material to check against.
 ## 21. Known limitations
 
 Stated plainly, because Part 36 says do not invent unsupported capabilities.
+
+0. **The Librarian cannot upload a built binary to Drive.** Found by T-7, 2026-09-08, and it is the
+   most consequential limitation on this list. `create_file` takes content **inline only** —
+   `textContent` or `base64Content`, no path — so a `.pptx`, `.docx` or PDF must pass through the
+   agent's context as base64. A 109 KB deck is 145,600 base64 characters against a tool-output
+   ceiling near 35,000: six reads, then one re-emitted parameter, every character by hand. One wrong
+   character is a corrupt file sitting where Matthew teaches from, and it would look filed.
+
+   Folder creation, renaming, reparenting, metadata and text files all work and are verified. **Built
+   binaries do not.** §8 says the human is the bridge for Project Knowledge and that Drive is the
+   shared path both surfaces reach. Drive is a shared *read* path; for built binaries the human is
+   the bridge there too. Evidence and measurements:
+   `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
 
 1. **A Claude Project cannot invoke Claude Code agents.** No bridge exists. §8.
 2. **Claude cannot write to Project Knowledge or to installed skills.** Every such update is a file

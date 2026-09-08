@@ -143,5 +143,13 @@ if (problems.length) {
   process.exit(1);
 }
 
-pres.writeFile({ fileName: OUT }).then(f =>
-  console.log(`wrote ${f}  —  ${code} ${UNIT} ${SECT}, ${n} slides`));
+pres.writeFile({ fileName: OUT }).then(f => {
+  console.log(`wrote ${f}  —  ${code} ${UNIT} ${SECT}, ${n} slides`);
+  // pptxgenjs stores its zip parts almost uncompressed - about 5x larger than it
+  // needs to be. Found during T-7, when the file size turned out to matter.
+  const r = require("child_process").spawnSync(
+    "python3", [path.join(__dirname, "..", "..", "scripts", "repack_pptx.py"), f],
+    { encoding: "utf8" });
+  if (r.status === 0) process.stdout.write(r.stdout);
+  else console.error("repack skipped:", (r.stderr || "").trim());
+});

@@ -23,7 +23,7 @@
     },
     "librarian": {
       "result": "fail",
-      "note": "NOT EXECUTED. Operation logged before mutation per DRIVE_ARCHITECTURE.md §3 at reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md. Held because it writes into the live teaching Drive and the user has not reviewed the deck. No parentId verification exists, so this step cannot be called pass."
+      "note": "PARTIAL. Both destination folders created AND independently verified: Section 01.4 - Isotopes (1WU_Mx3hYEDdNR8ADffg_bI16kPZ0GQDK, parent confirmed by get_file_metadata) and Presentations (1bK07FKOdrW3JUw5-2jre5zm1VZ1itJU-, confirmed by parentId search). The upload itself is BLOCKED by the connector, not by permissions: create_file takes content inline only, and 109KB of .pptx is 145,600 base64 characters against a ~35,000-character tool-output ceiling. Stopped rather than hand-shuttle it — a mistranscribed character would put a corrupt deck in the folder Matthew teaches from, looking filed. See reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md."
     },
     "deployment": {
       "result": "not required",
@@ -32,7 +32,7 @@
   },
   "status": "INCOMPLETE",
   "outstanding": [
-    "Librarian: 3 logged Drive operations awaiting the user's go-ahead — create Section 01.4 - Isotopes, create Presentations, upload the deck.",
+    "Librarian: the deck is NOT filed. Both folders exist and are verified; the .pptx cannot be uploaded through the connector and is the user's to drop into https://drive.google.com/drive/folders/1bK07FKOdrW3JUw5-2jre5zm1VZ1itJU-",
     "12 image slots unfilled. Prompts available from scripts/image_prompts.py. The deck is not classroom-ready until they are placed.",
     "Empty image wells still render as dashed boxes; a deck cannot yet suppress a well it is not using.",
     "Guided notes and practice set for 1.4 not built — next in the documented build order, out of scope for T-7."

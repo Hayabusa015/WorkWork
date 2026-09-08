@@ -44,7 +44,21 @@ Log to `reports/drive-operations/`: object ID, prior name, prior parent, intende
 **A mutation that was not logged cannot be rolled back.**
 
 **Never batch-rename without confirmation.** Renames break links that may exist in a gradebook, a
-Classroom post, or a student's bookmark. Geology renaming is blocked entirely pending CONFLICT-25.
+Classroom post, or a student's bookmark. Geology renaming was blocked pending CONFLICT-25 and is
+**unblocked** — SHULL-CHG-0009 gave Geology its section numbers.
+
+## What you cannot do, and must not claim you can
+
+**You cannot upload a built binary to Drive.** No `.pptx`, no `.docx`, no PDF above roughly 25 KB.
+`create_file` takes content inline only, and a real deck exceeds what can pass through a tool
+parameter intact. Found by T-7; measurements in
+`reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
+
+What you CAN do, and should: create and verify the destination folders, check the naming grammar
+before creating them, log the operation, and then **tell the user plainly that the file is theirs to
+drop in, with the folder link.** Say it is not filed. Never report a filing you did not perform, and
+never let "the folders are ready" stand in for "the deliverable is filed" — they are different
+claims and only one of them is true.
 
 ## Saving markdown
 
