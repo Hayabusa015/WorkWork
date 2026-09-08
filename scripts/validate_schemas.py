@@ -30,6 +30,22 @@ CASES = [
     ("task-report.schema.json", False, "INCOMPLETE that does not say what is outstanding",
      {"task": "Build notes", "subject": "Chemistry", "deliverable": "Guided notes",
       "steps": STEPS, "status": "INCOMPLETE"}),
+    # T-10, 2026-09-08. The schema accepted both of these until the test built them.
+    # A report that ticks WORK COMPLETE over a failed step is the dishonesty the whole
+    # file exists to make impossible, and it was possible.
+    ("task-report.schema.json", False, "WORK COMPLETE while the auditor FAILED",
+     {"task": "Build a deck", "subject": "Chemistry", "deliverable": "Slides",
+      "steps": {**STEPS, "auditor": {"result": "fail", "note": "clipped text on slide 6"}},
+      "status": "WORK COMPLETE", "location": LOC}),
+    ("task-report.schema.json", False, "WORK COMPLETE while the librarian FAILED",
+     {"task": "Build a deck", "subject": "Chemistry", "deliverable": "Slides",
+      "steps": {**STEPS, "librarian": {"result": "fail", "note": "parentId lookup found another folder"}},
+      "status": "WORK COMPLETE", "location": LOC}),
+    ("task-report.schema.json", True, "INCOMPLETE WITH a failed step - still legal, and the point",
+     {"task": "Build a deck for a section that does not exist", "subject": "Chemistry",
+      "deliverable": "Slides",
+      "steps": {**STEPS, "overseer": {"result": "fail", "note": "1.9 is not in the decisions file"}},
+      "status": "INCOMPLETE", "outstanding": ["Confirm the intended section, 1.1-1.5."]}),
     ("task-report.schema.json", False, "step skipped with no reason given",
      {"task": "Build notes", "subject": "Chemistry", "deliverable": "Guided notes",
       "steps": {**STEPS, "researcher": {"result": "not required"}},

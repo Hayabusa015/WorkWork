@@ -59,6 +59,21 @@ const LABEL_ON_DARK_CARD  = C.mutedOnDark;   // mutedOnDark on graphite,  6.34:1
 const CONTENT_W = W - M.l - M.r;
 
 const pres = new pptxgen();
+
+/* Every master's placeholder names, collected as the masters are defined rather than
+ * maintained as a list beside them. build_deck.js checks against this, because
+ * pptxgenjs silently turns an addText to a placeholder the master never declared into a
+ * plain text box in a default font - which is how a stray DejaVu Sans run got into the
+ * first CHEM deck built through the chain. Slide 1 uses 02_SECTION_TITLE, which has no
+ * eyebrow. Nothing failed; the text simply arrived in the wrong font. */
+const PLACEHOLDERS = {};
+const defineMaster = (def) => {
+  PLACEHOLDERS[def.title] = (def.objects || [])
+    .filter(o => o.placeholder && o.placeholder.options && o.placeholder.options.name)
+    .map(o => o.placeholder.options.name);
+  pres.defineSlideMaster(def);
+};
+
 pres.layout = "LAYOUT_WIDE";
 pres.author = "Matthew Shull";
 pres.company = "SHULL Science";
@@ -153,7 +168,7 @@ const subhead = (dark, y = subheadY, w = CONTENT_W) => ({
 /* ================= THE TWELVE LAYOUTS ================= */
 
 /* 01 — UNIT TITLE (dark, hero image right) */
-pres.defineSlideMaster({
+defineMaster({
   title: "01_UNIT_TITLE", background: { color: C.darkGround },
   objects: [
     bgDark(),
@@ -178,7 +193,7 @@ pres.defineSlideMaster({
 });
 
 /* 02 — SECTION TITLE (accent panel left, image right) */
-pres.defineSlideMaster({
+defineMaster({
   title: "02_SECTION_TITLE", background: { color: C.darkGround },
   objects: [
     bgDark(),
@@ -214,7 +229,7 @@ pres.defineSlideMaster({
 });
 
 /* 03 — GROUPED CONCEPT (light, image + 2 cards + must-write) */
-pres.defineSlideMaster({
+defineMaster({
   title: "03_GROUPED_CONCEPT", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
@@ -226,7 +241,7 @@ pres.defineSlideMaster({
 });
 
 /* 04 — SECTION DIVIDER (dark, full-bleed image, floating card) */
-pres.defineSlideMaster({
+defineMaster({
   title: "04_DIVIDER", background: { color: C.darkGround },
   objects: [
     bgDark(),
@@ -272,7 +287,7 @@ const step = (n, x) => ([
       text: "What changed, and why." } },
 ]);
 
-pres.defineSlideMaster({
+defineMaster({
   title: "05_PROCESS_TIMELINE", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
@@ -284,7 +299,7 @@ pres.defineSlideMaster({
 });
 
 /* 06 — CONCEPT + IMAGE PANEL (dark — the one deliberate dark content slide) */
-pres.defineSlideMaster({
+defineMaster({
   title: "06_CONCEPT_IMAGE", background: { color: C.darkGround },
   objects: [
     bgDark(), rail(),
@@ -314,7 +329,7 @@ pres.defineSlideMaster({
 });
 
 /* 07 — COMPARISON CARDS (light, 3 parallel cards) */
-pres.defineSlideMaster({
+defineMaster({
   title: "07_COMPARISON_CARDS", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false),
@@ -329,7 +344,7 @@ pres.defineSlideMaster({
 });
 
 /* 08 — DIAGRAM + ANNOTATION (light, hand-built figure + 3 rule cards) */
-pres.defineSlideMaster({
+defineMaster({
   title: "08_DIAGRAM_ANNOTATION", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
@@ -348,7 +363,7 @@ pres.defineSlideMaster({
 });
 
 /* 09 — EXAMPLE PROBLEM (light — problem, givens, EMPTY work area) */
-pres.defineSlideMaster({
+defineMaster({
   title: "09_EXAMPLE_PROBLEM", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false),
@@ -380,7 +395,7 @@ pres.defineSlideMaster({
 });
 
 /* 10 — WORKED SOLUTION (light — the 09 pair. Every example ships with its solution.) */
-pres.defineSlideMaster({
+defineMaster({
   title: "10_WORKED_SOLUTION", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
@@ -401,7 +416,7 @@ pres.defineSlideMaster({
 });
 
 /* 11 — GIVENS / EQUATION / ANSWER (light — any course) */
-pres.defineSlideMaster({
+defineMaster({
   title: "11_GIVENS_EQUATION_ANSWER", background: { color: C.lightGround },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
@@ -456,7 +471,7 @@ const INDEX = [
   ["11", "Given/Eq/Ans",  "any course"],          ["12", "Deck Index",    "delete before class"],
 ];
 
-pres.defineSlideMaster({
+defineMaster({
   title: "12_DECK_INDEX", background: { color: C.darkGround },
   objects: [
     bgDark(), rail(), ...eyebrow(true),
@@ -476,6 +491,7 @@ pres.defineSlideMaster({
 });
 
 module.exports = pres;
+module.exports.PLACEHOLDERS = PLACEHOLDERS;
 
 /* ================= DEMO DECK ================= */
 /* One slide per layout, so a build can be looked at rather than trusted. The content

@@ -2,76 +2,217 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Hayabusa015/WorkWork/schemas/task-report.schema.json",
   "title": "SHULL OS Task Report",
-  "description": "The completion report for a document-producing task. WORK COMPLETE requires every required step accounted for AND a verified location. See workflows/build-deliverable.md.",
+  "description": "The completion report for a document-producing task. WORK COMPLETE requires every required step accounted for, NO step marked fail, AND a verified location. See workflows/build-deliverable.md.",
   "type": "object",
-  "required": ["task", "subject", "deliverable", "steps", "status"],
+  "required": [
+    "task",
+    "subject",
+    "deliverable",
+    "steps",
+    "status"
+  ],
   "additionalProperties": false,
   "properties": {
-    "task": { "type": "string", "minLength": 1 },
-    "subject": { "enum": ["Chemistry", "Physics", "Geology"] },
-    "unit": { "type": "string", "pattern": "^U\\d{2}$" },
-    "section": { "type": "string", "pattern": "^S\\d{2}\\.\\d$" },
-    "deliverable": { "type": "string", "minLength": 1 },
+    "task": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "enum": [
+        "Chemistry",
+        "Physics",
+        "Geology"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "pattern": "^U\\d{2}$"
+    },
+    "section": {
+      "type": "string",
+      "pattern": "^S\\d{2}\\.\\d$"
+    },
+    "deliverable": {
+      "type": "string",
+      "minLength": 1
+    },
     "steps": {
       "type": "object",
       "description": "Every step is pass, fail, or explicitly not required. A tick that did not happen is a lie in a form that looks like diligence.",
-      "required": ["overseer", "designer", "auditor", "librarian", "deployment"],
+      "required": [
+        "overseer",
+        "designer",
+        "auditor",
+        "librarian",
+        "deployment"
+      ],
       "additionalProperties": false,
       "properties": {
-        "overseer":   { "$ref": "#/$defs/step" },
-        "researcher": { "$ref": "#/$defs/step" },
-        "designer":   { "$ref": "#/$defs/step" },
-        "auditor":    { "$ref": "#/$defs/step" },
-        "librarian":  { "$ref": "#/$defs/step" },
-        "deployment": { "$ref": "#/$defs/step" }
+        "overseer": {
+          "$ref": "#/$defs/step"
+        },
+        "researcher": {
+          "$ref": "#/$defs/step"
+        },
+        "designer": {
+          "$ref": "#/$defs/step"
+        },
+        "auditor": {
+          "$ref": "#/$defs/step"
+        },
+        "librarian": {
+          "$ref": "#/$defs/step"
+        },
+        "deployment": {
+          "$ref": "#/$defs/step"
+        }
       }
     },
-    "status": { "enum": ["WORK COMPLETE", "INCOMPLETE"] },
+    "status": {
+      "enum": [
+        "WORK COMPLETE",
+        "INCOMPLETE"
+      ]
+    },
     "location": {
       "type": "object",
       "description": "Required for WORK COMPLETE. verifiedBy records HOW the destination was confirmed - an independent lookup, not the create call returning success.",
-      "required": ["path", "fileId", "verifiedBy"],
+      "required": [
+        "path",
+        "fileId",
+        "verifiedBy"
+      ],
       "properties": {
-        "path": { "type": "string" },
-        "fileId": { "type": "string" },
-        "verifiedBy": { "enum": ["parentId lookup", "get_file_metadata"] }
+        "path": {
+          "type": "string"
+        },
+        "fileId": {
+          "type": "string"
+        },
+        "verifiedBy": {
+          "enum": [
+            "parentId lookup",
+            "get_file_metadata"
+          ]
+        }
       }
     },
     "outstanding": {
       "type": "array",
       "description": "Required for INCOMPLETE. What failed and what remains.",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1
     }
   },
   "$defs": {
     "step": {
       "type": "object",
-      "required": ["result"],
+      "required": [
+        "result"
+      ],
       "properties": {
-        "result": { "enum": ["pass", "fail", "not required"] },
-        "note": { "type": "string" }
+        "result": {
+          "enum": [
+            "pass",
+            "fail",
+            "not required"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
       },
       "allOf": [
         {
-          "if": { "properties": { "result": { "const": "not required" } }, "required": ["result"] },
-          "then": { "required": ["result", "note"] }
+          "if": {
+            "properties": {
+              "result": {
+                "const": "not required"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          },
+          "then": {
+            "required": [
+              "result",
+              "note"
+            ]
+          }
         },
         {
-          "if": { "properties": { "result": { "const": "fail" } }, "required": ["result"] },
-          "then": { "required": ["result", "note"] }
+          "if": {
+            "properties": {
+              "result": {
+                "const": "fail"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          },
+          "then": {
+            "required": [
+              "result",
+              "note"
+            ]
+          }
         }
       ]
     }
   },
   "allOf": [
     {
-      "if": { "properties": { "status": { "const": "WORK COMPLETE" } }, "required": ["status"] },
-      "then": { "required": ["location"] }
+      "if": {
+        "properties": {
+          "status": {
+            "const": "WORK COMPLETE"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "$comment": "WORK COMPLETE requires BOTH halves: a verified location AND no step that failed. Only the location half was enforced until T-10 built a report claiming WORK COMPLETE with the auditor marked fail and a clipped slide named in its own note - and the schema accepted it. A report that ticks completion over a failed QA step is the exact dishonesty this file exists to make impossible.",
+        "required": [
+          "location"
+        ],
+        "properties": {
+          "steps": {
+            "additionalProperties": {
+              "properties": {
+                "result": {
+                  "not": {
+                    "const": "fail"
+                  },
+                  "$comment": "A failed step means the status is INCOMPLETE. There is no third option."
+                }
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "if": { "properties": { "status": { "const": "INCOMPLETE" } }, "required": ["status"] },
-      "then": { "required": ["outstanding"] }
+      "if": {
+        "properties": {
+          "status": {
+            "const": "INCOMPLETE"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "outstanding"
+        ]
+      }
     }
   ]
 }
