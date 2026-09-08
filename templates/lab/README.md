@@ -10,17 +10,39 @@ that structure with the content lifted out.
 
 ---
 
-## Status — read before using
+## Status
 
 | File | State |
 |---|---|
-| `build_lab.py` | **Present.** Migrated from Drive, verified working. |
-| `SHULL_Lab_TEMPLATE_MASTER.html` | **MISSING.** Described by the original README; not in Drive. |
-| `SHULL_Lab_TEMPLATE_TEACHER_KEY.html` | **MISSING.** Same. |
-| Preview PDFs | **MISSING.** Same. |
+| `build_lab.py` | Migrated from Drive, verified working |
+| `SHULL_Lab_TEMPLATE_MASTER.html` | **v1.1** — migrated byte-exact from Drive, then moved onto the token system |
+| `SHULL_Lab_TEMPLATE_TEACHER_KEY.html` | **v1.1** — same |
+| `shull-lab-tokens.css` | **Generated** by `scripts/build_lab_css.py` from `brand/tokens.json`. Do not hand-edit. |
 
-**The template HTML must be authored to the spec below.** It is a build task, not a recovery.
-See SHULL-CHG-0010, Finding 1.
+Verified end to end: both files render, `pdffonts` shows Archivo, and page 1 of the master
+measures **5.2% of pixels marked, 2.4% heavy** — at the SHULL ink benchmark.
+
+### What changed from Drive v1.0
+
+Structure, wording, blocks, and the locked rules are **untouched**. Only brand values moved:
+
+| v1.0 | v1.1 |
+|---|---|
+| Poppins / Liberation Sans | `var(--display)` / `var(--body)` → Trade Gothic Next → Archivo → Liberation Sans |
+| Deep Forest `#1A2318` | `var(--ink)` |
+| Moss Green `#4A7C59` | `var(--accent)` — the course text-safe deep variant |
+| Warm Earth `#6E5310` / `#8B6914` | `var(--warn)` / `var(--warn-rule)` — semantic, not brand |
+| Parchment as light ground | White. Parchment survives only as the SVG liquid fill. |
+| "the print palette is identical for all three courses" | **False now.** The `<body>` course class drives a real accent. |
+
+The `<body class="chem\|phys\|geo">` hook was described in v1.0 as changing "nothing visual today."
+**It now does.** Setting it switches `--accent` to that course's `primaryDeep`.
+
+### Known exception
+
+Six `#14161B` and one `#EDF0E5` remain as literals inside the hand-built SVG diagram, because
+`var()` does not resolve in SVG presentation attributes under this renderer. They are the only
+hand-typed hexes permitted in this directory and `validate_tokens.py` must allow them.
 
 ---
 

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL Science — Lab Document Template (MASTER)</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB DOCUMENT TEMPLATE (MASTER)  v1.0
+ Works for CHEMISTRY · PHYSICS · GEOLOGY
+=====================================================================
+
+ HOW TO USE
+ 1. Copy this file. Rename it using the doc-code grammar:
+       SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor].html
+ 2. On the <body> tag, set the course class:  chem  |  phys  |  geo
+ 3. Replace every [[ BRACKETED TOKEN ]]. Search for "[[" to find them all.
+ 4. Delete any block you do not need. Blocks are marked "BLOCK:" in comments.
+ 5. Render:  python3 build_lab.py yourfile.html
+ 6. File the PDF in:  [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ RULES BAKED IN — DO NOT OVERRIDE
+ · Ink-friendly. Outline and rule treatments only. No solid fills, no
+   shaded banners, no colored table headers.
+ · No write-lines, no answer spaces, no fillable data tables on the
+   handout. The lab notebook is the write-on surface. The pre-lab
+   instructs students to draw their own tables.
+ · Print palette is the same for all three courses. The per-course
+   accent palettes (Lab Lime / Kinetic / Terra Teal) are PROJECTION
+   ONLY and never touch a printed page.
+ · Margins are the confirmed SHULL print standard and are locked.
+=====================================================================
+-->
+
+<link rel="stylesheet" href="shull-lab-tokens.css">
+<style>
+  /* ---------- Locked SHULL print margins ---------- */
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+
+    @top-right {
+      content: string(runhead);
+      font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+      letter-spacing: 0.30em; color: var(--footer);
+      margin-top: 0.16in;
+    }
+    @bottom-left {
+      content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: string(footright);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  @page :first { @top-right { content: ""; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    font-size: 10.3pt;
+    line-height: 1.40;
+    color: var(--ink);
+  }
+
+  /* Brand values come from shull-lab-tokens.css, generated from brand/tokens.json.
+     Never hand-type a hex here. See SHULL-CHG-0008 for the colour-as-type rule. */
+
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  b, strong { font-weight: bold; }
+
+  /* string-set carriers — set once, used by every running head/footer */
+  .meta, .runhead { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code   { string-set: unitcode content(); }
+  .m-fright { string-set: footright content(); }
+
+  /* Any section can set the running header for the pages that follow */
+  .runhead { string-set: runhead content(); }
+
+  /* ---------- Masthead (page 1 only) ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 {
+    font-family: var(--display); font-weight: bold; font-size: 17pt;
+    line-height: 1.12; letter-spacing: -0.005em; flex: 1 1 auto;
+  }
+  .masthead h1 .accent { color: var(--accent); }   /* ONE accent word max */
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--accent); border-radius: 9pt;
+    padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  /* ---------- Name / Date / Period / Group ---------- */
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; }
+  .id-row .per  { flex: 1; }
+  .id-group { margin: 6pt 1pt 11pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 8.6pt;
+    letter-spacing: 0.20em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent);
+    padding-bottom: 2.5pt; margin: 13pt 0 6pt 0;
+  }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 {
+    font-family: var(--display); font-weight: 600; font-size: 10.2pt;
+    color: var(--ink); margin: 10pt 0 4pt 0;
+  }
+  h3 .flag {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--warn);
+    border: 0.8pt solid var(--warn-rule); border-radius: 7pt;
+    padding: 1.5pt 6pt; margin-left: 7pt; vertical-align: 1.5pt;
+  }
+
+  p { margin-bottom: 5pt; }
+  p.lead { margin-bottom: 7pt; }
+
+  /* ---------- Bulleted lists (goals, safety, materials) ---------- */
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3.5pt; }
+  ul.dot li::before {
+    content: "▪"; position: absolute; left: 0; top: -0.5pt;
+    color: var(--accent); font-size: 10pt; line-height: 1;
+  }
+
+  /* ---------- Numbered question lists (pre-lab, post-lab) ---------- */
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li {
+    counter-increment: q; position: relative;
+    padding-left: 20pt; margin-bottom: 7pt;
+    page-break-inside: avoid;
+  }
+  ol.q > li::before {
+    content: counter(q);
+    position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt;
+    color: var(--ink);
+    border: 1pt solid var(--accent); border-radius: 2.5pt;
+    width: 14pt; height: 14pt; line-height: 12pt;
+    text-align: center;
+  }
+  .ref {
+    font-family: var(--display); font-weight: 600; font-size: 6.4pt;
+    letter-spacing: 0.16em; color: var(--accent); white-space: nowrap;
+    margin-left: 5pt;
+  }
+
+  /* ---------- Numbered procedure ---------- */
+  ol.proc { margin: 3pt 0 4pt 17pt; }
+  ol.proc > li { margin-bottom: 4.5pt; page-break-inside: avoid; }
+  ol.proc ul { list-style: none; margin: 3pt 0 1pt 0; }
+  ol.proc ul li {
+    padding-left: 11pt; position: relative; margin-bottom: 2.5pt;
+    font-size: 9.9pt;
+  }
+  ol.proc ul li::before {
+    content: "–"; position: absolute; left: 1pt; color: var(--accent);
+  }
+
+  /* ---------- Formula callout (outline only) ---------- */
+  .formula {
+    border-left: 2.5pt solid var(--accent);
+    padding: 5pt 0 5pt 10pt; margin: 6pt 0 7pt 0;
+  }
+  .formula .fname {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2.5pt;
+  }
+  .formula .fx { font-family: var(--display); font-size: 10.6pt; font-weight: 500; }
+
+  /* ---------- Data-table skeletons students copy into the notebook ---- */
+  .tables { display: flex; gap: 10pt; margin-top: 7pt; align-items: flex-start; }
+  .tbl { flex: 1 1 0; page-break-inside: avoid; }
+  .tbl .cap {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; margin-bottom: 0;
+  }
+  .tbl table { width: 100%; border-collapse: collapse; }
+  .tbl td {
+    border-bottom: 0.6pt solid var(--rule-hairline);
+    padding: 3.2pt 2pt; font-size: 9.1pt; line-height: 1.25;
+  }
+  .tbl td.note {
+    font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); text-align: right; border-bottom: none;
+  }
+
+  /* ---------- Reference data table (e.g. accepted densities) ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
+  table.data th {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
+  }
+  table.data td {
+    padding: 3.6pt 4pt; font-size: 9.8pt;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+  }
+  .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
+
+  /* ---------- Two-column figure/table row ---------- */
+  .split { display: flex; gap: 14pt; align-items: flex-start; }
+  .split .wide { flex: 3 1 0; } .split .narrow { flex: 1 1 0; padding-top: 8pt; }
+  .figcap {
+    font-size: 8pt; color: var(--label); text-align: center;
+    margin-top: 4pt; line-height: 1.3;
+  }
+
+  /* ---------- Inline emphasis rule (the "read this" line) ---------- */
+  .rule-note {
+    border-top: 0.8pt solid var(--rule-hairline); border-bottom: 0.8pt solid var(--rule-hairline);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.9pt;
+  }
+
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body class="chem">
+<!-- ^^^ SET COURSE CLASS: chem | phys | geo  (affects wording notes only —
+     the print palette is identical for all three courses by design) -->
+
+<!-- ============ RUNNING HEAD / FOOTER VALUES — set once ============ -->
+<div class="meta">
+  <span class="m-course">[[ CHEMISTRY ]]</span>
+  <span class="m-code">[[ U0 / S0.3 ]]</span>
+  <span class="m-fright">[[ INTRO SKILLS LAB ]] · CARBONLESS COPY GRADED INDIVIDUALLY</span>
+</div>
+
+
+<!-- ================================================================
+     PAGE 1 — MASTHEAD · GOALS · PURPOSE · BACKGROUND
+     ================================================================ -->
+
+<div class="masthead">
+  <div class="eyebrow">UNIT [[ 0 ]] — [[ FOUNDATIONS OF CHEMISTRY ]] · SECTION [[ 3 ]]</div>
+  <div class="titlerow">
+    <h1>[[ Lab Title ]]: <span class="accent">[[ Accent Word ]]</span> [[ rest of title ]]</h1>
+    <div class="chip">[[ U0 / S0.3 ]]</div>
+  </div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>
+  <div class="date"><div class="f">&nbsp;</div><div class="lbl">DATE</div></div>
+  <div class="per"><div class="f">&nbsp;</div><div class="lbl">PERIOD</div></div>
+</div>
+<div class="id-group">
+  <div class="f">&nbsp;</div><div class="lbl">GROUP MEMBERS</div>
+</div>
+
+<h2>GOALS</h2>
+<!-- BLOCK: GOALS — 4-6 items. Each starts with a verb and names the actual
+     skill or measurement. No "students will be able to" phrasing. -->
+<ul class="dot">
+  <li>[[ Operate a specific tool correctly — name the tool and the skill. ]]</li>
+  <li>[[ Measure a specific quantity and explain why the wrong tool won't do. ]]</li>
+  <li>[[ Determine / calculate the target quantity and state what you do with it. ]]</li>
+  <li>[[ Build or set up the apparatus and accomplish the physical task. ]]</li>
+  <li>[[ Record data in your lab notebook as you take it — not from memory afterward. ]]</li>
+</ul>
+
+<h2>PURPOSE</h2>
+<!-- BLOCK: PURPOSE — 2-3 sentences, plain, second person. Say what the
+     student is actually going to determine and what the real point is.
+     Do not explain the educational value of the activity. -->
+<p class="lead">[[ You are going to ___ using nothing but ___. Both jobs depend entirely on
+whether you can use the tools correctly. That is the real point of today. ]]</p>
+
+<h2>BACKGROUND</h2>
+<!-- BLOCK: BACKGROUND — only the theory needed to do and understand THIS lab.
+     Bold lead-in phrase per idea. Every formula gets a .formula block with
+     its NAME as well as its symbols. -->
+<p><b>[[ Concept 1 lead-in. ]]</b> [[ Two to four sentences. Include the specific
+misstep students make — that sentence is what makes this section worth printing. ]]</p>
+
+<p><b>[[ Concept 2 lead-in. ]]</b> [[ Explanation. ]]</p>
+
+<div class="formula">
+  <div class="fname">[[ NAME OF THE RELATIONSHIP ]]</div>
+  <div class="fx">[[ quantity = quantity ÷ quantity ]] &nbsp;·&nbsp; [[ units ]]</div>
+</div>
+
+<p>[[ One sentence on why the relationship behaves the way it does — the sentence
+that connects the math to the identification or conclusion. ]]</p>
+
+<!-- BLOCK (optional): governing equation, reaction, or model -->
+<div class="formula">
+  <div class="fname">[[ REACTION / EQUATION FOR TODAY ]]</div>
+  <div class="fx">[[ CaCl<sub>2</sub>(aq) + Na<sub>2</sub>CO<sub>3</sub>(aq) → CaCO<sub>3</sub>(s) + 2 NaCl(aq) ]]</div>
+</div>
+
+<!-- BLOCK: percent error — keep whenever an accepted value exists. Delete if not. -->
+<div class="formula">
+  <div class="fname">PERCENT ERROR</div>
+  <div class="fx">percent error = ( | experimental − accepted | ÷ accepted ) × 100</div>
+</div>
+
+
+<!-- ================================================================
+     PAGE 2 — SAFETY · PRE-LAB · DATA TABLES TO COPY
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">[[ U0 / S0.3 ]] · [[ INTRO SKILLS LAB ]] · SAFETY &amp; PRE-LAB</div>
+
+<h2 class="warn">SAFETY</h2>
+<!-- BLOCK: SAFETY — name the specific hazard AND the behavior that controls it.
+     Never generic. One bullet per real hazard. Include the disposal-of-broken-
+     glass line and the spill line every time. VERIFY every chemical statement. -->
+<ul class="dot">
+  <li>[[ Splash goggles go on before any bottle is opened and stay on until every piece of
+      glassware is washed and put away — including while other groups are still working. ]]</li>
+  <li>[[ Chemical + concentration ]] is [[ hazard ]]. On skin: [[ exact response and duration ]].
+      In eyes: [[ eyewash duration, hold eyelids open, send a group member for me immediately ]].
+      Do not wait to see if it gets better.</li>
+  <li>[[ Equipment-specific hazard and the action that prevents it. ]]</li>
+  <li>Check the rim of every [[ piece of glassware ]] before you use it. Chipped glass cuts.
+      Broken glass goes in the glass box by the back sink — never the trash can.</li>
+  <li>[[ Thermal / electrical / burner statement, or: "Nothing is heated today and no burner is lit." ]]</li>
+  <li>Report every spill, including water. Water on the floor is how people fall.</li>
+</ul>
+
+<h2>PRE-LAB — DUE AT THE START OF THE PERIOD</h2>
+<p class="lead">Answer all of these in your lab notebook, numbered 1 through [[ N ]], before you
+walk in. Do not write on this handout — it stays clean so you can follow the procedure with wet
+hands. You will not be allowed to start the lab without the pre-lab finished, because most of
+these are the parts people get wrong when they wing it.</p>
+
+<!-- BLOCK: PRE-LAB QUESTIONS
+     Confirmed mix: 2–3 conceptual · 3–4 procedural-reading · 1 safety/disposal
+     · 1 final item that makes them draw their own data tables.
+     Procedural items must force them to LOCATE a value or an action in the
+     procedure — a volume, a temperature, an order of operations. -->
+<ol class="q">
+  <li>[[ CONCEPTUAL — a distinction they will otherwise blur. Name the word you want used. ]]</li>
+  <li>[[ CONCEPTUAL — why one tool/method is trusted over another. ]]</li>
+  <li>[[ CONCEPTUAL — what has to be true for the observed phenomenon to happen, in their words. ]]</li>
+  <li>[[ PROCEDURAL — Read Part __. Exactly what quantity do you measure, and with what tool? ]]</li>
+  <li>[[ PROCEDURAL — In Part __, step __, where does ___ end up, and what problem does that solve? ]]</li>
+  <li>[[ PROCEDURAL — Which part do you start first, and why does that order matter for finishing on time? ]]</li>
+  <li>[[ PROCEDURAL — What do you do with ___ when you are finished with it? ]]</li>
+  <li>[[ SAFETY — Specific exposure scenario. State exactly what you do, and write where the
+      eyewash station / extinguisher / shutoff is in this room. ]]</li>
+  <li>Set up your [[ N ]] data tables in your notebook. Copy them exactly as shown, in ink,
+      leaving enough room to write in each blank. Units go in the row labels — do not plan to
+      add them later.</li>
+</ol>
+
+<!-- BLOCK: DATA-TABLE SKELETONS
+     These are for students to COPY into the notebook. They are never filled in
+     on this handout. Units belong in the row label. Use 2 or 3 side by side;
+     delete a .tbl to drop one. -->
+<div class="tables">
+  <div class="tbl">
+    <div class="cap">TABLE 1 · [[ TABLE NAME ]]</div>
+    <table>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+    </table>
+  </div>
+  <div class="tbl">
+    <div class="cap">TABLE 2 · [[ TABLE NAME ]]</div>
+    <table>
+      <tr><td>[[ Row label ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+    </table>
+  </div>
+  <div class="tbl">
+    <div class="cap">TABLE 3 · [[ TABLE NAME ]]</div>
+    <table>
+      <tr><td>[[ Qualitative observation row ]]</td></tr>
+      <tr><td>[[ Row label ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+      <tr><td class="note">[[ next class ]]</td></tr>
+      <tr><td>[[ Row label with (units) ]]</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="rule-note">
+  If you write a number wrong during the lab, draw one line through it and write the correct
+  value beside it. Never scribble it out and never erase — I need to see what you originally
+  recorded.
+</div>
+
+
+<!-- ================================================================
+     PAGE 3 — MATERIALS · PROCEDURE
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">[[ U0 / S0.3 ]] · [[ INTRO SKILLS LAB ]] · PROCEDURE</div>
+
+<h2>MATERIALS</h2>
+<!-- BLOCK: MATERIALS — run as prose separated by middots. Exact sizes and
+     concentrations. This is what the tray gets loaded from. -->
+<p><b>Per group:</b> [[ item ]] · [[ item with size ]] · [[ item (2) ]] · [[ item ]] ·
+[[ 0.5 M reagent ]] · [[ 0.5 M reagent ]]</p>
+
+<h2>PROCEDURE</h2>
+
+<!-- BLOCK: PROCEDURE PART — duplicate this block per part.
+     Numbered major steps, bulleted substeps only.
+     Put the warning BESIDE the step it applies to, not in a preamble.
+     Use the .flag pill for timing/order instructions. -->
+<h3>Part A — [[ Part Name ]]</h3>
+<ol class="proc">
+  <li>[[ Major step. ]]
+    <ul>
+      <li>[[ Substep — the check or condition. ]]</li>
+      <li>[[ Substep — what to do if the check fails. ]]</li>
+    </ul>
+  </li>
+  <li>[[ Major step with the exact quantity and precision: "Record its mass to 0.01 g." ]]</li>
+  <li>[[ Major step. ]]</li>
+  <li>[[ Major step. ]]
+    <ul>
+      <li>[[ The thing they must write down before moving on. ]]</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Part B — [[ Part Name ]]</h3>
+<ol class="proc">
+  <li>[[ Major step. ]]</li>
+  <li>[[ Major step with reading precision: "Read at eye level and record to 0.1 mL." ]]</li>
+  <li>[[ The step that tells them not to "fix" their data: "Do not go back and adjust —
+      the disagreement is the data." ]]</li>
+  <li>[[ Immediate cleanup step. ]]</li>
+</ol>
+
+<h3>Part C — [[ Part Name ]] <span class="flag">[[ START THIS BEFORE PART D ]]</span></h3>
+<ol class="proc">
+  <li>[[ Measure exact volume with the named tool and transfer to the named vessel. ]]</li>
+  <li>[[ Rinse / reset step between reagents. ]]</li>
+  <li>[[ The step where the thing happens. ]]
+    <ul>
+      <li>Watch the instant [[ they meet ]]. Write what you see in your notebook before you do
+          anything else — [[ name the three properties: color, clarity, whether it settles ]].
+          "It changed" is not an observation.</li>
+    </ul>
+  </li>
+  <li>[[ Build the apparatus: ]]
+    <ul>
+      <li>[[ Substep with a real dimension: "about 15 cm above the base." ]]</li>
+      <li>[[ Substep. ]]</li>
+      <li>[[ Substep + the reason it matters: "This stops ___ and pulls ___ through faster." ]]</li>
+    </ul>
+  </li>
+  <li>[[ Major step. ]]</li>
+  <li>[[ Major step. ]]
+    <ul>
+      <li>[[ The failure mode stated as a consequence: "If it goes over the edge, ___ escapes
+          into your ___ and your ___ is wrong." ]]</li>
+    </ul>
+  </li>
+  <li>[[ Rinse-and-transfer step so nothing is left behind. ]]</li>
+  <li>Go start Part D while this [[ drains / runs / cools ]].</li>
+  <li>[[ What happens to the product at the end of the period and when it gets massed. ]]</li>
+</ol>
+
+<h3>Part D — [[ Part Name ]] <span class="flag">[[ DO THIS WHILE PART C RUNS ]]</span></h3>
+<ol class="proc">
+  <li>[[ Identify and describe the sample: color, luster, surface texture. ]]</li>
+  <li>[[ Measure to a stated precision. ]]</li>
+  <li>[[ Measure, with the anti-rounding warning: "Record the exact initial volume to 0.1 mL
+      — not '30 mL.'" ]]</li>
+  <li>[[ Measure. ]]</li>
+  <li>[[ The subtraction / derived quantity. ]]</li>
+  <li>[[ Calculate. Carry units through the division. ]]</li>
+  <li>[[ Identify from the table below, then calculate percent error against the accepted value. ]]</li>
+  <li>[[ Return the sample to the tray. ]]</li>
+</ol>
+
+<!-- BLOCK (optional): reference data table + small figure.
+     Delete .narrow if there is no figure. Figures are hand-built SVG. -->
+<div class="split">
+  <div class="wide">
+    <table class="data">
+      <tr><th>[[ MATERIAL ]]</th><th>[[ SYMBOL ]]</th><th>[[ ACCEPTED VALUE (UNITS) ]]</th></tr>
+      <tr><td>[[ name ]]</td><td>[[ sym ]]</td><td>[[ value ]]</td></tr>
+      <tr><td>[[ name ]]</td><td>[[ sym ]]</td><td>[[ value ]]</td></tr>
+      <tr><td>[[ name ]]</td><td>[[ sym ]]</td><td>[[ value ]]</td></tr>
+      <tr><td>[[ name ]]</td><td>[[ sym ]]</td><td>[[ value ]]</td></tr>
+      <tr><td>[[ name ]]</td><td>[[ sym ]]</td><td>[[ value ]]</td></tr>
+    </table>
+    <div class="caption">[[ Conditions the values apply at, and any value that is a range
+    rather than a single number — say why. ]]</div>
+  </div>
+  <div class="narrow">
+    <!-- Hand-built SVG only. Anything students READ as science is drawn, never generated. -->
+    <svg viewBox="0 0 90 130" width="100%">
+      <rect x="30" y="10" width="30" height="105" fill="none" stroke="#14161B" stroke-width="1.6"/>
+      <ellipse cx="45" cy="118" rx="17" ry="5" fill="none" stroke="#14161B" stroke-width="1.6"/>
+      <path d="M31 42 h28 v72 h-28 z" fill="#EDF0E5" stroke="none"/>
+      <path d="M31 42 q14 6 28 0" fill="none" stroke="#14161B" stroke-width="1.2"/>
+      <g stroke="#14161B" stroke-width="1">
+        <line x1="52" y1="30" x2="60" y2="30"/><line x1="52" y1="50" x2="60" y2="50"/>
+        <line x1="52" y1="70" x2="60" y2="70"/><line x1="52" y1="90" x2="60" y2="90"/>
+        <line x1="52" y1="110" x2="60" y2="110"/>
+      </g>
+      <g stroke="#14161B" stroke-width="0.7">
+        <line x1="55" y1="40" x2="60" y2="40"/><line x1="55" y1="60" x2="60" y2="60"/>
+        <line x1="55" y1="80" x2="60" y2="80"/><line x1="55" y1="100" x2="60" y2="100"/>
+      </g>
+      <g font-family="Archivo, Liberation Sans" font-size="7" fill="#14161B" text-anchor="end">
+        <text x="49" y="33">40</text><text x="49" y="53">30</text>
+        <text x="49" y="73">20</text><text x="49" y="93">10</text><text x="49" y="113">0</text>
+      </g>
+    </svg>
+    <div class="figcap">[[ One-line reading instruction for the figure. ]]</div>
+  </div>
+</div>
+
+<h2>DATA TABLES</h2>
+<p>You built these in your pre-lab. Have them open and ready before you touch a
+[[ balance / meter stick / hand lens ]]. Fill them in <b>as you take each measurement</b> —
+not at the end of the period from memory.</p>
+
+<!-- BLOCK: DISPOSAL AND CLEANUP
+     The Alconox block below is the SHULL standing default. Keep items 4-6
+     verbatim on every lab. Edit only items 1-3 for the specific waste. -->
+<h2 class="warn">DISPOSAL AND CLEANUP — LAST FIVE MINUTES</h2>
+<ol class="proc">
+  <li>[[ Liquid waste: exact destination and the reason it is permitted. Never imply — state it.
+      "Our state permits acids and bases of 6.0 M and below down the drain, and this filtrate is
+      dilute salt water — nowhere near that limit." VERIFY before printing. ]]</li>
+  <li>[[ Solid waste / product: where it goes, and when it is finally thrown out. ]]</li>
+  <li>[[ Reusable specimen or sample: how it is returned and in what condition. ]]</li>
+  <li><b>Wash all glassware with the Alconox solution in the blue spray bottle.</b> Spray inside,
+      scrub with a brush, and rinse thoroughly — soap left in a beaker changes the next
+      measurement made in it.</li>
+  <li>Rinse with distilled water and invert everything on the rack to dry.</li>
+  <li>Wipe your bench, push in your stool, and wash your hands. <b>Goggles come off last</b>, once
+      the whole room is finished — not once you are.</li>
+</ol>
+
+
+<!-- ================================================================
+     PAGE 4 — POST-LAB ANALYSIS
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">[[ U0 / S0.3 ]] · [[ INTRO SKILLS LAB ]] · POST-LAB</div>
+
+<h2>POST-LAB ANALYSIS</h2>
+<p class="lead">Answer these in your lab notebook, numbered 1 through [[ N ]]. Show every
+calculation with units — an answer with no work and no units earns partial credit at best.</p>
+
+<!-- BLOCK: POST-LAB QUESTIONS
+     Confirmed mix: 2–3 "what happened and why" tied to the lesson ·
+     the required calculation with percent error · 2 error-analysis items that
+     name a real procedural cause · 1 item connecting back to an earlier section.
+     Tag each with the part it draws on using <span class="ref">. -->
+<ol class="q">
+  <li>[[ WHAT HAPPENED — two measurements disagreed. State which is closer to true and explain
+      what about the two tools causes the difference. ]] <span class="ref">PART B</span></li>
+  <li>[[ CALCULATION — show the calculation, name your result, and calculate percent error
+      against the accepted value. Units in every step. ]] <span class="ref">PART D</span></li>
+  <li>[[ WHY — using your recorded observations, explain where the product came from. Refer to
+      the equation in the Background. ]] <span class="ref">PART C</span></li>
+  <li>[[ ERROR ANALYSIS — a specific procedural slip. State whether it raises or lowers the
+      calculated value, and say specifically whether the error entered through the ___ or the
+      ___. ]] <span class="ref">ERROR ANALYSIS</span></li>
+  <li>[[ ERROR ANALYSIS — why a step had to happen in the order it did. What would you be
+      unable to determine if you skipped it? ]] <span class="ref">ERROR ANALYSIS</span></li>
+  <li>[[ CONNECTION — pick one measurement you made today and identify the correct equipment
+      for it from Section [[ 0.1 ]], then name the one safety rule from Section [[ 0.2 ]] that
+      applied while you took it. ]] <span class="ref">[[ U0 / S0.1 · S0.2 ]]</span></li>
+</ol>
+
+</body>
+</html>

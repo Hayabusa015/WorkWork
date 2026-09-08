@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL Science — Lab Teacher Prep + Key Template</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB TEACHER PREP + KEY (MASTER)  v1.0
+=====================================================================
+ Ships as its OWN FILE, always. Never staple teacher content onto the
+ student handout.
+
+ Filename:  SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor]_Key.html
+ Same folder as the student lab:
+   [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ Fill every [[ TOKEN ]]. Render with:  python3 build_lab.py yourfile.html
+=====================================================================
+-->
+
+<link rel="stylesheet" href="shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left { content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode)
+                            " · TEACHER COPY";
+                   font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                   color: var(--footer); margin-bottom: 0.14in; }
+    @bottom-right { content: "PAGE " counter(page) " OF " counter(pages) " · DO NOT DISTRIBUTE";
+                    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                    color: var(--footer); margin-bottom: 0.14in; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); font-size: 10.2pt;
+         line-height: 1.40; color: var(--ink); }
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  .meta { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code { string-set: unitcode content(); }
+
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow { font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--warn); margin-bottom: 3pt; }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 { font-family: var(--display); font-weight: bold; font-size: 16pt;
+    line-height: 1.12; flex: 1 1 auto; }
+  .chip { flex: 0 0 auto; margin-left: 12pt; font-family: var(--display); font-weight: 600;
+    font-size: 8pt; letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--warn-rule); border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap; }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.20em;
+    color: var(--ink); border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt;
+    margin: 12pt 0 5pt 0; }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 9.6pt; margin: 8pt 0 3pt 0; }
+  p { margin-bottom: 4.5pt; }
+
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3pt; }
+  ul.dot li::before { content: "▪"; position: absolute; left: 0;
+    color: var(--accent); font-size: 10pt; line-height: 1; }
+
+  table.grid { width: 100%; border-collapse: collapse; margin-top: 5pt; }
+  table.grid th { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; text-align: left; padding: 0 5pt 3pt 5pt;
+    border-bottom: 1.2pt solid var(--accent); }
+  table.grid td { padding: 3.6pt 5pt; font-size: 9.7pt; vertical-align: top;
+    border-bottom: 0.6pt solid var(--rule-hairline); }
+
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li { counter-increment: q; position: relative; padding-left: 20pt;
+    margin-bottom: 6pt; page-break-inside: avoid; }
+  ol.q > li::before { content: counter(q); position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--ink);
+    border: 1pt solid var(--warn-rule); border-radius: 2.5pt; width: 14pt; height: 14pt;
+    line-height: 12pt; text-align: center; }
+  .ans { color: var(--warn); }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body>
+<div class="meta">
+  <span class="m-course">[[ CHEMISTRY ]]</span>
+  <span class="m-code">[[ U0 / S0.3 ]]</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">TEACHER PREP + KEY · UNIT [[ 0 ]] · SECTION [[ 3 ]] · NOT FOR STUDENTS</div>
+  <div class="titlerow">
+    <h1>[[ Lab Title ]]</h1>
+    <div class="chip">[[ U0 / S0.3 ]]</div>
+  </div>
+</div>
+
+<h2>PREP — [[ WHEN ]]</h2>
+<!-- BLOCK: advance prep timeline. Be specific enough that a sub or a future
+     you can run it cold. Solution recipes get exact masses and volumes. -->
+<table class="grid">
+  <tr><th>WHEN</th><th>TASK</th><th>DETAIL</th></tr>
+  <tr><td>[[ Night before ]]</td><td>[[ Make solutions ]]</td>
+      <td>[[ Exact recipe: g of solid, to what final volume, in what vessel. ]]</td></tr>
+  <tr><td>[[ Morning of ]]</td><td>[[ Load trays ]]</td>
+      <td>[[ Per-group count × number of groups = total. ]]</td></tr>
+  <tr><td>[[ Before 1st period ]]</td><td>[[ Room setup ]]</td>
+      <td>[[ Where the shared stations go, what is out on the bench. ]]</td></tr>
+</table>
+
+<h3>Materials — total for [[ N ]] groups across [[ N ]] periods</h3>
+<p>[[ Item × count ]] · [[ Item × count ]] · [[ Reagent, total volume needed ]]</p>
+
+<h2>TIMING — 50-MINUTE PERIOD</h2>
+<table class="grid">
+  <tr><th>MIN</th><th>PHASE</th><th>WATCH FOR</th></tr>
+  <tr><td>[[ 0–5 ]]</td><td>[[ Pre-lab check, tray out ]]</td><td>[[ ]]</td></tr>
+  <tr><td>[[ 5–15 ]]</td><td>[[ Part A/B ]]</td><td>[[ ]]</td></tr>
+  <tr><td>[[ 15–35 ]]</td><td>[[ Part C running, D in parallel ]]</td><td>[[ ]]</td></tr>
+  <tr><td>[[ 35–45 ]]</td><td>[[ Finish, record ]]</td><td>[[ ]]</td></tr>
+  <tr><td>[[ 45–50 ]]</td><td>Cleanup, goggles off last</td><td>[[ ]]</td></tr>
+</table>
+
+<h2 class="warn">FAILURE POINTS</h2>
+<!-- BLOCK: what actually goes wrong, and the one sentence you say to fix it. -->
+<ul class="dot">
+  <li><b>[[ The mistake. ]]</b> [[ Why it happens and what it does to their numbers. ]]
+      [[ What you say or do. ]]</li>
+  <li><b>[[ The mistake. ]]</b> [[ Fix. ]]</li>
+  <li><b>[[ The mistake. ]]</b> [[ Fix. ]]</li>
+</ul>
+
+<h2>EXPECTED RESULTS</h2>
+<p>[[ The realistic range, not the ideal number. State what a good group gets and what
+a sloppy-but-passing group gets, so partial credit decisions are consistent. ]]</p>
+<table class="grid">
+  <tr><th>QUANTITY</th><th>ACCEPTED</th><th>TYPICAL STUDENT RANGE</th></tr>
+  <tr><td>[[ ]]</td><td>[[ ]]</td><td>[[ ]]</td></tr>
+  <tr><td>[[ ]]</td><td>[[ ]]</td><td>[[ ]]</td></tr>
+</table>
+
+<h2>SAFETY + DISPOSAL — VERIFIED</h2>
+<!-- Every chemical statement on the student page gets confirmed here against
+     the SDS and district/state policy BEFORE the handout is copied. -->
+<ul class="dot">
+  <li>[[ Hazard ]] — verified against [[ SDS / district policy ]] on [[ date ]].</li>
+  <li>[[ Disposal route ]] — verified. [[ Limit and why this waste is under it. ]]</li>
+  <li>Alconox cleanup block is the standing default and needs no per-lab check.</li>
+</ul>
+
+<div class="pagebreak"></div>
+
+<h2>PRE-LAB KEY</h2>
+<ol class="q">
+  <li>[[ Question stem, abbreviated. ]] <span class="ans">[[ Answer. Note the wording you
+      will and will not accept. ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ Data tables drawn ]] <span class="ans">[[ Full credit = tables drawn in ink with
+      units in the row labels. ]]</span></li>
+</ol>
+
+<h2>POST-LAB KEY</h2>
+<!-- Work every calculation independently. Show enough steps that partial
+     credit can be assigned without re-deriving it during grading. -->
+<ol class="q">
+  <li>[[ stem ]] <span class="ans">[[ Full answer, plus the common wrong answer and whether
+      it earns partial credit. ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ Worked calculation, every step, units carried.
+      Percent error shown. ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+  <li>[[ stem ]] <span class="ans">[[ answer ]]</span></li>
+</ol>
+
+<h2>GRADING</h2>
+<p>[[ Point split across pre-lab / data / post-lab. Carbonless copy is graded
+individually. ]]</p>
+<p>[[ Any lab-specific scoring rule — e.g. −1 point per misidentified unknown out of 11. ]]</p>
+
+<h2>MISSED LAB</h2>
+<p>If the setup is already torn down, the student completes a Missed Lab Analysis rather
+than the class re-running the lab. [[ Name the data set you hand them — a real class data
+table from this period — and which post-lab questions they still answer. ]]</p>
+
+</body>
+</html>

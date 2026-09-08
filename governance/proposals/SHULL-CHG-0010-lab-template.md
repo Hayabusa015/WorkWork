@@ -93,3 +93,45 @@ shot, never generated.**
 - The Bunsen burner lighting station addition to the U0 Intro Skills Lab is still open.
 - *(The template's third open item — "Physics has no unit/section map" — is resolved. Physics has 11
   units and 48 sections.)*
+
+---
+
+## RESOLUTION — 2026-09-08
+
+**Finding 1 is closed.** The four missing files were uploaded to `_Brand/Templates/Lab/` at
+00:45 on 2026-09-08. All four now exist. Both HTML templates were migrated into
+`templates/lab/` **byte-exact** — 27,231 and 8,936 bytes, matching Drive.
+
+The template is well-built and the voice is unmistakably Matt's: *"'It changed' is not an
+observation." · "Never scribble it out and never erase — I need to see what you originally
+recorded." · "Goggles come off last, once the whole room is finished — not once you are."*
+Nothing in it was rewritten.
+
+**Finding 2 is resolved as predicted.** Rendering v1.0 unmodified confirmed the conflict
+empirically: `pdffonts` reported **DejaVu Sans and Liberation Sans**. The template asks for
+Poppins, which is not installed, so it silently fell back to a font nobody chose — the exact defect
+CHG-0006 describes, reproduced on a real document.
+
+### The migration
+
+`scripts/build_lab_css.py` generates `templates/lab/shull-lab-tokens.css` from `brand/tokens.json`,
+so no hex is hand-typed. The two templates now reference custom properties.
+
+After: `pdffonts` reports **Archivo, Archivo-Medium, Archivo-SemiBold, Archivo-Bold**, and page 1
+measures **5.2% marked / 2.4% heavy** — matching the SHULL ink benchmark.
+
+Rasterized and inspected, both pages. Safety headings render in the semantic amber rather than a
+course colour, which is Part 9 behaving correctly: *course identity does not override semantic
+meaning.*
+
+### Two things recorded, not fixed
+
+1. **The master renders 5 pages; its own comments describe a 4-page document.** With tokens in place
+   of real content that may resolve on its own, but a filled lab should be page-budget checked —
+   `build_lab.py` takes an expected count as its second argument for exactly this.
+2. **`5.2` / `5.4` in the Geology map** remains open and unrelated to this template.
+
+| Field | Value |
+|---|---|
+| **Status** | **IMPLEMENTED** |
+| **Verified** | Rendered, font-checked, ink-measured, and visually inspected at 110 dpi. |
