@@ -56,14 +56,16 @@ Read in this order:
 
 ## Decided
 
+Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex is written.
+
 | | |
 |---|---|
-| Chemistry | Lab Lime `#A3E635` + Aqua `#22D3EE` |
-| Physics | Quantum Gold `#F5B82E` + Deep Purple `#8B5CF6` |
-| Geology | Terra Teal `#16B8A6` + Rust Orange `#E85D24` |
-| Background | White `#FFFFFF` default; Parchment `#EDF0E5` special-purpose only |
+| Chemistry | Lab Lime + Aqua |
+| Physics | Quantum Gold + Deep Purple |
+| Geology | Terra Teal + Rust Orange |
+| Background | White by default; Parchment as a special-purpose surface only |
 | Typography | Trade Gothic Next, falling back to Archivo / Archivo Narrow |
-| Coloured type on white | Deep variants — Chem `#4D730E`, Phys `#896107`, Geo `#0E766A` |
+| Coloured type on white | Each course's text-safe deep variant, never the display colour |
 | Filenames | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]`, zero-padded |
 | Geology numbering | Plate Tectonics = U4 |
 | Drive | Unchanged — `SHULL Science/`, Unit → Section → five content folders |

@@ -263,7 +263,7 @@ Supersedes: `SHULL_System_Governance.md` §8 Geology row 1 (the U5/U9/U10 workin
 Status: CONFIRMED · SHULL-CHG-0004
 
 ### 2026-09-07 — Palette
-Terra Teal `#16B8A6` + Rust Orange `#E85D24`, all media.
+Terra Teal + Rust Orange , all media.
 Supersedes: the confirmed earth palette (Canyon Umber, Basalt Brown, Rust Red, Amber Ochre, Sage
 Moss, Sandstone); `shull-geology-guidelines` §7 "identical to Chemistry".
 Status: CONFIRMED · SHULL-CHG-0003

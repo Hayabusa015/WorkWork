@@ -29,9 +29,9 @@ Structure, wording, blocks, and the locked rules are **untouched**. Only brand v
 | v1.0 | v1.1 |
 |---|---|
 | Poppins / Liberation Sans | `var(--display)` / `var(--body)` → Trade Gothic Next → Archivo → Liberation Sans |
-| Deep Forest `#1A2318` | `var(--ink)` |
-| Moss Green `#4A7C59` | `var(--accent)` — the course text-safe deep variant |
-| Warm Earth `#6E5310` / `#8B6914` | `var(--warn)` / `var(--warn-rule)` — semantic, not brand |
+| Deep Forest | `var(--ink)` |
+| Moss Green | `var(--accent)` — the course text-safe deep variant |
+| Warm Earth | `var(--warn)` / `var(--warn-rule)` — semantic, not brand |
 | Parchment as light ground | White. Parchment survives only as the SVG liquid fill. |
 | "the print palette is identical for all three courses" | **False now.** The `<body>` course class drives a real accent. |
 
@@ -40,7 +40,7 @@ The `<body class="chem\|phys\|geo">` hook was described in v1.0 as changing "not
 
 ### Known exception
 
-Six `#14161B` and one `#EDF0E5` remain as literals inside the hand-built SVG diagram, because
+Seven literal hexes remain inside the hand-built SVG diagram, because
 `var()` does not resolve in SVG presentation attributes under this renderer. They are the only
 hand-typed hexes permitted in this directory and `validate_tokens.py` must allow them.
 

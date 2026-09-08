@@ -30,8 +30,8 @@ SHULL Science/
 
 ### Grammar
 
-- Units: `Unit ##` zero-padded plus a short title — `Unit 08 - Chemical Reactions`
-- Sections: `Section ##.#` plus a short title — `Section 08.4 - Balancing Equations`
+- Units: `Unit ##` zero-padded plus a short title — `Unit 08 - <Unit Name>`
+- Sections: `Section ##.#` plus a short title — `Section 08.4 - <Section Name>`
 - **Separator is a hyphen-minus, never an en dash.** An en dash creates a near-duplicate folder.
 - The five content folders are **exactly** those five, same spelling, same order, every time.
 - Section subfolders are created on demand, when first needed.

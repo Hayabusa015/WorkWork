@@ -10,9 +10,9 @@
   --surface:       #EDF0E5;
 
   /* Neutral working values, derived from the grounds */
-  --rule-hairline: #c8cdc2;
-  --label:         #55604f;
-  --footer:        #6b7265;
+  --rule-hairline: #C8CDC2;
+  --label:         #55604F;
+  --footer:        #6B7265;
 
   /* Semantic - used for meaning, never for branding */
   --warn:          #92400E;

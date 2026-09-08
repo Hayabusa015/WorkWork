@@ -17,7 +17,14 @@ import json, os, sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOKENS = os.path.join(REPO, "brand", "tokens.json")
 
-WHITE, PARCHMENT, ASPHALT = "#FFFFFF", "#EDF0E5", "#14161B"
+def _grounds():
+    """The three grounds every colour is measured against - read, never typed."""
+    with open(TOKENS) as fh:
+        g = json.load(fh)["ground"]
+    return g["white"]["hex"], g["parchment"]["hex"], g["asphalt"]["hex"]
+
+
+WHITE, PARCHMENT, ASPHALT = _grounds()
 
 
 def _srgb(c):

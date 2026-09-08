@@ -31,9 +31,9 @@ css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_lab_css.py - DO N
   --surface:       {g['parchment']['hex']};
 
   /* Neutral working values, derived from the grounds */
-  --rule-hairline: #c8cdc2;
-  --label:         #55604f;
-  --footer:        #6b7265;
+  --rule-hairline: {g['ruleHairline']['hex']};
+  --label:         {g['label']['hex']};
+  --footer:        {g['footer']['hex']};
 
   /* Semantic - used for meaning, never for branding */
   --warn:          {sem['caution']['deep']};
