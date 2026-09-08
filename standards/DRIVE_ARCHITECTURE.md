@@ -65,7 +65,7 @@ SHULL Science/
 | Read, search, retrieve | Allowed |
 | Create | Allowed in authorised teaching locations |
 | Rename | Allowed when deterministic — **log the prior name first** |
-| Move | **BLOCKED pending test T-3.** Reparenting via `update_file` is unverified. Copy-and-trash changes the file ID and breaks every link. Until T-3 passes, the Librarian *proposes* moves and does not execute them. |
+| Move | **Allowed when deterministic.** `update_file` accepts `parentId` and replaces the existing parent — a true reparent that **preserves the file ID**, so links survive and rollback is exact. Log the prior parent first. |
 | Overwrite | Requires explicit workflow authorisation |
 | Trash | **Requires user approval.** Recoverable. |
 | Permanent delete | **Not possible.** No tool exists. Emptying the trash is the user's action alone. |
@@ -82,7 +82,17 @@ Drive converts uploaded markdown into a Google Doc unless told not to. Use
 `disableConversionToGoogleType: true` with `contentMimeType: text/plain`. Verified working — every
 `.md` in `_Brand/Standards/` is stored as `text/plain`.
 
-## 5. Known filing defects
+## 5. Moving a file
+
+`update_file` with `fileId` and the new `parentId`. The file ID does not change.
+
+> **Never move by `copy_file` + `trash_file`.** That produces a new ID, breaks every existing link,
+> and leaves the original in the trash. The reparent is the only correct move.
+
+Before: log object ID, prior name, **prior parent**. After: verify by `parentId` search on the
+destination. Rollback is reparenting back to the logged prior parent.
+
+## 6. Known filing defects
 
 Found during inspection, **not yet corrected** — these are the Librarian's and Janitor's first work
 order, and each needs approval before action. The current list is in `config/drive.json` under
@@ -91,7 +101,7 @@ order, and each needs approval before action. The current list is in `config/dri
 The blocking one: a Geology guided-notes `.docx` is sitting in `_Brand/Templates/`, both misfiled
 and misnamed.
 
-## 6. Publishing standards to Drive
+## 7. Publishing standards to Drive
 
 `scripts/publish_standards.py` renders `standards/` and `brand/` into `_Brand/Standards/` so Claude
 Projects can read them. **One direction only.** Projects never write back, and nothing in

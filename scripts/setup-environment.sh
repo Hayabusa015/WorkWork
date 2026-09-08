@@ -36,14 +36,14 @@ fi
 # 3. Python build libraries ----------------------------------------------------
 log "installing python build libraries"
 python3 -m pip install --quiet --disable-pip-version-check \
-  python-docx python-pptx pymupdf pillow weasyprint fonttools 2>&1 \
+  python-docx python-pptx pymupdf pillow weasyprint fonttools jsonschema 2>&1 \
   | grep -vi "warning: running pip" || true
 
 # 4. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
 import importlib, shutil
-for m in ["docx","pptx","fitz","PIL","weasyprint","fontTools"]:
+for m in ["docx","pptx","fitz","PIL","weasyprint","fontTools","jsonschema"]:
     try: importlib.import_module(m); print(f"    {m:11} OK")
     except Exception: print(f"    {m:11} MISSING")
 for b in ["soffice","pdffonts","pdftoppm"]:

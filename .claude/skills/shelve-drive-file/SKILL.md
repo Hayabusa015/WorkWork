@@ -45,7 +45,7 @@ it into a Google Doc and the file stops being diffable.
 |---|---|
 | Create, upload | Yes, in authorised teaching locations |
 | Rename | Deterministic only — **log the prior name first** |
-| **Move** | **BLOCKED pending test T-3.** Reparenting is unverified; copy-and-trash changes the file ID and breaks every link. **Propose moves; do not execute them.** |
+| **Move** | **Allowed when deterministic.** `update_file` with a new `parentId` reparents in place and **keeps the file ID**. Log the prior parent first. **Never move by copy-and-trash** — that changes the ID and breaks links. |
 | Overwrite | Explicit workflow authorisation |
 | Trash | **User approval.** Recoverable. |
 | Permanent delete | **Not possible.** No tool exists. |

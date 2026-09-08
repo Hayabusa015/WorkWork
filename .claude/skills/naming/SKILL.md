@@ -37,9 +37,10 @@ that was not logged cannot be rolled back.
 **Never batch-rename without confirmation.** Renames break links that may exist in a gradebook, a
 Classroom post, or a student's bookmark.
 
-## Currently blocked
+## Nothing is blocked
 
-Nothing. Geology renaming was blocked on section numbering and is now unblocked (SHULL-CHG-0009).
+Geology renaming was blocked on section numbering — unblocked by SHULL-CHG-0009. Moves were blocked
+pending test T-3 — unblocked 2026-09-08; `update_file` reparents in place and keeps the file ID.
 
 ## Images are not course documents
 

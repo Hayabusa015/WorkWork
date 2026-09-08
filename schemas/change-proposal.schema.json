@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hayabusa015/WorkWork/schemas/change-proposal.schema.json",
+  "title": "SHULL OS Change Record",
+  "description": "A proposed change to brand, standards, governance, or a course-wide convention. Only the Secretary may implement one, and only when status is APPROVED. See governance/CHANGE_CONTROL.md.",
+  "type": "object",
+  "required": ["changeId", "date", "source", "currentRule", "proposedRule", "reason", "risk", "status"],
+  "properties": {
+    "changeId": { "type": "string", "pattern": "^SHULL-CHG-\\d{4}$" },
+    "date": { "type": "string", "format": "date" },
+    "source": { "enum": ["Researcher", "Janitor", "Auditor", "User", "Migration"] },
+    "currentRule": { "type": "string", "minLength": 1, "description": "Verbatim, with file and section." },
+    "proposedRule": { "type": "string", "minLength": 1 },
+    "supersedes": {
+      "type": "string",
+      "description": "The rule being replaced, with file and section. This is what makes drift visible instead of silent."
+    },
+    "reason": { "type": "string", "minLength": 1 },
+    "affectedAgents": { "type": "array", "items": { "type": "string" } },
+    "affectedSkills": { "type": "array", "items": { "type": "string" } },
+    "affectedCourses": {
+      "type": "array",
+      "items": { "enum": ["chemistry", "physics", "geology"] }
+    },
+    "risk": { "enum": ["low", "medium", "high"] },
+    "recommendation": { "type": "string" },
+    "decision": { "type": "string" },
+    "status": { "enum": ["PENDING", "APPROVED", "REJECTED", "DEFERRED", "IMPLEMENTED"] },
+    "implementedBy": {
+      "type": "string",
+      "description": "Commit SHA. Without it the record is a claim, not a change."
+    },
+    "verified": {
+      "type": "object",
+      "description": "A change is not done until it has been checked. APPROVED is not IMPLEMENTED, and IMPLEMENTED is not verified.",
+      "required": ["done", "how"],
+      "properties": {
+        "done": { "type": "boolean" },
+        "how": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "IMPLEMENTED" } }, "required": ["status"] },
+      "then": { "required": ["implementedBy", "verified", "decision"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "REJECTED" } }, "required": ["status"] },
+      "then": { "required": ["decision"] }
+    }
+  ]
+}

@@ -52,7 +52,7 @@
     "search": "search_files with parentId = '<ID>' is the reliable folder-verification query",
     "createFolder": "create_file with mimeType application/vnd.google-apps.folder",
     "saveMarkdown": "disableConversionToGoogleType: true AND contentMimeType: text/plain, or Drive converts it to a Google Doc",
-    "move": "UNVERIFIED. Test T-3 must confirm update_file can reparent before the Librarian executes any move. copy_file + trash_file changes the file ID and breaks links.",
+    "move": "SUPPORTED. update_file accepts parentId and replaces the existing parent - a true reparent that PRESERVES the file ID, so links survive and rollback is exact. Verified from the tool contract 2026-09-08 (test T-3). Do NOT use copy_file + trash_file to move: that creates a new ID and breaks every existing link.",
     "delete": "trash_file only. There is no permanent-delete tool. Emptying the trash is the user's action."
   },
   "knownDefects": [

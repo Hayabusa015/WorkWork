@@ -31,7 +31,7 @@ is unclear, ask.** Never default to a misc folder.
 | Read, search, retrieve | Yes |
 | Create | Yes, in authorised teaching locations |
 | Rename | Yes when deterministic — **log the prior name first** |
-| **Move** | **BLOCKED until test T-3 passes.** Reparenting is unverified; copy-and-trash changes the file ID and breaks links. **Propose moves; do not execute them.** |
+| **Move** | **Allowed when deterministic.** `update_file` + new `parentId` reparents and keeps the file ID. Log the prior parent first. **Never copy-and-trash to move.** |
 | Overwrite | Requires explicit workflow authorisation |
 | Trash | **Requires user approval.** Recoverable. |
 | Permanent delete | **Impossible.** No tool exists. Only the user empties the trash. |
