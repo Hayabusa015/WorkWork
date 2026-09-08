@@ -3,14 +3,45 @@
   "unit": 1,
   "section": "1.4",
   "sectionTitle": "Isotopes",
-  "note": "Builds on 1.3 (atomic number, mass number, nuclear notation). Sets up 1.5 without teaching weighted average. 50-minute period; last 5 minutes are cleanup/reset.",
+  "note": "Builds on 1.3 (atomic number, mass number, nuclear notation). Sets up 1.5 without teaching weighted average. 50-minute period; last 5 minutes are cleanup/reset. Rebuilt 2026-09-08 after the T-7 audit returned FAIL.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
       "fields": {
-        "number": "01",
+        "number": "04",
         "headline": "1.4\nIsotopes",
         "subhead": "Count protons, neutrons, and electrons in any isotope, and explain why the neutron count does not change the element."
+      },
+      "imageSubjects": {
+        "section": "a graphite crucible and tongs on a dark bench, lit from the left"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Two Atoms, Different Masses",
+        "subhead": "You already know the atomic number identifies the element. Now the neutron count is allowed to change and the atomic number is not.",
+        "keyq": "If two atoms of carbon have different masses, are they still the same element?"
+      },
+      "imageSubjects": {
+        "concept": "two identical laboratory balances side by side, one pan slightly lower"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write these before we go further. Everything after this slide uses them.",
+        "k1_l": "ISOTOPE",
+        "k1_b": "Atoms of one element with different neutron counts.",
+        "k2_l": "MASS NUMBER",
+        "k2_b": "Protons plus neutrons. Not the mass on the periodic table.",
+        "k3_l": "NATURAL ABUNDANCE",
+        "k3_b": "How common one isotope is on Earth, as a percent.",
+        "mustwrite": "Isotopes are atoms of the same element with different numbers of neutrons."
+      },
+      "imageSubjects": {
+        "aside": "a worn chemistry notebook open to a hand-ruled page"
       }
     },
     {
@@ -19,32 +50,30 @@
         "headline": "Same Element, Different Mass",
         "subhead": "Two atoms of carbon can have different masses. They are still both carbon.",
         "c1_l": "WHAT STAYS THE SAME",
-        "c1_b": "Protons.\nEvery carbon atom has 6.\n\nChange that and you no longer have carbon.",
+        "c1_b": "Protons.\nEvery carbon atom has 6.\n\nChange that and it is not carbon.",
         "c2_l": "WHAT CHANGES",
         "c2_b": "Neutrons.\nCarbon can have 6, 7, or 8.\n\nThe mass changes. The element does not.",
-        "mustwrite": "Isotopes are atoms of the same element with different numbers of neutrons."
-      }
-    },
-    {
-      "master": "06_CONCEPT_IMAGE",
-      "fields": {
-        "headline": "What Actually Names an Atom",
-        "subhead": "You already know the atomic number identifies the element. This section is what happens when the neutron count changes and the atomic number does not.",
-        "keyq": "If two atoms have different masses, how do you know they are the same element?"
+        "mustwrite": "The atomic number identifies the element. The mass number does not."
+      },
+      "imageSubjects": {
+        "concept": "a block of graphite and a diamond specimen on dark slate"
       }
     },
     {
       "master": "07_COMPARISON_CARDS",
       "fields": {
         "headline": "The Three Isotopes of Hydrogen",
-        "subhead": "Hydrogen is the clearest case: one proton in all three, and the neutron count does the rest.",
+        "subhead": "One proton in all three. The neutron count does the rest.",
         "k1_l": "HYDROGEN-1",
-        "k1_b": "1 proton\n0 neutrons\nMass number 1\n\nAbout 99.98% of all hydrogen.",
+        "k1_b": "1 proton, 0 neutrons\nMass number 1\n\nAbout 99.98% of all hydrogen.",
         "k2_l": "HYDROGEN-2",
-        "k2_b": "1 proton\n1 neutron\nMass number 2\n\nCalled deuterium.",
+        "k2_b": "1 proton, 1 neutron\nMass number 2\n\nCalled deuterium.",
         "k3_l": "HYDROGEN-3",
-        "k3_b": "1 proton\n2 neutrons\nMass number 3\n\nCalled tritium. Radioactive.",
-        "mustwrite": "The atomic number identifies the element. The mass number does not."
+        "k3_b": "1 proton, 2 neutrons\nMass number 3\n\nCalled tritium. Radioactive.",
+        "mustwrite": "Isotopes of an element differ only in neutron count."
+      },
+      "imageSubjects": {
+        "aside": "three sealed glass ampoules of colourless gas in a row"
       }
     },
     {
@@ -52,13 +81,15 @@
       "fields": {
         "headline": "Two Ways to Write the Same Isotope",
         "subhead": "You will see both. They carry exactly the same information.",
-        "diagram": "Nuclear symbol and hyphen notation\nfor carbon-14, side by side",
         "a1_l": "HYPHEN NOTATION",
-        "a1_b": "carbon-14. Element name, then mass number.",
+        "a1_b": "Element name, then mass number.",
         "a2_l": "NUCLEAR SYMBOL",
-        "a2_b": "Mass number on top, atomic number below, element symbol beside.",
-        "a3_l": "WHAT IS MISSING",
-        "a3_b": "Neither one shows you the neutrons. You calculate those."
+        "a2_b": "Mass number above, atomic number below.",
+        "a3_l": "WHAT NEITHER SHOWS",
+        "a3_b": "The neutrons. You calculate those."
+      },
+      "images": {
+        "diagram": "../assets/chem_u01_s1.4_nuclear_notation.png"
       }
     },
     {
@@ -66,21 +97,24 @@
       "fields": {
         "headline": "Getting Neutrons Out of the Notation",
         "subhead": "Four steps, and you use the same four every time.",
-        "s1_l": "Element",
-        "s1_b": "Find the atomic number on the periodic table. That is your protons.",
+        "s1_l": "Protons",
+        "s1_b": "Atomic number, off the periodic table.",
         "s2_l": "Mass number",
-        "s2_b": "Read it from the notation. It is protons plus neutrons.",
+        "s2_b": "Read it from the notation.",
         "s3_l": "Subtract",
-        "s3_b": "Neutrons = mass number minus atomic number.",
+        "s3_b": "Mass number minus atomic number.",
         "s4_l": "Electrons",
-        "s4_b": "Neutral atom only: electrons equal protons."
+        "s4_b": "Neutral atom: same as protons."
+      },
+      "imageSubjects": {
+        "band": "a periodic table wall chart photographed at a shallow angle"
       }
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
       "fields": {
         "headline": "Example: Counting Particles in Chlorine-37",
-        "subhead": "Work area stays empty. We do this one together on the board.",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
         "problem": "How many protons, neutrons, and electrons are in a neutral atom of chlorine-37?",
         "g1_l": "GIVEN",
         "g1_b": "Chlorine-37\nMass number = 37\nAtomic number = 17",
@@ -88,6 +122,9 @@
         "g2_b": "Protons\nNeutrons\nElectrons",
         "work": "",
         "mustwrite": "Neutrons = mass number minus atomic number."
+      },
+      "imageSubjects": {
+        "aside": "a bottle of sodium chloride crystals under warm light"
       }
     },
     {
@@ -98,7 +135,10 @@
         "f1_l": "SETUP",
         "f1_b": "neutrons =\nmass number − atomic number",
         "work": "37 − 17 = 20 neutrons\n17 protons\n17 electrons",
-        "mustwrite": "A neutral atom has equal protons and electrons. Chlorine-35 would give 18 neutrons."
+        "mustwrite": "A neutral atom has equal protons and electrons."
+      },
+      "imageSubjects": {
+        "data": "an analytical balance display in a darkened lab"
       }
     },
     {
@@ -110,7 +150,10 @@
         "c1_b": "About 76% of all chlorine on Earth.\n\n18 neutrons.",
         "c2_l": "CHLORINE-37",
         "c2_b": "About 24%.\n\n20 neutrons.",
-        "mustwrite": "Natural abundance is why the periodic table lists 35.45 and not a whole number."
+        "mustwrite": "Natural abundance is measured in a lab, not decided."
+      },
+      "imageSubjects": {
+        "concept": "rock salt crystals spilled across a dark surface"
       }
     },
     {
@@ -124,22 +167,35 @@
         "g2_l": "NEED",
         "g2_b": "Protons\nNeutrons\nElectrons",
         "work": "",
-        "mustwrite": "Check your answer: does protons plus neutrons give you back the mass number?"
+        "mustwrite": "Protons plus neutrons must give you back the mass number. Check it every time."
+      },
+      "imageSubjects": {
+        "aside": "a potassium chloride reagent bottle with a worn label"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Potassium-40, Worked",
+        "subhead": "Check yours against this before we move on.",
+        "f1_l": "SETUP",
+        "f1_b": "Potassium\natomic number = 19",
+        "work": "40 − 19 = 21 neutrons\n19 protons\n19 electrons",
+        "mustwrite": "Potassium-40 has 21 neutrons."
+      },
+      "imageSubjects": {
+        "data": "a scientist's pencil resting on a page of handwritten calculations"
       }
     },
     {
       "master": "04_DIVIDER",
       "fields": {
-        "eyebrow": "1.5  •  NEXT SECTION",
+        "eyebrow": "LOOKING AHEAD",
         "headline": "Where This Goes\nNext",
-        "subhead": "You can now count particles in any isotope. Next section: how those percentages turn into the single mass printed on the periodic table."
-      }
-    },
-    {
-      "master": "12_DECK_INDEX",
-      "fields": {
-        "headline": "Layout\nReference",
-        "subhead": "Delete this slide before class."
+        "subhead": "You can now count particles in any isotope. Next: how those percentages turn into the single mass printed on the periodic table."
+      },
+      "imageSubjects": {
+        "divider": "a long laboratory bench receding into shadow"
       }
     }
   ]

@@ -67,10 +67,14 @@ const pres = new pptxgen();
  * first CHEM deck built through the chain. Slide 1 uses 02_SECTION_TITLE, which has no
  * eyebrow. Nothing failed; the text simply arrived in the wrong font. */
 const PLACEHOLDERS = {};
+const SLOTS = {};   // name -> {x, y, w, h}, so a deck can fill a slot without knowing where it is
 const defineMaster = (def) => {
-  PLACEHOLDERS[def.title] = (def.objects || [])
+  const phs = (def.objects || [])
     .filter(o => o.placeholder && o.placeholder.options && o.placeholder.options.name)
-    .map(o => o.placeholder.options.name);
+    .map(o => o.placeholder.options);
+  PLACEHOLDERS[def.title] = phs.map(o => o.name);
+  SLOTS[def.title] = {};
+  for (const o of phs) SLOTS[def.title][o.name] = { x: o.x, y: o.y, w: o.w, h: o.h };
   pres.defineSlideMaster(def);
 };
 
@@ -338,7 +342,11 @@ defineMaster({
     ...imageSlot("aside", 9.45, 1.19, 2.88, 1.62, "SUPPORTING IMAGE"),
     ...card("k1", M.l, 3.05, 3.72, 2.55, "ITEM ONE", "Three parallel items.\nOne job each."),
     ...card("k2", M.l + 3.95, 3.05, 3.72, 2.55, "ITEM TWO", "Not a wall of bullets."),
-    ...card("k3", M.l + 7.90, 3.05, 3.72, 2.55, "ITEM THREE", "The third parallel item.", { dark: true }),
+    // All three neutral. "Three parallel items" means parallel: an unexplained dark card
+    // emphasises whatever is listed third, which on the Isotopes deck was tritium - the
+    // least important of the three. Design system: all-neutral, and the must-write bar
+    // carries the one cue.
+    ...card("k3", M.l + 7.90, 3.05, 3.72, 2.55, "ITEM THREE", "The third parallel item."),
     ...mustWrite(5.92), ...footer(false),
   ],
 });
@@ -371,7 +379,9 @@ defineMaster({
     { rect: { x: 9.75, y: 1.05, w: 2.83, h: 1.45, fill: { color: C.cardLight },
               line: { color: C.accent, width: 2 } } },
     ...imageSlot("aside", 10.13, 1.19, 2.08, 1.17, "SUPPORTING IMAGE"),
-    { rect: { x: M.l, y: bodyTopY, w: 5.90, h: 1.15, fill: { color: C.darkGround } } },
+    // Graphite, not asphalt: the must-write bar below is the write-this cue and it needs
+    // to be the only black block on the slide.
+    { rect: { x: M.l, y: bodyTopY, w: 5.90, h: 1.15, fill: { color: C.cardDark } } },
     { text: { text: "PROBLEM",
         options: { x: M.l + padX, y: 2.76, w: 2.0, h: 0.24, fontFace: F.body, fontSize: 9, bold: true,
                    charSpacing: 1.4, color: C.accent, margin: 0, isTextBox: true } } },
@@ -422,7 +432,7 @@ defineMaster({
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
     { rect: { x: M.l, y: bodyTopY, w: 5.10, h: 2.87, fill: { color: C.accent } } },
     ...imageSlot("setup", M.l + 0.16, 2.78, 4.78, 2.55, "SETUP IMAGE"),
-    { rect: { x: 6.10, y: bodyTopY, w: 6.48, h: 1.05, fill: { color: C.darkGround } } },
+    { rect: { x: 6.10, y: bodyTopY, w: 6.48, h: 1.05, fill: { color: C.cardDark } } },
     { text: { text: "PROBLEM",
         options: { x: 6.32, y: 2.74, w: 2.0, h: 0.22, fontFace: F.body, fontSize: 9, bold: true,
                    charSpacing: 1.4, color: C.accent, margin: 0, isTextBox: true } } },
@@ -492,6 +502,7 @@ defineMaster({
 
 module.exports = pres;
 module.exports.PLACEHOLDERS = PLACEHOLDERS;
+module.exports.SLOTS = SLOTS;
 
 /* ================= DEMO DECK ================= */
 /* One slide per layout, so a build can be looked at rather than trusted. The content

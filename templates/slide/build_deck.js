@@ -56,6 +56,13 @@ if (parseInt(spec.unit, 10) !== declaredUnit) {
   process.exit(1);
 }
 
+/* PNG header read, so an image can be fitted to its slot without pulling in a library. */
+function pngSize(file) {
+  const b = fs.readFileSync(file, { start: 0, end: 32 });
+  if (b.length < 24 || b.readUInt32BE(0) !== 0x89504e47) return null;
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+}
+
 const pad = (n) => String(n).padStart(2, "0");
 const UNIT = `U${pad(spec.unit)}`;
 const SECT = `S${pad(spec.section.split(".")[0])}.${spec.section.split(".")[1]}`;
@@ -85,6 +92,26 @@ for (const slide of spec.slides) {
   if (declared.includes("eyebrow") && !("eyebrow" in fields)) fields.eyebrow = EYEBROW;
   if (declared.includes("code") && !("code" in fields)) {
     fields.code = slide.master === "12_DECK_INDEX" ? "TEMPLATE" : FOOTER_CODE;
+  }
+
+  /* Images go into a named slot, never at coordinates. A deck that could place an image
+     at an arbitrary x/y would be a deck that can invent geometry, which is the one thing
+     this split exists to prevent. The image is fitted inside the slot and centred, so a
+     wrong aspect ratio letterboxes instead of stretching. */
+  for (const [slotName, imgRel] of Object.entries(slide.images || {})) {
+    const slot = (pres.SLOTS[slide.master] || {})[slotName];
+    if (!slot) { problems.push(`slide ${n} (${slide.master}): no slot "${slotName}"`); continue; }
+    const imgPath = path.resolve(path.dirname(specPath), imgRel);
+    if (!fs.existsSync(imgPath)) { problems.push(`slide ${n}: image not found — ${imgRel}`); continue; }
+    const dim = pngSize(imgPath);
+    let { x, y, w, h } = slot;
+    if (dim) {
+      const scale = Math.min(w / dim.w, h / dim.h);
+      const fw = dim.w * scale, fh = dim.h * scale;
+      x += (w - fw) / 2; y += (h - fh) / 2; w = fw; h = fh;
+    }
+    s.addImage({ path: imgPath, x, y, w, h });
+    delete fields[slotName];   // the slot's prompt text is replaced by the image
   }
 
   for (const [ph, txt] of Object.entries(fields)) {

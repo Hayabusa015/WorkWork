@@ -1099,7 +1099,7 @@ near-duplicate section titles, and the duplicated build files now in the Drive L
 **Not started, deliberately.** The Routine is scheduled only after the system has been exercised on
 real work — a weekly review of a system nobody has used yet reports on nothing.
 
-### ⬜ Phase 14 — Test the complete system
+### 🟡 Phase 14 — Test the complete system
 1. Run T-7 end-to-end on one real Chemistry section.
 2. Run T-10.
 3. Janitor's first full sweep; Auditor's independent review of the build.
@@ -1107,8 +1107,17 @@ real work — a weekly review of a system nobody has used yet reports on nothing
    equivalents. **Until then both coexist and the legacy set stays untouched.**
    *Deliverable: SHULL OS V1.*
 
-**Not started** — T-7 and T-10 have not been run, and the legacy skills stay installed and untouched
-until they pass.
+**T-7 and T-10 both run and both pass** — 2026-09-08. Full write-up in
+`reports/T-7_acceptance-test_2026-09-08.md`; the task report is
+`reports/task-reports/2026-09-08_chem-u01-s01.4-slides.json` and it says INCOMPLETE, correctly.
+
+The test found nine defects. **Seven were in the system, not the deck**, including three in checks
+written the same day: a builder that produced a deck for a section that does not exist, a task-report
+schema that accepted WORK COMPLETE over a failed step, and a geometry audit that reported clean on a
+slide with text sliced by a card edge.
+
+The legacy skills stay installed and untouched. Step 4 below is not done: retiring them waits on the
+user actually using the system, which is the test no amount of my testing substitutes for.
 
 The slide template **is** migrated (SHULL-CHG-0013), so `build-presentation` is no longer blocked.
 Two design questions from that migration are open with the user: the withdrawn footer chip, and

@@ -1,0 +1,40 @@
+{
+  "task": "T-7 acceptance test: build the Chemistry U01 S1.4 (Isotopes) section slide deck through the full chain",
+  "subject": "Chemistry",
+  "unit": "U01",
+  "section": "S01.4",
+  "deliverable": "SHULL_CHEM_Slides_U01_S01.4.pptx — 13 slides",
+  "steps": {
+    "overseer": {
+      "result": "pass",
+      "note": "Section 1.4 Isotopes confirmed in courses/chemistry/DECISIONS.md. Scope: one 50-minute section, slide deck only, first in the build order. Found standards/NAMING.md stale in two places while reading it as authority; fixed before building."
+    },
+    "researcher": {
+      "result": "pass",
+      "note": "Every value verified independently by the Auditor: Cl-37 (17p/20n/17e), Cl-35 (18n), Cl abundances 76/24, atomic mass 35.45, K-40 (19p/21n/19e), H-1/H-2/H-3, carbon 6/7/8 neutrons. No fabricated value."
+    },
+    "designer": {
+      "result": "pass",
+      "note": "Built on the twelve-layout template via build_deck.js. Shipped two blockers on the first pass — clipped text on slide 6 and a worked example with no solution slide — both found by the Auditor, both fixed. Geometry audit clean, Archivo embedded, no fallback fonts."
+    },
+    "auditor": {
+      "result": "pass",
+      "note": "First pass FAIL: 2 blockers, 3 majors, 10 minors, run as a separate agent with no knowledge of the build choices. All blockers and majors fixed; template-level minors 13 and 15 fixed. Re-verified: audit clean, pdffonts shows Archivo only."
+    },
+    "librarian": {
+      "result": "fail",
+      "note": "NOT EXECUTED. Operation logged before mutation per DRIVE_ARCHITECTURE.md §3 at reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md. Held because it writes into the live teaching Drive and the user has not reviewed the deck. No parentId verification exists, so this step cannot be called pass."
+    },
+    "deployment": {
+      "result": "not required",
+      "note": "Nothing to verify in Drive while the Librarian step is held."
+    }
+  },
+  "status": "INCOMPLETE",
+  "outstanding": [
+    "Librarian: 3 logged Drive operations awaiting the user's go-ahead — create Section 01.4 - Isotopes, create Presentations, upload the deck.",
+    "12 image slots unfilled. Prompts available from scripts/image_prompts.py. The deck is not classroom-ready until they are placed.",
+    "Empty image wells still render as dashed boxes; a deck cannot yet suppress a well it is not using.",
+    "Guided notes and practice set for 1.4 not built — next in the documented build order, out of scope for T-7."
+  ]
+}

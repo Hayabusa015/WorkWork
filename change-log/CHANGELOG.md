@@ -57,6 +57,8 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
+| 2026-09-08 | Empty image wells render as dashed boxes; a deck cannot suppress a well it is not using | Design — T-7 open finding |
 | 2026-09-08 | Two Geology section titles in U5 are near-duplicates | User — deferred to "when I get to work" |
 | 2026-09-08 | The Drive Lab folder now holds a duplicate of two template files | User — deferred to "when I get to work" |
 | 2026-09-07 | Chemistry grading framing differs between two legacy sources | User — see `courses/chemistry/DECISIONS.md` open questions |

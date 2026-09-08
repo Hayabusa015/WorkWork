@@ -20,6 +20,7 @@ import sys, os, json
 from pptx import Presentation
 from pptx.util import Emu
 from pptx.enum.dml import MSO_FILL
+from fontTools.ttLib import TTFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from measure_tokens import contrast
@@ -41,6 +42,103 @@ def boxes(shapes):
         out.append((sh.name, text.split("\n")[0][:28],
                     Emu(sh.left).inches, Emu(sh.top).inches,
                     Emu(sh.left + sh.width).inches, Emu(sh.top + sh.height).inches))
+    return out
+
+
+# ---- real font metrics, so overflow is measured rather than guessed ----------
+# The box-overlap check below cannot see text spilling out of its OWN box, and that
+# is the defect the gate calls highest-priority. The first deck built through the
+# chain shipped with two step cards sliced through the glyph bodies: the strings had
+# no newlines in them, so a line-count cap saw two lines where the renderer wrapped
+# three. Advance widths come from the shipped Archivo files, not an average.
+
+_FONTS = {}
+
+def _font(bold):
+    key = "Bold" if bold else "Regular"
+    if key not in _FONTS:
+        path = os.path.join(REPO, "brand", "fonts", f"Archivo-{key}.ttf")
+        tt = TTFont(path)
+        _FONTS[key] = (tt.getBestCmap(), tt["hmtx"], tt["head"].unitsPerEm)
+    return _FONTS[key]
+
+
+def text_width_pt(text, size_pt, bold):
+    cmap, hmtx, upem = _font(bold)
+    total = 0
+    for ch in text:
+        gname = cmap.get(ord(ch))
+        total += hmtx[gname][0] if gname else upem // 2
+    return total * size_pt / upem
+
+
+def wrapped_lines(text, size_pt, bold, box_w_in):
+    """How many lines this actually takes in a box this wide."""
+    avail = box_w_in * 72.0
+    if avail <= 0:
+        return 1
+    lines = 0
+    for para in text.split("\n"):
+        words, cur = para.split(), ""
+        if not words:
+            lines += 1
+            continue
+        n = 1
+        for w in words:
+            trial = w if not cur else cur + " " + w
+            if text_width_pt(trial, size_pt, bold) <= avail:
+                cur = trial
+            else:
+                n += 1
+                cur = w
+        lines += n
+    return lines
+
+
+def overflow_check(shapes, fills, label):
+    """Text that runs past the visible card holding it.
+
+    Overflowing its own text box is not the defect - PowerPoint lets text spill and
+    nothing is lost. The defect is text spilling past the CARD it sits on, where the
+    card's edge slices it. That is what shipped on the first deck: step-card bodies
+    wrapped to three lines in a two-line box and ran out through the bottom of the
+    card. So the container measured against is the filled rectangle behind the text,
+    not the placeholder.
+    """
+    out = []
+    for sh in shapes:
+        if not sh.has_text_frame or not sh.text_frame.text.strip():
+            continue
+        if sh.width is None or sh.height is None:
+            continue
+        box = rect(sh)
+        box_w = box[2] - box[0]
+        total_lines, size = 0, None
+        for para in sh.text_frame.paragraphs:
+            for run in para.runs:
+                if not run.text.strip():
+                    continue
+                size = run.font.size.pt if run.font.size else 18
+                total_lines += wrapped_lines(run.text, size, bool(run.font.bold), box_w)
+        if not size or not total_lines:
+            continue
+
+        needed_bottom = box[1] + total_lines * size * 1.21 / 72.0
+
+        # The card behind this text: the smallest filled rect that contains its top-left.
+        holder = None
+        for (x0, y0, x1, y1), _hex in fills:
+            if x0 <= box[0] + 0.02 and y0 <= box[1] + 0.02 and x1 >= box[2] - 0.02 and y1 >= box[1]:
+                area = (x1 - x0) * (y1 - y0)
+                if holder is None or area < holder[1]:
+                    holder = ((x0, y0, x1, y1), area)
+        if holder is None:
+            continue
+        card_bottom = holder[0][3]
+        if needed_bottom > card_bottom + 0.01:
+            body = sh.text_frame.text.strip().replace("\n", " ")[:44]
+            out.append(f"{label}: {body!r} wraps to {total_lines} lines at {size:g}pt and runs "
+                       f"{needed_bottom - card_bottom:.2f}in past the card edge — it will clip")
     return out
 
 
@@ -130,6 +228,8 @@ def main():
         for b in bs:
             if b[2] < -0.01 or b[3] < -0.01 or b[4] > W + 0.01 or b[5] > H + 0.01:
                 errors.append(f"slide {i}: {b[0]!r} ({b[1]!r}) runs off the slide")
+
+        errors.extend(overflow_check(slide.shapes, fills, f"slide {i}"))
         # Student-facing type floor. Slide System v2 permits 10-12pt for eyebrows, card
         # labels and footers - navigation, not content. pptxgenjs renames placeholders to
         # "Text N" on the slide, so the exemption cannot key on a name. It keys on what
@@ -156,8 +256,8 @@ def main():
             print("  " + e)
         return 1
     print(f"audit_slide_geometry: {name} - {len(prs.slides)} slides. No overlapping text, "
-          f"nothing off-slide, nothing below the {floor}pt content floor, every text/ground "
-          f"pair at or above {target}:1.")
+          f"nothing off-slide, no text overflowing its box, nothing below the {floor}pt "
+          f"content floor, every text/ground pair at or above {target}:1.")
     return 0
 
 
