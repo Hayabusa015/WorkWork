@@ -19,7 +19,14 @@ SVG_EXCEPTION = {"templates/lab/SHULL_Lab_TEMPLATE_MASTER.html"}
 SVG_ALLOWED = {"#" + "14161B", "#" + "EDF0E5"}
 
 # Generated from brand/tokens.json by a script - a build artifact, not a source of truth.
-GENERATED = {"templates/lab/shull-lab-tokens.css"}
+# Written from tokens.json by a build script, never by hand. Each one names its
+# generator in its own header. tokens.generated.js also happens to store hex without
+# a leading "#", so the pattern below would miss it either way - it is listed here so
+# the exemption is a decision on the record rather than an accident of a regex.
+GENERATED = {
+    "templates/lab/shull-lab-tokens.css",       # scripts/build_lab_css.py
+    "templates/slide/tokens.generated.js",      # scripts/build_slide_tokens.py
+}
 
 # This file names the exception values it permits; that is not duplication.
 SELF = {"scripts/validate_tokens.py"}

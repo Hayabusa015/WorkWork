@@ -39,14 +39,27 @@ python3 -m pip install --quiet --disable-pip-version-check \
   python-docx python-pptx pymupdf pillow weasyprint fonttools jsonschema 2>&1 \
   | grep -vi "warning: running pip" || true
 
-# 4. Report --------------------------------------------------------------------
+# 4. Node libraries for the slide template ------------------------------------
+# The twelve layouts are pptxgenjs slide masters. python-pptx can fill a layout but
+# cannot define one, and "New slide -> Layout -> pick one" is the whole point of the
+# template - so this dependency is load-bearing, not a preference.
+SLIDE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/templates/slide"
+if [ -d "$SLIDE_DIR" ] && ! ( cd "$SLIDE_DIR" && node -e "require('pptxgenjs')" ) >/dev/null 2>&1; then
+  log "installing pptxgenjs for the slide template"
+  ( cd "$SLIDE_DIR" && npm install pptxgenjs --no-audit --no-fund --silent >/dev/null 2>&1 ) \
+    && log "  pptxgenjs OK" || log "  WARNING: npm failed. The slide template cannot be built."
+fi
+
+# 5. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
 import importlib, shutil
 for m in ["docx","pptx","fitz","PIL","weasyprint","fontTools","jsonschema"]:
     try: importlib.import_module(m); print(f"    {m:11} OK")
     except Exception: print(f"    {m:11} MISSING")
-for b in ["soffice","pdffonts","pdftoppm"]:
+for b in ["soffice","pdffonts","pdftoppm","node","npm"]:
     print(f"    {b:11} {'OK' if shutil.which(b) else 'MISSING'}")
 PY
+( cd "$SLIDE_DIR" 2>/dev/null && node -e "require('pptxgenjs')" ) >/dev/null 2>&1 \
+  && log "    pptxgenjs   OK" || log "    pptxgenjs   MISSING"
 log "done"

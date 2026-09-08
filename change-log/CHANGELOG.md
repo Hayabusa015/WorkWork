@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0013 | 2026-09-08 | Twelve-layout slide template migrated onto the token system | PROPOSED | `governance/proposals/SHULL-CHG-0013-slide-template.md` |
 | SHULL-CHG-0012 | 2026-09-08 | Physics decisions file created from two legacy sources | CONFIRMED | `courses/physics/DECISIONS.md` |
 | SHULL-CHG-0011 | 2026-09-08 | Chemistry decisions adopted from Drive as authoritative | CONFIRMED | `courses/chemistry/DECISIONS.md` |
 | SHULL-CHG-0010 | 2026-09-08 | Adopt the existing lab template rather than redesign | PARTIAL | `governance/proposals/SHULL-CHG-0010-lab-template.md` |
@@ -56,6 +57,8 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-08 | Restore the slide footer chip that linked a slide to its printed handout? | User — SHULL-CHG-0013 finding 3 |
+| 2026-09-08 | `ground.footer` measures 4.98:1 on white, under the 5.5 target, in print too | User — SHULL-CHG-0013 finding 8, three options costed |
 | 2026-09-08 | Two Geology section titles in U5 are near-duplicates | User — deferred to "when I get to work" |
 | 2026-09-08 | The Drive Lab folder now holds a duplicate of two template files | User — deferred to "when I get to work" |
 | 2026-09-07 | Chemistry grading framing differs between two legacy sources | User — see `courses/chemistry/DECISIONS.md` open questions |

@@ -385,7 +385,7 @@ ShullOS/                              (see Q-1 — this root may become shull-os
 │   └── drive.json                    verified folder IDs, machine-readable
 ├── templates/
 │   ├── lab/                          migrated template, HTML + build_lab.py + generated CSS
-│   └── slide-template/src/           tokens.js + build.js → 12-layout .pptx  (NOT YET BUILT)
+│   └── slide/                        build.js + generated tokens → 12-layout .pptx
 ├── schemas/
 │   ├── change-proposal.schema.json
 │   └── task-report.schema.json
@@ -399,6 +399,8 @@ ShullOS/                              (see Q-1 — this root may become shull-os
 │   ├── validate_references.py        fail on a reference to a file that does not exist
 │   ├── measure_tokens.py             compute contrast + grayscale into tokens.json
 │   ├── build_lab_css.py              tokens.json → templates/lab/shull-lab-tokens.css
+│   ├── build_slide_tokens.py         tokens.json → templates/slide/tokens.generated.js
+│   ├── audit_slide_geometry.py       fail on clipped, colliding or low-contrast slide text
 │   ├── publish_standards.py          repo → Drive _Brand/Standards/ (emits the plan)
 │   ├── setup-environment.sh          idempotent toolchain install; SessionStart hook
 │   ├── hook-validate.sh              Stop hook: run every validator
@@ -1105,8 +1107,12 @@ real work — a weekly review of a system nobody has used yet reports on nothing
    equivalents. **Until then both coexist and the legacy set stays untouched.**
    *Deliverable: SHULL OS V1.*
 
-**Not started.** Also outstanding here: the twelve-layout slide template has not been migrated, so
-`build-presentation` has no template to build against.
+**Not started** — T-7 and T-10 have not been run, and the legacy skills stay installed and untouched
+until they pass.
+
+The slide template **is** migrated (SHULL-CHG-0013), so `build-presentation` is no longer blocked.
+Two design questions from that migration are open with the user: the withdrawn footer chip, and
+`ground.footer` missing the contrast target in print as well as on slides.
 
 ---
 

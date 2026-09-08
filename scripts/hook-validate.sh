@@ -15,8 +15,10 @@ for v in validate_layers validate_codes validate_tokens validate_agents validate
     echo "── $v ──"; echo "$out"; fail=1
   fi
 done
-if ! out=$(python3 scripts/measure_tokens.py --check 2>&1); then
-  echo "── measure_tokens ──"; echo "$out"; fail=1
-fi
+for c in measure_tokens build_slide_tokens; do
+  if ! out=$(python3 "scripts/$c.py" --check 2>&1); then
+    echo "── $c ──"; echo "$out"; fail=1
+  fi
+done
 [ "$fail" -eq 0 ] && echo "[shull-os] validators clean"
 exit 0   # report, never block the session

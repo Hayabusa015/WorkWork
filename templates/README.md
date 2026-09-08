@@ -9,5 +9,6 @@ the build. **That indirection is the best engineering in the legacy system — p
 
 Generated from `brand/tokens.json`. Never hand-edit a token here.
 
-*Status: the lab template is migrated and on the token system (Phase 9). The twelve-layout slide
+*Status: both templates are migrated and on the token system. The lab template landed in Phase 9
+(SHULL-CHG-0010); the twelve-layout slide
 template has not been migrated yet.*
