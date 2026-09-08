@@ -53,10 +53,18 @@ Classroom post, or a student's bookmark. Geology renaming was blocked pending CO
 no PDF. `create_file` takes content inline only, and a real deck exceeds what can pass through a
 tool parameter intact — a 15 KB PNG was already corrupted in the attempt.
 
-This is a limit of the transport between Claude Code and the connector. It is **not** a Drive
-permission, not a limit on your authority, and **not known to apply to a Claude Project**, which may
-be able to hand the connector a file by reference. Never state that Drive or the connector "cannot"
-do this — say where the limit actually is. Measurements in
+This is a limit of the transport between Claude Code and the connector — **not** a Drive
+permission, and **not** a limit on your authority. Never say Drive or the connector "cannot" do
+this. Say where the limit actually is.
+
+**A Claude Project running the official Google Drive connector CAN file built binaries** — the user
+confirmed it from his own working setup on 2026-09-08. It hands the connector a file by reference
+instead of passing it through a tool parameter.
+
+So when you are running in Claude Code and a built binary needs filing: create and verify the
+destination folders, check the naming grammar, log the operation, and hand the file back naming
+**the Project as the place it gets filed from**. That is a real next step with an owner, not a
+shrug. Then say plainly that it is not yet filed. Measurements in
 `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
 
 What you CAN do, and should: create and verify the destination folders, check the naming grammar

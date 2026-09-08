@@ -932,10 +932,29 @@ Stated plainly, because Part 36 says do not invent unsupported capabilities.
    Verified working from here: folder creation, renaming, reparenting, metadata reads, and text
    files via `textContent`.
 
-   **UNTESTED and NOT claimed: whether a Claude Project has the same limit.** A Project holds
-   generated files in its own workspace and may hand one to the connector by reference rather than
-   by value. If it can, the architecture's answer for filing built binaries is the Project surface
-   or the user, not Claude Code. Do not assert either way without testing it.
+   **A Claude Project does NOT have this limit.** Confirmed by the user on 2026-09-08: he runs the
+   official Claude Google Drive connector in a Project and Claude puts files into his Drive there.
+   A Project holds a generated file in its own workspace and hands it to the connector **by
+   reference**; nothing passes through a tool parameter as text, so the ceiling that stops Claude
+   Code does not apply.
+
+   Recorded on the user's testimony from his own working setup, **not verified by me from here** —
+   I cannot test the Project surface from Claude Code. Believe it, but say where it came from.
+
+   **This resolves the gap rather than leaving it open, and it fixes the division of labour:**
+
+   | | Claude Code | Claude Project |
+   |---|---|---|
+   | Build a deliverable | **Yes** — repo, node, pptxgenjs, WeasyPrint, the validators | No |
+   | Run agents, skills, hooks | **Yes** | No — §8 |
+   | Enforce the QA gate | **Yes** | No |
+   | **File a built binary to Drive** | **No** | **Yes** |
+   | Create/verify folders, rename, reparent | Yes | Yes |
+
+   So the Librarian's filing authority is real; it is just **exercised from the Project, not from
+   here.** Claude Code builds and audits, the Project files, and the user carries the file between
+   them — the same bridge §8 already describes for Project Knowledge, now with a second crossing.
+   `docs/MOBILE_AND_PROJECT_WORKFLOW.md` §3.4 covers it.
 
    Evidence and measurements: `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
 

@@ -32,7 +32,7 @@
   },
   "status": "INCOMPLETE",
   "outstanding": [
-    "Librarian: the deck is NOT filed. Both folders exist and are verified; the .pptx cannot be uploaded through the connector and is the user's to drop into https://drive.google.com/drive/folders/1bK07FKOdrW3JUw5-2jre5zm1VZ1itJU-",
+    "Librarian: the deck is NOT filed from Claude Code, which cannot upload a built binary. Both destination folders exist and are verified. Filing happens from the Claude Project, where the official Google Drive connector hands the file over by reference — the Project should also re-run the parentId verification after uploading. Folder: https://drive.google.com/drive/folders/1bK07FKOdrW3JUw5-2jre5zm1VZ1itJU-",
     "12 image slots unfilled. Prompts available from scripts/image_prompts.py. The deck is not classroom-ready until they are placed.",
     "Empty image wells still render as dashed boxes; a deck cannot yet suppress a well it is not using.",
     "Guided notes and practice set for 1.4 not built — next in the documented build order, out of scope for T-7."

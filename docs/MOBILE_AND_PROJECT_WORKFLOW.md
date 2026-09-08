@@ -59,10 +59,23 @@ The paste enters `workflows/build-deliverable.md`. Agents, skills, tokens, QA ga
 grammar, the anti-slop check. Output lands in Drive under the structure in
 `standards/DRIVE_ARCHITECTURE.md`, and a task report lands in `reports/`.
 
-### 3.4 Return (Drive) — the shared surface
+### 3.4 File it (Project) — the crossing back
 
-Both surfaces read the same Drive. The Project can open what Claude Code just built, because it is a
-real file in a real folder, not a message in a conversation. This is why Drive is the canonical file
+**Claude Code cannot put a built `.pptx` or `.docx` into Drive. A Project can.** §21 item 0 has the
+measurements; the short version is that Claude Code has to push a file's bytes through a tool
+parameter and a real deck does not fit, while a Project hands the connector the file by reference.
+
+So the built file crosses back the way the request came out — through you. Claude Code produces it
+and names the destination folder, which it *can* create and verify. You hand it to the Project, and
+the Project files it.
+
+That is two crossings, both manual, and neither is a workaround for a missing feature — they are
+where the two surfaces genuinely do not touch.
+
+### 3.5 Read (Drive) — the shared surface
+
+Both surfaces read the same Drive. The Project can open what was just filed, because it is a real
+file in a real folder, not a message in a conversation. This is why Drive is the canonical file
 library and not a backup: **it is the only thing both halves of the system can see.**
 
 ---
