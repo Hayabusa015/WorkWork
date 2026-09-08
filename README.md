@@ -44,14 +44,18 @@ Analysis only. Read in this order:
 | Geology | Terra Teal `#16B8A6` + Rust Orange `#E85D24` |
 | Background | White `#FFFFFF` default; Parchment `#EDF0E5` special-purpose only |
 | Typography | Trade Gothic Next, falling back to Archivo / Archivo Narrow |
+| Coloured type on white | Deep variants — Chem `#4D730E`, Phys `#896107`, Geo `#0E766A` |
+| Filenames | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]`, zero-padded |
 | Geology numbering | Plate Tectonics = U4 |
 | Drive | Unchanged — `SHULL Science/`, Unit → Section → five content folders |
 
-## Open before the build continues
+## Open — important, not blocking
 
-- **CONFLICT-28** — the six course colours fail WCAG as text on white; they were chosen for a
-  dark ground. Blocks the design system.
-- **CONFLICT-09(a)** — section-code padding in filenames. Blocks batch renaming.
+- **CONFLICT-24** — Chemistry grading: gradebook weights vs. the "daily practice ~10%" framing.
+- **CONFLICT-25** — whether Geology has section numbers at all. Blocks Geology renaming and the
+  code validator.
+- **CONFLICT-26** — the Gizmos rule vs. the built U1 materials that use one.
+- **Q-13** — whether to add a `99 Archive/` folder to the Drive content folders.
 
 ## What has not happened
 

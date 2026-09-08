@@ -2,8 +2,8 @@
 
 **Authority:** These are Matthew Shull's explicit decisions, given in review of
 `CONFLICT_REPORT.md`. Under Part 28 they are tier-1 sources and they win over every legacy file.
-**Effect:** All seven CRITICAL conflicts are resolved except CONFLICT-09(a), which was not put to a
-decision and remains open.
+**Effect:** All seven CRITICAL conflicts are resolved, plus CONFLICT-28 which these decisions raised.
+**Amended:** 2026-09-08 with CHG-0007 (naming) and CHG-0008 (colour on white).
 **Format:** Part 32 change records.
 
 ---
@@ -167,27 +167,111 @@ students receive.** Installing Archivo makes the QA render and the shipped PDF t
 
 ---
 
-## SHULL-CHG-0007 — Naming grammar — **NOT DECIDED**
+## SHULL-CHG-0007 — Naming grammar
 
 | Field | Value |
 |---|---|
-| **Resolves** | CONFLICT-09(a) / Q-6(a) — **still open** |
-| **Status** | **PENDING** |
+| **Date** | 2026-09-08 |
+| **Source** | User decision |
+| **Resolves** | CONFLICT-09(a) / Q-6(a) |
+| **Current Rule** | Three incompatible forms: `shull-studio` §2 unpadded (`U08_S8.4`); Folder Organization v2 padded (`U08_S08.2`); specification Part 25 with no prefix and no section code |
+| **Decision** | **Zero-padded section codes.** |
+| **Locked grammar** | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]` |
+| **Supersedes** | `shull-studio` §2 unpadded examples · specification Part 25 |
+| **Reason** | Matches the Drive folder names confirmed in CHG-0005 (`Section 08.4 - …`), which lets `validate_codes.py` compare a filename against a folder path without normalising |
+| **Affected skills** | `naming`, `shelve-drive-file`, every `build-*` skill |
+| **Risk** | Low |
+| **Status** | **APPROVED** |
 
-The Drive half of Q-6 was answered (CHG-0005). The naming half was not put to a decision.
+**Worked examples:**
 
-The open question is section-code padding:
+```
+SHULL_CHEM_Slides_U08_S08.2.pptx
+SHULL_PHYS_Guided_Notes_U02_S02.3.docx
+SHULL_GEO_Practice_Set_U04_S04.1.pdf
+SHULL_CHEM_Test_U08_S08.4_A.docx
+SHULL_CHEM_Test_U08_S08.4_A_Key.docx
+```
 
-| Source | Form |
+- `COURSE` ∈ `CHEM` · `PHYS` · `GEO`
+- `Type` ∈ `Slides` `Guided_Notes` `Practice_Set` `Quiz` `Test` `Lab` `Study_Guide` `Reference`
+  `Key` `Rubric` `Activity` `Organizer`
+- Unit and section both zero-padded to two digits
+- Parallel-form version letters append last, before `_Key`
+- Answer keys are always separate files ending `_Key`
+- **Images are not course documents** — no `SHULL_` prefix, lowercase:
+  `[course]_u##_s##.#_[subject].png` → `chem_u01_s1.2_rutherford.png`; shared backgrounds drop the
+  unit code (`bg_glassware.png`)
+
+**Unblocks:** the `naming` skill and `validate_codes.py`.
+**Batch renaming** is now unblocked for Chemistry and Physics. Geology additionally needs
+CONFLICT-25 (whether Geology has section numbers at all).
+
+---
+
+## SHULL-CHG-0008 — Colour on white: text-safe deep variants
+
+| Field | Value |
 |---|---|
-| `shull-studio` §2 | `U08_S8.4` — **unpadded** |
-| `SHULL_Cowork_Folder_Organization_v2.md` | `SHULL_CHEM_Slides_U08_S08.2.pptx` — **padded** |
-| Specification Part 25 | `CHEM_U03_Presentation_Periodic_Trends_v1` — no prefix, no section code |
+| **Date** | 2026-09-08 |
+| **Source** | User decision |
+| **Resolves** | CONFLICT-28 |
+| **Current Rule** | The six locked course colours were selected for a `#14161B` dark ground and fail WCAG as text on the locked white background — four fail outright, two reach large-text-only, none passes body text |
+| **Decision** | **Option (a): one text-safe deep variant per course**, derived from the primary by preserving hue and saturation and reducing lightness. |
+| **Reason** | Preserves the "one accent-colour word per headline" rule that has been in the system since the beginning, rather than giving up coloured type entirely |
+| **Affected** | `brand/tokens.json`, `brand/SHULL_DESIGN_SYSTEM.md`, `apply-shull-design`, every `build-*` skill |
+| **Risk** | Low |
+| **Status** | **APPROVED** |
 
-**Recommendation, unchanged:** `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]` with
-**zero-padded** sections, matching the Drive folder names now confirmed in CHG-0005.
+### The tokens
 
-**Blocks:** the `naming` skill, `validate_codes.py`, and all batch renaming.
+Contrast target set at **5.5:1**, not the 4.5:1 AA minimum. A colour sitting at exactly 4.51:1 is one
+rounding step from failing; 5.5:1 gives headroom that survives anti-aliasing and a tired projector
+bulb, without darkening the hue into mud.
+
+| Course | Display (locked, CHG-0002/0003) | Text-safe deep | On white | Grey |
+|---|---|---|---:|---:|
+| Chemistry | Lab Lime `#A3E635` | **Lab Lime Deep `#4D730E`** | 5.56:1 | 92 |
+| Physics | Quantum Gold `#F5B82E` | **Quantum Gold Deep `#896107`** | 5.56:1 | 99 |
+| Geology | Terra Teal `#16B8A6` | **Terra Teal Deep `#0E766A`** | 5.50:1 | 86 |
+
+Secondaries (Aqua, Deep Purple, Rust Orange) get **no** deep variant. Only one text-safe accent per
+course is needed, because only one accent word per headline is permitted.
+
+### The usage rule — symmetrical, and it is the whole point
+
+> **On a light ground, coloured type uses the deep variant. On a dark ground, coloured type uses
+> the display colour. Neither is ever used as type on the other.**
+
+Measured, so this is not a preference:
+
+| | On white `#FFFFFF` | On Asphalt `#14161B` |
+|---|---:|---:|
+| Display colours | 1.51 – 4.23:1 — **not type** | 4.27 – 12.00:1 — type ✓ |
+| Deep variants | 5.50 – 5.56:1 — type ✓ | 3.25 – 3.29:1 — **not type** |
+
+Display colours remain unchanged for every non-type use — fills, highlight blocks, rules, chips,
+tag pills, borders, and dark-ground accents. Nothing about CHG-0002 or CHG-0003 changes.
+
+### A second problem this fixes
+
+Geology's display pair sits **6 grey levels apart** (Terra Teal 134, Rust Orange 128) — effectively
+identical photocopied, in the course whose own guidelines say most handouts print in grayscale.
+
+Terra Teal **Deep** reads at grey 86 against Rust Orange's 128 — a separation of **42**, comfortably
+past the ≥20 threshold the legacy system used. So Geology's coloured type is now grayscale-safe
+against its own secondary.
+
+**This does not excuse the display pair.** Where Terra Teal and Rust Orange appear as adjacent fills,
+they must still be differentiated by **border and label as well as fill** — the existing
+"never rely on colour alone" rule, applied the way Quiet Voltage applied it to tag pills.
+
+### Standing rule for `tokens.json`
+
+Every colour in `tokens.json` carries its measured contrast against both grounds and its grayscale
+value. A colour that enters the palette without measurements is a defect. This is the one practice
+worth keeping from the retired Quiet Voltage palette, and it is what would have caught this
+conflict on 2026-09-06 instead of two days later.
 
 ---
 
@@ -290,10 +374,12 @@ specify how colour is applied to type.** That is a Phase 8 blocker, not a Phase 
 | CONFLICT-03 | Geology unit numbering | ✅ Plate Tectonics U4 |
 | CONFLICT-04 | Typography | ✅ Archivo + Archivo Narrow |
 | CONFLICT-06 | Drive architecture | ✅ As built, `SHULL Science` |
-| CONFLICT-09(a) | Naming grammar | ⬜ **PENDING** |
-| CONFLICT-28 | Colour-on-white contrast | ⬜ **NEW — blocks Phase 8** |
+| CONFLICT-09(a) | Naming grammar | ✅ Zero-padded (CHG-0007) |
+| CONFLICT-28 | Colour-on-white contrast | ✅ Deep variants, option (a) (CHG-0008) |
 
-**Six of seven CRITICAL conflicts resolved.** Phase 7 (repository skeleton, legacy snapshots,
-`CLAUDE.md`, governance) is **unblocked and ready to begin** — `workwork` is attached and this
-analysis now lives in it. Phase 8 (design system and tokens) needs CONFLICT-28 and CONFLICT-09(a).
+**All seven CRITICAL conflicts resolved.** Phases 7 and 8 are both unblocked.
+
+Remaining open items are IMPORTANT, not blocking: CONFLICT-24 (Chemistry grading framing),
+CONFLICT-25 (whether Geology has section numbers — still blocks Geology renaming and the code
+validator), CONFLICT-26 (the Gizmos exception), and Q-13 (the `99 Archive/` Drive folder).
 
