@@ -346,6 +346,7 @@ ShullOS/                              (see Q-1 — this root may become shull-os
 │   │   ├── apply-shull-design/SKILL.md
 │   │   ├── verify-content/SKILL.md
 │   │   ├── audit-deliverable/SKILL.md
+│   │   ├── anti-ai-slop/SKILL.md
 │   │   ├── retrieve-drive-file/SKILL.md
 │   │   ├── shelve-drive-file/SKILL.md
 │   │   ├── naming/SKILL.md
@@ -354,6 +355,7 @@ ShullOS/                              (see Q-1 — this root may become shull-os
 ├── brand/
 │   ├── SHULL_DESIGN_SYSTEM.md        THE authoritative design system
 │   ├── tokens.json                   THE only place a hex is typed
+│   ├── fonts/                        Archivo + Archivo Narrow, statics, fontconfig alias
 │   └── palette-archive/              ← CHANGE 3: deprecated palettes, preserved
 │       ├── README.md                 why each was superseded, and when
 │       ├── base-parchment-bio-lime.md
@@ -382,23 +384,38 @@ ShullOS/                              (see Q-1 — this root may become shull-os
 ├── config/
 │   └── drive.json                    verified folder IDs, machine-readable
 ├── templates/
-│   └── slide-template/src/           tokens.js + build.js → 12-layout .pptx
+│   ├── lab/                          migrated template, HTML + build_lab.py + generated CSS
+│   └── slide-template/src/           tokens.js + build.js → 12-layout .pptx  (NOT YET BUILT)
 ├── schemas/
 │   ├── change-proposal.schema.json
 │   └── task-report.schema.json
 ├── scripts/
+│   ├── _shullos.py                   shared helpers; one exclusion list, not six
 │   ├── validate_layers.py            fail if a course fact appears in a skill
 │   ├── validate_codes.py             fail if a U#/S#.# code isn't in a DECISIONS.md
 │   ├── validate_tokens.py            ← CHANGE 4: fail if a hex is typed outside tokens.json
-│   └── publish_standards.py          repo → Drive _Brand/Standards/
+│   ├── validate_agents.py            fail if an agent's tool grants exceed its authority
+│   ├── validate_schemas.py           fail if a schema stops rejecting what it must reject
+│   ├── validate_references.py        fail on a reference to a file that does not exist
+│   ├── measure_tokens.py             compute contrast + grayscale into tokens.json
+│   ├── build_lab_css.py              tokens.json → templates/lab/shull-lab-tokens.css
+│   ├── publish_standards.py          repo → Drive _Brand/Standards/ (emits the plan)
+│   ├── setup-environment.sh          idempotent toolchain install; SessionStart hook
+│   ├── hook-validate.sh              Stop hook: run every validator
+│   └── hook-drive-guard.sh           PreToolUse hook on the Drive connector
 ├── reports/                          Researcher, Janitor, Auditor output
 ├── change-log/
 │   └── CHANGELOG.md
-├── docs/                             this plan + the three companion analyses
+├── docs/                             this plan, the analyses, decisions, and Part 35
 └── legacy/                           ← CHANGE 5: verbatim snapshots, never edited
     ├── skills/                       the 10 installed SHULL skills, as-found
-    └── drive-standards/              the 6 _Brand/Standards files, as-found
+    └── drive-standards/              the _Brand/Standards files, as-found, + MANIFEST
 ```
+
+**This tree is the built repository as of 2026-09-08**, not a wish. Where something is planned but
+absent it says so inline. The tree is a reading aid; `git ls-files` is the authority, and
+`scripts/validate_references.py` fails the build on any path this document names that does not
+resolve.
 
 **Why the five changes:**
 
@@ -964,7 +981,11 @@ background (measured). Blocks Phase 8, not Phase 7.
 
 ## 23. Exact implementation sequence
 
-Phases 1–6 are complete. Nothing below Phase 7 starts until §22's blocking questions are answered.
+**Status as of 2026-09-08: Phases 1–12 complete. Phases 13–14 not started.**
+
+Below, ✅ means built and validated, 🟡 means partially built with the gap named, ⬜ means not
+started. Where execution deviated from the plan as written, an **Actual** line says how — the plan
+is not retroactively edited to look prescient.
 
 ### ✅ Phase 1 — Inspect environment and repository
 Done. §1–§8.
@@ -986,10 +1007,12 @@ Done as a proposal. §9–§17. **Not written to disk as authority** — that is
 Done. Every claimed capability in this plan was checked against the live environment. Anything that
 could not be verified is listed in §21 as a limitation, not asserted as a feature.
 
-### ⛔ GATE — user review
-Answer Q-1 through Q-6. Nothing below proceeds without them.
+### ✅ GATE — user review
+Passed 2026-09-07. Q-1 through Q-6 answered; recorded as SHULL-CHG-0001 … 0006 in
+`docs/DECISIONS_2026-09-07.md`. Q-7 and CONFLICT-28 were raised *by* that review and closed by
+SHULL-CHG-0007 and -0008.
 
-### Phase 7 — Repository structure
+### ✅ Phase 7 — Repository structure
 1. Resolve Q-1; establish the root.
 2. Create the §9 tree, empty, with a `README.md` in each directory saying what it owns.
 3. Snapshot the 10 installed skills verbatim into `legacy/skills/`.
@@ -999,7 +1022,10 @@ Answer Q-1 through Q-6. Nothing below proceeds without them.
 6. Write `config/drive.json` with the seven verified folder IDs.
 7. Commit. *Deliverable: a navigable, empty, documented skeleton.*
 
-### Phase 8 — Standards, then agents
+**Actual:** done, plus `legacy/drive-standards/MANIFEST.md`. Legacy skill snapshots verified
+byte-identical by md5. Root became a new repository per SHULL-CHG-0001.
+
+### ✅ Phase 8 — Standards, then agents
 1. `brand/tokens.json` and `brand/SHULL_DESIGN_SYSTEM.md` from Part 46 + resolved Q-2…Q-5.
 2. `brand/palette-archive/` — all five superseded palettes, each with a dated supersession note.
 3. `standards/` — ANTI_AI_SLOP, VOICE, NAMING, DRIVE_ARCHITECTURE, QA_GATE.
@@ -1008,13 +1034,26 @@ Answer Q-1 through Q-6. Nothing below proceeds without them.
    to point at will invent rules, which is the failure this whole system exists to prevent.
 6. Run T-2. *Deliverable: a governed system with no build capability yet.*
 
-### Phase 9 — Skills and validators
+**Actual:** an unplanned step ran first — the build toolchain did not exist (no LibreOffice filters,
+no PDF tooling, no WeasyPrint) and "Trade Gothic Next" silently resolved to DejaVu Sans, so every QA
+render would have inspected a different document than the one shipped. Fixed by
+`scripts/setup-environment.sh`, static font instances, and a fontconfig alias. That is the concrete
+mechanism behind SHULL-CHG-0006.
+
+### ✅ Phase 9 — Skills and validators
 1. The twelve skills from §11, each pointing at standards and restating nothing.
 2. `validate_layers.py`, `validate_codes.py`, `validate_tokens.py`.
 3. `.claude/settings.json` hooks: PreToolUse authority gates, Stop validator run.
 4. Run T-1. *Deliverable: build capability, mechanically prevented from drifting.*
 
-### Phase 10 — Drive integration
+**Actual:** six validators, not three — `validate_agents.py`, `validate_schemas.py` and
+`validate_references.py` were added as each new failure mode appeared. Their first run found four
+real defects in work committed hours earlier. The PreToolUse *authority* gate was deliberately not
+built: a shell hook cannot tell which agent is asking, so blocking by path would fire on legitimate
+Secretary work and become noise. Authority is enforced by agent tool grants, which
+`validate_agents.py` checks.
+
+### ✅ Phase 10 — Drive integration
 1. **Run T-3 first.** The Librarian's MOVE authority depends on the answer.
 2. T-4, T-5, T-6.
 3. `retrieve-drive-file` and `shelve-drive-file` against the real tree.
@@ -1023,13 +1062,19 @@ Answer Q-1 through Q-6. Nothing below proceeds without them.
 5. Resolve the §14.3 filing defects — **as proposals, executed only on approval.**
    *Deliverable: verified read/write to the real library.*
 
-### Phase 11 — QA and deployment workflows
+**Actual:** T-3 passed. `update_file` reparents natively and **preserves the file ID**, so MOVE is
+unblocked and copy-and-trash is now forbidden as a move mechanism.
+
+### ✅ Phase 11 — QA and deployment workflows
 1. `workflows/build-deliverable.md` — the Part 34 seven-step chain.
 2. `audit-deliverable` skill: render → rasterize → inspect. **Never ship a document unseen.**
 3. `schemas/task-report.schema.json`; WORK COMPLETE only on a verified artifact at a verified path.
 4. Run T-8. *Deliverable: a deliverable cannot ship unaudited.*
 
-### Phase 12 — Course integration
+**Actual:** three workflows and two schemas, the schemas behaviour-tested by `validate_schemas.py`
+(9 cases) rather than merely being valid JSON Schema.
+
+### ✅ Phase 12 — Course integration
 1. `courses/chemistry/DECISIONS.md` — adopt `CHEM_DECISIONS.md` from Drive. **Chemistry first: it
    is fully mapped and is the reference implementation.**
 2. `courses/physics/DECISIONS.md` — 11 units / 48 sections, confirmed. Record Q-14.
@@ -1038,18 +1083,30 @@ Answer Q-1 through Q-6. Nothing below proceeds without them.
 4. `scripts/publish_standards.py` → `_Brand/Standards/`; document the Project read path.
    *Deliverable: three courses, one authoritative decisions file each.*
 
-### Phase 13 — Weekly Researcher reporting
+**Actual:** Geology was unblocked earlier than planned — the `Geology_Course_Roadmap` document in
+Drive independently corroborated Plate Tectonics = U4 and supplied all 54 section titles
+(SHULL-CHG-0009). `publish_standards.py` emits the upload plan rather than calling Drive, so the
+write still goes through the Librarian. **Two items are still open with the user:** the U5
+near-duplicate section titles, and the duplicated build files now in the Drive Lab folder.
+
+### ⬜ Phase 13 — Weekly Researcher reporting
 1. `weekly-system-review` skill — report-only, three hard limits (§16).
 2. A Routine, at the time confirmed in Q-8.
 3. Run T-9. *Deliverable: a system that notices its own drift and changes nothing on its own.*
 
-### Phase 14 — Test the complete system
+**Not started, deliberately.** The Routine is scheduled only after the system has been exercised on
+real work — a weekly review of a system nobody has used yet reports on nothing.
+
+### ⬜ Phase 14 — Test the complete system
 1. Run T-7 end-to-end on one real Chemistry section.
 2. Run T-10.
 3. Janitor's first full sweep; Auditor's independent review of the build.
 4. Only after T-7 and T-10 pass: retire the legacy installed skills, replacing them with SHULL OS
    equivalents. **Until then both coexist and the legacy set stays untouched.**
    *Deliverable: SHULL OS V1.*
+
+**Not started.** Also outstanding here: the twelve-layout slide template has not been migrated, so
+`build-presentation` has no template to build against.
 
 ---
 
