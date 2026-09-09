@@ -67,10 +67,12 @@ section. Chemistry has the order enforced and picks its own counts.
 > from the legacy studio skill and never confirmed. His own `SHULL_PHYS_Practice_Sets_U01.docx`
 > runs 2/2/1/1 across all four sections. The artifact won. SHULL-CHG-0019.
 
-**Tier tags are outlined, never filled**, and the tiers stay apart in greyscale by border
-**weight**. His existing Physics sheet fills them — light blue warm-up, solid navy multi-topic —
-and sets each question number in a solid navy square. Both are section 8 violations and the square
-is the withdrawn number-box (SHULL-CHG-0015).
+**Tier tags carry no box and sit in their own right-aligned column**, so every prompt starts on
+one edge. His existing Physics sheet fills them — light blue warm-up, solid navy multi-topic — and
+sets each question number in a solid navy square. Both are section 8 violations and the square is
+the withdrawn number-box (SHULL-CHG-0015). An outlined boxed tag was tried first and he rejected it
+on sight: a run border cannot be padded, so at 7pt it clamps to the cap height, and four tiers in
+four border weights read as a rendering fault rather than a scale.
 
 Work boxes carry a faint **SHOW WORK HERE** watermark, at `print.watermarkOpacityPct`. Bracketed
 self-check answers for **numeric results only** — never for explanation, vocabulary, or

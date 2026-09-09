@@ -118,31 +118,6 @@ def borders(cell, hexval, sz=6, edges=("top", "left", "bottom", "right"), val="s
     tcPr.append(b)
 
 
-def pill(paragraph, text, hexval, pal, sz=6, size=7):
-    """An outlined tag, inline with the text that follows it.
-
-    His existing Physics practice set fills these - a light blue WARM-UP, a solid navy
-    MULTI-TOPIC - which section 8 forbids on anything printed, and which was a
-    meaningful part of that sheet's ink. A run border (w:bdr) draws the outline around
-    the text itself, so the tag sits on the same line as the question instead of
-    costing a table and the blank paragraph a table drags with it. Tiers stay
-    distinguishable in greyscale by border WEIGHT, not by fill.
-    """
-    r = paragraph.add_run(f" {text} ")
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = True
-    r.font.color.rgb = RGBColor.from_string(hexof(pal.accent))
-    el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
-    rPr = r._element.get_or_add_rPr()
-    rPr.append(el)
-    bdr = OxmlElement("w:bdr")
-    bdr.set(qn("w:val"), "single"); bdr.set(qn("w:sz"), str(sz))
-    bdr.set(qn("w:space"), "0"); bdr.set(qn("w:color"), hexof(hexval))
-    rPr.append(bdr)
-    return r
-
-
 def checkbox(paragraph, pal, size=9):
     """An empty tick box, drawn in the brand face rather than borrowed from another.
 
@@ -224,15 +199,46 @@ def fix_widths(table, widths):
         col.width = Inches(w)
 
 
+def gap(doc, pt=6):
+    """A vertical gap of exactly `pt` points.
+
+    `doc.add_paragraph()` with a space_after is not a gap of that size - it is a full
+    empty body line PLUS the space after it, so a 3pt spacer actually costs about 16pt.
+    Six of them between the questions of one section is most of an inch of nothing, and
+    on a one-page-per-section sheet that inch is what pushes the closing checklist onto
+    a second sheet of paper. Pinning the line makes the gap the size it says it is.
+    """
+    p = doc.add_paragraph()
+    pPr = p._p.get_or_add_pPr()
+    sp = OxmlElement("w:spacing")
+    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+    sp.set(qn("w:line"), str(int(pt * 20))); sp.set(qn("w:lineRule"), "exact")
+    pPr.append(sp)
+    r = p.add_run()
+    r.font.name = FONT
+    r.font.size = Pt(max(1, pt - 2))
+    return p
+
+
+def cell_margins(cell, top=0, bottom=0, left=40, right=40):
+    """Margins on ONE cell, in twentieths of a point.
+
+    Applying them to a whole table is the usual case, but not always the right one: a
+    right-aligned tag needs no margin on its left and a real gap on its right, and
+    zeroing the row wholesale ran the tag straight into the text it labels.
+    """
+    mar = OxmlElement("w:tcMar")
+    for edge, v in (("top", top), ("bottom", bottom), ("left", left), ("right", right)):
+        e = OxmlElement(f"w:{edge}")
+        e.set(qn("w:w"), str(int(v))); e.set(qn("w:type"), "dxa")
+        mar.append(e)
+    cell._tc.get_or_add_tcPr().append(mar)
+
+
 def tight_cells(t, top=0, bottom=0, left=40, right=40):
     for row in t.rows:
         for c in row.cells:
-            mar = OxmlElement("w:tcMar")
-            for edge, v in (("top", top), ("bottom", bottom), ("left", left), ("right", right)):
-                e = OxmlElement(f"w:{edge}")
-                e.set(qn("w:w"), str(v)); e.set(qn("w:type"), "dxa")
-                mar.append(e)
-            c._tc.get_or_add_tcPr().append(mar)
+            cell_margins(c, top, bottom, left, right)
 
 
 def one_cell(doc, width=7.5):

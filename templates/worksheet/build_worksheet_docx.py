@@ -36,8 +36,9 @@ from docx.oxml import OxmlElement
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
-    borders, para, pill, run, check_item, rule_lines, fix_widths, one_cell, no_split,
+    borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
+    text_width_in, cell_margins, gap,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -46,7 +47,6 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 TEXT_W_IN = 7.50
 NUM_W_IN = 0.30                                  # the question number's own column
 BODY_W_IN = TEXT_W_IN - NUM_W_IN
-BODY_INNER_IN = round(BODY_W_IN - 0.28, 2)       # minus one nesting's cell margins
 
 # The ramp, per course. His own PHYS U01 practice sets run 2 warm-up, 2 practice,
 # 1 challenge, 1 multi-topic per section - six questions, easy to start and finishing on
@@ -55,6 +55,9 @@ BODY_INNER_IN = round(BODY_W_IN - 0.28, 2)       # minus one nesting's cell marg
 # nobody confirmed it, and his shipped packet is the better evidence. SHULL-CHG-0019
 # records the conflict.
 TIERS = ("warm-up", "practice", "challenge", "multi-topic")
+TIER_PT = 7                     # the tag is metadata, set below the body size
+TIER_TRACK_PT = 1.3             # w:spacing val 26, in points per character
+TIER_GAP_IN = 0.10              # the gap between the tag and the prompt it labels
 # Exact counts are enforced only where there is evidence for them. Physics has a
 # shipped packet to read; Chemistry does not, so it gets the ORDER of the ramp enforced
 # and picks its own counts. Inventing a Chemistry count and calling it locked is how
@@ -64,7 +67,25 @@ RAMP = {
     "chemistry": None,
     "geology":   None,          # a Geology sheet is an activity, not a question ladder
 }
-TIER_WEIGHT = {"warm-up": 4, "practice": 8, "challenge": 14, "multi-topic": 22}
+
+
+def tier_col_in():
+    """Width of the tier column, measured from the longest tier name.
+
+    The tags used to run inline with the prompt, which left every question starting at
+    a different place and every wrapped line running back under the tag. Giving the tag
+    its own column fixes both - but only if the column is wide enough for the longest
+    name, or "MULTI-TOPIC" wraps to two lines and looks worse than what it replaced.
+    So it is measured off the shipped Archivo files rather than picked, and it follows
+    the tier names if they are ever renamed.
+    """
+    widest = max(text_width_in(t.upper(), TIER_PT, bold=True)
+                 + TIER_TRACK_PT * len(t) / 72.0 for t in TIERS)
+    # The tag is set right, so it needs no slack on its left - only the gap to the
+    # prompt on its right. The cell's own margins are zeroed to match, because every
+    # hundredth of an inch here comes straight off the prompt column, and on a
+    # one-page-per-section sheet that is the difference between four pages and five.
+    return round(widest + TIER_GAP_IN, 2)
 WORK_MIN_IN = 1.6
 WATERMARK = "SHOW WORK HERE"
 
@@ -136,7 +157,7 @@ def grid(doc, n, across, height_in, pal, gutter=0.18, arrows=True):
         if r < rows - 1 and arrows:
             arrow(doc, pal)
         else:
-            doc.add_paragraph().paragraph_format.space_after = Pt(0)
+            gap(doc, 4)   # cards need air between rows even without an arrow
     return out
 
 
@@ -228,43 +249,49 @@ def reflection_block(doc, block, pal):
 # ------------------------------------------------------------------------ questions
 
 def question_block(doc, q, i, pal, course, base_dir):
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [NUM_W_IN, BODY_W_IN])
+    tier_w = tier_col_in()
+    t = doc.add_table(rows=1, cols=3)
+    fix_widths(t, [NUM_W_IN, tier_w, BODY_W_IN - tier_w])
     # A question stays whole. Split across a page break, the parts and the work box
     # land on the next sheet with no number above them - the student sees an unlabelled
     # box and four lettered parts belonging to nothing.
     no_split(t.rows[0])
-    numcell, body = t.rows[0].cells
+    numcell, tiercell, body = t.rows[0].cells
     # Just the number. No box, no square, no circle, in any format. SHULL-CHG-0015 -
     # his existing Physics sheet sets these in solid navy squares, which is both the
     # withdrawn number-box and a fill on a printed page.
     para(numcell, str(i), 11, bold=True, color=pal.accent, first=True)
 
-    # The tier tag rides inline with the prompt: one line, no fill, and tiers stay
-    # apart in greyscale by border weight.
-    p = body.paragraphs[0]
-    p.paragraph_format.space_after = Pt(2)
+    # The tier tag has its own column, set right so every tag ends on one edge and
+    # every prompt begins on one edge. It carries no box at all: a run border cannot be
+    # padded, so a boxed tag at 7pt is always clamped to the cap height and looks
+    # stamped on, and a box drawn on the cell is a tall empty rectangle beside one word.
+    # Four tiers in four different border weights read as a rendering fault rather than
+    # a scale. The word is the tag.
     if q.get("tier"):
-        weight = TIER_WEIGHT[q["tier"]]
-        colour = pal.hair if q["tier"] == "warm-up" else (
-            pal.display if q["tier"] == "multi-topic" else pal.accent)
-        pill(p, q["tier"].upper(), colour, pal, sz=weight)
-        run(p, "   ", 10)
-    run(p, q["prompt"], 10, color=pal.ink)
+        # No margin on the left, where a right-set tag does not need one; the gap to
+        # the prompt is on the right, where it is visible.
+        cell_margins(tiercell, left=0, right=TIER_GAP_IN * 1440)
+        p = para(tiercell, q["tier"].upper(), TIER_PT, bold=True, color=pal.accent,
+                 caps_track=True, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+    para(body, q["prompt"], 10, color=pal.ink, first=True)
     for part in q.get("parts", []):
         # Multi-part items keep full body size on every part.
         para(body, "   " + debullet(part), 10, color=pal.ink)
 
+    body_inner = round(BODY_W_IN - tier_w - 0.16, 2)
     if q.get("diagram"):
-        diagram_block(body, q["diagram"], pal, BODY_INNER_IN, base_dir)
+        diagram_block(body, q["diagram"], pal, body_inner, base_dir)
     if q.get("draw"):
-        draw_block(body, q["draw"], pal, BODY_INNER_IN - 0.2)
+        draw_block(body, q["draw"], pal, body_inner - 0.2)
     if q.get("given") or q.get("need"):
-        given_need(body, q.get("given", ""), q.get("need", ""), pal, BODY_INNER_IN)
+        given_need(body, q.get("given", ""), q.get("need", ""), pal, body_inner)
 
     if q.get("math"):
         work_box(body, q.get("workLabel", ""), pal,
-                 float(q.get("workHeightIn", WORK_MIN_IN)), BODY_INNER_IN,
+                 float(q.get("workHeightIn", WORK_MIN_IN)), body_inner,
                  watermark=q.get("watermark", WATERMARK))
     elif q.get("answerLines"):
         answer = int(q["answerLines"])
@@ -276,7 +303,7 @@ def question_block(doc, q, i, pal, course, base_dir):
         # over the whole answer.
         pp = para(body, q["selfCheck"], 8, color=pal.label)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    doc.add_paragraph().paragraph_format.space_after = Pt(3)
+    gap(doc, 3)
     return t
 
 
@@ -431,7 +458,7 @@ def main():
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
         # ---- What this is about, before anything is asked of them.
-        doc.add_paragraph().paragraph_format.space_after = Pt(2)
+        gap(doc, 2)
         c = one_cell(doc)
         borders(c, pal.display, sz=18, edges=("left",))
         label(c, sec.get("conceptLabel", "THE CONCEPT — READ THIS FIRST"), pal, first=True)
@@ -441,7 +468,7 @@ def main():
 
         pk = sec.get("priorKnowledge", spec.get("priorKnowledge"))
         if pk:
-            doc.add_paragraph().paragraph_format.space_after = Pt(2)
+            gap(doc, 2)
             c = one_cell(doc); borders(c, pal.hair)
             label(c, pk.get("label", "BEFORE YOU START — YOU ALREADY KNOW THIS"),
                   pal, first=True)
@@ -450,17 +477,17 @@ def main():
 
         eqs = sec.get("equations", spec.get("equations")) or []
         if eqs:
-            doc.add_paragraph().paragraph_format.space_after = Pt(2)
+            gap(doc, 2)
             equation_bar(doc, eqs, pal,
                          spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
 
         if sec.get("directions"):
-            doc.add_paragraph().paragraph_format.space_after = Pt(2)
+            gap(doc, 2)
             c = one_cell(doc); borders(c, pal.ink, sz=8, edges=("top",))
             label(c, "DIRECTIONS", pal, first=True)
             para(c, sec["directions"], 9.5)
 
-        doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        gap(doc, 4)
         for i, q in enumerate(sec.get("questions", []), 1):
             question_block(doc, q, i, pal, course, HERE)
 
@@ -474,7 +501,7 @@ def main():
             if block.get("instruction") and kindb in ("cards", "slots"):
                 c = one_cell(doc)
                 para(c, block["instruction"], 9.5, color=pal.ink, first=True)
-                doc.add_paragraph().paragraph_format.space_after = Pt(2)
+                gap(doc, 2)
             if kindb == "cards":
                 cards_block(doc, block, pal)
             elif kindb == "slots":

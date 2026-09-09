@@ -47,6 +47,13 @@ directions → questions → close. Each section starts a new page.
 
 ## Blocks
 
+**The tier tag has its own column**, set right, so every tag ends on one edge and every prompt
+begins on one — including wrapped lines, which used to run back underneath the tag. The column is
+measured from the longest tier name against the shipped Archivo files, so it follows the names if
+they are ever renamed. It carries **no box at all**: a run border cannot be padded, so a boxed tag
+at 7pt is clamped to the cap height and looks stamped on, and a box drawn on the cell is a tall
+empty rectangle beside one word. The word is the tag.
+
 `questions` carry `tier`, `prompt`, `parts`, `points`, and optionally `math`, `given`/`need`,
 `diagram`, `draw`, `answerLines`, `selfCheck`. Beyond them a section can carry `blocks`:
 
@@ -55,6 +62,14 @@ directions → questions → close. Each section starts a new page.
 - **`draw`** — blank captioned panels, when there is nothing to cut.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.
+
+## Vertical space
+
+Use `gap(doc, pt)`, never `doc.add_paragraph()` with a `space_after`. The second is not a gap of
+that size — it is a full empty body line *plus* the space after it, so a "3pt" spacer costs about
+16pt. Six between the questions of one section is most of an inch of nothing, and that inch is what
+pushes a closing checklist onto a second sheet of paper. It cost four separate content trims before
+it was diagnosed; the content all went back once the spacers were the size they claimed.
 
 ## Rules the builder enforces rather than trusts
 

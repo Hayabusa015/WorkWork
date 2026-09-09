@@ -46,7 +46,7 @@ byte-identical `word/document.xml` before anything new was added.
 |---|---|---|
 | Solid navy banner on every page | Outlined header, heavy accent rule | Section 8 — no full-page colour banners. It was the largest single ink cost on the sheet. |
 | Question numbers in solid navy squares | Just the number | SHULL-CHG-0015, and section 8. |
-| Tier pills filled (light blue, solid navy) | Outlined pills, inline with the prompt | Section 8. Tiers stay apart in greyscale by border **weight**, which is what actually survives a photocopier. Inline also removes the blank paragraph a table drags with it. |
+| Tier pills filled (light blue, solid navy) | No box, own right-aligned column | Section 8. See "the tier tag" below. |
 | A work box under every question | None | His instruction. Students work in the Hayden-McNeil notebooks. |
 | One-line "LEARNING GOALS" | Concept review + prior knowledge + equations | His instruction. |
 | No Name / Date / Period / Score | All four, Score boxed | His instruction. |
@@ -92,6 +92,22 @@ feeding it a spec built to trip it. A refusal that never fires is not a refusal.
 - All: difficulty never goes backwards, the multi-topic problem is last, the section code exists in
   `DECISIONS.md`, and `sections` agrees with `sectionsContent`.
 
+## The tier tag
+
+Outlined pills were built first, inline with the prompt, in four border weights so the tiers would
+survive greyscale. He rejected them on sight — "these look awful" — and he was right on three
+counts. A run border (`w:bdr`) has no usable padding, so at 7pt the box clamps to the cap height
+and looks stamped on. Four different border weights read as a rendering fault, not a scale. And an
+inline tag of varying width leaves every prompt starting at a different place, with wrapped lines
+running back underneath the tag.
+
+Four alternatives were built and rendered before choosing: no box, a run-in head with an em rule, a
+single uniform hairline box, and an accent bar. All four were better, and all four shared the
+alignment fault. The fix is structural: **the tag gets its own column, set right**, so every tag
+ends on one edge and every prompt begins on one. The column width is measured from the longest tier
+name against the shipped Archivo files — picked by eye it would wrap "MULTI-TOPIC" and look worse
+than what it replaced. No box at all: a box on the cell is a tall empty rectangle beside one word.
+
 ## Three defects found while building
 
 - **Every printed file in this repo was rendering in two fonts.** `pdffonts` showed DejaVuSans in
@@ -107,6 +123,13 @@ feeding it a spec built to trip it. A refusal that never fires is not a refusal.
   height, so where a section ended flush with the bottom of its page that paragraph did not fit —
   it moved to the next page and only then broke, leaving a page carrying nothing but a footer.
   Pinned to a 1pt exact line, it always fits where it is written.
+- **Every spacer was four times the size it claimed.** `doc.add_paragraph()` with a `space_after`
+  is a full empty body line *plus* that space, so a "3pt" gap cost about 16pt and six of them
+  between the questions of a section came to most of an inch. It was diagnosed only after four
+  separate content trims had been made to pay for it — a key idea and three prior-knowledge items
+  deleted from Physics sections to buy back space that empty paragraphs were spending. `gap(doc,
+  pt)` pins the line, and every one of those trims was restored with every section still on one
+  page.
 - **Unit titles were typed into specs.** `validate_layers.py` caught it: a unit's name is a course
   fact and belongs in `DECISIONS.md`. Both builders now read it from there, and the field is gone
   from all five specs. The three roadmaps write their headings three different ways, so all three

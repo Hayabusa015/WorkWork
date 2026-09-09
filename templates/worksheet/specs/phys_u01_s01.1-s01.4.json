@@ -95,7 +95,7 @@
       "code": "1.2",
       "title": "Acceleration & the Kinematic Equations",
       "concept": {
-        "summary": "Acceleration is the rate a velocity changes, in m/s per second. It is a vector, so it carries a sign — and a negative acceleration does not mean “slowing down”, it means pointing in the negative direction. The four kinematic equations each leave out exactly one quantity; choosing the right one means asking which quantity you neither have nor want.",
+        "summary": "Acceleration is the rate a velocity changes, in m/s per second. It is a vector, so a negative acceleration does not mean “slowing down” — it means pointing in the negative direction. The four kinematic equations each leave out one quantity, so you choose by asking which one you neither have nor want.",
         "keyIdeas": [
           "An object slows down when a and v point opposite ways, whatever their signs.",
           "Pick the equation by what is missing, not by what looks familiar.",
@@ -105,7 +105,8 @@
       "priorKnowledge": {
         "items": [
           "Displacement carries a sign; distance does not (S1.1).",
-          "Average velocity as Δx over Δt (S1.1)."
+          "Average velocity as Δx over Δt (S1.1).",
+          "Solving a quadratic, and knowing when to keep both roots (U0 S0.3)."
         ]
       },
       "directions": "Work every problem in your Hayden-McNeil notebook. Write the givens with signs, then name the equation you chose before you use it.",
@@ -192,7 +193,8 @@
       "priorKnowledge": {
         "items": [
           "Slope as rise over run, with units (U0 S0.4).",
-          "Area of a rectangle and of a triangle."
+          "Area of a rectangle and of a triangle.",
+          "The kinematic equations, so you can check a graph reading against one (S1.2)."
         ]
       },
       "directions": "Work every problem in your Hayden-McNeil notebook. Sketch each graph before you calculate — the sketch is part of the answer.",
@@ -238,7 +240,8 @@
         "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
         "checklist": [
           "Every graph is sketched in the notebook before its calculation.",
-          "Every slope answer carries units."
+          "Every slope answer carries units.",
+          "Problem 6 explains the agreement in words."
         ]
       },
       "equations": [
@@ -278,7 +281,8 @@
       "priorKnowledge": {
         "items": [
           "All four kinematic equations, and choosing by what is missing (S1.2).",
-          "Reading a v-t graph's slope and area (S1.3)."
+          "Reading a v-t graph's slope and area (S1.3).",
+          "Keeping a sign convention consistent across a whole problem (S1.1)."
         ]
       },
       "directions": "Work every problem in your Hayden-McNeil notebook. Write your sign convention at the top of each problem before anything else.",

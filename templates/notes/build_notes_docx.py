@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
-    borders, para, check_item, rule_lines, fix_widths, one_cell, no_split,
+    borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block,
     page_setup, running_footer,
 )
@@ -134,11 +134,11 @@ def main():
     para(c, spec["fields"], 9, color=label, first=True)
 
     if eqs:
-        doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        gap(doc, 4)
         equation_bar(doc, eqs, pal,
                      spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    gap(doc, 4)
     t = doc.add_table(rows=1, cols=2)
     fix_widths(t, [3.75, 3.75])
     for i, (lab, items) in enumerate([("UNIT LEARNING TARGETS", spec["unitTargets"]),
@@ -148,20 +148,20 @@ def main():
         for x in items:
             para(cell, "•  " + debullet(x), 9.5)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+    gap(doc, 4)
     c = one_cell(doc); borders(c, display, sz=18, edges=("left",))
     para(c, "HOW THESE NOTES WORK", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["howItWorks"]:
         para(c, "•  " + debullet(x), 9.5)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(2)
+    gap(doc, 2)
     c = one_cell(doc); borders(c, white)
     para(c, "SECTIONS IN THIS UNIT", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["sectionList"]:
         check_item(c, debullet(x), pal, 9.5)
 
     for sec in spec["sectionsContent"]:
-        doc.add_paragraph().paragraph_format.space_after = Pt(6)
+        gap(doc, 6)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
         a, b = t.rows[0].cells
@@ -223,7 +223,7 @@ def main():
                 else:
                     rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
 
-        doc.add_paragraph().paragraph_format.space_after = Pt(2)
+        gap(doc, 2)
         c = one_cell(doc); borders(c, accent)
         para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
              bold=True, color=accent, caps_track=True, first=True)
@@ -233,7 +233,7 @@ def main():
         for x in sec.get("selfCheck", []):
             check_item(c, x, pal)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+    gap(doc, 6)
     c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
     borders(c, display, sz=18, edges=("bottom",))
     para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
