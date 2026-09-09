@@ -76,9 +76,13 @@ the withdrawn number-box (SHULL-CHG-0015). An outlined boxed tag was tried first
 on sight: a run border cannot be padded, so at 7pt it clamps to the cap height, and four tiers in
 four border weights read as a rendering fault rather than a scale.
 
-Work boxes carry a faint **SHOW WORK HERE** watermark, at `print.watermarkOpacityPct`. Bracketed
-self-check answers for **numeric results only** — never for explanation, vocabulary, or
-graph-reading. Multi-part items keep full body size on every part.
+Work boxes carry a faint **SHOW WORK HERE** watermark, at `print.watermarkOpacityPct`.
+
+**Every calculation carries its answer except the last question** (SHULL-CHG-0021) — the last one
+they finish without a net, and the builder refuses a self-check on it. Bracketed answers are for
+**numeric results only**, never for explanation, vocabulary, or graph-reading, which is why the
+spec marks a question `"calculation": true` rather than the builder guessing from its wording.
+Multi-part items keep full body size on every part.
 
 **The page budget is declared in the spec** (`pagesPerSection`) and measured against. It is not one
 number for everybody: a Physics section is one page, a Chemistry section with eight work boxes is

@@ -417,6 +417,27 @@ def check_profile(spec, course, sec):
             return (f"{where}: math questions and no equation bar. Add \"equations\", "
                     'or "noEquationBar": true if the math genuinely needs none.')
 
+    # Self-check answers. His rule: "on calculations, include answers so the students
+    # can self check, add this on all but the final challenge problem." The last
+    # question is the one they have to commit to without a safety net, so it is not
+    # merely allowed to lack an answer - it is refused if it carries one.
+    #
+    # Numeric results ONLY. A conceptual question keeps no bracket, because there the
+    # bracket would hand over the whole answer rather than confirm arithmetic - which
+    # is why a question is marked `calculation` in the spec rather than guessed at from
+    # its wording. "Name the kinematic equation you would use" reads like a physics
+    # problem and has no number in it.
+    for k, q in enumerate(qs):
+        last = k == len(qs) - 1
+        calc = q.get("calculation") or q.get("math")
+        if calc and not last and not q.get("selfCheck"):
+            return (f"{where} question {k + 1} is a calculation with no self-check "
+                    'answer. Add "selfCheck", or drop "calculation" if the answer is '
+                    "not a number. SHULL-CHG-0021.")
+        if last and q.get("selfCheck"):
+            return (f"{where}: the last question carries a self-check answer. That one "
+                    "they finish without a net. SHULL-CHG-0021.")
+
     ramp = RAMP[course]
     if ramp and qs:
         shape = {}

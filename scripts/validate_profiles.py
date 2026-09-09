@@ -113,6 +113,20 @@ def _unknown_block(s):
     return s
 
 
+def _calc_no_answer(s):
+    for q in s["sectionsContent"][0]["questions"]:
+        if q.get("selfCheck"):
+            del q["selfCheck"]
+            return s
+    s["sectionsContent"][0]["questions"][0]["calculation"] = True
+    return s
+
+
+def _answer_on_last(s):
+    s["sectionsContent"][0]["questions"][-1]["selfCheck"] = "[ 42 ]"
+    return s
+
+
 CASES = [
     ("physics refuses a work box",        phys, _work_box,     "no work areas at all"),
     ("physics refuses ruled answers",     phys, _ruled,        "no work areas at all"),
@@ -127,6 +141,8 @@ CASES = [
     ("an unknown section code is refused", phys, _bad_code,    "not in"),
     ("sections and content must agree",   phys, _mismatch,     "same fact"),
     ("an unknown block kind is refused",  chem, _unknown_block, "unknown block kind"),
+    ("a calculation needs its answer",    phys, _calc_no_answer, "no self-check answer"),
+    ("the last question gets no answer",  phys, _answer_on_last, "without a net"),
 ]
 
 

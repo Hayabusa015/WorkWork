@@ -34,17 +34,23 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A hiker walks 5 m east, then 3 m farther east. Find the total distance travelled and the displacement."
+          "prompt": "A hiker walks 5 m east, then 3 m farther east. Find the total distance travelled and the displacement.",
+          "calculation": true,
+          "selfCheck": "[  8 m  ·  +8 m east  ]"
         },
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A car travels 120 km in 2.0 hours. Find its average speed in km/h."
+          "prompt": "A car travels 120 km in 2.0 hours. Find its average speed in km/h.",
+          "calculation": true,
+          "selfCheck": "[  60 km/h  ]"
         },
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A jogger runs from x = 10 m to x = 70 m in 20 s. Find the displacement and the average velocity."
+          "prompt": "A jogger runs from x = 10 m to x = 70 m in 20 s. Find the displacement and the average velocity.",
+          "calculation": true,
+          "selfCheck": "[  +60 m  ·  3.0 m/s  ]"
         },
         {
           "tier": "practice",
@@ -52,12 +58,16 @@
           "prompt": "A student walks 8 m north, then 8 m south back to the starting point, taking 10 s in total. Find the total distance, the displacement, and the average velocity.",
           "parts": [
             "Before you calculate: which of those three will be zero, and why?"
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  16 m  ·  0 m  ·  0 m/s  ]"
         },
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "A cyclist starts at x₀ = −15 m, rides forward to x = 50 m, then backtracks to a final position of 40 m, all in 25 s. Find the total distance travelled and the average velocity."
+          "prompt": "A cyclist starts at x₀ = −15 m, rides forward to x = 50 m, then backtracks to a final position of 40 m, all in 25 s. Find the total distance travelled and the average velocity.",
+          "calculation": true,
+          "selfCheck": "[  75 m  ·  2.2 m/s  ]"
         },
         {
           "tier": "multi-topic",
@@ -68,14 +78,6 @@
           ]
         }
       ],
-      "close": {
-        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
-        "checklist": [
-          "Every problem is numbered in the notebook.",
-          "Every answer carries a unit.",
-          "You stated your positive direction before problem 4."
-        ]
-      },
       "equations": [
         {
           "note": "average speed",
@@ -114,7 +116,9 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A car's velocity increases from 5 m/s to 20 m/s in 5 s. Find its acceleration."
+          "prompt": "A car's velocity increases from 5 m/s to 20 m/s in 5 s. Find its acceleration.",
+          "calculation": true,
+          "selfCheck": "[  3 m/s²  ]"
         },
         {
           "tier": "warm-up",
@@ -124,7 +128,9 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "An object starts from rest and accelerates at 4 m/s² for 8 s. Find its displacement and its final velocity."
+          "prompt": "An object starts from rest and accelerates at 4 m/s² for 8 s. Find its displacement and its final velocity.",
+          "calculation": true,
+          "selfCheck": "[  128 m  ·  32 m/s  ]"
         },
         {
           "tier": "practice",
@@ -132,7 +138,9 @@
           "prompt": "A car decelerates from 30 m/s to 10 m/s over a distance of 100 m. Find its acceleration.",
           "parts": [
             "Which quantity is missing here? Let that pick your equation."
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  −4.0 m/s²  ]"
         },
         {
           "tier": "challenge",
@@ -140,7 +148,9 @@
           "prompt": "A train accelerates from rest at 1.5 m/s² for 10 s, then travels at constant velocity for 20 s. Find the total distance covered.",
           "parts": [
             "This is two phases. Solve them separately, then add."
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  375 m  ]"
         },
         {
           "tier": "multi-topic",
@@ -151,13 +161,6 @@
           ]
         }
       ],
-      "close": {
-        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
-        "checklist": [
-          "You named the equation before using it on every problem.",
-          "Every given carries a sign."
-        ]
-      },
       "equations": [
         {
           "note": "acceleration",
@@ -202,17 +205,23 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A position-time graph passes through (0 s, 2 m) and (4 s, 18 m) as a straight line. Find the velocity."
+          "prompt": "A position-time graph passes through (0 s, 2 m) and (4 s, 18 m) as a straight line. Find the velocity.",
+          "calculation": true,
+          "selfCheck": "[  4 m/s  ]"
         },
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A velocity-time graph is a horizontal line at 6 m/s from t = 0 s to t = 5 s. Find the displacement."
+          "prompt": "A velocity-time graph is a horizontal line at 6 m/s from t = 0 s to t = 5 s. Find the displacement.",
+          "calculation": true,
+          "selfCheck": "[  30 m  ]"
         },
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A v-t graph is a straight line from (0 s, 0 m/s) to (8 s, 24 m/s). Find the acceleration and the displacement over the 8 s."
+          "prompt": "A v-t graph is a straight line from (0 s, 0 m/s) to (8 s, 24 m/s). Find the acceleration and the displacement over the 8 s.",
+          "calculation": true,
+          "selfCheck": "[  3 m/s²  ·  96 m  ]"
         },
         {
           "tier": "practice",
@@ -220,12 +229,16 @@
           "prompt": "A v-t graph shows a constant 10 m/s for 3 s, then a straight-line decrease to 0 m/s over the next 2 s. Find the total displacement.",
           "parts": [
             "Two shapes, not one. Name them before you find the area."
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  40 m  ]"
         },
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "A v-t graph rises from 0 to 15 m/s over 3 s, holds constant for 4 s, then falls to 0 over 3 s. Find the displacement in each phase and the total."
+          "prompt": "A v-t graph rises from 0 to 15 m/s over 3 s, holds constant for 4 s, then falls to 0 over 3 s. Find the displacement in each phase and the total.",
+          "calculation": true,
+          "selfCheck": "[  22.5 m  ·  60 m  ·  22.5 m  ·  105 m total  ]"
         },
         {
           "tier": "multi-topic",
@@ -236,14 +249,6 @@
           ]
         }
       ],
-      "close": {
-        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
-        "checklist": [
-          "Every graph is sketched in the notebook before its calculation.",
-          "Every slope answer carries units.",
-          "Problem 6 explains the agreement in words."
-        ]
-      },
       "equations": [
         {
           "note": "slope of x-t is velocity",
@@ -290,7 +295,9 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A ball is dropped from rest. Find its velocity after 2.0 s. Take up as positive."
+          "prompt": "A ball is dropped from rest. Find its velocity after 2.0 s. Take up as positive.",
+          "calculation": true,
+          "selfCheck": "[  −19.6 m/s  ]"
         },
         {
           "tier": "warm-up",
@@ -300,7 +307,9 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A ball is dropped from rest and falls for 3.0 s. Find the distance it falls."
+          "prompt": "A ball is dropped from rest and falls for 3.0 s. Find the distance it falls.",
+          "calculation": true,
+          "selfCheck": "[  44.1 m  ]"
         },
         {
           "tier": "practice",
@@ -308,7 +317,9 @@
           "prompt": "A stone is thrown straight up at 12 m/s. Find the time it takes to reach maximum height.",
           "parts": [
             "What is v at maximum height? That is your missing quantity."
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  1.22 s  ]"
         },
         {
           "tier": "challenge",
@@ -316,7 +327,9 @@
           "prompt": "A ball is thrown straight up at 20 m/s from a rooftop 15 m above the ground. Find the maximum height above the roof and the total time to reach the ground.",
           "parts": [
             "The quadratic gives two times. Say which one is physical and why the other is not."
-          ]
+          ],
+          "calculation": true,
+          "selfCheck": "[  20.4 m above the roof  ·  4.72 s  ]"
         },
         {
           "tier": "multi-topic",
@@ -327,14 +340,6 @@
           ]
         }
       ],
-      "close": {
-        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
-        "checklist": [
-          "Your sign convention is written at the top of every problem.",
-          "You rejected the non-physical root in problem 5 and said why.",
-          "Problem 6 is written in sentences."
-        ]
-      },
       "equations": [
         {
           "note": "free fall",

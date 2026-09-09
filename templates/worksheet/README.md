@@ -69,7 +69,19 @@ they are ever renamed. It carries **no box at all**: a run border cannot be padd
 at 7pt is clamped to the cap height and looks stamped on, and a box drawn on the cell is a tall
 empty rectangle beside one word. The word is the tag.
 
-`questions` carry `tier`, `prompt`, `parts`, `points`, and optionally `math`, `given`/`need`,
+## Self-check answers
+
+**Every calculation carries its answer except the last question**, so a student knows on the spot
+whether their arithmetic is right. The last one they finish without a net — the builder *refuses* a
+self-check on it, and refuses a calculation anywhere else that lacks one.
+
+**Numeric results only.** A conceptual question keeps no bracket, because there the bracket hands
+over the whole answer instead of confirming arithmetic. That is why a question is marked
+`"calculation": true` in the spec rather than guessed at from its wording — "Name the kinematic
+equation you would use" reads like a physics problem and has no number in it.
+
+`questions` carry `tier`, `prompt`, `parts`, `points`, and optionally `calculation`, `math`,
+`given`/`need`,
 `diagram`, `draw`, `answerLines`, `selfCheck`. Beyond them a section can carry `blocks`:
 
 - **`cards`** — cut-out cards, dashed border, title, text and a box to draw in.

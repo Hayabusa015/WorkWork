@@ -63,7 +63,9 @@
             "c.  CO₂"
           ],
           "math": true,
-          "workHeightIn": 1.5
+          "workHeightIn": 1.5,
+          "calculation": true,
+          "selfCheck": "[  18.02  ·  58.44  ·  44.01 g/mol  ]"
         },
         {
           "tier": "warm-up",
@@ -71,7 +73,8 @@
           "prompt": "Ca(NO₃)₂ — how many atoms of each element are in one formula unit? Then find its molar mass.",
           "math": true,
           "workHeightIn": 1.5,
-          "selfCheck": "[ 164.10 g/mol ]"
+          "selfCheck": "[  1 Ca, 2 N, 6 O  ·  164.10 g/mol  ]",
+          "calculation": true
         },
         {
           "tier": "practice",
@@ -81,7 +84,8 @@
           "need": "moles",
           "math": true,
           "workHeightIn": 1.4,
-          "selfCheck": "[ 0.770 mol ]"
+          "selfCheck": "[  0.770 mol  ]",
+          "calculation": true
         },
         {
           "tier": "practice",
@@ -91,7 +95,8 @@
           "need": "mass in grams",
           "math": true,
           "workHeightIn": 1.4,
-          "selfCheck": "[ 110. g ]"
+          "selfCheck": "[  110. g  ]",
+          "calculation": true
         },
         {
           "tier": "practice",
@@ -116,7 +121,8 @@
           "need": "number of molecules",
           "math": true,
           "workHeightIn": 1.8,
-          "selfCheck": "[ 6.02 × 10²³ molecules ]"
+          "selfCheck": "[  1.00 mol  ·  6.02 × 10²³ molecules  ]",
+          "calculation": true
         },
         {
           "tier": "challenge",
@@ -126,7 +132,8 @@
           "need": "mass in grams",
           "math": true,
           "workHeightIn": 1.8,
-          "selfCheck": "[ 16.0 g ]"
+          "selfCheck": "[  0.500 mol  ·  16.0 g  ]",
+          "calculation": true
         },
         {
           "tier": "multi-topic",
@@ -141,16 +148,7 @@
           "math": true,
           "workHeightIn": 3.0
         }
-      ],
-      "close": {
-        "banner": "CHECK YOUR WORK BEFORE YOU TURN THIS IN",
-        "checklist": [
-          "Every answer carries a unit.",
-          "Every conversion went through moles.",
-          "Significant figures match the least precise measurement given.",
-          "Question 8d is written in a sentence, not a number."
-        ]
-      }
+      ]
     }
   ],
   "pagesPerSection": 4
