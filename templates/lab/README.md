@@ -83,7 +83,8 @@ hand-typed hexes permitted in this directory and `validate_tokens.py` must allow
 problem** — reduce body font size or line-height first.
 
 **Ink.** Outline and rule treatments only. No solid banners, no filled table headers, no shaded
-section backgrounds. Number squares and chips are outlined, not filled. This is the standing rule
+section backgrounds. Chips are outlined, not filled, and **a numbered list is just the number —
+no box** (SHULL-CHG-0015). This is the standing rule
 for every printed SHULL document, not a choice made for this template.
 
 **No write space on the handout.** No ruled lines, no answer blanks, no fillable data tables. **The

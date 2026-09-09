@@ -155,14 +155,14 @@
     padding-left: 20pt; margin-bottom: 7pt;
     page-break-inside: avoid;
   }
+  /* Just the number. No box. SHULL-CHG-0015 — the user's standing rule for every
+     numbered list in every format. Right-aligned so 9 and 10 line up. */
   ol.q > li::before {
     content: counter(q);
     position: absolute; left: 0; top: 0.5pt;
     font-family: var(--display); font-weight: bold; font-size: 9pt;
-    color: var(--ink);
-    border: 1pt solid var(--accent); border-radius: 2.5pt;
-    width: 14pt; height: 14pt; line-height: 12pt;
-    text-align: center;
+    color: var(--accent);
+    width: 13pt; text-align: right;
   }
   .ref {
     font-family: var(--display); font-weight: 600; font-size: 6.4pt;

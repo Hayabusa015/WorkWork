@@ -72,10 +72,10 @@
   ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
   ol.q > li { counter-increment: q; position: relative; padding-left: 20pt;
     margin-bottom: 6pt; page-break-inside: avoid; }
+  /* Just the number. No box. SHULL-CHG-0015. */
   ol.q > li::before { content: counter(q); position: absolute; left: 0; top: 0.5pt;
-    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--ink);
-    border: 1pt solid var(--warn-rule); border-radius: 2.5pt; width: 14pt; height: 14pt;
-    line-height: 12pt; text-align: center; }
+    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--warn);
+    width: 13pt; text-align: right; }
   .ans { color: var(--warn); }
   .pagebreak { page-break-before: always; }
 </style>

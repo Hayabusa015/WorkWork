@@ -77,8 +77,11 @@ confirmed that on 2026-09-08 (SHULL-CHG-0013 finding 3). A slide's code lives in
 same grammar; it is simply not in a chip. `slideGeometry.footerChip` in `brand/tokens.json` records
 the decision. Restoring the slide-to-print chip link would be a new proposal.
 
-**Number squares** carry problem numbers and organizer unit numbers on print. **Circles** are the
-slide-divider variant. Do not cross them.
+**Numbered lists carry no marker at all — just the number.** No square, no circle, no box, in any
+format. SHULL-CHG-0015. This replaces the earlier number-square rule, which is withdrawn.
+
+**Circles** remain the section marker on dark slide dividers. That is a section marker, not a list
+number, and the two do not cross.
 
 ## 5. Renaming
 

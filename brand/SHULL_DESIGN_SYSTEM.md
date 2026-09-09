@@ -229,8 +229,10 @@ study guides, reference sheets. Digital-only deliverables are exempt.
   needed for scanability, use a very light grey tint — never a brand colour at medium or full
   saturation.
 - **Chart areas are hatched, not tinted.**
-- Number squares, chips, and border-tab labels stay outlined or light-fill. Solid fill is reserved
-  for slides and digital-only use.
+- **A numbered list is just the number. No box, no square, no circle, in any format** — labs,
+  guided notes, worksheets, practice sets, tests, slides. SHULL-CHG-0015, and it has no exceptions.
+- Chips and border-tab labels stay outlined or light-fill. Solid fill is reserved for slides and
+  digital-only use.
 - Minimum weights: `print.weights.boxBorder`, `print.weights.writingLine`.
 - Full-colour variants are preserved on request — **never shipped as the default print file.**
 

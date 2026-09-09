@@ -41,7 +41,8 @@ and clipped text is the highest-priority visual defect in the gate.
   type to fit.
 - **16pt floor** for anything read from a seat. Below it is navigation only — eyebrow, card label,
   footer code — never a sentence. `audit_slide_geometry.py` enforces exactly that distinction.
-- **Section markers on dark dividers are circles.** Number squares are for print. Do not cross them.
+- **Section markers on dark dividers are circles.** That is a section marker, not a list number.
+- **A numbered list is just the number** — no box, no square, no circle. SHULL-CHG-0015, every format.
 - **Card colour logic:** either all cards neutral, or a coloured card means "write this definition" —
   and if so, the deck says so in words. Never mix with no stated rule.
 - **Course colour is never a small label on a card.** `primaryDeep` on parchment measures 4.8:1 and

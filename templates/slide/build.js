@@ -276,10 +276,12 @@ defineMaster({
 const step = (n, x) => ([
   { rect: { x, y: 5.05, w: 2.86, h: 1.30, fill: { color: C.cardLight },
             line: { color: C.cardEdge, width: 1 } } },
-  { rect: { x: x + 0.16, y: 5.20, w: 0.34, h: 0.34, fill: { color: C.darkGround } } },
+  // Just the number. No box behind it. SHULL-CHG-0015 — the user's rule covers every
+  // format, slides included. Asphalt rather than the accent: with the square gone the
+  // numeral sits on the parchment card, where a course deep variant measures 4.8:1.
   { text: { text: String(n),
-      options: { x: x + 0.16, y: 5.20, w: 0.34, h: 0.34, fontFace: F.body, fontSize: 11, bold: true,
-                 color: C.accent, align: "center", valign: "middle", margin: 0, isTextBox: true } } },
+      options: { x: x + 0.16, y: 5.18, w: 0.40, h: 0.38, fontFace: F.body, fontSize: 13, bold: true,
+                 color: C.textOnLight, align: "left", valign: "middle", margin: 0, isTextBox: true } } },
   { placeholder: {
       options: { name: `s${n}_l`, type: "body", x: x + 0.60, y: 5.20, w: 2.10, h: 0.30,
                  fontFace: F.body, fontSize: T.cardLabel, bold: true, color: C.textOnLight,

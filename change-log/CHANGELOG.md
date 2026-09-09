@@ -25,10 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
-## 2026-09-08
+## 2026-09-09 · 2026-09-08
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0015 | 2026-09-09 | A numbered list is just the number — no box, any format | CONFIRMED | `governance/proposals/SHULL-CHG-0015-no-number-boxes.md` |
+| SHULL-CHG-0014 | 2026-09-09 | Guided notes template, .docx, from Matthew's own packet | CONFIRMED | `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` |
 | SHULL-CHG-0013 | 2026-09-08 | Twelve-layout slide template migrated onto the token system | CONFIRMED | `governance/proposals/SHULL-CHG-0013-slide-template.md` |
 | SHULL-CHG-0012 | 2026-09-08 | Physics decisions file created from two legacy sources | CONFIRMED | `courses/physics/DECISIONS.md` |
 | SHULL-CHG-0011 | 2026-09-08 | Chemistry decisions adopted from Drive as authoritative | CONFIRMED | `courses/chemistry/DECISIONS.md` |
