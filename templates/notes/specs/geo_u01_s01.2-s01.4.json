@@ -1,0 +1,229 @@
+{
+  "course": "geology",
+  "unit": 1,
+  "sections": [
+    "1.2",
+    "1.3",
+    "1.4"
+  ],
+  "unitTitle": "THE UNIVERSE AND THE SOLAR SYSTEM",
+  "kicker": "GUIDED NOTES  ·  PHASE 01  ·  3 SECTIONS",
+  "fields": "NAME  _________________________________       DATE  ______________       PERIOD  ______",
+  "unitTargets": [
+    "•  I can describe the Big Bang theory and the evidence that supports it.",
+    "•  I can explain how the first stars and heavier elements formed.",
+    "•  I can describe nebular theory and the steps that form a solar system.",
+    "•  I can describe the Sun's layers, activity cycle, and effects on Earth."
+  ],
+  "keyTerms": [
+    "•  Singularity, nucleosynthesis, redshift, cosmic background radiation",
+    "•  Supernova, nebula, protostar, accretion",
+    "•  Nebular theory, fusion",
+    "•  Photosphere, chromosphere, corona, sunspot, prominence, solar wind, coronal mass ejection (CME)"
+  ],
+  "howItWorks": [
+    "The left column asks the questions you should be able to answer from the notes beside them — use it to quiz yourself later.",
+    "A teal rule down the left of a line means must-write. Copy those exactly.",
+    "Each section ends with a summary box. Close your notes before you write it."
+  ],
+  "sectionList": [
+    "S1.2   The Big Bang Theory and Origins of the Universe",
+    "S1.3   Formation of a Solar System (Nebular Theory)",
+    "S1.4   Earth's Solar System — The Sun"
+  ],
+  "sectionsContent": [
+    {
+      "code": "U1 / S1.2",
+      "title": "The Big Bang & Origins",
+      "learningTarget": "I can describe the Big Bang theory, the evidence that supports it, and how the first stars created the elements.",
+      "rows": [
+        {
+          "cueLabel": "BASICS",
+          "cues": [
+            "How long ago is the Big Bang estimated to have happened?",
+            "What is a singularity?"
+          ],
+          "notesLabel": "THE BIG BANG",
+          "notes": [
+            "How long ago did the Big Bang occur?",
+            "Describe the Big Bang, starting from the singularity.",
+            "What is nucleosynthesis?"
+          ]
+        },
+        {
+          "cueLabel": "EVIDENCE",
+          "cues": [
+            "What 3 pieces of evidence support the Big Bang theory?",
+            "What is redshift?"
+          ],
+          "notesLabel": "EVIDENCE FOR THE BIG BANG",
+          "notes": [
+            "Three independent lines of evidence all point the same direction.",
+            "1.",
+            "2.",
+            "3.",
+            "Describe the concept of redshift. [Gizmo activity today]"
+          ]
+        },
+        {
+          "cueLabel": "EARLY UNIVERSE",
+          "cues": [
+            "Why do bigger stars burn faster and die younger?",
+            "Why do stars tend to form in clusters?"
+          ],
+          "notesLabel": "THE EARLY UNIVERSE: FIRST STARS",
+          "notes": [
+            "Describe the stars of the early universe.",
+            "Bigger stars are __________________ and burn __________________ than smaller stars.",
+            "Why does a bigger star pull more matter toward it, and what does that cause?"
+          ]
+        },
+        {
+          "cueLabel": "STAR DUST",
+          "cues": [
+            "What determines which elements a star can create?",
+            "What has to happen for elements heavier than iron to form?"
+          ],
+          "notesLabel": "STAR DUST: WHERE ELEMENTS COME FROM",
+          "notes": [
+            "Smaller stars create the elements ______________ through ______________ by the process of ______________________.",
+            "Bigger stars can fuse elements all the way up to ______________.",
+            "Anything larger than ______________ is only created in a ______________________.",
+            "Why does an older nebula contain a wider variety of elements?"
+          ]
+        }
+      ],
+      "summaryPrompt": "In your own words: how do we get from a single point at the Big Bang to a universe full of different elements?",
+      "selfCheck": [
+        "I can name all 3 pieces of evidence for the Big Bang.",
+        "I can explain why supernovae matter for the elements around us."
+      ]
+    },
+    {
+      "code": "U1 / S1.3",
+      "title": "Formation of a Solar System",
+      "learningTarget": "I can describe nebular theory and explain, step by step, how a solar system forms from a cloud of gas and dust.",
+      "rows": [
+        {
+          "cueLabel": "BASICS",
+          "cues": [
+            "What is nebular theory, in one sentence?",
+            "What is a protostar? What is accretion?"
+          ],
+          "notesLabel": "SOLAR SYSTEM FORMATION",
+          "notes": [
+            "The process of forming a solar system is called ______________________________.",
+            "Define protostar:",
+            "Define accretion:"
+          ]
+        },
+        {
+          "cueLabel": "THE SEQUENCE",
+          "cues": [
+            "Put the steps of nebular theory in order.",
+            "What has to happen for fusion to ignite?"
+          ],
+          "notesLabel": "NEBULAR THEORY, STEP BY STEP",
+          "notes": [
+            "Describe the process of solar system formation (nebular theory) as a series of steps. Include accretion and protostar and their significance.",
+            "*A solar system forms from one rotating cloud — the sun and every planet share the same origin."
+          ]
+        },
+        {
+          "cueLabel": "EVIDENCE",
+          "cues": [
+            "Have we ever actually seen a solar system forming?",
+            "How do planets end up orbiting roughly in the same flat plane?"
+          ],
+          "notesLabel": "EVIDENCE FOR NEBULAR THEORY",
+          "notes": [
+            "Telescopes (like ALMA) have photographed protoplanetary disks around young stars — flattened rings of gas and dust with gaps where planets are clearing their orbits. What stage of nebular theory does that match, and why do the planets end up orbiting in roughly the same flat plane?"
+          ]
+        }
+      ],
+      "summaryPrompt": "You built this sequence today in the Nebular Theory Timeline activity. In your own words, explain what would be different about a solar system if the original nebula had less mass.",
+      "selfCheck": [
+        "I can put all 6 stages of nebular theory in the correct order.",
+        "I can explain what a protoplanetary disk tells us about nebular theory."
+      ]
+    },
+    {
+      "code": "U1 / S1.4",
+      "title": "Earth's Solar System — The Sun",
+      "learningTarget": "I can describe the Sun's layers and activity, and explain how solar activity affects Earth.",
+      "rows": [
+        {
+          "cueLabel": "BASICS",
+          "cues": [
+            "How old is the Milky Way? How old is the Sun?",
+            "How much longer will the Sun last?"
+          ],
+          "notesLabel": "OUR STAR",
+          "notes": [
+            "How old is the Milky Way?",
+            "How old is our Sun?",
+            "About how much longer will the Sun last?"
+          ]
+        },
+        {
+          "cueLabel": "LAYERS",
+          "cues": [
+            "Put the Sun's layers in order from the center out.",
+            "Which layer is the visible surface? Which is hottest?"
+          ],
+          "notesLabel": "LAYERS OF THE SUN",
+          "notes": [
+            "Core:",
+            "Radiative zone:",
+            "Convective zone:",
+            "Photosphere (the visible surface):",
+            "Chromosphere:",
+            "Corona (atmosphere):"
+          ]
+        },
+        {
+          "cueLabel": "ACTIVITY",
+          "cues": [
+            "What is a sunspot? What is a prominence?",
+            "How long is a typical solar cycle?"
+          ],
+          "notesLabel": "SOLAR CYCLE, SUNSPOTS, AND PROMINENCES",
+          "notes": [
+            "Sunspots:",
+            "Prominences:",
+            "About how long is one solar activity cycle?"
+          ]
+        },
+        {
+          "cueLabel": "EFFECTS ON EARTH",
+          "cues": [
+            "What are solar winds, and what stops them from reaching Earth's surface?",
+            "What is a CME, and why is a large one dangerous?"
+          ],
+          "notesLabel": "SOLAR WIND AND CMES",
+          "notes": [
+            "What are solar winds?",
+            "What blocks the solar wind from reaching Earth's surface, and what does that create?",
+            "What is a coronal mass ejection (CME)? Why can a large one be dangerous?"
+          ]
+        }
+      ],
+      "summaryPrompt": "Explain the chain of cause and effect from a coronal mass ejection leaving the Sun to its possible impact on Earth.",
+      "selfCheck": [
+        "I can name the Sun's layers in order.",
+        "I can explain what an aurora actually is."
+      ]
+    }
+  ],
+  "close": {
+    "banner": "UNIT 1 · PULLING IT TOGETHER",
+    "checklist": [
+      "Notes complete for S1.2, S1.3, S1.4",
+      "Nebular Theory Timeline activity filed",
+      "Red Shift Gizmo activity filed",
+      "Summary boxes written"
+    ],
+    "bigPicture": "Trace the whole story in order: from the Big Bang to a fully formed solar system with a stable star. What has to happen, and in what order?",
+    "fuzzyLabel": "STILL FUZZY ON — bring these to review day"
+  }
+}

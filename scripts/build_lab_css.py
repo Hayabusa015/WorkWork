@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate templates/lab/shull-lab-tokens.css from brand/tokens.json.
+"""Generate the print token CSS from brand/tokens.json.
 
 The lab templates must not contain hand-typed hex values - that is the rule
 validate_tokens.py enforces and the reason six palettes drifted apart. This
@@ -12,7 +12,11 @@ import json, os
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 tokens = json.load(open(os.path.join(REPO, "brand", "tokens.json")))
-out = os.path.join(REPO, "templates", "lab", "shull-lab-tokens.css")
+# One generated token file per print template. Same content, same source - the lab
+# and the guided-notes packet are the same design system on paper, so neither gets
+# to drift from the other.
+OUTS = [os.path.join(REPO, "templates", "lab", "shull-lab-tokens.css"),
+        os.path.join(REPO, "templates", "notes", "shull-notes-tokens.css")]
 
 g = tokens["ground"]
 c = tokens["courses"]
@@ -57,8 +61,10 @@ body.geo  {{ --accent: {c['geology']['primaryDeep']['hex']};   --accent-display:
    --accent-display is a fill, rule or marker. Never body text on white.
    See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008. */
 """
-open(out, "w").write(css)
-print(f"wrote {os.path.relpath(out, REPO)}")
+for out in OUTS:
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    open(out, "w").write(css)
+    print(f"wrote {os.path.relpath(out, REPO)}")
 for line in css.splitlines():
     if line.strip().startswith(("--accent", "body.")):
         print("  ", line.strip())

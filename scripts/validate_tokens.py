@@ -25,6 +25,7 @@ SVG_ALLOWED = {"#" + "14161B", "#" + "EDF0E5"}
 # the exemption is a decision on the record rather than an accident of a regex.
 GENERATED = {
     "templates/lab/shull-lab-tokens.css",       # scripts/build_lab_css.py
+    "templates/notes/shull-notes-tokens.css",   # scripts/build_lab_css.py, same content
     "templates/slide/tokens.generated.js",      # scripts/build_slide_tokens.py
 }
 

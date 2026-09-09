@@ -1,0 +1,37 @@
+/* GENERATED FROM brand/tokens.json BY scripts/build_lab_css.py - DO NOT EDIT.
+   Re-run the script after changing any token. Hand-editing a hex here is the
+   defect validate_tokens.py exists to catch. */
+
+:root {
+  /* Grounds */
+  --ground:        #FFFFFF;
+  --ink:           #14161B;
+  --structure:     #2E3338;
+  --surface:       #EDF0E5;
+
+  /* Neutral working values, derived from the grounds */
+  --rule-hairline: #C8CDC2;
+  --label:         #55604F;
+  --footer:        #61675B;
+
+  /* Semantic - used for meaning, never for branding */
+  --warn:          #92400E;
+  --warn-rule:     #F59E0B;
+
+  /* Course accent. Defaults to Chemistry; the body class overrides. */
+  --accent:        #4D730E;
+  --accent-display:#A3E635;
+
+  /* Type */
+  --display: "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
+  --body:    "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
+}
+
+body.chem { --accent: #4D730E; --accent-display: #A3E635; }
+body.phys { --accent: #896107;   --accent-display: #F5B82E; }
+body.geo  { --accent: #0E766A;   --accent-display: #16B8A6; }
+
+/* The rule that makes this safe on paper: --accent is the text-safe deep
+   variant and is the ONLY course colour permitted as type on a light ground.
+   --accent-display is a fill, rule or marker. Never body text on white.
+   See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008. */

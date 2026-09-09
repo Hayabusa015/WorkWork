@@ -1,0 +1,124 @@
+<!-- SHULL OS — guided / Cornell notes packet. Option B: HTML → PDF.
+     Structure preserved from the GEO U1 packet Matthew uses; see
+     governance/proposals/SHULL-CHG-0014-guided-notes-template.md.
+     Colour comes from shull-notes-tokens.css, generated from brand/tokens.json. -->
+<meta charset="utf-8">
+<link rel="stylesheet" href="shull-notes-tokens.css">
+<style>
+  @page { size: letter; margin: 0.5in 0.5in 0.55in 0.5in;
+    @bottom-left  { content: string(brandfoot); font-family: var(--body); font-size: 7pt;
+                    letter-spacing: 0.14em; color: var(--footer); }
+    @bottom-right { content: string(codefoot) "   ·   p " counter(page) " / " counter(pages);
+                    font-family: var(--body); font-size: 7pt; letter-spacing: 0.10em;
+                    color: var(--footer); }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--body); font-size: 10pt; line-height: 1.34;
+         color: var(--ink); background: var(--ground); }
+
+  .foot-brand { string-set: brandfoot content(); position: absolute; visibility: hidden; }
+  .foot-code  { string-set: codefoot content();  position: absolute; visibility: hidden; }
+
+  /* ---------- unit head ---------- */
+  .brandbar { background: var(--ink); color: var(--ground); padding: 7pt 10pt 8pt; }
+  .brandbar .org  { font-size: 7.5pt; letter-spacing: 0.22em; color: var(--accent-display); }
+  .brandbar .unit { font-size: 15pt; font-weight: 700; margin-top: 3pt; letter-spacing: -0.005em; }
+  .brandbar .kick { font-size: 7.5pt; letter-spacing: 0.18em; margin-top: 3pt; opacity: 0.72; }
+
+  .fields { border: 0.75pt solid var(--rule-hairline); border-top: none;
+            padding: 6pt 10pt; font-size: 9pt; letter-spacing: 0.05em; color: var(--label); }
+
+  .two { display: flex; gap: 0; margin-top: 8pt; }
+  .two > div { width: 50%; border: 0.75pt solid var(--rule-hairline); padding: 7pt 10pt 8pt; }
+  .two > div + div { border-left: none; }
+
+  .lbl { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em;
+         color: var(--accent); margin-bottom: 4pt; }
+  ul.tight { margin: 0; padding-left: 11pt; }
+  ul.tight li { margin-bottom: 2.5pt; }
+
+  .howbox { margin-top: 8pt; border-left: 2.5pt solid var(--accent-display);
+            background: var(--surface); padding: 7pt 10pt 8pt; }
+
+  .checklist { margin-top: 8pt; font-size: 9.5pt; }
+  .checklist div { margin-bottom: 3pt; }
+  .box { display: inline-block; width: 8pt; height: 8pt; border: 0.75pt solid var(--structure);
+         margin-right: 6pt; vertical-align: -0.5pt; }
+
+  /* ---------- one section ---------- */
+  .section { margin-top: 13pt; break-inside: auto; }
+  .sechead { display: flex; background: var(--ink); color: var(--ground); }
+  .sechead .t { flex: 1; padding: 6pt 10pt; font-size: 12.5pt; font-weight: 700; }
+  .sechead .c { width: 1.5in; padding: 6pt 10pt; font-size: 8.5pt; font-weight: 700;
+                letter-spacing: 0.12em; text-align: right; align-self: center;
+                color: var(--accent-display); }
+  .target { border: 0.75pt solid var(--rule-hairline); border-top: none;
+            padding: 5pt 10pt 6pt; font-size: 9.5pt; }
+  .target b { color: var(--accent); letter-spacing: 0.14em; font-size: 7.5pt; }
+
+  /* The Cornell split. 1.88in cue / 5.62in notes, preserved from the original. */
+  table.cornell { width: 100%; border-collapse: collapse; margin-top: 7pt; }
+  table.cornell td { vertical-align: top; border: 0.75pt solid var(--rule-hairline);
+                     padding: 6pt 9pt 9pt; }
+  td.cue   { width: 1.88in; background: var(--surface); }
+  td.notes { width: 5.62in; }
+  .cue .lbl, .notes .lbl { margin-bottom: 3pt; }
+  .cue p   { margin: 0 0 4pt; font-size: 9pt; }
+  .notes p { margin: 0 0 3pt; font-size: 9.5pt; }
+  /* Must-write: an accent rule, where the original used a sage green line. */
+  .notes p.mw { border-left: 2.5pt solid var(--accent-display); padding-left: 7pt;
+                font-weight: 600; }
+  .rule { border-bottom: 0.5pt solid var(--rule-hairline); height: 15pt; }
+
+  .summary { border: 1pt solid var(--accent); border-top: 2.5pt solid var(--accent);
+             padding: 6pt 10pt 8pt; margin-top: 7pt; break-inside: avoid; }
+  .summary .lbl { color: var(--accent); }
+  .summary .prompt { font-size: 9.5pt; margin: 0 0 4pt; }
+  .selfcheck { margin-top: 6pt; font-size: 9pt; }
+  .selfcheck div { margin-bottom: 2.5pt; }
+
+  /* ---------- unit close ---------- */
+  .close { margin-top: 14pt; break-inside: avoid; }
+  .closebar { background: var(--structure); color: var(--ground); padding: 6pt 10pt;
+              font-size: 9pt; font-weight: 700; letter-spacing: 0.18em; }
+  .closebody { border: 0.75pt solid var(--rule-hairline); border-top: none; padding: 8pt 10pt 9pt; }
+  .fuzzy { margin-top: 8pt; border: 0.75pt dashed var(--structure); padding: 6pt 10pt 22pt; }
+</style>
+
+<span class="foot-brand">SHULL SCIENCE</span><span class="foot-code">{{FOOTCODE}}</span>
+
+<div class="brandbar">
+  <div class="org">SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS</div>
+  <div class="unit">{{UNITTITLE}}</div>
+  <div class="kick">{{KICKER}}</div>
+</div>
+<div class="fields">{{FIELDS}}</div>
+
+<div class="two">
+  <div><div class="lbl">UNIT LEARNING TARGETS</div><ul class="tight">{{TARGETS}}</ul></div>
+  <div><div class="lbl">KEY TERMS</div><ul class="tight">{{TERMS}}</ul></div>
+</div>
+
+<div class="howbox">
+  <div class="lbl">HOW THESE NOTES WORK</div>
+  <ul class="tight">{{HOWITWORKS}}</ul>
+</div>
+
+<div class="checklist">
+  <div class="lbl">SECTIONS IN THIS UNIT</div>
+  {{SECTIONLIST}}
+</div>
+
+{{SECTIONS}}
+
+<div class="close">
+  <div class="closebar">{{CLOSEBANNER}}</div>
+  <div class="closebody">
+    <div class="lbl">SECTION CHECKLIST</div>
+    {{CLOSECHECK}}
+    <div class="lbl" style="margin-top:8pt">UNIT BIG PICTURE</div>
+    <p style="margin:0 0 4pt">{{BIGPICTURE}}</p>
+    <div class="rule"></div><div class="rule"></div><div class="rule"></div>
+    <div class="fuzzy"><div class="lbl">{{FUZZY}}</div></div>
+  </div>
+</div>
