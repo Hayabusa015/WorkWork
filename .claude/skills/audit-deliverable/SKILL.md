@@ -32,13 +32,18 @@ layout check below is being run against the wrong metrics.
 ## 3. Measure the ink — print documents only
 
 ```bash
-python3 -c "
-import pymupdf; p=pymupdf.open('FILE.pdf')[0].get_pixmap(dpi=150,colorspace=pymupdf.csGRAY).samples
-print(f'{100*sum(1 for b in p if b<240)/len(p):.1f}% marked, {100*sum(1 for b in p if b<100)/len(p):.1f}% heavy')"
+python3 scripts/audit_print_ink.py FILE.pdf
+python3 scripts/audit_fonts.py FILE.pdf
 ```
 
-Benchmark is around 5% marked. Any solid fill larger than a small tag, chip, or icon fails
-regardless of the number.
+**Do not measure ink by counting marked pixels.** That was the rule here and it is wrong: it counts
+a 7% grey tint exactly as hard as solid black. The budget is **toner coverage** — the mean darkness
+of the page, which is what a cartridge spends. `audit_print_ink.py` reports toner (the budget,
+ceiling 9%), marked (density, reported), and the widest solid band. Any solid fill wider than
+0.60 in fails regardless of either number. SHULL-CHG-0020.
+
+`audit_fonts.py` fails a PDF that renders in anything but Archivo and names the character that
+pulled the substitute in.
 
 ## 4. Then the rest of the gate
 

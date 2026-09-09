@@ -33,8 +33,23 @@ to draw in, cards to cut, slots to glue them into. A Geology sheet with none of 
 
 ## The page shape
 
-Header → Name / Date / Period / **Score** → the concept → prior knowledge → equations →
-directions → questions → close. Each section starts a new page.
+Header → Name / Date / Period / **Score** → REMEMBER → BEFORE YOU START → equations →
+directions → question cards → close. Each section starts a new page.
+
+The layout follows his `Master_Physics` reference, with the two changes he asked for. **No work
+space on a Physics sheet** — the notebooks are where problems get worked. And **no solid header
+slab**: his banner measures a 7.61 in solid band, which fails the fill rule on its own, so the
+shape survives as an outlined header with a heavy accent bar on the left edge, which is the one
+place a solid mark earns its ink.
+
+**One card per question**, number top left, tier top right, both in a single paragraph with a right
+tab stop — a nested table there drags a blank paragraph in with it and the card gains a line of
+nothing. **Two short questions share a row**; `is_short()` decides, so the pairing follows the
+content rather than a hand-placed break.
+
+**Tier colours** run quiet grey → amber → red → full ink. `semantic.success` measures 5.02 on white
+even at its deep variant, under the 5.5 house target, so the easiest tier takes the muted label
+grey instead; the hardest takes ink, because after red there is nowhere to go in colour.
 
 - **The score total is summed from the questions, never typed.** A header reading `/ 20` over
   questions adding to 18 is one fact stored twice.
@@ -80,6 +95,17 @@ it was diagnosed; the content all went back once the spacers were the size they 
 5. Every question stays whole across a page break. So does every card, slot and close block.
 
 ## Measured, not judged
+
+`audit_print_ink.py` reports **three** numbers and they are not interchangeable. **Toner** is ink
+volume — the mean darkness of the page, what a cartridge actually spends — and it is the budget.
+**Marked** is the share of the page carrying any mark, a density reading, reported but not failed
+on except at an extreme. **The widest solid band** is what the standard fails outright.
+
+Using `marked` as the ink budget was wrong and it nearly cost a good design: it counts a 7% grey
+tint exactly as hard as solid black, so it ranked a sheet with two pale panels (18.70% marked,
+**4.68% toner**) as worse than one with solid navy banners on every page (12.47% marked, **8.15%
+toner**) — when the second lays down 74% more ink. SHULL-CHG-0020.
+
 
 `audit_worksheet.py` reads the budget from the spec, so a section that quietly grows a page fails
 where a section that was always three pages passes. `audit_fonts.py` fails a PDF that renders in

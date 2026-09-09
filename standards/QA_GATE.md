@@ -55,8 +55,19 @@ display pair is six levels apart, so border and label differentiation is mandato
 
 ## 5. Ink — print documents only
 
-Estimate what a printer would lay down. This is measurable, not a matter of taste: rasterise and
-compute the percentage of marked pixels. A rebuilt practice set measured 5.2% marked, 2.9% heavy.
+Measure what a printer would lay down. This is measurable, not a matter of taste — and the
+measurement is **toner coverage**, the mean darkness of the page, not the count of marked pixels.
+The two are not the same and the difference is not small: a pale tint panel marks a lot of pixels
+and spends almost no toner, so counting pixels ranks a tinted sheet above one with solid banners
+that uses 74% more ink. SHULL-CHG-0020.
+
+```bash
+python3 scripts/audit_print_ink.py FILE.pdf
+```
+
+**toner** — ink volume, the budget. Ceiling 9%, calibrated on Matthew's own files.
+**marked** — page density, reported not failed on except at an extreme.
+**widest solid band** — geometry, and the thing that fails outright.
 
 **Fails immediately:**
 

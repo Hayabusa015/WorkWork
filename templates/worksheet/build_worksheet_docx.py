@@ -28,8 +28,8 @@ Colour comes from brand/tokens.json. No hex is typed in this file.
 """
 import json, os, sys
 from docx import Document
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.shared import Pt, Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -38,7 +38,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -88,6 +88,37 @@ def tier_col_in():
     return round(widest + TIER_GAP_IN, 2)
 WORK_MIN_IN = 1.6
 WATERMARK = "SHOW WORK HERE"
+CARD_PAD_IN = 0.28              # one nesting of cell margins
+SHORT_PROMPT_CH = 118           # two such questions sit side by side
+
+
+def tier_colour(tier, pal):
+    """The tier ramp: quiet grey, amber, red, then full ink.
+
+    Taken from his Master_Physics layout, which tags the tiers green / amber / red.
+    Two changes. `semantic.success` measures 2.28 on white and its deep variant 5.02,
+    both under the 5.5 house target, so the easiest tier is set in the muted label grey
+    instead - which suits a warm-up anyway. And the hardest tier is full ink rather than
+    a fourth hue: after red there is nowhere to go in colour, and black is
+    unambiguously the heaviest thing on a page.
+
+    SHULL-CHG-0020 records the cost: `semantic.danger` means "danger, safety warning,
+    error, stop". Spending it on CHALLENGE dilutes that in a room where red also means
+    hazard. The word CHALLENGE disambiguates it and it is his design, so it ships - but
+    it is named rather than buried.
+    """
+    return {"warm-up": pal.label,
+            "practice": T["semantic"]["caution"]["deep"],
+            "challenge": T["semantic"]["danger"]["deep"],
+            "multi-topic": pal.ink}[tier]
+
+
+def is_short(q):
+    """A question that can share a row with its neighbour: nothing to draw, nothing to
+    solve in, no lettered parts, and a prompt that fits two lines of half a page."""
+    return not (q.get("diagram") or q.get("draw") or q.get("math")
+                or q.get("answerLines") or q.get("parts") or q.get("given")
+                or q.get("need")) and len(q.get("prompt", "")) <= SHORT_PROMPT_CH
 
 
 # --------------------------------------------------------------------------- blocks
@@ -248,63 +279,91 @@ def reflection_block(doc, block, pal):
 
 # ------------------------------------------------------------------------ questions
 
-def question_block(doc, q, i, pal, course, base_dir):
-    tier_w = tier_col_in()
-    t = doc.add_table(rows=1, cols=3)
-    fix_widths(t, [NUM_W_IN, tier_w, BODY_W_IN - tier_w])
-    # A question stays whole. Split across a page break, the parts and the work box
-    # land on the next sheet with no number above them - the student sees an unlabelled
-    # box and four lettered parts belonging to nothing.
-    no_split(t.rows[0])
-    numcell, tiercell, body = t.rows[0].cells
-    # Just the number. No box, no square, no circle, in any format. SHULL-CHG-0015 -
-    # his existing Physics sheet sets these in solid navy squares, which is both the
-    # withdrawn number-box and a fill on a printed page.
-    para(numcell, str(i), 11, bold=True, color=pal.accent, first=True)
+def question_card(cell, q, n, pal, course, base_dir, width):
+    """One question, in its own bordered card.
 
-    # The tier tag has its own column, set right so every tag ends on one edge and
-    # every prompt begins on one edge. It carries no box at all: a run border cannot be
-    # padded, so a boxed tag at 7pt is always clamped to the cap height and looks
-    # stamped on, and a box drawn on the cell is a tall empty rectangle beside one word.
-    # Four tiers in four different border weights read as a rendering fault rather than
-    # a scale. The word is the tag.
+    From his Master_Physics layout: a card per question, the number top left and the
+    tier top right. Both live in ONE paragraph with a right tab stop rather than in a
+    nested table - a table here drags a blank paragraph in with it and the card gains
+    a line of nothing at the top.
+    """
+    borders(cell, pal.hair, sz=6)
+    cell_margins(cell, top=55, bottom=55, left=130, right=130)
+    inner = round(width - CARD_PAD_IN, 2)
+
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(inner), WD_TAB_ALIGNMENT.RIGHT)
+    # Just the number. No box, no square, no circle. SHULL-CHG-0015 - his own sheets
+    # set these in solid squares, which is the withdrawn number box and a fill besides.
+    run(p, f"{n}.", 10.5, bold=True, color=pal.ink)
     if q.get("tier"):
-        # No margin on the left, where a right-set tag does not need one; the gap to
-        # the prompt is on the right, where it is visible.
-        cell_margins(tiercell, left=0, right=TIER_GAP_IN * 1440)
-        p = para(tiercell, q["tier"].upper(), TIER_PT, bold=True, color=pal.accent,
-                 caps_track=True, first=True)
-        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        colour = tier_colour(q["tier"], pal)
+        run(p, "\t", TIER_PT)
+        run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
+        r = run(p, q["tier"].upper(), TIER_PT, bold=True, color=colour)
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+        r._element.get_or_add_rPr().append(el)
 
-    para(body, q["prompt"], 10, color=pal.ink, first=True)
+    para(cell, q["prompt"], 10, color=pal.ink)
     for part in q.get("parts", []):
         # Multi-part items keep full body size on every part.
-        para(body, "   " + debullet(part), 10, color=pal.ink)
+        para(cell, "   " + debullet(part), 10, color=pal.ink)
 
-    body_inner = round(BODY_W_IN - tier_w - 0.16, 2)
     if q.get("diagram"):
-        diagram_block(body, q["diagram"], pal, body_inner, base_dir)
+        diagram_block(cell, q["diagram"], pal, inner, base_dir)
     if q.get("draw"):
-        draw_block(body, q["draw"], pal, body_inner - 0.2)
+        draw_block(cell, q["draw"], pal, inner - 0.2)
     if q.get("given") or q.get("need"):
-        given_need(body, q.get("given", ""), q.get("need", ""), pal, body_inner)
+        given_need(cell, q.get("given", ""), q.get("need", ""), pal, inner)
 
     if q.get("math"):
-        work_box(body, q.get("workLabel", ""), pal,
-                 float(q.get("workHeightIn", WORK_MIN_IN)), body_inner,
+        work_box(cell, q.get("workLabel", ""), pal,
+                 float(q.get("workHeightIn", WORK_MIN_IN)), inner,
                  watermark=q.get("watermark", WATERMARK))
     elif q.get("answerLines"):
-        answer = int(q["answerLines"])
-        rule_lines(body, answer, pal.hair)
+        rule_lines(cell, int(q["answerLines"]), pal.hair)
 
     if q.get("selfCheck"):
         # Bracketed self-check answers for NUMERIC results only - never for an
         # explanation, a vocabulary term, or a graph reading, where the bracket hands
         # over the whole answer.
-        pp = para(body, q["selfCheck"], 8, color=pal.label)
+        pp = para(cell, q["selfCheck"], 8, color=pal.label)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    gap(doc, 3)
-    return t
+    unpad_cell(cell)
+    return cell
+
+
+def render_questions(doc, questions, pal, course, base_dir):
+    """Cards down the page, two across where both questions are short.
+
+    His layout pairs the two warm-ups on one row and gives the longer questions the
+    full width. Pairing is decided by `is_short`, so it follows the content rather
+    than a hand-placed break.
+    """
+    gutter = 0.18
+    half = round((TEXT_W_IN - gutter) / 2, 2)
+    i = 0
+    while i < len(questions):
+        q = questions[i]
+        nxt = questions[i + 1] if i + 1 < len(questions) else None
+        pair = nxt is not None and is_short(q) and is_short(nxt)
+        if pair:
+            t = doc.add_table(rows=1, cols=3)
+            fix_widths(t, [half, gutter, half])
+            no_split(t.rows[0])
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, half)
+            question_card(t.rows[0].cells[2], nxt, i + 2, pal, course, base_dir, half)
+            i += 2
+        else:
+            t = doc.add_table(rows=1, cols=1)
+            fix_widths(t, [TEXT_W_IN])
+            # A question stays whole. Split across a page break, the parts and the work
+            # box land on the next sheet with no number above them.
+            no_split(t.rows[0])
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, TEXT_W_IN)
+            i += 1
+        gap(doc, 3)
 
 
 # ------------------------------------------------------------------------- profiles
@@ -429,47 +488,70 @@ def main():
         if si:
             page_break(doc)
 
-        # ---- Header. Outlined, not filled: design system section 8. His existing
-        # Physics sheet runs a solid navy banner across the top of every page, which is
-        # the single largest ink cost on it.
-        c = one_cell(doc)
-        borders(c, pal.display, sz=18, edges=("bottom",))
-        para(c, f"SHULL SCIENCE  ·  {course.upper()}  ·  MR. SHULL  ·  "
-                f"UNIT {int(spec['unit'])} — {utitle.upper()}", 7.5, bold=True,
-             color=pal.accent, caps_track=True, first=True)
-        para(c, sec["title"], 15, bold=True, color=pal.ink)
-        para(c, f"{kind.replace('_', ' ').upper()}  ·  {unit} / S{sec['code']}"
-                + (f"  ·  ~{spec['timeTargetMin']} MIN" if spec.get("timeTargetMin") else ""),
-             7.5, color=pal.label, caps_track=True)
-
-        # ---- Name / Date / Period / Score. The score total is summed from the
-        # questions, never typed: a header reading "/ 20" over questions adding to 18
-        # is one fact stored in two places.
-        total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
-                 + sum(int(b.get("points", 0)) for b in sec.get("blocks", [])))
+        # ---- Header. His Master_Physics banner is a solid navy slab across the top
+        # of the page - handsome, and 28.46% marked with a 7.61in solid band, which
+        # fails both halves of the ink gate on its own. "Make the header more ink
+        # saver" was his instruction. The shape survives: the eyebrow, the big title,
+        # the code on the right. Only the slab goes, replaced by a heavy accent bar on
+        # the left edge, which is the one place a solid mark earns its ink.
         t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.95, 1.55])
-        a, b = t.rows[0].cells
-        borders(a, pal.hair); borders(b, pal.ink, sz=8)
-        para(a, "NAME ______________________________   DATE _____________   "
-                "PERIOD _____", 9, color=pal.label, first=True)
-        pp = para(b, "SCORE", 7, bold=True, color=pal.accent, caps_track=True, first=True)
-        pp = para(b, f"_______  /  {total}", 10, bold=True, color=pal.ink)
+        fix_widths(t, [5.55, 1.95])
+        h, hr = t.rows[0].cells
+        for cc in (h, hr):
+            borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
+        borders(h, pal.display, sz=30, edges=("left",))
+        cell_margins(h, top=80, bottom=80, left=160, right=80)
+        cell_margins(hr, top=80, bottom=80, left=80, right=60)
+        para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()}", 7.5, bold=True,
+             color=pal.accent, caps_track=True, first=True)
+        para(h, sec["title"], 15, bold=True, color=pal.ink)
+        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
+                  caps_track=True, first=True)
+        pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        pp = para(hr, kind.replace("_", " ").upper()
+                  + (f"  ·  ~{spec['timeTargetMin']} MIN"
+                     if spec.get("timeTargetMin") else ""),
+                  6.5, color=pal.label, caps_track=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
+        # ---- Name / Date / Period / Score. Four ruled fields on one line, the label
+        # sitting on the rule - his layout, and lighter than a box around each. The
+        # score total is summed from the questions, never typed: a header reading "/ 20"
+        # over questions adding to 18 is one fact stored in two places.
+        total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
+                 + sum(int(b.get("points", 0)) for b in sec.get("blocks", [])))
+        gap(doc, 5)
+        widths = [3.05, 1.75, 1.10, 1.60]
+        t = doc.add_table(rows=1, cols=4)
+        fix_widths(t, widths)
+        for cc, lab in zip(t.rows[0].cells, ("NAME", "DATE", "PERIOD", "SCORE")):
+            borders(cc, pal.ink, sz=4, edges=("bottom",))
+            cell_margins(cc, top=0, bottom=40, left=0, right=120)
+            p = para(cc, lab, 6.5, bold=True, color=pal.label, caps_track=True,
+                     first=True)
+            if lab == "SCORE":
+                p.paragraph_format.tab_stops.add_tab_stop(
+                    Inches(widths[3] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
+                run(p, "\t", 9)
+                run(p, f"/  {total}", 10, bold=True, color=pal.ink)
+
         # ---- What this is about, before anything is asked of them.
-        gap(doc, 2)
+        gap(doc, 5)
         c = one_cell(doc)
-        borders(c, pal.display, sz=18, edges=("left",))
-        label(c, sec.get("conceptLabel", "THE CONCEPT — READ THIS FIRST"), pal, first=True)
+        borders(c, pal.hair, sz=4)
+        borders(c, pal.display, sz=24, edges=("left",))
+        shade(c, pal.surface)
+        cell_margins(c, top=70, bottom=70, left=130, right=130)
+        label(c, sec.get("conceptLabel", "REMEMBER"), pal, first=True)
         para(c, sec["concept"]["summary"], 9.5)
         for x in sec["concept"].get("keyIdeas", []):
             para(c, "•  " + debullet(x), 9.5)
 
         pk = sec.get("priorKnowledge", spec.get("priorKnowledge"))
         if pk:
-            gap(doc, 2)
-            c = one_cell(doc); borders(c, pal.hair)
+            gap(doc, 4)
+            c = one_cell(doc); borders(c, pal.hair, sz=4)
+            cell_margins(c, top=70, bottom=70, left=130, right=130)
             label(c, pk.get("label", "BEFORE YOU START — YOU ALREADY KNOW THIS"),
                   pal, first=True)
             for x in pk["items"]:
@@ -488,8 +570,7 @@ def main():
             para(c, sec["directions"], 9.5)
 
         gap(doc, 4)
-        for i, q in enumerate(sec.get("questions", []), 1):
-            question_block(doc, q, i, pal, course, HERE)
+        render_questions(doc, sec.get("questions", []), pal, course, HERE)
 
         for bi, block in enumerate(sec.get("blocks", [])):
             kindb = block["kind"]

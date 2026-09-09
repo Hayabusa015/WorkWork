@@ -57,15 +57,19 @@ python3 scripts/audit_print_ink.py out.pdf
 headers.** Every header here is a hairline above and an accent rule below. The cue column is
 separated by its border, not a tint.
 
-It reports two things, and they are not the same:
+It reports three things, and they are not the same:
 
-- **`% marked`** — ink volume. A budget. Dense procedure legitimately uses more than a notes packet.
+- **`toner`** — ink volume, the mean darkness of the page. This is the budget. Dense procedure
+  legitimately uses more than a notes packet.
+- **`marked`** — the share of the page carrying any mark. Density, not ink: a pale tint marks
+  every pixel it covers and spends almost none. Reported, not failed on except at an extreme.
 - **`widest solid band`** — geometry. This is what the standard fails immediately, and it is the one
   that catches a header going back to a fill.
 
-Calibrated to Matthew's own packet, which was already ink-disciplined before this system existed:
-5.41% marked, no fills. The first build of this template measured 17.10% — 3.2× his ink — on a
-document photocopied for every student in the course.
+Calibrated to Matthew's own files: his GEO packet 3.09% toner, his old PHYS practice set 8.15%.
+The first build of this template measured 3.2× his ink on a document photocopied for every student
+in the course. Reading `marked` as the ink budget was a separate mistake, corrected in
+SHULL-CHG-0020.
 
 The fill detector is verified against positive controls, because a check that never fires is not a
 check: reinstating the old solid header produces a **7.50 in band** and fails.

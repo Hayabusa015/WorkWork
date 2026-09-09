@@ -33,10 +33,12 @@ character, because one U+2610 checkbox pulls in a whole second font.
 No solid-fill headers, no shaded section backgrounds. This is measured, not judged — the first
 build of the template ran 3.2× the ink of the packet the user had written by hand.
 
-The check reports **% marked** (ink volume, a budget) and **the widest solid band in inches** (the
-thing the standard actually fails). Do not read one as the other: a page of dense small type puts
-down as many dark pixels as a bar does, and an earlier version of this check confused them and
-wrongly failed the lab template.
+The check reports **toner** (ink volume, the budget), **marked** (page density, reported) and
+**the widest solid band in inches** (the thing the standard actually fails). Do not read any one as
+another. A page of dense small type puts down as many dark pixels as a bar does — an early version
+confused those two and wrongly failed the lab template. And a pale tint marks every pixel it covers
+while spending almost no toner — reading `marked` as the ink budget was the second confusion, and
+it ranked a tinted sheet worse than one using 74% more ink. SHULL-CHG-0020.
 
 Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `standards/NAMING.md`.
 

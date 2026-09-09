@@ -57,11 +57,15 @@ def main():
     for i, page in enumerate(doc):
         txt = page.get_text()
         flat = txt.replace(" ", "")
-        if "SHULLSCIENCE·" in flat and "MR.SHULL" in flat:
-            # The kicker is letter-tracked, so the code arrives as "U 0 1  /  S 1 . 1".
-            # Match on the despaced text or nothing will ever be found.
-            m = re.search(r"U\d{1,2}/S\d{1,2}\.\d", flat)
-            starts.append((i, m.group(0) if m else f"page {i + 1}"))
+        # A section starts where its code appears in the "U01 / S1.1" form the header
+        # uses. Detecting the header by its wording coupled this check to a string that
+        # then changed, and it silently found nothing - so it keys on the code, which is
+        # what identifies a section anyway. The running footer writes the span in a
+        # different form ("U01 · S1.1-S1.4"), so the two cannot be confused.
+        # The kicker is letter-tracked, so the code arrives as "U 0 1  /  S 1 . 1".
+        m = re.search(r"U\d{1,2}/S\d{1,2}\.\d(?!\d)", flat)
+        if m:
+            starts.append((i, m.group(0)))
     if not starts:
         print("   no section headers found — not a worksheet built by this template.")
         starts = [(0, "whole document")]

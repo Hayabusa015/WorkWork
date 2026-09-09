@@ -32,6 +32,7 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0017 | 2026-09-09 | Course profiles: stacked fractions, equation bar, Geology has no math | CONFIRMED | `governance/proposals/SHULL-CHG-0017-course-profiles.md` |
 | SHULL-CHG-0018 | 2026-09-09 | Cue column narrows to 1.28in and condenses; no box around the equation bar | CONFIRMED | `governance/proposals/SHULL-CHG-0018-cue-column.md` |
 | SHULL-CHG-0019 | 2026-09-09 | Worksheet template with three enforced course profiles; font audit | CONFIRMED | `governance/proposals/SHULL-CHG-0019-worksheet-template.md` |
+| SHULL-CHG-0020 | 2026-09-09 | Master_Physics card layout; toner replaces marked as the ink budget | CONFIRMED | `governance/proposals/SHULL-CHG-0020-master-physics-layout.md` |
 | SHULL-CHG-0016 | 2026-09-09 | A problem to solve gets a bordered work box, enforced at build | CONFIRMED | `governance/proposals/SHULL-CHG-0016-work-boxes.md` |
 | SHULL-CHG-0015 | 2026-09-09 | A numbered list is just the number — no box, any format | CONFIRMED | `governance/proposals/SHULL-CHG-0015-no-number-boxes.md` |
 | SHULL-CHG-0014 | 2026-09-09 | Guided notes template, .docx, from Matthew's own packet | CONFIRMED | `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` |
@@ -67,6 +68,7 @@ with the user.
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |
 | 2026-09-09 | `validate_codes.py` checks that a section code exists, not that its title matches the roadmap. That is how the 1.3/1.4 drift survived. Worth building a title check? | User |
+| 2026-09-09 | Tier tags reuse `semantic.danger` (red) for CHALLENGE. Red also means hazard in a lab. Keep it, or run the ramp grey → course accent → ink? | User — SHULL-CHG-0020 |
 | 2026-09-08 | Empty image wells render as dashed boxes; a deck cannot suppress a well it is not using | Design — T-7 open finding |
 | 2026-09-09 | Notes specs cannot express a table inside a Cornell cell — his Physics equation table flattened to text | Design — SHULL-CHG-0016, matters most for Physics |
 | 2026-09-08 | Two Geology section titles in U5 are near-duplicates | User — deferred to "when I get to work" |
