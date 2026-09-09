@@ -94,6 +94,41 @@ def fix_widths(table, widths):
         col.width = Inches(w)
 
 
+# SHULL-CHG-0016. Matthew's physics packet puts a bordered box under every worked
+# example - a 1x1 table, ~1in tall, hRule "atLeast" so it grows but never shrinks, and
+# cantSplit so it never breaks across a page. Students work the problem inside it.
+# His rule: "anytime problems need solved in guided notes leave a box for them to do it."
+WORK_BOX_MIN_IN = 1.4          # his was 0.98in; a little more room for kinematics
+GIVEN_LABEL_IN = 0.72
+
+
+def work_box(cell, label, hexval, accent, height_in=WORK_BOX_MIN_IN, width=5.06):
+    t = cell.add_table(rows=1, cols=1)
+    fix_widths(t, [width])
+    tr = t.rows[0]
+    trPr = tr._tr.get_or_add_trPr()
+    cant = OxmlElement("w:cantSplit"); trPr.append(cant)
+    h = OxmlElement("w:trHeight")
+    h.set(qn("w:val"), str(int(height_in * 1440)))
+    h.set(qn("w:hRule"), "atLeast")
+    trPr.append(h)
+    inner = tr.cells[0]
+    borders(inner, hexval, sz=6)
+    # The label is read; the border is not. hairline on white measures 1.6:1.
+    para(inner, label, 7.5, bold=True, color=accent, caps_track=True, first=True)
+    return inner
+
+
+def given_need(cell, given, need, hexval, accent):
+    t = cell.add_table(rows=2, cols=2)
+    fix_widths(t, [GIVEN_LABEL_IN, 5.06 - GIVEN_LABEL_IN])
+    for ri, (lab, val) in enumerate((("GIVEN", given), ("NEED", need))):
+        a, b = t.rows[ri].cells
+        borders(a, hexval, sz=4); borders(b, hexval, sz=4)
+        para(a, lab, 7.5, bold=True, color=accent, caps_track=True, first=True)
+        para(b, val, 9.5, first=True)
+
+
 def one_cell(doc, width=7.5):
     t = doc.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.LEFT
     fix_widths(t, [width])
@@ -114,6 +149,26 @@ def main():
     if bad:
         print(f"build_notes_docx: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md.", file=sys.stderr)
+        return 1
+
+    # "Anytime problems need solved in guided notes leave a box for them to do it."
+    # A rule that only lives in a document is not a mechanism, so this refuses to build.
+    PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
+    missing = []
+    for sec in spec["sectionsContent"]:
+        for row in sec["rows"]:
+            if row.get("problem") or row.get("noWorkBox"):
+                continue
+            hay = " ".join([row.get("cueLabel", ""), row.get("notesLabel", "")]).upper()
+            if any(w in hay for w in PROBLEM_WORDS):
+                missing.append(f"{sec['code']} · {row.get('notesLabel') or row.get('cueLabel')}")
+    if missing:
+        print("build_notes_docx: these rows look like problems to solve and have no work box:",
+              file=sys.stderr)
+        for m in missing:
+            print("   " + m, file=sys.stderr)
+        print('\nAdd a "problem" block, or "noWorkBox": true if it genuinely is not one.\n'
+              'Students need somewhere to work it. SHULL-CHG-0016.', file=sys.stderr)
         return 1
 
     code = COURSE_CODE[course]
@@ -197,6 +252,19 @@ def main():
             for q in row["cues"]:
                 para(cue, q, 9)
             para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
+            prob = row.get("problem")
+            if prob:
+                para(notes, prob.get("label", "EXAMPLE"), 7.5, bold=True,
+                     color=accent, caps_track=True)
+                if prob.get("statement"):
+                    para(notes, prob["statement"], 9.5)
+                if prob.get("given") or prob.get("need"):
+                    given_need(notes, prob.get("given", ""), prob.get("need", ""), hair, accent)
+                work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), hair, accent,
+                         float(prob.get("workHeightIn", WORK_BOX_MIN_IN)))
+                if prob.get("answer"):
+                    para(notes, prob["answer"], 9.5)
+
             for n in row["notes"]:
                 mw = n.startswith(("*", "✎"))
                 body = n.lstrip("*✎").strip()

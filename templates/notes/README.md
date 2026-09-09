@@ -29,6 +29,11 @@ neither gets to drift from the other.
 - **A note line ending in `?` gets two ruled lines. Everything else gets one.**
 - **Must-write:** prefix a notes line with `*` in the spec. It renders as an accent rule down the
   left. One per idea — not one per line.
+- **A problem to solve gets a box to solve it in.** SHULL-CHG-0016. Add a `problem` block to the
+  row — label, statement, given, need, workLabel, answer — and the builder emits the GIVEN/NEED
+  table and a bordered work box that grows but never shrinks and never splits across a page.
+  **The build refuses** if a row is labelled EXAMPLE / PRACTICE / PROBLEM / SOLVE / CALCULATE /
+  YOUR TURN and has no box. Opt out with `"noWorkBox": true` — explicitly, in the spec.
 - **"Still fuzzy on"** closes the packet. It is the only place a student is asked what they did not
   get, and it is worth keeping.
 
