@@ -27,6 +27,11 @@ python3 scripts/audit_print_ink.py out.pdf     # convert the .docx first
 No solid-fill headers, no shaded section backgrounds. This is measured, not judged — the first
 build of the template ran 3.2× the ink of the packet the user had written by hand.
 
+The check reports **% marked** (ink volume, a budget) and **the widest solid band in inches** (the
+thing the standard actually fails). Do not read one as the other: a page of dense small type puts
+down as many dark pixels as a bar does, and an earlier version of this check confused them and
+wrongly failed the lab template.
+
 Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `standards/NAMING.md`.
 
 ## Every document

@@ -42,10 +42,18 @@ python3 scripts/audit_print_ink.py out.pdf
 headers.** Every header here is a hairline above and an accent rule below. The cue column is
 separated by its border, not a tint.
 
-The limits are calibrated to Matthew's own packet, which was already ink-disciplined before this
-system existed: 5.41% marked, 2.80% heavy. The first build of this template measured **17.10% /
-4.32%** — 3.2× his ink — on a document that gets photocopied for every student in the course.
-**If a header ever goes back to a solid fill, this check is what catches it.**
+It reports two things, and they are not the same:
+
+- **`% marked`** — ink volume. A budget. Dense procedure legitimately uses more than a notes packet.
+- **`widest solid band`** — geometry. This is what the standard fails immediately, and it is the one
+  that catches a header going back to a fill.
+
+Calibrated to Matthew's own packet, which was already ink-disciplined before this system existed:
+5.41% marked, no fills. The first build of this template measured 17.10% — 3.2× his ink — on a
+document photocopied for every student in the course.
+
+The fill detector is verified against positive controls, because a check that never fires is not a
+check: reinstating the old solid header produces a **7.50 in band** and fails.
 
 ## QA
 

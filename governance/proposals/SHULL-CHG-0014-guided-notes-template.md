@@ -120,14 +120,36 @@ chosen one.
 The checker's limits are calibrated to **his packet**, not to a number I picked — my first threshold
 was arbitrary and failed his original too, which is how I knew it was wrong.
 
-## Finding 5 — the lab template fails the same check
+## Finding 5 — I reported the lab template as failing. It was not. The check was wrong.
 
-Not fixed, and not silently. `templates/lab/SHULL_Lab_TEMPLATE_MASTER.pdf` measures **7.14% marked,
-3.41% heavy on average, worst page 10.66% / 4.96%** — over the limit on both counts. Same defect
-class as finding 4, in a template shipped under SHULL-CHG-0010 and called done.
+**WITHDRAWN, and worth keeping on the record.**
 
-It is a separate template with its own change record and a copy already in Drive, so rewriting it
-belongs in its own change rather than inside this one. **Open.**
+The first version of `audit_print_ink.py` scored a "heavy" percentage — pixels below mid-grey — and
+treated that as the fill test. On that basis the lab template failed at 4.96% heavy, and I told the
+user so.
+
+Then I looked at the page. **It has no fills at all.** It is five pages of dense procedure, and a
+page of small dark type puts down as many dark pixels as a solid bar does. The metric could not tell
+the two apart, and the standard fails *fills*, not ink volume.
+
+Rewritten to measure the thing the standard actually names — *"any solid fill larger than a small
+tag, chip, or icon"* — as geometry rather than volume. Text makes dark runs a glyph-stroke wide; a
+bar makes one run hundreds of pixels wide, held down its height. The checker reports **the widest
+solid band on each page, in inches.**
+
+| | marked, worst page | widest solid band |
+|---|---|---|
+| His original packet | 8.35% | **none** |
+| Lab template | 10.66% | **none** |
+| Notes, after finding 4 | 8.31% | **none** |
+| *Positive control* — notes with the old solid header put back | 14.01% | **7.50 in** |
+| *Positive control* — a slide deck, dark grounds by design | 100% | 13.15 in |
+
+The controls matter: a check that never fires is not a check. Both were run and both flagged.
+
+**The lab template needs no change.** Finding 4 stands — the notes template really did add fills his
+packet never had, and the ink measurement of that was correct. What was wrong was the conclusion
+drawn about a second template from a metric that could not support it.
 
 ## Verification
 
