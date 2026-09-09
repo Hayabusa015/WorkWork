@@ -179,7 +179,14 @@
             "Photosphere (the visible surface):",
             "Chromosphere:",
             "Corona (atmosphere):"
-          ]
+          ],
+          "diagram": {
+            "label": "LABEL THE SUN'S LAYERS",
+            "caption": "Label each layer from the centre outward, then mark where fusion happens.",
+            "figureNote": "[ CROSS-SECTION OF THE SUN ]",
+            "heightIn": 2.9,
+            "labelSlots": 6
+          }
         },
         {
           "cueLabel": "ACTIVITY",

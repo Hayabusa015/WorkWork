@@ -229,6 +229,8 @@ study guides, reference sheets. Digital-only deliverables are exempt.
   needed for scanability, use a very light grey tint — never a brand colour at medium or full
   saturation.
 - **Chart areas are hatched, not tinted.**
+- **A fraction is stacked** — numerator above, denominator below, a horizontal bar between them.
+  **Never `a/b` inline in running text.** Any format, any course. SHULL-CHG-0017.
 - **A numbered list is just the number. No box, no square, no circle, in any format** — labs,
   guided notes, worksheets, practice sets, tests, slides. SHULL-CHG-0015, and it has no exceptions.
 - Chips and border-tab labels stay outlined or light-fill. Solid fill is reserved for slides and

@@ -24,7 +24,7 @@
   ],
   "howItWorks": [
     "The left column holds the questions you should be able to answer from the notes beside them. Cover the right side and quiz yourself with it later.",
-    "A ✎ line with a green bar is must-write. Copy it exactly.",
+    "A line with a gold rule down its left edge is must-write. Copy it exactly.",
     "Every worked example has a bordered work area. Show enough that I can follow your reasoning, and carry units the whole way."
   ],
   "sectionList": [
@@ -341,5 +341,37 @@
     ],
     "bigPicture": "Trace one motion all the way through: position, velocity, acceleration, and what each graph of it looks like.",
     "fuzzyLabel": "STILL FUZZY ON — bring these to review day"
-  }
+  },
+  "equations": [
+    {
+      "note": "average velocity",
+      "lhs": "v",
+      "num": "Δx",
+      "den": "Δt"
+    },
+    {
+      "note": "average speed",
+      "lhs": "speed",
+      "num": "distance",
+      "den": "Δt"
+    },
+    {
+      "note": "acceleration",
+      "lhs": "a",
+      "num": "Δv",
+      "den": "Δt"
+    },
+    {
+      "note": "constant a — no Δx",
+      "plain": "v = v₀ + at"
+    },
+    {
+      "note": "constant a — no v",
+      "plain": "Δx = v₀t + ½at²"
+    },
+    {
+      "note": "constant a — no t",
+      "plain": "v² = v₀² + 2aΔx"
+    }
+  ]
 }

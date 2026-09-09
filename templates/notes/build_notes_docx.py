@@ -13,7 +13,7 @@ import json, os, re, sys
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -25,6 +25,14 @@ T = json.load(open(os.path.join(REPO, "brand", "tokens.json")))
 G = T["ground"]
 FONT = T["typography"]["stack"].split(",")[0].strip().strip('"')
 FLOOR = T["typography"]["floors"]["printBody"]["pt"]
+
+
+BULLETS = "•·▸►‣-–— "
+
+
+def debullet(x):
+    """The source packets wrote their own bullets into the text; we supply one."""
+    return str(x).lstrip(BULLETS).strip()
 
 
 def hexof(h):
@@ -102,6 +110,106 @@ WORK_BOX_MIN_IN = 1.4          # his was 0.98in; a little more room for kinemati
 GIVEN_LABEL_IN = 0.72
 
 
+# SHULL-CHG-0017. A fraction is stacked - numerator over denominator with a horizontal
+# bar. Never "a/b" inline in the text. Built as a two-row table rather than Office Math
+# (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
+# .docx, so nothing in this pipeline could see what shipped. A ruled table renders
+# identically in Word, LibreOffice, Google Docs and print, and can be checked.
+def stacked_frac(cell, num, den, ink_hex, rule_hex, size=10.5):
+    t = cell.add_table(rows=2, cols=1)
+    fix_widths(t, [max(0.5, 0.085 * max(len(num), len(den)) + 0.20)])
+    top, bot = t.rows[0].cells[0], t.rows[1].cells[0]
+    borders(top, rule_hex, sz=6, edges=("bottom",))
+    for c, txt in ((top, num), (bot, den)):
+        p = para(c, txt, size, color=ink_hex, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_after = Pt(0)
+        p.paragraph_format.space_before = Pt(0)
+    return t
+
+
+def equation_bar(doc, equations, accent, ink, hair, label):
+    """The equations students may reference, at the top of the page.
+
+    His rule: on any Physics or Chemistry sheet with math, the equations go at the top
+    so students know what they are allowed to reach for. Two across, outlined not
+    filled, fractions stacked.
+    """
+    c = one_cell(doc)
+    borders(c, accent, sz=6)
+    para(c, label, 7.5, bold=True, color=accent, caps_track=True, first=True)
+    cols = 2
+    rows = (len(equations) + cols - 1) // cols
+    t = c.add_table(rows=rows, cols=cols)
+    fix_widths(t, [3.62, 3.62])
+    for i, eq in enumerate(equations):
+        cell = t.rows[i // cols].cells[i % cols]
+        if eq.get("note"):
+            para(cell, eq["note"], 7.5, bold=True, color=accent, caps_track=True, first=True)
+        if eq.get("num") and eq.get("den"):
+            # lhs and the fraction side by side. A nested table always starts its own
+            # line, so the equals sign needs its own cell to sit beside the bar.
+            inner = cell.add_table(rows=1, cols=2)
+            fix_widths(inner, [0.80, 2.60])
+            lc, fc = inner.rows[0].cells
+            # Middle-aligned so the equals sign lands on the fraction bar, not above it.
+            lc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            para(lc, (eq.get("lhs", "") + "  =") if eq.get("lhs") else "", 10.5,
+                 bold=True, first=True).alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            stacked_frac(fc, eq["num"], eq["den"], ink, hair)
+        else:
+            para(cell, eq.get("plain", ""), 10.5, bold=True, first=not eq.get("note"))
+    return c
+
+
+def diagram_block(cell, dgm, accent, ink, hair):
+    """A figure students label. Geology's equivalent of a work box.
+
+    His example: the layers of the Earth, or a plate boundary with the trench and the
+    mid-ocean ridge to identify. The figure gets real room and the label lines are
+    numbered beside it, so a student writes on the sheet rather than in a margin.
+    """
+    # The heading and caption live INSIDE the non-splitting row. Kept outside it, they
+    # stranded on the previous page while the figure moved to the next - which is worse
+    # than no heading at all, because the student sees a box with no instruction.
+    # ONE row. cantSplit holds a row together but does nothing across two rows, so the
+    # heading stranded on the previous page while the figure moved to the next - a box
+    # with no instruction above it, which is worse than no heading at all.
+    c = cell
+    t = c.add_table(rows=1, cols=2)
+    fix_widths(t, [3.10, 1.96])
+    fig, labels = t.rows[0].cells
+    para(fig, dgm.get("label", "LABEL THIS DIAGRAM"), 7.5, bold=True, color=accent,
+         caps_track=True, first=True)
+    if dgm.get("caption"):
+        para(fig, dgm["caption"], 9)
+    borders(fig, hair, sz=4)
+    trPr = t.rows[0]._tr.get_or_add_trPr()
+    trPr.append(OxmlElement("w:cantSplit"))
+    hh = OxmlElement("w:trHeight")
+    hh.set(qn("w:val"), str(int(float(dgm.get("heightIn", 3.0)) * 1440)))
+    hh.set(qn("w:hRule"), "atLeast")
+    trPr.append(hh)
+    img = dgm.get("image")
+    if img and os.path.exists(os.path.join(HERE, img)):
+        r = fig.add_paragraph().add_run()
+        r.add_picture(os.path.join(HERE, img), width=Inches(2.90))
+        fig.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    else:
+        # NOT first=True. The heading already claimed paragraph 0, and passing it twice
+        # appends a run to the same paragraph instead of making a new one - the heading
+        # and the figure note ran together as one line.
+        p = para(fig, dgm.get("figureNote", "[ FIGURE ]"), 9,
+                 color=hair, caps_track=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(10)
+    para(labels, "LABEL", 7.5, bold=True, color=accent, caps_track=True, first=True)
+    for i in range(int(dgm.get("labelSlots", 6))):
+        p = para(labels, f"{i + 1}", 9.5, bold=True, color=ink)
+        rule_lines(labels, 1, hair)
+    return c
+
+
 def work_box(cell, label, hexval, accent, height_in=WORK_BOX_MIN_IN, width=5.06):
     t = cell.add_table(rows=1, cols=1)
     fix_widths(t, [width])
@@ -171,6 +279,25 @@ def main():
               'Students need somewhere to work it. SHULL-CHG-0016.', file=sys.stderr)
         return 1
 
+    # Course profiles. The three courses do not want the same document, and pretending
+    # they do is how a Geology packet ends up with a kinematics equation bar.
+    eqs = spec.get("equations") or []
+    has_problem = any(r.get("problem") for sec in spec["sectionsContent"] for r in sec["rows"])
+    if course == "geology":
+        if eqs or has_problem:
+            print("build_notes_docx: Geology has no math. Remove the equation bar and the "
+                  "problem blocks — a Geology packet labels diagrams instead. SHULL-CHG-0017.",
+                  file=sys.stderr)
+            return 1
+    else:
+        if has_problem and not eqs:
+            print(f"build_notes_docx: {course} packet has problems to solve and no equation "
+                  f"bar. Students need the equations at the top of the page so they know what "
+                  f"they may reference. Add \"equations\", or \"noEquationBar\": true.",
+                  file=sys.stderr)
+            if not spec.get("noEquationBar"):
+                return 1
+
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
@@ -200,6 +327,11 @@ def main():
     c = one_cell(doc); borders(c, hair)
     para(c, spec["fields"], 9, color=label, first=True)
 
+    if eqs:
+        doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        equation_bar(doc, eqs, accent, ink, hair,
+                     spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
+
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
     t = doc.add_table(rows=1, cols=2)
     fix_widths(t, [3.75, 3.75])
@@ -208,19 +340,19 @@ def main():
         cell = t.rows[0].cells[i]; borders(cell, hair)
         para(cell, lab, 7.5, bold=True, color=accent, caps_track=True, first=True)
         for x in items:
-            para(cell, "•  " + str(x).lstrip("•·-– ").strip(), 9.5)
+            para(cell, "•  " + debullet(x), 9.5)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
     c = one_cell(doc); borders(c, display, sz=18, edges=("left",))
     para(c, "HOW THESE NOTES WORK", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["howItWorks"]:
-        para(c, "•  " + x, 9.5)
+        para(c, "•  " + debullet(x), 9.5)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(2)
     c = one_cell(doc); borders(c, white)
     para(c, "SECTIONS IN THIS UNIT", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["sectionList"]:
-        para(c, "☐  " + str(x), 9.5)
+        para(c, "☐  " + debullet(x), 9.5)
 
     for sec in spec["sectionsContent"]:
         doc.add_paragraph().paragraph_format.space_after = Pt(6)
@@ -252,6 +384,9 @@ def main():
             for q in row["cues"]:
                 para(cue, q, 9)
             para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
+            if row.get("diagram"):
+                diagram_block(notes, row["diagram"], accent, ink, hair)
+
             prob = row.get("problem")
             if prob:
                 para(notes, prob.get("label", "EXAMPLE"), 7.5, bold=True,
