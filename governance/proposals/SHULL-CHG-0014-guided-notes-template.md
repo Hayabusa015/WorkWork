@@ -10,7 +10,8 @@
 | **Supersedes** | Nothing — this fills a gap |
 | **Affected Skills** | `build-document` |
 | **Affected Courses** | All three |
-| **Decision** | **PROPOSED — awaiting his choice of Option A or B** |
+| **Decision** | **Approved 2026-09-09 — Option A, the `.docx`.** He also required the headers to follow the print ink rule; see finding 4. |
+| **Status** | **IMPLEMENTED** |
 
 Legacy packet snapshotted at `legacy/guided-notes/`, md5 recorded.
 
@@ -80,10 +81,53 @@ spec is the source and a second view of it costs nothing.
 | Writing lines | Paragraph borders | CSS rules |
 | Matches the lab template | Same tokens, different pipeline | **Same tokens AND same pipeline** |
 
-**My recommendation: A, the `.docx`.** Guided notes are the one document a teacher edits after the
-fact — dropping a line for one class, adding a diagram, adjusting for a modified copy. Option B is
-more precise on the page, but a PDF cannot be changed at 7:40 a.m. The lab template stays HTML→PDF
+**Chosen: A, the `.docx`.** Guided notes are the one document a teacher edits after the fact —
+dropping a line for one class, adding a diagram, adjusting for a modified copy. Option B is more
+precise on the page, but a PDF cannot be changed at 7:40 a.m. The lab template stays HTML→PDF
 because a lab handout is shipped as printed, not edited.
+
+Option B stays in the repo. The spec is the source and a second view of it costs nothing.
+
+---
+
+## Finding 4 — I added ink his packet never had, and it was measurable
+
+**He caught this: "make sure headers follow the low low printer ink rule."** He was right, and the
+standard already said so — `SHULL_DESIGN_SYSTEM.md` §8: *"no full-page colour banners, no shaded
+section backgrounds, no solid-fill headers."*
+
+The first build had solid asphalt bars across the brand header, all three section heads, and the
+close banner, plus parchment shading on every cue column and the callout box. **His original packet
+has no cell fill anywhere** — the extraction found zero `w:fill` values. He had been following the
+ink rule by hand, before this system existed.
+
+`standards/QA_GATE.md` §5 says the check is computable — *"rasterise and compute the percentage of
+marked pixels"* — and nothing computed it. `scripts/audit_print_ink.py` now does.
+
+| | marked | heavy | worst page |
+|---|---|---|---|
+| **His original packet** | 5.41% | 2.80% | 8.35% / 3.97% |
+| **My first build** | **17.10%** | **4.32%** | **26.74% / 9.21%** |
+| **After the fix** | **6.18%** | **2.22%** | 8.31% / 3.34% |
+
+**3.2× his ink**, on a document that gets photocopied for every student in the course.
+
+Fixed by replacing every fill with a rule: the brand bar, section heads and close banner are now a
+hairline above and a heavy accent rule below; the cue column is separated by its border alone, which
+is the Cornell convention anyway. Hierarchy is unchanged. Both renderers were fixed, not just the
+chosen one.
+
+The checker's limits are calibrated to **his packet**, not to a number I picked — my first threshold
+was arbitrary and failed his original too, which is how I knew it was wrong.
+
+## Finding 5 — the lab template fails the same check
+
+Not fixed, and not silently. `templates/lab/SHULL_Lab_TEMPLATE_MASTER.pdf` measures **7.14% marked,
+3.41% heavy on average, worst page 10.66% / 4.96%** — over the limit on both counts. Same defect
+class as finding 4, in a template shipped under SHULL-CHG-0010 and called done.
+
+It is a separate template with its own change record and a copy already in Drive, so rewriting it
+belongs in its own change rather than inside this one. **Open.**
 
 ## Verification
 

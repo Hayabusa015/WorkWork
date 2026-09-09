@@ -131,12 +131,16 @@ def main():
     s.left_margin = s.right_margin = Inches(0.5)
     s.top_margin = s.bottom_margin = Inches(0.44)
 
-    # brand bar
-    c = one_cell(doc); shade(c, ink); borders(c, ink)
+    # Brand bar. Outlined, not filled: SHULL_DESIGN_SYSTEM section 8 - "no full-page
+    # colour banners, no shaded section backgrounds, no solid-fill headers." The first
+    # build of this template ignored that and measured 3.2x the ink of Matthew's own
+    # packet, which had no cell fills anywhere. A heavy accent rule carries the same
+    # hierarchy for a rule's worth of toner.
+    c = one_cell(doc); borders(c, display, sz=18, edges=("bottom",))
     para(c, "SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS", 7.5,
-         bold=True, color=display, caps_track=True, first=True)
-    para(c, spec["unitTitle"].upper(), 15, bold=True, color=white)
-    para(c, spec["kicker"], 7.5, color=hair, caps_track=True)
+         bold=True, color=accent, caps_track=True, first=True)
+    para(c, spec["unitTitle"].upper(), 15, bold=True, color=ink)
+    para(c, spec["kicker"], 7.5, color=label, caps_track=True)
 
     c = one_cell(doc); borders(c, hair)
     para(c, spec["fields"], 9, color=label, first=True)
@@ -152,7 +156,7 @@ def main():
             para(cell, "•  " + str(x).lstrip("•·-– ").strip(), 9.5)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
-    c = one_cell(doc); shade(c, surface); borders(c, display, sz=4, edges=("left",))
+    c = one_cell(doc); borders(c, display, sz=18, edges=("left",))
     para(c, "HOW THESE NOTES WORK", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["howItWorks"]:
         para(c, "•  " + x, 9.5)
@@ -168,9 +172,12 @@ def main():
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
         a, b = t.rows[0].cells
-        for cell in (a, b): shade(cell, ink); borders(cell, ink)
-        para(a, sec["title"], 12.5, bold=True, color=white, first=True)
-        p = para(b, sec["code"], 8.5, bold=True, color=display, caps_track=True, first=True)
+        # Section head: ruled above and below, not filled.
+        for cell in (a, b):
+            borders(cell, ink, sz=12, edges=("top",))
+            borders(cell, display, sz=18, edges=("bottom",))
+        para(a, sec["title"], 12.5, bold=True, color=ink, first=True)
+        p = para(b, sec["code"], 8.5, bold=True, color=accent, caps_track=True, first=True)
         p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
         c = one_cell(doc); borders(c, hair)
@@ -183,7 +190,9 @@ def main():
         fix_widths(t, [1.88, 5.62])
         for ri, row in enumerate(sec["rows"]):
             cue, notes = t.rows[ri].cells
-            shade(cue, surface); borders(cue, hair); borders(notes, hair)
+            # No fill on the cue column. Matthew's packet separated the columns with a
+            # rule alone, which is the Cornell convention and costs nothing to print.
+            borders(cue, hair); borders(notes, hair)
             para(cue, row["cueLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
             for q in row["cues"]:
                 para(cue, q, 9)
@@ -212,8 +221,9 @@ def main():
             para(c, "☐  " + x, 9)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
-    c = one_cell(doc); shade(c, G["graphite"]["hex"]); borders(c, G["graphite"]["hex"])
-    para(c, spec["close"]["banner"], 9, bold=True, color=white, caps_track=True, first=True)
+    c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
+    borders(c, display, sz=18, edges=("bottom",))
+    para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
     c = one_cell(doc); borders(c, hair)
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["close"]["checklist"]:

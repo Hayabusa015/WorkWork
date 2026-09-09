@@ -32,6 +32,21 @@ neither gets to drift from the other.
 - **"Still fuzzy on"** closes the packet. It is the only place a student is asked what they did not
   get, and it is worth keeping.
 
+## Print ink — this one is measured
+
+```bash
+python3 scripts/audit_print_ink.py out.pdf
+```
+
+`SHULL_DESIGN_SYSTEM.md` §8: no full-page banners, no shaded section backgrounds, **no solid-fill
+headers.** Every header here is a hairline above and an accent rule below. The cue column is
+separated by its border, not a tint.
+
+The limits are calibrated to Matthew's own packet, which was already ink-disciplined before this
+system existed: 5.41% marked, 2.80% heavy. The first build of this template measured **17.10% /
+4.32%** — 3.2× his ink — on a document that gets photocopied for every student in the course.
+**If a header ever goes back to a solid fill, this check is what catches it.**
+
 ## QA
 
 ```bash

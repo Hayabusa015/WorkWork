@@ -20,13 +20,15 @@
   .foot-code  { string-set: codefoot content();  position: absolute; visibility: hidden; }
 
   /* ---------- unit head ---------- */
-  .brandbar { background: var(--ink); color: var(--ground); padding: 7pt 10pt 8pt; }
-  .brandbar .org  { font-size: 7.5pt; letter-spacing: 0.22em; color: var(--accent-display); }
+  /* Outlined, never filled — SHULL_DESIGN_SYSTEM section 8. A solid banner here cost
+     3.2x the ink of Matthew's own packet, measured. */
+  .brandbar { border-bottom: 2.5pt solid var(--accent-display); padding: 2pt 0 6pt; }
+  .brandbar .org  { font-size: 7.5pt; letter-spacing: 0.22em; color: var(--accent); font-weight: 700; }
   .brandbar .unit { font-size: 15pt; font-weight: 700; margin-top: 3pt; letter-spacing: -0.005em; }
-  .brandbar .kick { font-size: 7.5pt; letter-spacing: 0.18em; margin-top: 3pt; opacity: 0.72; }
+  .brandbar .kick { font-size: 7.5pt; letter-spacing: 0.18em; margin-top: 3pt; color: var(--label); }
 
-  .fields { border: 0.75pt solid var(--rule-hairline); border-top: none;
-            padding: 6pt 10pt; font-size: 9pt; letter-spacing: 0.05em; color: var(--label); }
+  .fields { border-bottom: 0.75pt solid var(--rule-hairline);
+            padding: 6pt 0; font-size: 9pt; letter-spacing: 0.05em; color: var(--label); }
 
   .two { display: flex; gap: 0; margin-top: 8pt; }
   .two > div { width: 50%; border: 0.75pt solid var(--rule-hairline); padding: 7pt 10pt 8pt; }
@@ -38,7 +40,7 @@
   ul.tight li { margin-bottom: 2.5pt; }
 
   .howbox { margin-top: 8pt; border-left: 2.5pt solid var(--accent-display);
-            background: var(--surface); padding: 7pt 10pt 8pt; }
+            padding: 7pt 10pt 8pt; }
 
   .checklist { margin-top: 8pt; font-size: 9.5pt; }
   .checklist div { margin-bottom: 3pt; }
@@ -47,20 +49,21 @@
 
   /* ---------- one section ---------- */
   .section { margin-top: 13pt; break-inside: auto; }
-  .sechead { display: flex; background: var(--ink); color: var(--ground); }
-  .sechead .t { flex: 1; padding: 6pt 10pt; font-size: 12.5pt; font-weight: 700; }
-  .sechead .c { width: 1.5in; padding: 6pt 10pt; font-size: 8.5pt; font-weight: 700;
+  .sechead { display: flex; border-top: 1.5pt solid var(--ink);
+             border-bottom: 2.5pt solid var(--accent-display); }
+  .sechead .t { flex: 1; padding: 5pt 0 5pt; font-size: 12.5pt; font-weight: 700; }
+  .sechead .c { width: 1.5in; padding: 5pt 0; font-size: 8.5pt; font-weight: 700;
                 letter-spacing: 0.12em; text-align: right; align-self: center;
-                color: var(--accent-display); }
-  .target { border: 0.75pt solid var(--rule-hairline); border-top: none;
-            padding: 5pt 10pt 6pt; font-size: 9.5pt; }
+                color: var(--accent); }
+  .target { border-bottom: 0.75pt solid var(--rule-hairline);
+            padding: 5pt 0 6pt; font-size: 9.5pt; }
   .target b { color: var(--accent); letter-spacing: 0.14em; font-size: 7.5pt; }
 
   /* The Cornell split. 1.88in cue / 5.62in notes, preserved from the original. */
   table.cornell { width: 100%; border-collapse: collapse; margin-top: 7pt; }
   table.cornell td { vertical-align: top; border: 0.75pt solid var(--rule-hairline);
                      padding: 6pt 9pt 9pt; }
-  td.cue   { width: 1.88in; background: var(--surface); }
+  td.cue   { width: 1.88in; }   /* rule-separated, not filled — the Cornell convention */
   td.notes { width: 5.62in; }
   .cue .lbl, .notes .lbl { margin-bottom: 3pt; }
   .cue p   { margin: 0 0 4pt; font-size: 9pt; }
@@ -79,9 +82,9 @@
 
   /* ---------- unit close ---------- */
   .close { margin-top: 14pt; break-inside: avoid; }
-  .closebar { background: var(--structure); color: var(--ground); padding: 6pt 10pt;
-              font-size: 9pt; font-weight: 700; letter-spacing: 0.18em; }
-  .closebody { border: 0.75pt solid var(--rule-hairline); border-top: none; padding: 8pt 10pt 9pt; }
+  .closebar { border-top: 1.5pt solid var(--ink); border-bottom: 2.5pt solid var(--accent-display);
+              padding: 5pt 0; font-size: 9pt; font-weight: 700; letter-spacing: 0.18em; }
+  .closebody { padding: 8pt 0 9pt; }
   .fuzzy { margin-top: 8pt; border: 0.75pt dashed var(--structure); padding: 6pt 10pt 22pt; }
 </style>
 

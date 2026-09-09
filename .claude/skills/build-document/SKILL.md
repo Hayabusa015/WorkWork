@@ -5,6 +5,28 @@ description: Build SHULL print documents - practice sets, guided and Cornell not
 
 # build-document
 
+## The production path
+
+```bash
+python3 templates/notes/build_notes_docx.py templates/notes/specs/<spec>.json out.docx
+```
+
+**`.docx`, chosen by the user 2026-09-09** (SHULL-CHG-0014) — guided notes are the one document he
+edits after the fact, and a PDF cannot be changed at 7:40 a.m. `build_notes.py` renders the same
+spec to PDF if a fixed-layout copy is ever wanted.
+
+Structure, and why: `templates/notes/README.md`. The content lives in a JSON spec; the builder
+checks the section code against that course's `DECISIONS.md` before building anything.
+
+**Every packet is measured before it ships:**
+
+```bash
+python3 scripts/audit_print_ink.py out.pdf     # convert the .docx first
+```
+
+No solid-fill headers, no shaded section backgrounds. This is measured, not judged — the first
+build of the template ran 3.2× the ink of the packet the user had written by hand.
+
 Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `standards/NAMING.md`.
 
 ## Every document
