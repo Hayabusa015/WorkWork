@@ -22,7 +22,13 @@ checks the section code against that course's `DECISIONS.md` before building any
 
 ```bash
 python3 scripts/audit_print_ink.py out.pdf     # convert the .docx first
+python3 scripts/audit_fonts.py out.pdf         # Archivo only, or it names the character
 ```
+
+`audit_fonts.py` is the enforcement of the rule this repo states in four places and, until
+SHULL-CHG-0019, checked in none: DejaVu or Liberation in `pdffonts` means the substitution did not
+take and the classroom copy has different metrics from the one that was checked. It names the
+character, because one U+2610 checkbox pulls in a whole second font.
 
 No solid-fill headers, no shaded section backgrounds. This is measured, not judged — the first
 build of the template ran 3.2× the ink of the packet the user had written by hand.
@@ -42,19 +48,43 @@ Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `st
 
 **Ruled lines are for prose. Open boxes are for math.** This holds everywhere.
 
-## Practice sets — locked v2 shape
+## Worksheets and practice sets
 
-Exactly **8 questions**: 2 warm-up / 3 practice / 2 challenge / 1 multi-topic.
-**Strictly two pages**, enforced by a page-count check.
+```bash
+python3 templates/worksheet/build_worksheet_docx.py specs/<spec>.json out.docx
+python3 scripts/audit_worksheet.py out.docx specs/<spec>.json
+python3 scripts/audit_fonts.py out.pdf
+```
 
-Tag pills in four tiers, separated by **border colour as well as fill** so they survive a
-photocopier. Work boxes carry a border-tab label sitting *on* the border, not floating grey text
-inside. Bracketed self-check answers for **numeric results only** — never for explanation,
-vocabulary, or graph-reading. Multi-part items keep full body size on every part.
+Structure and the three course profiles: `templates/worksheet/README.md`. The profiles are
+enforced at build time, not described — a Physics spec carrying a work box is refused.
+
+**The ramp.** Difficulty never goes backwards, and the multi-topic problem is last. Physics holds
+his shipped shape exactly: **2 warm-up / 2 practice / 1 challenge / 1 multi-topic**, six per
+section. Chemistry has the order enforced and picks its own counts.
+
+> The earlier figure here — exactly 8 questions, 2/3/2/1, strictly two pages — was **INHERITED**
+> from the legacy studio skill and never confirmed. His own `SHULL_PHYS_Practice_Sets_U01.docx`
+> runs 2/2/1/1 across all four sections. The artifact won. SHULL-CHG-0019.
+
+**Tier tags are outlined, never filled**, and the tiers stay apart in greyscale by border
+**weight**. His existing Physics sheet fills them — light blue warm-up, solid navy multi-topic —
+and sets each question number in a solid navy square. Both are section 8 violations and the square
+is the withdrawn number-box (SHULL-CHG-0015).
+
+Work boxes carry a faint **SHOW WORK HERE** watermark, at `print.watermarkOpacityPct`. Bracketed
+self-check answers for **numeric results only** — never for explanation, vocabulary, or
+graph-reading. Multi-part items keep full body size on every part.
+
+**The page budget is declared in the spec** (`pagesPerSection`) and measured against. It is not one
+number for everybody: a Physics section is one page, a Chemistry section with eight work boxes is
+four, a cut-and-glue activity is two by construction. The failure is a section that *grows* a page,
+not a section that was always three.
 
 > **Physics carries no work areas at all** — no ruled lines, no work boxes. A prior-knowledge and
-> equations reminder block goes at the top instead. Students work in their lab notebooks.
-> **Flag this whenever a request tries to reuse the Chemistry template unmodified for Physics.**
+> equations reminder block goes at the top instead. Students work in their Hayden-McNeil carbonless
+> lab notebooks. **Flag this whenever a request tries to reuse the Chemistry template unmodified
+> for Physics.** Removing the work boxes took his own U01 packet from eight pages to four.
 
 ## Guided and Cornell notes
 

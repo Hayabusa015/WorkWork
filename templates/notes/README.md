@@ -73,7 +73,7 @@ check: reinstating the old solid header produces a **7.50 in band** and fails.
 ## QA
 
 ```bash
-pdffonts out.pdf     # Archivo only for Option B; Option A also substitutes for U+2610 ☐
+python3 ../../scripts/audit_fonts.py out.pdf    # Archivo only, both options
 ```
 
 Then look at every page. Neither builder checks page breaks, and a summary box orphaned at the top

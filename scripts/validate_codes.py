@@ -24,16 +24,24 @@ SPEC_KEYS = ("course", "unit", "section")
 
 
 def spec_codes(rel, text):
-    """(course, unit, section, why) for a deck spec. Empty for anything else."""
+    """(course, unit, section) for every section a spec declares. Empty if it is not
+    a spec."""
     if not rel.endswith(".json"):
         return []
     try:
         spec = json.loads(text)
     except ValueError:
         return []
-    if not isinstance(spec, dict) or not all(k in spec for k in SPEC_KEYS):
+    if not isinstance(spec, dict) or "course" not in spec or "unit" not in spec:
         return []
-    return [(str(spec["course"]).lower(), spec["unit"], str(spec["section"]))]
+    if all(k in spec for k in SPEC_KEYS):                    # a deck spec: one section
+        return [(str(spec["course"]).lower(), spec["unit"], str(spec["section"]))]
+    if isinstance(spec.get("sections"), list):               # notes and worksheet specs
+        # These carry a list. The builders check them too, but only when something is
+        # built - a spec sitting in the repo with a bad code should not wait that long.
+        return [(str(spec["course"]).lower(), spec["unit"], str(x))
+                for x in spec["sections"]]
+    return []
 
 def main():
     valid = {c: section_codes(c) for c in ("chemistry", "physics", "geology")}
@@ -50,16 +58,16 @@ def main():
         for course, unit, sect in spec_codes(rel, text):
             where = rel.replace(os.sep, "/")
             if course not in valid:
-                errors.append(f"{where} — deck spec names course {course!r}, "
+                errors.append(f"{where} — spec names course {course!r}, "
                               f"which is not one of {', '.join(sorted(valid))}")
                 continue
             if sect not in valid[course]:
-                errors.append(f"{where} — deck spec section {sect} is not in "
+                errors.append(f"{where} — spec section {sect} is not in "
                               f"courses/{course}/DECISIONS.md")
                 continue
             declared_unit = int(str(sect).split(".")[0])
             if int(unit) != declared_unit:
-                errors.append(f"{where} — deck spec unit U{int(unit):02d} disagrees with "
+                errors.append(f"{where} — spec unit U{int(unit):02d} disagrees with "
                               f"section {sect}")
 
         for m in FILENAME.finditer(text):

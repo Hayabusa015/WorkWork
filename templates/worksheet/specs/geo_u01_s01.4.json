@@ -1,0 +1,98 @@
+{
+  "course": "geology",
+  "unit": 1,
+  "sections": [
+    "1.4"
+  ],
+  "docType": "Activity",
+  "timeTargetMin": "40",
+  "sectionsContent": [
+    {
+      "code": "1.4",
+      "title": "Nebular Theory: Build the Timeline",
+      "conceptLabel": "THE CONCEPT — READ THIS FIRST",
+      "concept": {
+        "summary": "Nebular theory is the explanation for where our solar system came from. It starts with a cold cloud of gas and dust drifting in space and ends with a star and eight planets. Every step in between is gravity doing one thing: pulling matter toward the densest point, and speeding it up as it goes.",
+        "keyIdeas": [
+          "Gravity pulls inward. Everything else in the story is a consequence of that.",
+          "A spinning cloud flattens into a disk for the same reason pizza dough does."
+        ]
+      },
+      "priorKnowledge": {
+        "label": "BEFORE YOU START — YOU ALREADY KNOW THIS",
+        "items": [
+          "Gravity pulls, and pulls harder when things are closer together or more massive (S1.2).",
+          "A nebula is a cloud of gas and dust in space (S1.2)."
+        ]
+      },
+      "blocks": [
+        {
+          "kind": "cards",
+          "across": 2,
+          "cardHeightIn": 1.42,
+          "drawHeightIn": 0.7,
+          "instruction": "These 6 cards are scrambled — they are NOT in the correct order. Read each one, cut it out, and colour or sketch a small illustration for it. Set the six cards aside; you will glue them onto the timeline on the next page once your group agrees on the order.",
+          "cutLabel": "CUT ALONG THE DASHED LINE",
+          "drawLabel": "COLOUR OR SKETCH THIS STAGE:",
+          "points": 6,
+          "cards": [
+            {
+              "title": "Accretion",
+              "text": "Clumps of matter farther out in the disk sweep up nearby gas and dust as they orbit, growing larger and larger."
+            },
+            {
+              "title": "A Nebula Drifts",
+              "text": "A giant cloud of gas and dust — a nebula — exists quietly in space. Nothing is condensing yet."
+            },
+            {
+              "title": "Fusion Ignites",
+              "text": "The centre finally reaches about 10 million °C. Nuclear fusion begins — a star is born at the centre of the system."
+            },
+            {
+              "title": "A Protostar Forms",
+              "text": "The densest region of the nebula begins to condense under its own gravity. As it condenses, it heats up."
+            },
+            {
+              "title": "Solar Wind Clears the System",
+              "text": "Fusion's outward pressure blows the leftover gas and dust out of the system, leaving a star and its planets behind."
+            },
+            {
+              "title": "Spinning and Flattening",
+              "text": "Gravity pulls material toward the centre. As the cloud collapses inward, it spins faster and flattens into a disk."
+            }
+          ]
+        },
+        {
+          "kind": "slots",
+          "across": 2,
+          "slots": 6,
+          "slotHeightIn": 1.9,
+          "innerHeightIn": 1.0,
+          "pageBreakBefore": true,
+          "heading": "Your Nebular Theory Timeline",
+          "instruction": "Glue the whole card — title, description and your drawing — into its matching numbered slot below, in the order the solar system actually forms. Slot 1 happens first. Each slot is sized to match the cards exactly.",
+          "slotLabel": "GLUE HERE — SLOT",
+          "points": 6
+        },
+        {
+          "kind": "reflection",
+          "linesEach": 2,
+          "points": 4,
+          "prompts": [
+            "What has to happen before fusion can ignite? Why can't it happen at stage 1?",
+            "What would be different about a solar system that formed from a smaller, less massive nebula?"
+          ]
+        }
+      ],
+      "close": {
+        "banner": "BEFORE YOU TURN THIS IN",
+        "checklist": [
+          "All six cards are glued down, in order, with nothing loose.",
+          "Every card has a drawing on it, not just the words.",
+          "Both reflection questions are answered in full sentences."
+        ]
+      }
+    }
+  ],
+  "pagesPerSection": 2
+}

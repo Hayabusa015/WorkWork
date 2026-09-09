@@ -1,0 +1,157 @@
+{
+  "course": "chemistry",
+  "unit": 7,
+  "sections": [
+    "7.4"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "30",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "equations": [
+    {
+      "note": "moles from mass",
+      "lhs": "n",
+      "num": "mass (g)",
+      "den": "molar mass (g/mol)"
+    },
+    {
+      "note": "particles from moles",
+      "plain": "N  =  n × 6.022 × 10²³"
+    },
+    {
+      "note": "moles from particles",
+      "lhs": "n",
+      "num": "N",
+      "den": "6.022 × 10²³"
+    },
+    {
+      "note": "gas at STP",
+      "lhs": "n",
+      "num": "volume (L)",
+      "den": "22.4 L/mol"
+    }
+  ],
+  "sectionsContent": [
+    {
+      "code": "7.4",
+      "title": "Mole Conversions",
+      "concept": {
+        "summary": "A mole is a counting number, the way a dozen is: one mole is 6.022 × 10²³ of whatever you are counting. Molar mass is the bridge between a number you can count and a mass you can weigh — how many grams one mole weighs, read off the periodic table in g/mol.",
+        "keyIdeas": [
+          "Grams and particles never convert directly. Every conversion goes through moles.",
+          "Molar mass of a compound is the sum over every atom in the formula — subscripts multiply.",
+          "Carry units through every step. If the units do not cancel to what you want, the setup is wrong, not the arithmetic."
+        ]
+      },
+      "priorKnowledge": {
+        "label": "BEFORE YOU START — YOU ALREADY KNOW THIS",
+        "items": [
+          "Reading a formula: a subscript counts the atom just before it, and a subscript outside parentheses multiplies everything inside (U6).",
+          "Finding atomic mass on the periodic table — the decimal number, not the atomic number (U1 S1.5).",
+          "Scientific notation and significant figures (U7 S7.1)."
+        ]
+      },
+      "directions": "Show every step in the box provided. Carry units the whole way through. Round only at the end, to the correct number of significant figures.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Write the molar mass of each, to two decimal places. Show the sum, not just the answer.",
+          "parts": [
+            "a.  H₂O",
+            "b.  NaCl",
+            "c.  CO₂"
+          ],
+          "math": true,
+          "workHeightIn": 1.5
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Ca(NO₃)₂ — how many atoms of each element are in one formula unit? Then find its molar mass.",
+          "math": true,
+          "workHeightIn": 1.5,
+          "selfCheck": "[ 164.10 g/mol ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "How many moles are in 45.0 g of NaCl?",
+          "given": "45.0 g NaCl",
+          "need": "moles",
+          "math": true,
+          "workHeightIn": 1.4,
+          "selfCheck": "[ 0.770 mol ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "What is the mass of 2.50 mol of CO₂?",
+          "given": "2.50 mol CO₂",
+          "need": "mass in grams",
+          "math": true,
+          "workHeightIn": 1.4,
+          "selfCheck": "[ 110. g ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Complete the conversion map. Write what belongs in the middle box, then label each arrow with the factor that makes that conversion.",
+          "diagram": {
+            "label": "COMPLETE THE MAP",
+            "heightIn": 2.2,
+            "labelSlots": 4,
+            "caption": "Grams and particles never touch. Every path runs through the middle.",
+            "figureNote": "[ GRAMS ]   ←→   [        ?        ]   ←→   [ PARTICLES ]"
+          }
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "How many molecules are in 18.0 g of H₂O?",
+          "parts": [
+            "This is two conversions, not one. Do them in order and do not skip the middle."
+          ],
+          "given": "18.0 g H₂O",
+          "need": "number of molecules",
+          "math": true,
+          "workHeightIn": 1.8,
+          "selfCheck": "[ 6.02 × 10²³ molecules ]"
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A sample of oxygen gas occupies 11.2 L at STP. Find the mass of the sample.",
+          "given": "11.2 L O₂ at STP",
+          "need": "mass in grams",
+          "math": true,
+          "workHeightIn": 1.8,
+          "selfCheck": "[ 16.0 g ]"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 6,
+          "prompt": "A student weighs out 25.0 g of Ca(NO₃)₂ for a lab.",
+          "parts": [
+            "a.  How many moles did they weigh out?",
+            "b.  How many nitrate ions are in the sample?",
+            "c.  The lab calls for 0.200 mol. Too much or too little, and by how many grams?",
+            "d.  Their partner says “just weigh 25 g, close enough.” Using your answer to c, say whether you agree and why."
+          ],
+          "math": true,
+          "workHeightIn": 3.0
+        }
+      ],
+      "close": {
+        "banner": "CHECK YOUR WORK BEFORE YOU TURN THIS IN",
+        "checklist": [
+          "Every answer carries a unit.",
+          "Every conversion went through moles.",
+          "Significant figures match the least precise measurement given.",
+          "Question 8d is written in a sentence, not a number."
+        ]
+      }
+    }
+  ],
+  "pagesPerSection": 4
+}

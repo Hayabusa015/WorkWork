@@ -1,0 +1,355 @@
+{
+  "course": "physics",
+  "unit": 1,
+  "sections": [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.4"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "20–30",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "sectionsContent": [
+    {
+      "code": "1.1",
+      "title": "Distance, Displacement & Velocity",
+      "concept": {
+        "summary": "Distance is how far you travelled; displacement is how far you ended up from where you started. Distance is a scalar and never negative. Displacement is a vector — it carries a sign, and the sign is meaningless until you say which way is positive.",
+        "keyIdeas": [
+          "Speed pairs with distance. Velocity pairs with displacement. They are not interchangeable words.",
+          "A round trip has real distance and zero displacement, so it has real average speed and zero average velocity.",
+          "State your positive direction before you write a single number."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Scientific notation and significant figures (U0 S0.2).",
+          "Rearranging an equation for the variable you want (U0 S0.3).",
+          "Reading a value off a number line, including negative positions."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Number each one, show the givens, and carry units the whole way through. Bring the sheet and your notebook to class.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A hiker walks 5 m east, then 3 m farther east. Find the total distance travelled and the displacement."
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A car travels 120 km in 2.0 hours. Find its average speed in km/h."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A jogger runs from x = 10 m to x = 70 m in 20 s. Find the displacement and the average velocity."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A student walks 8 m north, then 8 m south back to the starting point, taking 10 s in total. Find the total distance, the displacement, and the average velocity.",
+          "parts": [
+            "Before you calculate: which of those three will be zero, and why?"
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A cyclist starts at x₀ = −15 m, rides forward to x = 50 m, then backtracks to a final position of 40 m, all in 25 s. Find the total distance travelled and the average velocity."
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "An average velocity comes out to 3.4 m/s. Convert it to km/h and express your answer with the correct number of significant figures (U0 S0.2).",
+          "parts": [
+            "Then say in one sentence why 3.4 m/s and 12.24 km/h are not equally honest answers."
+          ]
+        }
+      ],
+      "close": {
+        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
+        "checklist": [
+          "Every problem is numbered in the notebook.",
+          "Every answer carries a unit.",
+          "You stated your positive direction before problem 4."
+        ]
+      },
+      "equations": [
+        {
+          "note": "average speed",
+          "lhs": "speed",
+          "num": "distance",
+          "den": "total time"
+        },
+        {
+          "note": "average velocity",
+          "lhs": "v",
+          "num": "Δx",
+          "den": "Δt"
+        }
+      ]
+    },
+    {
+      "code": "1.2",
+      "title": "Acceleration & the Kinematic Equations",
+      "concept": {
+        "summary": "Acceleration is the rate a velocity changes, in m/s per second. It is a vector, so it carries a sign — and a negative acceleration does not mean “slowing down”, it means pointing in the negative direction. The four kinematic equations each leave out exactly one quantity; choosing the right one means asking which quantity you neither have nor want.",
+        "keyIdeas": [
+          "An object slows down when a and v point opposite ways, whatever their signs.",
+          "Pick the equation by what is missing, not by what looks familiar.",
+          "Write your givens with signs before you choose an equation."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Displacement carries a sign; distance does not (S1.1).",
+          "Average velocity as Δx over Δt (S1.1)."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Write the givens with signs, then name the equation you chose before you use it.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A car's velocity increases from 5 m/s to 20 m/s in 5 s. Find its acceleration."
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "You are given v₀, a and t, and asked for v. Name the kinematic equation you would use, and say which quantity it leaves out."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "An object starts from rest and accelerates at 4 m/s² for 8 s. Find its displacement and its final velocity."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A car decelerates from 30 m/s to 10 m/s over a distance of 100 m. Find its acceleration.",
+          "parts": [
+            "Which quantity is missing here? Let that pick your equation."
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A train accelerates from rest at 1.5 m/s² for 10 s, then travels at constant velocity for 20 s. Find the total distance covered.",
+          "parts": [
+            "This is two phases. Solve them separately, then add."
+          ]
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "For the train above, confirm your first-phase displacement using v = Δx/Δt from Section 1.1 instead of the kinematic equation.",
+          "parts": [
+            "The two methods must agree. If they do not, one of them used the wrong velocity — say which and why."
+          ]
+        }
+      ],
+      "close": {
+        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
+        "checklist": [
+          "You named the equation before using it on every problem.",
+          "Every given carries a sign."
+        ]
+      },
+      "equations": [
+        {
+          "note": "acceleration",
+          "lhs": "a",
+          "num": "Δv",
+          "den": "Δt"
+        },
+        {
+          "note": "constant a — no Δx",
+          "plain": "v = v₀ + at"
+        },
+        {
+          "note": "constant a — no v",
+          "plain": "Δx = v₀t + ½at²"
+        },
+        {
+          "note": "constant a — no t",
+          "plain": "v² = v₀² + 2aΔx"
+        }
+      ]
+    },
+    {
+      "code": "1.3",
+      "title": "Position, Velocity & Acceleration Graphs",
+      "concept": {
+        "summary": "A motion graph answers questions two ways: the slope and the area. On a position-time graph the slope is velocity. On a velocity-time graph the slope is acceleration and the area underneath is displacement. Reading a graph is not a different skill from the kinematic equations — it is the same physics, drawn.",
+        "keyIdeas": [
+          "Slope of x-t is velocity. Slope of v-t is acceleration. Area under v-t is displacement.",
+          "Area below the time axis is negative displacement. It subtracts.",
+          "A curved x-t graph means the velocity is changing — that is what acceleration looks like."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Slope as rise over run, with units (U0 S0.4).",
+          "Area of a rectangle and of a triangle."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Sketch each graph before you calculate — the sketch is part of the answer.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A position-time graph passes through (0 s, 2 m) and (4 s, 18 m) as a straight line. Find the velocity."
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A velocity-time graph is a horizontal line at 6 m/s from t = 0 s to t = 5 s. Find the displacement."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A v-t graph is a straight line from (0 s, 0 m/s) to (8 s, 24 m/s). Find the acceleration and the displacement over the 8 s."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A v-t graph shows a constant 10 m/s for 3 s, then a straight-line decrease to 0 m/s over the next 2 s. Find the total displacement.",
+          "parts": [
+            "Two shapes, not one. Name them before you find the area."
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A v-t graph rises from 0 to 15 m/s over 3 s, holds constant for 4 s, then falls to 0 over 3 s. Find the displacement in each phase and the total."
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "For the rising phase above, find the acceleration from the graph's slope, then verify your displacement with Δx = v₀t + ½at² (S1.2).",
+          "parts": [
+            "Say in one sentence why the area method and the equation method have to agree."
+          ]
+        }
+      ],
+      "close": {
+        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
+        "checklist": [
+          "Every graph is sketched in the notebook before its calculation.",
+          "Every slope answer carries units."
+        ]
+      },
+      "equations": [
+        {
+          "note": "slope of x-t is velocity",
+          "lhs": "v",
+          "num": "Δx",
+          "den": "Δt"
+        },
+        {
+          "note": "slope of v-t is acceleration",
+          "lhs": "a",
+          "num": "Δv",
+          "den": "Δt"
+        },
+        {
+          "note": "area under v-t is displacement",
+          "plain": "Δx = area"
+        },
+        {
+          "note": "check it against",
+          "plain": "Δx = v₀t + ½at²"
+        }
+      ]
+    },
+    {
+      "code": "1.4",
+      "title": "Free Fall",
+      "concept": {
+        "summary": "Free fall is the kinematic equations with one number filled in: a = g = 9.81 m/s², always pointing down, whether the object is rising, falling, or momentarily at rest at the top. Nothing about free fall is new physics. The only thing that changes is that you no longer get to choose a — you only get to choose which direction you are calling positive.",
+        "keyIdeas": [
+          "At the top of the flight v = 0, but a is still 9.81 m/s² downward.",
+          "If up is positive, a = −9.81 m/s². If down is positive, a = +9.81 m/s². Pick one and hold it for the whole problem.",
+          "Air resistance is ignored here. That is an assumption, not a fact about the world."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "All four kinematic equations, and choosing by what is missing (S1.2).",
+          "Reading a v-t graph's slope and area (S1.3)."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Write your sign convention at the top of each problem before anything else.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A ball is dropped from rest. Find its velocity after 2.0 s. Take up as positive."
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "State the value and the sign of a for an object in free fall if down is chosen as the positive direction."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A ball is dropped from rest and falls for 3.0 s. Find the distance it falls."
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A stone is thrown straight up at 12 m/s. Find the time it takes to reach maximum height.",
+          "parts": [
+            "What is v at maximum height? That is your missing quantity."
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A ball is thrown straight up at 20 m/s from a rooftop 15 m above the ground. Find the maximum height above the roof and the total time to reach the ground.",
+          "parts": [
+            "The quadratic gives two times. Say which one is physical and why the other is not."
+          ]
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "Describe in words the shape of the velocity-time graph for the ball above, from launch to landing, and identify where its slope equals g (S1.3).",
+          "parts": [
+            "Then say what the area under that graph represents between launch and the top of the flight."
+          ]
+        }
+      ],
+      "close": {
+        "banner": "NUMERIC ANSWERS SELF-CHECK ON THE TEACHER COPY — BRING QUESTIONS TO CLASS",
+        "checklist": [
+          "Your sign convention is written at the top of every problem.",
+          "You rejected the non-physical root in problem 5 and said why.",
+          "Problem 6 is written in sentences."
+        ]
+      },
+      "equations": [
+        {
+          "note": "free fall",
+          "plain": "g = 9.81 m/s²  (down)"
+        },
+        {
+          "note": "constant a — no Δx",
+          "plain": "v = v₀ + at"
+        },
+        {
+          "note": "constant a — no v",
+          "plain": "Δx = v₀t + ½at²"
+        },
+        {
+          "note": "constant a — no t",
+          "plain": "v² = v₀² + 2aΔx"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 1
+}
