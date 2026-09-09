@@ -59,14 +59,20 @@
             padding: 5pt 0 6pt; font-size: 9.5pt; }
   .target b { color: var(--accent); letter-spacing: 0.14em; font-size: 7.5pt; }
 
-  /* The Cornell split. 1.88in cue / 5.62in notes, preserved from the original. */
+  /* The Cornell split. 1.28in cue / 6.22in notes. His own packets ran 1.88in
+     (Geology) and 2.00in (Physics); he asked for the cue narrower and condensed,
+     because it is a prompt, not a second body column. Must match CUE_W_IN /
+     NOTES_W_IN in build_notes_docx.py - the two renderers print the same page. */
   table.cornell { width: 100%; border-collapse: collapse; margin-top: 7pt; }
   table.cornell td { vertical-align: top; border: 0.75pt solid var(--rule-hairline);
                      padding: 6pt 9pt 9pt; }
-  td.cue   { width: 1.88in; }   /* rule-separated, not filled — the Cornell convention */
-  td.notes { width: 5.62in; }
+  td.cue   { width: 1.28in; }   /* rule-separated, not filled — the Cornell convention */
+  td.notes { width: 6.22in; }
   .cue .lbl, .notes .lbl { margin-bottom: 3pt; }
-  .cue p   { margin: 0 0 4pt; font-size: 9pt; }
+  /* Condensed. The tracking that suits a full-width label makes a cue label wrap in
+     a 1.28in column, so the cue keeps caps and colour and gives the tracking back. */
+  .cue .lbl { letter-spacing: 0; font-size: 7pt; }
+  .cue p   { margin: 0 0 4pt; font-size: 8.5pt; }
   .notes p { margin: 0 0 3pt; font-size: 9.5pt; }
   /* Must-write: an accent rule, where the original used a sage green line. */
   .notes p.mw { border-left: 2.5pt solid var(--accent-display); padding-left: 7pt;

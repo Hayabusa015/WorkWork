@@ -30,6 +30,7 @@ supersedes it, exactly as the decision logs work.
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0017 | 2026-09-09 | Course profiles: stacked fractions, equation bar, Geology has no math | CONFIRMED | `governance/proposals/SHULL-CHG-0017-course-profiles.md` |
+| SHULL-CHG-0018 | 2026-09-09 | Cue column narrows to 1.28in and condenses; no box around the equation bar | CONFIRMED | `governance/proposals/SHULL-CHG-0018-cue-column.md` |
 | SHULL-CHG-0016 | 2026-09-09 | A problem to solve gets a bordered work box, enforced at build | CONFIRMED | `governance/proposals/SHULL-CHG-0016-work-boxes.md` |
 | SHULL-CHG-0015 | 2026-09-09 | A numbered list is just the number — no box, any format | CONFIRMED | `governance/proposals/SHULL-CHG-0015-no-number-boxes.md` |
 | SHULL-CHG-0014 | 2026-09-09 | Guided notes template, .docx, from Matthew's own packet | CONFIRMED | `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` |

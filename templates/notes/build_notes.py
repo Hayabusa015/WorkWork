@@ -2,7 +2,7 @@
 """Build a guided/Cornell notes packet as PDF from a JSON spec. Option B.
 
 Structure preserved from the GEO U1 packet Matthew already uses and likes -
-the Cornell 1.88in/5.62in split, the section rhythm, the closed-notes summary
+the Cornell 1.28in/6.22in split, the section rhythm, the closed-notes summary
 box, the self-check, the "still fuzzy on" box. Colour and type come from
 brand/tokens.json via the generated CSS, so a packet cannot carry a hex.
 
@@ -91,6 +91,32 @@ def main():
         print(f"build_notes: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md. Nothing is built against a code that is not "
               f"in the decisions file.", file=sys.stderr)
+        return 1
+
+    # Option B renders the Cornell structure and nothing else. It has no work box
+    # (SHULL-CHG-0016), no stacked fractions or equation bar and no diagram block
+    # (SHULL-CHG-0017), and it used to drop them silently - a worked-example row came
+    # out as an empty cell and the packet still said it built. A renderer that cannot
+    # print what the spec asks for says so instead of printing a lie.
+    unsupported = set()
+    if spec.get("equations"):
+        unsupported.add("equations (the equation bar and stacked fractions)")
+    def scan(node):
+        if isinstance(node, dict):
+            if "problem" in node:
+                unsupported.add("problem (the work box students solve in)")
+            if "diagram" in node:
+                unsupported.add("diagram (the figure students label)")
+            for v in node.values():
+                scan(v)
+        elif isinstance(node, list):
+            for v in node:
+                scan(v)
+    scan(spec)
+    if unsupported:
+        print("build_notes: this spec uses " + "; ".join(sorted(unsupported)) +
+              ". Option B (HTML/PDF) does not render those. Build it with "
+              "build_notes_docx.py, which is the production path.", file=sys.stderr)
         return 1
 
     unit = f"U{int(spec['unit']):02d}"
