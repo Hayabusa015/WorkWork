@@ -21,15 +21,23 @@ They are enforced at build time. Each refusal names the rule and the change reco
 | Prior-knowledge block | optional | **required** | optional |
 | Ramp | order enforced, counts free | **2 / 2 / 1 / 1**, enforced | not a question ladder |
 | Visual work | diagrams and charts to complete | — | **required**: diagram, draw, cards or slots |
-| Page budget | 4 for eight boxed questions | 1 per section | 2 for a cut-and-glue |
+| Page budget | 4 for eight boxed questions | 1 per section | **1** normally; 2 for a cut-and-glue |
 
 **Physics carries no work areas at all.** Students work in their Hayden-McNeil carbonless lab
 notebooks, so a work box or a ruled answer line on a Physics sheet is a refusal, not a warning.
 His existing U01 practice set had a work box under every question; removing them is what took that
 packet from eight pages to four.
 
-**Geology has no math and must have something to do with the hands** — a diagram to label, panels
-to draw in, cards to cut, slots to glue them into. A Geology sheet with none of those is refused.
+**Geology has no math and must have something to look at, label, order or match.** But it is a
+range of formats, not one — **a Geology assignment is not a cut-and-glue by default.** The light
+ones are `sort` and `match`: one page, ten minutes, no scissors, and the same learning as the
+cut-out for most sequencing and vocabulary work. Cut-and-glue earns its two pages and its scissors
+sometimes; it should not be what every sheet turns into. SHULL-CHG-0022.
+
+A sheet that genuinely is a reading response sets `"proseOnly": true` and is allowed through.
+
+Two demos are in `specs/` for exactly this reason: `geo_u01_s01.4` is the two-page cut-and-glue,
+`geo_u04_s04.1` is a one-page label-match-order sheet.
 
 ## The page shape
 
@@ -86,6 +94,11 @@ equation you would use" reads like a physics problem and has no number in it.
 
 - **`cards`** — cut-out cards, dashed border, title, text and a box to draw in.
 - **`slots`** — numbered slots the cards are glued into, sized to match.
+- **`sort`** — put things in order in place: printed scrambled with a box to write the number in.
+  The one-page version of the cut-and-glue timeline.
+- **`match`** — terms with a blank on the left, lettered descriptions on the right. The spec
+  supplies the descriptions already shuffled, because a builder that shuffled them would produce a
+  different sheet on every build and no answer key would survive one.
 - **`draw`** — blank captioned panels, when there is nothing to cut.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.

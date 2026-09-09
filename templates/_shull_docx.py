@@ -220,6 +220,48 @@ def gap(doc, pt=6):
     return p
 
 
+def trim_tail(doc):
+    """Make sure the body ends with a paragraph, and that the paragraph is 1pt.
+
+    OOXML requires the document body to end with a paragraph, and a body built entirely
+    out of tables does not have one - python-docx will happily write `</w:tbl></w:body>`.
+    Word and LibreOffice both repair that by inserting a paragraph of their own, at full
+    body height, and when the content already reaches the bottom of the page that
+    inserted paragraph does not fit: the file gains a completely blank final page
+    carrying nothing but the running footer.
+
+    So the paragraph is written deliberately and pinned to a 1pt exact line. The file
+    becomes valid and the page count is the content's, rather than an artefact of how
+    the file had to be built.
+    """
+    body = doc.element.body
+    last = None
+    for el in body:
+        if el.tag.split("}")[-1] != "sectPr":
+            last = el
+    def pin(el):
+        pPr = el.get_or_add_pPr()
+        sp = OxmlElement("w:spacing")
+        sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+        sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
+        pPr.append(sp)
+        rPr = OxmlElement("w:rPr")
+        for name in ("w:sz", "w:szCs"):
+            e = OxmlElement(name); e.set(qn("w:val"), "2"); rPr.append(e)
+        pPr.append(rPr)
+
+    if last is not None and last.tag.split("}")[-1] == "p" \
+            and not "".join(last.itertext()).strip():
+        pin(last)
+        return
+    p = doc.add_paragraph()
+    pin(p._p)
+    sect = body.find(qn("w:sectPr"))
+    if sect is not None:
+        body.remove(p._p)
+        sect.addprevious(p._p)
+
+
 def cell_margins(cell, top=0, bottom=0, left=40, right=40):
     """Margins on ONE cell, in twentieths of a point.
 

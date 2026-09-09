@@ -25,7 +25,7 @@ from _shull_docx import (          # noqa: E402
     unit_title,
     borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block,
-    page_setup, running_footer,
+    page_setup, running_footer, trim_tail,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -249,6 +249,7 @@ def main():
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
 
+    trim_tail(doc)
     doc.save(out)
     print(f"wrote {out}  —  {code} {unit} {span}")
     return 0

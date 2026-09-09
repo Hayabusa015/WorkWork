@@ -113,6 +113,13 @@ drift.
 
 ## Geology activities
 
+**Not every Geology assignment is a cut-and-glue.** SHULL-CHG-0022 — he said so directly. The
+default is a one-page sheet: a diagram to label, a `match` grid, a `sort` (order it in place, write
+the number in the box, no scissors), and one written question. Cut-and-glue is worth two pages and
+a pair of scissors *sometimes*, and it is not the shape a Geology sheet should fall into by
+default.
+
+
 Foldables, cut-and-sequence, diagram labelling and colouring, graphic organizers as a *primary*
 note-taking format. **Clear fold lines, generous cut margins, print-safe non-bleeding colour
 regions** — these have to survive scissors and glue in a 50-minute period.

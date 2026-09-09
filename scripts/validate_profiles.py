@@ -122,6 +122,23 @@ def _calc_no_answer(s):
     return s
 
 
+def _geo_match_only(s):
+    """A Geology sheet whose only visual element is a matching grid. This must BUILD -
+    the point of SHULL-CHG-0022 is that a light format satisfies the rule."""
+    s["sectionsContent"][0]["blocks"] = [
+        {"kind": "match", "terms": ["Crust", "Mantle"],
+         "descriptions": ["The outer skin.", "The thick middle."]}]
+    return s
+
+
+def _geo_prose_escape(s):
+    """And a genuine reading response, declared as such, must build too."""
+    s["sectionsContent"][0]["blocks"] = [
+        {"kind": "reflection", "prompts": ["What changed your mind?"]}]
+    s["sectionsContent"][0]["proseOnly"] = True
+    return s
+
+
 def _answer_on_last(s):
     s["sectionsContent"][0]["questions"][-1]["selfCheck"] = "[ 42 ]"
     return s
@@ -136,13 +153,21 @@ CASES = [
     ("questions must ramp upward",        chem, _out_of_order, "do not ramp"),
     ("geology refuses an equation bar",   geo,  _geo_eq,       "no math"),
     ("geology refuses a math question",   geo,  _geo_math,     "no math"),
-    ("geology needs something visual",    geo,  _geo_no_visual, "nothing to label, draw"),
+    ("geology needs something visual",    geo,  _geo_no_visual, "the whole sheet is prose"),
     ("chemistry math needs equations",    chem, _chem_no_eq,   "no equation bar"),
     ("an unknown section code is refused", phys, _bad_code,    "not in"),
     ("sections and content must agree",   phys, _mismatch,     "same fact"),
     ("an unknown block kind is refused",  chem, _unknown_block, "unknown block kind"),
     ("a calculation needs its answer",    phys, _calc_no_answer, "no self-check answer"),
     ("the last question gets no answer",  phys, _answer_on_last, "without a net"),
+]
+
+
+# Cases that must BUILD, not refuse. A profile that refuses everything proves nothing,
+# so the permissive side is tested too.
+ALLOW = [
+    ("a matching grid satisfies Geology", geo, _geo_match_only),
+    ("a declared prose sheet is allowed",  geo, _geo_prose_escape),
 ]
 
 
@@ -157,9 +182,17 @@ def main():
         else:
             print(f"  ok   {name}")
 
+    for name, base, mutate in ALLOW:
+        rc, out = build(mutate(base()))
+        if rc:
+            fails.append((name, f"refused a spec it should accept: {out.strip()[:110]}"))
+        else:
+            print(f"  ok   {name}")
+
     # And the three real specs must still build, or the profiles are refusing
     # everything and the cases above prove nothing.
-    for f in ("phys_u01_s01.1-s01.4.json", "geo_u01_s01.4.json", "chem_u07_s07.4.json"):
+    for f in ("phys_u01_s01.1-s01.4.json", "geo_u01_s01.4.json", "geo_u04_s04.1.json",
+              "chem_u07_s07.4.json"):
         rc, out = build(load(f))
         if rc:
             fails.append((f, f"a good spec was refused: {out.strip()[:120]}"))
@@ -171,7 +204,8 @@ def main():
         for n, why in fails:
             print(f"  {n}: {why}")
         return 1
-    print(f"\nOK - {len(CASES)} refusals fire, 3 real specs build")
+    print(f"\nOK - {len(CASES)} refusals fire, {len(ALLOW)} allowances hold, "
+          f"4 real specs build")
     return 0
 
 

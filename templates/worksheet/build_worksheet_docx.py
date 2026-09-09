@@ -38,7 +38,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -263,17 +263,95 @@ def draw_block(cell, block, pal, width):
     return t
 
 
+def sort_block(doc, block, pal):
+    """Put things in order, in place - no scissors.
+
+    The same learning as the cut-and-glue timeline, on one page and in ten minutes:
+    the items are printed scrambled with a blank beside each, and the student writes
+    the order. Cut-and-glue is worth the two pages and the scissors sometimes; it is
+    not worth them every time, and this is the version for the rest of the time.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "PUT THESE IN ORDER"), pal, first=True)
+    if block.get("instruction"):
+        para(c, block["instruction"], 9.5)
+    items = block["items"]
+    t = c.add_table(rows=len(items), cols=2)
+    fix_widths(t, [0.55, TEXT_W_IN - 0.55 - 0.30])
+    for r, item in enumerate(items):
+        box, txt = t.rows[r].cells
+        no_split(t.rows[r])
+        borders(box, pal.ink, sz=4)
+        cell_margins(box, top=40, bottom=40, left=60, right=60)
+        para(box, "", 11, first=True)
+        borders(txt, pal.hair, sz=4, edges=("bottom",))
+        cell_margins(txt, top=40, bottom=40, left=130, right=60)
+        para(txt, item, 9.5, color=pal.ink, first=True)
+    unpad_cell(c)
+    return c
+
+
+def match_block(doc, block, pal):
+    """Matching: terms on the left with a blank, descriptions on the right.
+
+    The descriptions are deliberately NOT in the same order as the terms; the spec
+    supplies them already shuffled, because a builder that shuffles them would produce
+    a different sheet on every build and no answer key would survive.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "MATCHING"), pal, first=True)
+    para(c, block.get("instruction",
+                      "Write the letter of the correct description beside each term."), 9.5)
+    terms, descs = block["terms"], block["descriptions"]
+    rows = max(len(terms), len(descs))
+    t = c.add_table(rows=rows, cols=4)
+    fix_widths(t, [0.42, 2.35, 0.34, TEXT_W_IN - 3.41])
+    for r in range(rows):
+        blank, term, letter, desc = t.rows[r].cells
+        no_split(t.rows[r])
+        if r < len(terms):
+            borders(blank, pal.ink, sz=4, edges=("bottom",))
+            cell_margins(blank, top=40, bottom=40, left=0, right=90)
+            para(blank, "", 10, first=True)
+            para(term, terms[r], 9.5, color=pal.ink, first=True)
+        if r < len(descs):
+            # Just the letter. No box, no circle. SHULL-CHG-0015.
+            para(letter, f"{chr(97 + r)}.", 9.5, bold=True, color=pal.accent, first=True)
+            para(desc, descs[r], 9.5, color=pal.ink, first=True)
+    unpad_cell(c)
+    return c
+
+
 def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
     c = one_cell(doc)
-    label(c, block.get("label", "REFLECTION"), pal, first=True)
     for i, q in enumerate(block["prompts"], 1):
-        p = c.add_paragraph()
+        # A prompt and the lines it is answered on are one thing. Left to flow, the
+        # question ended a page and its answer lines started the next one - the student
+        # turns over to two rules belonging to nothing.
+        t = c.add_table(rows=1, cols=1)
+        fix_widths(t, [TEXT_W_IN - 0.30])
+        no_split(t.rows[0])
+        cc = t.rows[0].cells[0]
+        cell_margins(cc, top=0, bottom=0, left=0, right=0)
+        if i == 1:
+            # The heading goes INSIDE the first non-splitting row. Kept outside it, it
+            # ended a page on its own with the question it introduces on the next one -
+            # the same stranding the diagram block hit, one level up.
+            label(cc, block.get("label", "REFLECTION"), pal, first=True)
+            p = cc.add_paragraph()
+        else:
+            p = cc.paragraphs[0]
         p.paragraph_format.space_after = Pt(2)
         run(p, f"{i}. ", 9.5, bold=True, color=pal.ink)
         run(p, q, 9.5, italic=True, color=pal.ink)
-        rule_lines(c, int(block.get("linesEach", 2)), pal.ink)
+        rule_lines(cc, int(block.get("linesEach", 2)), pal.ink)
+    unpad_cell(c)
     return c
 
 
@@ -383,7 +461,8 @@ def check_profile(spec, course, sec):
     math_qs = [q for q in qs if q.get("math")]
     work_qs = [q for q in qs if q.get("math") or q.get("answerLines")]
     visual = ([q for q in qs if q.get("diagram") or q.get("draw")]
-              + [b for b in blocks if b["kind"] in ("cards", "slots", "draw", "diagram")])
+              + [b for b in blocks if b["kind"] in
+                 ("cards", "slots", "draw", "diagram", "sort", "match")])
     where = f"section {sec['code']}"
 
     if course == "geology":
@@ -393,10 +472,14 @@ def check_profile(spec, course, sec):
         if math_qs:
             return (f"{where}: Geology has no math. Remove \"math\" from "
                     f"{len(math_qs)} question(s). SHULL-CHG-0017.")
-        if not visual:
-            return (f"{where}: nothing to label, draw, cut or order. Geology is the "
-                    "visual, expressive class - every sheet needs at least one "
-                    "diagram, draw, cards or slots block. SHULL-CHG-0019.")
+        if not visual and not sec.get("proseOnly"):
+            return (f"{where}: nothing to look at, label, order or match - the whole "
+                    "sheet is prose. Geology is the visual class, so add a diagram, "
+                    "draw, sort, match, cards or slots block.\n   The light ones are "
+                    "sort and match: one page, no scissors. Cut-and-glue is worth two "
+                    "pages sometimes and should not be the default.\n   If this sheet "
+                    'genuinely is a reading response, set "proseOnly": true. '
+                    "SHULL-CHG-0022.")
 
     if course == "physics":
         if work_qs:
@@ -608,6 +691,10 @@ def main():
                 cards_block(doc, block, pal)
             elif kindb == "slots":
                 slots_block(doc, block, pal)
+            elif kindb == "sort":
+                sort_block(doc, block, pal)
+            elif kindb == "match":
+                match_block(doc, block, pal)
             elif kindb == "reflection":
                 reflection_block(doc, block, pal)
             elif kindb == "draw":
@@ -634,6 +721,7 @@ def main():
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal,
                    with_page_numbers=True)
+    trim_tail(doc)
     doc.save(out)
     nq = sum(len(x.get("questions", [])) for x in sections)
     print(f"wrote {out}  —  {code} {unit} {span}, "

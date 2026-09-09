@@ -1,0 +1,80 @@
+{
+  "course": "geology",
+  "unit": 4,
+  "sections": [
+    "4.1"
+  ],
+  "docType": "Worksheet",
+  "timeTargetMin": "25",
+  "pagesPerSection": 1,
+  "sectionsContent": [
+    {
+      "code": "4.1",
+      "title": "Layers of the Earth",
+      "concept": {
+        "summary": "Earth is layered because it sorted itself by density while it was still molten — the heaviest material sank to the middle and the lightest floated to the top. That one idea explains the whole diagram. The layers can be named by what they are made of (crust, mantle, core) or by how they behave (lithosphere, asthenosphere), and the two sets of names do not line up.",
+        "keyIdeas": [
+          "The lithosphere is crust PLUS the rigid top of the mantle — it is a behaviour, not a material."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Density is mass per unit volume; denser things sink through less dense things (U1).",
+          "Earth formed hot enough to be molten all the way through (U1 S1.6)."
+        ]
+      },
+      "blocks": [
+        {
+          "kind": "diagram",
+          "label": "LABEL THE LAYERS — FROM THE CENTRE OUT",
+          "heightIn": 1.55,
+          "labelSlots": 5,
+          "points": 5,
+          "caption": "Word bank: inner core · outer core · mantle · crust · lithosphere",
+          "figureNote": "[ CROSS-SECTION OF THE EARTH ]"
+        },
+        {
+          "kind": "match",
+          "label": "MATCH THE LAYER TO WHAT IT IS",
+          "points": 5,
+          "instruction": "Write the letter of the correct description in the blank beside each layer.",
+          "terms": [
+            "Inner core",
+            "Outer core",
+            "Mantle",
+            "Crust",
+            "Asthenosphere"
+          ],
+          "descriptions": [
+            "The thin, brittle outer skin we live on — thinnest under the oceans.",
+            "Solid iron and nickel, kept solid by sheer pressure.",
+            "The slow-flowing part of the upper mantle that the plates ride on.",
+            "Liquid iron and nickel, and the reason Earth has a magnetic field.",
+            "The thickest layer by far — hot rock that moves, slowly."
+          ]
+        },
+        {
+          "kind": "sort",
+          "label": "PUT THEM IN ORDER — DENSEST FIRST",
+          "points": 5,
+          "instruction": "Number these 1 to 5, from the densest material to the least dense. Write the number in the box.",
+          "items": [
+            "Mantle",
+            "Crust",
+            "Inner core",
+            "Ocean water",
+            "Outer core"
+          ]
+        },
+        {
+          "kind": "reflection",
+          "linesEach": 2,
+          "points": 3,
+          "prompts": [
+            "Earth sorted itself by density while it was molten. Use that one idea to explain why the iron is in the middle."
+          ]
+        }
+      ]
+    }
+  ]
+}

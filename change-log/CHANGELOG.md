@@ -34,6 +34,7 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0019 | 2026-09-09 | Worksheet template with three enforced course profiles; font audit | CONFIRMED | `governance/proposals/SHULL-CHG-0019-worksheet-template.md` |
 | SHULL-CHG-0020 | 2026-09-09 | Master_Physics card layout; toner replaces marked as the ink budget | CONFIRMED | `governance/proposals/SHULL-CHG-0020-master-physics-layout.md` |
 | SHULL-CHG-0021 | 2026-09-09 | Calculations carry their answer, except the last question | CONFIRMED | `governance/proposals/SHULL-CHG-0021-self-check-answers.md` |
+| SHULL-CHG-0022 | 2026-09-09 | A Geology assignment is not a cut-and-glue by default; sort and match blocks | CONFIRMED | `governance/proposals/SHULL-CHG-0022-geology-formats.md` |
 | SHULL-CHG-0016 | 2026-09-09 | A problem to solve gets a bordered work box, enforced at build | CONFIRMED | `governance/proposals/SHULL-CHG-0016-work-boxes.md` |
 | SHULL-CHG-0015 | 2026-09-09 | A numbered list is just the number — no box, any format | CONFIRMED | `governance/proposals/SHULL-CHG-0015-no-number-boxes.md` |
 | SHULL-CHG-0014 | 2026-09-09 | Guided notes template, .docx, from Matthew's own packet | CONFIRMED | `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` |
