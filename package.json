@@ -1,0 +1,48 @@
+{
+  "name": "shull-os-desktop",
+  "productName": "SHULL OS",
+  "version": "0.1.0",
+  "description": "Personal teaching workspace",
+  "author": "Shull",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "desktop": "electron .",
+    "desktop:pack": "electron-builder --win --dir",
+    "desktop:dist": "electron-builder --win zip",
+    "desktop:installer": "electron-builder --win nsis",
+    "test": "node --test app/*.test.mjs app/test.mjs desktop/*.test.cjs"
+  },
+  "devDependencies": {"electron": "44.3.0", "electron-builder": "26.15.3"},
+  "build": {
+    "appId": "org.shull.os",
+    "publish": {"provider": "github", "owner": "Hayabusa015", "repo": "WorkWork", "releaseType": "release"},
+    "directories": {"app": ".", "output": "dist"},
+    "files": ["desktop/*.cjs", "!desktop/*.test.cjs", "package.json"],
+    "extraResources": [
+      {"from": "app", "to": "repo/app", "filter": ["**/*", "!data/**/*", "!node_modules/**/*", "!*.test.mjs", "!test.mjs"]},
+      {"from": "templates", "to": "repo/templates", "filter": ["**/*", "!**/node_modules/**/*", "!**/__pycache__/**/*"]},
+      {"from": "brand", "to": "repo/brand"},
+      {"from": "courses", "to": "repo/courses"},
+      {"from": "standards", "to": "repo/standards"},
+      {"from": "governance", "to": "repo/governance"},
+      {"from": "scripts", "to": "repo/scripts", "filter": ["**/*", "!**/__pycache__/**/*"]},
+      {"from": ".claude", "to": "repo/.claude"},
+      {"from": "docs", "to": "repo/docs"},
+      {"from": "desktop/vendor", "to": "vendor"}
+    ],
+    "win": {"target": ["nsis", "zip"], "signAndEditExecutable": false},
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SHULL OS",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "SHULL-OS-Setup-${version}.exe"
+    },
+    "artifactName": "SHULL-OS-${version}-Windows.${ext}"
+  }
+}

@@ -8,9 +8,10 @@ import {fileURLToPath} from 'node:url';
 import {randomUUID} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
+import {resolveDataDirectory} from './runtime.mjs';
 const exec=promisify(execFile), root=path.dirname(fileURLToPath(import.meta.url)), repo=path.dirname(root);
 process.env.PYTHONUTF8='1';
-const data=process.env.SHULL_DATA_DIR||path.join(root,'data');fs.mkdirSync(data,{recursive:true});
+const data=process.env.SHULL_DATA_DIR||resolveDataDirectory({appDirectory:root});fs.mkdirSync(data,{recursive:true});
 const dbfile=path.join(data,'state.json');
 let db=fs.existsSync(dbfile)?JSON.parse(fs.readFileSync(dbfile,'utf8')):{focus:[],runs:[]};
 db.suggestions??=[];
@@ -23,7 +24,7 @@ let key=process.env.ANTHROPIC_API_KEY||'',model=db.selectedModel||'claude-sonnet
 const read=p=>fs.readFileSync(path.join(repo,p),'utf8');
 const specs=fs.readdirSync(path.join(repo,'templates/worksheet/specs')).filter(x=>x.endsWith('.json')).map(name=>({id:name,spec:JSON.parse(read('templates/worksheet/specs/'+name))}));
 const standards=['standards/QA_GATE.md','standards/VOICE.md','brand/SHULL_DESIGN_SYSTEM.md',...['chemistry','physics','geology'].map(c=>`courses/${c}/DECISIONS.md`)];
-const port=Number(process.env.PORT||4317),origin=`http://127.0.0.1:${port}`;
+let port=Number(process.env.PORT||4317),origin=`http://127.0.0.1:${port}`;
 async function anthropic(endpoint,body){const response=await fetch('https://api.anthropic.com/v1/'+endpoint,{method:body?'POST':'GET',headers:{'x-api-key':key,'anthropic-version':'2023-06-01','content-type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(180000)});const result=await response.json();if(!response.ok)throw Error(`Anthropic request failed (${response.status}). Check your key, model access, and API balance.`);return result;}
 const agent=createAgentRunner({read,save,charge:(run,step,index)=>recordCharge(db.billing,run,step,index),request:body=>anthropic('messages',body),report:(run,step,index)=>{
 const dir=path.join(data,'reports',run.id);fs.mkdirSync(dir,{recursive:true});
@@ -54,7 +55,7 @@ if(run.pdf){const auditScript=path.join(repo,'scripts/audit_worksheet.py');try{c
 run.status=run.audit?.status==='failed'?'Audit needs attention':'Needs teacher review';run.reviewNote=run.audit?.status==='passed'?'Built and passed the repository worksheet/page/ink audit. Review the content and visual preview before classroom use.':'Built, but the repository audit found an issue. Review the audit output before approval.';if(run.agents?.length){run.status='Agent review';save();await reviewArtifact(run);}}catch(e){run.status='Failed';run.error=('Worksheet build failed: '+(e.stderr||e.message)).slice(0,1800);}save();}
 export function validateSpec(spec){if(!spec||!['chemistry','physics','geology'].includes(spec.course)||!Array.isArray(spec.sectionsContent))throw Error('Invalid worksheet specification');const scan=v=>{if(typeof v==='string'&&(/(?:file:|https?:|\.\.[/\\])/.test(v)))throw Error('External paths and URLs are not accepted in worksheet specifications');if(v&&typeof v==='object')for(const [k,x]of Object.entries(v)){if(/^(image|src|path|file|imagePath)$/i.test(k)&&x)throw Error('Image file references are not supported yet');scan(x);}};scan(spec);return spec;}
 async function body(req){let b='';for await(const chunk of req){b+=chunk;if(b.length>200000)throw Error('Request too large');}return JSON.parse(b||'{}');}
-const server=http.createServer(async(req,res)=>{const send=(code,obj)=>{res.writeHead(code,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(obj));};try{if(req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`)return send(403,{error:'Invalid host'});if(req.method!=='GET'&&req.headers.origin!==origin&&req.headers.origin!==`http://localhost:${port}`)return send(403,{error:'Invalid origin'});const url=new URL(req.url,origin),p=url.pathname;
+const server=http.createServer(async(req,res)=>{const send=(code,obj)=>{res.writeHead(code,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(obj));};try{if(process.env.SHULL_DESKTOP_TOKEN&&req.headers['x-shull-desktop']!==process.env.SHULL_DESKTOP_TOKEN)return send(403,{error:'Desktop session required'});if(req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`)return send(403,{error:'Invalid host'});if(req.method!=='GET'&&req.headers.origin!==origin&&req.headers.origin!==`http://localhost:${port}`)return send(403,{error:'Invalid origin'});const url=new URL(req.url,origin),p=url.pathname;
 if(p==='/interface.js'){res.writeHead(200,{'content-type':'text/javascript'});return res.end(fs.readFileSync(path.join(root,'public/interface.js')));}
 if(p==='/api/maintenance'&&req.method==='POST'){if(!key||!model)throw Error('Connect your Anthropic key and select a model first');if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');const run={id:randomUUID(),kind:'maintenance',course:'system',title:'Repository health review',model,created:new Date().toISOString(),status:'Agent review',agents:[]};db.runs.unshift(run);save();send(202,{id:run.id});void maintenance(run);return;}
 
@@ -93,4 +94,5 @@ const match=p.match(/^\/api\/runs\/([\w-]+)\/(build|approve|teach)$/);if(match&&
 const file=p.match(/^\/files\/([\w-]+)\/(worksheet\.(docx|pdf))$/);if(file){const target=path.join(data,file[1],file[2]);if(!fs.existsSync(target))return send(404,{});res.writeHead(200,{'content-type':file[3]==='pdf'?'application/pdf':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','content-disposition':`${file[3]==='pdf'?'inline':'attachment'}; filename="${file[2]}"`});fs.createReadStream(target).pipe(res);return;}
 const staticFiles={'/':'index.html','/app.js':'app.js','/style.css':'style.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
 }catch(e){send(400,{error:e.message});}});
-if(process.argv[1]===fileURLToPath(import.meta.url))server.listen(port,'127.0.0.1',()=>console.log(`SHULL OS ready at ${origin}`));
+export function startServer(requestedPort=port){return new Promise((resolve,reject)=>{server.once('error',reject);server.listen(requestedPort,'127.0.0.1',()=>{server.removeListener('error',reject);port=server.address().port;origin=`http://127.0.0.1:${port}`;resolve(server);});});}
+if(process.argv[1]===fileURLToPath(import.meta.url))startServer().then(()=>console.log(`SHULL OS ready at ${origin}`));

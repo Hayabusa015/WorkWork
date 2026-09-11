@@ -1,1 +1,1 @@
-{"name":"shull-os-app","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test test.mjs agents.test.mjs suggestions.test.mjs billing.test.mjs"},"engines":{"node":">=22"}}
+{"name":"shull-os-app","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test test.mjs agents.test.mjs suggestions.test.mjs billing.test.mjs runtime.test.mjs"},"engines":{"node":">=22"}}
