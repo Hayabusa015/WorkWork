@@ -1,0 +1,61 @@
+{
+  "course": "geology",
+  "unit": 1,
+  "section": "1.4",
+  "title": "Build a Solar System",
+  "subtitle": "Nebular theory drawing and sequencing",
+  "duration": "30–40 minutes",
+  "review": "The Sun and planets formed from gas and dust in a nebula. Gravity gathered the material. A young star grew near the center while planets began forming in the surrounding disk. These cards simplify a process whose stages overlap.",
+  "recap": "Nebula = a cloud of gas and dust. Gravity pulls matter together. Accretion = smaller pieces joining to make larger ones.",
+  "directions": "Read the six scrambled cards. Sketch each stage in its open space and label one feature. Use arrows, symbols, or optional color. Cut on the dashed borders. Arrange the whole cards on page 2 before gluing. Add your name to both sheets.",
+  "cards": [
+    {
+      "id": "A",
+      "title": "Pieces grow into worlds",
+      "text": "In the disk, small pieces collide and stick. Larger bodies gather more material as planets begin to grow.",
+      "order": 4,
+      "drawing": "Several small pieces joining a larger body; label a growing planet."
+    },
+    {
+      "id": "B",
+      "title": "A cloud of gas and dust",
+      "text": "A large nebula contains the material that will become a star and its planets.",
+      "order": 1,
+      "drawing": "A loose cloud with small dust marks; label gas and dust."
+    },
+    {
+      "id": "C",
+      "title": "The disk begins to clear",
+      "text": "Winds and radiation from the young star help clear much of the gas and dust. Growing planets and smaller bodies remain.",
+      "order": 5,
+      "drawing": "A central star, planets on paths, and a few smaller bodies; label one planet."
+    },
+    {
+      "id": "D",
+      "title": "Gravity gathers material",
+      "text": "Part of the cloud collapses inward. Material becomes more crowded and the center heats up.",
+      "order": 2,
+      "drawing": "Arrows pointing into a denser center; label gravity."
+    },
+    {
+      "id": "E",
+      "title": "Fusion powers the Sun",
+      "text": "The center becomes hot and dense enough for steady hydrogen fusion. Hydrogen joins to form helium and releases energy.",
+      "order": 6,
+      "drawing": "A bright central Sun; label the Sun and use outward rays for energy."
+    },
+    {
+      "id": "F",
+      "title": "A spinning disk and protostar",
+      "text": "The collapsing cloud spins and flattens. A hot protostar grows at the center of the disk.",
+      "order": 3,
+      "drawing": "A flattened disk around a central protostar; label both."
+    }
+  ],
+  "reflection": "Choose two neighboring stages. Explain what changed between them and show that change with an arrow or label in your drawings.",
+  "teacher_notes": "Print pages 1 and 2 SINGLE-SIDED on separate sheets, at 100% scale. Give students scissors, glue, and pencils; coloring is optional. Cards are smaller than targets by 0.10 in in both dimensions. Page 2 contains no correct stage titles. Accept sketches, symbols, arrows, and labels; evaluate science rather than artistic skill. This is a simplified instructional sequence: disk formation, protostar growth, accretion, fusion, and clearing overlap. The cards do not claim planets finish forming before fusion or that all debris disappears. Clearing starts before the Sun reaches sustained hydrogen fusion; do not teach fusion as the switch that starts the wind.",
+  "sources": [
+    "https://science.nasa.gov/universe/stars/planetary-system/",
+    "https://science.nasa.gov/exoplanets/how-do-planets-form/"
+  ]
+}

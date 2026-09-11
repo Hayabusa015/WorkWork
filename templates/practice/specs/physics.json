@@ -1,0 +1,97 @@
+{
+  "course": "physics",
+  "unit": 4,
+  "section": "4.1",
+  "title": "Work and Power",
+  "subtitle": "Connect forces, displacement, and time",
+  "duration": "30–40 minutes",
+  "review": "A force does work when it has a component along an object's displacement. Work can be positive, negative, or zero. Average power tells you how quickly work is done. Always name the force whose work you are finding.",
+  "recap": "Friction opposes sliding. Constant velocity means zero NET force, not zero force. From motion: constant acceleration changes velocity steadily; displacement depends on the starting velocity and elapsed time.",
+  "directions": "Do every response, diagram, and calculation in your Hayden-McNeil carbonless notebook. Number 1–8. State the equation, substitute with units, and explain signs. Use a calculator; report numeric results to two significant figures. Right is positive; g = 9.8 m/s². Brackets give numeric checks.",
+  "equations": [
+    {
+      "plain": "W = Fparallel d"
+    },
+    {
+      "lhs": "Pavg",
+      "num": "W",
+      "den": "Δt"
+    },
+    {
+      "plain": "Fnet = m a"
+    },
+    {
+      "plain": "d = vi t + ½ a t²"
+    }
+  ],
+  "equation_note": "Fparallel = force component along displacement (N); d = displacement along that direction (m); W = work (J); Pavg = average power (W); t = time (s). Parallel: W = +Fd; opposite: W = −Fd; perpendicular: W = 0. All forces below are parallel or perpendicular.",
+  "questions": [
+    {
+      "number": 1,
+      "tier": "Warm-up",
+      "concept": "Recognize work",
+      "prompt": "You hold a backpack still, then carry it horizontally at constant height. In either case, does your UPWARD support force do work on it? Explain using displacement.",
+      "answer": "No in both cases. While held still, displacement is zero. During horizontal motion, upward support is perpendicular to displacement, so its work is zero. This is work on the backpack, not energy used by the person."
+    },
+    {
+      "number": 2,
+      "tier": "Warm-up",
+      "concept": "A direct calculation",
+      "prompt": "A constant 12 N force pushes a cart 3.0 m to the right. The force points right. Find the work done by this force.",
+      "check": "+36 J",
+      "answer": "W = Fd = (12 N)(3.0 m) = +36 J. The force and displacement point in the same direction."
+    },
+    {
+      "number": 3,
+      "tier": "Practice",
+      "concept": "Friction and signs",
+      "prompt": "A crate slides 5.0 m right against a constant 8.0 N friction force. Draw the friction arrow in your notebook. Find friction's work and explain its sign.",
+      "check": "−4.0 × 10¹ J",
+      "answer": "Friction points left, opposite the rightward displacement. Wfriction = −(8.0 N)(5.0 m) = −4.0 × 10¹ J."
+    },
+    {
+      "number": 4,
+      "tier": "Practice",
+      "concept": "Average power",
+      "prompt": "A motor does 2.4 × 10³ J of work in 8.0 s. Find its average power. A second motor does the same work in 4.0 s. Compare their work and power.",
+      "check": "3.0 × 10² W; 6.0 × 10² W",
+      "answer": "P1 = 2400 J / 8.0 s = 3.0 × 10² W. P2 = 2400 J / 4.0 s = 6.0 × 10² W. Equal work; the second motor has twice the average power."
+    },
+    {
+      "number": 5,
+      "tier": "Practice",
+      "concept": "Read a force graph",
+      "prompt": "The graph shows the force along a cart's displacement. Find the work from 0 to 4.0 m using the area under the graph. What units does that area have?",
+      "figure": "force_graph",
+      "answer": "Rectangle area = (6.0 N)(4.0 m) = 24 N·m = 24 J. The force is positive along the displacement; its work is positive."
+    },
+    {
+      "number": 6,
+      "tier": "Challenge",
+      "concept": "Applied work versus net work",
+      "prompt": "A person pulls a crate 4.0 m right at constant speed with a horizontal 15 N force. Draw and label its free-body diagram. Find the work done by the pull, friction, gravity, and normal force. Then find NET work.",
+      "check": "Wnet = 0 J",
+      "answer": "Horizontal forces are equal: pull 15 N right and friction 15 N left. Normal points up; weight points down, with equal magnitudes on this level floor. Wpull = +60. J; Wfriction = −60. J; gravity and normal each do 0 J. Net work is 0 J. Individual forces can do nonzero work at constant speed."
+    },
+    {
+      "number": 7,
+      "tier": "Challenge",
+      "concept": "Compare two machines",
+      "prompt": "Machine A lifts a 10. kg load straight up 1.5 m in 3.0 s at constant speed. Machine B lifts the same load the same height in 6.0 s. Calculate each machine's upward force, work on the load, and average power. Explain why a faster lift does not require more work here.",
+      "check": "F = 98 N; W = 1.5 × 10² J each",
+      "answer": "Constant speed gives Fup = mg = (10. kg)(9.8 m/s²) = 98 N. Each does 147 J before rounding, reported as 1.5 × 10² J. PA = 147/3.0 = 49 W; PB = 147/6.0 = 24.5 W, reported as 25 W. Use unrounded work in the power calculation. Same force and displacement mean the same work."
+    },
+    {
+      "number": 8,
+      "tier": "Connect",
+      "concept": "Motion plus forces plus work",
+      "prompt": "A 4.0 kg cart starts from rest on a level floor. A constant 10. N push acts right; friction is 2.0 N left. These forces act for 3.0 s. (a) Draw the free-body diagram. (b) Find net force and acceleration. (c) Find displacement. (d) Find work done by the push and by friction, then NET work. (e) Find the push's average power. Explain why push work and net work differ.",
+      "check": "d = 9.0 m; Wnet = 72 J",
+      "answer": "FBD: 10. N right, 2.0 N left, normal up, weight down; vertical forces equal. Fnet = +8.0 N; a = Fnet/m = +2.0 m/s², right. d = 0 + ½(2.0)(3.0)² = 9.0 m right. Wpush = +90. J; Wfriction = −18 J; Wnet = +72 J. Ppush = 90./3.0 = 30. W. Push work counts only the push; net work includes friction. Connects earlier kinematics and Newton's second law without requiring the next section's work-energy theorem."
+    }
+  ],
+  "teacher_notes": "Estimated timing, not classroom-measured: reminder and start 4 min; questions 1–4 about 9 min; graph 3 min; questions 6–7 about 8 min; connector 8–10 min. All responses belong in the notebook. No trig or work-energy theorem is required. Bracketed checks follow the shared practice convention and can be disabled with --no-checks. No gradebook weighting is implied.",
+  "sources": [
+    "https://openstax.org/books/college-physics-2e/pages/7-1-work-the-scientific-definition"
+  ]
+}
