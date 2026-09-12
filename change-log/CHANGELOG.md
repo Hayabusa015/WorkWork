@@ -79,6 +79,7 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-12 | Pear Assessment appears to have a real "import from document" feature (DOCX/PDF/Forms/JPG/PNG, announced Oct 2024) that the Day 1 item bank could target instead of plain text — but whether it auto-detects the correct answer, what markup/format it expects, and what plan tier it needs were not confirmed (Pear's own help center is not reachable from this environment). Matt is trying the import himself first and will report back what it actually wants. SHULL-CHG-0023. | User — `templates/assessment/build_day1_item_bank.py` |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |
