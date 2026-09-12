@@ -22,7 +22,7 @@ from docx.oxml import OxmlElement
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
-    unit_title,
+    unit_title, section_span,
     borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block,
     page_setup, running_footer, trim_tail,
@@ -111,8 +111,7 @@ def main():
 
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
-    span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
-            if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
+    span = section_span(spec["sections"])
     out = sys.argv[2] if len(sys.argv) > 2 else \
         os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
 

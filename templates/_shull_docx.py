@@ -81,6 +81,18 @@ def known_sections(course):
     return set(re.findall(r"(?<![\d.])\d{1,2}\.\d(?![\d])", text[:end] if end > 0 else text))
 
 
+def section_span(sections):
+    """The `S##.#` or `S##.#-S##.#` span for a filename, zero-padded per NAMING.md
+    (SHULL-CHG-0007). Three builders each formatted this inline, unpadded - `S7.4`
+    instead of `S07.4` - which is the exact fact-lives-twice defect this file exists
+    to prevent, and which the naming standard's own worked examples never show.
+    """
+    def pad(sec):
+        u, s = str(sec).split(".")
+        return f"S{int(u):02d}.{s}"
+    return f"{pad(sections[0])}-{pad(sections[-1])}" if len(sections) > 1 else pad(sections[0])
+
+
 def unit_title(course, unit):
     """The unit's name, read from that course's DECISIONS.md.
 
@@ -197,6 +209,30 @@ def fix_widths(table, widths):
             cell.width = Inches(w)
     for col, w in zip(table.columns, widths):
         col.width = Inches(w)
+
+
+def page_break(doc):
+    """Start a new page without spending a line to do it.
+
+    A normal paragraph carrying a page break is full body height, so when a section
+    ends flush with the bottom of its page that paragraph does not fit - it moves to
+    the next page, and only then breaks, leaving a blank page carrying nothing but the
+    footer. Pinning the line to 1pt exact makes the break paragraph effectively
+    dimensionless, so it always fits where it is written.
+    """
+    from docx.enum.text import WD_BREAK
+    p = doc.add_paragraph()
+    pf = p.paragraph_format
+    pf.space_before = Pt(0); pf.space_after = Pt(0)
+    pPr = p._p.get_or_add_pPr()
+    sp = OxmlElement("w:spacing")
+    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+    sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
+    pPr.append(sp)
+    r = p.add_run()
+    r.font.size = Pt(1)
+    r.add_break(WD_BREAK.PAGE)
+    return p
 
 
 def gap(doc, pt=6):

@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-09-12
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0023 | 2026-09-12 | Assessment build system: Day 1 item bank, Day 2 problems test | CONFIRMED | `governance/proposals/SHULL-CHG-0023-assessment-template.md` |
+
 ## 2026-09-09 · 2026-09-08
 
 | ID | Date | Change | Status | Record |
@@ -41,10 +47,17 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0013 | 2026-09-08 | Twelve-layout slide template migrated onto the token system | CONFIRMED | `governance/proposals/SHULL-CHG-0013-slide-template.md` |
 | SHULL-CHG-0012 | 2026-09-08 | Physics decisions file created from two legacy sources | CONFIRMED | `courses/physics/DECISIONS.md` |
 | SHULL-CHG-0011 | 2026-09-08 | Chemistry decisions adopted from Drive as authoritative | CONFIRMED | `courses/chemistry/DECISIONS.md` |
-| SHULL-CHG-0010 | 2026-09-08 | Adopt the existing lab template rather than redesign | PARTIAL | `governance/proposals/SHULL-CHG-0010-lab-template.md` |
+| SHULL-CHG-0010 | 2026-09-08 | Adopt the existing lab template rather than redesign | PARTIAL¹ | `governance/proposals/SHULL-CHG-0010-lab-template.md` |
 | SHULL-CHG-0009 | 2026-09-08 | Geology has section numbers — 10 units, 54 sections | CONFIRMED | `governance/proposals/SHULL-CHG-0009-geology-section-numbering.md` |
 | SHULL-CHG-0008 | 2026-09-08 | Text-safe deep variants for colour on a light ground | CONFIRMED | `docs/DECISIONS_2026-09-07.md` |
 | SHULL-CHG-0007 | 2026-09-08 | Zero-padded section codes | CONFIRMED | `docs/DECISIONS_2026-09-07.md` |
+
+¹ **Index correction, 2026-09-12.** This row is the defect the record itself warns about: the
+record's own RESOLUTION section (dated 2026-09-08, same day) closed both open findings and marked
+the change IMPLEMENTED and verified — rendered, font-checked, ink-measured, visually inspected. This
+row was never updated to match. Per this file's own rule, the record wins; the row is left as
+originally shipped (never edited) and flagged here rather than silently corrected in place. Read
+`governance/proposals/SHULL-CHG-0010-lab-template.md` for the actual current status: **IMPLEMENTED**.
 
 ## 2026-09-07
 

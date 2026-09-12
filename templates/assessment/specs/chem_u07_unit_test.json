@@ -1,0 +1,509 @@
+{
+  "course": "chemistry",
+  "unit": 7,
+  "sections": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4"
+  ],
+  "standardNote": "PROVISIONAL — Ohio HS Chemistry standard codes not yet confirmed for this unit. Do not print a code until Matt confirms it.",
+  "day1": {
+    "docType": "Unit_Test_Day1_MC",
+    "instructionsForPlatform": "Conceptual multiple choice. Delivered through Pear Assessment (formerly Edulastic) — this is an item bank to copy into the platform, not a printed page. A demo set of 8 items is built here to prove the parallel-version mechanic; the real test runs ~25 items per DECISIONS.md and scales the same way.",
+    "versions": [
+      {
+        "label": "A",
+        "items": [
+          {
+            "id": "d1-1",
+            "learningTarget": "Define the mole as a counting unit (S7.2)",
+            "stem": "A mole is best described as which of the following?",
+            "choices": [
+              "A unit of mass equal to one gram",
+              "The atomic number of an element",
+              "A fixed number of particles, the way a dozen is a fixed number of eggs",
+              "A unit that only applies to gases"
+            ],
+            "correct": 2,
+            "distractorRationale": [
+              "Confuses the mole (a count) with grams (a mass) — the exact mix-up the unit's key idea warns against.",
+              "Confuses mole with atomic number; no relationship between the two.",
+              null,
+              "Overgeneralizes from the gas-at-STP conversion to all moles."
+            ]
+          },
+          {
+            "id": "d1-2",
+            "learningTarget": "Avogadro's number (S7.2)",
+            "stem": "One mole of any substance contains how many particles?",
+            "choices": [
+              "6.022 × 10²³",
+              "22.4",
+              "1.008",
+              "6.022 × 10⁹"
+            ],
+            "correct": 0,
+            "distractorRationale": [
+              null,
+              "22.4 L/mol is the molar volume of a gas at STP, not a particle count — a real mix-up between two constants introduced the same week.",
+              "1.008 is the atomic mass of hydrogen in g/mol, not Avogadro's number.",
+              "Right form, wrong exponent — catches a student who half-remembers the number."
+            ]
+          },
+          {
+            "id": "d1-3",
+            "learningTarget": "Molar mass from a formula (S7.3)",
+            "stem": "To find the molar mass of a compound, you should:",
+            "choices": [
+              "Add the atomic numbers of every element in the formula",
+              "Multiply the molar masses of the elements together",
+              "Use only the molar mass of the first element listed",
+              "Add the molar mass of every atom in the formula, multiplying by each subscript"
+            ],
+            "correct": 3,
+            "distractorRationale": [
+              "Confuses atomic number (periodic table position) with atomic mass (the g/mol value actually needed).",
+              "Molar masses are summed, never multiplied — a made-up operation with no chemical meaning.",
+              "Ignores every atom but one; would give a real student a wildly low answer on Ca(NO₃)₂-type formulas.",
+              null
+            ]
+          },
+          {
+            "id": "d1-4",
+            "learningTarget": "Subscripts outside parentheses (S7.3)",
+            "stem": "In Ca(NO₃)₂, how many total oxygen atoms are present?",
+            "choices": [
+              "3",
+              "6",
+              "2",
+              "9"
+            ],
+            "correct": 1,
+            "distractorRationale": [
+              "Reads only the inner subscript on O and forgets the outer 2 multiplies it.",
+              null,
+              "Confuses the outer subscript (which multiplies the whole NO₃ group) with the oxygen count directly.",
+              "Adds the two subscripts (3 + 2 × 3) instead of multiplying them."
+            ]
+          },
+          {
+            "id": "d1-5",
+            "learningTarget": "Grams-to-particles requires two steps (S7.4)",
+            "stem": "A student wants to convert 10.0 g of a compound directly into a number of molecules in one step. What is wrong with that plan?",
+            "choices": [
+              "Grams and particles never convert directly — the calculation has to pass through moles first",
+              "Nothing is wrong; grams convert directly to particles using Avogadro's number",
+              "Grams can only be converted to liters, never to particles",
+              "The conversion is only possible for gases at STP"
+            ],
+            "correct": 0,
+            "distractorRationale": [
+              null,
+              "This is the exact misconception the unit's key idea targets — skipping the mole step entirely.",
+              "Confuses this conversion pathway with the STP gas-volume pathway, which is a separate route.",
+              "Wrongly restricts a general rule (all grams-to-particles conversions) to one special case (STP gases)."
+            ]
+          },
+          {
+            "id": "d1-6",
+            "learningTarget": "Choosing the right conversion factor (S7.4)",
+            "stem": "Which conversion factor correctly turns a known mass in grams into moles?",
+            "choices": [
+              "mass (g) × molar mass (g/mol)",
+              "mass (g) ÷ 6.022 × 10²³",
+              "mass (g) ÷ 22.4 L/mol",
+              "mass (g) ÷ molar mass (g/mol)"
+            ],
+            "correct": 3,
+            "distractorRationale": [
+              "Inverts the operation — multiplying instead of dividing gives units of g²/mol, which do not cancel to moles.",
+              "Divides by Avogadro's number instead of molar mass — confuses two different conversion factors.",
+              "Uses the STP molar-volume constant on a mass, not a volume — units do not cancel to moles.",
+              null
+            ]
+          },
+          {
+            "id": "d1-7",
+            "learningTarget": "Units as a check (S7.1, S7.4)",
+            "stem": "After setting up a mole-conversion problem, the units do not cancel to the unit the question asked for. What does that mean?",
+            "choices": [
+              "It does not matter, as long as the final number looks reasonable",
+              "The setup is wrong and needs to be redone — not just the arithmetic",
+              "Round the answer so the units match anyway",
+              "Units only need to cancel on gas problems"
+            ],
+            "correct": 1,
+            "distractorRationale": [
+              "This is the exact shortcut the unit tells students not to take — the key idea is stated as a warning against it.",
+              null,
+              "Rounding cannot fix a units problem; the setup itself is the error.",
+              "The rule applies to every mole conversion, not only STP gas problems."
+            ]
+          },
+          {
+            "id": "d1-8",
+            "learningTarget": "Sample size vs. amount of substance (S7.2)",
+            "stem": "Sample X is 1.00 mol of helium gas. Sample Y is 1.00 mol of lead. Which contains more atoms?",
+            "choices": [
+              "Sample X, because gases have more particles per mole",
+              "Sample Y, because lead is denser",
+              "Neither — both contain the same number of atoms",
+              "It cannot be determined without knowing the volume"
+            ],
+            "correct": 2,
+            "distractorRationale": [
+              "Confuses particle count (fixed by the mole) with physical state — gases do not get \"extra\" particles per mole.",
+              "Confuses density (a mass-per-volume property) with particle count, which the mole fixes regardless of density.",
+              null,
+              "Volume is irrelevant to particle count once the amount in moles is already known."
+            ]
+          }
+        ]
+      },
+      {
+        "label": "B",
+        "items": [
+          {
+            "id": "d1-1",
+            "learningTarget": "Define the mole as a counting unit (S7.2)",
+            "stem": "Which statement best defines a mole?",
+            "choices": [
+              "A measurement of an object's mass in grams",
+              "The number of protons in an atom's nucleus",
+              "A counting number equal to 6.022 × 10²³ of something, the way \"dozen\" means 12",
+              "A unit used only when measuring liquids"
+            ],
+            "correct": 2,
+            "distractorRationale": [
+              "Confuses the mole (a count) with grams (a mass).",
+              "Confuses mole with atomic number/proton count.",
+              null,
+              "Wrongly restricts the mole to one state of matter."
+            ]
+          },
+          {
+            "id": "d1-2",
+            "learningTarget": "Avogadro's number (S7.2)",
+            "stem": "Avogadro's number is used to convert between moles and:",
+            "choices": [
+              "Number of particles",
+              "Volume in liters",
+              "Mass in grams",
+              "Atomic mass units"
+            ],
+            "correct": 0,
+            "distractorRationale": [
+              null,
+              "Volume converts through 22.4 L/mol at STP, a different constant entirely.",
+              "Mass converts through molar mass, a different constant entirely.",
+              "Atomic mass units describe one atom, not a mole-scale sample."
+            ]
+          },
+          {
+            "id": "d1-3",
+            "learningTarget": "Molar mass from a formula (S7.3)",
+            "stem": "The molar mass of a compound is found by:",
+            "choices": [
+              "Averaging the atomic masses of the elements present",
+              "Adding the atomic numbers of every element in the formula",
+              "Using the molar mass of only the heaviest element",
+              "Summing each element's molar mass, multiplied by its subscript in the formula"
+            ],
+            "correct": 3,
+            "distractorRationale": [
+              "Averaging instead of summing loses the effect of the subscripts entirely.",
+              "Confuses atomic number with atomic mass.",
+              "Ignores every atom but one, badly underestimating polyatomic compounds.",
+              null
+            ]
+          },
+          {
+            "id": "d1-4",
+            "learningTarget": "Subscripts outside parentheses (S7.3)",
+            "stem": "In Mg(OH)₂, how many total hydrogen atoms are present?",
+            "choices": [
+              "1",
+              "2",
+              "4",
+              "3"
+            ],
+            "correct": 1,
+            "distractorRationale": [
+              "Reads the inner formula but forgets the outer subscript multiplies it.",
+              null,
+              "Doubles the wrong part of the formula — multiplies the O count instead of the whole group correctly.",
+              "No basis in the formula; a guess between the two nearby numbers."
+            ]
+          },
+          {
+            "id": "d1-5",
+            "learningTarget": "Grams-to-particles requires two steps (S7.4)",
+            "stem": "Why can't grams be converted straight to number of particles in a single step?",
+            "choices": [
+              "Because there is no direct conversion factor between grams and particles — moles are the required middle step",
+              "Because grams only apply to solids",
+              "Because particles can only be counted for gases",
+              "Because the calculation would require calculus"
+            ],
+            "correct": 0,
+            "distractorRationale": [
+              null,
+              "Grams describe mass for any state of matter, not only solids.",
+              "Particle counts apply to any sample, not only gases.",
+              "The math involved is arithmetic, not calculus — an irrelevant reason."
+            ]
+          },
+          {
+            "id": "d1-6",
+            "learningTarget": "Choosing the right conversion factor (S7.4)",
+            "stem": "To convert a known number of moles into a mass in grams, you should:",
+            "choices": [
+              "Divide moles by molar mass (g/mol)",
+              "Multiply moles by 6.022 × 10²³",
+              "Divide moles by 22.4 L/mol",
+              "Multiply moles by molar mass (g/mol)"
+            ],
+            "correct": 3,
+            "distractorRationale": [
+              "Inverts the operation; dividing gives mol²/g, which does not cancel to grams.",
+              "Uses Avogadro's number, which converts moles to particles, not to grams.",
+              "Uses the STP molar-volume constant, which converts moles to liters, not to grams.",
+              null
+            ]
+          },
+          {
+            "id": "d1-7",
+            "learningTarget": "Units as a check (S7.1, S7.4)",
+            "stem": "A student's units cancel to \"mol²/g\" instead of \"mol.\" What should they do?",
+            "choices": [
+              "Keep going; the arithmetic will still be correct",
+              "Redo the setup — the conversion factor was used upside down",
+              "Just relabel the final answer as \"mol\"",
+              "Ignore it — units only matter for gas problems"
+            ],
+            "correct": 1,
+            "distractorRationale": [
+              "Wrong units mean the setup, not just the label, is wrong — the arithmetic inherits the error.",
+              null,
+              "Relabeling does not fix a wrong setup; the number itself is wrong.",
+              "The units check applies to every mole conversion, not only gas problems."
+            ]
+          },
+          {
+            "id": "d1-8",
+            "learningTarget": "Sample size vs. amount of substance (S7.2)",
+            "stem": "Sample X is 2.00 mol of neon gas. Sample Y is 2.00 mol of iron. Which statement is correct?",
+            "choices": [
+              "Sample X contains more atoms because gases pack more particles per mole",
+              "Sample Y contains more atoms because iron is denser",
+              "Both samples contain the same number of atoms",
+              "It cannot be determined without knowing the temperature"
+            ],
+            "correct": 2,
+            "distractorRationale": [
+              "Confuses particle count with physical state; the mole fixes particle count regardless of state.",
+              "Confuses density with particle count.",
+              null,
+              "Temperature affects volume for a gas, not the fixed particle count set by the mole."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "day2": {
+    "docType": "Unit_Test_Day2_Problems",
+    "timeTargetMin": "45",
+    "equationLabel": "EQUATIONS YOU MAY USE",
+    "equations": [
+      {
+        "note": "moles from mass",
+        "lhs": "n",
+        "num": "mass (g)",
+        "den": "molar mass (g/mol)"
+      },
+      {
+        "note": "particles from moles",
+        "plain": "N  =  n × 6.022 × 10²³"
+      },
+      {
+        "note": "moles from particles",
+        "lhs": "n",
+        "num": "N",
+        "den": "6.022 × 10²³"
+      },
+      {
+        "note": "gas at STP",
+        "lhs": "n",
+        "num": "volume (L)",
+        "den": "22.4 L/mol"
+      }
+    ],
+    "directions": "Show every step of your work in the space provided. Carry units through every line. Circle your final answer with the correct units and significant figures. Partial credit is available — no credit is given for an answer with no work shown.",
+    "versions": [
+      {
+        "label": "A",
+        "problems": [
+          {
+            "points": 3,
+            "prompt": "Find the molar mass of MgCl₂. Show the sum, not just the final answer.",
+            "workHeightIn": 1.5,
+            "answer": {
+              "value": "95.21 g/mol",
+              "workSteps": [
+                "Mg: 24.31 g/mol",
+                "Cl: 35.45 g/mol × 2 = 70.90 g/mol",
+                "24.31 + 70.90 = 95.21 g/mol"
+              ]
+            }
+          },
+          {
+            "points": 4,
+            "prompt": "How many moles are in 68.0 g of MgCl₂?",
+            "given": "68.0 g MgCl₂ (molar mass 95.21 g/mol)",
+            "need": "moles",
+            "workHeightIn": 1.6,
+            "answer": {
+              "value": "0.714 mol",
+              "workSteps": [
+                "n = 68.0 g ÷ 95.21 g/mol",
+                "n = 0.7143 mol → 0.714 mol (3 sig figs)"
+              ]
+            }
+          },
+          {
+            "points": 4,
+            "prompt": "What is the mass of 3.20 mol of CO₂?",
+            "given": "3.20 mol CO₂",
+            "need": "mass in grams",
+            "workHeightIn": 1.6,
+            "answer": {
+              "value": "141 g",
+              "workSteps": [
+                "molar mass CO₂ = 12.01 + 2(16.00) = 44.01 g/mol",
+                "mass = 3.20 mol × 44.01 g/mol = 140.8 g → 141 g (3 sig figs)"
+              ]
+            }
+          },
+          {
+            "points": 5,
+            "prompt": "How many molecules are in 9.00 g of H₂O? This is two conversions — do them in order and do not skip the middle.",
+            "given": "9.00 g H₂O",
+            "need": "number of molecules",
+            "workHeightIn": 2.0,
+            "answer": {
+              "value": "3.01 × 10²³ molecules",
+              "workSteps": [
+                "molar mass H₂O = 18.02 g/mol",
+                "n = 9.00 g ÷ 18.02 g/mol = 0.4995 mol",
+                "N = 0.4995 mol × 6.022 × 10²³ = 3.01 × 10²³ molecules"
+              ]
+            }
+          },
+          {
+            "points": 6,
+            "prompt": "A sample of nitrogen gas (N₂) occupies 5.60 L at STP.",
+            "parts": [
+              "a.  How many moles of N₂ are present?",
+              "b.  What is the mass of the sample?",
+              "c.  How many molecules of N₂ are present?",
+              "d.  A classmate claims that doubling the volume to 11.2 L would double the number of molecules. Using your work above, say whether they are correct and why."
+            ],
+            "workHeightIn": 3.2,
+            "answer": {
+              "value": "a. 0.250 mol   b. 7.01 g   c. 1.51 × 10²³ molecules   d. Correct — at STP, moles are directly proportional to volume (n = V ÷ 22.4), so doubling the volume doubles the moles and therefore doubles the number of molecules.",
+              "workSteps": [
+                "a. n = 5.60 L ÷ 22.4 L/mol = 0.250 mol",
+                "b. molar mass N₂ = 2(14.01) = 28.02 g/mol; mass = 0.250 mol × 28.02 g/mol = 7.01 g",
+                "c. N = 0.250 mol × 6.022 × 10²³ = 1.51 × 10²³ molecules",
+                "d. Direct proportionality: V → n → N all scale together at STP."
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "label": "B",
+        "problems": [
+          {
+            "points": 3,
+            "prompt": "Find the molar mass of Al₂O₃. Show the sum, not just the final answer.",
+            "workHeightIn": 1.5,
+            "answer": {
+              "value": "101.96 g/mol",
+              "workSteps": [
+                "Al: 26.98 g/mol × 2 = 53.96 g/mol",
+                "O: 16.00 g/mol × 3 = 48.00 g/mol",
+                "53.96 + 48.00 = 101.96 g/mol"
+              ]
+            }
+          },
+          {
+            "points": 4,
+            "prompt": "How many moles are in 51.0 g of Al₂O₃?",
+            "given": "51.0 g Al₂O₃ (molar mass 101.96 g/mol)",
+            "need": "moles",
+            "workHeightIn": 1.6,
+            "answer": {
+              "value": "0.500 mol",
+              "workSteps": [
+                "n = 51.0 g ÷ 101.96 g/mol",
+                "n = 0.5002 mol → 0.500 mol (3 sig figs)"
+              ]
+            }
+          },
+          {
+            "points": 4,
+            "prompt": "What is the mass of 1.75 mol of NH₃?",
+            "given": "1.75 mol NH₃",
+            "need": "mass in grams",
+            "workHeightIn": 1.6,
+            "answer": {
+              "value": "29.8 g",
+              "workSteps": [
+                "molar mass NH₃ = 14.01 + 3(1.008) = 17.03 g/mol",
+                "mass = 1.75 mol × 17.03 g/mol = 29.80 g → 29.8 g (3 sig figs)"
+              ]
+            }
+          },
+          {
+            "points": 5,
+            "prompt": "How many molecules are in 15.0 g of NaCl? This is two conversions — do them in order and do not skip the middle.",
+            "given": "15.0 g NaCl",
+            "need": "number of molecules",
+            "workHeightIn": 2.0,
+            "answer": {
+              "value": "1.55 × 10²³ molecules",
+              "workSteps": [
+                "molar mass NaCl = 58.44 g/mol",
+                "n = 15.0 g ÷ 58.44 g/mol = 0.2567 mol",
+                "N = 0.2567 mol × 6.022 × 10²³ = 1.55 × 10²³ molecules"
+              ]
+            }
+          },
+          {
+            "points": 6,
+            "prompt": "A sample of oxygen gas (O₂) occupies 8.96 L at STP.",
+            "parts": [
+              "a.  How many moles of O₂ are present?",
+              "b.  What is the mass of the sample?",
+              "c.  How many molecules of O₂ are present?",
+              "d.  A classmate claims that cutting the volume in half to 4.48 L would cut the number of molecules in half. Using your work above, say whether they are correct and why."
+            ],
+            "workHeightIn": 3.2,
+            "answer": {
+              "value": "a. 0.400 mol   b. 12.8 g   c. 2.41 × 10²³ molecules   d. Correct — at STP, moles are directly proportional to volume (n = V ÷ 22.4), so halving the volume halves the moles and therefore halves the number of molecules.",
+              "workSteps": [
+                "a. n = 8.96 L ÷ 22.4 L/mol = 0.400 mol",
+                "b. molar mass O₂ = 2(16.00) = 32.00 g/mol; mass = 0.400 mol × 32.00 g/mol = 12.8 g",
+                "c. N = 0.400 mol × 6.022 × 10²³ = 2.41 × 10²³ molecules",
+                "d. Direct proportionality: V → n → N all scale together at STP."
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

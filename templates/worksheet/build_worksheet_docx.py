@@ -29,16 +29,16 @@ Colour comes from brand/tokens.json. No hex is typed in this file.
 import json, os, sys
 from docx import Document
 from docx.shared import Pt, Inches
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
-    COURSE_CODE, Palette, debullet, known_sections, unit_title,
+    COURSE_CODE, Palette, debullet, known_sections, unit_title, section_span,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, page_break,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -122,29 +122,6 @@ def is_short(q):
 
 
 # --------------------------------------------------------------------------- blocks
-
-def page_break(doc):
-    """Start a new page without spending a line to do it.
-
-    A normal paragraph carrying a page break is full body height, so when a section
-    ends flush with the bottom of its page that paragraph does not fit - it moves to
-    the next page, and only then breaks, leaving a blank page carrying nothing but the
-    footer. Pinning the line to 1pt exact makes the break paragraph effectively
-    dimensionless, so it always fits where it is written.
-    """
-    p = doc.add_paragraph()
-    pf = p.paragraph_format
-    pf.space_before = Pt(0); pf.space_after = Pt(0)
-    pPr = p._p.get_or_add_pPr()
-    sp = OxmlElement("w:spacing")
-    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
-    sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
-    pPr.append(sp)
-    r = p.add_run()
-    r.font.size = Pt(1)
-    r.add_break(WD_BREAK.PAGE)
-    return p
-
 
 def label(cell, text, pal, size=7.5, first=False):
     return para(cell, text, size, bold=True, color=pal.accent, caps_track=True, first=first)
@@ -579,8 +556,7 @@ def main():
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
     utitle = unit_title(course, spec["unit"])       # a course fact, read not typed
-    span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
-            if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
+    span = section_span(spec["sections"])
     kind = spec.get("docType", "Practice_Set")
     out = sys.argv[2] if len(sys.argv) > 2 else \
         os.path.join(HERE, f"SHULL_{code}_{kind}_{unit}_{span}.docx")
