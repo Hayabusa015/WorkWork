@@ -53,6 +53,15 @@ def layer1_files():
         root = os.path.join(REPO, d)
         for dirpath, dirnames, filenames in os.walk(root):
             dirnames[:] = [x for x in dirnames if x not in {".git", "palette-archive", "superseded"}]
+            rel_dir = os.path.relpath(dirpath, REPO)
+            # .claude/skills/hallmark is a vendored third-party skill (see its SOURCE.md) -
+            # its own example copy is not a SHULL course fact. Same exclusion reasoning as
+            # _shullos.EXCLUDED_DIRS; this validator predates that shared list and does its
+            # own walk, so the skip is repeated here rather than left unhandled.
+            if rel_dir == os.path.join(".claude", "skills", "hallmark") or \
+                    rel_dir.startswith(os.path.join(".claude", "skills", "hallmark") + os.sep):
+                dirnames[:] = []
+                continue
             for fn in filenames:
                 if fn.lower().endswith((".md", ".json", ".html", ".css")):
                     yield os.path.relpath(os.path.join(dirpath, fn), REPO)

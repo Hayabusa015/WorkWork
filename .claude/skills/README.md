@@ -24,3 +24,11 @@ is what the legacy `shull-studio` became, and decomposing it is most of this mig
 
 Enforced by `scripts/validate_layers.py` and `scripts/validate_tokens.py`, which run on the Stop
 hook. A skill that restates a rule fails the build.
+
+## Vendored, ungoverned
+
+One skill here isn't a SHULL skill at all and isn't subject to the table above:
+
+| Skill | Owns | Why it's separate |
+|---|---|---|
+| `hallmark` | Auditing/building the `app/` web UI (HTML/CSS) | Third-party (nutlope/hallmark, MIT), vendored verbatim for the Codex-built local app — the one surface in this repo that's actually a website. See `hallmark/SOURCE.md`. Not a SHULL document skill; not enforced by the validators above. |

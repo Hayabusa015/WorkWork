@@ -5,12 +5,15 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Never scanned. legacy/ is a verbatim snapshot; docs/ and governance/ are analysis and
 # change records that legitimately quote superseded values; palette-archive exists to
-# hold retired hexes.
+# hold retired hexes. .claude/skills/hallmark is a vendored third-party skill for the
+# app/ web UI (see its SOURCE.md) - its hex codes and example "test NN" copy are not
+# SHULL tokens or course facts, and flagging them is noise, not a finding.
 EXCLUDED_DIRS = {
     ".git", "node_modules", "legacy", "docs", "reports",
     os.path.join("brand", "palette-archive"),
     os.path.join("governance", "proposals"),
     os.path.join("standards", "superseded"),
+    os.path.join(".claude", "skills", "hallmark"),
 }
 
 TEXT_EXT = {".md", ".html", ".css", ".js", ".py", ".json", ".txt", ".yml", ".yaml"}
