@@ -1,1 +1,52 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SHULL OS • Teaching workspace</title><link rel="stylesheet" href="/style.css"></head><body><aside><a class="brand" href="/">SHULL <span>OS</span></a><p class="tagline">Plan. Create. Teach.</p><nav id="nav"></nav><footer>Better lessons.<br>Brighter thinkers.<div class="line"></div><small>Personal teaching workspace</small></footer></aside><main><header><div><h1 id="heading">Today</h1><p id="subtitle">Your teaching day, in one place.</p></div><span id="date"></span></header><div id="notice" role="status"></div><div id="content"></div></main><dialog id="review"><button id="close" class="close" aria-label="Close review">×</button><div id="detail"></div></dialog><script type="module" src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHULL OS • Teaching workspace</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-course="chemistry">
+  <aside>
+    <div>
+      <a class="brand" href="/">SHULL <span>OS</span></a>
+      <p class="tagline">Plan · Create · Teach</p>
+    </div>
+    <nav id="nav" aria-label="Workspace"></nav>
+    <div class="rail-foot">
+      <div class="rail-rule"></div>
+      <p class="rail-note">Better lessons.<br>Brighter thinkers.</p>
+      <p class="rail-note">Personal teaching workspace</p>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <h1 id="heading">Today</h1>
+        <p id="subtitle">Your teaching day, in one place.</p>
+      </div>
+      <span id="date"></span>
+    </header>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <div id="content"></div>
+  </main>
+
+  <dialog id="review" aria-label="Document review">
+    <button id="close" class="close" aria-label="Close review">×</button>
+    <div id="detail"></div>
+  </dialog>
+
+  <!-- Full-size look at a template, opened from any thumbnail. -->
+  <dialog id="shot-view" aria-label="Template preview">
+    <button id="shot-close" class="close" aria-label="Close preview">×</button>
+    <figure class="shot-figure">
+      <img id="shot-image" alt="">
+      <figcaption><span id="shot-caption"></span><span id="shot-meta" class="hint"></span></figcaption>
+    </figure>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

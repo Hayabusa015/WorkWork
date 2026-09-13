@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2026-09-13",
+    "scope": "app",
+    "macrostructure": "Workbench",
+    "theme": "derived from brand/tokens.json (per-course accent)",
+    "enrichment": "none",
+    "brief": "SHULL OS teaching workspace — redesign app/public, add real template previews"
+  }
+]

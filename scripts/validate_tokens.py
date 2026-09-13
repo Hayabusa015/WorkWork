@@ -27,10 +27,16 @@ GENERATED = {
     "templates/lab/shull-lab-tokens.css",       # scripts/build_lab_css.py
     "templates/notes/shull-notes-tokens.css",   # scripts/build_lab_css.py, same content
     "templates/slide/tokens.generated.js",      # scripts/build_slide_tokens.py
+    "app/public/tokens.css",                    # scripts/build_app_tokens.py
+    "app/public/favicon.svg",                   # scripts/build_app_tokens.py, same run
 }
 
 # This file names the exception values it permits; that is not duplication.
-SELF = {"scripts/validate_tokens.py"}
+SELF = {"scripts/validate_tokens.py",
+        # Names #16B8A6 once, in the docstring explaining that Geology's identity
+        # colour was being used as the app's global accent. Documenting the defect,
+        # not storing the value.
+        "scripts/build_app_tokens.py"}
 
 SOURCE = "brand/tokens.json"
 

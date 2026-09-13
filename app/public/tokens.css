@@ -1,0 +1,100 @@
+/* GENERATED FROM brand/tokens.json BY scripts/build_app_tokens.py - DO NOT EDIT.
+   Re-run the script after changing any token. Hand-editing a hex here is the
+   defect validate_tokens.py exists to catch.
+
+   Hallmark · genre: modern-minimal · macrostructure: Workbench
+   design-system: app/design.md · designed-as-app
+   Theme is not a Hallmark catalog pick: it is derived from the repository's own
+   locked brand tokens, which outrank the catalog. */
+
+:root {
+  color-scheme: dark;
+
+  /* Ground - brand/tokens.json "ground" */
+  --paper:      #14161B;
+  --paper-2:    #2E3338;
+  --paper-3:    color-mix(in oklab, #2E3338 62%, #14161B);
+  --ink:        #FFFFFF;
+  --ink-2:      #BDB6AA;
+  /* Measured, not eyeballed. At 62% this was 2.74:1 on a panel - below WCAG AA and
+     well under the house 5.5 - and it carries every hint, date and caption in the
+     app. At 85% it measures 6.57 on the ground, 5.38 in a field and 4.63 on a panel:
+     clears AA everywhere and the house target on the two larger surfaces, while
+     staying a visible step below --ink-2 (6.34 on panel). */
+  --ink-3:      color-mix(in oklab, #BDB6AA 85%, #14161B);
+  --rule:       color-mix(in oklab, #BDB6AA 22%, #14161B);
+  /* Functional borders - field and button edges. WCAG 1.4.11 wants 3:1 for a UI
+     boundary; 38% measured 1.51 on a panel. 70% measures 3.29 panel / 3.83 field.
+     --rule stays faint: it only ever draws decorative separators. */
+  --rule-strong:color-mix(in oklab, #BDB6AA 70%, #14161B);
+  --parchment:  #EDF0E5;
+
+  /* Accent - neutral product default. A course overrides it below. */
+  --accent:       #EDF0E5;
+  --accent-2:     #BDB6AA;
+  --accent-quiet: color-mix(in oklab, #EDF0E5 12%, transparent);
+  --accent-line:  color-mix(in oklab, #EDF0E5 34%, transparent);
+  --accent-ink:   #14161B;
+
+  /* Every course at once - for lists and legends that show all three side by side,
+     where a single active accent cannot say which course a row belongs to. The
+     grayscaleSeparationMin rule still applies: these carry a dot AND a text label,
+     never colour alone. */
+  --course-chemistry: #A3E635;
+  --course-physics:   #F5B82E;
+  --course-geology:   #16B8A6;
+
+  /* Semantic - meaning never yields to course identity (spec Part 9) */
+  --danger:   #DC2626;
+  --caution:  #F59E0B;
+  --success:  #22C55E;
+
+  /* Type - Trade Gothic Next, Archivo, Liberation Sans, sans-serif */
+  --font-body: Trade Gothic Next, Archivo, Liberation Sans, sans-serif;
+  --font-display: Trade Gothic Next Condensed, Archivo Narrow, Liberation Sans Narrow, sans-serif;
+
+  /* 4pt scale */
+  --space-3xs: .25rem; --space-2xs: .5rem;  --space-xs: .75rem;
+  --space-sm:  1rem;   --space-md:  1.5rem; --space-lg: 2rem;
+  --space-xl:  3rem;   --space-2xl: 4.5rem;
+
+  --text-xs: .75rem;  --text-sm: .8125rem; --text-md: .9375rem;
+  --text-lg: 1.0625rem; --text-xl: 1.375rem; --text-2xl: 1.875rem;
+  --text-display: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
+
+  --radius-card: 12px; --radius-input: 9px; --radius-pill: 999px;
+  --rule-hair: 1px;
+
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-short: 160ms;
+  --dur-mid: 240ms;
+}
+
+[data-course="chemistry"] {
+  --accent:        #A3E635;      /* Lab Lime */
+  --accent-2:      #22D3EE;      /* Aqua */
+  --accent-quiet:  color-mix(in oklab, #A3E635 14%, transparent);
+  --accent-line:   color-mix(in oklab, #A3E635 38%, transparent);
+}
+[data-course="physics"] {
+  --accent:        #F5B82E;      /* Quantum Gold */
+  --accent-2:      #8B5CF6;      /* Deep Purple */
+  --accent-quiet:  color-mix(in oklab, #F5B82E 14%, transparent);
+  --accent-line:   color-mix(in oklab, #F5B82E 38%, transparent);
+}
+[data-course="geology"] {
+  --accent:        #16B8A6;      /* Terra Teal */
+  --accent-2:      #E85D24;      /* Rust Orange */
+  --accent-quiet:  color-mix(in oklab, #16B8A6 14%, transparent);
+  --accent-line:   color-mix(in oklab, #16B8A6 38%, transparent);
+}
+
+/* "Class" routing is cross-course: it takes the neutral product accent, because
+   no single course owns a general-class material. */
+[data-course="class"] {
+  --accent:        #EDF0E5;
+  --accent-2:      #BDB6AA;
+  --accent-quiet:  color-mix(in oklab, #EDF0E5 12%, transparent);
+  --accent-line:   color-mix(in oklab, #EDF0E5 34%, transparent);
+}
