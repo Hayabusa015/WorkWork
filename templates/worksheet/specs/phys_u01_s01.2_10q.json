@@ -29,7 +29,7 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "Iron Man boosts away from another one of Fury's meetings, speeding up from 5 m/s to a faster cruise, accelerating at 3 m/s² for 4 s. Find his final velocity.",
+          "prompt": "Iron Man boosts away from another one of Fury's meetings, speeding up from 5 m/s to a faster cruise, accelerating at 3 m/s² for 4 s. Find his **final velocity**.",
           "calculation": true,
           "selfCheck": "[  17 m/s  ]",
           "solution": "v = v0 + at = 5 m/s + (3 m/s²)(4 s) = 17 m/s.",
@@ -38,7 +38,7 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "The Flash decelerates from 30 m/s to 10 m/s in 4 s — still faster than your last Uber driver. Find his acceleration.",
+          "prompt": "The Flash decelerates from 30 m/s to 10 m/s in 4 s — still faster than your last Uber driver. Find his **acceleration**.",
           "calculation": true,
           "selfCheck": "[  −5 m/s²  ]",
           "solution": "a = (v − v0) ÷ t = (10 m/s − 30 m/s) ÷ 4 s = −5 m/s².",
@@ -47,16 +47,16 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "Spider-Man free-falls off a building starting from rest, speeding up at 9.8 m/s² for 3 s before he remembers he has web-shooters. Find how far he fell.",
+          "prompt": "Thor launches off the ground from rest and accelerates at 6 m/s² for 4 s before he levels off. Find the **distance** he covers before leveling off.",
           "calculation": true,
-          "selfCheck": "[  44.1 m  ]",
-          "solution": "Δx = v0t + ½at² = 0 + ½(9.8 m/s²)(3 s)² = ½(9.8)(9) = 44.1 m.",
-          "finalAnswer": "44.1 m"
+          "selfCheck": "[  48 m  ]",
+          "solution": "Δx = v0t + ½at² = 0 + ½(6 m/s²)(4 s)² = ½(6)(16) = 48 m.",
+          "finalAnswer": "48 m"
         },
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "Batman's grappling hook reels him up from rest over a displacement of 20 m, reaching a final speed of 8 m/s — he's trying to beat Alfred to dinner. Find his acceleration.",
+          "prompt": "Batman's grappling hook reels him up from rest over a displacement of 20 m, reaching a final speed of 8 m/s — he's trying to beat Alfred to dinner. Find his **acceleration**.",
           "calculation": true,
           "selfCheck": "[  1.6 m/s²  ]",
           "solution": "v² = v0² + 2aΔx → (8 m/s)² = 0 + 2a(20 m) → 64 = 40a → a = 1.6 m/s².",
@@ -65,7 +65,7 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "SpongeBob's boat-mobile pulls away from the Krusty Krab drive-through at 4 m/s and accelerates at 2 m/s² for 5 s. Find the distance it covers.",
+          "prompt": "SpongeBob's boat-mobile pulls away from the Krusty Krab drive-through at 4 m/s and accelerates at 2 m/s² for 5 s. Find the **distance** it covers.",
           "calculation": true,
           "selfCheck": "[  45 m  ]",
           "solution": "Δx = v0t + ½at² = (4 m/s)(5 s) + ½(2 m/s²)(5 s)² = 20 m + 25 m = 45 m.",
@@ -74,7 +74,7 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "The Batmobile speeds up from 15 m/s to 35 m/s while covering 250 m of Gotham docks — Alfred texted that dinner's getting cold again. Find how long that took.",
+          "prompt": "The Batmobile speeds up from 15 m/s to 35 m/s while covering 250 m of Gotham docks — Alfred texted that dinner's getting cold again. Find the **time** that took.",
           "parts": [
             "Which of the four equations doesn't need acceleration at all?"
           ],
@@ -86,7 +86,7 @@
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "Patrick Star rolls down a Bikini Bottom hill starting at 2 m/s, accelerating at 3 m/s², covering 40 m before he stops rolling. Find the time it took. Keep only the positive root.",
+          "prompt": "Patrick Star rolls down a Bikini Bottom hill starting at 2 m/s, accelerating at 3 m/s², covering 40 m before he stops rolling. Find the **time** it took. Keep only the positive root.",
           "calculation": true,
           "selfCheck": "[  4.54 s  ]",
           "solution": "Δx = v0t + ½at² → 40 = 2t + 1.5t² → 1.5t² + 2t − 40 = 0. Quadratic formula: t = [−2 ± √(4+240)] ÷ 3 = [−2 ± 15.62] ÷ 3. Positive root: t = 13.62 ÷ 3 = 4.54 s.",
@@ -95,7 +95,7 @@
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "Aquaman jets off from rest, accelerating at 2 m/s² for 6 s, then coasts at whatever velocity he reached for another 10 s. Find the total distance covered across both phases.",
+          "prompt": "Aquaman jets off from rest, accelerating at 2 m/s² for 6 s, then coasts at whatever velocity he reached for another 10 s. Find the **total distance** covered across both phases.",
           "parts": [
             "Two phases, two calculations — find the velocity at the end of phase 1 before you touch phase 2."
           ],
@@ -107,7 +107,7 @@
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "Wonder Woman accelerates uniformly from 4 m/s to 22 m/s over a 30 m sprint. First use v² = v₀² + 2aΔx to find her acceleration, then find the time using v = v₀ + at.",
+          "prompt": "Wonder Woman accelerates uniformly from 4 m/s to 22 m/s over a 30 m sprint. First use v² = v₀² + 2aΔx to find her **acceleration**, then find the **time** using v = v₀ + at.",
           "parts": [
             "Confirm your time with Δx = ((v₀ + v) ÷ 2)t — it should come back to 30 m."
           ],
@@ -119,7 +119,7 @@
         {
           "tier": "multi-topic",
           "points": 5,
-          "prompt": "Batman and Robin drag race down a straight stretch of the Gotham docks, starting at the same moment. Batman starts from rest and accelerates at 4 m/s². Robin starts 20 m ahead of Batman and holds a constant 12 m/s, no acceleration. Find how long it takes Batman to catch up, and his velocity at that moment.",
+          "prompt": "Batman and Robin drag race down a straight stretch of the Gotham docks, starting at the same moment. Batman starts from rest and accelerates at 4 m/s². Robin starts 20 m ahead of Batman and holds a constant 12 m/s, no acceleration. Find the **time** it takes Batman to catch up, and his **velocity** at that moment.",
           "parts": [
             "Write both positions as functions of time and set them equal — Robin's head start is part of his position, not a separate step."
           ],
