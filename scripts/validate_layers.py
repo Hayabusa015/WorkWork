@@ -58,8 +58,9 @@ def layer1_files():
             # its own example copy is not a SHULL course fact. Same exclusion reasoning as
             # _shullos.EXCLUDED_DIRS; this validator predates that shared list and does its
             # own walk, so the skip is repeated here rather than left unhandled.
-            if rel_dir == os.path.join(".claude", "skills", "hallmark") or \
-                    rel_dir.startswith(os.path.join(".claude", "skills", "hallmark") + os.sep):
+            vendored = [os.path.join(".claude", "skills", "hallmark"),
+                        os.path.join(".claude", "skills", "frontend-slides")]
+            if any(rel_dir == v or rel_dir.startswith(v + os.sep) for v in vendored):
                 dirnames[:] = []
                 continue
             for fn in filenames:

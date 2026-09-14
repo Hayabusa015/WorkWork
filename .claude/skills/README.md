@@ -27,8 +27,9 @@ hook. A skill that restates a rule fails the build.
 
 ## Vendored, ungoverned
 
-One skill here isn't a SHULL skill at all and isn't subject to the table above:
+Two skills here are not SHULL skills at all and are not subject to the table above:
 
 | Skill | Owns | Why it's separate |
 |---|---|---|
 | `hallmark` | Auditing/building the `app/` web UI (HTML/CSS) | Third-party (nutlope/hallmark, MIT), vendored verbatim for the Codex-built local app — the one surface in this repo that's actually a website. See `hallmark/SOURCE.md`. Not a SHULL document skill; not enforced by the validators above. |
+| `frontend-slides` | HTML slide decks, `.pptx` extraction, deck→PDF export | Third-party (zarazhangrui/frontend-slides, MIT). Its design philosophy — vary fonts and palettes per deck — is the opposite of SHULL's locked brand, so it carries a generated `shull-science` template that overrides that. **Select `shull-science` for any SHULL deck.** See `frontend-slides/SOURCE.md`. Does not replace `templates/slide/`, which still builds the `.pptx`. |

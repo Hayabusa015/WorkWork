@@ -14,6 +14,11 @@ EXCLUDED_DIRS = {
     os.path.join("governance", "proposals"),
     os.path.join("standards", "superseded"),
     os.path.join(".claude", "skills", "hallmark"),
+    # Vendored third-party skill (see its SOURCE.md). Its ~25 upstream template
+    # design docs are full of other people's palettes and faces by design; they are
+    # not SHULL tokens and flagging them is noise. The one SHULL template inside it
+    # is generated from brand/tokens.json, so it is an artifact, not a source.
+    os.path.join(".claude", "skills", "frontend-slides"),
 }
 
 TEXT_EXT = {".md", ".html", ".css", ".js", ".py", ".json", ".txt", ".yml", ".yaml"}
