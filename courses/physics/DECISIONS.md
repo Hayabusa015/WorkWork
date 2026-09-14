@@ -274,6 +274,52 @@ rendering rule, both of which continue to govern every other Physics document.
 Status: CONFIRMED — Path A (course-specific; no standard/skill file touched — the shared builder
 itself is untouched, only used via a documented one-time override).
 
+### 2026-09-14 — One-off correction: Section 1.2 practice set (Q3 free-fall removed, bold answer-target rendering added)
+This is a further, later one-off correction to the same document recorded immediately above — not a
+new document — made in direct response to two follow-up instructions from Matt.
+
+**1. Q3 replaced — free fall is Section 1.4, not 1.2.** Matt said plainly: "I don't want free fall.
+That's section 1.4, I just want 1.2." Question 3 originally used g = 9.8 m/s² (a free-fall scenario),
+which belongs to Section 1.4 (Free Fall), not 1.2 (Acceleration & the Kinematic Equations). It was
+replaced with a non-free-fall constant-acceleration problem: Thor accelerates from rest at 6 m/s²
+for 4 s, find the distance covered (48 m). No other question in the set used free fall.
+
+**2. The asked-for quantity is now bolded in every prompt.** Matt said: "When the problem asks for
+something like 'acceleration' put the acceleration in bold." All 10 question prompts now wrap the
+specific quantity the student is asked to solve for in **bold** markdown — e.g. "Find his
+**acceleration**", "Find the **distance** he covers."
+
+This required a new rendering technique, since the shared `para`/`run` primitives in
+`_shull_docx.py` only support single-run paragraphs. A `para_rich()` helper was added — regex
+`BOLD_RE = re.compile(r'(\*\*[^*]+\*\*)')` splitting text into bold/plain run segments — inside the
+same kind of one-off, in-memory build script used for the ramp/tier-tag exception above.
+`build_worksheet_docx.py` was **not** edited. The same bold-splitting was applied to the teacher
+key's restated-prompt line, in a matching one-off override of `build_worksheet_key_docx.py`'s
+`answer_block()`, preserving that line's existing italic styling — both bold and plain segments stay
+italic, and bold segments are also bold. `build_worksheet_key_docx.py` itself was **not** edited
+either.
+
+Both the student docx/pdf and the Key docx/pdf were rebuilt from the corrected spec
+(`templates/worksheet/specs/phys_u01_s01.2_10q.json`) and re-passed all three standing audits:
+`audit_worksheet.py` (2-page budget, PASS), `audit_fonts.py` (Archivo only, PASS),
+`audit_print_ink.py` (student PASS at 4.40% toner max, key PASS at 2.71% toner max). Both were
+visually inspected page by page and confirmed correct.
+
+**Scope, stated plainly:**
+1. Scoped to this one document — `SHULL_PHYS_Practice_Set_U01_S01.2.docx`/`.pdf` and its `_Key` —
+   built from the same, already-committed spec file.
+2. **Not a precedent** for other Physics documents — a future document needing either the same
+   free-fall exclusion check or bold-answer-target rendering needs its own explicit request and its
+   own record.
+3. Both files already re-passed all three standing audits (worksheet, fonts, print-ink) before this
+   entry was recorded.
+
+Supersedes: Nothing in the "One-off exceptions: Section 1.2 practice set (custom ramp + tier tag
+suppressed)" entry immediately above — that entry's ramp (3/3/3/1) and tier-tag-suppression findings
+are untouched by this correction. This entry only updates the content of Q3 and adds the
+prompt-rendering detail within the same document.
+Status: CONFIRMED — Path A (course-specific one-off; shared builders untouched).
+
 ### 2026-09-14 — Standing convention: separate answer-key file for every Physics practice set
 Matt said plainly: "produce the answer key when you create a physics problem set like this." This
 is a new standing rule: **every future Physics practice set must ship with a separate `_Key` file**
