@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-14
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -327,14 +327,31 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
    Projects 15 / Homework 7 / Binders 3. This file says daily practice is ~10%. Homework 7 +
    Binders 3 = 10, so they *may* reconcile — but "daily practice" and "homework + binders" are not
    obviously the same category. **Confirm which framing is the real gradebook.** (CONFLICT-24)
-4. **Lab placements beyond U0.** Only U0.3 (Intro Skills Lab) and U0.4 (11 Unknowns Lab) are
-   confirmed. The pacing guide's other lab slots (e.g. Calorimetry in U9, Titration in U14)
-   are reasonable PROVISIONAL suggestions, not confirmed lab names or procedures. *Blocks:
-   building any lab past Unit 0 as final rather than draft.*
+4. **Lab placements beyond U0.** U0.3 (Intro Skills Lab), U0.4 (11 Unknowns Lab), and now U1.1
+   (Paper Chromatography: Rf Values of Food Colorings — Matt's direct placement choice,
+   2026-09-14; see decision log) are confirmed. The pacing guide's other lab slots (e.g.
+   Calorimetry in U9, Titration in U14) remain reasonable PROVISIONAL suggestions, not confirmed
+   lab names or procedures. *Blocks: building any lab past Unit 0 as final rather than draft,
+   except U1.1.*
 
 ---
 
 ## Decision log
+
+### 2026-09-14 — U1.1 lab confirmed: Paper Chromatography
+U1.1 (Matter & Changes) now has a confirmed lab: "Paper Chromatography: Rf Values of Food
+Colorings," built and filed as `SHULL_CHEM_Lab_U01_S01.1_Chromatography.html` /
+`SHULL_CHEM_Lab_U01_S01.1_Chromatography_Key.html` (not yet filed to Drive — that is a separate
+step). Placement was Matt's direct choice in conversation, given U1.1 pairs naturally with
+separating-mixtures content — not inferred from the pacing guide and not a builder guess.
+Data-collection shape for this lab: each group runs only 2 of the 4 known food colorings plus a
+shared mystery mixture (not all 4 per group), pooling data via the course's existing
+one-shared-Google-Sheet-per-lab convention (see "Lab data collection," above) — this is the
+existing mechanism, not a new one.
+Supersedes: item 4 ("Lab placements beyond U0") in Open Questions, updated below to add U1.1 to
+the confirmed list. U0.3 and U0.4 remain confirmed as before; every other lab slot past Unit 0
+(Calorimetry U9, Titration U14, etc.) remains PROVISIONAL and still blocked.
+Status: CONFIRMED
 
 ### 2026-09-05 — Chemistry decisions file created
 Curriculum map, calendar/pacing, grading policy, lab template, and assessment structure moved
