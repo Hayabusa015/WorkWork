@@ -29,42 +29,42 @@
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A skateboarder pushes off and rolls 5 m east down the sidewalk, then coasts 3 m farther east before rolling to a stop. Find the total distance travelled and the displacement.",
+          "prompt": "Spider-Man swings 5 m east across 5th Avenue, then swings 3 m farther east to land on a rooftop water tower — Aunt May still doesn't know where he's been all afternoon. Find the total distance travelled and the displacement.",
           "calculation": true,
           "selfCheck": "[  8 m  ·  +8 m east  ]"
         },
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A motorcycle courier covers 120 km of city deliveries in 2.0 hours. Find the average speed in km/h.",
+          "prompt": "The Batmobile covers 120 km across Gotham on a grocery run for Alfred, taking 2.0 hours because of, well, Gotham traffic. Find its average speed in km/h.",
           "calculation": true,
           "selfCheck": "[  60 km/h  ]"
         },
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "An e-bike rider covers 90 km on a single charge over a 3.0-hour ride. Find her average speed in km/h.",
+          "prompt": "SpongeBob makes the long way round through Bikini Bottom on a Krusty Krab delivery — 90 km in 3.0 hours, because Patrick insisted on a snack break halfway. Find the average speed in km/h.",
           "calculation": true,
           "selfCheck": "[  30 km/h  ]"
         },
         {
           "tier": "warm-up",
           "points": 2,
-          "prompt": "A delivery drone flies 200 m east from the warehouse, then has to backtrack 50 m west around a tree. Find the total distance travelled and the displacement.",
+          "prompt": "Iron Man's suit flies 200 m east from the tower, then doubles back 50 m west because FRIDAY reminds him he forgot his phone charger again. Find the total distance travelled and the displacement.",
           "calculation": true,
           "selfCheck": "[  250 m  ·  +150 m east  ]"
         },
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A zip-line rider starts at x = 10 m and reaches x = 70 m along the cable in 20 s. Find the displacement and the average velocity.",
+          "prompt": "Batman's grappling hook yanks him from x = 10 m to x = 70 m across a Gotham alley in 20 s, while Robin yells \"wait for me!\" from the ground. Find the displacement and the average velocity.",
           "calculation": true,
           "selfCheck": "[  +60 m  ·  3.0 m/s  ]"
         },
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A hoverboard rider glides 8 m north across the gym floor, then glides 8 m south back to the starting line, taking 10 s in total. Find the total distance, the displacement, and the average velocity.",
+          "prompt": "Patrick Star tumbles 8 m north down a sand dune, then tumbles 8 m south back to where he started, taking 10 s total, because he forgot which way the Krusty Krab was. Find the total distance, the displacement, and the average velocity.",
           "parts": [
             "Before you calculate: which of those three will be zero, and why?"
           ],
@@ -74,21 +74,21 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "A kayaker paddles from x = 5 m to x = −15 m along the shoreline in 10 s. Find the displacement and the average velocity.",
+          "prompt": "Aquaman swims from x = 5 m to x = −15 m along the reef in 10 s, chasing a shopping cart that fell off the pier. Find the displacement and the average velocity.",
           "calculation": true,
           "selfCheck": "[  −20 m  ·  −2.0 m/s  ]"
         },
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "A cyclist starts at x₀ = −15 m, rides forward to x = 50 m, then backtracks to a final position of 40 m, all in 25 s. Find the total distance travelled and the average velocity.",
+          "prompt": "The Batmobile starts at x₀ = −15 m in the Batcave tunnel, races forward to x = 50 m, then backs up to a final position of x = 40 m, all in 25 s, because Alfred texted that dinner's getting cold. Find the total distance travelled and the average velocity.",
           "calculation": true,
           "selfCheck": "[  75 m  ·  2.2 m/s  ]"
         },
         {
           "tier": "multi-topic",
           "points": 5,
-          "prompt": "An e-bike's speedometer displays an average velocity of 3.4 m/s. Convert it to km/h and express your answer with the correct number of significant figures (U0 S0.2).",
+          "prompt": "The Flash's speedometer (yes, he installed one) reads an average velocity of 3.4 m/s during a very unimpressive grocery run. Convert it to km/h and express your answer with the correct number of significant figures (U0 S0.2).",
           "parts": [
             "Then say in one sentence why 3.4 m/s and 12.24 km/h are not equally honest answers."
           ]
