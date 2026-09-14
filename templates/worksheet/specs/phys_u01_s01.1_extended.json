@@ -1,0 +1,114 @@
+{
+  "course": "physics",
+  "unit": 1,
+  "sections": ["1.1"],
+  "docType": "Practice_Set",
+  "timeTargetMin": "25–35",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "sectionsContent": [
+    {
+      "code": "1.1",
+      "title": "Distance, Displacement & Average Velocity",
+      "concept": {
+        "summary": "Distance is how far you travelled; displacement is how far you ended up from where you started. Distance is a scalar and never negative. Displacement is a vector — it carries a sign, and the sign is meaningless until you say which way is positive.",
+        "keyIdeas": [
+          "Speed pairs with distance. Velocity pairs with displacement. They are not interchangeable words.",
+          "A round trip has real distance and zero displacement, so it has real average speed and zero average velocity.",
+          "State your positive direction before you write a single number."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Scientific notation and significant figures (U0 S0.2).",
+          "Rearranging an equation for the variable you want (U0 S0.3).",
+          "Reading a value off a number line, including negative positions."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Number each one, show the givens, and carry units the whole way through. Bring the sheet and your notebook to class.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A skateboarder pushes off and rolls 5 m east down the sidewalk, then coasts 3 m farther east before rolling to a stop. Find the total distance travelled and the displacement.",
+          "calculation": true,
+          "selfCheck": "[  8 m  ·  +8 m east  ]"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A motorcycle courier covers 120 km of city deliveries in 2.0 hours. Find the average speed in km/h.",
+          "calculation": true,
+          "selfCheck": "[  60 km/h  ]"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "An e-bike rider covers 90 km on a single charge over a 3.0-hour ride. Find her average speed in km/h.",
+          "calculation": true,
+          "selfCheck": "[  30 km/h  ]"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A delivery drone flies 200 m east from the warehouse, then has to backtrack 50 m west around a tree. Find the total distance travelled and the displacement.",
+          "calculation": true,
+          "selfCheck": "[  250 m  ·  +150 m east  ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A zip-line rider starts at x = 10 m and reaches x = 70 m along the cable in 20 s. Find the displacement and the average velocity.",
+          "calculation": true,
+          "selfCheck": "[  +60 m  ·  3.0 m/s  ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A hoverboard rider glides 8 m north across the gym floor, then glides 8 m south back to the starting line, taking 10 s in total. Find the total distance, the displacement, and the average velocity.",
+          "parts": [
+            "Before you calculate: which of those three will be zero, and why?"
+          ],
+          "calculation": true,
+          "selfCheck": "[  16 m  ·  0 m  ·  0 m/s  ]"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "A kayaker paddles from x = 5 m to x = −15 m along the shoreline in 10 s. Find the displacement and the average velocity.",
+          "calculation": true,
+          "selfCheck": "[  −20 m  ·  −2.0 m/s  ]"
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A cyclist starts at x₀ = −15 m, rides forward to x = 50 m, then backtracks to a final position of 40 m, all in 25 s. Find the total distance travelled and the average velocity.",
+          "calculation": true,
+          "selfCheck": "[  75 m  ·  2.2 m/s  ]"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "An e-bike's speedometer displays an average velocity of 3.4 m/s. Convert it to km/h and express your answer with the correct number of significant figures (U0 S0.2).",
+          "parts": [
+            "Then say in one sentence why 3.4 m/s and 12.24 km/h are not equally honest answers."
+          ]
+        }
+      ],
+      "equations": [
+        {
+          "note": "average speed",
+          "lhs": "speed",
+          "num": "distance",
+          "den": "total time"
+        },
+        {
+          "note": "average velocity",
+          "lhs": "v",
+          "num": "Δx",
+          "den": "Δt"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 2
+}

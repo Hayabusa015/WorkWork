@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-14
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -219,6 +219,59 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 ---
 
 ## Decision log
+
+### 2026-09-14 — Standing convention: vary problem scenarios in Physics practice sets
+Physics practice-set questions must stop reusing a single generic subject (e.g., "a student
+walks...", "a runner...") across every question in a set. Vary the subject and scenario from
+question to question using physically realistic real-world contexts — vehicles, sports, everyday
+devices — for example a skateboarder, a delivery drone, a zip-line rider, a kayaker, an e-bike,
+rather than defaulting every problem to "a student" or "a runner."
+
+Scenarios must stay physically realistic for the numbers used: check that a chosen scenario's
+computed values are plausible for that subject (e.g., do not call something a "race car" if the
+computed average speed comes out walking pace) — this follows the accuracy discipline already in
+force in this file, applied to scenario choice as well as to the numbers themselves. Flag it in the
+teacher notes if a scenario and its computed numbers don't match.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation — not a one-off for a single document. It is a voice/content-design
+convention only. It does not change the enforced ramp, the no-work-area rule, or any other build
+mechanic in `templates/worksheet/build_worksheet_docx.py`, which are untouched.
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
+### 2026-09-14 — One-off ramp exception: Section 1.1 extended practice set
+`templates/worksheet/build_worksheet_docx.py` enforces an exact Physics ramp of 2 warm-up /
+2 practice / 1 challenge / 1 multi-topic (6 questions per section) via `RAMP["physics"]`, confirmed
+under SHULL-CHG-0019. **That enforced ramp is UNCHANGED and remains 2/2/1/1 for every Physics
+section other than the one document below.**
+
+Matt asked for a ~10-question confidence-building version of just Section 1.1. Offered a choice
+between (a) keeping the standard 6, (b) a one-off exception for this document only, or (c) changing
+the standard ramp for all of Physics, he chose **(b)**: 4 warm-up / 3 practice / 1 challenge /
+1 multi-topic (9 questions), scoped to this document only.
+
+The resulting spec is committed at `templates/worksheet/specs/phys_u01_s01.1_extended.json`,
+producing `SHULL_PHYS_Practice_Set_U01_S01.1_Extended.docx`. It was **not** built by running
+`build_worksheet_docx.py specs/phys_u01_s01.1_extended.json` directly — the checked-in RAMP
+enforcement refuses that invocation, exactly as designed. It was built by a one-time script that
+imports the module and monkeypatches `RAMP["physics"]` in memory for that single call only:
+
+```python
+import build_worksheet_docx as b
+b.RAMP["physics"] = {"warm-up": 4, "practice": 3, "challenge": 1, "multi-topic": 1}
+b.main()   # with sys.argv pointed at phys_u01_s01.1_extended.json
+```
+
+Recorded here so the spec file is reproducible by anyone who finds it later and wonders why the
+checked-in builder refuses it standalone. `build_worksheet_docx.py` itself was not edited and its
+enforcement is untouched.
+
+**This is not a precedent.** A future request to change a different section's ramp needs its own
+decision — do not cite this entry to justify it.
+Supersedes: None — does not alter or replace the ramp confirmed under SHULL-CHG-0019, which
+continues to govern every other Physics section.
+Status: CONFIRMED — Path A (one-off, this document only; no `governance/proposals/` record filed).
 
 ### 2026-09-08 — Physics decisions file created
 Curriculum map, sequencing, discipline rules, and the worksheet rule moved here from
