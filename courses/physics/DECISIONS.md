@@ -220,6 +220,40 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 
 ## Decision log
 
+### 2026-09-14 — Standing convention: separate answer-key file for every Physics practice set
+Matt said plainly: "produce the answer key when you create a physics problem set like this." This
+is a new standing rule: **every future Physics practice set must ship with a separate `_Key` file**
+containing full worked solutions for every question — not just the inline self-check brackets the
+student handout already carries under SHULL-CHG-0021. This matches how the previously-filed
+`SHULL_PHYS_Practice_Set_U01_S1.1_Key.pdf` already worked before this session touched anything (a
+real precedent already existed in Drive), and now the workflow — not just the file convention —
+reflects it.
+
+**Mechanism (recorded for reference, not locked as an implementation detail).** A new companion
+script, `templates/worksheet/build_worksheet_key_docx.py`, reads the same spec JSON as
+`build_worksheet_docx.py` and renders a separate `_Key` docx from each question's new `"solution"`
+(full worked steps) and `"finalAnswer"` (short final result) fields — fields that do not exist on
+the student-facing renderer's schema and are silently ignored by it, so one spec file serves both
+builds without drift. The key is **not** bound by the student handout's course-profile enforcement
+(no-work-area, self-check-except-last, etc.), since it is teacher-only content by definition — it
+always contains every answer, including the one the student sheet withholds.
+
+This is an additive, standalone script. `templates/worksheet/build_worksheet_docx.py` itself was
+**not** modified — its enforcement of the ramp, the no-work-area rule, and self-check placement is
+untouched by this change.
+
+**Scope, stated plainly:**
+1. This applies to **all future Physics practice sets**, not just the S01.1 one already built today.
+2. The new key builder is additive — it did not change `build_worksheet_docx.py`'s enforcement of
+   anything (ramp, no-work-areas, self-check placement).
+3. Every question in a spec must carry a `"solution"` field or the key build refuses, by design — a
+   key that silently skips a question is worse than no key.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation.
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
 ### 2026-09-14 — Standing convention: character-based scenarios in Physics practice sets
 Physics practice-set questions default to **recognizable characters** as the scenario subject —
 Marvel and DC superheroes (Spider-Man, Batman, Iron Man, The Flash, Aquaman, etc.) and cartoon

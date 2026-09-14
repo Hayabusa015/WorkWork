@@ -31,35 +31,45 @@
           "points": 2,
           "prompt": "Spider-Man swings 5 m east across 5th Avenue, then swings 3 m farther east to land on a rooftop water tower — Aunt May still doesn't know where he's been all afternoon. Find the total distance travelled and the displacement.",
           "calculation": true,
-          "selfCheck": "[  8 m  ·  +8 m east  ]"
+          "selfCheck": "[  8 m  ·  +8 m east  ]",
+          "solution": "Total distance = 5 m + 3 m = 8 m — both legs add, direction doesn't cancel distance.\nBoth legs are east (positive), so displacement Δx = +5 m + 3 m = +8 m.",
+          "finalAnswer": "8 m · +8 m east"
         },
         {
           "tier": "warm-up",
           "points": 2,
           "prompt": "The Batmobile covers 120 km across Gotham on a grocery run for Alfred, taking 2.0 hours because of, well, Gotham traffic. Find its average speed in km/h.",
           "calculation": true,
-          "selfCheck": "[  60 km/h  ]"
+          "selfCheck": "[  60 km/h  ]",
+          "solution": "speed = distance ÷ total time = 120 km ÷ 2.0 h = 60 km/h.",
+          "finalAnswer": "60 km/h"
         },
         {
           "tier": "warm-up",
           "points": 2,
           "prompt": "SpongeBob makes the long way round through Bikini Bottom on a Krusty Krab delivery — 90 km in 3.0 hours, because Patrick insisted on a snack break halfway. Find the average speed in km/h.",
           "calculation": true,
-          "selfCheck": "[  30 km/h  ]"
+          "selfCheck": "[  30 km/h  ]",
+          "solution": "speed = distance ÷ total time = 90 km ÷ 3.0 h = 30 km/h.",
+          "finalAnswer": "30 km/h"
         },
         {
           "tier": "warm-up",
           "points": 2,
           "prompt": "Iron Man's suit flies 200 m east from the tower, then doubles back 50 m west because FRIDAY reminds him he forgot his phone charger again. Find the total distance travelled and the displacement.",
           "calculation": true,
-          "selfCheck": "[  250 m  ·  +150 m east  ]"
+          "selfCheck": "[  250 m  ·  +150 m east  ]",
+          "solution": "Total distance = 200 m + 50 m = 250 m.\nThe east leg is +200 m; the west leg is opposite direction, so −50 m. Displacement Δx = 200 m − 50 m = +150 m.",
+          "finalAnswer": "250 m · +150 m east"
         },
         {
           "tier": "practice",
           "points": 3,
           "prompt": "Batman's grappling hook yanks him from x = 10 m to x = 70 m across a Gotham alley in 20 s, while Robin yells \"wait for me!\" from the ground. Find the displacement and the average velocity.",
           "calculation": true,
-          "selfCheck": "[  +60 m  ·  3.0 m/s  ]"
+          "selfCheck": "[  +60 m  ·  3.0 m/s  ]",
+          "solution": "Δx = x_f − x_i = 70 m − 10 m = +60 m.\nv̄ = Δx ÷ Δt = 60 m ÷ 20 s = 3.0 m/s.",
+          "finalAnswer": "+60 m · 3.0 m/s"
         },
         {
           "tier": "practice",
@@ -69,21 +79,27 @@
             "Before you calculate: which of those three will be zero, and why?"
           ],
           "calculation": true,
-          "selfCheck": "[  16 m  ·  0 m  ·  0 m/s  ]"
+          "selfCheck": "[  16 m  ·  0 m  ·  0 m/s  ]",
+          "solution": "Total distance = 8 m + 8 m = 16 m.\nDisplacement = 0 m: he ends at the same point he started, so the two legs cancel.\nv̄ = Δx ÷ Δt = 0 m ÷ 10 s = 0 m/s. Distance is never zero for a real round trip, but displacement and average velocity are exactly zero whenever the start and end points match.",
+          "finalAnswer": "16 m · 0 m · 0 m/s"
         },
         {
           "tier": "practice",
           "points": 3,
           "prompt": "Aquaman swims from x = 5 m to x = −15 m along the reef in 10 s, chasing a shopping cart that fell off the pier. Find the displacement and the average velocity.",
           "calculation": true,
-          "selfCheck": "[  −20 m  ·  −2.0 m/s  ]"
+          "selfCheck": "[  −20 m  ·  −2.0 m/s  ]",
+          "solution": "Δx = x_f − x_i = −15 m − 5 m = −20 m.\nv̄ = Δx ÷ Δt = −20 m ÷ 10 s = −2.0 m/s.",
+          "finalAnswer": "−20 m · −2.0 m/s"
         },
         {
           "tier": "challenge",
           "points": 4,
           "prompt": "The Batmobile starts at x₀ = −15 m in the Batcave tunnel, races forward to x = 50 m, then backs up to a final position of x = 40 m, all in 25 s, because Alfred texted that dinner's getting cold. Find the total distance travelled and the average velocity.",
           "calculation": true,
-          "selfCheck": "[  75 m  ·  2.2 m/s  ]"
+          "selfCheck": "[  75 m  ·  2.2 m/s  ]",
+          "solution": "Leg 1: −15 m to 50 m, a distance of |50 − (−15)| = 65 m forward.\nLeg 2: 50 m to 40 m, a distance of |40 − 50| = 10 m backward.\nTotal distance = 65 m + 10 m = 75 m.\nDisplacement Δx = x_f − x_i = 40 − (−15) = +55 m.\nv̄ = Δx ÷ Δt = 55 m ÷ 25 s = 2.2 m/s.",
+          "finalAnswer": "75 m · 2.2 m/s"
         },
         {
           "tier": "multi-topic",
@@ -91,7 +107,9 @@
           "prompt": "The Flash's speedometer (yes, he installed one) reads an average velocity of 3.4 m/s during a very unimpressive grocery run. Convert it to km/h and express your answer with the correct number of significant figures (U0 S0.2).",
           "parts": [
             "Then say in one sentence why 3.4 m/s and 12.24 km/h are not equally honest answers."
-          ]
+          ],
+          "solution": "3.4 m/s × 3.6 = 12.24 km/h (the conversion factor 3.6 is exact and doesn't limit sig figs).\n3.4 m/s carries 2 significant figures, so the reported answer must also carry 2: 12 km/h.\n12.24 km/h claims four significant figures of precision that the original 3.4 m/s measurement never supported — the extra digits are arithmetic noise, not real precision. That's why it isn't an equally honest answer.",
+          "finalAnswer": "12 km/h"
         }
       ],
       "equations": [
