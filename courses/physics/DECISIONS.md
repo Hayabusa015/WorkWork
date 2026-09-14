@@ -220,6 +220,70 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 
 ## Decision log
 
+### 2026-09-14 — First Physics lab built: Section 1.3 (Position-Velocity-Acceleration Graphing)
+Matt asked for a new Physics lab on Section 1.3, confirmed above in the curriculum map — no new code
+confirmation was needed. This is the **first Physics lab built in this system**, built from the
+locked lab template (`templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+`templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`) and filed as
+`SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs.html`/`.pdf`, plus its `_Key`.
+
+**Apparatus, confirmed with Matt during the conversation.** Students use a Vernier Go Direct Sensor
+Cart — onboard position/velocity encoder plus a 3-axis accelerometer, **not** a separate stationary
+motion detector — on a Vernier Dynamics Track, connected to Vernier Graphical Analysis software. This
+was Matt's explicit direction, not an assumption.
+
+**Percent difference vs. percent error, taught deliberately as two different things.**
+- **Part B** (level track, cart pushed and coasts at constant velocity) has **no accepted value** —
+  an arbitrary push has nothing to check against. Velocity is found two independent ways (linear-fit
+  slope of the x-t graph, and a graph-read height off the v-t graph) and the two measurements are
+  checked against **each other** with **percent difference**.
+- **Part C** (incline built by stacking books under one end of the track) produces genuine constant
+  acceleration, with a real theoretical value derivable from first-principles geometry:
+  a_theory = g·sinθ ≈ g·(h ÷ L), where h is the height of the raised end and L is the distance
+  between the track's two support feet. Because a real accepted value exists here, measured
+  acceleration is checked against it with real **percent error** — the **first Physics lab with a
+  true accepted-value percent-error calculation derived from first-principles geometry**, rather than
+  a supplied constant.
+- **Part D** (brief push up the same incline — rolls up, stops, rolls back down, one continuous
+  trial) teaches that constant acceleration through a velocity reversal produces a smooth parabola on
+  x-t and one continuous straight line through zero on v-t, with acceleration reading the *same*
+  constant value throughout — no spike at the turnaround — contrasted explicitly against a person
+  reversing direction on foot, where the acceleration graph *would* spike because the net force
+  itself changes at that instant.
+
+**Two hand-built SVG diagrams**, original artwork per the standing hand-coded-diagrams-only rule: an
+apparatus side-view (books, tilted track, cart, end stop, h and L labeled and bracketed) and a small
+reference diagram of the smooth-parabola turnaround. **The apparatus diagram's incline is drawn
+deliberately steeper than the real setup will look in the room, and the caption says so.** A
+true-to-scale shallow incline line was found to trigger a false positive in
+`scripts/audit_print_ink.py`'s solid-band detector — a long, very shallow diagonal stroke reads as a
+wide horizontal band to that script's row-scanning algorithm — so the drawn angle was exaggerated for
+legibility and to clear the audit. This is a documented, deliberate diagram choice, not a factual
+claim about the real incline's steepness. **A future editor should not "fix" the angle back to
+realistic** — doing so reintroduces the audit failure.
+
+**Deviation from the locked lab template: the Alconox glassware-wash block is dropped entirely.**
+The template's README calls that block (disposal items 4-6) "standing boilerplate, keep it verbatim,
+only items 1-3 change per lab." This lab has no glassware and no chemical of any kind — only
+reusable sensor/track/book equipment — so printing a glassware-washing instruction would be actively
+wrong, not merely unnecessary. The teacher key states this explicitly: "The standard Alconox
+glassware-wash block does not apply to this lab... This is a deliberate departure from the usual
+Chemistry-style disposal block, not an oversight." The student handout's Cleanup section is
+equipment-return-only instead.
+
+**Scope, stated plainly:**
+1. Scoped to this one lab — `SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs.html`/`.pdf` and its `_Key`.
+2. **Not a precedent** for future Physics or Chemistry labs. This is a one-off exception to the
+   Alconox-block rule for this lab only, because this lab genuinely has no glassware or chemicals — a
+   future lab needing the same exception needs its own explicit request and its own record; it may
+   not cite this one.
+3. The shared lab template files — `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+   `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`, and `templates/lab/build_lab.py` — were
+   **not** modified.
+
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific; shared lab template untouched).
+
 ### 2026-09-14 — One-off exceptions: Section 1.2 practice set (custom ramp + tier tag suppressed)
 Matt asked for a new Physics practice set on Section 1.2 (Acceleration & the Kinematic Equations):
 10 questions total, 3 easy / 3 regular / 4 challenging (he said "3 basic, 2-3 regular, 3-4
