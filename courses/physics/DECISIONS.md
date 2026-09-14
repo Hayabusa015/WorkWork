@@ -220,6 +220,60 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 
 ## Decision log
 
+### 2026-09-14 — One-off exceptions: Section 1.2 practice set (custom ramp + tier tag suppressed)
+Matt asked for a new Physics practice set on Section 1.2 (Acceleration & the Kinematic Equations):
+10 questions total, 3 easy / 3 regular / 4 challenging (he said "3 basic, 2-3 regular, 3-4
+challenging" — 3/3/4 was chosen, within his stated ranges). He also said explicitly: "do not add the
+little buttons that say Basic, or challenge" — meaning suppress the on-page tier-tag label entirely,
+not just remove its box (the box was already removed under an earlier confirmed rule; this removes
+the tag text itself).
+
+Two separate one-off deviations from the checked-in `templates/worksheet/build_worksheet_docx.py`,
+both scoped to this one document only, same pattern as the S1.1 ramp exception recorded below.
+
+**1. Custom ramp shape.** The enforced Physics ramp is 2 warm-up / 2 practice / 1 challenge /
+1 multi-topic, confirmed under SHULL-CHG-0019. **That enforced ramp is UNCHANGED and remains 2/2/1/1
+for every Physics section other than the one document below.** This document used 3 warm-up /
+3 practice / 3 challenge / 1 multi-topic (10 questions). Built via the same kind of one-time
+in-memory monkeypatch as the S1.1 exception:
+
+```python
+import build_worksheet_docx as b
+b.RAMP["physics"] = {"warm-up": 3, "practice": 3, "challenge": 3, "multi-topic": 1}
+b.main()   # with sys.argv pointed at phys_u01_s01.2_10q.json
+```
+
+Note: the last question is internally tagged `multi-topic` (not `challenge`) because a separate,
+independent check in `build_worksheet_docx.py` requires the last question's tier to be exactly
+`multi-topic` regardless of the RAMP override — this is invisible to students either way since
+finding 2 below removes the visible tag entirely.
+
+**2. Tier tag suppressed entirely on the student page.** Not just "no box" (already the standing
+rule) — no tier label text at all, anywhere on the card. Built by monkeypatching
+`build_worksheet_docx.question_card` for this build only, with a copy of that function that omits
+the `if q.get("tier"): ...` block that draws the tag. The `tier` field is still present in the spec
+(`templates/worksheet/specs/phys_u01_s01.2_10q.json`) so the ramp/order enforcement above still runs
+correctly — only the on-page rendering is suppressed. `build_worksheet_docx.py` itself was not
+edited.
+
+The teacher key (`build_worksheet_key_docx.py`) still shows tier labels as plain text next to each
+question number — that suppression is student-page only, the key is unaffected and keeps showing
+tier for grading reference.
+
+**Scope, stated plainly:**
+1. Both changes are scoped to this document only
+   (`SHULL_PHYS_Practice_Set_U01_S01.2.docx`/`.pdf` + its `_Key`), built from
+   `templates/worksheet/specs/phys_u01_s01.2_10q.json` (already committed to git).
+2. The enforced ramp (2/2/1/1) and the enforced tier-tag rendering remain unchanged in
+   `build_worksheet_docx.py` for every other Physics document.
+3. **This is not a precedent** — a future document needing either exception needs its own explicit
+   request and its own record, not a citation of this one.
+
+Supersedes: None — does not alter or replace the ramp confirmed under SHULL-CHG-0019 or the tier-tag
+rendering rule, both of which continue to govern every other Physics document.
+Status: CONFIRMED — Path A (course-specific; no standard/skill file touched — the shared builder
+itself is untouched, only used via a documented one-time override).
+
 ### 2026-09-14 — Standing convention: separate answer-key file for every Physics practice set
 Matt said plainly: "produce the answer key when you create a physics problem set like this." This
 is a new standing rule: **every future Physics practice set must ship with a separate `_Key` file**
