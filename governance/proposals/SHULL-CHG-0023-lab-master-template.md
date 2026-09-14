@@ -14,10 +14,10 @@
 | **Affected Courses** | All three — Chemistry, Physics, Geology |
 | **Risk** | **High** — see §5 |
 | **Recommendation** | Do not implement as a blind swap. Resolve the conflicts in §4 with Matt first — in particular, whether "become or inform" means full replacement or a partial merge, since large parts of the new text conflict with rules currently marked LOCKED. |
-| **Decision** | *(pending)* |
-| **Status** | **PENDING** |
-| **Implemented By** | *(blank)* |
-| **Verified** | no |
+| **Decision** | **Rejected.** Matt reviewed the current locked `SHULL_Lab_TEMPLATE_MASTER.html`/PDF against the proposed structure and decided the existing template is good. The new structure is not adopted. Because the change is not happening, none of the eight open conflict questions in §4 needed answering — they remain unresolved but moot, and are left in this record as reference should this ever be re-raised. |
+| **Status** | **REJECTED** |
+| **Implemented By** | N/A — rejected, no change made |
+| **Verified** | N/A — rejected, no implementation to verify |
 
 ---
 
@@ -332,9 +332,19 @@ phrasing, which leaves the door open to a partial merge rather than a full repla
 - No course `DECISIONS.md` was touched — this is a build-mechanics (Layer 1) change, not a course
   fact.
 - No decision-log entry was appended anywhere.
-- `change-log/CHANGELOG.md` was not edited. Its "How a row is written" table defines a `PROPOSED`
-  status for exactly this situation, but no row in the current file uses it — every existing row is
-  `CONFIRMED`, `PARTIAL`, or (for SUPERSEDED cases) named as such. There is no established precedent
-  in this repository for logging a still-PENDING record before a decision. Once Matt decides, this
-  will need a row (`PROPOSED` today, or `CONFIRMED`/`PARTIAL` once implemented and verified) —
-  flagged here for Matt, not written.
+- `change-log/CHANGELOG.md` was not edited. Its "How a row is written" table defines `CONFIRMED`,
+  `PARTIAL`, `PROPOSED`, and `SUPERSEDED` — no `REJECTED` status exists in that table, and no row in
+  the current file logs a rejected record. There is no established precedent in this repository for
+  logging a REJECTED change in the changelog index. Per §7 below, no row was added for that reason,
+  not by omission.
+
+## 7. 2026-09-14 update — decision made
+
+Matt reviewed the current locked template against the proposed structure and decided the existing
+template is good. **None of the eight open questions in §4 were answered** — the change is not
+happening, so the conflicts they describe are moot rather than resolved. Status changed to
+**REJECTED**. Per `governance/CHANGE_CONTROL.md` §3, a REJECTED record is kept, not deleted, so this
+proposal is not re-raised. The full structural-diff analysis in §3 above is left exactly as written,
+as the reference if this is ever revisited.
+
+`templates/lab/` was not touched — no file there changes as a result of this decision.
