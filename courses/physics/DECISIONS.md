@@ -220,6 +220,40 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 
 ## Decision log
 
+### 2026-09-14 — Standing convention: character-based scenarios in Physics practice sets
+Physics practice-set questions default to **recognizable characters** as the scenario subject —
+Marvel and DC superheroes (Spider-Man, Batman, Iron Man, The Flash, Aquaman, etc.) and cartoon
+characters (SpongeBob, Patrick, etc.) are the examples Matt gave — with **light jokes worked into
+the prompts**. This replaces plain real-world realistic scenarios (vehicles, sports, everyday
+devices) as the default, and replaces generic subjects ("a student walks...", "a runner...") as
+well.
+
+**Realism constraint relaxed for character scenarios, by nature.** The prior entry's requirement
+that a scenario's computed numbers stay physically plausible *for that real-world subject* (e.g.,
+not calling something a "race car" when the math implies walking pace) does not apply the same way
+to a comic-book or cartoon character — a superhero's stunt or a cartoon character's pratfall is not
+held to real-world plausibility. What does **not** relax: the underlying physics and math must
+still be correct. Only the scenario framing is fictional; the answer is not. Where a graded
+kinematic/force/energy value would be nonsensical even *in-universe* for the character (e.g., a
+result that contradicts the numbers explicitly given in the problem), flag it in the teacher notes
+the same way the prior entry required for real-world mismatches.
+
+**Copyright/practice note.** Reference characters by name only, inside wholly original word
+problems written for this course. Do not reproduce dialogue, lyrics, or copyrighted artwork/images.
+This is consistent with ordinary low-risk educational fair use — the same kind of reference a
+physics textbook already makes when it puts Superman in a projectile-motion problem — and these are
+private, non-commercial classroom documents for Matt's own students, not published or sold.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation as a replacement, not a one-off for a single document. It is a voice/content-
+design convention only. It does not change the enforced ramp, the no-work-area rule, or any other
+build mechanic in `templates/worksheet/build_worksheet_docx.py`, which are untouched.
+Supersedes: The 2026-09-14 entry below, "Standing convention: vary problem scenarios in Physics
+practice sets" — that entry's real-world-scenario default and its plausibility-for-a-real-subject
+requirement no longer govern going forward. That entry's text is left as-is below as the historical
+record of what was decided first, per this file's append-only rule.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
 ### 2026-09-14 — Standing convention: vary problem scenarios in Physics practice sets
 Physics practice-set questions must stop reusing a single generic subject (e.g., "a student
 walks...", "a runner...") across every question in a set. Vary the subject and scenario from
