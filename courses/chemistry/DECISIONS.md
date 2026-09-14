@@ -338,6 +338,28 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
 
 ## Decision log
 
+### 2026-09-14 — U1.1 lab redesigned: mystery mixture removed, primary-color pairs + off-the-shelf green
+The data-collection shape for U1.1's confirmed lab ("Paper Chromatography: Rf Values of Food
+Colorings") has been redesigned by Matt, directly in conversation, later the same day as the entry
+below — a real design change, not a wording tweak. There is no more secret "mystery mixture"
+dropper. New design: only the three primary colors (red, blue, yellow) are tested as knowns — green
+is not treated as an independent "known," since it is understood to be a real mixture. The six lab
+groups are assigned in pairs across the three primaries for replication: Red+Blue (groups 1–2),
+Red+Yellow (groups 3–4), Blue+Yellow (groups 5–6) — each pair run by two groups. Every group's third
+station is green, run from a standard off-the-shelf bottle — no pre-mixing, no secret recipe. Green
+is expected to separate into two bands matching blue's and yellow's Rf values; the exercise asks
+students to confirm this with data (Rf values), not to blindly "eyeball" identify an unknown. This
+design is simpler to run than the mystery-mixture version it replaces: no advance mixing, no
+verifying a custom recipe, and no risk of a mislabeled or dried-out mystery dropper between class
+periods. `SHULL_CHEM_Lab_U01_S01.1_Chromatography.html` and `_Key.html` have been rebuilt to match;
+both remain 4 pages, and page-budget, ink, and font audits all still pass.
+Supersedes: the data-collection-shape description ("each group runs only 2 of the 4 known food
+colorings plus a shared mystery mixture, not all 4 per group") in the 2026-09-14 "U1.1 lab
+confirmed: Paper Chromatography" entry immediately below. That entry's lab-placement confirmation —
+U1.1 has a confirmed lab, built and filed as those two files — is NOT superseded and still stands;
+only its mystery-mixture data-collection description is replaced by the design above.
+Status: CONFIRMED · Path A (course-specific; no standard or skill file touched)
+
 ### 2026-09-14 — U1.1 lab confirmed: Paper Chromatography
 U1.1 (Matter & Changes) now has a confirmed lab: "Paper Chromatography: Rf Values of Food
 Colorings," built and filed as `SHULL_CHEM_Lab_U01_S01.1_Chromatography.html` /
