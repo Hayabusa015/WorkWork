@@ -338,6 +338,27 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
 
 ## Decision log
 
+### 2026-09-15 — Standing policy: optional worksheets redeemable at test time, +1 point each, uncapped
+New course-wide grading policy, stated by Matt directly in conversation: "My chemistry worksheets
+are sometimes optional and they get to turn in any optional assignment at test time, add optional
+assignments point to the test, 1 point per optional assignment on the test." This is a Chemistry
+course-wide standing policy, not scoped to any single worksheet: a worksheet may be explicitly
+marked OPTIONAL. A student may turn in a completed optional worksheet at test time — the day of the
+relevant unit test — rather than on the worksheet's original due date. Each completed optional
+worksheet turned in this way adds 1 point to that test's score. Matt did not specify a maximum
+number of optional assignments/points this can add to a single test; record this as currently
+UNCAPPED. **Open question:** a class turning in an unbounded number of optional worksheets at test
+time could meaningfully inflate a test score, so a per-test cap may eventually be wanted — confirm
+with Matt whether one should exist, and if so what it is. No cap is invented here.
+Context for how this is first being applied: the immediate trigger was Matt building a new optional
+Section 1.5 (Average Atomic Mass) worksheet for the Unit 1 Chemistry unit, marked with this exact
+optional/1-point framing directly in its own header. That worksheet is being built by a separate
+agent in parallel and is not created or touched by this entry; this entry exists so the policy is
+durable and applies to every future optional worksheet, not just S1.5's.
+Supersedes: None (first record of this policy).
+Status: CONFIRMED — Path A (course-specific grading convention; no governance/proposals/ record
+needed, matching the pattern of other course-convention entries already in this file)
+
 ### 2026-09-14 — U1.1 lab redesigned: mystery mixture removed, primary-color pairs + off-the-shelf green
 The data-collection shape for U1.1's confirmed lab ("Paper Chromatography: Rf Values of Food
 Colorings") has been redesigned by Matt, directly in conversation, later the same day as the entry
