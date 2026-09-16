@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-09-16
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0023 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md` |
+
 ## 2026-09-09 · 2026-09-08
 
 | ID | Date | Change | Status | Record |
@@ -76,6 +82,7 @@ with the user.
 | 2026-09-08 | Two Geology section titles in U5 are near-duplicates | User — deferred to "when I get to work" |
 | 2026-09-08 | The Drive Lab folder now holds a duplicate of two template files | User — deferred to "when I get to work" |
 | 2026-09-07 | Chemistry grading framing differs between two legacy sources | User — see `courses/chemistry/DECISIONS.md` open questions |
+| 2026-09-16 | The Librarian's live Geology/Physics folder scaffold (`reports/drive-operations/2026-09-16_geo-phys-scaffold.md`) logged intent to build the old five-per-section structure the same day SHULL-CHG-0023 replaced it with two-per-unit/three-per-section. No closing RESULTS file yet on record. Does live Drive need remediation, or is the scaffold already correct/incomplete? | User — SHULL-CHG-0023 |
 
 ---
 

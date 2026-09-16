@@ -1,6 +1,8 @@
 # Drive Architecture
 
-**Authority:** SHULL-CHG-0005 — the structure stays exactly as built.
+**Authority:** SHULL-CHG-0005 — the structure stays exactly as built, **except** where superseded.
+**Superseded in part by SHULL-CHG-0023** (2026-09-16): Guided Notes and Presentations moved from the
+Section level to the Unit level. See `governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md`.
 **Folder IDs and operational notes:** `config/drive.json`. This file does not repeat them.
 **Google Drive is the canonical location for finished teaching documents.** The repository is
 canonical for the system. Claude Projects are working context, never storage.
@@ -18,10 +20,10 @@ SHULL Science/
 │       ├── Chemistry/  Physics/  Geology/  Shared/
 └── [Course]/                        Chemistry · Physics · Geology
     └── Unit ## - Unit Name/
+        ├── Guided Notes/
+        ├── Presentations/
         └── Section ##.# - Section Name/
             ├── Homework/
-            ├── Presentations/
-            ├── Guided Notes/
             ├── Tests-Quizizz/
             └── Labs-Case Studies-Projects/
 ```
@@ -33,18 +35,22 @@ SHULL Science/
 - Units: `Unit ##` zero-padded plus a short title — `Unit 08 - <Unit Name>`
 - Sections: `Section ##.#` plus a short title — `Section 08.4 - <Section Name>`
 - **Separator is a hyphen-minus, never an en dash.** An en dash creates a near-duplicate folder.
-- The five content folders are **exactly** those five, same spelling, same order, every time.
+- **Unit-level content folders:** `Guided Notes` and `Presentations` — **exactly** those two, same
+  spelling, same order, siblings of the Section folders, one copy per unit. **Not** duplicated into
+  each section. (**SHULL-CHG-0023**, superseding the prior section-level placement of these two.)
+- **Section-level content folders:** `Homework`, `Tests-Quizizz`, `Labs-Case Studies-Projects` —
+  **exactly** those three, same spelling, same order, every time.
 - Section subfolders are created on demand, when first needed.
 
 ### What goes where
 
-| Folder | Contents |
-|---|---|
-| Homework | Practice sets, worksheets, take-home work, homework keys |
-| Presentations | Decks built on the slide template, plus exported PDFs |
-| Guided Notes | Cornell and guided packets — student copy **and** filled teacher key |
-| Tests-Quizizz | Quizzes, unit tests, exit tickets, bell ringers, A–D versions, keys |
-| Labs-Case Studies-Projects | Lab handouts, case studies, project instructions, rubrics |
+| Folder | Level | Contents |
+|---|---|---|
+| Guided Notes | Unit | Cornell and guided packets — student copy **and** filled teacher key. A packet or deck spans a unit, not one section — this is why it lives one level up. |
+| Presentations | Unit | Decks built on the slide template, plus exported PDFs. Same reasoning as Guided Notes. |
+| Homework | Section | Practice sets, worksheets, take-home work, homework keys |
+| Tests-Quizizz | Section | Quizzes, unit tests, exit tickets, bell ringers, A–D versions, keys |
+| Labs-Case Studies-Projects | Section | Lab handouts, case studies, project instructions, rubrics |
 
 ## 2. Routing rules
 
