@@ -56,8 +56,10 @@ NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
 # (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
 
 def main():
-    spec = json.load(open(sys.argv[1] if len(sys.argv) > 1
-                          else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")))
+    spec_path = sys.argv[1] if len(sys.argv) > 1 \
+        else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")
+    spec_dir = os.path.dirname(os.path.abspath(spec_path))
+    spec = json.load(open(spec_path))
     course = spec["course"]
     pal = Palette(course)
     accent, display, ink, hair = pal.accent, pal.display, pal.ink, pal.hair
@@ -160,7 +162,35 @@ def main():
     for x in spec["sectionList"]:
         check_item(c, debullet(x), pal, 9.5)
 
+    # SHULL-CHG-0018. Page 1 is now a dedicated, standalone title page (front matter
+    # gets its own page_break below, before section 1 starts), so there is room for an
+    # optional reference image right on the cover - his ask was a Bohr-model diagram
+    # already relevant to the atomic-structure section. Path is resolved against the
+    # SPEC FILE's own directory, not this script's, since that is where a build's local
+    # assets live. Absent field or missing file: no change from prior behavior, and a
+    # missing file is a clear stderr note rather than a crash - Geology/Physics specs
+    # that never set this must keep building exactly as before.
+    img_spec = spec.get("titleImage")
+    if img_spec:
+        img_path = os.path.join(spec_dir, img_spec["path"])
+        if os.path.exists(img_path):
+            gap(doc, 10)
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run().add_picture(img_path, width=Inches(float(img_spec.get("widthIn", 3.2))))
+            if img_spec.get("caption"):
+                gap(doc, 3)
+                cap = doc.add_paragraph()
+                cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                r = cap.add_run(img_spec["caption"])
+                r.font.name = FONT; r.font.size = Pt(8.5)
+                r.font.color.rgb = RGBColor.from_string(hexof(label))
+        else:
+            print(f"build_notes_docx: titleImage \"{img_spec['path']}\" not found at "
+                  f"{img_path} — building without it.", file=sys.stderr)
+
     for sec in spec["sectionsContent"]:
+        doc.add_page_break()
         gap(doc, 6)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
