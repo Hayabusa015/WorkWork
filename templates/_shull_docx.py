@@ -603,6 +603,125 @@ def running_footer(section, text, pal, with_page_numbers=False):
     return f
 
 
+def add_watermark(section, image_path, width_in):
+    """A faint background image, floating behind the text, repeating on every page.
+
+    python-docx has no watermark API. `header.paragraphs[0].add_run().add_picture()`
+    only produces an INLINE picture - in the header's text flow, not floating and not
+    behind the body - so it would push the header down rather than sit under the page.
+    The reliable recipe, and the one that survives `soffice --headless --convert-to
+    pdf` (this pipeline's PDF path) as well as Word: insert the picture the normal
+    inline way, then rewrite the `<wp:inline>` that call produced into a `<wp:anchor>`
+    carrying `behindDoc="1"`, reusing the same `<a:graphic>` payload rather than
+    re-embedding the image. Centred on the page in both axes, so it does not have to
+    be re-measured against the page size if that ever changes.
+
+    One header holds every page a document doesn't split into a new section - this
+    template never does - so this is called once per document, not once per page.
+
+    Position is an explicit offset, in EMU, computed from the page size and the
+    picture's own rendered extent, rather than `<wp:align>center</wp:align>` - the
+    same centred position, measured instead of named.
+
+    `header_distance` is pulled in to the body's own top margin before anything is
+    added. python-docx's default header distance (0.5in) is WIDER than this
+    template's 0.44in top margin, and that gap is invisible with an empty header -
+    but the moment the header holds real content, LibreOffice's DOCX import reads it
+    as real space the body must clear, shaving a few points off every page's usable
+    height. On a page that already lands its last line at the very bottom - this
+    template's title page does - that was enough to overflow a single trailing
+    paragraph onto a page of its own, and the whole document gained a spurious blank
+    page. Pulling the header in under the margin removes the gap it was measuring.
+    """
+    header = section.header
+    if section.header_distance > section.top_margin:
+        section.header_distance = section.top_margin
+    p = header.paragraphs[0]
+    for r in list(p.runs):
+        r._r.getparent().remove(r._r)
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = p.add_run()
+    pic = run.add_picture(image_path, width=Inches(width_in))
+    inline = pic._inline
+    extent, graphic = inline.extent, inline.graphic
+    docPr = inline.docPr
+    docPr.set("id", "1")
+    docPr.set("name", "Watermark")
+    frame_locks = inline.find(qn("wp:cNvGraphicFramePr"))
+
+    page_w = section.page_width
+    page_h = section.page_height
+    off_x = max(0, (page_w - extent.cx) // 2)
+    off_y = max(0, (page_h - extent.cy) // 2)
+
+    anchor = OxmlElement("wp:anchor")
+    for k, v in (("behindDoc", "1"), ("distT", "0"), ("distB", "0"), ("distL", "0"),
+                 ("distR", "0"), ("simplePos", "0"), ("locked", "0"),
+                 ("layoutInCell", "1"), ("allowOverlap", "1"), ("relativeHeight", "1")):
+        anchor.set(k, v)
+
+    simple_pos = OxmlElement("wp:simplePos")
+    simple_pos.set("x", "0"); simple_pos.set("y", "0")
+
+    pos_h = OxmlElement("wp:positionH"); pos_h.set("relativeFrom", "page")
+    off_h = OxmlElement("wp:posOffset"); off_h.text = str(int(off_x)); pos_h.append(off_h)
+    pos_v = OxmlElement("wp:positionV"); pos_v.set("relativeFrom", "page")
+    off_v = OxmlElement("wp:posOffset"); off_v.text = str(int(off_y)); pos_v.append(off_v)
+
+    new_extent = OxmlElement("wp:extent")
+    new_extent.set("cx", str(extent.cx)); new_extent.set("cy", str(extent.cy))
+    effect_extent = OxmlElement("wp:effectExtent")
+    for e in ("l", "t", "r", "b"):
+        effect_extent.set(e, "0")
+    wrap_none = OxmlElement("wp:wrapNone")
+
+    for el in (simple_pos, pos_h, pos_v, new_extent, effect_extent, wrap_none,
+               docPr, frame_locks, graphic):
+        if el is not None:
+            anchor.append(el)
+
+    inline.getparent().replace(inline, anchor)
+    return anchor
+
+
+def study_recap_page(doc, recap, pal, width=7.5):
+    """The standing last page: a 2x2 grid of outlined boxes a student studies from.
+
+    His ask: "a nice little recap infographic ... topic breakdown, key points,
+    notable confusing points, things to remember" on the last page, every unit. In
+    this design system an infographic is structure and type hierarchy, not colour or
+    fill - hairline borders, no cell shading, the same print-ink rule as every other
+    page. `recap` is `{"title", "topics", "keyPoints", "confusingPoints", "remember"}`,
+    each list a handful of short strings.
+
+    Callers add the page break that puts this on its own page and call it last, so
+    nothing this system builds ever follows the recap.
+    """
+    doc.add_page_break()
+    c = one_cell(doc, width)
+    borders(c, pal.ink, sz=12, edges=("top",))
+    borders(c, pal.display, sz=18, edges=("bottom",))
+    para(c, recap.get("title", "STUDY RECAP"), 15, bold=True, color=pal.ink, first=True)
+
+    gap(doc, 4)
+    half = round(width / 2 - 0.06, 2)
+    boxes = [
+        ("TOPIC BREAKDOWN", recap.get("topics", [])),
+        ("KEY POINTS", recap.get("keyPoints", [])),
+        ("WATCH OUT FOR", recap.get("confusingPoints", [])),
+        ("REMEMBER", recap.get("remember", [])),
+    ]
+    t = doc.add_table(rows=2, cols=2)
+    fix_widths(t, [half, half])
+    for i, (lab, items) in enumerate(boxes):
+        cell = t.rows[i // 2].cells[i % 2]
+        borders(cell, pal.hair)
+        para(cell, lab, 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
+        for x in items:
+            para(cell, "•  " + debullet(x), 9.5, color=pal.ink)
+    return t
+
+
 def _field(paragraph, instr, pal):
     """A Word field. Page numbers have to be computed by the reader, not by us -
     a worksheet that says "page 2 of 3" in fixed text lies the moment it is edited."""
