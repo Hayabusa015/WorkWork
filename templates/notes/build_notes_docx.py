@@ -25,7 +25,7 @@ from _shull_docx import (          # noqa: E402
     unit_title,
     borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block, fillin_table,
-    unpad_cell, page_setup, running_footer, trim_tail,
+    unpad_cell, page_setup, running_footer, trim_tail, add_watermark, study_recap_page,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -120,6 +120,20 @@ def main():
 
     doc = Document()
     s = page_setup(doc)
+
+    # Optional faint background image, repeating on every page including the title
+    # page and the closing recap page - the header holds it once because this
+    # template never splits into a new section. Path is resolved against the SPEC
+    # FILE's own directory, the same convention as titleImage. Absent field or
+    # missing file: no change from prior behavior.
+    wm_spec = spec.get("watermarkImage")
+    if wm_spec:
+        wm_path = os.path.join(spec_dir, wm_spec["path"])
+        if os.path.exists(wm_path):
+            add_watermark(s, wm_path, float(wm_spec.get("widthIn", 5.0)))
+        else:
+            print(f"build_notes_docx: watermarkImage \"{wm_spec['path']}\" not found at "
+                  f"{wm_path} — building without it.", file=sys.stderr)
 
     # Brand bar. Outlined, not filled: SHULL_DESIGN_SYSTEM section 8 - "no full-page
     # colour banners, no shaded section backgrounds, no solid-fill headers." The first
@@ -270,7 +284,7 @@ def main():
     c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
     borders(c, display, sz=18, edges=("bottom",))
     para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
-    c = one_cell(doc); borders(c, hair)
+    c = one_cell(doc, protect=True); borders(c, hair)
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["close"]["checklist"]:
         check_item(c, x, pal)
@@ -279,6 +293,19 @@ def main():
     rule_lines(c, 3, hair)
     para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
     rule_lines(c, 3, hair)
+
+    # SHULL-CHG-0018. A standing last page, every course: topic breakdown, key
+    # points, confusing points, remember. Required-with-a-loud-warning rather than a
+    # hard crash - Geology's and Physics's already-shipped specs don't have this
+    # content yet and inventing it is not this builder's job - so a spec missing it
+    # still builds, loudly, matching the noEquationBar soft-opt-out pattern.
+    recap = spec.get("studyRecap")
+    if recap:
+        study_recap_page(doc, recap, pal)
+    else:
+        print("build_notes_docx: this course's notes should end with a Study Recap "
+              "page — none provided, building without one; see SHULL-CHG-0018 "
+              "discussion.", file=sys.stderr)
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
 
