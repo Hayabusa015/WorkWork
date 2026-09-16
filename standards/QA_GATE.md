@@ -99,6 +99,18 @@ If the document has answers, the key is its own file ending `_Key`.
 Including in **each** parallel version. A/B/C/D versions are not shuffles — re-solve each one from
 scratch. Ugly or unrealistic answers mean changing the numbers, not shipping them.
 
+## 10. Density and adjacency
+
+- Body prose does not exceed roughly 80 characters per line. If a text column runs edge-to-edge on
+  a wide page or slide, narrow it or split it.
+- Every diagram, image, or table sits next to the text that explains it — never separated by a
+  column break or a page the student has to flip past.
+- Only one color is doing highlight/emphasis work on a given page or slide, and it means the same
+  thing everywhere it appears in that document (this generalizes the existing slide rule in §12 of
+  `brand/SHULL_DESIGN_SYSTEM.md` to print documents).
+- Nothing on the page exists only to fill space. Anything that doesn't pass the §6 decoration test
+  in `brand/SHULL_DESIGN_SYSTEM.md` gets cut, not shrunk. SHULL-CHG-0023.
+
 ---
 
 ## Deliverable-specific additions

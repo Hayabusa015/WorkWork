@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-09-16
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0023 | 2026-09-16 | Cognitive-load research made checkable: text/diagram adjacency, line-length, decoration rationale, new QA_GATE check | CONFIRMED | `governance/proposals/SHULL-CHG-0023-cognitive-load-visual-design.md` |
+
 ## 2026-09-09 · 2026-09-08
 
 | ID | Date | Change | Status | Record |

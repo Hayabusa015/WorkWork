@@ -83,6 +83,12 @@ small for the expected response** · obvious template repetition across a long d
 The positive form of these rules — density, decoration, imagery, hierarchy — is in
 `brand/SHULL_DESIGN_SYSTEM.md`. This list is what failure looks like.
 
+**Why this list is not just taste:** decorative-but-irrelevant content measurably *lowers* recall
+and transfer of the material around it — it isn't neutral. Anything that fails the §6 decoration
+test in `brand/SHULL_DESIGN_SYSTEM.md` ("must serve hierarchy, navigation, explanation, emphasis,
+identity, or visual comprehension") is actively working against the content, not just filling
+space. SHULL-CHG-0023.
+
 ## 6. The audit list
 
 Search every draft for these habits and revise unless genuinely necessary:

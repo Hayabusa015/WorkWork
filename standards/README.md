@@ -6,7 +6,7 @@
 | `VOICE.md` | How Mr. Shull writes to his own students |
 | `NAMING.md` | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]`, zero-padded |
 | `DRIVE_ARCHITECTURE.md` | The Drive tree, folder grammar, and routing rules |
-| `QA_GATE.md` | The nine checks every deliverable passes before it ships |
+| `QA_GATE.md` | The ten checks every deliverable passes before it ships |
 | `superseded/` | Proposals considered and declined, kept so they are not re-proposed |
 
 Skills point at these. Standards do not restate each other.

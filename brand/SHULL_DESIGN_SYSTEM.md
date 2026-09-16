@@ -177,6 +177,15 @@ Both extremes fail:
 |---|---|
 | "beautiful but useless" | "textbook page pasted onto a slide" |
 
+**Two rules follow from why clutter fails, not just that it looks bad:**
+
+- **A diagram, image, or table sits adjacent to the text that explains it** — same box, same
+  column, never separated by a page turn or a gap the reader has to search across. (Separating them
+  forces a reader to hold one in memory while hunting for the other — the split-attention effect,
+  and it measurably hurts comprehension.)
+- **Body prose targets 50–75 characters per line, never exceeding ~80.** A column that runs
+  edge-to-edge on a wide page or slide gets narrowed or split, not left wide. SHULL-CHG-0023.
+
 ---
 
 ## 6. Decoration
