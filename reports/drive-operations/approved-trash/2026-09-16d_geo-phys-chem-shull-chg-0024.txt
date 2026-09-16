@@ -2,6 +2,10 @@
 # Read by scripts/hook-drive-guard.sh as the explicit-approval check required by
 # governance/GOVERNANCE.md's authority table ("Drive trash: approval").
 #
+# EXECUTED 2026-09-16: all 220 IDs below were trashed by the orchestrating session via
+# mcp__Google_Drive__trash_file, one call per ID, all returned success. See
+# reports/drive-operations/2026-09-16e_shull-chg-0024-trash-executed.md for the closing log.
+#
 # Source proposals:
 #   reports/drive-operations/2026-09-16c_physics-u01-chemistry-shull-chg-0024.md (24 IDs)
 #   reports/drive-operations/2026-09-16d_geo-phys-retrofit-shull-chg-0024.md (196 IDs)
