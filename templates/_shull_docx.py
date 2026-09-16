@@ -283,9 +283,14 @@ def tight_cells(t, top=0, bottom=0, left=40, right=40):
             cell_margins(c, top, bottom, left, right)
 
 
-def one_cell(doc, width=7.5):
+def one_cell(doc, width=7.5, protect=False):
+    """`protect=True` holds the whole block together across a page break (cantSplit) -
+    for a box like the section summary, where one orphaned line stranded on an
+    otherwise-blank page is worse than the whole box moving down as a unit."""
     t = doc.add_table(rows=1, cols=1); t.alignment = WD_TABLE_ALIGNMENT.LEFT
     fix_widths(t, [width])
+    if protect:
+        no_split(t.rows[0])
     return t.rows[0].cells[0]
 
 
@@ -458,6 +463,65 @@ def given_need(cell, given, need, pal, inner_w):
         borders(a, pal.hair, sz=4); borders(b, pal.hair, sz=4)
         para(a, lab, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
         para(b, val, 9.5, first=True)
+
+
+def fillin_table(cell, spec, pal, inner_w):
+    """A small comparison table a student fills in by hand.
+
+    His example: charge/mass/location for proton, neutron, electron was three
+    separate "what's the charge, mass, and location of X" questions, asked once per
+    particle, each with its own blank lines - the same three-part question in disguise
+    three times over. When several open questions are really one row of a comparison
+    table, this draws the table instead: one header row naming what belongs in each
+    column, then one bordered, hand-writeable row per item.
+
+    `spec` is `{"headers": [...], "rows": [[...], ...], "widths": [...]}`. `widths` is
+    optional column fractions of `inner_w` (must sum to ~1); omitted, the first column
+    (the row's own label - "Proton", "Cl-35") gets a narrower share than the rest. An
+    empty string in a cell is a blank for the student to write in; text there is the
+    key's answer, and the key's answers are bold - the same distinction a must-write
+    line marks with its rule, made here with weight instead of a line, because a table
+    cell has no left edge to draw one on.
+
+    No cell fill anywhere - hairline borders only, the same print-ink rule as
+    `given_need` and `diagram_block`. Every body row is `no_split` and floored tall
+    enough to hand-write a word or a number into, because a table with zero-height
+    blank cells is not a graphic organizer, it is a smaller way to fail a student.
+    """
+    headers = spec["headers"]
+    rows = spec["rows"]
+    ncols = len(headers)
+    widths = spec.get("widths")
+    if widths:
+        widths = [round(inner_w * w, 3) for w in widths]
+    else:
+        label_w = min(round(inner_w * 0.22, 3), 1.15)
+        rest_w = round((inner_w - label_w) / (ncols - 1), 3)
+        widths = [label_w] + [rest_w] * (ncols - 1)
+
+    t = cell.add_table(rows=1 + len(rows), cols=ncols)
+    fix_widths(t, widths)
+    tight_cells(t, top=24, bottom=24, left=50, right=50)
+
+    for ci, h in enumerate(headers):
+        c = t.rows[0].cells[ci]
+        borders(c, pal.hair, sz=4)
+        para(c, h, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+
+    row_h = float(spec.get("rowHeightIn", 0.34))
+    for ri, vals in enumerate(rows):
+        tr = t.rows[ri + 1]
+        no_split(tr, row_h)
+        for ci, val in enumerate(vals):
+            c = tr.cells[ci]
+            borders(c, pal.hair, sz=4)
+            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            if ci == 0:
+                para(c, val, 9, bold=True, color=pal.ink, first=True)
+            else:
+                filled = bool(str(val).strip())
+                para(c, val, 9.5, bold=filled, color=pal.ink, first=True)
+    return t
 
 
 def diagram_block(cell, dgm, pal, inner_w, base_dir=HERE):

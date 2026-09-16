@@ -24,8 +24,8 @@ from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
     borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
-    stacked_frac, equation_bar, work_box, given_need, diagram_block,
-    page_setup, running_footer, trim_tail,
+    stacked_frac, equation_bar, work_box, given_need, diagram_block, fillin_table,
+    unpad_cell, page_setup, running_footer, trim_tail,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -225,6 +225,9 @@ def main():
             para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
             if row.get("diagram"):
                 diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
+            if row.get("table"):
+                fillin_table(notes, row["table"], pal, NOTES_INNER_IN)
+                unpad_cell(notes)
 
             prob = row.get("problem")
             if prob:
@@ -254,7 +257,7 @@ def main():
                     rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
 
         gap(doc, 2)
-        c = one_cell(doc); borders(c, accent)
+        c = one_cell(doc, protect=True); borders(c, accent)
         para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
              bold=True, color=accent, caps_track=True, first=True)
         para(c, sec["summaryPrompt"], 9.5)
