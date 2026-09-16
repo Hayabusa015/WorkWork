@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-09-16 | Tests-Quizizz renamed Quiz, moves to Unit level; Homework folder removed, filed loose in Section | IMPLEMENTED | `governance/proposals/SHULL-CHG-0024-quiz-unit-level-no-homework-folder.md` |
 | SHULL-CHG-0023 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md` |
 
 ## 2026-09-09 · 2026-09-08

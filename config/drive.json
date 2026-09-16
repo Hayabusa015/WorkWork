@@ -1,5 +1,5 @@
 {
-  "$comment": "Verified read-only against the live Drive on 2026-09-07. Owner: mshull@jagschools.org. Structure locked by SHULL-CHG-0005; do not restructure without a Secretary change record. SUPERSEDED IN PART by SHULL-CHG-0023 (2026-09-16): 'Guided Notes' and 'Presentations' moved from Section-level to Unit-level content folders. See folderGrammar below and governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md. As of that date, the live Drive rebuild (Librarian) was in progress in parallel; reports/drive-operations/2026-09-16_geo-phys-scaffold.md logged intent to build the OLD five-per-section structure with no closing RESULTS file yet on record — reconcile against live Drive before trusting this file's folderGrammar to describe what currently exists there.",
+  "$comment": "Verified read-only against the live Drive on 2026-09-07. Owner: mshull@jagschools.org. Structure locked by SHULL-CHG-0005; do not restructure without a Secretary change record. SUPERSEDED IN PART by SHULL-CHG-0023 (2026-09-16): 'Guided Notes' and 'Presentations' moved from Section-level to Unit-level content folders. SUPERSEDED IN PART AGAIN by SHULL-CHG-0024 (2026-09-16): 'Tests-Quizizz' is renamed 'Quiz' and moves from Section-level to Unit-level; 'Homework' is removed as a folder at any level (homework files are now loose files directly in the Section folder); 'Labs-Case Studies-Projects' is unchanged. See folderGrammar below and governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md and governance/proposals/SHULL-CHG-0024-quiz-unit-level-no-homework-folder.md. As of 2026-09-16, the live Drive rebuild (Librarian) was in progress in parallel; reports/drive-operations/2026-09-16_geo-phys-scaffold.md logged intent to build the OLD five-per-section structure with no closing RESULTS file yet on record — reconcile against live Drive before trusting this file's folderGrammar to describe what currently exists there. Matt has separately demonstrated the SHULL-CHG-0024 structure live in Physics Unit 01 by hand; retrofitting the rest of Drive is a separate Librarian task, not done by this record.",
   "root": {
     "name": "SHULL Science",
     "id": "1FsFiaYfkwgSLnA62bpIHt2zGosFwcPec"
@@ -41,14 +41,14 @@
     "separator": "hyphen-minus, never an en dash",
     "unitContentFolders": [
       "Guided Notes",
-      "Presentations"
+      "Presentations",
+      "Quiz"
     ],
     "sectionContentFolders": [
-      "Homework",
-      "Tests-Quizizz",
       "Labs-Case Studies-Projects"
     ],
-    "contentFolderRule": "SHULL-CHG-0023 (2026-09-16), superseding the SHULL-CHG-0005-locked five-per-section structure. 'Guided Notes' and 'Presentations' are created once per Unit, as siblings of that unit's Section folders — not duplicated into each section, because a guided-notes packet or slide deck spans a whole unit, not one section. 'Homework', 'Tests-Quizizz', and 'Labs-Case Studies-Projects' remain per-Section, exactly those three, same spelling, same order, every time. Reuse existing folders case-insensitively at both levels. Never create 'Tests' beside 'Tests-Quizizz'. Unit and Section subfolders are created on demand."
+    "contentFolderRule": "SHULL-CHG-0024 (2026-09-16), superseding SHULL-CHG-0023's folderGrammar (2026-09-16), which itself superseded the SHULL-CHG-0005-locked five-per-section structure. 'Guided Notes', 'Presentations', and 'Quiz' are created once per Unit, as siblings of that unit's Section folders — not duplicated into each section, because a guided-notes packet, slide deck, or a unit's quiz bank/tests span a whole unit, not one section. 'Quiz' is the renamed, unit-level successor to the old Section-level 'Tests-Quizizz' (same contents: quizzes, unit tests, exit tickets, bell ringers, A-D versions, keys). 'Labs-Case Studies-Projects' remains the only per-Section content folder, same spelling, every time. There is no 'Homework' folder at any level: homework files (practice sets, worksheets, take-home work, keys) are filed as loose files directly inside the Section folder itself. Reuse existing folders case-insensitively at both levels. Never create 'Tests' or 'Tests-Quizizz' beside 'Quiz'. Unit and Section subfolders are created on demand.",
+    "homeworkFiling": "No Homework folder exists at any level as of SHULL-CHG-0024. Homework files are loose files directly inside 'Section ##.# - Section Name/', not inside any subfolder."
   },
   "operations": {
     "search": "search_files with parentId = '<ID>' is the reliable folder-verification query",
@@ -61,7 +61,7 @@
     "GEO_U1_S1.2-S1.4_Guided_Cornell_Notes.docx is misfiled in _Brand/Templates/ and is misnamed",
     "_Brand/Templates/ holds 15 PNGs, make_art.py, regrade.py and demo_u1.js that are not templates",
     "Template source (tokens.js, tokens.phys.js, build.js) sits flat in Templates/ rather than Templates/src/",
-    "Chemistry Unit 00 has a bare Labs/ folder instead of a Section folder with the three section-level content folders (Homework, Tests-Quizizz, Labs-Case Studies-Projects) -- also check whether Unit 00 has its two unit-level folders (Guided Notes, Presentations) per SHULL-CHG-0023",
+    "Chemistry Unit 00 has a bare Labs/ folder instead of a Section folder with its one section-level content folder (Labs-Case Studies-Projects) and homework filed loose inside it -- also check whether Unit 00 has its three unit-level folders (Guided Notes, Presentations, Quiz) per SHULL-CHG-0023 / SHULL-CHG-0024",
     "SHULL_Color_Palette_Library.md and SHULL_Image_Prompt_Pack.md are referenced by filed standards but do not exist",
     "SHULL_Physics_Unit_Map_1.pdf is cited as the source of the confirmed Physics map but is not in Drive"
   ]
