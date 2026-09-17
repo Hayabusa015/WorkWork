@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-14
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -219,6 +219,291 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 ---
 
 ## Decision log
+
+### 2026-09-14 — First Physics lab built: Section 1.3 (Position-Velocity-Acceleration Graphing)
+Matt asked for a new Physics lab on Section 1.3, confirmed above in the curriculum map — no new code
+confirmation was needed. This is the **first Physics lab built in this system**, built from the
+locked lab template (`templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+`templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`) and filed as
+`SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs.html`/`.pdf`, plus its `_Key`.
+
+**Apparatus, confirmed with Matt during the conversation.** Students use a Vernier Go Direct Sensor
+Cart — onboard position/velocity encoder plus a 3-axis accelerometer, **not** a separate stationary
+motion detector — on a Vernier Dynamics Track, connected to Vernier Graphical Analysis software. This
+was Matt's explicit direction, not an assumption.
+
+**Percent difference vs. percent error, taught deliberately as two different things.**
+- **Part B** (level track, cart pushed and coasts at constant velocity) has **no accepted value** —
+  an arbitrary push has nothing to check against. Velocity is found two independent ways (linear-fit
+  slope of the x-t graph, and a graph-read height off the v-t graph) and the two measurements are
+  checked against **each other** with **percent difference**.
+- **Part C** (incline built by stacking books under one end of the track) produces genuine constant
+  acceleration, with a real theoretical value derivable from first-principles geometry:
+  a_theory = g·sinθ ≈ g·(h ÷ L), where h is the height of the raised end and L is the distance
+  between the track's two support feet. Because a real accepted value exists here, measured
+  acceleration is checked against it with real **percent error** — the **first Physics lab with a
+  true accepted-value percent-error calculation derived from first-principles geometry**, rather than
+  a supplied constant.
+- **Part D** (brief push up the same incline — rolls up, stops, rolls back down, one continuous
+  trial) teaches that constant acceleration through a velocity reversal produces a smooth parabola on
+  x-t and one continuous straight line through zero on v-t, with acceleration reading the *same*
+  constant value throughout — no spike at the turnaround — contrasted explicitly against a person
+  reversing direction on foot, where the acceleration graph *would* spike because the net force
+  itself changes at that instant.
+
+**Two hand-built SVG diagrams**, original artwork per the standing hand-coded-diagrams-only rule: an
+apparatus side-view (books, tilted track, cart, end stop, h and L labeled and bracketed) and a small
+reference diagram of the smooth-parabola turnaround. **The apparatus diagram's incline is drawn
+deliberately steeper than the real setup will look in the room, and the caption says so.** A
+true-to-scale shallow incline line was found to trigger a false positive in
+`scripts/audit_print_ink.py`'s solid-band detector — a long, very shallow diagonal stroke reads as a
+wide horizontal band to that script's row-scanning algorithm — so the drawn angle was exaggerated for
+legibility and to clear the audit. This is a documented, deliberate diagram choice, not a factual
+claim about the real incline's steepness. **A future editor should not "fix" the angle back to
+realistic** — doing so reintroduces the audit failure.
+
+**Deviation from the locked lab template: the Alconox glassware-wash block is dropped entirely.**
+The template's README calls that block (disposal items 4-6) "standing boilerplate, keep it verbatim,
+only items 1-3 change per lab." This lab has no glassware and no chemical of any kind — only
+reusable sensor/track/book equipment — so printing a glassware-washing instruction would be actively
+wrong, not merely unnecessary. The teacher key states this explicitly: "The standard Alconox
+glassware-wash block does not apply to this lab... This is a deliberate departure from the usual
+Chemistry-style disposal block, not an oversight." The student handout's Cleanup section is
+equipment-return-only instead.
+
+**Scope, stated plainly:**
+1. Scoped to this one lab — `SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs.html`/`.pdf` and its `_Key`.
+2. **Not a precedent** for future Physics or Chemistry labs. This is a one-off exception to the
+   Alconox-block rule for this lab only, because this lab genuinely has no glassware or chemicals — a
+   future lab needing the same exception needs its own explicit request and its own record; it may
+   not cite this one.
+3. The shared lab template files — `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+   `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`, and `templates/lab/build_lab.py` — were
+   **not** modified.
+
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific; shared lab template untouched).
+
+### 2026-09-14 — One-off exceptions: Section 1.2 practice set (custom ramp + tier tag suppressed)
+Matt asked for a new Physics practice set on Section 1.2 (Acceleration & the Kinematic Equations):
+10 questions total, 3 easy / 3 regular / 4 challenging (he said "3 basic, 2-3 regular, 3-4
+challenging" — 3/3/4 was chosen, within his stated ranges). He also said explicitly: "do not add the
+little buttons that say Basic, or challenge" — meaning suppress the on-page tier-tag label entirely,
+not just remove its box (the box was already removed under an earlier confirmed rule; this removes
+the tag text itself).
+
+Two separate one-off deviations from the checked-in `templates/worksheet/build_worksheet_docx.py`,
+both scoped to this one document only, same pattern as the S1.1 ramp exception recorded below.
+
+**1. Custom ramp shape.** The enforced Physics ramp is 2 warm-up / 2 practice / 1 challenge /
+1 multi-topic, confirmed under SHULL-CHG-0019. **That enforced ramp is UNCHANGED and remains 2/2/1/1
+for every Physics section other than the one document below.** This document used 3 warm-up /
+3 practice / 3 challenge / 1 multi-topic (10 questions). Built via the same kind of one-time
+in-memory monkeypatch as the S1.1 exception:
+
+```python
+import build_worksheet_docx as b
+b.RAMP["physics"] = {"warm-up": 3, "practice": 3, "challenge": 3, "multi-topic": 1}
+b.main()   # with sys.argv pointed at phys_u01_s01.2_10q.json
+```
+
+Note: the last question is internally tagged `multi-topic` (not `challenge`) because a separate,
+independent check in `build_worksheet_docx.py` requires the last question's tier to be exactly
+`multi-topic` regardless of the RAMP override — this is invisible to students either way since
+finding 2 below removes the visible tag entirely.
+
+**2. Tier tag suppressed entirely on the student page.** Not just "no box" (already the standing
+rule) — no tier label text at all, anywhere on the card. Built by monkeypatching
+`build_worksheet_docx.question_card` for this build only, with a copy of that function that omits
+the `if q.get("tier"): ...` block that draws the tag. The `tier` field is still present in the spec
+(`templates/worksheet/specs/phys_u01_s01.2_10q.json`) so the ramp/order enforcement above still runs
+correctly — only the on-page rendering is suppressed. `build_worksheet_docx.py` itself was not
+edited.
+
+The teacher key (`build_worksheet_key_docx.py`) still shows tier labels as plain text next to each
+question number — that suppression is student-page only, the key is unaffected and keeps showing
+tier for grading reference.
+
+**Scope, stated plainly:**
+1. Both changes are scoped to this document only
+   (`SHULL_PHYS_Practice_Set_U01_S01.2.docx`/`.pdf` + its `_Key`), built from
+   `templates/worksheet/specs/phys_u01_s01.2_10q.json` (already committed to git).
+2. The enforced ramp (2/2/1/1) and the enforced tier-tag rendering remain unchanged in
+   `build_worksheet_docx.py` for every other Physics document.
+3. **This is not a precedent** — a future document needing either exception needs its own explicit
+   request and its own record, not a citation of this one.
+
+Supersedes: None — does not alter or replace the ramp confirmed under SHULL-CHG-0019 or the tier-tag
+rendering rule, both of which continue to govern every other Physics document.
+Status: CONFIRMED — Path A (course-specific; no standard/skill file touched — the shared builder
+itself is untouched, only used via a documented one-time override).
+
+### 2026-09-14 — One-off correction: Section 1.2 practice set (Q3 free-fall removed, bold answer-target rendering added)
+This is a further, later one-off correction to the same document recorded immediately above — not a
+new document — made in direct response to two follow-up instructions from Matt.
+
+**1. Q3 replaced — free fall is Section 1.4, not 1.2.** Matt said plainly: "I don't want free fall.
+That's section 1.4, I just want 1.2." Question 3 originally used g = 9.8 m/s² (a free-fall scenario),
+which belongs to Section 1.4 (Free Fall), not 1.2 (Acceleration & the Kinematic Equations). It was
+replaced with a non-free-fall constant-acceleration problem: Thor accelerates from rest at 6 m/s²
+for 4 s, find the distance covered (48 m). No other question in the set used free fall.
+
+**2. The asked-for quantity is now bolded in every prompt.** Matt said: "When the problem asks for
+something like 'acceleration' put the acceleration in bold." All 10 question prompts now wrap the
+specific quantity the student is asked to solve for in **bold** markdown — e.g. "Find his
+**acceleration**", "Find the **distance** he covers."
+
+This required a new rendering technique, since the shared `para`/`run` primitives in
+`_shull_docx.py` only support single-run paragraphs. A `para_rich()` helper was added — regex
+`BOLD_RE = re.compile(r'(\*\*[^*]+\*\*)')` splitting text into bold/plain run segments — inside the
+same kind of one-off, in-memory build script used for the ramp/tier-tag exception above.
+`build_worksheet_docx.py` was **not** edited. The same bold-splitting was applied to the teacher
+key's restated-prompt line, in a matching one-off override of `build_worksheet_key_docx.py`'s
+`answer_block()`, preserving that line's existing italic styling — both bold and plain segments stay
+italic, and bold segments are also bold. `build_worksheet_key_docx.py` itself was **not** edited
+either.
+
+Both the student docx/pdf and the Key docx/pdf were rebuilt from the corrected spec
+(`templates/worksheet/specs/phys_u01_s01.2_10q.json`) and re-passed all three standing audits:
+`audit_worksheet.py` (2-page budget, PASS), `audit_fonts.py` (Archivo only, PASS),
+`audit_print_ink.py` (student PASS at 4.40% toner max, key PASS at 2.71% toner max). Both were
+visually inspected page by page and confirmed correct.
+
+**Scope, stated plainly:**
+1. Scoped to this one document — `SHULL_PHYS_Practice_Set_U01_S01.2.docx`/`.pdf` and its `_Key` —
+   built from the same, already-committed spec file.
+2. **Not a precedent** for other Physics documents — a future document needing either the same
+   free-fall exclusion check or bold-answer-target rendering needs its own explicit request and its
+   own record.
+3. Both files already re-passed all three standing audits (worksheet, fonts, print-ink) before this
+   entry was recorded.
+
+Supersedes: Nothing in the "One-off exceptions: Section 1.2 practice set (custom ramp + tier tag
+suppressed)" entry immediately above — that entry's ramp (3/3/3/1) and tier-tag-suppression findings
+are untouched by this correction. This entry only updates the content of Q3 and adds the
+prompt-rendering detail within the same document.
+Status: CONFIRMED — Path A (course-specific one-off; shared builders untouched).
+
+### 2026-09-14 — Standing convention: separate answer-key file for every Physics practice set
+Matt said plainly: "produce the answer key when you create a physics problem set like this." This
+is a new standing rule: **every future Physics practice set must ship with a separate `_Key` file**
+containing full worked solutions for every question — not just the inline self-check brackets the
+student handout already carries under SHULL-CHG-0021. This matches how the previously-filed
+`SHULL_PHYS_Practice_Set_U01_S1.1_Key.pdf` already worked before this session touched anything (a
+real precedent already existed in Drive), and now the workflow — not just the file convention —
+reflects it.
+
+**Mechanism (recorded for reference, not locked as an implementation detail).** A new companion
+script, `templates/worksheet/build_worksheet_key_docx.py`, reads the same spec JSON as
+`build_worksheet_docx.py` and renders a separate `_Key` docx from each question's new `"solution"`
+(full worked steps) and `"finalAnswer"` (short final result) fields — fields that do not exist on
+the student-facing renderer's schema and are silently ignored by it, so one spec file serves both
+builds without drift. The key is **not** bound by the student handout's course-profile enforcement
+(no-work-area, self-check-except-last, etc.), since it is teacher-only content by definition — it
+always contains every answer, including the one the student sheet withholds.
+
+This is an additive, standalone script. `templates/worksheet/build_worksheet_docx.py` itself was
+**not** modified — its enforcement of the ramp, the no-work-area rule, and self-check placement is
+untouched by this change.
+
+**Scope, stated plainly:**
+1. This applies to **all future Physics practice sets**, not just the S01.1 one already built today.
+2. The new key builder is additive — it did not change `build_worksheet_docx.py`'s enforcement of
+   anything (ramp, no-work-areas, self-check placement).
+3. Every question in a spec must carry a `"solution"` field or the key build refuses, by design — a
+   key that silently skips a question is worse than no key.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation.
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
+### 2026-09-14 — Standing convention: character-based scenarios in Physics practice sets
+Physics practice-set questions default to **recognizable characters** as the scenario subject —
+Marvel and DC superheroes (Spider-Man, Batman, Iron Man, The Flash, Aquaman, etc.) and cartoon
+characters (SpongeBob, Patrick, etc.) are the examples Matt gave — with **light jokes worked into
+the prompts**. This replaces plain real-world realistic scenarios (vehicles, sports, everyday
+devices) as the default, and replaces generic subjects ("a student walks...", "a runner...") as
+well.
+
+**Realism constraint relaxed for character scenarios, by nature.** The prior entry's requirement
+that a scenario's computed numbers stay physically plausible *for that real-world subject* (e.g.,
+not calling something a "race car" when the math implies walking pace) does not apply the same way
+to a comic-book or cartoon character — a superhero's stunt or a cartoon character's pratfall is not
+held to real-world plausibility. What does **not** relax: the underlying physics and math must
+still be correct. Only the scenario framing is fictional; the answer is not. Where a graded
+kinematic/force/energy value would be nonsensical even *in-universe* for the character (e.g., a
+result that contradicts the numbers explicitly given in the problem), flag it in the teacher notes
+the same way the prior entry required for real-world mismatches.
+
+**Copyright/practice note.** Reference characters by name only, inside wholly original word
+problems written for this course. Do not reproduce dialogue, lyrics, or copyrighted artwork/images.
+This is consistent with ordinary low-risk educational fair use — the same kind of reference a
+physics textbook already makes when it puts Superman in a projectile-motion problem — and these are
+private, non-commercial classroom documents for Matt's own students, not published or sold.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation as a replacement, not a one-off for a single document. It is a voice/content-
+design convention only. It does not change the enforced ramp, the no-work-area rule, or any other
+build mechanic in `templates/worksheet/build_worksheet_docx.py`, which are untouched.
+Supersedes: The 2026-09-14 entry below, "Standing convention: vary problem scenarios in Physics
+practice sets" — that entry's real-world-scenario default and its plausibility-for-a-real-subject
+requirement no longer govern going forward. That entry's text is left as-is below as the historical
+record of what was decided first, per this file's append-only rule.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
+### 2026-09-14 — Standing convention: vary problem scenarios in Physics practice sets
+Physics practice-set questions must stop reusing a single generic subject (e.g., "a student
+walks...", "a runner...") across every question in a set. Vary the subject and scenario from
+question to question using physically realistic real-world contexts — vehicles, sports, everyday
+devices — for example a skateboarder, a delivery drone, a zip-line rider, a kayaker, an e-bike,
+rather than defaulting every problem to "a student" or "a runner."
+
+Scenarios must stay physically realistic for the numbers used: check that a chosen scenario's
+computed values are plausible for that subject (e.g., do not call something a "race car" if the
+computed average speed comes out walking pace) — this follows the accuracy discipline already in
+force in this file, applied to scenario choice as well as to the numbers themselves. Flag it in the
+teacher notes if a scenario and its computed numbers don't match.
+
+This is a standing convention for **all future Physics practice sets**, confirmed by Matt directly
+in this conversation — not a one-off for a single document. It is a voice/content-design
+convention only. It does not change the enforced ramp, the no-work-area rule, or any other build
+mechanic in `templates/worksheet/build_worksheet_docx.py`, which are untouched.
+Supersedes: None.
+Status: CONFIRMED — Path A (course-specific convention; no `governance/proposals/` record filed).
+
+### 2026-09-14 — One-off ramp exception: Section 1.1 extended practice set
+`templates/worksheet/build_worksheet_docx.py` enforces an exact Physics ramp of 2 warm-up /
+2 practice / 1 challenge / 1 multi-topic (6 questions per section) via `RAMP["physics"]`, confirmed
+under SHULL-CHG-0019. **That enforced ramp is UNCHANGED and remains 2/2/1/1 for every Physics
+section other than the one document below.**
+
+Matt asked for a ~10-question confidence-building version of just Section 1.1. Offered a choice
+between (a) keeping the standard 6, (b) a one-off exception for this document only, or (c) changing
+the standard ramp for all of Physics, he chose **(b)**: 4 warm-up / 3 practice / 1 challenge /
+1 multi-topic (9 questions), scoped to this document only.
+
+The resulting spec is committed at `templates/worksheet/specs/phys_u01_s01.1_extended.json`,
+producing `SHULL_PHYS_Practice_Set_U01_S01.1_Extended.docx`. It was **not** built by running
+`build_worksheet_docx.py specs/phys_u01_s01.1_extended.json` directly — the checked-in RAMP
+enforcement refuses that invocation, exactly as designed. It was built by a one-time script that
+imports the module and monkeypatches `RAMP["physics"]` in memory for that single call only:
+
+```python
+import build_worksheet_docx as b
+b.RAMP["physics"] = {"warm-up": 4, "practice": 3, "challenge": 1, "multi-topic": 1}
+b.main()   # with sys.argv pointed at phys_u01_s01.1_extended.json
+```
+
+Recorded here so the spec file is reproducible by anyone who finds it later and wonders why the
+checked-in builder refuses it standalone. `build_worksheet_docx.py` itself was not edited and its
+enforcement is untouched.
+
+**This is not a precedent.** A future request to change a different section's ramp needs its own
+decision — do not cite this entry to justify it.
+Supersedes: None — does not alter or replace the ramp confirmed under SHULL-CHG-0019, which
+continues to govern every other Physics section.
+Status: CONFIRMED — Path A (one-off, this document only; no `governance/proposals/` record filed).
 
 ### 2026-09-08 — Physics decisions file created
 Curriculum map, sequencing, discipline rules, and the worksheet rule moved here from

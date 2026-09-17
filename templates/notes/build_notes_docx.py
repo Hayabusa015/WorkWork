@@ -13,6 +13,7 @@ import json, os, sys
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -23,10 +24,77 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
-    borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
-    stacked_frac, equation_bar, work_box, given_need, diagram_block,
-    page_setup, running_footer, trim_tail,
+    borders, para, check_item, rule_lines, fix_widths, tight_cells, one_cell,
+    no_split, gap, stacked_frac, equation_bar, work_box, given_need, diagram_block,
+    fillin_table, unpad_cell, cell_margins, page_setup, running_footer, trim_tail,
+    add_watermark, study_recap_page,
 )
+
+
+# SHULL-CHG-0019. Matthew's own words: "if there's a matter flow chart, I kind of just
+# want them to fill in their own matter flow chart on the paper." Guided notes capture
+# what's on the board during lecture - they are not a reasoning worksheet - so the
+# S1.1 Matter Flowchart row is a small tree of boxes the student labels as it's drawn,
+# not a set of open questions. This is specific to one row in one course's one section,
+# so it lives here rather than in _shull_docx.py: a shared primitive is for a shape
+# more than one builder needs, and nothing else in the system draws a branching tree.
+# Archivo carries "↓" (down arrow) but none of the diagonal arrow glyphs, so the
+# connectors are straight-down arrows only - the branching itself is shown by which
+# columns of the grid each box spans, the same way Matthew draws it on the board.
+def matter_flowchart(cell, pal, inner_w, filled=False):
+    """S1.1's Matter Flowchart: MATTER splits into Pure substance / Mixture, and each
+    of those splits again into Element/Compound and Homogeneous/Heterogeneous.
+
+    `filled=False` (student copy): only MATTER is printed; every other box is blank
+    for the student to label as the chart goes up on the board. `filled=True` (key):
+    every box carries its answer. Same four-column grid either way, so the two
+    documents stay pixel-for-pixel comparable - the key is the student page, answered.
+    """
+    box_h = 0.34
+    t = cell.add_table(rows=5, cols=4)
+    fix_widths(t, [inner_w / 4] * 4)
+    tight_cells(t, top=16, bottom=16, left=30, right=30)
+
+    def box(c, text):
+        borders(c, pal.hair, sz=6)
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        p = para(c, text, 9.5, bold=True, color=pal.ink, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    def arrow(c):
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        p = para(c, "↓", 11, bold=True, color=pal.hair, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    # Level 1 - MATTER, the one thing everyone starts from. Centred over the row by
+    # merging only the middle two columns; the outer two stay unbordered spacers.
+    top = t.rows[0].cells[1].merge(t.rows[0].cells[2])
+    box(top, "MATTER")
+    no_split(t.rows[0], box_h)
+
+    # One connector, then the fork into two.
+    left_arrow = t.rows[1].cells[0].merge(t.rows[1].cells[1])
+    right_arrow = t.rows[1].cells[2].merge(t.rows[1].cells[3])
+    arrow(left_arrow)
+    arrow(right_arrow)
+
+    # Level 2 - Pure substance / Mixture.
+    pure = t.rows[2].cells[0].merge(t.rows[2].cells[1])
+    mix = t.rows[2].cells[2].merge(t.rows[2].cells[3])
+    box(pure, "Pure substance" if filled else "")
+    box(mix, "Mixture" if filled else "")
+    no_split(t.rows[2], box_h)
+
+    # Connector into the four leaves - one arrow per leaf, directly above it.
+    for c in t.rows[3].cells:
+        arrow(c)
+
+    # Level 3 - the four leaves, in the deck's own order.
+    leaves = ["Element", "Compound", "Homogeneous", "Heterogeneous"]
+    for c, name in zip(t.rows[4].cells, leaves):
+        box(c, name if filled else "")
+    no_split(t.rows[4], box_h)
+    return t
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -56,8 +124,10 @@ NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
 # (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
 
 def main():
-    spec = json.load(open(sys.argv[1] if len(sys.argv) > 1
-                          else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")))
+    spec_path = sys.argv[1] if len(sys.argv) > 1 \
+        else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")
+    spec_dir = os.path.dirname(os.path.abspath(spec_path))
+    spec = json.load(open(spec_path))
     course = spec["course"]
     pal = Palette(course)
     accent, display, ink, hair = pal.accent, pal.display, pal.ink, pal.hair
@@ -119,6 +189,20 @@ def main():
     doc = Document()
     s = page_setup(doc)
 
+    # Optional faint background image, repeating on every page including the title
+    # page and the closing recap page - the header holds it once because this
+    # template never splits into a new section. Path is resolved against the SPEC
+    # FILE's own directory, the same convention as titleImage. Absent field or
+    # missing file: no change from prior behavior.
+    wm_spec = spec.get("watermarkImage")
+    if wm_spec:
+        wm_path = os.path.join(spec_dir, wm_spec["path"])
+        if os.path.exists(wm_path):
+            add_watermark(s, wm_path, float(wm_spec.get("widthIn", 5.0)))
+        else:
+            print(f"build_notes_docx: watermarkImage \"{wm_spec['path']}\" not found at "
+                  f"{wm_path} — building without it.", file=sys.stderr)
+
     # Brand bar. Outlined, not filled: SHULL_DESIGN_SYSTEM section 8 - "no full-page
     # colour banners, no shaded section backgrounds, no solid-fill headers." The first
     # build of this template ignored that and measured 3.2x the ink of Matthew's own
@@ -160,7 +244,35 @@ def main():
     for x in spec["sectionList"]:
         check_item(c, debullet(x), pal, 9.5)
 
+    # SHULL-CHG-0018. Page 1 is now a dedicated, standalone title page (front matter
+    # gets its own page_break below, before section 1 starts), so there is room for an
+    # optional reference image right on the cover - his ask was a Bohr-model diagram
+    # already relevant to the atomic-structure section. Path is resolved against the
+    # SPEC FILE's own directory, not this script's, since that is where a build's local
+    # assets live. Absent field or missing file: no change from prior behavior, and a
+    # missing file is a clear stderr note rather than a crash - Geology/Physics specs
+    # that never set this must keep building exactly as before.
+    img_spec = spec.get("titleImage")
+    if img_spec:
+        img_path = os.path.join(spec_dir, img_spec["path"])
+        if os.path.exists(img_path):
+            gap(doc, 10)
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run().add_picture(img_path, width=Inches(float(img_spec.get("widthIn", 3.2))))
+            if img_spec.get("caption"):
+                gap(doc, 3)
+                cap = doc.add_paragraph()
+                cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                r = cap.add_run(img_spec["caption"])
+                r.font.name = FONT; r.font.size = Pt(8.5)
+                r.font.color.rgb = RGBColor.from_string(hexof(label))
+        else:
+            print(f"build_notes_docx: titleImage \"{img_spec['path']}\" not found at "
+                  f"{img_path} — building without it.", file=sys.stderr)
+
     for sec in spec["sectionsContent"]:
+        doc.add_page_break()
         gap(doc, 6)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
@@ -192,9 +304,22 @@ def main():
             para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
             for q in row["cues"]:
                 para(cue, q, 8.5)
+                # SHULL-CHG-0020. His ask: "give recall." The cue column already told
+                # a student to "cover the right side and quiz yourself with it later" -
+                # but gave nowhere to actually write the answer when they did, so
+                # recall stayed a mental exercise instead of a real self-check. One
+                # short line per cue turns it into one.
+                rule_lines(cue, 1, hair)
             para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
             if row.get("diagram"):
                 diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
+            if row.get("table"):
+                fillin_table(notes, row["table"], pal, NOTES_INNER_IN)
+                unpad_cell(notes)
+            if row.get("matterFlowchart"):
+                matter_flowchart(notes, pal, NOTES_INNER_IN,
+                                  filled=bool(row["matterFlowchart"].get("filled")))
+                unpad_cell(notes)
 
             prob = row.get("problem")
             if prob:
@@ -213,18 +338,44 @@ def main():
             for n in row["notes"]:
                 mw = n.startswith(("*", "✎"))
                 body = n.lstrip("*✎").strip()
-                p = para(notes, body, 9.5, bold=mw)
                 if mw:
-                    pPr = p._p.get_or_add_pPr()
-                    bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
-                    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
-                    x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
-                    bd.append(x); pPr.append(bd)
+                    # A paragraph-level w:pBdr left border (the original approach) is
+                    # valid OOXML and present in the saved file, but LibreOffice does
+                    # not paint it inside a nested table cell - confirmed by inspecting
+                    # the raw XML (border there, sz 18, colour correct) against the
+                    # rendered PDF (no line at all). Every OTHER accent bar in this
+                    # system (the masthead kicker, work_box's label) is a TABLE CELL
+                    # border, which does render reliably - so the must-write line gets
+                    # the same treatment: its own 1x1 table with a left cell border,
+                    # not a paragraph border.
+                    mwt = notes.add_table(rows=1, cols=1)
+                    fix_widths(mwt, [NOTES_INNER_IN])
+                    mwc = mwt.rows[0].cells[0]
+                    borders(mwc, display, sz=18, edges=("left",))
+                    cell_margins(mwc, top=20, bottom=20, left=120, right=0)
+                    para(mwc, body, 9.5, bold=True, first=True)
+                    # NOT unpad_cell(notes) here: that helper strips every empty
+                    # paragraph before the FIRST table anywhere in the cell, not just
+                    # the one this call just introduced - in a notes cell that already
+                    # has earlier rule_lines() blank writing lines before this
+                    # must-write table, it deleted those too. Harmless here: the one
+                    # extra blank paragraph python-docx leaves before a freshly added
+                    # table is a few points of space, not a rendering defect.
                 else:
+                    para(notes, body, 9.5, bold=False)
                     rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
 
+            # SHULL-CHG-0020. His ask: "add box to add anything from the slide,
+            # 'Extra'." The structured prompts above cover what he planned to put on
+            # the slide - this is the catch-all for whatever he adds live that isn't
+            # one of them, kept with the row it belongs to rather than pooled once at
+            # the end of the section, since that's what "from the slide" scopes it to.
+            para(notes, "EXTRA — ANYTHING ELSE FROM THE SLIDE", 7.5, bold=True,
+                 color=accent, caps_track=True)
+            rule_lines(notes, 2, hair)
+
         gap(doc, 2)
-        c = one_cell(doc); borders(c, accent)
+        c = one_cell(doc, protect=True); borders(c, accent)
         para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
              bold=True, color=accent, caps_track=True, first=True)
         para(c, sec["summaryPrompt"], 9.5)
@@ -237,7 +388,7 @@ def main():
     c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
     borders(c, display, sz=18, edges=("bottom",))
     para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
-    c = one_cell(doc); borders(c, hair)
+    c = one_cell(doc, protect=True); borders(c, hair)
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["close"]["checklist"]:
         check_item(c, x, pal)
@@ -246,6 +397,19 @@ def main():
     rule_lines(c, 3, hair)
     para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
     rule_lines(c, 3, hair)
+
+    # SHULL-CHG-0018. A standing last page, every course: topic breakdown, key
+    # points, confusing points, remember. Required-with-a-loud-warning rather than a
+    # hard crash - Geology's and Physics's already-shipped specs don't have this
+    # content yet and inventing it is not this builder's job - so a spec missing it
+    # still builds, loudly, matching the noEquationBar soft-opt-out pattern.
+    recap = spec.get("studyRecap")
+    if recap:
+        study_recap_page(doc, recap, pal)
+    else:
+        print("build_notes_docx: this course's notes should end with a Study Recap "
+              "page — none provided, building without one; see SHULL-CHG-0018 "
+              "discussion.", file=sys.stderr)
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
 
