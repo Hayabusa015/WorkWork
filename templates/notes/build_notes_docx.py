@@ -13,6 +13,7 @@ import json, os, sys
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -23,10 +24,77 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
-    borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
-    stacked_frac, equation_bar, work_box, given_need, diagram_block, fillin_table,
-    unpad_cell, page_setup, running_footer, trim_tail, add_watermark, study_recap_page,
+    borders, para, check_item, rule_lines, fix_widths, tight_cells, one_cell,
+    no_split, gap, stacked_frac, equation_bar, work_box, given_need, diagram_block,
+    fillin_table, unpad_cell, cell_margins, page_setup, running_footer, trim_tail,
+    add_watermark, study_recap_page,
 )
+
+
+# SHULL-CHG-0019. Matthew's own words: "if there's a matter flow chart, I kind of just
+# want them to fill in their own matter flow chart on the paper." Guided notes capture
+# what's on the board during lecture - they are not a reasoning worksheet - so the
+# S1.1 Matter Flowchart row is a small tree of boxes the student labels as it's drawn,
+# not a set of open questions. This is specific to one row in one course's one section,
+# so it lives here rather than in _shull_docx.py: a shared primitive is for a shape
+# more than one builder needs, and nothing else in the system draws a branching tree.
+# Archivo carries "↓" (down arrow) but none of the diagonal arrow glyphs, so the
+# connectors are straight-down arrows only - the branching itself is shown by which
+# columns of the grid each box spans, the same way Matthew draws it on the board.
+def matter_flowchart(cell, pal, inner_w, filled=False):
+    """S1.1's Matter Flowchart: MATTER splits into Pure substance / Mixture, and each
+    of those splits again into Element/Compound and Homogeneous/Heterogeneous.
+
+    `filled=False` (student copy): only MATTER is printed; every other box is blank
+    for the student to label as the chart goes up on the board. `filled=True` (key):
+    every box carries its answer. Same four-column grid either way, so the two
+    documents stay pixel-for-pixel comparable - the key is the student page, answered.
+    """
+    box_h = 0.34
+    t = cell.add_table(rows=5, cols=4)
+    fix_widths(t, [inner_w / 4] * 4)
+    tight_cells(t, top=16, bottom=16, left=30, right=30)
+
+    def box(c, text):
+        borders(c, pal.hair, sz=6)
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        p = para(c, text, 9.5, bold=True, color=pal.ink, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    def arrow(c):
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        p = para(c, "↓", 11, bold=True, color=pal.hair, first=True)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    # Level 1 - MATTER, the one thing everyone starts from. Centred over the row by
+    # merging only the middle two columns; the outer two stay unbordered spacers.
+    top = t.rows[0].cells[1].merge(t.rows[0].cells[2])
+    box(top, "MATTER")
+    no_split(t.rows[0], box_h)
+
+    # One connector, then the fork into two.
+    left_arrow = t.rows[1].cells[0].merge(t.rows[1].cells[1])
+    right_arrow = t.rows[1].cells[2].merge(t.rows[1].cells[3])
+    arrow(left_arrow)
+    arrow(right_arrow)
+
+    # Level 2 - Pure substance / Mixture.
+    pure = t.rows[2].cells[0].merge(t.rows[2].cells[1])
+    mix = t.rows[2].cells[2].merge(t.rows[2].cells[3])
+    box(pure, "Pure substance" if filled else "")
+    box(mix, "Mixture" if filled else "")
+    no_split(t.rows[2], box_h)
+
+    # Connector into the four leaves - one arrow per leaf, directly above it.
+    for c in t.rows[3].cells:
+        arrow(c)
+
+    # Level 3 - the four leaves, in the deck's own order.
+    leaves = ["Element", "Compound", "Homogeneous", "Heterogeneous"]
+    for c, name in zip(t.rows[4].cells, leaves):
+        box(c, name if filled else "")
+    no_split(t.rows[4], box_h)
+    return t
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -242,6 +310,10 @@ def main():
             if row.get("table"):
                 fillin_table(notes, row["table"], pal, NOTES_INNER_IN)
                 unpad_cell(notes)
+            if row.get("matterFlowchart"):
+                matter_flowchart(notes, pal, NOTES_INNER_IN,
+                                  filled=bool(row["matterFlowchart"].get("filled")))
+                unpad_cell(notes)
 
             prob = row.get("problem")
             if prob:
@@ -260,14 +332,31 @@ def main():
             for n in row["notes"]:
                 mw = n.startswith(("*", "✎"))
                 body = n.lstrip("*✎").strip()
-                p = para(notes, body, 9.5, bold=mw)
                 if mw:
-                    pPr = p._p.get_or_add_pPr()
-                    bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
-                    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
-                    x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
-                    bd.append(x); pPr.append(bd)
+                    # A paragraph-level w:pBdr left border (the original approach) is
+                    # valid OOXML and present in the saved file, but LibreOffice does
+                    # not paint it inside a nested table cell - confirmed by inspecting
+                    # the raw XML (border there, sz 18, colour correct) against the
+                    # rendered PDF (no line at all). Every OTHER accent bar in this
+                    # system (the masthead kicker, work_box's label) is a TABLE CELL
+                    # border, which does render reliably - so the must-write line gets
+                    # the same treatment: its own 1x1 table with a left cell border,
+                    # not a paragraph border.
+                    mwt = notes.add_table(rows=1, cols=1)
+                    fix_widths(mwt, [NOTES_INNER_IN])
+                    mwc = mwt.rows[0].cells[0]
+                    borders(mwc, display, sz=18, edges=("left",))
+                    cell_margins(mwc, top=20, bottom=20, left=120, right=0)
+                    para(mwc, body, 9.5, bold=True, first=True)
+                    # NOT unpad_cell(notes) here: that helper strips every empty
+                    # paragraph before the FIRST table anywhere in the cell, not just
+                    # the one this call just introduced - in a notes cell that already
+                    # has earlier rule_lines() blank writing lines before this
+                    # must-write table, it deleted those too. Harmless here: the one
+                    # extra blank paragraph python-docx leaves before a freshly added
+                    # table is a few points of space, not a rendering defect.
                 else:
+                    para(notes, body, 9.5, bold=False)
                     rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
 
         gap(doc, 2)
