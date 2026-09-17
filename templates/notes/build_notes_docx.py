@@ -304,6 +304,12 @@ def main():
             para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
             for q in row["cues"]:
                 para(cue, q, 8.5)
+                # SHULL-CHG-0020. His ask: "give recall." The cue column already told
+                # a student to "cover the right side and quiz yourself with it later" -
+                # but gave nowhere to actually write the answer when they did, so
+                # recall stayed a mental exercise instead of a real self-check. One
+                # short line per cue turns it into one.
+                rule_lines(cue, 1, hair)
             para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
             if row.get("diagram"):
                 diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
@@ -358,6 +364,15 @@ def main():
                 else:
                     para(notes, body, 9.5, bold=False)
                     rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
+
+            # SHULL-CHG-0020. His ask: "add box to add anything from the slide,
+            # 'Extra'." The structured prompts above cover what he planned to put on
+            # the slide - this is the catch-all for whatever he adds live that isn't
+            # one of them, kept with the row it belongs to rather than pooled once at
+            # the end of the section, since that's what "from the slide" scopes it to.
+            para(notes, "EXTRA — ANYTHING ELSE FROM THE SLIDE", 7.5, bold=True,
+                 color=accent, caps_track=True)
+            rule_lines(notes, 2, hair)
 
         gap(doc, 2)
         c = one_cell(doc, protect=True); borders(c, accent)
