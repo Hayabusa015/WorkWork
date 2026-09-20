@@ -111,9 +111,38 @@ application that built it.
 
 ## Verification
 
-Pending. The token block is in place and the record is written; the generated app CSS and the app
-itself are Matthew's to update, and the accent swap is not verified until a screen has been looked
-at. **IMPLEMENTED is not verified.**
+Partly done, and the gap is named rather than papered over.
 
-**Implemented By:** pending
-**Verified:** pending
+The colour itself is measured, not asserted: the numbers in the table above were computed by
+`scripts/measure_tokens.py`, not typed by hand. The app theme is generated from the token rather
+than copied out of it, and `scripts/build_app_css.py --check` passes — which is the part that
+matters for drift, because it means the shipped CSS cannot quietly disagree with
+`brand/tokens.json`. The test suite and `scripts/hook-validate.sh` are clean. And the accent has now
+actually been looked at: four screens of the running app — Today, Design, Desk, Templates — were
+rendered and read, which is the condition this section previously said was outstanding.
+
+Two things remain unchecked, and neither is a formality:
+
+1. **Windows.** Nothing has been seen in the packaged app on Windows. The screens above were the app
+   running, not the build a user installs.
+2. **Colour blindness.** No simulation was run against the two under-floor pairs. The
+   border-and-label differentiation that `rules.note` demands of them is implemented, but "written
+   to the rule" and "tested against an eye that cannot separate the hues" are different claims, and
+   only the first one is true today.
+
+Until those two are done this stays **partly verified**. **IMPLEMENTED is not verified**, and
+partly verified is not verified either.
+
+**Implemented By:** `705e2f1` (theme and token), plus a follow-up commit carrying the record
+close-out and a CI fix
+
+**Verified:** Partly, 2026-09-20. What was checked: `scripts/measure_tokens.py` wrote the `measured`
+block for `identity.signal` and reports 8.07:1 on asphalt (AAA band), 2.24:1 on white (NOT TYPE) and
+grayscale 126; `scripts/build_app_css.py` regenerates the theme from the token and its `--check`
+passes, so the generated CSS cannot drift from `brand/tokens.json`; 37 node tests pass and
+`scripts/hook-validate.sh` reports all validators clean; and four screens of the running app — Today,
+Design, Desk, Templates — were rendered and read. **What was not checked:** nothing has been seen on
+Windows in the packaged app, and no colour-blindness simulation was run against the two under-floor
+pairs (`identity.signal` vs `courses.geology.primary`, `identity.signal` vs `semantic.success`) — the
+border-and-label differentiation `rules.note` requires is implemented, but it has not been tested
+empirically.

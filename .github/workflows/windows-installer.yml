@@ -115,10 +115,11 @@ jobs:
         run: npx electron desktop/smoke.cjs
 
       # The icon is a generated artifact like the theme is; fail here rather than
-      # ship a build wearing the default Electron atom.
+      # ship a build wearing the default Electron atom. Runs on the Python we
+      # just bundled, not the runner's — only ours has Pillow.
       - name: Check the app icon is current
         shell: pwsh
-        run: python scripts/build_app_icon.py --check
+        run: desktop/vendor/python/python.exe scripts/build_app_icon.py --check
 
       - name: Build the installer
         shell: pwsh
