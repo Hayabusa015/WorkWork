@@ -2,6 +2,7 @@ import http from 'node:http';
 import {recordCharge,balanceSummary,estimateWorkflow,usageCost} from './billing.mjs';
 import {deliverSuggestion,addSuggestionFocus,handToLibrarian} from './suggestions.mjs';
 import {references,agentNames,createAgentRunner,draftWithAgents,checkScope} from './agents.mjs';
+import {curriculum,documentTypes,documentName,COURSE_CODE} from './curriculum.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -23,6 +24,21 @@ const save=()=>{for(const r of db.runs)if(!['Failed','Interrupted'].includes(r.s
 let key=process.env.ANTHROPIC_API_KEY||'',model=db.selectedModel||'claude-sonnet-5',models=[];
 const read=p=>fs.readFileSync(path.join(repo,p),'utf8');
 const specs=fs.readdirSync(path.join(repo,'templates/worksheet/specs')).filter(x=>x.endsWith('.json')).map(name=>({id:name,spec:JSON.parse(read('templates/worksheet/specs/'+name))}));
+// What this app can actually build, per document type from standards/NAMING.md.
+// Only the worksheet builder is wired in; the rest name the repository command
+// instead of offering a button that does nothing.
+const CONTENT={
+ Practice_Set:{app:true,family:'worksheet',blurb:'Questions with work areas, on the course profile.'},
+ Activity:{app:true,family:'worksheet',blurb:'A shorter task or station sheet. Geology’s usual shape.'},
+ Guided_Notes:{app:false,family:'notes',command:'python3 templates/notes/build_notes_docx.py templates/notes/specs/<spec>.json out.docx'},
+ Lab:{app:false,family:'lab',command:'python3 templates/lab/build_lab.py templates/lab/<lab>.html'},
+ Slides:{app:false,family:'slide',command:'cd templates/slide && SHULL_COURSE=<course> node build.js out.pptx'},
+};
+const contentTypes=()=>documentTypes(read('standards/NAMING.md'))
+ .filter(type=>type!=='Key')   // a key is never chosen; it is always a second file
+ .map(type=>({type,label:type.replaceAll('_',' '),...(CONTENT[type]||{app:false,family:null})}));
+const previewDir=path.join(root,'public/previews');
+const gallery=()=>{const file=path.join(previewDir,'catalog.json');if(!fs.existsSync(file))return{generated:false,families:[]};try{return{generated:true,...JSON.parse(fs.readFileSync(file,'utf8'))};}catch{return{generated:false,families:[],error:'The preview catalog could not be read. Re-run scripts/build_template_previews.py.'};}};
 const standards=['standards/QA_GATE.md','standards/VOICE.md','brand/SHULL_DESIGN_SYSTEM.md',...['chemistry','physics','geology'].map(c=>`courses/${c}/DECISIONS.md`)];
 let port=Number(process.env.PORT||4317),origin=`http://127.0.0.1:${port}`;
 async function anthropic(endpoint,body){const response=await fetch('https://api.anthropic.com/v1/'+endpoint,{method:body?'POST':'GET',headers:{'x-api-key':key,'anthropic-version':'2023-06-01','content-type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(180000)});const result=await response.json();if(!response.ok)throw Error(`Anthropic request failed (${response.status}). Check your key, model access, and API balance.`);return result;}
@@ -30,7 +46,7 @@ const agent=createAgentRunner({read,save,charge:(run,step,index)=>recordCharge(d
 const dir=path.join(data,'reports',run.id);fs.mkdirSync(dir,{recursive:true});
 fs.writeFileSync(path.join(dir,index+'-'+step.role+'.md'),step.report);
 }});
-async function draft(run){try{await draftWithAgents(run,{read,agent,example:specs.find(s=>s.id===run.template).spec,validate:validateSpec,save,onResearch:async(run,research)=>{if(research.issues.length)await deliverSuggestion({run,research,agent,suggestions:db.suggestions,save});}});}catch(e){run.status='Failed';run.error=e.message;save();}}
+async function draft(run,target){try{await draftWithAgents(run,{read,agent,target,example:specs.find(s=>s.id===run.template).spec,validate:validateSpec,save,onResearch:async(run,research)=>{if(research.issues.length)await deliverSuggestion({run,research,agent,suggestions:db.suggestions,save});}});}catch(e){run.status='Failed';run.error=e.message;save();}}
 async function reviewArtifact(run){
 const dir=path.join(data,run.id);
 const evidence={spec:run.spec,files:{docx:fs.existsSync(path.join(dir,'worksheet.docx')),pdf:fs.existsSync(path.join(dir,'worksheet.pdf'))},printAudit:run.audit||{status:'unavailable'},visualInspection:'not performed by an agent',separateKey:'not verified',drive:'not connected'};
@@ -79,9 +95,44 @@ const run={id:randomUUID(),kind:'handoff',course:item.course,title:'Librarian: '
 item.status='sending';item.handoffRun=run.id;delete item.error;db.runs.unshift(run);save();send(202,{id:run.id});void handToLibrarian({item,run,agent,save});return;}
 
 if(p==='/api/billing'&&req.method==='POST'){const b=await body(req);if(typeof b.balance!=='number'||!Number.isFinite(b.balance)||b.balance<0||b.balance>100000)throw Error('Enter a valid USD balance');db.billing.starting=b.balance;db.billing.baselineIndex=db.billing.ledger.length;db.billing.since=new Date().toISOString();save();return send(200,balanceSummary(db.billing));}
-if(p==='/api/estimate'){const template=specs.find(t=>t.id===url.searchParams.get('template'));const kind=url.searchParams.get('kind')||'document';const roleList=kind==='build'?['auditor','librarian','overseer']:['overseer','researcher','secretary','designer','auditor','overseer','auditor','librarian','overseer'];const course=template?.spec.course||'chemistry';const chars={};for(const role of roleList){chars[role]=[`.claude/agents/${role}.md`,...(references[role]||[]),`courses/${course}/DECISIONS.md`].reduce((n,p)=>n+read(p).length,0)+JSON.stringify(template?.spec||{}).length+(url.searchParams.get('prompt')||'').slice(0,6000).length;}return send(200,{estimate:estimateWorkflow(model,roleList,chars)});}
+if(p==='/api/estimate'){
+// A Design request names a course and a document type rather than a template; resolve
+// the structural example the same way /api/design does, so the estimate is of the run
+// that would actually happen.
+const byDesign=url.searchParams.get('course')?(specs.find(x=>x.spec.course===url.searchParams.get('course')&&x.spec.docType===url.searchParams.get('type'))||specs.find(x=>x.spec.course===url.searchParams.get('course'))):null;
+const template=byDesign||specs.find(t=>t.id===url.searchParams.get('template'));const kind=url.searchParams.get('kind')||'document';const roleList=kind==='build'?['auditor','librarian','overseer']:['overseer','researcher','secretary','designer','auditor','overseer','auditor','librarian','overseer'];const course=template?.spec.course||'chemistry';const chars={};for(const role of roleList){chars[role]=[`.claude/agents/${role}.md`,...(references[role]||[]),`courses/${course}/DECISIONS.md`].reduce((n,p)=>n+read(p).length,0)+JSON.stringify(template?.spec||{}).length+(url.searchParams.get('prompt')||'').slice(0,6000).length;}return send(200,{estimate:estimateWorkflow(model,roleList,chars)});}
 if(p.match(/^\/api\/templates\/([\w.-]+)\/name$/)&&req.method==='POST'){const id=p.match(/^\/api\/templates\/([\w.-]+)\/name$/)[1],template=specs.find(x=>x.id===id);if(!template)throw Error('Template not found');const b=await body(req),name=String(b.name||'').trim();if(name.length<2||name.length>120)throw Error('Template name must be 2–120 characters');db.templateNames[id]=name;save();return send(200,{ok:true,id,name});}
 if(p==='/api/state')return send(200,{...db,billing:balanceSummary(db.billing),runs:db.runs.map(r=>({...r,estimatedCost:r.sample?0:(r.agents||[]).reduce((n,a)=>n+(a.cost??usageCost(r.model,a.usage)??0),0),costUnknown:(r.agents||[]).some(a=>a.cost===null||(!a.usage&&['failed','interrupted'].includes(a.status)))})),agentNames,connected:!!key,model,models,templates:specs.map(x=>({id:x.id,course:x.spec.course,title:db.templateNames[x.id]||x.spec.sectionsContent.map(s=>s.title).join(', '),originalTitle:x.spec.sectionsContent.map(s=>s.title).join(', ')})),standards});
+if(p==='/api/gallery')return send(200,gallery());
+if(p==='/api/curriculum'){const course=url.searchParams.get('course');if(!['chemistry','physics','geology'].includes(course))throw Error('Select Chemistry, Physics, or Geology');
+ return send(200,{...curriculum(read(`courses/${course}/DECISIONS.md`),course),code:COURSE_CODE[course],source:`courses/${course}/DECISIONS.md`,contentTypes:contentTypes()});}
+if(p==='/api/design'&&req.method==='POST'){const b=await body(req);
+ const course=b.course;if(!['chemistry','physics','geology'].includes(course))throw Error('Select a course');
+ const type=String(b.type||'');const capability=contentTypes().find(x=>x.type===type);
+ if(!capability)throw Error('Unknown document type');
+ if(!capability.app)throw Error(capability.command
+   ?`SHULL OS cannot build ${capability.label} yet. Build it from the repository: ${capability.command}`
+   :`No template builds ${capability.label} yet.`);
+ const unit=Number(b.unit);const sections=Array.isArray(b.sections)?b.sections.map(String):[];
+ if(!Number.isInteger(unit)||!sections.length)throw Error('Choose a unit and at least one section');
+ const decisions=read(`courses/${course}/DECISIONS.md`);
+ // The rule from CLAUDE.md, enforced before anything is spent: never build against a
+ // code that is not in that course's decisions file.
+ checkScope({course,unit,sections},decisions,course);
+ const map=curriculum(decisions,course);const unitEntry=map.units.find(u=>u.unit===unit);
+ if(!unitEntry)throw Error(`U${unit} is not in courses/${course}/DECISIONS.md`);
+ const chosen=unitEntry.sections.filter(x=>sections.includes(x.code));
+ if(chosen.length!==sections.length)throw Error('A selected section is not in that unit');
+ if(!key||!model)throw Error('Connect your Anthropic key and select a model first');
+ if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');
+ const example=specs.find(x=>x.spec.course===course&&x.spec.docType===type)||specs.find(x=>x.spec.course===course);
+ if(!example)throw Error(`No ${course} worksheet template to take a structure from`);
+ const target={course,unit,sections,type,unitTitle:unitEntry.title,sectionTitles:chosen.map(x=>x.title)};
+ const run={id:randomUUID(),kind:'design',template:example.id,course,templateCourse:course,model,agents:[],target,
+  filename:documentName({course,type,unit,sections}),
+  title:chosen.map(x=>x.title).join(', '),prompt:String(b.prompt||'').slice(0,6000),
+  created:new Date().toISOString(),status:'Drafting'};
+ db.runs.unshift(run);save();send(201,{id:run.id});void draft(run,target);return;}
 if(p==='/api/standard'){if(!standards.includes(url.searchParams.get('path')))return send(404,{});return send(200,{text:read(url.searchParams.get('path'))});}
 if(p==='/api/connect'&&req.method==='POST'){const b=await body(req);key=String(b.key||key);if(!key)throw Error('Enter your Anthropic API key');try{models=(await anthropic('models')).data.map(m=>({id:m.id,name:m.display_name}));model=models.some(m=>m.id===model)?model:(models[0]?.id||'');db.selectedModel=model;save();}catch(e){key='';throw e;}return send(200,{ok:true});}
 if(p==='/api/disconnect'&&req.method==='POST'){key='';models=[];model='';return send(200,{ok:true});}
@@ -89,10 +140,17 @@ if(p==='/api/model'&&req.method==='POST'){const b=await body(req);if(!models.som
 if(p==='/api/focus'&&req.method==='POST'){const b=await body(req);if(b.id){const f=db.focus.find(f=>f.id===b.id);if(f)f.done=!f.done;}else if(String(b.text||'').trim())db.focus.push({id:randomUUID(),text:String(b.text).slice(0,200),done:false});save();return send(200,{ok:true});}
 if(p==='/api/runs'&&req.method==='POST'){const b=await body(req),template=specs.find(s=>s.id===b.template),route=['chemistry','physics','geology','class'].includes(b.course)?b.course:(template?.spec.course);if(!template)throw Error('Select a repository worksheet');if(!route)throw Error('Select a course');if(route!=='class'&&route!==template.spec.course)throw Error('Choose a template from the selected course');if(!b.sample&&(!key||!model))throw Error('Connect your Anthropic key and select a model first');if(!b.sample){checkScope(template.spec,read('courses/'+template.spec.course+'/DECISIONS.md'),route);if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');}if(b.model&&models.some(m=>m.id===b.model))model=b.model;const run={id:randomUUID(),template:template.id,course:route,templateCourse:template.spec.course,model,agents:[],title:template.spec.sectionsContent.map(s=>s.title).join(', '),prompt:String(b.prompt||'').slice(0,6000),created:new Date().toISOString(),status:b.sample?'Draft ready':'Drafting',sample:!!b.sample};if(b.sample)run.spec=structuredClone(template.spec);db.runs.unshift(run);save();send(201,{id:run.id});if(!b.sample)void draft(run);return;}
 const revision=p.match(/^\/api\/runs\/([\w-]+)\/revise$/);
-if(revision&&req.method==='POST'){const run=db.runs.find(r=>r.id===revision[1]);if(!run||run.status!=='Agent needs attention'||!run.spec)throw Error('No revision-ready draft');if(!key||!model)throw Error('Reconnect Anthropic first');if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');run.prompt=(run.prompt||'')+'\nRevise these independent review findings:\n'+(run.agents||[]).filter(x=>x.role==='auditor').slice(-1).map(x=>x.report).join('\n');run.docx=false;run.pdf=false;delete run.audit;run.status='Drafting';run.model=model;save();send(202,{id:run.id});void draft(run);return;}
+if(revision&&req.method==='POST'){const run=db.runs.find(r=>r.id===revision[1]);if(!run||run.status!=='Agent needs attention'||!run.spec)throw Error('No revision-ready draft');if(!key||!model)throw Error('Reconnect Anthropic first');if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');run.prompt=(run.prompt||'')+'\nRevise these independent review findings:\n'+(run.agents||[]).filter(x=>x.role==='auditor').slice(-1).map(x=>x.report).join('\n');run.docx=false;run.pdf=false;delete run.audit;run.status='Drafting';run.model=model;save();send(202,{id:run.id});void draft(run,run.target);return;}
 const match=p.match(/^\/api\/runs\/([\w-]+)\/(build|approve|teach)$/);if(match&&req.method==='POST'){const run=db.runs.find(r=>r.id===match[1]);if(!run)throw Error('Request not found');if(match[2]==='build'){if(!['Draft ready','Needs teacher review'].includes(run.status)||!run.spec)throw Error('Draft is not ready');if(run.agents?.length&&(!key||!model))throw Error('Reconnect Anthropic to run the independent artifact review');validateSpec(run.spec);run.status='Building';save();send(202,{ok:true});void build(run);return;}if(match[2]==='approve'){if(run.status!=='Needs teacher review')throw Error('Build and review the document first');run.status='Teacher approved';}else{if(run.status!=='Teacher approved')throw Error('Approve before recording paper assignment');run.status='Handed out';run.taughtAt=new Date().toISOString();}save();return send(200,{ok:true});}
-const file=p.match(/^\/files\/([\w-]+)\/(worksheet\.(docx|pdf))$/);if(file){const target=path.join(data,file[1],file[2]);if(!fs.existsSync(target))return send(404,{});res.writeHead(200,{'content-type':file[3]==='pdf'?'application/pdf':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','content-disposition':`${file[3]==='pdf'?'inline':'attachment'}; filename="${file[2]}"`});fs.createReadStream(target).pipe(res);return;}
-const staticFiles={'/':'index.html','/app.js':'app.js','/style.css':'style.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
+const file=p.match(/^\/files\/([\w-]+)\/(worksheet\.(docx|pdf))$/);if(file){const target=path.join(data,file[1],file[2]);if(!fs.existsSync(target))return send(404,{});
+const owner=db.runs.find(r=>r.id===file[1]);
+// A design run knows the name standards/NAMING.md wants; hand the file over under it.
+const name=owner?.filename?owner.filename.replace(/\.docx$/,'.'+file[3]):file[2];
+res.writeHead(200,{'content-type':file[3]==='pdf'?'application/pdf':'application/vnd.openxmlformats-officedocument.wordprocessingml.document','content-disposition':`${file[3]==='pdf'?'inline':'attachment'}; filename="${name}"`});fs.createReadStream(target).pipe(res);return;}
+const preview=p.match(/^\/previews\/([\w.-]+\.png)$/);
+if(preview){const target=path.join(previewDir,preview[1]);if(!target.startsWith(previewDir+path.sep)||!fs.existsSync(target))return send(404,{});res.writeHead(200,{'content-type':'image/png','cache-control':'no-cache'});return fs.createReadStream(target).pipe(res);}
+if(p==='/icon.svg'){res.writeHead(200,{'content-type':'image/svg+xml','cache-control':'no-cache'});return res.end(fs.readFileSync(path.join(root,'public/icon.svg')));}
+const staticFiles={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/tokens.generated.css':'tokens.generated.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
 }catch(e){send(400,{error:e.message});}};
 const server=http.createServer(handler);
 export function startServer(requestedPort=port){return new Promise((resolve,reject)=>{server.once('error',reject);server.listen(requestedPort,'127.0.0.1',()=>{server.removeListener('error',reject);port=server.address().port;origin=`http://127.0.0.1:${port}`;resolve(server);});});}
