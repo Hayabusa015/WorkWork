@@ -24,6 +24,9 @@ from PIL import Image, ImageDraw
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(REPO, "build", "icon-source.png")
 OUT = os.path.join(REPO, "build", "icon.ico")
+# The same badge, web-sized, for the app's own rail. Served by app/server.mjs.
+MARK = os.path.join(REPO, "app", "public", "badge.png")
+MARK_PX = 128
 
 # Windows picks the nearest size rather than scaling, so ship the ones it asks
 # for instead of one large image.
@@ -87,12 +90,19 @@ def main(argv):
         if have != sorted((n, n) for n in SIZES):
             print(f"build_app_icon: build/icon.ico holds {have}, expected {SIZES} — re-run the script")
             return 1
+        if not os.path.exists(MARK):
+            print("build_app_icon: app/public/badge.png missing — run scripts/build_app_icon.py")
+            return 1
         print("build_app_icon: OK — every expected size is present")
         return 0
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     frames[-1].save(OUT, format="ICO", sizes=[(n, n) for n in SIZES])
     print(f"wrote {os.path.relpath(OUT, REPO)} — {', '.join(str(n) for n in SIZES)}px")
+
+    os.makedirs(os.path.dirname(MARK), exist_ok=True)
+    frames[-1].resize((MARK_PX, MARK_PX), Image.LANCZOS).save(MARK, optimize=True)
+    print(f"wrote {os.path.relpath(MARK, REPO)} — {MARK_PX}px")
     return 0
 
 

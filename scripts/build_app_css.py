@@ -26,10 +26,14 @@ c = tokens["courses"]
 sem = tokens["semantic"]
 typ = tokens["typography"]
 
-# Geology's Terra Teal is the app's own accent: the workspace is not a course,
-# and this is the identity the shipped app already carried. Course surfaces
-# still use their own colour — see --course-* below.
-APP = c["geology"]
+# SHULL-CHG-0024: the workspace has its own colour, sampled from the SHULL OS
+# badge. It used to borrow Geology's Terra Teal, which was a stand-in — the app
+# is not Geology. Course surfaces still use their own colour, see --course-*.
+#
+# Screen only. It measures 2.24:1 on white, so it is NOT type on a light ground
+# and must never reach a printed document; the print builders keep taking their
+# colour from courses.*.
+APP = tokens["identity"]["signal"]
 
 css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_app_css.py — DO NOT EDIT.
    Re-run the script after changing any token. app/public/style.css must not
@@ -57,6 +61,8 @@ css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_app_css.py — DO
   --t-geo:           {c['geology']['primary']['hex']};
   --t-geo-2:         {c['geology']['secondary']['hex']};
 
+  --t-signal:        {APP['hex']};   /* {APP['name']} — the app's own */
+
   --t-danger:        {sem['danger']['hex']};
   --t-caution:       {sem['caution']['hex']};
   --t-success:       {sem['success']['hex']};
@@ -80,10 +86,10 @@ css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_app_css.py — DO
   --text-dim:    color-mix(in oklab, var(--t-muted-on-dark) 72%, var(--t-asphalt));
 
   /* ---- Accent: the workspace's own identity. ---- */
-  --accent:       var(--t-geo);
-  --accent-bright:color-mix(in oklab, var(--t-geo) 72%, white);
-  --accent-deep:  color-mix(in oklab, var(--t-geo) 55%, var(--t-asphalt));
-  --accent-ink:   color-mix(in oklab, var(--t-asphalt) 82%, var(--t-geo));
+  --accent:       var(--t-signal);
+  --accent-bright:color-mix(in oklab, var(--t-signal) 72%, white);
+  --accent-deep:  color-mix(in oklab, var(--t-signal) 55%, var(--t-asphalt));
+  --accent-ink:   color-mix(in oklab, var(--t-asphalt) 88%, var(--t-signal));
 
   /* ---- Course identity. Used for the course a document belongs to, never
      as decoration. ---- */
@@ -130,7 +136,7 @@ icon = f"""<!-- GENERATED FROM brand/tokens.json BY scripts/build_app_css.py - D
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="7" fill="{g['asphalt']['hex']}"/>
   <path d="M8 21.5c1.8 1.6 4 2.4 6.4 2.4 3.2 0 5.2-1.5 5.2-3.7 0-2.1-1.5-3.1-4.6-3.9l-1.8-.5c-3.6-.9-5.6-2.6-5.6-5.5C7.6 7 10.3 5 14.6 5c2.2 0 4.2.6 5.8 1.7"
-        fill="none" stroke="{c['geology']['primary']['hex']}" stroke-width="3"
+        fill="none" stroke="{APP['hex']}" stroke-width="3"
         stroke-linecap="round"/>
   <rect x="7" y="25" width="18" height="2" rx="1" fill="{c['chemistry']['primary']['hex']}"/>
 </svg>
