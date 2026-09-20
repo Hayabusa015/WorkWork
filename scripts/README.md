@@ -11,6 +11,7 @@
 |---|---|---|
 | `build_app_css.py` | `app/public/tokens.generated.css`, `app/public/icon.svg` | `brand/tokens.json` |
 | `build_template_previews.py` | `app/public/previews/` — a page image per document template, plus `catalog.json` | each template's own builder |
+| `build_app_icon.py` | `build/icon.ico` — the Windows app and installer icon | `build/icon-source.png` |
 
 Both write build artifacts. Never hand-edit one; re-run the script. `build_app_css.py --check`
 fails when the generated theme has drifted from the tokens, and is the reason

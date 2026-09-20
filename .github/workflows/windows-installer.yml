@@ -114,6 +114,12 @@ jobs:
         shell: pwsh
         run: npx electron desktop/smoke.cjs
 
+      # The icon is a generated artifact like the theme is; fail here rather than
+      # ship a build wearing the default Electron atom.
+      - name: Check the app icon is current
+        shell: pwsh
+        run: python scripts/build_app_icon.py --check
+
       - name: Build the installer
         shell: pwsh
         run: npx electron-builder --win nsis zip --publish never

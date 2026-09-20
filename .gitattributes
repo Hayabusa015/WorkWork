@@ -9,6 +9,7 @@
 
 # Binary, never touched.
 *.png  binary
+*.ico  binary
 *.pdf  binary
 *.ttf  binary
 *.docx binary

@@ -33,7 +33,7 @@
       {"from": "docs", "to": "repo/docs"},
       {"from": "desktop/vendor", "to": "vendor"}
     ],
-    "win": {"target": ["nsis", "zip"], "signAndEditExecutable": false},
+    "win": {"target": ["nsis", "zip"], "signExecutable": false, "icon": "build/icon.ico"},
     "nsis": {
       "oneClick": true,
       "perMachine": false,
