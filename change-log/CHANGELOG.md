@@ -72,6 +72,7 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-20 | SHULL-CHG-0023 made the notes packet strictly recall but scoped three blocks out of it: the closed-notes section summary box, the per-section self-check, and the "still fuzzy on" prompt. They read as the student checking their own notes rather than being quizzed on a slide. Should any of them also lose their question form? | User — SHULL-CHG-0023 §"Deliberately out of scope" |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |
