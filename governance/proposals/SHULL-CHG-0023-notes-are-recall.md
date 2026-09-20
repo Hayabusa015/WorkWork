@@ -1,20 +1,14 @@
 ---
 id: SHULL-CHG-0023
 title: Guided notes are strictly recall — the cue column names, it does not ask
-status: PENDING
+status: IMPLEMENTED
 opened: 2026-09-20
+decided: 2026-09-20
 source: User
-decided_by:
+decided_by: Matthew Shull
 ---
 
-# PROPOSED — SHULL-CHG-0023 — Guided notes are recall
-
-**This is a draft, not a record.** It is in `reports/` because only the Secretary writes to
-`governance/`, and only against an approved ID. Approve it and the Secretary moves it to
-`governance/proposals/SHULL-CHG-0023-notes-are-recall.md` and appends the CHANGELOG row.
-
-The mechanism below is **already implemented** — it is in `templates/`, `scripts/` and `app/`,
-which are not Secretary-only. What is missing is the record.
+# SHULL-CHG-0023 — Guided notes are recall
 
 ## What he asked for
 
@@ -108,6 +102,9 @@ decisions file is touched. Affects all three courses equally; no course-specific
 - `npm test` — 36 pass.
 - Both packets rebuilt and page 3 of the Geology packet read at 100 dpi.
 - Gallery previews regenerated; the Template gallery now shows a recall packet.
+
+**Implemented By:** 3cc19ef3a10a657aab70bbe60e172c49c6b7cbf6
+**Verified:** yes — validators clean, 36 node tests pass, both packets rebuilt and read, page counts unchanged (Geology 5, Physics 7), ink inside budget.
 
 ## Also found, not fixed here
 
