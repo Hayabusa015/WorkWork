@@ -72,6 +72,25 @@ test('the roadmap commentary is not read as curriculum', () => {
   }
 });
 
+test('the parsers survive a Windows checkout', () => {
+  // Git checks out CRLF on Windows and the desktop app IS Windows, so every
+  // parser here must give the same answer either way. It did not: documentTypes
+  // matched on \n\n, which CRLF cannot contain, so a Windows install showed an
+  // empty document-type list and refused every design request as an unknown
+  // type. Caught by the first CI run on a Windows runner, not by this container.
+  const crlf = text => text.replace(/\n/g, '\r\n');
+
+  const naming = fs.readFileSync(path.join(repo, 'standards', 'NAMING.md'), 'utf8');
+  assert.deepEqual(documentTypes(crlf(naming)), documentTypes(naming));
+  assert.ok(documentTypes(crlf(naming)).length >= 10);
+
+  for (const course of COURSES) {
+    const text = decisions(course);
+    assert.deepEqual(curriculum(crlf(text), course), curriculum(text, course),
+      `${course} parses differently from a Windows checkout`);
+  }
+});
+
 test('document types come from standards/NAMING.md, not from the app', () => {
   const naming = fs.readFileSync(path.join(repo, 'standards', 'NAMING.md'), 'utf8');
   const types = documentTypes(naming);

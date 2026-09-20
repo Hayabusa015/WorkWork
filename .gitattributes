@@ -1,0 +1,17 @@
+# This repository is a text-parsing system whose app runs on Windows. Git's
+# default there is a CRLF checkout, and Node does not translate line endings the
+# way Python's text mode does — so a parser written against \n silently stops
+# matching on the machine the app actually ships to. That shipped once: the
+# document-type list came back empty on Windows and the Design tab refused every
+# request. Check everything out with LF so a parser sees the same bytes
+# everywhere, and let Git detect binaries on its own.
+* text=auto eol=lf
+
+# Binary, never touched.
+*.png  binary
+*.pdf  binary
+*.ttf  binary
+*.docx binary
+*.dotx binary
+*.pptx binary
+*.zip  binary
