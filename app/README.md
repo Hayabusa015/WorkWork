@@ -4,6 +4,32 @@ API credits: the local tracker starts at the user-supplied $5 balance. New agent
 
 Run with Node 22+: `npm start`, then open http://127.0.0.1:4317.
 
+## Interface
+
+The app is a dark workspace. Every colour it uses comes from `app/public/tokens.generated.css`,
+which `scripts/build_app_css.py` writes from `brand/tokens.json` — the same source the printed
+templates take their palette from. `app/public/style.css` contains no colour literal at all;
+screen-only surfaces are mixed from the ground tokens with `color-mix()`, and the course accent is
+scoped by a `data-course` attribute so a Chemistry card cannot end up wearing the Geology accent.
+Run `npm run app:theme` (or `python3 scripts/build_app_css.py`) after any token change;
+`--check` fails when the generated theme has drifted, and `scripts/validate_tokens.py` covers the
+rest.
+
+**Desk** is the Secretary's workspace: the inbox on one surface with its counts, the briefing
+request, the notices on the blotter, and side trays for what is waiting on teacher review, recent
+agent handoffs and today's focus. Today keeps a compact card that links to it.
+
+**Templates** is a visual gallery of every document family in the repository — worksheet, guided
+and Cornell notes, lab handout, activity prototype and section slide deck. Each card shows real
+rendered pages, not a mock-up: `scripts/build_template_previews.py` (`npm run app:previews`) runs
+each template's own builder, converts the result to PDF and rasterises the first pages into
+`app/public/previews/`. Cards say how many pages of the whole document are shown, and which
+families this app can actually build. **Only the worksheet builder is wired into the app's build
+button.** The other four are previews of repository builds; the gallery labels them that way and
+must keep doing so. Picking a worksheet preview carries its template and course into Create.
+Previews are committed build artifacts; regenerate them after changing a template or a spec. The
+gallery degrades to description cards on a machine without the build toolchain.
+
 Set SHULL_PYTHON to a Python executable with the repository build dependencies installed. Set SHULL_SOFFICE to LibreOffice's executable for PDF previews. Configure an Anthropic API key in Settings and select a model; the key stays in server memory only. The app runs separate bounded Messages API sessions using all seven repository role definitions. This is an application orchestrator, not Claude Code or the Agent SDK: role frontmatter tools and Claude Code hooks do not run here. The host limits agents to supplied context and structured outputs; no model-generated shell commands or file paths are executed.
 
 Daily focus, draft specs and run statuses persist in app/data (gitignored). Generated documents are local draft artifacts. Try repository example works without a key. The server listens only on loopback and rejects cross-origin writes. This is a single-user local app, not ready for public hosting.
@@ -14,4 +40,4 @@ Agents → Run repository health review executes five repository validators, the
 
 The Secretary inbox appears on Today and Agents. Researcher findings from drafting are delivered through a separate Secretary call; Get updates runs a course briefing from course decisions, current focus items, and recent task metadata. Suggestions persist with source-run links. Add to today creates one linked focus item, Archive is reversible, and Send to Librarian creates one explicit handoff with a saved response. Failed/interrupted handoffs can be retried by the user. Drive filing remains pending. Drafts with research findings now include an additional Secretary call.
 
-Run `npm test` for validation, agent handoff, and suggestion lifecycle checks. Live Anthropic calls require your key and API credits. Restarted in-progress jobs are marked interrupted; there are no automatic billable retries.
+Run `npm test` for validation, agent handoff, suggestion lifecycle, theme-drift and gallery checks. Live Anthropic calls require your key and API credits. Restarted in-progress jobs are marked interrupted; there are no automatic billable retries.

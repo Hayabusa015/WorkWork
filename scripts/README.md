@@ -7,6 +7,18 @@
 | `validate_tokens.py` | A raw hex value is typed outside `tokens.json` |
 | `publish_standards.py` | — publishes `standards/` and `brand/` to Drive `_Brand/Standards/`, one direction only |
 
+| Generator | Writes | From |
+|---|---|---|
+| `build_app_css.py` | `app/public/tokens.generated.css`, `app/public/icon.svg` | `brand/tokens.json` |
+| `build_template_previews.py` | `app/public/previews/` — a page image per document template, plus `catalog.json` | each template's own builder |
+
+Both write build artifacts. Never hand-edit one; re-run the script. `build_app_css.py --check`
+fails when the generated theme has drifted from the tokens, and is the reason
+`validate_tokens.py` can keep the app under the same one-hex rule as the print templates.
+`build_template_previews.py` needs the full build toolchain (python-docx, WeasyPrint, pptxgenjs,
+LibreOffice, poppler); a family whose tools are missing is reported and skipped rather than
+failing the run.
+
 `legacy/` is excluded from every validator.
 
 These three checks would have caught, respectively: the Chemistry skill that was ordered trimmed

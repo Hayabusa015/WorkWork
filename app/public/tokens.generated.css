@@ -1,0 +1,90 @@
+/* GENERATED FROM brand/tokens.json BY scripts/build_app_css.py — DO NOT EDIT.
+   Re-run the script after changing any token. app/public/style.css must not
+   contain a colour literal; every colour it uses is named here.
+
+   Screen tokens, not print tokens. The grounds below are mixed from
+   ground.asphalt so the app's dark surfaces stay on the same neutral axis as
+   the dark slide layouts instead of drifting to a different grey. */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Raw brand values. The only place the app names one. ---- */
+  --t-asphalt:       #14161B;
+  --t-graphite:      #2E3338;
+  --t-white:         #FFFFFF;
+  --t-parchment:     #EDF0E5;
+  --t-muted-on-dark: #BDB6AA;
+  --t-rule:          #C8CDC2;
+
+  --t-chem:          #A3E635;
+  --t-chem-2:        #22D3EE;
+  --t-phys:          #F5B82E;
+  --t-phys-2:        #8B5CF6;
+  --t-geo:           #16B8A6;
+  --t-geo-2:         #E85D24;
+
+  --t-danger:        #DC2626;
+  --t-caution:       #F59E0B;
+  --t-success:       #22C55E;
+
+  /* ---- Screen grounds, derived. Each step is a stated mix of asphalt and
+     white, so the ladder is even and reproducible. ---- */
+  --ground-0: color-mix(in oklab, var(--t-asphalt) 92%, black);   /* page */
+  --ground-1: color-mix(in oklab, var(--t-asphalt) 97%, white);   /* rail */
+  --ground-2: color-mix(in oklab, var(--t-asphalt) 92%, white);   /* panel */
+  --ground-3: color-mix(in oklab, var(--t-asphalt) 87%, white);   /* raised */
+  --ground-4: color-mix(in oklab, var(--t-asphalt) 82%, white);   /* input */
+
+  --edge:       color-mix(in oklab, var(--t-graphite) 78%, white 6%);
+  --edge-soft:  color-mix(in oklab, var(--t-graphite) 90%, black);
+  --edge-bright:color-mix(in oklab, var(--t-graphite) 55%, white);
+
+  /* ---- Type on dark. mutedOnDark is the token for secondary text on a dark
+     ground; it measures 8.99:1 on asphalt. ---- */
+  --text:        color-mix(in oklab, var(--t-white) 96%, var(--t-parchment));
+  --text-muted:  var(--t-muted-on-dark);
+  --text-dim:    color-mix(in oklab, var(--t-muted-on-dark) 72%, var(--t-asphalt));
+
+  /* ---- Accent: the workspace's own identity. ---- */
+  --accent:       var(--t-geo);
+  --accent-bright:color-mix(in oklab, var(--t-geo) 72%, white);
+  --accent-deep:  color-mix(in oklab, var(--t-geo) 55%, var(--t-asphalt));
+  --accent-ink:   color-mix(in oklab, var(--t-asphalt) 82%, var(--t-geo));
+
+  /* ---- Course identity. Used for the course a document belongs to, never
+     as decoration. ---- */
+  --course-chemistry:   var(--t-chem);
+  --course-chemistry-2: var(--t-chem-2);
+  --course-physics:     var(--t-phys);
+  --course-physics-2:   var(--t-phys-2);
+  --course-geology:     var(--t-geo);
+  --course-geology-2:   var(--t-geo-2);
+  --course: var(--accent);
+
+  /* ---- Semantic. Meaning, never branding. A course colour never stands in
+     for a warning colour. ---- */
+  --danger:  var(--t-danger);
+  --caution: var(--t-caution);
+  --success: var(--t-success);
+
+  /* ---- Paper. The document previews and the draft preview show a printed
+     page; a printed page is white. ---- */
+  --paper:     var(--t-white);
+  --paper-ink: var(--t-asphalt);
+  --paper-rule:var(--t-rule);
+
+  /* ---- Type stacks, from the locked font stack. ---- */
+  --font:           Trade Gothic Next, Archivo, Liberation Sans, sans-serif;
+  --font-condensed: Trade Gothic Next Condensed, Archivo Narrow, Liberation Sans Narrow, sans-serif;
+}
+
+/* Course scoping. Set data-course on any subtree and everything inside it that
+   reads var(--course) follows, so a Chemistry card cannot end up wearing the
+   Geology accent. */
+[data-course="chemistry"] { --course: var(--course-chemistry); --course-2: var(--course-chemistry-2); }
+[data-course="physics"]   { --course: var(--course-physics);   --course-2: var(--course-physics-2); }
+[data-course="geology"]   { --course: var(--course-geology);   --course-2: var(--course-geology-2); }
+[data-course="class"],
+[data-course="system"],
+[data-course="all"]       { --course: var(--accent);           --course-2: var(--accent-bright); }

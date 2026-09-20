@@ -1,0 +1,228 @@
+{
+  "generated": "build_template_previews.py",
+  "width": 900,
+  "families": [
+    {
+      "id": "worksheet",
+      "name": "Worksheet / practice set",
+      "course": "all",
+      "app": true,
+      "blurb": "One builder, one spec, three course profiles. Chemistry gets a work box per math question; Physics refuses them; Geology refuses the equation bar. The profile is enforced at build time, not by remembering.",
+      "detail": "templates/worksheet/README.md",
+      "pages": 2,
+      "items": [
+        {
+          "id": "worksheet-chem_u07_s07.4",
+          "title": "Mole Conversions",
+          "course": "chemistry",
+          "spec": "chem_u07_s07.4.json",
+          "source": "templates/worksheet/specs/chem_u07_s07.4.json",
+          "images": [
+            "worksheet-chem_u07_s07.4-1.png",
+            "worksheet-chem_u07_s07.4-2.png"
+          ],
+          "total": 4
+        },
+        {
+          "id": "worksheet-geo_u01_s01.4",
+          "title": "Nebular Theory: Build the Timeline",
+          "course": "geology",
+          "spec": "geo_u01_s01.4.json",
+          "source": "templates/worksheet/specs/geo_u01_s01.4.json",
+          "images": [
+            "worksheet-geo_u01_s01.4-1.png",
+            "worksheet-geo_u01_s01.4-2.png"
+          ],
+          "total": 2
+        },
+        {
+          "id": "worksheet-geo_u04_s04.1",
+          "title": "Layers of the Earth",
+          "course": "geology",
+          "spec": "geo_u04_s04.1.json",
+          "source": "templates/worksheet/specs/geo_u04_s04.1.json",
+          "images": [
+            "worksheet-geo_u04_s04.1-1.png"
+          ],
+          "total": 1
+        },
+        {
+          "id": "worksheet-phys_u01_s01.1-s01.4",
+          "title": "Distance, Displacement & Velocity, Acceleration & the Kinematic Equations, Position, Velocity & Acceleration Graphs, Free Fall",
+          "course": "physics",
+          "spec": "phys_u01_s01.1-s01.4.json",
+          "source": "templates/worksheet/specs/phys_u01_s01.1-s01.4.json",
+          "images": [
+            "worksheet-phys_u01_s01.1-s01.4-1.png",
+            "worksheet-phys_u01_s01.1-s01.4-2.png"
+          ],
+          "total": 4
+        }
+      ],
+      "status": "built"
+    },
+    {
+      "id": "notes",
+      "name": "Guided / Cornell notes",
+      "course": "all",
+      "app": false,
+      "blurb": "Cornell split pinned at 1.28in / 6.22in. The cue column holds the questions a student should be able to answer from the notes beside them. Worked examples carry a bordered work area.",
+      "detail": "templates/notes/README.md",
+      "pages": 2,
+      "items": [
+        {
+          "id": "notes-geo_u01_s01.2-s01.4",
+          "title": "Unit 1 \u2014 The Big Bang & Origins +2 more",
+          "course": "geology",
+          "spec": "geo_u01_s01.2-s01.4.json",
+          "source": "templates/notes/specs/geo_u01_s01.2-s01.4.json",
+          "images": [
+            "notes-geo_u01_s01.2-s01.4-1.png",
+            "notes-geo_u01_s01.2-s01.4-2.png"
+          ],
+          "total": 5
+        },
+        {
+          "id": "notes-phys_u01_s01.1-s01.4",
+          "title": "Unit 1 \u2014 Distance, Displacement & Velocity +3 more",
+          "course": "physics",
+          "spec": "phys_u01_s01.1-s01.4.json",
+          "source": "templates/notes/specs/phys_u01_s01.1-s01.4.json",
+          "images": [
+            "notes-phys_u01_s01.1-s01.4-1.png",
+            "notes-phys_u01_s01.1-s01.4-2.png"
+          ],
+          "total": 7
+        }
+      ],
+      "status": "built"
+    },
+    {
+      "id": "lab",
+      "name": "Lab handout",
+      "course": "all",
+      "app": false,
+      "blurb": "The locked lab structure with the content lifted out. Builds a student handout and a separate teacher prep-and-key file, page-budget checked so a four-page lab does not quietly become five.",
+      "detail": "templates/lab/README.md",
+      "pages": 2,
+      "items": [
+        {
+          "id": "lab-master",
+          "title": "Student handout",
+          "course": "all",
+          "source": "templates/lab/SHULL_Lab_TEMPLATE_MASTER.html",
+          "images": [
+            "lab-master-1.png",
+            "lab-master-2.png"
+          ],
+          "total": 5
+        },
+        {
+          "id": "lab-key",
+          "title": "Teacher prep and key",
+          "course": "all",
+          "source": "templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html",
+          "images": [
+            "lab-key-1.png",
+            "lab-key-2.png"
+          ],
+          "total": 2
+        }
+      ],
+      "status": "built"
+    },
+    {
+      "id": "practice",
+      "name": "Activity / editable prototype",
+      "course": "all",
+      "app": false,
+      "blurb": "Editable course-specific prototypes with a matching key file. Still prototypes until the rendered layouts are accepted \u2014 treat what you see here as a proposal.",
+      "detail": "templates/practice/build_practice.py",
+      "pages": 1,
+      "items": [
+        {
+          "id": "practice-chemistry",
+          "title": "Chemistry activity prototype",
+          "course": "chemistry",
+          "source": "templates/practice/specs/chemistry.json",
+          "images": [
+            "practice-chemistry-1.png"
+          ],
+          "total": 2
+        },
+        {
+          "id": "practice-physics",
+          "title": "Physics activity prototype",
+          "course": "physics",
+          "source": "templates/practice/specs/physics.json",
+          "images": [
+            "practice-physics-1.png"
+          ],
+          "total": 2
+        },
+        {
+          "id": "practice-geology",
+          "title": "Geology activity prototype",
+          "course": "geology",
+          "source": "templates/practice/specs/geology.json",
+          "images": [
+            "practice-geology-1.png"
+          ],
+          "total": 2
+        }
+      ],
+      "status": "built"
+    },
+    {
+      "id": "slide",
+      "name": "Section slide deck",
+      "course": "all",
+      "app": false,
+      "blurb": "Twelve layouts, one file, three courses. Geometry and type scale preserved from the approved deck; a 16pt floor on anything read from a seat.",
+      "detail": "templates/slide/README.md",
+      "pages": 4,
+      "items": [
+        {
+          "id": "slide-chemistry",
+          "title": "Chemistry deck \u2014 twelve layouts",
+          "course": "chemistry",
+          "source": "templates/slide/build.js",
+          "images": [
+            "slide-chemistry-1.png",
+            "slide-chemistry-2.png",
+            "slide-chemistry-3.png",
+            "slide-chemistry-4.png"
+          ],
+          "total": 12
+        },
+        {
+          "id": "slide-physics",
+          "title": "Physics deck \u2014 twelve layouts",
+          "course": "physics",
+          "source": "templates/slide/build.js",
+          "images": [
+            "slide-physics-1.png",
+            "slide-physics-2.png",
+            "slide-physics-3.png",
+            "slide-physics-4.png"
+          ],
+          "total": 12
+        },
+        {
+          "id": "slide-geology",
+          "title": "Geology deck \u2014 twelve layouts",
+          "course": "geology",
+          "source": "templates/slide/build.js",
+          "images": [
+            "slide-geology-1.png",
+            "slide-geology-2.png",
+            "slide-geology-3.png",
+            "slide-geology-4.png"
+          ],
+          "total": 12
+        }
+      ],
+      "status": "built"
+    }
+  ]
+}
