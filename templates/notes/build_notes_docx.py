@@ -19,6 +19,8 @@ from docx.oxml import OxmlElement
 # Every primitive on this page - how a work box is drawn, how a fraction stacks, how a
 # diagram block holds together across a page break - is shared with the worksheet
 # builder. It lives in one file so the two cannot drift.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
@@ -68,6 +70,11 @@ def main():
     if bad:
         print(f"build_notes_docx: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md.", file=sys.stderr)
+        return 1
+
+    # Guided notes are strictly recall: the cue column names what to record, it does
+    # not ask for it. recall.py carries the rule and both renderers check it.
+    if recall.check(spec, "build_notes_docx"):
         return 1
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
@@ -221,7 +228,7 @@ def main():
                     x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
                     bd.append(x); pPr.append(bd)
                 else:
-                    rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
+                    rule_lines(notes, recall.ruled_lines(body), hair)
 
         gap(doc, 2)
         c = one_cell(doc); borders(c, accent)

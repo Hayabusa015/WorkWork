@@ -10,6 +10,8 @@ brand/tokens.json via the generated CSS, so a packet cannot carry a hex.
 
 Rules it enforces rather than trusts:
   - the section code must exist in that course's DECISIONS.md
+  - the packet is strictly recall - no questions in the cue column or the
+    notes lines; see recall.py
   - nothing below the print body floor in tokens.json
 """
 import html, json, os, re, sys
@@ -17,6 +19,8 @@ import html, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "scripts"))
+sys.path.insert(0, HERE)
+import recall                                                          # noqa: E402
 
 COURSE_CODE = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
 CLASS = {"chemistry": "chem", "physics": "phys", "geology": "geo"}
@@ -62,7 +66,7 @@ def build_section(s):
             mw = n.startswith(('*', '✎'))
             cls = ' class="mw"' if mw else ''
             body.append(f"<p{cls}>{esc(n.lstrip('*✎').strip())}</p>")
-            body.append(lines(2 if n.rstrip().endswith("?") else 1))
+            body.append(lines(recall.ruled_lines(n)))
         rows.append(f'<tr><td class="cue">{cue}</td>'
                     f'<td class="notes">{"".join(body)}</td></tr>')
     checks = checkrow(s.get("selfCheck", []))
@@ -91,6 +95,10 @@ def main():
         print(f"build_notes: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md. Nothing is built against a code that is not "
               f"in the decisions file.", file=sys.stderr)
+        return 1
+
+    # Guided notes are strictly recall. One rule, one place, both renderers.
+    if recall.check(spec, "build_notes"):
         return 1
 
     # Option B renders the Cornell structure and nothing else. It has no work box

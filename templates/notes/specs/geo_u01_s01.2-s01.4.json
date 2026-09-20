@@ -21,7 +21,7 @@
     "•  Photosphere, chromosphere, corona, sunspot, prominence, solar wind, coronal mass ejection (CME)"
   ],
   "howItWorks": [
-    "The left column asks the questions you should be able to answer from the notes beside them — use it to quiz yourself later.",
+    "The left column names what to record. Write it on the right while the slide is up. Cover the right side later and see how much you can bring back.",
     "A teal rule down the left of a line means must-write. Copy those exactly.",
     "Each section ends with a summary box. Close your notes before you write it."
   ],
@@ -39,21 +39,21 @@
         {
           "cueLabel": "BASICS",
           "cues": [
-            "How long ago is the Big Bang estimated to have happened?",
-            "What is a singularity?"
+            "Age of the universe — the number",
+            "Definition — singularity"
           ],
           "notesLabel": "THE BIG BANG",
           "notes": [
-            "How long ago did the Big Bang occur?",
+            "The Big Bang: about ______________ years ago.",
             "Describe the Big Bang, starting from the singularity.",
-            "What is nucleosynthesis?"
+            "Define nucleosynthesis:"
           ]
         },
         {
           "cueLabel": "EVIDENCE",
           "cues": [
-            "What 3 pieces of evidence support the Big Bang theory?",
-            "What is redshift?"
+            "The three pieces of evidence",
+            "Definition — redshift"
           ],
           "notesLabel": "EVIDENCE FOR THE BIG BANG",
           "notes": [
@@ -67,28 +67,28 @@
         {
           "cueLabel": "EARLY UNIVERSE",
           "cues": [
-            "Why do bigger stars burn faster and die younger?",
-            "Why do stars tend to form in clusters?"
+            "Bigger stars — burn rate and lifespan",
+            "Star clusters — the reason"
           ],
           "notesLabel": "THE EARLY UNIVERSE: FIRST STARS",
           "notes": [
             "Describe the stars of the early universe.",
             "Bigger stars are __________________ and burn __________________ than smaller stars.",
-            "Why does a bigger star pull more matter toward it, and what does that cause?"
+            "A bigger star pulls more matter toward it because ______________, and that causes ______________."
           ]
         },
         {
           "cueLabel": "STAR DUST",
           "cues": [
-            "What determines which elements a star can create?",
-            "What has to happen for elements heavier than iron to form?"
+            "The limit on which elements a star can make",
+            "Elements heavier than iron — how they form"
           ],
           "notesLabel": "STAR DUST: WHERE ELEMENTS COME FROM",
           "notes": [
             "Smaller stars create the elements ______________ through ______________ by the process of ______________________.",
             "Bigger stars can fuse elements all the way up to ______________.",
             "Anything larger than ______________ is only created in a ______________________.",
-            "Why does an older nebula contain a wider variety of elements?"
+            "An older nebula holds a wider variety of elements because ______________."
           ]
         }
       ],
@@ -106,8 +106,8 @@
         {
           "cueLabel": "BASICS",
           "cues": [
-            "What is nebular theory, in one sentence?",
-            "What is a protostar? What is accretion?"
+            "Nebular theory, in one sentence",
+            "Definitions — protostar, accretion"
           ],
           "notesLabel": "SOLAR SYSTEM FORMATION",
           "notes": [
@@ -120,7 +120,7 @@
           "cueLabel": "THE SEQUENCE",
           "cues": [
             "Put the steps of nebular theory in order.",
-            "What has to happen for fusion to ignite?"
+            "The condition for fusion to ignite"
           ],
           "notesLabel": "NEBULAR THEORY, STEP BY STEP",
           "notes": [
@@ -131,12 +131,12 @@
         {
           "cueLabel": "EVIDENCE",
           "cues": [
-            "Have we ever actually seen a solar system forming?",
-            "How do planets end up orbiting roughly in the same flat plane?"
+            "The photographed evidence",
+            "The flat plane — where it comes from"
           ],
           "notesLabel": "EVIDENCE FOR NEBULAR THEORY",
           "notes": [
-            "Telescopes (like ALMA) have photographed protoplanetary disks around young stars — flattened rings of gas and dust with gaps where planets are clearing their orbits. What stage of nebular theory does that match, and why do the planets end up orbiting in roughly the same flat plane?"
+            "Telescopes (like ALMA) have photographed protoplanetary disks around young stars — flattened rings of gas and dust with gaps where planets are clearing their orbits. This matches the ______________ stage of nebular theory. The planets end up in one flat plane because ______________."
           ]
         }
       ],
@@ -154,21 +154,21 @@
         {
           "cueLabel": "BASICS",
           "cues": [
-            "How old is the Milky Way? How old is the Sun?",
-            "How much longer will the Sun last?"
+            "Ages — Milky Way, Sun",
+            "The Sun's remaining lifespan"
           ],
           "notesLabel": "OUR STAR",
           "notes": [
-            "How old is the Milky Way?",
-            "How old is our Sun?",
-            "About how much longer will the Sun last?"
+            "Age of the Milky Way:",
+            "Age of the Sun:",
+            "The Sun has about ______________ left."
           ]
         },
         {
           "cueLabel": "LAYERS",
           "cues": [
             "Put the Sun's layers in order from the center out.",
-            "Which layer is the visible surface? Which is hottest?"
+            "The visible surface, and the hottest layer"
           ],
           "notesLabel": "LAYERS OF THE SUN",
           "notes": [
@@ -190,27 +190,27 @@
         {
           "cueLabel": "ACTIVITY",
           "cues": [
-            "What is a sunspot? What is a prominence?",
-            "How long is a typical solar cycle?"
+            "Definitions — sunspot, prominence",
+            "Length of one solar cycle"
           ],
           "notesLabel": "SOLAR CYCLE, SUNSPOTS, AND PROMINENCES",
           "notes": [
             "Sunspots:",
             "Prominences:",
-            "About how long is one solar activity cycle?"
+            "One solar activity cycle is about ______________."
           ]
         },
         {
           "cueLabel": "EFFECTS ON EARTH",
           "cues": [
-            "What are solar winds, and what stops them from reaching Earth's surface?",
-            "What is a CME, and why is a large one dangerous?"
+            "Solar wind, and what stops it",
+            "CME — definition, and the danger"
           ],
           "notesLabel": "SOLAR WIND AND CMES",
           "notes": [
-            "What are solar winds?",
-            "What blocks the solar wind from reaching Earth's surface, and what does that create?",
-            "What is a coronal mass ejection (CME)? Why can a large one be dangerous?"
+            "Define solar wind:",
+            "The solar wind is blocked by ______________, which creates ______________.",
+            "Define coronal mass ejection (CME), and record why a large one is dangerous:"
           ]
         }
       ],

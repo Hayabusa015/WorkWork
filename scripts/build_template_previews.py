@@ -52,9 +52,9 @@ FAMILIES = [
         "name": "Guided / Cornell notes",
         "course": "all",
         "app": False,
-        "blurb": "Cornell split pinned at 1.28in / 6.22in. The cue column holds the questions a "
-                 "student should be able to answer from the notes beside them. Worked examples "
-                 "carry a bordered work area.",
+        "blurb": "Strictly recall: the page a student fills in while the slide is up. The cue "
+                 "column names the thing to record - a definition, a table, a sequence - and "
+                 "never asks a question. Worked examples carry a bordered work area.",
         "detail": "templates/notes/README.md",
         "pages": 2,
     },

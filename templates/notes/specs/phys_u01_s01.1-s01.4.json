@@ -22,7 +22,7 @@
     "▸  Acceleration, kinematic equation, free fall, g"
   ],
   "howItWorks": [
-    "The left column holds the questions you should be able to answer from the notes beside them. Cover the right side and quiz yourself with it later.",
+    "The left column names what to record. Write it on the right while the slide is up. Cover the right side later and see how much you can bring back.",
     "A line with a gold rule down its left edge is must-write. Copy it exactly.",
     "Every worked example has a bordered work area. Show enough that I can follow your reasoning, and carry units the whole way."
   ],
@@ -41,8 +41,8 @@
         {
           "cueLabel": "POSITION",
           "cues": [
-            "What do you have to choose before any position number means anything?",
-            "What does the sign of a position tell you?"
+            "The choice that has to come first",
+            "The sign of a position — what it tells you"
           ],
           "notesLabel": "POSITION AND THE COORDINATE AXIS",
           "notes": [
@@ -55,8 +55,8 @@
         {
           "cueLabel": "DISTANCE VS. DISPLACEMENT",
           "cues": [
-            "Which one can be negative?",
-            "A runner does one full lap. What is the displacement?"
+            "The one that can be negative",
+            "One full lap — the displacement"
           ],
           "notesLabel": "TWO DIFFERENT QUESTIONS ABOUT THE SAME TRIP",
           "notes": [
@@ -68,8 +68,8 @@
         {
           "cueLabel": "SPEED VS. VELOCITY",
           "cues": [
-            "Which of the two needs a direction?",
-            "When are the two numbers equal?"
+            "The one that needs a direction",
+            "The case where the two are equal"
           ],
           "notesLabel": "AVERAGE SPEED AND AVERAGE VELOCITY",
           "notes": [
@@ -82,7 +82,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "What is the first thing written down, before any number?"
+            "The first thing written down, before any number"
           ],
           "notesLabel": "",
           "notes": [],
@@ -112,8 +112,8 @@
         {
           "cueLabel": "ACCELERATION",
           "cues": [
-            "What exactly is changing when something accelerates?",
-            "What do the units m/s² actually mean, in words?"
+            "The quantity that is changing",
+            "m/s², in words"
           ],
           "notesLabel": "WHAT ACCELERATION MEASURES",
           "notes": [
@@ -126,7 +126,7 @@
         {
           "cueLabel": "SIGNS",
           "cues": [
-            "Does a negative acceleration always mean slowing down?",
+            "Negative acceleration — what it does and does not mean",
             "Give one case where both v and a are negative."
           ],
           "notesLabel": "COMPARING THE SIGN OF a TO THE SIGN OF v",
@@ -137,8 +137,8 @@
         {
           "cueLabel": "THE FOUR EQUATIONS",
           "cues": [
-            "Which quantity does each equation leave out?",
-            "What must be true about a for these to work?"
+            "The quantity each equation leaves out",
+            "The condition on a"
           ],
           "notesLabel": "CONSTANT ACCELERATION ONLY",
           "notes": [
@@ -148,7 +148,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "Why does part (b) not need the acceleration?"
+            "Part (b) — the reason acceleration is not needed"
           ],
           "notesLabel": "",
           "notes": [],
@@ -165,7 +165,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "Which given is missing here, and which equation does that point to?"
+            "The missing given, and the equation it points to"
           ],
           "notesLabel": "",
           "notes": [],
@@ -195,8 +195,8 @@
         {
           "cueLabel": "POSITION–TIME",
           "cues": [
-            "What quantity is the slope?",
-            "What does a flat line mean?"
+            "The slope — what it is",
+            "A flat line — what it means"
           ],
           "notesLabel": "SLOPE OF A POSITION–TIME GRAPH",
           "notes": [
@@ -208,8 +208,8 @@
         {
           "cueLabel": "VELOCITY–TIME",
           "cues": [
-            "What quantity is the slope?",
-            "What quantity is the area?"
+            "The slope — what it is",
+            "The area — what it is"
           ],
           "notesLabel": "SLOPE AND AREA ON A VELOCITY–TIME GRAPH",
           "notes": [
@@ -222,7 +222,7 @@
           "cueLabel": "THREE MOTIONS",
           "cues": [
             "Sketch all three graphs for a cart moving at constant speed.",
-            "Which row is a straight line in all three?"
+            "The row that is a straight line in all three"
           ],
           "notesLabel": "ONE MOTION, THREE GRAPHS",
           "notes": [
@@ -234,7 +234,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "Why is no kinematic equation needed here?"
+            "The reason no kinematic equation is needed"
           ],
           "notesLabel": "",
           "notes": [],
@@ -264,8 +264,8 @@
         {
           "cueLabel": "WHAT FREE FALL IS",
           "cues": [
-            "What has to be true for an object to be in free fall?",
-            "Why does mass not appear in the answer?"
+            "The condition for free fall",
+            "Mass — the reason it does not appear"
           ],
           "notesLabel": "GRAVITY AS THE ONLY FORCE",
           "notes": [
@@ -277,8 +277,8 @@
         {
           "cueLabel": "SIGNS & SYMMETRY",
           "cues": [
-            "At the very top, what is v? What is a?",
-            "How does the time up compare with the time down?"
+            "At the very top — v and a",
+            "Time up against time down"
           ],
           "notesLabel": "UP IS POSITIVE, ALL UNIT",
           "notes": [
@@ -290,7 +290,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "Which given comes from the phrase \"at the top\"?"
+            "The given that comes from \"at the top\""
           ],
           "notesLabel": "",
           "notes": [],
@@ -307,7 +307,7 @@
         {
           "cueLabel": "WORKED EXAMPLE",
           "cues": [
-            "Why is the displacement negative here?"
+            "The reason the displacement is negative"
           ],
           "notesLabel": "",
           "notes": [],
