@@ -29,6 +29,9 @@ const paths = {
   beaker:    'M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7 15h10',
   page:      'M6 3h8l4 4v14H6ZM14 3v4h4M9 12h6M9 16h4',
   eye:       'M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6m10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6',
+  compass:   'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18m3.5 5.5-2 5-5 2 2-5Z',
+  stack:     'M4 5h16v4H4Zm0 6h16v4H4Zm0 6h10v2H4Z',
+  spark:     'M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18',
 };
 
 export const icon = name =>

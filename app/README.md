@@ -15,6 +15,19 @@ Run `npm run app:theme` (or `python3 scripts/build_app_css.py`) after any token 
 `--check` fails when the generated theme has drifted, and `scripts/validate_tokens.py` covers the
 rest.
 
+**Design** picks a class, a unit, a section and a document type, in that order, and hands the
+result to the agent workflow. The unit and section lists are read out of
+`courses/<course>/DECISIONS.md` by the server on every request and are never stored — a cached
+copy of a course fact is how a packet ends up printing a code the decisions file does not have.
+Each unit is cross-checked against the section count it declares for itself, and every code the
+picker offers is one `checkScope` accepts, so a selection cannot die after the money is spent.
+The document types are read from `standards/NAMING.md`, and the brief shows the filename that
+grammar asks for; the app serves the built file under that name. Two types build here —
+Practice Set and Activity, both through the worksheet builder. Guided Notes, Lab and Slides name
+their repository command instead of offering a button, and the types nothing builds say so.
+A design run locks the agents to the chosen unit and sections: the worksheet template is used
+for its schema only, and the Designer cannot return a spec outside that scope.
+
 **Desk** is the Secretary's workspace: the inbox on one surface with its counts, the briefing
 request, the notices on the blotter, and side trays for what is waiting on teacher review, recent
 agent handoffs and today's focus. Today keeps a compact card that links to it.
@@ -40,4 +53,4 @@ Agents → Run repository health review executes five repository validators, the
 
 The Secretary inbox appears on Today and Agents. Researcher findings from drafting are delivered through a separate Secretary call; Get updates runs a course briefing from course decisions, current focus items, and recent task metadata. Suggestions persist with source-run links. Add to today creates one linked focus item, Archive is reversible, and Send to Librarian creates one explicit handoff with a saved response. Failed/interrupted handoffs can be retried by the user. Drive filing remains pending. Drafts with research findings now include an additional Secretary call.
 
-Run `npm test` for validation, agent handoff, suggestion lifecycle, theme-drift and gallery checks. Live Anthropic calls require your key and API credits. Restarted in-progress jobs are marked interrupted; there are no automatic billable retries.
+Run `npm test` for validation, agent handoff, suggestion lifecycle, theme-drift, gallery and curriculum-picker checks. Live Anthropic calls require your key and API credits. Restarted in-progress jobs are marked interrupted; there are no automatic billable retries.

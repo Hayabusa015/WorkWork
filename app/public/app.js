@@ -7,6 +7,11 @@ import {icon, mountLayoutEditor, isLayoutEditing} from './interface.js';
 let state, current, gallery = null, galleryFilter = 'all';
 let tab = 'Today', selectedCourse = 'chemistry', pendingTemplate = null;
 
+// The Design tab's selection. `map` is the course's curriculum, read fresh from its
+// decisions file by the server — the app never keeps its own copy of a course fact.
+let design = {course: 'chemistry', unit: null, sections: [], type: 'Practice_Set', prompt: ''};
+let map = null, mapLoading = false;
+
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g,
@@ -34,6 +39,7 @@ const COURSE_BLURB = {
 const TABS = [
   {id: 'Today',       icon: 'home',      sub: 'Same curiosity. A more organized day.'},
   {id: 'Create',      icon: 'plus',      sub: 'Make something for your next class.'},
+  {id: 'Design',      icon: 'compass',   sub: 'Pick a class, a unit, a section and what to make.'},
   {id: 'Templates',   icon: 'layers',    sub: 'Every document this system prints. Look before you pick.'},
   {id: 'Library',     icon: 'folder',    sub: 'Your locally built materials. Google Drive connection comes next.'},
   {id: 'Desk',        icon: 'inbox',     sub: 'Briefings, notices and handoffs, in one place.',
@@ -277,6 +283,158 @@ function deskCard() {
       </div>`).join('')}
     <div class="actions"><button data-goto="Desk">${icon('inbox')} Open the desk ${icon('arrow')}</button></div>
   </section>`;
+}
+
+/* ------------------------------------------------------------------ *\
+   Design — class, unit, section, content type
+\* ------------------------------------------------------------------ */
+
+/* The unit and section lists come from the server, which reads them out of
+   courses/<course>/DECISIONS.md on every request. Nothing about the curriculum
+   is stored here. That is the whole point: a second copy is how a packet ends
+   up printing a code the decisions file does not have. */
+
+async function loadMap(course) {
+  mapLoading = true;
+  try { map = await api('curriculum?course=' + encodeURIComponent(course)); }
+  catch (e) { map = null; error(e); }
+  mapLoading = false;
+  if (tab === 'Design') render();
+}
+
+const unitOf = () => map?.units.find(u => u.unit === design.unit) || null;
+const chosenSections = () => (unitOf()?.sections || []).filter(x => design.sections.includes(x.code));
+const typeOf = () => map?.contentTypes.find(t => t.type === design.type) || null;
+
+/** A page image for a content type, preferring this course's own. */
+function typeThumb(family, course) {
+  const fam = (gallery?.families || []).find(f => f.id === family);
+  if (!fam?.items?.length) return null;
+  const item = fam.items.find(i => i.course === course) || fam.items[0];
+  return item.images?.[0] || null;
+}
+
+function step(n, label, done, body) {
+  return `<section class="panel step ${done ? 'done' : ''}">
+    <h2><span class="step-number">${done ? icon('check') : n}</span>${label}</h2>
+    ${body}</section>`;
+}
+
+function designView() {
+  const courses = ['chemistry', 'physics', 'geology'];
+  const unit = unitOf();
+  const type = typeOf();
+
+  const classStep = step(1, 'Which class?', !!design.course, `
+    <div class="courses">${courses.map(c => `
+      <button class="course choice ${design.course === c ? 'chosen' : ''}" data-design-course="${c}" data-course="${c}">
+        <span class="course-icon">${icon(COURSE_ICON[c])}</span>
+        <div><h3>${title(c)}</h3><p>${COURSE_BLURB[c]}</p></div>
+      </button>`).join('')}</div>`);
+
+  const unitStep = step(2, 'Which unit?', design.unit !== null, !map
+    ? `<div class="empty">${mapLoading ? 'Reading the course decisions…' : 'Choose a class first.'}</div>`
+    : `<div class="unit-list">${map.units.map(u => `
+        <button class="unit-row ${design.unit === u.unit ? 'chosen' : ''}" data-design-unit="${u.unit}">
+          <span class="unit-code">U${String(u.unit).padStart(2, '0')}</span>
+          <span class="grow"><strong>${esc(u.title)}</strong>
+            <small>${u.sections.length} section${u.sections.length === 1 ? '' : 's'}</small></span>
+          ${u.warning ? `<span class="badge warn" title="${esc(u.warning)}">check</span>` : ''}
+        </button>`).join('')}</div>
+       <p class="hint">Read from <code>${esc(map.source)}</code>. If a unit is not here, it is not in
+       the decisions file — add it there first.</p>`);
+
+  const sectionStep = step(3, 'Which section?', design.sections.length > 0, !unit
+    ? '<div class="empty">Choose a unit first.</div>'
+    : `${unit.warning ? `<p class="suggestion-error">${esc(unit.warning)}</p>` : ''}
+       <div class="section-list">${unit.sections.map(sec => `
+        <label class="section-pick ${design.sections.includes(sec.code) ? 'chosen' : ''}">
+          <input type="checkbox" data-design-section="${esc(sec.code)}" ${
+            design.sections.includes(sec.code) ? 'checked' : ''}>
+          <span class="section-code">S${esc(sec.code)}</span>
+          <span class="grow">${esc(sec.title)}</span>
+          ${sec.ext ? '<span class="badge neutral">EXT</span>' : ''}
+        </label>`).join('')}</div>
+       <p class="hint">One sheet can carry several sections of the same unit, each starting a new page.</p>`);
+
+  const typeStep = step(4, 'What are we making?', !!design.type, `
+    <div class="type-grid">${(map?.contentTypes || []).map(t => {
+      const thumb = t.family ? typeThumb(t.family, design.course) : null;
+      return `<button class="type-card ${design.type === t.type ? 'chosen' : ''} ${t.app ? '' : 'unbuilt'}"
+        data-design-type="${esc(t.type)}" ${t.app ? '' : 'aria-describedby="type-note"'}>
+        <span class="type-figure">${thumb
+          ? `<img src="/previews/${esc(thumb)}" alt="" loading="lazy">`
+          : icon('page')}</span>
+        <strong>${esc(t.label)}</strong>
+        <span class="badge ${t.app ? 'good' : t.family ? 'neutral' : 'warn'}">${
+          t.app ? 'Builds here' : t.family ? 'Repository' : 'No builder'}</span>
+      </button>`;
+    }).join('')}</div>
+    <p class="hint" id="type-note">Types come from <code>standards/NAMING.md</code>. Two build inside
+    SHULL OS today. The rest are honest about where they build — or that nothing builds them yet.</p>`);
+
+  return `<div class="design">
+    <div class="stack">
+      ${classStep}${unitStep}${sectionStep}${typeStep}
+      <section class="panel">
+        <h2>${icon('pen')} Anything specific?</h2>
+        <label class="sr-only" for="design-prompt">What should this cover?</label>
+        <textarea id="design-prompt" placeholder="Harder than last time. Keep the units in every answer.">${esc(design.prompt)}</textarea>
+        <p class="hint">Optional. The section is already the subject; this is for difficulty, emphasis,
+        or a change you want.</p>
+      </section>
+    </div>
+    ${designBrief(unit, type)}
+  </div>`;
+}
+
+function designBrief(unit, type) {
+  const picked = chosenSections();
+  const ready = !!(design.course && unit && picked.length && type);
+  const codes = picked.map(s => s.code);
+  const pad = c => { const [w, d] = c.split('.'); return `S${w.padStart(2, '0')}.${d}`; };
+  const span = codes.length > 1 ? `${pad(codes[0])}-${pad(codes[codes.length - 1])}` : codes[0] ? pad(codes[0]) : '';
+  const filename = ready
+    ? `SHULL_${map.code}_${type.type}_U${String(unit.unit).padStart(2, '0')}_${span}.docx`
+    : null;
+
+  return `<aside class="brief" data-course="${esc(design.course)}">
+    <section class="panel">
+      <span class="eyebrow">Design brief</span>
+      <div class="brief-chip">${ready
+        ? `U${String(unit.unit).padStart(2, '0')} / ${span}`
+        : 'Nothing picked yet'}</div>
+
+      <dl class="brief-list">
+        <dt>Class</dt><dd>${design.course ? title(design.course) + ` · ${esc(map?.code || '')}` : '—'}</dd>
+        <dt>Unit</dt><dd>${unit ? esc(unit.title) : '—'}</dd>
+        <dt>Section${picked.length === 1 ? '' : 's'}</dt>
+        <dd>${picked.length ? picked.map(s => `${esc(s.code)} ${esc(s.title)}`).join('<br>') : '—'}</dd>
+        <dt>Document</dt><dd>${type ? esc(type.label) : '—'}</dd>
+      </dl>
+
+      ${filename ? `<div class="brief-file">
+        <small>Save it as</small><code>${esc(filename)}</code>
+        <small>standards/NAMING.md §2</small></div>` : ''}
+
+      ${ready && !type.app ? `<div class="empty">
+        <strong>SHULL OS does not build ${esc(type.label)} yet.</strong>
+        ${type.command ? `<p>Build it from the repository:</p><code class="command">${esc(type.command)}</code>`
+          : '<p>No template in the repository builds this type.</p>'}</div>` : ''}
+
+      ${ready && type.app ? `
+        <p class="hint cost-estimate" id="cost-estimate" role="status">Calculating a planning estimate…</p>
+        <div class="actions">
+          <button class="primary" id="design-go" ${state.connected ? '' : 'disabled'}>
+            ${icon('spark')} Design this section ${icon('arrow')}</button>
+        </div>
+        <p class="hint">${state.connected
+          ? 'Runs Overseer → Researcher → Designer → independent Auditor against this section, then you review and build.'
+          : 'Connect your Anthropic key in Settings to run the agents.'}</p>` : ''}
+
+      ${ready ? '' : '<p class="hint">Pick a class, a unit, at least one section, and a document type.</p>'}
+    </section>
+  </aside>`;
 }
 
 /* ------------------------------------------------------------------ *\
@@ -532,6 +690,31 @@ function templateRename(id) {
   dialog.querySelector('input').select();
 }
 
+/* A dashboard reads at a glance or it is just a page of panels. These are the
+   five numbers worth knowing before the first bell; each one opens the tab that
+   explains it. */
+function overview() {
+  const notices = (state.suggestions || []).filter(x => !x.dismissed && x.status === 'new').length;
+  const waiting = state.runs.filter(r =>
+    ['Needs teacher review', 'Agent needs attention', 'Audit needs attention'].includes(r.status)).length;
+  const working = state.runs.filter(r => WORKING.includes(r.status)).length;
+  const stats = [
+    {n: state.runs.filter(r => r.docx).length, label: 'Documents built', goto: 'Library', icon: 'file'},
+    {n: waiting, label: 'Awaiting review', goto: 'Desk', icon: 'clipboard', lit: waiting > 0},
+    {n: notices, label: 'New notices', goto: 'Desk', icon: 'inbox', lit: notices > 0},
+    {n: state.focus.filter(f => !f.done).length, label: 'Open focus', goto: 'Desk', icon: 'target'},
+    {n: usd(state.billing?.remaining ?? 0), label: 'Credits left', goto: 'Settings', icon: 'spark'},
+  ];
+  return `<div class="overview">${stats.map(s => `
+    <button class="overview-stat ${s.lit ? 'lit' : ''}" data-goto="${s.goto}">
+      <span class="overview-icon">${icon(s.icon)}</span>
+      <strong>${typeof s.n === 'number' ? s.n : esc(s.n)}</strong>
+      <span>${s.label}</span>
+    </button>`).join('')}
+    ${working ? `<div class="overview-working">${icon('spark')} ${working} workflow${
+      working === 1 ? '' : 's'} running</div>` : ''}</div>`;
+}
+
 /* ------------------------------------------------------------------ *\
    Render
 \* ------------------------------------------------------------------ */
@@ -544,7 +727,7 @@ function render() {
 
   let html = '';
 
-  if (tab === 'Today') html = `
+  if (tab === 'Today') html = overview() + `
     <div class="grid">
       <div class="stack">
         ${create()}
@@ -567,6 +750,7 @@ function render() {
     </div>`;
 
   if (tab === 'Create') html = create();
+  if (tab === 'Design') html = designView();
   if (tab === 'Desk') html = desk();
   if (tab === 'Templates') html = galleryView() + templateNames();
 
@@ -658,6 +842,10 @@ function render() {
   mountLayoutEditor(tab);
   bind();
   if (tab === 'Templates' && !gallery) loadGallery();
+  if (tab === 'Design') {
+    if (!gallery) loadGallery();
+    if (!map && !mapLoading) loadMap(design.course);
+  }
   $('#model')?.addEventListener('change', e => api('model', {model: e.target.value}).then(refresh).catch(error));
 }
 
@@ -670,9 +858,13 @@ async function refresh() { state = await api('state'); render(); }
 async function updateEstimate() {
   const target = $('#cost-estimate');
   if (!target) return;
+  const query = tab === 'Design'
+    ? `course=${encodeURIComponent(design.course)}&type=${encodeURIComponent(design.type)}`
+      + `&prompt=${encodeURIComponent(design.prompt)}`
+    : `template=${encodeURIComponent($('#template')?.value || '')}`
+      + `&prompt=${encodeURIComponent($('#prompt')?.value || '')}`;
   try {
-    const result = await api('estimate?template=' + encodeURIComponent($('#template')?.value || '')
-      + '&prompt=' + encodeURIComponent($('#prompt')?.value || ''));
+    const result = await api('estimate?' + query);
     if (!target.isConnected) return;
     target.textContent = result.estimate
       ? `Estimated full document: ${usd(result.estimate.low)}–${usd(result.estimate.high)} with ${result.estimate.model}. `
@@ -780,6 +972,37 @@ function bind() {
     const d = await api('standard?path=' + encodeURIComponent(b.dataset.standard));
     $('#detail').innerHTML = `<h2>${esc(b.dataset.standard)}</h2><pre>${esc(d.text)}</pre>`;
     $('#review').showModal();
+  });
+
+  // Design
+  $$('[data-design-course]').forEach(b => b.onclick = () => {
+    design = {...design, course: b.dataset.designCourse, unit: null, sections: []};
+    map = null;
+    render();
+    loadMap(design.course);
+  });
+  $$('[data-design-unit]').forEach(b => b.onclick = () => {
+    design.unit = Number(b.dataset.designUnit);
+    design.sections = [];
+    render();
+  });
+  $$('[data-design-section]').forEach(b => b.onchange = () => {
+    const code = b.dataset.designSection;
+    const order = (unitOf()?.sections || []).map(x => x.code);
+    design.sections = b.checked
+      ? [...design.sections, code].sort((x, y) => order.indexOf(x) - order.indexOf(y))
+      : design.sections.filter(x => x !== code);
+    render();
+  });
+  $$('[data-design-type]').forEach(b => b.onclick = () => { design.type = b.dataset.designType; render(); });
+  $('#design-prompt')?.addEventListener('input', e => { design.prompt = e.target.value; });
+  $('#design-go')?.addEventListener('click', async () => {
+    try {
+      const r = await api('design', {course: design.course, unit: design.unit,
+        sections: design.sections, type: design.type, prompt: design.prompt});
+      await refresh();
+      show(r.id);
+    } catch (e) { error(e); }
   });
 
   // Gallery
