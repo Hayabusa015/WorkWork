@@ -40,11 +40,15 @@ The workflow runs the tests, bundles Python, verifies that the bundled Python ca
 worksheet, boots the app and reads its UI back, builds the installer, and attaches it to a new
 GitHub Release. **Any of those failing stops the release** rather than shipping a broken one.
 
-The tag is the version. `electron-builder` names the artifacts from `package.json`, and the app's
-own **Check for updates** button compares the release tag against the running version and looks for
-an asset named `SHULL-OS-Setup-*.exe` — so the workflow rewrites `package.json` from the tag to
-keep the three in step. A release tagged `v0.2.0` is what makes an installed `0.1.0` offer to
-update itself.
+The tag is the version. `electron-builder` names the artifacts from `package.json` and writes that
+same version into `latest.yml` — so the workflow rewrites `package.json` from the tag to keep them
+in step. A release tagged `v0.2.0` is what makes every installed `0.1.0` update itself, without
+anyone being asked.
+
+`latest.yml` is the release asset that makes that work: it names the installer and carries its
+SHA-512, and the app refuses a download whose hash does not match. The workflow fails rather than
+publish a release without it. Do not delete it from a release, or every installed copy stops
+seeing updates — they read that file, not the release page.
 
 ## The two files beside this one are superseded
 

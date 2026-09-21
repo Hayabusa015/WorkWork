@@ -12,6 +12,10 @@ let tab = 'Today', selectedCourse = 'chemistry', pendingTemplate = null;
 let design = {course: 'chemistry', unit: null, sections: [], type: 'Practice_Set', prompt: ''};
 let map = null, mapLoading = false;
 
+// Unsubscribes the Settings panel from desktop update events. bind() runs on
+// every render, so the previous listener is dropped before a new one is added.
+let unwatchUpdates = null;
+
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g,
@@ -875,34 +879,50 @@ async function updateEstimate() {
 }
 
 function bind() {
-  // Desktop update panel, injected by the Electron preload when present.
-  if (tab === 'Settings' && window.shullUpdater) {
+  // Desktop panel, injected by the Electron preload when present. In a browser
+  // there is no window.shullDesktop and none of this renders.
+  if (unwatchUpdates) { unwatchUpdates(); unwatchUpdates = null; }
+  if (tab === 'Settings' && window.shullDesktop) {
     const panel = document.createElement('section');
     panel.className = 'panel';
-    panel.innerHTML = `<h2>SHULL OS updates</h2>
-      <p>Check GitHub Releases for a newer desktop build. Your saved workspace data stays on this computer.</p>
-      <div class="actions"><button id="check-updates" type="button">Check for updates</button>
-      <button id="install-update" class="primary" type="button" hidden>Download and install</button></div>
-      <p class="hint" id="update-status">Updates are checked only when you ask.</p>`;
+    panel.innerHTML = `<h2>SHULL OS desktop</h2>
+      <p>Updates arrive on their own. The app checks this project's GitHub releases shortly after it
+      opens and every six hours after that, downloads a newer version in the background, and puts it
+      in place the next time you close the app. Your saved documents and your balance are kept
+      outside the installation and are not touched.</p>
+      <p class="hint" id="update-status">Reading update status…</p>
+      <div class="actions">
+        <button id="open-workspace" type="button">Open saved documents folder</button>
+        <button id="check-updates" type="button">Check now</button>
+        <button id="install-update" class="primary" type="button" hidden>Restart and install</button>
+      </div>`;
     $('#content').prepend(panel);
-    $('#check-updates').onclick = async () => {
+
+    const paint = u => {
       const status = $('#update-status'), install = $('#install-update');
-      status.textContent = 'Checking GitHub Releases…';
-      install.hidden = true;
-      try {
-        const r = await window.shullUpdater.check();
-        if (r.available) {
-          status.textContent = `Version ${r.version} is available.`;
-          install.hidden = false;
-          install.onclick = async () => {
-            install.disabled = true;
-            status.textContent = 'Downloading update…';
-            try { await window.shullUpdater.install(); }
-            catch (e) { install.disabled = false; status.textContent = 'Update failed. ' + e.message; }
-          };
-        } else status.textContent = `You are running the latest release (${r.current}).`;
-      } catch (e) { status.textContent = 'Update check unavailable. ' + e.message; }
+      if (!status || !install) return;               // the tab changed under us
+      install.hidden = u.state !== 'ready';
+      status.textContent =
+        u.state === 'checking'    ? 'Checking for a newer version…'
+      : u.state === 'downloading' ? `Downloading version ${u.version} — ${u.percent}%`
+      : u.state === 'ready'       ? `Version ${u.version} is downloaded and verified. It installs `
+                                    + 'when you next close the app, or restart now.'
+      : u.state === 'current'     ? `You are running the latest release (${u.current}).`
+      : u.state === 'error'       ? `Could not reach GitHub. ${u.message}`
+      : u.state === 'dev'         ? `Running from source (${u.current}). Updates apply to the `
+                                    + 'installed app only.'
+      : `Version ${u.current}. The first check runs a few seconds after the app opens.`;
     };
+
+    $('#open-workspace').onclick = () => window.shullDesktop.openWorkspace();
+    $('#check-updates').onclick = () =>
+      window.shullDesktop.updates.check().then(paint).catch(() => {});  // the error event paints it
+    $('#install-update').onclick = async () => {
+      try { await window.shullDesktop.updates.install(); }
+      catch (e) { $('#update-status').textContent = 'Could not install. ' + e.message; }
+    };
+    window.shullDesktop.updates.status().then(paint).catch(() => {});
+    unwatchUpdates = window.shullDesktop.updates.onStatus(paint);
   }
 
   $('#balance-form')?.addEventListener('submit', async e => {
