@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-09-22
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-09-22 | Classroom builds enter at the Overseer | PARTIAL | `governance/proposals/SHULL-CHG-0024-overseer-routes-classroom-builds.md` |
+
 ## 2026-09-20
 
 | ID | Date | Change | Status | Record |
