@@ -98,3 +98,9 @@ own. If a document claims otherwise, it is wrong.
 - Show the plan, get a yes, then build. A "build me all of Unit 5" request is a plan first.
 - A returned message is not a completed task. A task is complete when the deliverable has been
   verified to exist, at a verified location.
+- **Every classroom deliverable routes through the Overseer from the start.** The test: if it ends
+  in an artifact a student or a substitute teacher would hold, the Overseer is the entry point — at
+  any size, including a one-line revision. A question that produces no artifact is not a build.
+  Repository, tooling and governance work is out of scope. Building first and auditing afterwards
+  is not the workflow, and a builder never audits its own build. Scope and reasoning:
+  `governance/proposals/SHULL-CHG-0024-overseer-routes-classroom-builds.md`.
