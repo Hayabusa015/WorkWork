@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL Physics — U01/S01.4 Reaction Time Lab</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · PHYSICS · U01 / S01.4 FREE FALL
+ REACTION TIME AND THE DISTRACTED DRIVER — STUDENT HANDOUT
+ Built from templates/lab/SHULL_Lab_TEMPLATE_MASTER.html v1.1
+=====================================================================
+ DELIBERATE DEVIATIONS FROM THE TEMPLATE, all recorded in the key:
+ · SAFETY section deleted — requested by Matt. No chemical, thermal,
+   electrical or glassware hazard exists in this lab.
+ · DISPOSAL AND CLEANUP (Alconox block) deleted — no glassware, no
+   reagents, nothing to dispose of. Replaced by one reset step.
+ · Data tables are printed as full grids rather than single-column
+   skeletons, per Matt 2026-09-22. Students still record in the lab
+   notebook; the printed grid is the thing they copy.
+=====================================================================
+-->
+
+<link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<style>
+  /* ---------- Locked SHULL print margins ---------- */
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+
+    @top-right {
+      content: string(runhead);
+      font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+      letter-spacing: 0.30em; color: var(--footer);
+      margin-top: 0.16in;
+    }
+    @bottom-left {
+      content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: string(footright);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  @page :first { @top-right { content: ""; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    font-size: 10.1pt;
+    line-height: 1.37;
+    color: var(--ink);
+  }
+
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  b, strong { font-weight: bold; }
+
+  .meta, .runhead { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code   { string-set: unitcode content(); }
+  .m-fright { string-set: footright content(); }
+  .runhead { string-set: runhead content(); }
+
+  /* ---------- Masthead (page 1 only) ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 {
+    font-family: var(--display); font-weight: bold; font-size: 17pt;
+    line-height: 1.12; letter-spacing: -0.005em; flex: 1 1 auto;
+  }
+  .masthead h1 .accent { color: var(--accent); }
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--accent); border-radius: 9pt;
+    padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  /* ---------- Name / Date / Period / Group ---------- */
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; }
+  .id-row .per  { flex: 1; }
+  .id-group { margin: 6pt 1pt 11pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 8.6pt;
+    letter-spacing: 0.20em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent);
+    padding-bottom: 2.5pt; margin: 13pt 0 6pt 0;
+  }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 {
+    font-family: var(--display); font-weight: 600; font-size: 10.2pt;
+    color: var(--ink); margin: 10pt 0 4pt 0;
+  }
+  h3 .flag {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--warn);
+    border: 0.8pt solid var(--warn-rule); border-radius: 7pt;
+    padding: 1.5pt 6pt; margin-left: 7pt; vertical-align: 1.5pt;
+  }
+
+  p { margin-bottom: 5pt; }
+  p.lead { margin-bottom: 7pt; }
+
+  /* ---------- Bulleted lists ---------- */
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3.5pt; }
+  ul.dot li::before {
+    content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent);
+  }
+
+  /* ---------- Numbered question lists ---------- */
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li {
+    counter-increment: q; position: relative;
+    padding-left: 20pt; margin-bottom: 7pt;
+    page-break-inside: avoid;
+  }
+  ol.q > li::before {
+    content: counter(q);
+    position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt;
+    color: var(--accent);
+    width: 13pt; text-align: right;
+  }
+  ol.parts { list-style-type: lower-alpha; margin: 5pt 0 3pt 15pt; }
+  ol.parts > li { margin-bottom: 3.5pt; font-size: 9.9pt; }
+  .ref {
+    font-family: var(--display); font-weight: 600; font-size: 6.4pt;
+    letter-spacing: 0.16em; color: var(--accent); white-space: nowrap;
+    margin-left: 5pt;
+  }
+
+  /* ---------- Numbered procedure ---------- */
+  ol.proc { margin: 3pt 0 4pt 17pt; }
+  ol.proc > li { margin-bottom: 4.5pt; page-break-inside: avoid; }
+  ol.proc ul { list-style: none; margin: 3pt 0 1pt 0; }
+  ol.proc ul li {
+    padding-left: 11pt; position: relative; margin-bottom: 2.5pt;
+    font-size: 9.9pt;
+  }
+  ol.proc ul li::before {
+    content: "–"; position: absolute; left: 1pt; color: var(--accent);
+  }
+
+  /* ---------- Formula callout (outline only) ---------- */
+  .formula {
+    border-left: 2.5pt solid var(--accent);
+    padding: 5pt 0 5pt 10pt; margin: 6pt 0 7pt 0;
+  }
+  .formula .fname {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2.5pt;
+  }
+  .formula .fx { font-family: var(--display); font-size: 10.6pt; font-weight: 500; }
+
+  /* ---------- Worked example ---------- */
+  .worked { margin: 5pt 0 4pt 0; }
+  .worked ol { margin-left: 17pt; }
+  .worked ol li { margin-bottom: 3.5pt; }
+  .worked .step { font-family: var(--display); font-size: 10.4pt; font-weight: 500; }
+
+  /* ---------- Reference data table ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
+  table.data th {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
+  }
+  table.data td {
+    padding: 3.6pt 4pt; font-size: 9.8pt;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+  }
+  .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
+
+  /* ---------- Data-recording grids ----------
+     Outline and hairline only — no filled headers, no shaded rows.
+     Row height is set to be written in; the notebook copy uses the
+     same shape. -->  */
+  .dcap {
+    font-family: var(--display); font-weight: 600; font-size: 6.8pt;
+    letter-spacing: 0.16em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt;
+    margin: 9pt 0 0 0;
+  }
+  .dcap .sit { color: var(--accent); }
+  table.dgrid { width: 100%; border-collapse: collapse; page-break-inside: avoid; }
+  table.dgrid th {
+    font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+    letter-spacing: 0.10em; color: var(--label); text-align: center;
+    padding: 3pt 2pt; line-height: 1.25;
+    border-bottom: 0.9pt solid var(--rule-hairline);
+  }
+  table.dgrid td {
+    padding: 8pt 3pt; font-size: 9.2pt; text-align: center;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+    border-right: 0.6pt solid var(--rule-hairline);
+  }
+  table.dgrid td:last-child, table.dgrid th:last-child { border-right: none; }
+  table.dgrid th { border-right: 0.6pt solid var(--rule-hairline); }
+  table.dgrid td.who {
+    text-align: left; font-family: var(--display); font-size: 8.4pt;
+    letter-spacing: 0.06em; white-space: nowrap;
+  }
+
+  /* ---------- Inline emphasis rule ---------- */
+  .rule-note {
+    border-top: 0.8pt solid var(--rule-hairline); border-bottom: 0.8pt solid var(--rule-hairline);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.9pt;
+  }
+
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body class="phys">
+
+<div class="meta">
+  <span class="m-course">PHYSICS</span>
+  <span class="m-code">U01 / S01.4</span>
+  <span class="m-fright">REACTION TIME LAB · CARBONLESS COPY GRADED INDIVIDUALLY</span>
+</div>
+
+
+<!-- ================================================================
+     PAGE 1 — MASTHEAD · GOALS · PURPOSE · BACKGROUND
+     ================================================================ -->
+
+<div class="masthead">
+  <div class="eyebrow">UNIT 1 — MOTION IN ONE DIMENSION · SECTION 4 · FREE FALL</div>
+  <div class="titlerow">
+    <h1>Reaction Time and the <span class="accent">Distracted</span> Driver</h1>
+    <div class="chip">U01 / S01.4</div>
+  </div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>
+  <div class="date"><div class="f">&nbsp;</div><div class="lbl">DATE</div></div>
+  <div class="per"><div class="f">&nbsp;</div><div class="lbl">PERIOD</div></div>
+</div>
+<div class="id-group">
+  <div class="f">&nbsp;</div><div class="lbl">GROUP MEMBERS</div>
+</div>
+
+<h2>GOALS</h2>
+<ul class="dot">
+  <li>Measure the distance a falling meter stick travels before you can catch it, to the
+      nearest 0.1 cm.</li>
+  <li>Calculate a reaction time from that distance using the kinematic equation for free fall.</li>
+  <li>Compare your reaction time across three attention conditions and find which costs you most.</li>
+  <li>Determine how far a car travels while its driver is still deciding to brake.</li>
+  <li>Record every drop as you take it — including the ones you throw out, and why.</li>
+</ul>
+
+<h2>PURPOSE</h2>
+<p class="lead">You are going to measure your own reaction time with nothing but a meter stick and the
+fact that gravity is dependable — then do it twice more, once with your eyes closed and once with your
+eyes open and your brain busy. The last number you calculate today is a stopping distance, and it is the
+one that matters.</p>
+
+<h2>BACKGROUND</h2>
+
+<p><b>Free fall does not just mean "falling."</b> An object is in <b>free fall</b> when gravity is
+the only force acting on it. A dropped meter stick qualifies — air resistance on something that dense,
+that slow, over that short a drop is far too small to detect with a ruler. A sheet of paper does not.
+The misstep nearly everyone makes is assuming the heavier object falls faster. It does not. <b>Mass does
+not appear anywhere in the equations you are about to use</b>, which says it plainly.</p>
+
+<p><b>Gravity adds 9.80 m/s of speed every second.</b> Near Earth's surface the acceleration due to
+gravity has a magnitude of <b>g = 9.80 m/s<sup>2</sup></b>. That is an acceleration — a rate of change
+of velocity — not a speed and not a force. After 0.20 s of falling the stick is moving about 2.0 m/s;
+after 0.40 s, about 3.9 m/s. It never stops speeding up the whole way down.</p>
+
+<p><b>Sign convention for this lab: down is negative.</b> Declare it once and use it in every line of
+every calculation. Then the acceleration is <b>a = &minus;9.80 m/s<sup>2</sup></b>, and a stick that
+falls 18.4 cm has a displacement of <b>&Delta;y = &minus;0.184 m</b>. Both are negative, they divide to
+a positive number, and the time comes out positive — which it must, because clocks do not run backwards.
+If you end up taking the square root of a negative number, you mixed your signs. You did not break
+physics.</p>
+
+<div class="formula">
+  <div class="fname">DISPLACEMENT WITH CONSTANT ACCELERATION</div>
+  <div class="fx">&Delta;y = v<sub>0</sub>t + &frac12;at<sup>2</sup> &nbsp;·&nbsp; meters, meters per second, seconds</div>
+</div>
+
+<p><b>The stick starts at rest, and that is what makes this simple.</b> At the instant Student A lets go
+the stick is not moving, so <b>v<sub>0</sub> = 0</b>, the entire first term is zero and disappears, and
+rearranging what is left for time gives you the only equation you need today.</p>
+
+<div class="formula">
+  <div class="fname">FREE-FALL TIME FROM DROP DISTANCE &nbsp;(valid only when v<sub>0</sub> = 0)</div>
+  <div class="fx">t = &radic;( 2&Delta;y &divide; a ) &nbsp;·&nbsp; seconds</div>
+</div>
+
+<p><b>The meter stick is a clock.</b> It is not testing your grip or your arm speed — it turns a time you
+have no instrument to measure into a distance you can. Everything between the stick leaving Student A's
+fingers and your fingers closing — light reaching your eye, your brain recognizing it, the signal going
+down your arm — happens in free fall. <b>The further it falls, the longer you took.</b></p>
+
+<div class="formula">
+  <div class="fname">PERCENT ERROR</div>
+  <div class="fx">percent error = ( | experimental &minus; accepted | &divide; accepted ) &times; 100</div>
+</div>
+
+<!-- PAGE 2 runs on from the background — no forced break. -->
+<div class="runhead">U01 / S01.4 · REACTION TIME · SAMPLE CALCULATION &amp; PRE-LAB</div>
+
+<div class="rule-note">
+  <b>Accepted value for Situation A: 0.20 s.</b> Published simple visual reaction times for adults run
+  roughly 0.18–0.25 s. Know what that is before you use it: a <b>typical value for people</b>, not a
+  constant of nature like g. A large percent error here means you are unusual, not that you measured
+  badly — and your error analysis has to say which one you think it is.
+</div>
+
+<h2>SAMPLE CALCULATION — WORK YOURS EXACTLY LIKE THIS</h2>
+<p class="lead">A group averages their four drops and gets <b>18.4 cm</b>. Find the reaction time,
+then the percent error.</p>
+
+<div class="worked">
+<ol>
+  <li><b>Convert to meters, put the sign on it, and list what you know.</b> The equation runs in
+      meters, not centimeters, and the stick fell <i>down</i>.
+      <div class="step">18.4 cm &times; ( 1 m &divide; 100 cm ) = 0.184 m &nbsp;&rarr;&nbsp;
+        &Delta;y = &minus;0.184 m</div>
+      <div class="step">&Delta;y = &minus;0.184 m &nbsp;·&nbsp; v<sub>0</sub> = 0 m/s
+        &nbsp;·&nbsp; a = &minus;9.80 m/s<sup>2</sup> &nbsp;·&nbsp; t = ?</div></li>
+  <li><b>Start from the full equation and cancel the term you know is zero.</b>
+      <div class="step">&Delta;y = v<sub>0</sub>t + &frac12;at<sup>2</sup>
+        &nbsp;&rarr;&nbsp; &Delta;y = &frac12;at<sup>2</sup></div></li>
+  <li><b>Solve for t before you put numbers in.</b>
+      <div class="step">t<sup>2</sup> = 2&Delta;y &divide; a
+        &nbsp;&rarr;&nbsp; t = &radic;( 2&Delta;y &divide; a )</div></li>
+  <li><b>Substitute, and watch the units cancel.</b> Meters over meters per second squared leaves
+      seconds squared; its square root is seconds.
+      <div class="step">t = &radic;( 2(&minus;0.184 m) &divide; (&minus;9.80 m/s<sup>2</sup>) )
+        = &radic;( 0.03755 s<sup>2</sup> )</div></li>
+  <li><b>Answer, with a unit and the right significant figures.</b> 18.4 cm has three, so t has three.
+      <div class="step">t = 0.194 s</div></li>
+  <li><b>Percent error against the accepted 0.20 s.</b>
+      <div class="step">( | 0.194 s &minus; 0.20 s | &divide; 0.20 s ) &times; 100 = 3.0%</div></li>
+</ol>
+</div>
+
+<div class="rule-note">
+  <b>Look at the square root before you go further.</b> A stick falling 18.4 cm takes 0.194 s; one
+  falling four times as far takes only twice as long. Reaction time does not scale with distance the
+  way your eye wants it to, because the stick speeds up the whole way down.
+</div>
+
+<h2>PRE-LAB — DUE AT THE START OF THE PERIOD</h2>
+<p class="lead">Answer all of these in your lab notebook, numbered 1 through 8, before you walk in. You
+will not be allowed to start without the pre-lab finished — most of these are exactly what people get
+wrong when they wing it.</p>
+
+<ol class="q">
+  <li>In your own words, what does <b>free fall</b> mean? Name the force we are ignoring and the
+      specific reason ignoring it is reasonable here.</li>
+  <li>A 50 kg and a 90 kg student each drop an identical meter stick from the same height. Do the
+      sticks land at different times? Justify it with acceleration — not weight.</li>
+  <li>Explain why the distance the stick falls measures your <b>reaction time</b> and not your grip
+      strength.</li>
+  <li>Write down the sign convention you will use today and the acceleration with its sign attached.
+      Every calculation this period has to agree with what you just wrote.</li>
+  <li><b>Read Part A.</b> What quantity do you measure, with what tool, to what precision?</li>
+  <li><b>Read Part A, step 6.</b> List the three things that void a drop. For each, say whether
+      keeping it would make your average reaction time look <i>faster</i> or <i>slower</i> than it is.</li>
+  <li><b>Read Part B.</b> Student C has a job in Part B that nobody has in Part A. What is it, and
+      what exactly is Student C supposed to be watching?</li>
+  <li>Set up your three data tables in your notebook. Copy them exactly as they are printed on
+      the DATA page, in ink, with room to write in every cell. <b>Units go in the column headings —
+      do not plan to add them later.</b></li>
+</ol>
+
+
+<!-- ================================================================
+     PAGE 3 — MATERIALS · PROCEDURE
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">U01 / S01.4 · REACTION TIME · PROCEDURE</div>
+
+<h2>MATERIALS</h2>
+<p><b>Per group of three:</b> meter stick (1) · desk or table with a flat front edge ·
+calculator (1) · lab notebook and pen, one per person</p>
+
+<h2>PROCEDURE</h2>
+<p class="lead"><b>Roles.</b> A is the <b>dropper</b>, B is the <b>catcher</b> — the one being measured —
+and C is the <b>caller and recorder</b>. Everyone is the catcher for four drops in every situation, so
+you rotate three times per part.</p>
+
+<h3>Part A — Situation A: Ordinary Reaction Time</h3>
+<ol class="proc">
+  <li>B sits with a forearm flat on the desk and the hand hanging past the front edge, thumb and
+      index finger open about 3 cm apart.
+    <ul>
+      <li>The fingers must not touch the stick. If they do, B feels the release instead of seeing it
+          and the number is worthless.</li>
+    </ul>
+  </li>
+  <li>A holds the meter stick vertically and hanging, so the <b>0 cm end is at the bottom</b> and
+      level with the top of B's thumb.
+    <ul>
+      <li>If your stick reads 100 at the bottom, turn it over — otherwise every number you record is
+          wrong by the length of the stick.</li>
+    </ul>
+  </li>
+  <li>A says "ready," then releases at a random moment within five seconds. <b>No countdown, no
+      "three, two, one," no twitch of the arm first.</b></li>
+  <li>B squeezes the instant the stick moves — close the fingers where they already are, do not chase
+      the stick down.</li>
+  <li>C reads the mark level with the <b>top of B's thumb</b>, to the nearest <b>0.1 cm</b>. That
+      number is the distance the stick fell.</li>
+  <li>Repeat until B has <b>four good drops.</b> A drop is <b>void</b> if B chased the stick down, if
+      B guessed the release and caught early, or if the stick went past B's hand entirely.
+    <ul>
+      <li>Void it, write down <i>why</i>, and take a replacement drop. Do not quietly keep a bad
+          number and do not quietly delete one.</li>
+    </ul>
+  </li>
+  <li>Rotate until all three of you have four good drops.</li>
+</ol>
+
+<h3>Part B — Situation B: The Passenger's Warning <span class="flag">EYES CLOSED</span></h3>
+<p>Same setup as Part A, with two changes: B's eyes are shut, and C now triggers the catch.</p>
+<ol class="proc">
+  <li>B closes both eyes and keeps them closed until the catch, hand in the Part A position.</li>
+  <li>C stands where the stick is clearly visible and <b>watches the stick itself</b>, not A's hand
+      or face.</li>
+  <li>A releases with no warning. C shouts <b>"GO!"</b> the instant the stick starts to move.</li>
+  <li>B squeezes on the word — not on a guess, and not on the sound of A's hand opening.</li>
+  <li>After the catch, C reads the mark at the top of B's thumb, to 0.1 cm.
+    <ul>
+      <li>If the stick falls all the way past B's hand, <b>that is real data.</b> Record it as
+          "missed — greater than 100.0 cm." It means the warning arrived later than a full meter of
+          falling.</li>
+    </ul>
+  </li>
+  <li>Four good drops each, then rotate.</li>
+</ol>
+
+<h3>Part C — Situation C: Eyes Open, Mind Busy <span class="flag">KEEP COUNTING</span></h3>
+<p>Setup is identical to Part A, and B's eyes stay open and on the stick the entire time — the only
+thing that changes is what B's brain is doing. Four good drops each, then rotate, exactly as before.</p>
+<ol class="proc">
+  <li>C gives B a starting number — begin at <b>100</b> — and B counts backwards out loud <b>by
+      sevens</b>: 100, 93, 86, 79, and so on.</li>
+  <li>B keeps counting out loud <i>and</i> watching the stick — both at once. That is the point.</li>
+  <li>A releases at a random moment, after B has said at least three numbers.</li>
+  <li>B catches, and <b>keeps counting through the catch.</b> If B stops counting in order to catch,
+      the trial is void. Take it again.</li>
+  <li>C records to 0.1 cm, using a <b>different starting number</b> each round (100, 96, 87, 94...)
+      so nobody memorizes the sequence.</li>
+</ol>
+
+<!-- ================================================================
+     PAGE 4 — DATA TABLES
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">U01 / S01.4 · REACTION TIME · DATA</div>
+
+<h2>DATA</h2>
+<p class="lead">You copied these three tables into your notebook as your pre-lab. Fill the notebook
+copy in <b>as you take each measurement</b> — never at the end of the period from memory. All
+distances to 0.1 cm. All times to three significant figures.</p>
+
+<div class="dcap">TABLE 1 · SITUATION A — <span class="sit">ORDINARY REACTION TIME</span> · EYES OPEN, NOTHING ELSE GOING ON</div>
+<table class="dgrid">
+  <tr>
+    <th style="width:16%">CATCHER</th>
+    <th>DROP 1<br>(cm)</th><th>DROP 2<br>(cm)</th><th>DROP 3<br>(cm)</th><th>DROP 4<br>(cm)</th>
+    <th>AVERAGE<br>(cm)</th><th>AVERAGE<br>(m)</th><th>REACTION TIME<br>t (s)</th>
+  </tr>
+  <tr><td class="who">Student 1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<div class="dcap">TABLE 2 · SITUATION B — <span class="sit">THE PASSENGER'S WARNING</span> · EYES CLOSED, CATCH ON "GO!"</div>
+<table class="dgrid">
+  <tr>
+    <th style="width:16%">CATCHER</th>
+    <th>DROP 1<br>(cm)</th><th>DROP 2<br>(cm)</th><th>DROP 3<br>(cm)</th><th>DROP 4<br>(cm)</th>
+    <th>AVERAGE<br>(cm)</th><th>AVERAGE<br>(m)</th><th>REACTION TIME<br>t (s)</th>
+  </tr>
+  <tr><td class="who">Student 1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<div class="dcap">TABLE 3 · SITUATION C — <span class="sit">EYES OPEN, MIND BUSY</span> · COUNTING BACKWARDS BY SEVENS</div>
+<table class="dgrid">
+  <tr>
+    <th style="width:16%">CATCHER</th>
+    <th>DROP 1<br>(cm)</th><th>DROP 2<br>(cm)</th><th>DROP 3<br>(cm)</th><th>DROP 4<br>(cm)</th>
+    <th>AVERAGE<br>(cm)</th><th>AVERAGE<br>(m)</th><th>REACTION TIME<br>t (s)</th>
+  </tr>
+  <tr><td class="who">Student 1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="who">Student 3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<div class="rule-note">
+  If you write a number wrong, draw <b>one line</b> through it and write the correct value beside it.
+  Never scribble it out and never erase — I need to see what you originally recorded. A voided drop
+  gets the same treatment plus one word saying why.
+</div>
+
+<h2>WORKING YOUR DATA — DO THIS BEFORE YOU LEAVE</h2>
+<ol class="proc">
+  <li>Average the four distances for each person in each situation, in centimeters, then convert to
+      meters.</li>
+  <li>Calculate the reaction time for each average using t = &radic;( 2&Delta;y &divide; a ). Three
+      significant figures, work shown in your notebook.</li>
+  <li>For <b>Situation A only</b>, calculate your percent error against the accepted 0.20 s.</li>
+  <li><b>Write your spread</b> for Situation A — highest drop minus lowest drop, in centimeters.
+      That spread is your uncertainty, and you need it for Question 3.</li>
+  <li>Return every meter stick to the rack unbent and leave the desk clear.</li>
+</ol>
+
+
+<!-- ================================================================
+     PAGE 5 — POST-LAB ANALYSIS
+     ================================================================ -->
+<div class="pagebreak"></div>
+<div class="runhead">U01 / S01.4 · REACTION TIME · POST-LAB</div>
+
+<h2>POST-LAB ANALYSIS</h2>
+<p class="lead">Answer these in your lab notebook, numbered 1 through 4. Show every calculation with
+units. An answer with no work and no units earns partial credit at best.</p>
+
+<ol class="q">
+  <li><b>Rank and compare.</b> Using your own three reaction times, rank the situations from fastest
+      to slowest. Then calculate how much longer your Situation C time was than your Situation A
+      time — first in seconds, then as a percent increase, using
+      ( C &minus; A ) &divide; A &times; 100. State in one sentence what you were doing differently
+      in Situation C, given that your eyes were open and on the stick both times.
+      <span class="ref">PARTS A &amp; C</span></li>
+
+  <li><b>The chain.</b> Situation B was almost certainly your slowest, and the obvious explanation —
+      "sound is slower than sight" — is <b>wrong.</b> Published measurements have people reacting to
+      a sound about 0.02–0.04 s <i>faster</i> than to a light. Explain what else had to happen in
+      Situation B that did not in Situation A, name whose reaction time is buried inside your
+      Situation B number besides your own, and say why B is slow anyway. Then connect it: a passenger
+      yelling "stop!" <i>is</i> Situation B. Say what that makes a passenger's warning worth.
+      <span class="ref">PART B</span></li>
+
+  <li><b>Error analysis.</b> A group records these four drops in Situation A: 19.8 cm, 4.2 cm,
+      21.1 cm, 20.4 cm.
+      <ol class="parts" type="a">
+        <li>Calculate the reaction time the 4.2 cm drop by itself would give.</li>
+        <li>Name the <b>specific thing the catcher did</b> to produce a number that small. "Human
+            error" is not an answer and earns zero.</li>
+        <li>Calculate the average reaction time with that drop included, and again with it thrown
+            out and replaced by a fourth good drop of 20.1 cm. State which average is honest and
+            why.</li>
+        <li>Compare the spread of this group's three good drops to the spread you recorded for
+            yourself. Whose measurement is more trustworthy, and how do you know from the spread
+            alone?</li>
+      </ol>
+      <span class="ref">ERROR ANALYSIS</span></li>
+
+  <li><b>The school zone.</b> You are driving through a school zone at <b>25 mph</b>. The posted
+      limit is 20 — you are speeding. A child steps into the crosswalk ahead of you. You see them,
+      you brake, and you stop. The question is <i>where</i> you stop.
+      <table class="data">
+        <tr><th>QUANTITY</th><th>VALUE</th><th>WHERE IT COMES FROM</th></tr>
+        <tr><td>Your speed</td><td>25 mph</td><td>given — and constant until you touch the brake</td></tr>
+        <tr><td>Conversion</td><td>1 mile = 1609 m · 1 h = 3600 s</td><td>given</td></tr>
+        <tr><td>Braking distance, 25 mph &rarr; 0</td><td>8.9 m</td><td>dry asphalt, good tires, a = &minus;7.0 m/s<sup>2</sup></td></tr>
+        <tr><td>Width of the crosswalk</td><td>3.0 m</td><td>the child is standing in the middle of it</td></tr>
+      </table>
+      <ol class="parts" type="a">
+        <li>Convert 25 mph to m/s. Carry the units through the conversion so you can see them
+            cancel.</li>
+        <li>Using your <b>Situation A</b> reaction time and v = d &divide; t rearranged, find your
+            <b>reaction distance</b> — how far the car travels before your foot even reaches the
+            brake.</li>
+        <li>Do part (b) again with your <b>Situation C</b> reaction time.</li>
+        <li>Find the <b>total stopping distance</b> for each case: reaction distance + braking
+            distance.</li>
+        <li>Subtract. How many extra meters did the distracted version cost you? Compare that number
+            to the 3.0 m crosswalk and write one sentence — not a paragraph — saying plainly what
+            those extra meters mean for the child standing in the middle of it.</li>
+      </ol>
+      <div class="rule-note">
+        <b>The push.</b> Everything before your foot touches the brake happens at a constant 25 mph,
+        because you have not braked yet. That is exactly why v = d &divide; t works for the reaction
+        distance and the kinematic equations do not — there is no acceleration during your reaction
+        time. The braking distance is the same 8.9 m either way, because once the brakes are on the
+        car does not care why it took you so long to get there. <b>The entire difference between your
+        two totals is distance you covered while you were still deciding.</b>
+      </div>
+      <span class="ref">U01 / S01.1 · S01.4</span></li>
+</ol>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL Physics — U01/S01.4 Reaction Time Lab — Teacher Prep + Key</title>
+
+<link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left { content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode)
+                            " · TEACHER COPY";
+                   font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                   color: var(--footer); margin-bottom: 0.14in; }
+    @bottom-right { content: "PAGE " counter(page) " OF " counter(pages) " · DO NOT DISTRIBUTE";
+                    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                    color: var(--footer); margin-bottom: 0.14in; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); font-size: 10.2pt;
+         line-height: 1.40; color: var(--ink); }
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  .meta { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code { string-set: unitcode content(); }
+
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow { font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--warn); margin-bottom: 3pt; }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 { font-family: var(--display); font-weight: bold; font-size: 16pt;
+    line-height: 1.12; flex: 1 1 auto; }
+  .chip { flex: 0 0 auto; margin-left: 12pt; font-family: var(--display); font-weight: 600;
+    font-size: 8pt; letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--warn-rule); border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap; }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.20em;
+    color: var(--ink); border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt;
+    margin: 12pt 0 5pt 0; }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 9.6pt; margin: 8pt 0 3pt 0; }
+  p { margin-bottom: 4.5pt; }
+
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3pt; }
+  ul.dot li::before { content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent); }
+
+  table.grid { width: 100%; border-collapse: collapse; margin-top: 5pt; }
+  table.grid th { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; text-align: left; padding: 0 5pt 3pt 5pt;
+    border-bottom: 1.2pt solid var(--accent); }
+  table.grid td { padding: 3.6pt 5pt; font-size: 9.7pt; vertical-align: top;
+    border-bottom: 0.6pt solid var(--rule-hairline); }
+
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li { counter-increment: q; position: relative; padding-left: 20pt;
+    margin-bottom: 6pt; page-break-inside: avoid; }
+  ol.q > li::before { content: counter(q); position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--warn);
+    width: 13pt; text-align: right; }
+  ol.parts { list-style-type: lower-alpha; margin: 4pt 0 2pt 16pt; }
+  ol.parts > li { margin-bottom: 3pt; font-size: 9.9pt; }
+  .ans { color: var(--warn); }
+  .formula { border-left: 2.5pt solid var(--accent); padding: 4pt 0 4pt 10pt; margin: 5pt 0; }
+  .formula .fname { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2pt; }
+  .formula .fx { font-family: var(--display); font-size: 10.4pt; font-weight: 500; }
+  .flagbox { border-top: 0.8pt solid var(--warn-rule); border-bottom: 0.8pt solid var(--warn-rule);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.7pt; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body>
+<div class="meta">
+  <span class="m-course">PHYSICS</span>
+  <span class="m-code">U01 / S01.4</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">TEACHER PREP + KEY · UNIT 1 · SECTION 4 · NOT FOR STUDENTS</div>
+  <div class="titlerow">
+    <h1>Reaction Time and the Distracted Driver</h1>
+    <div class="chip">U01 / S01.4</div>
+  </div>
+</div>
+
+<div class="flagbox">
+  <b>Four deliberate departures from the locked lab template, all requested or forced by this lab.</b>
+  <b>(1) No SAFETY section</b> — requested 2026-09-22. There is no chemical, thermal, electrical or
+  glassware hazard here; the only caution worth saying out loud is "nobody stands where a dropped
+  stick can hit them," and that is in the procedure by implication rather than as a section.
+  <b>(2) No DISPOSAL / Alconox block</b> — nothing is consumed and no glassware is used, so the
+  standing block has nothing to act on. Replaced by a one-line reset step.
+  <b>(3) Data tables print as full grids</b> rather than single-column copy-me skeletons, per Matt
+  2026-09-22. Students still record in the lab notebook — the printed grid is what they copy, and
+  the handout still carries no answer blanks.
+  <b>(4) Body type is 10.1pt / 1.37</b> rather than the template's 10.3 / 1.40. This is the
+  sanctioned page-budget lever (margins were not touched); it buys the fifth page back.
+</div>
+
+<h2>PREP — FIVE MINUTES, MORNING OF</h2>
+<table class="grid">
+  <tr><th>WHEN</th><th>TASK</th><th>DETAIL</th></tr>
+  <tr><td>Morning of</td><td>Count sticks</td>
+      <td>9 meter sticks for 27 students in groups of 3. Check each one for a readable 0 cm end —
+          a stick with a worn or capped zero end gives a systematic error nobody will notice.</td></tr>
+  <tr><td>Morning of</td><td>Desk check</td>
+      <td>Groups need a flat front edge to rest a forearm on. Lab benches with a lip work; round
+          tables do not.</td></tr>
+  <tr><td>First minute</td><td>Orientation check</td>
+      <td>Walk the room and confirm every group is holding the stick <b>0 cm down</b>. This is the
+          single error that silently ruins a whole group's data set.</td></tr>
+</table>
+
+<h3>Materials — 27 students, 9 groups, per period</h3>
+<p>Meter stick × 9 · calculator × 9 (or phones) · lab notebook and pen, one per student. Nothing
+consumable. Nothing to order.</p>
+
+<h2>TIMING — 50-MINUTE PERIOD</h2>
+<table class="grid">
+  <tr><th>MIN</th><th>PHASE</th><th>WATCH FOR</th></tr>
+  <tr><td>0–5</td><td>Pre-lab check, roles assigned, sticks out</td>
+      <td>Pre-lab Q8 — did they actually draw three tables?</td></tr>
+  <tr><td>5–15</td><td>Part A — 3 catchers × 4 drops</td>
+      <td>Stick orientation. Fingers resting on the stick. Anticipation.</td></tr>
+  <tr><td>15–25</td><td>Part B — eyes closed</td>
+      <td>Callers watching A's hand instead of the stick. Misses being re-dropped instead of
+          recorded.</td></tr>
+  <tr><td>25–34</td><td>Part C — counting backwards by sevens</td>
+      <td>Catchers who stop counting to catch. That trial is void.</td></tr>
+  <tr><td>34–47</td><td>Calculations — Working Your Data 1–4</td>
+      <td>cm → m conversion. This is where the period actually goes.</td></tr>
+  <tr><td>47–50</td><td>Sticks back, desks clear</td><td></td></tr>
+</table>
+
+<div class="flagbox">
+  <b>If a group is running behind, cut catchers, not situations.</b> Have one designated catcher do
+  all three situations rather than three catchers doing two. The comparison that matters is
+  within one person — A vs B vs C on the same nervous system — so a group with one complete
+  catcher has usable data and a group with three catchers and no Situation C does not.
+</div>
+
+<h2 class="warn">FAILURE POINTS</h2>
+<ul class="dot">
+  <li><b>The stick is upside down.</b> 100 cm at the bottom instead of 0. Every distance is then
+      wrong by the length of the stick and the reaction times come out near 0.45 s across the board.
+      Catch it in the first minute by walking the room — it is invisible in the data afterward.</li>
+  <li><b>Fingers already touching the stick.</b> The catcher feels the release instead of seeing it
+      and posts times near 0.10 s. Enforce the 3 cm gap.</li>
+  <li><b>Anticipation.</b> Short outlier drops — under about 8 cm — are almost always a guessed
+      release. Tell the dropper to vary the delay and tell the catcher to watch the 0 cm end of the
+      stick, not the dropper's hand or face.</li>
+  <li><b>A Situation B miss gets re-dropped until they "get one."</b> This is the most damaging
+      failure in the lab, because it deletes the result. A stick that falls past the hand means
+      t &gt; 0.452 s, and that is the finding, not a failed trial. Say this before Part B starts.</li>
+  <li><b>cm left as m.</b> 18.4 entered as meters gives t = 1.94 s. <b>Any reaction time over about
+      0.6 s that is not a Situation B miss is a unit error.</b> That single sentence catches most of
+      the bad post-labs.</li>
+  <li><b>Square root of a negative.</b> Means they made &Delta;y negative and a positive, or the
+      reverse. Send them back to the sign convention they wrote in pre-lab Q4.</li>
+  <li><b>Counting backwards by sevens is genuinely hard for some students</b> and for anyone
+      working in a second language. Counting back by threes, or reciting the alphabet backwards,
+      loads attention the same way. Swap it without comment — the load is the variable, not the
+      arithmetic.</li>
+</ul>
+
+<h2>EXPECTED RESULTS</h2>
+<p>Grade the method, not the number. Every student's value is legitimately their own, and the only
+hard bound is the meter stick itself — a caught stick cannot exceed 100.0 cm, so no measured
+reaction time can exceed <b>0.452 s</b>.</p>
+<table class="grid">
+  <tr><th>QUANTITY</th><th>ACCEPTED / EXPECTED</th><th>TYPICAL STUDENT RANGE</th></tr>
+  <tr><td>Situation A reaction time</td><td>0.20 s (supplied to students)</td>
+      <td>0.15–0.25 s · 11–31 cm. Published simple visual reaction time runs about 0.18–0.25 s.</td></tr>
+  <tr><td>Situation B reaction time</td><td>no published value — see note</td>
+      <td><b>PROVISIONAL:</b> 0.30–0.45 s · 44–99 cm, with outright misses common.</td></tr>
+  <tr><td>Situation C reaction time</td><td>no published value — see note</td>
+      <td><b>PROVISIONAL:</b> 0.22–0.35 s · 24–60 cm.</td></tr>
+  <tr><td>Spread across 4 good drops</td><td>—</td><td>1–4 cm is tight. Over about 8 cm means the
+      procedure was not being run the same way twice.</td></tr>
+</table>
+
+<div class="flagbox">
+  <b>Two things in that table are mine, not the literature's.</b> The <b>0.20 s accepted value</b> is
+  a published figure for simple visual reaction time in adults, where sources put the range at
+  roughly 0.18–0.25 s; it is a population typical value, not a constant, and the student handout says
+  so. The <b>Situation B and C ranges are my estimates</b>, converted from plausible reaction times —
+  <b>no published value exists for these two conditions as run here.</b> Treat them as PROVISIONAL and
+  replace them with your own first-period numbers, which will be better than anything I can give you.
+</div>
+
+<h2 class="warn">SAFETY AND DISPOSAL — DELIBERATELY OMITTED</h2>
+<ul class="dot">
+  <li>No chemicals, no heat, no flame, no electricity, no glassware. Nothing to verify against an
+      SDS and nothing to dispose of. The omission was requested, and the standing verification
+      requirement does not attach because <b>the handout makes no safety or disposal claim at all</b>
+      — which is the rule that matters. Never let a lab assert a safety fact it has not checked;
+      asserting none is a different thing from asserting a wrong one.</li>
+  <li>The one physical caution, if you want it said out loud rather than printed: a dropped stick
+      that is missed lands on the floor, so keep feet back and do not run this standing on stools.</li>
+</ul>
+
+<div class="pagebreak"></div>
+
+<h2>PRE-LAB KEY</h2>
+<ol class="q">
+  <li>Free fall definition. <span class="ans">Gravity is the only force acting. Ignoring air
+      resistance. Accept any answer naming the stick's density, its low speed, and the short drop
+      distance as the reason drag is negligible. Do not accept "because we said so" or "air doesn't
+      matter."</span></li>
+  <li>50 kg vs 90 kg student. <span class="ans">The sticks land at the same time. The justification
+      must reach acceleration: every object in free fall accelerates at 9.80 m/s<sup>2</sup>
+      regardless of mass, and the mass of the person dropping it is irrelevant in the first place.
+      Half credit for the right answer with a weight-based justification.</span></li>
+  <li>Why it measures reaction time. <span class="ans">The stick is in free fall for exactly the
+      interval between release and the fingers closing. The distance is a stand-in for that time.
+      Grip strength changes how hard they squeeze, not when.</span></li>
+  <li>Sign convention. <span class="ans">Down negative: a = &minus;9.80 m/s<sup>2</sup>,
+      &Delta;y negative. Up-positive is the convention; accept down-positive if they then write
+      a = +9.80 and &Delta;y positive <b>and</b> use it consistently. The requirement is that it is
+      declared, not which one they pick.</span></li>
+  <li>Part A measurement. <span class="ans">Distance the stick fell · meter stick · to 0.1 cm. All
+      three required.</span></li>
+  <li>Three void conditions. <span class="ans">Chased the stick down · guessed the release and
+      caught early · stick went past the hand. First two make the average look <b>faster</b> than
+      reality; the third, if recorded as a short catch rather than a miss, also makes it look
+      faster. Accept "slower" only for a genuinely recorded miss.</span></li>
+  <li>Student C's Part B job. <span class="ans">Calling "GO!" the instant the stick is released —
+      and watching <b>the stick itself</b>, not A's hand or face. The second half is the point of
+      the question; it sets up post-lab Q2.</span></li>
+  <li>Three tables drawn. <span class="ans">Full credit = three tables, in ink, units in the column
+      headings, room to write. No credit for one table with the situations crammed in.</span></li>
+</ol>
+
+<h2>POST-LAB KEY</h2>
+<p>Worked below with one illustrative student: <b>A = 0.19 s · B = 0.42 s · C = 0.30 s.</b> Every
+student's numbers differ. <b>Mark the method.</b></p>
+
+<ol class="q">
+  <li>Rank and compare. <span class="ans">Expected ranking fastest to slowest: A, C, B. Difference
+      C &minus; A = 0.30 &minus; 0.19 = <b>0.11 s</b>. Percent increase =
+      ( 0.11 &divide; 0.19 ) &times; 100 = <b>58%</b>. The sentence must land on <b>attention</b>,
+      not vision — eyes were open and on the stick in both. Accept "my brain was busy," "I was
+      doing two things," "I was processing the arithmetic." Do not accept "I couldn't see it."</span></li>
+
+  <li>The chain. <span class="ans">Situation B contains <b>two</b> reaction times in series:
+      Student C has to see the stick move and react by shouting, and only then can B react to the
+      sound. The measured number is roughly C's visual reaction time plus B's auditory reaction
+      time, so it is slow despite sound being the faster channel. The driving conclusion: a
+      passenger's warning is worth less than it feels like, because it cannot reach you until the
+      passenger has already reacted. <b>Full credit requires naming Student C's reaction time as
+      part of the measurement.</b> A student who says "sound is slower" has not read the question
+      and gets no credit for that clause.</span></li>
+
+  <li>Error analysis.
+      <ol class="parts">
+        <li><span class="ans">0.042 m &rarr; t = &radic;(2 &times; 0.042 &divide; 9.80) =
+            &radic;(0.008571) = <b>0.093 s</b> (2 sig figs — 4.2 cm has two).</span></li>
+        <li><span class="ans">The catcher anticipated the release and squeezed before the stick
+            moved — or was watching the dropper's hand rather than the stick. Either is acceptable
+            and both are specific. <b>"Human error," "we messed up," and "the equipment was bad"
+            earn zero,</b> per the standing rule.</span></li>
+        <li><span class="ans">With 4.2 included: mean = 65.5 &divide; 4 = 16.4 cm = 0.1638 m
+            &rarr; t = <b>0.183 s</b>. With 20.1 replacing it: mean = 81.4 &divide; 4 = 20.35 cm =
+            0.2035 m &rarr; t = <b>0.204 s</b>. The bad drop makes them look <b>0.021 s faster</b>
+            than they are, about 10%. The honest average is 0.204 s, because the 4.2 cm drop did not
+            measure a reaction — it measured a guess.</span></li>
+        <li><span class="ans">Spread of the three good drops = 21.1 &minus; 19.8 = <b>1.3 cm</b>,
+            which is tight, so those three are trustworthy. Student compares against their own
+            recorded spread. The reasoning to look for: a small spread means the procedure was
+            repeatable; it does <b>not</b> mean the value is correct — a consistently upside-down
+            stick has a tiny spread too.</span></li>
+      </ol></li>
+
+  <li>The school zone.
+      <ol class="parts">
+        <li><span class="ans">25 mi/h &times; (1609 m &divide; 1 mi) &times; (1 h &divide; 3600 s) =
+            <b>11.2 m/s</b> (11.17 unrounded).</span></li>
+        <li><span class="ans">d = vt = 11.2 &times; 0.19 = <b>2.1 m</b></span></li>
+        <li><span class="ans">d = vt = 11.2 &times; 0.30 = <b>3.4 m</b></span></li>
+        <li><span class="ans">Attentive: 2.1 + 8.9 = <b>11.0 m</b>. Distracted: 3.4 + 8.9 =
+            <b>12.3 m</b>.</span></li>
+        <li><span class="ans"><b>1.2–1.3 m, and both are right.</b> Straight from the rounded totals,
+            12.3 &minus; 11.0 = 1.3 m. Carried unrounded, 11.2 &times; (0.30 &minus; 0.19) = 1.23 m
+            &rarr; 1.2 m. <b>Accept either</b> — but a student whose difference disagrees with their
+            own parts (b)–(d) has an arithmetic error, not a rounding one. That is roughly 40% of the
+            3.0 m crosswalk; the child standing in the middle is 1.5 m from the near edge, so the
+            extra distance is close to the whole margin between stopping at the edge of the crosswalk
+            and arriving where the child is standing. Accept any one-sentence version that connects
+            the number to the child. Do not accept a paragraph, and do not accept "you should pay
+            attention" with no number in it.</span></li>
+      </ol></li>
+</ol>
+
+<div class="flagbox">
+  <b>The move students miss in Q4</b> is that v = d &divide; t is legal for the reaction distance
+  precisely <i>because</i> nothing is accelerating yet — the car is still at a constant 25 mph until
+  the brake is touched. Students who reach for a kinematic equation there have not understood which
+  phase is which. The handout's "push" box says this outright; if a student still misses it, the
+  question to ask is "what is the acceleration during your reaction time?"
+</div>
+
+<h2>GRADING</h2>
+<p><b>Within the lab — PROVISIONAL, adjust to taste:</b> pre-lab 8 · data and calculations 12 ·
+post-lab 20 = 40 points. Post-lab Q4 is worth 8 of that 20; it is the assessment target of the
+whole activity. The carbonless copy is graded individually.</p>
+<p><b>Gradebook category weight is not set for Physics.</b> Chemistry's 55/20/15/7/3 split is
+explicitly <i>not</i> carried over — see <i>courses/physics/DECISIONS.md</i>, open question 3. This lab
+is filed without a category weight rather than guessing one.</p>
+
+<h2>MISSED LAB</h2>
+<p>Do not re-run the setup. Hand the student a real class data table from this period — one complete
+group, all three situations — and have them work post-lab questions 1 through 4 from it. Add one
+question in place of the percent-error step they cannot do: <i>whose reaction time are you
+calculating, and name one thing you would have learned by catching the stick yourself that you
+cannot learn from this table.</i></p>
+
+</body>
+</html>
