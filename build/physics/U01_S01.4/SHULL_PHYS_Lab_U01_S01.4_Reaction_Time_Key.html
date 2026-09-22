@@ -48,6 +48,8 @@
     width: 3.4pt; height: 3.4pt; background: var(--accent); }
 
   table.grid { width: 100%; border-collapse: collapse; margin-top: 5pt; }
+  table.grid th:first-child { width: 13%; white-space: nowrap; }
+  table.grid td:first-child { white-space: nowrap; }
   table.grid th { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
     letter-spacing: 0.16em; text-align: left; padding: 0 5pt 3pt 5pt;
     border-bottom: 1.2pt solid var(--accent); }
@@ -73,7 +75,7 @@
 </style>
 </head>
 
-<body>
+<body class="phys">
 <div class="meta">
   <span class="m-course">PHYSICS</span>
   <span class="m-code">U01 / S01.4</span>
@@ -97,8 +99,9 @@
   <b>(3) Data tables print as full grids</b> rather than single-column copy-me skeletons, per Matt
   2026-09-22. Students still record in the lab notebook — the printed grid is what they copy, and
   the handout still carries no answer blanks.
-  <b>(4) Body type is 10.1pt / 1.37</b> rather than the template's 10.3 / 1.40. This is the
-  sanctioned page-budget lever (margins were not touched); it buys the fifth page back.
+  <b>(4) The student handout's body type is 10.1pt / 1.37</b> rather than the template's
+  10.3 / 1.40. This is the sanctioned page-budget lever (margins were not touched); it buys the
+  fifth page back. This key is unchanged at the key template's 10.2 / 1.40.
 </div>
 
 <h2>PREP — FIVE MINUTES, MORNING OF</h2>
@@ -131,7 +134,7 @@ consumable. Nothing to order.</p>
           recorded.</td></tr>
   <tr><td>25–34</td><td>Part C — counting backwards by sevens</td>
       <td>Catchers who stop counting to catch. That trial is void.</td></tr>
-  <tr><td>34–47</td><td>Calculations — Working Your Data 1–4</td>
+  <tr><td>34–47</td><td>Calculations — Working Your Data 1–5</td>
       <td>cm → m conversion. This is where the period actually goes.</td></tr>
   <tr><td>47–50</td><td>Sticks back, desks clear</td><td></td></tr>
 </table>
@@ -146,7 +149,9 @@ consumable. Nothing to order.</p>
 <h2 class="warn">FAILURE POINTS</h2>
 <ul class="dot">
   <li><b>The stick is upside down.</b> 100 cm at the bottom instead of 0. Every distance is then
-      wrong by the length of the stick and the reaction times come out near 0.45 s across the board.
+      wrong by the length of the stick and the reaction times bunch up around <b>0.38–0.43 s</b>
+      (a real 11–31 cm reads as 89–69 cm). Nobody reacts that uniformly, and that tell is the
+      giveaway.
       Catch it in the first minute by walking the room — it is invisible in the data afterward.</li>
   <li><b>Fingers already touching the stick.</b> The catcher feels the release instead of seeing it
       and posts times near 0.10 s. Enforce the 3 cm gap.</li>
@@ -157,8 +162,9 @@ consumable. Nothing to order.</p>
       failure in the lab, because it deletes the result. A stick that falls past the hand means
       t &gt; 0.452 s, and that is the finding, not a failed trial. Say this before Part B starts.</li>
   <li><b>cm left as m.</b> 18.4 entered as meters gives t = 1.94 s. <b>Any reaction time over about
-      0.6 s that is not a Situation B miss is a unit error.</b> That single sentence catches most of
-      the bad post-labs.</li>
+      0.452 s that is not a recorded Situation B miss is a unit error</b> — 0.452 s is the ceiling
+      a 100.0 cm stick imposes, so a caught stick cannot beat it. That single sentence catches most
+      of the bad post-labs.</li>
   <li><b>Square root of a negative.</b> Means they made &Delta;y negative and a positive, or the
       reverse. Send them back to the sign convention they wrote in pre-lab Q4.</li>
   <li><b>Counting backwards by sevens is genuinely hard for some students</b> and for anyone
@@ -235,6 +241,23 @@ reaction time can exceed <b>0.452 s</b>.</p>
       headings, room to write. No credit for one table with the situations crammed in.</span></li>
 </ol>
 
+<h2>WORKING YOUR DATA — KEY</h2>
+<ol class="q">
+  <li>Averages. <span class="ans">Four distances per person per situation, cm then m. Watch for
+      groups averaging across <i>people</i> instead of across drops — that produces one number per
+      situation and destroys the within-person comparison Q1 depends on.</span></li>
+  <li>Reaction times. <span class="ans">t = &radic;(2&Delta;y &divide; a), three sig figs, signs
+      carried. Cross-check against the table in EXPECTED RESULTS above.</span></li>
+  <li>Percent error, Situation A only. <span class="ans">( | t<sub>A</sub> &minus; 0.20 | &divide;
+      0.20 ) &times; 100. Worked example: t = 0.194 s &rarr; ( 0.006 &divide; 0.20 ) &times; 100 =
+      <b>3%</b>. <b>One sig fig</b> — the subtraction leaves 0.006, which has one. A student
+      reporting 3.0% has claimed a precision the subtraction does not support; take it as a sig-fig
+      error, not a wrong answer.</span></li>
+  <li>Spread. <span class="ans">Highest minus lowest drop, Situation A, in cm. Typically 1–4 cm.
+      This is the uncertainty they need for post-lab Q3(d).</span></li>
+  <li>Reset. <span class="ans">Not graded. Checked.</span></li>
+</ol>
+
 <h2>POST-LAB KEY</h2>
 <p>Worked below with one illustrative student: <b>A = 0.19 s · B = 0.42 s · C = 0.30 s.</b> Every
 student's numbers differ. <b>Mark the method.</b></p>
@@ -257,15 +280,18 @@ student's numbers differ. <b>Mark the method.</b></p>
 
   <li>Error analysis.
       <ol class="parts">
-        <li><span class="ans">0.042 m &rarr; t = &radic;(2 &times; 0.042 &divide; 9.80) =
-            &radic;(0.008571) = <b>0.093 s</b> (2 sig figs — 4.2 cm has two).</span></li>
+        <li><span class="ans">&Delta;y = &minus;0.042 m, a = &minus;9.80 m/s<sup>2</sup> &rarr;
+            t = &radic;( 2(&minus;0.042) &divide; (&minus;9.80) ) = &radic;(0.008571) =
+            <b>0.093 s</b> (2 sig figs — 4.2 cm has two). <b>Mark the signs.</b> A student who
+            drops them here after declaring the convention in pre-lab Q4 has not lost the
+            arithmetic, but they have lost the habit the unit is teaching.</span></li>
         <li><span class="ans">The catcher anticipated the release and squeezed before the stick
             moved — or was watching the dropper's hand rather than the stick. Either is acceptable
             and both are specific. <b>"Human error," "we messed up," and "the equipment was bad"
             earn zero,</b> per the standing rule.</span></li>
-        <li><span class="ans">With 4.2 included: mean = 65.5 &divide; 4 = 16.4 cm = 0.1638 m
-            &rarr; t = <b>0.183 s</b>. With 20.1 replacing it: mean = 81.4 &divide; 4 = 20.35 cm =
-            0.2035 m &rarr; t = <b>0.204 s</b>. The bad drop makes them look <b>0.021 s faster</b>
+        <li><span class="ans">With 4.2 included: mean = 65.5 &divide; 4 = 16.4 cm, so
+            &Delta;y = &minus;0.1638 m &rarr; t = <b>0.183 s</b>. With 20.1 replacing it:
+            mean = 81.4 &divide; 4 = 20.35 cm, &Delta;y = &minus;0.2035 m &rarr; t = <b>0.204 s</b>. The bad drop makes them look <b>0.021 s faster</b>
             than they are, about 10%. The honest average is 0.204 s, because the 4.2 cm drop did not
             measure a reaction — it measured a guess.</span></li>
         <li><span class="ans">Spread of the three good drops = 21.1 &minus; 19.8 = <b>1.3 cm</b>,
