@@ -66,7 +66,8 @@ Geology numbering problem before a packet printed with the wrong footer.
 ## 4. Safety and change control
 
 - **Only the Secretary writes to `brand/`, `standards/`, `governance/`, and `courses/`, and only
-  against an APPROVED proposal ID.** Everyone else proposes.
+  against an APPROVED proposal ID.** Everyone else proposes. (The main session records the user's
+  decision; see `governance/CHANGE_CONTROL.md` §4.)
 - Every rule change is a commit carrying its Change ID. Git history is the audit log.
 - **Permanent deletion requires explicit user approval.** Drive objects can only be trashed
   (recoverable), never permanently deleted, by design.
