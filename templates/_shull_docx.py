@@ -105,17 +105,42 @@ def shade(cell, hexval):
     cell._tc.get_or_add_tcPr().append(el)
 
 
+# OOXML fixes the order of the children of w:tcBorders. A file that lists them in
+# another order is schema-invalid, and Word repairs it silently while LibreOffice
+# may not - so the order is written down once and the merge below respects it.
+_BORDER_ORDER = ("top", "start", "left", "bottom", "end", "right", "insideH", "insideV",
+                 "tl2br", "tr2bl")
+
+
 def borders(cell, hexval, sz=6, edges=("top", "left", "bottom", "right"), val="single"):
     """A cell border. `val="dashed"` is the cut line on a cut-and-glue activity - the
-    dash is the instruction, so it has to be the border style and not a drawn shape."""
+    dash is the instruction, so it has to be the border style and not a drawn shape.
+
+    Calls STACK. Two calls on one cell used to append two `w:tcBorders` elements,
+    which is invalid - readers were free to take either, and the second call only
+    appeared to work because both renderers happened to merge them. It now merges
+    into the one element, replacing an edge already set, so a weight ladder can be
+    built the obvious way: the hairline box first, then the heavier accent edge.
+
+        borders(cue, pal.hair, sz=8)                       # the box
+        borders(cue, pal.display, sz=12, edges=("left",))  # the rail on top of it
+    """
     tcPr = cell._tc.get_or_add_tcPr()
-    b = OxmlElement("w:tcBorders")
+    b = tcPr.find(qn("w:tcBorders"))
+    if b is None:
+        b = OxmlElement("w:tcBorders")
+        tcPr.append(b)
     for e in edges:
+        old = b.find(qn(f"w:{e}"))
+        if old is not None:
+            b.remove(old)
         x = OxmlElement(f"w:{e}")
         x.set(qn("w:val"), val); x.set(qn("w:sz"), str(sz))
         x.set(qn("w:color"), hexof(hexval))
         b.append(x)
-    tcPr.append(b)
+    order = {n: i for i, n in enumerate(_BORDER_ORDER)}
+    for child in sorted(list(b), key=lambda c: order.get(c.tag.split("}")[-1], 99)):
+        b.append(child)
 
 
 def checkbox(paragraph, pal, size=9):
@@ -170,7 +195,12 @@ def para(cell, text, size, *, bold=False, color=None, spacing=0.14, caps_track=F
     if color:
         r.font.color.rgb = RGBColor.from_string(hexof(color))
     if caps_track:
-        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+        # True is the standard label tracking; an int is a looser or tighter one, for
+        # a label that has to read as quieter than the headings around it. Tracking is
+        # part of how loud a caps label is, so demoting one means turning this down as
+        # well as the size and the colour.
+        val = 26 if caps_track is True else int(caps_track)
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(val))
         r._element.get_or_add_rPr().append(el)
     return p
 
@@ -603,8 +633,68 @@ def running_footer(section, text, pal, with_page_numbers=False):
     return f
 
 
-def add_watermark(section, image_path, width_in):
+def fade_to_ink(image_path, target_pct):
+    """Wash an image toward white until its darkest tone lays down `target_pct` ink.
+
+    A watermark is defined by ink coverage, not by how someone happened to prepare the
+    PNG - the same rule `Palette.watermark` already applies to the text watermark. So
+    the template measures the file and washes it to the standard rather than trusting
+    it, which has two consequences worth stating:
+
+    - Any course can drop in any image and get the same whisper. The first Chemistry
+      watermark was prepared by hand at 15% and printed as a competing graphic behind
+      the matter flowchart; nothing in the build could have caught that, because the
+      ink level lived in a PNG.
+    - It is idempotent. An already-faded file measures at or under target and is
+      returned untouched, so re-running a build does not wash the image away one pass
+      at a time - the failure mode of doing this with a fixed blend factor.
+
+    The darkest tone is read at the 0.05th percentile, not the outright minimum, so one
+    stray dark pixel or a JPEG ringing artefact cannot decide the exposure of the whole
+    image. Returns a PNG stream for `add_picture`, or None if no fade was needed.
+    """
+    from PIL import Image
+    im = Image.open(image_path)
+    if im.mode in ("RGBA", "LA", "P"):
+        im = Image.alpha_composite(
+            Image.new("RGBA", im.size, (255, 255, 255, 255)), im.convert("RGBA"))
+    im = im.convert("RGB")
+
+    hist = im.convert("L").histogram()
+    n = sum(hist)
+    floor_n = max(1, int(n * 0.0005))
+    seen, darkest = 0, 255
+    for v, k in enumerate(hist):
+        seen += k
+        if seen >= floor_n:
+            darkest = v
+            break
+    have = (255 - darkest) / 255.0 * 100.0
+    if have <= target_pct + 0.5:
+        return None
+    f = target_pct / have
+    washed = Image.eval(im, lambda v: int(round(255 - (255 - v) * f)))
+    import io
+    buf = io.BytesIO()
+    washed.save(buf, format="PNG")
+    buf.seek(0)
+    return buf
+
+
+def add_watermark(section, image_path, width_in, *, ink_pct=None, vert_frac=0.5):
     """A faint background image, floating behind the text, repeating on every page.
+
+    `ink_pct` is the darkest tone the watermark is allowed to print, defaulting to the
+    low end of print.watermarkOpacityPct.denseTable in tokens.json - every print
+    template this system has is a page of ruled tables, and the design system says a
+    watermark on one is reduced rather than normal.
+
+    `vert_frac` is where the picture's CENTRE sits down the page, as a fraction of page
+    height. 0.5 is dead centre, which is where content is: centred, the Chemistry atom
+    ran through the matter flowchart, the work box and the fill-in prompts on three
+    different pages. Lower than centre puts it in the quiet bottom third of a page
+    whose weight is at the top, so it reads as a ground rather than as a second layer
+    of drawing competing with the first.
 
     python-docx has no watermark API. `header.paragraphs[0].add_run().add_picture()`
     only produces an INLINE picture - in the header's text flow, not floating and not
@@ -641,7 +731,10 @@ def add_watermark(section, image_path, width_in):
         r._r.getparent().remove(r._r)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    pic = run.add_picture(image_path, width=Inches(width_in))
+    if ink_pct is None:
+        ink_pct = T["print"]["watermarkOpacityPct"]["denseTable"][0]
+    src = fade_to_ink(image_path, ink_pct) or image_path
+    pic = run.add_picture(src, width=Inches(width_in))
     inline = pic._inline
     extent, graphic = inline.extent, inline.graphic
     docPr = inline.docPr
@@ -652,7 +745,7 @@ def add_watermark(section, image_path, width_in):
     page_w = section.page_width
     page_h = section.page_height
     off_x = max(0, (page_w - extent.cx) // 2)
-    off_y = max(0, (page_h - extent.cy) // 2)
+    off_y = int(min(max(0, page_h * vert_frac - extent.cy / 2), max(0, page_h - extent.cy)))
 
     anchor = OxmlElement("wp:anchor")
     for k, v in (("behindDoc", "1"), ("distT", "0"), ("distB", "0"), ("distL", "0"),
@@ -684,7 +777,7 @@ def add_watermark(section, image_path, width_in):
     return anchor
 
 
-def study_recap_page(doc, recap, pal, width=7.5):
+def study_recap_page(doc, recap, pal, width=7.5, row_height_in=4.4):
     """The standing last page: a 2x2 grid of outlined boxes a student studies from.
 
     His ask: "a nice little recap infographic ... topic breakdown, key points,
@@ -698,12 +791,14 @@ def study_recap_page(doc, recap, pal, width=7.5):
     nothing this system builds ever follows the recap.
     """
     doc.add_page_break()
+    gap(doc, 10)
     c = one_cell(doc, width)
     borders(c, pal.ink, sz=12, edges=("top",))
     borders(c, pal.display, sz=18, edges=("bottom",))
+    cell_margins(c, top=70, bottom=70, left=40, right=40)
     para(c, recap.get("title", "STUDY RECAP"), 15, bold=True, color=pal.ink, first=True)
 
-    gap(doc, 4)
+    gap(doc, 7)
     half = round(width / 2 - 0.06, 2)
     boxes = [
         ("TOPIC BREAKDOWN", recap.get("topics", [])),
@@ -713,9 +808,21 @@ def study_recap_page(doc, recap, pal, width=7.5):
     ]
     t = doc.add_table(rows=2, cols=2)
     fix_widths(t, [half, half])
+    tight_cells(t, top=60, bottom=60, left=70, right=70)
+    # The recap is a page, not a block that happens to land last. Sized only by its
+    # own text it filled the top 40% of the sheet and left the rest blank, which
+    # reads as an unfinished page rather than a composed one - and gave a student
+    # nowhere to add a line of their own to a box they are supposed to study from.
+    # Each half takes the height that is actually there. hRule "atLeast", so a course
+    # with more recap content than this one still grows past the floor.
+    for r in t.rows:
+        no_split(r, float(row_height_in))
     for i, (lab, items) in enumerate(boxes):
         cell = t.rows[i // 2].cells[i % 2]
-        borders(cell, pal.hair)
+        borders(cell, pal.hair, sz=6)
+        # The same rail the cue column carries, so the recap reads as the last page
+        # of THIS packet rather than a generic four-box organizer.
+        borders(cell, pal.display, sz=12, edges=("left",))
         para(cell, lab, 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
         for x in items:
             para(cell, "•  " + debullet(x), 9.5, color=pal.ink)

@@ -13,7 +13,7 @@ import json, os, sys
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -107,6 +107,12 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 WORK_BOX_MIN_IN = 1.4          # his was 0.98in; a little more room for kinematics
 GIVEN_LABEL_IN = 0.72
 
+# A watermark is a whisper you notice only if you look for it. Its ink level is the
+# design system's (print.watermarkOpacityPct, applied in add_watermark); its size and
+# position are this template's, because they depend on where THIS page puts content.
+WATERMARK_W_IN = 3.0
+WATERMARK_VERT_FRAC = 0.80
+
 # The Cornell split, decided once. His own packets ran a 1.88in (Geology) / 2.00in
 # (Physics) cue column; he asked for it narrower and condensed - the cue is a prompt,
 # not a second body column, and every inch it gives back goes to the notes side where
@@ -117,6 +123,31 @@ CUE_W_IN = 1.28
 NOTES_W_IN = TEXT_W_IN - CUE_W_IN          # 6.22
 CELL_MAR_IN = 0.56                          # default tcMar, both sides, both nestings
 NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
+
+
+# The weight ladder. Every border in the body used to be the same hairline at the same
+# weight, so a section boundary, a row divider and the inside edge of a fill-in table
+# all claimed the page equally and the sheet read as one undifferentiated grid. Four
+# steps is enough - in print a half-point reads clearly - and naming them here is what
+# stops the next edit from picking a number that happens to look fine in isolation.
+# Eighths of a point, which is what w:sz counts.
+W_SECTION = 18      # the accent rule under a section head. Nothing else is this heavy.
+W_HEAD_TOP = 12     # the ink rule above it
+W_RAIL = 12         # the cue-column rail
+W_ROW = 8           # one notes row from the next
+W_BOX = 6           # an element's own outline - work box, learning target, summary
+W_INNER = 4         # inside an element - table cells, given/need, writing lines
+
+# "Siding": a vertical accent rule down the left edge of every cue cell. The Cornell
+# split was drawn with the same hairline as everything else, so the page had no spine
+# and the cue column did not read as a column at a glance - it read as the narrow
+# cells of a table. A cell border, not a fill: SHULL_DESIGN_SYSTEM section 8, and the
+# same mechanism as the masthead kicker and the must-write line, which is the one that
+# renders reliably inside a nested cell in both Word and LibreOffice.
+#
+# It also gives the dead space at the foot of a short cue cell something to be. The
+# notes side is always taller than its cue, so most cue cells end in a gap; with a rail
+# running past it that gap is margin, and without one it is a hole.
 
 
 # SHULL-CHG-0017. A fraction is stacked - numerator over denominator with a horizontal
@@ -198,7 +229,17 @@ def main():
     if wm_spec:
         wm_path = os.path.join(spec_dir, wm_spec["path"])
         if os.path.exists(wm_path):
-            add_watermark(s, wm_path, float(wm_spec.get("widthIn", 5.0)))
+            # Geometry is the template's, not the spec's. At the 5.0in the Chemistry
+            # spec asked for, centred, the atom sat directly behind the matter
+            # flowchart, the work box and the fill-in prompts - a second drawing
+            # competing with the first on the page a student is trying to write on.
+            # A watermark is a ground: small enough not to reach the content column's
+            # working width, low enough to sit in the quiet bottom third of a page
+            # whose weight is at the top. `widthIn` is honoured only when it asks for
+            # LESS than that, so a spec can make it quieter and cannot make it louder.
+            want = float(wm_spec.get("widthIn", WATERMARK_W_IN))
+            add_watermark(s, wm_path, min(want, WATERMARK_W_IN),
+                          vert_frac=WATERMARK_VERT_FRAC)
         else:
             print(f"build_notes_docx: watermarkImage \"{wm_spec['path']}\" not found at "
                   f"{wm_path} — building without it.", file=sys.stderr)
@@ -256,14 +297,29 @@ def main():
     if img_spec:
         img_path = os.path.join(spec_dir, img_spec["path"])
         if os.path.exists(img_path):
-            gap(doc, 10)
-            p = doc.add_paragraph()
+            # The plate is framed, and the caption lives inside the frame with it.
+            # Dropped straight onto the page, a raster carrying its own cream ground
+            # read as a foreign object pasted on white - nothing said where the
+            # picture ended and the sheet began. A hairline rule and real padding
+            # make the edge a decision. Outlined, not filled; the frame is the only
+            # ink it costs.
+            gap(doc, 14)
+            img_w = float(img_spec.get("widthIn", 3.2))
+            ft = doc.add_table(rows=1, cols=1)
+            ft.alignment = WD_TABLE_ALIGNMENT.CENTER
+            fix_widths(ft, [round(img_w + 0.44, 2)])
+            fc = ft.rows[0].cells[0]
+            borders(fc, hair, sz=W_BOX)
+            cell_margins(fc, top=110, bottom=90, left=110, right=110)
+            p = fc.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p.add_run().add_picture(img_path, width=Inches(float(img_spec.get("widthIn", 3.2))))
+            p.paragraph_format.space_after = Pt(0)
+            p.add_run().add_picture(img_path, width=Inches(img_w))
             if img_spec.get("caption"):
-                gap(doc, 3)
-                cap = doc.add_paragraph()
+                cap = fc.add_paragraph()
                 cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                cap.paragraph_format.space_before = Pt(6)
+                cap.paragraph_format.space_after = Pt(0)
                 r = cap.add_run(img_spec["caption"])
                 r.font.name = FONT; r.font.size = Pt(8.5)
                 r.font.color.rgb = RGBColor.from_string(hexof(label))
@@ -273,19 +329,26 @@ def main():
 
     for sec in spec["sectionsContent"]:
         doc.add_page_break()
-        gap(doc, 6)
+        # A section head sat 6pt off the top margin with the learning target pressed
+        # straight underneath, so the loudest thing on the page had nothing around it
+        # and read as jammed rather than as an opening. The air is the hierarchy here:
+        # nothing else on the page gets this much room above it.
+        gap(doc, 20)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
         a, b = t.rows[0].cells
         # Section head: ruled above and below, not filled.
         for cell in (a, b):
-            borders(cell, ink, sz=12, edges=("top",))
-            borders(cell, display, sz=18, edges=("bottom",))
+            borders(cell, ink, sz=W_HEAD_TOP, edges=("top",))
+            borders(cell, display, sz=W_SECTION, edges=("bottom",))
+            cell_margins(cell, top=90, bottom=90, left=0, right=0)
         para(a, sec["title"], 12.5, bold=True, color=ink, first=True)
         p = para(b, sec["code"], 8.5, bold=True, color=accent, caps_track=True, first=True)
         p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
-        c = one_cell(doc); borders(c, hair)
+        gap(doc, 7)
+        c = one_cell(doc); borders(c, hair, sz=W_BOX)
+        cell_margins(c, top=45, bottom=45, left=40, right=40)
         p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
         r = p.add_run("LEARNING TARGET   "); r.font.name = FONT; r.font.size = Pt(7.5)
         r.bold = True; r.font.color.rgb = RGBColor.from_string(hexof(accent))
@@ -297,11 +360,25 @@ def main():
             cue, notes = t.rows[ri].cells
             # No fill on the cue column. Matthew's packet separated the columns with a
             # rule alone, which is the Cornell convention and costs nothing to print.
-            borders(cue, hair); borders(notes, hair)
+            # The weight ladder does the rest: the boundary between one row and the
+            # next is heavier than the hairline dividing cue from notes, which is in
+            # turn heavier than anything drawn inside a row.
+            for cell in (cue, notes):
+                borders(cell, hair, sz=W_ROW, edges=("top", "bottom"))
+                borders(cell, hair, sz=W_INNER, edges=("left", "right"))
+            # The rail. Last, so it replaces the hairline on that edge rather than
+            # arguing with it.
+            borders(cue, display, sz=W_RAIL, edges=("left",))
+            cell_margins(cue, top=30, bottom=30, left=130, right=50)
+            # A place for the eye to land, and a way to say "third block" without
+            # counting. Accent-deep, because it is type on a light ground.
+            n = para(cue, str(ri + 1), 13, bold=True, color=accent, first=True)
+            n.paragraph_format.space_after = Pt(0)
             # Condensed: the cue label keeps caps and colour but loses its letter
             # tracking - tracking is what made "DISTANCE VS. DISPLACEMENT" wrap - and
             # the prompts drop half a point so a question fits on two lines, not four.
-            para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
+            lab = para(cue, row["cueLabel"], 7, bold=True, color=accent)
+            lab.paragraph_format.space_after = Pt(4)
             for q in row["cues"]:
                 para(cue, q, 8.5)
                 # SHULL-CHG-0020. His ask: "give recall." The cue column already told
@@ -370,8 +447,13 @@ def main():
             # the slide - this is the catch-all for whatever he adds live that isn't
             # one of them, kept with the row it belongs to rather than pooled once at
             # the end of the section, since that's what "from the slide" scopes it to.
-            para(notes, "EXTRA — ANYTHING ELSE FROM THE SLIDE", 7.5, bold=True,
-                 color=accent, caps_track=True)
+            # It is an affordance, not a heading. Set in the accent at the same size
+            # and tracking as "FOUR TERMS YOU'LL USE ALL UNIT" it made a catch-all box
+            # look like teaching content, four and five times a page. Same words, same
+            # place, quieter voice: smaller, grey, barely tracked, not bold.
+            x = para(notes, "EXTRA — ANYTHING ELSE FROM THE SLIDE", 7,
+                     color=label, caps_track=12)
+            x.paragraph_format.space_before = Pt(3)
             rule_lines(notes, 2, hair)
 
         gap(doc, 2)
@@ -384,11 +466,18 @@ def main():
         for x in sec.get("selfCheck", []):
             check_item(c, x, pal)
 
-    gap(doc, 6)
-    c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
-    borders(c, display, sz=18, edges=("bottom",))
-    para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
-    c = one_cell(doc, protect=True); borders(c, hair)
+    gap(doc, 14)
+    c = one_cell(doc); borders(c, ink, sz=W_HEAD_TOP, edges=("top",))
+    borders(c, display, sz=W_SECTION, edges=("bottom",))
+    cell_margins(c, top=60, bottom=60, left=0, right=0)
+    # keepNext: the closing banner belongs to the checklist under it. Left to fall
+    # where it liked it stranded at the foot of the last section's page, a heading
+    # with its content on the next sheet.
+    bp = para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True,
+              first=True)
+    bp.paragraph_format.keep_with_next = True
+    c = one_cell(doc, protect=True); borders(c, hair, sz=W_BOX)
+    cell_margins(c, top=45, bottom=45, left=40, right=40)
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["close"]["checklist"]:
         check_item(c, x, pal)
