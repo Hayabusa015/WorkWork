@@ -458,7 +458,8 @@ def equation_bar(doc, equations, pal, label, width=7.5):
     return c
 
 
-def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None):
+def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
+             label_size=7.5, label_bold=True, label_caps=True, label_color=None):
     """An open bordered box a student solves a problem in.
 
     Ruled lines are for prose; open boxes are for math. The box grows with the work
@@ -468,6 +469,10 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None):
     Chemistry sheets, "a watermark that says Show work here in the area". Its grey
     comes from print.watermarkOpacityPct in tokens.json, so the ink standard and the
     page agree by construction.
+
+    The label keywords let a caller set the label as a quiet sentence-case caption
+    ("WORK / show your reasoning and units", small and grey) instead of a tracked caps
+    heading. The defaults are the worksheet's, unchanged.
     """
     t = cell.add_table(rows=1, cols=1)
     fix_widths(t, [width])
@@ -476,7 +481,8 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None):
     borders(inner, pal.hair, sz=6)
     # The label is read; the border is not. Hairline on white measures 1.6:1.
     if label:
-        para(inner, label, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+        para(inner, label, label_size, bold=label_bold, color=label_color or pal.accent,
+             caps_track=label_caps, first=True)
     if watermark:
         p = para(inner, watermark, 12, color=pal.watermark, caps_track=True,
                  first=not label)
@@ -495,7 +501,8 @@ def given_need(cell, given, need, pal, inner_w):
         para(b, val, 9.5, first=True)
 
 
-def fillin_table(cell, spec, pal, inner_w):
+def fillin_table(cell, spec, pal, inner_w, *, header_fill=None, header_caps=True,
+                 label_bold=True, header_size=7.5, body_size=9.5):
     """A small comparison table a student fills in by hand.
 
     His example: charge/mass/location for proton, neutron, electron was three
@@ -513,10 +520,15 @@ def fillin_table(cell, spec, pal, inner_w):
     line marks with its rule, made here with weight instead of a line, because a table
     cell has no left edge to draw one on.
 
-    No cell fill anywhere - hairline borders only, the same print-ink rule as
+    No body-cell fill anywhere - hairline borders only, the same print-ink rule as
     `given_need` and `diagram_block`. Every body row is `no_split` and floored tall
     enough to hand-write a word or a number into, because a table with zero-height
     blank cells is not a graphic organizer, it is a smaller way to fail a student.
+
+    `header_fill` is the one exception, and only the header row takes it: section 8
+    allows "a very light grey tint" where shading is genuinely needed for
+    scanability. Pass `pal.surface` (ground.parchment) - never a course colour. The
+    default is no fill, so the worksheet is unchanged.
     """
     headers = spec["headers"]
     rows = spec["rows"]
@@ -536,7 +548,10 @@ def fillin_table(cell, spec, pal, inner_w):
     for ci, h in enumerate(headers):
         c = t.rows[0].cells[ci]
         borders(c, pal.hair, sz=4)
-        para(c, h, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+        if header_fill:
+            shade(c, header_fill)
+        para(c, h, header_size, bold=True, color=pal.accent, caps_track=header_caps,
+             first=True)
 
     row_h = float(spec.get("rowHeightIn", 0.34))
     for ri, vals in enumerate(rows):
@@ -547,10 +562,11 @@ def fillin_table(cell, spec, pal, inner_w):
             borders(c, pal.hair, sz=4)
             c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
             if ci == 0:
-                para(c, val, 9, bold=True, color=pal.ink, first=True)
+                para(c, val, 9 if label_bold else body_size, bold=label_bold,
+                     color=pal.ink, first=True)
             else:
                 filled = bool(str(val).strip())
-                para(c, val, 9.5, bold=filled, color=pal.ink, first=True)
+                para(c, val, body_size, bold=filled, color=pal.ink, first=True)
     return t
 
 
@@ -633,211 +649,255 @@ def running_footer(section, text, pal, with_page_numbers=False):
     return f
 
 
-def fade_to_ink(image_path, target_pct):
-    """Wash an image toward white until its darkest tone lays down `target_pct` ink.
-
-    A watermark is defined by ink coverage, not by how someone happened to prepare the
-    PNG - the same rule `Palette.watermark` already applies to the text watermark. So
-    the template measures the file and washes it to the standard rather than trusting
-    it, which has two consequences worth stating:
-
-    - Any course can drop in any image and get the same whisper. The first Chemistry
-      watermark was prepared by hand at 15% and printed as a competing graphic behind
-      the matter flowchart; nothing in the build could have caught that, because the
-      ink level lived in a PNG.
-    - It is idempotent. An already-faded file measures at or under target and is
-      returned untouched, so re-running a build does not wash the image away one pass
-      at a time - the failure mode of doing this with a fixed blend factor.
-
-    The darkest tone is read at the 0.05th percentile, not the outright minimum, so one
-    stray dark pixel or a JPEG ringing artefact cannot decide the exposure of the whole
-    image. Returns a PNG stream for `add_picture`, or None if no fade was needed.
-    """
-    from PIL import Image
-    im = Image.open(image_path)
-    if im.mode in ("RGBA", "LA", "P"):
-        im = Image.alpha_composite(
-            Image.new("RGBA", im.size, (255, 255, 255, 255)), im.convert("RGBA"))
-    im = im.convert("RGB")
-
-    hist = im.convert("L").histogram()
-    n = sum(hist)
-    floor_n = max(1, int(n * 0.0005))
-    seen, darkest = 0, 255
-    for v, k in enumerate(hist):
-        seen += k
-        if seen >= floor_n:
-            darkest = v
-            break
-    have = (255 - darkest) / 255.0 * 100.0
-    if have <= target_pct + 0.5:
-        return None
-    f = target_pct / have
-    washed = Image.eval(im, lambda v: int(round(255 - (255 - v) * f)))
-    import io
-    buf = io.BytesIO()
-    washed.save(buf, format="PNG")
-    buf.seek(0)
-    return buf
-
-
-def add_watermark(section, image_path, width_in, *, ink_pct=None, vert_frac=0.5):
-    """A faint background image, floating behind the text, repeating on every page.
-
-    `ink_pct` is the darkest tone the watermark is allowed to print, defaulting to the
-    low end of print.watermarkOpacityPct.denseTable in tokens.json - every print
-    template this system has is a page of ruled tables, and the design system says a
-    watermark on one is reduced rather than normal.
-
-    `vert_frac` is where the picture's CENTRE sits down the page, as a fraction of page
-    height. 0.5 is dead centre, which is where content is: centred, the Chemistry atom
-    ran through the matter flowchart, the work box and the fill-in prompts on three
-    different pages. Lower than centre puts it in the quiet bottom third of a page
-    whose weight is at the top, so it reads as a ground rather than as a second layer
-    of drawing competing with the first.
-
-    python-docx has no watermark API. `header.paragraphs[0].add_run().add_picture()`
-    only produces an INLINE picture - in the header's text flow, not floating and not
-    behind the body - so it would push the header down rather than sit under the page.
-    The reliable recipe, and the one that survives `soffice --headless --convert-to
-    pdf` (this pipeline's PDF path) as well as Word: insert the picture the normal
-    inline way, then rewrite the `<wp:inline>` that call produced into a `<wp:anchor>`
-    carrying `behindDoc="1"`, reusing the same `<a:graphic>` payload rather than
-    re-embedding the image. Centred on the page in both axes, so it does not have to
-    be re-measured against the page size if that ever changes.
-
-    One header holds every page a document doesn't split into a new section - this
-    template never does - so this is called once per document, not once per page.
-
-    Position is an explicit offset, in EMU, computed from the page size and the
-    picture's own rendered extent, rather than `<wp:align>center</wp:align>` - the
-    same centred position, measured instead of named.
-
-    `header_distance` is pulled in to the body's own top margin before anything is
-    added. python-docx's default header distance (0.5in) is WIDER than this
-    template's 0.44in top margin, and that gap is invisible with an empty header -
-    but the moment the header holds real content, LibreOffice's DOCX import reads it
-    as real space the body must clear, shaving a few points off every page's usable
-    height. On a page that already lands its last line at the very bottom - this
-    template's title page does - that was enough to overflow a single trailing
-    paragraph onto a page of its own, and the whole document gained a spurious blank
-    page. Pulling the header in under the margin removes the gap it was measuring.
-    """
-    header = section.header
-    if section.header_distance > section.top_margin:
-        section.header_distance = section.top_margin
-    p = header.paragraphs[0]
-    for r in list(p.runs):
-        r._r.getparent().remove(r._r)
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run()
-    if ink_pct is None:
-        ink_pct = T["print"]["watermarkOpacityPct"]["denseTable"][0]
-    src = fade_to_ink(image_path, ink_pct) or image_path
-    pic = run.add_picture(src, width=Inches(width_in))
-    inline = pic._inline
-    extent, graphic = inline.extent, inline.graphic
-    docPr = inline.docPr
-    docPr.set("id", "1")
-    docPr.set("name", "Watermark")
-    frame_locks = inline.find(qn("wp:cNvGraphicFramePr"))
-
-    page_w = section.page_width
-    page_h = section.page_height
-    off_x = max(0, (page_w - extent.cx) // 2)
-    off_y = int(min(max(0, page_h * vert_frac - extent.cy / 2), max(0, page_h - extent.cy)))
-
-    anchor = OxmlElement("wp:anchor")
-    for k, v in (("behindDoc", "1"), ("distT", "0"), ("distB", "0"), ("distL", "0"),
-                 ("distR", "0"), ("simplePos", "0"), ("locked", "0"),
-                 ("layoutInCell", "1"), ("allowOverlap", "1"), ("relativeHeight", "1")):
-        anchor.set(k, v)
-
-    simple_pos = OxmlElement("wp:simplePos")
-    simple_pos.set("x", "0"); simple_pos.set("y", "0")
-
-    pos_h = OxmlElement("wp:positionH"); pos_h.set("relativeFrom", "page")
-    off_h = OxmlElement("wp:posOffset"); off_h.text = str(int(off_x)); pos_h.append(off_h)
-    pos_v = OxmlElement("wp:positionV"); pos_v.set("relativeFrom", "page")
-    off_v = OxmlElement("wp:posOffset"); off_v.text = str(int(off_y)); pos_v.append(off_v)
-
-    new_extent = OxmlElement("wp:extent")
-    new_extent.set("cx", str(extent.cx)); new_extent.set("cy", str(extent.cy))
-    effect_extent = OxmlElement("wp:effectExtent")
-    for e in ("l", "t", "r", "b"):
-        effect_extent.set(e, "0")
-    wrap_none = OxmlElement("wp:wrapNone")
-
-    for el in (simple_pos, pos_h, pos_v, new_extent, effect_extent, wrap_none,
-               docPr, frame_locks, graphic):
-        if el is not None:
-            anchor.append(el)
-
-    inline.getparent().replace(inline, anchor)
-    return anchor
-
-
-def study_recap_page(doc, recap, pal, width=7.5, row_height_in=4.4):
-    """The standing last page: a 2x2 grid of outlined boxes a student studies from.
-
-    His ask: "a nice little recap infographic ... topic breakdown, key points,
-    notable confusing points, things to remember" on the last page, every unit. In
-    this design system an infographic is structure and type hierarchy, not colour or
-    fill - hairline borders, no cell shading, the same print-ink rule as every other
-    page. `recap` is `{"title", "topics", "keyPoints", "confusingPoints", "remember"}`,
-    each list a handful of short strings.
-
-    Callers add the page break that puts this on its own page and call it last, so
-    nothing this system builds ever follows the recap.
-    """
-    doc.add_page_break()
-    gap(doc, 10)
-    c = one_cell(doc, width)
-    borders(c, pal.ink, sz=12, edges=("top",))
-    borders(c, pal.display, sz=18, edges=("bottom",))
-    cell_margins(c, top=70, bottom=70, left=40, right=40)
-    para(c, recap.get("title", "STUDY RECAP"), 15, bold=True, color=pal.ink, first=True)
-
-    gap(doc, 7)
-    half = round(width / 2 - 0.06, 2)
-    boxes = [
-        ("TOPIC BREAKDOWN", recap.get("topics", [])),
-        ("KEY POINTS", recap.get("keyPoints", [])),
-        ("WATCH OUT FOR", recap.get("confusingPoints", [])),
-        ("REMEMBER", recap.get("remember", [])),
-    ]
-    t = doc.add_table(rows=2, cols=2)
-    fix_widths(t, [half, half])
-    tight_cells(t, top=60, bottom=60, left=70, right=70)
-    # The recap is a page, not a block that happens to land last. Sized only by its
-    # own text it filled the top 40% of the sheet and left the rest blank, which
-    # reads as an unfinished page rather than a composed one - and gave a student
-    # nowhere to add a line of their own to a box they are supposed to study from.
-    # Each half takes the height that is actually there. hRule "atLeast", so a course
-    # with more recap content than this one still grows past the floor.
-    for r in t.rows:
-        no_split(r, float(row_height_in))
-    for i, (lab, items) in enumerate(boxes):
-        cell = t.rows[i // 2].cells[i % 2]
-        borders(cell, pal.hair, sz=6)
-        # The same rail the cue column carries, so the recap reads as the last page
-        # of THIS packet rather than a generic four-box organizer.
-        borders(cell, pal.display, sz=12, edges=("left",))
-        para(cell, lab, 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
-        for x in items:
-            para(cell, "•  " + debullet(x), 9.5, color=pal.ink)
-    return t
-
-
-def _field(paragraph, instr, pal):
+def field(paragraph, instr, pal, *, size=None, bold=False, color=None):
     """A Word field. Page numbers have to be computed by the reader, not by us -
-    a worksheet that says "page 2 of 3" in fixed text lies the moment it is edited."""
+    a worksheet that says "page 2 of 3" in fixed text lies the moment it is edited.
+
+    `instr` is the whole field code, switches included (`PAGE \\# "00"`)."""
     r = paragraph.add_run()
-    r.font.name = FONT; r.font.size = Pt(FOOTER_FLOOR)
-    r.font.color.rgb = RGBColor.from_string(hexof(pal.footer))
+    r.font.name = FONT; r.font.size = Pt(size or FOOTER_FLOOR)
+    r.bold = bold
+    r.font.color.rgb = RGBColor.from_string(hexof(color or pal.footer))
     beg = OxmlElement("w:fldChar"); beg.set(qn("w:fldCharType"), "begin")
     it = OxmlElement("w:instrText"); it.set(qn("xml:space"), "preserve")
     it.text = f" {instr} "
     end = OxmlElement("w:fldChar"); end.set(qn("w:fldCharType"), "end")
     r._r.append(beg); r._r.append(it); r._r.append(end)
     return r
+
+
+def _field(paragraph, instr, pal):
+    return field(paragraph, instr, pal)
+
+
+# w:sectPr children in schema order, so a page-number format lands where both
+# readers expect it rather than wherever an append happens to put it.
+_SECT_ORDER = ("headerReference", "footerReference", "footnotePr", "endnotePr", "type",
+               "pgSz", "pgMar", "paperSrc", "pgBorders", "lnNumType", "pgNumType", "cols",
+               "formProt", "vAlign", "noEndnote", "titlePg", "textDirection", "bidi",
+               "rtlGutter", "docGrid", "printerSettings", "sectPrChange")
+
+
+def page_number_format(section, fmt="decimalZero"):
+    """Set how a section's PAGE field renders - "decimalZero" is 01, 02 ... 10.
+
+    A `\\# "00"` picture switch on the field does the same job in Word, but
+    LibreOffice ignores it and prints "1". The section-level number format is honoured
+    by both, so a two-digit page number survives the PDF this pipeline checks as well
+    as the .docx the teacher edits. Callers use both: this for LibreOffice, the switch
+    for any reader that honours field switches over section formats.
+    """
+    sp = section._sectPr
+    old = sp.find(qn("w:pgNumType"))
+    if old is not None:
+        sp.remove(old)
+    el = OxmlElement("w:pgNumType"); el.set(qn("w:fmt"), fmt)
+    sp.append(el)
+    _sort_children(sp, _SECT_ORDER)
+    return el
+
+
+# ---------------------------------------------------------------------------------
+# Schema order. OOXML fixes the order of the children of pPr, rPr, tcPr and tblPr,
+# and every helper in this file appends - so a cell that is bordered, then margined,
+# then shaded, carries its children in call order, not schema order. LibreOffice
+# reads either. Word is stricter, and "Word found unreadable content" on a packet the
+# teacher opens at 7:40 a.m. is the failure the .docx was chosen to avoid. One pass
+# at save time puts every property list back in schema order.
+_PPR_ORDER = ("pStyle", "keepNext", "keepLines", "pageBreakBefore", "framePr",
+              "widowControl", "numPr", "suppressLineNumbers", "pBdr", "shd", "tabs",
+              "suppressAutoHyphens", "kinsoku", "wordWrap", "overflowPunct",
+              "topLinePunct", "autoSpaceDE", "autoSpaceDN", "bidi", "adjustRightInd",
+              "snapToGrid", "spacing", "ind", "contextualSpacing", "mirrorIndents",
+              "suppressOverlap", "jc", "textDirection", "textAlignment",
+              "textboxTightWrap", "outlineLvl", "divId", "cnfStyle", "rPr", "sectPr",
+              "pPrChange")
+_RPR_ORDER = ("rStyle", "rFonts", "b", "bCs", "i", "iCs", "caps", "smallCaps", "strike",
+              "dstrike", "outline", "shadow", "emboss", "imprint", "noProof",
+              "snapToGrid", "vanish", "webHidden", "color", "spacing", "w", "kern",
+              "position", "sz", "szCs", "highlight", "u", "effect", "bdr", "shd",
+              "fitText", "vertAlign", "rtl", "cs", "em", "lang", "eastAsianLayout",
+              "specVanish", "oMath")
+_TCPR_ORDER = ("cnfStyle", "tcW", "gridSpan", "hMerge", "vMerge", "tcBorders", "shd",
+               "noWrap", "tcMar", "textDirection", "tcFitText", "vAlign", "hideMark")
+_TBLPR_ORDER = ("tblStyle", "tblpPr", "tblOverlap", "bidiVisual", "tblStyleRowBandSize",
+                "tblStyleColBandSize", "tblW", "jc", "tblCellSpacing", "tblInd",
+                "tblBorders", "shd", "tblLayout", "tblCellMar", "tblLook")
+_PBDR_ORDER = ("top", "left", "bottom", "right", "between", "bar")
+
+
+def _sort_children(el, order):
+    rank = {n: i for i, n in enumerate(order)}
+    kids = list(el)
+    # Keep only the LAST of any duplicated single-occurrence child: two w:spacing
+    # elements in one pPr is invalid, and the later one is the one the caller meant.
+    seen, keep = set(), []
+    for k in reversed(kids):
+        tag = k.tag.split("}")[-1]
+        if tag in rank and tag in seen:
+            el.remove(k)
+            continue
+        seen.add(tag)
+        keep.append(k)
+    for k in sorted(reversed(keep), key=lambda c: rank.get(c.tag.split("}")[-1], 999)):
+        el.append(k)
+
+
+def schema_order(doc):
+    """Put every pPr / rPr / tcPr / tblPr / pBdr in the body, headers and footers into
+    schema order. Call once, immediately before `doc.save()`."""
+    parts = [doc.element.body]
+    for s in doc.sections:
+        parts += [s.header._element, s.footer._element]
+    for root in parts:
+        for tag, order in (("w:pPr", _PPR_ORDER), ("w:rPr", _RPR_ORDER),
+                           ("w:tcPr", _TCPR_ORDER), ("w:tblPr", _TBLPR_ORDER),
+                           ("w:pBdr", _PBDR_ORDER)):
+            for el in root.iter(qn(tag)):
+                _sort_children(el, order)
+
+
+# ---------------------------------------------------------------------------------
+# Height estimation. A .docx has no layout of its own - the reader lays it out - so a
+# builder that promises "this designed page is one sheet of paper" has to predict what
+# the reader will do. This walks the XML actually written and predicts the height of a
+# paragraph or table in points, using the shipped Archivo metrics for line wrapping.
+#
+# It is exact for what it is exact for: a paragraph pinned to an exact line height
+# (every paragraph a notes page writes is) and a row with an explicit height. Line
+# wrapping is a greedy fill against real advance widths, which is what both Word and
+# LibreOffice do. It is not a layout engine - callers keep a safety margin, and the
+# rendered PDF is still what QA looks at.
+_TWIP = 1 / 20.0
+_DEFAULT_CELL_MAR = (0, 108, 0, 108)       # top, left, bottom, right - "Normal Table"
+_AUTO_LINE = 1.088                         # hhea ascent + descent, Archivo, per pt
+
+
+def _attr(el, name, default=None):
+    v = el.get(qn(name)) if el is not None else None
+    return default if v is None else v
+
+
+def _para_runs(p, base_pt):
+    """(text, size_pt, bold) for every run, plus a list of inline picture heights."""
+    out, pics = [], []
+    for r in p.iter(qn("w:r")):
+        rpr = r.find(qn("w:rPr"))
+        size = base_pt
+        bold = False
+        if rpr is not None:
+            sz = rpr.find(qn("w:sz"))
+            if sz is not None:
+                size = int(_attr(sz, "w:val")) / 2.0
+            b = rpr.find(qn("w:b"))
+            if b is not None and _attr(b, "w:val", "1") not in ("0", "false"):
+                bold = True
+        for ch in r:
+            tag = ch.tag.split("}")[-1]
+            if tag == "t":
+                out.append((ch.text or "", size, bold))
+            elif tag == "tab":
+                out.append(("    ", size, bold))
+            elif tag == "br" and _attr(ch, "w:type") in (None, "textWrapping"):
+                out.append(("\n", size, bold))
+            elif tag == "drawing":
+                for ext in ch.iter("{http://schemas.openxmlformats.org/drawingml/2006/"
+                                   "wordprocessingDrawing}extent"):
+                    pics.append(int(ext.get("cy")) / 12700.0)
+                    break
+    return out, pics
+
+
+def _wrap_lines(runs, width_in):
+    """Greedy line fill over (text, size, bold) runs. Returns the number of lines."""
+    if width_in <= 0:
+        return 1
+    lines, x = 1, 0.0
+    word_w, space_w, pending = 0.0, 0.0, False
+    for text, size, bold in runs:
+        for ch in text:
+            if ch == "\n":
+                lines += 1; x = 0.0; word_w = 0.0; pending = False
+                continue
+            w = text_width_in(ch, size, bold)
+            if ch == " ":
+                if pending:
+                    x += word_w; word_w = 0.0; pending = False
+                x += w
+                continue
+            if not pending:
+                # a new word starts; wrap if it will not fit where the line has got to
+                pending = True
+            word_w += w
+            if x + word_w > width_in and x > 0:
+                lines += 1
+                x = 0.0
+    return lines
+
+
+def estimate_height(el, width_in, base_pt=10.0):
+    """Predicted rendered height, in points, of a w:p or w:tbl element."""
+    tag = el.tag.split("}")[-1]
+    if tag == "p":
+        ppr = el.find(qn("w:pPr"))
+        sp = ppr.find(qn("w:spacing")) if ppr is not None else None
+        before = int(_attr(sp, "w:before", 0)) * _TWIP
+        after = int(_attr(sp, "w:after", 0)) * _TWIP
+        runs, pics = _para_runs(el, base_pt)
+        size = max([s for _, s, _ in runs] or [base_pt])
+        rule = _attr(sp, "w:lineRule", "auto")
+        line = _attr(sp, "w:line")
+        if line is not None and rule in ("exact", "atLeast"):
+            line_pt = int(line) * _TWIP
+            if rule == "atLeast":
+                line_pt = max(line_pt, size * _AUTO_LINE)
+        else:
+            mult = int(line) / 240.0 if line is not None else 1.0
+            line_pt = size * _AUTO_LINE * mult
+        ind = ppr.find(qn("w:ind")) if ppr is not None else None
+        avail = width_in - (int(_attr(ind, "w:left", 0)) + int(_attr(ind, "w:right", 0))) \
+            * _TWIP / 72.0
+        n = _wrap_lines(runs, avail)
+        body = n * line_pt
+        if pics:
+            body = max(body - line_pt, 0) + sum(pics) + 2
+        bdr = 0.0
+        pb = ppr.find(qn("w:pBdr")) if ppr is not None else None
+        if pb is not None:
+            for edge in ("top", "bottom"):
+                e = pb.find(qn(f"w:{edge}"))
+                if e is not None:
+                    bdr += int(_attr(e, "w:sz", 4)) / 8.0 + int(_attr(e, "w:space", 0))
+        return before + body + after + bdr
+    if tag == "tbl":
+        total = 0.0
+        for tr in el.findall(qn("w:tr")):
+            natural = 0.0
+            for tc in tr.findall(qn("w:tc")):
+                tcpr = tc.find(qn("w:tcPr"))
+                vm = tcpr.find(qn("w:vMerge")) if tcpr is not None else None
+                if vm is not None and _attr(vm, "w:val") != "restart":
+                    continue
+                w = tcpr.find(qn("w:tcW")) if tcpr is not None else None
+                cw = int(_attr(w, "w:w", 1440)) * _TWIP / 72.0
+                mt, ml, mb, mr = _DEFAULT_CELL_MAR
+                mar = tcpr.find(qn("w:tcMar")) if tcpr is not None else None
+                if mar is not None:
+                    get = lambda e, d: int(_attr(mar.find(qn(f"w:{e}")), "w:w", d))
+                    mt, ml, mb, mr = get("top", mt), get("left", ml), get("bottom", mb), \
+                        get("right", mr)
+                inner = cw - (ml + mr) * _TWIP / 72.0
+                h = sum(estimate_height(k, inner, base_pt) for k in tc
+                        if k.tag.split("}")[-1] in ("p", "tbl"))
+                natural = max(natural, h + (mt + mb) * _TWIP)
+            trpr = tr.find(qn("w:trPr"))
+            th = trpr.find(qn("w:trHeight")) if trpr is not None else None
+            if th is not None:
+                val = int(_attr(th, "w:val", 0)) * _TWIP
+                rule = _attr(th, "w:hRule", "atLeast")
+                row = val if rule == "exact" else max(val, natural)
+            else:
+                row = natural
+            total += row
+        return total
+    return 0.0

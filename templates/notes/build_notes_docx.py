@@ -1,18 +1,37 @@
 #!/usr/bin/env python3
-"""Build a guided/Cornell notes packet as .docx from the same JSON spec. Option A.
+"""Build a guided/Cornell notes packet as .docx from a JSON spec. Option A.
 
-Identical structure and content to build_notes.py - the difference is the output.
-A .docx can be edited in Word and typed into by a student; it cannot hold the
-layout as exactly as the PDF, because Word reflows.
+    python3 templates/notes/build_notes_docx.py specs/<spec>.json out.docx [--verify]
 
-    python3 templates/notes/build_notes_docx.py specs/<spec>.json out.docx
+The packet is a set of designed pages, and each one is meant to be one sheet of paper:
+
+    cover            unit title, section breakdown with difficulty, equation toolbox,
+                     key terms by section, how to use the notes
+    content pages    a page head (eyebrow, section title, code, one-line subtitle for
+                     THIS page) and about three blocks. A block is two open columns
+                     split by one thin rule: the cue side (number, block title, cue
+                     questions) and the capture side (prompts, tables, flowchart,
+                     worked example, must-write lines), closed by one "Extra notes"
+                     line. Each section ends with a RECALL block.
+    concept review   the standing last page: per-section explanation, a watch-out line,
+                     and quick-recall questions.
+
+A .docx has no layout of its own - the reader lays it out - so "one designed page is
+one sheet" is predicted, not assumed: every paragraph here is pinned to an exact line
+height, `estimate_height()` measures what was written, and each page's spare height is
+shared out across its blocks so the blocks fill the sheet and stop at its foot.
+`--verify` converts with LibreOffice and fails if any designed page spilled.
+
+The spec schema is documented in templates/notes/README.md. Older flat specs (rows
+straight under each section, no `pages`) are upgraded at build time by
+`normalize_legacy()`, so they keep building without being rewritten by hand.
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
-import json, os, sys
+import copy, io, json, os, re, shutil, subprocess, sys, tempfile
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -22,489 +41,1372 @@ from docx.oxml import OxmlElement
 # builder. It lives in one file so the two cannot drift.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
-    T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
-    unit_title,
-    borders, para, check_item, rule_lines, fix_widths, tight_cells, one_cell,
-    no_split, gap, stacked_frac, equation_bar, work_box, given_need, diagram_block,
-    fillin_table, unpad_cell, cell_margins, page_setup, running_footer, trim_tail,
-    add_watermark, study_recap_page,
+    FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
+    unit_title, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
+    diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
+    schema_order, estimate_height, text_width_in,
 )
 
-
-# SHULL-CHG-0019. Matthew's own words: "if there's a matter flow chart, I kind of just
-# want them to fill in their own matter flow chart on the paper." Guided notes capture
-# what's on the board during lecture - they are not a reasoning worksheet - so the
-# S1.1 Matter Flowchart row is a small tree of boxes the student labels as it's drawn,
-# not a set of open questions. This is specific to one row in one course's one section,
-# so it lives here rather than in _shull_docx.py: a shared primitive is for a shape
-# more than one builder needs, and nothing else in the system draws a branching tree.
-# Archivo carries "↓" (down arrow) but none of the diagonal arrow glyphs, so the
-# connectors are straight-down arrows only - the branching itself is shown by which
-# columns of the grid each box spans, the same way Matthew draws it on the board.
-def matter_flowchart(cell, pal, inner_w, filled=False):
-    """S1.1's Matter Flowchart: MATTER splits into Pure substance / Mixture, and each
-    of those splits again into Element/Compound and Homogeneous/Heterogeneous.
-
-    `filled=False` (student copy): only MATTER is printed; every other box is blank
-    for the student to label as the chart goes up on the board. `filled=True` (key):
-    every box carries its answer. Same four-column grid either way, so the two
-    documents stay pixel-for-pixel comparable - the key is the student page, answered.
-    """
-    box_h = 0.34
-    t = cell.add_table(rows=5, cols=4)
-    fix_widths(t, [inner_w / 4] * 4)
-    tight_cells(t, top=16, bottom=16, left=30, right=30)
-
-    def box(c, text):
-        borders(c, pal.hair, sz=6)
-        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        p = para(c, text, 9.5, bold=True, color=pal.ink, first=True)
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-
-    def arrow(c):
-        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        p = para(c, "↓", 11, bold=True, color=pal.hair, first=True)
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-
-    # Level 1 - MATTER, the one thing everyone starts from. Centred over the row by
-    # merging only the middle two columns; the outer two stay unbordered spacers.
-    top = t.rows[0].cells[1].merge(t.rows[0].cells[2])
-    box(top, "MATTER")
-    no_split(t.rows[0], box_h)
-
-    # One connector, then the fork into two.
-    left_arrow = t.rows[1].cells[0].merge(t.rows[1].cells[1])
-    right_arrow = t.rows[1].cells[2].merge(t.rows[1].cells[3])
-    arrow(left_arrow)
-    arrow(right_arrow)
-
-    # Level 2 - Pure substance / Mixture.
-    pure = t.rows[2].cells[0].merge(t.rows[2].cells[1])
-    mix = t.rows[2].cells[2].merge(t.rows[2].cells[3])
-    box(pure, "Pure substance" if filled else "")
-    box(mix, "Mixture" if filled else "")
-    no_split(t.rows[2], box_h)
-
-    # Connector into the four leaves - one arrow per leaf, directly above it.
-    for c in t.rows[3].cells:
-        arrow(c)
-
-    # Level 3 - the four leaves, in the deck's own order.
-    leaves = ["Element", "Compound", "Homogeneous", "Heterogeneous"]
-    for c, name in zip(t.rows[4].cells, leaves):
-        box(c, name if filled else "")
-    no_split(t.rows[4], box_h)
-    return t
-
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(os.path.dirname(HERE))
+SCHOOL = "James A. Garfield Local Schools"
 
 
-# SHULL-CHG-0016. Matthew's physics packet puts a bordered box under every worked
-# example - a 1x1 table, ~1in tall, hRule "atLeast" so it grows but never shrinks, and
-# cantSplit so it never breaks across a page. Students work the problem inside it.
-# His rule: "anytime problems need solved in guided notes leave a box for them to do it."
-WORK_BOX_MIN_IN = 1.4          # his was 0.98in; a little more room for kinematics
-GIVEN_LABEL_IN = 0.72
-
-# A watermark is a whisper you notice only if you look for it. Its ink level is the
-# design system's (print.watermarkOpacityPct, applied in add_watermark); its size and
-# position are this template's, because they depend on where THIS page puts content.
-WATERMARK_W_IN = 3.0
-WATERMARK_VERT_FRAC = 0.80
-
-# The Cornell split, decided once. His own packets ran a 1.88in (Geology) / 2.00in
-# (Physics) cue column; he asked for it narrower and condensed - the cue is a prompt,
-# not a second body column, and every inch it gives back goes to the notes side where
-# the students actually write. Everything on the notes side is measured off NOTES_INNER
-# so nothing has to be re-derived when this moves again.
+# ---------------------------------------------------------------------------------
+# Geometry.
+#
+# The Cornell split is SHULL-CHG-0018's and is decided here once: a 1.28 in cue column
+# and 6.22 in capture column on a 7.50 in text block. Everything on the capture side is
+# measured off NOTES_INNER_IN, so moving the split moves every table, work box and
+# figure with it.
 TEXT_W_IN = 7.50
 CUE_W_IN = 1.28
-NOTES_W_IN = TEXT_W_IN - CUE_W_IN          # 6.22
-CELL_MAR_IN = 0.56                          # default tcMar, both sides, both nestings
-NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
+NOTES_W_IN = TEXT_W_IN - CUE_W_IN           # 6.22
+CUE_PAD_R_IN = 0.08                         # air between cue text and the column rule
+NOTES_PAD_L_IN = 0.20                       # air between the column rule and the notes
+CUE_INNER_IN = round(CUE_W_IN - CUE_PAD_R_IN, 2)      # 1.20
+NOTES_INNER_IN = round(NOTES_W_IN - NOTES_PAD_L_IN, 2)  # 6.02
+
+PAGE_W_IN, PAGE_H_IN = 8.5, 11.0
+MARGIN_LR_IN = 0.50
+MARGIN_TOP_IN = 0.42
+MARGIN_BOTTOM_IN = 0.72                     # the ruled footer lives in here
+FOOTER_DIST_IN = 0.30
+BODY_H_PT = (PAGE_H_IN - MARGIN_TOP_IN - MARGIN_BOTTOM_IN) * 72
+# What the height prediction is allowed to be wrong by before a page spills. Word and
+# LibreOffice round row heights and border widths differently; this is the room for it.
+SAFETY_PT = 14
+MAX_STRETCH_PT = 90
+
+# SHULL-CHG-0016: a problem to solve gets a bordered box to solve it in. hRule
+# "atLeast", so it grows with the work and never shrinks below this.
+WORK_BOX_MIN_IN = 1.4
+WORK_LABEL = "WORK / show your reasoning and units"
+
+# Rules, in eighths of a point (what w:sz counts). The page is greyscale and open: no
+# outer box and no cell borders around a block, so these few rules are the structure.
+W_RULE = 6          # page-head rules, the rule between blocks, the column rule
+W_LINE = 6          # a writing line - print.weights.writingLine is 0.75 pt minimum
+W_MUST = 12         # the grey rule down the left of a must-write line
+W_TABLE = 4         # inside a fill-in table
+
+# The type ladder, in points. Nothing on a student page is under the 8 pt print floor
+# except the running footer, which is what printFooter exists for.
+EYEBROW, PAGE_TITLE, SUBTITLE = 8, 20, 8.5
+BLOCK_NO, BLOCK_TITLE, CUE = 9, 11, 8.5
+BODY, BODY_LINE = 10, 13
+LABEL = 8
+CHIP = 8
+
+# The block title sits in the 1.28 in cue column. Codex set it at 12 pt in a column
+# half an inch wider; at this width 12 pt breaks "heterogeneous" mid-word, so 11 pt.
+# Checked against the shipped Archivo Bold metrics, not guessed.
+
+PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
+NUMBERED = ("notes", "example")          # blocks that take a number; the rest take a tag
+CAPTURE = ("notes", "problem", "table", "flowchart", "diagram")
 
 
-# The weight ladder. Every border in the body used to be the same hairline at the same
-# weight, so a section boundary, a row divider and the inside edge of a fill-in table
-# all claimed the page equally and the sheet read as one undifferentiated grid. Four
-# steps is enough - in print a half-point reads clearly - and naming them here is what
-# stops the next edit from picking a number that happens to look fine in isolation.
-# Eighths of a point, which is what w:sz counts.
-W_SECTION = 18      # the accent rule under a section head. Nothing else is this heavy.
-W_HEAD_TOP = 12     # the ink rule above it
-W_RAIL = 12         # the cue-column rail
-W_ROW = 8           # one notes row from the next
-W_BOX = 6           # an element's own outline - work box, learning target, summary
-W_INNER = 4         # inside an element - table cells, given/need, writing lines
+class GreyPalette(Palette):
+    """The notes page is greyscale. The shared primitives colour their labels with
+    `accent` and their rules with `display`; here those resolve to ink and label grey,
+    so a work box or fill-in table drawn by the same code the worksheet uses comes out
+    in the notes' voice without a second copy of the drawing."""
 
-# "Siding": a vertical accent rule down the left edge of every cue cell. The Cornell
-# split was drawn with the same hairline as everything else, so the page had no spine
-# and the cue column did not read as a column at a glance - it read as the narrow
-# cells of a table. A cell border, not a fill: SHULL_DESIGN_SYSTEM section 8, and the
-# same mechanism as the masthead kicker and the must-write line, which is the one that
-# renders reliably inside a nested cell in both Word and LibreOffice.
-#
-# It also gives the dead space at the foot of a short cue cell something to be. The
-# notes side is always taller than its cue, so most cue cells end in a gap; with a rail
-# running past it that gap is margin, and without one it is a hole.
+    def __init__(self, course):
+        super().__init__(course)
+        self.accent = self.ink
+        self.display = self.label
 
 
-# SHULL-CHG-0017. A fraction is stacked - numerator over denominator with a horizontal
-# bar. Never "a/b" inline in the text. Built as a two-row table rather than Office Math
-# (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
+# ---------------------------------------------------------------------------------
+# Text. Every paragraph this file writes is pinned to an exact line height. That is
+# what makes the page predictable: at "single" spacing Word sizes a line from
+# Archivo's Windows metrics (1.51 x the point size) and LibreOffice from its hhea
+# metrics (1.09 x), so the same file is a third taller in one reader than the other.
+# An exact line is the same in both.
 
-def main():
-    spec_path = sys.argv[1] if len(sys.argv) > 1 \
-        else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")
-    spec_dir = os.path.dirname(os.path.abspath(spec_path))
-    spec = json.load(open(spec_path))
-    course = spec["course"]
-    pal = Palette(course)
-    accent, display, ink, hair = pal.accent, pal.display, pal.ink, pal.hair
-    label, footer, white = pal.label, pal.footer, pal.white
+_MARK = re.compile(r"(\*\*.+?\*\*)")
 
+
+def segments(text):
+    """`**bold**` inline markup -> [(text, bold)]."""
+    out = []
+    for part in _MARK.split(str(text)):
+        if not part:
+            continue
+        if part.startswith("**") and part.endswith("**") and len(part) > 4:
+            out.append((part[2:-2], True))
+        else:
+            out.append((part, False))
+    return out
+
+
+def _spacing(p, before=0, after=0, line=None):
+    pPr = p._p.get_or_add_pPr()
+    sp = pPr.find(qn("w:spacing"))
+    if sp is None:
+        sp = OxmlElement("w:spacing")
+        pPr.append(sp)
+    sp.set(qn("w:before"), str(int(round(before * 20))))
+    sp.set(qn("w:after"), str(int(round(after * 20))))
+    if line is not None:
+        sp.set(qn("w:line"), str(int(round(line * 20))))
+        sp.set(qn("w:lineRule"), "exact")
+
+
+def _run(p, text, size, *, bold=False, color=None, track=None):
+    r = p.add_run(text)
+    r.font.name = FONT
+    r.font.size = Pt(size)
+    r.bold = bold
+    if color:
+        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    if track:
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(int(track)))
+        r._element.get_or_add_rPr().append(el)
+    return r
+
+
+def _bottom_rule(p, color, sz=W_RULE, space=1):
+    pPr = p._p.get_or_add_pPr()
+    b = pPr.find(qn("w:pBdr"))
+    if b is None:
+        b = OxmlElement("w:pBdr"); pPr.append(b)
+    x = OxmlElement("w:bottom")
+    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), str(sz))
+    x.set(qn("w:space"), str(space)); x.set(qn("w:color"), hexof(color))
+    b.append(x)
+
+
+def _top_rule(p, color, sz=W_RULE, space=4):
+    pPr = p._p.get_or_add_pPr()
+    b = pPr.find(qn("w:pBdr"))
+    if b is None:
+        b = OxmlElement("w:pBdr"); pPr.append(b)
+    x = OxmlElement("w:top")
+    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), str(sz))
+    x.set(qn("w:space"), str(space)); x.set(qn("w:color"), hexof(color))
+    b.append(x)
+
+
+def write(p, text, size, *, line=None, bold=False, color=None, before=0, after=0,
+          align=None, track=None):
+    """Fill paragraph `p` with marked-up text at an exact line height."""
+    _spacing(p, before, after, line or round(size * 1.3, 1))
+    for seg, b in segments(text):
+        _run(p, seg, size, bold=bold or b, color=color, track=track)
+    if align:
+        p.alignment = align
+    return p
+
+
+def pin(p, pt):
+    """An empty paragraph exactly `pt` tall - a spacer that is the size it says."""
+    _spacing(p, 0, 0, max(pt, 1))
+    r = p.add_run()
+    r.font.size = Pt(1)
+    return p
+
+
+_ISOTOPE = re.compile(r"(?<=[A-Za-z])-(?=\d)")
+
+
+def nobreak_hyphens(root):
+    """Cl-35, Cu-63, Iron-56: an isotope name must not break at its hyphen - "Cl-" at
+    the end of one line and "35" at the start of the next reads as two things. The
+    hyphen becomes U+2011, the non-breaking hyphen, which Archivo carries."""
+    for t in root.iter(qn("w:t")):
+        if t.text and "-" in t.text:
+            t.text = _ISOTOPE.sub("\u2011", t.text)
+
+
+def pin_all(el):
+    """Give every paragraph that still has reader-default spacing (the shared
+    primitives write some) an exact line of 1.25 x its largest run. A paragraph
+    holding a picture is left alone - an exact line would crop the picture to it."""
+    for p in el.iter(qn("w:p")):
+        if p.find(".//" + qn("w:drawing")) is not None:
+            continue
+        pPr = p.find(qn("w:pPr"))
+        sp = pPr.find(qn("w:spacing")) if pPr is not None else None
+        if sp is not None and sp.get(qn("w:lineRule")) == "exact":
+            continue
+        sizes = [int(s.get(qn("w:val"))) / 2.0 for s in p.iter(qn("w:sz"))]
+        size = max(sizes or [10])
+        if pPr is None:
+            pPr = OxmlElement("w:pPr"); p.insert(0, pPr)
+        if sp is None:
+            sp = OxmlElement("w:spacing"); pPr.append(sp)
+        sp.set(qn("w:line"), str(int(round(size * 1.25 * 20))))
+        sp.set(qn("w:lineRule"), "exact")
+
+
+class Col:
+    """One table cell being filled top to bottom.
+
+    python-docx starts a cell with an empty paragraph and appends another after every
+    nested table (Word needs a cell to END with one). Left alone, each is a full body
+    line of nothing - on a page budgeted to the point, that is how a block spills.
+    This owns those paragraphs: the first is used for the first line of content or
+    removed if a table comes first, the trailing one after a table is removed, and
+    `finish()` writes the one Word needs, 1 pt tall.
+    """
+
+    def __init__(self, cell, width_in, pal):
+        self.cell, self.w, self.pal = cell, width_in, pal
+        self._fresh = True
+
+    def para(self):
+        if self._fresh:
+            self._fresh = False
+            return self.cell.paragraphs[0]
+        return self.cell.add_paragraph()
+
+    def text(self, text, size=BODY, **kw):
+        kw.setdefault("color", self.pal.ink)
+        return write(self.para(), text, size, **kw)
+
+    def gap(self, pt):
+        return pin(self.para(), pt)
+
+    def line(self, height=17, after=8, color=None):
+        """A writing line: an empty paragraph with a rule along its foot.
+
+        The space under it is a separate 1-line spacer, not space-after. Both readers
+        group consecutive paragraphs that carry the same border and draw only the
+        outer edge of the group - two writing lines in a row printed as one."""
+        p = self.para()
+        _spacing(p, 0, 0, height)
+        _bottom_rule(p, color or self.pal.hair, W_LINE, 1)
+        if after:
+            self.gap(after)
+        return p
+
+    def after_table(self):
+        tc = self.cell._tc
+        kids = [k for k in tc if k.tag in (qn("w:p"), qn("w:tbl"))]
+        last = kids[-1]
+        if last.tag == qn("w:p") and not "".join(last.itertext()).strip() \
+                and len(kids) > 1 and kids[-2].tag == qn("w:tbl"):
+            tc.remove(last)
+        if self._fresh:
+            first = kids[0]
+            if first.tag == qn("w:p") and not "".join(first.itertext()).strip():
+                tc.remove(first)
+            self._fresh = False
+
+    def finish(self):
+        tc = self.cell._tc
+        kids = [k for k in tc if k.tag in (qn("w:p"), qn("w:tbl"))]
+        if not kids or kids[-1].tag == qn("w:tbl"):
+            pin(self.cell.add_paragraph(), 1)
+
+
+def table(container, widths, rows=1):
+    """A layout table. Its default cell margins are zeroed at the table level as well
+    as per cell: readers place a table's edge one default margin (0.075 in) left of
+    the text margin, so without this every ruled table on the page started a hair
+    left of the paragraphs and the footer rule under it."""
+    t = container.add_table(rows=rows, cols=len(widths))
+    t.alignment = WD_TABLE_ALIGNMENT.LEFT
+    fix_widths(t, widths)
+    tblPr = t._tbl.tblPr
+    m = OxmlElement("w:tblCellMar")
+    for edge in ("top", "left", "bottom", "right"):
+        e = OxmlElement(f"w:{edge}"); e.set(qn("w:w"), "0"); e.set(qn("w:type"), "dxa")
+        m.append(e)
+    tblPr.append(m)
+    return t
+
+
+def add_row(t, widths):
+    r = t.add_row()
+    for c, w in zip(r.cells, widths):
+        c.width = Inches(w)
+    return r
+
+
+def row_height(row, pt, rule="atLeast"):
+    trPr = row._tr.get_or_add_trPr()
+    for old in trPr.findall(qn("w:trHeight")):
+        trPr.remove(old)
+    h = OxmlElement("w:trHeight")
+    h.set(qn("w:val"), str(int(round(pt * 20))))
+    h.set(qn("w:hRule"), rule)
+    trPr.append(h)
+
+
+def cant_split(row):
+    trPr = row._tr.get_or_add_trPr()
+    if trPr.find(qn("w:cantSplit")) is None:
+        trPr.insert(0, OxmlElement("w:cantSplit"))
+
+
+def mar(cell, top=0, bottom=0, left=0, right=0):
+    """Cell margins in points."""
+    cell_margins(cell, top * 20, bottom * 20, left * 20, right * 20)
+
+
+def break_before(doc):
+    """Start a new sheet. A page-break-before on a 1 pt paragraph, not a `w:br` run: a
+    break run leaves the rest of its paragraph - a full empty line - at the top of the
+    new page."""
+    p = doc.add_paragraph()
+    pin(p, 1)
+    p.paragraph_format.page_break_before = True
+    return p
+
+
+def chip(col, text, pal):
+    """A small tag - RECALL, RECAP, REVIEW - tinted with the design system's light
+    callout surface. Section 8: "chips and border-tab labels stay outlined or
+    light-fill". Sized to its word, so it can never grow into a band."""
+    w = round(text_width_in(text, CHIP, True) + 0.018 * len(text) + 0.16, 2)
+    t = col.cell.add_table(rows=1, cols=1)
+    fix_widths(t, [w])
+    c = t.rows[0].cells[0]
+    shade(c, pal.surface)
+    mar(c, 1.5, 1.5, 4, 4)
+    write(c.paragraphs[0], text, CHIP, line=10.5, bold=True, color=pal.ink, track=10)
+    col.after_table()
+    return t
+
+
+# ---------------------------------------------------------------------------------
+# A branching flowchart - one root, two branches, four leaves (the S1.1 matter chart
+# is the first). Guided notes capture what goes up on the board, so the student labels
+# it as it is drawn. Word cannot draw a diagonal connector inside a table reliably, so
+# the chart is a picture - Archivo from brand/fonts, ink only, hairline boxes, thin
+# diagonal connectors - in two variants with one geometry: only the root printed
+# (student) and every box labelled (key). The labels come from the spec.
+FLOW_H_IN = 1.80
+_FLOW = {
+    # (x0, x1) as fractions of the width; (y0, y1) in inches
+    "top": ((0.329, 0.673), (0.02, 0.36)),
+    "l2": [((0.006, 0.457), (0.66, 1.08)), ((0.540, 0.990), (0.66, 1.08))],
+    "leaf": [((0.004, 0.216), (1.36, 1.78)), ((0.254, 0.470), (1.36, 1.78)),
+             ((0.539, 0.755), (1.36, 1.78)), ((0.780, 0.996), (1.36, 1.78))],
+}
+
+
+def flowchart_labels(fc):
+    """The chart's words come from the spec - they are content, not template. The
+    template owns only the shape: one root, two branches, two leaves under each."""
+    if not isinstance(fc, dict) or not fc.get("root") or len(fc.get("branches", [])) != 2 \
+            or len(fc.get("leaves", [])) != 4:
+        raise SystemExit('build_notes_docx: "flowchart" needs {"root": "…", "branches": '
+                         '[2 labels], "leaves": [4 labels, two under each branch]}.')
+    return fc["root"], fc["branches"], fc["leaves"]
+
+
+def flowchart_png(pal, width_in, fc, filled, dpi=300):
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = int(width_in * dpi), int(FLOW_H_IN * dpi)
+    rgb = lambda h: tuple(int(hexof(h)[i:i + 2], 16) for i in (0, 2, 4))
+    im = Image.new("RGB", (W, H), rgb(pal.white))
+    d = ImageDraw.Draw(im)
+    font = ImageFont.truetype(os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf"),
+                              int(round(9.5 / 72 * dpi)))
+    box_w = max(2, int(round(0.6 / 72 * dpi)))
+    link_w = max(2, int(round(0.6 / 72 * dpi)))
+
+    def rect(spec):
+        (x0, x1), (y0, y1) = spec
+        return (int(x0 * W), int(y0 * dpi), int(x1 * W) - 1, int(y1 * dpi))
+
+    def box(spec, text):
+        r = rect(spec)
+        d.rectangle(r, outline=rgb(pal.label), width=box_w)
+        if text:
+            tw = d.textlength(text, font=font)
+            asc, desc = font.getmetrics()
+            d.text(((r[0] + r[2]) / 2 - tw / 2, (r[1] + r[3]) / 2 - (asc + desc) / 2 + 2),
+                   text, font=font, fill=rgb(pal.ink))
+
+    def link(a, b):
+        ra, rb = rect(a), rect(b)
+        d.line([((ra[0] + ra[2]) / 2, ra[3]), ((rb[0] + rb[2]) / 2, rb[1])],
+               fill=rgb(pal.hair), width=link_w)
+
+    for l2 in _FLOW["l2"]:
+        link(_FLOW["top"], l2)
+    for i, leaf in enumerate(_FLOW["leaf"]):
+        link(_FLOW["l2"][i // 2], leaf)
+    root, branches, leaves = flowchart_labels(fc)
+    box(_FLOW["top"], root)
+    for spec, text in zip(_FLOW["l2"], branches):
+        box(spec, text if filled else "")
+    for spec, text in zip(_FLOW["leaf"], leaves):
+        box(spec, text if filled else "")
+    buf = io.BytesIO()
+    im.save(buf, format="PNG", dpi=(dpi, dpi))
+    buf.seek(0)
+    return buf
+
+
+# ---------------------------------------------------------------------------------
+# Section codes. Specs write them several ways ("1.1", "S01.1", "U01 / S01.1",
+# "U1 / S1.2"); the build uses the bare number for validation and prints S##.#,
+# zero-padded - standards/NAMING.md.
+
+def sec_num(code):
+    m = re.search(r"S?0*(\d{1,2})\.(\d)\s*$", str(code).strip())
+    if not m:
+        raise SystemExit(f"build_notes_docx: cannot read a section number from {code!r}")
+    return f"{int(m.group(1))}.{m.group(2)}"
+
+
+def sec_label(code):
+    u, s = sec_num(code).split(".")
+    return f"S{int(u):02d}.{s}"
+
+
+# ---------------------------------------------------------------------------------
+# Blocks.
+
+def render_cue(col, row, number, pal):
+    kind = row.get("kind", "notes")
+    if kind in ("recall", "recap", "review"):
+        chip(col, kind.upper(), pal)
+        col.gap(6)
+    elif number is not None:
+        col.text(f"{number:02d}", BLOCK_NO, line=11, bold=True, after=5)
+    col.text(row.get("title", ""), BLOCK_TITLE, line=13.5, bold=True, after=7)
+    for q in row.get("cues", []):
+        col.text(q, CUE, line=10.5, color=pal.label, after=5)
+
+
+def render_prompt(col, text, answer, lines, key, pal):
+    col.text(text, BODY, line=BODY_LINE)
+    if answer:
+        col.text(answer, BODY, line=BODY_LINE, bold=True, before=4, after=8)
+    else:
+        for _ in range(lines):
+            col.line()
+
+
+def render_must_write(col, text, pal):
+    """A line the student must have in their notes - lime on the slide. A grey rule
+    down its left edge, drawn as a cell border: a paragraph border inside a nested
+    cell is valid OOXML that LibreOffice does not paint."""
+    col.gap(3)
+    t = col.cell.add_table(rows=1, cols=1)
+    fix_widths(t, [col.w])
+    c = t.rows[0].cells[0]
+    borders(c, pal.label, sz=W_MUST, edges=("left",))
+    mar(c, 3, 3, 8, 0)
+    row_height(t.rows[0], 30)
+    cant_split(t.rows[0])
+    write(c.paragraphs[0], text, BODY, line=BODY_LINE, bold=True, color=pal.ink)
+    col.after_table()
+    col.gap(6)
+
+
+def render_problem(col, prob, key, pal):
+    if prob.get("statement"):
+        col.text(prob["statement"], BODY, line=BODY_LINE, after=3)
+    given = prob.get("given")
+    if given:
+        given = given if isinstance(given, list) else [given]
+        col.text("**Given:** " + given[0], BODY, line=BODY_LINE)
+        for g in given[1:]:
+            col.text(g, BODY, line=BODY_LINE)
+    if prob.get("find"):
+        col.text("**Find:** " + prob["find"], BODY, line=BODY_LINE, before=3)
+    col.gap(5)
+    # A spec may ask for a taller box, never a shorter one: 1.4 in is SHULL-CHG-0016's
+    # floor, and a page that cannot hold it is re-balanced, not given a smaller box.
+    height = max(float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), WORK_BOX_MIN_IN)
+    inner = work_box(col.cell, prob.get("workLabel", WORK_LABEL), pal, height, col.w,
+                     label_size=LABEL, label_bold=False, label_caps=False,
+                     label_color=pal.label)
+    mar(inner, 3, 3, 6, 6)
+    if key:
+        for s in prob.get("solution", []):
+            write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=pal.ink,
+                  before=2)
+    col.after_table()
+    if prob.get("answer"):
+        col.text(prob["answer"], BODY, line=BODY_LINE, bold=key, before=8)
+
+
+def render_notes(col, row, key, pal, base_dir):
+    kind = row.get("kind", "notes")
+    if row.get("notesLabel"):
+        # Printed as written - not upper-cased here. Upper-casing turned the Physics
+        # variable "a" into "A" in "COMPARING THE SIGN OF a TO THE SIGN OF v".
+        col.text(row["notesLabel"], LABEL, line=10.5, bold=True, after=6, track=10)
+    if row.get("diagram"):
+        diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
+        col.after_table()
+        col.gap(4)
+    if row.get("table"):
+        spec = dict(row["table"])
+        fillin_table(col.cell, spec, pal, col.w, header_fill=pal.surface,
+                     header_caps=False, label_bold=False, header_size=LABEL,
+                     body_size=9.5)
+        col.after_table()
+        col.gap(6)
+    if row.get("flowchart"):
+        p = col.para()
+        _spacing(p, 0, 4)
+        w = round(col.w - 0.15, 2)
+        p.add_run().add_picture(flowchart_png(pal, w, row["flowchart"], key),
+                                width=Inches(w))
+    if row.get("problem"):
+        render_problem(col, row["problem"], key, pal)
+
+    if kind == "recall":
+        col.text(row.get("prompt", ""), BODY, line=BODY_LINE)
+        # Ruled room sized to the answer the key gives (two or three lines), rather
+        # than a stretched blank under the checklist.
+        if key and row.get("answer"):
+            col.text(row["answer"], BODY, line=BODY_LINE, bold=True, before=4, after=6)
+        else:
+            col.gap(2)
+            for _ in range(int(row.get("lines", 3))):
+                col.line()
+        col.gap(4)
+        for x in row.get("selfCheck", []):
+            check(col, x, pal)
+    if kind == "review":
+        if row.get("bigPicture"):
+            col.text("**Big picture:** " + row["bigPicture"], BODY, line=BODY_LINE,
+                     after=8)
+        for x in row.get("checklist", []):
+            check(col, x, pal)
+        if row.get("fuzzyLabel"):
+            col.text(row["fuzzyLabel"], BODY, line=BODY_LINE, bold=True, before=8)
+            col.line(height=22)
+
+    for n in row.get("notes", []):
+        if isinstance(n, dict):
+            if "prompt" in n:
+                render_prompt(col, n["prompt"], n.get("answer") if key else None,
+                              int(n.get("lines", 1)), key, pal)
+            elif "text" in n:
+                col.text(n["text"], BODY, line=BODY_LINE + 1, after=n.get("after", 3))
+            elif "check" in n:
+                check(col, n["check"], pal)
+            elif "label" in n:
+                col.text(n["label"], BODY, line=BODY_LINE, bold=True, before=6)
+            elif "lines" in n:
+                for _ in range(int(n["lines"])):
+                    col.line()
+            continue
+        if n.startswith(("*", "✎")):
+            render_must_write(col, n.lstrip("*✎").strip(), pal)
+        else:
+            body = n.strip()
+            render_prompt(col, body, None, 2 if body.rstrip().endswith("?") else 1,
+                          key, pal)
+
+
+def check(col, text, pal):
+    p = col.para()
+    _spacing(p, 0, 5, 13)
+    checkbox(p, pal, 9)
+    for seg, b in segments("   " + text):
+        _run(p, seg, 9.5, bold=b, color=pal.ink)
+    return p
+
+
+def extra_notes(cell, pal):
+    """The quiet catch-all at the foot of every block: whatever goes up on the board
+    that the prompts above did not plan for. A small grey label and one line."""
+    col = Col(cell, NOTES_INNER_IN, pal)
+    t = cell.add_table(rows=1, cols=2)
+    fix_widths(t, [0.78, NOTES_INNER_IN - 0.78])
+    a, b = t.rows[0].cells
+    mar(a, 0, 1, 0, 0); mar(b, 0, 1, 0, 0)
+    a.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    write(a.paragraphs[0], "Extra notes:", LABEL, line=11, color=pal.label)
+    borders(b, pal.hair, sz=W_LINE, edges=("bottom",))
+    pin(b.paragraphs[0], 11)
+    col.after_table()
+    col.finish()
+
+
+def spacer(row, pt, rule_color=None):
+    row_height(row, pt, "exact")
+    for c in row.cells:
+        mar(c)
+        pin(c.paragraphs[0], 1)
+        if rule_color:
+            borders(c, rule_color, sz=W_RULE, edges=("bottom",))
+
+
+def render_blocks(t, rows, ctx, numbers):
+    """Append one page's blocks to table `t`. Returns [(content_row, extra_pt)] so the
+    caller can share out the page's spare height."""
+    pal = ctx["pal"]
+    widths = [CUE_W_IN, NOTES_W_IN]
+    out = []
+    for i, row in enumerate(rows):
+        spacer(add_row(t, widths), 10 if i == 0 else 9)
+        r = add_row(t, widths)
+        cant_split(r)
+        cue, notes = r.cells
+        mar(cue, 0, 0, 0, CUE_PAD_R_IN * 72)
+        mar(notes, 0, 0, NOTES_PAD_L_IN * 72, 0)
+        borders(notes, pal.hair, sz=W_RULE, edges=("left",))
+        cc = Col(cue, CUE_INNER_IN, pal)
+        render_cue(cc, row, numbers[i], pal)
+        cc.finish()
+        nc = Col(notes, NOTES_INNER_IN, pal)
+        render_notes(nc, row, ctx["key"], pal, ctx["base_dir"])
+        nc.gap(8)
+        nc.finish()
+        extra = 0.0
+        if row.get("extraNotes", row.get("kind", "notes") in ("notes", "example", "recap")):
+            e = add_row(t, widths)
+            cant_split(e)
+            ec, en = e.cells
+            mar(ec); mar(en, 0, 0, NOTES_PAD_L_IN * 72, 0)
+            borders(en, pal.hair, sz=W_RULE, edges=("left",))
+            pin(ec.paragraphs[0], 1)
+            extra_notes(en, pal)
+            row_height(e, 22)
+            extra = 22.0
+        last = i == len(rows) - 1
+        if not last:
+            spacer(add_row(t, widths), 9, pal.hair)
+        # A RECALL block is not stretched: its writing room is ruled lines, and blank
+        # space under a checklist reads as an unfinished box.
+        out.append((r, extra, row.get("kind", "notes") != "recall"))
+    return out
+
+
+def head_height(ctx, title, subtitle):
+    """Height of a page head, in points, measured the same way as a block."""
+    d = Document()
+    t = page_head(d, ctx, title, "S00.0", subtitle)
+    pin_all(t._tbl)
+    return estimate_height(t._tbl, TEXT_W_IN) + 2
+
+
+def block_height(row, ctx, number):
+    """Natural height of one block, in points - measured by rendering it into a
+    scratch document. Used to pack an old flat spec's rows into pages."""
+    d = Document()
+    t = table(d, [CUE_W_IN, NOTES_W_IN], rows=0)
+    parts = render_blocks(t, [row], ctx, [number])
+    pin_all(t._tbl)
+    return estimate_height(t._tbl, TEXT_W_IN)
+
+
+# ---------------------------------------------------------------------------------
+# Page head and footer.
+
+def page_head(doc, ctx, title, tag, subtitle):
+    pal = ctx["pal"]
+    t = table(doc, [5.9, 1.6], rows=3)
+    a, b = t.rows[0].cells
+    for c in (a, b):
+        mar(c)
+    write(a.paragraphs[0], ctx["eyebrow"], EYEBROW, line=11, bold=True, color=pal.ink)
+    write(b.paragraphs[0], tag, 9, line=11, bold=True, color=pal.ink,
+          align=WD_ALIGN_PARAGRAPH.RIGHT, before=3)
+    tr = t.rows[1].cells[0].merge(t.rows[1].cells[1])
+    mar(tr, 3, 6, 0, 0)
+    write(tr.paragraphs[0], title, PAGE_TITLE, line=25, bold=True, color=pal.ink)
+    borders(tr, pal.hair, sz=W_RULE, edges=("bottom",))
+    sr = t.rows[2].cells[0].merge(t.rows[2].cells[1])
+    if subtitle:
+        mar(sr, 8, 18, 0, 0)
+        write(sr.paragraphs[0], subtitle, SUBTITLE, line=11.5, color=pal.label)
+        borders(sr, pal.hair, sz=W_RULE, edges=("bottom",))
+    else:
+        mar(sr)
+        pin(sr.paragraphs[0], 1)
+    pin(doc.add_paragraph(), 1)
+    return t
+
+
+def footer(section, ctx):
+    pal = ctx["pal"]
+    section.footer_distance = Inches(FOOTER_DIST_IN)
+    p = section.footer.paragraphs[0]
+    _spacing(p, 0, 0, 12)
+    _top_rule(p, pal.hair, W_RULE, 6)
+    # The stock Footer style carries a centre tab at 3.25 in and a right tab at 6.5 in
+    # (a 6.5 in text block); the page number jumped to the first of them. Clear both,
+    # then set one right tab a hair inside the margin - LibreOffice drops a tab stop
+    # that sits exactly on it.
+    ts = p.paragraph_format.tab_stops
+    for pos in (3.25, 6.5):
+        ts.add_tab_stop(Inches(pos), WD_TAB_ALIGNMENT.CLEAR)
+    ts.add_tab_stop(Inches(TEXT_W_IN - 0.02), WD_TAB_ALIGNMENT.RIGHT)
+    _run(p, ctx["footer"], FOOTER_FLOOR, color=pal.footer, track=6)
+    _run(p, "\t", FOOTER_FLOOR)
+    # Two digits, computed by the reader so it stays right after an edit. The field
+    # switch is for Word; the section format is what LibreOffice honours.
+    field(p, 'PAGE \\# "00"', pal, size=8, bold=True, color=pal.ink)
+    page_number_format(section, "decimalZero")
+
+
+# ---------------------------------------------------------------------------------
+# Pages.
+
+def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
+    """Share a page's spare height out across its blocks, evenly: every block is
+    raised to a common floor, so the page fills to its foot and no block is left
+    short while another is stretched. Returns the predicted overflow (0 if it fits)."""
+    pin_all(head_tbl._tbl); pin_all(blocks_tbl._tbl)
+    avail = BODY_H_PT - SAFETY_PT - 2  # the two 1 pt paragraphs around the head
+    used = estimate_height(head_tbl._tbl, TEXT_W_IN) + estimate_height(blocks_tbl._tbl,
+                                                                       TEXT_W_IN)
+    naturals = []
+    for r, extra, _ in parts:
+        tbl = OxmlElement("w:tbl"); tbl.append(copy.deepcopy(r._tr))
+        naturals.append(estimate_height(tbl, TEXT_W_IN) + extra)
+    slack = avail - used
+    ctx["report"].append((label, round(used / 72, 2), round(avail / 72, 2)))
+    if slack < 0:
+        return -slack
+    # Water-fill: find the level L with sum(max(n, L)) - sum(n) == slack.
+    stretch = [n for (_, _, st), n in zip(parts, naturals) if st]
+    if not stretch:
+        return 0.0
+    level, s = 0.0, sorted(stretch)
+    total = sum(stretch) + slack
+    for k in range(len(s), 0, -1):
+        level = (total - sum(s[k:])) / k
+        if level >= s[k - 1]:
+            break
+    # A block is stretched to the common level, but never by more than MAX_STRETCH_PT:
+    # a page that holds one short block (an old spec's RECALL on its own sheet) keeps
+    # white space at its foot rather than becoming one seven-inch box.
+    for (r, extra, st), n in zip(parts, naturals):
+        if st:
+            row_height(r, min(max(n, level), n + MAX_STRETCH_PT) - extra)
+    return 0.0
+
+
+def content_page(doc, ctx, sec, page, numbers):
+    break_before(doc)
+    head = page_head(doc, ctx, sec["title"], sec_label(sec["code"]), page.get("subtitle"))
+    t = table(doc, [CUE_W_IN, NOTES_W_IN], rows=0)
+    parts = render_blocks(t, page["rows"], ctx, numbers)
+    over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}", head, t, parts)
+    if over:
+        ctx["overfull"].append(f"{sec_label(sec['code'])} page {page['_n']}: "
+                               f"predicted {over / 72:.2f} in too tall")
+
+
+def title_lines(title):
+    """Two lines for the cover title. Break after an ampersand or colon where there is
+    one ("Matter & | Atomic Structure"), otherwise where the two halves balance."""
+    words = title.split()
+    if len(words) < 3:
+        return [title]
+    for i, w in enumerate(words[:-1]):
+        if w in ("&", "and") or w.endswith(":"):
+            return [" ".join(words[:i + 1]), " ".join(words[i + 1:])]
+    best = min(range(1, len(words)),
+               key=lambda i: abs(text_width_in(" ".join(words[:i]), 30, True)
+                                 - text_width_in(" ".join(words[i:]), 30, True)))
+    return [" ".join(words[:best]), " ".join(words[best:])]
+
+
+def label_para(doc, text, pal, before=14, after=8):
+    return write(doc.add_paragraph(), text.upper(), LABEL, line=10.5, bold=True,
+                 color=pal.ink, before=before, after=after, track=10)
+
+
+def rule_para(doc, pal, before=0, after=0):
+    p = doc.add_paragraph()
+    _spacing(p, before, after, 2)
+    _bottom_rule(p, pal.hair, W_RULE, 0)
+    return p
+
+
+def toolbox_line(col, item, pal):
+    if isinstance(item, dict) and item.get("heading"):
+        return col.text(item["heading"], BODY, line=15, bold=True, before=4)
+    if isinstance(item, dict) and item.get("num"):
+        # SHULL-CHG-0017: a fraction is stacked, never a/b inline. lhs and the fraction
+        # side by side; the equals sign gets its own cell so it sits on the bar.
+        lhs = (item.get("lhs", "") + "  =") if item.get("lhs") else ""
+        lw = round(text_width_in(lhs, BODY) + 0.12, 2) if lhs else 0.05
+        t = col.cell.add_table(rows=1, cols=2)
+        fix_widths(t, [lw, col.w - lw])
+        a, b = t.rows[0].cells
+        mar(a, 2, 2); mar(b, 2, 2)
+        a.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        write(a.paragraphs[0], lhs, BODY, line=14, color=pal.ink)
+        stacked_frac(b, item["num"], item["den"], pal.ink, pal.hair, size=BODY)
+        col.after_table()
+        return t
+    if isinstance(item, dict):
+        item = item.get("plain", "")
+    return col.text(item, BODY, line=15)
+
+
+def _cover(doc, spec, ctx, k):
+    """The cover at spacing scale `k` (1 = as designed). Returns its predicted height."""
+    pal, cov = ctx["pal"], spec.get("cover", {})
+    img = cov.get("image")
+    img_path = os.path.join(ctx["base_dir"], img["path"]) if img else None
+    if img and not os.path.exists(img_path):
+        print(f"build_notes_docx: cover image \"{img['path']}\" not found at {img_path} "
+              f"— building without it.", file=sys.stderr)
+        img_path = None
+    img_w = min(float(img.get("widthIn", 2.0)), 2.2) if img_path else 0
+
+    t = table(doc, [TEXT_W_IN - 2.3, 2.3])
+    a, b = t.rows[0].cells
+    mar(a); mar(b)
+    write(a.paragraphs[0], ctx["cover_eyebrow"], EYEBROW, line=11, bold=True,
+          color=pal.ink, after=12 * k)
+    for ln in title_lines(ctx["unit_title"]):
+        write(a.add_paragraph(), ln, 30, line=34, bold=True, color=pal.ink)
+    codes = " / ".join(sec_label(s["code"]) for s in spec["sectionsContent"])
+    kicker = f"GUIDED NOTES • {codes}" + (" • TEACHER KEY" if ctx["key"] else "")
+    write(a.add_paragraph(), kicker, 8.5, line=11, bold=True, color=pal.ink, before=12 * k)
+    write(a.add_paragraph(), SCHOOL, 8.5, line=11, color=pal.label, before=6 * k)
+    if img_path:
+        p = b.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        p.add_run().add_picture(img_path, width=Inches(img_w))
+    else:
+        pin(b.paragraphs[0], 1)
+
+    fields = cov.get("fields", "Name ________________________________   "
+                               "Date ______________   Period ______")
+    p = write(doc.add_paragraph(), fields, BODY, line=14, color=pal.ink, before=12 * k,
+              after=0)
+    rule_para(doc, pal, before=10 * k)
+
+    # Section breakdown.
+    blurbs = {sec_num(s["code"]): s for s in cov.get("sections", [])}
+    secs = spec["sectionsContent"]
+    has_diff = any(blurbs.get(sec_num(s["code"]), {}).get("difficulty") for s in secs)
+    widths = [1.0, 5.3, 1.2] if has_diff else [1.0, 6.5]
+    t = table(doc, widths, rows=1 + len(secs))
+    h = t.rows[0].cells
+    for c in h:
+        mar(c, 12 * k, 6 * k, 0, 0)
+    write(h[0].merge(h[1]).paragraphs[0], "SECTION BREAKDOWN / CONCEPTS TO MASTER", LABEL, line=10.5, bold=True,
+          color=pal.ink, track=10)
+    if has_diff:
+        write(h[2].paragraphs[0], "DIFFICULTY", LABEL, line=10.5, bold=True,
+              color=pal.ink, track=10, align=WD_ALIGN_PARAGRAPH.RIGHT)
+    for i, s in enumerate(secs, 1):
+        cells = t.rows[i].cells
+        info = blurbs.get(sec_num(s["code"]), {})
+        for c in cells:
+            mar(c, 7 * k, 9 * k, 0, 0)
+            borders(c, pal.hair, sz=W_RULE, edges=("bottom",))
+        write(cells[0].paragraphs[0], sec_label(s["code"]), 9, line=13, bold=True,
+              color=pal.ink)
+        write(cells[1].paragraphs[0], s["title"], 11, line=14, bold=True, color=pal.ink)
+        blurb = info.get("blurb") or s.get("learningTarget", "")
+        if blurb:
+            write(cells[1].add_paragraph(), blurb, 9, line=12, color=pal.ink, before=4)
+        if has_diff:
+            d = info.get("difficulty")
+            write(cells[2].paragraphs[0], f"{d} / 10" if d else "", 12, line=14,
+                  bold=True, color=pal.ink, align=WD_ALIGN_PARAGRAPH.RIGHT)
+    if has_diff and cov.get("difficultyNote"):
+        write(doc.add_paragraph(), cov["difficultyNote"], LABEL, line=11,
+              color=pal.label, before=8 * k)
+
+    # Equation toolbox.
+    box = cov.get("equationToolbox")
+    if box:
+        label_para(doc, box.get("label", "Equation toolbox"), pal, before=16 * k,
+                   after=8 * k)
+        cols = box["columns"]
+        half = round(TEXT_W_IN / len(cols), 2)
+        t = table(doc, [half] * len(cols))
+        for c, spec_col in zip(t.rows[0].cells, cols):
+            mar(c, 0, 0, 0, 10)
+            col = Col(c, half - 0.14, pal)
+            if spec_col.get("heading"):
+                col.text(spec_col["heading"], BODY, line=15, bold=True)
+            for item in spec_col.get("lines", []):
+                toolbox_line(col, item, pal)
+            col.finish()
+        for i, n in enumerate(box.get("notes", [])):
+            write(doc.add_paragraph(), n, 8.5, line=12, color=pal.ink,
+                  before=8 * k if i == 0 else 0)
+        rule_para(doc, pal, before=10 * k)
+
+    # Key terms, grouped by section.
+    groups = cov.get("keyTerms", [])
+    if groups:
+        label_para(doc, "Key terms / grouped by section" if any(g.get("code")
+                   for g in groups) else "Key terms", pal,
+                   before=14 * k, after=8 * k)
+        for g in groups:
+            lead = f"**{sec_label(g['code'])}** " if g.get("code") else ""
+            write(doc.add_paragraph(), lead + " • ".join(g["terms"]), 9.5, line=15,
+                  color=pal.ink)
+
+    how = cov.get("howToUse")
+    if how:
+        label_para(doc, "How to use the notes", pal, before=16 * k, after=8 * k)
+        how = how if isinstance(how, list) else [how]
+        for x in how:
+            write(doc.add_paragraph(), x, 9.5, line=14, color=pal.ink, after=3)
+
+    body = [el for el in doc.element.body if el.tag in (qn("w:p"), qn("w:tbl"))]
+    pin_all(doc.element.body)
+    return sum(estimate_height(el, TEXT_W_IN) for el in body)
+
+
+def cover_page(doc, spec, ctx):
+    """The cover, fitted to one sheet. A cover with four sections and a column of
+    stacked fractions (Physics) runs long at the designed spacing; it is rebuilt once
+    with the air between its parts halved. Only spacing moves; no text is shrunk to
+    fit (build-document, "Page budget")."""
+    avail = BODY_H_PT - SAFETY_PT
+    for k in (1.0, 0.5):
+        for el in [e for e in doc.element.body if e.tag in (qn("w:p"), qn("w:tbl"))]:
+            doc.element.body.remove(el)
+        used = _cover(doc, spec, ctx, k)
+        if used <= avail:
+            break
+    ctx["report"].append(("cover" + (" (tight)" if k < 1 else ""), round(used / 72, 2),
+                          round(avail / 72, 2)))
+    if used > avail:
+        ctx["overfull"].append(f"cover: predicted {(used - avail) / 72:.2f} in too tall")
+
+
+def concept_review_page(doc, spec, ctx):
+    """The standing last page: what each section was for, the one mix-up to watch
+    for, and a few questions to answer with the explanations covered."""
+    pal, cr = ctx["pal"], spec["conceptReview"]
+    start = len(doc.element.body)
+    break_before(doc)
+    # The code slot carries a code on every page: here, the unit's.
+    page_head(doc, ctx, cr.get("title", "Concept Review"), ctx["unit_code"],
+              cr.get("subtitle"))
+    for i, s in enumerate(cr.get("sections", [])):
+        t = table(doc, [1.1, TEXT_W_IN - 1.1])
+        a, b = t.rows[0].cells
+        mar(a, 5, 0, 0, 0); mar(b)
+        write(a.paragraphs[0], sec_label(s["code"]), 9, line=16, bold=True,
+              color=pal.ink, before=0)
+        write(b.paragraphs[0], s["heading"], 13, line=17, bold=True, color=pal.ink)
+        pin(doc.add_paragraph(), 5)
+        for para_ in s.get("paragraphs", []):
+            lines = para_ if isinstance(para_, list) else [para_]
+            for j, ln in enumerate(lines):
+                write(doc.add_paragraph(), ln, BODY, line=15, color=pal.ink,
+                      after=7 if j == len(lines) - 1 else 0)
+        cmp_ = s.get("compare")
+        if cmp_:
+            t = table(doc, [TEXT_W_IN / 2, TEXT_W_IN / 2])
+            for c, side in zip(t.rows[0].cells, (cmp_["left"], cmp_["right"])):
+                mar(c, 0, 0, 0, 12)
+                write(c.paragraphs[0], side["heading"], BODY, line=14.5, bold=True,
+                      color=pal.ink)
+                for ln in side.get("lines", []):
+                    write(c.add_paragraph(), ln, BODY, line=14.5, color=pal.ink)
+            pin(doc.add_paragraph(), 6)
+        if s.get("watchOut"):
+            write(doc.add_paragraph(), "**Watch out:** " + s["watchOut"], 9, line=13,
+                  color=pal.ink, before=2, after=12)
+        rule_para(doc, pal, after=14)
+    qr = cr.get("quickRecall", [])
+    if qr:
+        label_para(doc, cr.get("quickRecallLabel", "Quick recall / cover the "
+                                                   "explanations above"), pal, before=4)
+        for i, q in enumerate(qr, 1):
+            q, a = (q.get("q"), q.get("a")) if isinstance(q, dict) else (q, None)
+            text = f"{i}. {q}" + (f"  **{a}**" if (ctx["key"] and a) else "")
+            write(doc.add_paragraph(), text, BODY, line=15, color=pal.ink, after=3)
+    els = [el for el in list(doc.element.body)[start:]
+           if el.tag in (qn("w:p"), qn("w:tbl"))]
+    for el in els:
+        pin_all(el)
+    used = sum(estimate_height(el, TEXT_W_IN) for el in els)
+    ctx["report"].append(("review", round(used / 72, 2),
+                          round((BODY_H_PT - SAFETY_PT) / 72, 2)))
+    if used > BODY_H_PT - SAFETY_PT:
+        ctx["overfull"].append(f"concept review: predicted "
+                               f"{(used - BODY_H_PT + SAFETY_PT) / 72:.2f} in too tall")
+
+
+# ---------------------------------------------------------------------------------
+# Old flat specs -> paged schema.
+
+_SMALL = {"a", "an", "and", "as", "at", "by", "for", "in", "of", "on", "or", "the",
+          "to", "vs.", "vs"}
+
+
+def title_case(s):
+    words = str(s).strip().split()
+    out = []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if i and lw in _SMALL:
+            out.append(lw)
+        elif any(c.isdigit() for c in w) or (len(w) > 1 and w.isupper() and len(w) <= 3
+                                             and lw not in {"the", "sun", "and"}):
+            out.append(w if len(w) <= 3 else w.capitalize())
+        else:
+            out.append("-".join(p[:1].upper() + p[1:].lower() for p in w.split("-")))
+    return " ".join(out)
+
+
+def _legacy_row(r):
+    row = {k: v for k, v in r.items() if k not in ("cueLabel", "problem")}
+    row["title"] = title_case(r.get("cueLabel", ""))
+    row["notes"] = list(r.get("notes", []))
+    if r.get("problem"):
+        p = dict(r["problem"])
+        # The old GIVEN/NEED table becomes inline Given:/Find: lines. The old heading
+        # label is dropped: the block title already names the example.
+        prob = {k: p[k] for k in ("statement", "given", "workHeightIn", "answer",
+                                  "solution") if p.get(k)}
+        if p.get("need"):
+            prob["find"] = p["need"]
+        row["problem"] = prob
+        row["kind"] = "example"
+    return row
+
+
+LEGACY_HOW_TO_USE = ("Quiz yourself with the left-column questions. A gray side rule marks a "
+                     "must-write note: the highlighted must-write block on the slide. Each "
+                     "section ends with a RECALL block; close your notes before you write it.")
+LEGACY_WORK_BOX = " Show your reasoning and units in each work box."
+# The old closing checklist names the old summary box. Only that term is renamed.
+LEGACY_TERMS = (("Summary boxes", "RECALL blocks"), ("summary boxes", "RECALL blocks"),
+                ("summary box", "RECALL block"))
+
+
+def _legacy_terms(text):
+    for old, new in LEGACY_TERMS:
+        text = text.replace(old, new)
+    return text
+
+
+def pack_pages(rows, heights, heads, avail, per_page=3):
+    """Choose where a section's page breaks fall.
+
+    Every way of cutting the section's blocks into consecutive pages is tried - a
+    section is a handful of blocks, so that is a few dozen cuts. A cut is allowed when
+    each page fits its budget (the first page's head carries the subtitle, later ones
+    do not) and holds at most `per_page` numbered blocks; a closing RECALL or REVIEW
+    block does not count against that, it only has to fit. A single block too tall
+    for any page is allowed a page of its own - there is nothing else to do with it.
+    Of the allowed cuts: fewest sheets first, then the one whose emptiest sheet is
+    fullest, so the spare room is shared instead of pooling on one sheet.
+    """
+    import itertools
+    k = len(rows)
+    best = None
+    for mask in itertools.product((0, 1), repeat=max(k - 1, 0)):
+        cuts = [0] + [i + 1 for i, m in enumerate(mask) if m] + [k]
+        pages = [list(range(cuts[i], cuts[i + 1])) for i in range(len(cuts) - 1)]
+        fills, ok = [], True
+        for pi, idx in enumerate(pages):
+            used = heads[0 if pi == 0 else 1] + sum(heights[i] for i in idx)
+            numbered = sum(1 for i in idx if rows[i].get("kind") not in ("recall", "review"))
+            if len(idx) > 1 and (used > avail or numbered > per_page):
+                ok = False
+                break
+            fills.append(used / avail)
+        if not ok:
+            continue
+        score = (len(pages), -min(fills))
+        if best is None or score < best[0]:
+            best = (score, pages)
+    return [[rows[i] for i in idx] for idx in best[1]]
+
+
+def normalize_legacy(spec, ctx):
+    """Upgrade a flat spec (rows directly under each section) to the paged schema.
+
+    Rows are packed onto pages by measured height, at most three blocks a page. The
+    first page of a section carries its learning target as the subtitle; later pages
+    carry none. The old summary box becomes a RECALL block, the old closing checklist
+    a REVIEW block on the last section, and the cover is assembled from what the old
+    front matter already said. Nothing is written that the spec did not already hold.
+    """
+    spec = copy.deepcopy(spec)
+    avail = BODY_H_PT - SAFETY_PT - 2          # the same budget fit_page() holds a page to
+    secs = spec["sectionsContent"]
+    for si, sec in enumerate(secs):
+        rows = [_legacy_row(r) for r in sec.get("rows", [])]
+        rows.append({"kind": "recall", "title": "Section summary",
+                     "cues": ["Close your notes before you write.",
+                              "Use the checklist to find what still needs practice."],
+                     "prompt": sec.get("summaryPrompt", ""),
+                     # Two lines, as the approved reference has: an old spec carries no
+                     # key answer to size the writing room to, and the third line is
+                     # what pushed a RECALL block onto a sheet of its own.
+                     "lines": 2,
+                     "selfCheck": sec.get("selfCheck", [])})
+        close = spec.get("close")
+        if si == len(secs) - 1 and close:
+            rows.append({"kind": "review", "title": "Pulling it together", "cues": [],
+                         "bigPicture": close.get("bigPicture", ""),
+                         "checklist": [_legacy_terms(x) for x in close.get("checklist", [])],
+                         "fuzzyLabel": close.get("fuzzyLabel", "Still fuzzy on:")
+                         .replace("STILL FUZZY ON", "Still fuzzy on")})
+        # Packed against measured heights: the real page head for each page's subtitle,
+        # each block as rendered, plus the 9 pt separator it brings. The breaks are
+        # chosen, not accumulated - a greedy fill put blocks on a page until one did not
+        # fit, which left single blocks on 40%-full sheets. See pack_pages().
+        heights, n = [], 0
+        for r in rows:
+            num = None
+            if r.get("kind", "notes") in NUMBERED:
+                n += 1
+                num = n
+            heights.append(block_height(r, ctx, num) + 9)
+        heads = (head_height(ctx, sec["title"], sec.get("learningTarget", "")),
+                 head_height(ctx, sec["title"], ""))
+        pages = pack_pages(rows, heights, heads, avail)
+        sec["pages"] = [{"subtitle": sec.get("learningTarget", "") if i == 0 else "",
+                         "rows": p} for i, p in enumerate(pages)]
+        sec.pop("rows", None)
+
+    cover = {
+        "sections": [{"code": s["code"], "blurb": s.get("learningTarget", "")}
+                     for s in secs],
+        "keyTerms": [{"terms": [debullet(x) for x in spec.get("keyTerms", [])]}]
+        if spec.get("keyTerms") else [],
+        # The old how-it-works text describes the old page - its rule colours ("teal
+        # rule", "gold rule") and its summary box - so it is not carried over. Every
+        # upgraded spec gets this template's own wording instead.
+        "howToUse": LEGACY_HOW_TO_USE + (LEGACY_WORK_BOX if any(
+            r.get("problem") for s in secs for p in s["pages"] for r in p["rows"]) else ""),
+    }
+    if spec.get("fields"):
+        cover["fields"] = spec["fields"]
+    if spec.get("titleImage"):
+        cover["image"] = spec["titleImage"]
+    eqs = spec.get("equations") or []
+    if eqs:
+        cols = [{"lines": []}, {"lines": []}]
+        for i, eq in enumerate(eqs):
+            col = cols[i % 2]["lines"]
+            if eq.get("note"):
+                col.append({"heading": eq["note"][:1].upper() + eq["note"][1:]})
+            if eq.get("num") and eq.get("den"):
+                col.append({"lhs": eq.get("lhs", ""), "num": eq["num"], "den": eq["den"]})
+            else:
+                col.append(eq.get("plain", ""))
+        cover["equationToolbox"] = {"label": spec.get("equationLabel",
+                                                      "Equation toolbox"),
+                                    "columns": cols}
+    spec["cover"] = cover
+    if spec.get("studyRecap") and not spec.get("conceptReview"):
+        print("build_notes_docx: this spec has an old studyRecap block; the Concept "
+              "Review page replaces it and does not read it.", file=sys.stderr)
+    return spec
+
+
+# ---------------------------------------------------------------------------------
+# Checks that refuse to build.
+
+def all_rows(spec):
+    for sec in spec["sectionsContent"]:
+        for page in sec.get("pages", []):
+            for row in page["rows"]:
+                yield sec, row
+
+
+def validate(spec, course):
     valid = known_sections(course)
-    bad = [s for s in spec["sections"] if s not in valid]
+    codes = [sec_num(s) for s in spec.get("sections", [])]
+    codes += [sec_num(s["code"]) for s in spec["sectionsContent"]]
+    cov = spec.get("cover", {})
+    codes += [sec_num(s["code"]) for s in cov.get("sections", [])]
+    codes += [sec_num(g["code"]) for g in cov.get("keyTerms", []) if g.get("code")]
+    codes += [sec_num(s["code"]) for s in spec.get("conceptReview", {}).get("sections", [])]
+    bad = sorted({c for c in codes if c not in valid})
     if bad:
         print(f"build_notes_docx: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md.", file=sys.stderr)
-        return 1
+        return False
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.
-    PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
+    # It does not depend on how a block is titled: a worked example is declared
+    # structurally ("kind": "example"), the declaration and the box must agree in both
+    # directions, and a block with nothing to capture is refused outright - so stripping
+    # the box from "Neutral iron-56" fails whether or not its title says EXAMPLE.
+    # The title keywords stay as a second net for rows that forgot the declaration.
     missing = []
-    for sec in spec["sectionsContent"]:
-        for row in sec["rows"]:
-            if row.get("problem") or row.get("noWorkBox"):
-                continue
-            hay = " ".join([row.get("cueLabel", ""), row.get("notesLabel", "")]).upper()
+    for sec, row in all_rows(spec):
+        kind = row.get("kind", "notes")
+        where = f"{sec_label(sec['code'])} · {row.get('title')}"
+        if kind == "example" and not row.get("problem"):
+            missing.append(f"{where}: declared a worked example, has no problem block")
+        elif row.get("problem") and kind != "example":
+            missing.append(f'{where}: has a problem block but is not "kind": "example"')
+        elif kind == "notes" and not any(row.get(k) for k in CAPTURE):
+            missing.append(f"{where}: nothing on the capture side")
+        elif kind == "notes" and not row.get("noWorkBox"):
+            hay = " ".join([row.get("title", ""), row.get("notesLabel", "")]).upper()
             if any(w in hay for w in PROBLEM_WORDS):
-                missing.append(f"{sec['code']} · {row.get('notesLabel') or row.get('cueLabel')}")
+                missing.append(f"{where}: reads as a problem to solve and has no work box")
     if missing:
-        print("build_notes_docx: these rows look like problems to solve and have no work box:",
-              file=sys.stderr)
+        print("build_notes_docx: work-box check failed:", file=sys.stderr)
         for m in missing:
             print("   " + m, file=sys.stderr)
-        print('\nAdd a "problem" block, or "noWorkBox": true if it genuinely is not one.\n'
-              'Students need somewhere to work it. SHULL-CHG-0016.', file=sys.stderr)
-        return 1
+        print('\nA problem to solve is a "kind": "example" row with a "problem" block. A row '
+              'that genuinely is not one takes "noWorkBox": true.\nStudents need somewhere '
+              'to work it. SHULL-CHG-0016.', file=sys.stderr)
+        return False
 
     # Course profiles. The three courses do not want the same document, and pretending
     # they do is how a Geology packet ends up with a kinematics equation bar.
-    eqs = spec.get("equations") or []
-    has_problem = any(r.get("problem") for sec in spec["sectionsContent"] for r in sec["rows"])
+    has_box = bool(cov.get("equationToolbox"))
+    has_problem = any(r.get("problem") for _, r in all_rows(spec))
     if course == "geology":
-        if eqs or has_problem:
-            print("build_notes_docx: Geology has no math. Remove the equation bar and the "
-                  "problem blocks — a Geology packet labels diagrams instead. SHULL-CHG-0017.",
-                  file=sys.stderr)
-            return 1
-    else:
-        if has_problem and not eqs:
-            print(f"build_notes_docx: {course} packet has problems to solve and no equation "
-                  f"bar. Students need the equations at the top of the page so they know what "
-                  f"they may reference. Add \"equations\", or \"noEquationBar\": true.",
-                  file=sys.stderr)
-            if not spec.get("noEquationBar"):
-                return 1
+        if has_box or has_problem:
+            print("build_notes_docx: Geology has no math. Remove the equation toolbox and "
+                  "the problem blocks — a Geology packet labels diagrams instead. "
+                  "SHULL-CHG-0017.", file=sys.stderr)
+            return False
+    elif has_problem and not has_box:
+        print(f"build_notes_docx: {course} packet has problems to solve and no equation "
+              f"toolbox. Students need the equations up front so they know what they may "
+              f"reference. Add cover.equationToolbox, or \"noEquationBar\": true.",
+              file=sys.stderr)
+        if not spec.get("noEquationBar"):
+            return False
+    return True
+
+
+# ---------------------------------------------------------------------------------
+
+def verify_pages(docx_path, expected):
+    """Convert with LibreOffice and count sheets. A designed page that spilled shows up
+    as one sheet too many - the failure this layout exists to prevent."""
+    soffice = shutil.which("soffice")
+    if not soffice:
+        # A check that quietly does not run is a pass nobody earned.
+        print("build_notes_docx: VERIFY FAILED — --verify needs LibreOffice (soffice) on "
+              "the PATH to render the pages, and it is not there.", file=sys.stderr)
+        return False
+    import pymupdf
+    with tempfile.TemporaryDirectory() as td:
+        subprocess.run([soffice, "--headless", "--convert-to", "pdf", "--outdir", td,
+                        docx_path], check=True, capture_output=True)
+        pdf = os.path.join(td, os.path.splitext(os.path.basename(docx_path))[0] + ".pdf")
+        got = len(pymupdf.open(pdf))
+    if got != expected:
+        print(f"build_notes_docx: VERIFY FAILED — {expected} designed pages rendered on "
+              f"{got} sheets. A page spilled; shorten its content or its work box.",
+              file=sys.stderr)
+        return False
+    print(f"verify: {got} sheets for {expected} designed pages")
+    return True
+
+
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    verify = "--verify" in sys.argv
+    spec_path = args[0] if args else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")
+    base_dir = os.path.dirname(os.path.abspath(spec_path))
+    spec = json.load(open(spec_path))
+    course = spec["course"]
+    pal = GreyPalette(course)
+    key = bool(spec.get("key"))
+    unit = int(spec["unit"])
+    COURSE = course.upper()
+    ctx = {
+        "pal": pal, "key": key, "base_dir": base_dir, "report": [], "overfull": [],
+        "unit_title": unit_title(course, unit),
+        "unit_code": f"U{unit:02d}",
+        "eyebrow": f"SHULL SCIENCE / {COURSE} / GUIDED NOTES" + (" / TEACHER KEY" if key
+                                                                  else ""),
+        "cover_eyebrow": f"SHULL SCIENCE / {COURSE} / UNIT {unit:02d}",
+        "footer": f"SHULL SCIENCE / {COURSE} / UNIT {unit:02d}" + (" / TEACHER KEY" if key
+                                                                    else ""),
+    }
+
+    for old in ("watermarkImage",):
+        if spec.get(old):
+            print(f"build_notes_docx: \"{old}\" is no longer drawn — the notes carry one "
+                  f"image, on the cover (cover.image).", file=sys.stderr)
+    legacy = not any("pages" in s for s in spec["sectionsContent"])
+    if legacy:
+        spec = normalize_legacy(spec, ctx)
+
+    if not validate(spec, course):
+        return 1
+    # Difficulty is a standard cover feature, but its values are course content: the
+    # build says so when one is missing and never makes one up.
+    rated = {sec_num(x["code"]) for x in spec.get("cover", {}).get("sections", [])
+             if x.get("difficulty")}
+    unrated = [sec_label(x["code"]) for x in spec["sectionsContent"]
+               if sec_num(x["code"]) not in rated]
+    if unrated and not legacy:
+        print(f"build_notes_docx: no difficulty rating for {', '.join(unrated)} — add "
+              f"cover.sections[].difficulty (1–10).", file=sys.stderr)
 
     code = COURSE_CODE[course]
-    unit = f"U{int(spec['unit']):02d}"
-    span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
-            if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
+    u = f"U{unit:02d}"
+    labels = [sec_label(s["code"]) for s in spec["sectionsContent"]]
+    span = f"{labels[0]}-{labels[-1]}" if len(labels) > 1 else labels[0]
+    # standards/NAMING.md range form (S01.1-S01.5). A key gets _Key, so the default for
+    # a key spec can never overwrite its student copy.
+    out = args[1] if len(args) > 1 else \
+        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{u}_{span}{'_Key' if key else ''}.docx")
 
     doc = Document()
-    s = page_setup(doc)
+    st = doc.styles["Normal"]
+    st.font.name = FONT
+    st.font.size = Pt(BODY)
+    st.element.rPr.rFonts.set(qn("w:eastAsia"), FONT)
+    s = doc.sections[0]
+    s.page_width, s.page_height = Inches(PAGE_W_IN), Inches(PAGE_H_IN)
+    s.left_margin = s.right_margin = Inches(MARGIN_LR_IN)
+    s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
+    # The header is empty, but LibreOffice still reserves its one empty line below
+    # the header distance. Set equal to the top margin, that line pushed every page's
+    # content 12 pt down - the whole safety margin, measured off the rendered PDF.
+    s.header_distance = Inches(0.2)
 
-    # Optional faint background image, repeating on every page including the title
-    # page and the closing recap page - the header holds it once because this
-    # template never splits into a new section. Path is resolved against the SPEC
-    # FILE's own directory, the same convention as titleImage. Absent field or
-    # missing file: no change from prior behavior.
-    wm_spec = spec.get("watermarkImage")
-    if wm_spec:
-        wm_path = os.path.join(spec_dir, wm_spec["path"])
-        if os.path.exists(wm_path):
-            # Geometry is the template's, not the spec's. At the 5.0in the Chemistry
-            # spec asked for, centred, the atom sat directly behind the matter
-            # flowchart, the work box and the fill-in prompts - a second drawing
-            # competing with the first on the page a student is trying to write on.
-            # A watermark is a ground: small enough not to reach the content column's
-            # working width, low enough to sit in the quiet bottom third of a page
-            # whose weight is at the top. `widthIn` is honoured only when it asks for
-            # LESS than that, so a spec can make it quieter and cannot make it louder.
-            want = float(wm_spec.get("widthIn", WATERMARK_W_IN))
-            add_watermark(s, wm_path, min(want, WATERMARK_W_IN),
-                          vert_frac=WATERMARK_VERT_FRAC)
-        else:
-            print(f"build_notes_docx: watermarkImage \"{wm_spec['path']}\" not found at "
-                  f"{wm_path} — building without it.", file=sys.stderr)
-
-    # Brand bar. Outlined, not filled: SHULL_DESIGN_SYSTEM section 8 - "no full-page
-    # colour banners, no shaded section backgrounds, no solid-fill headers." The first
-    # build of this template ignored that and measured 3.2x the ink of Matthew's own
-    # packet, which had no cell fills anywhere. A heavy accent rule carries the same
-    # hierarchy for a rule's worth of toner.
-    c = one_cell(doc); borders(c, display, sz=18, edges=("bottom",))
-    para(c, "SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS", 7.5,
-         bold=True, color=accent, caps_track=True, first=True)
-    para(c, unit_title(course, spec["unit"]).upper(), 15, bold=True, color=ink)
-    para(c, spec["kicker"], 7.5, color=label, caps_track=True)
-
-    c = one_cell(doc); borders(c, hair)
-    para(c, spec["fields"], 9, color=label, first=True)
-
-    if eqs:
-        gap(doc, 4)
-        equation_bar(doc, eqs, pal,
-                     spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
-
-    gap(doc, 4)
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [3.75, 3.75])
-    for i, (lab, items) in enumerate([("UNIT LEARNING TARGETS", spec["unitTargets"]),
-                                      ("KEY TERMS", spec["keyTerms"])]):
-        cell = t.rows[0].cells[i]; borders(cell, hair)
-        para(cell, lab, 7.5, bold=True, color=accent, caps_track=True, first=True)
-        for x in items:
-            para(cell, "•  " + debullet(x), 9.5)
-
-    gap(doc, 4)
-    c = one_cell(doc); borders(c, display, sz=18, edges=("left",))
-    para(c, "HOW THESE NOTES WORK", 7.5, bold=True, color=accent, caps_track=True, first=True)
-    for x in spec["howItWorks"]:
-        para(c, "•  " + debullet(x), 9.5)
-
-    gap(doc, 2)
-    c = one_cell(doc); borders(c, white)
-    para(c, "SECTIONS IN THIS UNIT", 7.5, bold=True, color=accent, caps_track=True, first=True)
-    for x in spec["sectionList"]:
-        check_item(c, debullet(x), pal, 9.5)
-
-    # SHULL-CHG-0018. Page 1 is now a dedicated, standalone title page (front matter
-    # gets its own page_break below, before section 1 starts), so there is room for an
-    # optional reference image right on the cover - his ask was a Bohr-model diagram
-    # already relevant to the atomic-structure section. Path is resolved against the
-    # SPEC FILE's own directory, not this script's, since that is where a build's local
-    # assets live. Absent field or missing file: no change from prior behavior, and a
-    # missing file is a clear stderr note rather than a crash - Geology/Physics specs
-    # that never set this must keep building exactly as before.
-    img_spec = spec.get("titleImage")
-    if img_spec:
-        img_path = os.path.join(spec_dir, img_spec["path"])
-        if os.path.exists(img_path):
-            # The plate is framed, and the caption lives inside the frame with it.
-            # Dropped straight onto the page, a raster carrying its own cream ground
-            # read as a foreign object pasted on white - nothing said where the
-            # picture ended and the sheet began. A hairline rule and real padding
-            # make the edge a decision. Outlined, not filled; the frame is the only
-            # ink it costs.
-            gap(doc, 14)
-            img_w = float(img_spec.get("widthIn", 3.2))
-            ft = doc.add_table(rows=1, cols=1)
-            ft.alignment = WD_TABLE_ALIGNMENT.CENTER
-            fix_widths(ft, [round(img_w + 0.44, 2)])
-            fc = ft.rows[0].cells[0]
-            borders(fc, hair, sz=W_BOX)
-            cell_margins(fc, top=110, bottom=90, left=110, right=110)
-            p = fc.paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p.paragraph_format.space_after = Pt(0)
-            p.add_run().add_picture(img_path, width=Inches(img_w))
-            if img_spec.get("caption"):
-                cap = fc.add_paragraph()
-                cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                cap.paragraph_format.space_before = Pt(6)
-                cap.paragraph_format.space_after = Pt(0)
-                r = cap.add_run(img_spec["caption"])
-                r.font.name = FONT; r.font.size = Pt(8.5)
-                r.font.color.rgb = RGBColor.from_string(hexof(label))
-        else:
-            print(f"build_notes_docx: titleImage \"{img_spec['path']}\" not found at "
-                  f"{img_path} — building without it.", file=sys.stderr)
-
+    designed = 1
+    cover_page(doc, spec, ctx)
     for sec in spec["sectionsContent"]:
-        doc.add_page_break()
-        # A section head sat 6pt off the top margin with the learning target pressed
-        # straight underneath, so the loudest thing on the page had nothing around it
-        # and read as jammed rather than as an opening. The air is the hierarchy here:
-        # nothing else on the page gets this much room above it.
-        gap(doc, 20)
-        t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.83, 1.67])
-        a, b = t.rows[0].cells
-        # Section head: ruled above and below, not filled.
-        for cell in (a, b):
-            borders(cell, ink, sz=W_HEAD_TOP, edges=("top",))
-            borders(cell, display, sz=W_SECTION, edges=("bottom",))
-            cell_margins(cell, top=90, bottom=90, left=0, right=0)
-        para(a, sec["title"], 12.5, bold=True, color=ink, first=True)
-        p = para(b, sec["code"], 8.5, bold=True, color=accent, caps_track=True, first=True)
-        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-
-        gap(doc, 7)
-        c = one_cell(doc); borders(c, hair, sz=W_BOX)
-        cell_margins(c, top=45, bottom=45, left=40, right=40)
-        p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
-        r = p.add_run("LEARNING TARGET   "); r.font.name = FONT; r.font.size = Pt(7.5)
-        r.bold = True; r.font.color.rgb = RGBColor.from_string(hexof(accent))
-        r2 = p.add_run(sec["learningTarget"]); r2.font.name = FONT; r2.font.size = Pt(9.5)
-
-        t = doc.add_table(rows=len(sec["rows"]), cols=2)
-        fix_widths(t, [CUE_W_IN, NOTES_W_IN])
-        for ri, row in enumerate(sec["rows"]):
-            cue, notes = t.rows[ri].cells
-            # No fill on the cue column. Matthew's packet separated the columns with a
-            # rule alone, which is the Cornell convention and costs nothing to print.
-            # The weight ladder does the rest: the boundary between one row and the
-            # next is heavier than the hairline dividing cue from notes, which is in
-            # turn heavier than anything drawn inside a row.
-            for cell in (cue, notes):
-                borders(cell, hair, sz=W_ROW, edges=("top", "bottom"))
-                borders(cell, hair, sz=W_INNER, edges=("left", "right"))
-            # The rail. Last, so it replaces the hairline on that edge rather than
-            # arguing with it.
-            borders(cue, display, sz=W_RAIL, edges=("left",))
-            cell_margins(cue, top=30, bottom=30, left=130, right=50)
-            # A place for the eye to land, and a way to say "third block" without
-            # counting. Accent-deep, because it is type on a light ground.
-            n = para(cue, str(ri + 1), 13, bold=True, color=accent, first=True)
-            n.paragraph_format.space_after = Pt(0)
-            # Condensed: the cue label keeps caps and colour but loses its letter
-            # tracking - tracking is what made "DISTANCE VS. DISPLACEMENT" wrap - and
-            # the prompts drop half a point so a question fits on two lines, not four.
-            lab = para(cue, row["cueLabel"], 7, bold=True, color=accent)
-            lab.paragraph_format.space_after = Pt(4)
-            for q in row["cues"]:
-                para(cue, q, 8.5)
-                # SHULL-CHG-0020. His ask: "give recall." The cue column already told
-                # a student to "cover the right side and quiz yourself with it later" -
-                # but gave nowhere to actually write the answer when they did, so
-                # recall stayed a mental exercise instead of a real self-check. One
-                # short line per cue turns it into one.
-                rule_lines(cue, 1, hair)
-            para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
-            if row.get("diagram"):
-                diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
-            if row.get("table"):
-                fillin_table(notes, row["table"], pal, NOTES_INNER_IN)
-                unpad_cell(notes)
-            if row.get("matterFlowchart"):
-                matter_flowchart(notes, pal, NOTES_INNER_IN,
-                                  filled=bool(row["matterFlowchart"].get("filled")))
-                unpad_cell(notes)
-
-            prob = row.get("problem")
-            if prob:
-                para(notes, prob.get("label", "EXAMPLE"), 7.5, bold=True,
-                     color=accent, caps_track=True)
-                if prob.get("statement"):
-                    para(notes, prob["statement"], 9.5)
-                if prob.get("given") or prob.get("need"):
-                    given_need(notes, prob.get("given", ""), prob.get("need", ""),
-                               pal, NOTES_INNER_IN)
-                work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
-                         float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), NOTES_INNER_IN)
-                if prob.get("answer"):
-                    para(notes, prob["answer"], 9.5)
-
-            for n in row["notes"]:
-                mw = n.startswith(("*", "✎"))
-                body = n.lstrip("*✎").strip()
-                if mw:
-                    # A paragraph-level w:pBdr left border (the original approach) is
-                    # valid OOXML and present in the saved file, but LibreOffice does
-                    # not paint it inside a nested table cell - confirmed by inspecting
-                    # the raw XML (border there, sz 18, colour correct) against the
-                    # rendered PDF (no line at all). Every OTHER accent bar in this
-                    # system (the masthead kicker, work_box's label) is a TABLE CELL
-                    # border, which does render reliably - so the must-write line gets
-                    # the same treatment: its own 1x1 table with a left cell border,
-                    # not a paragraph border.
-                    mwt = notes.add_table(rows=1, cols=1)
-                    fix_widths(mwt, [NOTES_INNER_IN])
-                    mwc = mwt.rows[0].cells[0]
-                    borders(mwc, display, sz=18, edges=("left",))
-                    cell_margins(mwc, top=20, bottom=20, left=120, right=0)
-                    para(mwc, body, 9.5, bold=True, first=True)
-                    # NOT unpad_cell(notes) here: that helper strips every empty
-                    # paragraph before the FIRST table anywhere in the cell, not just
-                    # the one this call just introduced - in a notes cell that already
-                    # has earlier rule_lines() blank writing lines before this
-                    # must-write table, it deleted those too. Harmless here: the one
-                    # extra blank paragraph python-docx leaves before a freshly added
-                    # table is a few points of space, not a rendering defect.
+        n = 0
+        for pi, page in enumerate(sec["pages"], 1):
+            page["_n"] = pi
+            numbers = []
+            for row in page["rows"]:
+                if row.get("kind", "notes") in NUMBERED:
+                    n += 1
+                    numbers.append(n)
                 else:
-                    para(notes, body, 9.5, bold=False)
-                    rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
+                    numbers.append(None)
+            content_page(doc, ctx, sec, page, numbers)
+            designed += 1
 
-            # SHULL-CHG-0020. His ask: "add box to add anything from the slide,
-            # 'Extra'." The structured prompts above cover what he planned to put on
-            # the slide - this is the catch-all for whatever he adds live that isn't
-            # one of them, kept with the row it belongs to rather than pooled once at
-            # the end of the section, since that's what "from the slide" scopes it to.
-            # It is an affordance, not a heading. Set in the accent at the same size
-            # and tracking as "FOUR TERMS YOU'LL USE ALL UNIT" it made a catch-all box
-            # look like teaching content, four and five times a page. Same words, same
-            # place, quieter voice: smaller, grey, barely tracked, not bold.
-            x = para(notes, "EXTRA — ANYTHING ELSE FROM THE SLIDE", 7,
-                     color=label, caps_track=12)
-            x.paragraph_format.space_before = Pt(3)
-            rule_lines(notes, 2, hair)
-
-        gap(doc, 2)
-        c = one_cell(doc, protect=True); borders(c, accent)
-        para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
-             bold=True, color=accent, caps_track=True, first=True)
-        para(c, sec["summaryPrompt"], 9.5)
-        rule_lines(c, 4, hair)
-        para(c, "SELF-CHECK", 7.5, bold=True, color=accent, caps_track=True)
-        for x in sec.get("selfCheck", []):
-            check_item(c, x, pal)
-
-    gap(doc, 14)
-    c = one_cell(doc); borders(c, ink, sz=W_HEAD_TOP, edges=("top",))
-    borders(c, display, sz=W_SECTION, edges=("bottom",))
-    cell_margins(c, top=60, bottom=60, left=0, right=0)
-    # keepNext: the closing banner belongs to the checklist under it. Left to fall
-    # where it liked it stranded at the foot of the last section's page, a heading
-    # with its content on the next sheet.
-    bp = para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True,
-              first=True)
-    bp.paragraph_format.keep_with_next = True
-    c = one_cell(doc, protect=True); borders(c, hair, sz=W_BOX)
-    cell_margins(c, top=45, bottom=45, left=40, right=40)
-    para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
-    for x in spec["close"]["checklist"]:
-        check_item(c, x, pal)
-    para(c, "UNIT BIG PICTURE", 7.5, bold=True, color=accent, caps_track=True)
-    para(c, spec["close"]["bigPicture"], 9.5)
-    rule_lines(c, 3, hair)
-    para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
-    rule_lines(c, 3, hair)
-
-    # SHULL-CHG-0018. A standing last page, every course: topic breakdown, key
-    # points, confusing points, remember. Required-with-a-loud-warning rather than a
-    # hard crash - Geology's and Physics's already-shipped specs don't have this
-    # content yet and inventing it is not this builder's job - so a spec missing it
-    # still builds, loudly, matching the noEquationBar soft-opt-out pattern.
-    recap = spec.get("studyRecap")
-    if recap:
-        study_recap_page(doc, recap, pal)
+    if spec.get("conceptReview"):
+        concept_review_page(doc, spec, ctx)
+        designed += 1
     else:
-        print("build_notes_docx: this course's notes should end with a Study Recap "
-              "page — none provided, building without one; see SHULL-CHG-0018 "
-              "discussion.", file=sys.stderr)
+        print("build_notes_docx: no conceptReview in this spec — building without the "
+              "standing Concept Review page. Every packet should end with one.",
+              file=sys.stderr)
 
-    running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
-
+    footer(s, ctx)
+    nobreak_hyphens(doc.element.body)
     trim_tail(doc)
+    schema_order(doc)
     doc.save(out)
-    print(f"wrote {out}  —  {code} {unit} {span}")
+
+    print(f"wrote {out}  —  {code} {u} {span}  —  {designed} designed pages"
+          + ("  (upgraded from a flat spec)" if legacy else ""))
+    for label, used, avail in ctx["report"]:
+        print(f"   {label:<12} {used:5.2f} in of {avail:.2f} in")
+    if ctx["overfull"]:
+        print("build_notes_docx: predicted to spill onto an extra sheet:", file=sys.stderr)
+        for m in ctx["overfull"]:
+            print("   " + m, file=sys.stderr)
+    if verify and not verify_pages(out, designed):
+        return 2
     return 0
 
 

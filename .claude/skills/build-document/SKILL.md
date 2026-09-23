@@ -12,8 +12,10 @@ python3 templates/notes/build_notes_docx.py templates/notes/specs/<spec>.json ou
 ```
 
 **`.docx`, chosen by the user 2026-09-09** (SHULL-CHG-0014) — guided notes are the one document he
-edits after the fact, and a PDF cannot be changed at 7:40 a.m. `build_notes.py` renders the same
-spec to PDF if a fixed-layout copy is ever wanted.
+edits after the fact, and a PDF cannot be changed at 7:40 a.m. For a fixed-layout copy, convert the
+built `.docx` with `soffice --headless --convert-to pdf`. `build_notes.py` (Option B, HTML to PDF)
+still exists, but it reads only the old flat spec and draws the old layout. It cannot render a
+paged spec.
 
 Structure, and why: `templates/notes/README.md`. The content lives in a JSON spec; the builder
 checks the section code against that course's `DECISIONS.md` before building anything.
@@ -103,10 +105,18 @@ notes are provisional.
 Set the scaffolding level and **state the choice in one line** so it can be overridden. The ladder
 comes down across the year; the per-course index is in each decisions file.
 
-Every section starts a new page and ends with a summary box plus self-check. Worked problems use an
-open bordered box with a faint prompt — **never ruled lines.** Blanks are sized to the expected
-answer; a one-word blank and a full-sentence blank must not look identical. Leave a margin note
-where a common misconception lives, named plainly.
+The packet is a set of designed pages, **one sheet each** (layout: SHULL-CHG-0025).
+It opens with a cover: section breakdown, equation toolbox, key terms by section, how to use the
+notes. Each section in the breakdown carries a **1–10 difficulty rating**. It is a standard cover
+feature, and the values are course content supplied in the spec. Each
+section usually spans two content pages, and each page has its own one-line subtitle and about
+three open two-column blocks. Every section ends with a **RECALL block** (summary prompt plus
+self-check). The packet closes on a **Concept Review** page. Cue questions carry no writing line.
+Worked problems use `Given:` / `Find:` and an open bordered work box, at least 1.4 in tall — **never
+ruled lines.** Build with `--verify` so a spilled page fails the build. Layout, schema, and why:
+`templates/notes/README.md`. Blanks are sized to the expected answer; a one-word blank and a
+full-sentence blank must not look identical. Leave a margin note where a common misconception
+lives, named plainly.
 
 **Always two files** — student copy and filled key — generated from the same source so they cannot
 drift.
