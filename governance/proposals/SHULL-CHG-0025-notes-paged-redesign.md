@@ -4,7 +4,7 @@
 |---|---|
 | **Change ID** | SHULL-CHG-0025 |
 | **Date** | 2026-09-23 |
-| **Source** | User. Verbatim: *"i took this over to chat gpt codex and we worked on this to improve it to this, i like how we seperated and broke down the slides like this a bit more and improved it, can you take what we did here to improve this and add it to our repo to update our guided notes propfile."* and *"maybe any shading or somehting that would improve this on greyscale?"* Four follow-up answers from the same conversation are in §2. |
+| **Source** | User. Verbatim: *"i took this over to chat gpt codex and we worked on this to improve it to this, i like how we seperated and broke down the slides like this a bit more and improved it, can you take what we did here to improve this and add it to our repo to update our guided notes propfile."* and *"maybe any shading or somehting that would improve this on greyscale?"* Four follow-up answers from the same conversation are in §2. **Added 2026-09-23:** a later answer, relayed by the main session, verbatim: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Its first two parts are recorded at §6 items 4 and 8. The third part belongs to SHULL-CHG-0029. **None of it approves this record.** |
 | **Reference artifact** | `/root/.claude/uploads/26f8099c-89f2-51d6-8b84-531faeb169a3/3933feb4-SHULL_CHEM_U01_Guided_Notes_Cover_and_Review.pdf`. It has 8 pages and was made outside this repository with ChatGPT/Codex, using ReportLab and Helvetica/Arial. **It is not stored in the repo.** It lives under `/root/.claude/uploads/` and may not persist. §3 describes it from the page renders. |
 | **Current Rule** | See §1 — verbatim, from SHULL-CHG-0014, SHULL-CHG-0016 and SHULL-CHG-0024 |
 | **Proposed Rule** | See §3 |
@@ -14,7 +14,7 @@
 | **Affected Skills** | `build-document` — `.claude/skills/build-document/SKILL.md` is being updated by the designer to describe the new layout. `templates/notes/README.md` is being updated by the designer too. **Neither update is committed.** Both land with this change, and not before it. |
 | **Affected Courses** | All three — Chemistry, Physics, Geology. The template is shared. |
 | **Risk** | **Medium** — a shared template, three courses. See §6 for the items that need the user. **Two touched LOCKED rules** (§6, items 1 and 2). Item 1 has been resolved in favour of the LOCKED rule, pending the user's confirmation. Item 2 is open. |
-| **Recommendation** | Approve the layout, subject to the user's answers in §6. The four decisions in §2 are already his. What is left is a set of places where the Codex reference and a standing rule disagree. §6 lists them. None is settled without the user. Items 1 and 3 have been brought back to the existing LOCKED rules (0015, 0016), pending his confirmation. The others are open. |
+| **Recommendation** | Approve the layout, subject to the user's answers in §6. The four decisions in §2 are already his. What is left is a set of places where the Codex reference and a standing rule disagree. §6 lists them. None is settled without the user. Items 1 and 3 have been brought back to the existing LOCKED rules (0015, 0016), pending his confirmation. Items 4 and 8 were answered on 2026-09-23. The recorded readings of those answers are the main session's, and his decision on this record confirms them. The others are open. |
 | **Decision** | *Pending.* |
 | **Status** | **PENDING** |
 | **Implemented By** | *(blank — the rebuild is in progress in the working tree and will not be committed until the user approves this record)* |
@@ -207,8 +207,10 @@ work box and its 1.4 in minimum (0016). Bare block numbers (0024 `4234b69`, and 
 
 ## 5. What stays out of this record
 
-- **`courses/`.** Nothing here writes a course fact. The difficulty ratings might be one, and §6
-  item 4 asks.
+- **`courses/`, except one split-out edit.** The template writes no course fact. The per-section
+  difficulty values **are** course facts (§6 item 4, answered 2026-09-23). Under `CHANGE_CONTROL.md`
+  §1 they are split out as a separate, labelled Path A edit to `courses/chemistry/DECISIONS.md`. See
+  §8.
 - **`brand/`.** No token changes. `ground.parchment` is used as it already exists.
 
 ---
@@ -246,11 +248,24 @@ In the order they block. One question at a time. Nothing here is settled without
    made the work-box label the course accent because a hairline-coloured label measured 1.62:1. In
    greyscale the label must use a grey that still clears contrast on white.
 
-4. **Difficulty ratings are new course content.** The Codex cover rates S01.1 at 1/10, S01.3 at
-   2/10 and S01.5 at 3/10. These did not come from this repository. `courses/chemistry/DECISIONS.md`
-   has no difficulty rating. **Do they belong in `courses/chemistry/DECISIONS.md` as a course fact?**
-   If so, that is a separate Path A edit. If not, the template should leave the field empty, not
-   carry numbers nobody confirmed. The same question will come up for Physics and Geology.
+4. **Difficulty ratings are new course content. ANSWERED 2026-09-23.** The Codex cover rates S01.1
+   at 1/10, S01.3 at 2/10 and S01.5 at 3/10. These did not come from this repository.
+   `courses/chemistry/DECISIONS.md` has no difficulty rating.
+
+   **The user, verbatim:** *"difficulty ratings, keep and add"*
+
+   **The main session's reading. Not his words.** Keep the ratings on the notes cover, and add them
+   as a standing feature of the notes template. The per-section values are course facts. So they live
+   in `courses/chemistry/DECISIONS.md`, and not in a skill or template. The template carries the
+   **field**. It carries no numbers. See §8, edit 2.
+
+   Still to watch (flagged, not blocking):
+   - The Codex cover rated only S01.1, S01.3 and S01.5. **S01.2 has no rating**, and none is invented
+     here. S01.4 has none because it is folded into S01.3 (SHULL-CHG-0028).
+   - Physics and Geology have **no values**. Their covers leave the field empty until he gives them.
+   - A notes spec that states a rating restates a fact that lives in `DECISIONS.md`. The spec must
+     match it, and §7 checks that. A builder that reads the value from `DECISIONS.md` would remove the
+     duplicate. That is a possible later improvement, not part of this record.
 
 5. **Greyscale removes course colour from printed notes in all three courses.** §8 already limits
    print colour to *"a thin accent only"*, so this is compatible. But it changes each course's
@@ -273,6 +288,24 @@ In the order they block. One question at a time. Nothing here is settled without
      Physics or Geology as written.
    - A flowchart drawn as an image cannot be edited in Word the way the rest of the document can.
      That sits slightly against 0014's reason for choosing `.docx`.
+
+8. **The equation toolbox and RECAP give the answers to the S01.3 fill-in prompts. ANSWERED
+   2026-09-23.** The Auditor asked whether the cover's equation toolbox (§3f) and the RECAP block
+   (§3d) should stay, since together they hand students the answers to the S01.3 fill-in prompts.
+   The question reached the Secretary through the main session. It is not in a report in this
+   repository, because the Auditor's 2026-09-23 audit left guided notes out of scope.
+
+   **The user, verbatim:** *"equation box, keep it"*
+
+   **The main session's reading. Not his words.** The cover toolbox and the RECAP stay where they
+   are, even though they give the S01.3 answers, because that matches the Codex reference.
+
+   **Flagged, not resolved:**
+   - The main session gave its reason as "the approved reference". **The reference is not approved.**
+     This record, which would adopt it, is still PENDING. The accurate reason is that it matches the
+     reference the user chose to work from.
+   - His words name the "equation box" only. Reading them as covering the RECAP too is the main
+     session's reading. He confirms or corrects it when he decides this record.
 
 ---
 
@@ -299,4 +332,43 @@ These must pass after the user approves and before Status moves past APPROVED:
 - [ ] `templates/notes/README.md` and `.claude/skills/build-document/SKILL.md` describe what the
       builder actually does
 - [ ] **An independent Auditor pass**, which 0024 never had
+- [ ] The difficulty rating is a template **field** with no default value.
+      `grep -rn "/10" templates/notes/build_notes_docx.py .claude/skills/build-document/SKILL.md templates/notes/README.md`
+      finds no per-section rating
+- [ ] Every rating in a committed notes spec matches `courses/chemistry/DECISIONS.md` exactly
+- [ ] The cover equation toolbox and the RECAP block are present, as the §6 item 8 answer requires
 - [ ] Commit message carries `SHULL-CHG-0025`, and `Implemented By` / `Verified` are filled in here
+
+---
+
+## 8. Implementation plan — the edits, split by layer
+
+Under `CHANGE_CONTROL.md` §1, a change that touches both layers is split into two labelled edits.
+
+| Edit | Path | File(s) | Change |
+|---|---|---|---|
+| 1 | **B** (build) | `templates/notes/build_notes_docx.py`, `templates/_shull_docx.py` if touched, `templates/notes/README.md`, `.claude/skills/build-document/SKILL.md`, and the committed Chemistry U01 spec | The layout in §3. It includes the cover's **difficulty-rating field**, a standing feature with no values in the template, and the equation toolbox and RECAP kept as they are (§6 item 8) |
+| 2 | **A** (course) | `courses/chemistry/DECISIONS.md` | A dated entry at the **top** of the decision log recording the U1 difficulty ratings, and the values placed next to the U1 curriculum map. Text below |
+
+Edit 2 draft, for the top of the decision log (`CHANGE_CONTROL.md` §5):
+
+```markdown
+### 2026-09-23 — U1 section difficulty ratings
+Guided-notes covers carry a difficulty rating out of 10 per section ("Estimated for advanced high
+school students: 1 = introductory; 10 = highly challenging"). Unit 1: S1.1 Matter & Changes 1/10 ·
+S1.3 Atomic Structure 2/10 · S1.5 Average Atomic Mass 3/10. S1.2 is not yet rated. S1.4 has no
+rating because it is folded into S1.3 (SHULL-CHG-0028). The values came from the Codex notes cover;
+Matt kept them 2026-09-23 ("difficulty ratings, keep and add").
+Supersedes: None (first record of difficulty ratings).
+Status: CONFIRMED · SHULL-CHG-0025 (Path A edit split from a Path B record)
+```
+
+The exact wording and position of the values next to the U1 curriculum map are settled at
+implementation. **They must not break the section-code parse** in `scripts/_shullos.py`
+`section_codes()`. For example, "1/10" must not be written straight after a code in a way that adds
+or drops a code. Run `scripts/validate_codes.py` afterwards. The Chemistry code count must not
+change.
+
+Edits 1 and 2 are separate commits, each carrying `SHULL-CHG-0025`. Edit 2 depends on nothing in
+edit 1 and may land first. If SHULL-CHG-0028 lands first, the S1.4 wording above stands. If it does
+not, the S1.4 clause is dropped rather than asserting a fold that is not yet recorded.
