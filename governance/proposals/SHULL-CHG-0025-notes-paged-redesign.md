@@ -15,8 +15,8 @@
 | **Affected Courses** | All three — Chemistry, Physics, Geology. The template is shared. |
 | **Risk** | **Medium** — a shared template, three courses. See §6 for the items that need the user. **Two touched LOCKED rules** (§6, items 1 and 2). Item 1 has been resolved in favour of the LOCKED rule, pending the user's confirmation. Item 2 is open. |
 | **Recommendation** | Approve the layout, subject to the user's answers in §6. The four decisions in §2 are already his. What is left is a set of places where the Codex reference and a standing rule disagree. §6 lists them. None is settled without the user. Items 1 and 3 have been brought back to the existing LOCKED rules (0015, 0016), pending his confirmation. Items 4 and 8 were answered on 2026-09-23. The recorded readings of those answers are the main session's, and his decision on this record confirms them. The others are open. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"approved"*, then *"i like the newer style."* His answers to §6: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Recorded under SHULL-CHG-0026. The approval covers the amended record, including bare block numbers (0015) and the 1.4 in work box (0016). |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank — the rebuild is in progress in the working tree and will not be committed until the user approves this record)* |
 | **Verified** | No — nothing has been implemented. The checks that will be required are in §7. |
 
