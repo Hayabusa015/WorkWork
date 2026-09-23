@@ -25,15 +25,15 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
-## Pending — raised 2026-09-23
+## 2026-09-23
 
 `PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0026 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0026-approval-recording.md` |
-| SHULL-CHG-0025 | 2026-09-23 | Guided notes paged redesign from the Codex reference | PARTIAL | `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` |
-| SHULL-CHG-0024 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | PARTIAL | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |
+| SHULL-CHG-0025 | 2026-09-23 | Guided notes paged redesign from the Codex reference | CONFIRMED | `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` |
+| SHULL-CHG-0024 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | CONFIRMED | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |
 
 ## 2026-09-09 · 2026-09-08
 
@@ -76,8 +76,8 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
-| 2026-09-23 | Approve the paged guided-notes redesign? Two conflicts with LOCKED rules come first: block-number chips vs SHULL-CHG-0015, and cue width vs SHULL-CHG-0018. The rebuild stays uncommitted until approval. | User — SHULL-CHG-0025 |
-| 2026-09-23 | Acknowledge the retroactive record for seven notes-template commits made without a Change ID (2026-09-16 to 2026-09-23). History is not rewritten. | User — SHULL-CHG-0024 |
+| 2026-09-23 | Approve the paged guided-notes redesign? Two conflicts with LOCKED rules come first: block-number chips vs SHULL-CHG-0015, and cue width vs SHULL-CHG-0018. The rebuild stays uncommitted until approval. | User — SHULL-CHG-0025. Answered 2026-09-23 — approved |
+| 2026-09-23 | Acknowledge the retroactive record for seven notes-template commits made without a Change ID (2026-09-16 to 2026-09-23). History is not rewritten. | User — SHULL-CHG-0024. Answered 2026-09-23 — approved |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |
@@ -100,3 +100,7 @@ history to comply would be forging an audit log to make it look like it was alwa
 The rule binds from the commit that introduces this file forward. To trace a pre-rule change, use
 the Record column: every one of the twelve is fully recorded, and the record names what it
 supersedes. Nothing is lost; it is one hop slower.
+
+The same gap opened again after the rule: seven notes-template commits (2026-09-16 to 2026-09-23)
+carry no Change ID. They are recorded retroactively in SHULL-CHG-0024, and their history is not
+rewritten either.
