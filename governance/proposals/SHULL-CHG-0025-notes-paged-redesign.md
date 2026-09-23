@@ -16,9 +16,9 @@
 | **Risk** | **Medium** — a shared template, three courses. See §6 for the items that need the user. **Two touched LOCKED rules** (§6, items 1 and 2). Item 1 has been resolved in favour of the LOCKED rule, pending the user's confirmation. Item 2 is open. |
 | **Recommendation** | Approve the layout, subject to the user's answers in §6. The four decisions in §2 are already his. What is left is a set of places where the Codex reference and a standing rule disagree. §6 lists them. None is settled without the user. Items 1 and 3 have been brought back to the existing LOCKED rules (0015, 0016), pending his confirmation. Items 4 and 8 were answered on 2026-09-23. The recorded readings of those answers are the main session's, and his decision on this record confirms them. The others are open. |
 | **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"approved"*, then *"i like the newer style."* His answers to §6: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Recorded under SHULL-CHG-0026. The approval covers the amended record, including bare block numbers (0015) and the 1.4 in work box (0016). |
-| **Status** | **APPROVED** |
-| **Implemented By** | *(blank — the rebuild is in progress in the working tree and will not be committed until the user approves this record)* |
-| **Verified** | No — nothing has been implemented. The checks that will be required are in §7. |
+| **Status** | **IMPLEMENTED** (2026-09-23) |
+| **Implemented By** | `71e5e05` (§8 edit 1, Path B: builder, specs, README, skill). §8 edit 2 (Path A, `courses/chemistry/DECISIONS.md`) and the matching `standards/QA_GATE.md` line were applied by the Secretary on 2026-09-23. **The main session commits them with `SHULL-CHG-0025` and adds that SHA here.** |
+| **Verified** | **Yes, with one partial item.** An independent Auditor passed the template on 2026-09-23 with no blocking rows (recorded in the `71e5e05` commit message; the Auditor's table is not stored in `reports/`). The items checked, and by whom, are in §7. **Partial:** the older Geology and Physics notes still leave some pages under-filled, including a single-block Geology sheet at 61%. This is a content limit (too little content in the old specs), not a builder defect. |
 
 **Depends on SHULL-CHG-0024.** This record's "Current Rule" is the template as the seven commits in
 0024 left it. The user has not yet acknowledged 0024. This record makes sense whichever way 0024
@@ -313,31 +313,55 @@ In the order they block. One question at a time. Nothing here is settled without
 
 These must pass after the user approves and before Status moves past APPROVED:
 
-- [ ] `pdffonts` / `scripts/audit_fonts.py`: Archivo only, on every rebuilt packet
-- [ ] `scripts/audit_print_ink.py`: toner within budget, **widest solid band stays under the fill
-      limit** with the new tints
-- [ ] The Chemistry U01 packet builds from a spec that **is committed** to `templates/notes/specs/`.
+*Checked 2026-09-23. Evidence key: **[C]** = stated in the `71e5e05` commit message.
+**[A]** = the independent Auditor's pass, as relayed to the Secretary by the main session. It is not
+stored in the repository. **[S]** = checked by the Secretary in the working tree (read and grep only,
+no shell).*
+
+- [x] `pdffonts` / `scripts/audit_fonts.py`: Archivo only, on every rebuilt packet. **[A]**
+- [x] `scripts/audit_print_ink.py`: toner within budget, **widest solid band stays under the fill
+      limit** with the new tints. **[A]** Ink check OK.
+- [x] The Chemistry U01 packet builds from a spec that **is committed** to `templates/notes/specs/`.
       0024 §5 found that the features it added were never exercised by a spec in the repository.
-- [ ] The Geology and Physics specs build through the automatic conversion, and every page is
-      inspected
-- [ ] 0016's enforcement still fires: strip a `problem` block and the build refuses
-- [ ] Work-box minimum is 1.4 in in the builder (not 1.1 in), and holds on the rendered page
-- [ ] Block numbers render bare, with no tint, chip or border (SHULL-CHG-0015). The tint appears
-      only on fill-in table header rows and on the RECALL / RECAP / REVIEW tags.
-- [ ] The mis-cited Change IDs from SHULL-CHG-0024 finding 1 are gone:
+      **[C][S]** `chem_u01_s01.1-s01.5_notes_student.json`, `_key.json` and their generator.
+- [x] The Geology and Physics specs build through the automatic conversion, and every page is
+      inspected. **[C][A]** Both build and pass `--verify`. **Partial:** some converted pages are
+      under-filled, including a single-block Geology sheet at 61%. This is a content limit of the
+      older specs. **[A]**
+- [x] 0016's enforcement still fires: strip a `problem` block and the build refuses. **[A]** The
+      SHULL-CHG-0016 strip tests exit 1 in 8 of 8 cases.
+- [x] Work-box minimum is 1.4 in in the builder (not 1.1 in), and holds on the rendered page.
+      **[C][S]** The builder has `WORK_BOX_MIN_IN = 1.4` (line 82). The rendered page is covered only
+      by the Auditor's pass having no blocking rows.
+- [x] Block numbers render bare, with no tint, chip or border (SHULL-CHG-0015). The tint appears
+      only on fill-in table header rows and on the RECALL / RECAP / REVIEW tags. **[C]**, and the
+      Auditor found no blocking rows. The Secretary did not inspect a render.
+- [x] The mis-cited Change IDs from SHULL-CHG-0024 finding 1 are gone:
       `grep -n "SHULL-CHG-001[89]\|SHULL-CHG-0020" templates/notes/build_notes_docx.py` returns only
-      correct citations
-- [ ] If `templates/_shull_docx.py` changes, both worksheet builders are rebuilt and checked
-      (0024 finding 2)
+      correct citations. **[S]** One hit, line 57, which correctly cites 0018 for the cue split.
+- [x] If `templates/_shull_docx.py` changes, both worksheet builders are rebuilt and checked
+      (0024 finding 2). **[C][A]** Worksheet output is byte-identical to the previous HEAD.
 - [ ] `templates/notes/README.md` and `.claude/skills/build-document/SKILL.md` describe what the
-      builder actually does
-- [ ] **An independent Auditor pass**, which 0024 never had
-- [ ] The difficulty rating is a template **field** with no default value.
+      builder actually does. *Not checked by the Secretary against the builder. The README
+      describes RECALL / RECAP / REVIEW and the legacy conversion.*
+- [x] **An independent Auditor pass**, which 0024 never had. **[C][A]** No blocking rows.
+- [x] The difficulty rating is a template **field** with no default value.
       `grep -rn "/10" templates/notes/build_notes_docx.py .claude/skills/build-document/SKILL.md templates/notes/README.md`
-      finds no per-section rating
-- [ ] Every rating in a committed notes spec matches `courses/chemistry/DECISIONS.md` exactly
-- [ ] The cover equation toolbox and the RECAP block are present, as the §6 item 8 answer requires
-- [ ] Commit message carries `SHULL-CHG-0025`, and `Implemented By` / `Verified` are filled in here
+      finds no per-section rating. **[S]** No hits. The builder reads `cover.sections[].difficulty`
+      and warns when it is absent.
+- [x] Every rating in a committed notes spec matches `courses/chemistry/DECISIONS.md` exactly.
+      **[S]** Both specs carry 1.1 → 1, 1.3 → 2, 1.5 → 3, matching the U1 line and the 2026-09-23
+      log entry added under §8 edit 2.
+- [x] The cover equation toolbox and the RECAP block are present, as the §6 item 8 answer requires.
+      **[S]** `equationToolbox` on the cover and a `"kind": "recap"` block in the student spec.
+- [x] Commit message carries `SHULL-CHG-0025`, and `Implemented By` / `Verified` are filled in here.
+      **[S]** `71e5e05`. The commit for §8 edit 2 is pending (see Implemented By).
+
+**§8 edit 2 note.** SHULL-CHG-0028 has not landed (still PENDING), so the S1.4 clause of the draft
+was dropped, as §8 requires. `scripts/validate_codes.py` was **not run** (no shell). The new U1 line
+was written so that `section_codes()` adds no code: no code follows a line start, `·` or `|`. The
+main session should run the validator before committing and confirm the Chemistry code count is
+unchanged.
 
 ---
 

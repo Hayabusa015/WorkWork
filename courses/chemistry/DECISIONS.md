@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-14
+**Last updated:** 2026-09-23
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -25,6 +25,8 @@ against a code not listed here.
 **U1 Matter & Atomic Structure** (5 sections)
 1.1 Matter & Changes · 1.2 History of the Atomic Model · 1.3 Atomic Structure · 1.4 Isotopes
 · 1.5 Average Atomic Mass
+*Guided-notes difficulty, out of 10:* S1.1 1/10, S1.3 2/10, S1.5 3/10. S1.2 is not yet rated.
+See the 2026-09-23 decision-log entry.
 
 **U2 Electrons & Atomic Theory** (5 sections)
 2.1 The Bohr Model · 2.2 Energy Levels, Sublevels & Orbitals · 2.3 Electron Configurations ·
@@ -337,6 +339,14 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
 ---
 
 ## Decision log
+
+### 2026-09-23 — U1 section difficulty ratings
+Guided-notes covers carry a difficulty rating out of 10 per section ("Estimated for advanced high
+school students: 1 = introductory; 10 = highly challenging"). Unit 1: S1.1 Matter & Changes 1/10 ·
+S1.3 Atomic Structure 2/10 · S1.5 Average Atomic Mass 3/10. S1.2 is not yet rated. The values came
+from the Codex notes cover; Matt kept them 2026-09-23 ("difficulty ratings, keep and add").
+Supersedes: None (first record of difficulty ratings).
+Status: CONFIRMED · SHULL-CHG-0025 (Path A edit split from a Path B record)
 
 ### 2026-09-15 — Standing policy: optional worksheets redeemable at test time, +1 point each, uncapped
 New course-wide grading policy, stated by Matt directly in conversation: "My chemistry worksheets
