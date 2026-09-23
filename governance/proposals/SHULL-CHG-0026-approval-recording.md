@@ -17,7 +17,7 @@
 | **Decision** | **Approved by the user, 2026-09-23**, in the main session. Answering the main session's proposal *"Write a proposal to allow approvals the Overseer quotes word for word from the main conversation, with a timestamp."*, he said, verbatim: *"Yes rewite so you can send to secretary, file these away and update, i like the newer style."* When this recording was blocked, he said *"retry, yes S1.3"*, then added the permission rule himself: *"Add the file"*. **One-time bootstrap exception (§5 item 1):** this first recording rests on his direct instruction (`CLAUDE.md` §2, precedence 1). **§5 item 2:** the main session makes the `CLAUDE.md` and `.claude/agents/` edits. **§5 item 4:** an approved record that is not yet built is indexed `PARTIAL`. |
 | **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
-| **Verified** | No. Nothing has been implemented. The required checks are in §6. |
+| **Verified** | No. **Partly implemented, 2026-09-23.** §4 row 1 (`CHANGE_CONTROL.md` §4) was applied by the Secretary and awaits its commit. Rows 2 and 4 are in the working tree. Row 3 (`overseer.md`) is not done. The §6 items checked so far are marked there. |
 
 ---
 
@@ -178,14 +178,24 @@ These are in blocking order. Each needs one answer.
 
 ## 6. Verification required before this is IMPLEMENTED
 
-- [ ] `CHANGE_CONTROL.md` §4 holds the recording path. "The user approves. Nothing else does."
-      is still present, word for word.
+- [x] `CHANGE_CONTROL.md` §4 holds the recording path. "The user approves. Nothing else does."
+      is still present, word for word. *Checked 2026-09-23 by the Secretary: the bullet is present
+      once, and rules 1–3 sit under a new "Recording the decision" bullet.*
 - [ ] `secretary.md`, `overseer.md` and `CLAUDE.md` point to `CHANGE_CONTROL.md` §4 and do not
       restate rules 1–3 (grep for the phrase "paraphrase a decision" finds it in one file only)
-- [ ] `legacy/` untouched
+      *Partly, 2026-09-23. In the working tree, `secretary.md` (Authority, lines 39–41 and the
+      Never list) and `CLAUDE.md` §4 point to §4 and do not restate it. **`overseer.md` has no
+      pointer yet.** The grep finds the phrase in `CHANGE_CONTROL.md` and in this record's own §2,
+      and nowhere else. The Secretary did not check whether the two pointer edits are committed.*
+- [ ] `legacy/` untouched. *The Secretary's edits did not touch it. Not checked against
+      `git status`: no shell in this session.*
 - [ ] The recording commit for 0026's own decision uses the rule 2 message, touches only
       `Decision:` / `Status:` and the CHANGELOG row, and states the §5 item 1 exception
-- [ ] Implementation commit(s) carry `SHULL-CHG-0026`
+      *Partly. `fa92811` carries the rule 2 message (read from `.git/logs/HEAD`). The committed
+      Decision field states the §5 item 1 exception. The Secretary could not read the diff (no
+      shell), so "touches only" is not verified.*
+- [ ] Implementation commit(s) carry `SHULL-CHG-0026`. *Pending: the main session commits.*
 - [ ] First live use: the next recorded decision (0024 or 0025) is checked against rule 2. Its
-      diff touches only the two fields and the index row.
+      diff touches only the two fields and the index row. *Partly. `53661f9` (0024) and `8cee7da`
+      (0025) carry the rule 2 message. Their diffs were not read.*
 - [ ] `Implemented By` and `Verified` filled in here

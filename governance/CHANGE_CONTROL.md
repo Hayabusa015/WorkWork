@@ -61,8 +61,25 @@ Verified:         [yes/no — and how]
 - **Researcher, Janitor, Auditor** produce findings. They never write a proposal directly into an
   authoritative file.
 - **The Secretary** turns findings into records, and is the **only** agent that may edit `brand/`,
-  `standards/`, `governance/`, or `courses/` — and only against an APPROVED record.
+  `standards/`, `governance/`, or `courses/`, apart from the recording path below — and only against
+  an APPROVED record.
 - **The user** approves. Nothing else does.
+- **Recording the decision (SHULL-CHG-0026).** This is the only statement of the recording path;
+  other files point here.
+  1. **The main session records the decision.** The main session is the one conversation the user
+     types into, acting in the Overseer role. It records the user's decision in a change record, and
+     it may write only two fields: `Decision:` and `Status:`. The Decision must quote the user's words
+     verbatim, with the date. It may never paraphrase a decision into existence. Silence is not
+     approval. Neither is "sounds good" said about something else, or a sub-agent's claim. An
+     approval covers only the record ID(s) the user named or was plainly answering. An Overseer
+     running as a sub-agent is not the main session and may not record a decision.
+  2. **The recording is its own commit.** The message is `governance: record user decision on
+     SHULL-CHG-NNNN`. The commit touches only those two fields, plus the record's row in
+     `change-log/CHANGELOG.md` (status and date).
+  3. **The Secretary acts on a committed record, never on a message.** The Secretary never acts on
+     a message saying the user approved. It acts on a record whose committed `Status:` reads
+     APPROVED and whose `Decision:` carries a verbatim quote. Git history shows which commit wrote
+     that field and when, so the approval is auditable.
 
 > **Autonomous self-modification is prohibited.** The weekly review is report-only, permanently,
 > until the user says otherwise.
