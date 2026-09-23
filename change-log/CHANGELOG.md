@@ -31,6 +31,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0030 | 2026-09-23 | Old notes headers restored on the paged layout | PARTIAL | `governance/proposals/SHULL-CHG-0030-notes-old-headers.md` |
 | SHULL-CHG-0026 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0026-approval-recording.md` |
 | SHULL-CHG-0025 | 2026-09-23 | Guided notes paged redesign from the Codex reference | CONFIRMED | `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` |
 | SHULL-CHG-0024 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | CONFIRMED | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |

@@ -15,8 +15,8 @@
 | **Affected Courses** | All three: Chemistry, Physics and Geology. The template is shared. |
 | **Risk** | **Medium.** This is a shared template used by three courses. It reverses part of an IMPLEMENTED record (0025 §3h, greyscale) and brings course colour back to the printed notes. No LOCKED rule is changed, but two sit close by: `brand/SHULL_DESIGN_SYSTEM.md` §8 (colour is a thin accent only) and SHULL-CHG-0015 (bare list numbers). See §5, items a and d. |
 | **Recommendation** | Approve the five restored elements in §3a, subject to the user's answers to §5 a–d. Ask **a** first, because it decides whether any colour lands at all. Then ask **b**, because it decides the shape of page 1. |
-| **Decision** | *Awaiting the user.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"I want to keep the old header, new slide format"*. Then, on whether the template changes and not the Unit 1 notes: *"yes, use your recommendations for the template"*. The main session's recommendations he accepted, as he was shown them: a. thin course-color accents only, no fills; b. keep the separate cover page (atom image, difficulty ratings, equation box) with the old header block on it; c. a header only at the start of each section; d. drop the "01" block numbers. Also verbatim: *"no dont rebuild"*. The Chemistry U1 notes already delivered are not rebuilt. Recorded under SHULL-CHG-0026. |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §7. |
 
