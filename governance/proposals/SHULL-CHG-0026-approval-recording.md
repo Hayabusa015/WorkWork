@@ -14,8 +14,8 @@
 | **Affected Courses** | None directly. It changes how every future change is approved, in all three courses. |
 | **Risk** | **Medium.** It changes who may write to `governance/`, narrowly. **The bootstrap is circular. See §5 item 1.** |
 | **Recommendation** | Approve. Without this, no Path B change can be approved from a Claude Code session at all. Answer §5 items 1 to 3 first. Items 1 and 2 decide how this record's own approval and implementation can happen. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Answering the main session's proposal *"Write a proposal to allow approvals the Overseer quotes word for word from the main conversation, with a timestamp."*, he said, verbatim: *"Yes rewite so you can send to secretary, file these away and update, i like the newer style."* When this recording was blocked, he said *"retry, yes S1.3"*, then added the permission rule himself: *"Add the file"*. **One-time bootstrap exception (§5 item 1):** this first recording rests on his direct instruction (`CLAUDE.md` §2, precedence 1). **§5 item 2:** the main session makes the `CLAUDE.md` and `.claude/agents/` edits. **§5 item 4:** an approved record that is not yet built is indexed `PARTIAL`. |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §6. |
 
