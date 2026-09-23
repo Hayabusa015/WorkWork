@@ -33,7 +33,7 @@ supersedes it, exactly as the decision logs work.
 |---|---|---|---|---|
 | SHULL-CHG-0026 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0026-approval-recording.md` |
 | SHULL-CHG-0025 | — | Guided notes paged redesign from the Codex reference | PROPOSED | `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` |
-| SHULL-CHG-0024 | — | Retroactive: seven unrecorded notes-template commits | PROPOSED | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |
+| SHULL-CHG-0024 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | PARTIAL | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |
 
 ## 2026-09-09 · 2026-09-08
 

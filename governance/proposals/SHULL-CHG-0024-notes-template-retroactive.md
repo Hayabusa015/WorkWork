@@ -14,8 +14,8 @@
 | **Affected Courses** | All three — Chemistry, Physics, Geology. The template is shared. The worksheet builders share `templates/_shull_docx.py` and are also touched (§6, finding 2). |
 | **Risk** | **Medium** as a change (shared template, three courses). As a process failure, the risk is not the diffs — it is that a reading of the rules existed under which a build change for all three courses needed no record. |
 | **Recommendation** | Acknowledge the record as written. **Do not rewrite git history** — no amend, rebase, or force-push; §2 says why. Treat SHULL-CHG-0025 as the change that settles the template's final form. Several of these seven changes are reversed there. Consider an Auditor pass on the template as it stands after 0025 lands, since none was run on these seven. |
-| **Decision** | *Pending — awaiting the user's acknowledgement.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"yes approve 0024 too"*. Recorded under SHULL-CHG-0026. |
+| **Status** | **APPROVED** |
 | **Implemented By** | `ed41fa0` · `e59ba21` · `2a02a58` · `fcdd544` · `f76fea6` · `9766298` · `4234b69` (full SHAs in §3). **These were committed before this record existed.** That is the defect this record documents. It is not a normal implementation. |
 | **Verified** | **Partly, by the session that made the changes. Not independently.** See §5. The orchestrating session reports running four checks: `pdffonts` showing Archivo only, a `scripts/audit_print_ink.py` pass, a rebuild of the Geology and Physics specs for backward compatibility, and visual inspection. **No independent Auditor pass was run on any of the seven commits.** The Secretary did not re-run any of these checks for this record. |
 
