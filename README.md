@@ -73,8 +73,6 @@ Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex
 ## Open — important, not blocking
 
 - **CONFLICT-24** — Chemistry grading: gradebook weights vs. the "daily practice ~10%" framing.
-- **CONFLICT-25** — whether Geology has section numbers at all. Blocks Geology renaming and the
-  code validator.
 - **CONFLICT-26** — the Gizmos rule vs. the built U1 materials that use one.
 - **Q-13** — whether to add a `99 Archive/` folder to the Drive content folders.
 

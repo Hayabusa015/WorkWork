@@ -19,7 +19,11 @@ system yourself.
   superseded.
 - **Stale documentation** — a file asserting something is missing, blocking, or pending that has
   since been resolved. The classic tell is "does not exist yet," "not yet supplied," or "NEEDED"
-  sitting beside a file that resolves it.
+  sitting beside a file that resolves it. **Check every `Status:` / `Phase X of 14` line against
+  actual repository state (`git log`, whether the thing it names is on disk) on every sweep** — this
+  exact drift sat in `CLAUDE.md` and `README.md` unnoticed for 42 commits (2026-09-08 to
+  2026-09-24), claiming agents and skills "do not yet exist" long after Phase 12 shipped them, and
+  was only caught by hand.
 - **Superseded versions** still presented as current
 - **Orphaned files** — a practice set with no deck, a quiz covering an unbuilt section
 - **Deprecated standards still referenced**

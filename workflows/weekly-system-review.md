@@ -27,13 +27,17 @@ verification  a change is not done until it has been checked
 
 ## Schedule
 
-A Routine firing a fresh session. **Not yet scheduled** — Phase 13, and only after the system has
-been exercised. A recurring job pointed at a half-built system produces noise, and noise trains the
-reader to stop reading.
+**Scheduled 2026-09-24 (Phase 13 activated).** A Routine fires a fresh session weekly, Sunday
+21:56 UTC, running this workflow end to end and stopping at PENDING proposals for user sign-off.
+Push and email notification is on, so a sweep with findings reaches the user even outside a session.
+Activated once the system had real exercise behind it — see the 2026-09-24 CLAUDE.md/README
+stale-status correction, found and fixed by hand, as the case in point for why this needed to be
+routine rather than incidental.
 
 Cron is evaluated in UTC. Ohio is UTC−4 until 2026-11-01, UTC−5 after — **the schedule needs
-revisiting at the DST change**, and that is a known gap rather than something the cron expression
-solves on its own.
+revisiting at the DST change** (21:56 UTC will drift an hour relative to Ohio local time), and that
+is a known gap rather than something the cron expression solves on its own. Whoever is running the
+system after 2026-11-01 should re-check the fire time against local expectations.
 
 ## What the review must not do
 
