@@ -1,7 +1,7 @@
 ---
 id: SHULL-CHG-0024
 title: Section-range grammar for multi-section documents — S##.#-S##.#, both halves zero-padded
-status: APPROVED
+status: IMPLEMENTED
 opened: 2026-09-24
 decided: 2026-09-24
 source: Auditor
@@ -116,9 +116,15 @@ operation, flagged below rather than folded in here.
 - `change-log/CHANGELOG.md` carries an index row pointing at this record.
 - Commit carries the Change ID in its message, per `governance/CHANGE_CONTROL.md` §6.
 
-**Implemented By:** (filled in immediately below in a follow-up commit, once this commit's own SHA
-is known — see `change-log/CHANGELOG.md` for the same note)
-**Verified:** pending — to be confirmed once the commit SHA is recorded
+**Implemented By:** `f341fbd` on `claude/elegant-bohr-8hkbpj`, message carries `SHULL-CHG-0024`. One
+commit, all three files (`standards/NAMING.md`, `change-log/CHANGELOG.md`, this record), nothing
+else changed.
+**Verified:** yes, with a caveat on who ran the check — this Secretary session has no git/shell
+tool, so it cannot independently run `git show`/`git log` against `f341fbd`. The coordinator, who
+does have git access, diffed the working tree against this record before committing and reported
+back that `standards/NAMING.md` and `change-log/CHANGELOG.md` match the text specified here exactly,
+and that the working tree is otherwise clean. Verification is therefore the coordinator's directly,
+recorded here rather than independently re-run.
 
 ## Not done here — flagged, not fixed
 

@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0024 | 2026-09-24 | Section-range grammar ratified: S##.#-S##.#, both halves padded, chip/footer match | PARTIAL — written, not yet committed (no git/shell tool available to this Secretary session) | `governance/proposals/SHULL-CHG-0024-section-range-grammar.md` |
+| SHULL-CHG-0024 | 2026-09-24 | Section-range grammar ratified: S##.#-S##.#, both halves padded, chip/footer match | CONFIRMED | `governance/proposals/SHULL-CHG-0024-section-range-grammar.md` |
 
 ## 2026-09-20
 
