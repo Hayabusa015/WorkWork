@@ -46,6 +46,33 @@ system after 2026-11-01 should re-check the fire time against local expectations
 - Flag `legacy/`, or flag materials listed in `brand/palette-archive/` as brand defects.
 - Manufacture findings to look useful. **Nothing found → one line, no commit.**
 
+## Sign-off dashboard
+
+**Secretary's Desk** — https://claude.ai/artifact/3zkvkaJB4EM8vYg2Jei5JT — is a Claude Artifact that
+mirrors `governance/proposals/*.md` for the user to review and sign off from a browser instead of
+reading raw markdown. Git remains authoritative; the dashboard is a synced view plus a decision
+inbox, never a second copy of the truth:
+
+- **`proposals` collection** — one document per Change ID, re-synced from the `.md` files whenever
+  a session runs this workflow. Read-only from the page's side.
+- **`decisions` collection** — written by the user clicking Approve / Reject / Defer on a PENDING
+  item. This is new state, not a duplicate: it is the intake for a human decision that doesn't exist
+  anywhere until they make it. Each document is `{change_id, decision, note, decided_at, applied}`.
+
+**Approve in the dashboard is a decision, not an implementation.** It does not touch git. Every run
+of this workflow must, after updating `governance/proposals/`:
+
+1. Push the current state of every proposal into the `proposals` collection (`ArtifactData`
+   `action: "batch"`, `set` per changed/new document) so the dashboard reflects reality.
+2. Query the `decisions` collection for `applied: false` documents. For each one, treat the
+   `decision` as the user's answer for that Change ID exactly as if they had said it in chat —
+   `approved` moves the record to APPROVED (implement only if also asked to, per the Secretary's
+   normal two-job split), `rejected`/`deferred` update `Status` and the decision log accordingly —
+   then write the same document back with `applied: true` and `applied_at` set, and re-sync that
+   proposal's `proposals` document so the dashboard shows the outcome without another manual step.
+3. Never silently drop an `applied: false` decision. If a decision arrived for a Change ID that no
+   longer exists or was already resolved another way, say so in the report rather than skipping it.
+
 ## The failure mode this exists to catch
 
 The legacy system detected drift correctly. Its librarian flagged the stale Physics map while two
