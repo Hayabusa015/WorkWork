@@ -1,7 +1,10 @@
 # Guided / Cornell notes
 
 **Authority:** `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` for the paged layout
-described here. Approved 2026-09-23. Also
+described here. Approved 2026-09-23.
+`governance/proposals/SHULL-CHG-0030-notes-old-headers.md` for the headers on it: the
+SHULL-CHG-0014 packet opening, section title bar, learning target line and course-colour row
+labels, restored on 0025's pages. Approved 2026-09-23. Also
 `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` (the template, and `.docx` as the
 production format), SHULL-CHG-0015 (bare list numbers), SHULL-CHG-0016 (work boxes),
 SHULL-CHG-0017 (course profiles, stacked fractions), SHULL-CHG-0018 (the cue column).
@@ -40,18 +43,26 @@ A packet is a set of **designed pages. Each designed page is one sheet of paper.
 
 | Page | What is on it |
 |---|---|
-| **Cover** | Eyebrow, the unit title (read from `DECISIONS.md` and never typed in a spec), section codes, school, an optional hero image top-right, Name/Date/Period, **Section breakdown / concepts to master** with each section's difficulty rating, **Equation toolbox**, **Key terms / grouped by section**, **How to use the notes** |
-| **Content pages** | A page head (eyebrow, section title, code, a one-line subtitle specific to *this* page) and about three **blocks**. A section usually spans two pages. |
-| **Concept review** | The standing last page: per section, a short explanation, an optional two-column comparison, and a *Watch out* line. Then **Quick recall / cover the explanations above**. |
+| **Cover** | The SHULL-CHG-0014 packet opening (SHULL-CHG-0030): the course-colour `SHULL SCIENCE · JAMES A. GARFIELD LOCAL SCHOOLS` line, the unit title in caps (read from `DECISIONS.md` and never typed in a spec), the `GUIDED NOTES · PHASE nn · N SECTIONS` kicker, closed by a heavy course-accent rule, with an optional image at the right. Then Name/Date/Period in a hairline outline; **Unit learning targets ∥ Key terms**; **How these notes work**, with the accent rule down its left; **Sections in this unit**, a box to tick per section with its difficulty rating at the right; and the **Equation toolbox** at the foot. |
+| **Content pages** | A new page per section. **Its first page opens with the section title bar**: the section title, the code at the right (`U01 / S01.2`, zero-padded per SHULL-CHG-0007), an ink rule above and a heavy course-accent rule below. Then the **`LEARNING TARGET` line**, closed by a hairline. **Continuation pages carry no head** (SHULL-CHG-0030 choice c); they start on their blocks. About three **blocks** a page; a section usually spans two pages. |
+| **Concept review** | The standing last page, opened by the same title bar with the unit code (`U01`) and the spec's subtitle under it: per section, a short explanation, an optional two-column comparison, and a *Watch out* line. Then **Quick recall / cover the explanations above**. |
 
 **A block is open, not boxed.** It has two columns split by one thin vertical rule, and one
 horizontal rule separates it from the next block. It has no outer box and no cell borders.
 
-- **Cue side (1.28 in, SHULL-CHG-0018):** the block number (`01`, `02`… bare, no chip, no box, no
-  tint, per SHULL-CHG-0015), a bold block title, then the cue questions in small grey type. **No
+- **Cue side (1.28 in, SHULL-CHG-0018):** the **cue label** in bold caps in the course's text-safe
+  colour, then the cue questions in small grey type. RECALL / RECAP / REVIEW blocks put their tag
+  above the label. **No block number** (`01`, `02`): SHULL-CHG-0030 dropped it (choice d). **No
   line under a cue.** Recall happens in the RECALL block and on the concept review page.
-- **Capture side (6.22 in):** prompts with a writing line, fill-in tables, the flowchart, worked
-  examples and must-write lines.
+- **Capture side (6.22 in):** the **notes heading** in tracked bold caps in the same colour, then
+  prompts with a writing line, fill-in tables, the flowchart, worked examples and must-write
+  lines.
+- **Where the two labels come from.** An old spec names both, `cueLabel` and `notesLabel`, and each
+  is printed as written. A paged spec's block has a `title` and at most a `notesLabel`. The title,
+  in caps, becomes the cue label. The notes heading is printed only when the spec gives a
+  `notesLabel` or the heading differs from the cue label, so a block never shows the same words
+  on both sides. A label the spec wrote is never upper-cased by the builder (Physics has a
+  variable `a` in one).
 - **Foot:** one quiet `Extra notes:` line, for whatever goes on the board that the prompts did not
   plan for.
 
@@ -61,14 +72,26 @@ RECALL block is never stretched to fill a page, because blank space under a chec
 unfinished box. Other kinds of block are **RECAP** (a short set of
 reminders) and **REVIEW** (the unit close: big picture, checklist, *Still fuzzy on*).
 
-**Greyscale.** Type is ink or label grey. Rules are the hairline token. `SHULL_DESIGN_SYSTEM.md` §8
-sanctions a very light tint in only two places, and this template uses exactly those two. Both use
-`pal.surface` (`ground.parchment`) through `shade()`:
+**Greyscale, with a thin course accent in the headers** (SHULL-CHG-0030, choice a). Body type is ink
+or label grey, and body rules are the hairline token. Course colour appears in two forms only,
+both from `brand/tokens.json`, and never as a fill (`SHULL_DESIGN_SYSTEM.md` §8):
+
+- **Rules** in the course `primary` (`pal.rule_accent`): the heavy rule under the cover masthead and
+  under each section title bar, and the rule down the left of *How these notes work*. `primary` is
+  never used for type; its measured `onWhiteVerdict` is *NOT TYPE* in all three courses.
+- **Label type** in the course `primaryDeep` (`pal.type_accent`, text-safe on white): the school
+  line, cover labels, the section code, `LEARNING TARGET`, and the cue label and notes heading.
+
+Everything else is greyscale, including the must-write rule, work boxes and fill-in tables. The
+shared primitives get a grey palette (`GreyPalette`), so they draw in the notes' voice.
+
+`SHULL_DESIGN_SYSTEM.md` §8 sanctions a very light tint in only two places, and this template uses
+exactly those two. Both use `pal.surface` (`ground.parchment`) through `shade()`:
 
 1. the **header row of a fill-in table**, and
 2. the small **RECALL / RECAP / REVIEW tags**. These are labels, not list numbers.
 
-Nothing else is shaded: not the cue column, not a row, not a page head, not any section-sized area.
+Nothing else is shaded: not the cue column, not a row, not a title bar, not any section-sized area.
 `audit_print_ink.py` checks it.
 
 **Must-write lines** (the highlighted must-write blocks on the slide) print in bold with a **grey rule down the left
@@ -85,11 +108,27 @@ connectors. Word cannot draw a diagonal connector inside a table reliably. **The
 the spec**; the template owns only the shape. The student copy prints only the root, and the key
 fills every box. Both use the same geometry.
 
-**Difficulty ratings are a standard cover feature.** Every section in the breakdown carries a
-1–10 difficulty, printed `n / 10` beside it, with the spec's `difficultyNote` under the table. The
+**Difficulty ratings are a standard cover feature.** Every section in the *Sections in this unit*
+checklist carries a 1–10 difficulty, printed `n / 10` at the right under a `DIFFICULTY` label, with
+the spec's `difficultyNote` under the list. The
 values are course content, so they come from the spec (`cover.sections[].difficulty`). The
 template never assigns them, and the build warns if a section in a paged spec has none. An old flat
 spec has no ratings to carry over, so its cover drops the column rather than inventing numbers.
+
+**The cover prints only what the spec holds** (SHULL-CHG-0030). A paged spec may give the 0014
+front matter under `cover` (`kicker`, `fields`, `unitTargets`, `keyTerms`, `howItWorks`,
+`sectionList`). What it leaves out is derived from the spec, and the build lists what it derived:
+
+| Missing | Derived from |
+|---|---|
+| `kicker` | `GUIDED NOTES · PHASE nn · N SECTIONS`. The phase is read from the course `DECISIONS.md` phase headings (`unit_phase()`); a course with no phases (Geology) drops it. A key adds `· TEACHER KEY`. |
+| `unitTargets` | The sections' own `learningTarget`s, in order. If there are none, and no key terms, the box is left out. |
+| `howItWorks` | `howToUse`, one bullet per sentence. |
+| `sectionList` | Each section's code and title. |
+| `fields` | `NAME ___ DATE ___ PERIOD ___`. |
+
+`cover.sections[].blurb` is no longer printed. The unit learning targets carry that role on the
+same page. A page's `subtitle` is no longer printed either: continuation pages have no head.
 
 **Isotope names never break at the hyphen.** `Cl-35`, `Cu-63` and `Iron-56` are written with the
 non-breaking hyphen (U+2011, in Archivo), so a line cannot end on "Cl-".
@@ -134,16 +173,24 @@ type to fit, and never shrink the work box.
                                              "num": "percent", "den": "100"}]}],
       "notes": ["Z = atomic number; A = mass number."]
     },
-    "keyTerms": [{"code": "1.1", "terms": ["Matter", "pure substance"]}],
-    "howToUse": "One short paragraph."
+    "keyTerms": [{"code": "1.1", "terms": ["Matter", "pure substance"]}],   // one line per section
+    "howToUse": "One short paragraph.",          // a bullet per sentence under "How these notes work"
+    // Optional, SHULL-CHG-0030. Derived from the spec when absent - see "The cover prints only
+    // what the spec holds".
+    "kicker": "GUIDED NOTES  ·  PHASE 01  ·  3 SECTIONS",
+    "fields": "NAME  ____   DATE  ____   PERIOD  ____",
+    "unitTargets": ["I can …"],
+    "howItWorks": ["…", "…"],                    // takes precedence over howToUse
+    "sectionList": ["S01.1   Title"]            // replaces the derived list; drops difficulty
   },
   "sectionsContent": [{
     "code": "1.1", "title": "…", "learningTarget": "…",
     "pages": [{
-      "subtitle": "What this page is for, in one line.",
+      "subtitle": "…",                             // not printed since SHULL-CHG-0030
       "rows": [
         {"title": "Vocabulary", "cues": ["…?"],
-         "notesLabel": "COPY THE FLOWCHART",          // optional small caps label, printed as written
+         "cueLabel": "BASICS",                        // optional; default: title in caps
+         "notesLabel": "COPY THE FLOWCHART",          // optional; default: title in caps. Printed as written
          "notes": [
            "DEFINE: matter",                             // prompt + 1 writing line (2 if it ends in ?)
            {"prompt": "DEFINE: matter", "answer": "…"},  // the key prints the answer, bold, in the line's place
@@ -171,7 +218,7 @@ type to fit, and never shrink the work box.
     }]
   }],
   "conceptReview": {
-    "title": "…", "subtitle": "…",                   // the code slot prints the unit code, U##
+    "title": "…", "subtitle": "…",                   // title bar with the unit code, U##; subtitle under it
     "sections": [{"code": "1.1", "heading": "…",
                   "paragraphs": [["line", "line"], ["next group"]],   // **bold** allowed
                   "compare": {"left": {"heading": "…", "lines": []},
@@ -192,16 +239,21 @@ source so they cannot drift.
 **Old flat specs still build.** A spec with `rows` directly under each section and no `pages` is
 upgraded at build time by `normalize_legacy()`:
 
-- Block titles come from `cueLabel` in title case, and a row with a problem becomes
+- Each row keeps its `cueLabel` and `notesLabel`, printed as written in course colour. Its `title`
+  (the `cueLabel` in title case) names it in build messages. A row with a problem becomes
   `"kind": "example"`.
 - Rows are packed onto pages by measured height, three blocks per page at most. A closing RECALL
   or REVIEW block joins the page before it whenever it fits.
-- The first page's subtitle is the learning target. Later pages have none.
+- The first page of each section opens with its title bar and learning target. Later pages have no
+  head.
 - `summaryPrompt` / `selfCheck` become a RECALL block, and `close` becomes a REVIEW block.
-- The cover is assembled from the old front matter, with two exceptions. **`howItWorks` is not
-  carried over**: it describes the old page (its rule colours and its summary box), so the cover
-  gets this template's standard, course-neutral wording instead. In the closing checklist, "summary
-  box" is renamed "RECALL block".
+- The cover carries the old front matter as written (SHULL-CHG-0030): `kicker`, `fields`,
+  `unitTargets`, `keyTerms`, `howItWorks` and `sectionList`. Three corrections only:
+  - section codes in the kicker and section list are zero-padded (`S1.2` → `S01.2`,
+    SHULL-CHG-0007);
+  - `howItWorks` names the rule the page actually draws: "a teal rule" or "a gold rule" becomes
+    "a gray rule", because the must-write rule is grey (SHULL-CHG-0025, kept by 0030);
+  - "summary box" becomes "RECALL block", there and in the closing checklist.
 
 Nothing else is rewritten. The build warns when there is no `conceptReview`.
 

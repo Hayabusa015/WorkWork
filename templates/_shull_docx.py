@@ -99,6 +99,19 @@ def unit_title(course, unit):
     return m.group(1).strip(" ·—-")
 
 
+def unit_phase(course, unit):
+    """The curriculum phase a unit sits in, read from the course's DECISIONS.md, where
+    it is a heading: "### Phase 1 — Lab Ready (U0–U3)". A course whose roadmap has no
+    phases (Geology) returns None; the caller leaves the phase out rather than invent
+    one."""
+    text = open(os.path.join(REPO, "courses", course, "DECISIONS.md")).read()
+    for m in re.finditer(r"^#+\s*Phase\s+(\d+)\b[^\n(]*\(U(\d+)\s*[–-]\s*U(\d+)\)",
+                         text, re.M):
+        if int(m.group(2)) <= int(unit) <= int(m.group(3)):
+            return int(m.group(1))
+    return None
+
+
 def shade(cell, hexval):
     el = OxmlElement("w:shd")
     el.set(qn("w:val"), "clear"); el.set(qn("w:fill"), hexof(hexval))

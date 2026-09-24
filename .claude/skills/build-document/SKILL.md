@@ -105,12 +105,19 @@ notes are provisional.
 Set the scaffolding level and **state the choice in one line** so it can be overridden. The ladder
 comes down across the year; the per-course index is in each decisions file.
 
-The packet is a set of designed pages, **one sheet each** (layout: SHULL-CHG-0025).
-It opens with a cover: section breakdown, equation toolbox, key terms by section, how to use the
-notes. Each section in the breakdown carries a **1–10 difficulty rating**. It is a standard cover
-feature, and the values are course content supplied in the spec. Each
-section usually spans two content pages, and each page has its own one-line subtitle and about
-three open two-column blocks. Every section ends with a **RECALL block** (summary prompt plus
+The packet is a set of designed pages, **one sheet each** (layout: SHULL-CHG-0025; headers:
+SHULL-CHG-0030). It opens with a cover carrying the SHULL-CHG-0014 packet opening: the
+course-colour school line, unit title and `GUIDED NOTES · PHASE nn · N SECTIONS` kicker over a
+course-accent rule, Name/Date/Period, unit learning targets ∥ key terms, how these notes work, and
+the sections-in-this-unit checklist, plus the cover image and the equation toolbox. Each section
+in the checklist carries a **1–10 difficulty rating**. It is a standard cover feature, and the
+values are course content supplied in the spec. Cover text the spec does not give is derived only
+from the spec itself, and the build lists what it derived. Nothing is invented. Each section
+starts on a new page, **opened by the section title bar** (title, `U01 / S01.2` code, course-accent
+rule) and its **`LEARNING TARGET` line**. Continuation pages carry no head. A section usually spans
+two pages of about three open two-column blocks. Each block has a course-colour cue label and, where it
+differs, a notes heading, and **no block number**. Colour is a thin accent only: rules in the course `primary`,
+label type in `primaryDeep`, never a fill. Every section ends with a **RECALL block** (summary prompt plus
 self-check). The packet closes on a **Concept Review** page. Cue questions carry no writing line.
 Worked problems use `Given:` / `Find:` and an open bordered work box, at least 1.4 in tall — **never
 ruled lines.** Build with `--verify` so a spilled page fails the build. Layout, schema, and why:

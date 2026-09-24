@@ -5,14 +5,19 @@
 
 The packet is a set of designed pages, and each one is meant to be one sheet of paper:
 
-    cover            unit title, section breakdown with difficulty, equation toolbox,
-                     key terms by section, how to use the notes
-    content pages    a page head (eyebrow, section title, code, one-line subtitle for
-                     THIS page) and about three blocks. A block is two open columns
-                     split by one thin rule: the cue side (number, block title, cue
-                     questions) and the capture side (prompts, tables, flowchart,
-                     worked example, must-write lines), closed by one "Extra notes"
-                     line. Each section ends with a RECALL block.
+    cover            the SHULL-CHG-0014 packet opening (school line, unit title, kicker,
+                     Name/Date/Period, unit targets | key terms, how these notes work,
+                     sections checklist with difficulty), plus the cover image and the
+                     equation toolbox - SHULL-CHG-0030
+    content pages    a new page per section. The first page of a section opens with the
+                     0014 section title bar (title, U## / S##.# code, course-accent rule)
+                     and its LEARNING TARGET line; continuation pages carry no head.
+                     Each page holds about three blocks. A block is two open columns
+                     split by one thin rule: the cue side (course-colour cue label, cue
+                     questions) and the capture side (course-colour notes heading,
+                     prompts, tables, flowchart, worked example, must-write lines),
+                     closed by one "Extra notes" line. Each section ends with a RECALL
+                     block.
     concept review   the standing last page: per-section explanation, a watch-out line,
                      and quick-recall questions.
 
@@ -26,7 +31,9 @@ The spec schema is documented in templates/notes/README.md. Older flat specs (ro
 straight under each section, no `pages`) are upgraded at build time by
 `normalize_legacy()`, so they keep building without being rewritten by hand.
 
-Colour comes from brand/tokens.json. No hex is typed in this file.
+Colour comes from brand/tokens.json. No hex is typed in this file. Course colour is a
+thin accent only (SHULL_DESIGN_SYSTEM section 8): the header rules in the course
+`primary`, and label type in the text-safe `primaryDeep`. Everything else is greyscale.
 """
 import copy, io, json, os, re, shutil, subprocess, sys, tempfile
 from docx import Document
@@ -42,7 +49,7 @@ from docx.oxml import OxmlElement
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
-    unit_title, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
+    unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
     diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
     schema_order, estimate_height, text_width_in,
 )
@@ -82,38 +89,54 @@ MAX_STRETCH_PT = 90
 WORK_BOX_MIN_IN = 1.4
 WORK_LABEL = "WORK / show your reasoning and units"
 
-# Rules, in eighths of a point (what w:sz counts). The page is greyscale and open: no
-# outer box and no cell borders around a block, so these few rules are the structure.
-W_RULE = 6          # page-head rules, the rule between blocks, the column rule
+# Rules, in eighths of a point (what w:sz counts). The page is open: no outer box and
+# no cell borders around a block, so these few rules are the structure.
+W_RULE = 6          # the rule between blocks, the column rule, hairlines
 W_LINE = 6          # a writing line - print.weights.writingLine is 0.75 pt minimum
 W_MUST = 12         # the grey rule down the left of a must-write line
 W_TABLE = 4         # inside a fill-in table
+# SHULL-CHG-0030 restores the SHULL-CHG-0014 header rules at 0014's weights: an ink
+# rule above a head and a heavy course-accent rule below it. A rule, not a band - 2.25
+# pt is a line's worth of toner (SHULL_DESIGN_SYSTEM section 8).
+W_HEAD_TOP = 12
+W_HEAD_ACCENT = 18
 
 # The type ladder, in points. Nothing on a student page is under the 8 pt print floor
 # except the running footer, which is what printFooter exists for.
-EYEBROW, PAGE_TITLE, SUBTITLE = 8, 20, 8.5
-BLOCK_NO, BLOCK_TITLE, CUE = 9, 11, 8.5
+CUE = 8.5
 BODY, BODY_LINE = 10, 13
 LABEL = 8
 CHIP = 8
 
-# The block title sits in the 1.28 in cue column. Codex set it at 12 pt in a column
-# half an inch wider; at this width 12 pt breaks "heterogeneous" mid-word, so 11 pt.
-# Checked against the shipped Archivo Bold metrics, not guessed.
+# SHULL-CHG-0030: the 0014 header sizes, from the 0f3b078 builder. 0014 set its labels
+# at 7 and 7.5 pt; they are raised to the 8 pt print floor (typography.floors.printBody),
+# the only size that moved. Tracking is 0014's: 26 on caps labels, none on the cue
+# label - "tracking is what made DISTANCE VS. DISPLACEMENT wrap" in the cue column.
+UNIT_TITLE_PT = 15          # the unit title on the cover, in caps
+BAR_TITLE_PT = 12.5         # the section title bar
+BAR_CODE_PT = 8.5           # U01 / S01.2 at the right of the bar
+TRACK = 26                  # 0014's caps_track
 
 PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
-NUMBERED = ("notes", "example")          # blocks that take a number; the rest take a tag
+TAGGED = ("recall", "recap", "review")   # blocks that open with a tag
 CAPTURE = ("notes", "problem", "table", "flowchart", "diagram")
 
 
 class GreyPalette(Palette):
-    """The notes page is greyscale. The shared primitives colour their labels with
+    """The notes body is greyscale. The shared primitives colour their labels with
     `accent` and their rules with `display`; here those resolve to ink and label grey,
     so a work box or fill-in table drawn by the same code the worksheet uses comes out
-    in the notes' voice without a second copy of the drawing."""
+    in the notes' voice without a second copy of the drawing.
+
+    The course colours are kept under their own names for the SHULL-CHG-0030 headers
+    and row labels, the only places they are used: `type_accent` is the course
+    `primaryDeep` (text-safe on white, for label type) and `rule_accent` is the course
+    `primary` (NOT type - rules only, per its measured onWhiteVerdict)."""
 
     def __init__(self, course):
         super().__init__(course)
+        self.type_accent = self.accent
+        self.rule_accent = self.display
         self.accent = self.ink
         self.display = self.label
 
@@ -447,7 +470,7 @@ def flowchart_png(pal, width_in, fc, filled, dpi=300):
 # ---------------------------------------------------------------------------------
 # Section codes. Specs write them several ways ("1.1", "S01.1", "U01 / S01.1",
 # "U1 / S1.2"); the build uses the bare number for validation and prints S##.#,
-# zero-padded - standards/NAMING.md.
+# zero-padded - standards/NAMING.md - or U## / S##.# on the section title bar.
 
 def sec_num(code):
     m = re.search(r"S?0*(\d{1,2})\.(\d)\s*$", str(code).strip())
@@ -461,17 +484,50 @@ def sec_label(code):
     return f"S{int(u):02d}.{s}"
 
 
+def bar_code(code):
+    """The section title bar's code: 0014's "U1 / S1.2" shape, zero-padded as
+    SHULL-CHG-0007 requires - "U01 / S01.2"."""
+    u, s = sec_num(code).split(".")
+    return f"U{int(u):02d} / S{int(u):02d}.{s}"
+
+
+_BARE_CODE = re.compile(r"\bS(\d)\.(\d)\b")
+
+
+def pad_codes(text):
+    """An old spec writes "S1.2" in running text (its kicker, its section list). The
+    build prints codes zero-padded everywhere else (SHULL-CHG-0007), so these are
+    padded too. Only the code's format changes."""
+    return _BARE_CODE.sub(lambda m: f"S0{m.group(1)}.{m.group(2)}", str(text))
+
+
+def label_of(row, which):
+    """The cue label or the notes heading of a block (SHULL-CHG-0030).
+
+    An old spec names both (`cueLabel` "BASICS", `notesLabel` "THE BIG BANG"). A paged
+    spec's block has a `title` and at most a `notesLabel`; its title, in caps, stands
+    in for whichever label is missing, so it is used for both when neither is given.
+    A label the spec wrote is printed as written - never upper-cased here: that turned
+    the Physics variable "a" into "A" in "COMPARING THE SIGN OF a TO THE SIGN OF v"."""
+    given = row.get(which)
+    if given:
+        return given
+    return str(row.get("title", "")).upper()
+
+
 # ---------------------------------------------------------------------------------
 # Blocks.
 
-def render_cue(col, row, number, pal):
+def render_cue(col, row, pal):
+    """The cue side: a tag on a RECALL / RECAP / REVIEW block, the course-colour cue
+    label (SHULL-CHG-0030; 0014's bold untracked caps), then the cue questions. No
+    block number - the user dropped the 01, 02 (0030 choice d)."""
     kind = row.get("kind", "notes")
-    if kind in ("recall", "recap", "review"):
+    if kind in TAGGED:
         chip(col, kind.upper(), pal)
         col.gap(6)
-    elif number is not None:
-        col.text(f"{number:02d}", BLOCK_NO, line=11, bold=True, after=5)
-    col.text(row.get("title", ""), BLOCK_TITLE, line=13.5, bold=True, after=7)
+    col.text(label_of(row, "cueLabel"), LABEL, line=10.5, bold=True,
+             color=pal.type_accent, after=6)
     for q in row.get("cues", []):
         col.text(q, CUE, line=10.5, color=pal.label, after=5)
 
@@ -532,10 +588,13 @@ def render_problem(col, prob, key, pal):
 
 def render_notes(col, row, key, pal, base_dir):
     kind = row.get("kind", "notes")
-    if row.get("notesLabel"):
-        # Printed as written - not upper-cased here. Upper-casing turned the Physics
-        # variable "a" into "A" in "COMPARING THE SIGN OF a TO THE SIGN OF v".
-        col.text(row["notesLabel"], LABEL, line=10.5, bold=True, after=6, track=10)
+    # The notes heading, in course colour with 0014's caps tracking (SHULL-CHG-0030).
+    # A heading derived from the title that only repeats the cue label beside it is
+    # left out; an explicit notesLabel, or one that differs, is printed.
+    heading = label_of(row, "notesLabel")
+    if row.get("notesLabel") or heading != label_of(row, "cueLabel"):
+        col.text(heading, LABEL, line=10.5, bold=True, after=6,
+                 color=pal.type_accent, track=TRACK)
     if row.get("diagram"):
         diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
         col.after_table()
@@ -636,7 +695,7 @@ def spacer(row, pt, rule_color=None):
             borders(c, rule_color, sz=W_RULE, edges=("bottom",))
 
 
-def render_blocks(t, rows, ctx, numbers):
+def render_blocks(t, rows, ctx):
     """Append one page's blocks to table `t`. Returns [(content_row, extra_pt)] so the
     caller can share out the page's spare height."""
     pal = ctx["pal"]
@@ -651,7 +710,7 @@ def render_blocks(t, rows, ctx, numbers):
         mar(notes, 0, 0, NOTES_PAD_L_IN * 72, 0)
         borders(notes, pal.hair, sz=W_RULE, edges=("left",))
         cc = Col(cue, CUE_INNER_IN, pal)
-        render_cue(cc, row, numbers[i], pal)
+        render_cue(cc, row, pal)
         cc.finish()
         nc = Col(notes, NOTES_INNER_IN, pal)
         render_notes(nc, row, ctx["key"], pal, ctx["base_dir"])
@@ -677,48 +736,62 @@ def render_blocks(t, rows, ctx, numbers):
     return out
 
 
-def head_height(ctx, title, subtitle):
-    """Height of a page head, in points, measured the same way as a block."""
+def head_height(ctx, sec):
+    """Height of a section's title bar and learning target, in points, measured the
+    same way as a block. Only a section's first page has one."""
     d = Document()
-    t = page_head(d, ctx, title, "S00.0", subtitle)
+    t = section_bar(d, ctx, sec["title"], bar_code(sec["code"]), sec.get("learningTarget"))
     pin_all(t._tbl)
     return estimate_height(t._tbl, TEXT_W_IN) + 2
 
 
-def block_height(row, ctx, number):
+def block_height(row, ctx):
     """Natural height of one block, in points - measured by rendering it into a
     scratch document. Used to pack an old flat spec's rows into pages."""
     d = Document()
     t = table(d, [CUE_W_IN, NOTES_W_IN], rows=0)
-    parts = render_blocks(t, [row], ctx, [number])
+    render_blocks(t, [row], ctx)
     pin_all(t._tbl)
     return estimate_height(t._tbl, TEXT_W_IN)
 
 
 # ---------------------------------------------------------------------------------
-# Page head and footer.
+# Section title bar and footer.
 
-def page_head(doc, ctx, title, tag, subtitle):
+BAR_CODE_W_IN = 1.67        # 0014's split: 5.83 in title, 1.67 in code
+
+
+def section_bar(doc, ctx, title, code, target=None, target_label="LEARNING TARGET",
+                target_color=None):
+    """SHULL-CHG-0030: the SHULL-CHG-0014 section title bar, as the 0f3b078 builder drew
+    it. The section title at the left, the code at the right in the course's text-safe
+    colour, an ink rule above and a heavy course-accent rule below - ruled, never
+    filled. Under it the LEARNING TARGET line, closed by a hairline. 0014 boxed that
+    line in hairlines because its rows were boxed; the paged page is open, so only the
+    closing hairline is kept.
+
+    It opens a section. Continuation pages carry no head (0030 choice c)."""
     pal = ctx["pal"]
-    t = table(doc, [5.9, 1.6], rows=3)
+    t = table(doc, [TEXT_W_IN - BAR_CODE_W_IN, BAR_CODE_W_IN], rows=2 if target else 1)
     a, b = t.rows[0].cells
     for c in (a, b):
-        mar(c)
-    write(a.paragraphs[0], ctx["eyebrow"], EYEBROW, line=11, bold=True, color=pal.ink)
-    write(b.paragraphs[0], tag, 9, line=11, bold=True, color=pal.ink,
-          align=WD_ALIGN_PARAGRAPH.RIGHT, before=3)
-    tr = t.rows[1].cells[0].merge(t.rows[1].cells[1])
-    mar(tr, 3, 6, 0, 0)
-    write(tr.paragraphs[0], title, PAGE_TITLE, line=25, bold=True, color=pal.ink)
-    borders(tr, pal.hair, sz=W_RULE, edges=("bottom",))
-    sr = t.rows[2].cells[0].merge(t.rows[2].cells[1])
-    if subtitle:
-        mar(sr, 8, 18, 0, 0)
-        write(sr.paragraphs[0], subtitle, SUBTITLE, line=11.5, color=pal.label)
-        borders(sr, pal.hair, sz=W_RULE, edges=("bottom",))
-    else:
-        mar(sr)
-        pin(sr.paragraphs[0], 1)
+        mar(c, 4, 4, 0, 0)
+        borders(c, pal.ink, sz=W_HEAD_TOP, edges=("top",))
+        borders(c, pal.rule_accent, sz=W_HEAD_ACCENT, edges=("bottom",))
+        c.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    write(a.paragraphs[0], title, BAR_TITLE_PT, line=16, bold=True, color=pal.ink)
+    write(b.paragraphs[0], code, BAR_CODE_PT, line=16, bold=True, color=pal.type_accent,
+          track=TRACK, align=WD_ALIGN_PARAGRAPH.RIGHT)
+    if target:
+        c = t.rows[1].cells[0].merge(t.rows[1].cells[1])
+        mar(c, 5, 6, 0, 0)
+        borders(c, pal.hair, sz=W_RULE, edges=("bottom",))
+        p = c.paragraphs[0]
+        _spacing(p, 0, 0, 13)
+        if target_label:
+            _run(p, target_label + "   ", LABEL, bold=True, color=pal.type_accent)
+        for seg, bb in segments(target):
+            _run(p, seg, 9.5, bold=bb, color=target_color or pal.ink)
     pin(doc.add_paragraph(), 1)
     return t
 
@@ -752,10 +825,12 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
     """Share a page's spare height out across its blocks, evenly: every block is
     raised to a common floor, so the page fills to its foot and no block is left
     short while another is stretched. Returns the predicted overflow (0 if it fits)."""
-    pin_all(head_tbl._tbl); pin_all(blocks_tbl._tbl)
-    avail = BODY_H_PT - SAFETY_PT - 2  # the two 1 pt paragraphs around the head
-    used = estimate_height(head_tbl._tbl, TEXT_W_IN) + estimate_height(blocks_tbl._tbl,
-                                                                       TEXT_W_IN)
+    pin_all(blocks_tbl._tbl)
+    avail = BODY_H_PT - SAFETY_PT - 2  # the 1 pt page-break paragraph and the one after a head
+    used = estimate_height(blocks_tbl._tbl, TEXT_W_IN)
+    if head_tbl is not None:
+        pin_all(head_tbl._tbl)
+        used += estimate_height(head_tbl._tbl, TEXT_W_IN)
     naturals = []
     for r, extra, _ in parts:
         tbl = OxmlElement("w:tbl"); tbl.append(copy.deepcopy(r._tr))
@@ -783,35 +858,33 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
     return 0.0
 
 
-def content_page(doc, ctx, sec, page, numbers):
+def content_page(doc, ctx, sec, page):
+    """One sheet of a section. Its first sheet opens with the section title bar and
+    learning target (SHULL-CHG-0030); a continuation sheet starts straight on its
+    blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn."""
     break_before(doc)
-    head = page_head(doc, ctx, sec["title"], sec_label(sec["code"]), page.get("subtitle"))
+    head = None
+    if page["_n"] == 1:
+        head = section_bar(doc, ctx, sec["title"], bar_code(sec["code"]),
+                           sec.get("learningTarget"))
     t = table(doc, [CUE_W_IN, NOTES_W_IN], rows=0)
-    parts = render_blocks(t, page["rows"], ctx, numbers)
+    parts = render_blocks(t, page["rows"], ctx)
     over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}", head, t, parts)
     if over:
         ctx["overfull"].append(f"{sec_label(sec['code'])} page {page['_n']}: "
                                f"predicted {over / 72:.2f} in too tall")
 
 
-def title_lines(title):
-    """Two lines for the cover title. Break after an ampersand or colon where there is
-    one ("Matter & | Atomic Structure"), otherwise where the two halves balance."""
-    words = title.split()
-    if len(words) < 3:
-        return [title]
-    for i, w in enumerate(words[:-1]):
-        if w in ("&", "and") or w.endswith(":"):
-            return [" ".join(words[:i + 1]), " ".join(words[i + 1:])]
-    best = min(range(1, len(words)),
-               key=lambda i: abs(text_width_in(" ".join(words[:i]), 30, True)
-                                 - text_width_in(" ".join(words[i:]), 30, True)))
-    return [" ".join(words[:best]), " ".join(words[best:])]
-
-
 def label_para(doc, text, pal, before=14, after=8):
+    """A cover label: 0014's bold tracked caps in the course's text-safe colour."""
     return write(doc.add_paragraph(), text.upper(), LABEL, line=10.5, bold=True,
-                 color=pal.ink, before=before, after=after, track=10)
+                 color=pal.type_accent, before=before, after=after, track=TRACK)
+
+
+def cell_label(cell_or_col, text, pal, first=True, after=4):
+    p = cell_or_col.paragraphs[0] if first else cell_or_col.add_paragraph()
+    return write(p, text.upper(), LABEL, line=10.5, bold=True, color=pal.type_accent,
+                 after=after, track=TRACK)
 
 
 def rule_para(doc, pal, before=0, after=0):
@@ -843,9 +916,89 @@ def toolbox_line(col, item, pal):
     return col.text(item, BODY, line=15)
 
 
+_SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z])")
+
+
+def cover_content(spec, ctx):
+    """What the SHULL-CHG-0014 packet opening prints, gathered from the spec
+    (SHULL-CHG-0030). An old flat spec carries all of it; normalize_legacy() moves it
+    under `cover`. A paged spec may carry it under `cover` too. Where a paged spec does
+    not, only what the spec already holds is used - nothing is written that it does not
+    say - and the build says what it derived (ctx["derived"]):
+
+      kicker      GUIDED NOTES · PHASE nn · N SECTIONS. The phase is read from the
+                  course DECISIONS.md (unit_phase); a course with no phases drops it.
+      unitTargets the sections' own learning targets, in order.
+      keyTerms    cover.keyTerms, grouped by section, one line per section.
+      howItWorks  cover.howToUse, split into its sentences, one bullet each.
+      sectionList each section's code and title.
+    """
+    cov = spec.get("cover", {})
+    secs = spec["sectionsContent"]
+    derived = ctx["derived"]
+    out = {}
+
+    kicker = cov.get("kicker")
+    if not kicker:
+        phase = unit_phase(ctx["course"], ctx["unit"])
+        n = len(secs)
+        kicker = "  ·  ".join(["GUIDED NOTES"] + ([f"PHASE {phase:02d}"] if phase else [])
+                              + [f"{n} SECTION{'S' if n != 1 else ''}"])
+        derived.append(f"kicker \"{kicker}\" (phase from courses/{ctx['course']}/"
+                       f"DECISIONS.md)" if phase else f"kicker \"{kicker}\" (no phase in "
+                       f"courses/{ctx['course']}/DECISIONS.md)")
+    if ctx["key"]:
+        kicker += "  ·  TEACHER KEY"
+    out["kicker"] = kicker
+
+    targets = [debullet(x) for x in cov.get("unitTargets", [])]
+    if not targets:
+        targets = [s["learningTarget"] for s in secs if s.get("learningTarget")]
+        if targets:
+            derived.append(f"unit targets = the {len(targets)} section learning targets")
+    out["targets"] = targets
+
+    terms = []
+    for g in cov.get("keyTerms", []):
+        if isinstance(g, dict):
+            lead = f"**{sec_label(g['code'])}**  " if g.get("code") else ""
+            terms.append(lead + ", ".join(g.get("terms", [])))
+        else:
+            terms.append(debullet(g))
+    out["terms"] = terms
+
+    how = cov.get("howItWorks") or cov.get("howToUse") or []
+    if isinstance(how, str):
+        how = [x.strip() for x in _SENTENCE.split(how) if x.strip()]
+        if not cov.get("howItWorks"):
+            derived.append(f"how these notes work = cover.howToUse, one bullet per "
+                           f"sentence ({len(how)})")
+    out["how"] = [debullet(x) for x in how]
+
+    diff = {sec_num(x["code"]): x.get("difficulty")
+            for x in cov.get("sections", []) if x.get("difficulty")}
+    listed = cov.get("sectionList")
+    if listed:
+        out["checklist"] = [(pad_codes(debullet(x)), None) for x in listed]
+    else:
+        out["checklist"] = [(f"{sec_label(s['code'])}   {s['title']}",
+                             diff.get(sec_num(s["code"]))) for s in secs]
+    out["has_diff"] = bool(diff) and not listed
+    out["difficultyNote"] = cov.get("difficultyNote") if out["has_diff"] else None
+    return out
+
+
 def _cover(doc, spec, ctx, k):
-    """The cover at spacing scale `k` (1 = as designed). Returns its predicted height."""
-    pal, cov = ctx["pal"], spec.get("cover", {})
+    """The cover at spacing scale `k` (1 = as designed). Returns its predicted height.
+
+    SHULL-CHG-0030: the SHULL-CHG-0014 packet opening, as the 0f3b078 builder drew it -
+    course-colour school line, unit title, kicker, closed by a heavy course-accent rule;
+    Name/Date/Period; Unit Learning Targets | Key Terms; How these notes work, with the
+    accent rule down its left; Sections in this unit. On top of it, 0025's cover items
+    the user kept (0030 choice b): the image at the right of the masthead, the
+    difficulty rating beside each section in the checklist, and the equation toolbox
+    at the foot. Outlines and rules only; nothing is filled."""
+    pal, cov, cc = ctx["pal"], spec.get("cover", {}), ctx["cover"]
     img = cov.get("image")
     img_path = os.path.join(ctx["base_dir"], img["path"]) if img else None
     if img and not os.path.exists(img_path):
@@ -854,69 +1007,93 @@ def _cover(doc, spec, ctx, k):
         img_path = None
     img_w = min(float(img.get("widthIn", 2.0)), 2.2) if img_path else 0
 
-    t = table(doc, [TEXT_W_IN - 2.3, 2.3])
-    a, b = t.rows[0].cells
-    mar(a); mar(b)
-    write(a.paragraphs[0], ctx["cover_eyebrow"], EYEBROW, line=11, bold=True,
-          color=pal.ink, after=12 * k)
-    for ln in title_lines(ctx["unit_title"]):
-        write(a.add_paragraph(), ln, 30, line=34, bold=True, color=pal.ink)
-    codes = " / ".join(sec_label(s["code"]) for s in spec["sectionsContent"])
-    kicker = f"GUIDED NOTES • {codes}" + (" • TEACHER KEY" if ctx["key"] else "")
-    write(a.add_paragraph(), kicker, 8.5, line=11, bold=True, color=pal.ink, before=12 * k)
-    write(a.add_paragraph(), SCHOOL, 8.5, line=11, color=pal.label, before=6 * k)
+    # Masthead. The text sits on the accent rule; the image stands beside it.
+    col_w = round(img_w + 0.2, 2) if img_path else 0
+    widths = [TEXT_W_IN - col_w, col_w] if img_path else [TEXT_W_IN]
+    t = table(doc, widths)
+    a = t.rows[0].cells[0]
+    for c in t.rows[0].cells:
+        mar(c, 0, 6, 0, 0)
+        borders(c, pal.rule_accent, sz=W_HEAD_ACCENT, edges=("bottom",))
+        c.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    write(a.paragraphs[0], f"SHULL SCIENCE  ·  {SCHOOL.upper()}", LABEL, line=11,
+          bold=True, color=pal.type_accent, track=TRACK, after=3)
+    write(a.add_paragraph(), ctx["unit_title"].upper(), UNIT_TITLE_PT, line=19, bold=True,
+          color=pal.ink)
+    write(a.add_paragraph(), cc["kicker"], LABEL, line=11, color=pal.label, track=TRACK,
+          before=2)
     if img_path:
+        b = t.rows[0].cells[1]
         p = b.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         p.add_run().add_picture(img_path, width=Inches(img_w))
-    else:
-        pin(b.paragraphs[0], 1)
 
-    fields = cov.get("fields", "Name ________________________________   "
-                               "Date ______________   Period ______")
-    p = write(doc.add_paragraph(), fields, BODY, line=14, color=pal.ink, before=12 * k,
-              after=0)
-    rule_para(doc, pal, before=10 * k)
+    # Name / Date / Period, in a hairline outline.
+    fields = cov.get("fields") or ("NAME  _________________________________       "
+                                   "DATE  ______________       PERIOD  ______")
+    t = table(doc, [TEXT_W_IN])
+    c = t.rows[0].cells[0]
+    borders(c, pal.hair, sz=W_RULE)
+    mar(c, 5, 5, 6, 6)
+    write(c.paragraphs[0], fields, 9, line=12, color=pal.label)
 
-    # Section breakdown.
-    blurbs = {sec_num(s["code"]): s for s in cov.get("sections", [])}
-    secs = spec["sectionsContent"]
-    has_diff = any(blurbs.get(sec_num(s["code"]), {}).get("difficulty") for s in secs)
-    widths = [1.0, 5.3, 1.2] if has_diff else [1.0, 6.5]
-    t = table(doc, widths, rows=1 + len(secs))
+    # Unit Learning Targets | Key Terms. Either one alone runs full width; with neither,
+    # the box is left out rather than printed empty.
+    lists = [(lab, items) for lab, items in (("Unit learning targets", cc["targets"]),
+                                             ("Key terms", cc["terms"])) if items]
+    if lists:
+        pin(doc.add_paragraph(), 6 * k)
+        w = round(TEXT_W_IN / len(lists), 2)
+        t = table(doc, [w] * len(lists))
+        for cell, (lab, items) in zip(t.rows[0].cells, lists):
+            borders(cell, pal.hair, sz=W_RULE)
+            mar(cell, 5, 5, 6, 6)
+            cell_label(cell, lab, pal)
+            for x in items:
+                write(cell.add_paragraph(), "•  " + x, 9.5, line=12.5, color=pal.ink,
+                      after=2)
+
+    # How these notes work, with 0014's accent rule down its left edge.
+    if cc["how"]:
+        pin(doc.add_paragraph(), 6 * k)
+        t = table(doc, [TEXT_W_IN])
+        c = t.rows[0].cells[0]
+        borders(c, pal.rule_accent, sz=W_HEAD_ACCENT, edges=("left",))
+        mar(c, 2, 2, 9, 0)
+        cell_label(c, "How these notes work", pal)
+        for x in cc["how"]:
+            write(c.add_paragraph(), "•  " + x, 9.5, line=12.5, color=pal.ink, after=2)
+
+    # Sections in this unit: a box to tick per section, its difficulty at the right.
+    pin(doc.add_paragraph(), 8 * k)
+    diff_w = 1.0 if cc["has_diff"] else 0
+    widths = [TEXT_W_IN - diff_w, diff_w] if diff_w else [TEXT_W_IN]
+    t = table(doc, widths, rows=1 + len(cc["checklist"]))
     h = t.rows[0].cells
-    for c in h:
-        mar(c, 12 * k, 6 * k, 0, 0)
-    write(h[0].merge(h[1]).paragraphs[0], "SECTION BREAKDOWN / CONCEPTS TO MASTER", LABEL, line=10.5, bold=True,
-          color=pal.ink, track=10)
-    if has_diff:
-        write(h[2].paragraphs[0], "DIFFICULTY", LABEL, line=10.5, bold=True,
-              color=pal.ink, track=10, align=WD_ALIGN_PARAGRAPH.RIGHT)
-    for i, s in enumerate(secs, 1):
+    cell_label(h[0], "Sections in this unit", pal)
+    if diff_w:
+        write(h[1].paragraphs[0], "DIFFICULTY", LABEL, line=10.5, bold=True,
+              color=pal.type_accent, track=TRACK, align=WD_ALIGN_PARAGRAPH.RIGHT,
+              after=4)
+    for i, (text, d) in enumerate(cc["checklist"], 1):
         cells = t.rows[i].cells
-        info = blurbs.get(sec_num(s["code"]), {})
-        for c in cells:
-            mar(c, 7 * k, 9 * k, 0, 0)
-            borders(c, pal.hair, sz=W_RULE, edges=("bottom",))
-        write(cells[0].paragraphs[0], sec_label(s["code"]), 9, line=13, bold=True,
-              color=pal.ink)
-        write(cells[1].paragraphs[0], s["title"], 11, line=14, bold=True, color=pal.ink)
-        blurb = info.get("blurb") or s.get("learningTarget", "")
-        if blurb:
-            write(cells[1].add_paragraph(), blurb, 9, line=12, color=pal.ink, before=4)
-        if has_diff:
-            d = info.get("difficulty")
-            write(cells[2].paragraphs[0], f"{d} / 10" if d else "", 12, line=14,
+        p = cells[0].paragraphs[0]
+        _spacing(p, 0, 4 * k, 13)
+        checkbox(p, pal, 9)
+        _run(p, "   " + text, 9.5, color=pal.ink)
+        if diff_w:
+            write(cells[1].paragraphs[0], f"{d} / 10" if d else "", 9.5, line=13,
                   bold=True, color=pal.ink, align=WD_ALIGN_PARAGRAPH.RIGHT)
-    if has_diff and cov.get("difficultyNote"):
-        write(doc.add_paragraph(), cov["difficultyNote"], LABEL, line=11,
-              color=pal.label, before=8 * k)
+    if cc["difficultyNote"]:
+        write(doc.add_paragraph(), cc["difficultyNote"], LABEL, line=11,
+              color=pal.label, before=2 * k)
 
-    # Equation toolbox.
+    # Equation toolbox (0025), kept on the cover (0030 choice b). A hairline above it.
     box = cov.get("equationToolbox")
     if box:
-        label_para(doc, box.get("label", "Equation toolbox"), pal, before=16 * k,
-                   after=8 * k)
+        rule_para(doc, pal, before=12 * k)
+        label_para(doc, box.get("label", "Equation toolbox"), pal, before=10 * k,
+                   after=6 * k)
         cols = box["columns"]
         half = round(TEXT_W_IN / len(cols), 2)
         t = table(doc, [half] * len(cols))
@@ -931,25 +1108,6 @@ def _cover(doc, spec, ctx, k):
         for i, n in enumerate(box.get("notes", [])):
             write(doc.add_paragraph(), n, 8.5, line=12, color=pal.ink,
                   before=8 * k if i == 0 else 0)
-        rule_para(doc, pal, before=10 * k)
-
-    # Key terms, grouped by section.
-    groups = cov.get("keyTerms", [])
-    if groups:
-        label_para(doc, "Key terms / grouped by section" if any(g.get("code")
-                   for g in groups) else "Key terms", pal,
-                   before=14 * k, after=8 * k)
-        for g in groups:
-            lead = f"**{sec_label(g['code'])}** " if g.get("code") else ""
-            write(doc.add_paragraph(), lead + " • ".join(g["terms"]), 9.5, line=15,
-                  color=pal.ink)
-
-    how = cov.get("howToUse")
-    if how:
-        label_para(doc, "How to use the notes", pal, before=16 * k, after=8 * k)
-        how = how if isinstance(how, list) else [how]
-        for x in how:
-            write(doc.add_paragraph(), x, 9.5, line=14, color=pal.ink, after=3)
 
     body = [el for el in doc.element.body if el.tag in (qn("w:p"), qn("w:tbl"))]
     pin_all(doc.element.body)
@@ -980,9 +1138,11 @@ def concept_review_page(doc, spec, ctx):
     pal, cr = ctx["pal"], spec["conceptReview"]
     start = len(doc.element.body)
     break_before(doc)
-    # The code slot carries a code on every page: here, the unit's.
-    page_head(doc, ctx, cr.get("title", "Concept Review"), ctx["unit_code"],
-              cr.get("subtitle"))
+    # The same title bar as a section (SHULL-CHG-0030), carrying the unit's code, with
+    # the page's subtitle in the learning-target slot, unlabelled and in label grey.
+    section_bar(doc, ctx, cr.get("title", "Concept Review"), ctx["unit_code"],
+                cr.get("subtitle"), target_label=None, target_color=pal.label)
+    pin(doc.add_paragraph(), 8)
     for i, s in enumerate(cr.get("sections", [])):
         t = table(doc, [1.1, TEXT_W_IN - 1.1])
         a, b = t.rows[0].cells
@@ -1053,7 +1213,9 @@ def title_case(s):
 
 
 def _legacy_row(r):
-    row = {k: v for k, v in r.items() if k not in ("cueLabel", "problem")}
+    # The cue label and notes heading are kept as the spec wrote them and printed in
+    # course colour (SHULL-CHG-0030). `title` names the block in build messages.
+    row = {k: v for k, v in r.items() if k != "problem"}
     row["title"] = title_case(r.get("cueLabel", ""))
     row["notes"] = list(r.get("notes", []))
     if r.get("problem"):
@@ -1069,13 +1231,21 @@ def _legacy_row(r):
     return row
 
 
-LEGACY_HOW_TO_USE = ("Quiz yourself with the left-column questions. A gray side rule marks a "
-                     "must-write note: the highlighted must-write block on the slide. Each "
-                     "section ends with a RECALL block; close your notes before you write it.")
-LEGACY_WORK_BOX = " Show your reasoning and units in each work box."
+# Used only when an old spec has no howItWorks of its own.
+LEGACY_HOW_TO_USE = ["Quiz yourself with the left-column questions.",
+                     "A gray rule down the left of a line means must-write. Copy those "
+                     "exactly.",
+                     "Each section ends with a RECALL block. Close your notes before you "
+                     "write it."]
+LEGACY_WORK_BOX = "Show your reasoning and units in each work box."
 # The old closing checklist names the old summary box. Only that term is renamed.
 LEGACY_TERMS = (("Summary boxes", "RECALL blocks"), ("summary boxes", "RECALL blocks"),
                 ("summary box", "RECALL block"))
+# The old how-it-works names the colour of the old must-write rule ("A teal rule down
+# the left of a line", "a gold rule down its left edge"). The rule is grey now
+# (SHULL-CHG-0025, kept by 0030), so the colour word is corrected to match the page.
+_RULE_COLOUR = re.compile(r"\b(teal|gold|lime|amber|rust|orange|green|aqua|purple|"
+                          r"colou?red)(\s+(?:side\s+)?rules?)\b", re.I)
 
 
 def _legacy_terms(text):
@@ -1084,13 +1254,18 @@ def _legacy_terms(text):
     return text
 
 
+def _legacy_how(text):
+    return _RULE_COLOUR.sub(lambda m: ("Gray" if m.group(1)[0].isupper() else "gray")
+                            + m.group(2), _legacy_terms(debullet(text)))
+
+
 def pack_pages(rows, heights, heads, avail, per_page=3):
     """Choose where a section's page breaks fall.
 
     Every way of cutting the section's blocks into consecutive pages is tried - a
     section is a handful of blocks, so that is a few dozen cuts. A cut is allowed when
-    each page fits its budget (the first page's head carries the subtitle, later ones
-    do not) and holds at most `per_page` numbered blocks; a closing RECALL or REVIEW
+    each page fits its budget (the first page carries the section title bar, later
+    ones no head) and holds at most `per_page` content blocks; a closing RECALL or REVIEW
     block does not count against that, it only has to fit. A single block too tall
     for any page is allowed a page of its own - there is nothing else to do with it.
     Of the allowed cuts: fewest sheets first, then the one whose emptiest sheet is
@@ -1105,8 +1280,8 @@ def pack_pages(rows, heights, heads, avail, per_page=3):
         fills, ok = [], True
         for pi, idx in enumerate(pages):
             used = heads[0 if pi == 0 else 1] + sum(heights[i] for i in idx)
-            numbered = sum(1 for i in idx if rows[i].get("kind") not in ("recall", "review"))
-            if len(idx) > 1 and (used > avail or numbered > per_page):
+            content = sum(1 for i in idx if rows[i].get("kind") not in ("recall", "review"))
+            if len(idx) > 1 and (used > avail or content > per_page):
                 ok = False
                 break
             fills.append(used / avail)
@@ -1122,10 +1297,11 @@ def normalize_legacy(spec, ctx):
     """Upgrade a flat spec (rows directly under each section) to the paged schema.
 
     Rows are packed onto pages by measured height, at most three blocks a page. The
-    first page of a section carries its learning target as the subtitle; later pages
-    carry none. The old summary box becomes a RECALL block, the old closing checklist
-    a REVIEW block on the last section, and the cover is assembled from what the old
-    front matter already said. Nothing is written that the spec did not already hold.
+    first page of a section carries its title bar and learning target; later pages
+    carry no head. Each row keeps its cueLabel and notesLabel. The old summary box
+    becomes a RECALL block, the old closing checklist a REVIEW block on the last
+    section, and the cover carries the old front matter (SHULL-CHG-0030). Nothing is
+    written that the spec did not already hold.
     """
     spec = copy.deepcopy(spec)
     avail = BODY_H_PT - SAFETY_PT - 2          # the same budget fit_page() holds a page to
@@ -1148,35 +1324,34 @@ def normalize_legacy(spec, ctx):
                          "checklist": [_legacy_terms(x) for x in close.get("checklist", [])],
                          "fuzzyLabel": close.get("fuzzyLabel", "Still fuzzy on:")
                          .replace("STILL FUZZY ON", "Still fuzzy on")})
-        # Packed against measured heights: the real page head for each page's subtitle,
+        # Packed against measured heights: the real section title bar on a first page,
         # each block as rendered, plus the 9 pt separator it brings. The breaks are
         # chosen, not accumulated - a greedy fill put blocks on a page until one did not
         # fit, which left single blocks on 40%-full sheets. See pack_pages().
-        heights, n = [], 0
-        for r in rows:
-            num = None
-            if r.get("kind", "notes") in NUMBERED:
-                n += 1
-                num = n
-            heights.append(block_height(r, ctx, num) + 9)
-        heads = (head_height(ctx, sec["title"], sec.get("learningTarget", "")),
-                 head_height(ctx, sec["title"], ""))
+        heights = [block_height(r, ctx) + 9 for r in rows]
+        # A section's first page carries the title bar and learning target; the rest
+        # carry no head (SHULL-CHG-0030).
+        heads = (head_height(ctx, sec), 0.0)
         pages = pack_pages(rows, heights, heads, avail)
-        sec["pages"] = [{"subtitle": sec.get("learningTarget", "") if i == 0 else "",
-                         "rows": p} for i, p in enumerate(pages)]
+        sec["pages"] = [{"rows": p} for p in pages]
         sec.pop("rows", None)
 
+    # The SHULL-CHG-0014 front matter goes on the cover as the spec wrote it
+    # (SHULL-CHG-0030). Three corrections only: codes are zero-padded (SHULL-CHG-0007);
+    # how-it-works names the grey must-write rule the page actually draws, not the old
+    # teal/gold rule; and "summary box" becomes "RECALL block".
+    has_problem = any(r.get("problem") for s in secs for p in s["pages"] for r in p["rows"])
+    how = [_legacy_how(x) for x in spec.get("howItWorks", [])]
+    if not how:
+        how = LEGACY_HOW_TO_USE + ([LEGACY_WORK_BOX] if has_problem else [])
     cover = {
-        "sections": [{"code": s["code"], "blurb": s.get("learningTarget", "")}
-                     for s in secs],
-        "keyTerms": [{"terms": [debullet(x) for x in spec.get("keyTerms", [])]}]
-        if spec.get("keyTerms") else [],
-        # The old how-it-works text describes the old page - its rule colours ("teal
-        # rule", "gold rule") and its summary box - so it is not carried over. Every
-        # upgraded spec gets this template's own wording instead.
-        "howToUse": LEGACY_HOW_TO_USE + (LEGACY_WORK_BOX if any(
-            r.get("problem") for s in secs for p in s["pages"] for r in p["rows"]) else ""),
+        "kicker": pad_codes(spec["kicker"]) if spec.get("kicker") else None,
+        "unitTargets": [debullet(x) for x in spec.get("unitTargets", [])],
+        "keyTerms": [debullet(x) for x in spec.get("keyTerms", [])],
+        "howItWorks": how,
+        "sectionList": [pad_codes(debullet(x)) for x in spec.get("sectionList", [])],
     }
+    cover = {k: v for k, v in cover.items() if v}
     if spec.get("fields"):
         cover["fields"] = spec["fields"]
     if spec.get("titleImage"):
@@ -1218,7 +1393,12 @@ def validate(spec, course):
     codes += [sec_num(s["code"]) for s in spec["sectionsContent"]]
     cov = spec.get("cover", {})
     codes += [sec_num(s["code"]) for s in cov.get("sections", [])]
-    codes += [sec_num(g["code"]) for g in cov.get("keyTerms", []) if g.get("code")]
+    codes += [sec_num(g["code"]) for g in cov.get("keyTerms", [])
+              if isinstance(g, dict) and g.get("code")]
+    # An old spec's section checklist names its codes in running text ("S1.2   The Big
+    # Bang ..."); they are checked like any other code.
+    codes += [f"{int(m.group(1))}.{m.group(2)}" for x in cov.get("sectionList", [])
+              for m in [re.search(r"\bS0*(\d{1,2})\.(\d)\b", str(x))] if m]
     codes += [sec_num(s["code"]) for s in spec.get("conceptReview", {}).get("sections", [])]
     bad = sorted({c for c in codes if c not in valid})
     if bad:
@@ -1316,10 +1496,7 @@ def main():
     ctx = {
         "pal": pal, "key": key, "base_dir": base_dir, "report": [], "overfull": [],
         "unit_title": unit_title(course, unit),
-        "unit_code": f"U{unit:02d}",
-        "eyebrow": f"SHULL SCIENCE / {COURSE} / GUIDED NOTES" + (" / TEACHER KEY" if key
-                                                                  else ""),
-        "cover_eyebrow": f"SHULL SCIENCE / {COURSE} / UNIT {unit:02d}",
+        "unit_code": f"U{unit:02d}", "course": course, "unit": unit, "derived": [],
         "footer": f"SHULL SCIENCE / {COURSE} / UNIT {unit:02d}" + (" / TEACHER KEY" if key
                                                                     else ""),
     }
@@ -1368,19 +1545,17 @@ def main():
     s.header_distance = Inches(0.2)
 
     designed = 1
+    ctx["cover"] = cover_content(spec, ctx)
+    if ctx["derived"] and not legacy:
+        print("build_notes_docx: cover content derived from this spec (SHULL-CHG-0030):",
+              file=sys.stderr)
+        for m in ctx["derived"]:
+            print("   " + m, file=sys.stderr)
     cover_page(doc, spec, ctx)
     for sec in spec["sectionsContent"]:
-        n = 0
         for pi, page in enumerate(sec["pages"], 1):
             page["_n"] = pi
-            numbers = []
-            for row in page["rows"]:
-                if row.get("kind", "notes") in NUMBERED:
-                    n += 1
-                    numbers.append(n)
-                else:
-                    numbers.append(None)
-            content_page(doc, ctx, sec, page, numbers)
+            content_page(doc, ctx, sec, page)
             designed += 1
 
     if spec.get("conceptReview"):
