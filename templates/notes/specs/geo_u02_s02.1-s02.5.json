@@ -96,7 +96,7 @@
               "key": "The time it takes for half of the parent atoms in a sample to decay."
             },
             {
-              "text": "Uranium-lead and potassium-argon date very ______________ rock. Carbon-14 dates material younger than about ______________ years.",
+              "text": "Best method for very old rock, and for recent organic material:",
               "key": "Uranium-lead and potassium-argon date very ancient rock. Carbon-14 dates material younger than about 50,000 years."
             },
             "*A mineral's age usually records when it crystallized — not necessarily the age of the whole rock layer around it."
@@ -111,24 +111,24 @@
           "notesLabel": "THE GEOLOGIC TIME SCALE",
           "notes": [
             {
-              "text": "The four units of the time scale, largest to smallest: ______________, ______________, ______________, ______________.",
-              "key": "The four units of the time scale, largest to smallest: eon, era, period, epoch."
+              "text": "The four units, largest to smallest:",
+              "key": "Eon, era, period, epoch."
             },
             {
-              "text": "Earth forms: about ______________ years ago.",
-              "key": "Earth forms: about 4.54 billion years ago."
+              "text": "Earth forms:",
+              "key": "About 4.54 billion years ago."
             },
             {
-              "text": "Cambrian Period begins: about ______________ years ago.",
-              "key": "Cambrian Period begins: about 539 million years ago."
+              "text": "Cambrian Period begins:",
+              "key": "About 539 million years ago."
             },
             {
-              "text": "Mesozoic Era begins: about ______________ years ago.",
-              "key": "Mesozoic Era begins: about 252 million years ago."
+              "text": "Mesozoic Era begins:",
+              "key": "About 252 million years ago."
             },
             {
-              "text": "Cenozoic Era begins: about ______________ years ago.",
-              "key": "Cenozoic Era begins: about 66 million years ago."
+              "text": "Cenozoic Era begins:",
+              "key": "About 66 million years ago."
             }
           ]
         }
@@ -153,12 +153,12 @@
           "notesLabel": "THE PRECAMBRIAN",
           "notes": [
             {
-              "text": "The Precambrian is an informal span, not a true eon, covering about ______________ % of Earth's history.",
-              "key": "The Precambrian is an informal span, not a true eon, covering about 88% of Earth's history."
+              "text": "Share of Earth's history it covers:",
+              "key": "An informal span (not a true eon) covering about 88% of Earth's history."
             },
             {
-              "text": "The three Precambrian eons, oldest to youngest: ______________, ______________, ______________.",
-              "key": "The three Precambrian eons, oldest to youngest: Hadean, Archean, Proterozoic."
+              "text": "The three eons, oldest to youngest:",
+              "key": "Hadean, Archean, Proterozoic."
             },
             {
               "text": "Hadean:",
@@ -183,12 +183,12 @@
           "notesLabel": "OXYGEN AND ICE IN THE PROTEROZOIC",
           "notes": [
             {
-              "text": "The Great Oxidation Event began about ______________ billion years ago, as photosynthesis released oxygen faster than rocks and iron could absorb it.",
-              "key": "The Great Oxidation Event began about 2.4 billion years ago, as photosynthesis released oxygen faster than rocks and iron could absorb it."
+              "text": "Great Oxidation Event — timing and cause:",
+              "key": "Began about 2.4 billion years ago, as photosynthesis released oxygen faster than rocks and iron could absorb it."
             },
             {
-              "text": "The Sturtian and Marinoan glaciations ('Snowball Earth') occurred roughly ______________–______________ million years ago.",
-              "key": "The Sturtian and Marinoan glaciations ('Snowball Earth') occurred roughly 720–635 million years ago."
+              "text": "Snowball Earth — timing and the two episodes:",
+              "key": "The Sturtian and Marinoan glaciations, roughly 720–635 million years ago."
             },
             "*Rising oxygen was toxic to many anaerobic microbes but made complex, oxygen-using life possible."
           ]
@@ -510,16 +510,16 @@
           "notesLabel": "SUPERCONTINENTS THROUGH TIME",
           "notes": [
             {
-              "text": "Rodinia assembled roughly ______________–______________ billion years ago, during the Proterozoic.",
-              "key": "Rodinia assembled roughly 1.1–0.9 billion years ago, during the Proterozoic."
+              "text": "Rodinia — approximate timing:",
+              "key": "Assembled roughly 1.1–0.9 billion years ago, during the Proterozoic."
             },
             {
-              "text": "Pangaea assembled during the ______________ Period and began rifting apart in the Late ______________ Period.",
-              "key": "Pangaea assembled during the Permian Period and began rifting apart in the Late Triassic Period."
+              "text": "Pangaea — assembly and rifting:",
+              "key": "Assembled during the Permian Period; began rifting apart in the Late Triassic Period."
             },
             {
-              "text": "On a paleo-continent map, white outlines show ______________.",
-              "key": "On a paleo-continent map, white outlines show where modern continental regions sit on the ancient map."
+              "text": "Reading a paleo-map — white outlines show:",
+              "key": "Where modern continental regions sit on the ancient map."
             },
             "*A single ocean, Panthalassa, surrounded Pangaea; the Tethys Sea sat along its eastern margin."
           ]
@@ -545,8 +545,8 @@
           "notesLabel": "THE END-PERMIAN EXTINCTION",
           "notes": [
             {
-              "text": "The end-Permian extinction happened about ______________ million years ago, ending the ______________ Era.",
-              "key": "The end-Permian extinction happened about 252 million years ago, ending the Paleozoic Era."
+              "text": "Timing:",
+              "key": "About 252 million years ago, ending the Paleozoic Era."
             },
             {
               "text": "Suspected cause:",
@@ -569,11 +569,11 @@
           "notesLabel": "THE K–PG EXTINCTION",
           "notes": [
             {
-              "text": "The K–Pg extinction happened about ______________ million years ago, ending the ______________ Era.",
-              "key": "The K–Pg extinction happened about 66 million years ago, ending the Mesozoic Era."
+              "text": "Timing:",
+              "key": "About 66 million years ago, ending the Mesozoic Era."
             },
             {
-              "text": "A roughly ______________ km asteroid struck near today's ______________ Peninsula (the Chicxulub crater).",
+              "text": "The impact site and size:",
               "key": "A roughly 10 km asteroid struck near today's Yucatán Peninsula (the Chicxulub crater)."
             },
             {
@@ -581,7 +581,7 @@
               "key": "An iridium-enriched layer worldwide, shocked minerals, impact spherules, tsunami deposits, and the Chicxulub crater itself."
             },
             {
-              "text": "About ______________ % of species disappeared, including all non-avian dinosaurs.",
+              "text": "Scale:",
               "key": "About 75% of species disappeared, including all non-avian dinosaurs."
             },
             "*Birds are theropod dinosaurs, and they survived the K–Pg extinction — the dinosaur lineage continues today."
