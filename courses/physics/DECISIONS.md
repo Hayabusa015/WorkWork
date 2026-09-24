@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-24
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -144,6 +144,28 @@ Physics.**
 
 ---
 
+## Tests — CONFIRMED
+
+> **Physics problem-solving tests — in-class, graded, work shown on the page — are capped at 2 pages
+> maximum, across all parallel versions.**
+
+This is a different document class from the Worksheets rule above: problem-solving tests carry work
+boxes and are meant to be worked *on* the page, unlike homework worksheets, practice sets, and study
+guides, which carry no work area and stay under the no-work-area rule.
+
+The rule applies specifically to the numeric/graph problem-solving test format confirmed by the Unit
+1 Day-2 test: multiple parallel versions (A/B/C), math problems plus a graph-sketch problem, a work
+box and a 0–5 per-problem grading rubric for each, and a boxed FINAL ANSWER line.
+
+**No confirmed Day 1/Day 2 test structure exists for Physics.** Chemistry runs a locked two-day
+Day 1 conceptual / Day 2 computational structure (`courses/chemistry/DECISIONS.md`), and Geology
+explicitly does not carry it over. Nothing in this file or in any Physics skill establishes a
+matching two-day architecture for Physics — "Day 2" here describes the one test built, not a
+confirmed course-wide structure. Do not assume the Chemistry split applies; ask Matt if a Physics
+test architecture question comes up.
+
+---
+
 ## Ohio standards
 
 Ohio's model Physics curriculum runs on motion, forces and momentum, energy, waves, and electricity
@@ -219,6 +241,20 @@ Unit 05 - Momentum & Impulse           Unit 10 - Nuclear & Modern Physics
 ---
 
 ## Decision log
+
+### 2026-09-24 — Problem-solving test page cap
+Physics problem-solving tests (in-class, graded, work shown on the page) are capped at 2 pages
+maximum, all versions. Prompted by the Unit 1 Day-2 problem-solving test: 3 parallel versions
+(A/B/C), 5 math problems plus 1 graph-sketch problem each, work boxes, a per-problem 0–5 rubric, and
+a boxed FINAL ANSWER line. It first built at 3 pages; Matt asked it condensed to 2 (the two easiest
+problems paired side by side, work-box heights and margins tightened), it now holds at 2 pages
+across all three versions, and Matt asked that the 2-page cap become a standing rule rather than a
+one-off for this document. Does not apply to homework worksheets, practice sets, or study guides —
+those stay under the no-work-area Worksheets rule above. No prior Physics test-page rule exists to
+supersede; this is a new rule. No confirmed Day 1/Day 2 test structure exists for Physics — see the
+Tests section note above; do not assume Chemistry's two-day split carries over.
+Decided by: Matthew Shull, in conversation, 2026-09-24.
+Status: CONFIRMED · SHULL-CHG-0024
 
 ### 2026-09-08 — Physics decisions file created
 Curriculum map, sequencing, discipline rules, and the worksheet rule moved here from
