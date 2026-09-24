@@ -255,6 +255,7 @@ supersede; this is a new rule. No confirmed Day 1/Day 2 test structure exists fo
 Tests section note above; do not assume Chemistry's two-day split carries over.
 Decided by: Matthew Shull, in conversation, 2026-09-24.
 Status: CONFIRMED · SHULL-CHG-0024
+Implemented by: commit 8f1b93d
 
 ### 2026-09-08 — Physics decisions file created
 Curriculum map, sequencing, discipline rules, and the worksheet rule moved here from
