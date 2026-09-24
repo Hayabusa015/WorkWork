@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0025 | 2026-09-24 | Guided-notes `--key` mode: student/key from one spec; problem-answer leak closed | PARTIAL | `governance/proposals/SHULL-CHG-0025-notes-key-mode.md` |
 | SHULL-CHG-0024 | 2026-09-24 | Section-range grammar ratified: S##.#-S##.#, both halves padded, chip/footer match | CONFIRMED | `governance/proposals/SHULL-CHG-0024-section-range-grammar.md` |
 
 ## 2026-09-20

@@ -10,6 +10,36 @@ python3 templates/notes/build_notes.py      specs/<spec>.json out.pdf    # Optio
 python3 templates/notes/build_notes_docx.py specs/<spec>.json out.docx   # Option A
 ```
 
+### Student copy and key — `--key`
+
+```bash
+python3 templates/notes/build_notes_docx.py --key specs/<spec>.json out.docx   # Option A, key
+```
+
+**SHULL-CHG-0025.** `build-document`'s own skill file already required it — *"Always two files —
+student copy and filled key — generated from the same source so they cannot drift"* — and
+`recall.py`'s `offences()` already read a notes line as `{"text": ..., "key": ...}`. The renderer
+just never finished the other half: every build was the student copy, unconditionally, whatever the
+spec held.
+
+**Option A only.** `--key` is not implemented in `build_notes.py` (Option B) — the same asymmetry as
+the work box, the equation bar, and the diagram block below: Option B is refused rather than built
+short.
+
+A `row.notes` line may be a plain string (unchanged — a blank still renders as ruled lines) or
+`{"text": "<line with a blank>", "key": "<the filled answer>"}`. In `--key` mode the `key` text
+prints in place of the ruled lines, bold, in the display accent colour. A `problem` block's
+`answer` now prints only in `--key` mode — before this fix it printed unconditionally, which would
+have leaked a worked answer onto the student copy the first time any spec used it.
+
+**The build refuses a key with a blank still blank.** If a plain-string notes line still carries a
+run of underscores or ends in a label colon, and has no `key` to fill it, `--key` stops rather than
+ship an incomplete key — the same "the build refuses" posture as the recall rule and the work-box
+rule below.
+
+`--key` appends `_Key` to the default output filename and `  ·  KEY` to the running footer, so a
+key page identifies itself without opening it.
+
 **One spec, two renderers.** The content lives in `specs/*.json` and neither builder owns it. Both
 check the section code against that course's `DECISIONS.md` before building anything, and both take
 colour from `brand/tokens.json` — no hex is typed in either.

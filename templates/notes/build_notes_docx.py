@@ -58,7 +58,16 @@ NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
 # (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
 
 def main():
-    spec = json.load(open(sys.argv[1] if len(sys.argv) > 1
+    # SHULL-CHG-0025. "Always produce two files: student, blanks empty; key, everything
+    # filled, generated from the same source structure so they can't drift." recall.py
+    # already read a notes line as {"text", "key"} in its offences() check - the check
+    # was written for a shape the renderer never actually implemented. This finishes it:
+    # --key switches every blank-bearing line and every problem's answer from hidden to
+    # shown, off the same spec, rather than a second hand-authored document.
+    args = [a for a in sys.argv[1:] if a != "--key"]
+    KEY = "--key" in sys.argv[1:]
+
+    spec = json.load(open(args[0] if args
                           else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")))
     course = spec["course"]
     pal = Palette(course)
@@ -120,8 +129,9 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
+    suffix = "_Key" if KEY else ""
+    out = args[1] if len(args) > 1 else \
+        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}{suffix}.docx")
 
     doc = Document()
     s = page_setup(doc)
@@ -214,12 +224,17 @@ def main():
                                pal, NOTES_INNER_IN)
                 work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
                          float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), NOTES_INNER_IN)
-                if prob.get("answer"):
-                    para(notes, prob["answer"], 9.5)
+                # SHULL-CHG-0025: an answer is what the key is for. Printing it
+                # unconditionally would leak it onto the student page.
+                if KEY and prob.get("answer"):
+                    para(notes, prob["answer"], 9.5, bold=True, color=display)
 
             for n in row["notes"]:
-                mw = n.startswith(("*", "✎"))
-                body = n.lstrip("*✎").strip()
+                # A notes line is a plain string, or {"text", "key"} - recall.py's
+                # offences() already reads it this shape; this is the renderer catching up.
+                text, keytext = (n, None) if isinstance(n, str) else (n.get("text", ""), n.get("key"))
+                mw = text.startswith(("*", "✎"))
+                body = text.lstrip("*✎").strip()
                 p = para(notes, body, 9.5, bold=mw)
                 if mw:
                     pPr = p._p.get_or_add_pPr()
@@ -227,6 +242,13 @@ def main():
                     x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
                     x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
                     bd.append(x); pPr.append(bd)
+                elif KEY:
+                    if keytext is not None:
+                        para(notes, keytext, 9.5, bold=True, color=display)
+                    elif "___" in body or body.endswith(":"):
+                        print(f"build_notes_docx: --key requested but {sec['code']} has a "
+                              f"blank line with no \"key\": {body!r}", file=sys.stderr)
+                        return 1
                 else:
                     rule_lines(notes, recall.ruled_lines(body), hair)
 
@@ -254,7 +276,10 @@ def main():
     para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
     rule_lines(c, 3, hair)
 
-    running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
+    footer_txt = f"SHULL SCIENCE          {unit} · {span}"
+    if KEY:
+        footer_txt += "  ·  KEY"
+    running_footer(s, footer_txt, pal)
 
     trim_tail(doc)
     doc.save(out)
