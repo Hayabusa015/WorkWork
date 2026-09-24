@@ -1,7 +1,7 @@
 ---
 id: SHULL-CHG-0025
 title: Guided-notes --key mode — student copy and key from one spec, one renderer
-status: APPROVED
+status: IMPLEMENTED
 opened: 2026-09-24
 decided: 2026-09-24
 source: Coordinator session (code, written and tested) + Matthew Shull (approval)
@@ -123,17 +123,16 @@ Performed by the coordinator session prior to this record:
 - PDF-rendered both outputs and grepped for the filled key text and the `· KEY` footer marker to
   confirm presence in the key build and absence in the student build.
 
-**Implemented By:** pending. The code change already exists in the working tree; this record, the
-`templates/notes/README.md` addition, and the `change-log/CHANGELOG.md` row land in the same commit
-as that code, made by the coordinator (who holds the git/Bash access this Secretary session does
-not). The commit SHA is to be added here once that commit lands, per `governance/CHANGE_CONTROL.md`
-— **`Implemented By` is not decoration; a record without it is a claim.**
+**Implemented By:** `65b8bad` on `claude/elegant-bohr-8hkbpj`, message carries `SHULL-CHG-0025`. One
+commit, all four files — `templates/notes/build_notes_docx.py`, this record, the
+`templates/notes/README.md` addition, and the `change-log/CHANGELOG.md` row — landed together, made
+by the coordinator (who holds the git/Bash access this Secretary session does not).
 
-**Verified:** pending in the same sense — the functional tests above were run and reported by the
-coordinator *before* the commit exists to point at. Once committed, this line should be updated to
-name who independently confirmed the working tree matches this record (the same caveat
-`SHULL-CHG-0024` carries, for the same reason: this Secretary session has no git tool to run that
-check itself).
+**Verified:** yes, independently, by the coordinator (`git show --stat 65b8bad`, confirming the
+four-file diff matches this record exactly) — the same role this session played re-checking
+`SHULL-CHG-0024`'s commit. This Secretary session has no git tool to run that check itself, so the
+verification is the coordinator's directly, recorded here rather than independently re-run by this
+session.
 
 ## Decision
 
