@@ -17,11 +17,14 @@
  * writes only within the file it is bound to. Safe to read top to bottom before
  * running it.
  *
- * SET THE YEAR EACH FALL
- * Dashboard!B1 is the single "Current School Year" cell. Every Data row's School
- * Year is computed FROM that one cell — never type a year into the Data tab by
- * hand. Change B1 once, in one place, at the start of each year, and every new
- * row entered from then on carries the new year automatically.
+ * SET THE YEAR EACH FALL — BEFORE THE FIRST PERIOD RUNS THE LAB
+ * Dashboard!B1 is the single "Current School Year" cell. The moment a Data row
+ * gets its Situation filled in, the onEdit_ trigger below snapshots B1's value
+ * into that row's School Year column as a literal — then never touches that
+ * row again, even after B1 changes. Never type a year into the Data tab by
+ * hand, and never edit an already-filled School Year cell by hand either.
+ * Change B1 once, at the very start of each year, before the first class
+ * enters data — a row entered before you update B1 snapshots the OLD year.
  *
  * TO RE-RUN
  * Extensions > Apps Script > run buildReactionTimeTracker, or use the
@@ -53,6 +56,49 @@ function onOpen() {
     .createMenu('SHULL Tools')
     .addItem('Rebuild Tracker', 'buildReactionTimeTracker')
     .addToUi();
+}
+
+/**
+ * Simple trigger — fires automatically on any edit to this spreadsheet by
+ * anyone who can edit it (students included; simple triggers run with the
+ * editing user's own permissions, which is all this needs).
+ *
+ * Its only job: the first time a Data row gets a Situation value (col D)
+ * AND its School Year cell (col A) is still blank, write Dashboard!B1's
+ * CURRENT value into col A as a literal — a snapshot of the year that row
+ * was entered in. A row that already has a Year is never touched again,
+ * so changing B1 next fall cannot retroactively relabel old rows.
+ *
+ * Handles multi-cell and multi-row paste, not just single-cell typing.
+ */
+function onEdit(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== TRACKER_DATA_SHEET) return;
+
+  const ss = sheet.getParent();
+  const dashboard = ss.getSheetByName(TRACKER_DASHBOARD_SHEET);
+  const currentYear = dashboard ? dashboard.getRange('B1').getValue() : '';
+  if (currentYear === '') return;
+
+  const firstRow = Math.max(e.range.getRow(), 2);
+  const lastRow = e.range.getLastRow();
+  if (lastRow < 2) return;
+  const numRows = lastRow - firstRow + 1;
+
+  const yearRange = sheet.getRange(firstRow, 1, numRows, 1);
+  const situationRange = sheet.getRange(firstRow, 4, numRows, 1);
+  const years = yearRange.getValues();
+  const situations = situationRange.getValues();
+
+  let changed = false;
+  for (let i = 0; i < numRows; i++) {
+    if (years[i][0] === '' && situations[i][0] !== '') {
+      years[i][0] = currentYear;
+      changed = true;
+    }
+  }
+  if (changed) yearRange.setValues(years);
 }
 
 function buildReactionTimeTracker() {
@@ -101,18 +147,21 @@ function buildDataSheet_(sheet) {
     .setFontWeight('bold').setBackground('#EDF0E5');
   sheet.setFrozenRows(1);
 
-  // School Year: pulled from Dashboard!$B$1 the moment Situation (col D) is
-  // filled in. This is the ONLY place Year is computed for a row — see the
-  // header comment. Column I is Average, column J is Reaction Time.
-  const yearFormulas = [];
+  // School Year: NOT a formula. It is snapshotted as a literal value by
+  // onEdit_(), below, the first time a row gets a Situation entered — once
+  // written it is never touched again, including when Dashboard!B1 changes
+  // next year. A live formula here was tried and rejected: every row would
+  // silently relabel itself to whatever B1 currently says, which means a
+  // year change would retroactively rewrite every prior year's data and the
+  // "This Year" filters would always be true for every row ever entered.
+  // Caught in independent review before this ever ran — see change history.
+  // Column I is Average, column J is Reaction Time; both remain formulas.
   const avgFormulas = [];
   const rtFormulas = [];
   for (let r = 2; r <= TRACKER_LAST_ROW; r++) {
-    yearFormulas.push([`=IF(D${r}="","",Dashboard!$B$1)`]);
     avgFormulas.push([`=IFERROR(AVERAGE(E${r}:H${r}),"")`]);
-    rtFormulas.push([`=IFERROR(SQRT(2*(I${r}/100)/9.8),"")`]);
+    rtFormulas.push([`=IFERROR(SQRT(2*(I${r}/100)/9.80),"")`]);
   }
-  sheet.getRange(2, 1, TRACKER_LAST_ROW - 1, 1).setFormulas(yearFormulas);
   sheet.getRange(2, 9, TRACKER_LAST_ROW - 1, 1).setFormulas(avgFormulas);
   sheet.getRange(2, 10, TRACKER_LAST_ROW - 1, 1).setFormulas(rtFormulas);
   sheet.getRange(2, 9, TRACKER_LAST_ROW - 1, 2).setNumberFormat('0.00');
@@ -156,11 +205,14 @@ function protectHeaderRow_(sheet, width) {
 }
 
 function buildDashboardSheet_(sheet) {
+  // Read B1 BEFORE clearing the sheet — clear() wipes it first, which had
+  // silently reset the current-year control cell to the hardcoded default
+  // on every rebuild, contradicting "re-running never touches your data."
+  const existingYear = sheet.getRange('B1').getValue();
   sheet.clear();
   sheet.getCharts().forEach(chart => sheet.removeChart(chart));
 
   sheet.getRange('A1').setValue('Current School Year').setFontWeight('bold');
-  const existingYear = sheet.getRange('B1').getValue();
   sheet.getRange('B1').setValue(existingYear || '2026-2027');
   sheet.getRange('A1:B1').setBackground('#FBDDA9');
 
@@ -184,14 +236,12 @@ function buildDashboardSheet_(sheet) {
     `=COUNTIFS(Data!$A$2:$A$${TRACKER_LAST_ROW},$B$1,Data!$D$2:$D$${TRACKER_LAST_ROW},"<>")`
   );
 
-  sheet.getRange('A10').setValue('Year-Over-Year Average Reaction Time, by Situation')
-    .setFontWeight('bold');
-  sheet.getRange('A11').setFormula(
-    `=IFERROR(QUERY(Data!A1:J${TRACKER_LAST_ROW},` +
-    `"select A, avg(J) where A is not null and A <> '' group by A pivot D",1),` +
-    `"No data yet — entries will appear once Data rows are filled in.")`
-  );
-
+  // Both charts below get an EXPLICIT width/height rather than relying on
+  // Apps Script's default (~600x371px). Left implicit, the two charts'
+  // default footprints plausibly overlap each other. With explicit sizes,
+  // the two charts are placed in disjoint ROW BANDS — rows 4-16 for the
+  // this-year chart, rows 18+ for the header/pivot/trend-chart band — so
+  // they cannot collide regardless of column position.
   const thisYearChart = sheet.newChart()
     .setChartType(Charts.ChartType.COLUMN)
     .addRange(sheet.getRange(4, 1, 3, 2))
@@ -200,21 +250,34 @@ function buildDashboardSheet_(sheet) {
     .setOption('legend', { position: 'none' })
     .setOption('series', { 0: { color: TRACKER_ACCENT } })
     .setOption('vAxis', { title: 'Reaction time (s)' })
+    .setOption('width', 400)
+    .setOption('height', 260)
     .build();
   sheet.insertChart(thisYearChart);
 
-  // Anchored to the RIGHT of the pivot table, not below it. The pivot table
-  // is fixed at 4 columns wide (Year + A/B/C) but grows a row per year
-  // forever — anchoring below it would eventually put the chart on top of
-  // its own data table after enough years of use.
+  sheet.getRange('A18').setValue('Year-Over-Year Average Reaction Time, by Situation')
+    .setFontWeight('bold');
+  sheet.getRange('A19').setFormula(
+    `=IFERROR(QUERY(Data!A1:J${TRACKER_LAST_ROW},` +
+    `"select A, avg(J) where A is not null and A <> '' group by A pivot D",1),` +
+    `"No data yet — entries will appear once Data rows are filled in.")`
+  );
+
+  // Anchored to the RIGHT of the pivot table (column F, with column E left
+  // as a gutter), not below it. The pivot table is fixed at 4 columns wide
+  // (Year + A/B/C) but grows a row per year forever — anchoring below it
+  // would eventually put the chart on top of its own data table after
+  // enough years of use.
   const trendChart = sheet.newChart()
     .setChartType(Charts.ChartType.COLUMN)
-    .addRange(sheet.getRange(11, 1, 60, 4))
-    .setPosition(10, 6, 0, 0)
+    .addRange(sheet.getRange(19, 1, 60, 4))
+    .setPosition(19, 6, 0, 0)
     .setOption('title', 'Class Average Reaction Time by Year')
     .setOption('vAxis', { title: 'Reaction time (s)' })
     .setOption('hAxis', { title: 'School year' })
     .setOption('colors', [TRACKER_ACCENT, TRACKER_ACCENT_B, '#2E3338'])
+    .setOption('width', 520)
+    .setOption('height', 320)
     .build();
   sheet.insertChart(trendChart);
 
@@ -228,5 +291,6 @@ function protectDashboardExceptControlCell_(sheet) {
   sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET).forEach(p => p.remove());
   const protection = sheet.protect().setDescription('Dashboard — aggregate view');
   protection.setUnprotectedRanges([sheet.getRange('B1')]);
+  protection.removeEditors(protection.getEditors());
   if (protection.canDomainEdit()) protection.setDomainEdit(false);
 }
