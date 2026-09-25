@@ -347,3 +347,211 @@ the working tree. It confirms the code matches this description. It is not a re-
 Matthew Shull, in conversation, 2026-09-25, reviewing the first flowed build: **"well shit theres
 way too much spacing now"**. The quote reached this record through the coordinator session. The
 Secretary did not hear it directly.
+
+---
+
+## Amendment 2 — 2026-09-25
+
+This amendment is appended. Nothing above has been rewritten: the original record and the first
+amendment stay as they were written. Where this amendment contradicts either one, **this amendment
+wins**. See "What this amendment supersedes" below.
+
+### What happened
+
+Matthew sent a screenshot of the build from the first amendment (`9b83b8d`) open in Word. Some pages
+were half empty in the middle of a section. A Cornell row could not split, so it jumped whole to the
+next page and left a gap. He said, verbatim:
+**"na see, this is what i mean. keep each section together, if a section ends just head to a new
+page!"**
+
+### Decision recorded: each section starts a new page
+
+**This is Matthew's decision.** Under flow, each section starts a new page. That matches
+`.claude/skills/build-document/SKILL.md` line 106: "Every section starts a new page and ends with a
+summary box plus self-check." It settles the first amendment's flagged question ("Which behavior is
+the rule is Matthew's decision, and it is not made here"). He chose the second way out: restore the
+unconditional breaks and keep the growth caps. The skill is not amended, and no separate change
+record is needed.
+
+The decision covers **flowed** specs. The original record's open item, "The skill and the default
+renderer still disagree", is **not** settled by it. Unflowed specs (GEO U1, PHYS U1, and any new spec
+that leaves out `"flow": true`) still do not start each section on a new page. Whether `flow` should
+become the default for new specs is still Matthew's decision.
+
+### What changed
+
+Code commit **`d0ad4e3`** on `claude/elegant-bohr-8hkbpj`. The coordinator made and verified it. Five
+files:
+
+- `templates/_shull_docx.py`
+- `templates/notes/build_notes_docx.py`
+- `templates/notes/fit_notes.py`
+- `templates/notes/README.md`
+- `templates/notes/specs/geo_u02_s02.1-s02.5.json`
+
+All five are in `templates/`, which is outside the Secretary's authority. **The Secretary did not
+touch any of them.**
+
+1. **Each section starts a new page again.** Under flow, every section after the first starts a new
+   page, every time. The close is still on its own page. The fitter no longer sets `breakBefore` on
+   sections or rows. The builder no longer supports `breakBefore` on rows.
+2. **One table row per prompt.** A prompt is its label, its ruled lines, and any must-write line
+   under it. Each prompt is now its own table row, and that row cannot split. The cue cell is
+   vertically merged down beside the prompts. Horizontal borders are drawn only at the top of the
+   first prompt and the bottom of the last, so the prompts still look like one Cornell row. A page
+   can now break between prompts but never through one, so a section runs on without gaps.
+   *Tried and dropped:* an intermediate attempt put keep-with-next on the paragraphs inside a row
+   that was allowed to split. LibreOffice ignores keep-with-next inside table cells. Word reads it as
+   "keep this row with the next row", which chains the whole table into one block. It is not in
+   `d0ad4e3`.
+3. **Exact line spacing in `rule_lines()`.** Each ruled line is now exactly 14pt with 5pt after it,
+   plus the 1pt spacer, so each line takes 20pt. Before, the spacing was "single", which takes its
+   height from the font's own metrics. Word set those rules about a third further apart than
+   LibreOffice did. So every page ran long in Word but not in the LibreOffice previews. Also,
+   `w:pBdr` is now inserted in OOXML schema order, before `w:spacing`, by a new `add_pbdr()` helper,
+   because Word is stricter about element order. *This is the shared helper, so like original item
+   4 it affects every notes packet and worksheet built with it, in all three courses, and it is not
+   opt-in.*
+4. **How the fitter gives back room.** For each section, the fitter measures the room left on the
+   page that holds the section's summary, which is the page where the section ends.
+   - It adds one line to every prompt in the section, but only if all of them fit ("never some and
+     not others").
+   - The rest of the room goes to the summary, which can grow by up to 6 lines over its natural 4.
+   - The close is capped at 4 extra lines for each box, over a natural 3.
+   - Room past a cap stays white.
+   - Each box still starts at least as tall as its key answer wraps, as in the first amendment's
+     item 4.
+   - The fitter backs off if the page count changes, or if any summary moves to a different page.
+   - If a summary box ends up alone on a page, the fitter prints a warning. It does not fix it.
+
+   | Slot | Natural | Cap | Maximum |
+   |---|---|---|---|
+   | Label line (`lines`) | the larger of the recall count and the key's wrapped length (first amendment, item 4) | +1 | natural + 1 |
+   | Section summary (`summaryLines`) | 4 | +6 | 10 |
+   | Close, big picture (`bigPictureLines`) | 3 | +4 | 7 |
+   | Close, still fuzzy on (`fuzzyLines`) | 3 | +4 | 7 |
+
+5. **Result for Geology U2:** 10 pages for the student copy and 10 for the key. The key matches the
+   student copy page for page, checked on the first text of each page. Both use Archivo only. The
+   heaviest page uses 3.84% toner on the student copy and 4.25% on the key. The GEO U1 and PHYS U1
+   specs, which do not use flow, still build. These figures are from the coordinator.
+
+### What this amendment supersedes
+
+These lines stay unedited in the record above, but they are **no longer accurate**.
+
+From the first amendment:
+
+| Where | Stale text | Now |
+|---|---|---|
+| First amendment, item 1 | A section starts a new page "only when it carries `"breakBefore": true`", set "only when the section's head would otherwise be stranded" | Every section after the first starts a new page, every time. The fitter sets no `breakBefore`. The builder does not read a row `breakBefore`. |
+| First amendment, item 2 | Narrower orphan test, where the fix is "the section's last row gets `breakBefore`". Also the tried-and-dropped approach of moving the last row down. | The fitter only warns about a summary alone on a page and does not fix it. There is no `breakBefore` in either direction. The tried-and-dropped note no longer applies. |
+| First amendment, item 3, cap table | Summary +2 (maximum 6). Close +3 each (maximum 6). | The label cap of +1 **still stands**. Summary is now +6 (maximum 10). Close is now +4 each (maximum 7). See the table in item 4 above. |
+
+Knock-on effects on lines elsewhere in the record:
+
+| Where | Stale text | Now |
+|---|---|---|
+| The first amendment's own "supersedes" table, rows for the front-matter `title:`, "Supersedes, last paragraph", and "Verification" | "A section starts a page only when…", "**No longer true**", "Sections are not all at a page top by design" | The original wording is accurate again for flowed specs. The title's "sections start a page" holds. Flow meets the skill's "Every section starts a new page". Every section after the first is at the top of a page. |
+| The first amendment's own "supersedes" table, Auditor row, and the original "Affected", Auditor | "no stranded section head" / "every section at a page top" | Every section after the first starts at the top of a page. The close is on its own page. No prompt is split across a page. The fitter warns about a summary alone on a page. The key still matches the student copy page for page. |
+| Original "New behavior" item 1 | "every Cornell row is `cantSplit`", and "a row may carry `"breakBefore": true`" | Every **prompt** is a `cantSplit` row. A Cornell row, meaning a cue and its prompts, may break between prompts. Row `breakBefore` is gone. |
+| Original item 3, and the first amendment's "unchanged" paragraph | "The fitter owns … `breakBefore`". Growth never changes "page count or row placement". | The fitter owns `lines`, `summaryLines`, `bigPictureLines`, and `fuzzyLines`. It removes `breakBefore` and never sets it. It backs off if the page count changes or any summary moves to a different page. Where a row sits is no longer checked on its own. |
+| Original item 3 | "hands it back … to the writing slots on that page" | Room is given back per section, measured on the page with that section's summary. Every prompt gets a line or none does. |
+
+These are unchanged by this amendment:
+
+- original items 2, 5, and 6
+- original item 4's spacer paragraph (the line pitch is now exact, as in item 3 above)
+- `"flow": true` stays opt-in, and the fitter still refuses a spec without it
+- the 16pt safety margin
+- the first amendment's item 4 (each box starts at least as tall as its key answer)
+- Option B is still out of scope
+
+### Resolved
+
+- **The first amendment's flag "The skill and the flowed renderer now disagree"** is resolved by
+  Matthew's decision above. Under flow, every section starts a new page, as the skill says.
+- **`templates/notes/README.md` §"QA"** is covered by both earlier flags. In the working tree it now
+  reads: "A flowed spec run through `fit_notes.py` has its page breaks checked for you — sections
+  start pages and no prompt splits; it warns if a summary sits alone. Option B and unflowed specs do
+  not, and a summary box orphaned at the top of a page is the defect to watch for there." That is the
+  qualification the original record asked for. The Secretary read the text but did not check which
+  commit introduced it.
+
+### Flagged, not resolved
+
+- **Matthew did not choose the cap values or the all-or-none rule; the coordinator did.** The +1 /
+  +6 / +4 caps and the rule that every prompt in a section gets a line or none does are the
+  coordinator's reading of the three quotes from Matthew. Matthew's words say to give back the space,
+  that there was too much, and that each section should start a new page. They do not give any
+  numbers. The caps are recorded under this record's existing approval. **Matthew should see the cap
+  table in item 4**, because it sets how much writing room students get. The summary can now grow to
+  10 lines. The first amendment capped it at 6.
+- **The default for unflowed specs is still open.** See "Decision recorded" above.
+- **`add_pbdr()` is not used everywhere a paragraph border is built.** Item 3 says `w:pBdr` is now
+  inserted in schema order, and that is true inside `rule_lines()`. But in
+  `templates/notes/build_notes_docx.py`, the left bar on a must-write line (lines 311–315) still uses
+  `pPr.append(bd)`. That happens after `para()` has already set paragraph spacing, so the bar's
+  `w:pBdr` comes after `w:spacing`, which is out of schema order. `templates/practice/build_practice.py`
+  line 315 also builds a `w:pBdr` by hand, and the Secretary did not check its order. Word opened the
+  build, according to the coordinator's report, so this may be harmless. It is recorded because it
+  contradicts the claim as stated. This is outside the Secretary's authority.
+- **Code left over from the dropped keep-with-next attempt.** `rule_lines()` in
+  `templates/_shull_docx.py` still accepts `keep=False` and sets `keep_with_next` from it. Its
+  docstring still describes holding a prompt's lines together "when the row itself is allowed to
+  break", which is the approach dropped in item 2. `build_notes_docx.py` never passes `keep`, so
+  nothing is built with it. It is dead code with a stale docstring. This is outside the Secretary's
+  authority.
+
+### Implemented By / Verified (amendment 2)
+
+**Implemented By:** `d0ad4e3` on `claude/elegant-bohr-8hkbpj`, committed by the coordinator. This
+amendment will land in a follow-up commit by the coordinator. The Secretary session has no git
+access.
+
+**Verified:** yes, by the coordinator. The coordinator checked the commit and produced the 10/10 page
+counts, the page-for-page key match, the font audit, and the ink figures in item 5. The Secretary
+could not run `git show --stat d0ad4e3`.
+
+The Secretary's own check was a read-only look at the working tree. It confirms that the code
+matches this description, apart from the two flags above. It is not a re-run of the builds.
+
+- `fit_notes.py`
+  - It contains `CAP = {"label": 1, "summary": 6, "close": 4}`.
+  - Its docstring quotes all three of Matthew's instructions.
+  - `normalise()` removes `breakBefore` from sections and rows.
+  - `grow()` adds a line to every prompt only when `extra >= len(labels)`, then adds up to the cap
+    to the summary.
+  - The back-off test is `len(new) != n_pages or section_ends(new) != home`.
+  - A summary alone on a page only produces a warning on stderr.
+- `build_notes_docx.py`
+  - It calls `page_break(doc)` for every section when `FLOW and si > 0`, and before the close when
+    `FLOW`.
+  - It does not refer to `breakBefore` anywhere.
+  - `blocks_of()` makes one row per prompt, with a must-write line folded into the prompt above it.
+  - Each prompt row gets `no_split(tr)`. The cue cell uses `vMerge` "restart" and then "continue".
+  - Top and bottom borders are drawn only on the first and last prompt.
+- `_shull_docx.py`
+  - `RULE_LINE_PT = 14` and `RULE_AFTER_PT = 5` are set with exact line spacing.
+  - `add_pbdr()` exists, and `rule_lines()` uses it.
+- Geology U2 spec
+  - It carries `"flow": true` and no `breakBefore`.
+  - The five `summaryLines` values are 4, 7, 8, 10, 7. The 10 is at the new cap.
+  - The close has `bigPictureLines` 7 and `fuzzyLines` 7, both at the new cap.
+
+The record path is the same. `change-log/CHANGELOG.md` is not touched by this amendment. The index
+row still reads CONFIRMED.
+
+### Decision (amendment 2)
+
+Matthew Shull, in conversation, 2026-09-25, looking at a screenshot of the `9b83b8d` build in Word:
+**"na see, this is what i mean. keep each section together, if a section ends just head to a new
+page!"**
+
+This decides that each section starts a new page for flowed specs. It also approves the one-row-per-
+prompt change, which is how a section runs on without gaps. The exact line spacing in item 3 is not
+named in the quote. It is recorded under this approval as the fix for pages running long in Word,
+which is what his screenshot showed. The cap values are the coordinator's; see "Flagged" above.
+
+The quote reached this record through the coordinator session. The Secretary did not hear it
+directly.

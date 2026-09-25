@@ -209,7 +209,7 @@ RULE_LINE_PT = 14      # exact, so Word and LibreOffice set the same pitch
 RULE_AFTER_PT = 5
 
 
-def rule_lines(cell, n, hexval, written=None, size=9.5, color=None, keep=False):
+def rule_lines(cell, n, hexval, written=None, size=9.5, color=None):
     """n writing lines, each with its own rule.
 
     Word and LibreOffice both treat adjacent paragraphs with identical borders as one
@@ -225,24 +225,19 @@ def rule_lines(cell, n, hexval, written=None, size=9.5, color=None, keep=False):
     font's own metrics, which Word and LibreOffice read differently - Word set these
     rules about a third further apart, so every page ran long there and not here.
 
-    `keep` holds the lines to each other and to what follows, so a prompt's lines
-    never split from it across a page when the row itself is allowed to break.
     """
     written = written or []
     total = max(n, len(written))
     for i in range(total):
-        last = i == total - 1
         if i:
             s = cell.add_paragraph()
             f = s.paragraph_format
             f.space_before = f.space_after = Pt(0)
             f.line_spacing_rule = WD_LINE_SPACING.EXACTLY; f.line_spacing = Pt(1)
-            f.keep_with_next = keep
         p = cell.add_paragraph()
         f = p.paragraph_format
         f.space_before = Pt(0); f.space_after = Pt(RULE_AFTER_PT)
         f.line_spacing_rule = WD_LINE_SPACING.EXACTLY; f.line_spacing = Pt(RULE_LINE_PT)
-        f.keep_with_next = keep and not last
         if i < len(written):
             run(p, written[i], size, bold=True, color=color)
         b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")

@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
-    borders, para, check_item, rule_lines, wrap_to, fix_widths, one_cell, no_split, gap,
+    borders, para, check_item, rule_lines, wrap_to, add_pbdr, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block,
     page_setup, running_footer, trim_tail,
 )
@@ -312,7 +312,7 @@ def main():
                         bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
                         x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
                         x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
-                        bd.append(x); pPr.append(bd)
+                        bd.append(x); add_pbdr(pPr, bd)
                         continue
                     lines = (n.get("lines") if isinstance(n, dict) else None) \
                         or recall.ruled_lines(body)
