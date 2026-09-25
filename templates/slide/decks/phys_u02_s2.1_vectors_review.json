@@ -2,45 +2,177 @@
   "course": "physics",
   "unit": 2,
   "section": "2.1",
-  "sectionTitle": "Vectors & Vector Basics (Review)",
-  "note": "Deliberately brief. Full vector teaching (drawing, resolving, compass notation, the 40NE/50EN equivalency, and vector addition) now lives at U1 S1.0, pending Secretary approval of SHULL-CHG-0024. This section is a recap/bridge only, per Matt's instruction.",
+  "sectionTitle": "Vectors & Vector Basics",
+  "note": "Full treatment, not a brief recap -- per Matt's instruction to stop routing vectors through a separate U1 section and teach them directly here, thoroughly, assuming students cannot yet draw or resolve a vector. Includes dedicated worked time on the compass-notation equivalency pain point (e.g. 40 N of E = 50 E of N).",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
       "fields": {
         "number": "01",
         "headline": "2.1\nVectors & Vector Basics",
-        "subhead": "Recall what a vector is, how to draw one, and how to describe its direction — before we add them together."
+        "subhead": "What a vector is, how to draw one, and how to describe its direction — before we add them together."
       },
       "imageSubjects": { "section": "a wooden protractor and ruler laid across graph paper" }
     },
     {
       "master": "07_COMPARISON_CARDS",
       "fields": {
-        "headline": "Quick Recall: Vector Vocabulary",
-        "subhead": "You built all of this in Unit 1. Here's the short version.",
+        "headline": "Three Words You Need First",
+        "subhead": "Write these before we go further.",
         "k1_l": "VECTOR",
-        "k1_b": "Has magnitude AND direction.\nDrawn as an arrow.",
+        "k1_b": "Has magnitude AND\ndirection.\nDrawn as an arrow.",
         "k2_l": "MAGNITUDE",
         "k2_b": "The size or length.\nAlways positive.",
-        "k3_l": "COMPONENT",
-        "k3_b": "A vector's x- or y-part.\nA cos(theta), A sin(theta).",
+        "k3_l": "DIRECTION",
+        "k3_b": "Which way it points.\nGiven as an angle.",
         "mustwrite": "A vector needs both magnitude and direction — a number alone is not one."
       },
       "imageSubjects": { "aside": "a compass rose drawn in pencil on aged paper" }
     },
     {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "How to Draw a Vector",
+        "subhead": "Every vector arrow carries two pieces of information at once.",
+        "diagram": "DIAGRAM TO HAND-BUILD: an arrow drawn from a starting point (tail) to an ending point (tip), arrow length measured against a scale, angle marked from a reference axis at the tail.",
+        "a1_l": "LENGTH",
+        "a1_b": "Arrow length =\nmagnitude.",
+        "a2_l": "DIRECTION",
+        "a2_b": "Arrow angle =\ndirection.",
+        "a3_l": "TIP",
+        "a3_b": "Points the way\nthe vector acts."
+      }
+    },
+    {
       "master": "03_GROUPED_CONCEPT",
       "fields": {
-        "headline": "Drawing and Resolving, Recap",
-        "subhead": "Two skills from Unit 1, Section 1.0 — you should already be comfortable with both.",
-        "c1_l": "DRAWING",
-        "c1_b": "Arrow length = magnitude.\nArrow direction = angle.\nTip points the way it acts.",
-        "c2_l": "RESOLVING",
-        "c2_b": "x-part: A cos(theta)\ny-part: A sin(theta)\nRight-triangle trig.",
-        "mustwrite": "Full walkthrough and practice: Unit 1, Section 1.0."
+        "headline": "Resolving a Vector Into Components",
+        "subhead": "Any vector can be broken into an x-part and a y-part using right-triangle trig.",
+        "c1_l": "X-COMPONENT",
+        "c1_b": "Ax = A cos(theta)\nAdjacent side.",
+        "c2_l": "Y-COMPONENT",
+        "c2_b": "Ay = A sin(theta)\nOpposite side.",
+        "mustwrite": "Components let you add vectors later — that's the whole point of resolving."
       },
       "imageSubjects": { "concept": "a drafting compass and protractor on a dark desk" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Resolving a Displacement",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "A hiker walks 50 m at 30° above the horizontal. Find the x- and y-components.",
+        "g1_l": "GIVEN",
+        "g1_b": "A = 50 m\ntheta = 30°",
+        "g2_l": "NEED",
+        "g2_b": "Ax and Ay",
+        "work": "",
+        "mustwrite": "Ax = A cos(theta). Ay = A sin(theta). Always."
+      },
+      "imageSubjects": { "aside": "a hiking boot print in trail dust" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Displacement, Worked",
+        "subhead": "Plug into both formulas — don't skip one.",
+        "f1_l": "SETUP",
+        "f1_b": "Ax = 50cos30°\nAy = 50sin30°",
+        "work": "Ax = 43.3 m\nAy = 25.0 m",
+        "mustwrite": "Check: Ax² + Ay² should equal A² again."
+      },
+      "imageSubjects": { "data": "a hand-drawn right triangle on graph paper" }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Degrees and Compass Directions",
+        "subhead": "The same vector can be described two ways — from an axis, or as a compass bearing.",
+        "diagram": "DIAGRAM TO HAND-BUILD: a compass rose (N/E/S/W) with a vector arrow drawn between two adjacent directions, showing the angle measured from each of the two nearby axes.",
+        "a1_l": "FROM AN AXIS",
+        "a1_b": "Angle measured from\nhorizontal or vertical.",
+        "a2_l": "COMPASS BEARING",
+        "a2_b": "e.g. \"40° North\nof East.\"",
+        "a3_l": "SAME VECTOR",
+        "a3_b": "Two labels,\none direction."
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "One Direction, Two Names",
+        "subhead": "\"North of East\" and \"East of North\" angles are always complementary — they add to 90°.",
+        "keyq": "Why do 40° North of East and 50° East of North point the exact same way?"
+      },
+      "imageSubjects": { "concept": "a brass compass rose engraved on a dark surface" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Converting the Angle",
+        "subhead": "First rep — copy the reasoning, not just the number.",
+        "problem": "A vector points 40° North of East. Express this direction as an angle East of North.",
+        "g1_l": "GIVEN",
+        "g1_b": "40° North of East",
+        "g2_l": "NEED",
+        "g2_b": "Same direction, as an\nangle East of North",
+        "work": "",
+        "mustwrite": "North-of-East and East-of-North angles always add to 90°."
+      },
+      "imageSubjects": { "aside": "a protractor resting on a hand-drawn angle diagram" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Converting the Angle, Worked",
+        "subhead": "Subtract from 90° — that's the whole method.",
+        "f1_l": "SETUP",
+        "f1_b": "East of North =\n90° − North of East",
+        "work": "90° − 40° = 50°\nSame vector: 50° East of North",
+        "mustwrite": "40° North of East and 50° East of North are the same vector."
+      },
+      "imageSubjects": { "data": "two intersecting rulers forming a right angle" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Your Turn: A Hiking Bearing",
+        "subhead": "Second rep — same method, different numbers.",
+        "problem": "A hiker walks at 65° East of North. Express this as an angle North of East.",
+        "g1_l": "GIVEN",
+        "g1_b": "65° East of North",
+        "g2_l": "NEED",
+        "g2_b": "Same direction, as an\nangle North of East",
+        "work": "",
+        "mustwrite": "Same rule: the two angles always add to 90°."
+      },
+      "imageSubjects": { "aside": "a topographic trail map with a pencil bearing line" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Hiking Bearing, Worked",
+        "subhead": "Check yours against this before we move on.",
+        "f1_l": "SETUP",
+        "f1_b": "North of East =\n90° − East of North",
+        "work": "90° − 65° = 25°\nSame vector: 25° North of East",
+        "mustwrite": "65° East of North and 25° North of East are the same vector."
+      },
+      "imageSubjects": { "data": "a compass sitting on a folded trail map" }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Quick Check: Resolve and Convert",
+        "subhead": "Both skills from this section, in one problem.",
+        "problem": "A force of 20 N acts at 70° East of North. Find its angle North of East.",
+        "q1_l": "GIVEN",
+        "q1_b": "20 N\n70° East of North",
+        "q2_l": "EQUATION",
+        "q2_b": "North of East =\n90° − East of North",
+        "answer": "20° North of East"
+      },
+      "imageSubjects": { "setup": "a small handheld dynamometer on a workbench" }
     },
     {
       "master": "04_DIVIDER",
