@@ -25,10 +25,11 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
-## 2026-09-24
+## 2026-09-25 · 2026-09-24
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0026 | 2026-09-25 | Notes flow and fit; key on student lines; every ruled line ruled | CONFIRMED | `governance/proposals/SHULL-CHG-0026-notes-flow-fit.md` |
 | SHULL-CHG-0025 | 2026-09-24 | Guided-notes `--key` mode: student/key from one spec; problem-answer leak closed | CONFIRMED | `governance/proposals/SHULL-CHG-0025-notes-key-mode.md` |
 | SHULL-CHG-0024 | 2026-09-24 | Section-range grammar ratified: S##.#-S##.#, both halves padded, chip/footer match | CONFIRMED | `governance/proposals/SHULL-CHG-0024-section-range-grammar.md` |
 
@@ -80,7 +81,7 @@ with the user.
 | Raised | Question | Waiting on |
 |---|---|---|
 | 2026-09-24 | The already-built Geology U2 packet (`SHULL_GEO_Guided_Notes_U02_S02.1-2.5.docx` and `_Key`) still carries the pre-SHULL-CHG-0024 unpadded filename and chip/footer. Rename and rebuild are real fixes but need the Librarian's before/after log and a rebuild pass. | Overseer to route — SHULL-CHG-0024 §"Not done here" |
-| 2026-09-24 | `templates/notes/build_notes.py` assembles a section range as `S{sections[0]}-S{sections[-1]}` from spec JSON section strings that are themselves stored unpadded (`"1.2"`, not `"01.2"`), so it does not actually emit the zero-padded form SHULL-CHG-0024 now requires. | Designer/Auditor — SHULL-CHG-0024 §"Not done here" |
+| 2026-09-24 | `templates/notes/build_notes.py` assembles a section range as `S{sections[0]}-S{sections[-1]}` from spec JSON section strings that are themselves stored unpadded (`"1.2"`, not `"01.2"`), so it does not actually emit the zero-padded form SHULL-CHG-0024 now requires. **2026-09-25: the Option A half is closed by SHULL-CHG-0026** (`build_notes_docx.py` now zero-pads the span in its filename and footer). **This row's subject, Option B `build_notes.py`, still stands** and was not touched. | Designer/Auditor — SHULL-CHG-0024 §"Not done here" |
 | 2026-09-20 | SHULL-CHG-0023 made the notes packet strictly recall but scoped three blocks out of it: the closed-notes section summary box, the per-section self-check, and the "still fuzzy on" prompt. They read as the student checking their own notes rather than being quizzed on a slide. Should any of them also lose their question form? | User — SHULL-CHG-0023 §"Deliberately out of scope" |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |

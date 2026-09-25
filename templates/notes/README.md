@@ -140,5 +140,6 @@ check: reinstating the old solid header produces a **7.50 in band** and fails.
 python3 ../../scripts/audit_fonts.py out.pdf    # Archivo only, both options
 ```
 
-Then look at every page. Neither builder checks page breaks, and a summary box orphaned at the top
-of a page is the defect to watch for.
+Then look at every page. A flowed spec run through `fit_notes.py` has its page breaks checked for
+you — sections start pages, no row splits, no summary sits alone. Option B and unflowed specs do
+not, and a summary box orphaned at the top of a page is the defect to watch for there.
