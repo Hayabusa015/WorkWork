@@ -142,5 +142,5 @@ python3 ../../scripts/audit_fonts.py out.pdf    # Archivo only, both options
 ```
 
 Then look at every page. A flowed spec run through `fit_notes.py` has its page breaks checked for
-you — sections start pages, no row splits, no summary sits alone. Option B and unflowed specs do
+you — no section head is stranded, no row splits, no summary sits alone on a page. Option B and unflowed specs do
 not, and a summary box orphaned at the top of a page is the defect to watch for there.

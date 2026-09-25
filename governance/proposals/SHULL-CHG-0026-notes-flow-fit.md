@@ -213,3 +213,137 @@ courses the next time each is rebuilt.
 
 The quote reached this record through the coordinator session; the Secretary did not hear it
 directly.
+
+---
+
+## Amendment — 2026-09-25, same day
+
+Appended, not rewritten. The sections above stay as they were written. Where this amendment
+contradicts them, **this amendment wins** — see "What this amendment supersedes in the record
+above" below.
+
+### What happened
+
+Matthew reviewed the first flowed and fitted build (the 11-page build in "Verification" above) and
+said, verbatim: **"well shit theres way too much spacing now"**.
+
+Cause: the unconditional page break before every section (original item 1) freed whole
+page-bottoms, and the fitter (original item 3) poured all of that room into the writing slots. Each
+prompt got up to 6–7 ruled lines and the unit review became a full page of lines. The build went
+from 8 pages to 11.
+
+### What changed
+
+Code commit **`9b83b8d`** on `claude/elegant-bohr-8hkbpj`. The coordinator made and verified it.
+Four files: `templates/notes/build_notes_docx.py`, `templates/notes/fit_notes.py`,
+`templates/notes/README.md`, `templates/notes/specs/geo_u02_s02.1-s02.5.json`. All four are in
+`templates/`, outside the Secretary's authority. **The Secretary did not touch any of them.**
+
+1. **Sections no longer page-break unconditionally under flow.** A section starts a new page only
+   when it carries `"breakBefore": true`. The fitter sets that only when the section's head would
+   otherwise be stranded, meaning its title is on one page and none of its rows are on that page.
+   Otherwise a section flows on directly after the previous one. Keep-with-next on the head and
+   learning target, `cantSplit` rows and summary, row-level `breakBefore`, and the close starting
+   its own page are all unchanged.
+2. **Narrower orphan test for summary boxes.** A summary box counts as orphaned only when it sits
+   on a page with no rows at all. If a summary tops a page that the next section's notes also use,
+   it is left alone, because it sits directly after what it summarises. For a true orphan the
+   original fix still applies: the section's last row gets `breakBefore` and travels with the
+   summary.
+   *Tried and dropped:* one intermediate attempt also moved a section's last row down with its
+   summary on a shared page. That left big gaps (one page a third empty) and pushed the build back
+   to 11 pages, so it is not in `9b83b8d`.
+3. **Growth is capped** by the `CAP` constant in `fit_notes.py`, measured over each slot's natural
+   count:
+
+   | Slot | Natural | Cap | Maximum |
+   |---|---|---|---|
+   | Label line (`lines`) | see item 4 | +1 | natural + 1 |
+   | Section summary (`summaryLines`) | 4 | +2 | 6 |
+   | Close, big picture (`bigPictureLines`) | 3 | +3 | 6 |
+   | Close, still fuzzy on (`fuzzyLines`) | 3 | +3 | 6 |
+
+   Room past the caps stays white at the foot of the page.
+4. **A label line's natural count is now the larger of two numbers:** the recall rule's count
+   (`recall.ruled_lines()`; 2 for a line ending in `:`), and the number of lines the key answer
+   wraps to (`wrap_to()` on Archivo's glyph widths at the notes width). The key writes on the
+   student's lines, so a student needs at least that much room. Without this rule the capped key
+   overflowed to 11 pages against the student's 10.
+5. **Result for Geology U2:** 10 pages for the student copy and 10 for the key. The key matches the
+   student copy page for page, checked on the first text of each page. Both use Archivo only and
+   are within the ink budget. These figures are from the coordinator.
+
+### What this amendment supersedes in the record above
+
+These lines stay in the record unedited. They are **no longer accurate**:
+
+| Where in this record | Stale text | Now |
+|---|---|---|
+| Front matter `title:` | "sections start a page" | A section starts a page only when its head would otherwise be stranded (item 1). |
+| "New behavior" item 1, first bullet | "every section after the first starts a new page — via a pinned 1pt paragraph carrying `pageBreakBefore`" | Only a section marked `"breakBefore": true`. The fitter sets it only for a stranded head (item 1). |
+| "New behavior" item 3 | "grows … until no room is left" | Growth stops at the caps. Room past them stays white (item 3). |
+| "New behavior" item 3 | orphan = "a summary box alone at the top of a page, cut off from its notes" | Orphan = a summary on a page with **no rows at all** (item 2). |
+| "New behavior" item 3 | "resets them to natural counts" | Still true, but a label's natural count now includes the key's wrapped length (item 4). |
+| "Supersedes", last paragraph | "Item 1 lets the renderer meet `build-document` SKILL.md's existing 'Every section starts a new page' — for flowed specs only." | **No longer true.** See "Flagged" below. |
+| "Affected", Auditor | "a flowed packet should have every section at a page top" | A flowed packet should have **no stranded section head** and no summary alone on a page with no rows. Key page-for-page with the student copy still applies. |
+| "Verification", first two bullets | "11 pages student, 11 pages key", "Every section starts at a page top", "all 11 key pages" | 10 student, 10 key, key page-for-page (item 5). Sections are not all at a page top by design. |
+
+These are unchanged by this amendment: original items 2, 4, 5, and 6. Opt-in `"flow": true`. The
+fitter refusing an unflowed spec. The 16pt safety margin. Growth never changing the page count or
+row placement. The fitter owning `lines`, `summaryLines`, `bigPictureLines`, `fuzzyLines`, and
+`breakBefore`. Option B out of scope.
+
+### Flagged, not resolved
+
+- **The skill and the flowed renderer now disagree.** `.claude/skills/build-document/SKILL.md`
+  line 106 says: "Every section starts a new page and ends with a summary box plus self-check." The
+  original record said flow brought the renderer into line with that for flowed specs. After this
+  amendment it no longer does. Under flow a section starts a new page only when its head would be
+  stranded. Matthew's original instruction ("its ok if you end sections and move the next section
+  to the next page") reads as a permission, not a requirement. His follow-up ("way too much spacing
+  now") pushed away from unconditional breaks. **Which behavior is the rule is Matthew's decision,
+  and it is not made here.** The two ways out are:
+  - amend the skill so a section starts a new page only when its head would otherwise be stranded,
+    which needs its own change record; or
+  - restore unconditional breaks and keep the growth caps.
+
+  This joins the existing open item "The skill and the default renderer still disagree" above.
+- **The cap values were chosen by the coordinator, not named by Matthew.** The +1 / +2 / +3 caps
+  and the stranded-head break rule came from the coordinator's reading of "way too much spacing
+  now". Matthew's words direct a reduction but do not name the numbers. They are recorded here
+  under this record's existing approval as a correction to its own over-growth. **Matthew should
+  see the cap table in item 3 stated plainly**, because it sets how much writing room students get.
+- **`templates/notes/README.md` §"QA"**: the stale sentence flagged above ("Neither builder checks
+  page breaks…") is still not covered by this amendment. It is outside the Secretary's authority.
+
+### Implemented By / Verified (amendment)
+
+**Implemented By:** `9b83b8d` on `claude/elegant-bohr-8hkbpj`, committed by the coordinator. This
+amendment will land in a follow-up commit by the coordinator. The Secretary session has no git
+access.
+
+**Verified:** yes, by the coordinator: the commit, and the 10/10 page counts, page-for-page key
+match, font audit, and ink audit in item 5.
+The Secretary could not run `git show --stat 9b83b8d`. Its own check was a read-only spot-check of
+the working tree. It confirms the code matches this description. It is not a re-run of the builds.
+- `fit_notes.py`: `CAP = {"label": 1, "summary": 2, "close": 3}` is present with a comment citing
+  "Way too much spacing".
+- `fit_notes.py`: `normalise()` sets a label's natural count to
+  `max(recall.ruled_lines(...), len(wrap_to(key, ...)))`.
+- `fit_notes.py`: the stranded-head test ("title on the page, none of its rows") sets the
+  section's `breakBefore`. The orphan test is `not p["rows"]`.
+- `build_notes_docx.py`: page-breaks a section only when `FLOW and si > 0 and
+  sec.get("breakBefore")`.
+- `README.md`: the "Flow and fit" subsection states the stranded-head rule and the caps, and
+  quotes "way too much spacing now".
+- Geology U2 spec: carries `"flow": true` and no `breakBefore`, so in the committed fit no section
+  or row is forced to a new page. All five `summaryLines` are 4, and the close has
+  `bigPictureLines` 6 and `fuzzyLines` 6 (at cap).
+
+`change-log/CHANGELOG.md` is unchanged. The status stays CONFIRMED and the record path is the same.
+
+### Decision (amendment)
+
+Matthew Shull, in conversation, 2026-09-25, reviewing the first flowed build: **"well shit theres
+way too much spacing now"**. The quote reached this record through the coordinator session. The
+Secretary did not hear it directly.
