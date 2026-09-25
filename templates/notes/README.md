@@ -48,13 +48,14 @@ python3 templates/notes/fit_notes.py specs/<spec>.json --write   # then build as
 
 **SHULL-CHG-0026.** *"It's ok if you end sections and move the next section to the next page.
 Use the space available — if you move a section, just increase the size of the boxes to use the
-new space. Just make it flow."* With `"flow": true` every section after the first starts a page,
-a Cornell row never splits, and the close gets its own page. `fit_notes.py` then measures the
-room left at the foot of each page and gives it back as ruled lines to the writing slots on that
-page — label lines, the summary, the close — without moving anything to another page. It also
-sends a section's last row over with its summary if the summary would sit alone. It owns the
-`lines`, `summaryLines`, `bigPictureLines`, `fuzzyLines` and `breakBefore` fields and resets them
-every run: refit after any content edit. Opt-in, so a packet already handed out does not reflow.
+new space. Just make it flow."* — then, on the first fit: *"way too much spacing now."* With
+`"flow": true` a Cornell row never splits and the close gets its own page; a section moves to a
+new page only when its head would otherwise be stranded at the foot of one. `fit_notes.py` renders
+the packet, finds stranded heads (and a summary box left alone on a page) and breaks before them,
+then grows writing space — but modestly: every box is at least as tall as its answer (the key
+writes the answer on these same lines), and grows at most 1 line over that; summaries +2, the
+close +3. Room past the caps stays white. It owns the `lines`, `summaryLines`, `bigPictureLines`,
+`fuzzyLines` and `breakBefore` fields and resets them every run: refit after any content edit. Opt-in, so a packet already handed out does not reflow.
 
 Every ruled line is now its own rule. Identical borders on adjacent paragraphs merge into one
 group in Word and LibreOffice alike, so a "2-line" answer used to print as one line with space

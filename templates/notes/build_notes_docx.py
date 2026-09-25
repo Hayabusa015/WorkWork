@@ -150,8 +150,8 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     secs = [zpad(x) for x in spec["sections"]]
     span = f"S{secs[0]}-S{secs[-1]}" if len(secs) > 1 else f"S{secs[0]}"
-    # SHULL-CHG-0026. "Flow": every section after the first starts a page, a Cornell
-    # row never splits across a page, and the close gets its own page. Opt-in per spec
+    # SHULL-CHG-0026. "Flow": a Cornell row never splits across a page, a section
+    # marked "breakBefore" starts one, and the close gets its own page. Opt-in per spec
     # so a packet already in circulation does not reflow under anyone. fit_notes.py
     # then grows the ruled lines into whatever space the breaks free up.
     FLOW = bool(spec.get("flow"))
@@ -204,7 +204,7 @@ def main():
         check_item(c, debullet(x), pal, 9.5)
 
     for si, sec in enumerate(spec["sectionsContent"]):
-        if FLOW and si > 0:
+        if FLOW and si > 0 and sec.get("breakBefore"):
             page_break(doc)
         else:
             gap(doc, 6)
