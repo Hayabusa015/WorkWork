@@ -54,12 +54,12 @@
             {
               "text": "Define body fossil:",
               "key": "Bones, teeth, shells, wood, and leaves — preserved parts of an organism. Durable tissues are more likely to survive.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Define trace fossil (ichnofossil):",
               "key": "Tracks, trails, burrows, and coprolites — records of biological activity. The organism itself may be absent.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -179,27 +179,27 @@
             {
               "text": "Share of Earth's history it covers:",
               "key": "An informal span (not a true eon) covering about 88% of Earth's history.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "The three eons, oldest to youngest:",
               "key": "Hadean, Archean, Proterozoic.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Hadean:",
               "key": "Earth accretes and differentiates; dense iron-rich metal sinks to form the core.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Archean:",
               "key": "Long-lived crust, oceans, and microbial ecosystems develop.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Proterozoic:",
               "key": "Atmospheric oxygen rises; eukaryotes and later multicellular organisms diversify.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -230,7 +230,7 @@
         "I can name the three Precambrian eons in order.",
         "I can explain why the Great Oxidation Event was a turning point."
       ],
-      "summaryLines": 4
+      "summaryLines": 7
     },
     {
       "code": "U02 / S02.3",
@@ -249,17 +249,17 @@
             {
               "text": "Earth:",
               "key": "Shallow seas spread across continental margins; sand, mud, and carbonate sediments become sandstone, shale, and limestone. Laurentia includes the core of modern North America.",
-              "lines": 4
+              "lines": 3
             },
             {
               "text": "Life:",
               "key": "The Cambrian Explosion (about 539 million years ago) rapidly diversifies animal body plans — arthropods (trilobites), mollusks, brachiopods, sponges, echinoderms, and early chordates appear. Life is still entirely marine.",
-              "lines": 4
+              "lines": 3
             },
             {
               "text": "Climate:",
               "key": "Greenhouse conditions and high sea levels are widespread; atmospheric oxygen is lower than today.",
-              "lines": 3
+              "lines": 2
             },
             "*The Cambrian Explosion happened over tens of millions of years, not overnight — and rare sites like the Burgess Shale preserve soft-bodied animals that ordinary fossilization loses."
           ]
@@ -276,17 +276,17 @@
             {
               "text": "Earth:",
               "key": "Shallow seas cover large areas; plate collisions begin new phases of mountain building.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
               "key": "Marine biodiversity expands — reefs and jawless fishes flourish — while major extinctions follow the late-period cooling, and early land plants appear.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Climate:",
               "key": "Warm conditions give way to late-Ordovician cooling, ice growth, and falling sea level.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -302,17 +302,17 @@
             {
               "text": "Earth:",
               "key": "Laurentia and Baltica converge during Caledonian mountain building; much of Gondwana sits at southern latitudes.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
               "key": "Jawed fishes and eurypterids diversify; small vascular plants and terrestrial arthropods expand the first land communities and soils.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Climate:",
               "key": "Warming after the Ordovician glaciation helps sea levels recover.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -328,17 +328,17 @@
             {
               "text": "Earth:",
               "key": "Continental collisions continue; reefs thrive in warm shallow seas.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
               "key": "Placoderms, early cartilaginous fish, and lobe-finned fish diversify in the sea; forests, insects, and early tetrapods spread on land — before late-Devonian extinctions hit hard.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Climate:",
               "key": "Warm shallow-sea conditions persist before late-Devonian environmental crises disrupt them.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -354,7 +354,7 @@
             {
               "text": "Earth:",
               "key": "Pangaea assembles through major continental collisions; Appalachian mountain building continues; tropical wetlands bury thick organic deposits that later become coal.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
@@ -381,17 +381,17 @@
             {
               "text": "Earth:",
               "key": "Pangaea is fully assembled, surrounded by one ocean (Panthalassa); interior regions far from the coast are strongly seasonal and dry.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
               "key": "Synapsids (the mammal lineage, e.g. Dimetrodon) and sauropsids (the reptile and dinosaur-ancestor lineage) diverge; amphibians, insects, sharks, and marine invertebrates remain important.",
-              "lines": 4
+              "lines": 3
             },
             {
               "text": "Climate:",
               "key": "Conditions vary through the period; by the end of the Permian, severe warming and widespread ocean oxygen loss set up a crisis.",
-              "lines": 3
+              "lines": 2
             },
             "*Dimetrodon is a synapsid — the mammal lineage — not a dinosaur, even though it looked reptilian."
           ]
@@ -462,17 +462,17 @@
             {
               "text": "Earth:",
               "key": "High sea levels flood broad continental areas; continued continental breakup reshapes coastlines and currents; even Antarctica supports forests during warm intervals.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Life:",
               "key": "Flowering plants (angiosperms) spread and diversify, with insects diversifying alongside them; diverse dinosaur groups (including ceratopsians) and early birds flourish; mammals are already present, though small, before the period ends in mass extinction.",
-              "lines": 4
+              "lines": 3
             },
             {
               "text": "Climate:",
               "key": "Greenhouse conditions and high sea levels dominate most of the period.",
-              "lines": 3
+              "lines": 2
             },
             "*Paleontologists learn about dinosaurs from fossils — skulls and bones for identity, tracks and eggs for behavior, and dated rock layers for when they lived and died out."
           ]
@@ -489,17 +489,17 @@
             {
               "text": "Earth:",
               "key": "Continents keep moving toward modern positions; converging plates begin building the Alpine–Himalayan belt (India colliding with Asia) and the Circum-Pacific belt (Andes, western North America, Japan).",
-              "lines": 4
+              "lines": 3
             },
             {
               "text": "Life:",
               "key": "Mammals diversify rapidly into the ecological space left open after the K–Pg extinction.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Climate:",
               "key": "Climate cools gradually as the greenhouse conditions of the Mesozoic fade.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -562,7 +562,7 @@
         "I can list all 12 periods above in chronological order.",
         "For any period, I can describe its life, its geology, and its climate."
       ],
-      "summaryLines": 4
+      "summaryLines": 8
     },
     {
       "code": "U02 / S02.4",
@@ -581,17 +581,17 @@
             {
               "text": "Rodinia — approximate timing:",
               "key": "Assembled roughly 1.1–0.9 billion years ago, during the Proterozoic.",
-              "lines": 2
+              "lines": 3
             },
             {
               "text": "Pangaea — assembly and rifting:",
               "key": "Assembled during the Permian Period; began rifting apart in the Late Triassic Period.",
-              "lines": 2
+              "lines": 3
             },
             {
               "text": "Reading a paleo-map — white outlines show:",
               "key": "Where modern continental regions sit on the ancient map.",
-              "lines": 2
+              "lines": 3
             },
             "*A single ocean, Panthalassa, surrounded Pangaea; the Tethys Sea sat along its eastern margin."
           ]
@@ -601,7 +601,7 @@
       "selfCheck": [
         "I can name both supercontinents in this unit and roughly when each existed."
       ],
-      "summaryLines": 4
+      "summaryLines": 10
     },
     {
       "code": "U02 / S02.5",
@@ -620,17 +620,17 @@
             {
               "text": "Timing:",
               "key": "About 252 million years ago, ending the Paleozoic Era.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Suspected cause:",
               "key": "Siberian Traps volcanism — huge eruptions and intrusions released greenhouse gases directly and by heating carbon-rich rocks, driving global warming and ocean oxygen loss.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "Scale:",
               "key": "Most marine species disappeared, and land ecosystems suffered severe losses; rebuilding complex ecosystems took millions of years.",
-              "lines": 3
+              "lines": 2
             }
           ]
         },
@@ -647,7 +647,7 @@
             {
               "text": "Timing:",
               "key": "About 66 million years ago, ending the Mesozoic Era.",
-              "lines": 3
+              "lines": 2
             },
             {
               "text": "The impact site and size:",
@@ -673,7 +673,7 @@
         "I can name the suspected cause of each extinction in this section.",
         "I can list at least three pieces of evidence for the Chicxulub impact."
       ],
-      "summaryLines": 4
+      "summaryLines": 7
     }
   ],
   "close": {
@@ -685,7 +685,7 @@
     ],
     "bigPicture": "Trace Earth's whole story in order, from the Precambrian's first microbes to the Cenozoic's modern world. What has to happen, and in what order, for each era to set up the next one?",
     "fuzzyLabel": "STILL FUZZY ON — bring these to review day",
-    "bigPictureLines": 6,
-    "fuzzyLines": 6
+    "bigPictureLines": 7,
+    "fuzzyLines": 7
   }
 }

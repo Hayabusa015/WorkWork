@@ -17,7 +17,7 @@ file that imports it.
 """
 import json, os, re
 from docx.shared import Pt, Inches, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -187,7 +187,29 @@ def wrap_to(text, width_in, size_pt, bold=False):
     return out + ([cur] if cur else [])
 
 
-def rule_lines(cell, n, hexval, written=None, size=9.5, color=None):
+_AFTER_PBDR = {qn("w:" + t) for t in (
+    "shd", "tabs", "suppressAutoHyphens", "kinsoku", "wordWrap", "overflowPunct",
+    "topLinePunct", "autoSpaceDE", "autoSpaceDN", "bidi", "adjustRightInd", "snapToGrid",
+    "spacing", "ind", "contextualSpacing", "mirrorIndents", "suppressOverlap", "jc",
+    "textDirection", "textAlignment", "textboxTightWrap", "outlineLvl", "divId",
+    "cnfStyle", "rPr", "sectPr", "pPrChange")}
+
+
+def add_pbdr(pPr, pbdr):
+    """Put w:pBdr where the schema says it goes - before spacing, ind, jc and the rest.
+    Word is stricter about pPr child order than LibreOffice."""
+    for child in pPr:
+        if child.tag in _AFTER_PBDR:
+            child.addprevious(pbdr)
+            return
+    pPr.append(pbdr)
+
+
+RULE_LINE_PT = 14      # exact, so Word and LibreOffice set the same pitch
+RULE_AFTER_PT = 5
+
+
+def rule_lines(cell, n, hexval, written=None, size=9.5, color=None, keep=False):
     """n writing lines, each with its own rule.
 
     Word and LibreOffice both treat adjacent paragraphs with identical borders as one
@@ -198,23 +220,34 @@ def rule_lines(cell, n, hexval, written=None, size=9.5, color=None):
     `written` is a list of lines to set on the rules, one per line - an answer key
     written the way a student would write it, so the key keeps the student copy's
     pagination page for page. More written lines than rules adds rules.
+
+    Line height is exact, not "single": single spacing takes its height from the
+    font's own metrics, which Word and LibreOffice read differently - Word set these
+    rules about a third further apart, so every page ran long there and not here.
+
+    `keep` holds the lines to each other and to what follows, so a prompt's lines
+    never split from it across a page when the row itself is allowed to break.
     """
     written = written or []
-    for i in range(max(n, len(written))):
+    total = max(n, len(written))
+    for i in range(total):
+        last = i == total - 1
         if i:
             s = cell.add_paragraph()
-            sp = OxmlElement("w:spacing")
-            sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
-            sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
-            s._p.get_or_add_pPr().append(sp)
+            f = s.paragraph_format
+            f.space_before = f.space_after = Pt(0)
+            f.line_spacing_rule = WD_LINE_SPACING.EXACTLY; f.line_spacing = Pt(1)
+            f.keep_with_next = keep
         p = cell.add_paragraph()
-        p.paragraph_format.space_after = Pt(5)
+        f = p.paragraph_format
+        f.space_before = Pt(0); f.space_after = Pt(RULE_AFTER_PT)
+        f.line_spacing_rule = WD_LINE_SPACING.EXACTLY; f.line_spacing = Pt(RULE_LINE_PT)
+        f.keep_with_next = keep and not last
         if i < len(written):
             run(p, written[i], size, bold=True, color=color)
-        pPr = p._p.get_or_add_pPr()
         b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
         x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "4"); x.set(qn("w:color"), hexof(hexval))
-        b.append(x); pPr.append(b)
+        b.append(x); add_pbdr(p._p.get_or_add_pPr(), b)
 
 
 def fix_widths(table, widths):

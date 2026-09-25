@@ -48,14 +48,17 @@ python3 templates/notes/fit_notes.py specs/<spec>.json --write   # then build as
 
 **SHULL-CHG-0026.** *"It's ok if you end sections and move the next section to the next page.
 Use the space available — if you move a section, just increase the size of the boxes to use the
-new space. Just make it flow."* — then, on the first fit: *"way too much spacing now."* With
-`"flow": true` a Cornell row never splits and the close gets its own page; a section moves to a
-new page only when its head would otherwise be stranded at the foot of one. `fit_notes.py` renders
-the packet, finds stranded heads (and a summary box left alone on a page) and breaks before them,
-then grows writing space — but modestly: every box is at least as tall as its answer (the key
-writes the answer on these same lines), and grows at most 1 line over that; summaries +2, the
-close +3. Room past the caps stays white. It owns the `lines`, `summaryLines`, `bigPictureLines`,
-`fuzzyLines` and `breakBefore` fields and resets them every run: refit after any content edit. Opt-in, so a packet already handed out does not reflow.
+new space. Just make it flow."* Then *"way too much spacing now"*, then *"keep each section
+together, if a section ends just head to a new page!"* With `"flow": true` each section after the
+first starts a page and runs down it without gaps, and the close gets its own page. Every prompt —
+its label, its ruled lines, a must-write under it — is its own unsplittable table row with the cue
+column merged beside it, so a page breaks between prompts and never through one. (Keep-with-next
+inside a cell does not do this: LibreOffice ignores it, and Word reads it as "keep this row with the
+next", chaining the whole table.) Rules are set at an exact 14pt so Word and LibreOffice pitch them
+the same. `fit_notes.py` then takes the room left on each section's last page: one more line for
+every prompt in the section if all of them fit (never some), the rest to the summary up to +6, and
+the close up to +4 each. Every box starts at least as tall as its answer. Past the caps stays white.
+It owns `lines`, `summaryLines`, `bigPictureLines` and `fuzzyLines` and resets them every run: refit after any content edit. Opt-in, so a packet already handed out does not reflow.
 
 Every ruled line is now its own rule. Identical borders on adjacent paragraphs merge into one
 group in Word and LibreOffice alike, so a "2-line" answer used to print as one line with space
@@ -142,5 +145,5 @@ python3 ../../scripts/audit_fonts.py out.pdf    # Archivo only, both options
 ```
 
 Then look at every page. A flowed spec run through `fit_notes.py` has its page breaks checked for
-you — no section head is stranded, no row splits, no summary sits alone on a page. Option B and unflowed specs do
+you — sections start pages and no prompt splits; it warns if a summary sits alone. Option B and unflowed specs do
 not, and a summary box orphaned at the top of a page is the defect to watch for there.

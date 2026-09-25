@@ -150,8 +150,9 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     secs = [zpad(x) for x in spec["sections"]]
     span = f"S{secs[0]}-S{secs[-1]}" if len(secs) > 1 else f"S{secs[0]}"
-    # SHULL-CHG-0026. "Flow": a Cornell row never splits across a page, a section
-    # marked "breakBefore" starts one, and the close gets its own page. Opt-in per spec
+    # SHULL-CHG-0026. "Flow": each section after the first starts a page and runs
+    # continuously - a row may break between prompts, never through one - and the
+    # close gets its own page. Opt-in per spec
     # so a packet already in circulation does not reflow under anyone. fit_notes.py
     # then grows the ruled lines into whatever space the breaks free up.
     FLOW = bool(spec.get("flow"))
@@ -204,7 +205,7 @@ def main():
         check_item(c, debullet(x), pal, 9.5)
 
     for si, sec in enumerate(spec["sectionsContent"]):
-        if FLOW and si > 0 and sec.get("breakBefore"):
+        if FLOW and si > 0:
             page_break(doc)
         else:
             gap(doc, 6)
@@ -228,68 +229,91 @@ def main():
             for cell in (a, b, c):
                 keep_next(cell)
 
-        # A row marked "breakBefore" starts a page. Word will not break a page inside a
-        # table, so the Cornell table is split there and the break sits between the two.
-        # fit_notes.py sets it; an author rarely needs to.
+        # Under flow every prompt - its label, its ruled lines, and any must-write
+        # line under it - is its own table row that cannot split, with the cue column
+        # merged down beside them. A page can then break between prompts and never
+        # through one, and the section runs on without the gap an unsplittable Cornell
+        # row left when it jumped whole: "keep each section together, if a section ends
+        # just head to a new page." Row-level, because keep-with-next on paragraphs
+        # inside a cell is ignored by LibreOffice and read by Word as "keep this whole
+        # row with the next", which chains every row into one unbreakable block.
         rows = sec["rows"]
-        brk = lambda i: FLOW and i > 0 and rows[i].get("breakBefore")
-        t = None
-        for ri, row in enumerate(rows):
-            if t is None or brk(ri):
-                if t is not None:
-                    page_break(doc)
-                end = next((j for j in range(ri + 1, len(rows)) if brk(j)), len(rows))
-                t = doc.add_table(rows=end - ri, cols=2)
-                fix_widths(t, [CUE_W_IN, NOTES_W_IN])
-                ti = 0
-            tr = t.rows[ti]; ti += 1
-            if FLOW:
-                no_split(tr)
-            cue, notes = tr.cells
-            last_row = ri == len(rows) - 1
-            # No fill on the cue column. Matthew's packet separated the columns with a
-            # rule alone, which is the Cornell convention and costs nothing to print.
-            borders(cue, hair); borders(notes, hair)
-            # Condensed: the cue label keeps caps and colour but loses its letter
-            # tracking - tracking is what made "DISTANCE VS. DISPLACEMENT" wrap - and
-            # the prompts drop half a point so a question fits on two lines, not four.
-            para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
-            for q in row["cues"]:
-                para(cue, q, 8.5)
-            para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
-            if row.get("diagram"):
-                diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
 
-            prob = row.get("problem")
-            if prob:
-                para(notes, prob.get("label", "EXAMPLE"), 7.5, bold=True,
-                     color=accent, caps_track=True)
-                if prob.get("statement"):
-                    para(notes, prob["statement"], 9.5)
-                if prob.get("given") or prob.get("need"):
-                    given_need(notes, prob.get("given", ""), prob.get("need", ""),
-                               pal, NOTES_INNER_IN)
-                work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
-                         float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), NOTES_INNER_IN)
-                # SHULL-CHG-0025: an answer is what the key is for. Printing it
-                # unconditionally would leak it onto the student page.
-                if KEY and prob.get("answer"):
-                    para(notes, prob["answer"], 9.5, bold=True, color=display)
-
-            for n in row["notes"]:
-                # A notes line is a plain string, or {"text", "key"} - recall.py's
-                # offences() already reads it this shape; this is the renderer catching up.
-                text, keytext = (n, None) if isinstance(n, str) else (n.get("text", ""), n.get("key"))
-                mw = text.startswith(("*", "✎"))
-                body = text.lstrip("*✎").strip()
-                p = para(notes, body, 9.5, bold=mw)
-                if mw:
-                    pPr = p._p.get_or_add_pPr()
-                    bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
-                    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
-                    x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
-                    bd.append(x); pPr.append(bd)
+        def blocks_of(row):
+            if not FLOW:
+                return [list(range(len(row["notes"])))]
+            out = []
+            for i, n in enumerate(row["notes"]):
+                text = n if isinstance(n, str) else n.get("text", "")
+                if out and text.startswith(("*", "✎")):
+                    out[-1].append(i)
                 else:
+                    out.append([i])
+            return out or [[]]
+
+        plans = [blocks_of(r) for r in rows]
+        t = doc.add_table(rows=sum(len(bl) for bl in plans), cols=2)
+        fix_widths(t, [CUE_W_IN, NOTES_W_IN])
+        ti = 0
+        for ri, row in enumerate(rows):
+            blocks = plans[ri]
+            for bi, blk in enumerate(blocks):
+                tr = t.rows[ti]; ti += 1
+                if FLOW:
+                    no_split(tr)
+                cue, notes = tr.cells
+                # No fill on the cue column. Matthew's packet separated the columns with
+                # a rule alone, which is the Cornell convention and costs nothing to print.
+                edges = ("left", "right") + (("top",) if bi == 0 else ()) \
+                    + (("bottom",) if bi == len(blocks) - 1 else ())
+                borders(cue, hair, edges=edges); borders(notes, hair, edges=edges)
+                if len(blocks) > 1:
+                    cue._tc.get_or_add_tcPr().vMerge_val = "restart" if bi == 0 else "continue"
+                if bi == 0:
+                    # Condensed: the cue label keeps caps and colour but loses its letter
+                    # tracking - tracking is what made "DISTANCE VS. DISPLACEMENT" wrap -
+                    # and the prompts drop half a point so a cue fits on two lines.
+                    para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
+                    for q in row["cues"]:
+                        para(cue, q, 8.5)
+                    para(notes, row["notesLabel"], 7.5, bold=True, color=accent,
+                         caps_track=True, first=True)
+                    if row.get("diagram"):
+                        diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
+
+                    prob = row.get("problem")
+                    if prob:
+                        para(notes, prob.get("label", "EXAMPLE"), 7.5, bold=True,
+                             color=accent, caps_track=True)
+                        if prob.get("statement"):
+                            para(notes, prob["statement"], 9.5)
+                        if prob.get("given") or prob.get("need"):
+                            given_need(notes, prob.get("given", ""), prob.get("need", ""),
+                                       pal, NOTES_INNER_IN)
+                        work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
+                                 float(prob.get("workHeightIn", WORK_BOX_MIN_IN)),
+                                 NOTES_INNER_IN)
+                        # SHULL-CHG-0025: an answer is what the key is for. Printing it
+                        # unconditionally would leak it onto the student page.
+                        if KEY and prob.get("answer"):
+                            para(notes, prob["answer"], 9.5, bold=True, color=display)
+
+                for k, idx in enumerate(blk):
+                    n = row["notes"][idx]
+                    # A notes line is a plain string, or {"text", "key"} - recall.py's
+                    # offences() already reads it this shape.
+                    text, keytext = (n, None) if isinstance(n, str) \
+                        else (n.get("text", ""), n.get("key"))
+                    mw = text.startswith(("*", "✎"))
+                    body = text.lstrip("*✎").strip()
+                    p = para(notes, body, 9.5, bold=mw, first=(bi > 0 and k == 0))
+                    if mw:
+                        pPr = p._p.get_or_add_pPr()
+                        bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
+                        x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
+                        x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
+                        bd.append(x); pPr.append(bd)
+                        continue
                     lines = (n.get("lines") if isinstance(n, dict) else None) \
                         or recall.ruled_lines(body)
                     if not KEY:
@@ -304,11 +328,6 @@ def main():
                               f"blank line with no \"key\": {body!r}", file=sys.stderr)
                         return 1
 
-            # A summary box alone at the top of a page, cut off from the notes it
-            # summarises, is the one orphan flow can still make. The last row travels
-            # with it instead.
-            if FLOW and last_row:
-                keep_next(cue); keep_next(notes)
 
         gap(doc, 2)
         c = one_cell(doc); borders(c, accent)

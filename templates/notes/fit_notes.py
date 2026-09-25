@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
-"""Grow a flowed notes packet's writing space into the room its page breaks free up.
+"""Give a flowed notes packet's leftover page room back as writing space - modestly.
 
     python3 templates/notes/fit_notes.py specs/<spec>.json [--write]
 
-SHULL-CHG-0026. "Use the space available - if you move a section to the next page,
-just increase the size of the boxes to use the new space. Just make it flow."
-                                                    - Matthew Shull, 2026-09-25
+SHULL-CHG-0026. Matthew, 2026-09-25, in order:
+    "use the space available ... just increase the size of the boxes"
+    "well shit theres way too much spacing now"
+    "keep each section together, if a section ends just head to a new page!"
 
-A spec with "flow": true breaks before every section and never splits a row, so pages
-end short. This renders the student copy, measures how much room is left at the foot
-of each page, and hands it back as extra ruled lines to the writing slots ON that page:
-every label line ("Earth:", "Define half-life:"), the section summary, and the close.
-It rebuilds and re-measures until nothing is left to give, and backs a page off if a
-row it grew got pushed to the next one. Nothing is added to a page that did not have
-the room, so the page count never moves.
+With "flow": true each section starts a page and runs down it continuously - a row may
+break between prompts, never through one - so the only room left is at the end of each
+section's last page, and on the close's page. This renders the student copy, measures
+that room, and hands it back: one more line for every prompt in the section if there is
+room for all of them (never some and not others), then the rest to the section summary,
+up to a cap. Anything past the cap stays white. It re-renders and backs off if anything
+moved to another page, so the page count never changes.
 
-Measured in LibreOffice. Word sets the same Archivo a touch tighter, so a page that
-fits here fits there; SAFETY_PT is the margin for the difference.
+Every box starts at least as tall as its answer - the key writes the answer on the same
+lines, and a student needs at least that much room.
 
---write puts the fitted line counts back into the spec, so the build is reproducible
-from what is committed. Without it the spec is only reported on.
+--write puts the fitted counts back into the spec, so the build is reproducible from
+what is committed. The fitter owns lines / summaryLines / bigPictureLines / fuzzyLines
+and resets them every run: refit after any content edit.
 """
 import copy, json, os, subprocess, sys, tempfile
 import pymupdf
@@ -31,14 +33,12 @@ sys.path.insert(0, os.path.dirname(HERE))
 from _shull_docx import wrap_to  # noqa: E402
 from build_notes_docx import NOTES_INNER_IN  # noqa: E402
 
-RULE_PT = 19.0      # one ruled line: a 10pt body line plus its 6pt space-after, measured
-SAFETY_PT = 16.0    # left empty at the foot of every page, for Word's reflow
+RULE_PT = 20.0      # one ruled line: 14pt exact + 5pt after + the 1pt spacer (rule_lines)
+SAFETY_PT = 16.0    # left empty at the foot of every page, for Word's reflow of labels
 FOOTER_GAP_PT = 8.0
 MAX_PASSES = 8
-# "Way too much spacing" - Matthew, 2026-09-25, on the first fit, which poured every
-# freed inch into the boxes. A box grows by at most this many lines over its natural
-# count; room beyond that stays white at the foot of the page.
-CAP = {"label": 1, "summary": 2, "close": 3}
+# Growth over natural. "Way too much spacing" came from boxes grown 4-6 lines each.
+CAP = {"label": 1, "summary": 6, "close": 4}
 NATURAL = {"summary": 4, "close": 3}
 
 
@@ -113,33 +113,40 @@ def measure(doc, spec):
     return pages
 
 
-def slots(spec, info):
-    """Everything on one page that can take another ruled line, row by row."""
-    out = []
-    for si, ri in info["rows"]:
-        for n in spec["sectionsContent"][si]["rows"][ri]["notes"]:
-            if isinstance(n, dict) and "lines" in n and n["lines"] < n["natural"] + CAP["label"]:
-                out.append(n)
-    for si in info["summaries"]:
-        if spec["sectionsContent"][si]["summaryLines"] < NATURAL["summary"] + CAP["summary"]:
-            out.append(("summary", si))
-    if info["close"]:
-        out += [("close", k) for k in ("bigPictureLines", "fuzzyLines")
-                if spec["close"][k] < NATURAL["close"] + CAP["close"]]
-    return out
+def section_ends(pages):
+    """Section index -> the page its summary box sits on: where the section ends."""
+    return {si: pno for pno, p in enumerate(pages) for si in p["summaries"]}
 
 
-def bump(spec, slot, by):
-    if isinstance(slot, dict):
-        slot["lines"] += by
-    elif slot[0] == "summary":
-        spec["sectionsContent"][slot[1]]["summaryLines"] += by
-    else:
-        spec["close"][slot[1]] += by
-
-
-def placement(pages):
-    return [tuple(p["rows"]) for p in pages], [tuple(p["summaries"]) for p in pages]
+def grow(spec, pages, safety):
+    """One pass of handing room back. Returns True if anything grew."""
+    grew = False
+    ends = section_ends(pages)
+    for si, sec in enumerate(spec["sectionsContent"]):
+        if si not in ends:
+            continue
+        extra = int((pages[ends[si]]["room"] - safety) // RULE_PT)
+        labels = [n for row in sec["rows"] for n in row["notes"]
+                  if isinstance(n, dict) and "lines" in n
+                  and n["lines"] < n["natural"] + CAP["label"]]
+        # Every prompt in the section gets its line, or none does - uneven boxes read
+        # as a mistake.
+        if labels and extra >= len(labels):
+            for n in labels:
+                n["lines"] += 1
+            extra -= len(labels); grew = True
+        add = max(0, min(extra, NATURAL["summary"] + CAP["summary"] - sec["summaryLines"]))
+        if add:
+            sec["summaryLines"] += add; grew = True
+    for p in pages:
+        if p["close"]:
+            extra = int((p["room"] - safety) // RULE_PT)
+            for k in ("bigPictureLines", "fuzzyLines") * max(0, extra):
+                if extra <= 0:
+                    break
+                if spec["close"][k] < NATURAL["close"] + CAP["close"]:
+                    spec["close"][k] += 1; extra -= 1; grew = True
+    return grew
 
 
 def main():
@@ -153,56 +160,26 @@ def main():
     normalise(spec)
     with tempfile.TemporaryDirectory() as work:
         pages = measure(render(spec, work), spec)
-        # A summary box alone on a page has been cut off from its notes. Send the
-        # section's last row over with it - and if that row is already travelling,
-        # the one before it - until every summary shares a page with a row.
-        for _ in range(MAX_PASSES):
-            # A section head at the foot of a page with its first row on the next:
-            # the whole section moves over. Only then - a section that fits, flows.
-            heads = [si for p in pages for si in p["titles"]
-                     if si > 0 and not any(r[0] == si for r in p["rows"])]
-            for si in heads:
-                spec["sectionsContent"][si]["breakBefore"] = True
-            # A summary alone on a page. One that tops a page the next section's notes
-            # also share is not orphaned - it sits directly after what it summarises.
-            orphans = [si for p in pages if not p["rows"] for si in p["summaries"]]
-            if not orphans and not heads:
-                break
-            for si in orphans:
-                rows = spec["sectionsContent"][si]["rows"]
-                marked = [i for i, r in enumerate(rows) if r.get("breakBefore")]
-                i = (min(marked) - 1) if marked else len(rows) - 1
-                if i > 0:
-                    rows[i]["breakBefore"] = True
-            pages = measure(render(spec, work), spec)
-        home = placement(pages)
-        n_pages = len(pages)
+        home, n_pages = section_ends(pages), len(pages)
         safety = SAFETY_PT
         for _ in range(MAX_PASSES):
             before = copy.deepcopy(spec)
-            grew = False
-            for info in pages:
-                extra = int((info["room"] - safety) // RULE_PT)
-                while extra > 0:
-                    s = slots(spec, info)
-                    if not s:
-                        break
-                    for slot in s[:extra]:
-                        bump(spec, slot, 1)
-                    extra -= min(extra, len(s))
-                    grew = True
-            if not grew:
+            if not grow(spec, pages, safety):
                 break
             new = measure(render(spec, work), spec)
-            if len(new) != n_pages or placement(new) != home:
-                # Something got pushed: back out this pass and ask for a line less.
+            if len(new) != n_pages or section_ends(new) != home:
+                # Something moved to another page: back out, ask for a line less.
                 spec = before
                 safety += RULE_PT
                 continue
             pages = new
         final = measure(render(spec, work), spec)
+    lonely = [si for p in final if not p["rows"] for si in p["summaries"]]
     for i, p in enumerate(final, 1):
         print(f"   p{i}: {p['room']:5.0f}pt left")
+    if lonely:
+        print(f"fit_notes: summary box alone on a page for section(s) {lonely} - "
+              f"look at it.", file=sys.stderr)
     if "--write" in sys.argv[1:]:
         for sec in spec["sectionsContent"]:
             for row in sec["rows"]:
