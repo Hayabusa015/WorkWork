@@ -1,0 +1,692 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "section": "2.1",
+  "sectionTitle": "Motion in Two Dimensions",
+  "note": "Single combined deck for the whole unit, per Matt's instruction to deliver Unit 2 as one deck rather than separate section files. Internally still divided into 2.1, 2.2, 2.3 with correct per-slide footer codes.",
+  "slides": [
+    {
+      "master": "01_UNIT_TITLE",
+      "fields": {
+        "headline": "Unit 2\nMotion in Two Dimensions",
+        "subhead": "Vectors, vector addition, and projectile motion — from first principles to real trajectories.",
+        "code": "U02"
+      },
+      "imageSubjects": {
+        "hero": "a basketball frozen mid-arc against a stormy sky"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "2.1\nVectors & Vector Basics",
+        "subhead": "What a vector is, how to draw one, and how to describe its direction — before we add them together.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "section": "a wooden protractor and ruler laid across graph paper"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write these before we go further.",
+        "k1_l": "VECTOR",
+        "k1_b": "Has magnitude AND\ndirection.\nDrawn as an arrow.",
+        "k2_l": "MAGNITUDE",
+        "k2_b": "The size or length.\nAlways positive.",
+        "k3_l": "DIRECTION",
+        "k3_b": "Which way it points.\nGiven as an angle.",
+        "mustwrite": "A vector needs both magnitude and direction — a number alone is not one.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "aside": "a compass rose drawn in pencil on aged paper"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "How to Draw a Vector",
+        "subhead": "Every vector arrow carries two pieces of information at once.",
+        "diagram": "DIAGRAM TO HAND-BUILD: an arrow drawn from a starting point (tail) to an ending point (tip), arrow length measured against a scale, angle marked from a reference axis at the tail.",
+        "a1_l": "LENGTH",
+        "a1_b": "Arrow length =\nmagnitude.",
+        "a2_l": "DIRECTION",
+        "a2_b": "Arrow angle =\ndirection.",
+        "a3_l": "TIP",
+        "a3_b": "Points the way\nthe vector acts.",
+        "code": "U02 • S02.1"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Resolving a Vector Into Components",
+        "subhead": "Any vector can be broken into an x-part and a y-part using right-triangle trig.",
+        "c1_l": "X-COMPONENT",
+        "c1_b": "Ax = A cos(theta)\nAdjacent side.",
+        "c2_l": "Y-COMPONENT",
+        "c2_b": "Ay = A sin(theta)\nOpposite side.",
+        "mustwrite": "Components let you add vectors later — that's the whole point of resolving.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "concept": "a drafting compass and protractor on a dark desk"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Resolving a Displacement",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "A hiker walks 50 m at 30° above the horizontal. Find the x- and y-components.",
+        "g1_l": "GIVEN",
+        "g1_b": "A = 50 m\ntheta = 30°",
+        "g2_l": "NEED",
+        "g2_b": "Ax and Ay",
+        "work": "",
+        "mustwrite": "Ax = A cos(theta). Ay = A sin(theta). Always.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "aside": "a hiking boot print in trail dust"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Displacement, Worked",
+        "subhead": "Plug into both formulas — don't skip one.",
+        "f1_l": "SETUP",
+        "f1_b": "Ax = 50cos30°\nAy = 50sin30°",
+        "work": "Ax = 43.3 m\nAy = 25.0 m",
+        "mustwrite": "Check: Ax² + Ay² should equal A² again.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "data": "a hand-drawn right triangle on graph paper"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Degrees and Compass Directions",
+        "subhead": "The same vector can be described two ways — from an axis, or as a compass bearing.",
+        "diagram": "DIAGRAM TO HAND-BUILD: a compass rose (N/E/S/W) with a vector arrow drawn between two adjacent directions, showing the angle measured from each of the two nearby axes.",
+        "a1_l": "FROM AN AXIS",
+        "a1_b": "Angle measured from\nhorizontal or vertical.",
+        "a2_l": "COMPASS BEARING",
+        "a2_b": "e.g. \"40° North\nof East.\"",
+        "a3_l": "SAME VECTOR",
+        "a3_b": "Two labels,\none direction.",
+        "code": "U02 • S02.1"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "One Direction, Two Names",
+        "subhead": "\"North of East\" and \"East of North\" angles are always complementary — they add to 90°.",
+        "keyq": "Why do 40° North of East and 50° East of North point the exact same way?",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "concept": "a brass compass rose engraved on a dark surface"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Converting the Angle",
+        "subhead": "First rep — copy the reasoning, not just the number.",
+        "problem": "A vector points 40° North of East. Express this direction as an angle East of North.",
+        "g1_l": "GIVEN",
+        "g1_b": "40° North of East",
+        "g2_l": "NEED",
+        "g2_b": "Same direction, as an\nangle East of North",
+        "work": "",
+        "mustwrite": "North-of-East and East-of-North angles always add to 90°.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "aside": "a protractor resting on a hand-drawn angle diagram"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Converting the Angle, Worked",
+        "subhead": "Subtract from 90° — that's the whole method.",
+        "f1_l": "SETUP",
+        "f1_b": "East of North =\n90° − North of East",
+        "work": "90° − 40° = 50°\nSame vector: 50° East of North",
+        "mustwrite": "40° North of East and 50° East of North are the same vector.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "data": "two intersecting rulers forming a right angle"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Your Turn: A Hiking Bearing",
+        "subhead": "Second rep — same method, different numbers.",
+        "problem": "A hiker walks at 65° East of North. Express this as an angle North of East.",
+        "g1_l": "GIVEN",
+        "g1_b": "65° East of North",
+        "g2_l": "NEED",
+        "g2_b": "Same direction, as an\nangle North of East",
+        "work": "",
+        "mustwrite": "Same rule: the two angles always add to 90°.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "aside": "a topographic trail map with a pencil bearing line"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Hiking Bearing, Worked",
+        "subhead": "Check yours against this before we move on.",
+        "f1_l": "SETUP",
+        "f1_b": "North of East =\n90° − East of North",
+        "work": "90° − 65° = 25°\nSame vector: 25° North of East",
+        "mustwrite": "65° East of North and 25° North of East are the same vector.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "data": "a compass sitting on a folded trail map"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Quick Check: Resolve and Convert",
+        "subhead": "Both skills from this section, in one problem.",
+        "problem": "A force of 20 N acts at 70° East of North. Find its angle North of East.",
+        "q1_l": "GIVEN",
+        "q1_b": "20 N\n70° East of North",
+        "q2_l": "EQUATION",
+        "q2_b": "North of East =\n90° − East of North",
+        "answer": "20° North of East",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "setup": "a small handheld dynamometer on a workbench"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "2.2  •  NEXT UP",
+        "headline": "Adding Vectors\nTogether",
+        "subhead": "Section 2.2 puts these skills to work — combining two vectors into one resultant.",
+        "code": "U02 • S02.1"
+      },
+      "imageSubjects": {
+        "divider": "two arrows converging toward a single point on a dark chalkboard"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "02",
+        "headline": "2.2\nVector Addition",
+        "subhead": "Combine two vectors into a single resultant — first at 90°, then at any angle.",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "section": "two ropes pulling at right angles on a metal ring"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Adding Perpendicular Vectors",
+        "subhead": "When two vectors meet at 90°, the Pythagorean theorem gives the resultant directly.",
+        "diagram": "DIAGRAM TO HAND-BUILD: two vectors drawn tip-to-tail at a right angle, with the resultant vector drawn as the hypotenuse connecting the start of the first to the tip of the second.",
+        "a1_l": "MAGNITUDE",
+        "a1_b": "R = √(A² + B²)",
+        "a2_l": "DIRECTION",
+        "a2_b": "theta = arctan(B/A)",
+        "a3_l": "WHEN TO USE",
+        "a3_b": "Only when the vectors\nare perpendicular.",
+        "code": "U02 • S02.2"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Plane in a Crosswind",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "A plane flies 80 km/h east into a 20 km/h north crosswind. Find the resultant velocity.",
+        "g1_l": "GIVEN",
+        "g1_b": "80 km/h, east\n20 km/h, north\nPerpendicular vectors",
+        "g2_l": "NEED",
+        "g2_b": "Resultant magnitude\nResultant direction",
+        "work": "",
+        "mustwrite": "Perpendicular vectors: R² = leg² + leg².",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "aside": "a small propeller plane silhouette against clouds"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Plane in a Crosswind, Worked",
+        "subhead": "Write the direction, not just the number.",
+        "f1_l": "FORMULA",
+        "f1_b": "R = √(A² + B²)\ntheta = arctan(B/A)",
+        "work": "R = √(80²+20²) = 82.5 km/h\ntheta = arctan(20/80) = 14°\nDirection: 14° N of E",
+        "mustwrite": "Always report both magnitude and direction together.",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "data": "an instrument panel compass and airspeed gauge"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Adding Vectors at Any Angle",
+        "subhead": "When the angle isn't 90°, break each vector into components first.",
+        "diagram": "DIAGRAM TO HAND-BUILD: two vectors at an arbitrary angle to each other, each decomposed into dashed x- and y-component arrows, added separately, then recombined into a resultant vector.",
+        "a1_l": "STEP 1",
+        "a1_b": "Break each vector\ninto x and y parts.",
+        "a2_l": "STEP 2",
+        "a2_b": "Add the x's.\nAdd the y's.",
+        "a3_l": "STEP 3",
+        "a3_b": "Recombine:\nR=√(x²+y²), theta=arctan(y/x)",
+        "code": "U02 • S02.2"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Two Forces on a Box",
+        "subhead": "Components first — this is not a Pythagorean-shortcut problem.",
+        "problem": "A 40 N force acts east, and a 30 N force acts 60° above east. Find the resultant force.",
+        "g1_l": "GIVEN",
+        "g1_b": "F1 = 40 N at 0°\nF2 = 30 N at 60°",
+        "g2_l": "NEED",
+        "g2_b": "Resultant magnitude\nResultant direction",
+        "work": "",
+        "mustwrite": "Not perpendicular — resolve into components before adding.",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "aside": "two ropes pulling a wooden crate at different angles"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Two Forces on a Box, Worked",
+        "subhead": "Add the x's, add the y's, then recombine.",
+        "f1_l": "COMPONENTS",
+        "f1_b": "F1x=40, F1y=0\nF2x=30cos60°=15, F2y=30sin60°=26",
+        "work": "Fx=40+15=55 N\nFy=0+26=26 N\nR=√(55²+26²)=60.9 N, theta=25°",
+        "mustwrite": "Add components on each axis separately, then recombine.",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "data": "a hand-drawn force diagram with two angled arrows"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Your Turn: Two Displacements",
+        "subhead": "Same three steps. Work it, then check your answer.",
+        "problem": "Walk 30 m east, then 40 m at 45° above east. Find the resultant displacement.",
+        "q1_l": "GIVEN",
+        "q1_b": "30 m at 0°\n40 m at 45°",
+        "q2_l": "EQUATION",
+        "q2_b": "Add x's, add y's,\nthen R=√(x²+y²)",
+        "answer": "R ≈ 64.8 m at 26°",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "setup": "footprints in sand changing direction partway across a beach"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "2.3  •  NEXT UP",
+        "headline": "Projectile\nMotion",
+        "subhead": "Section 2.3 puts vector addition to work — motion through the air, in three stages.",
+        "code": "U02 • S02.2"
+      },
+      "imageSubjects": {
+        "divider": "a basketball mid-arc against a dark gym backdrop"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "2.3\nProjectile Motion",
+        "subhead": "Model objects moving through the air under gravity alone — in three stages, from simplest to most complex.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "section": "a ball frozen mid-arc against a stormy sky"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Vocabulary You Need First",
+        "subhead": "Three words, used constantly for the rest of this section.",
+        "k1_l": "PROJECTILE",
+        "k1_b": "An object moving\nunder gravity alone.\nNo other forces act.",
+        "k2_l": "TRAJECTORY",
+        "k2_b": "The curved path\nthe object follows.\nA parabola.",
+        "k3_l": "RANGE",
+        "k3_b": "Total horizontal\ndistance travelled.\nLaunch point to landing.",
+        "mustwrite": "Horizontal and vertical motion happen independently — at the same time.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "a stopwatch resting on a physics textbook"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "No Horizontal Force Needed",
+        "subhead": "Gravity acts only downward. Nothing pushes the object forward — horizontal velocity stays constant.",
+        "keyq": "If nothing pushes it forward, why does a thrown ball keep moving sideways?",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "concept": "a strobe-style multi-exposure photo of a thrown ball's arc"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "STAGE 1 OF 3",
+        "headline": "Horizontal Launch\nNo Angle, No Height Change",
+        "subhead": "The simplest case: launched flat, lands at the same height it started.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "divider": "a marble rolling off the edge of a dark table"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "The Flat Launch",
+        "subhead": "Horizontal velocity stays constant. Vertical motion is free fall from rest.",
+        "diagram": "DIAGRAM TO HAND-BUILD: object launched horizontally off a table edge, curving downward in a symmetric parabola. Mark equal horizontal spacing between time-steps (constant vx) and growing vertical spacing (accelerating vy).",
+        "a1_l": "HORIZONTAL (x)",
+        "a1_b": "vx stays constant.\nx = v0x · t",
+        "a2_l": "VERTICAL (y)",
+        "a2_b": "Starts at rest (v0y=0).\ny = ½ g t²",
+        "a3_l": "TIME TO LAND",
+        "a3_b": "Set y = launch height.\nSolve for t.",
+        "code": "U02 • S02.3"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Rolling Off a Table",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "A ball rolls off a 0.80 m table at 2.5 m/s. How long until it lands, and how far does it travel?",
+        "g1_l": "GIVEN",
+        "g1_b": "Height = 0.80 m\nv0x = 2.5 m/s\nv0y = 0",
+        "g2_l": "NEED",
+        "g2_b": "Time to land\nHorizontal distance",
+        "work": "",
+        "mustwrite": "Vertical motion decides the time. Horizontal motion decides the distance.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "a marble resting at the edge of a wooden table"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Table Roll-Off, Worked",
+        "subhead": "Solve vertical first — it gives you the time everything else depends on.",
+        "f1_l": "SETUP",
+        "f1_b": "y = ½ g t²\n0.80 = ½(9.8)t²",
+        "work": "t = √(2×0.80/9.8) = 0.40 s\nx = v0x · t = 2.5 × 0.40\nx = 1.0 m",
+        "mustwrite": "Find time from the vertical drop, then use it for horizontal distance.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "data": "a hand-drawn graph of height versus time"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Your Turn: Off a Higher Shelf",
+        "subhead": "Same two steps. Work it, then check your answer.",
+        "problem": "A marble rolls off a 1.25 m shelf at 3.0 m/s. How far does it land from the shelf?",
+        "q1_l": "GIVEN",
+        "q1_b": "Height = 1.25 m\nv0x = 3.0 m/s",
+        "q2_l": "EQUATION",
+        "q2_b": "y = ½ g t²\nx = v0x · t",
+        "answer": "x ≈ 1.5 m",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "setup": "a bookshelf edge with a small marble balanced on it"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "STAGE 2 OF 3",
+        "headline": "Adding a\nLaunch Angle",
+        "subhead": "Now the launch itself is angled — both velocity components exist from the start.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "divider": "a soccer ball frozen mid-flight against floodlights"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Launching at an Angle",
+        "subhead": "The initial velocity splits into a horizontal and a vertical part.",
+        "diagram": "DIAGRAM TO HAND-BUILD: object launched at an angle above level ground, arcing up to a peak then back down symmetrically to land at the same height. Show v0 decomposed into v0x and v0y at the launch point with a right-triangle construction.",
+        "a1_l": "COMPONENTS",
+        "a1_b": "v0x = v0 cos(theta)\nv0y = v0 sin(theta)",
+        "a2_l": "TIME OF FLIGHT",
+        "a2_b": "t = 2v0y / g\n(level ground only)",
+        "a3_l": "RANGE",
+        "a3_b": "R = v0x · t",
+        "code": "U02 • S02.3"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: A Kicked Soccer Ball",
+        "subhead": "Break the velocity into components before doing anything else.",
+        "problem": "A ball is kicked at 18 m/s at 30° above the ground. Find the time of flight and the range.",
+        "g1_l": "GIVEN",
+        "g1_b": "v0 = 18 m/s\ntheta = 30°\nLevel ground",
+        "g2_l": "NEED",
+        "g2_b": "Time of flight\nRange",
+        "work": "",
+        "mustwrite": "Resolve v0 into v0x and v0y before solving anything else.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "a soccer cleat mid-kick against a dark background"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Kicked Ball, Worked",
+        "subhead": "Components first, then the two standard formulas.",
+        "f1_l": "SETUP",
+        "f1_b": "v0x = 18cos30° = 15.6\nv0y = 18sin30° = 9.0",
+        "work": "t = 2(9.0)/9.8 = 1.84 s\nR = 15.6 × 1.84 = 28.7 m",
+        "mustwrite": "Time of flight depends only on v0y. Range depends on both.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "data": "a hand-drawn parabolic arc sketch with labeled axes"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Your Turn: A Launched Arrow",
+        "subhead": "Resolve first. Then apply the same two formulas.",
+        "problem": "An arrow is shot at 45 m/s at 40° above level ground. Find its range.",
+        "q1_l": "GIVEN",
+        "q1_b": "v0 = 45 m/s\ntheta = 40°",
+        "q2_l": "EQUATION",
+        "q2_b": "t = 2v0y/g\nR = v0x · t",
+        "answer": "R ≈ 209 m",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "setup": "an archery target with an arrow mid-flight"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "STAGE 3 OF 3",
+        "headline": "Height Changes\n& Max Height",
+        "subhead": "Launch and landing points no longer match — and now we solve for the peak of the arc.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "divider": "a cliffside overlook at dusk with a dark valley below"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "When Launch and Landing Differ",
+        "subhead": "The trajectory is no longer symmetric — the level-ground shortcut no longer applies.",
+        "diagram": "DIAGRAM TO HAND-BUILD: object launched at an angle from an elevated point, rising to a peak above the launch height, then descending past the launch height to land lower — an asymmetric arc, the descent longer than the ascent.",
+        "a1_l": "MAX HEIGHT",
+        "a1_b": "At the peak, vy = 0.\nt_apex = v0y / g",
+        "a2_l": "HEIGHT GAINED",
+        "a2_b": "Δy = v0y² / (2g)",
+        "a3_l": "ASYMMETRIC CASE",
+        "a3_b": "Solve y(t)=y0+v0y t−½gt²\nfor total time.",
+        "code": "U02 • S02.3"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Max Height From a Cliff",
+        "subhead": "Find the peak first — everything else builds on it.",
+        "problem": "A rock is launched at 20 m/s at 35° from a 15 m cliff. Find the maximum height above the launch point.",
+        "g1_l": "GIVEN",
+        "g1_b": "v0 = 20 m/s\ntheta = 35°\nLaunch height = 15 m",
+        "g2_l": "NEED",
+        "g2_b": "Max height above\nthe launch point",
+        "work": "",
+        "mustwrite": "At maximum height, vertical velocity is exactly zero.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "a rock resting on a cliff edge overlooking water"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Max Height, Worked",
+        "subhead": "vy = 0 at the top — that's the condition that solves it.",
+        "f1_l": "SETUP",
+        "f1_b": "v0y = 20sin35° = 11.5\nΔy = v0y²/(2g)",
+        "work": "Δy = 11.5²/(2×9.8) = 6.7 m\nPeak height above ground: 21.7 m",
+        "mustwrite": "Report height above the launch point, and above the ground, separately.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "data": "a hand-drawn height-versus-time curve peaking then falling"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Landing Below the Launch",
+        "subhead": "No shortcut formula here — solve the full position equation for time.",
+        "problem": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground below. Find the total time of flight.",
+        "g1_l": "GIVEN",
+        "g1_b": "v0y = 11.5 m/s\nLaunch height = 15 m\nLands at height = 0",
+        "g2_l": "NEED",
+        "g2_b": "Total time of flight",
+        "work": "",
+        "mustwrite": "y(t) = y0 + v0y t − ½ g t² — solve the quadratic for t.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "a stopwatch beside a cliffside diagram sketch"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Total Flight Time, Worked",
+        "subhead": "Quadratic formula — keep the positive root, it's the only one that makes sense.",
+        "f1_l": "SETUP",
+        "f1_b": "0 = 15 + 11.5t − 4.9t²",
+        "work": "Quadratic formula →\nt ≈ 3.3 s (positive root)",
+        "mustwrite": "The negative root is a math artifact — time can't be negative.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "data": "handwritten quadratic-formula work on notebook paper"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Stages, One Idea",
+        "subhead": "Horizontal and vertical motion are always independent — only the setup changes.",
+        "k1_l": "STAGE 1",
+        "k1_b": "Flat launch.\nSymmetric, simple.",
+        "k2_l": "STAGE 2",
+        "k2_b": "Add an angle.\nResolve v0 first.",
+        "k3_l": "STAGE 3",
+        "k3_b": "Add height change.\nSolve for the peak or\nthe full quadratic.",
+        "mustwrite": "Every projectile problem: resolve v0, then work x and y separately.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "aside": "three small sketched arcs of increasing complexity"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "UNIT 2 SUMMARY",
+        "headline": "Vectors to\nProjectile Motion",
+        "subhead": "Section 2.1 reviewed vectors, 2.2 added them together, and 2.3 put that skill to work predicting motion through the air.",
+        "code": "U02 • S02.3"
+      },
+      "imageSubjects": {
+        "divider": "a night sky with a single arcing firework trail"
+      }
+    }
+  ]
+}
