@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
-    borders, para, check_item, rule_lines, fix_widths, one_cell, no_split, gap,
+    borders, para, check_item, rule_lines, wrap_to, fix_widths, one_cell, no_split, gap,
     stacked_frac, equation_bar, work_box, given_need, diagram_block,
     page_setup, running_footer, trim_tail,
 )
@@ -56,6 +56,27 @@ NOTES_INNER_IN = round(NOTES_W_IN - CELL_MAR_IN, 2)   # 5.66
 # SHULL-CHG-0017. A fraction is stacked - numerator over denominator with a horizontal
 # bar. Never "a/b" inline in the text. Built as a two-row table rather than Office Math
 # (OMML): OMML is valid and Word renders it, but LibreOffice will not import it from
+
+def page_break(doc):
+    """A 1pt paragraph that starts a new page. Breaking on a pinned paragraph rather
+    than on the section's own table keeps the break out of the table, where Word and
+    LibreOffice disagree about whether pageBreakBefore in a cell counts."""
+    p = gap(doc, 1)
+    p._p.get_or_add_pPr().append(OxmlElement("w:pageBreakBefore"))
+
+
+def keep_next(cell):
+    """Hold a cell's paragraphs to whatever follows, so a section head is never left
+    alone at the bottom of a page with its first row on the next."""
+    for p in cell.paragraphs:
+        p.paragraph_format.keep_with_next = True
+
+
+def zpad(sec):
+    """'2.1' -> '02.1'. SHULL-CHG-0024: both halves of a code zero-padded, everywhere."""
+    major, minor = str(sec).split(".")
+    return f"{int(major):02d}.{minor}"
+
 
 def main():
     # SHULL-CHG-0025. "Always produce two files: student, blanks empty; key, everything
@@ -127,8 +148,13 @@ def main():
 
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
-    span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
-            if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
+    secs = [zpad(x) for x in spec["sections"]]
+    span = f"S{secs[0]}-S{secs[-1]}" if len(secs) > 1 else f"S{secs[0]}"
+    # SHULL-CHG-0026. "Flow": every section after the first starts a page, a Cornell
+    # row never splits across a page, and the close gets its own page. Opt-in per spec
+    # so a packet already in circulation does not reflow under anyone. fit_notes.py
+    # then grows the ruled lines into whatever space the breaks free up.
+    FLOW = bool(spec.get("flow"))
     suffix = "_Key" if KEY else ""
     out = args[1] if len(args) > 1 else \
         os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}{suffix}.docx")
@@ -177,8 +203,11 @@ def main():
     for x in spec["sectionList"]:
         check_item(c, debullet(x), pal, 9.5)
 
-    for sec in spec["sectionsContent"]:
-        gap(doc, 6)
+    for si, sec in enumerate(spec["sectionsContent"]):
+        if FLOW and si > 0:
+            page_break(doc)
+        else:
+            gap(doc, 6)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
         a, b = t.rows[0].cells
@@ -195,11 +224,29 @@ def main():
         r = p.add_run("LEARNING TARGET   "); r.font.name = FONT; r.font.size = Pt(7.5)
         r.bold = True; r.font.color.rgb = RGBColor.from_string(hexof(accent))
         r2 = p.add_run(sec["learningTarget"]); r2.font.name = FONT; r2.font.size = Pt(9.5)
+        if FLOW:
+            for cell in (a, b, c):
+                keep_next(cell)
 
-        t = doc.add_table(rows=len(sec["rows"]), cols=2)
-        fix_widths(t, [CUE_W_IN, NOTES_W_IN])
-        for ri, row in enumerate(sec["rows"]):
-            cue, notes = t.rows[ri].cells
+        # A row marked "breakBefore" starts a page. Word will not break a page inside a
+        # table, so the Cornell table is split there and the break sits between the two.
+        # fit_notes.py sets it; an author rarely needs to.
+        rows = sec["rows"]
+        brk = lambda i: FLOW and i > 0 and rows[i].get("breakBefore")
+        t = None
+        for ri, row in enumerate(rows):
+            if t is None or brk(ri):
+                if t is not None:
+                    page_break(doc)
+                end = next((j for j in range(ri + 1, len(rows)) if brk(j)), len(rows))
+                t = doc.add_table(rows=end - ri, cols=2)
+                fix_widths(t, [CUE_W_IN, NOTES_W_IN])
+                ti = 0
+            tr = t.rows[ti]; ti += 1
+            if FLOW:
+                no_split(tr)
+            cue, notes = tr.cells
+            last_row = ri == len(rows) - 1
             # No fill on the cue column. Matthew's packet separated the columns with a
             # rule alone, which is the Cornell convention and costs nothing to print.
             borders(cue, hair); borders(notes, hair)
@@ -242,39 +289,56 @@ def main():
                     x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
                     x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
                     bd.append(x); pPr.append(bd)
-                elif KEY:
-                    if keytext is not None:
-                        para(notes, keytext, 9.5, bold=True, color=display)
+                else:
+                    lines = (n.get("lines") if isinstance(n, dict) else None) \
+                        or recall.ruled_lines(body)
+                    if not KEY:
+                        rule_lines(notes, lines, hair)
+                    elif keytext is not None:
+                        # The answer goes on the student's own ruled lines, so the key
+                        # is the student copy filled in - same pages, same breaks.
+                        rule_lines(notes, lines, hair, color=display,
+                                   written=wrap_to(keytext, NOTES_INNER_IN - 0.05, 9.5, True))
                     elif "___" in body or body.endswith(":"):
                         print(f"build_notes_docx: --key requested but {sec['code']} has a "
                               f"blank line with no \"key\": {body!r}", file=sys.stderr)
                         return 1
-                else:
-                    rule_lines(notes, recall.ruled_lines(body), hair)
+
+            # A summary box alone at the top of a page, cut off from the notes it
+            # summarises, is the one orphan flow can still make. The last row travels
+            # with it instead.
+            if FLOW and last_row:
+                keep_next(cue); keep_next(notes)
 
         gap(doc, 2)
         c = one_cell(doc); borders(c, accent)
+        if FLOW:
+            c._tc.getparent().get_or_add_trPr().append(OxmlElement("w:cantSplit"))
         para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
              bold=True, color=accent, caps_track=True, first=True)
         para(c, sec["summaryPrompt"], 9.5)
-        rule_lines(c, 4, hair)
+        rule_lines(c, sec.get("summaryLines", 4), hair)
         para(c, "SELF-CHECK", 7.5, bold=True, color=accent, caps_track=True)
         for x in sec.get("selfCheck", []):
             check_item(c, x, pal)
 
-    gap(doc, 6)
+    close = spec["close"]
+    if FLOW:
+        page_break(doc)
+    else:
+        gap(doc, 6)
     c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
     borders(c, display, sz=18, edges=("bottom",))
-    para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
+    para(c, close["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
     c = one_cell(doc); borders(c, hair)
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
-    for x in spec["close"]["checklist"]:
+    for x in close["checklist"]:
         check_item(c, x, pal)
     para(c, "UNIT BIG PICTURE", 7.5, bold=True, color=accent, caps_track=True)
-    para(c, spec["close"]["bigPicture"], 9.5)
-    rule_lines(c, 3, hair)
-    para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
-    rule_lines(c, 3, hair)
+    para(c, close["bigPicture"], 9.5)
+    rule_lines(c, close.get("bigPictureLines", 3), hair)
+    para(c, close["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
+    rule_lines(c, close.get("fuzzyLines", 3), hair)
 
     footer_txt = f"SHULL SCIENCE          {unit} · {span}"
     if KEY:

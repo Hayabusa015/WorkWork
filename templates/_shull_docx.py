@@ -175,10 +175,42 @@ def para(cell, text, size, *, bold=False, color=None, spacing=0.14, caps_track=F
     return p
 
 
-def rule_lines(cell, n, hexval):
-    for _ in range(n):
+def wrap_to(text, width_in, size_pt, bold=False):
+    """Break text into lines that fit width_in, measured on the shipped Archivo."""
+    out, cur = [], ""
+    for w in text.split():
+        t = f"{cur} {w}".strip()
+        if cur and text_width_in(t, size_pt, bold) > width_in:
+            out.append(cur); cur = w
+        else:
+            cur = t
+    return out + ([cur] if cur else [])
+
+
+def rule_lines(cell, n, hexval, written=None, size=9.5, color=None):
+    """n writing lines, each with its own rule.
+
+    Word and LibreOffice both treat adjacent paragraphs with identical borders as one
+    bordered group and draw its bottom rule once, under the last paragraph - so four
+    identical rules printed as one line with blank space above it. A 1pt unbordered
+    paragraph between each pair breaks the group in both, so every line is ruled.
+
+    `written` is a list of lines to set on the rules, one per line - an answer key
+    written the way a student would write it, so the key keeps the student copy's
+    pagination page for page. More written lines than rules adds rules.
+    """
+    written = written or []
+    for i in range(max(n, len(written))):
+        if i:
+            s = cell.add_paragraph()
+            sp = OxmlElement("w:spacing")
+            sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+            sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
+            s._p.get_or_add_pPr().append(sp)
         p = cell.add_paragraph()
-        p.paragraph_format.space_after = Pt(6)
+        p.paragraph_format.space_after = Pt(5)
+        if i < len(written):
+            run(p, written[i], size, bold=True, color=color)
         pPr = p._p.get_or_add_pPr()
         b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
         x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "4"); x.set(qn("w:color"), hexof(hexval))
