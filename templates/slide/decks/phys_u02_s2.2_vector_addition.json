@@ -1,0 +1,67 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "section": "2.2",
+  "sectionTitle": "Vector Addition",
+  "note": "Brief bridge, not full re-teaching — both the 90 degree and general vector-addition methods were taught in depth at U1 S1.0 (pending SHULL-CHG-0024). This section confirms the method and applies it to a 2D-motion example.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "02",
+        "headline": "2.2\nVector Addition",
+        "subhead": "Combine two vectors into a single resultant — first at 90°, then at any angle."
+      },
+      "imageSubjects": { "section": "two ropes pulling at right angles on a metal ring" }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Two Ways to Add Vectors",
+        "subhead": "Same two methods from Unit 1, Section 1.0.",
+        "c1_l": "PERPENDICULAR (90°)",
+        "c1_b": "R = √(A² + B²)\ntheta = arctan(B/A)\nPythagorean shortcut.",
+        "c2_l": "GENERAL (ANY ANGLE)",
+        "c2_b": "Break each into x, y.\nAdd the x's, add the y's.\nRecombine into one R.",
+        "mustwrite": "Full method and worked examples: Unit 1, Section 1.0."
+      },
+      "imageSubjects": { "concept": "a wind sock at an angle to a runway" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Applying It: Plane in a Crosswind",
+        "subhead": "A 2D-motion example — copy the setup, not just the answer.",
+        "problem": "A plane flies 80 km/h east into a 20 km/h north crosswind. Find the resultant velocity.",
+        "g1_l": "GIVEN",
+        "g1_b": "80 km/h, east\n20 km/h, north\nPerpendicular vectors",
+        "g2_l": "NEED",
+        "g2_b": "Resultant magnitude\nResultant direction",
+        "work": "",
+        "mustwrite": "Perpendicular vectors: R² = leg² + leg²."
+      },
+      "imageSubjects": { "aside": "a small propeller plane silhouette against clouds" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Plane in a Crosswind, Worked",
+        "subhead": "Write the direction, not just the number — a resultant with no angle is an incomplete answer.",
+        "f1_l": "FORMULA",
+        "f1_b": "R = √(A² + B²)\ntheta = arctan(B/A)",
+        "work": "R = √(80² + 20²) = 82.5 km/h\ntheta = arctan(20/80) = 14°\nDirection: 14° N of E",
+        "mustwrite": "Always report both magnitude and direction together."
+      },
+      "imageSubjects": { "data": "an instrument panel compass and airspeed gauge" }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "2.3  •  NEXT UP",
+        "headline": "Projectile\nMotion",
+        "subhead": "Section 2.3 puts vector addition to work — motion through the air, in three stages."
+      },
+      "imageSubjects": { "divider": "a basketball mid-arc against a dark gym backdrop" }
+    }
+  ]
+}

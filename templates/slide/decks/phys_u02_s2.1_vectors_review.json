@@ -1,0 +1,55 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "section": "2.1",
+  "sectionTitle": "Vectors & Vector Basics (Review)",
+  "note": "Deliberately brief. Full vector teaching (drawing, resolving, compass notation, the 40NE/50EN equivalency, and vector addition) now lives at U1 S1.0, pending Secretary approval of SHULL-CHG-0024. This section is a recap/bridge only, per Matt's instruction.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "2.1\nVectors & Vector Basics",
+        "subhead": "Recall what a vector is, how to draw one, and how to describe its direction — before we add them together."
+      },
+      "imageSubjects": { "section": "a wooden protractor and ruler laid across graph paper" }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Quick Recall: Vector Vocabulary",
+        "subhead": "You built all of this in Unit 1. Here's the short version.",
+        "k1_l": "VECTOR",
+        "k1_b": "Has magnitude AND direction.\nDrawn as an arrow.",
+        "k2_l": "MAGNITUDE",
+        "k2_b": "The size or length.\nAlways positive.",
+        "k3_l": "COMPONENT",
+        "k3_b": "A vector's x- or y-part.\nA cos(theta), A sin(theta).",
+        "mustwrite": "A vector needs both magnitude and direction — a number alone is not one."
+      },
+      "imageSubjects": { "aside": "a compass rose drawn in pencil on aged paper" }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Drawing and Resolving, Recap",
+        "subhead": "Two skills from Unit 1, Section 1.0 — you should already be comfortable with both.",
+        "c1_l": "DRAWING",
+        "c1_b": "Arrow length = magnitude.\nArrow direction = angle.\nTip points the way it acts.",
+        "c2_l": "RESOLVING",
+        "c2_b": "x-part: A cos(theta)\ny-part: A sin(theta)\nRight-triangle trig.",
+        "mustwrite": "Full walkthrough and practice: Unit 1, Section 1.0."
+      },
+      "imageSubjects": { "concept": "a drafting compass and protractor on a dark desk" }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "2.2  •  NEXT UP",
+        "headline": "Adding Vectors\nTogether",
+        "subhead": "Section 2.2 puts these skills to work — combining two vectors into one resultant."
+      },
+      "imageSubjects": { "divider": "two arrows converging toward a single point on a dark chalkboard" }
+    }
+  ]
+}
