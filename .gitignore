@@ -5,3 +5,9 @@ dist/
 desktop/vendor/
 installer/*.zip
 .vercel/
+
+# Built slide decks are the finished deliverable -- Drive is canonical for
+# those (CLAUDE.md), the repo only tracks the JSON source specs that
+# generate them (templates/slide/decks/*.json).
+templates/slide/*.pptx
+templates/slide/*.pdf
