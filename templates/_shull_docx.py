@@ -472,7 +472,8 @@ def equation_bar(doc, equations, pal, label, width=7.5):
 
 
 def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
-             label_size=7.5, label_bold=True, label_caps=True, label_color=None):
+             label_size=7.5, label_bold=True, label_caps=True, label_color=None,
+             corner=None):
     """An open bordered box a student solves a problem in.
 
     Ruled lines are for prose; open boxes are for math. The box grows with the work
@@ -486,6 +487,11 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
     The label keywords let a caller set the label as a quiet sentence-case caption
     ("WORK / show your reasoning and units", small and grey) instead of a tracked caps
     heading. The defaults are the worksheet's, unchanged.
+
+    `corner` prints a small grey note in the box's bottom-right corner - the self-check
+    answer, which used to cost a line of its own below the box (SHULL-CHG-0031). It is
+    pushed down by space-before rather than bottom-aligning the cell, so the watermark
+    stays where it is; the row is atLeast, so a long label only grows the box.
     """
     t = cell.add_table(rows=1, cols=1)
     fix_widths(t, [width])
@@ -496,11 +502,23 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
     if label:
         para(inner, label, label_size, bold=label_bold, color=label_color or pal.accent,
              caps_track=label_caps, first=True)
+    used = 0.0                       # points already taken inside the box, top down
+    if label:
+        used += label_size * 1.25
     if watermark:
+        wm_before = int(max(6, height_in * 72 * 0.32))
         p = para(inner, watermark, 12, color=pal.watermark, caps_track=True,
                  first=not label)
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p.paragraph_format.space_before = Pt(int(max(6, height_in * 72 * 0.32)))
+        p.paragraph_format.space_before = Pt(wm_before)
+        used += wm_before + 12 * 1.25
+    if corner:
+        # 8 pt line plus a little slack, so rounding never tips the box past its height
+        before = max(0, int(height_in * 72 - used - 8 * 1.25 - 6))
+        p = para(inner, corner, 8, color=pal.label,
+                 first=not (label or watermark))
+        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        p.paragraph_format.space_before = Pt(before)
     return inner
 
 

@@ -1,0 +1,112 @@
+{
+  "course": "chemistry",
+  "unit": 1,
+  "sections": [
+    "1.5"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "30",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "equations": [
+    {
+      "note": "average atomic mass",
+      "plain": "(mass₁ × abundance₁) + (mass₂ × abundance₂) + …"
+    },
+    {
+      "note": "percent to decimal",
+      "lhs": "decimal",
+      "num": "percent",
+      "den": "100"
+    },
+    {
+      "note": "questions 5–6: count to decimal",
+      "lhs": "decimal",
+      "num": "atoms of that isotope",
+      "den": "total atoms in the sample"
+    }
+  ],
+  "sectionsContent": [
+    {
+      "code": "1.5",
+      "title": "Optional Practice: Average Atomic Mass",
+      "conceptLabel": "OPTIONAL — WORTH 1 POINT ON YOUR UNIT 1 TEST",
+      "concept": {
+        "summary": "Complete this and turn it in at test time to add 1 point to your Unit 1 test score. Not turning it in costs you nothing."
+      },
+      "directions": "Use each isotope's mass number as its mass. Change each percent to a decimal before you multiply (75.76% → 0.7576). For 5–6, divide each atom count by the total first. Round to two decimal places, in amu.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Thallium has two naturally occurring isotopes: thallium-203 (29.52%) and thallium-205 (70.48%). Find its average atomic mass.",
+          "math": true,
+          "workHeightIn": 1.4,
+          "calculation": true,
+          "selfCheck": "[  204.41 amu  ]",
+          "solution": "TEACHER NOTE: every mass on this sheet is the isotope's mass number, by design, so each answer differs slightly from the periodic-table value. The periodic-table value is given under each solution for comparison. Accept ±0.01 amu for rounding.\nPercents to decimals: 29.52% → 0.2952   ·   70.48% → 0.7048\n203 × 0.2952 = 59.9256\n205 × 0.7048 = 144.4840\n59.9256 + 144.4840 = 204.4096 → 204.41 amu\nPeriodic table: 204.38 amu.",
+          "finalAnswer": "204.41 amu"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Sulfur has four naturally occurring isotopes: sulfur-32 (94.99%), sulfur-33 (0.75%), sulfur-34 (4.25%) and sulfur-36 (0.01%). Keep the rare one in the calculation. Find its average atomic mass.",
+          "math": true,
+          "workHeightIn": 1.4,
+          "calculation": true,
+          "selfCheck": "[  32.09 amu  ]",
+          "solution": "Percents to decimals: 0.9499 · 0.0075 · 0.0425 · 0.0001\n32 × 0.9499 = 30.3968\n33 × 0.0075 = 0.2475\n34 × 0.0425 = 1.4450\n36 × 0.0001 = 0.0036\n30.3968 + 0.2475 + 1.4450 + 0.0036 = 32.0929 → 32.09 amu\nCommon error: 0.01% written as 0.01 instead of 0.0001. That gives 32.45 amu.\nPeriodic table: 32.06 amu.",
+          "finalAnswer": "32.09 amu"
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Cerium has four naturally occurring isotopes: cerium-136 (0.185%), cerium-138 (0.251%), cerium-140 (88.450%) and cerium-142 (11.114%). Find its average atomic mass.",
+          "math": true,
+          "workHeightIn": 1.4,
+          "calculation": true,
+          "selfCheck": "[  140.21 amu  ]",
+          "solution": "Percents to decimals: 0.00185 · 0.00251 · 0.88450 · 0.11114\n136 × 0.00185 = 0.25160\n138 × 0.00251 = 0.34638\n140 × 0.88450 = 123.83000\n142 × 0.11114 = 15.78188\n0.25160 + 0.34638 + 123.83000 + 15.78188 = 140.20986 → 140.21 amu\nPeriodic table: 140.12 amu.",
+          "finalAnswer": "140.21 amu"
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "Germanium has five naturally occurring isotopes: germanium-70 (20.52%), germanium-72 (27.45%), germanium-73 (7.76%), germanium-74 (36.52%) and germanium-76 (7.75%). Find its average atomic mass.",
+          "math": true,
+          "workHeightIn": 1.7,
+          "calculation": true,
+          "selfCheck": "[  72.71 amu  ]",
+          "solution": "Percents to decimals: 0.2052 · 0.2745 · 0.0776 · 0.3652 · 0.0775\n70 × 0.2052 = 14.3640\n72 × 0.2745 = 19.7640\n73 × 0.0776 = 5.6648\n74 × 0.3652 = 27.0248\n76 × 0.0775 = 5.8900\n14.3640 + 19.7640 + 5.6648 + 27.0248 + 5.8900 = 72.7076 → 72.71 amu\nPeriodic table: 72.63 amu.",
+          "finalAnswer": "72.71 amu"
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "A sample of lutetium contains 487 atoms of lutetium-175 and 13 atoms of lutetium-176. Find the total number of atoms, find each isotope's abundance as a decimal, then find the average atomic mass.",
+          "math": true,
+          "workHeightIn": 1.7,
+          "calculation": true,
+          "selfCheck": "[  175.03 amu  ]",
+          "solution": "Total atoms: 487 + 13 = 500\nLu-175: 487 out of 500 → 0.974   ·   Lu-176: 13 out of 500 → 0.026   (check: 0.974 + 0.026 = 1.000)\n175 × 0.974 = 170.450\n176 × 0.026 = 4.576\n170.450 + 4.576 = 175.026 → 175.03 amu\nCounts are illustrative, set to the natural abundance (97.401% · 2.599%) rounded to the nearest atom in 500.\nCommon error: dividing by 487 (the larger count) instead of the total, 500.\nPeriodic table: 174.97 amu.",
+          "finalAnswer": "175.03 amu"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 6,
+          "prompt": "A sample of lead contains 7 atoms of lead-204, 120 atoms of lead-206, 111 atoms of lead-207 and 262 atoms of lead-208.",
+          "parts": [
+            "a.  Find the average atomic mass of lead in this sample.",
+            "b.  Lead's atomic number is 82. How many neutrons are in one atom of lead-208?",
+            "c.  Lead-208 is more than half of the sample. Why is the average still below 208?"
+          ],
+          "math": true,
+          "workHeightIn": 2.8,
+          "calculation": true,
+          "solution": "a.  Total atoms: 7 + 120 + 111 + 262 = 500\n    Abundances as decimals: 7 out of 500 → 0.014 · 120 out of 500 → 0.240 · 111 out of 500 → 0.222 · 262 out of 500 → 0.524   (sum 1.000)\n    204 × 0.014 = 2.856\n    206 × 0.240 = 49.440\n    207 × 0.222 = 45.954\n    208 × 0.524 = 108.992\n    2.856 + 49.440 + 45.954 + 108.992 = 207.242 → 207.24 amu\nb.  neutrons = A − Z = 208 − 82 = 126 neutrons\nc.  The other 47.6% of the atoms (lead-204, -206 and -207) are lighter than 208, so they pull the weighted average down. 208 is the heaviest isotope, so any lighter atoms in the sample keep the average below 208. It would only reach 208 if every atom were lead-208.\nCounts are illustrative, near natural abundance (1.4% · 24.1% · 22.1% · 52.4%). Periodic table: 207.2 amu.",
+          "finalAnswer": "a. 207.24 amu   ·   b. 126 neutrons   ·   c. lighter isotopes make up 47.6% of the atoms and pull the average below 208"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 2
+}
