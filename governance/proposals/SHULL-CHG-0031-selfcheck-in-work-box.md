@@ -14,8 +14,8 @@
 | **Affected Courses** | All three, because the template is shared. **Chemistry:** the brackets move into the box. **Physics:** no change (§3). **Geology:** no change. Geology has no calculations, so it has no brackets. |
 | **Risk** | **Low.** Placement only. No token, no LOCKED rule and no course fact changes. The one layout risk is a student writing over the bracket in the corner (§4, item 4). |
 | **Recommendation** | Approve §2 as written. Answer §4 item 1 first, because it decides what happens to code that already cites this ID. |
-| **Decision** | *(blank. Awaiting the user.)* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-09-28**, in the main session. Verbatim: *"Ok I lied dont remove the answer. Just put it in the work.box, I dont know why you are putting it outside the box and wasting so much space just to put a small answer in the corner"*. Recorded under SHULL-CHG-0026. On §4 flag 1: the code was written in the working tree by the main session before this record existed, and was not committed until after this recording. |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. The required checks are in §5. |
 
