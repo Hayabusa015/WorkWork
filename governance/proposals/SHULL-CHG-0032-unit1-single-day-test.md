@@ -14,8 +14,8 @@
 | **Affected Courses** | Chemistry only |
 | **Risk** | **Low.** One course, one unit, and no section code changes. The two-day default is untouched. |
 | **Recommendation** | Approve §2 after the user answers the open questions in §3. Question 1 (version count) changes what gets built, so it comes first. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Rejected by the user, 2026-09-28**, in the main session. He first said *"I'm not sure if there's enough in this unit to have a day 2 test."* Then, while thinking it through, he asked: *"Could we add a day 2 written test. Usually I add problem. We could add average atomic mass problems. The table.. what else, I dont really wrong long answer on the day2"*. The main session proposed a short Day 2 (the fill-in chart plus three average-atomic-mass problems, no long answers) and he answered, verbatim: *"yes, do the two-day version."* Unit 1 therefore keeps the two-day unit-test form in `courses/chemistry/DECISIONS.md`, and no exception is needed. The Day 2 tests built earlier are superseded by a new Day 2, not by this record. Recorded under SHULL-CHG-0026. |
+| **Status** | **REJECTED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §6. |
 
