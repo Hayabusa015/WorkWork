@@ -710,6 +710,14 @@ def main():
         # sitting on the rule - his layout, and lighter than a box around each. The
         # score total is summed from the questions, never typed: a header reading "/ 20"
         # over questions adding to 18 is one fact stored in two places.
+        #
+        # `blankScore` (spec- or section-level): the sheet has no established point
+        # value - nothing in the source and no confirmed Geology grading rule for this
+        # activity shape - so the total is not invented and typed onto a student page.
+        # CLAUDE.md section 4: never invent an assessment fact and present it as
+        # settled on a student page. The "/ N" becomes a blank line Matt fills in by
+        # hand, the same way NAME and DATE are blank lines rather than guesses.
+        blank_score = spec.get("blankScore") or sec.get("blankScore")
         total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
                  + sum(int(b.get("points", 0)) for b in sec.get("blocks", [])))
         gap(doc, 5)
@@ -725,7 +733,10 @@ def main():
                 p.paragraph_format.tab_stops.add_tab_stop(
                     Inches(widths[3] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
                 run(p, "\t", 9)
-                run(p, f"/  {total}", 10, bold=True, color=pal.ink)
+                if blank_score:
+                    run(p, "/  ________", 10, bold=True, color=pal.ink)
+                else:
+                    run(p, f"/  {total}", 10, bold=True, color=pal.ink)
 
         # ---- Group members, for a partner or station-group activity. Optional and
         # off by default - most sheets are individual work and carry no such line.

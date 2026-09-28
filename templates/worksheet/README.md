@@ -61,6 +61,12 @@ grey instead; the hardest takes ink, because after red there is nowhere to go in
 
 - **The score total is summed from the questions, never typed.** A header reading `/ 20` over
   questions adding to 18 is one fact stored twice.
+- **`blankScore` (spec- or section-level) prints a blank line instead of a total.** For a sheet
+  with no established point value — nothing in the source, no confirmed grading rule for that
+  activity shape — the total is not invented and printed on a student page. CLAUDE.md section 4:
+  never present an invented fact as settled on a student page. `/ N` becomes `/ ________`, the
+  same way NAME and DATE are blank lines rather than guesses. First used on the Fossil ID activity
+  (U2/S2.3), flagged blocking by an independent audit.
 - **The concept block comes before anything is asked.** A student who has been away reads what the
   sheet is about before question 1, not after it.
 - **Prior knowledge is the recall block** — the friction reminder before a friction problem. It

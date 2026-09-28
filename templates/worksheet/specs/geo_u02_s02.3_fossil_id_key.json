@@ -6,6 +6,7 @@
   "timeTargetMin": "45",
   "pagesPerSection": 2,
   "groupMembers": true,
+  "blankScore": true,
   "sectionsContent": [
     {
       "code": "2.3",
@@ -19,7 +20,6 @@
           "kind": "table",
           "label": "FOSSIL DATA CHART — TEACHER MASTER",
           "instruction": "Please complete the chart for each fossil. No universal answer key exists — correct entries depend on the specimens in this year's bag set. See the prep checklist at the end of this page.",
-          "points": 11,
           "rows": 11,
           "rowLabels": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
           "rowHeightIn": 0.42,
@@ -76,7 +76,8 @@
         "checklist": [
           "Confirm bags #1–11 are stocked with a specimen and that specimen's own identification/reference sheet before students rotate.",
           "This chart has no universal answer key — correct entries depend on the specific specimens filling this year's bag set. Confirm entries against your own bag-by-bag key before use.",
-          "The \"Replacement\" entry on the reference page is flagged for review — see the note under that definition."
+          "The \"Replacement\" entry on the reference page is flagged for review — see the note under that definition.",
+          "PROVISIONAL — the ~45-minute time target printed on this activity is an estimate, not a confirmed timing from Matt. Confirm before relying on it for pacing."
         ]
       }
     }

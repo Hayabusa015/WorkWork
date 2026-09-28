@@ -6,6 +6,7 @@
   "timeTargetMin": "45",
   "pagesPerSection": 2,
   "groupMembers": true,
+  "blankScore": true,
   "sectionsContent": [
     {
       "code": "2.3",
@@ -19,7 +20,6 @@
           "kind": "table",
           "label": "FOSSIL DATA CHART",
           "instruction": "Please complete the chart for each fossil.",
-          "points": 11,
           "rows": 11,
           "rowLabels": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
           "rowHeightIn": 0.42,
