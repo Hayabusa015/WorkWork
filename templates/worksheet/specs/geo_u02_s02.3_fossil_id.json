@@ -1,0 +1,75 @@
+{
+  "course": "geology",
+  "unit": 2,
+  "sections": ["2.3"],
+  "docType": "Activity",
+  "timeTargetMin": "45",
+  "pagesPerSection": 2,
+  "groupMembers": true,
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Fossil Identification",
+      "concept": {
+        "summary": "Fossils are commonly not the actual physical remains of the organism itself, but rather the remains are now rocks. A fossil can preserve an entire organism or just part of one. For example, bones, shells, feathers, wood, and leaves can all become fossils. One of the most common fossils is petrified wood. There are also various types of fossils. Fossils also tell us about the environment that the organism lived."
+      },
+      "directions": "Please complete the chart for each fossil. Fossil specimens are in bags labeled #1–11. Retrieve bag 1, use the identification/reference sheet included in that bag to identify the fossil, and record your findings in row 1 of the chart below. Return the bag, then repeat with bag 2, and so on through bag 11.",
+      "blocks": [
+        {
+          "kind": "table",
+          "label": "FOSSIL DATA CHART",
+          "instruction": "Please complete the chart for each fossil.",
+          "points": 11,
+          "rows": 11,
+          "rowLabels": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
+          "rowHeightIn": 0.42,
+          "labelColIn": 0.75,
+          "columns": [
+            "FOSSIL NUMBER",
+            "Name of Fossil",
+            "In what time period would it have been in?",
+            "What type of environment would it have lived in?",
+            "What would it have eaten? (If Applicable)",
+            {
+              "head": "What type of fossil is it?",
+              "sub": "(Permineralized, replacement, trace, carbonaceous, mold, cast) — see key on back"
+            }
+          ]
+        },
+        {
+          "kind": "reference",
+          "label": "TYPES OF FOSSILS — REFERENCE",
+          "instruction": "Use this key to answer the last column of the chart.",
+          "pageBreakBefore": true,
+          "heading": "Fossil Identification — Types of Fossils Reference",
+          "items": [
+            {
+              "term": "Permineralized",
+              "definition": "One of the common types of fossils is permineralization. This occurs when the pores of the plant materials, bones, and shells are impregnated by mineral matter from the ground, lakes, or ocean. In some cases, the wood fibers and cellulose dissolve and some minerals replace them. Sometimes the mineral substance of the fossils will completely dissolve and some other minerals replace them. The common minerals that form this kind of fossils are calcite, iron, and silica. Ex: Petrification"
+            },
+            {
+              "term": "Replacement",
+              "definition": "Replacement occurs when the original shell or bone dissolves away and is replaced by a different mineral; when this occurs with permineralization, it is called petrification. In compression, the most common form of fossilization of leaves and ferns, a dark imprint of the fossil remains."
+            },
+            {
+              "term": "Trace",
+              "definition": "a fossil of a footprint, trail, burrow, or other trace of an animal rather than of the animal itself."
+            },
+            {
+              "term": "Carbonaceous",
+              "definition": "A carbonaceous film or carbon film is an organism outline of a fossil. It is a type of fossil found in any rock when organic material is compressed, leaving only a carbon residue or film."
+            },
+            {
+              "term": "Mold Fossil",
+              "definition": "when an animal dies and its body decays, it can leave an imprint in the sediment. If this imprint fills in with minerals from sediment and groundwater, it can harden to form a fossil."
+            },
+            {
+              "term": "Cast Fossil",
+              "definition": "A fossil formed when an animal, plant, or other organism dies, its flesh decays and bones deteriorate due to chemical reactions; minerals gradually enter the cavity, resulting in a cast, which is in the general form of the original organism."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -326,6 +326,94 @@ def match_block(doc, block, pal):
     return c
 
 
+def table_block(doc, block, pal):
+    """An open, multi-column data chart - one row per specimen or station.
+
+    Cards, slots, sort and match all assume a small fixed set of items. A
+    station-rotation chart is a different shape: many rows, several short answers per
+    row, one row per specimen the student rotates to. Geology's fossil-ID activity is
+    the first of these; a future rock/mineral specimen-ID chart in U3 is the same
+    shape again, which is why this is a block kind and not a one-off table drawn
+    straight into a spec.
+
+    Hairline borders on every cell - a real table, per SHULL_DESIGN_SYSTEM section 8
+    ("table rows use hairline borders, never alternating solid shading"), not a card
+    grid standing in for tabular data. The first column is a pre-printed row label (a
+    specimen number) rather than another blank: a rotation chart tells the student
+    which row is next, it does not ask them to number their own rows.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "DATA CHART"), pal, first=True)
+    if block.get("instruction"):
+        para(c, block["instruction"], 9.5)
+    cols = block["columns"]
+    rows = block.get("rowLabels") or [str(i + 1) for i in range(int(block.get("rows", 0)))]
+    ncols = len(cols)
+    total_w = TEXT_W_IN - 0.30
+    label_w = float(block.get("labelColIn", 0.50))
+    rest_w = round((total_w - label_w) / (ncols - 1), 3)
+    widths = [label_w] + [rest_w] * (ncols - 1)
+
+    t = c.add_table(rows=len(rows) + 1, cols=ncols)
+    fix_widths(t, widths)
+    no_split(t.rows[0])
+    for cc, col in zip(t.rows[0].cells, cols):
+        borders(cc, pal.ink, sz=6)
+        cell_margins(cc, top=45, bottom=45, left=60, right=60)
+        head = col if isinstance(col, str) else col["head"]
+        sub = None if isinstance(col, str) else col.get("sub")
+        para(cc, head, 7, bold=True, color=pal.accent, first=True)
+        if sub:
+            para(cc, sub, 6, color=pal.label)
+
+    row_h = float(block.get("rowHeightIn", 0.42))
+    for r, rl in enumerate(rows, 1):
+        no_split(t.rows[r], row_h)
+        for ci, cc in enumerate(t.rows[r].cells):
+            borders(cc, pal.hair, sz=4)
+            cell_margins(cc, top=35, bottom=35, left=60, right=60)
+            if ci == 0:
+                p = para(cc, str(rl), 9.5, bold=True, color=pal.ink, first=True)
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            else:
+                para(cc, "", 9.5, first=True)
+    unpad_cell(c)
+    return c
+
+
+def reference_block(doc, block, pal):
+    """A definitions/key reference list - the "see key" material a data-chart column
+    points back to (fossil types here; a mineral streak/hardness/cleavage glossary
+    reads the same way in U3). Term in the course accent colour, definition in body
+    ink.
+
+    An optional `flag` on an item renders a caution-coloured teacher note under its
+    definition. A source definition that is internally muddled is reproduced verbatim
+    - reformatting is not the same task as fact-checking - and the flag is how that
+    gets in front of the teacher instead of silently disappearing.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "REFERENCE"), pal, first=True)
+    if block.get("instruction"):
+        para(c, block["instruction"], 9.5)
+    for item in block["items"]:
+        p = c.add_paragraph()
+        p.paragraph_format.space_after = Pt(5)
+        run(p, item["term"] + ":  ", 9.5, bold=True, color=pal.accent)
+        run(p, item["definition"], 9.5, color=pal.ink)
+        if item.get("flag"):
+            fp = c.add_paragraph()
+            fp.paragraph_format.space_after = Pt(6)
+            run(fp, "TEACHER NOTE — " + item["flag"], 8, italic=True,
+                color=T["semantic"]["caution"]["deep"])
+    unpad_cell(c)
+    return c
+
+
 def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
@@ -462,7 +550,7 @@ def check_profile(spec, course, sec):
     work_qs = [q for q in qs if q.get("math") or q.get("answerLines")]
     visual = ([q for q in qs if q.get("diagram") or q.get("draw")]
               + [b for b in blocks if b["kind"] in
-                 ("cards", "slots", "draw", "diagram", "sort", "match")])
+                 ("cards", "slots", "draw", "diagram", "sort", "match", "table")])
     where = f"section {sec['code']}"
 
     if course == "geology":
@@ -639,6 +727,18 @@ def main():
                 run(p, "\t", 9)
                 run(p, f"/  {total}", 10, bold=True, color=pal.ink)
 
+        # ---- Group members, for a partner or station-group activity. Optional and
+        # off by default - most sheets are individual work and carry no such line.
+        if spec.get("groupMembers") or sec.get("groupMembers"):
+            gap(doc, 3)
+            t = doc.add_table(rows=1, cols=1)
+            fix_widths(t, [TEXT_W_IN])
+            cc = t.rows[0].cells[0]
+            borders(cc, pal.ink, sz=4, edges=("bottom",))
+            cell_margins(cc, top=0, bottom=40, left=0, right=0)
+            para(cc, "GROUP MEMBERS", 6.5, bold=True, color=pal.label,
+                 caps_track=True, first=True)
+
         # ---- What this is about, before anything is asked of them.
         gap(doc, 5)
         c = one_cell(doc)
@@ -701,6 +801,10 @@ def main():
                 draw_block(one_cell(doc), block, pal, TEXT_W_IN - 0.3)
             elif kindb == "diagram":
                 diagram_block(one_cell(doc), block, pal, TEXT_W_IN - 0.3, HERE)
+            elif kindb == "table":
+                table_block(doc, block, pal)
+            elif kindb == "reference":
+                reference_block(doc, block, pal)
             else:
                 return refuse(f"unknown block kind {kindb!r} in section {sec['code']}.")
 
