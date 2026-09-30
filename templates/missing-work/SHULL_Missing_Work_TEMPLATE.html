@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL Science - Missing Work (TEMPLATE)</title>
+<!--
+ SHULL SCIENCE - MISSING WORK, one page, student-facing, all three courses.
+ Neutral master: the course is ticked by hand (three outlined circles).
+ Course-accent versions are produced by build_missing_work.py from this same file.
+ Colour comes from ../lab/shull-lab-tokens.css (generated from brand/tokens.json).
+ Never type a hex in this file.
+ No late-work rule is written on the student page. Course policy differs and is
+ only partly confirmed; the teacher writes it in the FROM YOUR TEACHER box.
+-->
+<link rel="stylesheet" href="../lab/shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left {
+      content: "SHULL SCIENCE \00b7  MISSING WORK" string(coursename);
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: "PAGE " counter(page) " OF " counter(pages);
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); font-size: 10.3pt; line-height: 1.35; color: var(--ink); }
+  body.neutral { --accent: var(--structure); --accent-display: var(--structure); }
+
+  .m-course { string-set: coursename content(); font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .eyebrow { font-family: var(--display); font-weight: 600; font-size: 8pt;
+             letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt; }
+  .titlerow { display: flex; align-items: flex-end; }
+  h1 { font-family: var(--display); font-weight: bold; font-size: 22pt; line-height: 1.1; flex: 1 1 auto; }
+  h1 .accent { color: var(--accent); }
+  .sub { font-size: 10pt; margin-top: 3pt; }
+  .chip { flex: 0 0 auto; margin-left: 12pt; font-family: var(--display); font-weight: 600;
+          font-size: 8.5pt; letter-spacing: 0.10em; border: 1.1pt solid var(--accent-display);
+          border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap; }
+
+  .id-row { display: flex; gap: 16pt; margin: 12pt 1pt 0 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); height: 18pt; }
+  .id-row .name { flex: 3; } .id-row .per { flex: 1.3; } .id-row .date { flex: 1.3; }
+  .lbl { font-family: var(--display); font-size: 8pt; letter-spacing: 0.16em; color: var(--label); margin-top: 2.5pt; }
+
+  .course-select { display: flex; align-items: center; gap: 16pt; margin: 9pt 1pt 0 1pt; }
+  .opt { white-space: nowrap; }
+  .circ, .box { display: inline-block; border: 1pt solid var(--ink); vertical-align: -1.5pt; margin-right: 4pt; }
+  .circ { width: 9pt; height: 9pt; border-radius: 50%; }
+  .box  { width: 9pt; height: 9pt; }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.20em;
+       border-bottom: 1pt solid var(--accent-display); padding-bottom: 2.5pt; margin: 14pt 0 7pt 0; }
+
+  table.work { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  table.work th { font-family: var(--display); font-weight: 600; font-size: 8pt; letter-spacing: 0.12em;
+                  color: var(--label); text-align: left; padding: 0 5pt 3pt 5pt; border-bottom: 1.2pt solid var(--ink); }
+  table.work td { height: 26pt; border: 1px solid var(--label); border-top: none; padding: 0 5pt; font-size: 9pt; }
+  table.work td:first-child, table.work th:first-child { border-left: none; }
+  table.work td:last-child { border-right: none; }
+  table.work tfoot td { height: 26pt; font-weight: 600; }
+  table.work tfoot td.tl { text-align: right; border-left: none; font-family: var(--display);
+                           letter-spacing: 0.12em; font-size: 8pt; }
+  table.work tfoot td.nb { border: none; }
+  .c-a { width: 38%; } .c-u { width: 13%; } .c-p { width: 10%; } .c-d { width: 14%; } .c-t { width: 25%; }
+
+  .cols { display: flex; gap: 22pt; }
+  .cols > div { flex: 1 1 0; }
+  ol.steps { margin-left: 14pt; }
+  ol.steps li { margin-bottom: 4.5pt; padding-left: 2pt; }
+  .pick { margin-bottom: 5pt; }
+  .pick .q { font-weight: 600; margin-bottom: 3pt; }
+  .pick .opts { display: flex; flex-wrap: wrap; gap: 3pt 12pt; font-size: 9.5pt; }
+  .line { border-bottom: 0.9pt solid var(--label); height: 19pt; }
+  .line.t { margin-top: 2pt; }
+
+  .teacher { border: 1px solid var(--label); padding: 7pt 9pt 6pt 9pt; }
+  .teacher .row { display: flex; gap: 8pt; align-items: flex-end; margin-bottom: 4pt; }
+  .teacher .row .k { flex: 0 0 auto; font-weight: 600; font-size: 9.5pt; }
+  .teacher .row .v { flex: 1 1 auto; border-bottom: 0.9pt solid var(--label); height: 15pt; }
+</style>
+</head>
+<body class="neutral">
+<div class="m-course"></div>
+
+<div class="masthead">
+  <div class="eyebrow">SHULL SCIENCE</div>
+  <div class="titlerow">
+    <h1>Missing <span class="accent">Work</span></h1>
+  </div>
+  <div class="sub">Everything on this sheet still needs to be turned in. Keep it until every row is checked off.</div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f"></div><div class="lbl">STUDENT NAME</div></div>
+  <div class="per"><div class="f"></div><div class="lbl">CLASS / PERIOD</div></div>
+  <div class="date"><div class="f"></div><div class="lbl">DATE ISSUED</div></div>
+</div>
+
+<div class="course-select">
+  <span class="lbl" style="margin-top:0">COURSE</span>
+  <span class="opt"><span class="circ"></span>Chemistry</span>
+  <span class="opt"><span class="circ"></span>Physics</span>
+  <span class="opt"><span class="circ"></span>Geology</span>
+</div>
+
+<h2>WHAT YOU OWE</h2>
+<table class="work">
+  <thead>
+    <tr>
+      <th class="c-a">ASSIGNMENT</th><th class="c-u">UNIT / SECTION</th><th class="c-p">POINTS</th>
+      <th class="c-d">DUE BY</th><th class="c-t">TURNED IN (CHECK, THEN DATE)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+  </tbody>
+  <tfoot>
+    <tr><td class="tl" colspan="2">TOTAL POINTS MISSING</td><td></td><td class="nb" colspan="2"></td></tr>
+  </tfoot>
+</table>
+
+<h2>HOW TO GET IT TURNED IN</h2>
+<div class="cols">
+  <div>
+    <ol class="steps">
+      <li>Find each assignment in the table. If you do not have a copy, ask for one today.</li>
+      <li>Put your name, class period, and the assignment title on every page.</li>
+      <li>Turn it in the way marked on the right, on or before the due-by date in its row.</li>
+      <li>Have the row checked off when you hand it in. Write the date.</li>
+      <li>If a due date will not work for you, tell me before it passes.</li>
+    </ol>
+  </div>
+  <div>
+    <div class="pick">
+      <div class="q">Turn it in to</div>
+      <div class="opts">
+        <span><span class="box"></span>Tray / bin</span>
+        <span><span class="box"></span>Google Classroom</span>
+        <span><span class="box"></span>Hand to me</span>
+      </div>
+      <div class="line t"></div>
+    </div>
+    <div class="pick">
+      <div class="q">Help with the work</div>
+      <div class="opts">
+        <span><span class="box"></span>Before school</span>
+        <span><span class="box"></span>Lunch</span>
+        <span><span class="box"></span>After school</span>
+        <span><span class="box"></span>In class</span>
+      </div>
+      <div class="line t"></div>
+    </div>
+    <div class="lbl" style="margin-top:0">WHERE AND WHEN</div>
+  </div>
+</div>
+
+<h2>FROM YOUR TEACHER</h2>
+<div class="teacher">
+  <div class="row"><span class="k">Late or make-up credit:</span><span class="v"></span></div>
+  <div class="row"><span class="v"></span></div>
+  <div class="row"><span class="k">Notes and handouts from days you missed:</span><span class="v"></span></div>
+  <div class="row"><span class="k">Other:</span><span class="v"></span></div>
+</div>
+
+</body>
+</html>
