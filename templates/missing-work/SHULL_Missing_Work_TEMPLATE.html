@@ -10,7 +10,7 @@
  Colour comes from ../lab/shull-lab-tokens.css (generated from brand/tokens.json).
  Never type a hex in this file.
  No late-work rule is written on the student page. Course policy differs and is
- only partly confirmed; the teacher writes it in the FROM YOUR TEACHER box.
+ only partly confirmed, so none is stated here.
 -->
 <link rel="stylesheet" href="../lab/shull-lab-tokens.css">
 <style>
@@ -62,29 +62,25 @@
   table.work { width: 100%; border-collapse: collapse; table-layout: fixed; }
   table.work th { font-family: var(--display); font-weight: 600; font-size: 8pt; letter-spacing: 0.12em;
                   color: var(--label); text-align: left; padding: 0 5pt 3pt 5pt; border-bottom: 1.2pt solid var(--ink); }
-  table.work td { height: 26pt; border: 1px solid var(--label); border-top: none; padding: 0 5pt; font-size: 9pt; }
+  table.work td { height: 42pt; border: 1px solid var(--label); border-top: none; padding: 0 5pt; font-size: 9pt; vertical-align: top; }
   table.work td:first-child, table.work th:first-child { border-left: none; }
   table.work td:last-child { border-right: none; }
-  table.work tfoot td { height: 26pt; font-weight: 600; }
+  table.work tfoot td { height: 26pt; vertical-align: middle; font-weight: 600; }
   table.work tfoot td.tl { text-align: right; border-left: none; font-family: var(--display);
                            letter-spacing: 0.12em; font-size: 8pt; }
   table.work tfoot td.nb { border: none; }
-  .c-a { width: 38%; } .c-u { width: 13%; } .c-p { width: 10%; } .c-d { width: 14%; } .c-t { width: 25%; }
+  .c-a { width: 25%; } .c-u { width: 9%; } .c-y { width: 24%; } .c-w { width: 13%; }
+  .c-p { width: 8%; } .c-d { width: 11%; } .c-t { width: 10%; }
+  table.work td.ty .fmt { display: block; margin-top: 17pt; font-size: 8pt; white-space: nowrap; }
+  table.work td.ty .box { width: 8pt; height: 8pt; margin-right: 3pt; }
+  table.work td.ty .fmt span { margin-right: 6pt; }
+  table.work td.ck { vertical-align: middle; }
 
-  .cols { display: flex; gap: 22pt; }
-  .cols > div { flex: 1 1 0; }
   ol.steps { margin-left: 14pt; }
-  ol.steps li { margin-bottom: 4.5pt; padding-left: 2pt; }
-  .pick { margin-bottom: 5pt; }
-  .pick .q { font-weight: 600; margin-bottom: 3pt; }
-  .pick .opts { display: flex; flex-wrap: wrap; gap: 3pt 12pt; font-size: 9.5pt; }
-  .line { border-bottom: 0.9pt solid var(--label); height: 19pt; }
-  .line.t { margin-top: 2pt; }
-
-  .teacher { border: 1px solid var(--label); padding: 7pt 9pt 6pt 9pt; }
-  .teacher .row { display: flex; gap: 8pt; align-items: flex-end; margin-bottom: 4pt; }
-  .teacher .row .k { flex: 0 0 auto; font-weight: 600; font-size: 9.5pt; }
-  .teacher .row .v { flex: 1 1 auto; border-bottom: 0.9pt solid var(--label); height: 15pt; }
+  ol.steps li { margin-bottom: 5pt; padding-left: 2pt; }
+  .help { margin-top: 12pt; border: 1.1pt solid var(--accent-display); padding: 9pt 11pt; font-size: 11pt; }
+  .help .hk { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.18em;
+              color: var(--accent); margin-right: 8pt; }
 </style>
 </head>
 <body class="neutral">
@@ -115,66 +111,32 @@
 <table class="work">
   <thead>
     <tr>
-      <th class="c-a">ASSIGNMENT</th><th class="c-u">UNIT / SECTION</th><th class="c-p">POINTS</th>
-      <th class="c-d">DUE BY</th><th class="c-t">TURNED IN (CHECK, THEN DATE)</th>
+      <th class="c-a">ASSIGNMENT</th><th class="c-u">UNIT / SECTION</th><th class="c-y">TYPE</th>
+      <th class="c-w">PASSWORD</th><th class="c-p">POINTS</th><th class="c-d">DUE BY</th><th class="c-t">TURNED IN</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
   </tbody>
   <tfoot>
-    <tr><td class="tl" colspan="2">TOTAL POINTS MISSING</td><td></td><td class="nb" colspan="2"></td></tr>
+    <tr><td class="tl" colspan="4">TOTAL POINTS MISSING</td><td></td><td class="nb" colspan="2"></td></tr>
   </tfoot>
 </table>
 
 <h2>HOW TO GET IT TURNED IN</h2>
-<div class="cols">
-  <div>
-    <ol class="steps">
-      <li>Find each assignment in the table. If you do not have a copy, ask for one today.</li>
-      <li>Put your name, class period, and the assignment title on every page.</li>
-      <li>Turn it in the way marked on the right, on or before the due-by date in its row.</li>
-      <li>Have the row checked off when you hand it in. Write the date.</li>
-      <li>If a due date will not work for you, tell me before it passes.</li>
-    </ol>
-  </div>
-  <div>
-    <div class="pick">
-      <div class="q">Turn it in to</div>
-      <div class="opts">
-        <span><span class="box"></span>Tray / bin</span>
-        <span><span class="box"></span>Google Classroom</span>
-        <span><span class="box"></span>Hand to me</span>
-      </div>
-      <div class="line t"></div>
-    </div>
-    <div class="pick">
-      <div class="q">Help with the work</div>
-      <div class="opts">
-        <span><span class="box"></span>Before school</span>
-        <span><span class="box"></span>Lunch</span>
-        <span><span class="box"></span>After school</span>
-        <span><span class="box"></span>In class</span>
-      </div>
-      <div class="line t"></div>
-    </div>
-    <div class="lbl" style="margin-top:0">WHERE AND WHEN</div>
-  </div>
-</div>
-
-<h2>FROM YOUR TEACHER</h2>
-<div class="teacher">
-  <div class="row"><span class="k">Late or make-up credit:</span><span class="v"></span></div>
-  <div class="row"><span class="v"></span></div>
-  <div class="row"><span class="k">Notes and handouts from days you missed:</span><span class="v"></span></div>
-  <div class="row"><span class="k">Other:</span><span class="v"></span></div>
-</div>
+<ol class="steps">
+  <li>Find each assignment in the table. If you do not have a copy, ask for one today.</li>
+  <li>Put your name, class period, and the assignment title on every page.</li>
+  <li>Attach your finished work to this paper and turn it in on or before the due-by date in its row.</li>
+  <li>Tests on Edulastic: log in and use the password in the table.</li>
+</ol>
+<div class="help"><span class="hk">NEED HELP OR A PLACE TO WORK?</span> Come in during <b>GMen time</b>.</div>
 
 </body>
 </html>
