@@ -3,7 +3,7 @@
   "unit": 2,
   "section": "2.3",
   "sectionTitle": "Electron Configurations",
-  "note": "Follows 2.2 (levels, sublevels, orbitals) and sets up 2.4 (valence electrons, ions). Notation convention: filling order, e.g. [Ar] 4s2 3d6, written with raised numbers. Required through Kr (Z = 36). Cr and Cu are the only exceptions taught. Every configuration and orbital diagram on these slides is checked by scripts/build_diagram_u02_s02.3_configurations.py. 50-minute period; the last 5 minutes are cleanup/reset.",
+  "note": "Follows 2.2 (levels, sublevels, orbitals) and sets up 2.4 (valence electrons, ions). Notation convention (PROVISIONAL until Matt confirms): filling order, e.g. [Ar] 4s^{2} 3d^{6}, written with true superscript runs ^{...}. Required through Kr (Z = 36), PROVISIONAL scope. Cr and Cu are the only exceptions taught. Every configuration and orbital diagram on these slides, and every configuration in the speaker notes, is checked by scripts/build_diagram_u02_s02.3_configurations.py. 50-minute period; the last 5 minutes are cleanup/reset.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
@@ -14,7 +14,8 @@
       },
       "imageSubjects": {
         "section": "a long row of numbered wooden mail slots in a dim hallway, a few holding envelopes"
-      }
+      },
+      "notes": "PROVISIONAL scope: required through Kr (Z = 36), per the content brief; Matt to confirm. Period 5 and beyond (Mo, Ag, Au) are not taught on these slides and are not checked in the build script. PROVISIONAL notation: configurations are written in filling order, e.g. [Ar] 4s^2 3d^6, not energy order. Image prompt (section slot): a long row of numbered wooden mail slots in a dim hallway, a few holding envelopes."
     },
     {
       "master": "06_CONCEPT_IMAGE",
@@ -25,7 +26,8 @@
       },
       "imageSubjects": {
         "concept": "an apartment building at dusk with a few lit windows on different floors"
-      }
+      },
+      "notes": "Hook. Ask: do all 8 electrons have the same energy? Let them guess; the slides answer it (no). Z = 8 comes from the periodic table. Image prompt (concept slot): an apartment building at dusk with a few lit windows on different floors."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -42,7 +44,8 @@
       },
       "imageSubjects": {
         "aside": "a printed periodic table with oxygen's cell circled in pencil"
-      }
+      },
+      "notes": "Say it aloud: two-p-four. Level 2, p sublevel, 4 electrons. Ground state = lowest-energy arrangement; every configuration today is a ground state unless the slide says otherwise. Image prompt (aside slot): a printed periodic table with oxygen's cell circled in pencil."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -58,7 +61,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.3_aufbau_order.png"
-      }
+      },
+      "notes": "Walk each arrow top right to bottom left. We need the order through 5p: 1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p. Say it as: 4s fills before 3d in neutral K and Ca. Do not say 4s is always lower than 3d (once 3d holds electrons it sits lower; that is S2.4, ions)."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -74,7 +78,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.3_pauli.png"
-      }
+      },
+      "notes": "Spin up and down are labels, not literal rotation. Common mix-up: two per orbital, not two per sublevel (a p sublevel has 3 orbitals and holds 6)."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -90,7 +95,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.3_hund.png"
-      }
+      },
+      "notes": "Figure: N in 2p. Correct = three singles, spins parallel. Wrong = one pair, one single, one empty box. Equal-energy orbitals are called degenerate. Electrons spread out first because sharing an orbital costs repulsion."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -106,7 +112,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.3_orbital_diagram_nitrogen.png"
-      }
+      },
+      "notes": "N has 7 electrons so 7 arrows: 2 + 2 + 3. Convention: draw the up arrow first in every box, and the label's raised number counts the arrows."
     },
     {
       "master": "05_PROCESS_TIMELINE",
@@ -124,7 +131,8 @@
       },
       "imageSubjects": {
         "band": "a periodic table wall chart photographed at a shallow angle"
-      }
+      },
+      "notes": "Four steps, every element. Caps: s 2, p 6, d 10, f 14. Always check that the sum equals Z. Image prompt (band slot): a periodic table wall chart photographed at a shallow angle."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -141,7 +149,8 @@
       },
       "imageSubjects": {
         "aside": "a small cylinder of oxygen gas with a regulator, on a lab cart"
-      }
+      },
+      "notes": "Students copy the setup; the work area stays empty on purpose and is filled live on the board. Answer on the next slide: 1s^2 2s^2 2p^4, 2 unpaired. Image prompt (aside slot): a small cylinder of oxygen gas with a regulator, on a lab cart."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -155,7 +164,8 @@
       },
       "images": {
         "data": "../assets/chem_u02_s2.3_orbital_diagram_oxygen.png"
-      }
+      },
+      "notes": "Oxygen: 1s^2 2s^2 2p^4, 2 + 2 + 4 = 8. The 2p boxes hold one pair and two singles, so 2 unpaired."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -168,11 +178,12 @@
         "k2_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nSum: 2+2+6+2+5 = 17\nUnpaired: 1",
         "k3_l": "CALCIUM, Z = 20",
         "k3_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6} 4s^{2}\n\nSum: 2+2+6+2+6+2 = 20\nUnpaired: 0",
-        "mustwrite": "The raised numbers add up to the atomic number, every time."
+        "mustwrite": "Use the previous period's noble gas. Cl is in period 3, so its core is [Ne], not [Ar]."
       },
       "imageSubjects": {
         "aside": "period 3 of a periodic table wall chart, lit from the side"
-      }
+      },
+      "notes": "N: 1s^2 2s^2 2p^3, 3 unpaired. Cl: 1s^2 2s^2 2p^6 3s^2 3p^5, 1 unpaired. Ca: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2, 0 unpaired. 3d stays empty until scandium. Image prompt (aside slot): period 3 of a periodic table wall chart, lit from the side."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -187,7 +198,8 @@
       },
       "imageSubjects": {
         "concept": "a neon sign tube glowing orange-red in a dark window"
-      }
+      },
+      "notes": "COMMON ERROR (brief): using the noble gas of the same period, or the element's own. Cl is period 3, so the core is [Ne], not [Ar]; the core is the previous period's noble gas. Shorthand: [Ne] 3s^2 3p^5, which equals the longhand 1s^2 2s^2 2p^6 3s^2 3p^5. Image prompt (concept slot): a neon sign tube glowing orange-red in a dark window."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -204,7 +216,8 @@
       },
       "imageSubjects": {
         "aside": "a rusted iron nail on a white bench"
-      }
+      },
+      "notes": "Students copy the setup, then work it. Answer on the next slide. Fe, Z = 26. Fill 4s before 3d, and we write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Image prompt (aside slot): a rusted iron nail on a white bench."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -218,7 +231,8 @@
       },
       "images": {
         "data": "../assets/chem_u02_s2.3_orbital_diagram_iron.png"
-      }
+      },
+      "notes": "Fe: [Ar] 4s^2 3d^6, 18 + 2 + 6 = 26. The 3d boxes hold one pair and four singles, so 4 unpaired. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -234,7 +248,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.3_cr_cu_exceptions.png"
-      }
+      },
+      "notes": "Only Cr and Cu are taught as exceptions. Cr: [Ar] 4s^1 3d^5. Cu: [Ar] 4s^1 3d^10. These are measured ground states, not textbook errors. PROVISIONAL label: 'half-full or full d is extra stable' is a simplification, not a predictor; it does not explain every exception. Mo, Ag and Au (one period down) are not taught and unchecked here; outside Cr and Cu, say 'look it up'."
     },
     {
       "master": "05_PROCESS_TIMELINE",
@@ -252,7 +267,8 @@
       },
       "imageSubjects": {
         "band": "a teacher's red pen resting on a page of student work"
-      }
+      },
+      "notes": "Run the four checks in order: count, caps and order, Hund and Pauli, then core / Cr / Cu. Stop at the first failure. Image prompt (band slot): a teacher's red pen resting on a page of student work."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -269,21 +285,55 @@
       },
       "imageSubjects": {
         "aside": "a page of student work with a few lines circled in red pen"
-      }
+      },
+      "notes": "Answers on the next slide. Each was written as a ground state. (a) O: 1s^2 2s^2 2p^6 is 10 electrons, O has 8. (b) K: [Ar] 3d^1 puts 3d before 4s. (c) Ca: [Ne] 4s^2 is 12 electrons, wrong core. (d) Cr: [Ar] 4s^2 3d^4 obeys the rules but is not the real ground state. Image prompt (aside slot): a page of student work with a few lines circled in red pen."
     },
     {
       "master": "10_WORKED_SOLUTION",
       "fields": {
         "headline": "Spot the Mistake, Worked",
-        "subhead": "Four different problems, four different checks.",
+        "subhead": "Four problems, four different checks. Each fix is on the right.",
         "f1_l": "WHAT IS WRONG",
-        "f1_b": "(a) 10 electrons. O has 8.\n(b) 4s fills before 3d.\n(c) [Ne] 4s^{2} totals 12.\n(d) Rules fit, atom does not.",
-        "work": "Breaks:\n(a) the count\n(b) Aufbau\n(c) the core\n(d) the real Cr",
+        "f1_b": "(a) Count: 10, not 8\n(b) Aufbau: 4s first\n(c) Core: needs [Ar]\n(d) Real Cr differs",
+        "work": "Corrected:\n(a) 1s^{2} 2s^{2} 2p^{4}\n(b) [Ar] 4s^{1}\n(c) [Ar] 4s^{2}\n(d) [Ar] 4s^{1} 3d^{5}",
         "mustwrite": "Cr follows the rules on paper, but the measured ground state is [Ar] 4s^{1} 3d^{5}."
       },
       "imageSubjects": {
         "data": "a pencil resting on a page of crossed-out electron counts"
-      }
+      },
+      "notes": "Corrected: (a) O 1s^2 2s^2 2p^4. (b) K [Ar] 4s^1. (c) Ca [Ar] 4s^2. (d) Cr [Ar] 4s^1 3d^5. Teach 'rules-consistent' versus 'observed': (d) passes every rule on paper and is still not the real atom. Image prompt (data slot): a pencil resting on a page of crossed-out electron counts."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Example: Spot the Mistake, Diagrams",
+        "subhead": "Two orbital diagrams. Each breaks a different rule.",
+        "a1_l": "(E) NITROGEN, Z = 7",
+        "a1_b": "Only the three 2p boxes are drawn.",
+        "a2_l": "(F) NEON, Z = 10",
+        "a2_b": "Only the 2s box is drawn.",
+        "a3_l": "YOUR JOB",
+        "a3_b": "Name the broken rule. Redraw it correctly."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_spot_diagrams.png"
+      },
+      "notes": "Orbital-diagram errors (brief items c, d), labelled (e) and (f) here. (e) N 2p drawn up, down, up: three singles but not parallel. (f) Ne 2s drawn up, up in one box: Pauli. Ask which rule each breaks and what the fix looks like."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Spot the Mistake, Diagrams, Worked",
+        "subhead": "One Hund error and one Pauli error. The fixes are drawn at left.",
+        "f1_l": "WHAT IS WRONG",
+        "f1_b": "(e) Hund: spins differ\n(f) Pauli: same spin",
+        "work": "Fixed:\n(e) 2p: up, up, up\n(f) 2s: up, down",
+        "mustwrite": "Hund: singles first, all spins the same. Pauli: two in one orbital must be opposite."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.3_spot_diagrams_fixed.png"
+      },
+      "notes": "(e) Hund: unpaired electrons need parallel spins. Correct N 2p: up, up, up. (f) Pauli: two electrons in one orbital must have opposite spins. Correct Ne 2s: up, down. The brief's other Hund error (pair, single, empty) is the WRONG row on the Hund slide earlier in this deck."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -300,7 +350,8 @@
       },
       "imageSubjects": {
         "aside": "a pencil and a blank sheet of lined paper on a lab bench"
-      }
+      },
+      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29; exception, a filled 3d is extra stable (simplification, PROVISIONAL label). Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
     },
     {
       "master": "04_DIVIDER",
@@ -311,7 +362,8 @@
       },
       "imageSubjects": {
         "divider": "an empty lab stool at a long bench, window light across the floor"
-      }
+      },
+      "notes": "Looking ahead: next is valence electrons and ion configurations (S2.4). Image prompt (divider slot): an empty lab stool at a long bench, window light across the floor."
     }
   ]
 }
