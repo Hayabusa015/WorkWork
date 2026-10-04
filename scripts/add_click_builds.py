@@ -64,6 +64,11 @@ Added for S2.3 (every key below is opt-in; a spec that does not use them builds 
   top level   "alt_text": true       give each drawn diagram a computed description (descr) from its data;
                                      each build then needs "element". "picture_alt": [{"slide": N, "descr": "..."}]
                                      sets the description of the static pictures on a slide.
+              "decorative_arrows": true   with alt_text: the individual electron arrows (and valence overlay arrows)
+                                     are marked decorative (empty descr plus the Office 2017 decorative extension,
+                                     adec:decorative val=1) so a screen reader hears only the group's computed
+                                     description, not one line per arrow. Without it every arrow keeps its own
+                                     "Up arrow in 4s box 1" description (the S2.4 output is unchanged).
   {"remove": 1, "from": "4s"}  {"add": 1, "to": "3d"}   a step names its sublevel instead of the default
         (valence-first removal, first-open-sublevel addition). Two such steps are a "move".
   "predicted": true   sublevels are the Aufbau-predicted state of Z (asserted), which differs from the measured
@@ -75,9 +80,10 @@ Added for S2.3 (every key below is opt-in; a spec that does not use them builds 
         electron count fades in WITH the last arrow of that sublevel (a second text box, adjacent).
   "type": "text_line"   a build of native text boxes, one per configuration segment (see process_text_line):
         {"longhand": "1s2 2s2 ...", "core": "Ar", "z": 32, "title": ..., "captions": {"highlight", "replace"},
-         "result": "auto"}: click 1 the longhand and its sum appear; click 2 the segments the noble gas
-        covers are highlighted; click 3 they leave and [Ar] appears in their place; click 4 the finished
-        shorthand line appears. Everything is computed from the checker's tables and asserted.
+         "result": "auto"}: click 1 the longhand and its sum (2+2+6+... = 32) appear; click 2 the
+        segments the noble gas covers are highlighted; click 3 they leave, the longhand sum leaves with them
+        and [Ar] appears in their place; click 4 the finished shorthand line appears with its own sum
+        (18 + 2 + 10 + 2 = 32), in the row the longhand sum occupied. Everything is computed from the checker's tables and asserted.
 
 Static final-state mode (--static; every key is opt-in, the animated output is unaffected):
   Same builds, same asserted chemistry, no animation. Per build the static slide shows
@@ -825,6 +831,22 @@ def set_descr(shape, text):
     nv.set("descr", text)
 
 
+NS_ADEC = "http://schemas.microsoft.com/office/drawing/2017/decorative"
+URI_DECORATIVE = "{C183D7F6-B498-43B3-948B-1728B52AA6E4}"
+
+
+def set_decorative(shape):
+    """Mark a shape decorative: empty descr plus the Office decorative extension (cNvPr/extLst/ext/adec:decorative).
+    Replaces any earlier extLst on the cNvPr; python-pptx shapes carry none."""
+    nv = next(shape._element.iter(f"{{{NS_P}}}cNvPr"))
+    nv.set("descr", "")
+    for old in nv.findall(f"{{{NS_A}}}extLst"):
+        nv.remove(old)
+    ext_lst = etree.SubElement(nv, f"{{{NS_A}}}extLst")
+    ext = etree.SubElement(ext_lst, f"{{{NS_A}}}ext", uri=URI_DECORATIVE)
+    etree.SubElement(ext, f"{{{NS_ADEC}}}decorative", nsmap={"adec": NS_ADEC}, val="1")
+
+
 def process_text_line(slide, b, region, T, chk):
     """A build of native text boxes, one per configuration segment. Returns (timeline, desc, shp).
 
@@ -910,6 +932,9 @@ def process_text_line(slide, b, region, T, chk):
         chips.append(textbox(sh, xl[i], cy, ws[i], chip_h, t, font, 18, ink, True,
                              name=f"BUILD segment {parts[i][0]}", wrap=False))
     sm = textbox(sh, x0 + pad, cy + chip_h + gap, inner, sum_h, sum_txt, font, 18, ink, True, name="BUILD sum")
+    short_sum = f"{want} + " + " + ".join(str(n) for _, n in tail) + f" = {z}"
+    assert want + sum(n for _, n in tail) == z
+    sm2 = textbox(sh, x0 + pad, cy + chip_h + gap, inner, sum_h, short_sum, font, 18, ink, True, name="BUILD sum shorthand")
     yy = cy + chip_h + gap + sum_h + gap
     cap_boxes = []
     for c, n in zip(caps, n_cap):
@@ -924,18 +949,18 @@ def process_text_line(slide, b, region, T, chk):
     ar = textbox(sh, ar_x, cy + 0.02, war, chip_h - 0.04, ar_txt, font, 18, ink, True, name=f"BUILD {core} bracket",
                  wrap=False, fill=accent, outline=ink)
     out["captions"] = [(None, c) for c in cap_boxes]
-    out["extra"] = [title, hl] + chips + [sm, ar, res]
+    out["extra"] = [title, hl] + chips + [sm, sm2, ar, res]
     tl = Timeline()
     f_ = lambda shape, cls, text=False, fill=False: eff(shape.shape_id, cls, "fade", text=text, fill=fill)
     tl.click(f_(title, "entr", True), *[f_(c, "entr", True) for c in chips], f_(sm, "entr", True))
     tl.click(f_(hl, "entr", fill=True), f_(cap_boxes[0], "entr", True))
     tl.click(f_(hl, "exit", fill=True), *[f_(c, "exit", True) for c in chips[:k]],
-             f_(ar, "entr", True, True), f_(cap_boxes[1], "entr", True))
-    tl.click(f_(res, "entr", True))
+             f_(sm, "exit", True), f_(ar, "entr", True, True), f_(cap_boxes[1], "entr", True))
+    tl.click(f_(res, "entr", True), f_(sm2, "entr", True))
     desc = [f"the longhand line, one text box per segment, and its sum ({sum_txt}) appear",
             f"the first {k} segments (the {core} part, {want} electrons) are highlighted: {caps[0]}",
-            f"the highlighted segments leave and {ar_txt} appears in their place: {caps[1]}",
-            f"the finished line appears: {short}"]
+            f"the highlighted segments and the longhand sum leave and {ar_txt} appears in their place: {caps[1]}",
+            f"the finished line appears: {short}, with its own sum ({short_sum})"]
     # replay: what is showing after each click
     static = [bd.shape_id]
     every = [x.shape_id for x in all_shapes(out)]
@@ -943,10 +968,12 @@ def process_text_line(slide, b, region, T, chk):
     ids = lambda L: {x.shape_id for x in L}
     v1, v2, v3, v4 = vis(1), vis(2), vis(3), vis(4)
     assert ids(chips) <= v1 and title.shape_id in v1 and sm.shape_id in v1
-    assert not (ids([hl, ar, res] + cap_boxes) & v1), "something arrives before its click"
+    assert not (ids([hl, ar, res, sm2] + cap_boxes) & v1), "something arrives before its click"
     assert hl.shape_id in v2 and cap_boxes[0].shape_id in v2 and ids(chips) <= v2
-    assert not (ids(chips[:k]) | {hl.shape_id}) & v3 and ar.shape_id in v3 and ids(chips[k:]) <= v3
-    assert ids(chips[k:]) | {ar.shape_id, res.shape_id, title.shape_id, sm.shape_id} | ids(cap_boxes) <= v4
+    assert not (ids(chips[:k]) | {hl.shape_id, sm.shape_id}) & v3 and ar.shape_id in v3 and ids(chips[k:]) <= v3
+    assert sm.shape_id in v2 and sm2.shape_id not in v3, "the longhand sum shows through click 2, the shorthand sum not before click 4"
+    assert ids(chips[k:]) | {ar.shape_id, res.shape_id, title.shape_id, sm2.shape_id} | ids(cap_boxes) <= v4
+    assert sm.shape_id not in v4
     assert not (ids(chips[:k]) | {hl.shape_id}) & v4
     # what remains reads as the shorthand: the bracket, then the tail, left to right
     shown = sorted([(ar.left, ar_txt)] + [(chips[i].left, plain(seg_txt[i])) for i in range(k, len(seg_txt))])
@@ -1210,7 +1237,12 @@ def process(deck, specfile, out, preview=None, only=None, static_mode=False):
         if b["alt_text"]:
             set_descr(shp["group"], describe_diagram(b, initial, [a for a in arrows if a in want], arrows))
             for a in arrows:
-                set_descr(shp["arrows"][id(a)], f"{'Up' if a.spin == 'u' else 'Down'} arrow in {a.sub} box {a.box + 1}")
+                if spec.get("decorative_arrows"):
+                    set_decorative(shp["arrows"][id(a)])
+                    if id(a) in shp["hl"]:
+                        set_decorative(shp["hl"][id(a)])
+                else:
+                    set_descr(shp["arrows"][id(a)], f"{'Up' if a.spin == 'u' else 'Down'} arrow in {a.sub} box {a.box + 1}")
         earlier.append((tl, desc, b["region"], b.get("name"), b, shp, static, every, n, removed, total_final))
     for slide_no, items in per_slide.items():
         slide = prs.slides[slide_no - 1]

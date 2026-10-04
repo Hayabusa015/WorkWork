@@ -217,6 +217,7 @@
     }
   ],
   "alt_text": true,
+  "decorative_arrows": true,
   "picture_alt": [
     {
       "slide": 4,

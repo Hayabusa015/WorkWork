@@ -374,6 +374,10 @@ def run_checks():
     # Ge's first five segments are exactly argon's configuration (the highlight in the build)
     segs = parse("1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2")[1]
     assert dict(segs[:5]) == ground_state(ar) and sum(n for _, n in segs[:5]) == 18
+    # the two sums the Ge text build shows: the longhand sum (leaves at click 3) and the shorthand's own sum (click 4)
+    assert sum(n for _, n in segs) == ge == 32
+    assert "+".join(str(n) for _, n in segs) == "2+2+6+2+6+2+10+2"
+    assert f"{ar} + " + " + ".join(str(n) for _, n in segs[5:]) + f" = {ge}" == "18 + 2 + 10 + 2 = 32"
     return n_checked
 
 
