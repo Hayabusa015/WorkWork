@@ -2,6 +2,15 @@
  *
  *   SHULL_COURSE=chemistry node build_deck.js decks/chem_u01_s01.4.json out.pptx
  *
+ * Optional spec features (both backwards-compatible; absent = no change):
+ *   Run markup inside any field string:  ^{...} superscript run,  _{...} subscript run.
+ *     "Mg^{2+}"  "10^{-19} J"  "3d^{5}"  "H_{2}O"  - the run keeps the placeholder's size,
+ *     font and colour (a baseline-shift attribute only). Use the true minus U+2212 in a
+ *     superscript only after confirming Archivo carries it. A string with no markup is
+ *     passed through untouched. Line caps and the 110-char must-write check count the
+ *     text with markup stripped. No nesting; an unclosed "^{" is an error.
+ *   Teacher notes:  "notes": "text" on a slide object -> that slide's speaker notes.
+ *
  * The masters come from build.js; this file only places content into them. That split
  * is the point: a deck can never introduce geometry or colour of its own, because it
  * has no way to. Everything it can set is a placeholder the master already declared.
@@ -78,6 +87,33 @@ const CAPS = K.lineCaps;
 const problems = [];
 let n = 0;
 
+/* ^{..} / _{..} markup. Returns null when the string has none, so plain text takes
+   exactly the path it always did. Otherwise returns pptxgenjs text runs; "\n" becomes
+   breakLine on the preceding run, matching how pptxgenjs treats it in a plain string. */
+const MARK = /([\^_])\{([^{}]*)\}/g;
+const hasMarkup = (t) => { MARK.lastIndex = 0; return MARK.test(t); };
+const stripMarkup = (t) => t.replace(MARK, "$2");
+function toRuns(text) {
+  const runs = [];
+  const lines = text.split("\n");
+  lines.forEach((line, li) => {
+    let last = 0, m;
+    const push = (t, o) => { if (t) runs.push({ text: t, options: o || {} }); };
+    MARK.lastIndex = 0;
+    while ((m = MARK.exec(line))) {
+      push(line.slice(last, m.index));
+      push(m[2], m[1] === "^" ? { superscript: true } : { subscript: true });
+      last = m.index + m[0].length;
+    }
+    push(line.slice(last));
+    if (li < lines.length - 1) {
+      if (!runs.length) runs.push({ text: "", options: {} });
+      runs[runs.length - 1].options.breakLine = true;
+    }
+  });
+  return runs;
+}
+
 for (const slide of spec.slides) {
   n += 1;
   const s = pres.addSlide({ masterName: slide.master });
@@ -120,18 +156,22 @@ for (const slide of spec.slides) {
       problems.push(`slide ${n} (${slide.master}): no placeholder "${ph}" — declared: ${declared.join(", ")}`);
       continue;
     }
-    s.addText(String(txt), { placeholder: ph });
+    const str = String(txt);
+    if (/[\^_]\{/.test(str.replace(MARK, ""))) { problems.push(`slide ${n}: field ${ph}: unbalanced ^{ or _{ markup`); continue; }
+    s.addText(hasMarkup(str) ? toRuns(str) : str, { placeholder: ph });
   }
+  if (slide.notes) s.addNotes(String(slide.notes));
 
   // Cap check. A card body of five lines is a slide that should have been two slides.
   const bodyKeys = Object.keys(fields).filter(k => /_b$/.test(k) || k === "mustwrite" || k === "subhead");
   for (const k of bodyKeys) {
-    const lines = String(fields[k] || "").split("\n").filter(l => l.trim()).length;
+    const lines = stripMarkup(String(fields[k] || "")).split("\n").filter(l => l.trim()).length;
     const cap = k === "mustwrite" ? 2 : 4;
     if (lines > cap) problems.push(`slide ${n} (${slide.master}) field ${k}: ${lines} lines, cap ${cap}`);
   }
-  if (fields.mustwrite && String(fields.mustwrite).length > 110) {
-    problems.push(`slide ${n}: must-write is ${String(fields.mustwrite).length} chars — it has to fit one bar`);
+  const mwLen = fields.mustwrite ? stripMarkup(String(fields.mustwrite)).length : 0;
+  if (mwLen > 110) {
+    problems.push(`slide ${n}: must-write is ${mwLen} chars — it has to fit one bar`);
   }
 }
 

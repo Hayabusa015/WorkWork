@@ -66,6 +66,16 @@ Images come from the loop in `SHULL_Slide_System_v2.md` §5: Claude supplies a p
 user generates and saves it, Claude places it. Anything a student *reads* as science — a diagram
 with a number, a label, or a formula — is built, never generated.
 
+## Spec markup and notes
+
+Optional, backwards-compatible; documented at the top of `build_deck.js`.
+
+- `^{...}` is a superscript run and `_{...}` a subscript run inside any field: `Mg^{2+}`, `10^{-19} J`, `3d^{5}`, `H_{2}O`. No nesting.
+- The run is a baseline-shift attribute at the placeholder's own size, font and colour. No Unicode superscript glyphs.
+- Line caps and the 110-char must-write check count the text with markup stripped.
+- `"notes": "..."` on a slide object writes that slide's speaker notes. Absent means no notes part.
+- `scripts/audit_slide_geometry.py` over-counts lines on marked-up text (it counts each run as a line). Visually check the raster.
+
 ## QA
 
 ```bash
