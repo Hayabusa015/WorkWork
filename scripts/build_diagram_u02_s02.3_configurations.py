@@ -285,13 +285,15 @@ def check_against_spec():
     if not os.path.exists(SPEC):
         print("  (spec not written yet - slide-text cross-check skipped)")
         return
-    text = open(SPEC, encoding="utf-8").read()
+    text = json.dumps(json.load(open(SPEC, encoding="utf-8")), ensure_ascii=False)
+    text = text.replace("\\n", " ")        # a longhand line broken across two lines is still one string
+    off_slide = {"[Ar] 4s2 3d9"}            # Cu 'predicted', shown only inside the figure
     missing = []
     for _, _, cfg, _ in GOOD:
         if sup(cfg) not in text:
             missing.append(("good", cfg, sup(cfg)))
     for _, _, cfg, _ in BAD:
-        if sup(cfg) not in text:
+        if cfg not in off_slide and sup(cfg) not in text:
             missing.append(("bad", cfg, sup(cfg)))
     # Any configuration-looking token in the spec that is NOT a checked one is a stray.
     import re

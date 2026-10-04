@@ -140,10 +140,10 @@ def fig_bohr_hydrogen():
     cx, cy, a = 300, 300, 31                     # orbit radius = n^2 * a, as in Bohr's model
     for n in (1, 2, 3):
         f.circle(cx, cy, n * n * a, outline=GRAPH, w=3)
-    f.circle(cx, cy, 7, fill=INK)                # nucleus: 1 proton
+    f.circle(cx, cy, 8, fill=INK)                # nucleus: 1 proton
     ang = math.radians(215)                      # the electron, on the n = 1 orbit
     ex, ey = cx + a * math.cos(ang), cy - a * math.sin(ang)
-    f.circle(ex, ey, 10, fill=ACC, outline=INK, w=3)
+    f.circle(ex, ey, 12, fill=ACC, outline=INK, w=3)
 
     col = 670
     rows = [("n = 3", 3, 38, 80), ("n = 2", 2, 48, 175), ("n = 1", 1, 30, 270)]
