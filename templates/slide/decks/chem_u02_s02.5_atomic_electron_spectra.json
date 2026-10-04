@@ -159,7 +159,7 @@
       "fields": {
         "headline": "Example: Color of the 3 to 2 Drop",
         "subhead": "Calculator provided. Copy the setup, not just the answer.",
-        "problem": "Hydrogen drops from n = 3 to n = 2 and emits 3.03e-19 J. Find the wavelength and color.",
+        "problem": "Hydrogen's 3 to 2 drop emits a 3.03e-19 J photon. Find its wavelength and color.",
         "g1_l": "GIVEN",
         "g1_b": "E = 3.03e-19 J\nh = 6.626e-34 J·s\nc = 3.00e8 m/s",
         "g2_l": "NEED",

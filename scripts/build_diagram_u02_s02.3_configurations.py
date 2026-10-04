@@ -463,8 +463,8 @@ def fig_aufbau():
 # ---- figure 2: Pauli, allowed vs not allowed ------------------------------
 def fig_pauli():
     c = Canvas(1010, 600)
-    rows = [("pauli_ok", 40, True, "ALLOWED", "opposite spins"),
-            ("pauli_bad", 330, False, "NOT ALLOWED", "same spin")]
+    rows = [("pauli_ok", 40, True, "CORRECT", "opposite spins"),
+            ("pauli_bad", 330, False, "WRONG", "same spin")]
     for key, y, ok, head, sub in rows:
         content = DIAGRAMS[key][3]
         bad = not ok
@@ -480,7 +480,7 @@ def fig_pauli():
 def fig_hund():
     c = Canvas(1010, 600)
     rows = [("N_2p_correct", 20, True, "CORRECT", "singles first"),
-            ("N_2p_wrong", 315, False, "NOT ALLOWED", "pairs too soon")]
+            ("N_2p_wrong", 315, False, "WRONG", "pairs too soon")]
     for key, y, ok, head, sub in rows:
         boxes = DIAGRAMS[key][3]
         size, pitch, x0 = 130, 142, 40
@@ -497,6 +497,17 @@ def fig_hund():
     c.save("chem_u02_s2.3_hund.png")
 
 
+
+def cfg_label(c, cx, y, sub, count, px=54):
+    """'2p' with its electron count raised beside it. Drawn, not a glyph, so the count
+    is as large as the letters: it is the number students are meant to read."""
+    fb, fs = F_BOLD(px), F_BOLD(px * 0.78)
+    wb = fb.getlength(sub) / SCALE
+    ws = fs.getlength(str(count)) / SCALE
+    x = cx - (wb + ws + 2) / 2
+    c.text(x, y, sub, fb, COL["asphalt"], "lm")
+    c.text(x + wb + 2, y - px * 0.30, str(count), fs, COL["asphalt"], "lm")
+
 def draw_groups(c, groups, x_start, y, size, inner, outer, label_dy, cfg_text, f_label=54):
     """Draw labelled groups of boxes. Returns the x of each group's centre."""
     x = x_start
@@ -504,7 +515,7 @@ def draw_groups(c, groups, x_start, y, size, inner, outer, label_dy, cfg_text, f
         gw = len(boxes) * size + (len(boxes) - 1) * inner
         for i, b in enumerate(boxes):
             orbital_box(c, x + i * (size + inner), y, size, b)
-        c.text(x + gw / 2, y + size + label_dy, cfg, F_BOLD(f_label), COL["asphalt"])
+        cfg_label(c, x + gw / 2, y + size + label_dy, sub, cfg, f_label)
         x += gw + outer
     return x
 
@@ -518,7 +529,7 @@ def fig_anatomy_n():
     size, inner, outer = 140, 14, 62
     width = sum(len(b) * size + (len(b) - 1) * inner for _, b in groups) + outer * (len(groups) - 1)
     x0 = (1010 - width) / 2
-    cfgs = [sup("1s2"), sup("2s2"), sup("2p3")]
+    cfgs = [2, 2, 3]
     draw_groups(c, groups, x0, 150, size, inner, outer, 56, cfgs, 58)
     c.line([(80, 410), (930, 410)], COL["hair"], 3)
     c.text(505, 490, "2 + 2 + 3 = 7 arrows = 7 electrons", F_SEMI(52), COL["asphalt"])
@@ -535,7 +546,7 @@ def fig_oxygen():
     size, inner, outer = 112, 10, 44
     width = sum(len(b) * size + (len(b) - 1) * inner for _, b in groups) + outer * (len(groups) - 1)
     draw_groups(c, groups, (846 - width) / 2, 118, size, inner, outer, 52,
-                [sup("1s2"), sup("2s2"), sup("2p4")], 52)
+                [2, 2, 4], 52)
     c.line([(60, 350), (786, 350)], COL["hair"], 3)
     c.text(423, 420, "2 + 2 + 4 = 8", F_SEMI(52), COL["asphalt"])
     assert sum(count_arrows(b) for _, b in groups) == 8
@@ -550,7 +561,7 @@ def fig_iron():
     size, inner, outer = 100, 8, 48
     width = sum(len(b) * size + (len(b) - 1) * inner for _, b in groups) + outer * (len(groups) - 1)
     draw_groups(c, groups, (846 - width) / 2, 120, size, inner, outer, 52,
-                [sup("4s2"), sup("3d6")], 52)
+                [2, 6], 52)
     c.line([(60, 350), (786, 350)], COL["hair"], 3)
     c.text(423, 420, "[Ar] 18 + 2 + 6 = 26", F_SEMI(52), COL["asphalt"])
     assert 18 + sum(count_arrows(b) for _, b in groups) == 26

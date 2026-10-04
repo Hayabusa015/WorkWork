@@ -287,61 +287,52 @@ def fig_level_n3():
     top, bot = 70, 420
     k = (bot - top) / abs(energy_1e19(2))
     y_of = lambda e: top - e * k
-    x0, x1 = 30, 330
-    rows = [("∞", 0.0, None), ("3", energy_1e19(3), 3), ("2", energy_1e19(2), 2)]
-    for nn, e, n in rows:
+    x0, x1, lx = 30, 300, 322
+    f.line([(x0, y_of(0)), (x1, y_of(0))], fill=GRAPH, w=3, dash=(14, 10))
+    f.rich(lx, y_of(0) + lab * 0.35, "n = \u221e:  E = 0", lab)
+    for n, hi in ((3, True), (2, False)):
+        e = energy_1e19(n)
         y = y_of(e)
-        hi = n == 3
-        f.line([(x0, y), (x1, y)], fill=ACC if hi else (GRAPH if n is None else INK),
-               w=7 if hi else 3, dash=(14, 10) if n is None else None)
-        if n is None:
-            f.rich(x1 + 24, y + lab * 0.35, [("n = ∞:  E = 0", "n")], lab)
-        else:
-            f.rich(x1 + 24, y + lab * 0.35, [("n = " + nn + ":  ", "n")] + E(n)[:1] + [(nn, "sub"),
-                   (" = " + fmt(e) + " ", "n")] + EXP("−19")[:1] + [("−19", "sup"), (" J", "n")],
-                   lab * 0.86)
-    f.circle((x0 + x1) / 2, y_of(energy_1e19(3)) - 20, 12, fill=ACC, outline=INK, w=3)
+        f.line([(x0, y), (x1, y)], fill=ACC if hi else INK, w=7 if hi else 4)
+        f.rich(lx, y + lab * 0.35, E(n) + [(" = " + fmt(e) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
+    f.circle(150, y_of(energy_1e19(3)), 13, fill=ACC, outline=INK, w=3)
     f.save("chem_u02_s2.1_level_n3.png")
 
 
 def fig_transition_3_to_2():
     f = _data_fig()
     lab = f.pt(16)
-    top, bot = 80, 380
-    k = (bot - top) / (energy_1e19(3) - energy_1e19(2))
-    y_of = lambda n: bot - (energy_1e19(n) - energy_1e19(2)) * k
-    x0, x1 = 30, 330
-    sz = lab * 0.86
-    for n in (3, 2):
-        y = y_of(n)
+    top, bot = 80, 400
+    y3, y2 = top, bot
+    x0, x1, lx = 30, 300, 322
+    r = 13
+    for n, y in ((3, y3), (2, y2)):
         f.line([(x0, y), (x1, y)], fill=INK, w=4)
-        f.rich(x1 + 24, y + sz * 0.35, E(n) + [(" = " + fmt(energy_1e19(n)) + " ", "n")] + [("× 10", "n"), ("−19", "sup"), (" J", "n")], sz)
-    ax = 150
-    f.circle(ax, y_of(3) + 20, 12, fill=WHITE, outline=ACC, w=4)
-    f.circle(ax, y_of(2) - 20, 12, fill=ACC, outline=INK, w=3)
-    f.arrow(ax, y_of(3) + 38, ax, y_of(2) - 38, fill=ACC, w=6, head=22)
-    wy = (y_of(3) + y_of(2)) / 2
-    f.wave(ax + 28, x1 - 10, wy, fill=ACC)
-    f.rich(x1 + 24, wy + sz * 0.35, [("ΔE = " + fmt(energy_1e19(2) - energy_1e19(3)) + " ", "n")] +
-           [("× 10", "n"), ("−19", "sup"), (" J", "n")], sz, fill=INK)
+        f.rich(lx, y + lab * 0.35, E(n) + [(" = " + fmt(energy_1e19(n)) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
+    ax = 100
+    f.arrow(ax, y3 + r + 4, ax, y2 - r - 8, fill=ACC, w=6, head=22)
+    f.circle(ax, y3, r, fill=WHITE, outline=ACC, w=4)
+    f.circle(ax, y2, r, fill=ACC, outline=INK, w=3)
+    wy = (y3 + y2) / 2
+    f.wave(ax + 30, x1 - 10, wy, fill=ACC)
+    f.rich(lx, wy + lab * 0.35, [("\u0394E = " + fmt(energy_1e19(2) - energy_1e19(3)) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
     f.save("chem_u02_s2.1_transition_3_to_2.png")
 
 
 def fig_ionization():
     f = _data_fig()
     lab = f.pt(16)
-    sz = lab * 0.86
-    top, bot = 70, 400
-    x0, x1 = 30, 330
+    top, bot = 80, 400
+    x0, x1, lx = 30, 300, 322
+    r = 13
     f.line([(x0, top), (x1, top)], fill=GRAPH, w=3, dash=(14, 10))
-    f.rich(x1 + 24, top + sz * 0.35, "n = ∞:  E = 0", sz)
+    f.rich(lx, top + lab * 0.35, "n = \u221e:  E = 0", lab)
     f.line([(x0, bot), (x1, bot)], fill=INK, w=4)
-    f.rich(x1 + 24, bot + sz * 0.35, E(1) + [(" = −2.18 ", "n")] + EXP("−18") + [(" J", "n")], sz)
-    ax = 150
-    f.circle(ax, bot - 20, 12, fill=ACC, outline=INK, w=3)
-    f.arrow(ax, bot - 40, ax, top + 4, fill=ACC, w=6, head=24)
-    mid = (top + bot) / 2
-    f.rich(x1 + 24, mid + sz * 0.35, [("ΔE = +2.18 ", "n")] + EXP("−18") + [(" J", "n")], sz)
+    f.rich(lx, bot + lab * 0.35, E(1) + [(" = \u22122.18 ", "n")] + EXP("\u221218") + [(" J", "n")], lab)
+    ax = 100
+    f.arrow(ax, bot - r - 4, ax, top + 2, fill=ACC, w=6, head=24)
+    f.circle(ax, bot, r, fill=ACC, outline=INK, w=3)
+    f.rich(lx, (top + bot) / 2 + lab * 0.35, [("\u0394E = +2.18 ", "n")] + EXP("\u221218") + [(" J", "n")], lab)
     f.save("chem_u02_s2.1_ionization.png")
 
 

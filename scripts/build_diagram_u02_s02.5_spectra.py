@@ -264,8 +264,8 @@ def fig_table():
     cols = {"drop": 40, "dE": 240, "lam": 520, "sw": 800}
     hy = 52
     text(d, cols["drop"], hy, "Drop", f=F_BOLD, anchor="lm", fill=T["grey"])
-    text(d, cols["dE"], hy, "ΔE (J)", anchor="lm", fill=T["grey"])
-    text(d, cols["lam"], hy, "λ (nm)", anchor="lm", fill=T["grey"])
+    text(d, cols["dE"], hy, "ΔE (J)", f=F_BOLD, anchor="lm", fill=T["grey"])
+    text(d, cols["lam"], hy, "Wavelength (nm)", f=F_BOLD, anchor="lm", fill=T["grey"])
     d.line([(px(X0), px(92)), (px(X1), px(92))], fill=T["grey"], width=px(3))
     for i, n in enumerate((3, 4, 5, 6)):
         cy = 150 + i * 106

@@ -1,0 +1,343 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.1",
+  "sectionTitle": "The Bohr Model",
+  "note": "Built from reports/u2-content-briefs.md S2.1. 50-minute period; 20 content slides, last two are the formative check (5 items). Energies are written in caret form (10^-19) because Archivo has no superscript minus; the hand-built figures draw true superscripts. Nothing PROVISIONAL is on a student slide. The optional Bohr-radius slide (brief slide 17) is not built.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "2.1\nThe Bohr Model",
+        "subhead": "Find hydrogen's energy levels, and explain emission and absorption as an electron changing level."
+      },
+      "imageSubjects": {
+        "section": "a hydrogen gas discharge tube glowing pink-magenta on a dark bench, lit only by its own light"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Why Only a Few Colors?",
+        "subhead": "Heat hydrogen gas and it glows. A prism spreads that glow into a few thin lines of color, not a rainbow.",
+        "keyq": "Why does hydrogen give only a few colors of light?"
+      },
+      "imageSubjects": {
+        "concept": "a glowing hydrogen discharge tube photographed close, with a prism-split smear of four thin colored lines beside it"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write the first one down. The other two come back on later slides.",
+        "k1_l": "ENERGY LEVEL",
+        "k1_b": "One allowed energy for the electron.\nLabeled n = 1, 2, 3, and up.",
+        "k2_l": "QUANTIZED",
+        "k2_b": "Only certain values are allowed.\nNothing in between.",
+        "k3_l": "PHOTON",
+        "k3_b": "A packet of light.\nIts energy sets its color.",
+        "mustwrite": "Energy level: one allowed energy for the electron, labeled n."
+      },
+      "imageSubjects": {
+        "aside": "a glass prism on a lab bench splitting a narrow white beam"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Why Bohr Needed a New Model",
+        "subhead": "Rutherford put the electrons outside a dense nucleus. That left a problem.",
+        "c1_l": "WHAT WAS KNOWN",
+        "c1_b": "Thomson: electrons inside positive material.\n\nRutherford, 1911: a dense nucleus, electrons outside it.",
+        "c2_l": "THE PROBLEM",
+        "c2_b": "A charge moving in a circle should give off energy and spiral into the nucleus.\n\nAtoms do not collapse.",
+        "mustwrite": "Bohr proposed a new model of the hydrogen atom in 1913."
+      },
+      "imageSubjects": {
+        "concept": "a chalkboard with a hand-drawn nucleus and one looping electron path, chalk dust on the ledge"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Bohr's Three Ideas",
+        "subhead": "He kept the nucleus and put rules on the electron.",
+        "k1_l": "FIXED ORBITS",
+        "k1_b": "The electron moves in a circular orbit.\nEach orbit has one fixed energy.",
+        "k2_l": "NO RADIATION",
+        "k2_b": "In an allowed orbit, the electron does not give off energy.",
+        "k3_l": "PHOTON JUMPS",
+        "k3_b": "It changes orbit only by absorbing or emitting a photon.",
+        "mustwrite": "The photon's energy equals the energy difference between the two orbits."
+      },
+      "imageSubjects": {
+        "aside": "a hand-drawn set of concentric circles in a pocket notebook, pencil beside it"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Bohr's Hydrogen Atom",
+        "subhead": "One proton, one electron, orbits at fixed distances.",
+        "a1_l": "THE NUCLEUS",
+        "a1_b": "One proton, drawn as the dot in the center.",
+        "a2_l": "THE ORBITS",
+        "a2_b": "n = 1, 2, 3 and up. Farther out is higher energy.",
+        "a3_l": "THE ELECTRON",
+        "a3_b": "One electron, in one orbit at a time. Here: n = 1."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_bohr_hydrogen.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Quantized Means Steps, Not a Ramp",
+        "subhead": "You can stand on a stair. You cannot stand between two stairs.",
+        "c1_l": "STAIRS",
+        "c1_b": "Only certain heights.\n\nAn electron's energy works like this.",
+        "c2_l": "A RAMP",
+        "c2_b": "Any height at all.\n\nElectrons do not behave this way.",
+        "mustwrite": "Quantized: only certain energy values are allowed. Nothing in between."
+      },
+      "imageSubjects": {
+        "concept": "a wooden staircase beside a smooth ramp of the same height, side-lit"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "The Energy of Each Level",
+        "subhead": "Put in n and you get that level's energy, in joules.",
+        "a1_l": "n",
+        "a1_b": "Whole numbers only: 1, 2, 3 ... Never 1.5.",
+        "a2_l": "THE NEGATIVE SIGN",
+        "a2_b": "The electron is bound to the nucleus. E = 0 is a free electron.",
+        "a3_l": "HYDROGEN ONLY",
+        "a3_b": "This formula fails for atoms with 2 or more electrons."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_energy_equation.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Hydrogen's Energy Levels",
+        "subhead": "Drawn to scale. Watch what happens to the spacing.",
+        "a1_l": "LOWEST ENERGY",
+        "a1_b": "More negative means lower. n = 1 is the lowest.",
+        "a2_l": "THE SPACING SHRINKS",
+        "a2_b": "The levels crowd together as n gets larger.",
+        "a3_l": "ZERO",
+        "a3_b": "n = ∞ is E = 0. The electron has left the atom."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_energy_levels.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Energy at n = 3",
+        "subhead": "We do this one together. Write the setup, not just the number.",
+        "problem": "What is the energy of the hydrogen electron when n = 3?",
+        "g1_l": "GIVEN",
+        "g1_b": "Hydrogen\nn = 3",
+        "g2_l": "NEED",
+        "g2_b": "E₃, in joules",
+        "work": "",
+        "mustwrite": "Eₙ = −2.18 × 10^−18 J ÷ n²"
+      },
+      "imageSubjects": {
+        "aside": "a pencil resting beside a scientific calculator on a lab notebook"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "n = 3, Worked",
+        "subhead": "Square n first, then divide.",
+        "f1_l": "FORMULA",
+        "f1_b": "Eₙ = −2.18 × 10^−18 J ÷ n²",
+        "work": "3² = 9\n−2.18 × 10^−18 ÷ 9\n= −2.42 × 10^−19 J",
+        "mustwrite": "Less negative means higher energy. E₃ is above E₂."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_level_n3.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Ground State and Excited States",
+        "subhead": "Hydrogen's electron has one lowest level and many higher ones.",
+        "c1_l": "GROUND STATE",
+        "c1_b": "n = 1.\nThe lowest energy level.\n\nWhere the electron normally sits.",
+        "c2_l": "EXCITED STATE",
+        "c2_b": "Any level above n = 1.\n\nShort-lived. The electron falls back down.",
+        "mustwrite": "Ground state: n = 1. Excited state: any higher n."
+      },
+      "imageSubjects": {
+        "concept": "two hydrogen discharge tubes side by side, one dark and one glowing"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Absorption: The Electron Goes Up",
+        "subhead": "The atom takes in energy from a photon.",
+        "a1_l": "AN EXACT MATCH",
+        "a1_b": "Photon energy must equal E final minus E initial.",
+        "a2_l": "THE WRONG ENERGY",
+        "a2_b": "The photon passes through. Nothing happens.",
+        "a3_l": "THE RESULT",
+        "a3_b": "The electron moves up. The atom gains energy."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_absorption.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Emission: The Electron Drops",
+        "subhead": "The atom gives energy out as a photon.",
+        "a1_l": "THE DROP",
+        "a1_b": "The electron falls from a higher level to a lower one.",
+        "a2_l": "THE PHOTON",
+        "a2_b": "Its energy is the absolute value of ΔE.",
+        "a3_l": "A BIGGER DROP",
+        "a3_b": "A bigger drop gives a higher-energy photon."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_emission.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Drop from n = 3 to n = 2",
+        "subhead": "Find the energy change, then say where the energy went.",
+        "problem": "A hydrogen electron drops from n = 3 to n = 2. Find ΔE. Is energy absorbed or released?",
+        "g1_l": "GIVEN",
+        "g1_b": "n = 3 to n = 2\nE₃ = −2.42 × 10^−19 J\nE₂ = −5.45 × 10^−19 J",
+        "g2_l": "NEED",
+        "g2_b": "ΔE\nAbsorbed or released?",
+        "work": "",
+        "mustwrite": "ΔE = final energy minus initial energy. A negative ΔE means energy leaves the atom."
+      },
+      "imageSubjects": {
+        "aside": "a camera-flash bulb mid-discharge in a dark room"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "n = 3 to n = 2, Worked",
+        "subhead": "Final minus initial. Keep the negative signs.",
+        "f1_l": "SETUP",
+        "f1_b": "ΔE = E₂ − E₃\nFinal level: n = 2\nInitial level: n = 3",
+        "work": "−5.45 × 10^−19\n− (−2.42 × 10^−19)\n= −3.03 × 10^−19 J\nReleased.",
+        "mustwrite": "Energy released: a photon of 3.03 × 10^−19 J leaves the atom."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_transition_3_to_2.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Removing the Electron",
+        "subhead": "Ionization means n goes all the way to infinity.",
+        "problem": "How much energy removes the electron from a hydrogen atom in its ground state?",
+        "g1_l": "GIVEN",
+        "g1_b": "Hydrogen, ground state\nn = 1 to n = ∞\nE at n = ∞ is 0",
+        "g2_l": "NEED",
+        "g2_b": "ΔE\nAbsorbed or released?",
+        "work": "",
+        "mustwrite": "Ionization: the electron goes from its level to n = ∞, where E = 0."
+      },
+      "imageSubjects": {
+        "aside": "a spark gap between two electrodes in a dark lab"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Ionization, Worked",
+        "subhead": "Final minus initial again. The sign tells you the direction.",
+        "f1_l": "SETUP",
+        "f1_b": "ΔE = final − initial\nFinal (n = ∞): 0\nInitial (n = 1): E₁",
+        "work": "E₁ = −2.18 × 10^−18 J\nΔE = 0 − E₁\n= +2.18 × 10^−18 J\nAbsorbed.",
+        "mustwrite": "A positive ΔE means energy absorbed. Ionizing hydrogen takes 2.18 × 10^−18 J."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_ionization.png"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Where the Bohr Model Stops Working",
+        "subhead": "It was a real step forward. It is no longer the accepted model.",
+        "k1_l": "HYDROGEN ONLY",
+        "k1_b": "Correct energies for hydrogen. Wrong for He, Li, and every atom with 2 or more electrons.",
+        "k2_l": "THE PICTURE",
+        "k2_b": "Electrons are not particles on circular tracks. The electron-cloud model replaces the orbits.",
+        "k3_l": "WHAT SURVIVES",
+        "k3_b": "Quantized energy levels.\nA level change means a photon in or out.",
+        "mustwrite": "Keep this: energy is quantized, and a change of level means a photon in or out."
+      },
+      "imageSubjects": {
+        "aside": "a worn textbook diagram of concentric orbits with a pencil strike through it"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Quick Check: Items 1 to 3",
+        "subhead": "Work these on your own paper, then we compare.",
+        "k1_l": "CHECK 1",
+        "k1_b": "Explain why hydrogen emits light at only certain colors. Use the word quantized.",
+        "k2_l": "CHECK 2",
+        "k2_b": "Calculate the energy of the hydrogen electron at n = 2.",
+        "k3_l": "CHECK 3",
+        "k3_b": "A hydrogen electron drops from n = 4 to n = 2. Is energy absorbed or released? How much?",
+        "mustwrite": "For every calculation, write the equation first, then the numbers, then the units."
+      },
+      "imageSubjects": {
+        "aside": "a student's notebook page with a calculation crossed out and redone"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Quick Check: Items 4 and 5",
+        "subhead": "Same as before. Your own paper first.",
+        "c1_l": "CHECK 4",
+        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? Find both ΔE values.",
+        "c2_l": "CHECK 5",
+        "c2_b": "Give one reason the Bohr model is no longer the accepted model of the atom.",
+        "mustwrite": "Check 4: put a number on both drops before you compare them."
+      },
+      "imageSubjects": {
+        "concept": "a stack of graded quiz papers with a red pen on top"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "LOOKING AHEAD",
+        "headline": "Where This Goes\nNext",
+        "subhead": "Bohr's model works for hydrogen and nothing bigger. Next: what replaced it, and what an orbital is."
+      },
+      "imageSubjects": {
+        "divider": "a long laboratory bench receding into shadow, one lamp lit at the far end"
+      }
+    }
+  ]
+}
