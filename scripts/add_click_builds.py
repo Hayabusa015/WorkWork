@@ -28,10 +28,32 @@ Spec (JSON). One object per build slide; see templates/slide/README.md, "Click b
         "start": "empty" | "filled",       # empty: fill by clicks. filled: atom flies in whole
         "effect": "fade" | "appear",       # electron arrows (default fade)
         "captions": {"hund": "...", "pauli": "..."},   # fill builds; shown once, at the step the rule starts
-        "steps": [{"remove": 2, "caption": "..."}, {"add": 1}],  # ion builds, "start": "filled"
+        "steps": [{"highlight": "valence", "caption": "..."},      # ion builds, "start": "filled"
+                  {"remove": 2, "caption": "..."}, {"add": 1}],
+        "start_text": "Fe: [Ar] 4s^{2} 3d^{6}",   # optional state line, arrives with click 1
         "sum": "auto" | "text" | false,    # final line; "auto" = 2 + 2 + 4 = 8
-        "result": "Fe^{2+}"                # optional ion result, appears with the last click
+        "result": "Fe^{2+}",               # optional ion result, appears with the last click
+        "name": "Na",                      # optional; prefixes this build's lines in the notes
+        "box_max": 0.5                     # optional cap on the box size, inches (matching two atoms)
      }]}
+
+Ion-build extras (added for S2.4):
+  {"highlight": "valence", "valence": 2}   a step with no electron change: the arrows of the outermost
+        level (highest n among the drawn sublevels) are recoloured at that click. Drawn as a second set of
+        arrows laid over the first (course Primary fill, Asphalt outline), entering by fade, and leaving
+        together with their arrow when it is removed. "valence" is optional; when given it is asserted
+        against the count found. One accent only, from the course tokens.
+  {"remove": 1, "text": "Fe^{2+}: charge 2+, 24 electrons"}   a step may carry "text": a state line
+        that fades in at that click. With "start_text" the lines form a record under the diagram, one
+        row each, so the final state shows the whole record and no two texts ever share a box. Do not
+        combine with "sum" or "result".
+  Captions may wrap to two lines (asserted <= 2); each caption keeps its own row so the final state
+        never overprints.
+  "band": [1, 2]   draw this build in the first of two equal horizontal bands of the region, so two
+        atoms (Na, then Cl) share one slot without any shape or text overlapping the other's. Compact
+        metrics apply in a band: no more than one state row, and no captions, will fit (asserted by the
+        minimum box size). Several objects may name the same slide; their clicks run in spec order as
+        one sequence and the notes line lists them all.
 
 Everything chemical is computed and asserted here, not typed: arrows are generated in fill order
 (within a sublevel one up arrow into each box left to right, THEN the down arrows left to right),
@@ -178,6 +200,20 @@ def plan_steps(b):
         present.setdefault(s["label"], [])
     steps = []
     for st in steps_spec:
+        if "highlight" in st:
+            assert st["highlight"] == "valence", f"unknown highlight {st['highlight']!r}"
+            live = [s for s in subs if present[s["label"]]]
+            assert live, "highlight on an empty atom"
+            top = max(int(s["label"][0]) for s in live)
+            arrs = [a for s in live if int(s["label"][0]) == top for a in present[s["label"]]]
+            if st.get("valence") is not None:
+                assert len(arrs) == st["valence"], \
+                    f"slide {b['slide']}: {len(arrs)} arrows in n = {top}, spec says {st['valence']} valence"
+            steps.append({"kind": "highlight", "arrow": None, "arrows": arrs, "caption": st.get("caption"),
+                          "text": st.get("text"),
+                          "label": "highlight the valence arrows (" +
+                                   ", ".join(s["label"] for s in live if int(s["label"][0]) == top) + ")"})
+            continue
         kind = "remove" if "remove" in st else "add"
         k = st[kind]
         for j in range(k):
@@ -193,6 +229,7 @@ def plan_steps(b):
                 a = pool[tgt["label"]][len(present[tgt["label"]])]
                 present[tgt["label"]].append(a)
             steps.append({"kind": kind, "arrow": a, "caption": st.get("caption") if j == 0 else None,
+                          "text": st.get("text") if j == k - 1 else None,
                           "label": f"{'remove' if kind == 'remove' else 'add'} {tgt['label']} "
                                    f"{'up' if a.spin == 'u' else 'down'} arrow"})
     allarrows = {}
@@ -201,13 +238,14 @@ def plan_steps(b):
             allarrows[(a.sub, a.box, a.spin)] = a
     initial_objs = [pool[a.sub][a.order] for a in initial]
     used = initial_objs + [st["arrow"] for st in steps if st["kind"] == "add"]
+    hl = [a for st in steps if st["kind"] == "highlight" for a in st["arrows"]]
     uniq = []
     for a in used:
         if a not in uniq:
             uniq.append(a)
     # final-state check against the electron arithmetic
     final = {s["label"]: len(present[s["label"]]) for s in subs}
-    net = sum(1 if st["kind"] == "add" else -1 for st in steps)
+    net = sum(1 if st["kind"] == "add" else -1 for st in steps if st["kind"] != "highlight")
     assert sum(final.values()) == sum(count.values()) + net
     check_boxes([a for s in subs for a in present[s["label"]]], subs)
     return initial_objs, steps, uniq
@@ -250,9 +288,10 @@ def textbox(shapes, x, y, w, h, text, font, size, color, bold=False, align=PP_AL
     tf.word_wrap = True
     tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
     tf.vertical_anchor = anchor
-    p = tf.paragraphs[0]
-    p.alignment = align
-    add_runs(p, text, font, size, color, bold)
+    for i, line_ in enumerate(text.split("\n")):          # "\n" starts a new paragraph
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        p.alignment = align
+        add_runs(p, line_, font, size, color, bold)
     # no autofit: text is never shrunk to fit
     return tb
 
@@ -279,31 +318,48 @@ def draw(slide, b, region, T, initial, steps, arrows):
     font = T["fonts"]["body"]
     deep = T["courses"][b["_course"]]["primaryDeep"]
     x0, y0, W, H = region["x"], region["y"], region["w"], region["h"]
-    pad = 0.12
+    compact = b.get("band") is not None
+    pad = 0.02 if compact else 0.12
     subs = b["sublevels"]
     nb = sum(s["boxes"] for s in subs)
     inner, outer = 0.05, 0.28
     title_h, label_h, line = 0.30, 0.30, 0.28
+    srow = 0.30 if compact else 0.32
+    gap = 0.02 if compact else 0.04
     caps = [st["caption"] for st in steps if st["caption"]]
-    # Captions accumulate, each in its own one-line row, so a static export (PDF, handout) of the
-    # final state never has two captions drawn on top of each other.
-    for c in caps:
-        assert est_lines(c, W - 2 * pad, FLOOR_PT, True) == 1, f"caption does not fit one line here: {c!r}"
-    n_caps = len(caps)
-    cap_h = n_caps * line
-    sum_h = 0.32 if (b.get("sum", "auto") or b.get("result")) else 0
-    gaps = 0.04 * 4
+    # Captions accumulate, each in its own row (one or two lines), so a static export (PDF, handout) of
+    # the final state never has two captions drawn on top of each other.
+    cap_lines = [est_lines(c, W - 2 * pad, FLOOR_PT, True) for c in caps]
+    for c, n in zip(caps, cap_lines):
+        assert n <= 2, f"caption does not fit two lines here: {c!r}"
+    cap_h = sum(n * line for n in cap_lines)
+    states = bool(b.get("start_text")) or any(st.get("text") for st in steps)
+    if states:
+        assert not b.get("result") and b.get("sum", "auto") in ("auto", False, None), \
+            "start_text / step text cannot be combined with result or a custom sum"
+        texts = [t for t in [b.get("start_text")] + [st.get("text") for st in steps] if t]
+        for t in texts:
+            assert est_lines(t, W - 2 * pad, 18, True) == 1, f"state text does not fit one line: {t!r}"
+        sum_h = srow * len(texts)
+    else:
+        sum_h = 0.32 if (b.get("sum", "auto") or b.get("result")) else 0
+    gaps = gap * 4
+    # compact (band) builds put the title in a column to the left of the boxes, not above them
+    tw = 0.95 if compact else 0.0
+    if compact:
+        title_h = 0.0
     avail_h = H - 2 * pad - title_h - label_h - cap_h - sum_h - gaps
-    avail_w = W - 2 * pad - (nb - len(subs)) * inner - (len(subs) - 1) * outer
-    size = min(1.0, avail_w / nb, avail_h)
+    avail_w = W - 2 * pad - tw - (nb - len(subs)) * inner - (len(subs) - 1) * outer
+    size = min(b.get("box_max", 1.0), avail_w / nb, avail_h)
     assert size >= 0.4, f"slide {b['slide']}: boxes would be {size:.2f} in; the region is too small"
     row_w = nb * size + (nb - len(subs)) * inner + (len(subs) - 1) * outer
     # vertical stack, centred in the region
     stack = title_h + size + label_h + cap_h + sum_h + gaps
     y = y0 + (H - stack) / 2
-    xs = x0 + (W - row_w) / 2
+    xs = x0 + pad + tw + (W - 2 * pad - tw - row_w) / 2
 
-    out = {"backdrop": None, "group": None, "arrows": {}, "captions": [], "sum": None}
+    out = {"backdrop": None, "group": None, "arrows": {}, "hl": {}, "captions": [], "sum": None,
+           "states": []}
     bd = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(x0 * IN)), Emu(int(y0 * IN)),
                                 Emu(int(W * IN)), Emu(int(H * IN)))
     bd.name = "BUILD backdrop"
@@ -315,8 +371,12 @@ def draw(slide, b, region, T, initial, steps, arrows):
     grp.name = "BUILD boxes and labels"
     out["group"] = grp
     gs = grp.shapes
-    textbox(gs, x0 + pad, y, W - 2 * pad, title_h, b["title"], font, 18, ink, True, name="BUILD title")
-    by = y + title_h + 0.04
+    if compact:
+        th = max(size, 0.31 * (b["title"].count("\n") + 1))        # 18 pt lines, never clipped
+        textbox(gs, x0 + pad, y + size / 2 - th / 2, tw, th, b["title"], font, 18, ink, True, name="BUILD title")
+    else:
+        textbox(gs, x0 + pad, y, W - 2 * pad, title_h, b["title"], font, 18, ink, True, name="BUILD title")
+    by = y + title_h + (0 if compact else gap)
     box_xy = {}
     x = xs
     for s in subs:
@@ -330,7 +390,7 @@ def draw(slide, b, region, T, initial, steps, arrows):
             r.line.color.rgb = rgb(ink); r.line.width = Pt(2.25)
             r.shadow.inherit = False
             box_xy[(s["label"], i)] = (bx, by)
-        textbox(gs, x - 0.1, by + size + 0.04, gw + 0.2, label_h,
+        textbox(gs, x - 0.1, by + size + gap, gw + 0.2, label_h,
                 s["label"] if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
                 name=f"BUILD label {s['label']}")
         x += gw + outer
@@ -348,19 +408,44 @@ def draw(slide, b, region, T, initial, steps, arrows):
         shp.fill.solid(); shp.fill.fore_color.rgb = rgb(ink); shp.line.fill.background()
         shp.shadow.inherit = False
         a.spid = shp.shape_id
+        a.geom = (cx - aw / 2, byy + (size - ah) / 2, aw, ah)
         out["arrows"][id(a)] = shp
-    cy = by + size + 0.04 + label_h + 0.04
+    # valence highlight: a second arrow laid over the first (Primary fill, Asphalt outline)
+    accent = T["courses"][b["_course"]]["primary"]
+    for st in steps:
+        for a in st.get("arrows") or []:
+            if id(a) in out["hl"]:
+                continue
+            x_, y_, w_, h_ = a.geom
+            hs = slide.shapes.add_shape(MSO_SHAPE.UP_ARROW if a.spin == "u" else MSO_SHAPE.DOWN_ARROW,
+                                        Emu(int(x_ * IN)), Emu(int(y_ * IN)), Emu(int(w_ * IN)), Emu(int(h_ * IN)))
+            hs.name = f"BUILD valence {a.sub} box{a.box + 1} {'up' if a.spin == 'u' else 'down'}"
+            hs.adjustments[0] = 0.34
+            hs.adjustments[1] = 0.70
+            hs.fill.solid(); hs.fill.fore_color.rgb = rgb(accent)
+            hs.line.color.rgb = rgb(ink); hs.line.width = Pt(1.5)
+            hs.shadow.inherit = False
+            out["hl"][id(a)] = hs
+    cy = by + size + gap + label_h + gap
     row = 0
     for st in steps:
         if st["caption"]:
-            tb = textbox(slide.shapes, x0 + pad, cy + row * line, W - 2 * pad, line, st["caption"], font,
+            nl = cap_lines[len(out["captions"])]
+            tb = textbox(slide.shapes, x0 + pad, cy + row * line, W - 2 * pad, nl * line, st["caption"], font,
                          FLOOR_PT, deep, True, name="BUILD caption")
             out["captions"].append((st, tb))
-            row += 1
-    ty = cy + cap_h + 0.04
+            row += nl
+    ty = cy + cap_h + gap
     s_text = None
     core = b.get("core")
-    if b.get("result"):
+    if states:
+        for st_, t in [(None, b.get("start_text"))] + [(st, st.get("text")) for st in steps]:
+            if t:
+                out["states"].append((st_, textbox(slide.shapes, x0 + pad, ty + srow * len(out["states"]),
+                                                   W - 2 * pad, srow, t, font, 18, ink, True,
+                                                   name="BUILD state")))
+        s_text = None
+    elif b.get("result"):
         s_text = b["result"]
     elif b.get("sum", "auto"):
         if b.get("sum", "auto") == "auto":
@@ -393,19 +478,35 @@ def build_timeline(b, shp, initial, steps):
     tl = Timeline()
     fx = b.get("effect", "fade")
     box = eff(shp["group"].shape_id, "entr", "fly", grp=True)
+    pre = []
+    start_state = [eff(tb.shape_id, "entr", "fade", text=True) for st_, tb in shp["states"] if st_ is None]
     desc = []
     if initial:                                    # filled start: the atom arrives whole
-        tl.click(box, *[eff(shp["arrows"][id(a)].shape_id, "entr", "fly", fill=True) for a in initial])
+        tl.click(*pre, box, *[eff(shp["arrows"][id(a)].shape_id, "entr", "fly", fill=True) for a in initial],
+                 *start_state)
         desc.append("boxes, labels and every electron arrow fly in")
     else:
-        tl.click(box)
+        tl.click(*pre, box, *start_state)
         desc.append("boxes and labels fly in")
+    present_hl = []                               # valence overlays currently showing
     last = len(steps) - 1
     for i, st in enumerate(steps):
         a = st["arrow"]
-        sp = shp["arrows"][id(a)]
-        effects = [eff(sp.shape_id, "entr" if st["kind"] == "add" else "exit", fx, fill=True)]
+        effects = []
+        if st["kind"] == "highlight":
+            for ha in st["arrows"]:
+                effects.append(eff(shp["hl"][id(ha)].shape_id, "entr", "fade", fill=True))
+                present_hl.append(ha)
+        else:
+            sp = shp["arrows"][id(a)]
+            effects.append(eff(sp.shape_id, "entr" if st["kind"] == "add" else "exit", fx, fill=True))
+            if st["kind"] == "remove" and a in present_hl:      # its valence overlay leaves with it
+                effects.append(eff(shp["hl"][id(a)].shape_id, "exit", "fade", fill=True))
+                present_hl.remove(a)
         for s2, tb in shp["captions"]:
+            if s2 is st:
+                effects.append(eff(tb.shape_id, "entr", "fade", text=True))
+        for s2, tb in shp["states"]:
             if s2 is st:
                 effects.append(eff(tb.shape_id, "entr", "fade", text=True))
         if i == last and shp["sum"] is not None:
@@ -540,6 +641,17 @@ def append_note(slide, text):
     tf.text = (tf.text.rstrip() + "\n" if tf.text.strip() else "") + text
 
 
+def all_shape_ids(shp):
+    return ([shp["backdrop"].shape_id, shp["group"].shape_id]
+            + [sp.shape_id for sp in shp["arrows"].values()] + [sp.shape_id for sp in shp["hl"].values()]
+            + [tb.shape_id for _, tb in shp["captions"]] + [tb.shape_id for _, tb in shp["states"]]
+            + ([shp["sum"].shape_id] if shp["sum"] is not None else []))
+
+
+def drop(shape):
+    shape._element.getparent().remove(shape._element)
+
+
 def process(deck, specfile, out, preview=None, only=None):
     spec = json.load(open(specfile, encoding="utf-8"))
     course = spec["course"]
@@ -547,6 +659,7 @@ def process(deck, specfile, out, preview=None, only=None):
     chk = load_checker()
     prs = Presentation(deck)
     report = []
+    per_slide = {}                       # slide number -> [(timeline, desc)], in spec order
     for b in spec["builds"]:
         if only and b["slide"] != only:
             continue
@@ -554,55 +667,74 @@ def process(deck, specfile, out, preview=None, only=None):
         slide = prs.slides[b["slide"] - 1]
         layout = slide.slide_layout.name
         assert layout == b["layout"], f"slide {b['slide']}: layout is {layout}, spec says {b['layout']}"
-        region = T["slots"][layout][b["region"]]
+        slot = T["slots"][layout][b["region"]]
+        region = dict(slot)
+        if b.get("band"):
+            i_, n_ = b["band"]
+            assert 1 <= i_ <= n_, f"bad band {b['band']}"
+            region["h"] = region["h"] / n_
+            region["y"] = region["y"] + region["h"] * (i_ - 1)
         validate_atom(b, chk)
         initial, steps, arrows = plan_steps(b)
-        all_arrows = list(arrows)
-        removed = remove_pictures_in(slide, region)
+        earlier = per_slide.setdefault(b["slide"], [])
+        removed = remove_pictures_in(slide, slot)
         shp = draw(slide, b, region, T, initial, steps, arrows)
         tl, desc = build_timeline(b, shp, initial, steps)
         n = len(tl.clicks)
         static = [shp["backdrop"].shape_id]
+        every = all_shape_ids(shp)
         # final-state assertion: replay the clicks and compare with the target
-        final_vis = simulate(tl, static + [shp["group"].shape_id] + [sp.shape_id for sp in shp["arrows"].values()]
-                             + [tb.shape_id for _, tb in shp["captions"]]
-                             + ([shp["sum"].shape_id] if shp["sum"] is not None else []), n)
-        want = {a for a in arrows if True}
+        final_vis = simulate(tl, static + every[1:], n)
         if b.get("steps"):
-            cur = set(initial)
+            want, want_hl = set(initial), set()
             for st in steps:
-                (cur.add if st["kind"] == "add" else cur.discard)(st["arrow"])
-            want = cur
+                if st["kind"] == "highlight":
+                    want_hl |= set(st["arrows"])
+                else:
+                    (want.add if st["kind"] == "add" else want.discard)(st["arrow"])
+            want_hl &= want                            # an overlay leaves with its arrow
+        else:
+            want, want_hl = set(arrows), set()
         check_boxes(list(want), b["sublevels"])
         got = {a for a in arrows if shp["arrows"][id(a)].shape_id in final_vis}
         assert got == want, f"slide {b['slide']}: final state differs from the computed target"
+        got_hl = {a for a in arrows if id(a) in shp["hl"] and shp["hl"][id(a)].shape_id in final_vis}
+        assert got_hl == want_hl, f"slide {b['slide']}: final valence highlights differ from the target"
+        if shp["states"]:
+            shown = [tb for _, tb in shp["states"] if tb.shape_id in final_vis]
+            assert len(shown) == len(shp["states"]), f"slide {b['slide']}: a state line is not showing at the end"
         total_final = len(got)
+        earlier.append((tl, desc, b["region"], b.get("name"), b, shp, static, every, n, removed, total_final))
+    for slide_no, items in per_slide.items():
+        slide = prs.slides[slide_no - 1]
         if preview is not None:
-            vis = simulate(tl, static + [shp["group"].shape_id] + [sp.shape_id for sp in shp["arrows"].values()]
-                           + [tb.shape_id for _, tb in shp["captions"]]
-                           + ([shp["sum"].shape_id] if shp["sum"] is not None else []), min(preview, n))
-            keep_group = shp["group"].shape_id in vis
-            if not keep_group:
-                shp["group"]._element.getparent().remove(shp["group"]._element)
-            for a in arrows:
-                s_ = shp["arrows"][id(a)]
-                if s_.shape_id not in vis:
-                    s_._element.getparent().remove(s_._element)
-            for _, tb in shp["captions"]:
-                if tb.shape_id not in vis:
-                    tb._element.getparent().remove(tb._element)
-            if shp["sum"] is not None and shp["sum"].shape_id not in vis:
-                shp["sum"]._element.getparent().remove(shp["sum"]._element)
-            report.append((b["slide"], f"preview after {min(preview, n)} of {n} clicks"))
+            left = preview
+            for tl, desc, _, _, b, shp, static, every, n, _, _ in items:
+                k = max(0, min(left, n))
+                left -= k
+                vis = simulate(tl, static + every[1:], k)
+                for shape in [shp["backdrop"], shp["group"]] + list(shp["arrows"].values()) \
+                        + list(shp["hl"].values()) + [tb for _, tb in shp["captions"]] \
+                        + [tb for _, tb in shp["states"]] + ([shp["sum"]] if shp["sum"] is not None else []):
+                    if shape.shape_id not in vis:
+                        drop(shape)
+                report.append((slide_no, f"preview after {k} of {n} clicks"))
             continue
+        merged = Timeline()
+        notes = []
+        for tl, desc, _, name, *_ in items:
+            merged.clicks += tl.clicks
+            notes += [f"{name}: {d}" if name else d for d in desc]
         el = slide._element
-        tm = etree.fromstring(timing_xml(tl))
+        tm = etree.fromstring(timing_xml(merged))
         anchor = el.find(f"{{{NS_P}}}clrMapOvr")
         tr = el.find(f"{{{NS_P}}}transition")
         (tr if tr is not None else anchor).addnext(tm)
+        n = len(merged.clicks)
         nodes = validate_timing(slide, n)
-        append_note(slide, f"CLICK BUILD: {n} clicks: " + "; ".join(f"{i + 1} {d}" for i, d in enumerate(desc)) + ".")
-        report.append((b["slide"], n, nodes, removed, total_final))
+        append_note(slide, f"CLICK BUILD: {n} clicks: " + "; ".join(f"{i + 1} {d}" for i, d in enumerate(notes)) + ".")
+        for tl, desc, _, _, b, _, _, _, nn, removed, total_final in items:
+            report.append((slide_no, nn, nodes, removed, total_final))
     prs.save(out)
     return report
 

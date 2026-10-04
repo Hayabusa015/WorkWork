@@ -159,10 +159,7 @@
         "a3_l": "THE CHECK",
         "a3_b": "11 − 1 = 10 and 17 + 1 = 18."
       },
-      "images": {
-        "diagram": "../assets/chem_u02_s2.4_na_cl_ions.png"
-      },
-      "notes": "MERGED slide (was two: Na+ orbitals and Cl- orbitals). Na loses its 3s1, leaving the neon configuration; Cl's added electron goes into the open 3p spot, not a new level, and matches argon. Charge column in the figure is large and plain so the minus is legible. Do not yet say why these charges: the rule comes at the end of the section."
+      "notes": "MERGED slide (was two: Na+ orbitals and Cl- orbitals). Na loses its 3s1, leaving the neon configuration; Cl's added electron goes into the open 3p spot, not a new level, and matches argon. Click build replaces the static figure: sodium builds first, then the chlorine build covers it in the same slot (the 20-content-slide cap leaves no room for a second slide). The state line under each diagram gives the plain, large charge so the minus is legible. The static PNG chem_u02_s2.4_na_cl_ions.png stays on disk for print. Do not yet say why these charges: the rule comes at the end of the section."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -227,10 +224,7 @@
         "a3_l": "Fe^{3+}",
         "a3_b": "[Ar] 3d^{5}\n23 electrons. One 3d electron leaves too."
       },
-      "images": {
-        "diagram": "../assets/chem_u02_s2.4_fe_ions_orbitals.png"
-      },
-      "notes": "Fe 26, Fe2+ 24 [Ar]3d6, Fe3+ 23 [Ar]3d5. Present 3d5 as an observed electron count, not proof of a cause."
+      "notes": "Fe 26, Fe2+ 24 [Ar]3d6, Fe3+ 23 [Ar]3d5. Present 3d5 as an observed electron count, not proof of a cause. Click build replaces the static figure: one slide carries Fe, Fe2+ and Fe3+ (the 4s arrows leave first, then one 3d). The static PNG chem_u02_s2.4_fe_ions_orbitals.png stays on disk for print."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -276,10 +270,7 @@
         "c2_b": "Lose both 4s electrons: [Ar].\n18 electrons, 20 protons.\nCharge: 20 − 18 = 2+",
         "mustwrite": "Ca has 2 valence electrons. Losing both leaves [Ar], so Ca forms Ca^{2+}."
       },
-      "imageSubjects": {
-        "concept": "a chunk of calcium metal in a sealed glass vial on dark slate"
-      },
-      "notes": "NEW. Closing synthesis, step 1: Ca walk-through in four moves: count (2 valence), move (lose 2; gaining 6 is more), result ([Ar], 18 electrons), charge (20 protons minus 18 electrons = 2+). Valence-electron reasoning only. Do not teach ionization energy; Unit 3 (U3.4, U3.7) explains the energy side. Scope boundary set by Matt 2026-10-04; DECISIONS.md not changed. Avoid 'wants' or 'needs' language for atoms. Image slot empty. Prompt subject: a chunk of calcium metal in a sealed glass vial on dark slate."
+      "notes": "NEW. Closing synthesis, step 1: Ca walk-through in four moves: count (2 valence), move (lose 2; gaining 6 is more), result ([Ar], 18 electrons), charge (20 protons minus 18 electrons = 2+). Valence-electron reasoning only. Do not teach ionization energy; Unit 3 (U3.4, U3.7) explains the energy side. Scope boundary set by Matt 2026-10-04; DECISIONS.md not changed. Avoid 'wants' or 'needs' language for atoms. The picture slot holds the Ca click build (valence arrows highlighted, then removed one per click)."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -326,10 +317,7 @@
         "work": "Mg: 2, lose 2, [Ne], 2+\nAl: 3, lose 3, [Ne], 3+\nS: 6, gain 2, [Ar], 2−\nBr: 7, gain 1, [Kr], 1−",
         "mustwrite": "Mg 2+, Al 3+, S 2−, Br 1−. Each move ends at a noble gas configuration."
       },
-      "imageSubjects": {
-        "data": "a pencil resting on a page of handwritten ion charges"
-      },
-      "notes": "Mg: 12 e to 10, Mg2+, [Ne]. Al: 13 to 10, Al3+, [Ne]. S: 16 to 18, S2-, [Ar]. Br: 35 to 36, Br-, [Kr] (3d10 already full). All numbers re-added in the figure script assertions. Anion charges are written plain (2−, 1−) on the slide for legibility. Same pattern, same rule: Mg2+ and S2- were the old example's ions. Image slot empty. Prompt subject: a pencil resting on a page of handwritten ion charges."
+      "notes": "Mg: 12 e to 10, Mg2+, [Ne]. Al: 13 to 10, Al3+, [Ne]. S: 16 to 18, S2-, [Ar]. Br: 35 to 36, Br-, [Kr] (3d10 already full). All numbers re-added in the figure script assertions. Anion charges are written plain (2−, 1−) on the slide for legibility. Same pattern, same rule: Mg2+ and S2- were the old example's ions. The picture slot holds a click build for S only (two down arrows added); Mg, Al and Br stay in the text."
     },
     {
       "master": "05_PROCESS_TIMELINE",

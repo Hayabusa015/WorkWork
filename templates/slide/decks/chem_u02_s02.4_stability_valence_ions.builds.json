@@ -1,0 +1,68 @@
+{
+  "course": "chemistry",
+  "note": "Click builds for S2.4. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each layout name is asserted. These slides' PNGs/image subjects are omitted from the deck spec so the slot is empty. Slide 10 stacks two builds (Na, then Cl) in two bands of one slot. State lines write the minus as plain large text, never a raised glyph. A state line is a record row: each fades in and stays.",
+  "builds": [
+    {
+      "slide": 10, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram", "name": "Na", "band": [1, 2],
+      "title": "Na", "box_max": 0.5, "z": 11, "start": "filled",
+      "sublevels": [
+        {"label": "1s", "boxes": 1, "electrons": 2},
+        {"label": "2s", "boxes": 1, "electrons": 2},
+        {"label": "2p", "boxes": 3, "electrons": 6},
+        {"label": "3s", "boxes": 1, "electrons": 1}
+      ],
+      "steps": [{"remove": 1, "text": "Na^{+}: charge 1+, 10 electrons"}]
+    },
+    {
+      "slide": 10, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram", "name": "Cl", "band": [2, 2],
+      "title": "Cl\n[Ne]", "box_max": 0.5, "z": 17, "core": {"label": "[Ne]", "electrons": 10}, "start": "filled",
+      "sublevels": [
+        {"label": "3s", "boxes": 1, "electrons": 2},
+        {"label": "3p", "boxes": 3, "electrons": 5}
+      ],
+      "steps": [{"add": 1, "text": "Cl ion: charge 1−, 18 electrons"}]
+    },
+    {
+      "slide": 14, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram", "name": "Fe",
+      "title": "IRON  Z = 26  [Ar] CORE", "z": 26, "core": {"label": "[Ar]", "electrons": 18}, "start": "filled",
+      "sublevels": [
+        {"label": "4s", "boxes": 1, "electrons": 2},
+        {"label": "3d", "boxes": 5, "electrons": 6}
+      ],
+      "steps": [
+        {"highlight": "valence", "valence": 2, "caption": "Highest n is 4: the 4s electrons leave first"},
+        {"remove": 1},
+        {"remove": 1, "text": "Fe^{2+}: charge 2+, 24 electrons"},
+        {"remove": 1, "caption": "Then one 3d electron leaves", "text": "Fe^{3+}: charge 3+, 23 electrons"}
+      ]
+    },
+    {
+      "slide": 17, "layout": "03_GROUPED_CONCEPT", "region": "concept", "name": "Ca",
+      "title": "CALCIUM  Z = 20  [Ne] CORE", "z": 20, "core": {"label": "[Ne]", "electrons": 10}, "start": "filled",
+      "sublevels": [
+        {"label": "3s", "boxes": 1, "electrons": 2},
+        {"label": "3p", "boxes": 3, "electrons": 6},
+        {"label": "4s", "boxes": 1, "electrons": 2}
+      ],
+      "start_text": "Ca: charge 0, 20 electrons",
+      "steps": [
+        {"highlight": "valence", "valence": 2,
+         "caption": "Valence electrons leave first: this is the outermost level"},
+        {"remove": 1},
+        {"remove": 1, "text": "Ca^{2+} = [Ar]: charge 2+"}
+      ]
+    },
+    {
+      "slide": 20, "layout": "10_WORKED_SOLUTION", "region": "data", "name": "S",
+      "title": "SULFUR  Z = 16  [Ne] CORE", "z": 16, "core": {"label": "[Ne]", "electrons": 10}, "start": "filled",
+      "sublevels": [
+        {"label": "3s", "boxes": 1, "electrons": 2},
+        {"label": "3p", "boxes": 3, "electrons": 4}
+      ],
+      "steps": [
+        {"add": 1, "caption": "6 valence + 2 gained = 8"},
+        {"add": 1, "text": "S ion: charge 2−"}
+      ]
+    }
+  ]
+}
