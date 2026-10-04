@@ -1,0 +1,42 @@
+{
+  "course": "chemistry",
+  "note": "Click builds for S2.3. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each carries a layout name that is asserted. These slides' PNGs are omitted from the deck spec so the slot is empty; the post-processor also deletes any picture inside the slot.",
+  "builds": [
+    {
+      "slide": 7, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram",
+      "title": "NITROGEN  Z = 7", "z": 7, "start": "empty",
+      "sublevels": [
+        {"label": "1s", "boxes": 1, "electrons": 2},
+        {"label": "2s", "boxes": 1, "electrons": 2},
+        {"label": "2p", "boxes": 3, "electrons": 3}
+      ],
+      "captions": {"hund": "Hund: one up arrow in each box first", "pauli": "Pauli: pair with opposite spin"}
+    },
+    {
+      "slide": 8, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram",
+      "title": "OXYGEN  2p SUBLEVEL", "start": "empty",
+      "sublevels": [{"label": "2p", "boxes": 3, "electrons": 4}],
+      "captions": {"hund": "Hund: one up arrow in each box first", "pauli": "Pauli: pair with opposite spin"},
+      "sum": "4 arrows = 4 electrons in 2p"
+    },
+    {
+      "slide": 11, "layout": "10_WORKED_SOLUTION", "region": "data",
+      "title": "OXYGEN  Z = 8", "z": 8, "start": "empty",
+      "sublevels": [
+        {"label": "1s", "boxes": 1, "electrons": 2},
+        {"label": "2s", "boxes": 1, "electrons": 2},
+        {"label": "2p", "boxes": 3, "electrons": 4}
+      ],
+      "captions": {"hund": "Hund: singles first", "pauli": "Pauli: opposite spins"}
+    },
+    {
+      "slide": 15, "layout": "10_WORKED_SOLUTION", "region": "data",
+      "title": "IRON  Z = 26", "z": 26, "core": {"label": "[Ar]", "electrons": 18}, "start": "empty",
+      "sublevels": [
+        {"label": "4s", "boxes": 1, "electrons": 2},
+        {"label": "3d", "boxes": 5, "electrons": 6}
+      ],
+      "captions": {"hund": "Hund: singles first", "pauli": "Pauli: opposite spins"}
+    }
+  ]
+}

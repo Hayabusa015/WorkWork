@@ -93,3 +93,39 @@ render would be inspecting a different document than the one that ships.
 
 **Neither check replaces looking at the raster.** Both open findings in the change record were found
 mechanically; the two box collisions in finding 7 were found by eye first.
+
+## Click builds
+
+`build_deck.js` (pptxgenjs) cannot write animations. Orbital diagrams that must be built one click
+at a time (boxes fly in, then one electron arrow per click in Hund and Pauli order, or one arrow
+leaving or arriving per click for an ion) are added by a **post-processor**, never by the masters or
+the deck builder:
+
+```bash
+cd templates/slide
+SHULL_COURSE=chemistry node build_deck.js decks/<spec>.json /tmp/<deck>.pptx      # 1. static deck
+python3 ../../scripts/add_click_builds.py /tmp/<deck>.pptx decks/<spec>.builds.json \
+        ../../deliverables/<unit>/<final>.pptx                                  # 2. animated deliverable
+```
+
+Rules for the two files:
+
+- The build slide must leave its slot **empty**: omit that slide's `images` entry in `<spec>.json`
+  (the post-processor also deletes any picture inside the slot). The PNG figure script can keep
+  drawing the static figure for print.
+- `<spec>.builds.json` lists one object per build slide: 1-based `slide`, the `layout` name (asserted),
+  the `region` (a slot name; coordinates come from `build.js` `SLOTS`, never typed), `title`,
+  `sublevels` (`label`, `boxes`, `electrons`, Aufbau order), optional `z` and `core`, `start`
+  (`empty` fills by clicks, `filled` flies the atom in whole), `captions` (`hund`, `pauli`), and for
+  ions `steps` (`{"remove": n}` or `{"add": n}` with an optional `caption`). The script's docstring is
+  the field reference.
+- Arrow order, caps, Aufbau order, Pauli, Hund and electron totals (against Z, using the S2.3 checker's
+  ground-state table) are computed and asserted by the script. A spec that cannot be filled legally fails
+  the run. Ions remove valence-first (highest n, then highest l: 4s before 3d).
+- The script appends `CLICK BUILD: N clicks: ...` to each changed slide's teacher notes, so the count in
+  the notes is the count in the file.
+- Verify: `python3 scripts/add_click_builds.py deck.pptx spec.builds.json out.pptx --preview K [--slide N]`
+  writes a static copy showing the state after K clicks, for rasterising intermediate states.
+  Then run the geometry audit and `pdffonts` as above. The animation was checked by script and by
+  LibreOffice import; it has not been played in PowerPoint, Keynote or Google Slides.
+- A rebuild from `build_deck.js` drops the animation. Always re-run step 2 after step 1.

@@ -347,17 +347,19 @@ def check_against_spec():
         print("  tokens in the spec or notes that no checked configuration contains:", strays)
     assert not missing, "slide text does not contain a checked configuration"
     assert not strays, "unchecked configuration on a slide or in the notes"
-    # 5. the corrected configurations on the Spot-the-Mistake solutions slide (18) are the checked ones
-    sol = " ".join(str(v) for v in slides[17]["fields"].values())
+    # 5. the corrected configurations on the Spot-the-Mistake solutions slide are the checked ones
+    def slide_by_headline(h):          # by headline, not position: slides get inserted
+        return next(sl for sl in slides if sl["fields"].get("headline") == h)
+    sol = " ".join(str(v) for v in slide_by_headline("Spot the Mistake, Worked")["fields"].values())
     for cfg in ["1s2 2s2 2p4", "[Ar] 4s1", "[Ar] 4s2", "[Ar] 4s1 3d5"]:
-        assert mark(cfg) in sol, f"slide 18 missing corrected {cfg}"
+        assert mark(cfg) in sol, f"Spot the Mistake, Worked: missing corrected {cfg}"
     # each correction really is the ground state of its element
     for sym, Z, cfg in [("O", 8, "1s2 2s2 2p4"), ("K", 19, "[Ar] 4s1"), ("Ca", 20, "[Ar] 4s2"),
                         ("Cr", 24, "[Ar] 4s1 3d5")]:
         assert check_config(cfg, Z) == [], (sym, cfg)
         assert expand(cfg) == ground_state(Z), (sym, cfg)
-    # 6. slide 12 carries the same-period-noble-gas note, and it is true: Ar is Cl's own period
-    assert "not [Ar]" in slides[11]["fields"]["mustwrite"]
+    # 6. the Noble-Gas Shorthand slide carries the same-period-noble-gas note, and it is true: Ar is Cl's own period
+    assert "not [Ar]" in slide_by_headline("Noble-Gas Shorthand")["fields"]["mustwrite"]
     assert check_config("[Ar] 3s2 3p5", 17) != []         # the error the note warns against
     print(f"  spec cross-check: {len(GOOD) + len(BAD)} configurations verbatim, no strays, "
           f"no Unicode superscripts, notes on all {len(slides)} slides")

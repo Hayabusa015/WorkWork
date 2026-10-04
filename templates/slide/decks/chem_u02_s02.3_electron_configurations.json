@@ -110,10 +110,21 @@
         "a3_l": "THE LABEL UNDER EACH GROUP",
         "a3_b": "The raised number counts the arrows."
       },
-      "images": {
-        "diagram": "../assets/chem_u02_s2.3_orbital_diagram_nitrogen.png"
-      },
       "notes": "N has 7 electrons so 7 arrows: 2 + 2 + 3. Convention: draw the up arrow first in every box, and the label's raised number counts the arrows."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Filling Oxygen's 2p Boxes",
+        "subhead": "Four electrons, three boxes. Watch the order of the arrows.",
+        "a1_l": "THE BOXES",
+        "a1_b": "The 2p sublevel has 3 boxes. Oxygen puts 4 electrons in them.",
+        "a2_l": "HUND'S RULE",
+        "a2_b": "One up arrow in each box first.",
+        "a3_l": "PAULI EXCLUSION PRINCIPLE",
+        "a3_b": "The fourth arrow pairs up, pointing the opposite way."
+      },
+      "notes": "Click build (see scripts/add_click_builds.py): the three 2p boxes fly in, then one arrow per click: up, up, up (Hund: singles first), then down in box 1 (Pauli: a pair has opposite spins). Result: 2p^4 with one pair and two singles, so 2 unpaired electrons. Have students draw each arrow in their notes at the same click. Same filling as the oxygen example later in this deck."
     },
     {
       "master": "05_PROCESS_TIMELINE",
@@ -161,9 +172,6 @@
         "f1_b": "Z = 8 electrons\nFill 1s, then 2s, then 2p",
         "work": "1s^{2} 2s^{2} 2p^{4}\n2 + 2 + 4 = 8\nUnpaired: 2",
         "mustwrite": "Oxygen is 1s^{2} 2s^{2} 2p^{4}, with 2 unpaired electrons."
-      },
-      "images": {
-        "data": "../assets/chem_u02_s2.3_orbital_diagram_oxygen.png"
       },
       "notes": "Oxygen: 1s^2 2s^2 2p^4, 2 + 2 + 4 = 8. The 2p boxes hold one pair and two singles, so 2 unpaired."
     },
@@ -228,9 +236,6 @@
         "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
         "work": "[Ar] 4s^{2} 3d^{6}\n18 + 2 + 6 = 26\nUnpaired: 4",
         "mustwrite": "Fe is [Ar] 4s^{2} 3d^{6}. One pair and 4 singles in the 3d boxes."
-      },
-      "images": {
-        "data": "../assets/chem_u02_s2.3_orbital_diagram_iron.png"
       },
       "notes": "Fe: [Ar] 4s^2 3d^6, 18 + 2 + 6 = 26. The 3d boxes hold one pair and four singles, so 4 unpaired. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6."
     },
