@@ -14,6 +14,11 @@ does exactly one thing:
     python3 scripts/add_click_builds.py deck.pptx deck.builds.json out.pptx --preview K [--slide N]
         --preview K  writes a STATIC copy showing the state after K clicks (no animation). For
                      looking at intermediate states in a raster; never a deliverable.
+    python3 scripts/add_click_builds.py deck.pptx deck.builds.json out.pptx --static
+        --static     writes the PRINT / HANDOUT variant: no p:timing, and each build slide shows only its
+                     coherent FINAL state (see "Static final-state mode" below). Opt-in; without the flag the
+                     output is unchanged. Use it for any export that is not slideshow mode (PDF, print,
+                     handout, Normal view, Google Slides import), where every shape shows at once.
 
 Spec (JSON). One object per build slide; see templates/slide/README.md, "Click builds".
     {"course": "chemistry",
@@ -73,6 +78,22 @@ Added for S2.3 (every key below is opt-in; a spec that does not use them builds 
          "result": "auto"}: click 1 the longhand and its sum appear; click 2 the segments the noble gas
         covers are highlighted; click 3 they leave and [Ar] appears in their place; click 4 the finished
         shorthand line appears. Everything is computed from the checker's tables and asserted.
+
+Static final-state mode (--static; every key is opt-in, the animated output is unaffected):
+  Same builds, same asserted chemistry, no animation. Per build the static slide shows
+    arrows        only the arrows of the final state (removed arrows absent, added arrows present)
+    highlights    none (the valence overlay is a teaching step, never a final state)
+    labels        every sublevel label carries its FINAL count, e.g. 4s^{0} 3d^{5} for Fe3+ (ion builds)
+    state lines   the "start_text" (before) and the LAST step "text" (after); intermediate species lines
+                  (e.g. Fe2+ between Fe and Fe3+) are animated-only
+    captions      kept, each on its own row (fill builds: Hund and Pauli; ion builds: the step captions)
+    text_line     (Ge) the longhand line, then the shorthand line ([Ar] chip + the remaining segments),
+                  one caption saying what the noble-gas symbol stands for, and the check sum. The click-2
+                  caption ("these 18 electrons...") describes a highlight that is not shown, so it is not used.
+  {"static_title": "Fe^{3+}  Z = 26  [Ar] CORE"}   optional: the diagram title in the static output, when the
+        final state is a different species from the title that opens the animation.
+  {"static_caption": "..."}   text_line only, optional: replaces the computed noble-gas caption.
+  Notes: the static output carries "STATIC FINAL STATE" instead of the "CLICK BUILD" line.
 
 Everything chemical is computed and asserted here, not typed: arrows are generated in fill order
 (within a sublevel one up arrow into each box left to right, THEN the down arrows left to right),
@@ -563,7 +584,8 @@ def draw(slide, b, region, T, initial, steps, arrows):
             late_boxes.append((s["label"], cx0 + wn - 0.04, by + size + gap, wc, label_h, cnt))
         else:
             textbox(gs, x - 0.1, by + size + gap, gw + 0.2, label_h,
-                    s["label"] if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
+                    (f"{s['label']}^{{{b['_final_counts'][s['label']]}}}" if b.get("_final_counts") is not None
+                     else s["label"]) if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
                     name=f"BUILD label {s['label']}")
         x += gw + outer
     # arrows (separate top-level shapes: each is animated on its own)
@@ -936,6 +958,94 @@ def process_text_line(slide, b, region, T, chk):
     return tl, desc, out, ids(chips[:k]) | {hl.shape_id}
 
 
+def process_text_line_static(slide, b, region, T, chk):
+    """The print / handout state of a text-line build: no animation, only the coherent final state.
+
+        title
+        Longhand:   the full configuration as one line of text
+        Shorthand:  [Ar] in the highlight style, then the segments the noble gas does not cover
+        caption     what the noble-gas symbol stands for (computed; "static_caption" overrides)
+        check       core electrons + the remaining superscripts = Z
+    Nothing is hidden and nothing overlaps: the click-2 caption, the highlight block and the covered
+    segments of the animated build are not drawn. Chemistry is computed and asserted as in the animated build."""
+    ink, white = T["ground"]["asphalt"], T["ground"]["white"]
+    font = T["fonts"]["body"]
+    deep = T["courses"][b["_course"]]["primaryDeep"]
+    accent = T["courses"][b["_course"]]["primary"]
+    x0, y0, W, H = region["x"], region["y"], region["w"], region["h"]
+    pad, line, gap = 0.12, 0.28, 0.04
+    cfg = b["longhand"]
+    core_sym, parts = chk.parse(cfg)
+    assert core_sym is None, "longhand must not use a noble-gas core"
+    z = b["z"]
+    assert chk.electrons(cfg) == z and chk.check_config(cfg, z) == [], "longhand fails the checker"
+    core = b["core"]
+    want = max(nz for _, nz in chk.NOBLE if nz < z)
+    assert chk.NOBLE_Z[core] == want, f"{core} is not the noble gas BEFORE Z = {z}"
+    run, k = 0, None
+    for i, (_, n) in enumerate(parts):
+        run += n
+        if run == want:
+            k = i + 1
+            break
+    assert k and dict(parts[:k]) == chk.ground_state(want), "the prefix is not the noble gas"
+    tail = parts[k:]
+    short = f"[{core}] " + " ".join(f"{a}{n}" for a, n in tail)
+    assert short == chk.shorthand_string(z), f"shorthand {short!r} != checker {chk.shorthand_string(z)!r}"
+    inner = W - 2 * pad
+    long_txt = " ".join(f"{a}^{{{n}}}" for a, n in parts)
+    ar_txt = f"[{core}]"
+    seg_txt = [f"{a}^{{{n}}}" for a, n in tail]
+    cap = b.get("static_caption") or (f"{ar_txt} stands for the first {want} electrons: the noble gas "
+                                      f"before {b.get('element') or chk.SYMBOL[z]}")
+    chk_txt = f"{want} + " + " + ".join(str(n) for _, n in tail) + f" = {z} electrons"
+    assert want + sum(n for _, n in tail) == z
+    assert text_w(long_txt, 18) * 1.04 <= inner, f"the longhand row needs {text_w(long_txt, 18):.2f} in; the region has {inner:.2f}"
+    war = text_w(ar_txt, 18) + 2 * 0.07
+    wseg = [text_w(t, 18) + 2 * 0.05 for t in seg_txt]
+    gsp = 0.07
+    row_w = war + sum(wseg) + gsp * len(seg_txt)
+    assert row_w <= inner, f"the shorthand row needs {row_w:.2f} in; the region has {inner:.2f}"
+    n_cap = wrap_count(cap, inner, FLOOR_PT)
+    assert n_cap <= 2, f"the caption needs {n_cap} lines"
+    title_h, lab_h, row_h, chip_h, sum_h = 0.30, 0.26, 0.34, 0.44, 0.30
+    stack = title_h + 2 * lab_h + row_h + chip_h + n_cap * line + sum_h + 6 * gap
+    assert stack <= H - 2 * pad, f"static text-line build needs {stack:.2f} in, the region has {H - 2 * pad:.2f}"
+    y = y0 + (H - stack) / 2
+    out = {"backdrop": None, "group": None, "arrows": {}, "hl": {}, "captions": [], "sum": None,
+           "states": [], "extra": [], "counts": {}}
+    bd = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(x0 * IN)), Emu(int(y0 * IN)),
+                                Emu(int(W * IN)), Emu(int(H * IN)))
+    bd.name = "BUILD backdrop"
+    bd.fill.solid(); bd.fill.fore_color.rgb = rgb(white); bd.line.fill.background()
+    bd.shadow.inherit = False
+    out["backdrop"] = bd
+    sh = slide.shapes
+    textbox(sh, x0 + pad, y, inner, title_h, b["title"], font, 18, ink, True, name="BUILD title")
+    yy = y + title_h + gap
+    textbox(sh, x0 + pad, yy, inner, lab_h, "Longhand", font, FLOOR_PT, deep, True, name="BUILD caption")
+    yy += lab_h + gap
+    textbox(sh, x0 + pad, yy, inner, row_h, long_txt, font, 18, ink, True, name="BUILD longhand")
+    yy += row_h + gap
+    textbox(sh, x0 + pad, yy, inner, lab_h, "Shorthand", font, FLOOR_PT, deep, True, name="BUILD caption")
+    yy += lab_h + gap
+    x = x0 + pad + (inner - row_w) / 2
+    textbox(sh, x, yy + 0.02, war, chip_h - 0.04, ar_txt, font, 18, ink, True, name=f"BUILD {core} bracket",
+            wrap=False, fill=accent, outline=ink)
+    x += war + gsp
+    for (a, n), t, w_ in zip(tail, seg_txt, wseg):
+        textbox(sh, x, yy, w_, chip_h, t, font, 18, ink, True, name=f"BUILD segment {a}", wrap=False)
+        x += w_ + gsp
+    yy += chip_h + gap
+    textbox(sh, x0 + pad, yy, inner, n_cap * line - 0.02, cap, font, FLOOR_PT, deep, True, name="BUILD caption")
+    yy += n_cap * line + gap
+    textbox(sh, x0 + pad, yy, inner, sum_h, chk_txt, font, 18, ink, True, name="BUILD sum")
+    if b.get("alt_text"):
+        set_descr(bd, f"Text build for {b.get('element', 'the element')}, Z = {z}: the longhand {cfg}, then the "
+                  f"shorthand {short}, where {ar_txt} stands for the first {want} electrons.")
+    return out
+
+
 def validate_timing(slide, expected_clicks):
     """Structural validation of the p:timing that was written."""
     el = slide._element
@@ -998,7 +1108,21 @@ def drop(shape):
     shape._element.getparent().remove(shape._element)
 
 
-def process(deck, specfile, out, preview=None, only=None):
+def static_spec(b):
+    """The spec of a build as the static (print / handout) copy draws it: a copy, never the original.
+    Ion steps keep their captions and the LAST state line; the species passed through on the way are animated-only."""
+    import copy as _copy
+    b = _copy.deepcopy(b)
+    if b.get("static_title"):
+        b["title"] = b["static_title"]
+    texts = [st for st in b.get("steps") or [] if st.get("text")]
+    if b.get("steps") and not b.get("story"):
+        for st in texts[:-1]:
+            del st["text"]
+    return b
+
+
+def process(deck, specfile, out, preview=None, only=None, static_mode=False):
     spec = json.load(open(specfile, encoding="utf-8"))
     course = spec["course"]
     T = load_tokens(course)
@@ -1022,6 +1146,14 @@ def process(deck, specfile, out, preview=None, only=None):
             region["y"] = region["y"] + region["h"] * (i_ - 1)
         b["alt_text"] = bool(spec.get("alt_text"))
         earlier = per_slide.setdefault(b["slide"], [])
+        if static_mode:
+            b = static_spec(b)
+        if b.get("type") == "text_line" and static_mode:
+            removed = remove_pictures_in(slide, slot)
+            shp = process_text_line_static(slide, b, region, T, chk)
+            earlier.append((None, ["the longhand line, then the shorthand line with the noble-gas symbol"],
+                            b["region"], b.get("name"), b, shp, None, None, 0, removed, 0))
+            continue
         if b.get("type") == "text_line":
             removed = remove_pictures_in(slide, slot)
             tl, desc, shp, _gone = process_text_line(slide, b, region, T, chk)
@@ -1031,6 +1163,12 @@ def process(deck, specfile, out, preview=None, only=None):
             continue
         validate_atom(b, chk)
         initial, steps, arrows = plan_steps(b)
+        if static_mode and b.get("steps"):
+            fc = {s_["label"]: s_["electrons"] for s_ in b["sublevels"]}
+            for st in steps:
+                if st["kind"] != "highlight":
+                    fc[st["arrow"].sub] += 1 if st["kind"] == "add" else -1
+            b["_final_counts"] = fc
         removed = remove_pictures_in(slide, slot)
         shp = draw(slide, b, region, T, initial, steps, arrows)
         tl, desc = build_timeline(b, shp, initial, steps)
@@ -1076,6 +1214,18 @@ def process(deck, specfile, out, preview=None, only=None):
         earlier.append((tl, desc, b["region"], b.get("name"), b, shp, static, every, n, removed, total_final))
     for slide_no, items in per_slide.items():
         slide = prs.slides[slide_no - 1]
+        if static_mode:
+            for tl, desc, _, name, b, shp, static, every, n, _, _ in items:
+                if tl is not None:                       # a computed final state: drop everything else
+                    vis = simulate(tl, static + every[1:], n)
+                    for shape in all_shapes(shp):
+                        if shape.shape_id not in vis or shape in shp["hl"].values():
+                            drop(shape)
+                what = ("final state of the click build" + (f" ({name})" if name else ""))
+                append_note(slide, f"STATIC FINAL STATE: print and handout copy, no animation. This slide shows the {what}; "
+                                   "the animated deck shows it one click at a time.")
+                report.append((slide_no, "static final state", n))
+            continue
         if preview is not None:
             left = preview
             for tl, desc, _, _, b, shp, static, every, n, _, _ in items:
@@ -1117,6 +1267,7 @@ def process(deck, specfile, out, preview=None, only=None):
 def main(argv):
     pos = [a for a in argv if not a.startswith("--")]
     flags = argv
+    static_mode = "--static" in flags
     preview = only = None
     if "--preview" in flags:
         preview = int(flags[flags.index("--preview") + 1]); pos.remove(str(preview))
@@ -1125,8 +1276,9 @@ def main(argv):
     if len(pos) < 2:
         sys.exit(__doc__)
     deck, specfile = pos[0], pos[1]
+    assert not (static_mode and preview is not None), "--static and --preview are separate modes"
     out = pos[2] if len(pos) > 2 else re.sub(r"\.pptx$", ".built.pptx", deck)
-    rep = process(deck, specfile, out, preview, only)
+    rep = process(deck, specfile, out, preview, only, static_mode)
     for r in rep:
         print("slide", *r)
     print("wrote", out)

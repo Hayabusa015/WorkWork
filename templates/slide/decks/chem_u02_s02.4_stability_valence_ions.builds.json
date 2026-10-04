@@ -11,6 +11,7 @@
         {"label": "2p", "boxes": 3, "electrons": 6},
         {"label": "3s", "boxes": 1, "electrons": 1}
       ],
+      "static_title": "Na^{+}",
       "steps": [{"remove": 1, "text": "Na^{+}: charge 1+, 10 electrons"}]
     },
     {
@@ -20,6 +21,7 @@
         {"label": "3s", "boxes": 1, "electrons": 2},
         {"label": "3p", "boxes": 3, "electrons": 5}
       ],
+      "static_title": "Cl ion\n[Ne]",
       "steps": [{"add": 1, "text": "Cl ion: charge 1−, 18 electrons"}]
     },
     {
@@ -29,9 +31,11 @@
         {"label": "4s", "boxes": 1, "electrons": 2},
         {"label": "3d", "boxes": 5, "electrons": 6}
       ],
+      "static_title": "Fe^{3+}  Z = 26  [Ar] CORE",
+      "start_text": "Fe: charge 0, 26 electrons",
       "steps": [
         {"highlight": "valence", "valence": 2, "caption": "Highest n is 4: the 4s electrons leave first"},
-        {"remove": 1},
+        {"remove": 1, "text": "Fe^{+}: charge 1+, 25 electrons"},
         {"remove": 1, "text": "Fe^{2+}: charge 2+, 24 electrons"},
         {"remove": 1, "caption": "Then one 3d electron leaves", "text": "Fe^{3+}: charge 3+, 23 electrons"}
       ]
@@ -44,6 +48,7 @@
         {"label": "3p", "boxes": 3, "electrons": 6},
         {"label": "4s", "boxes": 1, "electrons": 2}
       ],
+      "static_title": "Ca^{2+}  Z = 20  [Ne] CORE",
       "start_text": "Ca: charge 0, 20 electrons",
       "steps": [
         {"highlight": "valence", "valence": 2,
@@ -59,9 +64,10 @@
         {"label": "3s", "boxes": 1, "electrons": 2},
         {"label": "3p", "boxes": 3, "electrons": 4}
       ],
+      "static_title": "SULFUR ION  Z = 16  [Ne] CORE",
       "steps": [
-        {"add": 1, "caption": "6 valence + 2 gained = 8"},
-        {"add": 1, "text": "S ion: charge 2−"}
+        {"add": 1},
+        {"add": 1, "caption": "6 valence + 2 gained = 8", "text": "S ion: charge 2−"}
       ]
     }
   ]

@@ -15,7 +15,7 @@
       "imageSubjects": {
         "section": "a glass tube of neon gas glowing orange on a dark bench"
       },
-      "notes": "Section title. PROVISIONAL/OPEN: verbatim DECISIONS title now in the panel (see build report for fit). Scope boundary (Matt, 2026-10-04): S2.4 owns what an ion's configuration IS and valence-electron-based charge prediction at the end of the section (main group only). U3.7 and U3.4 own the energetics. PROVISIONAL: group 14 and transition metals are not predicted by the rule here. Not taught here: Lewis dot preview (PROVISIONAL, omitted; belongs to a later unit). Transition-metal valence counting (PROVISIONAL, brief slide 6) also omitted. Image slot empty. Prompt subject: a glass tube of neon gas glowing orange on a dark bench."
+      "notes": "Section title. PROVISIONAL/OPEN: verbatim DECISIONS title now in the panel. Scope boundary (Matt, 2026-10-04): S2.4 owns what an ion's configuration IS and valence-electron-based charge prediction at the end of the section (main group only). U3.7 and U3.4 own the energetics. PROVISIONAL: group 14 and transition metals are not predicted by the rule here. Not taught here: Lewis dot preview (PROVISIONAL, omitted; belongs to a later unit). Transition-metal valence counting (PROVISIONAL, brief slide 6) also omitted. Image slot empty. Prompt subject: a glass tube of neon gas glowing orange on a dark bench."
     },
     {
       "master": "06_CONCEPT_IMAGE",
@@ -224,7 +224,7 @@
         "a3_l": "Fe^{3+}",
         "a3_b": "[Ar] 3d^{5}\n23 electrons. One 3d electron leaves too."
       },
-      "notes": "Fe 26, Fe2+ 24 [Ar]3d6, Fe3+ 23 [Ar]3d5. Present 3d5 as an observed electron count, not proof of a cause. Click build replaces the static figure: one slide carries Fe, Fe2+ and Fe3+ (the 4s arrows leave first, then one 3d). The static PNG chem_u02_s2.4_fe_ions_orbitals.png stays on disk for print."
+      "notes": "Fe 26, Fe2+ 24 [Ar]3d6, Fe3+ 23 [Ar]3d5. Present 3d5 as an observed electron count, not proof of a cause. Click build replaces the static figure: one slide carries Fe, Fe2+ and Fe3+ (the 4s arrows leave first, then one 3d). Click 3 passes through Fe+ (25 electrons), named on the slide so no species goes unlabelled. The static PNG chem_u02_s2.4_fe_ions_orbitals.png stays on disk for print."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -315,7 +315,7 @@
         "f1_l": "SETUP",
         "f1_b": "Each line reads: valence,\nmove, noble gas, charge.",
         "work": "Mg: 2, lose 2, [Ne], 2+\nAl: 3, lose 3, [Ne], 3+\nS: 6, gain 2, [Ar], 2−\nBr: 7, gain 1, [Kr], 1−",
-        "mustwrite": "Mg 2+, Al 3+, S 2−, Br 1−. Each move ends at a noble gas configuration."
+        "mustwrite": "Mg^{2+}, Al^{3+}, S^{2−}, Br^{−}. Each move ends at a noble gas configuration."
       },
       "notes": "Mg: 12 e to 10, Mg2+, [Ne]. Al: 13 to 10, Al3+, [Ne]. S: 16 to 18, S2-, [Ar]. Br: 35 to 36, Br-, [Kr] (3d10 already full). All numbers re-added in the figure script assertions. Anion charges are written plain (2−, 1−) on the slide for legibility. Same pattern, same rule: Mg2+ and S2- were the old example's ions. The picture slot holds a click build for S only (two down arrows added); Mg, Al and Br stay in the text."
     },
