@@ -99,7 +99,14 @@ Static final-state mode (--static; every key is opt-in, the animated output is u
   {"static_title": "Fe^{3+}  Z = 26  [Ar] CORE"}   optional: the diagram title in the static output, when the
         final state is a different species from the title that opens the animation.
   {"static_caption": "..."}   text_line only, optional: replaces the computed noble-gas caption.
-  Notes: the static output carries "STATIC FINAL STATE" instead of the "CLICK BUILD" line.
+  Notes (static): the deck's teacher notes are written for the animated slide, so the static copy cleans them.
+        Default: an automatic filter drops every sentence that mentions a click, the CLICK BUILD line, --preview,
+        "per click" or "click at a time" (STATIC_NOTE_DROP) and keeps the rest.
+        {"static_notes": "..."}   optional on any build of a slide: replaces the whole note of that slide in the
+                static output (use it where the filter would also drop teacher-level science or an answer).
+        {"animated_deck": "SHULL_CHEM_Slides_U02_S02.3.pptx"}   optional, top level of the spec: adds the line
+                "Animated version: <file> has the click-by-click build".
+        One "STATIC FINAL STATE" line per slide (naming every build on it) replaces the "CLICK BUILD" line.
 
 Everything chemical is computed and asserted here, not typed: arrows are generated in fill order
 (within a sublevel one up arrow into each box left to right, THEN the down arrows left to right),
@@ -1119,6 +1126,20 @@ def append_note(slide, text):
     tf.text = (tf.text.rstrip() + "\n" if tf.text.strip() else "") + text
 
 
+STATIC_NOTE_DROP = re.compile(r"click|--preview|removed one per|a static export", re.I)
+
+
+def static_note_text(text, override=None):
+    """The teacher note of a static slide: the override if given, else the note with click/animation sentences removed."""
+    if override:
+        return override.strip()
+    out = []
+    for line in text.split("\n"):
+        sents = re.split(r"(?<=[.;:?!])\s+(?=[A-Z\[(\d])", line)
+        out.append(" ".join(x for x in sents if not STATIC_NOTE_DROP.search(x)))
+    return "\n".join(x for x in out if x.strip())
+
+
 def all_shapes(shp):
     """Every shape a build drew, backdrop first."""
     return ([shp["backdrop"]] + ([shp["group"]] if shp["group"] is not None else [])
@@ -1253,10 +1274,16 @@ def process(deck, specfile, out, preview=None, only=None, static_mode=False):
                     for shape in all_shapes(shp):
                         if shape.shape_id not in vis or shape in shp["hl"].values():
                             drop(shape)
-                what = ("final state of the click build" + (f" ({name})" if name else ""))
-                append_note(slide, f"STATIC FINAL STATE: print and handout copy, no animation. This slide shows the {what}; "
-                                   "the animated deck shows it one click at a time.")
                 report.append((slide_no, "static final state", n))
+            names = [name for _, _, _, name, *_ in items if name]
+            override = next((b_["static_notes"] for _, _, _, _, b_, *_ in items if b_.get("static_notes")), None)
+            tf = slide.notes_slide.notes_text_frame
+            tf.text = static_note_text(tf.text, override)
+            marker = ("STATIC FINAL STATE: print and handout copy, no animation. This slide shows the final state of the build"
+                      + (f" ({' and '.join(names)})" if names else "") + ".")
+            append_note(slide, marker)
+            if spec.get("animated_deck"):
+                append_note(slide, f"Animated version: {spec['animated_deck']} has the click-by-click build.")
             continue
         if preview is not None:
             left = preview

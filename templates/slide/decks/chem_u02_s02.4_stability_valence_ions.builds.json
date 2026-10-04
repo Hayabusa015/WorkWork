@@ -1,8 +1,10 @@
 {
   "course": "chemistry",
+  "animated_deck": "SHULL_CHEM_Slides_U02_S02.4.pptx",
   "note": "Click builds for S2.4. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each layout name is asserted. These slides' PNGs/image subjects are omitted from the deck spec so the slot is empty. Slide 10 stacks two builds (Na, then Cl) in two bands of one slot. State lines write the minus as plain large text, never a raised glyph. A state line is a record row: each fades in and stays.",
   "builds": [
     {
+      "static_notes": "MERGED slide (was two: Na+ orbitals and Cl- orbitals). Na loses its 3s1, leaving the neon configuration; Cl's added electron goes into the open 3p spot, not a new level, and matches argon. The slide shows the Na+ diagram above the Cl- diagram. The state line under each diagram gives the plain, large charge so the minus is legible. Do not yet say why these charges: the rule comes at the end of the section.",
       "slide": 10, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram", "name": "Na", "band": [1, 2],
       "title": "Na", "box_max": 0.5, "z": 11, "start": "filled",
       "sublevels": [
@@ -21,10 +23,11 @@
         {"label": "3s", "boxes": 1, "electrons": 2},
         {"label": "3p", "boxes": 3, "electrons": 5}
       ],
-      "static_title": "Cl ion\n[Ne]",
+      "static_title": "Cl^{−}\n[Ne]",
       "steps": [{"add": 1, "text": "Cl ion: charge 1−, 18 electrons"}]
     },
     {
+      "static_notes": "Fe 26, Fe2+ 24 [Ar]3d6, Fe3+ 23 [Ar]3d5. Present 3d5 as an observed electron count, not proof of a cause. This slide shows the finished Fe3+ diagram. The path to it: the 4s electrons leave first (Fe+ with 25 electrons, then Fe2+), then one 3d electron (Fe3+); only the end state is drawn here.",
       "slide": 14, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram", "name": "Fe",
       "title": "IRON  Z = 26  [Ar] CORE", "z": 26, "core": {"label": "[Ar]", "electrons": 18}, "start": "filled",
       "sublevels": [
@@ -41,6 +44,7 @@
       ]
     },
     {
+      "static_notes": "NEW. Closing synthesis, step 1: Ca walk-through in four moves: count (2 valence), move (lose 2; gaining 6 is more), result ([Ar], 18 electrons), charge (20 protons minus 18 electrons = 2+). Valence-electron reasoning only. Do not teach ionization energy; Unit 3 (U3.4, U3.7) explains the energy side. Scope boundary set by Matt 2026-10-04; DECISIONS.md not changed. Avoid 'wants' or 'needs' language for atoms. The picture slot shows the finished Ca2+ diagram (the two valence arrows removed).",
       "slide": 17, "layout": "03_GROUPED_CONCEPT", "region": "concept", "name": "Ca",
       "title": "CALCIUM  Z = 20  [Ne] CORE", "z": 20, "core": {"label": "[Ne]", "electrons": 10}, "start": "filled",
       "sublevels": [
@@ -58,6 +62,7 @@
       ]
     },
     {
+      "static_notes": "Mg: 12 e to 10, Mg2+, [Ne]. Al: 13 to 10, Al3+, [Ne]. S: 16 to 18, S2-, [Ar]. Br: 35 to 36, Br-, [Kr] (3d10 already full). All numbers re-added in the figure script assertions. Anion charges are written plain (2−, 1−) on the slide for legibility. Same pattern, same rule: Mg2+ and S2- were the old example's ions. The picture slot shows the S2- diagram (two down arrows added); Mg, Al and Br stay in the text.",
       "slide": 20, "layout": "10_WORKED_SOLUTION", "region": "data", "name": "S",
       "title": "SULFUR  Z = 16  [Ne] CORE", "z": 16, "core": {"label": "[Ne]", "electrons": 10}, "start": "filled",
       "sublevels": [
