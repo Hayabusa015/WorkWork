@@ -1,42 +1,246 @@
 {
   "course": "chemistry",
-  "note": "Click builds for S2.3. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each carries a layout name that is asserted. These slides' PNGs are omitted from the deck spec so the slot is empty; the post-processor also deletes any picture inside the slot.",
+  "note": "Click builds for S2.3. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each carries a layout name that is asserted (look slides up by headline: 7 Reading an Orbital Diagram, 8 Filling Oxygen's 2p Boxes, 11 Oxygen, Worked, 14 Shorthand: Germanium, 17 Iron, Worked, 18 Exception: Copper, 19 Exception: Chromium). These slides' PNGs are omitted from the deck spec so the slot is empty; the post-processor also deletes any picture inside the slot. alt_text gives every drawn diagram a computed description. late_counts shows each sublevel's raised electron count only with its last arrow.",
   "builds": [
     {
-      "slide": 7, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram",
-      "title": "NITROGEN  Z = 7", "z": 7, "start": "empty",
+      "slide": 7,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "title": "NITROGEN  Z = 7",
+      "z": 7,
+      "start": "empty",
       "sublevels": [
-        {"label": "1s", "boxes": 1, "electrons": 2},
-        {"label": "2s", "boxes": 1, "electrons": 2},
-        {"label": "2p", "boxes": 3, "electrons": 3}
+        {
+          "label": "1s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "2s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "2p",
+          "boxes": 3,
+          "electrons": 3
+        }
       ],
-      "captions": {"hund": "Hund: one up arrow in each box first", "pauli": "Pauli: pair with opposite spin"}
+      "captions": {
+        "hund": "Hund: one up arrow in each box first",
+        "pauli": "Pauli: pair with opposite spin"
+      },
+      "element": "nitrogen",
+      "late_counts": true
     },
     {
-      "slide": 8, "layout": "08_DIAGRAM_ANNOTATION", "region": "diagram",
-      "title": "OXYGEN  2p SUBLEVEL", "start": "empty",
-      "sublevels": [{"label": "2p", "boxes": 3, "electrons": 4}],
-      "captions": {"hund": "Hund: one up arrow in each box first", "pauli": "Pauli: pair with opposite spin"},
-      "sum": "4 arrows = 4 electrons in 2p"
+      "slide": 8,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "title": "OXYGEN  2p SUBLEVEL",
+      "start": "empty",
+      "sublevels": [
+        {
+          "label": "2p",
+          "boxes": 3,
+          "electrons": 4
+        }
+      ],
+      "captions": {
+        "hund": "Hund: one up arrow in each box first",
+        "pauli": "Pauli: pair with opposite spin"
+      },
+      "sum": "4 arrows = 4 electrons in 2p",
+      "element": "oxygen",
+      "late_counts": true
     },
     {
-      "slide": 11, "layout": "10_WORKED_SOLUTION", "region": "data",
-      "title": "OXYGEN  Z = 8", "z": 8, "start": "empty",
+      "slide": 11,
+      "layout": "10_WORKED_SOLUTION",
+      "region": "data",
+      "title": "OXYGEN  Z = 8",
+      "z": 8,
+      "start": "empty",
       "sublevels": [
-        {"label": "1s", "boxes": 1, "electrons": 2},
-        {"label": "2s", "boxes": 1, "electrons": 2},
-        {"label": "2p", "boxes": 3, "electrons": 4}
+        {
+          "label": "1s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "2s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "2p",
+          "boxes": 3,
+          "electrons": 4
+        }
       ],
-      "captions": {"hund": "Hund: singles first", "pauli": "Pauli: opposite spins"}
+      "captions": {
+        "hund": "Hund: singles first",
+        "pauli": "Pauli: opposite spins"
+      },
+      "element": "oxygen",
+      "late_counts": true
     },
     {
-      "slide": 15, "layout": "10_WORKED_SOLUTION", "region": "data",
-      "title": "IRON  Z = 26", "z": 26, "core": {"label": "[Ar]", "electrons": 18}, "start": "empty",
+      "slide": 14,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "type": "text_line",
+      "name": "Ge",
+      "element": "germanium",
+      "title": "GERMANIUM  Z = 32",
+      "z": 32,
+      "longhand": "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2",
+      "core": "Ar",
+      "captions": {
+        "highlight": "These 18 electrons are exactly argon's configuration",
+        "replace": "The noble gas BEFORE germanium stands in for them, like a substitution in math"
+      }
+    },
+    {
+      "slide": 17,
+      "layout": "10_WORKED_SOLUTION",
+      "region": "data",
+      "title": "IRON  Z = 26",
+      "z": 26,
+      "core": {
+        "label": "[Ar]",
+        "electrons": 18
+      },
+      "start": "empty",
       "sublevels": [
-        {"label": "4s", "boxes": 1, "electrons": 2},
-        {"label": "3d", "boxes": 5, "electrons": 6}
+        {
+          "label": "4s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "3d",
+          "boxes": 5,
+          "electrons": 6
+        }
       ],
-      "captions": {"hund": "Hund: singles first", "pauli": "Pauli: opposite spins"}
+      "captions": {
+        "hund": "Hund: singles first",
+        "pauli": "Pauli: opposite spins"
+      },
+      "element": "iron",
+      "late_counts": true
+    },
+    {
+      "slide": 18,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "name": "Cu",
+      "element": "copper",
+      "title": "COPPER  Z = 29  [Ar] CORE",
+      "z": 29,
+      "core": {
+        "label": "[Ar]",
+        "electrons": 18
+      },
+      "predicted": true,
+      "start": "filled",
+      "story": true,
+      "sublevels": [
+        {
+          "label": "4s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "3d",
+          "boxes": 5,
+          "electrons": 9
+        }
+      ],
+      "start_caption": "What the rules predict",
+      "start_text": "[Ar] 4s^{2} 3d^{9}",
+      "steps": [
+        {
+          "remove": 1,
+          "from": "4s",
+          "caption": "One 4s electron moves into 3d"
+        },
+        {
+          "add": 1,
+          "to": "3d",
+          "text": "Actual: [Ar] 4s^{1} 3d^{10}"
+        }
+      ]
+    },
+    {
+      "slide": 19,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "name": "Cr",
+      "element": "chromium",
+      "title": "CHROMIUM  Z = 24  [Ar] CORE",
+      "z": 24,
+      "core": {
+        "label": "[Ar]",
+        "electrons": 18
+      },
+      "predicted": true,
+      "start": "filled",
+      "story": true,
+      "sublevels": [
+        {
+          "label": "4s",
+          "boxes": 1,
+          "electrons": 2
+        },
+        {
+          "label": "3d",
+          "boxes": 5,
+          "electrons": 4
+        }
+      ],
+      "start_caption": "What the rules predict",
+      "start_text": "[Ar] 4s^{2} 3d^{4}",
+      "steps": [
+        {
+          "remove": 1,
+          "from": "4s",
+          "caption": "One 4s electron moves into 3d"
+        },
+        {
+          "add": 1,
+          "to": "3d",
+          "text": "Actual: [Ar] 4s^{1} 3d^{5}"
+        }
+      ]
+    }
+  ],
+  "alt_text": true,
+  "picture_alt": [
+    {
+      "slide": 4,
+      "descr": "Filling-order chart: sublevels 1s through 7p in rows by level, with diagonal arrows linking them in the order 1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p; 4s and 3d are outlined because 4s fills before 3d."
+    },
+    {
+      "slide": 5,
+      "descr": "Pauli exclusion principle: one orbital box with an up arrow and a down arrow is correct; a box with two up arrows is marked wrong."
+    },
+    {
+      "slide": 6,
+      "descr": "Hund's rule with nitrogen's 2p boxes: up, up, up in three boxes is correct; one pair, one single and one empty box is marked wrong."
+    },
+    {
+      "slide": 15,
+      "descr": "Periodic-table strip of periods 3 and 4. Argon, at the end of period 3, is marked with a tick as the noble gas before germanium. Germanium is outlined in period 4, group 14. Krypton, at the end of period 4 and after germanium, is marked with a cross as the wrong choice."
+    },
+    {
+      "slide": 24,
+      "descr": "Two wrong orbital diagrams. (e) Nitrogen 2p: up, down, up, three single arrows whose spins are not all the same. (f) Neon 2s: one box holding two up arrows."
+    },
+    {
+      "slide": 25,
+      "descr": "The corrected diagrams. (e) Nitrogen 2p: up, up, up, ticked as Hund. (f) Neon 2s: one up and one down arrow, ticked as Pauli."
     }
   ]
 }

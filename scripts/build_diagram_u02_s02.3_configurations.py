@@ -34,6 +34,8 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(REPO, "templates", "slide", "assets")
 SPEC = os.path.join(REPO, "templates", "slide", "decks",
                     "chem_u02_s02.3_electron_configurations.json")
+BUILDS = os.path.join(REPO, "templates", "slide", "decks",
+                      "chem_u02_s02.3_electron_configurations.builds.json")
 SCALE = 3                       # drawn large, placed small - stays crisp on a projector
 
 # ---------------------------------------------------------------------------
@@ -175,6 +177,31 @@ def check_config(cfg, Z):
     return broken
 
 
+def ion_string(Z, charge):
+    """Cation of Z with `charge`, shorthand, filling order. Electrons leave the highest n first, then the
+    highest l (4s before 3d), from the measured ground state."""
+    ex = dict(ground_state(Z))
+    for _ in range(charge):
+        sub = max((k for k, v in ex.items() if v), key=lambda k: (int(k[0]), "spdf".index(k[1])))
+        ex[sub] -= 1
+    core = max(nz for _, nz in NOBLE if nz < Z)
+    sym = next(sy for sy, nz in NOBLE if nz == core)
+    held = set(FILL_ORDER[:FILL_ORDER.index({2: "2s", 10: "3s", 18: "4s", 36: "5s"}[core])])
+    rest = " ".join(f"{k}{ex[k]}" for k in FILL_ORDER if ex.get(k) and k not in held)
+    return f"[{sym}] {rest}"
+
+
+def period_of(Z):
+    return next(i for i, (_, nz) in enumerate(NOBLE + [("", 10 ** 6)], 1) if Z <= nz)
+
+
+def group_of(Z):
+    """Group (1-18) of an element in periods 3 and 4 (the rows the strip draws)."""
+    p = period_of(Z)
+    lo, hi = STRIP_PERIODS[p]
+    return (Z - lo + 1) if (p == 4 or Z - lo + 1 <= 2) else Z - lo + 1 + 10
+
+
 # Every config the slides print, declared once. (label, Z, ascii string, expected unpaired)
 GOOD = [
     ("O",  8,  "1s2 2s2 2p4",                    2),
@@ -190,7 +217,25 @@ GOOD = [
     ("K",  19, "[Ar] 4s1",                       1),     # slide 18 correction of (b)
     ("P",  15, "1s2 2s2 2p6 3s2 3p3",            3),     # slide 21 answers, in the notes
     ("S",  16, "[Ne] 3s2 3p4",                   2),
+    ("Ge", 32, "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2", 2),     # the noble-gas shorthand build
+    ("Ge", 32, "[Ar] 4s2 3d10 4p2",              2),
 ]
+# Ions that the exception slides point forward to (S2.4). (label, Z, charge, ascii string). Computed by removing
+# electrons valence-first (highest n, then highest l) from the MEASURED ground state, and compared.
+ION = [
+    ("Cu+",  29, 1, "[Ar] 3d10"),
+    ("Cu2+", 29, 2, "[Ar] 3d9"),
+]
+# Beyond the required scope (Z > 36). Used ONLY in teacher notes, as counterexamples to the half/full heuristic.
+# Electron totals are checked here; the configurations themselves are NOT verified against a source from this
+# environment, so the notes must say PROVISIONAL wherever they appear.
+BEYOND_SCOPE = [
+    ("Nb", 41, "[Kr] 5s1 4d4"),        # not half-full, still moves an electron
+    ("W",  74, "[Xe] 6s2 4f14 5d4"),   # regular, although Cr and Mo (same group) are exceptions
+]
+# The periodic-table strip on the shorthand slide: periods 3 and 4, with the three elements it marks.
+STRIP_PERIODS = {3: (11, 18), 4: (19, 36)}
+STRIP_MARK = {"before": 18, "element": 32, "wrong": 36}
 # The deliberately wrong ones, and the check each one must trip.
 BAD = [
     ("O",  8,  "1s2 2s2 2p6",         "count"),     # 10 electrons
@@ -198,6 +243,7 @@ BAD = [
     ("Ca", 20, "[Ne] 4s2",            "count"),     # wrong core, only 12 electrons
     ("Cr", 24, "[Ar] 4s2 3d4",        "observed"),  # follows the rules, not the real atom
     ("Cu", 29, "[Ar] 4s2 3d9",        "observed"),
+    ("Ge", 32, "[Kr] 4s2 3d10 4p2",   "core"),      # krypton comes AFTER germanium: the wrong core (never printed)
 ]
 # Orbital diagrams. u = up, d = down, "" = empty box, uu = two same-spin (illegal).
 DIAGRAMS = {
@@ -301,7 +347,45 @@ def run_checks():
     # Cr / Cu: predicted != actual, both 6 and 11 electrons past argon
     assert sum(n for _, n in parse("[Ar] 4s2 3d4")[1]) == 6 == sum(n for _, n in parse("[Ar] 4s1 3d5")[1])
     assert sum(n for _, n in parse("[Ar] 4s2 3d9")[1]) == 11 == sum(n for _, n in parse("[Ar] 4s1 3d10")[1])
+    # --- S2.3 additions: Ge shorthand build, Cu and Cr exceptions, their ions, the strip, the counterexamples
+    for lab, Z, ch, cfg in ION:
+        assert ion_string(Z, ch) == cfg, f"{lab}: valence-first removal gives {ion_string(Z, ch)!r}, written {cfg!r}"
+        assert electrons(cfg) == Z - ch, f"{lab}: {electrons(cfg)} electrons, expected {Z - ch}"
+        n_checked += 1
+    # the 4s1 electron leaves first: Cu+ has no 4s, and Cu2+ then loses one 3d
+    assert ground_state(29)["4s"] == 1 and "4s" not in dict(parse("[Ar] 3d10")[1])
+    for sym, Z, cfg in BEYOND_SCOPE:
+        assert Z > 36 and electrons(cfg) == Z, f"{sym} {cfg}: {electrons(cfg)} != {Z}"
+        n_checked += 1
+    # a move changes no electron count, and moves exactly one electron out of 4s
+    for Z in (24, 29):
+        pred = {k: v for k, v in ground_state_aufbau(Z).items()}
+        act = ground_state(Z)
+        assert sum(pred.values()) == sum(act.values()) == Z
+        assert pred["4s"] - act["4s"] == 1 and act["3d"] - pred["3d"] == 1, (Z, pred, act)
+        assert {k for k in pred if pred[k] != act[k]} == {"4s", "3d"}
+    # the strip: the noble gas BEFORE Ge is Ar (end of period 3); Kr ends Ge's own period, AFTER it
+    ar, ge, kr = STRIP_MARK["before"], STRIP_MARK["element"], STRIP_MARK["wrong"]
+    assert (SYMBOL[ar], SYMBOL[ge], SYMBOL[kr]) == ("Ar", "Ge", "Kr")
+    assert max(nz for _, nz in NOBLE if nz < ge) == ar and ar < ge < kr
+    assert period_of(ar) == 3 and period_of(ge) == 4 and period_of(kr) == 4
+    assert group_of(ar) == 18 and group_of(kr) == 18 and group_of(ge) == 14
+    assert NOBLE_Z["Ar"] == ar and NOBLE_Z["Kr"] == kr
+    # Ge's first five segments are exactly argon's configuration (the highlight in the build)
+    segs = parse("1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2")[1]
+    assert dict(segs[:5]) == ground_state(ar) and sum(n for _, n in segs[:5]) == 18
     return n_checked
+
+
+def ground_state_aufbau(Z):
+    """What the filling rules alone give (the exception table ignored)."""
+    left, out = Z, {}
+    for sub in FILL_ORDER:
+        if left <= 0:
+            break
+        out[sub] = min(CAP[sub[1]], left)
+        left -= out[sub]
+    return out
 
 
 def check_against_spec():
@@ -324,7 +408,12 @@ def check_against_spec():
     assert "PROVISIONAL" in slides[0]["notes"] and "Mo, Ag" in slides[0]["notes"]
     # 3. slide text (fields only, not notes)
     ftext = json.dumps([sl["fields"] for sl in slides], ensure_ascii=False).replace("\\n", " ")
-    off_slide = {"[Ar] 4s2 3d9"}            # Cu 'predicted', shown only inside the figure
+    # the click builds (builds.json) print text too: state lines, titles, and the text-line longhand/shorthand
+    bspec = json.load(open(BUILDS, encoding="utf-8")) if os.path.exists(BUILDS) else {"builds": []}
+    built = [mark(bb["longhand"]) + " " + mark(shorthand_string(bb["z"]))
+             for bb in bspec["builds"] if bb.get("type") == "text_line"]
+    ftext = ftext + " " + json.dumps(bspec, ensure_ascii=False) + " " + " ".join(built)
+    off_slide = {"[Kr] 4s2 3d10 4p2"}       # Ge with the wrong core: never printed
     notes_only = {"1s2 2s2 2p6 3s2 3p3", "[Ne] 3s2 3p4"}   # P, S answers: speaker notes only
     missing = []
     for _, _, cfg, _ in GOOD:
@@ -334,7 +423,8 @@ def check_against_spec():
         if cfg not in off_slide and mark(cfg) not in ftext:
             missing.append(("bad", cfg, mark(cfg)))
     # 4. strays: any config-looking token on a slide or in a note that no checked string contains
-    checked = {c for _, _, c, _ in GOOD} | {c for _, _, c, _ in BAD}
+    checked = ({c for _, _, c, _ in GOOD} | {c for _, _, c, _ in BAD} | {c for *_, c in ION}
+               | {c for _, _, c in BEYOND_SCOPE})
     pat_f = r"(?:\[[A-Z][a-z]\] ?)?(?:\d[spdf]\^\{\d+\} ?)+"
     pat_n = r"(?:\[[A-Z][a-z]\] ?)?(?:\d[spdf]\^\d+ ?)+"
     toks = [re.sub(r"\^\{?(\d+)\}?", r"\1", t).strip() for t in re.findall(pat_f, ftext)]
@@ -358,6 +448,42 @@ def check_against_spec():
                         ("Cr", 24, "[Ar] 4s1 3d5")]:
         assert check_config(cfg, Z) == [], (sym, cfg)
         assert expand(cfg) == ground_state(Z), (sym, cfg)
+    # 5b. S2.3 additions: ions the Cu slide points to, counterexamples kept off the student slides
+    for lab, Z, ch, cfg in ION:
+        assert mark(cfg) in ftext, f"{lab}: {cfg} is not on the Cu slide"
+    note_text = {sl["fields"].get("headline"): sl["notes"] for sl in slides}
+    for sym, Z, cfg in BEYOND_SCOPE:
+        assert mark(cfg) not in ftext, f"{sym} {cfg} is beyond the required scope and must stay in the notes"
+    why = slide_by_headline("Why Cr and Cu Break the Pattern")
+    wtext = " ".join(str(v) for v in why["fields"].values())
+    assert "simplification" in wtext and "look the rest up" in wtext, "Why slide must say it is a simplification"
+    assert "always" not in wtext.lower(), "the Why slide must not claim half-full or full is always more stable"
+    wn = why["notes"]
+    for must in ("PROVISIONAL", "Nb", "[Kr] 5s^1 4d^4", "[Xe] 6s^2 4f^14 5d^4", "Mo, Ag and Au", "Cu^+ = [Ar] 3d^10",
+                 "Cu^2+ = [Ar] 3d^9", "exchange stabilization"):
+        assert must in wn, f"Why slide notes lack {must!r}"
+    assert "click build" in note_text["Check Yourself"].lower(), "Check Yourself notes must point at the Cu build"
+    heads = [sl["fields"].get("headline") for sl in slides]
+    i_ng = heads.index("Noble-Gas Shorthand")
+    assert heads[i_ng + 1] == "Shorthand: Germanium", "the Ge build slide must directly follow Noble-Gas Shorthand"
+    assert "Two Exceptions: Cr and Cu" not in heads, "the old single exceptions slide should have been replaced"
+    cu_i = heads.index("Exception: Copper")
+    assert heads[cu_i:cu_i + 3] == ["Exception: Copper", "Exception: Chromium", "Why Cr and Cu Break the Pattern"]
+    # builds.json agrees with the tables: Ge text line, Cu and Cr moves (predicted -> measured)
+    for bb in bspec["builds"]:
+        if bb.get("type") == "text_line":
+            assert bb["longhand"] in [c for _, _, c, _ in GOOD] and electrons(bb["longhand"]) == bb["z"]
+            assert bb["core"] == "Ar" and max(nz for _, nz in NOBLE if nz < bb["z"]) == NOBLE_Z[bb["core"]]
+        if bb.get("predicted"):
+            Z = bb["z"]
+            pred = ground_state_aufbau(Z)
+            assert {x["label"]: x["electrons"] for x in bb["sublevels"]} == {k: pred[k] for k in ("4s", "3d")}
+            assert bb["start_text"] == mark("[Ar] " + " ".join(f"{k}{pred[k]}" for k in ("4s", "3d")))
+            assert bb["steps"][-1]["text"] == "Actual: " + mark(shorthand_string(Z))
+            assert bb["steps"][0].get("from") == "4s" and bb["steps"][-1].get("to") == "3d"
+            key = {24: "Cr", 29: "Cu"}[Z]
+            for (sub, boxes), sl_ in zip(DIAGRAMS[key + "_pred"][3], bb["sublevels"]):
+                assert count_arrows(boxes) == sl_["electrons"], (key, sub)
     # 6. the Noble-Gas Shorthand slide carries the same-period-noble-gas note, and it is true: Ar is Cl's own period
     assert "not [Ar]" in slide_by_headline("Noble-Gas Shorthand")["fields"]["mustwrite"]
     assert check_config("[Ar] 3s2 3p5", 17) != []         # the error the note warns against
@@ -373,7 +499,9 @@ def tokens():
     return {"white": t["ground"]["white"]["hex"], "asphalt": t["ground"]["asphalt"]["hex"],
             "graphite": t["ground"]["graphite"]["hex"], "hair": t["ground"]["ruleHairline"]["hex"],
             "good": t["courses"]["chemistry"]["primaryDeep"]["hex"],
-            "bad": t["semantic"]["danger"]["deep"]}
+            "bad": t["semantic"]["danger"]["deep"],
+            "lime": t["courses"]["chemistry"]["primary"]["hex"],
+            "parch": t["ground"]["parchment"]["hex"]}
 
 
 COL = tokens()
@@ -658,6 +786,66 @@ def fig_cr_cu():
     c.save("chem_u02_s2.3_cr_cu_exceptions.png")
 
 
+
+# ---- figure 8: the periodic-table strip for germanium's noble gas --------------
+def strip_cells(period):
+    """Cells of one period: (column label, text). s-block and d-block are spans, p-block singles.
+    Computed from the atomic numbers, so the strip cannot disagree with the checker."""
+    lo, hi = STRIP_PERIODS[period]
+    cells = []
+    s_end = lo + 1
+    cells.append(("1-2", f"{SYMBOL[lo]}\u2013{SYMBOL[s_end]}"))
+    d_lo, d_hi = (21, 30) if period == 4 else (None, None)
+    cells.append(("3-12", f"{SYMBOL[d_lo]}\u2013{SYMBOL[d_hi]}" if d_lo else "\u2014"))
+    p_lo = (31 if period == 4 else 13)
+    for Z in range(p_lo, hi + 1):
+        assert group_of(Z) == 13 + (Z - p_lo)
+        cells.append((str(group_of(Z)), SYMBOL[Z]))
+    return cells
+
+
+def fig_ge_strip():
+    """Periods 3 and 4 as a strip: argon (end of period 3) marked as the noble gas BEFORE germanium,
+    germanium in period 4, krypton (end of period 4, AFTER germanium) marked as the wrong choice.
+    Marks are a tick, a cross and words as well as colour. 1010 x 600 = the slot, at 200 px per inch."""
+    ar, ge, kr = STRIP_MARK["before"], STRIP_MARK["element"], STRIP_MARK["wrong"]
+    c = Canvas(1010, 600)
+    widths = [176, 176] + [88] * 6
+    x_lab, x0 = 30, 84
+    colx = [x0]
+    for w in widths[:-1]:
+        colx.append(colx[-1] + w)
+    row_y = {3: 100, 4: 218}
+    ch = 100
+    # header: group numbers
+    heads = [h for h, _ in strip_cells(4)]
+    for cx_, w, h in zip(colx, widths, heads):
+        c.text(cx_ + w / 2, 52, h, F_REG(46), COL["graphite"])
+    for period, y in row_y.items():
+        c.text(x_lab + 6, y + ch / 2, str(period), F_BOLD(56), COL["asphalt"], "lm")
+        for cx_, w, (grp, txt) in zip(colx, widths, strip_cells(period)):
+            sym = txt
+            border, bw, fill, tcol, f = COL["hair"], 3, COL["white"], COL["asphalt"], F_REG(46 if "\u2013" in sym else 50)
+            if sym == "Ar":
+                border, bw, fill, f = COL["asphalt"], 8, COL["lime"], F_BOLD(48)
+            elif sym == "Ge":
+                border, bw, fill, f = COL["asphalt"], 8, COL["parch"], F_BOLD(48)
+            elif sym == "Kr":
+                border, bw, tcol, f = COL["bad"], 8, COL["bad"], F_BOLD(48)
+            c.rect(cx_ + 2, y, w - 4, ch, border, bw, fill=fill)
+            c.text(cx_ + w / 2, y + ch / 2, txt, f, tcol)
+    # legend, drawn from the same three atomic numbers
+    ly = 376
+    tick(c, 62, ly + 38, COL["good"], 1.0)
+    c.text(110, ly + 38, f"{SYMBOL[ar]}: ends period 3, BEFORE {SYMBOL[ge]}", F_BOLD(50), COL["good"], "lm")
+    ly += 78
+    cross(c, 62, ly + 38, COL["bad"], 1.0)
+    c.text(110, ly + 38, f"{SYMBOL[kr]}: ends period 4, AFTER {SYMBOL[ge]}", F_BOLD(50), COL["bad"], "lm")
+    ly += 78
+    c.text(110, ly + 38, f"{SYMBOL[ge]}: period 4, group 14", F_BOLD(50), COL["asphalt"], "lm")
+    c.save("chem_u02_s2.3_ge_noble_gas_strip.png")
+
+
 def _row_label(c, x, y, s, f=None):
     c.text(x, y, s, f or F_BOLD(54), COL["asphalt"], "lm")
 
@@ -716,6 +904,7 @@ def main():
     fig_cr_cu()
     fig_spot_problem()
     fig_spot_fixed()
+    fig_ge_strip()
     return 0
 
 

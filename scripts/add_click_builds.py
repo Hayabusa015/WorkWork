@@ -55,6 +55,25 @@ Ion-build extras (added for S2.4):
         minimum box size). Several objects may name the same slide; their clicks run in spec order as
         one sequence and the notes line lists them all.
 
+Added for S2.3 (every key below is opt-in; a spec that does not use them builds byte-identically):
+  top level   "alt_text": true       give each drawn diagram a computed description (descr) from its data;
+                                     each build then needs "element". "picture_alt": [{"slide": N, "descr": "..."}]
+                                     sets the description of the static pictures on a slide.
+  {"remove": 1, "from": "4s"}  {"add": 1, "to": "3d"}   a step names its sublevel instead of the default
+        (valence-first removal, first-open-sublevel addition). Two such steps are a "move".
+  "predicted": true   sublevels are the Aufbau-predicted state of Z (asserted), which differs from the measured
+        ground state; after the steps the final state is asserted to EQUAL the measured ground state
+        (the S2.3 checker's exception table), and the electron total is asserted unchanged.
+  "story": true, "start_caption": "..."   caption rows and state rows are laid out in the order they
+        arrive (caption, state, caption, state), each its own row, so the final state reads as a record.
+  "late_counts": true   fill builds only: the sublevel label shows its name from click 1 and the raised
+        electron count fades in WITH the last arrow of that sublevel (a second text box, adjacent).
+  "type": "text_line"   a build of native text boxes, one per configuration segment (see process_text_line):
+        {"longhand": "1s2 2s2 ...", "core": "Ar", "z": 32, "title": ..., "captions": {"highlight", "replace"},
+         "result": "auto"}: click 1 the longhand and its sum appear; click 2 the segments the noble gas
+        covers are highlighted; click 3 they leave and [Ar] appears in their place; click 4 the finished
+        shorthand line appears. Everything is computed from the checker's tables and asserted.
+
 Everything chemical is computed and asserted here, not typed: arrows are generated in fill order
 (within a sublevel one up arrow into each box left to right, THEN the down arrows left to right),
 sublevels must be in Aufbau order, no box may hold more than 2 arrows and two must be opposite,
@@ -162,11 +181,28 @@ def validate_atom(b, chk):
         if b.get("core"):
             sym = core["label"].strip("[]")
             assert chk.NOBLE_Z[sym] == core["electrons"], "core electron count does not match its noble gas"
-        gs = chk.ground_state(b["z"])
+        if b.get("predicted"):
+            assert b["z"] in chk.EXCEPTION, f"slide {b['slide']}: \"predicted\" is for a taught exception, Z={b['z']} is not one"
+            gs = aufbau_state(b["z"], chk)
+            assert gs != chk.ground_state(b["z"]), "the predicted state equals the measured one: nothing to show"
+        else:
+            gs = chk.ground_state(b["z"])
         for s in subs:
             assert gs.get(s["label"], 0) == s["electrons"], \
-                f"slide {b['slide']}: {s['label']} has {s['electrons']}, ground state of Z={b['z']} has {gs.get(s['label'], 0)}"
+                f"slide {b['slide']}: {s['label']} has {s['electrons']}, {'Aufbau' if b.get('predicted') else 'ground'} state of Z={b['z']} has {gs.get(s['label'], 0)}"
     return total
+
+
+def aufbau_state(Z, chk):
+    """What the filling rules alone give for Z: the checker's fill with the exception table ignored."""
+    left, out = Z, {}
+    for sub in chk.FILL_ORDER:
+        if left <= 0:
+            break
+        take = min(chk.CAP[sub[1]], left)
+        out[sub] = take
+        left -= take
+    return out
 
 
 def plan_steps(b):
@@ -218,14 +254,24 @@ def plan_steps(b):
         k = st[kind]
         for j in range(k):
             if kind == "remove":
-                cands = [s for s in subs if present[s["label"]]]
-                assert cands, "ion step removes from an empty atom"
-                tgt = max(cands, key=lambda s: (int(s["label"][0]), ORDER_L[s["label"][1]]))
+                if st.get("from"):                               # a named sublevel (a "move")
+                    assert st["from"] in by_label, f"remove from {st['from']!r}: not a drawn sublevel"
+                    tgt = by_label[st["from"]]
+                    assert present[tgt["label"]], f"remove from {tgt['label']}: it holds no electrons"
+                else:
+                    cands = [s for s in subs if present[s["label"]]]
+                    assert cands, "ion step removes from an empty atom"
+                    tgt = max(cands, key=lambda s: (int(s["label"][0]), ORDER_L[s["label"][1]]))
                 a = present[tgt["label"]].pop()
             else:
-                cands = [s for s in subs if len(present[s["label"]]) < s["boxes"] * 2]
-                assert cands, "no open sublevel to add to"
-                tgt = cands[0]
+                if st.get("to"):
+                    assert st["to"] in by_label, f"add to {st['to']!r}: not a drawn sublevel"
+                    tgt = by_label[st["to"]]
+                    assert len(present[tgt["label"]]) < tgt["boxes"] * 2, f"add to {tgt['label']}: it is full"
+                else:
+                    cands = [s for s in subs if len(present[s["label"]]) < s["boxes"] * 2]
+                    assert cands, "no open sublevel to add to"
+                    tgt = cands[0]
                 a = pool[tgt["label"]][len(present[tgt["label"]])]
                 present[tgt["label"]].append(a)
             steps.append({"kind": kind, "arrow": a, "caption": st.get("caption") if j == 0 else None,
@@ -280,12 +326,16 @@ def _run(par, t, font, size, color, bold, kind):
 
 
 def textbox(shapes, x, y, w, h, text, font, size, color, bold=False, align=PP_ALIGN.CENTER,
-            anchor=MSO_ANCHOR.MIDDLE, name="BUILD text"):
+            anchor=MSO_ANCHOR.MIDDLE, name="BUILD text", wrap=True, fill=None, outline=None):
     assert size >= FLOOR_PT, f"{name}: {size} pt is below the {FLOOR_PT} pt floor"
     tb = shapes.add_textbox(Emu(int(x * IN)), Emu(int(y * IN)), Emu(int(w * IN)), Emu(int(h * IN)))
     tb.name = name
+    if fill:
+        tb.fill.solid(); tb.fill.fore_color.rgb = rgb(fill)
+    if outline:
+        tb.line.color.rgb = rgb(outline); tb.line.width = Pt(1.5)
     tf = tb.text_frame
-    tf.word_wrap = True
+    tf.word_wrap = wrap
     tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
     tf.vertical_anchor = anchor
     for i, line_ in enumerate(text.split("\n")):          # "\n" starts a new paragraph
@@ -312,6 +362,83 @@ def est_lines(text, width_in, size_pt, bold=False):
     return lines
 
 
+_PIL = {}
+
+
+def text_w(text, size, bold=True, sup=0.62):
+    """Width in inches of text with ^{..}/_{..} runs, from the real Archivo metrics (brand/fonts).
+    A raised or lowered run is measured at `sup` of the size (PowerPoint and LibreOffice differ a little)."""
+    from PIL import ImageFont
+    key = bool(bold)
+    if key not in _PIL:
+        _PIL[key] = ImageFont.truetype(os.path.join(REPO, "brand", "fonts",
+                                                    "Archivo-Bold.ttf" if bold else "Archivo-Regular.ttf"), 200)
+    f, w, pos = _PIL[key], 0.0, 0
+    for m in re.finditer(r"([\^_])\{([^{}]*)\}", text):
+        w += f.getlength(text[pos:m.start()]) * size / 200 / 72
+        w += f.getlength(m.group(2)) * size * sup / 200 / 72
+        pos = m.end()
+    w += f.getlength(text[pos:]) * size / 200 / 72
+    return w
+
+
+def wrap_count(text, width_in, size, bold=True, safety=1.06):
+    """Lines a word-wrapped text needs in width_in, measured (not guessed); 6 % safety on the width."""
+    lines, cur = 1, ""
+    for w in plain(text).split():
+        trial = (cur + " " + w).strip()
+        if cur and text_w(trial, size, bold) * safety > width_in:
+            lines, cur = lines + 1, w
+        else:
+            cur = trial
+    return lines
+
+
+NUMW = {0: "no", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven"}
+
+
+def state_words(subs, arrows):
+    """'1s: 1 box, one pair. 2p: 3 boxes, one pair and two single up arrows.' computed from the arrows."""
+    out = []
+    for s in subs:
+        cells = {}
+        for a in arrows:
+            if a.sub == s["label"]:
+                cells.setdefault(a.box, []).append(a.spin)
+        pairs = sum(1 for v in cells.values() if len(v) == 2)
+        ups = sum(1 for v in cells.values() if v == ["u"])
+        downs = sum(1 for v in cells.values() if v == ["d"])
+        empty = s["boxes"] - len(cells)
+        bits = []
+        if pairs:
+            bits.append(f"{NUMW[pairs]} pair" + ("s" if pairs > 1 else ""))
+        if ups:
+            bits.append(f"{NUMW[ups]} single up arrow" + ("s" if ups > 1 else ""))
+        if downs:
+            bits.append(f"{NUMW[downs]} single down arrow" + ("s" if downs > 1 else ""))
+        if empty:
+            bits.append(f"{NUMW[empty]} empty box" + ("es" if empty > 1 else ""))
+        out.append(f"{s['label']}: {NUMW[s['boxes']]} box{'es' if s['boxes'] > 1 else ''}, "
+                   + (" and ".join(bits) if len(bits) < 3 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
+    return " ".join(out)
+
+
+def describe_diagram(b, initial, final, arrows):
+    """Alt text for a drawn orbital diagram, computed from the data that drew it."""
+    el = b.get("element")
+    assert el, f"slide {b['slide']}: alt_text needs an \"element\" on every build"
+    subs = b["sublevels"]
+    core = b.get("core")
+    head = f"Orbital diagram of {el}" + (f", {core['label']} core not drawn" if core else "") + ". "
+    if b.get("steps") and b.get("start") == "filled":
+        start = state_words(subs, initial)
+        end = state_words(subs, final)
+        if start == end:
+            return head + end
+        return head + "As first drawn: " + start + " After the steps: " + end
+    return head + state_words(subs, final)
+
+
 def draw(slide, b, region, T, initial, steps, arrows):
     """Draw every shape. Returns dict of shape handles (python-pptx shapes)."""
     ink, white = T["ground"]["asphalt"], T["ground"]["white"]
@@ -327,6 +454,34 @@ def draw(slide, b, region, T, initial, steps, arrows):
     srow = 0.30 if compact else 0.32
     gap = 0.02 if compact else 0.04
     caps = [st["caption"] for st in steps if st["caption"]]
+    story = bool(b.get("story"))
+    rows = []
+    if story:
+        # caption / state rows in arrival order, each its own row (see the docstring)
+        assert b.get("steps") and not b.get("result") and b.get("sum", "auto") in ("auto", False, None), \
+            "story rows are for step builds without a result or custom sum"
+        assert not compact, "story rows do not fit a band"
+        if b.get("start_caption"):
+            rows.append((None, "cap", b["start_caption"]))
+        if b.get("start_text"):
+            rows.append((None, "state", b["start_text"]))
+        for st in steps:
+            if st["caption"]:
+                rows.append((st, "cap", st["caption"]))
+            if st.get("text"):
+                rows.append((st, "state", st["text"]))
+        story_rows = []
+        for st_, kind, t in rows:
+            if kind == "cap":
+                nl = est_lines(t, W - 2 * pad, FLOOR_PT, True)
+                assert nl <= 2, f"caption does not fit two lines here: {t!r}"
+                story_rows.append((st_, kind, t, nl * line))
+            else:
+                assert est_lines(t, W - 2 * pad, 18, True) == 1, f"state text does not fit one line: {t!r}"
+                story_rows.append((st_, kind, t, srow))
+        caps = []
+    else:
+        assert not b.get("start_caption"), "start_caption needs \"story\": true"
     # Captions accumulate, each in its own row (one or two lines), so a static export (PDF, handout) of
     # the final state never has two captions drawn on top of each other.
     cap_lines = [est_lines(c, W - 2 * pad, FLOOR_PT, True) for c in caps]
@@ -334,7 +489,9 @@ def draw(slide, b, region, T, initial, steps, arrows):
         assert n <= 2, f"caption does not fit two lines here: {c!r}"
     cap_h = sum(n * line for n in cap_lines)
     states = bool(b.get("start_text")) or any(st.get("text") for st in steps)
-    if states:
+    if story:
+        sum_h = sum(r[3] for r in story_rows)
+    elif states:
         assert not b.get("result") and b.get("sum", "auto") in ("auto", False, None), \
             "start_text / step text cannot be combined with result or a custom sum"
         texts = [t for t in [b.get("start_text")] + [st.get("text") for st in steps] if t]
@@ -359,7 +516,7 @@ def draw(slide, b, region, T, initial, steps, arrows):
     xs = x0 + pad + tw + (W - 2 * pad - tw - row_w) / 2
 
     out = {"backdrop": None, "group": None, "arrows": {}, "hl": {}, "captions": [], "sum": None,
-           "states": []}
+           "states": [], "extra": [], "counts": {}}
     bd = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(x0 * IN)), Emu(int(y0 * IN)),
                                 Emu(int(W * IN)), Emu(int(H * IN)))
     bd.name = "BUILD backdrop"
@@ -378,6 +535,11 @@ def draw(slide, b, region, T, initial, steps, arrows):
         textbox(gs, x0 + pad, y, W - 2 * pad, title_h, b["title"], font, 18, ink, True, name="BUILD title")
     by = y + title_h + (0 if compact else gap)
     box_xy = {}
+    late = bool(b.get("late_counts"))
+    late_boxes = []
+    if late:
+        assert not b.get("steps") and b.get("start", "empty") == "empty", \
+            "late_counts is for fill builds that start empty"
     x = xs
     for s in subs:
         gw = s["boxes"] * size + (s["boxes"] - 1) * inner
@@ -390,9 +552,19 @@ def draw(slide, b, region, T, initial, steps, arrows):
             r.line.color.rgb = rgb(ink); r.line.width = Pt(2.25)
             r.shadow.inherit = False
             box_xy[(s["label"], i)] = (bx, by)
-        textbox(gs, x - 0.1, by + size + gap, gw + 0.2, label_h,
-                s["label"] if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
-                name=f"BUILD label {s['label']}")
+        if late:
+            # name in the group (flies in at click 1), raised count a separate box that fades in with the
+            # last arrow of this sublevel. Together they read, and are centred, like "2p^{4}".
+            nm, cnt = s["label"], str(s["electrons"])
+            wn, wc = text_w(nm, 18), text_w(f"^{{{cnt}}}", 18)
+            cx0 = x + gw / 2 - (wn + wc) / 2
+            textbox(gs, cx0, by + size + gap, wn + 0.02, label_h, nm, font, 18, ink, True,
+                    align=PP_ALIGN.LEFT, name=f"BUILD label {nm}", wrap=False)
+            late_boxes.append((s["label"], cx0 + wn, by + size + gap, wc, label_h, cnt))
+        else:
+            textbox(gs, x - 0.1, by + size + gap, gw + 0.2, label_h,
+                    s["label"] if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
+                    name=f"BUILD label {s['label']}")
         x += gw + outer
     # arrows (separate top-level shapes: each is animated on its own)
     aw, ah = size * 0.25, size * 0.62
@@ -426,8 +598,26 @@ def draw(slide, b, region, T, initial, steps, arrows):
             hs.line.color.rgb = rgb(ink); hs.line.width = Pt(1.5)
             hs.shadow.inherit = False
             out["hl"][id(a)] = hs
+    for lab, bx_, by_, bw_, bh_, cnt in late_boxes:
+        tbx = textbox(slide.shapes, bx_, by_, bw_ + 0.12, bh_, f"^{{{cnt}}}", font, 18, ink, True,
+                      align=PP_ALIGN.LEFT, name=f"BUILD count {lab}", wrap=False)
+        out["counts"][lab] = tbx
+        out["extra"].append(tbx)
     cy = by + size + gap + label_h + gap
     row = 0
+    if story:
+        yy = cy
+        for st_, kind, t, h in story_rows:
+            if kind == "cap":
+                tb = textbox(slide.shapes, x0 + pad, yy, W - 2 * pad, h, t, font, FLOOR_PT, deep, True,
+                             name="BUILD caption")
+                out["captions"].append((st_, tb))
+            else:
+                tb = textbox(slide.shapes, x0 + pad, yy, W - 2 * pad, h, t, font, 18, ink, True,
+                             name="BUILD state")
+                out["states"].append((st_, tb))
+            yy += h
+        return out
     for st in steps:
         if st["caption"]:
             nl = cap_lines[len(out["captions"])]
@@ -480,6 +670,12 @@ def build_timeline(b, shp, initial, steps):
     box = eff(shp["group"].shape_id, "entr", "fly", grp=True)
     pre = []
     start_state = [eff(tb.shape_id, "entr", "fade", text=True) for st_, tb in shp["states"] if st_ is None]
+    start_state += [eff(tb.shape_id, "entr", "fade", text=True) for st_, tb in shp["captions"] if st_ is None]
+    # late counts: the raised count of a sublevel arrives WITH the last arrow of that sublevel
+    last_of = {}
+    for i_, st_ in enumerate(steps):
+        if st_["arrow"] is not None:
+            last_of[st_["arrow"].sub] = i_
     desc = []
     if initial:                                    # filled start: the atom arrives whole
         tl.click(*pre, box, *[eff(shp["arrows"][id(a)].shape_id, "entr", "fly", fill=True) for a in initial],
@@ -503,6 +699,9 @@ def build_timeline(b, shp, initial, steps):
             if st["kind"] == "remove" and a in present_hl:      # its valence overlay leaves with it
                 effects.append(eff(shp["hl"][id(a)].shape_id, "exit", "fade", fill=True))
                 present_hl.remove(a)
+        for lab, tb in shp["counts"].items():
+            if last_of.get(lab) == i:
+                effects.append(eff(tb.shape_id, "entr", "fade", text=True))
         for s2, tb in shp["captions"]:
             if s2 is st:
                 effects.append(eff(tb.shape_id, "entr", "fade", text=True))
@@ -595,6 +794,148 @@ def timing_xml(tl):
     return xml
 
 
+
+# --------------------------------------------------------------------------- text-line build
+def set_descr(shape, text):
+    """Alt text: the descr attribute of the shape's cNvPr (works for shapes, groups and pictures)."""
+    el = shape._element
+    nv = next(el.iter(f"{{{NS_P}}}cNvPr"))
+    nv.set("descr", text)
+
+
+def process_text_line(slide, b, region, T, chk):
+    """A build of native text boxes, one per configuration segment. Returns (timeline, desc, shp).
+
+        click 1   title, every segment of the longhand line, and the sum of its superscripts appear
+        click 2   the segments the noble gas covers are highlighted (Primary fill, Asphalt outline, as the
+                  valence highlight in the ion builds) with the first caption
+        click 3   the highlight and those segments leave (exit fade); [Ar] appears in the highlight style,
+                  right-aligned in the space they occupied so it sits against the remaining segments
+        click 4   the finished shorthand line appears as the result row
+    Effects are the validated ones: fade in, fade out. Nothing moves. Chemistry is computed from the
+    checker: ground state, previous noble gas, the prefix of segments that equals that gas."""
+    ink, white = T["ground"]["asphalt"], T["ground"]["white"]
+    font = T["fonts"]["body"]
+    deep = T["courses"][b["_course"]]["primaryDeep"]
+    accent = T["courses"][b["_course"]]["primary"]
+    x0, y0, W, H = region["x"], region["y"], region["w"], region["h"]
+    pad, line, gap = 0.12, 0.28, 0.04
+    cfg = b["longhand"]
+    core_sym, parts = chk.parse(cfg)
+    assert core_sym is None, "longhand must not use a noble-gas core"
+    z = b["z"]
+    assert chk.electrons(cfg) == z, f"longhand totals {chk.electrons(cfg)}, Z = {z}"
+    assert chk.check_config(cfg, z) == [], f"longhand breaks a rule: {chk.check_config(cfg, z)}"
+    core = b["core"]
+    want = max(nz for _, nz in chk.NOBLE if nz < z)
+    assert chk.NOBLE_Z[core] == want, f"{core} is not the noble gas BEFORE Z = {z} (that is {want} electrons)"
+    run, k = 0, None
+    for i, (_, n) in enumerate(parts):
+        run += n
+        if run == want:
+            k = i + 1
+            break
+    assert k, f"no prefix of the longhand sums to {core}'s {want} electrons"
+    assert dict(parts[:k]) == chk.ground_state(want), f"the first {k} segments are not {core}'s configuration"
+    tail = parts[k:]
+    short = f"[{core}] " + " ".join(f"{a}{n}" for a, n in tail)
+    assert short == chk.shorthand_string(z), f"shorthand {short!r} != checker {chk.shorthand_string(z)!r}"
+    seg_txt = [f"{a}^{{{n}}}" for a, n in parts]
+    ar_txt = f"[{core}]"
+    res_txt = b.get("result_text") or chk.mark(short)
+    assert plain(res_txt) == short
+    sum_txt = "+".join(str(n) for _, n in parts) + f" = {z}"
+    caps = [b["captions"]["highlight"], b["captions"]["replace"]]
+    inner = W - 2 * pad
+    for padx, g in ((0.07, 0.09), (0.05, 0.07)):
+        ws = [text_w(t, 18) + 2 * padx for t in seg_txt]
+        row_w = sum(ws) + g * (len(ws) - 1)
+        if row_w <= inner:
+            break
+    assert row_w <= inner, f"the longhand line needs {row_w:.2f} in at 18 pt; the region has {inner:.2f}. Split the slide."
+    n_cap = [wrap_count(c, inner, FLOOR_PT) for c in caps]
+    assert all(n <= 2 for n in n_cap), f"a caption needs more than two lines: {n_cap}"
+    title_h, chip_h, sum_h, res_h = 0.30, 0.44, 0.30, 0.32
+    cap_h = sum(n * line for n in n_cap)
+    stack = title_h + chip_h + sum_h + cap_h + res_h + 5 * gap
+    assert stack <= H - 2 * pad, f"text-line build needs {stack:.2f} in, the region has {H - 2 * pad:.2f}"
+    y = y0 + (H - stack) / 2
+    out = {"backdrop": None, "group": None, "arrows": {}, "hl": {}, "captions": [], "sum": None,
+           "states": [], "extra": [], "counts": {}}
+    bd = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(x0 * IN)), Emu(int(y0 * IN)),
+                                Emu(int(W * IN)), Emu(int(H * IN)))
+    bd.name = "BUILD backdrop"
+    bd.fill.solid(); bd.fill.fore_color.rgb = rgb(white); bd.line.fill.background()
+    bd.shadow.inherit = False
+    out["backdrop"] = bd
+    sh = slide.shapes
+    title = textbox(sh, x0 + pad, y, inner, title_h, b["title"], font, 18, ink, True, name="BUILD title")
+    cy = y + title_h + gap
+    xs = x0 + pad + (inner - row_w) / 2
+    xl = [xs]
+    for w_ in ws[:-1]:
+        xl.append(xl[-1] + w_ + g)
+    # the highlight block sits BEHIND the segments of the core: a text-free rectangle, added first
+    hx0, hx1 = xl[0] - 0.04, xl[k - 1] + ws[k - 1] + 0.04
+    hl = sh.add_shape(MSO_SHAPE.RECTANGLE, Emu(int(hx0 * IN)), Emu(int((cy - 0.02) * IN)),
+                      Emu(int((hx1 - hx0) * IN)), Emu(int((chip_h + 0.04) * IN)))
+    hl.name = "BUILD highlight core"
+    hl.fill.solid(); hl.fill.fore_color.rgb = rgb(accent)
+    hl.line.color.rgb = rgb(ink); hl.line.width = Pt(1.5)
+    hl.shadow.inherit = False
+    chips = []
+    for i, t in enumerate(seg_txt):
+        chips.append(textbox(sh, xl[i], cy, ws[i], chip_h, t, font, 18, ink, True,
+                             name=f"BUILD segment {parts[i][0]}", wrap=False))
+    sm = textbox(sh, x0 + pad, cy + chip_h + gap, inner, sum_h, sum_txt, font, 18, ink, True, name="BUILD sum")
+    yy = cy + chip_h + gap + sum_h + gap
+    cap_boxes = []
+    for c, n in zip(caps, n_cap):
+        cap_boxes.append(textbox(sh, x0 + pad, yy, inner, n * line, c, font, FLOOR_PT, deep, True,
+                                 name="BUILD caption"))
+        yy += n * line
+    res = textbox(sh, x0 + pad, yy + gap, inner, res_h, res_txt, font, 18, ink, True, name="BUILD result")
+    # [Ar]: in the highlight style, right-aligned in the block's span so it sits against the tail
+    war = text_w(ar_txt, 18) + 2 * 0.07
+    assert war <= hx1 - hx0, "the noble-gas symbol is wider than the block it replaces"
+    ar_x = xl[k] - g - war
+    ar = textbox(sh, ar_x, cy + 0.02, war, chip_h - 0.04, ar_txt, font, 18, ink, True, name=f"BUILD {core} bracket",
+                 wrap=False, fill=accent, outline=ink)
+    out["captions"] = [(None, c) for c in cap_boxes]
+    out["extra"] = [title, hl] + chips + [sm, ar, res]
+    tl = Timeline()
+    f_ = lambda shape, cls, text=False, fill=False: eff(shape.shape_id, cls, "fade", text=text, fill=fill)
+    tl.click(f_(title, "entr", True), *[f_(c, "entr", True) for c in chips], f_(sm, "entr", True))
+    tl.click(f_(hl, "entr", fill=True), f_(cap_boxes[0], "entr", True))
+    tl.click(f_(hl, "exit", fill=True), *[f_(c, "exit", True) for c in chips[:k]],
+             f_(ar, "entr", True, True), f_(cap_boxes[1], "entr", True))
+    tl.click(f_(res, "entr", True))
+    desc = [f"the longhand line, one text box per segment, and its sum ({sum_txt}) appear",
+            f"the first {k} segments (the {core} part, {want} electrons) are highlighted: {caps[0]}",
+            f"the highlighted segments leave and {ar_txt} appears in their place: {caps[1]}",
+            f"the finished line appears: {short}"]
+    # replay: what is showing after each click
+    static = [bd.shape_id]
+    every = [x.shape_id for x in all_shapes(out)]
+    vis = lambda n: simulate(tl, static + every[1:], n)
+    ids = lambda L: {x.shape_id for x in L}
+    v1, v2, v3, v4 = vis(1), vis(2), vis(3), vis(4)
+    assert ids(chips) <= v1 and title.shape_id in v1 and sm.shape_id in v1
+    assert not (ids([hl, ar, res] + cap_boxes) & v1), "something arrives before its click"
+    assert hl.shape_id in v2 and cap_boxes[0].shape_id in v2 and ids(chips) <= v2
+    assert not (ids(chips[:k]) | {hl.shape_id}) & v3 and ar.shape_id in v3 and ids(chips[k:]) <= v3
+    assert ids(chips[k:]) | {ar.shape_id, res.shape_id, title.shape_id, sm.shape_id} | ids(cap_boxes) <= v4
+    assert not (ids(chips[:k]) | {hl.shape_id}) & v4
+    # what remains reads as the shorthand: the bracket, then the tail, left to right
+    shown = sorted([(ar.left, ar_txt)] + [(chips[i].left, plain(seg_txt[i])) for i in range(k, len(seg_txt))])
+    assert " ".join(t for _, t in shown) == plain(res_txt), "the line that remains does not equal the result row"
+    if b.get("alt_text"):
+        set_descr(bd, f"Text build for {b.get('element', 'the element')}, Z = {z}: the longhand "
+                  f"{cfg}, whose first {k} segments ({want} electrons) equal {core}, then {core} in brackets "
+                  f"standing in for them, then the finished shorthand {short}.")
+    return tl, desc, out, ids(chips[:k]) | {hl.shape_id}
+
+
 def validate_timing(slide, expected_clicks):
     """Structural validation of the p:timing that was written."""
     el = slide._element
@@ -641,11 +982,16 @@ def append_note(slide, text):
     tf.text = (tf.text.rstrip() + "\n" if tf.text.strip() else "") + text
 
 
+def all_shapes(shp):
+    """Every shape a build drew, backdrop first."""
+    return ([shp["backdrop"]] + ([shp["group"]] if shp["group"] is not None else [])
+            + list(shp["arrows"].values()) + list(shp["hl"].values())
+            + [tb for _, tb in shp["captions"]] + [tb for _, tb in shp["states"]]
+            + ([shp["sum"]] if shp["sum"] is not None else []) + list(shp.get("extra", [])))
+
+
 def all_shape_ids(shp):
-    return ([shp["backdrop"].shape_id, shp["group"].shape_id]
-            + [sp.shape_id for sp in shp["arrows"].values()] + [sp.shape_id for sp in shp["hl"].values()]
-            + [tb.shape_id for _, tb in shp["captions"]] + [tb.shape_id for _, tb in shp["states"]]
-            + ([shp["sum"].shape_id] if shp["sum"] is not None else []))
+    return [sh.shape_id for sh in all_shapes(shp)]
 
 
 def drop(shape):
@@ -674,9 +1020,17 @@ def process(deck, specfile, out, preview=None, only=None):
             assert 1 <= i_ <= n_, f"bad band {b['band']}"
             region["h"] = region["h"] / n_
             region["y"] = region["y"] + region["h"] * (i_ - 1)
+        b["alt_text"] = bool(spec.get("alt_text"))
+        earlier = per_slide.setdefault(b["slide"], [])
+        if b.get("type") == "text_line":
+            removed = remove_pictures_in(slide, slot)
+            tl, desc, shp, _gone = process_text_line(slide, b, region, T, chk)
+            n = len(tl.clicks)
+            earlier.append((tl, desc, b["region"], b.get("name"), b, shp, [shp["backdrop"].shape_id],
+                            all_shape_ids(shp), n, removed, 0))
+            continue
         validate_atom(b, chk)
         initial, steps, arrows = plan_steps(b)
-        earlier = per_slide.setdefault(b["slide"], [])
         removed = remove_pictures_in(slide, slot)
         shp = draw(slide, b, region, T, initial, steps, arrows)
         tl, desc = build_timeline(b, shp, initial, steps)
@@ -698,12 +1052,27 @@ def process(deck, specfile, out, preview=None, only=None):
         check_boxes(list(want), b["sublevels"])
         got = {a for a in arrows if shp["arrows"][id(a)].shape_id in final_vis}
         assert got == want, f"slide {b['slide']}: final state differs from the computed target"
+        if b.get("predicted"):
+            # a "move": the sublevels are what the rules predict; the steps must land on the measured state
+            fin = {}
+            for a in want:
+                fin[a.sub] = fin.get(a.sub, 0) + 1
+            for sub_ in b["sublevels"]:
+                fin.setdefault(sub_["label"], 0)
+            exp = chk.ground_state(b["z"])
+            assert all(fin[k_] == exp.get(k_, 0) for k_ in fin), \
+                f"slide {b['slide']}: the steps end at {fin}, the measured ground state of Z={b['z']} is {exp}"
+            assert sum(fin.values()) == sum(sub_["electrons"] for sub_ in b["sublevels"]), "a move must not change the count"
         got_hl = {a for a in arrows if id(a) in shp["hl"] and shp["hl"][id(a)].shape_id in final_vis}
         assert got_hl == want_hl, f"slide {b['slide']}: final valence highlights differ from the target"
         if shp["states"]:
             shown = [tb for _, tb in shp["states"] if tb.shape_id in final_vis]
             assert len(shown) == len(shp["states"]), f"slide {b['slide']}: a state line is not showing at the end"
         total_final = len(got)
+        if b["alt_text"]:
+            set_descr(shp["group"], describe_diagram(b, initial, [a for a in arrows if a in want], arrows))
+            for a in arrows:
+                set_descr(shp["arrows"][id(a)], f"{'Up' if a.spin == 'u' else 'Down'} arrow in {a.sub} box {a.box + 1}")
         earlier.append((tl, desc, b["region"], b.get("name"), b, shp, static, every, n, removed, total_final))
     for slide_no, items in per_slide.items():
         slide = prs.slides[slide_no - 1]
@@ -713,9 +1082,7 @@ def process(deck, specfile, out, preview=None, only=None):
                 k = max(0, min(left, n))
                 left -= k
                 vis = simulate(tl, static + every[1:], k)
-                for shape in [shp["backdrop"], shp["group"]] + list(shp["arrows"].values()) \
-                        + list(shp["hl"].values()) + [tb for _, tb in shp["captions"]] \
-                        + [tb for _, tb in shp["states"]] + ([shp["sum"]] if shp["sum"] is not None else []):
+                for shape in all_shapes(shp):
                     if shape.shape_id not in vis:
                         drop(shape)
                 report.append((slide_no, f"preview after {k} of {n} clicks"))
@@ -735,6 +1102,14 @@ def process(deck, specfile, out, preview=None, only=None):
         append_note(slide, f"CLICK BUILD: {n} clicks: " + "; ".join(f"{i + 1} {d}" for i, d in enumerate(notes)) + ".")
         for tl, desc, _, _, b, _, _, _, nn, removed, total_final in items:
             report.append((slide_no, nn, nodes, removed, total_final))
+    if preview is None:
+        for pa in spec.get("picture_alt", []):
+            pics = [sh for sh in prs.slides[pa["slide"] - 1].shapes if sh.shape_type == 13]
+            assert pics, f"picture_alt: slide {pa['slide']} has no picture"
+            assert len(pics) == 1 or pa.get("index") is not None, \
+                f"picture_alt: slide {pa['slide']} has {len(pics)} pictures; give an \"index\""
+            set_descr(pics[pa.get("index", 0)], pa["descr"])
+            report.append((pa["slide"], "picture alt text set"))
     prs.save(out)
     return report
 

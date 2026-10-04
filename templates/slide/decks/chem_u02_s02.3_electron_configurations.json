@@ -207,7 +207,38 @@
       "imageSubjects": {
         "concept": "a neon sign tube glowing orange-red in a dark window"
       },
-      "notes": "COMMON ERROR (brief): using the noble gas of the same period, or the element's own. Cl is period 3, so the core is [Ne], not [Ar]; the core is the previous period's noble gas. Shorthand: [Ne] 3s^2 3p^5, which equals the longhand 1s^2 2s^2 2p^6 3s^2 3p^5. Image prompt (concept slot): a neon sign tube glowing orange-red in a dark window."
+      "notes": "COMMON ERROR (brief): using the noble gas of the same period, or the element's own. Cl is period 3, so the core is [Ne], not [Ar]; the core is the previous period's noble gas. Shorthand: [Ne] 3s^2 3p^5, which equals the longhand 1s^2 2s^2 2p^6 3s^2 3p^5. Next slide: the same idea for germanium, built one click at a time (the longhand first, then the noble gas before it in brackets). Image prompt (concept slot): a neon sign tube glowing orange-red in a dark window."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Shorthand: Germanium",
+        "subhead": "Write it long first. Then swap the argon part for [Ar].",
+        "a1_l": "STEP 1: LONGHAND",
+        "a1_b": "All 32 electrons, in filling order.",
+        "a2_l": "STEP 2: THE SUBSTITUTE",
+        "a2_b": "[Ar] is a placeholder for argon's 18 electrons.",
+        "a3_l": "STEP 3: FINISH",
+        "a3_b": "Then write what is left, the usual way."
+      },
+      "notes": "Shorthand build for germanium (Z = 32), on text boxes, one per segment. The CLICK BUILD line at the end says exactly what each click does. Teach it in this order: write the longhand first; find the noble gas that comes BEFORE germanium and highlight those electrons; put that noble gas in brackets; finish the line. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^2, 2+2+6+2+6+2+10+2 = 32. The first five segments total 18 and are exactly argon's configuration, so [Ar] is a placeholder, a substitution like writing one symbol for a long repeated expression in math. Shorthand: [Ar] 4s^2 3d^10 4p^2, 18 + 2 + 10 + 2 = 32, with 2 unpaired electrons (the two 4p singles). Common error (brief): using the noble gas of the element's own period. Krypton ends germanium's period and comes AFTER it (Z = 36 > 32), so [Kr] would claim 36 electrons; the next slide shows the table strip. [Ar] sits against the remaining segments, in the space the highlighted block occupied, so the line reads [Ar] 4s^2 3d^10 4p^2 after click 3; click 4 writes the finished line as the answer to copy. Cl stays on the previous slide as the static example. A static export or print of this slide shows every shape at once (the highlight, the replaced segments and [Ar] overlap); for a handout use the --preview export of scripts/add_click_builds.py."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Why [Ar] and Not [Kr]?",
+        "subhead": "Germanium is in period 4. Its core is the noble gas that ends period 3.",
+        "a1_l": "ARGON, Z = 18",
+        "a1_b": "Ends period 3. It comes BEFORE germanium.",
+        "a2_l": "GERMANIUM, Z = 32",
+        "a2_b": "Period 4, group 14. Use the previous period's noble gas.",
+        "a3_l": "KRYPTON, Z = 36",
+        "a3_b": "Ends period 4. It comes AFTER germanium, so it is the wrong core."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_ge_noble_gas_strip.png"
+      },
+      "notes": "Table strip, periods 3 and 4 (groups 1-2, 3-12 as spans, then 13-18). Argon (Z = 18) is the last element of period 3: the noble gas BEFORE germanium. Germanium (Z = 32) is period 4, group 14. Krypton (Z = 36) ends period 4: it comes AFTER germanium, so it cannot be a core for a 32-electron atom. Rule restated: the core is the previous period's noble gas. Positions are asserted from the atomic numbers in scripts/build_diagram_u02_s02.3_configurations.py. The marks use a tick, a cross and words as well as colour. Alt text on the picture describes the strip."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -242,19 +273,48 @@
     {
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
-        "headline": "Two Exceptions: Cr and Cu",
-        "subhead": "Learn both. The rules predict 4s^{2} for each, and the measurements disagree.",
-        "a1_l": "CHROMIUM, Z = 24",
-        "a1_b": "Actual: [Ar] 4s^{1} 3d^{5}",
-        "a2_l": "COPPER, Z = 29",
-        "a2_b": "Actual: [Ar] 4s^{1} 3d^{10}",
-        "a3_l": "WHY (A SIMPLIFICATION)",
-        "a3_b": "Half-full and full 3d are extra stable."
+        "headline": "Exception: Copper",
+        "subhead": "The rules predict 4s^{2} 3d^{9}. Watch what the real atom does.",
+        "a1_l": "WATCH",
+        "a1_b": "Which sublevel loses an electron, and which gains one?",
+        "a2_l": "ONE OF TWO",
+        "a2_b": "Copper and chromium are the only exceptions we learn.",
+        "a3_l": "LOOKING AHEAD (S2.4)",
+        "a3_b": "4s empties first in ions: Cu^{+} is [Ar] 3d^{10}, Cu^{2+} is [Ar] 3d^{9}."
       },
-      "images": {
-        "diagram": "../assets/chem_u02_s2.3_cr_cu_exceptions.png"
+      "notes": "Copper click build (the CLICK BUILD line at the end gives the clicks). Boxes for 4s and 3d only; the [Ar] core (18 electrons) is not drawn. Click 1: the atom as the rules predict, [Ar] 4s^2 3d^9 (4s before 3d; 18 + 2 + 9 = 29). Click 2: one 4s arrow leaves. Click 3: a 3d down arrow arrives in the fifth box. End: [Ar] 4s^1 3d^10, 18 + 1 + 10 = 29, one unpaired electron (the 4s). Same electron count before and after: an electron MOVES, none is gained. Say 'measured ground state', not 'textbook error'. The arrows are bookkeeping for the end state; the diagram does not track one electron's journey. Forward pointer to S2.4: the 4s^1 electron leaves first, so Cu^+ = [Ar] 3d^10 and Cu^2+ = [Ar] 3d^9 (both checked by the figure script). The reason follows on the Why slide. Do not extend this to Ag or Au: not taught, not checked (look it up)."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Exception: Chromium",
+        "subhead": "Same move. The rules predict 4s^{2} 3d^{4}.",
+        "a1_l": "WATCH",
+        "a1_b": "Count the arrows in 3d before and after.",
+        "a2_l": "THE TOTAL",
+        "a2_b": "Cr still has 24 electrons. [Ar] is 18, so 6 are drawn.",
+        "a3_l": "UNPAIRED ELECTRONS",
+        "a3_b": "Count them at the end. Is it more than iron's 4?"
       },
-      "notes": "Only Cr and Cu are taught as exceptions. Cr: [Ar] 4s^1 3d^5. Cu: [Ar] 4s^1 3d^10. These are measured ground states, not textbook errors. PROVISIONAL label: 'half-full or full d is extra stable' is a simplification, not a predictor; it does not explain every exception. Mo, Ag and Au (one period down) are not taught and unchecked here; outside Cr and Cu, say 'look it up'."
+      "notes": "Chromium click build. Click 1: predicted [Ar] 4s^2 3d^4 (18 + 2 + 4 = 24): four up arrows in 3d and one empty box. Click 2: one 4s arrow leaves. Click 3: an up arrow arrives in the fifth 3d box. End: [Ar] 4s^1 3d^5, 18 + 1 + 5 = 24; every box in 4s and 3d holds exactly one up arrow, all spins parallel (Hund), so 6 unpaired electrons, more than iron's 4. The arrows are bookkeeping for the end state: the arrow that leaves 4s is the down one and the arrow that arrives in 3d is an up one, so do not present it as one electron keeping its spin; the point is the final arrangement. Answer to the unpaired question: 6. Same teaching label as Cu: measured ground state. Mo (same group, one period down) is an exception too, and W is not; not taught, not checked here."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Why Cr and Cu Break the Pattern",
+        "subhead": "A simplified reason, and where it stops working.",
+        "k1_l": "THE ENERGIES ARE CLOSE",
+        "k1_b": "4s and 3d are almost the same energy, so a small change can tip the balance.",
+        "k2_l": "THE PAYOFF",
+        "k2_b": "One 4s electron moves. 3d becomes completely full (Cu) or half full with parallel spins (Cr).",
+        "k3_l": "THE RESULT",
+        "k3_b": "That lowers the atom's total energy slightly, so the real atom does it.",
+        "mustwrite": "A simplification, not a rule: it misses other exceptions. Learn Cr and Cu; look the rest up."
+      },
+      "imageSubjects": {
+        "aside": "a coil of copper wire beside a chromium-plated tap on a lab bench"
+      },
+      "notes": "STUDENT LEVEL (simplified; say so out loud): 4s and 3d are very close in energy here. Moving one 4s electron gives a completely filled 3d (Cu) or a half-filled 3d with all five spins parallel (Cr). That lowers the atom's total energy slightly, so the real atom does that. This explains Cr and Cu; it does not predict every exception, and in this course students learn Cr and Cu and look the rest up. Do NOT say that half-full and full are always more stable. TEACHER LEVEL: the near-degeneracy of 4s and 3d is what lets a small energy change decide the arrangement. Textbook accounts cite exchange stabilization (same-spin electrons in different orbitals lower the energy; Cr has six parallel spins) and reduced electron-electron repulsion. PROVISIONAL: the textbook story is simpler than the real energy accounting, which needs electron-correlation calculations; that is why the heuristic fails. COUNTEREXAMPLES (PROVISIONAL: the script checks only that the electron totals are 41 and 74; confirm the configurations against a source before quoting or testing): Nb is [Kr] 5s^1 4d^4, an exception that is not half-full or full; W is the regular [Xe] 6s^2 4f^14 5d^4 although Cr and Mo, in the same group, are exceptions. So the heuristic is not a predictor. Mo, Ag and Au (one period down) are not taught and not checked here. Forward pointer to S2.4: the 4s^1 electron leaves first, so Cu^+ = [Ar] 3d^10 and Cu^2+ = [Ar] 3d^9. Image prompt (aside slot): a coil of copper wire beside a chromium-plated tap on a lab bench."
     },
     {
       "master": "05_PROCESS_TIMELINE",
@@ -291,7 +351,7 @@
       "imageSubjects": {
         "aside": "a page of student work with a few lines circled in red pen"
       },
-      "notes": "Answers on the next slide. Each was written as a ground state. (a) O: 1s^2 2s^2 2p^6 is 10 electrons, O has 8. (b) K: [Ar] 3d^1 puts 3d before 4s. (c) Ca: [Ne] 4s^2 is 12 electrons, wrong core. (d) Cr: [Ar] 4s^2 3d^4 obeys the rules but is not the real ground state. Image prompt (aside slot): a page of student work with a few lines circled in red pen."
+      "notes": "Answers on the next slide. Each was written as a ground state. (a) O: 1s^2 2s^2 2p^6 is 10 electrons, O has 8. (b) K: [Ar] 3d^1 puts 3d before 4s. (c) Ca: [Ne] 4s^2 is 12 electrons, wrong core. (d) Cr: [Ar] 4s^2 3d^4 obeys the rules but is not the real ground state. Replay the Chromium click build if students are unsure. Image prompt (aside slot): a page of student work with a few lines circled in red pen."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -306,7 +366,7 @@
       "imageSubjects": {
         "data": "a pencil resting on a page of crossed-out electron counts"
       },
-      "notes": "Corrected: (a) O 1s^2 2s^2 2p^4. (b) K [Ar] 4s^1. (c) Ca [Ar] 4s^2. (d) Cr [Ar] 4s^1 3d^5. Teach 'rules-consistent' versus 'observed': (d) passes every rule on paper and is still not the real atom. Image prompt (data slot): a pencil resting on a page of crossed-out electron counts."
+      "notes": "Corrected: (a) O 1s^2 2s^2 2p^4. (b) K [Ar] 4s^1. (c) Ca [Ar] 4s^2. (d) Cr [Ar] 4s^1 3d^5. (d) is the Chromium click build: predicted [Ar] 4s^2 3d^4, actual [Ar] 4s^1 3d^5. Teach 'rules-consistent' versus 'observed': (d) passes every rule on paper and is still not the real atom. Image prompt (data slot): a pencil resting on a page of crossed-out electron counts."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -356,7 +416,7 @@
       "imageSubjects": {
         "aside": "a pencil and a blank sheet of lined paper on a lab bench"
       },
-      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29; exception, a filled 3d is extra stable (simplification, PROVISIONAL label). Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
+      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29. Exception: replay the Copper click build (slide 'Exception: Copper'): the rules predict [Ar] 4s^2 3d^9, one 4s electron moves into 3d, and the filled 3d lowers the atom's total energy slightly. That is the simplified reason from the Why slide (4s and 3d are close in energy); it does not predict every exception, so do not accept 'full is always more stable'. Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
     },
     {
       "master": "04_DIVIDER",
