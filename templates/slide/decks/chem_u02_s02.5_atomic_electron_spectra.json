@@ -117,7 +117,7 @@
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "Hydrogen's Visible Emission Spectrum",
-        "subhead": "Four lines, computed from the energy levels.",
+        "subhead": "Four lines, from the energy levels.",
         "a1_l": "THE FOUR LINES",
         "a1_b": "656, 486, 434, and 410 nm. Red to violet.",
         "a2_l": "WHERE THEY END",
@@ -138,7 +138,7 @@
         "a1_l": "EXCITED STATE",
         "a1_b": "Heat or electricity lifts an electron up a level.",
         "a2_l": "EMISSION",
-        "a2_b": "The drop releases one photon with energy ΔE.",
+        "a2_b": "The drop releases one photon of light. That is the energy released.",
         "a3_l": "BIGGER DROP",
         "a3_b": "More energy, shorter wavelength, bluer light."
       },
