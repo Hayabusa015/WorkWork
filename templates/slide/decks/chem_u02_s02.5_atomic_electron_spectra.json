@@ -3,7 +3,7 @@
   "unit": 2,
   "section": "2.5",
   "sectionTitle": "Atomic & Electron Spectra",
-  "note": "Builds on 2.1 (energy levels, delta E). Heavy math delayed per course sequencing rule: one student wavelength calculation (calculator provided) plus pre-built tables. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
+  "note": "Builds on 2.1 (energy levels, drops). No calculation and no scientific notation, removed on Matt's instruction; students reason from a pre-built table of wavelengths and colors. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
@@ -53,7 +53,7 @@
         "headline": "The Visible Spectrum",
         "subhead": "Light we can see runs from about 400 nm to 700 nm.",
         "a1_l": "UNITS",
-        "a1_b": "One nm is one billionth of a meter: 1 × 10^{−9} m.",
+        "a1_b": "A nanometer (nm) is one billionth of a meter.",
         "a2_l": "VIOLET END",
         "a2_b": "Shortest wavelength, most energy.",
         "a3_l": "RED END",
@@ -62,7 +62,7 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.5_visible_spectrum.png"
       },
-      "notes": "Ranges: violet 400-450, blue 450-495, green 495-570, yellow 570-590, orange 590-620, red 620-700 nm (approximate)."
+      "notes": "Ranges: violet 400-450, blue 450-495, green 495-570, yellow 570-590, orange 590-620, red 620-700 nm (approximate). The arrows under the bar show the rule: shorter wavelength, more energy; longer wavelength, less energy."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -78,24 +78,7 @@
       "imageSubjects": {
         "concept": "a red and a violet laser pointer beam crossing in haze"
       },
-      "notes": "Defines frequency here: how many waves pass per second. Short wavelength, high frequency, high energy. IMAGE SLOT EMPTY, photo to shoot or generate: a red and a violet laser pointer beam crossing in haze."
-    },
-    {
-      "master": "11_GIVENS_EQUATION_ANSWER",
-      "fields": {
-        "headline": "The Photon Energy Equation",
-        "subhead": "Energy goes up as wavelength goes down. Calculator provided.",
-        "problem": "How much energy does one photon of a given wavelength carry?",
-        "q1_l": "GIVEN",
-        "q1_b": "h = 6.626 × 10^{−34} J·s\nc = 3.00 × 10^{8} m/s\n1 nm = 1 × 10^{−9} m",
-        "q2_l": "EQUATION",
-        "q2_b": "E = hc ÷ wavelength\nE = h × frequency\nc = wavelength × frequency",
-        "answer": "E in joules (J)"
-      },
-      "imageSubjects": {
-        "setup": "a handheld spectroscope resting on a notebook page"
-      },
-      "notes": "FLAG, Matt to confirm: the course sequencing rule delays scientific notation and heavy math (courses/chemistry/DECISIONS.md, Course sequencing rules). This deck holds to ONE student calculation, calculator provided, 3 sig figs. If you prefer S2.5 conceptual only, defer the calculation. Constants: h = 6.626e-34 J s, c = 3.00e8 m/s. Equations are for reference; students use only E = hc / wavelength today. IMAGE SLOT EMPTY, photo to shoot or generate: a handheld spectroscope resting on a notebook page."
+      "notes": "Defines frequency here: how many waves pass per second. Short wavelength, high frequency, high energy. State the rule in words only: more energy released means shorter wavelength and bluer light. No numbers needed. IMAGE SLOT EMPTY, photo to shoot or generate: a red and a violet laser pointer beam crossing in haze."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -162,57 +145,57 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.5_energy_transitions.png"
       },
-      "notes": "Each line is one drop to n = 2. Electrons drop to lower levels; they do not fall into the nucleus."
-    },
-    {
-      "master": "09_EXAMPLE_PROBLEM",
-      "fields": {
-        "headline": "Example: Color of the 3 to 2 Drop",
-        "subhead": "Calculator provided. Copy the setup, not just the answer.",
-        "problem": "Hydrogen's 3 to 2 drop emits a 3.03 × 10^{−19} J photon. Find its wavelength and color.",
-        "g1_l": "GIVEN",
-        "g1_b": "E = 3.03 × 10^{−19} J\nh = 6.626 × 10^{−34} J·s\nc = 3.00 × 10^{8} m/s",
-        "g2_l": "NEED",
-        "g2_b": "Wavelength in nm\nColor",
-        "work": "",
-        "mustwrite": "Rearrange first: wavelength = hc ÷ E."
-      },
-      "imageSubjects": {
-        "aside": "a hydrogen discharge tube glowing pink-magenta"
-      },
-      "notes": "FLAG, Matt to confirm: the course sequencing rule delays scientific notation and heavy math (courses/chemistry/DECISIONS.md, Course sequencing rules). This deck holds to ONE student calculation, calculator provided, 3 sig figs. If you prefer S2.5 conceptual only, defer the calculation. Delta E for 3 to 2 comes from S2.1 (3.03e-19 J). OPTIONAL Example 2 (dropped from this deck): the 486 nm line is the 4 to 2 drop. Check: delta E = 2.18e-18 x (1/4 - 1/16) = 4.09e-19 J; wavelength = 1.988e-25 / 4.09e-19 = 4.86e-7 m = 486 nm, blue-green. Re-derived for this revision. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen discharge tube glowing pink-magenta."
-    },
-    {
-      "master": "10_WORKED_SOLUTION",
-      "fields": {
-        "headline": "The 3 to 2 Drop, Worked",
-        "subhead": "Rearrange, divide, then convert meters to nanometers.",
-        "f1_l": "SETUP",
-        "f1_b": "wavelength = hc ÷ E\nhc = 6.626 × 10^{−34} × 3.00 × 10^{8}\nhc = 1.988 × 10^{−25} J·m",
-        "work": "(1.988 × 10^{−25})\n÷ (3.03 × 10^{−19})\n= 6.56 × 10^{−7} m\n× 10^{9} = 656 nm (red)",
-        "mustwrite": "656 nm is red: the 3 to 2 drop makes hydrogen's red line."
-      },
-      "imageSubjects": {
-        "data": "a calculator beside handwritten wavelength work"
-      },
-      "notes": "FLAG, Matt to confirm: the course sequencing rule delays scientific notation and heavy math (courses/chemistry/DECISIONS.md, Course sequencing rules). This deck holds to ONE student calculation, calculator provided, 3 sig figs. If you prefer S2.5 conceptual only, defer the calculation. Accept 656 or 657 nm: the unrounded energy 3.025e-19 J gives 657. Frequency check (optional): 3.00e8 / 6.56e-7 = 4.57e14 Hz. IMAGE SLOT EMPTY, photo to shoot or generate: a calculator beside handwritten wavelength work."
+      "notes": "Each line is one drop to n = 2. Electrons drop to lower levels; they do not fall into the nucleus. The levels are drawn to scale from the 1/n^2 pattern, so students can SEE that 6 to 2 is the longest arrow and 3 to 2 the shortest. Bigger drop, more energy, shorter wavelength, bluer light."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "Four Drops to n = 2",
-        "subhead": "A pre-built table. Read it, do not recalculate it.",
-        "a1_l": "READ DOWN",
-        "a1_b": "Bigger drop: more energy, shorter wavelength.",
-        "a2_l": "CHECK",
-        "a2_b": "The first row is the example you just solved.",
-        "a3_l": "ΔE UNITS",
-        "a3_b": "Joules, for one photon from one atom."
+        "subhead": "A pre-built table. Match each drop to its color.",
+        "a1_l": "SMALLEST DROP",
+        "a1_b": "3 to 2: the longest wavelength, red.",
+        "a2_l": "BIGGEST DROP",
+        "a2_b": "6 to 2: the shortest wavelength, violet.",
+        "a3_l": "THE PATTERN",
+        "a3_b": "Bigger drop, shorter wavelength, bluer light."
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.5_balmer_table.png"
       },
-      "notes": "Pre-built table, read-only; check values against the example. 3 to 2: 3.03e-19 J, 656 nm; 4 to 2: 4.09e-19 J, 486 nm; 5 to 2: 4.58e-19 J, 434 nm; 6 to 2: 4.84e-19 J, 410 nm. Scientific-notation flag applies here too (see slide 6)."
+      "notes": "Pre-built table, read-only. 3 to 2: 656 nm, red; 4 to 2: 486 nm, blue-green; 5 to 2: 434 nm, blue-violet; 6 to 2: 410 nm, violet. Students match drop to color by comparing drop size on the previous slide's figure; no calculation."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Match the Drop to the Line",
+        "subhead": "Use the table. Give a reason, not just an answer.",
+        "problem": "(a) Which drop made the red line, and why is it the smallest of the four? (b) A sample shows a violet line. Which drop?",
+        "g1_l": "GIVEN",
+        "g1_b": "The table of four drops\nRed line: 656 nm\nViolet line: 410 nm",
+        "g2_l": "NEED",
+        "g2_b": "(a) A drop and a reason\n(b) A drop",
+        "work": "",
+        "mustwrite": "Bigger drop means shorter wavelength and bluer light."
+      },
+      "imageSubjects": {
+        "aside": "a hydrogen discharge tube glowing pink-magenta"
+      },
+      "notes": "The wavelength calculation was removed from this deck on Matt's instruction; students reason from the table instead. OPTIONAL Example 2 (not on a slide): the 486 nm blue-green line is a bigger or smaller drop than the red line? Answer: bigger (4 to 2 versus 3 to 2), because 486 nm is a shorter wavelength than 656 nm; but smaller than the 5 to 2 drop, which makes the 434 nm line. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen discharge tube glowing pink-magenta."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Match the Drop, Worked",
+        "subhead": "Read the color, then compare the size of the drop.",
+        "f1_l": "SETUP",
+        "f1_b": "Bigger drop:\nmore energy,\nshorter wavelength,\nbluer light.",
+        "work": "(a) 656 nm is red: 3 to 2\nIt is the smallest drop,\nso the least energy.\n(b) 410 nm is violet: 6 to 2",
+        "mustwrite": "Red is the smallest drop, 3 to 2. Violet is the biggest, 6 to 2."
+      },
+      "imageSubjects": {
+        "data": "a notebook page with the table of four drops and pencil marks beside each color"
+      },
+      "notes": "Answers. (a) Red, 656 nm, the 3 to 2 drop. It is the smallest of the four (one step down from n = 3 to n = 2), so it releases the least energy, gives the longest wavelength, and looks red. (b) Violet, 410 nm, the 6 to 2 drop: the biggest drop of the four, the most energy, the shortest wavelength. IMAGE SLOT EMPTY, photo to shoot or generate: a notebook page with the table of four drops and pencil marks beside each color."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -228,7 +211,7 @@
       "imageSubjects": {
         "concept": "line spectra of several gas discharge tubes side by side, photographed through a spectroscope"
       },
-      "notes": "Helium was first detected in the Sun's spectrum, 1868 (Janssen and Lockyer). Line positions identify an element. IMAGE SLOT EMPTY, photo to shoot or generate: line spectra of several gas discharge tubes side by side, photographed through a spectroscope."
+      "notes": "Helium was first detected in the Sun's spectrum, 1868 (Janssen/Lockyer observations). Line positions identify an element. IMAGE SLOT EMPTY, photo to shoot or generate: line spectra of several gas discharge tubes side by side, photographed through a spectroscope."
     },
     {
       "master": "04_DIVIDER",
@@ -341,7 +324,7 @@
       "imageSubjects": {
         "aside": "a student's notebook with a half-finished answer"
       },
-      "notes": "Formative check. OPTIONAL extra item 3 (dropped from this deck): calculate the wavelength of a 4.58e-19 J photon (5 to 2 in hydrogen) and state the color. Answer: wavelength = 1.988e-25 / 4.58e-19 = 4.34e-7 m = 434 nm, blue-violet. Check: delta E = 2.18e-18 x (1/4 - 1/25) = 4.58e-19 J. Re-derived for this revision. Answers to the three on-slide items: blue (shorter wavelength, more energy); each element has unique energy levels so unique photon energies; lilac suggests K+ (heat lifts electrons, they drop, photons of visible light). IMAGE SLOT EMPTY, photo to shoot or generate: a student's notebook with a half-finished answer."
+      "notes": "Formative check. OPTIONAL extra item 3 (replaces a calculation item): a hydrogen line looks blue-violet at 434 nm. Is it the 4 to 2 drop or the 5 to 2 drop? Answer: 5 to 2. The 4 to 2 drop makes the 486 nm blue-green line; 434 nm is a shorter wavelength, so it is the bigger drop. Answers to the three on-slide items: blue (shorter wavelength, more energy); each element has unique energy levels so unique photon energies; lilac suggests K+ (heat lifts electrons, they drop, photons of visible light). IMAGE SLOT EMPTY, photo to shoot or generate: a student's notebook with a half-finished answer."
     }
   ]
 }

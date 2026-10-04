@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Draw the S2.5 "Atomic & Electron Spectra" figures for CHEM U02.
 
-Hand-built, not generated: every number a student reads off these figures is computed
-here from the Rydberg/Bohr relation, never typed. Colours of the UI (text, rules, card
+Hand-built, not generated: every wavelength a student reads off these figures is computed
+here from the Rydberg relation, never typed, and level spacing is computed from 1/n^2.
+No energies or constants are printed on any figure. Colours of the UI (text, rules, card
 edges) come from brand/tokens.json; type is the shipped Archivo. The spectrum and flame
 swatches are physical-colour illustrations of light - the one allowed exception to the
 brand palette, and only inside the figure.
@@ -22,9 +23,7 @@ S = 4
 W, H = 1010 * S, 600 * S
 MIN_PX = 44                     # 16 pt at 200 px/in
 
-R_H = 1.09678e7                 # Rydberg constant, 1/m
-H_PLANCK, C_LIGHT = 6.626e-34, 3.00e8
-E_1 = 2.18e-18                  # J, hydrogen n = 1 magnitude (brief constants table)
+R_H = 1.09678e7                 # Rydberg constant, 1/m (internal only, never printed)
 
 
 def tok():
@@ -52,16 +51,16 @@ def balmer_nm(n):
     return 1e9 / (R_H * (1 / 4 - 1 / n ** 2))
 
 
-def delta_e(n):
-    """Photon energy (J) of the n -> 2 drop, from E_n = -2.18e-18 / n^2."""
-    return E_1 * (1 / 4 - 1 / n ** 2)
+def rel_height(n):
+    """Level height above n = 1, as a fraction of the way to n = infinity: 1 - 1/n^2."""
+    return 1 - 1 / n ** 2
 
 
 LINES = {n: balmer_nm(n) for n in (3, 4, 5, 6)}
 assert [round(v) for v in LINES.values()] == [656, 486, 434, 410], LINES   # brief: exact facts
-# cross-check the two routes (Bohr energy + hc/E vs Rydberg) agree to within rounding
-for n, lam in LINES.items():
-    assert abs(H_PLANCK * C_LIGHT / delta_e(n) * 1e9 - lam) < 1.5, n
+# a bigger drop must give a shorter wavelength (the idea the figures teach)
+assert list(LINES.values()) == sorted(LINES.values(), reverse=True)
+assert [rel_height(n) - rel_height(2) for n in (3, 4, 5, 6)] == sorted(rel_height(n) - rel_height(2) for n in (3, 4, 5, 6))
 
 
 def rgb(wl, floor=1.0):
@@ -103,15 +102,6 @@ def ion(d, x, y, sym, charge, fill=None, anchor_left=True):
     w = F_BOLD.getlength(sym) / S
     d.text((px(x + w + 2), px(y - 16)), charge, font=F_SUP, fill=fill or T["ink"], anchor="lm")
     return x + w + 2 + F_SUP.getlength(charge) / S
-
-
-def sci(d, x, y, mant, exp):
-    """Draw 'mant × 10' with a raised exponent (true minus U+2212), left-anchored."""
-    base = f"{mant} \u00d7 10"
-    d.text((px(x), px(y)), base, font=F_BOLD, fill=T["ink"], anchor="lm")
-    w = F_BOLD.getlength(base) / S
-    e = str(exp).replace("-", "\u2212")
-    d.text((px(x + w + 2), px(y - 16)), e, font=F_SUP, fill=T["ink"], anchor="lm")
 
 
 X0, X1 = 40, 970                # spectrum bar span; 400 nm .. 700 nm
@@ -204,24 +194,24 @@ def fig_h_lines():
 # ---------------------------------------------------------------- figure 3: transitions
 def fig_levels():
     im, d = new()
-    top, n2 = 50, 440
+    top, n1 = 40, 500
     def ly(n):
-        return top + (n2 - top) * (E_1 / n ** 2) / (E_1 / 4)
+        return n1 - (n1 - top) * rel_height(n)       # n = 1 at the bottom, n = infinity at top
     lx0, lx1 = 275, 905
-    levels = {2: ly(2), 3: ly(3), 4: ly(4), 5: ly(5), 6: ly(6)}
+    levels = {n: ly(n) for n in (1, 2, 3, 4, 5, 6)}
     d.line([(px(lx0), px(top)), (px(lx1), px(top))], fill=T["grey"], width=px(3))
     for n, y in levels.items():
         d.line([(px(lx0), px(y)), (px(lx1), px(y))], fill=T["ink"], width=px(4))
     # labels in an even column, leaders to the true level height (levels crowd upward)
-    lab = {"inf": (38, top), 6: (92, levels[6]), 5: (146, levels[5]),
-           4: (200, levels[4]), 3: (254, levels[3]), 2: (n2, levels[2])}
+    lab = {"inf": (34, top), 6: (84, levels[6]), 5: (134, levels[5]), 4: (184, levels[4]),
+           3: (234, levels[3]), 2: (300, levels[2]), 1: (n1, levels[1])}
     for key, (cy, y) in lab.items():
-        s = "n = ∞" if key == "inf" else f"n = {key}"
+        s = "n = \u221e" if key == "inf" else f"n = {key}"
         text(d, 20, cy, s, f=F_BOLD, anchor="lm")
-        d.line([(px(190), px(cy)), (px(215), px(cy))], fill=T["rule"], width=px(2))
-        d.line([(px(215), px(cy)), (px(250), px(y))], fill=T["rule"], width=px(2))
-        d.line([(px(250), px(y)), (px(lx0), px(y))], fill=T["rule"], width=px(2))
-    # drops to n = 2
+        d.line([(px(160), px(cy)), (px(200), px(cy))], fill=T["rule"], width=px(2))
+        d.line([(px(200), px(cy)), (px(265), px(y))], fill=T["rule"], width=px(2))
+        d.line([(px(265), px(y)), (px(lx0), px(y))], fill=T["rule"], width=px(2))
+    # drops to n = 2, coloured by the line they make
     xs = {3: 395, 4: 515, 5: 635, 6: 755}
     for n, x in xs.items():
         col = rgb(LINES[n])
@@ -229,17 +219,17 @@ def fig_levels():
         d.line([(px(x), px(y_start + 4)), (px(x), px(y_end - 24))], fill=col, width=px(9))
         d.polygon([(px(x), px(y_end - 2)), (px(x - 20), px(y_end - 34)), (px(x + 20), px(y_end - 34))],
                   fill=col)
-        text(d, x, 488, f"{round(LINES[n])}", f=F_BOLD)
-    text(d, 575, 548, "Wavelength (nm) of each drop", fill=T["grey"])
+        text(d, x, y_end + 45, f"{round(LINES[n])}", f=F_BOLD)
+    text(d, 575, y_end + 105, "Wavelength (nm) of each drop", fill=T["grey"])
     # energy axis
     ax = 995
-    d.line([(px(ax), px(n2)), (px(ax), px(top + 40))], fill=T["accent"], width=px(3))
+    d.line([(px(ax), px(n1)), (px(ax), px(top + 40))], fill=T["accent"], width=px(3))
     d.polygon([(px(ax), px(top + 6)), (px(ax - 12), px(top + 40)), (px(ax + 12), px(top + 40))],
               fill=T["accent"])
     tmp = Image.new("RGBA", (px(210), px(60)), (255, 255, 255, 0))
     ImageDraw.Draw(tmp).text((px(105), px(30)), "Energy", font=F_BOLD, fill=T["ink"], anchor="mm")
     rot = tmp.rotate(90, expand=True)
-    im.paste(rot, (px(ax - 38) - rot.width // 2, px(245) - rot.height // 2), rot)
+    im.paste(rot, (px(ax - 38) - rot.width // 2, px(300) - rot.height // 2), rot)
     save(im, "chem_u02_s2.5_energy_transitions.png")
 
 
@@ -268,22 +258,24 @@ def fig_types():
 
 
 # ---------------------------------------------------------------- figure 5: pre-built table
+COLOR_NAME = {3: "red", 4: "blue-green", 5: "blue-violet", 6: "violet"}
+
+
 def fig_table():
     im, d = new()
-    cols = {"drop": 40, "dE": 240, "lam": 520, "sw": 800}
+    cols = {"drop": 40, "lam": 330, "sw": 600, "name": 740}
     hy = 52
     text(d, cols["drop"], hy, "Drop", f=F_BOLD, anchor="lm", fill=T["grey"])
-    text(d, cols["dE"], hy, "ΔE (J)", f=F_BOLD, anchor="lm", fill=T["grey"])
     text(d, cols["lam"], hy, "Wavelength (nm)", f=F_BOLD, anchor="lm", fill=T["grey"])
+    text(d, cols["sw"], hy, "Color", f=F_BOLD, anchor="lm", fill=T["grey"])
     d.line([(px(X0), px(92)), (px(X1), px(92))], fill=T["grey"], width=px(3))
     for i, n in enumerate((3, 4, 5, 6)):
         cy = 150 + i * 106
-        text(d, cols["drop"], cy, f"{n} → 2", f=F_BOLD, anchor="lm")
-        mant, exp = f"{delta_e(n):.2e}".split("e")
-        sci(d, cols["dE"], cy, mant, int(exp))
+        text(d, cols["drop"], cy, f"{n} \u2192 2", f=F_BOLD, anchor="lm")
         text(d, cols["lam"], cy, f"{round(LINES[n])}", f=F_BOLD, anchor="lm")
-        d.rounded_rectangle([px(cols["sw"]), px(cy - 34), px(cols["sw"] + 170), px(cy + 34)],
+        d.rounded_rectangle([px(cols["sw"]), px(cy - 34), px(cols["sw"] + 110), px(cy + 34)],
                             radius=px(8), fill=rgb(LINES[n]), outline=T["grey"], width=px(2))
+        text(d, cols["name"], cy, COLOR_NAME[n], f=F_LAB, anchor="lm")
         if i < 3:
             d.line([(px(X0), px(cy + 53)), (px(X1), px(cy + 53))], fill=T["rule"], width=px(2))
     save(im, "chem_u02_s2.5_balmer_table.png")
