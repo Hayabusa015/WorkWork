@@ -1,5 +1,8 @@
 # Chemistry U2 "Electrons & Atomic Theory" — Accuracy-Verified Content Briefs
 
+> **2026-10-04 update (Matt's instructions):** the numeric energy calculations and scientific notation in the S2.1 and S2.5 sections below were removed from the decks; wavelengths are shown in nm and in scientific notation only. S2.3 example order changed (orbital notation first, then notation-only examples) and S2.4 gained valence-electron ion formation. The decks, not this brief, are current. The slide counts and flags below are historical.
+
+
 Prepared by: researcher | Date: 2026-10-04 | Status: RECOMMENDATIONS ONLY — nothing in `brand/`, `standards/`, `governance/`, `courses/` was edited.
 
 Section codes confirmed in `courses/chemistry/DECISIONS.md` (lines 29-31): 2.1 The Bohr Model · 2.2 Energy Levels, Sublevels & Orbitals · 2.3 Electron Configurations · 2.4 Electron Stability & Valence Electrons · 2.5 Atomic & Electron Spectra. No U2 lab is confirmed in DECISIONS.md (only U0.3 and U0.4 are); no lab is invented below.

@@ -32,13 +32,13 @@ GENERATE these, save under the given filename, and hand them back:
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_wooden_staircase_beside_a_smooth.png
     prompt: a wooden staircase beside a smooth ramp of the same height, side-lit. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 10  09_EXAMPLE_PROBLEM  [aside]
-    file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_pencil_resting_beside_a_scientif.png
-    prompt: a pencil resting beside a scientific calculator on a lab notebook. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
-
-  slide 12  03_GROUPED_CONCEPT  [concept]
+  slide 10  03_GROUPED_CONCEPT  [concept]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_two_hydrogen_discharge_tubes_side_.png
     prompt: two hydrogen discharge tubes side by side, one dark and one glowing. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
+
+  slide 13  09_EXAMPLE_PROBLEM  [aside]
+    file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_pencil_resting_beside_a_lab_note.png
+    prompt: a pencil resting beside a lab notebook open to a hand-drawn ladder of energy levels. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
   slide 15  09_EXAMPLE_PROBLEM  [aside]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_camera_flash_bulb_mid_discharge_.png
@@ -53,8 +53,8 @@ GENERATE these, save under the given filename, and hand them back:
     prompt: a worn textbook diagram of concentric orbits with a pencil strike through it. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
   slide 20  07_COMPARISON_CARDS  [aside]
-    file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_student_s_notebook_page_with_a_c.png
-    prompt: a student's notebook page with a calculation crossed out and redone. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
+    file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_student_s_notebook_page_with_an_.png
+    prompt: a student's notebook page with an answer crossed out and rewritten. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
   slide 21  03_GROUPED_CONCEPT  [concept]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.1_a_stack_of_graded_quiz_papers_with.png
@@ -345,11 +345,7 @@ GENERATE these, save under the given filename, and hand them back:
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_red_and_a_violet_laser_pointer_b.png
     prompt: a red and a violet laser pointer beam crossing in haze. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide  6  11_GIVENS_EQUATION_ANSWER  [setup]
-    file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_handheld_spectroscope_resting_on.png
-    prompt: a handheld spectroscope resting on a notebook page. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
-
-  slide  7  03_GROUPED_CONCEPT  [concept]
+  slide  6  03_GROUPED_CONCEPT  [concept]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_an_incandescent_bulb_filament_besi.png
     prompt: an incandescent bulb filament beside a lit neon tube. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
@@ -358,31 +354,31 @@ GENERATE these, save under the given filename, and hand them back:
     prompt: a hydrogen discharge tube glowing pink-magenta. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
   slide 12  10_WORKED_SOLUTION  [data]
-    file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_calculator_beside_handwritten_wa.png
-    prompt: a calculator beside handwritten wavelength work. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
+    file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_notebook_page_with_the_table_of_.png
+    prompt: a notebook page with the table of four drops and pencil marks beside each color. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 14  03_GROUPED_CONCEPT  [concept]
+  slide 13  03_GROUPED_CONCEPT  [concept]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_line_spectra_of_several_gas_discha.png
     prompt: line spectra of several gas discharge tubes side by side, photographed through a spectroscope. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 15  04_DIVIDER  [divider]
+  slide 14  04_DIVIDER  [divider]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_lab_burner_flame_with_a_wire_loo.png
     prompt: a lab burner flame with a wire loop of metal salt, shot in a darkened room. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 16  03_GROUPED_CONCEPT  [concept]
+  slide 15  03_GROUPED_CONCEPT  [concept]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_flame_test_photograph_a_bright_l.png
     prompt: a flame test photograph, a bright lilac flame from a wire loop. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 19  09_EXAMPLE_PROBLEM  [aside]
+  slide 18  09_EXAMPLE_PROBLEM  [aside]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_two_wire_loops_of_metal_salt_in_a_.png
     prompt: two wire loops of metal salt in a flame, one lilac and one orange-red, shot side by side. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 20  10_WORKED_SOLUTION  [data]
+  slide 19  10_WORKED_SOLUTION  [data]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_notebook_page_with_a_flame_color.png
     prompt: a notebook page with a flame color table and pencil check marks. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-  slide 21  07_COMPARISON_CARDS  [aside]
+  slide 20  07_COMPARISON_CARDS  [aside]
     file:   _Brand/Image Library/Chemistry/chem_u02_s2.5_a_student_s_notebook_with_a_half_f.png
     prompt: a student's notebook with a half-finished answer. Photorealistic, dramatic studio photography. Matte near-black background. Warm key light from the upper left, deep shadow on the right. Shallow depth of field, soft falloff into black at the edges. No text, no labels, no numbers, no watermarks, no people. Wide 16:9 landscape, subject centred with generous negative space. Clean, editorial, museum-catalog quality.
 
-14 image slot(s) outstanding. The deck is not classroom-ready until they are placed.
+13 image slot(s) outstanding. The deck is not classroom-ready until they are placed.

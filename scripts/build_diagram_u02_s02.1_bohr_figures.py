@@ -299,7 +299,7 @@ def fig_ground_excited():
     lab = f.pt(16)
     ys = {1: 440, 2: 350, 3: 285, 4: 240, 5: 205}
     assert_levels(ys)
-    x0, x1, lx = 30, 300, 322
+    x0, x1, lx = 30, 250, 330
     r = 13
     for n in (5, 4, 3, 2, 1):
         y = ys[n]
@@ -313,7 +313,7 @@ def fig_ground_excited():
     ax = 120
     f.arrow(ax, ys[3] - r - 4, ax, ys[5] + 6, fill=ACC, w=6, head=22)
     f.circle(ax, ys[3], r, fill=ACC, outline=INK, w=3)                    # the electron, now
-    f.rich(x1, 490, "levels not to scale", lab, fill=GRAPH, anchor="r")
+    f.rich(x0, 60, "levels not to scale", lab, fill=GRAPH)
     f.save("chem_u02_s2.1_ground_excited.png")
 
 
@@ -329,7 +329,7 @@ def fig_drops_ranked():
     size = {k: ys[b] - ys[a] for k, (a, b) in drops.items()}      # arrow length, px
     order = sorted(size, key=size.get)
     assert order == ["B", "A", "C"], order                          # least to most energy
-    x0, x1, lx = 30, 300, 322
+    x0, x1, lx = 30, 250, 330
     f.line([(x0, top), (x1, top)], fill=GRAPH, w=3, dash=(14, 10))
     f.rich(lx, 34 + lab * 0.35, "top: electron gone", lab, fill=GRAPH)
     rows = {4: 92, 3: 140, 2: 188, 1: ys[1]}
@@ -337,14 +337,14 @@ def fig_drops_ranked():
         f.line([(x0, ys[n]), (x1, ys[n])], fill=ACC if n == 1 else INK, w=7 if n == 1 else 4)
         f.line([(x1 + 6, ys[n]), (lx - 14, rows[n])], fill=GRAPH, w=2)
         f.rich(lx, rows[n] + lab * 0.35, f"n = {n}", lab)
-    xs = {"A": 70, "B": 140, "C": 230}
+    xs = {"A": 62, "B": 125, "C": 190}
     for k, (a, b) in drops.items():
         f.arrow(xs[k], ys[a] + 3, xs[k], ys[b] - 2, fill=ACC, w=5, head=18)
     # letters: A and B under the n = 2 line, C beside its long arrow
     for k in ("A", "B"):
         f.rich(xs[k], ys[2] + 14 + lab * 0.8, k, lab * 1.1, "Archivo-Bold.ttf", anchor="m")
     f.rich(xs["C"] + 24, (ys[2] + ys[1]) / 2 + lab * 0.35, "C", lab * 1.1, "Archivo-Bold.ttf")
-    f.rich(x1, 470, "levels to scale", lab, fill=GRAPH, anchor="r")
+    f.rich(x0, 474, "levels to scale", lab, fill=GRAPH)
     f.save("chem_u02_s2.1_drops_ranked.png")
 
 
@@ -355,7 +355,7 @@ def fig_ionization():
     top, bot = 95, 410
     ys = {n: bot - (rel_energy(n) - rel_energy(1)) * (bot - top) for n in (1, 2, 3)}
     assert_levels(ys)
-    x0, x1, lx = 30, 300, 322
+    x0, x1, lx = 30, 250, 330
     r = 13
     f.line([(x0, top), (x1, top)], fill=GRAPH, w=3, dash=(14, 10))
     f.line([(x1 + 6, top), (lx - 14, 72)], fill=GRAPH, w=2)
