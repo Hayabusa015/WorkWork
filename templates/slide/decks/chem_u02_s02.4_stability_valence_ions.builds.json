@@ -34,10 +34,10 @@
       "static_title": "Fe^{3+}  Z = 26  [Ar] CORE",
       "start_text": "Fe: charge 0, 26 electrons",
       "steps": [
-        {"highlight": "valence", "valence": 2, "caption": "Highest n is 4: the 4s electrons leave first"},
+        {"highlight": "valence", "valence": 2, "caption": "Highest n is 4: 4s leaves first"},
         {"remove": 1, "text": "Fe^{+}: charge 1+, 25 electrons"},
         {"remove": 1, "text": "Fe^{2+}: charge 2+, 24 electrons"},
-        {"remove": 1, "caption": "Then one 3d electron leaves", "text": "Fe^{3+}: charge 3+, 23 electrons"}
+        {"remove": 1, "text": "Fe^{3+}: charge 3+, 23 electrons"}
       ]
     },
     {

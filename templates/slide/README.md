@@ -128,4 +128,8 @@ Rules for the two files:
   writes a static copy showing the state after K clicks, for rasterising intermediate states.
   Then run the geometry audit and `pdffonts` as above. The animation was checked by script and by
   LibreOffice import; it has not been played in PowerPoint, Keynote or Google Slides.
+- **Print / PDF / handout:** the animated deck shows every build state at once in any non-slideshow view.
+  For those, run step 2 again with `--static` (`... builds.json out_Static.pptx --static`): no animation, each
+  build slide shows only its final state (docstring: "Static final-state mode"). Name it with the descriptor
+  `_Static` after the section code, e.g. `SHULL_CHEM_Slides_U02_S02.3_Static.pptx`.
 - A rebuild from `build_deck.js` drops the animation. Always re-run step 2 after step 1.
