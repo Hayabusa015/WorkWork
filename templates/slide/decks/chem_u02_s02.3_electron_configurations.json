@@ -31,13 +31,13 @@
       "master": "07_COMPARISON_CARDS",
       "fields": {
         "headline": "Reading an Electron Configuration",
-        "subhead": "Take 2p⁴ apart one piece at a time.",
+        "subhead": "Take 2p^{4} apart one piece at a time.",
         "k1_l": "ENERGY LEVEL",
-        "k1_b": "The big number in front.\n\n2p⁴ is in level 2.",
+        "k1_b": "The big number in front.\n\n2p^{4} is in level 2.",
         "k2_l": "SUBLEVEL",
-        "k2_b": "The letter: s, p, d, or f.\n\n2p⁴ is in the p sublevel.",
+        "k2_b": "The letter: s, p, d, or f.\n\n2p^{4} is in the p sublevel.",
         "k3_l": "ELECTRONS",
-        "k3_b": "The raised number.\n\n2p⁴ holds 4 electrons.",
+        "k3_b": "The raised number.\n\n2p^{4} holds 4 electrons.",
         "mustwrite": "A configuration lists where the electrons sit. Ground state means the lowest-energy arrangement."
       },
       "imageSubjects": {
@@ -84,7 +84,7 @@
         "a1_l": "HUND'S RULE",
         "a1_b": "Singles first, all pointing the same way.",
         "a2_l": "NITROGEN",
-        "a2_b": "Its 2p³ is three single electrons: 3 unpaired.",
+        "a2_b": "Its 2p^{3} is three single electrons: 3 unpaired.",
         "a3_l": "THE TERM",
         "a3_b": "Equal-energy orbitals are called degenerate."
       },
@@ -150,8 +150,8 @@
         "subhead": "Order first. Then singles before pairs in the 2p boxes.",
         "f1_l": "SETUP",
         "f1_b": "Z = 8 electrons\nFill 1s, then 2s, then 2p",
-        "work": "1s² 2s² 2p⁴\n2 + 2 + 4 = 8\nUnpaired: 2",
-        "mustwrite": "Oxygen is 1s² 2s² 2p⁴, with 2 unpaired electrons."
+        "work": "1s^{2} 2s^{2} 2p^{4}\n2 + 2 + 4 = 8\nUnpaired: 2",
+        "mustwrite": "Oxygen is 1s^{2} 2s^{2} 2p^{4}, with 2 unpaired electrons."
       },
       "images": {
         "data": "../assets/chem_u02_s2.3_orbital_diagram_oxygen.png"
@@ -161,13 +161,13 @@
       "master": "07_COMPARISON_CARDS",
       "fields": {
         "headline": "Longhand: N, Cl, and Ca",
-        "subhead": "Calcium stops at 4s². The 3d sublevel stays empty until scandium.",
+        "subhead": "Calcium stops at 4s^{2}. The 3d sublevel stays empty until scandium.",
         "k1_l": "NITROGEN, Z = 7",
-        "k1_b": "1s² 2s² 2p³\n\nSum: 2+2+3 = 7\nUnpaired: 3",
+        "k1_b": "1s^{2} 2s^{2} 2p^{3}\n\nSum: 2+2+3 = 7\nUnpaired: 3",
         "k2_l": "CHLORINE, Z = 17",
-        "k2_b": "1s² 2s² 2p⁶ 3s² 3p⁵\n\nSum: 2+2+6+2+5 = 17\nUnpaired: 1",
+        "k2_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nSum: 2+2+6+2+5 = 17\nUnpaired: 1",
         "k3_l": "CALCIUM, Z = 20",
-        "k3_b": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²\n\nSum: 2+2+6+2+6+2 = 20\nUnpaired: 0",
+        "k3_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6} 4s^{2}\n\nSum: 2+2+6+2+6+2 = 20\nUnpaired: 0",
         "mustwrite": "The raised numbers add up to the atomic number, every time."
       },
       "imageSubjects": {
@@ -180,9 +180,9 @@
         "headline": "Noble-Gas Shorthand",
         "subhead": "Replace the filled inner core with a noble gas in brackets.",
         "c1_l": "LONGHAND: Cl",
-        "c1_b": "1s² 2s² 2p⁶ 3s² 3p⁵\n\nAll 17 electrons written out.",
+        "c1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nAll 17 electrons written out.",
         "c2_l": "SHORTHAND: Cl",
-        "c2_b": "[Ne] 3s² 3p⁵\n\n[Ne] stands for the first 10: 1s² 2s² 2p⁶.",
+        "c2_b": "[Ne] 3s^{2} 3p^{5}\n\n[Ne] stands for the first 10: 1s^{2} 2s^{2} 2p^{6}.",
         "mustwrite": "Use the noble gas from the previous period. Cl is in period 3, so its core is [Ne]."
       },
       "imageSubjects": {
@@ -212,9 +212,9 @@
         "headline": "Iron, Worked",
         "subhead": "Argon is the core. Then 4s, then 3d.",
         "f1_l": "LONGHAND",
-        "f1_b": "1s² 2s² 2p⁶ 3s² 3p⁶\n4s² 3d⁶",
-        "work": "[Ar] 4s² 3d⁶\n18 + 2 + 6 = 26\nUnpaired: 4",
-        "mustwrite": "Fe is [Ar] 4s² 3d⁶. One pair and 4 singles in the 3d boxes."
+        "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
+        "work": "[Ar] 4s^{2} 3d^{6}\n18 + 2 + 6 = 26\nUnpaired: 4",
+        "mustwrite": "Fe is [Ar] 4s^{2} 3d^{6}. One pair and 4 singles in the 3d boxes."
       },
       "images": {
         "data": "../assets/chem_u02_s2.3_orbital_diagram_iron.png"
@@ -224,11 +224,11 @@
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "Two Exceptions: Cr and Cu",
-        "subhead": "Learn both. The rules predict 4s² for each, and the measurements disagree.",
+        "subhead": "Learn both. The rules predict 4s^{2} for each, and the measurements disagree.",
         "a1_l": "CHROMIUM, Z = 24",
-        "a1_b": "Actual: [Ar] 4s¹ 3d⁵",
+        "a1_b": "Actual: [Ar] 4s^{1} 3d^{5}",
         "a2_l": "COPPER, Z = 29",
-        "a2_b": "Actual: [Ar] 4s¹ 3d¹⁰",
+        "a2_b": "Actual: [Ar] 4s^{1} 3d^{10}",
         "a3_l": "WHY (A SIMPLIFICATION)",
         "a3_b": "Half-full and full 3d are extra stable."
       },
@@ -261,9 +261,9 @@
         "subhead": "Each was written as a ground state.",
         "problem": "Each of these is wrong. Name the rule or fact it breaks.",
         "g1_l": "GIVEN (a), (b)",
-        "g1_b": "(a) O: 1s² 2s² 2p⁶\n(b) K: [Ar] 3d¹",
+        "g1_b": "(a) O: 1s^{2} 2s^{2} 2p^{6}\n(b) K: [Ar] 3d^{1}",
         "g2_l": "GIVEN (c), (d)",
-        "g2_b": "(c) Ca: [Ne] 4s²\n(d) Cr: [Ar] 4s² 3d⁴",
+        "g2_b": "(c) Ca: [Ne] 4s^{2}\n(d) Cr: [Ar] 4s^{2} 3d^{4}",
         "work": "",
         "mustwrite": "Add the electrons first. If the total is not Z, stop there."
       },
@@ -277,9 +277,9 @@
         "headline": "Spot the Mistake, Worked",
         "subhead": "Four different problems, four different checks.",
         "f1_l": "WHAT IS WRONG",
-        "f1_b": "(a) 10 electrons. O has 8.\n(b) 4s fills before 3d.\n(c) [Ne] 4s² totals 12.\n(d) Rules fit, atom does not.",
+        "f1_b": "(a) 10 electrons. O has 8.\n(b) 4s fills before 3d.\n(c) [Ne] 4s^{2} totals 12.\n(d) Rules fit, atom does not.",
         "work": "Breaks:\n(a) the count\n(b) Aufbau\n(c) the core\n(d) the real Cr",
-        "mustwrite": "Cr follows the rules on paper, but the measured ground state is [Ar] 4s¹ 3d⁵."
+        "mustwrite": "Cr follows the rules on paper, but the measured ground state is [Ar] 4s^{1} 3d^{5}."
       },
       "imageSubjects": {
         "data": "a pencil resting on a page of crossed-out electron counts"

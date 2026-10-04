@@ -125,7 +125,7 @@
     "a2_l": "ORBITALS PER SUBLEVEL",
     "a2_b": "s = 1, p = 3, d = 5, f = 7.",
     "a3_l": "WHERE THEY START",
-    "a3_b": "d: five orbitals, mostly four lobes. f: more complex."
+    "a3_b": "d starts at n = 3. f starts at n = 4."
    },
    "images": {
     "diagram": "../assets/chem_u02_s2.2_level_sublevel_orbital_map.png"
@@ -142,7 +142,7 @@
     "a2_l": "p: DUMBBELL",
     "a2_b": "Three orbitals: along x, y, and z.",
     "a3_l": "d AND f",
-    "a3_b": "d: mostly four lobes. f: more complex."
+    "a3_b": "d: five orbitals, mostly four lobes. f: more complex."
    },
    "images": {
     "diagram": "../assets/chem_u02_s2.2_orbital_shapes.png"
@@ -293,7 +293,7 @@
     "a2_l": "p BLOCK",
     "a2_b": "Groups 13 to 18: 6 columns wide.",
     "a3_l": "d AND f BLOCKS",
-    "a3_b": "d: groups 3 to 12, 10 wide.\nf: 14 wide, drawn below the table."
+    "a3_b": "d: groups 3 to 12. f: drawn below, 14 wide."
    },
    "images": {
     "diagram": "../assets/chem_u02_s2.2_periodic_table_blocks.png"

@@ -140,7 +140,7 @@
         "a2_l": "WHERE THEY END",
         "a2_b": "Every one is a drop that ends at n = 2.",
         "a3_l": "MORE LINES",
-        "a3_b": "More sit in the ultraviolet (UV) and infrared (IR). Your eyes miss them."
+        "a3_b": "More are in ultraviolet (UV) and infrared (IR)."
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.5_hydrogen_emission_lines.png"
@@ -189,7 +189,7 @@
         "subhead": "Rearrange, divide, then convert meters to nanometers.",
         "f1_l": "SETUP",
         "f1_b": "wavelength = hc ÷ E\nhc = 6.626 × 10^{−34} × 3.00 × 10^{8}\nhc = 1.988 × 10^{−25} J·m",
-        "work": "1.988 × 10^{−25} ÷ 3.03 × 10^{−19}\n= 6.56 × 10^{−7} m\n× 10^{9} nm per m = 656 nm\nRed light",
+        "work": "(1.988 × 10^{−25})\n÷ (3.03 × 10^{−19})\n= 6.56 × 10^{−7} m\n× 10^{9} = 656 nm (red)",
         "mustwrite": "656 nm is red: the 3 to 2 drop makes hydrogen's red line."
       },
       "imageSubjects": {
