@@ -3,19 +3,19 @@
   "unit": 2,
   "section": "2.4",
   "sectionTitle": "Electron Stability & Valence Electrons",
-  "note": "Includes ion configurations (placed here by Matt). Convention: filling order, e.g. [Ar] 4s2 3d6; Fe2+ = [Ar] 3d6. U3.7 owns which charge forms and the energetics. Example 3 covers Zn2+, Cu+, Cu2+ (Fe2+/Fe3+ are taught on the iron figure slide) to stay under the worked-example line cap. Transition-metal valence counting (PROVISIONAL, brief slide 6) and Lewis dot preview (PROVISIONAL, brief slide 19) are deliberately not on student slides.",
+  "note": "Includes ion configurations (placed here by Matt). Convention: filling order, e.g. [Ar] 4s2 3d6; Fe2+ = [Ar] 3d6. Boundary (Matt, 2026-10-04; DECISIONS.md was NOT changed): S2.4 owns valence-electron-based charge prediction (main-group: lose or gain the fewest electrons to reach 8, groups 1, 2, 13 lose 1 to 3, groups 15 to 17 gain 3 to 1), placed at the end of the section. U3.7 and U3.4 own the energetics (ionization energy, periodic trends, why that charge is favoured); only a one-line pointer here. PROVISIONAL: group 14 and the transition metals are not predicted by the rule here. Example 3 covers Zn2+, Cu+, Cu2+ (Fe2+/Fe3+ are taught on the iron figure slide) to stay under the worked-example line cap. Transition-metal valence counting (PROVISIONAL, brief slide 6) and Lewis dot preview (PROVISIONAL, brief slide 19) are deliberately not on student slides. Revision 2026-10-04: 22 slides kept. Merged Na/Cl figure slides into one, merged the two three-card ion slides into one, folded the Mg2+/S2- example pair into the new Mg/Al/S/Br prediction pair. Anion charges: the superscript minus renders as a hairline in the builder, so anion charges are also written plain and large (e.g. charge 1−).",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
       "fields": {
         "number": "2.4",
         "headline": "Electron\nStability &\nValence\nElectrons",
-        "subhead": "Count valence electrons, explain why noble gases are stable, and write the electron configuration of any common ion."
+        "subhead": "Count valence electrons, explain why noble gases are stable, write ion configurations, and predict main-group ion charges."
       },
       "imageSubjects": {
         "section": "a glass tube of neon gas glowing orange on a dark bench"
       },
-      "notes": "Section title. PROVISIONAL/OPEN: verbatim DECISIONS title now in the panel (see build report for fit). Scope boundary: S2.4 owns what an ion's configuration IS; U3.7 owns which charge an element forms and the energetics. Not taught here: Lewis dot preview (PROVISIONAL, omitted; belongs to a later unit). Transition-metal valence counting (PROVISIONAL, brief slide 6) also omitted. Image slot empty. Prompt subject: a glass tube of neon gas glowing orange on a dark bench."
+      "notes": "Section title. PROVISIONAL/OPEN: verbatim DECISIONS title now in the panel (see build report for fit). Scope boundary (Matt, 2026-10-04): S2.4 owns what an ion's configuration IS and valence-electron-based charge prediction at the end of the section (main group only). U3.7 and U3.4 own the energetics. PROVISIONAL: group 14 and transition metals are not predicted by the rule here. Not taught here: Lewis dot preview (PROVISIONAL, omitted; belongs to a later unit). Transition-metal valence counting (PROVISIONAL, brief slide 6) also omitted. Image slot empty. Prompt subject: a glass tube of neon gas glowing orange on a dark bench."
     },
     {
       "master": "06_CONCEPT_IMAGE",
@@ -74,12 +74,12 @@
         "a2_l": "THE EXCEPTION",
         "a2_b": "Helium is in group 18 and has 2 valence electrons, not 8.",
         "a3_l": "WHAT THIS SKIPS",
-        "a3_b": "Groups 3 to 12, the transition metals. Their ions follow the rule on slide 17."
+        "a3_b": "Groups 3 to 12, the transition metals. Their ions follow the rule on slide 13."
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.4_valence_by_group.png"
       },
-      "notes": "Main-group only. PROVISIONAL: transition-metal valence counting is deliberately left out (brief slide 6; Matt to decide whether d electrons count). Say only that their ions lose the outer s electrons first (slide 17). Lewis dot preview omitted: belongs to a later unit (S5.1), PROVISIONAL."
+      "notes": "Main-group only. PROVISIONAL: transition-metal valence counting is deliberately left out (brief slide 6; Matt to decide whether d electrons count). Say only that their ions lose the outer s electrons first (slide 13). Lewis dot preview omitted: belongs to a later unit (S5.1), PROVISIONAL."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -137,85 +137,50 @@
         "headline": "What Makes an Ion",
         "subhead": "Atoms become ions by gaining or losing electrons. The nucleus does not change.",
         "c1_l": "CATION",
-        "c1_b": "Loses electrons.\nPositive charge.\n\nNa → Na^{+}: 11 electrons become 10.",
+        "c1_b": "Loses electrons.\nPositive charge.\nNa → Na^{+}: 11 electrons become 10.\nCharge: 1+",
         "c2_l": "ANION",
-        "c2_b": "Gains electrons.\nNegative charge.\n\nCl → Cl^{−}: 17 electrons become 18.",
+        "c2_b": "Gains electrons.\nNegative charge.\nCl → Cl^{−}: 17 electrons become 18.\nCharge: 1−",
         "mustwrite": "Electrons = atomic number − charge. Protons never change."
       },
       "imageSubjects": {
         "concept": "a bowl of table salt crystals on dark slate"
       },
-      "notes": "Electrons = atomic number minus charge. Protons never change. Boundary: do not predict which charge forms (U3.7). Image slot empty. Prompt subject: a bowl of table salt crystals on dark slate."
+      "notes": "Electrons = atomic number minus charge. Protons never change. Here we only describe what an ion is; the charge-prediction rule comes at the end of the section (slide 18). Anion charge is also written plain (1−) because the superscript minus is faint. Image slot empty. Prompt subject: a bowl of table salt crystals on dark slate."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
-        "headline": "Na Becomes Na^{+}",
-        "subhead": "Electrons leave from the highest n first. Sodium loses its 3s electron.",
-        "a1_l": "BEFORE",
-        "a1_b": "Na: 1s^{2} 2s^{2} 2p^{6} 3s^{1}\n11 electrons",
-        "a2_l": "AFTER",
-        "a2_b": "Na^{+}: 1s^{2} 2s^{2} 2p^{6}\n10 electrons",
-        "a3_l": "THE MATCH",
-        "a3_b": "That is the configuration of neon, [Ne]."
+        "headline": "Na Loses One, Cl Gains One",
+        "subhead": "Electrons leave from the highest n first. A gained electron fills the open 3p spot.",
+        "a1_l": "SODIUM",
+        "a1_b": "3s^{1} leaves: 11 → 10 electrons.\nNa^{+}: charge 1+. Matches [Ne].",
+        "a2_l": "CHLORINE",
+        "a2_b": "One electron fills 3p: 17 → 18.\nCl^{−}: charge 1−. Matches [Ar].",
+        "a3_l": "THE CHECK",
+        "a3_b": "11 − 1 = 10 and 17 + 1 = 18."
       },
       "images": {
-        "diagram": "../assets/chem_u02_s2.4_na_cation_orbitals.png"
+        "diagram": "../assets/chem_u02_s2.4_na_cl_ions.png"
       },
-      "notes": "Na loses 3s1, leaving the neon configuration. Highest n comes off first."
+      "notes": "MERGED slide (was two: Na+ orbitals and Cl- orbitals). Na loses its 3s1, leaving the neon configuration; Cl's added electron goes into the open 3p spot, not a new level, and matches argon. Charge column in the figure is large and plain so the minus is legible. Do not yet say why these charges: the rule comes at the end of the section."
     },
     {
       "master": "07_COMPARISON_CARDS",
       "fields": {
-        "headline": "Three More Cations",
-        "subhead": "Same move every time. Remove from the highest n.",
-        "k1_l": "MAGNESIUM",
-        "k1_b": "Mg: [Ne] 3s^{2}\nMg^{2+}: [Ne]\n12 → 10 electrons",
-        "k2_l": "ALUMINUM",
-        "k2_b": "Al: [Ne] 3s^{2} 3p^{1}\nAl^{3+}: [Ne]\n13 → 10 electrons",
-        "k3_l": "CALCIUM",
-        "k3_b": "Ca: [Ar] 4s^{2}\nCa^{2+}: [Ar]\n20 → 18 electrons",
-        "mustwrite": "A cation's electrons come off the outermost level, the one with the highest n."
-      },
-      "imageSubjects": {
-        "aside": "a strip of magnesium ribbon coiled on a dark bench"
-      },
-      "notes": "Mg, Al, Ca all lose their outer electrons. Do not explain why these charges form; that is U3.7. Image slot empty. Prompt subject: a strip of magnesium ribbon coiled on a dark bench."
-    },
-    {
-      "master": "08_DIAGRAM_ANNOTATION",
-      "fields": {
-        "headline": "Cl Becomes Cl^{−}",
-        "subhead": "A gained electron fills the open spot in the same outer sublevel.",
-        "a1_l": "BEFORE",
-        "a1_b": "Cl: [Ne] 3s^{2} 3p^{5}\n17 electrons",
-        "a2_l": "AFTER",
-        "a2_b": "Cl^{−}: [Ne] 3s^{2} 3p^{6}\n18 electrons",
-        "a3_l": "THE MATCH",
-        "a3_b": "That is the configuration of argon, [Ar]. The new electron went into 3p, not a new level."
-      },
-      "images": {
-        "diagram": "../assets/chem_u02_s2.4_cl_anion_orbitals.png"
-      },
-      "notes": "The added electron goes into the open 3p spot, not a new level. Result matches argon."
-    },
-    {
-      "master": "07_COMPARISON_CARDS",
-      "fields": {
-        "headline": "Three More Anions",
-        "subhead": "Same move every time. Fill the open spots in the outer s and p.",
-        "k1_l": "OXYGEN",
-        "k1_b": "O: 1s^{2} 2s^{2} 2p^{4}\nO^{2−}: 1s^{2} 2s^{2} 2p^{6}\n= [Ne], 10 electrons",
-        "k2_l": "SULFUR",
-        "k2_b": "S: [Ne] 3s^{2} 3p^{4}\nS^{2−}: [Ne] 3s^{2} 3p^{6}\n= [Ar], 18 electrons",
+        "headline": "Three More Ions, Same Move",
+        "subhead": "Remove from the highest n, or fill the open spots in s and p.",
+        "k1_l": "ALUMINUM",
+        "k1_b": "Al: [Ne] 3s^{2} 3p^{1}\nAl^{3+}: [Ne]\n13 → 10 electrons\nCharge: 3+",
+        "k2_l": "OXYGEN",
+        "k2_b": "O: 1s^{2} 2s^{2} 2p^{4}\nO^{2−}: 1s^{2} 2s^{2} 2p^{6}\n= [Ne], 10 electrons\nCharge: 2−",
         "k3_l": "BROMINE",
-        "k3_b": "Br: [Ar] 4s^{2} 3d^{10} 4p^{5}\nBr^{−}: [Ar] 4s^{2} 3d^{10} 4p^{6}\n= [Kr], 36 electrons",
-        "mustwrite": "An anion's added electrons go into the open spots in the same outer s and p sublevels."
+        "k3_b": "Br: [Ar] 4s^{2} 3d^{10} 4p^{5}\nBr^{−}: [Ar] 4s^{2} 3d^{10} 4p^{6}\n= [Kr], 36 electrons\nCharge: 1−",
+        "mustwrite": "A cation loses from the highest n. An anion fills open spots in s and p."
       },
       "imageSubjects": {
         "aside": "a sealed ampoule of dark red-brown liquid bromine in a rack"
       },
-      "notes": "Anions fill open s and p spots. Br keeps its full 3d10. Image slot empty. Prompt subject: a sealed ampoule of dark red-brown liquid bromine in a rack."
+      "notes": "MERGED slide (was two card slides: Mg2+/Al3+/Ca2+ and O2-/S2-/Br-). Mg2+ and Ca2+ now appear in the Ca walk-through and the worked example; S2- in the worked example. Br keeps its full 3d10. Charge lines are plain so anion minus signs are legible. Image slot empty. Prompt subject: a sealed ampoule of dark red-brown liquid bromine in a rack."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -232,40 +197,7 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.4_isoelectronic_10.png"
       },
-      "notes": "Isoelectronic = same electron count and configuration. Sizes differ; the reason is Unit 3, only pointed to here."
-    },
-    {
-      "master": "09_EXAMPLE_PROBLEM",
-      "fields": {
-        "headline": "Example: Mg^{2+} and S^{2−}",
-        "subhead": "We do this one together. Copy the setup, not just the answer.",
-        "problem": "Write the electron configuration of Mg^{2+} and S^{2−}. Name the noble gas each one matches.",
-        "g1_l": "GIVEN",
-        "g1_b": "Mg: atomic number 12\nS: atomic number 16",
-        "g2_l": "NEED",
-        "g2_b": "Each atom's configuration\nIon electron count\nMatching noble gas",
-        "work": "",
-        "mustwrite": "Start from the neutral atom's configuration, then remove or add electrons."
-      },
-      "imageSubjects": {
-        "aside": "a sample of magnesium sulfate crystals on a watch glass"
-      },
-      "notes": "Worked example, do together. Image slot empty. Prompt subject: a sample of magnesium sulfate crystals on a watch glass."
-    },
-    {
-      "master": "10_WORKED_SOLUTION",
-      "fields": {
-        "headline": "Mg^{2+} and S^{2−}, Worked",
-        "subhead": "Count the electrons at the end. They should match the noble gas.",
-        "f1_l": "SETUP",
-        "f1_b": "Mg: 12 → 10 electrons\nS: 16 → 18 electrons",
-        "work": "Mg: 1s^{2} 2s^{2} 2p^{6} 3s^{2}\nMg^{2+}: 1s^{2} 2s^{2} 2p^{6} = [Ne]\nS: [Ne] 3s^{2} 3p^{4}\nS^{2−}: [Ne] 3s^{2} 3p^{6} = [Ar]",
-        "mustwrite": "Mg^{2+} matches neon. S^{2−} matches argon."
-      },
-      "imageSubjects": {
-        "data": "an analytical balance display in a darkened lab"
-      },
-      "notes": "Mg 12 to 10 electrons = [Ne]. S 16 to 18 electrons = [Ar]. Image slot empty. Prompt subject: an analytical balance display in a darkened lab."
+      "notes": "Isoelectronic = same electron count and configuration. Sizes differ; the reason is Unit 3, only pointed to here (one-line pointer, not taught)."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -334,6 +266,72 @@
       "notes": "Zn2+ = Cu+ = [Ar] 3d10 (28 e). Cu2+ = [Ar] 3d9 (27 e). Not noble-gas configurations; these are stable anyway. Image slot empty. Prompt subject: a pencil resting on a page of handwritten calculations."
     },
     {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Why Calcium Forms Ca^{2+}",
+        "subhead": "Count valence electrons first. The count tells you the move.",
+        "c1_l": "THE ATOM",
+        "c1_b": "Ca: [Ar] 4s^{2}\n2 valence electrons.\nLose 2, not gain 6: the fewest wins.",
+        "c2_l": "THE ION",
+        "c2_b": "Lose both 4s electrons: [Ar].\n18 electrons, 20 protons.\nCharge: 20 − 18 = 2+",
+        "mustwrite": "Ca has 2 valence electrons. Losing both leaves [Ar], so Ca forms Ca^{2+}."
+      },
+      "imageSubjects": {
+        "concept": "a chunk of calcium metal in a sealed glass vial on dark slate"
+      },
+      "notes": "NEW. Closing synthesis, step 1: Ca walk-through in four moves: count (2 valence), move (lose 2; gaining 6 is more), result ([Ar], 18 electrons), charge (20 protons minus 18 electrons = 2+). Valence-electron reasoning only. Do not teach ionization energy; Unit 3 (U3.4, U3.7) explains the energy side. Scope boundary set by Matt 2026-10-04; DECISIONS.md not changed. Avoid 'wants' or 'needs' language for atoms. Image slot empty. Prompt subject: a chunk of calcium metal in a sealed glass vial on dark slate."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Valence Electrons Predict the Charge",
+        "subhead": "Lose or gain the fewest electrons to reach 8. Unit 3 will explain the energy side.",
+        "a1_l": "LOSE",
+        "a1_b": "Groups 1, 2, 13 lose all their valence electrons.\nCharges 1+, 2+, 3+.",
+        "a2_l": "GAIN",
+        "a2_b": "Groups 15, 16, 17 gain 3, 2, 1 to reach 8.\nCharges 3−, 2−, 1−.",
+        "a3_l": "NOT PREDICTED HERE",
+        "a3_b": "Group 14 and the transition metals. Group 18 is already full."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_charge_by_group.png"
+      },
+      "notes": "NEW. Rule by group (period 3 examples; hand-built, every count asserted in the figure script). Main group: lose or gain the fewest electrons to reach 8 (2 in period 1). PROVISIONAL: group 14 (4 lost or 4 gained, no 'fewest') and the transition metals are not predicted by this rule here; transition-metal ions were covered on the iron and Zn/Cu slides. Pointer only: the energy side (why that charge is favoured) is Unit 3, U3.4 and U3.7; do not teach ionization energy. Charges are written plain and large (3−, 2−, 1−) because the superscript minus is faint."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Predict the Ions of Mg, Al, S, Br",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "Use valence electrons to predict each ion. Give the move, the result, and the charge.",
+        "g1_l": "GIVEN",
+        "g1_b": "Mg: group 2\nAl: group 13\nS: group 16\nBr: group 17",
+        "g2_l": "NEED",
+        "g2_b": "Valence electrons\nLose or gain how many\nNoble gas and charge",
+        "work": "",
+        "mustwrite": "Lose or gain the fewest electrons to reach 8 valence electrons."
+      },
+      "imageSubjects": {
+        "aside": "four sample vials of magnesium, aluminum, sulfur, and bromine on a dark bench"
+      },
+      "notes": "NEW worked example (replaces the earlier Mg2+/S2- configuration example, which this one subsumes). Do together; work area empty on purpose. Answers on next slide. Image slot empty. Prompt subject: four sample vials of magnesium, aluminum, sulfur, and bromine on a dark bench."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Mg, Al, S, and Br Ions, Worked",
+        "subhead": "Count, move, result, charge. Check the electron count at the end.",
+        "f1_l": "SETUP",
+        "f1_b": "Each line reads: valence,\nmove, noble gas, charge.",
+        "work": "Mg: 2, lose 2, [Ne], 2+\nAl: 3, lose 3, [Ne], 3+\nS: 6, gain 2, [Ar], 2−\nBr: 7, gain 1, [Kr], 1−",
+        "mustwrite": "Mg 2+, Al 3+, S 2−, Br 1−. Each move ends at a noble gas configuration."
+      },
+      "imageSubjects": {
+        "data": "a pencil resting on a page of handwritten ion charges"
+      },
+      "notes": "Mg: 12 e to 10, Mg2+, [Ne]. Al: 13 to 10, Al3+, [Ne]. S: 16 to 18, S2-, [Ar]. Br: 35 to 36, Br-, [Kr] (3d10 already full). All numbers re-added in the figure script assertions. Anion charges are written plain (2−, 1−) on the slide for legibility. Same pattern, same rule: Mg2+ and S2- were the old example's ions. Image slot empty. Prompt subject: a pencil resting on a page of handwritten ion charges."
+    },
+    {
       "master": "05_PROCESS_TIMELINE",
       "fields": {
         "headline": "Check Yourself",
@@ -342,27 +340,27 @@
         "s1_b": "Valence electrons in Al, Se, and Xe?",
         "s2_l": "Ca^{2+}",
         "s2_b": "Write it. Name the matching noble gas.",
-        "s3_l": "O^{2−}",
-        "s3_b": "Write the full configuration.",
+        "s3_l": "Predict",
+        "s3_b": "Predict O's ion. Write its full configuration.",
         "s4_l": "Three ions",
         "s4_b": "[Ar] shorthand for Fe^{3+}, Cu^{2+}, and Zn^{2+}."
       },
       "imageSubjects": {
         "band": "a periodic table wall chart photographed at a shallow angle"
       },
-      "notes": "Answers. 1) Al 3, Se 6, Xe 8. 2) Ca2+: 20 to 18 electrons, 1s2 2s2 2p6 3s2 3p6 = [Ar], argon. 3) O2-: 10 electrons, 1s2 2s2 2p6. 4) Fe3+: [Ar] 3d5; the two 4s electrons leave first, then one 3d. (The 'which leave first' part is not printed on the tile.) 5) Cu2+ [Ar] 3d9 (27 e); Zn2+ [Ar] 3d10 (28 e). The slide tile 4 carries Fe3+, Cu2+, Zn2+ together, so items 4 and 5 share one tile. Image slot empty. Prompt subject: a periodic table wall chart photographed at a shallow angle."
+      "notes": "Answers. 1) Al 3, Se 6, Xe 8. 2) Ca2+: 20 to 18 electrons, 1s2 2s2 2p6 3s2 3p6 = [Ar], argon. 3) O: group 16, 6 valence, gain 2, O2- (charge 2−), 10 electrons, 1s2 2s2 2p6 = [Ne]. 4) Fe3+: [Ar] 3d5; the two 4s electrons leave first, then one 3d. (The 'which leave first' part is not printed on the tile.) 5) Cu2+ [Ar] 3d9 (27 e); Zn2+ [Ar] 3d10 (28 e). The slide tile 4 carries Fe3+, Cu2+, Zn2+ together, so items 4 and 5 share one tile. If time, oral extras using the rule: K 1 valence, lose 1, K+, [Ar]; Se 6 valence, gain 2, Se2-, [Kr]; Al 3 valence, lose 3, Al3+, [Ne]. Group 14 (Si, C) and transition metals: not predicted by the rule here (PROVISIONAL). Tile 3 was changed from 'write the O2- configuration' to a predict-then-write prompt so the new rule is checked. Image slot empty. Prompt subject: a periodic table wall chart photographed at a shallow angle."
     },
     {
       "master": "04_DIVIDER",
       "fields": {
         "eyebrow": "LOOKING AHEAD",
         "headline": "Unit 3 Picks Up\nFrom Here",
-        "subhead": "You can write the configuration of any common ion. Unit 3 asks which charge an element forms and how much energy it takes."
+        "subhead": "You can predict the charge of a main-group ion from its valence electrons. Unit 3 explains the energy side."
       },
       "imageSubjects": {
         "divider": "a long laboratory bench receding into shadow"
       },
-      "notes": "Boundary: S2.4 stops at what an ion's configuration is. Which charge forms and the energy it takes: U3.4, U3.7. Image slot empty. Prompt subject: a long laboratory bench receding into shadow."
+      "notes": "Boundary (Matt, 2026-10-04): S2.4 owns valence-electron-based charge prediction (main group). Why that charge is favoured and the energy it takes: U3.4 and U3.7. Group 14 and transition metals not predicted by the rule here (PROVISIONAL). DECISIONS.md not changed. Image slot empty. Prompt subject: a long laboratory bench receding into shadow."
     }
   ]
 }

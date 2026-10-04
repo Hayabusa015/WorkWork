@@ -12,6 +12,8 @@ Canvas is 1010 x 600 logical px, the same aspect as layout 08's diagram slot
 (5.05 x 3.00 in), so one logical px = 0.005 in and 16 pt = 44.4 px. Nothing is set
 below 46 px, so every label clears the 16 pt floor at projected size.
 
+Charge signs: drawn with a stroke (the bare superscript minus is a hairline); charge
+columns are set large and plain, e.g. 2\u2212.
 Notation in the figures: filling order, e.g. [Ar] 4s2 3d6, with true superscripts.
 
     python3 scripts/build_diagram_u02_s02.4_stability_valence_ions.py
@@ -80,7 +82,10 @@ class Canvas:
             if sup:
                 spx = max(MIN_PX, int(px * 0.66))
                 f = font(face, spx)
-                self.d.text((x * S, (y - px * 0.36) * S), s, font=f, fill=fill, anchor="ls")
+                # charge signs get a stroke: the bare superscript minus is a hairline
+                sw = int(S * 1.6) if any(c in s for c in "+\u2212") else 0
+                self.d.text((x * S, (y - px * 0.36) * S), s, font=f, fill=fill, anchor="ls",
+                            stroke_width=sw, stroke_fill=fill)
                 x += self.d.textlength(s, font=f) / S
             else:
                 f = font(face, px)
@@ -278,30 +283,107 @@ def group_x(groups, size=90, x_start=150, gap=22):
     return xs
 
 
-# ---------------------------------------------------------------- D: Cl -> Cl-
-def fig_cl_anion():
+# ---------------------------------------------------------------- D: Na -> Na+ and Cl -> Cl-
+def fig_na_cl_ions():
+    na = [("2s", [2]), ("2p", [2, 2, 2]), ("3s", [1])]
+    na_ion = [("2s", [2]), ("2p", [2, 2, 2]), ("3s", [0])]
     cl = [("3s", [2]), ("3p", [2, 2, 1])]
-    cl_anion = [("3s", [2]), ("3p", [2, 2, 2])]
-    n1 = sum(sum(b) for _, b in cl)
-    n2 = sum(sum(b) for _, b in cl_anion)
-    assert (n1, n2) == (7, 8)
-    assert 10 + n1 == 17 and 10 + n2 == 18 == 17 - (-1)
+    cl_ion = [("3s", [2]), ("3p", [2, 2, 2])]
+    cnt = lambda g: sum(sum(b) for _, b in g)
+    core = 2                                   # 1s2 not drawn (Na rows); Cl rows also omit n=1,2 (10)
+    assert core + cnt(na) == 11 and core + cnt(na_ion) == 10 == 11 - 1
+    assert 10 + cnt(cl) == 17 and 10 + cnt(cl_ion) == 18 == 17 - (-1)
+    assert cnt(na_ion) == cnt(na) - 1 and cnt(cl_ion) == cnt(cl) + 1
 
     cv = Canvas()
-    xs = group_x(cl)
-    for (lab, _), cx in zip(cl, xs):
-        cv.text(cx, 80, lab, "Archivo-SemiBold.ttf", 52, C["graphite"], "c")
-    y1, y2 = 105, 335
-    cv.text(20, y1 + 62, "Cl", "Archivo-Bold.ttf", 56)
-    cv.text(20, y2 + 62, "Cl^-", "Archivo-Bold.ttf", 56)
-    orbital_row(cv, y1, "Cl", cl)
-    orbital_row(cv, y2, "Cl-", cl_anion, accent_idx=(3,), added_down=3)
-    # right-hand counts
-    for y, v, t in ((y1, n1, 17), (y2, n2, 18)):
-        cv.text(600, y + 40, f"{v} valence", "Archivo-Bold.ttf", 52, C["accent"])
-        cv.text(600, y + 98, f"{t} total", "Archivo-SemiBold.ttf", 50, C["graphite"])
-    cv.text(W / 2, 520, "The new electron fills the open 3p spot", "Archivo-SemiBold.ttf", 48, C["asphalt"], "c")
-    cv.save("chem_u02_s2.4_cl_anion_orbitals.png")
+    size, gap, xs0 = 70, 14, 170
+    def header(y):
+        cv.text(700, y, "Electrons", "Archivo-SemiBold.ttf", 46, C["graphite"], "c")
+        cv.text(900, y, "Charge", "Archivo-SemiBold.ttf", 46, C["graphite"], "c")
+    # pair A: sodium
+    for (lab, _), cx in zip(na, group_x(na, size=size, x_start=xs0, gap=gap)):
+        cv.text(cx, 48, lab, "Archivo-SemiBold.ttf", 46, C["graphite"], "c")
+    header(48)
+    yA1, yA2 = 66, 150
+    cv.text(20, yA1 + 52, "Na", "Archivo-Bold.ttf", 54)
+    cv.text(20, yA2 + 52, "Na^+", "Archivo-Bold.ttf", 54)
+    orbital_row(cv, yA1, "Na", na, size=size, gap=gap, x_start=xs0, accent_idx=(4,))
+    orbital_row(cv, yA2, "Na+", na_ion, size=size, gap=gap, x_start=xs0, dashed_idx=(4,))
+    for y, e, q in ((yA1, 11, "0"), (yA2, 10, "1+")):
+        cv.text(700, y + 52, str(e), "Archivo-Bold.ttf", 58, C["accent"], "c")
+        cv.text(900, y + 52, q, "Archivo-Bold.ttf", 62, C["asphalt"], "c")
+    cv.line(20, 250, W - 20, 250, C["rule"], 2)
+    # pair B: chlorine
+    for (lab, _), cx in zip(cl, group_x(cl, size=size, x_start=xs0, gap=gap)):
+        cv.text(cx, 308, lab, "Archivo-SemiBold.ttf", 46, C["graphite"], "c")
+    header(308)
+    yB1, yB2 = 326, 410
+    cv.text(20, yB1 + 52, "Cl", "Archivo-Bold.ttf", 54)
+    cv.text(20, yB2 + 52, "Cl^-", "Archivo-Bold.ttf", 54)
+    orbital_row(cv, yB1, "Cl", cl, size=size, gap=gap, x_start=xs0)
+    orbital_row(cv, yB2, "Cl-", cl_ion, size=size, gap=gap, x_start=xs0, accent_idx=(3,), added_down=3)
+    for y, e, q in ((yB1, 17, "0"), (yB2, 18, "1\u2212")):
+        cv.text(700, y + 52, str(e), "Archivo-Bold.ttf", 58, C["accent"], "c")
+        cv.text(900, y + 52, q, "Archivo-Bold.ttf", 62, C["asphalt"], "c")
+    cv.line(20, 505, W - 20, 505, C["rule"], 2)
+    cv.text(W / 2, 570, "11 \u2212 1 = 10          17 + 1 = 18", "Archivo-Bold.ttf", 54, C["asphalt"], "c")
+    cv.save("chem_u02_s2.4_na_cl_ions.png")
+
+
+# ---------------------------------------------------------------- D2: charge from valence electrons
+def fig_charge_by_group():
+    NOBLE_Z = {"He": 2, "Ne": 10, "Ar": 18, "Kr": 36}
+    # (group, atom, Z, valence, move, charge); move < 0 lose, > 0 gain, None = not predicted here
+    rows = [(1, "Na", 11, 1, -1, 1), (2, "Mg", 12, 2, -2, 2), (13, "Al", 13, 3, -3, 3),
+            (14, "Si", 14, 4, None, None),
+            (15, "P", 15, 5, 3, -3), (16, "S", 16, 6, 2, -2), (17, "Cl", 17, 7, 1, -1),
+            (18, "Ar", 18, 8, 0, 0)]
+    for g, sym, z, v, mv, q in rows:
+        assert v == (g if g <= 2 else g - 10), (g, v)
+        if mv is None:
+            assert g == 14 and v == 4 and 8 - v == v      # 4 lost or 4 gained: no 'fewest'
+            continue
+        if g in (1, 2, 13):
+            assert mv == -v and q == v                    # lose all valence electrons
+        elif g in (15, 16, 17):
+            assert mv == 8 - v and q == -(8 - v)          # gain up to 8
+        else:
+            assert mv == 0 and q == 0
+        assert z - q in (10, 18)                          # ends at [Ne] or [Ar]
+    # the concept-slide and worked-example ions, re-added from Z
+    assert 20 - 2 == NOBLE_Z["Ar"]                        # Ca 2+ -> [Ar]
+    assert 20 - 2 == 18 and 20 == 18 + 2
+    assert 12 - 2 == NOBLE_Z["Ne"] and 13 - 3 == NOBLE_Z["Ne"]   # Mg2+, Al3+ -> [Ne]
+    assert 16 + 2 == NOBLE_Z["Ar"] and 35 + 1 == NOBLE_Z["Kr"]   # S2-, Br- -> [Ar], [Kr]
+    assert 8 + 2 == NOBLE_Z["Ne"] and 19 - 1 == NOBLE_Z["Ar"] and 34 + 2 == NOBLE_Z["Kr"]  # O2-, K+, Se2-
+
+    cv = Canvas()
+    hd = "Archivo-SemiBold.ttf"
+    for x, t, al in ((85, "Group", "c"), (225, "Atom", "c"), (385, "Valence", "c"),
+                     (520, "Move", "l"), (900, "Charge", "c")):
+        cv.text(x, 52, t, hd, 46, C["graphite"], al)
+    cv.line(20, 70, W - 20, 70, C["graphite"], 2)
+    for i, (g, sym, z, v, mv, q) in enumerate(rows):
+        y = 130 + 62 * i
+        ink = C["graphite"] if mv is None else C["asphalt"]
+        cv.text(85, y, str(g), "Archivo-Bold.ttf", 54, ink, "c")
+        cv.text(225, y, sym, "Archivo-Bold.ttf", 54, ink, "c")
+        cv.text(385, y, str(v), "Archivo-Bold.ttf", 56, C["accent"], "c")
+        if mv is None:
+            move, charge = "not predicted", "\u2014"
+        elif mv < 0:
+            move, charge = f"lose {-mv}", f"{q}+"
+        elif mv > 0:
+            move, charge = f"gain {mv}", f"{-q}\u2212"
+        else:
+            move, charge = "none", "0"
+        cv.text(520, y, move, hd, 52, ink)
+        cv.text(900, y, charge, "Archivo-Bold.ttf", 60, ink, "c")
+        if i < len(rows) - 1 and g not in (13, 14):
+            cv.line(20, y + 14, W - 20, y + 14, C["rule"], 1)
+    y14 = 130 + 62 * 3
+    cv.rect(20, y14 - 46, W - 40, 62, C["graphite"], 2, dashed=True)
+    cv.save("chem_u02_s2.4_charge_by_group.png")
 
 
 # ---------------------------------------------------------------- E: isoelectronic
@@ -353,35 +435,9 @@ def fig_fe_ions():
     cv.save("chem_u02_s2.4_fe_ions_orbitals.png")
 
 
-# ---------------------------------------------------------------- G: Na -> Na+
-def fig_na_cation():
-    na = [("2s", [2]), ("2p", [2, 2, 2]), ("3s", [1])]
-    na_ion = [("2s", [2]), ("2p", [2, 2, 2]), ("3s", [0])]
-    cnt = lambda g: sum(sum(b) for _, b in g)
-    assert 2 + cnt(na) == 11 and 2 + cnt(na_ion) == 10 == 11 - 1
-    cv = Canvas()
-    size = 82
-    gap = 18
-    xs = group_x(na, size=size, x_start=150, gap=gap)
-    for (lab, _), cx in zip(na, xs):
-        cv.text(cx, 62, lab, "Archivo-SemiBold.ttf", 50, C["graphite"], "c")
-    cv.text(985, 62, "Total", "Archivo-SemiBold.ttf", 46, C["graphite"], "r")
-    y1, y2 = 90, 270
-    cv.text(20, y1 + 56, "Na", "Archivo-Bold.ttf", 54)
-    cv.text(20, y2 + 56, "Na^+", "Archivo-Bold.ttf", 54)
-    orbital_row(cv, y1, "Na", na, size=size, gap=gap, accent_idx=(4,))
-    orbital_row(cv, y2, "Na+", na_ion, size=size, gap=gap, dashed_idx=(4,))
-    cv.text(930, y1 + 58, "11", "Archivo-Bold.ttf", 60, C["accent"], "c")
-    cv.text(930, y2 + 58, "10", "Archivo-Bold.ttf", 60, C["accent"], "c")
-    cv.line(150, 410, W - 20, 410, C["rule"], 2)
-    cv.text(W / 2, 490, "The 3s electron leaves.", "Archivo-SemiBold.ttf", 52, C["asphalt"], "c")
-    cv.text(W / 2, 555, "11 − 1 = 10 electrons", "Archivo-Bold.ttf", 54, C["accent"], "c")
-    cv.save("chem_u02_s2.4_na_cation_orbitals.png")
-
-
 def main():
-    for fn in (fig_core_valence, fig_valence_by_group, fig_noble_gas, fig_cl_anion,
-               fig_isoelectronic, fig_fe_ions, fig_na_cation):
+    for fn in (fig_core_valence, fig_valence_by_group, fig_noble_gas, fig_na_cl_ions,
+               fig_charge_by_group, fig_isoelectronic, fig_fe_ions):
         fn()
     return 0
 
