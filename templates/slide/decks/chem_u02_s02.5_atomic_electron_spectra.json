@@ -1,0 +1,326 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.5",
+  "sectionTitle": "Atomic & Electron Spectra",
+  "note": "Builds on 2.1 (energy levels, delta E). Heavy math delayed per course sequencing rule: one student wavelength calculation (calculator provided) plus pre-built tables. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "05",
+        "headline": "2.5\nAtomic &\nElectron\nSpectra",
+        "subhead": "Explain how atoms make colored light, and use it to identify elements."
+      },
+      "imageSubjects": {
+        "section": "a hydrogen gas discharge tube glowing in a dark lab"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Where Does Color\nCome From?",
+        "subhead": "Fireworks, neon signs, a flame on a lab burner. Different colors, one question.",
+        "keyq": "What inside an atom decides the color of the light it gives off?"
+      },
+      "imageSubjects": {
+        "concept": "a firework burst beside a glowing neon sign, shot at night"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words to Start",
+        "subhead": "Write these first. The rest of the section uses them.",
+        "k1_l": "PHOTON",
+        "k1_b": "A single packet of light energy.",
+        "k2_l": "WAVELENGTH",
+        "k2_b": "The distance between two wave crests, measured in nm.",
+        "k3_l": "SPECTRUM",
+        "k3_b": "Light spread out by wavelength.",
+        "mustwrite": "A photon is one packet of light. Its energy is set by its wavelength."
+      },
+      "imageSubjects": {
+        "aside": "a glass prism splitting white light on a dark bench"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "The Visible Spectrum",
+        "subhead": "Light we can see runs from about 400 nm to 700 nm.",
+        "a1_l": "UNITS",
+        "a1_b": "One nm is one billionth of a meter: 1e-9 m.",
+        "a2_l": "VIOLET END",
+        "a2_b": "Shortest wavelength, most energy.",
+        "a3_l": "RED END",
+        "a3_b": "Longest wavelength, least energy."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_visible_spectrum.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Wavelength Sets the Energy",
+        "subhead": "Shorter wavelength means higher frequency and more energy per photon.",
+        "c1_l": "LONG WAVELENGTH",
+        "c1_b": "Red light.\nLow frequency.\nLow energy per photon.",
+        "c2_l": "SHORT WAVELENGTH",
+        "c2_b": "Violet light.\nHigh frequency.\nHigh energy per photon.",
+        "mustwrite": "Shorter wavelength means more energy. A violet photon beats a red one."
+      },
+      "imageSubjects": {
+        "concept": "a red and a violet laser pointer beam crossing in haze"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "The Photon Energy Equation",
+        "subhead": "Energy goes up as wavelength goes down. Calculator provided.",
+        "problem": "How much energy does one photon of a given wavelength carry?",
+        "q1_l": "GIVEN",
+        "q1_b": "h = 6.626e-34 J·s\nc = 3.00e8 m/s\n1 nm = 1e-9 m",
+        "q2_l": "EQUATION",
+        "q2_b": "E = hc ÷ wavelength\nE = h × frequency\nc = wavelength × frequency",
+        "answer": "E in joules (J)"
+      },
+      "imageSubjects": {
+        "setup": "a handheld spectroscope resting on a notebook page"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Hot Solid or Hot Gas",
+        "subhead": "What is glowing decides what the spectrum looks like.",
+        "c1_l": "HOT SOLID",
+        "c1_b": "A glowing filament.\n\nGives every color, no gaps.",
+        "c2_l": "HOT GAS",
+        "c2_b": "Excited atoms in a tube.\n\nGive a few separate lines.",
+        "mustwrite": "A hot solid gives a continuous spectrum. A hot gas gives a line spectrum."
+      },
+      "imageSubjects": {
+        "concept": "an incandescent bulb filament beside a lit neon tube"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Three Kinds of Spectra",
+        "subhead": "Same range of colors, three different patterns.",
+        "a1_l": "CONTINUOUS",
+        "a1_b": "Every color, no gaps. Made by a hot solid.",
+        "a2_l": "EMISSION",
+        "a2_b": "Bright lines on black. Made by a hot gas.",
+        "a3_l": "ABSORPTION",
+        "a3_b": "Dark lines at the same places as emission lines."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_spectra_types.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Hydrogen's Visible Emission Spectrum",
+        "subhead": "Four lines, computed from the energy levels.",
+        "a1_l": "THE FOUR LINES",
+        "a1_b": "656, 486, 434, and 410 nm. Red to violet.",
+        "a2_l": "WHERE THEY END",
+        "a2_b": "Every one is a drop that ends at n = 2.",
+        "a3_l": "MORE LINES",
+        "a3_b": "More sit in the UV and IR. Your eyes miss them."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_hydrogen_emission_lines.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Which Drop Makes Which Line",
+        "subhead": "Each line is one electron dropping to n = 2.",
+        "a1_l": "EXCITED STATE",
+        "a1_b": "Heat or electricity lifts an electron up a level.",
+        "a2_l": "EMISSION",
+        "a2_b": "The drop releases one photon with energy ΔE.",
+        "a3_l": "BIGGER DROP",
+        "a3_b": "More energy, shorter wavelength, bluer light."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_energy_transitions.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Color of the 3 to 2 Drop",
+        "subhead": "Calculator provided. Copy the setup, not just the answer.",
+        "problem": "Hydrogen drops from n = 3 to n = 2 and emits 3.03e-19 J. Find the wavelength and color.",
+        "g1_l": "GIVEN",
+        "g1_b": "E = 3.03e-19 J\nh = 6.626e-34 J·s\nc = 3.00e8 m/s",
+        "g2_l": "NEED",
+        "g2_b": "Wavelength in nm\nColor",
+        "work": "",
+        "mustwrite": "Rearrange first: wavelength = hc ÷ E."
+      },
+      "imageSubjects": {
+        "aside": "a hydrogen discharge tube glowing pink-magenta"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "The 3 to 2 Drop, Worked",
+        "subhead": "Accept 656 or 657 nm, depending on rounding.",
+        "f1_l": "SETUP",
+        "f1_b": "wavelength = hc ÷ E\nh × c = 6.626e-34 × 3.00e8\nh × c = 1.988e-25 J·m",
+        "work": "1.988e-25 ÷ 3.03e-19\n= 6.56e-7 m\n= 656 nm\nRed light",
+        "mustwrite": "656 nm is red: the 3 to 2 drop makes hydrogen's red line."
+      },
+      "imageSubjects": {
+        "data": "a calculator beside handwritten wavelength work"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Four Drops to n = 2",
+        "subhead": "A pre-built table. Read it, do not recalculate it.",
+        "a1_l": "READ DOWN",
+        "a1_b": "Bigger drop: more energy, shorter wavelength.",
+        "a2_l": "CHECK",
+        "a2_b": "The first row is the example you just solved.",
+        "a3_l": "ΔE UNITS",
+        "a3_b": "Joules, for one photon from one atom."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_balmer_table.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Every Element Has Its Own Lines",
+        "subhead": "Only certain energy drops exist, so only certain lines appear.",
+        "c1_l": "UNIQUE LEVELS",
+        "c1_b": "Each element has its own energy levels.\n\nSo its drops, and its lines, are its own.",
+        "c2_l": "A FINGERPRINT",
+        "c2_b": "Line positions identify an element.\n\nHelium was first found in sunlight, 1868.",
+        "mustwrite": "Each element has a unique line spectrum because its energy levels are unique."
+      },
+      "imageSubjects": {
+        "concept": "line spectra of several gas discharge tubes side by side, photographed through a spectroscope"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "FLAME TESTS",
+        "headline": "Same Idea,\nIn a Flame",
+        "subhead": "Metal ions in a flame emit light too. The color tells you which metal."
+      },
+      "imageSubjects": {
+        "divider": "a lab burner flame with a wire loop of metal salt, shot in a darkened room"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "How a Flame Test Makes Color",
+        "subhead": "The color is not the metal burning. It is electrons dropping levels.",
+        "c1_l": "IN THE FLAME",
+        "c1_b": "Heat lifts electrons in the metal ion to higher levels.",
+        "c2_l": "AS THEY DROP",
+        "c2_b": "They release photons of visible light. The color names the metal.",
+        "mustwrite": "The color of the emitted light identifies the metal ion."
+      },
+      "imageSubjects": {
+        "concept": "a flame test photograph, a bright lilac flame from a wire loop"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Flame Test Colors, Part 1",
+        "subhead": "Match the color you see to the metal ion.",
+        "a1_l": "READ THE TABLE",
+        "a1_b": "Each metal ion gives its own flame color.",
+        "a2_l": "SODIUM IS EVERYWHERE",
+        "a2_b": "A little Na+ turns many flames yellow.",
+        "a3_l": "NOT ONE WAVELENGTH",
+        "a3_b": "A flame color is a mix, not one exact line."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_flame_colors_1.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Flame Test Colors, Part 2",
+        "subhead": "Some of these colors look a lot alike.",
+        "a1_l": "LOOK-ALIKES",
+        "a1_b": "Sr2+ red and Ca2+ orange-red are easy to confuse.",
+        "a2_l": "NO COLOR",
+        "a2_b": "Many elements give no flame color we can see.",
+        "a3_l": "ONE TEST IS NOT ENOUGH",
+        "a3_b": "It narrows the options. It does not prove the ion."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_flame_colors_2.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Identify the Metals",
+        "subhead": "Use the flame color tables. Copy the reasoning.",
+        "problem": "One salt burns lilac with a trace of yellow. Another burns orange-red. Which metals?",
+        "g1_l": "GIVEN",
+        "g1_b": "Salt A: lilac, with some yellow\nSalt B: orange-red",
+        "g2_l": "NEED",
+        "g2_b": "The metal ion behind each color",
+        "work": "",
+        "mustwrite": "Write the metal ion for each color, not just the color."
+      },
+      "imageSubjects": {
+        "aside": "two wire loops of metal salt in a flame, one lilac and one orange-red, shot side by side"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Two Unknowns, Identified",
+        "subhead": "Sodium contaminates almost every flame.",
+        "f1_l": "SETUP",
+        "f1_b": "Match each color\nto the table.\nNa+ gives yellow.",
+        "work": "Salt A: K+ (lilac)\nYellow trace: Na+\nSalt B: Ca2+\n(orange-red)",
+        "mustwrite": "Flame colors can look alike, so a flame test alone does not prove the ion."
+      },
+      "imageSubjects": {
+        "data": "a notebook page with a flame color table and pencil check marks"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Answer in your notes. Use the words photon and energy level.",
+        "k1_l": "ENERGY",
+        "k1_b": "Which has more energy, a red photon or a blue photon? Why?",
+        "k2_l": "WHY DIFFERENT",
+        "k2_b": "Why does each element have its own line spectrum?",
+        "k3_l": "FLAME TEST",
+        "k3_b": "A flame is lilac. Which ion? Explain the color with electrons.",
+        "mustwrite": "Answer in full sentences. Name the photon and the energy level."
+      },
+      "imageSubjects": {
+        "aside": "a student's notebook with a half-finished answer"
+      }
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+ "course": "chemistry",
+ "unit": 2,
+ "section": "2.2",
+ "sectionTitle": "Energy Levels, Sublevels & Orbitals",
+ "note": "50-minute period. Slides 13 and 14 (energy order, 4s before 3d) and the period-length slide can be cut without breaking the section. Quantum-numbers preview (brief slide 17, optional) left out; it belongs with 2.3.",
+ "slides": [
+  {
+   "master": "02_SECTION_TITLE",
+   "fields": {
+    "number": "02",
+    "headline": "2.2\nEnergy Levels, Sublevels & Orbitals",
+    "subhead": "Name the levels, sublevels, and orbitals, and say how many electrons each can hold."
+   },
+   "imageSubjects": {
+    "section": "a long-exposure photograph of fireflies over a dark field"
+   }
+  },
+  {
+   "master": "06_CONCEPT_IMAGE",
+   "fields": {
+    "headline": "Bohr Failed for Helium",
+    "subhead": "The Bohr model worked for hydrogen. For helium and every atom after it, the energies came out wrong.",
+    "keyq": "Bohr failed for helium. What replaced it?"
+   },
+   "imageSubjects": {
+    "concept": "a chalkboard with a half-erased circular orbit diagram"
+   }
+  },
+  {
+   "master": "07_COMPARISON_CARDS",
+   "fields": {
+    "headline": "Three Words You Need First",
+    "subhead": "Write these before we go further. Each one sits inside the one before.",
+    "k1_l": "ENERGY LEVEL",
+    "k1_b": "The main shell. Numbered n = 1, 2, 3, 4, and up.",
+    "k2_l": "SUBLEVEL",
+    "k2_b": "A group of orbitals inside a level. Named s, p, d, f.",
+    "k3_l": "ORBITAL",
+    "k3_b": "A region where an electron is probably found. Holds up to 2 electrons.",
+    "mustwrite": "Energy levels contain sublevels. Sublevels contain orbitals."
+   },
+   "imageSubjects": {
+    "aside": "a set of nested wooden boxes, open, on a bench"
+   }
+  },
+  {
+   "master": "07_COMPARISON_CARDS",
+   "fields": {
+    "headline": "How the Model Changed",
+    "subhead": "Two ideas replaced Bohr's circular paths.",
+    "k1_l": "SCHRÖDINGER, 1926",
+    "k1_b": "Described electrons with wave equations.\n\nThe math gives probabilities, not paths.",
+    "k2_l": "HEISENBERG",
+    "k2_b": "The uncertainty principle: you cannot know an electron's exact position and exact momentum at once.",
+    "k3_l": "THE RESULT",
+    "k3_b": "The quantum-mechanical model, also called the electron cloud model.",
+    "mustwrite": "Electrons are described by probability, not by paths."
+   },
+   "imageSubjects": {
+    "aside": "a vintage chalkboard covered in wave equations"
+   }
+  },
+  {
+   "master": "03_GROUPED_CONCEPT",
+   "fields": {
+    "headline": "Orbit vs. Orbital",
+    "subhead": "The two words sound alike. They mean different things.",
+    "c1_l": "BOHR ORBIT",
+    "c1_b": "A fixed circular path.\n\nThe electron is on the line.",
+    "c2_l": "ORBITAL",
+    "c2_b": "A region of space.\n\nThe electron is probably\ninside it.",
+    "mustwrite": "An orbital is a region of high probability for finding an electron, not a path."
+   },
+   "imageSubjects": {
+    "concept": "a long-exposure photograph of a swarm of fireflies forming a glowing cloud"
+   }
+  },
+  {
+   "master": "03_GROUPED_CONCEPT",
+   "fields": {
+    "headline": "Energy Levels: the Number n",
+    "subhead": "n is the principal quantum number: 1, 2, 3, 4, and up.",
+    "c1_l": "LOW n",
+    "c1_b": "n = 1\nClosest to the nucleus on average.\nLowest energy.",
+    "c2_l": "HIGH n",
+    "c2_b": "n = 4\nFarther from the nucleus on average.\nHigher energy.",
+    "mustwrite": "Higher n means higher energy and a larger average distance from the nucleus."
+   },
+   "imageSubjects": {
+    "concept": "a stone staircase seen from the bottom step, lit from above"
+   }
+  },
+  {
+   "master": "08_DIAGRAM_ANNOTATION",
+   "fields": {
+    "headline": "Levels, Sublevels, Orbitals",
+    "subhead": "Each box is one orbital. Read the map from the bottom up.",
+    "a1_l": "SUBLEVELS PER LEVEL",
+    "a1_b": "Level n has n sublevels.",
+    "a2_l": "ORBITALS PER SUBLEVEL",
+    "a2_b": "s = 1, p = 3, d = 5, f = 7.",
+    "a3_l": "WHERE THEY START",
+    "a3_b": "d starts at n = 3. f starts at n = 4."
+   },
+   "images": {
+    "diagram": "../assets/chem_u02_s2.2_level_sublevel_orbital_map.png"
+   }
+  },
+  {
+   "master": "08_DIAGRAM_ANNOTATION",
+   "fields": {
+    "headline": "Orbital Shapes",
+    "subhead": "These are probability regions. The electron does not travel along the outline.",
+    "a1_l": "s: SPHERE",
+    "a1_b": "One orbital, centered on the nucleus.",
+    "a2_l": "p: DUMBBELL",
+    "a2_b": "Three orbitals: along x, y, and z.",
+    "a3_l": "d AND f",
+    "a3_b": "d: mostly four lobes. f: more complex."
+   },
+   "images": {
+    "diagram": "../assets/chem_u02_s2.2_orbital_shapes.png"
+   }
+  },
+  {
+   "master": "07_COMPARISON_CARDS",
+   "fields": {
+    "headline": "How Many Electrons Fit",
+    "subhead": "Orbitals are the unit. Count orbitals, then double.",
+    "k1_l": "ONE ORBITAL",
+    "k1_b": "Holds at most 2 electrons.",
+    "k2_l": "ONE SUBLEVEL",
+    "k2_b": "s: 1 × 2 = 2\np: 3 × 2 = 6\nd: 5 × 2 = 10\nf: 7 × 2 = 14",
+    "k3_l": "OPPOSITE SPINS",
+    "k3_b": "The 2 electrons in one orbital have opposite spins. Section 2.3 puts this to work.",
+    "mustwrite": "One orbital holds 2 electrons. s holds 2, p holds 6, d holds 10, f holds 14."
+   },
+   "imageSubjects": {
+    "aside": "an open egg carton on a lab bench"
+   }
+  },
+  {
+   "master": "09_EXAMPLE_PROBLEM",
+   "fields": {
+    "headline": "Example: The n = 3 Level",
+    "subhead": "We do this one together. List first, then count.",
+    "problem": "List the sublevels in n = 3. Give the orbitals and maximum electrons in each.",
+    "g1_l": "GIVEN",
+    "g1_b": "n = 3\nLevel n has n sublevels",
+    "g2_l": "NEED",
+    "g2_b": "Sublevels\nOrbitals in each\nMax electrons",
+    "work": "",
+    "mustwrite": "Level n has n sublevels. List them, then count the orbitals."
+   },
+   "imageSubjects": {
+    "aside": "a three-tier wooden shelf with small boxes"
+   }
+  },
+  {
+   "master": "10_WORKED_SOLUTION",
+   "fields": {
+    "headline": "The n = 3 Level, Worked",
+    "subhead": "Check your list against this.",
+    "f1_l": "SETUP",
+    "f1_b": "n = 3 gives 3 sublevels:\n3s, 3p, 3d",
+    "work": "3s: 1 orbital, 2 e−\n3p: 3 orbitals, 6 e−\n3d: 5 orbitals, 10 e−\nTotal: 9 orbitals, 18 e−",
+    "mustwrite": "n = 3 holds 9 orbitals (n²) and 18 electrons (2n²)."
+   },
+   "imageSubjects": {
+    "data": "pencil and graph paper with tally marks"
+   }
+  },
+  {
+   "master": "08_DIAGRAM_ANNOTATION",
+   "fields": {
+    "headline": "Capacity of Each Level",
+    "subhead": "Add up the sublevels and the pattern shows.",
+    "a1_l": "ORBITALS IN LEVEL n",
+    "a1_b": "n² : 1, 4, 9, 16",
+    "a2_l": "ELECTRONS IN LEVEL n",
+    "a2_b": "2n² : 2, 8, 18, 32",
+    "a3_l": "SUBLEVELS IN LEVEL n",
+    "a3_b": "n of them, one new letter per level."
+   },
+   "images": {
+    "diagram": "../assets/chem_u02_s2.2_shell_capacity_table.png"
+   }
+  },
+  {
+   "master": "03_GROUPED_CONCEPT",
+   "fields": {
+    "headline": "Energy Order Inside a Level",
+    "subhead": "The answer depends on how many electrons the atom has.",
+    "c1_l": "MORE THAN ONE ELECTRON",
+    "c1_b": "Within one level, energy rises s, then p, then d, then f.",
+    "c2_l": "HYDROGEN ONLY",
+    "c2_b": "One electron, so every sublevel of the same n has the same energy.\nDo not carry this to other atoms.",
+    "mustwrite": "With more than one electron, energy rises s < p < d < f within a level."
+   },
+   "imageSubjects": {
+    "concept": "four wooden shelves of increasing height in a workshop"
+   }
+  },
+  {
+   "master": "08_DIAGRAM_ANNOTATION",
+   "fields": {
+    "headline": "4s Fills Before 3d",
+    "subhead": "Filling order for a neutral atom. Levels overlap.",
+    "a1_l": "FILLING ORDER",
+    "a1_b": "1s 2s 2p 3s 3p 4s 3d 4p",
+    "a2_l": "THE SURPRISE",
+    "a2_b": "In a neutral atom, 4s fills before 3d.",
+    "a3_l": "WHAT IS NEXT",
+    "a3_b": "Section 2.3 uses this order."
+   },
+   "images": {
+    "diagram": "../assets/chem_u02_s2.2_filling_order.png"
+   }
+  },
+  {
+   "master": "09_EXAMPLE_PROBLEM",
+   "fields": {
+    "headline": "Example: Capacity",
+    "subhead": "Your turn first. Then we compare.",
+    "problem": "What is the maximum number of electrons in the 4f sublevel? In the n = 2 level?",
+    "g1_l": "GIVEN",
+    "g1_b": "4f sublevel\nn = 2 level",
+    "g2_l": "NEED",
+    "g2_b": "Electrons in 4f\nElectrons in n = 2",
+    "work": "",
+    "mustwrite": "Electrons in a sublevel = orbitals × 2."
+   },
+   "imageSubjects": {
+    "aside": "a rack of seven small test tubes"
+   }
+  },
+  {
+   "master": "10_WORKED_SOLUTION",
+   "fields": {
+    "headline": "Capacity, Worked",
+    "subhead": "Check yours against this.",
+    "f1_l": "SETUP",
+    "f1_b": "f has 7 orbitals.\nn = 2 has 2s and 2p.",
+    "work": "4f: 7 × 2 = 14\n2s: 1 × 2 = 2\n2p: 3 × 2 = 6\nn = 2: 2 + 6 = 8",
+    "mustwrite": "4f holds 14 electrons. The n = 2 level holds 8, which is 2n²."
+   },
+   "imageSubjects": {
+    "data": "a handwritten tally on a lab notebook page"
+   }
+  },
+  {
+   "master": "08_DIAGRAM_ANNOTATION",
+   "fields": {
+    "headline": "The Table Maps the Sublevels",
+    "subhead": "Block width equals sublevel capacity. Helium (1s²) sits in group 18.",
+    "a1_l": "s BLOCK",
+    "a1_b": "Groups 1 and 2: 2 columns wide.",
+    "a2_l": "p BLOCK",
+    "a2_b": "Groups 13 to 18: 6 columns wide.",
+    "a3_l": "d AND f BLOCKS",
+    "a3_b": "d: groups 3 to 12, 10 wide. f: 14 wide."
+   },
+   "images": {
+    "diagram": "../assets/chem_u02_s2.2_periodic_table_blocks.png"
+   }
+  },
+  {
+   "master": "07_COMPARISON_CARDS",
+   "fields": {
+    "headline": "Why Periods Have These Lengths",
+    "subhead": "The number after = is how many elements are in that period.",
+    "k1_l": "PERIODS 1 TO 3",
+    "k1_b": "Period 1: 1s = 2\nPeriod 2: 2s 2p = 8\nPeriod 3: 3s 3p = 8",
+    "k2_l": "PERIODS 4 AND 5",
+    "k2_b": "Period 4: 4s 3d 4p = 18\nPeriod 5: 5s 4d 5p = 18",
+    "k3_l": "PERIODS 6 AND 7",
+    "k3_b": "Period 6: 6s 4f 5d 6p = 32\nPeriod 7: 7s 5f 6d 7p = 32",
+    "mustwrite": "Period lengths 2, 8, 8, 18, 18, 32, 32 come from the sublevels that fill in each."
+   },
+   "imageSubjects": {
+    "aside": "a periodic table wall chart photographed at a shallow angle"
+   }
+  },
+  {
+   "master": "07_COMPARISON_CARDS",
+   "fields": {
+    "headline": "Check: Level, Sublevel, Orbital",
+    "subhead": "Questions 1 to 3. Answer in your notes.",
+    "k1_l": "QUESTION 1",
+    "k1_b": "How is an orbital different from a Bohr orbit?",
+    "k2_l": "QUESTION 2",
+    "k2_b": "List all the sublevels in n = 2.",
+    "k3_l": "QUESTION 3",
+    "k3_b": "How many orbitals are in a d sublevel? How many electrons can it hold?",
+    "mustwrite": "Answer all three in your notes before we compare."
+   },
+   "imageSubjects": {
+    "aside": "a pencil resting on a blank notebook page"
+   }
+  },
+  {
+   "master": "03_GROUPED_CONCEPT",
+   "fields": {
+    "headline": "Check: Capacity",
+    "subhead": "Questions 4 and 5. Show the count.",
+    "c1_l": "QUESTION 4",
+    "c1_b": "What is the maximum number of electrons in the third energy level?",
+    "c2_l": "QUESTION 5",
+    "c2_b": "How many orbitals are in the n = 4 level?",
+    "mustwrite": "Show the count: sublevels first, then orbitals, then electrons."
+   },
+   "imageSubjects": {
+    "concept": "an empty desk with a calculator and a pencil"
+   }
+  },
+  {
+   "master": "04_DIVIDER",
+   "fields": {
+    "eyebrow": "LOOKING AHEAD",
+    "headline": "Where This Goes\nNext",
+    "subhead": "You can now name every orbital. Next: filling them in order to write an electron configuration."
+   },
+   "imageSubjects": {
+    "divider": "a long laboratory bench receding into shadow"
+   }
+  }
+ ]
+}

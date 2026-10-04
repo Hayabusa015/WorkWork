@@ -1,0 +1,346 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.4",
+  "sectionTitle": "Electron Stability & Valence Electrons",
+  "note": "Includes ion configurations (placed here by Matt). Convention: filling order, e.g. [Ar] 4s2 3d6; Fe2+ = [Ar] 3d6. U3.7 owns which charge forms and the energetics. Example 3 covers Zn2+, Cu+, Cu2+ (Fe2+/Fe3+ are taught on the iron figure slide) to stay under the worked-example line cap. Transition-metal valence counting (PROVISIONAL, brief slide 6) and Lewis dot preview (PROVISIONAL, brief slide 19) are deliberately not on student slides.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "04",
+        "headline": "2.4\nValence Electrons\n& Stability",
+        "subhead": "Count valence electrons, explain why noble gases are stable, and write the electron configuration of any common ion."
+      },
+      "imageSubjects": {
+        "section": "a glass tube of neon gas glowing orange on a dark bench"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Who Reacts, Who Doesn't",
+        "subhead": "Helium, neon, and argon barely react with anything. Sodium and chlorine react with almost everything.",
+        "keyq": "What is different about the electrons in He, Ne, and Ar?"
+      },
+      "imageSubjects": {
+        "concept": "a row of glowing noble gas discharge tubes against a dark background"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write these before we go further. Everything after this slide uses them.",
+        "k1_l": "VALENCE ELECTRON",
+        "k1_b": "An electron in the outermost energy level.",
+        "k2_l": "CORE ELECTRON",
+        "k2_b": "An electron in an inner, filled energy level.",
+        "k3_l": "NOBLE GAS CONFIGURATION",
+        "k3_b": "Outer s and p sublevels filled, like a noble gas.",
+        "mustwrite": "Valence electrons are the electrons in the outermost energy level, the one with the highest n."
+      },
+      "imageSubjects": {
+        "aside": "a worn chemistry notebook open to a hand-ruled page"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Core or Valence? Find the Highest n",
+        "subhead": "Chlorine has 17 electrons. Only the ones in n = 3 are valence.",
+        "a1_l": "CORE",
+        "a1_b": "1s² 2s² 2p⁶ fill n = 1 and n = 2. That is 10 electrons.",
+        "a2_l": "VALENCE",
+        "a2_b": "3s² 3p⁵ is the highest level, n = 3. That is 7 electrons.",
+        "a3_l": "THE CHECK",
+        "a3_b": "10 + 7 = 17, the atomic number of chlorine."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_core_valence_cl.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Valence Electrons From the Table",
+        "subhead": "For main-group elements, the group number gives you the count.",
+        "a1_l": "THE PATTERN",
+        "a1_b": "Groups 1 and 2: the group number.\nGroups 13 to 18: the units digit.",
+        "a2_l": "THE EXCEPTION",
+        "a2_b": "Helium is in group 18 and has 2 valence electrons, not 8.",
+        "a3_l": "WHAT THIS SKIPS",
+        "a3_b": "Groups 3 to 12, the transition metals. They come later in this section."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_valence_by_group.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Valence Electrons of P and Ca",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "Use each configuration to find the number of valence electrons in phosphorus and calcium.",
+        "g1_l": "GIVEN",
+        "g1_b": "P: [Ne] 3s² 3p³\nCa: [Ar] 4s²",
+        "g2_l": "NEED",
+        "g2_b": "Highest n for each\nValence electron count\nCheck against the group",
+        "work": "",
+        "mustwrite": "Valence electrons are the s and p electrons in the highest n only."
+      },
+      "imageSubjects": {
+        "aside": "a block of red phosphorus beside a piece of calcium metal"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Phosphorus and Calcium, Worked",
+        "subhead": "Check the group number last. It should agree with your count.",
+        "f1_l": "SETUP",
+        "f1_b": "Find the highest n.\nCount every electron in it.",
+        "work": "P: n = 3, so 3s² 3p³\n2 + 3 = 5 valence\nCa: n = 4, so 4s²\n2 valence",
+        "mustwrite": "P has 5 valence electrons (group 15). Ca has 2 (group 2)."
+      },
+      "imageSubjects": {
+        "data": "a pencil resting on a page of handwritten configurations"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Why Noble Gases Barely React",
+        "subhead": "Look at the outer s and p sublevels of each one.",
+        "a1_l": "OCTET AND DUET",
+        "a1_b": "Ne, Ar, and Kr have 8 electrons in their outer s and p sublevels. Helium has 2.",
+        "a2_l": "WHAT FULL MEANS",
+        "a2_b": "Full means s and p. Argon's 3d sublevel is empty, so n = 3 is not completely full.",
+        "a3_l": "HOW WE USE IT",
+        "a3_b": "Later in this section we compare ions to these four configurations."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_noble_gas_configs.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "What Makes an Ion",
+        "subhead": "Atoms become ions by gaining or losing electrons. The nucleus does not change.",
+        "c1_l": "CATION",
+        "c1_b": "Loses electrons.\nPositive charge.\n\nNa → Na+: 11 electrons become 10.",
+        "c2_l": "ANION",
+        "c2_b": "Gains electrons.\nNegative charge.\n\nCl → Cl−: 17 electrons become 18.",
+        "mustwrite": "Electrons = atomic number − charge. Protons never change."
+      },
+      "imageSubjects": {
+        "concept": "a bowl of table salt crystals on dark slate"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Na Becomes Na+",
+        "subhead": "Electrons leave from the highest n first. Sodium loses its 3s electron.",
+        "a1_l": "BEFORE",
+        "a1_b": "Na: 1s² 2s² 2p⁶ 3s¹\n11 electrons",
+        "a2_l": "AFTER",
+        "a2_b": "Na+: 1s² 2s² 2p⁶\n10 electrons",
+        "a3_l": "THE MATCH",
+        "a3_b": "That is the configuration of neon, [Ne]."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_na_cation_orbitals.png"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three More Cations",
+        "subhead": "Same move every time. Remove from the highest n.",
+        "k1_l": "MAGNESIUM",
+        "k1_b": "Mg: [Ne] 3s²\nMg²+: [Ne]\n12 → 10 electrons",
+        "k2_l": "ALUMINUM",
+        "k2_b": "Al: [Ne] 3s² 3p¹\nAl³+: [Ne]\n13 → 10 electrons",
+        "k3_l": "CALCIUM",
+        "k3_b": "Ca: [Ar] 4s²\nCa²+: [Ar]\n20 → 18 electrons",
+        "mustwrite": "A cation's electrons come off the outermost level, the one with the highest n."
+      },
+      "imageSubjects": {
+        "aside": "a strip of magnesium ribbon coiled on a dark bench"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Cl Becomes Cl−",
+        "subhead": "A gained electron fills the open spot in the same outer sublevel.",
+        "a1_l": "BEFORE",
+        "a1_b": "Cl: [Ne] 3s² 3p⁵\n17 electrons",
+        "a2_l": "AFTER",
+        "a2_b": "Cl−: [Ne] 3s² 3p⁶\n18 electrons",
+        "a3_l": "THE MATCH",
+        "a3_b": "That is the configuration of argon, [Ar]. The new electron went into 3p, not a new level."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_cl_anion_orbitals.png"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three More Anions",
+        "subhead": "Same move every time. Fill the open spots in the outer s and p.",
+        "k1_l": "OXYGEN",
+        "k1_b": "O: 1s² 2s² 2p⁴\nO²−: 1s² 2s² 2p⁶\n= [Ne], 10 electrons",
+        "k2_l": "SULFUR",
+        "k2_b": "S: [Ne] 3s² 3p⁴\nS²−: [Ne] 3s² 3p⁶\n= [Ar], 18 electrons",
+        "k3_l": "BROMINE",
+        "k3_b": "Br: [Ar] 4s² 3d¹⁰ 4p⁵\nBr−: [Ar] 4s² 3d¹⁰ 4p⁶\n= [Kr], 36 electrons",
+        "mustwrite": "An anion's added electrons go into the open spots in the same outer s and p sublevels."
+      },
+      "imageSubjects": {
+        "aside": "a sealed ampoule of dark red-brown liquid bromine in a rack"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Same Electrons, Different Atoms",
+        "subhead": "Isoelectronic means the same number of electrons and the same configuration.",
+        "a1_l": "ALL TEN",
+        "a1_b": "Each of these has 10 electrons: 1s² 2s² 2p⁶.",
+        "a2_l": "DIFFERENT NUCLEI",
+        "a2_b": "The proton counts differ, so these are different particles. Their sizes differ too. Unit 3 explains why.",
+        "a3_l": "COUNT IT",
+        "a3_b": "Electrons = protons − charge. Check any column."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_isoelectronic_10.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Mg²+ and S²−",
+        "subhead": "We do this one together. Copy the setup, not just the answer.",
+        "problem": "Write the electron configuration of Mg²+ and S²−. Name the noble gas each one matches.",
+        "g1_l": "GIVEN",
+        "g1_b": "Mg: atomic number 12\nS: atomic number 16",
+        "g2_l": "NEED",
+        "g2_b": "Each atom's configuration\nIon electron count\nMatching noble gas",
+        "work": "",
+        "mustwrite": "Start from the neutral atom's configuration, then remove or add electrons."
+      },
+      "imageSubjects": {
+        "aside": "a sample of magnesium sulfate crystals on a watch glass"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Mg²+ and S²−, Worked",
+        "subhead": "Count the electrons at the end. They should match the noble gas.",
+        "f1_l": "SETUP",
+        "f1_b": "Mg: 12 → 10 electrons\nS: 16 → 18 electrons",
+        "work": "Mg: 1s² 2s² 2p⁶ 3s²\nMg²+: 1s² 2s² 2p⁶ = [Ne]\nS: [Ne] 3s² 3p⁴\nS²−: [Ne] 3s² 3p⁶ = [Ar]",
+        "mustwrite": "Mg²+ matches neon. S²− matches argon."
+      },
+      "imageSubjects": {
+        "data": "an analytical balance display in a darkened lab"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Transition Metal Ions: 4s Leaves First",
+        "subhead": "This is the rule that surprises people. Watch the order.",
+        "c1_l": "THE RULE",
+        "c1_b": "Remove electrons from the outermost s first: 4s.\n\nThen take from 3d if more must go.",
+        "c2_l": "THE REASON",
+        "c2_b": "Once 3d has electrons, it sits lower in energy than 4s.\n\nSo 4s electrons leave first, even though 4s filled first.",
+        "mustwrite": "Transition-metal ions lose their ns electrons before their (n−1)d electrons."
+      },
+      "imageSubjects": {
+        "concept": "a polished iron nail and a copper coin on dark slate"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Iron: Fe, Fe²+, and Fe³+",
+        "subhead": "Both 4s electrons go first. The third comes out of 3d.",
+        "a1_l": "Fe",
+        "a1_b": "[Ar] 4s² 3d⁶\n26 electrons",
+        "a2_l": "Fe²+",
+        "a2_b": "[Ar] 3d⁶\n24 electrons. Both 4s electrons left.",
+        "a3_l": "Fe³+",
+        "a3_b": "[Ar] 3d⁵\n23 electrons. One 3d electron left."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.4_fe_ions_orbitals.png"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Zn²+, Cu+, and Cu²+",
+        "subhead": "Same rule as iron. Copy the setup, not just the answer.",
+        "problem": "Write the [Ar] shorthand for Zn²+, Cu+, and Cu²+.",
+        "g1_l": "GIVEN",
+        "g1_b": "Zn: [Ar] 4s² 3d¹⁰\nCu: [Ar] 4s¹ 3d¹⁰",
+        "g2_l": "NEED",
+        "g2_b": "Electrons to remove\nWhich sublevel they leave\nEach ion's shorthand",
+        "work": "",
+        "mustwrite": "Take the 4s electrons first. Only then take from 3d."
+      },
+      "imageSubjects": {
+        "aside": "a galvanized zinc sheet beside a length of copper wire"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Zn²+, Cu+, and Cu²+, Worked",
+        "subhead": "Neither one has to end at a noble gas configuration.",
+        "f1_l": "SETUP",
+        "f1_b": "Take 4s first, then 3d.\nZn 30 → 28. Cu 29 → 28 or 27.",
+        "work": "Zn²+: [Ar] 3d¹⁰\nCu+: [Ar] 3d¹⁰\nCu²+: 4s, then one 3d\n→ [Ar] 3d⁹",
+        "mustwrite": "Zn²+ and Cu+ are both [Ar] 3d¹⁰. Cu²+ is [Ar] 3d⁹."
+      },
+      "imageSubjects": {
+        "data": "a pencil resting on a page of handwritten calculations"
+      }
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Work these in your notes. We compare in a minute.",
+        "s1_l": "Valence",
+        "s1_b": "Valence electrons in Al, Se, and Xe?",
+        "s2_l": "Ca²+",
+        "s2_b": "Write it. Name the matching noble gas.",
+        "s3_l": "O²−",
+        "s3_b": "Write the full configuration.",
+        "s4_l": "Fe³+",
+        "s4_b": "Write the [Ar] shorthand for Fe³+, Cu²+, and Zn²+."
+      },
+      "imageSubjects": {
+        "band": "a periodic table wall chart photographed at a shallow angle"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "LOOKING AHEAD",
+        "headline": "Unit 3 Picks Up\nFrom Here",
+        "subhead": "You can write the configuration of any common ion. Unit 3 asks which charge an element forms and how much energy it takes."
+      },
+      "imageSubjects": {
+        "divider": "a long laboratory bench receding into shadow"
+      }
+    }
+  ]
+}
