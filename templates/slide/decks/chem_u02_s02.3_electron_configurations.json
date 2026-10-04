@@ -176,6 +176,36 @@
       "notes": "Oxygen: 1s^2 2s^2 2p^4, 2 + 2 + 4 = 8. The 2p boxes hold one pair and two singles, so 2 unpaired."
     },
     {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Iron",
+        "subhead": "Configuration, orbital diagram, and the unpaired count.",
+        "problem": "Write the configuration for iron and draw its 4s and 3d orbital diagram. How many unpaired electrons?",
+        "g1_l": "GIVEN",
+        "g1_b": "Iron, Z = 26\nNeutral atom",
+        "g2_l": "NEED",
+        "g2_b": "Longhand configuration\nOrbital diagram\nUnpaired electrons",
+        "work": "",
+        "mustwrite": "Fill 4s before 3d. We write 4s ahead of 3d."
+      },
+      "imageSubjects": {
+        "aside": "a rusted iron nail on a white bench"
+      },
+      "notes": "Second orbital-diagram example, after oxygen. Students copy the setup, then work it; answer on the next slide. Fe, Z = 26. Fill 4s before 3d, and we write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Only the 4s and 3d boxes are drawn; the first 18 electrons (through 3p) are just counted. The [Ar] label on the next slide previews noble-gas shorthand, which has not been taught yet at this point: say 'the first 18 electrons, the same as argon' and let the shorthand slides name it. Image prompt (aside slot): a rusted iron nail on a white bench."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Iron, Worked",
+        "subhead": "The first 18 fill through 3p. Then 4s, then 3d.",
+        "f1_l": "LONGHAND",
+        "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
+        "work": "[Ar] 4s^{2} 3d^{6}\n18 + 2 + 6 = 26\nUnpaired: 4",
+        "mustwrite": "Fe ends 4s^{2} 3d^{6}: one pair and 4 singles in the 3d boxes."
+      },
+      "notes": "Fe: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6, written with the first 18 as [Ar] 4s^2 3d^6, 18 + 2 + 6 = 26. The 3d boxes hold one pair and four singles, so 4 unpaired. The 4s pair is drawn first, then the 3d boxes (Hund: one up arrow in each box, then pair). [Ar] here is a preview of the noble-gas shorthand taught two slides later; treat it as 'the first 18'."
+    },
+    {
       "master": "07_COMPARISON_CARDS",
       "fields": {
         "headline": "Longhand: N, Cl, and Ca",
@@ -243,32 +273,68 @@
     {
       "master": "09_EXAMPLE_PROBLEM",
       "fields": {
-        "headline": "Example: Iron",
-        "subhead": "Longhand, shorthand, and the unpaired count.",
-        "problem": "Write longhand and shorthand for iron. How many unpaired electrons?",
+        "headline": "Example: Aluminum",
+        "subhead": "Notation only. No diagram this time.",
+        "problem": "Write the longhand configuration and the noble-gas shorthand for aluminum.",
         "g1_l": "GIVEN",
-        "g1_b": "Iron, Z = 26\nNeutral atom",
+        "g1_b": "Aluminum, Z = 13\nNeutral atom",
         "g2_l": "NEED",
-        "g2_b": "Longhand\nShorthand\nUnpaired electrons",
+        "g2_b": "Longhand\nShorthand\nElectron sum",
         "work": "",
-        "mustwrite": "Fill 4s before 3d. We write 4s ahead of 3d."
+        "mustwrite": "Aluminum is period 3, so its core is [Ne]."
       },
       "imageSubjects": {
-        "aside": "a rusted iron nail on a white bench"
+        "aside": "a roll of aluminum foil partly unrolled on a white bench"
       },
-      "notes": "Students copy the setup, then work it. Answer on the next slide. Fe, Z = 26. Fill 4s before 3d, and we write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Image prompt (aside slot): a rusted iron nail on a white bench."
+      "notes": "Notation-only example: no orbital diagram. Students copy the setup, then work it. Answer on the next slide: Al, Z = 13, 1s^2 2s^2 2p^6 3s^2 3p^1, 2+2+6+2+1 = 13; shorthand [Ne] 3s^2 3p^1, 10+2+1 = 13. Common error: [Ar] as the core. Argon (Z = 18) is bigger than aluminum's 13 electrons, so it cannot be a core. The core is the noble gas that ends the previous period (neon, period 2). Image prompt (aside slot): a roll of aluminum foil partly unrolled on a white bench."
     },
     {
       "master": "10_WORKED_SOLUTION",
       "fields": {
-        "headline": "Iron, Worked",
-        "subhead": "Argon is the core. Then 4s, then 3d.",
-        "f1_l": "LONGHAND",
-        "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
-        "work": "[Ar] 4s^{2} 3d^{6}\n18 + 2 + 6 = 26\nUnpaired: 4",
-        "mustwrite": "Fe is [Ar] 4s^{2} 3d^{6}. One pair and 4 singles in the 3d boxes."
+        "headline": "Aluminum, Worked",
+        "subhead": "Longhand first. Then swap the first 10 for [Ne].",
+        "f1_l": "SETUP",
+        "f1_b": "Z = 13 electrons\nCore: [Ne] ends period 2",
+        "work": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{1}\n[Ne] 3s^{2} 3p^{1}\n10 + 2 + 1 = 13",
+        "mustwrite": "Al is [Ne] 3s^{2} 3p^{1}, the same 13 electrons as the longhand."
       },
-      "notes": "Fe: [Ar] 4s^2 3d^6, 18 + 2 + 6 = 26. The 3d boxes hold one pair and four singles, so 4 unpaired. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6."
+      "notes": "Al: longhand 1s^2 2s^2 2p^6 3s^2 3p^1, 2+2+6+2+1 = 13. Shorthand [Ne] 3s^2 3p^1: [Ne] stands for the first 10 (1s^2 2s^2 2p^6), then 10+2+1 = 13. Notation only; no diagram is drawn. If students use [Ar] as the core, have them add it: 18 + 2 + 1 = 21, not 13. Image prompt (data slot): the aluminum square of a periodic table wall chart, photographed close and slightly off-axis.",
+      "imageSubjects": {
+        "data": "the aluminum square of a periodic table wall chart, photographed close and slightly off-axis"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Bromine and Nickel",
+        "subhead": "Notation only. Two elements, one core.",
+        "problem": "Write the noble-gas shorthand for each element.",
+        "g1_l": "(a) BROMINE",
+        "g1_b": "Br, Z = 35\nNeutral atom",
+        "g2_l": "(b) NICKEL",
+        "g2_b": "Ni, Z = 28\nNeutral atom",
+        "work": "",
+        "mustwrite": "Both are period 4, so the core is [Ar], never [Kr]."
+      },
+      "imageSubjects": {
+        "aside": "a nickel-plated metal bar and a sealed amber ampoule of bromine on a white tray"
+      },
+      "notes": "Notation-only example: no orbital diagram. Answers on the next slide. (a) Br, Z = 35: [Ar] 4s^2 3d^10 4p^5, 18+2+10+5 = 35. (b) Ni, Z = 28: [Ar] 4s^2 3d^8, 18+2+8 = 28. Common error: [Kr] because krypton is 'close' (Kr is Z = 36, one more than bromine, so [Kr] would already hold 36 electrons). Both are period 4, so the core is the noble gas that ends period 3, argon. Nickel follows the rules; the only exceptions taught are Cr and Cu. Image prompt (aside slot): a nickel-plated metal bar and a sealed amber ampoule of bromine on a white tray."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Bromine and Nickel, Worked",
+        "subhead": "Same [Ar] core. Then 4s, 3d, and 4p as needed.",
+        "f1_l": "CORE AND COUNT",
+        "f1_b": "Both are period 4\nCore: [Ar] = 18 electrons",
+        "work": "(a) [Ar] 4s^{2} 3d^{10} 4p^{5}\n18 + 2 + 10 + 5 = 35\n(b) [Ar] 4s^{2} 3d^{8}\n18 + 2 + 8 = 28",
+        "mustwrite": "Br is [Ar] 4s^{2} 3d^{10} 4p^{5}. Ni is [Ar] 4s^{2} 3d^{8}."
+      },
+      "notes": "(a) Br, Z = 35: [Ar] 4s^2 3d^10 4p^5, 18+2+10+5 = 35. (b) Ni, Z = 28: [Ar] 4s^2 3d^8, 18+2+8 = 28. Notation only; no diagram is drawn. Fill 4s before 3d, and write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Ni is not an exception. A student who writes [Kr] for either one has counted 36 electrons before writing anything else. Image prompt (data slot): the period 4 row of a periodic table wall chart, photographed close and slightly off-axis.",
+      "imageSubjects": {
+        "data": "the period 4 row of a periodic table wall chart, photographed close and slightly off-axis"
+      }
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",

@@ -219,6 +219,11 @@ GOOD = [
     ("S",  16, "[Ne] 3s2 3p4",                   2),
     ("Ge", 32, "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2", 2),     # the noble-gas shorthand build
     ("Ge", 32, "[Ar] 4s2 3d10 4p2",              2),
+    # the notation-only examples (Aluminum; Bromine and Nickel): no orbital diagram on those slides
+    ("Al", 13, "1s2 2s2 2p6 3s2 3p1",            1),
+    ("Al", 13, "[Ne] 3s2 3p1",                   1),
+    ("Br", 35, "[Ar] 4s2 3d10 4p5",              1),
+    ("Ni", 28, "[Ar] 4s2 3d8",                   2),
 ]
 # Ions that the exception slides point forward to (S2.4). (label, Z, charge, ascii string). Computed by removing
 # electrons valence-first (highest n, then highest l) from the MEASURED ground state, and compared.
@@ -490,6 +495,44 @@ def check_against_spec():
                 assert count_arrows(boxes) == sl_["electrons"], (key, sub)
     # 6. the Noble-Gas Shorthand slide carries the same-period-noble-gas note, and it is true: Ar is Cl's own period
     assert "not [Ar]" in slide_by_headline("Noble-Gas Shorthand")["fields"]["mustwrite"]
+    # 7. sequence: orbital-notation block first, then the notation block, then the notation-only examples,
+    #    then the exceptions. Notation-only examples carry no orbital diagram of any kind.
+    for a_, b_ in [("Reading an Orbital Diagram", "Filling Oxygen's 2p Boxes"), ("Filling Oxygen's 2p Boxes", "Writing a Configuration"),
+                  ("Writing a Configuration", "Example: Oxygen"), ("Example: Oxygen", "Oxygen, Worked"),
+                  ("Oxygen, Worked", "Example: Iron"), ("Example: Iron", "Iron, Worked"),
+                  ("Iron, Worked", "Longhand: N, Cl, and Ca"), ("Longhand: N, Cl, and Ca", "Noble-Gas Shorthand"),
+                  ("Shorthand: Germanium", "Why [Ar] and Not [Kr]?"), ("Why [Ar] and Not [Kr]?", "Example: Aluminum"),
+                  ("Example: Aluminum", "Aluminum, Worked"), ("Aluminum, Worked", "Example: Bromine and Nickel"),
+                  ("Example: Bromine and Nickel", "Bromine and Nickel, Worked"),
+                  ("Bromine and Nickel, Worked", "Exception: Copper")]:
+        assert heads.index(a_) + 1 == heads.index(b_), f"order: {b_!r} must directly follow {a_!r}"
+    notation_only = ["Example: Aluminum", "Aluminum, Worked", "Example: Bromine and Nickel", "Bromine and Nickel, Worked"]
+    builds_by_head = {heads[bb["slide"] - 1] for bb in bspec["builds"]}
+    EXPECT_BUILDS = {"Reading an Orbital Diagram", "Filling Oxygen's 2p Boxes", "Oxygen, Worked", "Iron, Worked",
+                     "Shorthand: Germanium", "Exception: Copper", "Exception: Chromium"}
+    assert builds_by_head == EXPECT_BUILDS, f"builds sit on the wrong slides: {sorted(builds_by_head ^ EXPECT_BUILDS)}"
+    for bb in bspec["builds"]:                      # each build's asserted layout and title match its slide
+        assert slides[bb["slide"] - 1]["master"] == bb["layout"], f"build on slide {bb['slide']}: layout differs"
+    for h in notation_only:
+        sl_ = slide_by_headline(h)
+        assert h not in builds_by_head and "images" not in sl_, f"{h}: a picture or build is on a notation-only slide"
+        words = (" ".join(str(v) for v in sl_["fields"].values()) + " " + sl_["notes"]).lower()
+        for banned in ("orbital diagram", "boxes", "arrow", "hund", "pauli", "unpaired"):
+            assert banned not in words.replace("no orbital diagram", "").replace("no diagram", ""), f"{h}: {banned!r} on a notation-only slide"
+    # every configuration on the new slides is one of the tables above, and the elements are the right ones
+    new_text = " ".join(str(v) for h in notation_only for v in slide_by_headline(h)["fields"].values()).replace("\n", " ")
+    new_toks = {re.sub(r"\^\{?(\d+)\}?", r"\1", t).strip()
+                for t in re.findall(r"(?:\[[A-Z][a-z]\] ?)?(?:\d[spdf]\^\{\d+\} ?)+", new_text)}
+    table = {c for _, _, c, _ in GOOD}
+    assert new_toks and new_toks <= table, f"configurations on the new slides not in GOOD: {sorted(new_toks - table)}"
+    for cfg in ["1s2 2s2 2p6 3s2 3p1", "[Ne] 3s2 3p1", "[Ar] 4s2 3d10 4p5", "[Ar] 4s2 3d8"]:
+        assert cfg in new_toks, f"new example missing {cfg}"
+    for sym, Z, cfg in [("Al", 13, "1s2 2s2 2p6 3s2 3p1"), ("Al", 13, "[Ne] 3s2 3p1"), ("Br", 35, "[Ar] 4s2 3d10 4p5"),
+                        ("Ni", 28, "[Ar] 4s2 3d8")]:
+        assert check_config(cfg, Z) == [] and expand(cfg) == ground_state(Z), (sym, cfg)
+    assert check_config("[Ar] 3s2 3p1", 13) != [] and check_config("[Kr] 4s2 3d10 4p5", 35) != []   # the traps in the notes
+    assert "[Ne]" in slide_by_headline("Example: Aluminum")["fields"]["mustwrite"]
+    assert "[Ar]" in slide_by_headline("Example: Bromine and Nickel")["fields"]["mustwrite"]
     assert check_config("[Ar] 3s2 3p5", 17) != []         # the error the note warns against
     print(f"  spec cross-check: {len(GOOD) + len(BAD)} configurations verbatim, no strays, "
           f"no Unicode superscripts, notes on all {len(slides)} slides")

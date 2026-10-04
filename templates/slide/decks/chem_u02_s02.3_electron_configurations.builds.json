@@ -1,7 +1,7 @@
 {
   "course": "chemistry",
   "animated_deck": "SHULL_CHEM_Slides_U02_S02.3.pptx",
-  "note": "Click builds for S2.3. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each carries a layout name that is asserted (look slides up by headline: 7 Reading an Orbital Diagram, 8 Filling Oxygen's 2p Boxes, 11 Oxygen, Worked, 14 Shorthand: Germanium, 17 Iron, Worked, 18 Exception: Copper, 19 Exception: Chromium). These slides' PNGs are omitted from the deck spec so the slot is empty; the post-processor also deletes any picture inside the slot. alt_text gives every drawn diagram a computed description. late_counts shows each sublevel's raised electron count only with its last arrow.",
+  "note": "Click builds for S2.3. Applied by scripts/add_click_builds.py after build_deck.js. Slide numbers are 1-based and each carries a layout name that is asserted (by headline: 7 Reading an Orbital Diagram, 8 Filling Oxygen's 2p Boxes, 11 Oxygen, Worked, 13 Iron, Worked, 16 Shorthand: Germanium, 22 Exception: Copper, 23 Exception: Chromium). These slides' PNGs are omitted from the deck spec so the slot is empty; the post-processor also deletes any picture inside the slot. alt_text gives every drawn diagram a computed description. late_counts shows each sublevel's raised electron count only with its last arrow.",
   "builds": [
     {
       "slide": 7,
@@ -88,24 +88,7 @@
       "late_counts": true
     },
     {
-      "static_notes": "Shorthand for germanium (Z = 32). Teach it in this order: write the longhand first; find the noble gas that comes BEFORE germanium and mark those electrons; put that noble gas in brackets; finish the line. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^2, 2+2+6+2+6+2+10+2 = 32. The first five segments total 18 and are exactly argon's configuration, so [Ar] is a placeholder, a substitution like writing one symbol for a long repeated expression in math. Shorthand: [Ar] 4s^2 3d^10 4p^2, 18 + 2 + 10 + 2 = 32, with 2 unpaired electrons (the two 4p singles). Common error (brief): using the noble gas of the element's own period. Krypton ends germanium's period and comes AFTER it (Z = 36 > 32), so [Kr] would claim 36 electrons; the next slide shows the table strip. This slide shows the longhand line, the shorthand line under it, and the check sum. Cl stays on the previous slide as the static example.",
-      "slide": 14,
-      "layout": "08_DIAGRAM_ANNOTATION",
-      "region": "diagram",
-      "type": "text_line",
-      "name": "Ge",
-      "element": "germanium",
-      "title": "GERMANIUM  Z = 32",
-      "z": 32,
-      "longhand": "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2",
-      "core": "Ar",
-      "captions": {
-        "highlight": "These 18 electrons are exactly argon's configuration",
-        "replace": "The noble gas BEFORE germanium stands in for them, like a substitution in math"
-      }
-    },
-    {
-      "slide": 17,
+      "slide": 13,
       "layout": "10_WORKED_SOLUTION",
       "region": "data",
       "title": "IRON  Z = 26",
@@ -135,8 +118,25 @@
       "late_counts": true
     },
     {
+      "static_notes": "Shorthand for germanium (Z = 32). Teach it in this order: write the longhand first; find the noble gas that comes BEFORE germanium and mark those electrons; put that noble gas in brackets; finish the line. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^2, 2+2+6+2+6+2+10+2 = 32. The first five segments total 18 and are exactly argon's configuration, so [Ar] is a placeholder, a substitution like writing one symbol for a long repeated expression in math. Shorthand: [Ar] 4s^2 3d^10 4p^2, 18 + 2 + 10 + 2 = 32, with 2 unpaired electrons (the two 4p singles). Common error (brief): using the noble gas of the element's own period. Krypton ends germanium's period and comes AFTER it (Z = 36 > 32), so [Kr] would claim 36 electrons; the next slide shows the table strip. This slide shows the longhand line, the shorthand line under it, and the check sum. Cl stays on the previous slide as the static example.",
+      "slide": 16,
+      "layout": "08_DIAGRAM_ANNOTATION",
+      "region": "diagram",
+      "type": "text_line",
+      "name": "Ge",
+      "element": "germanium",
+      "title": "GERMANIUM  Z = 32",
+      "z": 32,
+      "longhand": "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2",
+      "core": "Ar",
+      "captions": {
+        "highlight": "These 18 electrons are exactly argon's configuration",
+        "replace": "The noble gas BEFORE germanium stands in for them, like a substitution in math"
+      }
+    },
+    {
       "static_notes": "Copper. Boxes for 4s and 3d only; the [Ar] core (18 electrons) is not drawn. The atom as the rules predict: [Ar] 4s^2 3d^9 (4s before 3d; 18 + 2 + 9 = 29). The measured ground state: [Ar] 4s^1 3d^10, 18 + 1 + 10 = 29, one unpaired electron (the 4s). Same electron count before and after: an electron MOVES from 4s to 3d, none is gained. Say 'measured ground state', not 'textbook error'. The arrows are bookkeeping for the end state; the diagram does not track one electron's journey. Forward pointer to S2.4: the 4s^1 electron leaves first, so Cu^+ = [Ar] 3d^10 and Cu^2+ = [Ar] 3d^9 (both checked by the figure script). The reason follows on the Why slide. Do not extend this to Ag or Au: not taught, not checked (look it up).",
-      "slide": 18,
+      "slide": 22,
       "layout": "08_DIAGRAM_ANNOTATION",
       "region": "diagram",
       "name": "Cu",
@@ -179,7 +179,7 @@
     },
     {
       "static_notes": "Chromium. The atom as the rules predict: [Ar] 4s^2 3d^4 (18 + 2 + 4 = 24): four up arrows in 3d and one empty box. The measured ground state: [Ar] 4s^1 3d^5, 18 + 1 + 5 = 24; every box in 4s and 3d holds exactly one up arrow, all spins parallel (Hund), so 6 unpaired electrons, more than iron's 4. The arrows are bookkeeping for the end state: the arrow that leaves 4s is the down one and the arrow that arrives in 3d is an up one, so do not present it as one electron keeping its spin; the point is the final arrangement. Answer to the unpaired question: 6. Same teaching label as Cu: measured ground state. Mo (same group, one period down) is an exception too, and W is not; not taught, not checked here.",
-      "slide": 19,
+      "slide": 23,
       "layout": "08_DIAGRAM_ANNOTATION",
       "region": "diagram",
       "name": "Cr",
@@ -237,15 +237,15 @@
       "descr": "Hund's rule with nitrogen's 2p boxes: up, up, up in three boxes is correct; one pair, one single and one empty box is marked wrong."
     },
     {
-      "slide": 15,
+      "slide": 17,
       "descr": "Periodic-table strip of periods 3 and 4. Argon, at the end of period 3, is marked with a tick as the noble gas before germanium. Germanium is outlined in period 4, group 14. Krypton, at the end of period 4 and after germanium, is marked with a cross as the wrong choice."
     },
     {
-      "slide": 24,
+      "slide": 28,
       "descr": "Two wrong orbital diagrams. (e) Nitrogen 2p: up, down, up, three single arrows whose spins are not all the same. (f) Neon 2s: one box holding two up arrows."
     },
     {
-      "slide": 25,
+      "slide": 29,
       "descr": "The corrected diagrams. (e) Nitrogen 2p: up, up, up, ticked as Hund. (f) Neon 2s: one up and one down arrow, ticked as Pauli."
     }
   ]
