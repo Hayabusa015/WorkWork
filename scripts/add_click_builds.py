@@ -560,7 +560,7 @@ def draw(slide, b, region, T, initial, steps, arrows):
             cx0 = x + gw / 2 - (wn + wc) / 2
             textbox(gs, cx0, by + size + gap, wn + 0.02, label_h, nm, font, 18, ink, True,
                     align=PP_ALIGN.LEFT, name=f"BUILD label {nm}", wrap=False)
-            late_boxes.append((s["label"], cx0 + wn, by + size + gap, wc, label_h, cnt))
+            late_boxes.append((s["label"], cx0 + wn - 0.04, by + size + gap, wc, label_h, cnt))
         else:
             textbox(gs, x - 0.1, by + size + gap, gw + 0.2, label_h,
                     s["label"] if b.get("steps") else f"{s['label']}^{{{s['electrons']}}}", font, 18, ink, True,
@@ -891,7 +891,7 @@ def process_text_line(slide, b, region, T, chk):
     yy = cy + chip_h + gap + sum_h + gap
     cap_boxes = []
     for c, n in zip(caps, n_cap):
-        cap_boxes.append(textbox(sh, x0 + pad, yy, inner, n * line, c, font, FLOOR_PT, deep, True,
+        cap_boxes.append(textbox(sh, x0 + pad, yy, inner, n * line - 0.02, c, font, FLOOR_PT, deep, True,
                                  name="BUILD caption"))
         yy += n * line
     res = textbox(sh, x0 + pad, yy + gap, inner, res_h, res_txt, font, 18, ink, True, name="BUILD result")
