@@ -794,7 +794,7 @@ def fig_iron():
     draw_groups(c, groups, (846 - width) / 2, 120, size, inner, outer, 52,
                 [2, 6], 52)
     c.line([(60, 350), (786, 350)], COL["hair"], 3)
-    c.text(423, 420, "[Ar] 18 + 2 + 6 = 26", F_SEMI(52), COL["asphalt"])
+    c.text(423, 420, "first 18 + 2 + 6 = 26", F_SEMI(52), COL["asphalt"])
     assert 18 + sum(count_arrows(b) for _, b in groups) == 26
     c.save("chem_u02_s2.3_orbital_diagram_iron.png")
 

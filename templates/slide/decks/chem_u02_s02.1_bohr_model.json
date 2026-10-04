@@ -119,7 +119,7 @@
       "fields": {
         "headline": "Levels Get Whole-Number Labels",
         "subhead": "Each level gets a number, n. A higher n means more energy.",
-        "a1_l": "n",
+        "a1_l": "LEVEL NUMBER, n",
         "a1_b": "Whole numbers only: 1, 2, 3 ... Never 1.5.",
         "a2_l": "HIGHER n",
         "a2_b": "n = 1 is the lowest level. Each step up means more energy.",
@@ -235,19 +235,19 @@
       "master": "09_EXAMPLE_PROBLEM",
       "fields": {
         "headline": "Example: Ranking Three Drops",
-        "subhead": "Use the to-scale level diagram. A longer drop is a bigger drop.",
-        "problem": "Rank drops A, B and C from least to most energy released. Which gives the bluest light?",
+        "subhead": "Look back at the level diagram on slide 9. A longer drop is a bigger drop.",
+        "problem": "Rank drops A, B and C from least to most energy released. Which gives the highest-energy light?",
         "g1_l": "GIVEN",
         "g1_b": "A: n = 4 to n = 2\nB: n = 3 to n = 2\nC: n = 2 to n = 1",
         "g2_l": "NEED",
-        "g2_b": "Order, least to most\nThe bluest light",
+        "g2_b": "Order, least to most\nThe highest-energy light",
         "work": "",
         "mustwrite": "A bigger vertical drop on the diagram means more energy released."
       },
       "imageSubjects": {
         "aside": "a camera-flash bulb mid-discharge in a dark room"
       },
-      "notes": "Worked together. Leave the energy-levels slide (slide 9) up or flip back to it: the ranking uses the vertical gaps on that diagram, no formula. Answer: B (3 to 2) least, then A (4 to 2), then C (2 to 1) most. The bluest light comes from C, the most energy: more energy means a shorter wavelength, which is bluer. Accuracy note: C is really ultraviolet, beyond violet, so 'bluest' means furthest toward the blue-violet end; B is red and A is blue-green. S2.5 gives the wavelengths in nm. Image prompt (empty slot): a camera-flash bulb mid-discharge in a dark room."
+      "notes": "Worked together. Leave the energy-levels slide (slide 9) up or flip back to it: the ranking uses the vertical gaps on that diagram, no formula. Answer: B (3 to 2) least, then A (4 to 2), then C (2 to 1) most. The highest-energy light comes from C. Save the colour idea for the solution slide: more energy means a shorter wavelength, which is bluer, and C is really ultraviolet, beyond violet; B is red and A is blue-green. S2.5 gives the wavelengths in nm. Image prompt (empty slot): a camera-flash bulb mid-discharge in a dark room."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -256,13 +256,13 @@
         "subhead": "Longer arrow, more energy, bluer light.",
         "f1_l": "RULES",
         "f1_b": "Bigger drop,\nmore energy released.\nMore energy, bluer light.",
-        "work": "Least: B (3 to 2)\nThen: A (4 to 2)\nMost: C (2 to 1)\nBluest: C (ultraviolet)",
+        "work": "Least: B (3 to 2)\nThen: A (4 to 2)\nMost: C (2 to 1)\nHighest: C (ultraviolet)",
         "mustwrite": "More energy released means a shorter wavelength, which is bluer light."
       },
       "images": {
         "data": "../assets/chem_u02_s2.1_drops_ranked.png"
       },
-      "notes": "Read the arrows: C is longest, then A, then B. The figure is to scale in spacing, so arrow length is the ranking. Bluer means shorter wavelength and higher energy, stated qualitatively; no wavelengths here (S2.5). C is ultraviolet in fact: say so if a student asks."
+      "notes": "Read the arrows: C is longest, then A, then B. The figure is to scale in spacing, so arrow length is the ranking. Bluer means shorter wavelength and higher energy, stated qualitatively; no wavelengths here (S2.5). Highest-energy light is C, and C is ultraviolet in fact: say so if a student asks."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -288,7 +288,7 @@
         "headline": "Ionization, Worked",
         "subhead": "The electron climbs to the top of the diagram and leaves.",
         "f1_l": "IDEAS",
-        "f1_b": "Energy in lifts the electron.\nNo level is above n = ∞.\nOutermost electron leaves first.",
+        "f1_b": "Energy in lifts the electron.\nNo level is above n = ∞.\nIn bigger atoms, the\noutermost electron leaves first.",
         "work": "Start: n = 1\nEnergy in: it goes up\nEnd: n = ∞, it leaves\nAtom: a positive ion",
         "mustwrite": "Ionization takes energy in. Hydrogen ends as a positive ion with no electron."
       },
@@ -339,7 +339,7 @@
         "headline": "Quick Check: Items 4 and 5",
         "subhead": "Same as before. Your own paper first.",
         "c1_l": "CHECK 4",
-        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? How do you know?",
+        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? How do you know?",
         "c2_l": "CHECK 5",
         "c2_b": "Give one reason the Bohr model is no longer the accepted model of the atom.",
         "mustwrite": "Down releases energy as a photon. Up absorbs energy."

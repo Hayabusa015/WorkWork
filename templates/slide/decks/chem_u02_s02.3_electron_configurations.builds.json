@@ -93,6 +93,7 @@
       "region": "data",
       "title": "IRON  Z = 26",
       "z": 26,
+      "sum": "first 18 + 2 + 6 = 26",
       "core": {
         "label": "[Ar]",
         "electrons": 18
