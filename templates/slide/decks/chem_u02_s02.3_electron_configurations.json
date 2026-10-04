@@ -150,7 +150,7 @@
       "fields": {
         "headline": "Example: Oxygen",
         "subhead": "Copy the setup, not just the answer.",
-        "problem": "Write the longhand configuration and the orbital diagram for oxygen.",
+        "problem": "Write the full configuration and the orbital diagram for oxygen.",
         "g1_l": "GIVEN",
         "g1_b": "Oxygen, Z = 8\nNeutral atom",
         "g2_l": "NEED",
@@ -198,7 +198,7 @@
       "fields": {
         "headline": "Iron, Worked",
         "subhead": "The first 18 fill through 3p. Then 4s, then 3d.",
-        "f1_l": "LONGHAND",
+        "f1_l": "FULL CONFIGURATION",
         "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
         "work": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}\n2+2+6+2+6+2+6 = 26\nUnpaired: 4",
         "mustwrite": "Fe ends 4s^{2} 3d^{6}: one pair and 4 singles in the 3d boxes."
@@ -482,7 +482,7 @@
       "imageSubjects": {
         "aside": "a pencil and a blank sheet of lined paper on a lab bench"
       },
-      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29. Exception: go back to the Copper exception slide ('Exception: Copper'): the rules predict [Ar] 4s^2 3d^9, one 4s electron moves into 3d, and the filled 3d lowers the atom's total energy slightly. That is the simplified reason from the Why slide (4s and 3d are close in energy); it does not predict every exception, so do not accept 'full is always more stable'. Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
+      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29. Exception: go back to the Copper exception slide ('Exception: Copper', a click build in the animated deck): the rules predict [Ar] 4s^2 3d^9, one 4s electron moves into 3d, and the filled 3d lowers the atom's total energy slightly. That is the simplified reason from the Why slide (4s and 3d are close in energy); it does not predict every exception, so do not accept 'full is always more stable'. Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
     },
     {
       "master": "04_DIVIDER",

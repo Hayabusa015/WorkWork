@@ -423,7 +423,9 @@ def check_against_spec():
              for bb in bspec["builds"] if bb.get("type") == "text_line"]
     ftext = ftext + " " + json.dumps(bspec, ensure_ascii=False) + " " + " ".join(built)
     off_slide = {"[Kr] 4s2 3d10 4p2"}       # Ge with the wrong core: never printed
-    notes_only = {"1s2 2s2 2p6 3s2 3p3", "[Ne] 3s2 3p4"}   # P, S answers: speaker notes only
+    # P, S answers: speaker notes only. Fe shorthand is checked but not printed: shorthand is taught on
+    # the slide after the iron slides, so the iron slides use the full configuration only.
+    notes_only = {"1s2 2s2 2p6 3s2 3p3", "[Ne] 3s2 3p4", "[Ar] 4s2 3d6"}
     missing = []
     for _, _, cfg, _ in GOOD:
         if cfg not in notes_only and mark(cfg) not in ftext:
@@ -431,6 +433,24 @@ def check_against_spec():
     for _, _, cfg, _ in BAD:
         if cfg not in off_slide and mark(cfg) not in ftext:
             missing.append(("bad", cfg, mark(cfg)))
+    # 3b. notation order: nothing before the shorthand slide may print a noble-gas bracket, or use the word
+    #     "Longhand" in a student field before the slide that defines it
+    heads_ = [sl["fields"]["headline"] for sl in slides]
+    i_short = heads_.index("Noble-Gas Shorthand")
+    i_long = heads_.index("Longhand: N, Cl, and Ca")
+    for i_, sl in enumerate(slides[:i_short]):
+        vis = json.dumps(sl["fields"], ensure_ascii=False)
+        vis += json.dumps([bb for bb in bspec["builds"] if bb["slide"] == i_ + 1 and bb["slide"] <= i_short],
+                          ensure_ascii=False).replace('"label": "[Ar]"', "")
+        assert not re.search(r"\[[A-Z][a-z]\]", vis), f"slide {i_ + 1}: noble-gas bracket before the shorthand slide"
+        if i_ < i_long:
+            assert "longhand" not in json.dumps(sl["fields"]).lower(), f"slide {i_ + 1}: 'Longhand' before it is defined"
+    fe = slide_text_by_headline = next(sl for sl in slides if sl["fields"]["headline"] == "Iron, Worked")
+    assert mark("1s2 2s2 2p6 3s2 3p6 4s2 3d6").split(" 3s")[0] in fe["fields"]["work"], "iron WORK card lacks the full configuration"
+    assert "4s^{2} 3d^{6}" in fe["fields"]["work"] and "2+2+6+2+6+2+6 = 26" in fe["fields"]["work"]
+    fb = next(bb for bb in bspec["builds"] if bb["slide"] == heads_.index("Iron, Worked") + 1)
+    assert fb["core"]["electrons"] == 18 and fb["sum"] == "first 18 + 2 + 6 = 26", "iron build sum"
+    assert electrons("1s2 2s2 2p6 3s2 3p6 4s2 3d6") == 26 == fb["core"]["electrons"] + 2 + 6
     # 4. strays: any config-looking token on a slide or in a note that no checked string contains
     checked = ({c for _, _, c, _ in GOOD} | {c for _, _, c, _ in BAD} | {c for *_, c in ION}
                | {c for _, _, c in BEYOND_SCOPE})
