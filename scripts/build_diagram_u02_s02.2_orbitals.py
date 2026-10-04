@@ -131,7 +131,8 @@ def shapes():
     f_ax = font("Archivo-SemiBold.ttf", 23)
     for x, letter, n in zip(cxs, "spd", ("1 orbital", "3 orbitals", "5 orbitals")):
         text(d, (x, 22), letter, f_big)
-        text(d, (x, 214), n, f_lab)
+        text(d, (x, 206 if letter == "d" else 214), n, f_lab)
+    text(d, (cxs[2], 231), "(1 of 5 shown)", f_lab, GRAPHITE)
     # p axis letters at the lobe tips
     text(d, (cxs[1] + 70, cy), "x", f_ax, GRAPHITE)
     text(d, (cxs[1] + 2, cy - 72), "y", f_ax, GRAPHITE)
@@ -277,7 +278,7 @@ def block_map():
     totals = [row_len[k] + (f_each if k >= 5 else 0) for k in range(7)]
     assert totals == [2, 8, 8, 18, 18, 32, 32], totals
 
-    fillc = {"s": LIME_TINT, "p": PARCH, "d": HAIR, "f": LIME_PALE}
+    fillc = {"s": LIME_TINT, "p": PARCH, "d": HAIR, "f": WHITE}
 
     def ypos(r):
         return y0 + (r - 1) * ch + (10 if r >= 8 else 0)
@@ -297,7 +298,9 @@ def block_map():
                             (0, -1, (xa, ya, xa, yb)), (0, 1, (xb, ya, xb, yb))):
             nb = grid.get((r + dr, c + dc))
             if nb != b:
-                d.line([(S(seg[0]), S(seg[1])), (S(seg[2]), S(seg[3]))], fill=GRAPHITE, width=S(1.8))
+                # f block: deep-green heavy border so it reads apart from p in grayscale
+                d.line([(S(seg[0]), S(seg[1])), (S(seg[2]), S(seg[3]))],
+                       fill=DEEP if b == "f" else GRAPHITE, width=S(3.2 if b == "f" else 1.8))
 
     f_p = font("Archivo-SemiBold.ttf", 23)
     f_grp = font("Archivo-SemiBold.ttf", 23)

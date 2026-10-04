@@ -3,18 +3,19 @@
   "unit": 2,
   "section": "2.1",
   "sectionTitle": "The Bohr Model",
-  "note": "Built from reports/u2-content-briefs.md S2.1. 50-minute period; 20 content slides, last two are the formative check (5 items). Energies are written in caret form (10^-19) because Archivo has no superscript minus; the hand-built figures draw true superscripts. Nothing PROVISIONAL is on a student slide. The optional Bohr-radius slide (brief slide 17) is not built.",
+  "note": "Built from reports/u2-content-briefs.md S2.1. 50-minute period; 20 content slides, last two are the formative check (5 items). Powers of ten use ^{...} run markup with the true minus U+2212 (Archivo carries it); the hand-built figures draw the same superscripts. Nothing PROVISIONAL is on a student slide; flag F1 is labeled in teacher notes. The optional Bohr-radius slide (brief slide 17) is not built. No learning-target slide: the 20-content-slide cap is full, so targets sit in slide 1 notes.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
       "fields": {
-        "number": "01",
-        "headline": "2.1\nThe Bohr Model",
+        "number": "2.1",
+        "headline": "The Bohr Model",
         "subhead": "Find hydrogen's energy levels, and explain emission and absorption as an electron changing level."
       },
       "imageSubjects": {
         "section": "a hydrogen gas discharge tube glowing pink-magenta on a dark bench, lit only by its own light"
-      }
+      },
+      "notes": "Targets: describe Bohr's hydrogen model; use E_n = −2.18 × 10^{−18} J ÷ n² for a level energy and ΔE; explain emission and absorption; state the model's limits. Hook is the next slide. PROVISIONAL (brief flag F1, Matt to confirm): E_n needs scientific notation, but the course sequencing rule delays scientific notation and heavy math. Plan used: a pre-built table plus ONE student calculation, 3 sig figs, no sig-fig rules taught. Image prompt (empty slot): a hydrogen gas discharge tube glowing pink-magenta on a dark bench, lit only by its own light."
     },
     {
       "master": "06_CONCEPT_IMAGE",
@@ -25,7 +26,8 @@
       },
       "imageSubjects": {
         "concept": "a glowing hydrogen discharge tube photographed close, with a prism-split smear of four thin colored lines beside it"
-      }
+      },
+      "notes": "Pose the question and leave it open; it is answered by slide 20. Do not name quantization yet. Image prompt (empty slot): a glowing hydrogen discharge tube photographed close, with a prism-split smear of four thin colored lines beside it."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -42,7 +44,8 @@
       },
       "imageSubjects": {
         "aside": "a glass prism on a lab bench splitting a narrow white beam"
-      }
+      },
+      "notes": "Vocabulary first so later slides can use it. Students write only the energy-level line. Image prompt (empty slot): a glass prism on a lab bench splitting a narrow white beam."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -57,7 +60,8 @@
       },
       "imageSubjects": {
         "concept": "a chalkboard with a hand-drawn nucleus and one looping electron path, chalk dust on the ledge"
-      }
+      },
+      "notes": "Thomson, then Rutherford 1911, then the problem: a classical orbiting charge should radiate and spiral in. Bohr, 1913. Image prompt (empty slot): a chalkboard with a hand-drawn nucleus and one looping electron path, chalk dust on the ledge."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -74,7 +78,8 @@
       },
       "imageSubjects": {
         "aside": "a hand-drawn set of concentric circles in a pocket notebook, pencil beside it"
-      }
+      },
+      "notes": "Three rules: fixed orbits, no radiation in an orbit, photon jumps. The photon energy equals the difference between the two levels. Image prompt (empty slot): a hand-drawn set of concentric circles in a pocket notebook, pencil beside it."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -90,7 +95,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.1_bohr_hydrogen.png"
-      }
+      },
+      "notes": "Diagram: one proton, one electron, here at n = 1. Orbit radii run 1 : 4 : 9. This is the model's picture, not reality; slide 19 returns to that."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -105,7 +111,8 @@
       },
       "imageSubjects": {
         "concept": "a wooden staircase beside a smooth ramp of the same height, side-lit"
-      }
+      },
+      "notes": "Stairs versus ramp. Stress that no energy exists between levels. Image prompt (empty slot): a wooden staircase beside a smooth ramp of the same height, side-lit."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -121,7 +128,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.1_energy_equation.png"
-      }
+      },
+      "notes": "Equation: E_n = −2.18 × 10^{−18} J ÷ n². n is a whole number. Negative means bound; E = 0 is a free electron. Hydrogen only. PROVISIONAL (brief flag F1, Matt to confirm): E_n needs scientific notation, but the course sequencing rule delays scientific notation and heavy math. Plan used: a pre-built table plus ONE student calculation, 3 sig figs, no sig-fig rules taught."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -137,7 +145,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.1_energy_levels.png"
-      }
+      },
+      "notes": "Values to n = 6: n=1 −2.18 × 10^{−18} J; n=2 −5.45 × 10^{−19}; n=3 −2.42 × 10^{−19}; n=4 −1.36 × 10^{−19}; n=5 −8.72 × 10^{−20}; n=6 −6.06 × 10^{−20}. Spacing is drawn to scale. Misconception: more negative means more energy. It means lower. n = ∞ is E = 0."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -150,11 +159,12 @@
         "g2_l": "NEED",
         "g2_b": "E₃, in joules",
         "work": "",
-        "mustwrite": "Eₙ = −2.18 × 10^−18 J ÷ n²"
+        "mustwrite": "Eₙ = −2.18 × 10^{−18} J ÷ n²"
       },
       "imageSubjects": {
         "aside": "a pencil resting beside a scientific calculator on a lab notebook"
-      }
+      },
+      "notes": "Worked together. Answer: 3² = 9; −2.18 × 10^{−18} ÷ 9 = −2.42 × 10^{−19} J. Students write the setup, not just the number. Image prompt (empty slot): a pencil resting beside a scientific calculator on a lab notebook."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -162,13 +172,14 @@
         "headline": "n = 3, Worked",
         "subhead": "Square n first, then divide.",
         "f1_l": "FORMULA",
-        "f1_b": "Eₙ = −2.18 × 10^−18 J ÷ n²",
-        "work": "3² = 9\n−2.18 × 10^−18 ÷ 9\n= −2.42 × 10^−19 J",
+        "f1_b": "Eₙ = −2.18 × 10^{−18} J ÷ n²",
+        "work": "3² = 9\n−2.18 × 10^{−18} ÷ 9\n= −2.42 × 10^{−19} J",
         "mustwrite": "Less negative means higher energy. E₃ is above E₂."
       },
       "images": {
         "data": "../assets/chem_u02_s2.1_level_n3.png"
-      }
+      },
+      "notes": "Check against slide 9: −2.42 × 10^{−19} is less negative than E₂ = −5.45 × 10^{−19}, so E₃ is higher. Calculator use is fine; 3 sig figs, no sig-fig rules taught."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -183,7 +194,8 @@
       },
       "imageSubjects": {
         "concept": "two hydrogen discharge tubes side by side, one dark and one glowing"
-      }
+      },
+      "notes": "Ground state is n = 1. Excited states are any higher n and are short-lived. Image prompt (empty slot): two hydrogen discharge tubes side by side, one dark and one glowing."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -199,7 +211,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.1_absorption.png"
-      }
+      },
+      "notes": "Absorption: the electron rises only if the photon energy equals exactly E final minus E initial. Wrong-energy photons pass through. Misconception: that any photon will do."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -215,7 +228,8 @@
       },
       "images": {
         "diagram": "../assets/chem_u02_s2.1_emission.png"
-      }
+      },
+      "notes": "Emission: the electron drops and a photon leaves with energy |ΔE|. A bigger drop is a higher-energy photon. Misconception: emission means the electron goes up. It drops. Colors and wavelengths are S2.5, not here."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -224,7 +238,7 @@
         "subhead": "Find the energy change, then say where the energy went.",
         "problem": "A hydrogen electron drops from n = 3 to n = 2. Find ΔE. Is energy absorbed or released?",
         "g1_l": "GIVEN",
-        "g1_b": "n = 3 to n = 2\nE₃ = −2.42 × 10^−19 J\nE₂ = −5.45 × 10^−19 J",
+        "g1_b": "n = 3 to n = 2\nE₃ = −2.42 × 10^{−19} J\nE₂ = −5.45 × 10^{−19} J",
         "g2_l": "NEED",
         "g2_b": "ΔE\nAbsorbed or released?",
         "work": "",
@@ -232,7 +246,8 @@
       },
       "imageSubjects": {
         "aside": "a camera-flash bulb mid-discharge in a dark room"
-      }
+      },
+      "notes": "Worked together. Answer: ΔE = E₂ − E₃ = −5.45 × 10^{−19} − (−2.42 × 10^{−19}) = −3.03 × 10^{−19} J. Negative, so energy is released. Image prompt (empty slot): a camera-flash bulb mid-discharge in a dark room."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -241,12 +256,13 @@
         "subhead": "Final minus initial. Keep the negative signs.",
         "f1_l": "SETUP",
         "f1_b": "ΔE = E₂ − E₃\nFinal level: n = 2\nInitial level: n = 3",
-        "work": "−5.45 × 10^−19\n− (−2.42 × 10^−19)\n= −3.03 × 10^−19 J\nReleased.",
-        "mustwrite": "Energy released: a photon of 3.03 × 10^−19 J leaves the atom."
+        "work": "−5.45 × 10^{−19}\n− (−2.42 × 10^{−19})\n= −3.03 × 10^{−19} J\nReleased.",
+        "mustwrite": "Energy released: a photon of 3.03 × 10^{−19} J leaves the atom."
       },
       "images": {
         "data": "../assets/chem_u02_s2.1_transition_3_to_2.png"
-      }
+      },
+      "notes": "Final minus initial, keep the negatives. Photon energy is 3.03 × 10^{−19} J. Do not calculate its wavelength; that is S2.5."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -263,7 +279,8 @@
       },
       "imageSubjects": {
         "aside": "a spark gap between two electrodes in a dark lab"
-      }
+      },
+      "notes": "Worked together. Answer: n = 1 to ∞, ΔE = 0 − (−2.18 × 10^{−18}) = +2.18 × 10^{−18} J, absorbed. Image prompt (empty slot): a spark gap between two electrodes in a dark lab."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -272,12 +289,13 @@
         "subhead": "Final minus initial again. The sign tells you the direction.",
         "f1_l": "SETUP",
         "f1_b": "ΔE = final − initial\nFinal (n = ∞): 0\nInitial (n = 1): E₁",
-        "work": "E₁ = −2.18 × 10^−18 J\nΔE = 0 − E₁\n= +2.18 × 10^−18 J\nAbsorbed.",
-        "mustwrite": "A positive ΔE means energy absorbed. Ionizing hydrogen takes 2.18 × 10^−18 J."
+        "work": "E₁ = −2.18 × 10^{−18} J\nΔE = 0 − E₁\n= +2.18 × 10^{−18} J\nAbsorbed.",
+        "mustwrite": "A positive ΔE means energy absorbed. Ionizing hydrogen takes 2.18 × 10^{−18} J."
       },
       "images": {
         "data": "../assets/chem_u02_s2.1_ionization.png"
-      }
+      },
+      "notes": "Positive ΔE means absorbed. Ionization energy of ground-state hydrogen is 2.18 × 10^{−18} J."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -294,7 +312,8 @@
       },
       "imageSubjects": {
         "aside": "a worn textbook diagram of concentric orbits with a pencil strike through it"
-      }
+      },
+      "notes": "Limits: correct for hydrogen only, not for atoms with 2 or more electrons. Electrons are not particles on tracks; the electron-cloud model (S2.2) replaces the orbits. Keep: quantized levels, photon in or out. Image prompt (empty slot): a worn textbook diagram of concentric orbits with a pencil strike through it."
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -304,14 +323,15 @@
         "k1_l": "CHECK 1",
         "k1_b": "Explain why hydrogen emits light at only certain colors. Use the word quantized.",
         "k2_l": "CHECK 2",
-        "k2_b": "Calculate the energy of the hydrogen electron at n = 2.",
+        "k2_b": "Calculate the energy of the hydrogen electron at n = 2.",
         "k3_l": "CHECK 3",
-        "k3_b": "A hydrogen electron drops from n = 4 to n = 2. Is energy absorbed or released? How much?",
+        "k3_b": "A hydrogen electron drops from n = 4 to n = 2. Is energy absorbed or released? How much?",
         "mustwrite": "For every calculation, write the equation first, then the numbers, then the units."
       },
       "imageSubjects": {
         "aside": "a student's notebook page with a calculation crossed out and redone"
-      }
+      },
+      "notes": "Check answers. 1: Electron energy is quantized, so only certain level differences exist and only certain photon energies, hence certain colors. 2: E₂ = −2.18 × 10^{−18} ÷ 4 = −5.45 × 10^{−19} J. 3: Emitted. E₄ = −1.36 × 10^{−19}, E₂ = −5.45 × 10^{−19}, ΔE = −4.09 × 10^{−19} J, so 4.09 × 10^{−19} J leaves the atom. Image prompt (empty slot): a student's notebook page with a calculation crossed out and redone."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -319,25 +339,27 @@
         "headline": "Quick Check: Items 4 and 5",
         "subhead": "Same as before. Your own paper first.",
         "c1_l": "CHECK 4",
-        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? Find both ΔE values.",
+        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? Find both ΔE values.",
         "c2_l": "CHECK 5",
         "c2_b": "Give one reason the Bohr model is no longer the accepted model of the atom.",
-        "mustwrite": "Check 4: put a number on both drops before you compare them."
+        "mustwrite": "ΔE = final energy minus initial energy."
       },
       "imageSubjects": {
         "concept": "a stack of graded quiz papers with a red pen on top"
-      }
+      },
+      "notes": "Check answers. 4: n = 2 to 1 releases more. ΔE(3→2) = −3.03 × 10^{−19} J; ΔE(2→1) = −2.18 × 10^{−18} − (−5.45 × 10^{−19}) = −1.64 × 10^{−18} J. 5: any one of: works only for hydrogen; cannot predict multi-electron atoms; electrons are not particles in circular orbits. Image prompt (empty slot): a stack of graded quiz papers with a red pen on top."
     },
     {
       "master": "04_DIVIDER",
       "fields": {
         "eyebrow": "LOOKING AHEAD",
         "headline": "Where This Goes\nNext",
-        "subhead": "Bohr's model works for hydrogen and nothing bigger. Next: what replaced it, and what an orbital is."
+        "subhead": "Bohr's model works for hydrogen, not for atoms with 2 or more electrons. Next: what replaced it, and what an orbital is."
       },
       "imageSubjects": {
         "divider": "a long laboratory bench receding into shadow, one lamp lit at the far end"
-      }
+      },
+      "notes": "Bridge to S2.2 and the electron-cloud model. Do not say Bohr explains multi-electron spectra, intensities, or bonding. Image prompt (empty slot): a long laboratory bench receding into shadow, one lamp lit at the far end."
     }
   ]
 }

@@ -105,6 +105,15 @@ def ion(d, x, y, sym, charge, fill=None, anchor_left=True):
     return x + w + 2 + F_SUP.getlength(charge) / S
 
 
+def sci(d, x, y, mant, exp):
+    """Draw 'mant × 10' with a raised exponent (true minus U+2212), left-anchored."""
+    base = f"{mant} \u00d7 10"
+    d.text((px(x), px(y)), base, font=F_BOLD, fill=T["ink"], anchor="lm")
+    w = F_BOLD.getlength(base) / S
+    e = str(exp).replace("-", "\u2212")
+    d.text((px(x + w + 2), px(y - 16)), e, font=F_SUP, fill=T["ink"], anchor="lm")
+
+
 X0, X1 = 40, 970                # spectrum bar span; 400 nm .. 700 nm
 
 
@@ -271,7 +280,7 @@ def fig_table():
         cy = 150 + i * 106
         text(d, cols["drop"], cy, f"{n} → 2", f=F_BOLD, anchor="lm")
         mant, exp = f"{delta_e(n):.2e}".split("e")
-        text(d, cols["dE"], cy, f"{mant}e{int(exp)}", f=F_BOLD, anchor="lm")
+        sci(d, cols["dE"], cy, mant, int(exp))
         text(d, cols["lam"], cy, f"{round(LINES[n])}", f=F_BOLD, anchor="lm")
         d.rounded_rectangle([px(cols["sw"]), px(cy - 34), px(cols["sw"] + 170), px(cy + 34)],
                             radius=px(8), fill=rgb(LINES[n]), outline=T["grey"], width=px(2))
