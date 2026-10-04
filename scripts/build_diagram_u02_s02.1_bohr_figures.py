@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Draw the hand-built figures for CHEM U02 S2.1 The Bohr Model.
 
-Hand-built, not generated. A Bohr diagram, an energy-level diagram and an equation all
-carry numbers and counts a student reads as science, and a generated one gets the
-electron count or the spacing wrong in a way nobody catches at a glance. Every energy
-printed here is computed from E_n = -2.18e-18 J / n^2, not typed.
+Hand-built, not generated. A Bohr diagram and an energy-level diagram carry counts and
+spacing a student reads as science, and a generated one gets the electron count or the
+spacing wrong in a way nobody catches at a glance.
+
+NO energy value is printed anywhere (Matt's instruction, 2026-10-04: no scientific notation
+and no numeric energy calculations in S2.1). The spacing of the to-scale figures is still
+computed from the 1/n^2 shape (relative energy -1/n^2), so levels crowd together as n grows,
+but the numbers never reach the page. Assertions check level order, monotonic spacing, the
+drop ranking, and that no printed string carries an exponent, a times sign, a unit or a
+digit run that is not a level label.
 
 Colours come from brand/tokens.json. Type comes from the shipped Archivo files, the same
 ones the deck embeds. Text is asphalt (measured against its ground); the course accent is
@@ -23,16 +29,13 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(REPO, "templates", "slide", "assets")
 SCALE = 3                       # supersample; stays crisp on a projector
 
-RYD = 2.18e-18                  # J, the course constant (courses/chemistry via the brief)
+def rel_energy(n):
+    """Relative energy of level n: -1/n^2 (n = 1 is -1, n = infinity is 0). Used only for
+    POSITIONS. It is never printed."""
+    return -1.0 / (n * n)
 
 
-def energy_1e19(n):
-    """E_n in units of 1e-19 J (so 2.18e-18 J is 21.8)."""
-    return -RYD / (n * n) / 1e-19
-
-
-def fmt(x):
-    return f"{x:.3g}".replace("-", "−")
+PRINTED = []                    # every string drawn; checked by assert_text() in main()
 
 
 T = json.load(open(os.path.join(REPO, "brand", "tokens.json")))
@@ -108,6 +111,7 @@ class Fig:
         """y is the baseline. anchor l / m / r on x."""
         if isinstance(parts, str):
             parts = [(parts, "n")]
+        PRINTED.append("".join(t for t, _ in parts))
         w = self._parts_w(parts, size, fname)
         x0 = x if anchor == "l" else (x - w / 2 if anchor == "m" else x - w)
         for txt, mode in parts:
@@ -129,11 +133,28 @@ class Fig:
         print(f"wrote {os.path.relpath(path, REPO)}  {out.width}x{out.height}")
 
 
-E = lambda n: [("E", "n"), (str(n), "sub")]          # E with subscript level
-EXP = lambda m: [("× 10", "n"), (m, "sup")]       # x 10^m
+
 
 
 # ---------------------------------------------------------------------------------------
+def level_ys(ns, y_bottom, y_top_n, n_top):
+    """y position (px) of each level in ns, to scale: relative energy -1/n^2, with n = 1 at
+    y_bottom and level n_top at y_top_n. Returns dict n -> y."""
+    k = (y_bottom - y_top_n) / (rel_energy(n_top) - rel_energy(1))
+    return {n: y_bottom - (rel_energy(n) - rel_energy(1)) * k for n in ns}, k
+
+
+def assert_levels(ys):
+    """Level order and spacing. Higher n sits higher on the page (smaller y), and each gap
+    is smaller than the one below it."""
+    ns = sorted(ys)
+    for a, b in zip(ns, ns[1:]):
+        assert ys[b] < ys[a], f"level {b} not above level {a}"
+    gaps = [ys[a] - ys[b] for a, b in zip(ns, ns[1:])]
+    for g1, g2 in zip(gaps, gaps[1:]):
+        assert g2 < g1, f"spacing not shrinking: {gaps}"
+
+
 def fig_bohr_hydrogen():
     f = Fig(1010, 5.05, 3.0, PARCH)
     lab = f.pt(16) * 1.0
@@ -160,69 +181,58 @@ def fig_bohr_hydrogen():
     f.save("chem_u02_s2.1_bohr_hydrogen.png")
 
 
-def fig_equation():
+def _more_energy_axis(f, lab, x, y_bot, y_top, label_y=52):
+    f.rich(x, label_y, "more energy", lab, fill=GRAPH)
+    f.arrow(x, y_bot, x, y_top, fill=GRAPH, w=3, head=16)
+
+
+def fig_level_numbers():
+    """Slide 8. Levels n = 1..4, to scale (relative -1/n^2), labelled by n only. Between n = 1
+    and n = 2 a dashed line says there is no level there (whole numbers only)."""
     f = Fig(1010, 5.05, 3.0, PARCH)
-    big = 78
     lab = f.pt(16)
-    num = [("2.18 × 10", "n"), ("−18", "sup"), (" J", "n")]
-    den = [("n", "n"), ("2", "sup")]
-    fb = "Archivo-Bold.ttf"
-    wE = f._parts_w(E("n"), big * 1.15, fb)
-    wEq = f._parts_w([(" = −", "n")], big, fb)
-    wNum = f._parts_w(num, big * 0.82, fb)
-    barw = wNum + 36
-    gap = 22
-    total = wE + wEq + gap + barw
-    x0 = (f.W - total) / 2
-    base = 305                                    # baseline of the "E_n = -" part and the bar
-    bar_y = base - big * 0.33
-    f.rich(x0, base, E("n"), big * 1.15, fb)
-    f.rich(x0 + wE, base, [(" = −", "n")], big, fb)
-    fx = x0 + wE + wEq + gap
-    f.line([(fx, bar_y), (fx + barw, bar_y)], fill=INK, w=5)
-    f.rich(fx + barw / 2, bar_y - 20, num, big * 0.82, fb, anchor="m")
-    f.rich(fx + barw / 2, bar_y + 20 + big * 0.82 * 0.72, den, big * 0.82, fb, anchor="m")
-    # three plain labels, each tied to its part by a short rule
-    # constant, above
-    f.line([(fx + barw / 2, 120), (fx + barw / 2, bar_y - 20 - big * 0.82 * 0.8)], fill=ACC, w=3)
-    f.rich(fx + barw / 2, 88, "constant for hydrogen", lab, anchor="m")
-    # energy, below E_n
-    ex_mid = x0 + wE / 2
-    f.line([(ex_mid, base + 14), (ex_mid, 400)], fill=ACC, w=3)
-    f.rich(ex_mid, 400 + lab * 0.95, "energy", lab, anchor="m")
-    # level number, below n^2
-    dn_mid = fx + barw / 2
-    f.line([(dn_mid, bar_y + 20 + big * 0.82 * 0.72 + 22), (dn_mid, 400)], fill=ACC, w=3)
-    f.rich(dn_mid, 400 + lab * 0.95, "n = 1, 2, 3 ...", lab, anchor="m")
-    f.save("chem_u02_s2.1_energy_equation.png")
+    ys, _ = level_ys((1, 2, 3, 4), 540, 100, 4)
+    assert_levels(ys)
+    x0, x1, labx = 110, 480, 600
+    _more_energy_axis(f, lab, 50, 548, 84, label_y=52)
+    label_rows = {4: 74, 3: 130, 2: ys[2], 1: ys[1]}      # spread labels where levels crowd
+    for n in (4, 3, 2, 1):
+        y = ys[n]
+        f.line([(x0, y), (x1, y)], fill=ACC if n == 1 else INK, w=7 if n == 1 else 4)
+        ry = label_rows[n]
+        f.line([(x1 + 6, y), (labx - 14, ry)], fill=GRAPH, w=2)
+        f.rich(labx, ry + lab * 0.35, f"n = {n}", lab)
+    ymid = (ys[1] + ys[2]) / 2
+    f.line([(x0, ymid), (x1, ymid)], fill=GRAPH, w=3, dash=(8, 14))
+    f.rich(labx, ymid + lab * 0.35, "no level here", lab, fill=GRAPH)
+    f.save("chem_u02_s2.1_level_numbers.png")
 
 
 def fig_levels():
+    """Slide 9. n = 1..6 and the top (n = infinity), to scale, no values printed."""
     f = Fig(1010, 5.05, 3.0, PARCH)
     lab = f.pt(16)
-    top, bot = 100, 548                           # E = 0 at top, n = 1 at the bottom
-    k = (bot - top) / abs(energy_1e19(1))         # px per 1e-19 J: drawn to scale
-    y_of = lambda e: top - e * k
-    f.rich(40, 52, [("Energy (", "n")] + EXP("−19") + [(" J)", "n")], lab)
-    x0, x1 = 60, 480
-    f.arrow(40, bot + 4, 40, 78, fill=GRAPH, w=3, head=16)
-    labx_n, labx_v = 600, 960
+    top, bot = 100, 548                           # top of the diagram (n = infinity) and n = 1
+    ys = {n: bot - (rel_energy(n) - rel_energy(1)) * (bot - top) for n in range(1, 7)}
+    y_inf = top
+    assert_levels(ys)
+    assert all(y > y_inf for y in ys.values())
+    _more_energy_axis(f, lab, 40, bot + 4, 78, label_y=52)
+    x0, x1 = 90, 480
+    labx_n = 600
     pitch = 52
     rows = [("∞", None)] + [(str(n), n) for n in (6, 5, 4, 3, 2)]
     for i, (nn, n) in enumerate(rows):
-        e = 0.0 if n is None else energy_1e19(n)
-        y = y_of(e)
+        y = y_inf if n is None else ys[n]
         f.line([(x0, y), (x1, y)], fill=GRAPH if n is None else INK, w=3,
                dash=(14, 10) if n is None else None)
         ry = top + i * pitch
         f.line([(x1 + 6, y), (labx_n - 14, ry)], fill=GRAPH, w=2)
         f.rich(labx_n, ry + lab * 0.35, f"n = {nn}", lab)
-        f.rich(labx_v, ry + lab * 0.35, "0" if n is None else fmt(e), lab, anchor="r")
-    y = y_of(energy_1e19(1))
+    y = ys[1]
     f.line([(x0, y), (x1, y)], fill=ACC, w=7)
     f.line([(x1 + 6, y), (labx_n - 14, y)], fill=GRAPH, w=2)
     f.rich(labx_n, y + lab * 0.35, "n = 1", lab)
-    f.rich(labx_v, y + lab * 0.35, fmt(energy_1e19(1)), lab, anchor="r")
     f.save("chem_u02_s2.1_energy_levels.png")
 
 
@@ -230,6 +240,7 @@ def _three_levels(f, lab, top=70, bot=515):
     """n = 1, 2, 3 in order, NOT to scale: at true scale n = 2 and n = 3 are too close for an
     arrow and a dot. The energy-level slide is the to-scale figure; this one says so."""
     ys = {1: bot, 2: 235, 3: top}
+    assert_levels(ys)
     y_of = lambda n: ys[n]
     x0, x1 = 215, 965
     for n in (1, 2, 3):
@@ -254,8 +265,8 @@ def fig_absorption():
     wy = (y_of(1) + y_of(2)) / 2
     f.wave(x0 + 20, ax - 30, wy, fill=ACC)
     f.rich(x0 + 20, wy - 36, "photon in", lab)
-    f.rich(600, wy - 4, [("\u0394E = E", "n"), ("2", "sub"), (" \u2212 E", "n"), ("1", "sub")], lab)
-    f.rich(600, wy + 52, "\u0394E is positive", lab)
+    f.rich(600, wy - 4, "atom gains energy", lab)
+    f.rich(600, wy + 52, "electron goes up", lab)
     f.save("chem_u02_s2.1_absorption.png")
 
 
@@ -272,8 +283,8 @@ def fig_emission():
     f.wave(ax + 36, ax + 360, wy, fill=ACC)
     f.rich(ax + 40, wy - 28, "photon out", lab)
     ty = (y_of(2) + y_of(1)) / 2
-    f.rich(600, ty, [("\u0394E = E", "n"), ("2", "sub"), (" \u2212 E", "n"), ("3", "sub")], lab)
-    f.rich(600, ty + 52, "\u0394E is negative", lab)
+    f.rich(600, ty, "atom loses energy", lab)
+    f.rich(600, ty + 52, "electron goes down", lab)
     f.save("chem_u02_s2.1_emission.png")
 
 
@@ -281,70 +292,113 @@ def _data_fig():
     return Fig(850, 4.23, 2.48, WHITE)
 
 
-def fig_level_n3():
+def fig_ground_excited():
+    """Slide 14 (solution 1). Levels n = 1..5, NOT to scale (at true scale n = 3, 4, 5 are
+    too close together to draw an arrow), but the gaps still shrink as n rises."""
     f = _data_fig()
     lab = f.pt(16)
-    top, bot = 70, 420
-    k = (bot - top) / abs(energy_1e19(2))
-    y_of = lambda e: top - e * k
-    x0, x1, lx = 30, 300, 322
-    f.line([(x0, y_of(0)), (x1, y_of(0))], fill=GRAPH, w=3, dash=(14, 10))
-    f.rich(lx, y_of(0) + lab * 0.35, "n = \u221e:  E = 0", lab)
-    for n, hi in ((3, True), (2, False)):
-        e = energy_1e19(n)
-        y = y_of(e)
-        f.line([(x0, y), (x1, y)], fill=ACC if hi else INK, w=7 if hi else 4)
-        f.rich(lx, y + lab * 0.35, E(n) + [(" = " + fmt(e) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
-    f.circle(150, y_of(energy_1e19(3)), 13, fill=ACC, outline=INK, w=3)
-    f.save("chem_u02_s2.1_level_n3.png")
-
-
-def fig_transition_3_to_2():
-    f = _data_fig()
-    lab = f.pt(16)
-    top, bot = 80, 400
-    y3, y2 = top, bot
+    ys = {1: 440, 2: 350, 3: 285, 4: 240, 5: 205}
+    assert_levels(ys)
     x0, x1, lx = 30, 300, 322
     r = 13
-    for n, y in ((3, y3), (2, y2)):
-        f.line([(x0, y), (x1, y)], fill=INK, w=4)
-        f.rich(lx, y + lab * 0.35, E(n) + [(" = " + fmt(energy_1e19(n)) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
-    ax = 100
-    f.arrow(ax, y3 + r + 4, ax, y2 - r - 8, fill=ACC, w=6, head=22)
-    f.circle(ax, y3, r, fill=WHITE, outline=ACC, w=4)
-    f.circle(ax, y2, r, fill=ACC, outline=INK, w=3)
-    wy = (y3 + y2) / 2
-    f.wave(ax + 30, x1 - 10, wy, fill=ACC)
-    f.rich(lx, wy + lab * 0.35, [("\u0394E = " + fmt(energy_1e19(2) - energy_1e19(3)) + " ", "n")] + EXP("\u221219") + [(" J", "n")], lab)
-    f.save("chem_u02_s2.1_transition_3_to_2.png")
+    for n in (5, 4, 3, 2, 1):
+        y = ys[n]
+        f.line([(x0, y), (x1, y)], fill=ACC if n == 1 else INK, w=7 if n == 1 else 4)
+    notes = {5: "n = 5, goal", 4: "n = 4", 3: "n = 3, start", 2: "n = 2", 1: "n = 1, ground state"}
+    # labels: n = 5 and n = 4 are close, so spread them with leaders
+    rows = {5: 170, 4: 228, 3: 285, 2: 350, 1: 440}
+    for n in (5, 4, 3, 2, 1):
+        f.line([(x1 + 6, ys[n]), (lx - 14, rows[n])], fill=GRAPH, w=2)
+        f.rich(lx, rows[n] + lab * 0.35, notes[n], lab)
+    ax = 120
+    f.arrow(ax, ys[3] - r - 4, ax, ys[5] + 6, fill=ACC, w=6, head=22)
+    f.circle(ax, ys[3], r, fill=ACC, outline=INK, w=3)                    # the electron, now
+    f.rich(x1, 490, "levels not to scale", lab, fill=GRAPH, anchor="r")
+    f.save("chem_u02_s2.1_ground_excited.png")
+
+
+def fig_drops_ranked():
+    """Slide 16 (solution 2). Levels n = 1..4 and the top, TO SCALE. Three drops: A 4 to 2,
+    B 3 to 2, C 2 to 1. Arrow length is the energy released, so the arrows rank themselves."""
+    f = _data_fig()
+    lab = f.pt(16)
+    top, bot = 60, 400
+    ys = {n: bot - (rel_energy(n) - rel_energy(1)) * (bot - top) for n in (1, 2, 3, 4)}
+    assert_levels(ys)
+    drops = {"A": (4, 2), "B": (3, 2), "C": (2, 1)}
+    size = {k: ys[b] - ys[a] for k, (a, b) in drops.items()}      # arrow length, px
+    order = sorted(size, key=size.get)
+    assert order == ["B", "A", "C"], order                          # least to most energy
+    x0, x1, lx = 30, 300, 322
+    f.line([(x0, top), (x1, top)], fill=GRAPH, w=3, dash=(14, 10))
+    f.rich(lx, 34 + lab * 0.35, "top: electron gone", lab, fill=GRAPH)
+    rows = {4: 92, 3: 140, 2: 188, 1: ys[1]}
+    for n in (4, 3, 2, 1):
+        f.line([(x0, ys[n]), (x1, ys[n])], fill=ACC if n == 1 else INK, w=7 if n == 1 else 4)
+        f.line([(x1 + 6, ys[n]), (lx - 14, rows[n])], fill=GRAPH, w=2)
+        f.rich(lx, rows[n] + lab * 0.35, f"n = {n}", lab)
+    xs = {"A": 70, "B": 140, "C": 230}
+    for k, (a, b) in drops.items():
+        f.arrow(xs[k], ys[a] + 3, xs[k], ys[b] - 2, fill=ACC, w=5, head=18)
+    # letters: A and B under the n = 2 line, C beside its long arrow
+    for k in ("A", "B"):
+        f.rich(xs[k], ys[2] + 14 + lab * 0.8, k, lab * 1.1, "Archivo-Bold.ttf", anchor="m")
+    f.rich(xs["C"] + 24, (ys[2] + ys[1]) / 2 + lab * 0.35, "C", lab * 1.1, "Archivo-Bold.ttf")
+    f.rich(x1, 470, "levels to scale", lab, fill=GRAPH, anchor="r")
+    f.save("chem_u02_s2.1_drops_ranked.png")
 
 
 def fig_ionization():
+    """Slide 18 (solution 3). n = 1, 2, 3 to scale, the dashed top, an arrow up and out."""
     f = _data_fig()
     lab = f.pt(16)
-    top, bot = 80, 400
+    top, bot = 95, 410
+    ys = {n: bot - (rel_energy(n) - rel_energy(1)) * (bot - top) for n in (1, 2, 3)}
+    assert_levels(ys)
     x0, x1, lx = 30, 300, 322
     r = 13
     f.line([(x0, top), (x1, top)], fill=GRAPH, w=3, dash=(14, 10))
-    f.rich(lx, top + lab * 0.35, "n = \u221e:  E = 0", lab)
-    f.line([(x0, bot), (x1, bot)], fill=INK, w=4)
-    f.rich(lx, bot + lab * 0.35, E(1) + [(" = \u22122.18 ", "n")] + EXP("\u221218") + [(" J", "n")], lab)
-    ax = 100
-    f.arrow(ax, bot - r - 4, ax, top + 2, fill=ACC, w=6, head=24)
-    f.circle(ax, bot, r, fill=ACC, outline=INK, w=3)
-    f.rich(lx, (top + bot) / 2 + lab * 0.35, [("\u0394E = +2.18 ", "n")] + EXP("\u221218") + [(" J", "n")], lab)
+    f.line([(x1 + 6, top), (lx - 14, 72)], fill=GRAPH, w=2)
+    f.rich(lx, 72 + lab * 0.35, "n = ∞", lab)
+    rows = {3: 130, 2: 188, 1: ys[1]}
+    for n in (3, 2, 1):
+        f.line([(x0, ys[n]), (x1, ys[n])], fill=ACC if n == 1 else INK, w=7 if n == 1 else 4)
+        f.line([(x1 + 6, ys[n]), (lx - 14, rows[n])], fill=GRAPH, w=2)
+        f.rich(lx, rows[n] + lab * 0.35, f"n = {n}" + (", ground" if n == 1 else ""), lab)
+    ax = 120
+    f.arrow(ax, ys[1] - r - 4, ax, top - 34, fill=ACC, w=6, head=24)
+    f.circle(ax, ys[1], r, fill=ACC, outline=INK, w=3)                    # electron, start
+    f.circle(ax, top - 56, r, fill=WHITE, outline=ACC, w=4)               # electron, gone
+    f.rich(ax + 28, top - 52 + lab * 0.35, "leaves", lab)
     f.save("chem_u02_s2.1_ionization.png")
+
+
+def assert_text():
+    """No exponent, times sign, energy unit or number that is not a level label."""
+    import re
+    bad = []
+    for s in PRINTED:
+        if not s:
+            continue
+        if re.search(r"[×−\^]|10|e-\d|\bJ\b|\bjoule", s, re.I):
+            bad.append(s)
+        # digits are allowed only as level labels: "n = 4", "n = 4, goal" ...
+        if re.search(r"\d", s) and not re.fullmatch(r"(n = \d(, [a-z ]+)?|1 proton|1 electron)", s):
+            bad.append(s)
+    assert not bad, f"forbidden text in figures: {bad}"
 
 
 def main():
     fig_bohr_hydrogen()
-    fig_equation()
+    fig_level_numbers()
     fig_levels()
     fig_absorption()
     fig_emission()
-    fig_level_n3()
-    fig_transition_3_to_2()
+    fig_ground_excited()
+    fig_drops_ranked()
     fig_ionization()
+    assert_text()
+    print(f"text check passed on {len(PRINTED)} printed strings; no number but level labels")
     return 0
 
 

@@ -3,7 +3,7 @@
   "unit": 2,
   "section": "2.5",
   "sectionTitle": "Atomic & Electron Spectra",
-  "note": "Builds on 2.1 (energy levels, drops). No calculation and no scientific notation, removed on Matt's instruction; students reason from a pre-built table of wavelengths and colors. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
+  "note": "Builds on 2.1 (energy levels, drops). Per Matt: wavelengths are shown in nm and in scientific notation (meters); energies and calculations are removed. Students reason from a pre-built table of wavelengths and colors. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
@@ -51,9 +51,9 @@
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "The Visible Spectrum",
-        "subhead": "Light we can see runs from about 400 nm to 700 nm.",
+        "subhead": "Visible light runs from about 400 nm to 700 nm (4.00 × 10^{−7} m to 7.00 × 10^{−7} m).",
         "a1_l": "UNITS",
-        "a1_b": "A nanometer (nm) is one billionth of a meter.",
+        "a1_b": "One nm is one billionth of a meter: 1 × 10^{−9} m.",
         "a2_l": "VIOLET END",
         "a2_b": "Shortest wavelength, most energy.",
         "a3_l": "RED END",
@@ -62,7 +62,7 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.5_visible_spectrum.png"
       },
-      "notes": "Ranges: violet 400-450, blue 450-495, green 495-570, yellow 570-590, orange 590-620, red 620-700 nm (approximate). The arrows under the bar show the rule: shorter wavelength, more energy; longer wavelength, less energy."
+      "notes": "Ranges: violet 400-450, blue 450-495, green 495-570, yellow 570-590, orange 590-620, red 620-700 nm (approximate). The arrows under the bar show the rule: shorter wavelength, more energy; longer wavelength, less energy. Per Matt, the range is shown in nm and in scientific notation (meters): 400 nm is 4.00 × 10^-7 m, 700 nm is 7.00 × 10^-7 m."
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -145,13 +145,13 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.5_energy_transitions.png"
       },
-      "notes": "Each line is one drop to n = 2. Electrons drop to lower levels; they do not fall into the nucleus. The levels are drawn to scale from the 1/n^2 pattern, so students can SEE that 6 to 2 is the longest arrow and 3 to 2 the shortest. Bigger drop, more energy, shorter wavelength, bluer light."
+      "notes": "Each line is one drop to n = 2. Electrons drop to lower levels; they do not fall into the nucleus. The levels are drawn to scale from the 1/n^2 pattern, so students can SEE that 6 to 2 is the longest arrow and 3 to 2 the shortest. Bigger drop, more energy, shorter wavelength, bluer light. Wavelengths in meters (scientific notation, per Matt) are on the table slide: 6.56, 4.86, 4.34, 4.10 × 10^-7 m."
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "Four Drops to n = 2",
-        "subhead": "A pre-built table. Match each drop to its color.",
+        "subhead": "A pre-built table in nm and meters. Match each drop to its color.",
         "a1_l": "SMALLEST DROP",
         "a1_b": "3 to 2: the longest wavelength, red.",
         "a2_l": "BIGGEST DROP",
@@ -162,14 +162,14 @@
       "images": {
         "diagram": "../assets/chem_u02_s2.5_balmer_table.png"
       },
-      "notes": "Pre-built table, read-only. 3 to 2: 656 nm, red; 4 to 2: 486 nm, blue-green; 5 to 2: 434 nm, blue-violet; 6 to 2: 410 nm, violet. Students match drop to color by comparing drop size on the previous slide's figure; no calculation."
+      "notes": "Pre-built table, read-only. 3 to 2: 656 nm (6.56 × 10^-7 m), red; 4 to 2: 486 nm (4.86 × 10^-7 m), blue-green; 5 to 2: 434 nm (4.34 × 10^-7 m), blue-violet; 6 to 2: 410 nm (4.10 × 10^-7 m), violet. Scientific notation shown per Matt. Students match drop to color by comparing drop size on the previous slide's figure; no calculation."
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
       "fields": {
         "headline": "Example: Match the Drop to the Line",
         "subhead": "Use the table. Give a reason, not just an answer.",
-        "problem": "(a) Which drop made the red line, and why is it the smallest of the four? (b) A sample shows a violet line. Which drop?",
+        "problem": "(a) Which drop made the red line? Why is it the smallest? (b) Which made the violet line?",
         "g1_l": "GIVEN",
         "g1_b": "The table of four drops\nRed line: 656 nm\nViolet line: 410 nm",
         "g2_l": "NEED",
@@ -180,7 +180,7 @@
       "imageSubjects": {
         "aside": "a hydrogen discharge tube glowing pink-magenta"
       },
-      "notes": "The wavelength calculation was removed from this deck on Matt's instruction; students reason from the table instead. OPTIONAL Example 2 (not on a slide): the 486 nm blue-green line is a bigger or smaller drop than the red line? Answer: bigger (4 to 2 versus 3 to 2), because 486 nm is a shorter wavelength than 656 nm; but smaller than the 5 to 2 drop, which makes the 434 nm line. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen discharge tube glowing pink-magenta."
+      "notes": "The energy and wavelength calculations were removed on Matt's instruction; wavelengths stay in nm and scientific notation per Matt. Students reason from the table instead. OPTIONAL Example 2 (not on a slide): the 486 nm blue-green line is a bigger or smaller drop than the red line? Answer: bigger (4 to 2 versus 3 to 2), because 486 nm is a shorter wavelength than 656 nm; but smaller than the 5 to 2 drop, which makes the 434 nm line. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen discharge tube glowing pink-magenta."
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -189,7 +189,7 @@
         "subhead": "Read the color, then compare the size of the drop.",
         "f1_l": "SETUP",
         "f1_b": "Bigger drop:\nmore energy,\nshorter wavelength,\nbluer light.",
-        "work": "(a) 656 nm is red: 3 to 2\nIt is the smallest drop,\nso the least energy.\n(b) 410 nm is violet: 6 to 2",
+        "work": "(a) Red: 3 to 2\nThe smallest drop.\n(b) Violet: 6 to 2\nThe biggest drop.",
         "mustwrite": "Red is the smallest drop, 3 to 2. Violet is the biggest, 6 to 2."
       },
       "imageSubjects": {

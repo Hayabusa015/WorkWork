@@ -3,7 +3,8 @@
 
 Hand-built, not generated: every wavelength a student reads off these figures is computed
 here from the Rydberg relation, never typed, and level spacing is computed from 1/n^2.
-No energies or constants are printed on any figure. Colours of the UI (text, rules, card
+No energies or constants are printed on any figure. Wavelengths are printed in nm and,
+in the table, also in scientific notation (metres), computed from LINES. Colours of the UI (text, rules, card
 edges) come from brand/tokens.json; type is the shipped Archivo. The spectrum and flame
 swatches are physical-colour illustrations of light - the one allowed exception to the
 brand palette, and only inside the figure.
@@ -58,6 +59,15 @@ def rel_height(n):
 
 LINES = {n: balmer_nm(n) for n in (3, 4, 5, 6)}
 assert [round(v) for v in LINES.values()] == [656, 486, 434, 410], LINES   # brief: exact facts
+def sci_parts(lam_nm):
+    """Wavelength in metres as (mantissa, exponent) with 3 sig figs, from the nm value."""
+    m, e = f"{lam_nm * 1e-9:.2e}".split("e")
+    return m, int(e)
+
+
+assert [sci_parts(v)[0] for v in LINES.values()] == ["6.56", "4.86", "4.34", "4.10"]
+assert all(sci_parts(v)[1] == -7 for v in LINES.values())
+
 # a bigger drop must give a shorter wavelength (the idea the figures teach)
 assert list(LINES.values()) == sorted(LINES.values(), reverse=True)
 assert [rel_height(n) - rel_height(2) for n in (3, 4, 5, 6)] == sorted(rel_height(n) - rel_height(2) for n in (3, 4, 5, 6))
@@ -102,6 +112,18 @@ def ion(d, x, y, sym, charge, fill=None, anchor_left=True):
     w = F_BOLD.getlength(sym) / S
     d.text((px(x + w + 2), px(y - 16)), charge, font=F_SUP, fill=fill or T["ink"], anchor="lm")
     return x + w + 2 + F_SUP.getlength(charge) / S
+
+
+def sci(d, x, y, mant, exp, unit=" m"):
+    """Draw 'mant x 10' with a raised exponent (true minus U+2212) and a unit. Returns right edge."""
+    base = f"{mant} \u00d7 10"
+    d.text((px(x), px(y)), base, font=F_BOLD, fill=T["ink"], anchor="lm")
+    w = F_BOLD.getlength(base) / S
+    e = str(exp).replace("-", "\u2212")
+    d.text((px(x + w + 2), px(y - 16)), e, font=F_SUP, fill=T["ink"], anchor="lm")
+    w2 = F_SUP.getlength(e) / S
+    d.text((px(x + w + 2 + w2 + 4), px(y)), unit, font=F_BOLD, fill=T["ink"], anchor="lm")
+    return x + w + 2 + w2 + 4 + F_BOLD.getlength(unit) / S
 
 
 X0, X1 = 40, 970                # spectrum bar span; 400 nm .. 700 nm
@@ -263,19 +285,22 @@ COLOR_NAME = {3: "red", 4: "blue-green", 5: "blue-violet", 6: "violet"}
 
 def fig_table():
     im, d = new()
-    cols = {"drop": 40, "lam": 330, "sw": 600, "name": 740}
+    cols = {"drop": 40, "nm": 185, "sci": 300, "sw": 655, "name": 740}
     hy = 52
-    text(d, cols["drop"], hy, "Drop", f=F_BOLD, anchor="lm", fill=T["grey"])
-    text(d, cols["lam"], hy, "Wavelength (nm)", f=F_BOLD, anchor="lm", fill=T["grey"])
-    text(d, cols["sw"], hy, "Color", f=F_BOLD, anchor="lm", fill=T["grey"])
+    for k, lab in (("drop", "Drop"), ("nm", "nm"), ("sci", "In meters"), ("sw", "Color")):
+        text(d, cols[k], hy, lab, f=F_BOLD, anchor="lm", fill=T["grey"])
     d.line([(px(X0), px(92)), (px(X1), px(92))], fill=T["grey"], width=px(3))
     for i, n in enumerate((3, 4, 5, 6)):
         cy = 150 + i * 106
         text(d, cols["drop"], cy, f"{n} \u2192 2", f=F_BOLD, anchor="lm")
-        text(d, cols["lam"], cy, f"{round(LINES[n])}", f=F_BOLD, anchor="lm")
-        d.rounded_rectangle([px(cols["sw"]), px(cy - 34), px(cols["sw"] + 110), px(cy + 34)],
+        text(d, cols["nm"], cy, f"{round(LINES[n])}", f=F_BOLD, anchor="lm")
+        mant, exp = sci_parts(LINES[n])
+        right = sci(d, cols["sci"], cy, mant, exp)
+        assert right < cols["sw"] - 15, right
+        d.rounded_rectangle([px(cols["sw"]), px(cy - 34), px(cols["sw"] + 70), px(cy + 34)],
                             radius=px(8), fill=rgb(LINES[n]), outline=T["grey"], width=px(2))
         text(d, cols["name"], cy, COLOR_NAME[n], f=F_LAB, anchor="lm")
+        assert cols["name"] + F_LAB.getlength(COLOR_NAME[n]) / S < X1, n
         if i < 3:
             d.line([(px(X0), px(cy + 53)), (px(X1), px(cy + 53))], fill=T["rule"], width=px(2))
     save(im, "chem_u02_s2.5_balmer_table.png")
