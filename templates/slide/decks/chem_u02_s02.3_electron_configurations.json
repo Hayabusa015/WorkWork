@@ -35,11 +35,11 @@
         "headline": "Reading an Electron Configuration",
         "subhead": "Take 2p^{4} apart one piece at a time.",
         "k1_l": "ENERGY LEVEL",
-        "k1_b": "The big number in front.\n\n2p^{4} is in level 2.",
+        "k1_b": "2p^{4}\n\nThe big number in front is the level: 2.",
         "k2_l": "SUBLEVEL",
-        "k2_b": "The letter: s, p, d, or f.\n\n2p^{4} is in the p sublevel.",
+        "k2_b": "2p^{4}\n\nThe letter is the sublevel: p.",
         "k3_l": "ELECTRONS",
-        "k3_b": "The raised number.\n\n2p^{4} holds 4 electrons.",
+        "k3_b": "2p^{4}\n\nThe raised number is the electron count: 4.",
         "mustwrite": "A configuration lists where the electrons sit. Ground state means the lowest-energy arrangement."
       },
       "imageSubjects": {
@@ -178,7 +178,7 @@
         "k2_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nSum: 2+2+6+2+5 = 17\nUnpaired: 1",
         "k3_l": "CALCIUM, Z = 20",
         "k3_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6} 4s^{2}\n\nSum: 2+2+6+2+6+2 = 20\nUnpaired: 0",
-        "mustwrite": "Use the previous period's noble gas. Cl is in period 3, so its core is [Ne], not [Ar]."
+        "mustwrite": "The raised numbers add up to the atomic number, every time."
       },
       "imageSubjects": {
         "aside": "period 3 of a periodic table wall chart, lit from the side"
@@ -194,7 +194,7 @@
         "c1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nAll 17 electrons written out.",
         "c2_l": "SHORTHAND: Cl",
         "c2_b": "[Ne] 3s^{2} 3p^{5}\n\n[Ne] stands for the first 10: 1s^{2} 2s^{2} 2p^{6}.",
-        "mustwrite": "Use the noble gas from the previous period. Cl is in period 3, so its core is [Ne]."
+        "mustwrite": "Use the previous period's noble gas. Cl is in period 3, so its core is [Ne], not [Ar]."
       },
       "imageSubjects": {
         "concept": "a neon sign tube glowing orange-red in a dark window"

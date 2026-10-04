@@ -15,8 +15,11 @@ Two jobs, one file, so the drawing and the checking cannot drift apart:
   2. DRAWING. The figures are drawn from the same data the checker validated. Spin
      arrows are shapes (line plus triangle), never text glyphs.
 
-Convention (course decision, filling order): [Ar] 4s2 3d6. Written on slides with
-Unicode superscripts so 2p4 cannot be misread as "2p, four". Required through Kr.
+Convention (filling order, PROVISIONAL until confirmed): [Ar] 4s2 3d6. Written in the
+deck spec with run markup, [Ar] 4s^{2} 3d^{6}, which build_deck.js turns into a true
+superscript run (no Unicode superscript glyphs anywhere), so 2p4 cannot be misread as
+"2p, four". Speaker notes are plain text and write the same thing as 4s^2 3d^6.
+Required through Kr.
 
 Colours come from brand/tokens.json. Type is the shipped Archivo, so the figure and the
 slide around it are one typeface. Every text size is >= 46 px on a canvas drawn at
@@ -49,11 +52,11 @@ SYMBOL = {1: "H", 2: "He", 3: "Li", 4: "Be", 5: "B", 6: "C", 7: "N", 8: "O", 9: 
 # The only two exceptions taught. value = {subshell: electrons} overrides for Z.
 EXCEPTION = {24: {"4s": 1, "3d": 5}, 29: {"4s": 1, "3d": 10}}
 
-SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
+UNI_SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
 
 
-def sup(cfg):
-    """'1s2 2s2' -> '1s² 2s²'. Only digits that follow a subshell letter are raised."""
+def mark(cfg):
+    """'1s2 2s2' -> '1s^{2} 2s^{2}'. Only digits that follow a subshell letter are raised."""
     out, i = [], 0
     while i < len(cfg):
         ch = cfg[i]
@@ -62,7 +65,7 @@ def sup(cfg):
             j = i + 1
             while j < len(cfg) and cfg[j].isdigit():
                 j += 1
-            out.append(cfg[i + 1:j].translate(SUP))
+            out.append("^{" + cfg[i + 1:j] + "}")
             i = j
             continue
         i += 1
@@ -184,6 +187,9 @@ GOOD = [
     ("Cr", 24, "[Ar] 4s1 3d5",                   6),
     ("Cu", 29, "[Ar] 4s1 3d10",                  1),
     ("Ca", 20, "[Ar] 4s2",                       0),
+    ("K",  19, "[Ar] 4s1",                       1),     # slide 18 correction of (b)
+    ("P",  15, "1s2 2s2 2p6 3s2 3p3",            3),     # slide 21 answers, in the notes
+    ("S",  16, "[Ne] 3s2 3p4",                   2),
 ]
 # The deliberately wrong ones, and the check each one must trip.
 BAD = [
@@ -206,6 +212,11 @@ DIAGRAMS = {
     "Cr_act":  ("Cr", 24, None, [("4s", ["u"]), ("3d", ["u", "u", "u", "u", "u"])]),
     "Cu_pred": ("Cu", 29, None, [("4s", ["ud"]), ("3d", ["ud", "ud", "ud", "ud", "u"])]),
     "Cu_act":  ("Cu", 29, None, [("4s", ["u"]), ("3d", ["ud", "ud", "ud", "ud", "ud"])]),
+    # slides 19-20: the Hund (spins) and Pauli error-spotting pair, and the Check Yourself S answer
+    "N_2p_spins_wrong": ("N", 7, "2p", ["u", "d", "u"]),
+    "pauli_Ne_2s_wrong": ("Ne", 10, "2s", ["uu"]),
+    "pauli_Ne_2s_fixed": ("Ne", 10, "2s", ["ud"]),
+    "S_3p":          ("S", 16, "3p", ["ud", "u", "u"]),
 }
 
 
@@ -257,10 +268,12 @@ def run_checks():
         assert electrons(s) == Z and check_config(s, Z) == [], (Z, s)
     # diagrams: arrows = electrons, and the rules hold/break as labelled
     for key, (sym, Z, _, content) in DIAGRAMS.items():
-        if key in ("N_2p_correct", "N_2p_wrong"):
+        if key in ("N_2p_correct", "N_2p_wrong", "N_2p_spins_wrong"):
             assert count_arrows(content) == 3
         elif key.startswith("pauli"):
             assert count_arrows(content) == 2
+        elif key == "S_3p":
+            assert count_arrows(content) == 4          # S 3p4
         else:
             arrows = sum(count_arrows(b) for _, b in content)
             core = {"Fe": 18, "Cr_pred": 18, "Cr_act": 18, "Cu_pred": 18, "Cu_act": 18}.get(key, 0)
@@ -271,6 +284,17 @@ def run_checks():
     assert box_violations(DIAGRAMS["N_2p_wrong"][3]) == {"hund"}
     assert box_violations(DIAGRAMS["pauli_ok"][3]) == set()
     assert box_violations(DIAGRAMS["pauli_bad"][3]) == {"pauli"}
+    # slides 19-20. (e): three singles, spins not all parallel -> Hund only. (f): up-up -> Pauli only.
+    assert box_violations(DIAGRAMS["N_2p_spins_wrong"][3]) == {"hund"}
+    assert box_violations(DIAGRAMS["pauli_Ne_2s_wrong"][3]) == {"pauli"}
+    assert box_violations(DIAGRAMS["pauli_Ne_2s_fixed"][3]) == set()
+    assert box_violations(DIAGRAMS["S_3p"][3]) == set()
+    # the (e) fix is the already-validated N 2p diagram; the (f) fix is an up-down pair; both 2s holds 2
+    assert DIAGRAMS["N_2p_correct"][3] == ["u", "u", "u"] and DIAGRAMS["pauli_Ne_2s_fixed"][3] == ["ud"]
+    # Ne 2s is a filled 2s: Ne is 1s2 2s2 2p6 and its 2s holds 2
+    assert ground_state(10)["2s"] == 2 and DIAGRAMS["pauli_Ne_2s_fixed"][1] == 10
+    # S 3p: the 4 electrons are 1 pair + 2 singles (2 unpaired), matching the answer in the notes
+    assert ground_state(16)["3p"] == 4 and unpaired_in(16) == 2 and unpaired_in(15) == 3
     # unpaired claims used in card text
     assert unpaired_in(7) == 3 and unpaired_in(8) == 2 and unpaired_in(17) == 1
     assert unpaired_in(20) == 0 and unpaired_in(26) == 4
@@ -281,34 +305,62 @@ def run_checks():
 
 
 def check_against_spec():
-    """The slide text is the text that was checked. Every config string must appear verbatim."""
+    """The slide text is the text that was checked. Every config string must appear verbatim,
+    nothing unchecked may appear, and no Unicode superscript glyph may survive anywhere."""
+    import re
     if not os.path.exists(SPEC):
         print("  (spec not written yet - slide-text cross-check skipped)")
         return
-    text = json.dumps(json.load(open(SPEC, encoding="utf-8")), ensure_ascii=False)
-    text = text.replace("\\n", " ")        # a longhand line broken across two lines is still one string
+    spec = json.load(open(SPEC, encoding="utf-8"))
+    slides = spec["slides"]
+    text = json.dumps(spec["slides"], ensure_ascii=False)
+    # 1. markup only: no Unicode superscript digits in any slide field or note
+    assert not any(ch in text for ch in UNI_SUP), "Unicode superscript glyph left in the spec"
+    # 2. every slide has teacher notes, and every empty image slot's subject is in them
+    for i, sl in enumerate(slides, 1):
+        assert sl.get("notes", "").strip(), f"slide {i}: no notes"
+        for subj in sl.get("imageSubjects", {}).values():
+            assert subj in sl["notes"], f"slide {i}: image prompt missing from notes"
+    assert "PROVISIONAL" in slides[0]["notes"] and "Mo, Ag" in slides[0]["notes"]
+    # 3. slide text (fields only, not notes)
+    ftext = json.dumps([sl["fields"] for sl in slides], ensure_ascii=False).replace("\\n", " ")
     off_slide = {"[Ar] 4s2 3d9"}            # Cu 'predicted', shown only inside the figure
+    notes_only = {"1s2 2s2 2p6 3s2 3p3", "[Ne] 3s2 3p4"}   # P, S answers: speaker notes only
     missing = []
     for _, _, cfg, _ in GOOD:
-        if sup(cfg) not in text:
-            missing.append(("good", cfg, sup(cfg)))
+        if cfg not in notes_only and mark(cfg) not in ftext:
+            missing.append(("good", cfg, mark(cfg)))
     for _, _, cfg, _ in BAD:
-        if cfg not in off_slide and sup(cfg) not in text:
-            missing.append(("bad", cfg, sup(cfg)))
-    # Any configuration-looking token in the spec that is NOT a checked one is a stray.
-    import re
-    toks = set(re.findall(r"(?:\[[A-Z][a-z]\] )?(?:\d[spdf][⁰¹²³⁴-⁹]+ ?)+", text))
-    checked = {sup(c) for _, _, c, _ in GOOD} | {sup(c) for _, _, c, _ in BAD}
-    # tokens that are fragments of a checked string are fine
-    strays = [t.strip() for t in toks
-              if not any(t.strip() in c for c in checked) and t.strip()]
+        if cfg not in off_slide and mark(cfg) not in ftext:
+            missing.append(("bad", cfg, mark(cfg)))
+    # 4. strays: any config-looking token on a slide or in a note that no checked string contains
+    checked = {c for _, _, c, _ in GOOD} | {c for _, _, c, _ in BAD}
+    pat_f = r"(?:\[[A-Z][a-z]\] ?)?(?:\d[spdf]\^\{\d+\} ?)+"
+    pat_n = r"(?:\[[A-Z][a-z]\] ?)?(?:\d[spdf]\^\d+ ?)+"
+    toks = [re.sub(r"\^\{?(\d+)\}?", r"\1", t).strip() for t in re.findall(pat_f, ftext)]
+    toks += [re.sub(r"\^(\d+)", r"\1", t).strip()
+             for t in re.findall(pat_n, " ".join(sl["notes"] for sl in slides))]
+    strays = sorted({t for t in toks if t and not any(t in c for c in checked)})
     if missing:
         print("  MISSING from spec:", missing)
     if strays:
-        print("  tokens in the spec that no checked configuration contains:", sorted(set(strays)))
+        print("  tokens in the spec or notes that no checked configuration contains:", strays)
     assert not missing, "slide text does not contain a checked configuration"
-    print(f"  spec cross-check: every checked configuration appears verbatim; "
-          f"{len(strays)} unchecked fragment(s)")
+    assert not strays, "unchecked configuration on a slide or in the notes"
+    # 5. the corrected configurations on the Spot-the-Mistake solutions slide (18) are the checked ones
+    sol = " ".join(str(v) for v in slides[17]["fields"].values())
+    for cfg in ["1s2 2s2 2p4", "[Ar] 4s1", "[Ar] 4s2", "[Ar] 4s1 3d5"]:
+        assert mark(cfg) in sol, f"slide 18 missing corrected {cfg}"
+    # each correction really is the ground state of its element
+    for sym, Z, cfg in [("O", 8, "1s2 2s2 2p4"), ("K", 19, "[Ar] 4s1"), ("Ca", 20, "[Ar] 4s2"),
+                        ("Cr", 24, "[Ar] 4s1 3d5")]:
+        assert check_config(cfg, Z) == [], (sym, cfg)
+        assert expand(cfg) == ground_state(Z), (sym, cfg)
+    # 6. slide 12 carries the same-period-noble-gas note, and it is true: Ar is Cl's own period
+    assert "not [Ar]" in slides[11]["fields"]["mustwrite"]
+    assert check_config("[Ar] 3s2 3p5", 17) != []         # the error the note warns against
+    print(f"  spec cross-check: {len(GOOD) + len(BAD)} configurations verbatim, no strays, "
+          f"no Unicode superscripts, notes on all {len(slides)} slides")
 
 
 # ---------------------------------------------------------------------------
@@ -604,6 +656,50 @@ def fig_cr_cu():
     c.save("chem_u02_s2.3_cr_cu_exceptions.png")
 
 
+def _row_label(c, x, y, s, f=None):
+    c.text(x, y, s, f or F_BOLD(54), COL["asphalt"], "lm")
+
+
+def fig_spot_problem():
+    """Slide 19: the two wrong diagrams, neutral colour. Drawn from DIAGRAMS, not retyped."""
+    c = Canvas(1010, 600)
+    size, pitch = 130, 142
+    e = DIAGRAMS["N_2p_spins_wrong"][3]
+    f = DIAGRAMS["pauli_Ne_2s_wrong"][3]
+    _row_label(c, 40, 105, "(e)  N")
+    for i, b in enumerate(e):
+        orbital_box(c, 400 + i * pitch, 40, size, b)
+    c.text(400 + pitch + size / 2, 215, "2p", F_BOLD(50), COL["asphalt"])
+    c.line([(40, 300), (970, 300)], COL["hair"], 3)
+    _row_label(c, 40, 405, "(f)  Ne")
+    orbital_box(c, 400 + pitch, 340, size, f[0])
+    c.text(400 + pitch + size / 2, 515, "2s", F_BOLD(50), COL["asphalt"])
+    assert count_arrows(e) == 3 and count_arrows(f) == 2
+    c.save("chem_u02_s2.3_spot_diagrams.png")
+
+
+def fig_spot_fixed():
+    """Slide 20 (data slot, 846 x 496): the corrected diagrams, with the rule that fixed each."""
+    c = Canvas(846, 496)
+    size, pitch = 100, 112
+    e = DIAGRAMS["N_2p_correct"][3]
+    f = DIAGRAMS["pauli_Ne_2s_fixed"][3]
+    _row_label(c, 30, 90, "(e)  N", F_BOLD(50))
+    for i, b in enumerate(e):
+        orbital_box(c, 190 + i * pitch, 40, size, b)
+    c.text(190 + pitch + size / 2, 176, "2p", F_BOLD(50), COL["asphalt"])
+    tick(c, 570, 92, COL["good"], 1.0)
+    c.text(620, 92, "Hund", F_BOLD(50), COL["good"], "lm")
+    c.line([(40, 232), (806, 232)], COL["hair"], 3)
+    _row_label(c, 30, 322, "(f)  Ne", F_BOLD(50))
+    orbital_box(c, 190 + pitch, 272, size, f[0])
+    c.text(190 + pitch + size / 2, 408, "2s", F_BOLD(50), COL["asphalt"])
+    tick(c, 570, 324, COL["good"], 1.0)
+    c.text(620, 324, "Pauli", F_BOLD(50), COL["good"], "lm")
+    assert count_arrows(e) == 3 and count_arrows(f) == 2
+    c.save("chem_u02_s2.3_spot_diagrams_fixed.png")
+
+
 def main():
     n = run_checks()
     print(f"checker: {n} configuration checks, all diagrams validated "
@@ -616,6 +712,8 @@ def main():
     fig_oxygen()
     fig_iron()
     fig_cr_cu()
+    fig_spot_problem()
+    fig_spot_fixed()
     return 0
 
 
