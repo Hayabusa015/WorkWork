@@ -62,20 +62,17 @@
   table.work { width: 100%; border-collapse: collapse; table-layout: fixed; }
   table.work th { font-family: var(--display); font-weight: 600; font-size: 8pt; letter-spacing: 0.12em;
                   color: var(--label); text-align: left; padding: 0 5pt 3pt 5pt; border-bottom: 1.2pt solid var(--ink); }
-  table.work td { height: 42pt; border: 1px solid var(--label); border-top: none; padding: 0 5pt; font-size: 9pt; vertical-align: top; }
+  table.work td { height: 28pt; border: 1px solid var(--label); border-top: none; padding: 0 5pt; font-size: 9pt; }
   table.work td:first-child, table.work th:first-child { border-left: none; }
   table.work td:last-child { border-right: none; }
   table.work tfoot td { height: 26pt; vertical-align: middle; font-weight: 600; }
   table.work tfoot td.tl { text-align: right; border-left: none; font-family: var(--display);
                            letter-spacing: 0.12em; font-size: 8pt; }
   table.work tfoot td.nb { border: none; }
-  .c-a { width: 25%; } .c-u { width: 9%; } .c-y { width: 24%; } .c-w { width: 13%; }
-  .c-p { width: 8%; } .c-d { width: 11%; } .c-t { width: 10%; }
-  table.work td.ty .fmt { display: block; margin-top: 17pt; font-size: 8pt; white-space: nowrap; }
-  table.work td.ty .box { width: 8pt; height: 8pt; margin-right: 3pt; }
-  table.work td.ty .fmt span { margin-right: 6pt; }
-  table.work td.ck { vertical-align: middle; }
-
+  .c-a { width: 22%; } .c-u { width: 9%; } .c-y { width: 12%; } .c-f { width: 14%; }
+  .c-w { width: 12%; } .c-p { width: 9%; } .c-d { width: 11%; } .c-t { width: 11%; }
+  table.work td.tf { font-size: 7.5pt; line-height: 1.35; white-space: nowrap; }
+  table.work td.tf .box { width: 7.5pt; height: 7.5pt; margin-right: 3pt; vertical-align: -1pt; }
   ol.steps { margin-left: 14pt; }
   ol.steps li { margin-bottom: 5pt; padding-left: 2pt; }
   .help { margin-top: 12pt; border: 1.1pt solid var(--accent-display); padding: 9pt 11pt; font-size: 11pt; }
@@ -112,20 +109,19 @@
   <thead>
     <tr>
       <th class="c-a">ASSIGNMENT</th><th class="c-u">UNIT / SECTION</th><th class="c-y">TYPE</th>
-      <th class="c-w">PASSWORD</th><th class="c-p">POINTS</th><th class="c-d">DUE BY</th><th class="c-t">TURNED IN</th>
+      <th class="c-f">IF A TEST</th><th class="c-w">PASSWORD</th><th class="c-p">POINTS</th>
+      <th class="c-d">DUE BY</th><th class="c-t">TURNED IN</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
-    <tr><td></td><td></td><td class="ty"><span class="fmt"><span>If test:</span><span><span class="box"></span>Edulastic</span><span><span class="box"></span>Paper</span></span></td><td></td><td></td><td></td><td class="ck"><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
+    <tr><td></td><td></td><td></td><td class="tf"><span class="box"></span>Edulastic<br><span class="box"></span>Paper</td><td></td><td></td><td></td><td><span class="box"></span></td></tr>
   </tbody>
   <tfoot>
-    <tr><td class="tl" colspan="4">TOTAL POINTS MISSING</td><td></td><td class="nb" colspan="2"></td></tr>
+    <tr><td class="tl" colspan="5">TOTAL POINTS MISSING</td><td></td><td class="nb" colspan="2"></td></tr>
   </tfoot>
 </table>
 
