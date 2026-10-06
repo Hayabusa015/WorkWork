@@ -16,7 +16,7 @@ brand/tokens.json through the shared Palette; the fonts are the brand Archivo fi
 import os, sys
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.enum.section import WD_ORIENT
 from docx.oxml.ns import qn
@@ -131,20 +131,40 @@ def new_doc(landscape=False):
 
 def header(doc, pal, kicker, title, width=7.5, fields=True, score=None):
     c = one_cell(doc, width); borders(c, pal.display, sz=18, edges=("bottom",))
-    para(c, "SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS", 7.5, bold=True,
+    para(c, "SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS", 7, bold=True,
          color=pal.accent, caps_track=True, first=True)
-    para(c, title.upper(), 18, bold=True, color=pal.ink)
-    para(c, kicker, 7.5, color=pal.label, caps_track=True)
+    para(c, title.upper(), 13, bold=True, color=pal.ink)
+    para(c, kicker, 7, color=pal.label, caps_track=True)
     if fields:
-        c = one_cell(doc, width); borders(c, pal.hair)
-        txt = "NAME  ______________________________________   DATE  ______________   PERIOD  _______"
+        names = [("NAME", 3.3), ("DATE", 1.5), ("PERIOD", 1.2)]
         if score:
-            txt += f"   SCORE  _____ / {score}"
-        para(c, txt, 9, color=pal.label, first=True)
+            names.append((f"SCORE  / {score}", width - 6.0))
+        else:
+            names[0] = ("NAME", 3.3 + (width - 6.0))
+        t = doc.add_table(rows=1, cols=len(names))
+        fix_widths(t, [w for _, w in names])
+        no_split(t.rows[0], 0.46)
+        for cc, (lab, w) in zip(t.rows[0].cells, names):
+            cc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+            cell_margins(cc, top=20, bottom=0, left=0, right=120)
+            borders(cc, pal.hair, sz=8, edges=("bottom",))
+            p = cc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+            _run(p, lab, 7.5, bold=True, color=pal.label)
 
 
 def label(cell, text, pal, first=False):
     return para(cell, text, 7.5, bold=True, color=pal.accent, caps_track=True, first=first)
+
+
+def pin_tail(cell, pt=1):
+    p = cell.paragraphs[-1]
+    if p.text.strip():
+        return
+    pPr = p._p.get_or_add_pPr()
+    sp = OxmlElement("w:spacing")
+    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+    sp.set(qn("w:line"), str(int(pt * 20))); sp.set(qn("w:lineRule"), "exact")
+    pPr.append(sp)
 
 
 def sublevel_strip(cell, pal, key, z, width_in=7.2):
@@ -178,6 +198,7 @@ def sublevel_strip(cell, pal, key, z, width_in=7.2):
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             if marks[b]:
                 _run(p, marks[b], 10, bold=True, color=pal.accent)
+    pin_tail(cell)
     return t
 
 
@@ -195,6 +216,7 @@ def write_line(cell, text_label, pal, key_fn, key, *, label_w=1.6, total_w=7.2, 
     p = b.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
     if key:
         key_fn(p)
+    pin_tail(cell)
     return t
 
 
@@ -241,26 +263,24 @@ def build_longhand(out, key):
     spacer(c, 2)
 
     for i, z in enumerate(LONGHAND, 1):
-        gap(doc, 6)
+        gap(doc, 4)
         c = one_cell(doc); borders(c, pal.hair)
-        t = c.add_table(rows=1, cols=2)
-        fix_widths(t, [4.3, 2.9])
-        no_split(t.rows[0])
-        a, b = t.rows[0].cells
-        for x in (a, b):
-            cell_margins(x, top=0, bottom=0, left=0, right=0)
-        p = a.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
+        p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+        p.paragraph_format.tab_stops.add_tab_stop(Inches(7.0), WD_TAB_ALIGNMENT.RIGHT)
         _run(p, f"{i}   ", 10, bold=True, color=pal.accent)
         _run(p, f"{element_name(z)}, {SYMBOLS[z - 1]}", 10.5, bold=True, color=pal.ink)
-        p = b.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
+        _run(p, "\t", 9)
         _run(p, "Electrons  ", 9, bold=True, color=pal.ink)
         if key:
             _run(p, str(z), 10.5, bold=True, color=pal.accent, underline=True)
         else:
             _run(p, "_________", 10, color=pal.ink)
         spacer(c, 3)
-        sublevel_strip(c, pal, key, z)
-        spacer(c, 4)
+        if key:
+            sublevel_strip(c, pal, True, z)
+            spacer(c, 4)
+        else:
+            spacer(c, 50)
         write_line(c, "Electron configuration", pal,
                    lambda p, z=z: put_config(p, config(z), 10.5, pal.accent, bold=True), key)
         spacer(c, 2)
