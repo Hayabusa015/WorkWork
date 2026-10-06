@@ -234,8 +234,8 @@ def element_name(z):
 def build_longhand(out, key):
     pal = Palette(COURSE)
     doc, s = new_doc()
-    header(doc, pal, "PRACTICE SET  ·  ELECTRON CONFIGURATIONS  ·  LONGHAND" +
-           ("  ·  TEACHER KEY" if key else ""), "Longhand Electron Configurations", score=5)
+    header(doc, pal, "OPTIONAL PRACTICE  ·  ELECTRON CONFIGURATIONS  ·  LONGHAND" +
+           ("  ·  TEACHER KEY" if key else ""), "Longhand Electron Configurations")
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     label(c, "DIRECTIONS", pal, first=True)
@@ -295,8 +295,8 @@ def build_longhand(out, key):
 def build_shorthand(out, key):
     pal = Palette(COURSE)
     doc, s = new_doc()
-    header(doc, pal, "PRACTICE SET  ·  ELECTRON CONFIGURATIONS  ·  NOBLE-GAS SHORTHAND" +
-           ("  ·  TEACHER KEY" if key else ""), "Shorthand Electron Configurations", score=5)
+    header(doc, pal, "OPTIONAL PRACTICE  ·  ELECTRON CONFIGURATIONS  ·  NOBLE-GAS SHORTHAND" +
+           ("  ·  TEACHER KEY" if key else ""), "Shorthand Electron Configurations")
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     label(c, "DIRECTIONS", pal, first=True)
