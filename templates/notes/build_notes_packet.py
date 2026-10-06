@@ -156,7 +156,9 @@ def data_table(cell, tbl, ctx, inner_w):
         c = t.rows[0].cells[i]
         borders(c, pal.display, sz=12, edges=("bottom",))
         cell_margins(c)
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         rich(p, h, 8.5, ctx, bold=True, color=pal.accent)
     no_split(t.rows[0])
     for ri, row in enumerate(rows, start=1):
@@ -165,7 +167,9 @@ def data_table(cell, tbl, ctx, inner_w):
             c = t.rows[ri].cells[ci]
             borders(c, pal.hair, sz=4)
             cell_margins(c, top=30, bottom=30)
+            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER     # centered top-to-bottom,
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT                # left-justified across
             rich(p, txt, 9.5, ctx, bold=(ci == 0 and len(hdr) <= 4))
     ctx.empty = False
     spacer(cell, 4)
