@@ -68,16 +68,17 @@ def _run(p, text, size, *, bold=False, color=None, sup=False, underline=False):
 def rich(p, text, size, ctx, *, bold=False, color=None, inblank=False):
     """Write marked-up text into paragraph p. {{x}} is a blank; ^x^ is a superscript."""
     color = color or ctx.pal.ink
-    for part in TOKEN.split(text):
-        if not part:
-            continue
+    parts = [x for x in TOKEN.split(text) if x]
+    for i, part in enumerate(parts):
+        nxt = parts[i + 1] if i + 1 < len(parts) else ""
         if part.startswith("{{"):
             ans = part[2:-2]
             if ctx.key:
                 rich(p, ans, size, ctx, bold=True, color=ctx.pal.accent, inblank=True)
             else:
                 n = max(6, int(round(len(plain(ans)) * 1.1)) + 1)
-                _run(p, " " + "_" * n + " ", size, color=color)
+                tail = "" if nxt[:1] in ("-", ".", ",", ";", ")", "") else " "
+                _run(p, " " + "_" * n + tail, size, color=color)
         elif part.startswith("^"):
             _run(p, part[1:-1], size, bold=bold or inblank and ctx.key, color=color, sup=True)
         else:
@@ -110,7 +111,12 @@ def must_write(p, pal):
     bd = OxmlElement("w:pBdr"); x = OxmlElement("w:left")
     x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18")
     x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(pal.display))
-    bd.append(x); pPr.append(bd)
+    bd.append(x)
+    sp = pPr.find(qn("w:spacing"))          # schema order: pBdr comes before spacing
+    if sp is not None:
+        sp.addprevious(bd)
+    else:
+        pPr.append(bd)
 
 
 def page_break_before(doc):
@@ -154,7 +160,7 @@ def data_table(cell, tbl, ctx, inner_w):
         for ci, txt in enumerate(row):
             c = t.rows[ri].cells[ci]
             borders(c, pal.hair, sz=4)
-            cell_margins(c, top=50, bottom=50)
+            cell_margins(c, top=30, bottom=30)
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
             rich(p, txt, 9.5, ctx, bold=(ci == 0 and len(hdr) <= 4))
     spacer(cell, 4)
@@ -296,7 +302,7 @@ def build(spec, out, key):
             para(cue, tag, 7.5, bold=True, color=pal.ink, first=True)
             para(cue, row["cueLabel"], 7, bold=True, color=pal.accent)
             for q in row["cues"]:
-                para(cue, q, 8.5)
+                rpara(cue, q, 8.5, ctx)
             para(notes, row["notesLabel"], 7.5, bold=True, color=pal.accent,
                  caps_track=True, first=True)
             for n in row["notes"]:

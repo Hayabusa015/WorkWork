@@ -2,7 +2,7 @@
  "course": "chemistry",
  "unit": 2,
  "sections": ["2.1", "2.2", "2.3", "2.4", "2.5"],
- "kicker": "GUIDED NOTES · 5 SECTIONS · S2.1 – S2.5",
+ "kicker": "GUIDED NOTES · 5 SECTIONS · S02.1 – S02.5",
  "fields": "NAME  ______________________________________   DATE  ______________   PERIOD  _______",
  "unitTargets": [
   "I can describe energy levels, sublevels and orbitals and how many electrons each holds.",
@@ -23,16 +23,16 @@
   "Each section ends with a summary. Finish it from memory, then check your notes."
  ],
  "glance": [
-  {"code": "S2.1", "title": "The Bohr Model", "slides": "03–04", "record": "Energy levels, quantized, ground and excited states"},
-  {"code": "S2.2", "title": "Energy Levels, Sublevels & Orbitals", "slides": "06–11", "record": "Sublevels per level, orbital counts, electron capacity, blocks"},
-  {"code": "S2.3", "title": "Electron Configurations", "slides": "12–28", "record": "Aufbau, Pauli, Hund, longhand and noble-gas shorthand, Cr and Cu"},
-  {"code": "S2.4", "title": "Electron Stability & Valence Electrons", "slides": "29–37", "record": "Valence electrons, ion charges, transition-metal ions, isoelectronic"},
-  {"code": "S2.5", "title": "Atomic & Electron Spectra", "slides": "38–48", "record": "Absorption, emission, wavelength and energy, hydrogen lines, flame tests"}
+  {"code": "S02.1", "title": "The Bohr Model", "slides": "03–04", "record": "Energy levels, quantized, ground and excited states"},
+  {"code": "S02.2", "title": "Energy Levels, Sublevels & Orbitals", "slides": "06–11", "record": "Sublevels per level, orbital counts, electron capacity, blocks"},
+  {"code": "S02.3", "title": "Electron Configurations", "slides": "12–28", "record": "Aufbau, Pauli, Hund, longhand and noble-gas shorthand, Cr and Cu"},
+  {"code": "S02.4", "title": "Electron Stability & Valence Electrons", "slides": "29–37", "record": "Valence electrons, ion charges, transition-metal ions, isoelectronic"},
+  {"code": "S02.5", "title": "Atomic & Electron Spectra", "slides": "38–48", "record": "Absorption, emission, wavelength and energy, hydrogen lines, flame tests"}
  ],
 
  "sectionsContent": [
   {
-   "code": "U2 / S2.1",
+   "code": "U02 / S02.1",
    "title": "The Bohr Model",
    "slidesRange": "Slides 03–04",
    "learningTarget": "I can describe an electron's energy level in Bohr's model and name the ground state, the excited state and ionization.",
@@ -84,7 +84,7 @@
   },
 
   {
-   "code": "U2 / S2.2",
+   "code": "U02 / S02.2",
    "title": "Energy Levels, Sublevels & Orbitals",
    "slidesRange": "Slides 06–11",
    "learningTarget": "I can state how many sublevels, orbitals and electrons each energy level holds.",
@@ -193,7 +193,7 @@
   },
 
   {
-   "code": "U2 / S2.3",
+   "code": "U02 / S02.3",
    "title": "Electron Configurations",
    "slidesRange": "Slides 12–28",
    "learningTarget": "I can write longhand and noble-gas configurations, draw orbital diagrams with Pauli and Hund, and name the Cr and Cu exceptions.",
@@ -242,7 +242,7 @@
      "slides": "15",
      "cueLabel": "PAULI",
      "cues": ["Definition — Pauli rule", "Allowed and not allowed spins"],
-     "notesLabel": "PAULI: TWO ELECTRONS, OPPOSITE SPINS",
+     "notesLabel": "PAULI RULE",
      "notes": [
       "*One orbital holds {{2}} electrons, and their arrows must point {{opposite}} ways.",
       "Helium has 2 electrons. Both fit in the {{1s}} orbital.",
@@ -260,7 +260,7 @@
      "slides": "16",
      "cueLabel": "HUND",
      "cues": ["Definition — Hund's rule", "Carbon, nitrogen, oxygen in 2p"],
-     "notesLabel": "HUND: ONE IN EACH BEFORE PAIRING",
+     "notesLabel": "HUND'S RULE",
      "notes": [
       "*For boxes in the same sublevel, put {{one}} electron in each before making pairs.",
       "The first arrows all point {{up}}. Single electrons in these boxes have the {{same}} spin.",
@@ -302,7 +302,7 @@
      "notes": [
       "Ar has {{18}} electrons.",
       "*Ar: {{1s² 2s² 2p⁶ 3s² 3p⁶}}",
-      "Check: 2 + 2 + 6 + 2 + 6 = {{18}}. Argon has a full outer s and p."
+      "Check: the raised numbers add to {{18}}. Argon has a full outer s and p."
      ]
     },
     {
@@ -312,7 +312,7 @@
      "notesLabel": "SHORTHAND [NOBLE GAS CONFIGURATION]",
      "notes": [
       "*Find the matching first 18 electrons, then replace that part with {{[Ar]}}.",
-      "Germanium has {{32}} electrons: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²",
+      "Germanium has {{32}} electrons: {{1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²}}",
       "Shorthand for Ge: {{[Ar] 4s² 3d¹⁰ 4p²}}",
       "[Ar] covers {{18}} electrons. Keep the other {{14}}. Total: {{32}}."
      ]
@@ -325,7 +325,7 @@
      "notes": [
       "Iron has {{26}} electrons. [Ar] already covers the first {{18}}.",
       "26 − 18 = {{8}} electrons left to place.",
-      "*Fe: {{[Ar] 4s² 3d⁶}}, and 18 + 2 + 6 = 26",
+      "*Fe: {{[Ar] 4s² 3d⁶}}. The electrons add to {{26}}.",
       "An arrow without a partner is an unpaired electron. Fe has {{4}} unpaired."
      ],
      "orbitals": {
@@ -343,8 +343,8 @@
      "notesLabel": "EXAMPLES — BROMINE (35) AND NICKEL (28)",
      "notes": [
       "Count the electrons inside [Ar] first, then fill 4s before 3d.",
-      "Bromine: {{[Ar] 4s² 3d¹⁰ 4p⁵}}, and 18 + 2 + 10 + 5 = {{35}}",
-      "Nickel: {{[Ar] 4s² 3d⁸}}, and 18 + 2 + 8 = {{28}}",
+      "Bromine: {{[Ar] 4s² 3d¹⁰ 4p⁵}}. The electrons add to {{35}}.",
+      "Nickel: {{[Ar] 4s² 3d⁸}}. The electrons add to {{28}}.",
       "Longhand and shorthand show the {{same}} arrangement."
      ]
     },
@@ -404,7 +404,7 @@
   },
 
   {
-   "code": "U2 / S2.4",
+   "code": "U02 / S02.4",
    "title": "Electron Stability & Valence Electrons",
    "slidesRange": "Slides 29–37",
    "learningTarget": "I can count valence electrons, count electrons in an ion and predict the ion an atom forms.",
@@ -434,7 +434,7 @@
       "headers": ["Group", "1", "2", "13", "14", "15", "16", "17", "18"],
       "widths": [1.3, 0.54, 0.54, 0.54, 0.54, 0.54, 0.54, 0.54, 0.58],
       "rows": [
-       ["Valence e^−^", "{{1}}", "{{2}}", "{{3}}", "{{4}}", "{{5}}", "{{6}}", "{{7}}", "{{8}}*"]
+       ["Valence e^−^", "{{1}}", "{{2}}", "{{3}}", "{{4}}", "{{5}}", "{{6}}", "{{7}}", "{{8*}}"]
       ]
      }
     },
@@ -514,7 +514,7 @@
     }
    ],
    "summary": [
-    "Valence electrons are the {{outer}} electrons, and a main-group atom's count matches its {{group}}.",
+    "Valence electrons are the {{outer}} electrons, and for groups 13–18 the count is the group number minus {{10}}.",
     "Atoms gain or lose electrons to reach a full outer level like a {{noble gas}}.",
     "Metals tend to form {{cations}} and nonmetals tend to form {{anions}}.",
     "Transition metals lose their {{4s}} electrons before their {{3d}} electrons.",
@@ -529,7 +529,7 @@
   },
 
   {
-   "code": "U2 / S2.5",
+   "code": "U02 / S02.5",
    "title": "Atomic & Electron Spectra",
    "slidesRange": "Slides 38–48",
    "learningTarget": "I can connect electron drops between energy levels to the colors of light atoms give off, and I can record the hydrogen and flame-test data.",
@@ -682,27 +682,27 @@
  "review": {
   "banner": "UNIT 2 REVIEW — FINISH FROM MEMORY, THEN CHECK YOUR NOTES",
   "rows": [
-   ["S2.1", "Quantized", "Energy comes in {{set amounts}}. Electrons cannot stay {{halfway}} between levels."],
-   ["S2.1", "Ground state of hydrogen", "n = {{1}}. A higher level is an {{excited}} state."],
-   ["S2.2", "Capacities", "s = {{2}}, p = {{6}}, d = {{10}}, f = {{14}}"],
-   ["S2.2", "A whole level", "{{n²}} orbitals and up to {{2n²}} electrons"],
-   ["S2.3", "Three rules", "{{Aufbau}}, {{Pauli}} and {{Hund}}"],
-   ["S2.3", "Filling order", "1s, 2s, 2p, {{3s}}, {{3p}}, {{4s}}, {{3d}}, {{4p}}, {{5s}}"],
-   ["S2.3", "Exceptions", "Cr = {{[Ar] 4s¹ 3d⁵}}, Cu = {{[Ar] 4s¹ 3d¹⁰}}"],
-   ["S2.4", "Valence electrons", "The {{outer}} electrons. Group 16 has {{6}}."],
-   ["S2.4", "Electrons in an ion", "{{Atomic number − charge}}"],
-   ["S2.4", "Common charges", "Groups 1, 2, 13: {{1+}}, {{2+}}, {{3+}}. Groups 15, 16, 17: {{3−}}, {{2−}}, {{1−}}."],
-   ["S2.4", "Transition-metal ions", "The {{4s}} electrons leave before {{3d}}."],
-   ["S2.5", "Absorption and emission", "Absorption: electron moves {{up}}. Emission: electron {{drops}} and gives off a {{photon}}."],
-   ["S2.5", "Photon energy", "Equals the {{gap}} between levels. Shorter wavelength means {{higher}} energy."],
-   ["S2.5", "Hydrogen lines", "656 nm {{red}}, 486 nm {{blue-green}}, 434 nm {{blue-violet}}, 410 nm {{violet}}"]
+   ["S02.1", "Quantized", "Energy comes in {{set amounts}}. Electrons cannot stay {{halfway}} between levels."],
+   ["S02.1", "Ground state of hydrogen", "n = {{1}}. A higher level is an {{excited}} state."],
+   ["S02.2", "Capacities", "s = {{2}}, p = {{6}}, d = {{10}}, f = {{14}}"],
+   ["S02.2", "A whole level", "{{n²}} orbitals and up to {{2n²}} electrons"],
+   ["S02.3", "Three rules", "{{Aufbau}}, {{Pauli}} and {{Hund}}"],
+   ["S02.3", "Filling order", "1s, 2s, 2p, {{3s}}, {{3p}}, {{4s}}, {{3d}}, {{4p}}, {{5s}}"],
+   ["S02.3", "Exceptions", "Cr = {{[Ar] 4s¹ 3d⁵}}, Cu = {{[Ar] 4s¹ 3d¹⁰}}"],
+   ["S02.4", "Valence electrons", "The {{outer}} electrons. Group 16 has {{6}}."],
+   ["S02.4", "Electrons in an ion", "{{Atomic number − charge}}"],
+   ["S02.4", "Common charges", "Groups 1, 2, 13: {{1+}}, {{2+}}, {{3+}}. Groups 15, 16, 17: {{3−}}, {{2−}}, {{1−}}."],
+   ["S02.4", "Transition-metal ions", "The {{4s}} electrons leave before {{3d}}."],
+   ["S02.5", "Absorption and emission", "Absorption: electron moves {{up}}. Emission: electron {{drops}} and gives off a {{photon}}."],
+   ["S02.5", "Photon energy", "Equals the {{gap}} between levels. Shorter wavelength means {{higher}} energy."],
+   ["S02.5", "Hydrogen lines", "656 nm {{red}}, 486 nm {{blue-green}}, 434 nm {{blue-violet}}, 410 nm {{violet}}"]
   ],
   "checklist": [
-    "S2.1  I can define quantized and name ground and excited states.",
-    "S2.2  I can give the capacity of s, p, d and f and count orbitals in a level.",
-    "S2.3  I can write a configuration, shorthand and orbital diagram.",
-    "S2.4  I can predict the ion an atom forms from its group.",
-    "S2.5  I can link electron drops to the light atoms give off."
+    "S02.1  I can define quantized and name ground and excited states.",
+    "S02.2  I can give the capacity of s, p, d and f and count orbitals in a level.",
+    "S02.3  I can write a configuration, shorthand and orbital diagram.",
+    "S02.4  I can predict the ion an atom forms from its group.",
+    "S02.5  I can link electron drops to the light atoms give off."
   ],
   "fuzzyLabel": "STILL FUZZY ON"
  }
