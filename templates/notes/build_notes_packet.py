@@ -162,11 +162,11 @@ def data_table(cell, tbl, ctx, inner_w):
         rich(p, h, 8.5, ctx, bold=True, color=pal.accent)
     no_split(t.rows[0])
     for ri, row in enumerate(rows, start=1):
-        no_split(t.rows[ri], 0.25)
+        no_split(t.rows[ri], 0.22)
         for ci, txt in enumerate(row):
             c = t.rows[ri].cells[ci]
             borders(c, pal.hair, sz=4)
-            cell_margins(c, top=30, bottom=30)
+            cell_margins(c, top=20, bottom=20)
             c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER     # centered top-to-bottom,
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
             p.alignment = WD_ALIGN_PARAGRAPH.LEFT                # left-justified across
@@ -187,7 +187,7 @@ def orbital_block(cell, ob, ctx, inner_w):
     t = cell.add_table(rows=len(ob["rows"]), cols=1 + maxb)
     fix_widths(t, [name_w] + [box_w] * maxb)
     for ri, row in enumerate(ob["rows"]):
-        no_split(t.rows[ri], 0.36)
+        no_split(t.rows[ri], 0.32)
         nc = t.rows[ri].cells[0]
         nc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         p = nc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
@@ -334,6 +334,11 @@ def build(spec, out, key):
                 rpara(cue, q, 8.5, ctx)
             para(notes, row["notesLabel"], 7.5, bold=True, color=pal.accent,
                  caps_track=True, first=True)
+            for n in row.get("notes", []):
+                mw = n.startswith("*")
+                pp = rpara(notes, n.lstrip("*").strip(), 9.5, ctx, bold=mw)
+                if mw:
+                    must_write(pp, pal)
             if row.get("space"):
                 space_block(notes, row["space"], ctx)
             if row.get("table"):
