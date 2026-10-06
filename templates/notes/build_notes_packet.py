@@ -50,6 +50,7 @@ def plain(text):
 class Ctx:
     def __init__(self, pal, key):
         self.pal, self.key = pal, key
+        self.empty = False      # table cells: no ruled blank, the cell is the place to write
 
 
 def _run(p, text, size, *, bold=False, color=None, sup=False, underline=False):
@@ -75,6 +76,8 @@ def rich(p, text, size, ctx, *, bold=False, color=None, inblank=False):
             ans = part[2:-2]
             if ctx.key:
                 rich(p, ans, size, ctx, bold=True, color=ctx.pal.accent, inblank=True)
+            elif ctx.empty:
+                continue
             else:
                 n = max(6, int(round(len(plain(ans)) * 1.1)) + 1)
                 tail = "" if nxt[:1] in ("-", ".", ",", ";", ")", "") else " "
@@ -148,6 +151,7 @@ def data_table(cell, tbl, ctx, inner_w):
     widths = [w * scale for w in widths]
     t = cell.add_table(rows=1 + len(rows), cols=len(hdr))
     fix_widths(t, widths)
+    ctx.empty = True
     for i, h in enumerate(hdr):
         c = t.rows[0].cells[i]
         borders(c, pal.display, sz=12, edges=("bottom",))
@@ -156,13 +160,14 @@ def data_table(cell, tbl, ctx, inner_w):
         rich(p, h, 8.5, ctx, bold=True, color=pal.accent)
     no_split(t.rows[0])
     for ri, row in enumerate(rows, start=1):
-        no_split(t.rows[ri])
+        no_split(t.rows[ri], 0.25)
         for ci, txt in enumerate(row):
             c = t.rows[ri].cells[ci]
             borders(c, pal.hair, sz=4)
             cell_margins(c, top=30, bottom=30)
             p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
             rich(p, txt, 9.5, ctx, bold=(ci == 0 and len(hdr) <= 4))
+    ctx.empty = False
     spacer(cell, 4)
     return t
 
@@ -194,6 +199,28 @@ def orbital_block(cell, ob, ctx, inner_w):
             fill = row["fill"][bi] if bi < len(row["fill"]) else ""
             if ctx.key and fill:
                 _run(p, fill, 12, bold=True, color=pal.accent)
+    spacer(cell, 4)
+
+
+def space_block(cell, sp, ctx):
+    """Room to write. Student copy: ruled lines. Key: the expected notes."""
+    if ctx.key:
+        for line in sp["key"]:
+            rpara(cell, line, 9.5, ctx, bold=True, color=ctx.pal.accent)
+    else:
+        rule_lines(cell, sp["lines"], ctx.pal.hair)
+
+
+def sketch_block(cell, sk, ctx, inner_w):
+    pal = ctx.pal
+    para(cell, sk["label"], 7.5, bold=True, color=pal.accent, caps_track=True)
+    t = cell.add_table(rows=1, cols=1)
+    fix_widths(t, [inner_w])
+    no_split(t.rows[0], sk.get("heightIn", 1.7))
+    c = t.rows[0].cells[0]; borders(c, pal.hair, sz=6)
+    p = c.paragraphs[0]
+    if ctx.key:
+        _run(p, sk["key"], 9, bold=True, color=pal.accent)
     spacer(cell, 4)
 
 
@@ -272,29 +299,27 @@ def build(spec, out, key):
     for x in spec["howItWorks"]:
         para(c, "•  " + debullet(x), 9.5)
 
-    # ---------------- Sections ----------------
-    for sec in spec["sectionsContent"]:
-        page_break_before(doc)
+    # ---------------- Opener + sections ----------------
+    def head_bar(title, code=None, slides=None):
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.63, 1.87])
         a, b = t.rows[0].cells
         for cell in (a, b):
             borders(cell, pal.ink, sz=12, edges=("top",))
             borders(cell, pal.display, sz=18, edges=("bottom",))
-        para(a, sec["title"], 14, bold=True, color=pal.ink, first=True)
-        p = para(b, sec["code"], 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
-        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        p = para(b, sec["slidesRange"].upper(), 7.5, bold=True, color=pal.label, caps_track=True)
+        para(a, title, 14, bold=True, color=pal.ink, first=True)
+        first = True
+        if code:
+            p = para(b, code, 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
+            p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            first = False
+        p = para(b, slides.upper(), 7.5, bold=True, color=pal.label, caps_track=True, first=first)
         p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
-        c = one_cell(doc); borders(c, pal.hair)
-        p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
-        _run(p, "LEARNING TARGET   ", 7.5, bold=True, color=pal.accent)
-        _run(p, sec["learningTarget"], 9.5, color=pal.ink)
-
-        t = doc.add_table(rows=len(sec["rows"]), cols=2)
+    def rows_table(rows):
+        t = doc.add_table(rows=len(rows), cols=2)
         fix_widths(t, [CUE_W_IN, NOTES_W_IN])
-        for ri, row in enumerate(sec["rows"]):
+        for ri, row in enumerate(rows):
             no_split(t.rows[ri])
             cue, notes = t.rows[ri].cells
             borders(cue, pal.hair); borders(notes, pal.hair)
@@ -305,28 +330,39 @@ def build(spec, out, key):
                 rpara(cue, q, 8.5, ctx)
             para(notes, row["notesLabel"], 7.5, bold=True, color=pal.accent,
                  caps_track=True, first=True)
-            for n in row["notes"]:
-                mw = n.startswith("*")
-                body = n.lstrip("*").strip()
-                p = rpara(notes, body, 9.5, ctx, bold=mw)
-                if mw:
-                    must_write(p, pal)
+            if row.get("space"):
+                space_block(notes, row["space"], ctx)
             if row.get("table"):
                 data_table(notes, row["table"], ctx, NOTES_INNER_IN)
+            if row.get("sketch"):
+                sketch_block(notes, row["sketch"], ctx, NOTES_INNER_IN)
             if row.get("orbitals"):
                 orbital_block(notes, row["orbitals"], ctx, NOTES_INNER_IN)
-            if row.get("diagram"):
-                figure_block(notes, row["diagram"], ctx, NOTES_INNER_IN)
+
+    op = spec.get("opener")
+    if op:
+        page_break_before(doc)
+        head_bar(op["title"], None, op["slidesRange"])
+        gap(doc, 2)
+        rows_table(op["rows"])
+
+    for si, sec in enumerate(spec["sectionsContent"]):
+        if op and si == 0:
+            gap(doc, 10)           # the opener is part of the unit, not a section of its own
+        else:
+            page_break_before(doc)
+        head_bar(sec["title"], sec["code"], sec["slidesRange"])
+        c = one_cell(doc); borders(c, pal.hair)
+        p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
+        _run(p, "LEARNING TARGET   ", 7.5, bold=True, color=pal.accent)
+        _run(p, sec["learningTarget"], 9.5, color=pal.ink)
+        rows_table(sec["rows"])
 
         gap(doc, 6)
         c = one_cell(doc); borders(c, pal.accent)
-        para(c, "SECTION SUMMARY — finish each line from memory, then check your notes", 7.5,
+        para(c, "SECTION SUMMARY — the big ideas, in your own words", 7.5,
              bold=True, color=pal.accent, caps_track=True, first=True)
-        for x in sec["summary"]:
-            p = rpara(c, "•  " + x, 9.5, ctx, after=5)
-        para(c, "SELF-CHECK", 7.5, bold=True, color=pal.accent, caps_track=True)
-        for x in sec["selfCheck"]:
-            check_item(c, x, pal)
+        space_block(c, sec["summary"], ctx)
         no_split(doc.tables[-1].rows[0])
 
     # ---------------- Review page ----------------
@@ -337,14 +373,14 @@ def build(spec, out, key):
     para(c, rv["banner"], 10, bold=True, color=pal.ink, caps_track=True, first=True)
     gap(doc, 4)
     t = doc.add_table(rows=1 + len(rv["rows"]), cols=3)
-    fix_widths(t, [0.65, 1.95, 4.9])
-    for i, h in enumerate(["SECTION", "RECALL", "FILL IN"]):
+    fix_widths(t, [0.65, 2.0, 4.85])
+    for i, h in enumerate(["SECTION", "RECALL", "WRITE IT"]):
         cc = t.rows[0].cells[i]; borders(cc, pal.display, sz=12, edges=("bottom",))
         cell_margins(cc)
         p = cc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
         _run(p, h, 7.5, bold=True, color=pal.accent)
     for ri, row in enumerate(rv["rows"], start=1):
-        no_split(t.rows[ri], 0.4)
+        no_split(t.rows[ri], 0.52)
         for ci, v in enumerate(row):
             cc = t.rows[ri].cells[ci]; borders(cc, pal.hair, sz=4)
             cell_margins(cc, top=60, bottom=60)
@@ -354,14 +390,11 @@ def build(spec, out, key):
                 _run(p, v, 8.5, bold=True, color=pal.accent)
             elif ci == 1:
                 _run(p, v, 9, bold=True, color=pal.ink)
-            else:
-                rich(p, v, 9.5, ctx)
+            elif ctx.key:
+                rich(p, v, 9.5, ctx, bold=True, color=pal.accent)
     gap(doc, 8)
     c = one_cell(doc); borders(c, pal.hair)
-    para(c, "SECTION CHECKLIST", 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
-    for x in rv["checklist"]:
-        check_item(c, x, pal)
-    para(c, rv["fuzzyLabel"], 8.5, bold=True, color=pal.accent, caps_track=True)
+    para(c, rv["fuzzyLabel"], 8.5, bold=True, color=pal.accent, caps_track=True, first=True)
     rule_lines(c, 3, pal.hair)
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}" + ("          TEACHER KEY" if key else ""),
