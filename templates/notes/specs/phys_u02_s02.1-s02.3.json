@@ -1,0 +1,540 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.1",
+    "2.2",
+    "2.3"
+  ],
+  "kicker": "GUIDED NOTES · 3 SECTIONS · S2.1 – S2.3",
+  "fields": "NAME  ______________________________________   DATE  ______________   PERIOD  _______",
+  "unitTargets": [
+    "▸  I can describe a vector by its magnitude and direction, and resolve it into components.",
+    "▸  I can add vectors, at right angles and at any angle, and report the resultant with a direction.",
+    "▸  I can split a projectile’s motion into two axes that share one time.",
+    "▸  I can solve flat, angled and different-height launches, with signs declared."
+  ],
+  "keyTerms": [
+    "▸  Vector, magnitude, direction, component",
+    "▸  Resultant, tip-to-tail",
+    "▸  North of East, East of North",
+    "▸  Projectile, trajectory, range"
+  ],
+  "howItWorks": [
+    "The left column names what to record. The open space beside it is for the board: write, sketch, label. Use as much of it as the slide needs.",
+    "Worked examples print the problem. Copy the setup and every step from the board, and carry units the whole way.",
+    "Your Turn: work it in the box first, then check against the board before the next slide.",
+    "Every vector answer carries a direction. Every number carries a unit."
+  ],
+  "sectionList": [
+    "S2.1   Vectors & Vector Basics (Review)",
+    "S2.2   Vector Addition",
+    "S2.3   Projectile Motion (All Types)"
+  ],
+  "sectionsContent": [
+    {
+      "code": "U2 / S2.1",
+      "title": "Vectors & Vector Basics (Review)",
+      "learningTarget": "I can describe a vector by its magnitude and direction, name a direction two ways, and resolve a vector into x- and y-components.",
+      "rows": [
+        {
+          "cueLabel": "SLIDE 3",
+          "cues": [
+            "Definition of each term",
+            "Magnitude — its range of values"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "VECTOR · MAGNITUDE · DIRECTION",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 1.7
+          }
+        },
+        {
+          "cueLabel": "SLIDE 4",
+          "cues": [
+            "Tail, tip and scale",
+            "Length as magnitude, angle as direction"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "DRAWING A VECTOR",
+            "workLabel": "SKETCH AND LABEL",
+            "workHeightIn": 2.0
+          }
+        },
+        {
+          "cueLabel": "SLIDE 5",
+          "cues": [
+            "The two component equations",
+            "Adjacent side and opposite side"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "RESOLVING A VECTOR INTO COMPONENTS",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.2
+          }
+        },
+        {
+          "cueLabel": "SLIDES 6–7",
+          "cues": [
+            "The setup, before any number"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — RESOLVING A DISPLACEMENT",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 2.0,
+            "statement": "A hiker walks 50 m at 30° above the horizontal. Find the x- and y-components."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 8–9",
+          "cues": [
+            "Axis angle and compass bearing",
+            "Two names for one direction"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "DEGREES AND COMPASS DIRECTIONS",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.0
+          }
+        },
+        {
+          "cueLabel": "SLIDES 10–11",
+          "cues": [
+            "The relationship between the two angles"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — CONVERTING THE ANGLE",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 1.5,
+            "statement": "A vector points 40° North of East. Express its direction as an angle East of North."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 12–13",
+          "cues": [
+            "Same method, new numbers"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "YOUR TURN — A HIKING BEARING",
+            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workHeightIn": 1.5,
+            "statement": "A hiker walks at 65° East of North. Express this as an angle North of East."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 14",
+          "cues": [
+            "Two skills in one problem"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "QUICK CHECK — CONVERT AND RESOLVE",
+            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workHeightIn": 2.0,
+            "statement": "A force of 20 N acts at 70° East of North. Find its angle North of East, then resolve its components."
+          }
+        }
+      ],
+      "summaryPrompt": "In your own words: why is a number alone not enough to describe a vector, and what do you need to resolve one into components?",
+      "selfCheck": [
+        "I can draw a vector and label its tail, tip and angle.",
+        "I can convert North of East to East of North.",
+        "I can resolve a vector into x- and y-components."
+      ]
+    },
+    {
+      "code": "U2 / S2.2",
+      "title": "Vector Addition",
+      "learningTarget": "I can add two vectors, at 90° or at any angle, and state the resultant’s magnitude and direction.",
+      "rows": [
+        {
+          "cueLabel": "SLIDE 17",
+          "cues": [
+            "Tip-to-tail and the resultant",
+            "Magnitude and direction equations",
+            "The condition for this shortcut"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "ADDING PERPENDICULAR VECTORS",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.4
+          }
+        },
+        {
+          "cueLabel": "SLIDES 18–19",
+          "cues": [
+            "Magnitude and direction, both required",
+            "Common error — a magnitude with no direction"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — PLANE IN A CROSSWIND",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 2.4,
+            "statement": "A plane flies 80 km/h east relative to the air. A wind blows 20 km/h north. Find the plane’s velocity relative to the ground."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 20",
+          "cues": [
+            "The three steps, in order",
+            "Reason components come first"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "ADDING VECTORS AT ANY ANGLE",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.4
+          }
+        },
+        {
+          "cueLabel": "SLIDES 21–22",
+          "cues": [
+            "Add x to x and y to y",
+            "Extra digits kept until the final answer"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — TWO FORCES ON A BOX",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.0,
+            "statement": "A 40 N force acts east, and a 30 N force acts 60° above east. Find the resultant force."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 23",
+          "cues": [
+            "Same three steps"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "YOUR TURN — TWO DISPLACEMENTS",
+            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workHeightIn": 2.6,
+            "statement": "Walk 30 m east, then 40 m at 45° above east. Find the resultant displacement."
+          }
+        }
+      ],
+      "summaryPrompt": "In your own words: when can you use the right-triangle shortcut, and what do you do when you cannot?",
+      "selfCheck": [
+        "I can add two perpendicular vectors.",
+        "I can add vectors at any angle using components.",
+        "I can state a resultant with magnitude and direction."
+      ]
+    },
+    {
+      "code": "U2 / S2.3",
+      "title": "Projectile Motion (All Types)",
+      "learningTarget": "I can split a projectile’s motion into two axes, solve the vertical motion for time, and use that time horizontally.",
+      "rows": [
+        {
+          "cueLabel": "SLIDE 26",
+          "cues": [
+            "Definition of each term",
+            "Assumptions of the model"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "PROJECTILE · TRAJECTORY · RANGE",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 1.8
+          }
+        },
+        {
+          "cueLabel": "SLIDE 27",
+          "cues": [
+            "Horizontal velocity with no air resistance",
+            "Inertia as the reason",
+            "Common error — a force is needed to keep it moving sideways"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "NO HORIZONTAL FORCE NEEDED",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 1.8
+          }
+        },
+        {
+          "cueLabel": "SLIDE 28",
+          "cues": [
+            "All four equations",
+            "The quantity each one leaves out",
+            "The condition on acceleration"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "THE FOUR KINEMATIC EQUATIONS",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 2.4
+          }
+        },
+        {
+          "cueLabel": "SLIDE 29",
+          "cues": [
+            "Positive directions, stated",
+            "The variable list for each axis",
+            "Vertical velocity at the peak"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EVERY PROJECTILE SOLUTION STARTS HERE",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 2.6
+          }
+        },
+        {
+          "cueLabel": "SLIDE 31",
+          "cues": [
+            "Stage 1 — flat launch",
+            "Horizontal and vertical motion, separately",
+            "The time-to-land equation"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "THE FLAT LAUNCH",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.0
+          }
+        },
+        {
+          "cueLabel": "SLIDES 32–34",
+          "cues": [
+            "The variable list for each axis",
+            "Time from the vertical motion first"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — ROLLING OFF A TABLE",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.6,
+            "statement": "A ball leaves a 0.80 m table horizontally at 2.5 m/s. Find the flight time, the horizontal distance, and the final vertical velocity."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 35–36",
+          "cues": [
+            "Same method, new numbers"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "YOUR TURN — OFF A HIGHER SHELF",
+            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workHeightIn": 3.4,
+            "statement": "A marble leaves a 1.25 m shelf horizontally at 3.0 m/s. Find its flight time, horizontal distance, and final vertical velocity."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 38",
+          "cues": [
+            "Stage 2 — launch angle",
+            "Velocity components",
+            "Time of flight, and when it applies",
+            "The range equation"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "LAUNCHING AT AN ANGLE",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.2
+          }
+        },
+        {
+          "cueLabel": "SLIDES 39–41",
+          "cues": [
+            "Common error — Δy = 0 read as no vertical motion",
+            "Landing velocity components"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — A KICKED SOCCER BALL",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.6,
+            "statement": "A soccer ball launches at 18 m/s, 30° above level ground. Find the time of flight, the range, and the final velocity components."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 42–43",
+          "cues": [
+            "Write the general equation first"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "YOUR TURN — A LAUNCHED ARROW",
+            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workHeightIn": 3.4,
+            "statement": "An arrow launches at 45 m/s, 40° above level ground. Find the flight time, the range, and the final velocity components."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 45",
+          "cues": [
+            "Stage 3 — different heights",
+            "Conditions at the peak",
+            "Height gained",
+            "Reason the level-ground shortcut fails"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "WHEN LAUNCH AND LANDING DIFFER",
+            "workLabel": "SKETCH AND RECORD",
+            "workHeightIn": 2.4
+          }
+        },
+        {
+          "cueLabel": "SLIDES 46–48",
+          "cues": [
+            "The peak is the final state here",
+            "Height above launch, then above ground"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — CLIFF LAUNCH, THE PEAK",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.2,
+            "statement": "A rock launches at 20 m/s, 35° above horizontal, from a 15 m cliff. Find the maximum rise above launch and the time to the peak."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 49–51",
+          "cues": [
+            "The landing is a different final state",
+            "The quadratic and the root to keep"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "EXAMPLE — CLIFF LAUNCH, THE LANDING",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.6,
+            "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground. Find the flight time, the range, and the final vertical velocity."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 52",
+          "cues": [
+            "One approach for each stage",
+            "The quantity shared by both axes"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "THREE STAGES, ONE IDEA",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 1.8
+          }
+        },
+        {
+          "cueLabel": "SLIDES 54–55",
+          "cues": [
+            "Model assumptions, as stated",
+            "Landing velocity components"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "SCENARIO — THE FORTRESS ARCHER",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.8,
+            "statement": "In a historical film, an archer fires from a 20 m fortress roof toward soldiers across a level courtyard. The arrow leaves at 30 m/s and 35° upward. Find its flight time, ground range, and landing velocity components."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 57–58",
+          "cues": [
+            "Horizontal velocity at release",
+            "Common error — the crate drops straight down"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "SCENARIO — RESCUE SUPPLY DROP",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.4,
+            "statement": "A helicopter flies horizontally at 18 m/s, 45 m above an island landing zone. It releases a supply crate without a parachute. Find the fall time, horizontal travel, and landing velocity components."
+          }
+        },
+        {
+          "cueLabel": "SLIDES 60–61",
+          "cues": [
+            "Same height, nonzero root",
+            "Speed at landing in this model"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "SCENARIO — THE MOVIE STUNT JUMP",
+            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workHeightIn": 3.4,
+            "statement": "A movie stunt rider leaves a ramp at 14 m/s and 25° upward. The landing surface is at the same height. Model the rider and bike as one projectile: find flight time, range, and landing velocity components."
+          }
+        },
+        {
+          "cueLabel": "SLIDE 62",
+          "cues": [
+            "Magnitude equation",
+            "Direction equation",
+            "Direction stated below the horizontal"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "FINAL COMPONENTS TO FINAL VELOCITY",
+            "workLabel": "RECORD FROM THE BOARD",
+            "workHeightIn": 2.2
+          }
+        }
+      ],
+      "summaryPrompt": "In your own words: explain how one projectile moves with constant velocity in one direction and accelerates in the other, and what the two motions share.",
+      "selfCheck": [
+        "I can list the variables for each axis before choosing an equation.",
+        "I can solve a flat, an angled and a different-height launch.",
+        "I can turn final components into a final velocity with a direction."
+      ]
+    }
+  ],
+  "close": {
+    "banner": "UNIT 2 · PULLING IT TOGETHER",
+    "checklist": [
+      "Notes complete for S2.1–S2.3",
+      "Worked examples recorded with units",
+      "Your Turn problems checked against the board",
+      "Summary boxes written"
+    ],
+    "bigPicture": "Trace one projectile all the way through: resolve the launch velocity, solve the vertical motion for time, then use that same time horizontally.",
+    "fuzzyLabel": "STILL FUZZY ON — bring these to review day"
+  },
+  "noEquationBar": true
+}

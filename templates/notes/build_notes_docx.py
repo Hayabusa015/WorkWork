@@ -167,8 +167,14 @@ def main():
     for x in spec["sectionList"]:
         check_item(c, debullet(x), pal, 9.5)
 
-    for sec in spec["sectionsContent"]:
-        gap(doc, 6)
+    for si, sec in enumerate(spec["sectionsContent"]):
+        if si:
+            # Every section starts a new page (build-document skill). The packet was
+            # stranding a section heading and its target at the foot of the previous page.
+            from docx.enum.text import WD_BREAK
+            doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+        else:
+            gap(doc, 6)
         t = doc.add_table(rows=1, cols=2)
         fix_widths(t, [5.83, 1.67])
         a, b = t.rows[0].cells
@@ -188,6 +194,10 @@ def main():
 
         t = doc.add_table(rows=len(sec["rows"]), cols=2)
         fix_widths(t, [CUE_W_IN, NOTES_W_IN])
+        for r_ in t.rows:
+            # A Cornell row is one slide. Never break it across a page: the problem
+            # statement was landing at the foot of one page and its work box on the next.
+            r_._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
         for ri, row in enumerate(sec["rows"]):
             cue, notes = t.rows[ri].cells
             # No fill on the cue column. Matthew's packet separated the columns with a
@@ -240,11 +250,15 @@ def main():
         for x in sec.get("selfCheck", []):
             check_item(c, x, pal)
 
-    gap(doc, 6)
+    # The close starts its own page: the banner was stranding at the foot of the last
+    # section's page with its checklist on the next.
+    from docx.enum.text import WD_BREAK
+    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
     c = one_cell(doc); borders(c, ink, sz=12, edges=("top",))
     borders(c, display, sz=18, edges=("bottom",))
     para(c, spec["close"]["banner"], 9, bold=True, color=ink, caps_track=True, first=True)
     c = one_cell(doc); borders(c, hair)
+    c._tc.getparent().get_or_add_trPr().append(OxmlElement("w:cantSplit"))  # keep the close whole
     para(c, "SECTION CHECKLIST", 7.5, bold=True, color=accent, caps_track=True, first=True)
     for x in spec["close"]["checklist"]:
         check_item(c, x, pal)
