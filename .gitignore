@@ -11,3 +11,8 @@ installer/*.zip
 # generate them (templates/slide/decks/*.json).
 templates/slide/*.pptx
 templates/slide/*.pdf
+
+# Same for built worksheets/practice sets and their answer keys -- only the
+# JSON specs (templates/worksheet/specs/*.json) and image assets are source.
+templates/worksheet/*.docx
+templates/worksheet/*.pdf
