@@ -24,7 +24,8 @@
     "The left column names what to record. The open space beside it is for the board: write, sketch, label. Use as much of it as the slide needs.",
     "Worked examples print the problem. Copy the setup and every step from the board, and carry units the whole way.",
     "Your Turn: work it in the box first, then check against the board before the next slide.",
-    "Every vector answer carries a direction. Every number carries a unit."
+    "Every vector answer carries a direction. Every number carries a unit.",
+    "Projectile problems: +x is along the launch direction and +y is up, so down is negative. Neglect air resistance."
   ],
   "sectionList": [
     "S2.1   Vectors & Vector Basics (Review)",
@@ -334,7 +335,7 @@
             "label": "EXAMPLE — ROLLING OFF A TABLE",
             "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
             "workHeightIn": 3.6,
-            "statement": "A ball leaves a 0.80 m table horizontally at 2.5 m/s. Find the flight time, the horizontal distance, and the final vertical velocity."
+            "statement": "A ball leaves a 0.80 m table horizontally at 2.5 m/s. Find flight time, horizontal distance, and final vertical velocity."
           }
         },
         {
@@ -393,7 +394,7 @@
             "label": "YOUR TURN — A LAUNCHED ARROW",
             "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
             "workHeightIn": 3.4,
-            "statement": "An arrow launches at 45 m/s, 40° above level ground. Find the flight time, the range, and the final velocity components."
+            "statement": "An arrow launches at 45 m/s, 40° above level ground. Find flight time, range, and final velocity components."
           }
         },
         {
@@ -439,7 +440,7 @@
             "label": "EXAMPLE — CLIFF LAUNCH, THE LANDING",
             "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
             "workHeightIn": 3.6,
-            "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground. Find the flight time, the range, and the final vertical velocity."
+            "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground. Find flight time, range, and final vertical velocity."
           }
         },
         {
