@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHULL_GEO_Activity_U02_S02.3_Period_Poster</title>
+<link rel="stylesheet" href="../templates/lab/shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left {
+      content: "SHULL SCIENCE \00B7  GEOLOGY \00B7  U02 / S02.3";
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: "PAGE " counter(page) " OF " counter(pages);
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--body);
+    font-size: 10.5pt;
+    line-height: 1.36;
+    color: var(--ink);
+  }
+  .pg { break-after: page; }
+  .pg:last-child { break-after: auto; }
+
+  /* ---------- Masthead ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.4pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .titlerow { display: flex; align-items: flex-end; }
+  h1 {
+    font-family: var(--display); font-weight: bold; font-size: 20pt;
+    line-height: 1.1; flex: 1 1 auto;
+  }
+  h1 .accent { color: var(--accent); }
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; border: 1.1pt solid var(--accent-display);
+    border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; height: 15pt; }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; } .id-row .per { flex: 1; }
+  .id-group { margin: 6pt 1pt 6pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); height: 15pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.6pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 9pt;
+    letter-spacing: 0.20em; border-bottom: 1pt solid var(--accent-display);
+    padding-bottom: 2.5pt; margin: 12pt 0 6pt 0;
+  }
+  p { margin-bottom: 5pt; }
+
+  /* ---------- Numbered requirements: the number alone, no marker ---------- */
+  ol.req { list-style: none; margin: 0; padding: 0; }
+  ol.req li { display: flex; margin-bottom: 5pt; }
+  ol.req .n {
+    flex: 0 0 18pt; font-family: var(--display); font-weight: bold;
+    color: var(--accent);
+  }
+  ol.req b { font-weight: bold; }
+
+  /* ---------- Poster layout diagram ---------- */
+  .poster { border: 0.75pt solid var(--rule-hairline); padding: 6pt; margin: 4pt 0 2pt 0; }
+  .z-title {
+    border: 2pt solid var(--ink); text-align: center; padding: 6pt 6pt;
+    margin-bottom: 6pt;
+  }
+  .z-title .big { font-family: var(--display); font-weight: bold; font-size: 13pt; letter-spacing: 0.04em; }
+  .z-title .sm { font-size: 9pt; color: var(--label); }
+  .z-row { display: flex; gap: 6pt; }
+  .z-facts { flex: 1; border: 2pt solid var(--accent-display); padding: 5pt; }
+  .z-life  { flex: 1.5; border: 2pt dashed var(--ink); padding: 5pt; }
+  .zlab {
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.18em; margin-bottom: 4pt;
+  }
+  .z-facts .zlab { color: var(--accent); }
+  .sub {
+    border: 0.75pt solid var(--ink); padding: 4pt 5pt; font-size: 8.6pt;
+    color: var(--structure);
+  }
+  .sub .t { font-family: var(--display); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.14em; color: var(--ink); }
+  .sub.climate { height: 0.8in; margin-bottom: 5pt; }
+  .sub.map { height: 1.1in; }
+  .pics { display: flex; gap: 5pt; margin-top: 4pt; }
+  .pic { flex: 1; border: 0.75pt solid var(--ink); height: 1.82in; padding: 4pt 5pt; font-size: 8.6pt; color: var(--structure); }
+  .pic .t { font-family: var(--display); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.14em; color: var(--ink); }
+  .orgnote { font-size: 8.6pt; color: var(--structure); }
+  .key { font-size: 9pt; color: var(--label); margin-top: 4pt; }
+
+  /* ---------- Period menu ---------- */
+  table.menu { width: 100%; border-collapse: collapse; font-size: 9pt; line-height: 1.25; }
+  table.menu th {
+    font-family: var(--display); font-weight: 600; font-size: 7.4pt;
+    letter-spacing: 0.16em; text-align: left; padding: 3pt 5pt;
+    border-bottom: 1.4pt solid var(--ink); color: var(--ink);
+  }
+  table.menu td { padding: 2pt 5pt; border-bottom: 0.75pt solid var(--rule-hairline); vertical-align: top; }
+  table.menu tr { break-inside: avoid; }
+  table.menu tr.era td {
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.16em; color: var(--accent);
+    border-bottom: 1.2pt solid var(--accent-display); padding-top: 8pt; padding-bottom: 2pt;
+  }
+  table.menu .pname { font-family: var(--display); font-weight: bold; font-size: 10.4pt; }
+  table.menu .yrs { font-size: 8.4pt; color: var(--label); }
+  table.menu .ext {
+    font-size: 7.6pt; font-family: var(--display); font-weight: 600; letter-spacing: 0.06em;
+    border: 0.8pt solid var(--ink); border-radius: 6pt; padding: 0.5pt 5pt;
+    display: inline-block; margin-top: 2pt;
+  }
+  table.menu .ohio { font-style: italic; }
+  .menunote { font-size: 9pt; color: var(--label); margin-bottom: 4pt; }
+
+  /* ---------- Rubric ---------- */
+  table.rub { width: 100%; border-collapse: collapse; font-size: 9.4pt; line-height: 1.3; }
+  table.rub th {
+    font-family: var(--display); font-weight: 600; font-size: 7.4pt;
+    letter-spacing: 0.14em; text-align: left; padding: 3pt 5pt;
+    border-bottom: 1.4pt solid var(--ink);
+  }
+  table.rub td { padding: 5pt 5pt; border-bottom: 0.75pt solid var(--rule-hairline); vertical-align: top; }
+  table.rub tr { break-inside: avoid; }
+  table.rub .crit { font-family: var(--display); font-weight: bold; font-size: 10pt; }
+  table.rub .pts { font-family: var(--display); font-weight: 600; font-size: 8.4pt; color: var(--label); }
+  table.rub td.score { border-left: 0.75pt solid var(--rule-hairline); }
+  .total { display: flex; justify-content: flex-end; align-items: baseline; margin-top: 6pt;
+           font-family: var(--display); font-weight: bold; font-size: 12pt; }
+  .total .blank { display: inline-block; width: 0.8in; border-bottom: 0.9pt solid var(--ink); margin: 0 5pt; }
+
+  /* ---------- Group plan ---------- */
+  table.plan { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  table.plan td { border-bottom: 0.9pt solid var(--ink); height: 26pt; vertical-align: bottom; padding: 0 3pt 2pt 3pt; }
+  table.plan td.job { width: 2.4in; border-bottom: 0.75pt solid var(--rule-hairline); font-family: var(--display); font-weight: 600; }
+</style>
+</head>
+<body class="geo">
+
+<!-- ===================== PAGE 1 ===================== -->
+<div class="pg">
+  <div class="masthead">
+    <div class="eyebrow">GEOLOGY &middot; GEOLOGIC TIME &middot; GROUP PROJECT</div>
+    <div class="titlerow">
+      <h1>Geologic <span class="accent">Period</span> Poster</h1>
+      <div class="chip">U02 / S02.3</div>
+    </div>
+  </div>
+
+  <div class="id-row">
+    <div class="name"><div class="f"></div><div class="lbl">NAME</div></div>
+    <div class="date"><div class="f"></div><div class="lbl">DATE</div></div>
+    <div class="per"><div class="f"></div><div class="lbl">PERIOD</div></div>
+  </div>
+  <div class="id-group"><div class="f"></div><div class="lbl">GROUP MEMBERS</div></div>
+
+  <h2>THE JOB</h2>
+  <p>Your group picks one geologic period and makes a poster about it. The menu on page 2 lists every period you can choose from, with the main points of each, so you can compare before you decide. The poster has to be in color.</p>
+
+  <h2>WHAT GOES ON THE POSTER</h2>
+  <ol class="req">
+    <li><span class="n">1</span><span><b>Title.</b> The name of your period, large enough to read from across the room. Add when it started and ended, in millions of years ago (mya).</span></li>
+    <li><span class="n">2</span><span><b>Key Facts zone.</b> This holds two things. <b>Climate:</b> was it warm or cold, wet or dry, and was there ice? <b>Continents:</b> a colored map showing where the continents were during your period, each one labeled.</span></li>
+    <li><span class="n">3</span><span><b>Organisms.</b> Pick at least 3 important living things that evolved or first appeared in your period (the first dinosaurs, the first flowering plants). Write what each one was and why it matters.</span></li>
+    <li><span class="n">4</span><span><b>Pictures.</b> One picture of each organism you list, labeled with its name. Draw it or print it.</span></li>
+    <li><span class="n">5</span><span><b>Color.</b> The whole poster is in color, not pencil or pen alone.</span></li>
+  </ol>
+
+  <h2>POSTER LAYOUT</h2>
+  <div class="poster">
+    <div class="z-title">
+      <div class="big">PERIOD NAME</div>
+      <div class="sm">start and end dates, in mya</div>
+    </div>
+    <div class="z-row">
+      <div class="z-facts">
+        <div class="zlab">KEY FACTS</div>
+        <div class="sub climate"><div class="t">CLIMATE</div>warm or cold, wet or dry, ice or no ice</div>
+        <div class="sub map"><div class="t">CONTINENTS MAP</div>colored, each continent labeled</div>
+      </div>
+      <div class="z-life">
+        <div class="zlab">ORGANISMS</div>
+        <div class="orgnote">At least 3. Each one gets a picture, a name, and why it matters. Add frames if you have more.</div>
+        <div class="pics">
+          <div class="pic"><div class="t">ORGANISM 1</div>picture, name, why it matters</div>
+          <div class="pic"><div class="t">ORGANISM 2</div>picture, name, why it matters</div>
+          <div class="pic"><div class="t">ORGANISM 3</div>picture, name, why it matters</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="key">Solid teal border: Key Facts. Dashed black border: Organisms. Where the zones sit on your poster is up to your group.</div>
+</div>
+
+<!-- ===================== PAGE 2 ===================== -->
+<div class="pg">
+  <div class="masthead" style="padding-bottom:5pt;">
+    <div class="eyebrow">CHOOSE YOUR PERIOD</div>
+    <div class="titlerow"><h1 style="font-size:16pt;">The <span class="accent">Menu</span>: 12 Periods</h1></div>
+  </div>
+  <p class="menunote" style="margin-top:6pt;">mya = million years ago. Oldest at the top, youngest at the bottom. Use this to pick, then get the full facts from your class notes.</p>
+
+  <table class="menu">
+    <thead>
+      <tr><th style="width:15%">PERIOD</th><th style="width:22%">CLIMATE</th><th style="width:35%">NEW LIFE</th><th style="width:28%">CONTINENTS</th></tr>
+    </thead>
+    <tbody>
+      <tr class="era"><td colspan="4">PALEOZOIC ERA &middot; 539 TO 252 MYA</td></tr>
+      <tr>
+        <td><div class="pname">Cambrian</div><div class="yrs">539 to 485 mya</div></td>
+        <td>Warm. Shallow seas flooded the edges of the continents.</td>
+        <td>The Cambrian explosion: first animals with hard shells and eyes. Trilobites, Anomalocaris. All life is in the ocean.</td>
+        <td>Gondwana, a big continent mostly in the south. Smaller continents scattered near the equator.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Ordovician</div><div class="yrs">485 to 444 mya</div><div class="ext">ENDS: MASS EXTINCTION</div></td>
+        <td>Warm with very high sea level, then an ice age near the end.</td>
+        <td>First land plants (small, mossy). Big coral reefs. Fish with no jaws. <span class="ohio">Ohio's state fossil, the trilobite Isotelus, is from this period.</span></td>
+        <td>Gondwana over the South Pole. Ohio sat under a warm shallow sea.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Silurian</div><div class="yrs">444 to 419 mya</div></td>
+        <td>Warm. Ice melted and seas rose again.</td>
+        <td>First plants with stems that carry water (Cooksonia). First fish with jaws. Sea scorpions.</td>
+        <td>Two northern continents, Laurentia and Baltica, collide and close an ocean between them.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Devonian</div><div class="yrs">419 to 359 mya</div><div class="ext">ENDS: MASS EXTINCTION</div></td>
+        <td>Mostly warm. Cooling toward the end.</td>
+        <td>The Age of Fishes: armored Dunkleosteus, early sharks. First forests. First four-legged animals; Tiktaalik, a fish with leg-like fins. <span class="ohio">Dunkleosteus fossils come from the Cleveland Shale.</span></td>
+        <td>North America and Europe joined into one northern continent. Gondwana still in the south.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Carboniferous</div><div class="yrs">359 to 299 mya</div></td>
+        <td>Warm and wet with huge swamps. Ice sheets in the far south late in the period.</td>
+        <td>Swamp forests that became coal. First reptiles. Dragonfly-like insects with wings about 2 ft across. <span class="ohio">Eastern Ohio's coal formed in these swamps.</span></td>
+        <td>Gondwana and the northern continent collide. Pangaea starts to form.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Permian</div><div class="yrs">299 to 252 mya</div><div class="ext">ENDS: MASS EXTINCTION</div></td>
+        <td>Hot and dry. Deserts in the middle of the land.</td>
+        <td>Dimetrodon and other mammal relatives. Conifer trees. Beetles. Ends with the worst mass extinction ever: about 90% of ocean species gone.</td>
+        <td>One supercontinent: Pangaea.</td>
+      </tr>
+
+      <tr class="era"><td colspan="4">MESOZOIC ERA &middot; 252 TO 66 MYA</td></tr>
+      <tr>
+        <td><div class="pname">Triassic</div><div class="yrs">252 to 201 mya</div><div class="ext">ENDS: MASS EXTINCTION</div></td>
+        <td>Hot, mostly dry. No ice at the poles.</td>
+        <td>First dinosaurs. First mammals (small). First pterosaurs. Early turtles. Ichthyosaurs in the sea.</td>
+        <td>Pangaea, still in one piece. It begins to crack apart near the end.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Jurassic</div><div class="yrs">201 to 145 mya</div></td>
+        <td>Warm and humid. No ice caps.</td>
+        <td>Giant long-necked dinosaurs. Stegosaurus. First birds (Archaeopteryx). Plesiosaurs in the sea.</td>
+        <td>Pangaea splits into a northern and a southern continent. The Atlantic Ocean starts to open.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Cretaceous</div><div class="yrs">145 to 66 mya</div><div class="ext">ENDS: MASS EXTINCTION</div></td>
+        <td>Very warm. Highest sea level of the whole era; a shallow sea cut North America in two.</td>
+        <td>First flowering plants. Tyrannosaurus rex and Triceratops. An asteroid hit about 66 mya and ended the non-bird dinosaurs.</td>
+        <td>Continents keep splitting. South America and Africa separate. India drifts north.</td>
+      </tr>
+
+      <tr class="era"><td colspan="4">CENOZOIC ERA &middot; 66 MYA TO TODAY</td></tr>
+      <tr>
+        <td><div class="pname">Paleogene</div><div class="yrs">66 to 23 mya</div></td>
+        <td>Hot early on, then cooling. Ice starts to build on Antarctica.</td>
+        <td>Mammals take over the empty spaces left by the dinosaurs. First whales, first horses, early primates.</td>
+        <td>Looks closer to today. India crashes into Asia and the Himalaya begin to rise.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Neogene</div><div class="yrs">23 to 2.6 mya</div></td>
+        <td>Cooling and drying. Large Antarctic ice sheets.</td>
+        <td>Grasslands spread, and so do grazing animals. Mastodons. Early human ancestors (Australopithecus).</td>
+        <td>Almost the modern map. North and South America join at Panama about 3 mya.</td>
+      </tr>
+      <tr>
+        <td><div class="pname">Quaternary</div><div class="yrs">2.6 mya to today</div></td>
+        <td>Repeating ice ages. Sea level dropped each time ice grew. <span class="ohio">Ice sheets covered much of Ohio.</span></td>
+        <td>Woolly mammoths, saber-toothed cats, and the first Homo sapiens (about 300,000 years ago). Many large mammals died out about 11,000 years ago.</td>
+        <td>Same positions as today.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== PAGE 3 ===================== -->
+<div class="pg">
+  <div class="masthead" style="padding-bottom:5pt;">
+    <div class="eyebrow">GEOLOGIC PERIOD POSTER</div>
+    <div class="titlerow"><h1 style="font-size:16pt;">Group <span class="accent">Plan</span> and Rubric</h1></div>
+  </div>
+
+  <h2>OUR GROUP PLAN</h2>
+  <table class="plan">
+    <tr><td class="job">Our period</td><td></td></tr>
+    <tr><td class="job">Organism 1</td><td></td></tr>
+    <tr><td class="job">Organism 2</td><td></td></tr>
+    <tr><td class="job">Organism 3</td><td></td></tr>
+    <tr><td class="job">Who makes the continents map</td><td></td></tr>
+    <tr><td class="job">Who writes the climate section</td><td></td></tr>
+  </table>
+
+  <h2>RUBRIC &middot; 20 POINTS</h2>
+  <table class="rub">
+    <thead>
+      <tr><th style="width:15%">PART</th><th style="width:30%">FULL CREDIT</th><th style="width:28%">PARTIAL</th><th style="width:15%">LITTLE OR NONE</th><th style="width:12%">SCORE</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="crit">Title</div><div class="pts">2 points</div></td>
+        <td><b>2.</b> Period name and start and end dates, readable across the room.</td>
+        <td><b>1.</b> Name only, dates missing, or hard to read.</td>
+        <td><b>0.</b> No title.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Climate</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> Correct. Says warm or cold, wet or dry, and gives at least one specific detail such as ice, deserts, swamps, or sea level.</td>
+        <td><b>1 to 2.</b> One word like "hot" with no detail, or partly incorrect.</td>
+        <td><b>0.</b> Missing or wrong.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Organisms</div><div class="pts">4 points</div></td>
+        <td><b>4.</b> At least 3 organisms that really first appeared in this period. Each one explained: what it was and why it matters.</td>
+        <td><b>2 to 3.</b> Fewer than 3, or one is from a different period, or the explanations are missing.</td>
+        <td><b>0 to 1.</b> One organism or none.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Pictures</div><div class="pts">4 points</div></td>
+        <td><b>4.</b> Every organism listed has a picture, and each picture is labeled with its name.</td>
+        <td><b>2 to 3.</b> Most have pictures, or pictures are not labeled.</td>
+        <td><b>0 to 1.</b> Few pictures or none.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Continents map</div><div class="pts">4 points</div></td>
+        <td><b>4.</b> Map shows where the continents were in this period. Each continent is labeled.</td>
+        <td><b>2 to 3.</b> Map is there but unlabeled, or only partly matches the period.</td>
+        <td><b>0 to 1.</b> No map, or just today's map.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Color and layout</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> The whole poster is in color. Key Facts and Organisms are easy to find. Text is readable from a few feet away.</td>
+        <td><b>1 to 2.</b> Color in some parts only, or crowded and hard to read.</td>
+        <td><b>0.</b> Mostly black and white.</td>
+        <td class="score"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="total">TOTAL <span class="blank"></span> / 20</div>
+</div>
+
+</body>
+</html>
