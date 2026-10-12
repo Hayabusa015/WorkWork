@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SHULL_GEO_Activity_U02_S02.3_Period_Poster</title>
+<title>SHULL_GEO_Activity_U02_S02.3_Period_Infographic</title>
 <link rel="stylesheet" href="../templates/lab/shull-lab-tokens.css">
 <style>
   @page {
@@ -99,7 +99,7 @@
   .sub.climate { height: 0.8in; margin-bottom: 5pt; }
   .sub.map { height: 1.1in; }
   .pics { display: flex; gap: 5pt; margin-top: 4pt; }
-  .pic { flex: 1; border: 0.75pt solid var(--ink); height: 1.82in; padding: 4pt 5pt; font-size: 8.6pt; color: var(--structure); }
+  .pic { flex: 1; border: 0.75pt solid var(--ink); height: 1.5in; padding: 4pt 5pt; font-size: 8.6pt; color: var(--structure); }
   .pic .t { font-family: var(--display); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.14em; color: var(--ink); }
   .orgnote { font-size: 8.6pt; color: var(--structure); }
   .key { font-size: 9pt; color: var(--label); margin-top: 4pt; }
@@ -148,6 +148,33 @@
   table.plan { width: 100%; border-collapse: collapse; font-size: 10pt; }
   table.plan td { border-bottom: 0.9pt solid var(--ink); height: 26pt; vertical-align: bottom; padding: 0 3pt 2pt 3pt; }
   table.plan td.job { width: 2.4in; border-bottom: 0.75pt solid var(--rule-hairline); font-family: var(--display); font-weight: 600; }
+
+  /* ---------- Timeline bar + example page ---------- */
+  .tl { margin-bottom: 6pt; }
+  .tlbar { display: flex; height: 14pt; border: 0.75pt solid var(--ink); }
+  .tlbar span { flex: 1; border-right: 0.75pt solid var(--ink); }
+  .tlbar span:last-child { border-right: 0; }
+  .ex-note { font-size: 9pt; color: var(--label); margin: 4pt 0 6pt 0; }
+  .ex-tag { display:inline-block; border: 1pt solid var(--accent); color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.16em; padding: 1pt 5pt; }
+  .ex { border: 0.75pt solid var(--rule-hairline); padding: 8pt; }
+  .ex .z-title { padding: 8pt; }
+  .ex .z-title .big { font-size: 24pt; letter-spacing: 0.08em; }
+  .ex .tlbar { height: 20pt; }
+  .ex .tlbar span { display:flex; align-items:center; justify-content:center; font-family: var(--display); font-size: 8pt; font-weight:600; }
+  .ex .tlbar span.on { border: 2pt solid var(--accent); color: var(--accent); }
+  .ex .tlcap { font-size: 8.4pt; color: var(--label); margin-top: 2pt; }
+  .ex .z-facts, .ex .z-life { padding: 6pt; }
+  .ex .stat { border: 0.75pt solid var(--ink); padding: 4pt 5pt; margin-bottom: 5pt; font-size: 9.4pt; line-height: 1.25; }
+  .ex .stat b { font-family: var(--display); font-weight: 700; font-size: 9.4pt; }
+  .ex .mapbox { border: 0.75pt solid var(--ink); padding: 3pt; text-align: center; font-size: 8.4pt; }
+  .ex .mapbox svg { width: 100%; height: 1.15in; }
+  .ex .org { flex: 1; border: 0.75pt solid var(--ink); padding: 4pt; font-size: 8.8pt; line-height: 1.25; }
+  .ex .org .draw { height: 1.15in; border: 0.75pt dashed var(--rule-hairline); display:flex; align-items:center; justify-content:center; text-align:center; color: var(--structure); font-size: 8.2pt; margin-bottom: 3pt; }
+  .ex .org .nm { font-family: var(--display); font-weight: 700; font-size: 10pt; }
+  .ex .callouts { margin-top: 6pt; }
+  ol.how { list-style: none; counter-reset: h; }
+  ol.how li { display:flex; margin-bottom: 3pt; font-size: 9.6pt; }
+  ol.how .n { flex: 0 0 18pt; font-family: var(--display); font-weight: bold; color: var(--accent); }
 </style>
 </head>
 <body class="geo">
@@ -157,7 +184,7 @@
   <div class="masthead">
     <div class="eyebrow">GEOLOGY &middot; GEOLOGIC TIME &middot; GROUP PROJECT</div>
     <div class="titlerow">
-      <h1>Geologic <span class="accent">Period</span> Poster</h1>
+      <h1>Geologic <span class="accent">Period</span> Infographic</h1>
       <div class="chip">U02 / S02.3</div>
     </div>
   </div>
@@ -170,23 +197,25 @@
   <div class="id-group"><div class="f"></div><div class="lbl">GROUP MEMBERS</div></div>
 
   <h2>THE JOB</h2>
-  <p>Your group picks one geologic period and makes a poster about it. The menu on page 2 lists every period you can choose from, with the main points of each, so you can compare before you decide. The poster has to be in color.</p>
+  <p>Your group picks one geologic period and makes an infographic about it. An infographic tells its story with pictures, a map, and short labels, not paragraphs. The menu on page 2 lists every period you can choose from so you can compare before you decide. Page 3 shows an example setup. The infographic has to be in color.</p>
 
-  <h2>WHAT GOES ON THE POSTER</h2>
+  <h2>WHAT GOES ON THE INFOGRAPHIC</h2>
   <ol class="req">
     <li><span class="n">1</span><span><b>Title.</b> The name of your period, large enough to read from across the room. Add when it started and ended, in millions of years ago (mya).</span></li>
-    <li><span class="n">2</span><span><b>Key Facts zone.</b> This holds two things. <b>Climate:</b> was it warm or cold, wet or dry, and was there ice? <b>Continents:</b> a colored map showing where the continents were during your period, each one labeled.</span></li>
-    <li><span class="n">3</span><span><b>Organisms.</b> Pick at least 3 important living things that evolved or first appeared in your period (the first dinosaurs, the first flowering plants). Write what each one was and why it matters.</span></li>
-    <li><span class="n">4</span><span><b>Pictures.</b> One picture of each organism you list, labeled with its name. Draw it or print it.</span></li>
-    <li><span class="n">5</span><span><b>Color.</b> The whole poster is in color, not pencil or pen alone.</span></li>
+    <li><span class="n">2</span><span><b>Timeline bar.</b> A strip showing where your period sits in its era, with your period highlighted.</span></li>
+    <li><span class="n">3</span><span><b>Key Facts zone.</b> <b>Climate:</b> warm or cold, wet or dry, ice or no ice. <b>Continents:</b> a colored map of where the continents were, each one labeled.</span></li>
+    <li><span class="n">4</span><span><b>Organisms.</b> At least 3 important living things that evolved or first appeared in your period (the first dinosaurs, the first flowering plants). Each gets a picture, its name, and a one-line caption on why it matters.</span></li>
+    <li><span class="n">5</span><span><b>Short text only.</b> Labels and one-line captions. No paragraphs.</span></li>
+    <li><span class="n">6</span><span><b>Color.</b> The whole infographic is in color, not pencil or pen alone.</span></li>
   </ol>
 
-  <h2>POSTER LAYOUT</h2>
+  <h2>BLANK LAYOUT</h2>
   <div class="poster">
     <div class="z-title">
       <div class="big">PERIOD NAME</div>
       <div class="sm">start and end dates, in mya</div>
     </div>
+    <div class="tl"><div class="zlab">TIMELINE BAR</div><div class="tlbar"><span></span><span></span><span></span></div></div>
     <div class="z-row">
       <div class="z-facts">
         <div class="zlab">KEY FACTS</div>
@@ -195,16 +224,16 @@
       </div>
       <div class="z-life">
         <div class="zlab">ORGANISMS</div>
-        <div class="orgnote">At least 3. Each one gets a picture, a name, and why it matters. Add frames if you have more.</div>
+        <div class="orgnote">At least 3. Picture, name, one-line caption. Add frames if you have more.</div>
         <div class="pics">
-          <div class="pic"><div class="t">ORGANISM 1</div>picture, name, why it matters</div>
-          <div class="pic"><div class="t">ORGANISM 2</div>picture, name, why it matters</div>
-          <div class="pic"><div class="t">ORGANISM 3</div>picture, name, why it matters</div>
+          <div class="pic"><div class="t">ORGANISM 1</div>picture, name, caption</div>
+          <div class="pic"><div class="t">ORGANISM 2</div>picture, name, caption</div>
+          <div class="pic"><div class="t">ORGANISM 3</div>picture, name, caption</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="key">Solid teal border: Key Facts. Dashed black border: Organisms. Where the zones sit on your poster is up to your group.</div>
+  <div class="key">Solid teal border: Key Facts. Dashed black border: Organisms. Where the zones sit is up to your group.</div>
 </div>
 
 <!-- ===================== PAGE 2 ===================== -->
@@ -301,10 +330,60 @@
   </table>
 </div>
 
-<!-- ===================== PAGE 3 ===================== -->
+<!-- ===================== PAGE 3: EXAMPLE ===================== -->
 <div class="pg">
   <div class="masthead" style="padding-bottom:5pt;">
-    <div class="eyebrow">GEOLOGIC PERIOD POSTER</div>
+    <div class="eyebrow">EXAMPLE SETUP</div>
+    <div class="titlerow"><h1 style="font-size:16pt;">What a Finished <span class="accent">Infographic</span> Looks Like</h1></div>
+  </div>
+  <p class="ex-note"><span class="ex-tag">EXAMPLE</span>&nbsp; Sample layout using the Triassic. Choose a different period for yours. This copy is outlined to save printer ink. Yours must be colored in.</p>
+
+  <div class="ex">
+    <div class="z-title">
+      <div class="big">TRIASSIC</div>
+      <div class="sm">252 to 201 mya &middot; 51 million years &middot; Mesozoic Era</div>
+    </div>
+    <div class="tl">
+      <div class="tlbar"><span class="on">TRIASSIC</span><span>JURASSIC</span><span>CRETACEOUS</span></div>
+      <div class="tlcap">Timeline bar: the Mesozoic Era, with our period highlighted.</div>
+    </div>
+    <div class="z-row">
+      <div class="z-facts">
+        <div class="zlab">KEY FACTS</div>
+        <div class="stat"><b>CLIMATE</b><br>Hot and mostly dry. No ice at the poles.</div>
+        <div class="mapbox">
+          <svg viewBox="0 0 200 110" role="img" aria-label="Simple sketch of the supercontinent Pangaea">
+            <path d="M25 40 C35 15 75 10 100 22 C130 8 165 20 172 48 C178 70 150 92 120 90 C105 102 80 100 66 86 C40 84 18 66 25 40 Z" style="fill:none;stroke:var(--accent);stroke-width:2.5"/>
+            <text x="100" y="58" text-anchor="middle" font-size="14" font-weight="bold" style="fill:var(--ink);font-family:var(--display)">PANGAEA</text>
+          </svg>
+          CONTINENTS: one supercontinent, Pangaea
+        </div>
+      </div>
+      <div class="z-life">
+        <div class="zlab">ORGANISMS</div>
+        <div class="pics" style="margin-top:0;">
+          <div class="org"><div class="draw"><span>drawing of<br>Coelophysis</span></div><div class="nm">Coelophysis</div>One of the first dinosaurs. Small, fast, and walked on two legs.</div>
+          <div class="org"><div class="draw"><span>drawing of<br>Eudimorphodon</span></div><div class="nm">Eudimorphodon</div>An early pterosaur. First animals with backbones to fly.</div>
+          <div class="org"><div class="draw"><span>drawing of<br>an ichthyosaur</span></div><div class="nm">Ichthyosaur</div>A reptile that went back to the ocean and looked like a dolphin.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>HOW THIS EXAMPLE MEETS THE JOB</h2>
+  <ol class="how">
+    <li><span class="n">1</span><span>Big title with the dates. The name is the biggest thing on the page.</span></li>
+    <li><span class="n">2</span><span>The timeline bar shows where the Triassic sits and highlights it.</span></li>
+    <li><span class="n">3</span><span>Key Facts holds climate and the continents map, side by side.</span></li>
+    <li><span class="n">4</span><span>Three organisms, each with a picture, a name, and a one-line caption.</span></li>
+    <li><span class="n">5</span><span>Only labels and short captions. Nothing longer than one sentence.</span></li>
+  </ol>
+</div>
+
+<!-- ===================== PAGE 4 ===================== -->
+<div class="pg">
+  <div class="masthead" style="padding-bottom:5pt;">
+    <div class="eyebrow">GEOLOGIC PERIOD INFOGRAPHIC</div>
     <div class="titlerow"><h1 style="font-size:16pt;">Group <span class="accent">Plan</span> and Rubric</h1></div>
   </div>
 
@@ -314,7 +393,7 @@
     <tr><td class="job">Organism 1</td><td></td></tr>
     <tr><td class="job">Organism 2</td><td></td></tr>
     <tr><td class="job">Organism 3</td><td></td></tr>
-    <tr><td class="job">Who makes the continents map</td><td></td></tr>
+    <tr><td class="job">Who makes the timeline and continents map</td><td></td></tr>
     <tr><td class="job">Who writes the climate section</td><td></td></tr>
   </table>
 
@@ -325,44 +404,44 @@
     </thead>
     <tbody>
       <tr>
-        <td><div class="crit">Title</div><div class="pts">2 points</div></td>
-        <td><b>2.</b> Period name and start and end dates, readable across the room.</td>
-        <td><b>1.</b> Name only, dates missing, or hard to read.</td>
-        <td><b>0.</b> No title.</td>
+        <td><div class="crit">Title and timeline</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> Period name and dates are big and clear. Timeline bar shows where the period sits and highlights it.</td>
+        <td><b>1 to 2.</b> One is missing, or hard to read.</td>
+        <td><b>0.</b> Neither.</td>
         <td class="score"></td>
       </tr>
       <tr>
         <td><div class="crit">Climate</div><div class="pts">3 points</div></td>
-        <td><b>3.</b> Correct. Says warm or cold, wet or dry, and gives at least one specific detail such as ice, deserts, swamps, or sea level.</td>
+        <td><b>3.</b> Correct. Says warm or cold, wet or dry, and gives one specific detail such as ice, deserts, swamps, or sea level.</td>
         <td><b>1 to 2.</b> One word like "hot" with no detail, or partly incorrect.</td>
         <td><b>0.</b> Missing or wrong.</td>
         <td class="score"></td>
       </tr>
       <tr>
-        <td><div class="crit">Organisms</div><div class="pts">4 points</div></td>
-        <td><b>4.</b> At least 3 organisms that really first appeared in this period. Each one explained: what it was and why it matters.</td>
-        <td><b>2 to 3.</b> Fewer than 3, or one is from a different period, or the explanations are missing.</td>
+        <td><div class="crit">Continents map</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> Map shows where the continents were in this period. Each continent is labeled.</td>
+        <td><b>1 to 2.</b> Map is there but unlabeled, or only partly matches the period.</td>
+        <td><b>0.</b> No map, or just today's map.</td>
+        <td class="score"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Organisms and pictures</div><div class="pts">5 points</div></td>
+        <td><b>5.</b> At least 3 organisms that first appeared in this period. Each has a labeled picture and a one-line caption on why it matters.</td>
+        <td><b>2 to 4.</b> Fewer than 3, or one is from a different period, or pictures or captions are missing.</td>
         <td><b>0 to 1.</b> One organism or none.</td>
         <td class="score"></td>
       </tr>
       <tr>
-        <td><div class="crit">Pictures</div><div class="pts">4 points</div></td>
-        <td><b>4.</b> Every organism listed has a picture, and each picture is labeled with its name.</td>
-        <td><b>2 to 3.</b> Most have pictures, or pictures are not labeled.</td>
-        <td><b>0 to 1.</b> Few pictures or none.</td>
+        <td><div class="crit">Clear and visual</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> Tells the story with pictures and short labels. No paragraphs. Zones are easy to find and readable from a few feet away.</td>
+        <td><b>1 to 2.</b> Too much writing, or crowded and hard to follow.</td>
+        <td><b>0.</b> Mostly paragraphs.</td>
         <td class="score"></td>
       </tr>
       <tr>
-        <td><div class="crit">Continents map</div><div class="pts">4 points</div></td>
-        <td><b>4.</b> Map shows where the continents were in this period. Each continent is labeled.</td>
-        <td><b>2 to 3.</b> Map is there but unlabeled, or only partly matches the period.</td>
-        <td><b>0 to 1.</b> No map, or just today's map.</td>
-        <td class="score"></td>
-      </tr>
-      <tr>
-        <td><div class="crit">Color and layout</div><div class="pts">3 points</div></td>
-        <td><b>3.</b> The whole poster is in color. Key Facts and Organisms are easy to find. Text is readable from a few feet away.</td>
-        <td><b>1 to 2.</b> Color in some parts only, or crowded and hard to read.</td>
+        <td><div class="crit">Color</div><div class="pts">3 points</div></td>
+        <td><b>3.</b> The whole infographic is colored, and the color helps show what goes together.</td>
+        <td><b>1 to 2.</b> Color in some parts only.</td>
         <td><b>0.</b> Mostly black and white.</td>
         <td class="score"></td>
       </tr>
