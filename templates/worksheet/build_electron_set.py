@@ -764,6 +764,11 @@ def build_gizmo(out, key):
     line(c, "5   Look at the Energy view. Which box sits lower on the screen, 4s or 3d?  {{4s}}   "
             "Lower on the screen means  {{lower}}  energy.")
     line(c, "6   Order the subshells fill:   1s,  {{2s}},  {{2p}},  {{3s}},  {{3p}},  {{4s}},  {{3d}},  4p")
+    line(c, "7   Build phosphorus (P) in the Gizmo and Check it. Electron configuration:  "
+            "{{1s^2^ 2s^2^ 2p^6^ 3s^2^ 3p^3^}}")
+    line(c, "8   Use what you saw in step 5. In one sentence, explain why potassium's last electron "
+            "goes in 4s and not in 3d.")
+    answer_line(c, "My explanation", "4s is lower in energy than 3d, so it fills first.", label_w=1.2)
     rule_bar(c, "AUFBAU PRINCIPLE", "Electrons fill the {{lowest}}-energy orbitals first.",
              "lowest, highest")
 
@@ -774,6 +779,10 @@ def build_gizmo(out, key):
             "arrow points  {{up}}  and the second arrow points  {{down}}.")
     line(c, "2   Select Li. Try to add a third electron to the 1s box, then click Check.")
     answer_line(c, "Feedback", "Marked wrong: a full orbital takes no third electron. It goes in 2s.")
+    line(c, "3   Select Ne and fill it. The 2p subshell has  {{3}}  boxes and holds  {{6}}  electrons "
+            "in total. Divide: that is  {{2}}  electrons in each box.")
+    line(c, "4   Predict, then try it. The 3d subshell has 5 boxes. The most electrons it can hold is  "
+            "{{10}}.  Click a few 3d boxes in the Gizmo to see the arrows.")
     rule_bar(c, "PAULI EXCLUSION PRINCIPLE",
              "One orbital holds at most {{2}} electrons, and their arrows point in "
              "{{opposite}} directions.", "2, 1, same, opposite")
@@ -816,10 +825,41 @@ def build_gizmo(out, key):
     spacer(c, 3)
     line(c, "3   In nitrogen, each 2p box holds  {{1}}  electron. In oxygen, the fourth 2p electron "
             "goes into a box that already has one and  {{pairs up}}  with it.")
+    line(c, "4   Count the unpaired electrons (single arrows) in the 2p boxes:  "
+            "N  {{3}}     O  {{2}}     F  {{1}}     Ne  {{0}}")
+    line(c, "5   Why does the number of unpaired electrons go down after nitrogen?")
+    answer_line(c, "My explanation", "Every box already has one electron, so the next ones must pair up.",
+                label_w=1.2)
     rule_bar(c, "HUND'S RULE",
              "Electrons fill each {{box}} in a subshell with {{one}} electron first. They pair up "
              "only when every box has one. The single electrons all point the {{same}} way.",
              "box, one, two, same, opposite")
+
+    # ---------------- Practice ----------------
+    line(c, "6   Practice. Draw the 3s and 3p boxes for each element first, using all three rules. "
+            "Then build it in the Gizmo and Check. Correct anything the Gizmo marks wrong.")
+    spacer(c, 2)
+    pr = [(15, "P"), (16, "S"), (17, "Cl")]
+    t = c.add_table(rows=len(pr), cols=2)
+    fix_widths(t, [0.6, 6.4])
+    for i, (z, sym) in enumerate(pr):
+        no_split(t.rows[i], 0.44)
+        a_, d_ = t.rows[i].cells
+        for x in (a_, d_):
+            x.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_margins(x, top=20, bottom=20, left=20, right=20)
+            borders(x, pal.hair, sz=4, edges=("bottom",))
+        pa = a_.paragraphs[0]; pa.paragraph_format.space_after = Pt(0)
+        _run(pa, sym, 11, bold=True, color=pal.ink)
+        subs = {(n, l): cc for n, l, cc in config(z)}
+        parts = [("3s", arrows(subs.get((3, "s"), 0) if key else 0, 1)),
+                 ("3p", arrows(subs.get((3, "p"), 0) if key else 0, 3))]
+        pin_first(d_)
+        box_strip(d_, pal, parts)
+    pin_tail(c)
+    spacer(c, 3)
+    line(c, "7   Which of the three has the most unpaired electrons?  {{P}}   How many?  {{3}}")
+    spacer(c, 2)
 
     # ---------------- Summary ----------------
     gap(doc, 5)
