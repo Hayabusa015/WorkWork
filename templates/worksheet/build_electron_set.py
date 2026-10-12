@@ -646,6 +646,196 @@ def full_table(doc, pal):
 
 
 # ---------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
+# Item 5: Gizmo exploration of the three rules (before the rules are taught)
+# ---------------------------------------------------------------------------------------
+def pin_first(cell, pt=1):
+    p = cell.paragraphs[0]
+    pPr = p._p.get_or_add_pPr()
+    sp = OxmlElement("w:spacing")
+    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+    sp.set(qn("w:line"), str(int(pt * 20))); sp.set(qn("w:lineRule"), "exact")
+    pPr.append(sp)
+
+
+def box_strip(cell, pal, parts):
+    """parts = [(label, [arrow strings per box])]. Empty string = empty box."""
+    widths = []
+    for lab, boxes in parts:
+        widths += [0.34] + [0.30] * len(boxes)
+    t = cell.add_table(rows=1, cols=len(widths))
+    fix_widths(t, widths)
+    no_split(t.rows[0], 0.34)
+    ci = 0
+    for lab, boxes in parts:
+        lc = t.rows[0].cells[ci]; ci += 1
+        lc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell_margins(lc, top=0, bottom=0, left=0, right=10)
+        p = lc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        _run(p, lab, 8, bold=True, color=pal.label)
+        for mark in boxes:
+            bc = t.rows[0].cells[ci]; ci += 1
+            borders(bc, pal.accent, sz=8)
+            bc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_margins(bc, top=0, bottom=0, left=0, right=0)
+            p = bc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            if mark:
+                _run(p, mark, 10, bold=True, color=pal.accent)
+    pin_tail(cell)
+    return t
+
+
+def build_gizmo(out, key):
+    pal = Palette(COURSE)
+    ctx = Ctx(pal, key)
+    doc, s = new_doc()
+    header(doc, pal, "ACTIVITY  ·  ELECTRON CONFIGURATION GIZMO  ·  BEFORE WE TEACH IT" +
+           ("  ·  TEACHER KEY" if key else ""), "Exploring the 3 Rules of Electron Configuration")
+
+    def box(title=None):
+        c = one_cell(doc); borders(c, pal.hair)
+        if title:
+            label(c, title, pal, first=True)
+        return c
+
+    def line(cell, text, first=False):
+        p = cell.paragraphs[0] if first else cell.add_paragraph()
+        p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.left_indent = Inches(0.25)
+        p.paragraph_format.first_line_indent = Inches(-0.25)
+        rich(p, text, 10, ctx)
+        return p
+
+    def answer_line(cell, lab, ans, label_w=1.2):
+        write_line(cell, lab, pal, lambda p: rich(p, ans, 9.5, ctx, bold=True, color=pal.accent),
+                   key, label_w=label_w, height=0.34)
+
+    def rule_bar(cell, title, sentence, bank=None):
+        spacer(cell, 3)
+        t = cell.add_table(rows=1, cols=1)
+        fix_widths(t, [7.0])
+        c = t.rows[0].cells[0]
+        borders(c, pal.display, sz=18, edges=("left",))
+        cell_margins(c, top=30, bottom=30, left=100, right=40)
+        p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(1)
+        _run(p, title + "   ", 9, bold=True, color=pal.accent)
+        rich(p, sentence, 9.5, ctx, bold=True)
+        if bank and not key:
+            q = c.add_paragraph(); q.paragraph_format.space_after = Pt(0)
+            _run(q, "Word bank: " + bank, 8, color=pal.label)
+        no_split(t.rows[0])
+        pin_tail(cell)
+
+    if key:
+        gap(doc, 2)
+        c = box()
+        para(c, "Feedback wording comes from the Gizmo and can differ from what is shown here. "
+                "Look for the idea, not the exact words.", 8.5, color=pal.label, first=True)
+
+    gap(doc, 3)
+    c = box("GOAL")
+    para(c, "Before we talk about the rules, you will find them yourself. Click, try things, read "
+            "the Gizmo's feedback, and write down what you notice. A wrong try is how you find a "
+            "rule. If a step goes wrong, click Reset and start that step again.", 9.5)
+
+    gap(doc, 4)
+    c = box("SET UP")
+    for i, x in enumerate([
+            "Open the Electron Configuration Gizmo. Click the PERIODIC TABLE tab and select H.",
+            "Click the ELECTRON CONFIGURATION tab. Click Reset.",
+            "Check Show total number of electrons. Set Subshells ordered by to Energy.",
+            "Each box is one orbital. Click a box to add an electron (an arrow). Click Check to "
+            "see if your arrangement is right. Click Next element to move on."], 1):
+        line(c, f"{i}   {x}")
+
+    # ---------------- Part 1: Aufbau ----------------
+    gap(doc, 5)
+    c = box("PART 1  ·  RULE 1  ·  WHERE DOES THE NEXT ELECTRON GO?")
+    line(c, "1   Select H. Click the 2s box, not the 1s box, then click Check.")
+    answer_line(c, "Feedback", "Marked wrong: the electron belongs in a lower-energy orbital (1s).")
+    line(c, "2   Reset and click 1s instead. Check. Electron configuration shown:  {{1s^1^}}")
+    line(c, "3   Select Ar on the PERIODIC TABLE tab. Build argon and click Check until it is "
+            "correct. Click Next element to reach K. Click the first 3d box, then Check.")
+    answer_line(c, "Feedback", "Marked wrong: 3d is not next. The electron goes in 4s.")
+    line(c, "4   Fix potassium. Click Next element to add Ca, then Sc. Where does the new electron go?")
+    line(c, "       K:  {{4s}}        Ca:  {{4s}}        Sc:  {{3d}}")
+    line(c, "5   Look at the Energy view. Which box sits lower on the screen, 4s or 3d?  {{4s}}   "
+            "Lower on the screen means  {{lower}}  energy.")
+    line(c, "6   Order the subshells fill:   1s,  {{2s}},  {{2p}},  {{3s}},  {{3p}},  {{4s}},  {{3d}},  4p")
+    rule_bar(c, "AUFBAU PRINCIPLE", "Electrons fill the {{lowest}}-energy orbitals first.",
+             "lowest, highest")
+
+    # ---------------- Part 2: Pauli ----------------
+    gap(doc, 5)
+    c = box("PART 2  ·  RULE 2  ·  TWO ELECTRONS IN ONE BOX")
+    line(c, "1   Reset. Select He. Click the 1s box twice. Look at the two arrows. The first "
+            "arrow points  {{up}}  and the second arrow points  {{down}}.")
+    line(c, "2   Select Li. Try to add a third electron to the 1s box, then click Check.")
+    answer_line(c, "Feedback", "Marked wrong: a full orbital takes no third electron. It goes in 2s.")
+    rule_bar(c, "PAULI EXCLUSION PRINCIPLE",
+             "One orbital holds at most {{2}} electrons, and their arrows point in "
+             "{{opposite}} directions.", "2, 1, same, opposite")
+
+    # ---------------- Part 3: Hund ----------------
+    page_break_before(doc)
+    c = box("PART 3  ·  RULE 3  ·  SHARING THE 2p BOXES")
+    line(c, "1   Reset. Select C. Fill 1s and 2s. Then click the SAME 2p box twice and click Check.")
+    answer_line(c, "Feedback", "Marked wrong: the 2p electrons belong in different boxes.")
+    line(c, "2   Fix it and click Check. Then build each element below in the Gizmo, clicking Check "
+            "each time. Write its electron configuration and draw every arrow in the boxes.")
+    spacer(c, 2)
+    rows = [(5, "B"), (6, "C"), (7, "N"), (8, "O"), (9, "F"), (10, "Ne")]
+    t = c.add_table(rows=1 + len(rows), cols=3)
+    fix_widths(t, [0.6, 2.3, 4.1])
+    for i, h in enumerate(["ELEMENT", "ELECTRON CONFIGURATION", "ORBITAL DIAGRAM  ·  DRAW THE ARROWS"]):
+        x = t.rows[0].cells[i]
+        borders(x, pal.display, sz=12, edges=("bottom",))
+        cell_margins(x, top=10, bottom=20, left=20, right=20)
+        ph = x.paragraphs[0]; ph.paragraph_format.space_after = Pt(0)
+        _run(ph, h, 7.5, bold=True, color=pal.accent)
+    for i, (z, sym) in enumerate(rows, start=1):
+        no_split(t.rows[i], 0.44)
+        a_, b_, d_ = t.rows[i].cells
+        for x in (a_, b_, d_):
+            x.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_margins(x, top=20, bottom=20, left=20, right=20)
+            borders(x, pal.hair, sz=4, edges=("bottom",))
+        pa = a_.paragraphs[0]; pa.paragraph_format.space_after = Pt(0)
+        _run(pa, sym, 11, bold=True, color=pal.ink)
+        pb = b_.paragraphs[0]; pb.paragraph_format.space_after = Pt(0)
+        if key:
+            put_config(pb, config(z), 9.5, pal.accent, bold=True)
+        subs = {(n, l): cc for n, l, cc in config(z)}
+        parts = [("1s", arrows(2 if key else 0, 1)), ("2s", arrows(2 if key else 0, 1)),
+                 ("2p", arrows(subs.get((2, "p"), 0) if key else 0, 3))]
+        pin_first(d_)
+        box_strip(d_, pal, parts)
+    pin_tail(c)
+    spacer(c, 3)
+    line(c, "3   In nitrogen, each 2p box holds  {{1}}  electron. In oxygen, the fourth 2p electron "
+            "goes into a box that already has one and  {{pairs up}}  with it.")
+    rule_bar(c, "HUND'S RULE",
+             "Electrons fill each {{box}} in a subshell with {{one}} electron first. They pair up "
+             "only when every box has one. The single electrons all point the {{same}} way.",
+             "box, one, two, same, opposite")
+
+    # ---------------- Summary ----------------
+    gap(doc, 5)
+    c = box("MY THREE RULES, IN MY OWN WORDS")
+    for nm, ans in [("Aufbau", "Fill the lowest-energy orbitals first."),
+                    ("Pauli", "Two electrons per orbital, arrows opposite."),
+                    ("Hund", "One electron in each box before pairing, singles point the same way.")]:
+        answer_line(c, nm, ans, label_w=0.9)
+    spacer(c, 2)
+
+    running_footer(s, f"SHULL SCIENCE          {UNIT} · S02.3" +
+                   ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
+    trim_tail(doc)
+    doc.save(out)
+
+
 def main():
     outdir = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(outdir, exist_ok=True)
@@ -662,7 +852,10 @@ def main():
     build_valence(os.path.join(outdir, base + ".docx"), False, tmp)
     build_valence(os.path.join(outdir, base + "_Key.docx"), True, tmp)
     build_battleship(os.path.join(outdir, "SHULL_CHEM_Activity_U02_S02.3_Electron_Battleship.docx"))
-    print("wrote 7 files to", outdir)
+    g = "SHULL_CHEM_Activity_U02_S02.3_Gizmo_Rules"
+    build_gizmo(os.path.join(outdir, g + ".docx"), False)
+    build_gizmo(os.path.join(outdir, g + "_Key.docx"), True)
+    print("wrote 9 files to", outdir)
 
 
 if __name__ == "__main__":
