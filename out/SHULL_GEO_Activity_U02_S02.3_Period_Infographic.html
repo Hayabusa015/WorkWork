@@ -165,12 +165,14 @@
   .ex .tlcap { font-size: 8.4pt; color: var(--label); margin-top: 2pt; }
   .ex .z-facts, .ex .z-life { padding: 6pt; }
   .ex .stat { border: 0.75pt solid var(--ink); padding: 4pt 5pt; margin-bottom: 5pt; font-size: 9.4pt; line-height: 1.25; }
-  .ex .stat b { font-family: var(--display); font-weight: 700; font-size: 9.4pt; }
+  .ex .stat b { font-family: var(--display); font-weight: bold; font-size: 9.4pt; }
   .ex .mapbox { border: 0.75pt solid var(--ink); padding: 3pt; text-align: center; font-size: 8.4pt; }
+  .mapwrap { position: relative; }
+  .maplab { position: absolute; left: 0; right: 0; top: 50%; margin-top: -7pt; text-align: center; font-family: var(--display); font-weight: bold; font-size: 10pt; letter-spacing: 0.06em; }
   .ex .mapbox svg { width: 100%; height: 1.15in; }
   .ex .org { flex: 1; border: 0.75pt solid var(--ink); padding: 4pt; font-size: 8.8pt; line-height: 1.25; }
   .ex .org .draw { height: 1.15in; border: 0.75pt dashed var(--rule-hairline); display:flex; align-items:center; justify-content:center; text-align:center; color: var(--structure); font-size: 8.2pt; margin-bottom: 3pt; }
-  .ex .org .nm { font-family: var(--display); font-weight: 700; font-size: 10pt; }
+  .ex .org .nm { font-family: var(--display); font-weight: bold; font-size: 10pt; }
   .ex .callouts { margin-top: 6pt; }
   ol.how { list-style: none; counter-reset: h; }
   ol.how li { display:flex; margin-bottom: 3pt; font-size: 9.6pt; }
@@ -352,10 +354,9 @@
         <div class="zlab">KEY FACTS</div>
         <div class="stat"><b>CLIMATE</b><br>Hot and mostly dry. No ice at the poles.</div>
         <div class="mapbox">
-          <svg viewBox="0 0 200 110" role="img" aria-label="Simple sketch of the supercontinent Pangaea">
+          <div class="mapwrap"><svg viewBox="0 0 200 110" role="img" aria-label="Simple sketch of the supercontinent Pangaea">
             <path d="M25 40 C35 15 75 10 100 22 C130 8 165 20 172 48 C178 70 150 92 120 90 C105 102 80 100 66 86 C40 84 18 66 25 40 Z" style="fill:none;stroke:var(--accent);stroke-width:2.5"/>
-            <text x="100" y="58" text-anchor="middle" font-size="14" font-weight="bold" style="fill:var(--ink);font-family:var(--display)">PANGAEA</text>
-          </svg>
+          </svg><div class="maplab">PANGAEA</div></div>
           CONTINENTS: one supercontinent, Pangaea
         </div>
       </div>
