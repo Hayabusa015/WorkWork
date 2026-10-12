@@ -164,14 +164,14 @@
   .ex .tlbar span.on { border: 2pt solid var(--accent); color: var(--accent); }
   .ex .tlcap { font-size: 8.4pt; color: var(--label); margin-top: 2pt; }
   .ex .z-facts, .ex .z-life { padding: 6pt; }
-  .ex .stat { border: 0.75pt solid var(--ink); padding: 4pt 5pt; margin-bottom: 5pt; font-size: 9.4pt; line-height: 1.25; }
+  .ex .stat { border: 0.75pt solid var(--ink); padding: 8pt 7pt; margin-bottom: 8pt; font-size: 10.4pt; line-height: 1.25; }
   .ex .stat b { font-family: var(--display); font-weight: bold; font-size: 9.4pt; }
   .ex .mapbox { border: 0.75pt solid var(--ink); padding: 3pt; text-align: center; font-size: 8.4pt; }
   .mapwrap { position: relative; }
   .maplab { position: absolute; left: 0; right: 0; top: 50%; margin-top: -7pt; text-align: center; font-family: var(--display); font-weight: bold; font-size: 10pt; letter-spacing: 0.06em; }
   .ex .mapbox svg { width: 100%; height: 1.15in; }
   .ex .org { flex: 1; border: 0.75pt solid var(--ink); padding: 4pt; font-size: 8.8pt; line-height: 1.25; }
-  .ex .org .draw { height: 1.15in; border: 0.75pt dashed var(--rule-hairline); display:flex; align-items:center; justify-content:center; text-align:center; color: var(--structure); font-size: 8.2pt; margin-bottom: 3pt; }
+  .ex .org .draw { height: 3.2in; border: 0.75pt dashed var(--rule-hairline); display:flex; align-items:center; justify-content:center; text-align:center; color: var(--structure); font-size: 8.2pt; margin-bottom: 3pt; }
   .ex .org .nm { font-family: var(--display); font-weight: bold; font-size: 10pt; }
   .ex .callouts { margin-top: 6pt; }
   ol.how { list-style: none; counter-reset: h; }
@@ -336,49 +336,37 @@
 <div class="pg">
   <div class="masthead" style="padding-bottom:5pt;">
     <div class="eyebrow">EXAMPLE SETUP</div>
-    <div class="titlerow"><h1 style="font-size:16pt;">What a Finished <span class="accent">Infographic</span> Looks Like</h1></div>
+    <div class="titlerow"><h1 style="font-size:16pt;">Sample <span class="accent">Layout</span>: The Triassic</h1></div>
   </div>
-  <p class="ex-note"><span class="ex-tag">EXAMPLE</span>&nbsp; Sample layout using the Triassic. Choose a different period for yours. This copy is outlined to save printer ink. Yours must be colored in.</p>
+  <p class="ex-note">This is only an example of how the pieces fit together. Pick a different period for yours. Yours must be colored in, with real pictures.</p>
 
   <div class="ex">
     <div class="z-title">
       <div class="big">TRIASSIC</div>
-      <div class="sm">252 to 201 mya &middot; 51 million years &middot; Mesozoic Era</div>
+      <div class="sm">252 to 201 mya &middot; Mesozoic Era</div>
     </div>
     <div class="tl">
       <div class="tlbar"><span class="on">TRIASSIC</span><span>JURASSIC</span><span>CRETACEOUS</span></div>
-      <div class="tlcap">Timeline bar: the Mesozoic Era, with our period highlighted.</div>
     </div>
     <div class="z-row">
       <div class="z-facts">
         <div class="zlab">KEY FACTS</div>
         <div class="stat"><b>CLIMATE</b><br>Hot and mostly dry. No ice at the poles.</div>
-        <div class="mapbox">
-          <div class="mapwrap"><svg viewBox="0 0 200 110" role="img" aria-label="Simple sketch of the supercontinent Pangaea">
-            <path d="M25 40 C35 15 75 10 100 22 C130 8 165 20 172 48 C178 70 150 92 120 90 C105 102 80 100 66 86 C40 84 18 66 25 40 Z" style="fill:none;stroke:var(--accent);stroke-width:2.5"/>
-          </svg><div class="maplab">PANGAEA</div></div>
-          CONTINENTS: one supercontinent, Pangaea
-        </div>
+        <div class="stat"><b>CONTINENTS</b><br>One supercontinent called Pangaea. It starts to crack apart near the end of the period.</div>
+        <div class="stat" style="margin-bottom:0;"><b>HOW LONG</b><br>About 51 million years.</div>
       </div>
       <div class="z-life">
         <div class="zlab">ORGANISMS</div>
         <div class="pics" style="margin-top:0;">
-          <div class="org"><div class="draw"><span>drawing of<br>Coelophysis</span></div><div class="nm">Coelophysis</div>An early dinosaur from the Late Triassic. Small, fast, and walked on two legs.</div>
-          <div class="org"><div class="draw"><span>drawing of<br>Eudimorphodon</span></div><div class="nm">Eudimorphodon</div>An early pterosaur. Pterosaurs were the first backboned animals to fly under their own power.</div>
-          <div class="org"><div class="draw"><span>drawing of<br>an ichthyosaur</span></div><div class="nm">Ichthyosaur</div>A marine reptile. Later ones looked like dolphins.</div>
+          <div class="org"><div class="draw"></div><div class="nm">Coelophysis</div>An early dinosaur. Small, fast, walked on two legs.</div>
+          <div class="org"><div class="draw"></div><div class="nm">Eudimorphodon</div>An early pterosaur, one of the first backboned animals to fly.</div>
+          <div class="org"><div class="draw"></div><div class="nm">Ichthyosaur</div>A marine reptile. Later ones looked like dolphins.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <h2>HOW THIS EXAMPLE MEETS THE JOB</h2>
-  <ol class="how">
-    <li><span class="n">1</span><span>Big title with the dates. The name is the biggest thing on the page.</span></li>
-    <li><span class="n">2</span><span>The timeline bar shows where the Triassic sits and highlights it.</span></li>
-    <li><span class="n">3</span><span>Key Facts holds climate and the continents map, side by side.</span></li>
-    <li><span class="n">4</span><span>Three organisms, each with a picture, a name, and a one-line caption.</span></li>
-    <li><span class="n">5</span><span>Only labels and short captions. Nothing longer than one sentence.</span></li>
-  </ol>
+  <p class="ex-note" style="margin-top:8pt;">The empty boxes are where the pictures go. Everything else is a label or a one-line caption.</p>
 </div>
 
 <!-- ===================== PAGE 4 ===================== -->
