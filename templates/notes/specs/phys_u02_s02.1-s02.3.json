@@ -12,7 +12,7 @@
     "▸  I can describe a vector by its magnitude and direction, and resolve it into components.",
     "▸  I can add vectors, at right angles and at any angle, and report the resultant with a direction.",
     "▸  I can split a projectile’s motion into two axes that share one time.",
-    "▸  I can solve flat, angled and different-height launches, with signs declared."
+    "▸  I can solve flat, angled and different-height launches using one shared time."
   ],
   "keyTerms": [
     "▸  Vector, magnitude, direction, component",
@@ -25,7 +25,7 @@
     "Worked examples print the problem. Copy the setup and every step from the board, and carry units the whole way.",
     "Your Turn: work it in the box first, then check against the board before the next slide.",
     "Every vector answer carries a direction. Every number carries a unit.",
-    "Projectile problems: +x is along the launch direction and +y is up, so down is negative. Neglect air resistance."
+    "Projectile problems: +y is up, so down is negative. Neglect air resistance."
   ],
   "sectionList": [
     "S2.1   Vectors & Vector Basics (Review)",
@@ -298,37 +298,7 @@
           }
         },
         {
-          "cueLabel": "SLIDE 28",
-          "cues": [
-            "All four equations",
-            "The quantity each one leaves out",
-            "The condition on acceleration"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "THE FOUR KINEMATIC EQUATIONS",
-            "workLabel": "",
-            "workHeightIn": 2.4
-          }
-        },
-        {
           "cueLabel": "SLIDE 29",
-          "cues": [
-            "Positive directions, stated",
-            "The variable list for each axis",
-            "Vertical velocity at the peak"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "EVERY PROJECTILE SOLUTION STARTS HERE",
-            "workLabel": "",
-            "workHeightIn": 2.6
-          }
-        },
-        {
-          "cueLabel": "SLIDE 31",
           "cues": [
             "Stage 1 — flat launch",
             "Horizontal and vertical motion, separately",
@@ -343,24 +313,24 @@
           }
         },
         {
-          "cueLabel": "SLIDES 32–34",
+          "cueLabel": "SLIDES 30–31",
           "cues": [
-            "The variable list for each axis",
-            "Time from the vertical motion first"
+            "Vertical motion first, for the shared time",
+            "Horizontal distance from that time"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "EXAMPLE — ROLLING OFF A TABLE",
             "workLabel": "",
-            "workHeightIn": 3.6,
-            "statement": "A ball leaves a 0.80 m table horizontally at 2.5 m/s. Find flight time, horizontal distance, and final vertical velocity."
+            "workHeightIn": 2.6,
+            "statement": "A ball rolls off a 0.80 m table at 2.5 m/s. How long until it lands, and how far does it travel horizontally?"
           }
         },
         {
-          "cueLabel": "SLIDES 35–36",
+          "cueLabel": "SLIDE 32",
           "cues": [
-            "Same method, new numbers",
+            "Same two steps",
             "Work it first, then check the board"
           ],
           "notesLabel": "",
@@ -368,12 +338,12 @@
           "problem": {
             "label": "YOUR TURN — OFF A HIGHER SHELF",
             "workLabel": "",
-            "workHeightIn": 3.4,
-            "statement": "A marble leaves a 1.25 m shelf horizontally at 3.0 m/s. Find its flight time, horizontal distance, and final vertical velocity."
+            "workHeightIn": 2.4,
+            "statement": "A marble rolls off a 1.25 m shelf at 3.0 m/s. How far from the shelf does it land?"
           }
         },
         {
-          "cueLabel": "SLIDE 38",
+          "cueLabel": "SLIDE 34",
           "cues": [
             "Stage 2 — launch angle",
             "Velocity components",
@@ -389,24 +359,24 @@
           }
         },
         {
-          "cueLabel": "SLIDES 39–41",
+          "cueLabel": "SLIDES 35–36",
           "cues": [
-            "Common error — Δy = 0 read as no vertical motion",
-            "Landing velocity components"
+            "Resolve the velocity first",
+            "Time depends on viy, range on both components"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "EXAMPLE — A KICKED SOCCER BALL",
             "workLabel": "",
-            "workHeightIn": 3.6,
-            "statement": "A soccer ball launches at 18 m/s, 30° above level ground. Find the time of flight, the range, and the final velocity components."
+            "workHeightIn": 2.8,
+            "statement": "A ball is kicked at 18 m/s at 30° above level ground. Find its time of flight and range."
           }
         },
         {
-          "cueLabel": "SLIDES 42–43",
+          "cueLabel": "SLIDE 37",
           "cues": [
-            "Write the general equation first",
+            "Resolve first, then the level-ground formulas",
             "Work it first, then check the board"
           ],
           "notesLabel": "",
@@ -414,12 +384,12 @@
           "problem": {
             "label": "YOUR TURN — A LAUNCHED ARROW",
             "workLabel": "",
-            "workHeightIn": 3.4,
-            "statement": "An arrow launches at 45 m/s, 40° above level ground. Find flight time, range, and final velocity components."
+            "workHeightIn": 2.6,
+            "statement": "An arrow is shot at 45 m/s at 40° above level ground. Find its range, neglecting air resistance."
           }
         },
         {
-          "cueLabel": "SLIDE 45",
+          "cueLabel": "SLIDE 39",
           "cues": [
             "Stage 3 — different heights",
             "Conditions at the peak",
@@ -435,37 +405,37 @@
           }
         },
         {
-          "cueLabel": "SLIDES 46–48",
+          "cueLabel": "SLIDES 40–41",
           "cues": [
-            "The peak is the final state here",
+            "Vertical velocity at the peak",
             "Height above launch, then above ground"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
-            "label": "EXAMPLE — CLIFF LAUNCH, THE PEAK",
+            "label": "EXAMPLE — MAX HEIGHT FROM A CLIFF",
             "workLabel": "",
-            "workHeightIn": 3.2,
-            "statement": "A rock launches at 20 m/s, 35° above horizontal, from a 15 m cliff. Find the maximum rise above launch and the time to the peak."
+            "workHeightIn": 2.6,
+            "statement": "A rock is launched at 20 m/s at 35° from a 15 m cliff. Find its maximum height above the launch point."
           }
         },
         {
-          "cueLabel": "SLIDES 49–51",
+          "cueLabel": "SLIDES 42–43",
           "cues": [
-            "The landing is a different final state",
+            "The full position equation",
             "The quadratic and the root to keep"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
-            "label": "EXAMPLE — CLIFF LAUNCH, THE LANDING",
+            "label": "EXAMPLE — LANDING BELOW THE LAUNCH",
             "workLabel": "",
-            "workHeightIn": 3.6,
-            "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground. Find flight time, range, and final vertical velocity."
+            "workHeightIn": 2.8,
+            "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground below. Find its total time of flight."
           }
         },
         {
-          "cueLabel": "SLIDE 52",
+          "cueLabel": "SLIDE 44",
           "cues": [
             "One approach for each stage",
             "The quantity shared by both axes"
@@ -477,73 +447,13 @@
             "workLabel": "",
             "workHeightIn": 1.8
           }
-        },
-        {
-          "cueLabel": "SLIDES 54–55",
-          "cues": [
-            "Model assumptions, as stated",
-            "Landing velocity components"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "SCENARIO — THE FORTRESS ARCHER",
-            "workLabel": "",
-            "workHeightIn": 3.8,
-            "statement": "In a historical film, an archer fires from a 20 m fortress roof toward soldiers across a level courtyard. The arrow leaves at 30 m/s and 35° upward. Find its flight time, ground range, and landing velocity components."
-          }
-        },
-        {
-          "cueLabel": "SLIDES 57–58",
-          "cues": [
-            "Horizontal velocity at release",
-            "Common error — the crate drops straight down"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "SCENARIO — RESCUE SUPPLY DROP",
-            "workLabel": "",
-            "workHeightIn": 3.4,
-            "statement": "A helicopter flies horizontally at 18 m/s, 45 m above an island landing zone. It releases a supply crate without a parachute. Find the fall time, horizontal travel, and landing velocity components."
-          }
-        },
-        {
-          "cueLabel": "SLIDES 60–61",
-          "cues": [
-            "Same height, nonzero root",
-            "Speed at landing in this model"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "SCENARIO — THE MOVIE STUNT JUMP",
-            "workLabel": "",
-            "workHeightIn": 3.4,
-            "statement": "A movie stunt rider leaves a ramp at 14 m/s and 25° upward. The landing surface is at the same height. Model the rider and bike as one projectile: find flight time, range, and landing velocity components."
-          }
-        },
-        {
-          "cueLabel": "SLIDE 62",
-          "cues": [
-            "Magnitude equation",
-            "Direction equation",
-            "Direction stated below the horizontal"
-          ],
-          "notesLabel": "",
-          "notes": [],
-          "problem": {
-            "label": "FINAL COMPONENTS TO FINAL VELOCITY",
-            "workLabel": "",
-            "workHeightIn": 2.2
-          }
         }
       ],
       "summaryPrompt": "In your own words: explain how one projectile moves with constant velocity in one direction and accelerates in the other, and what the two motions share.",
       "selfCheck": [
-        "I can list the variables for each axis before choosing an equation.",
+        "I can find the time from the vertical motion and use it horizontally.",
         "I can solve a flat, an angled and a different-height launch.",
-        "I can turn final components into a final velocity with a direction."
+        "I can find the peak height and the total flight time from a cliff."
       ]
     }
   ],
