@@ -116,12 +116,14 @@ def main():
             if not spec.get("noEquationBar"):
                 return 1
 
+    KEY = "--key" in sys.argv
+    argv = [a for a in sys.argv if a != "--key"]
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
+    out = argv[2] if len(argv) > 2 else \
+        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}{'_Key' if KEY else ''}.docx")
 
     doc = Document()
     s = page_setup(doc)
@@ -135,7 +137,8 @@ def main():
     para(c, "SHULL SCIENCE  ·  JAMES A. GARFIELD LOCAL SCHOOLS", 7.5,
          bold=True, color=accent, caps_track=True, first=True)
     para(c, unit_title(course, spec["unit"]).upper(), 15, bold=True, color=ink)
-    para(c, spec["kicker"], 7.5, color=label, caps_track=True)
+    para(c, spec["kicker"] + ("  ·  TEACHER KEY" if KEY else ""), 7.5,
+         color=pal.key if KEY else label, caps_track=True, bold=KEY)
 
     c = one_cell(doc); borders(c, hair)
     para(c, spec["fields"], 9, color=label, first=True)
@@ -227,8 +230,13 @@ def main():
                 if prob.get("given") or prob.get("need"):
                     given_need(notes, prob.get("given", ""), prob.get("need", ""),
                                pal, NOTES_INNER_IN)
-                work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
-                         float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), NOTES_INNER_IN)
+                box = work_box(notes, prob.get("workLabel", "WORK — SHOW EVERY STEP"), pal,
+                               float(prob.get("workHeightIn", WORK_BOX_MIN_IN)), NOTES_INNER_IN)
+                if KEY:
+                    # Teacher key: what goes in the box, in the key colour. Same spec as the
+                    # student copy, so the two cannot drift.
+                    for ln in prob.get("key", []):
+                        para(box, ln, 9, color=pal.key)
                 if prob.get("answer"):
                     para(notes, prob["answer"], 9.5)
 
@@ -250,6 +258,8 @@ def main():
         para(c, "SECTION SUMMARY — close your notes before you write this", 7.5,
              bold=True, color=accent, caps_track=True, first=True)
         para(c, sec["summaryPrompt"], 9.5)
+        if KEY and sec.get("summaryKey"):
+            para(c, sec["summaryKey"], 9, color=pal.key)
         rule_lines(c, 4, hair)
         para(c, "SELF-CHECK", 7.5, bold=True, color=accent, caps_track=True)
         for x in sec.get("selfCheck", []):
@@ -273,7 +283,7 @@ def main():
     para(c, spec["close"]["fuzzyLabel"], 8.5, bold=True, color=accent, caps_track=True)
     rule_lines(c, 3, hair)
 
-    running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal)
+    running_footer(s, f"SHULL SCIENCE          {unit} · {span}" + ("          TEACHER KEY" if KEY else ""), pal)
 
     trim_tail(doc)
     doc.save(out)

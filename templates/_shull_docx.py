@@ -61,6 +61,9 @@ class Palette:
         self.label = G["label"]["hex"]
         self.footer = G["footer"]["hex"]
         self.white = G["white"]["hex"]
+        # Teacher-key ink: the deep semantic red, text-safe on white, and unmistakable
+        # against the gold and black of a student copy printed in colour.
+        self.key = T["semantic"]["danger"]["deep"]
 
     @property
     def watermark(self):
