@@ -209,7 +209,12 @@ def main():
             para(cue, row["cueLabel"], 7, bold=True, color=accent, first=True)
             for q in row["cues"]:
                 para(cue, q, 8.5)
-            para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
+            p0 = para(notes, row["notesLabel"], 7.5, bold=True, color=accent, caps_track=True, first=True)
+            if not row["notesLabel"]:
+                # A problem row has no section label. Collapse the empty first paragraph so
+                # the slide title starts at the top of the row, not a blank line down.
+                p0.paragraph_format.space_after = Pt(0)
+                p0.paragraph_format.line_spacing = Pt(1)
             if row.get("diagram"):
                 diagram_block(notes, row["diagram"], pal, NOTES_INNER_IN, HERE)
 
