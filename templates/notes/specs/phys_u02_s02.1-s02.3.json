@@ -48,7 +48,7 @@
           "notes": [],
           "problem": {
             "label": "VECTOR · MAGNITUDE · DIRECTION",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 1.7
           }
         },
@@ -62,7 +62,7 @@
           "notes": [],
           "problem": {
             "label": "DRAWING A VECTOR",
-            "workLabel": "SKETCH AND LABEL",
+            "workLabel": "",
             "workHeightIn": 2.0
           }
         },
@@ -76,7 +76,7 @@
           "notes": [],
           "problem": {
             "label": "RESOLVING A VECTOR INTO COMPONENTS",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.2
           }
         },
@@ -89,7 +89,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — RESOLVING A DISPLACEMENT",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 2.0,
             "statement": "A hiker walks 50 m at 30° above the horizontal. Find the x- and y-components."
           }
@@ -104,7 +104,7 @@
           "notes": [],
           "problem": {
             "label": "DEGREES AND COMPASS DIRECTIONS",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.0
           }
         },
@@ -117,7 +117,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — CONVERTING THE ANGLE",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 1.5,
             "statement": "A vector points 40° North of East. Express its direction as an angle East of North."
           }
@@ -125,13 +125,14 @@
         {
           "cueLabel": "SLIDES 12–13",
           "cues": [
-            "Same method, new numbers"
+            "Same method, new numbers",
+            "Work it first, then check the board"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "YOUR TURN — A HIKING BEARING",
-            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workLabel": "",
             "workHeightIn": 1.5,
             "statement": "A hiker walks at 65° East of North. Express this as an angle North of East."
           }
@@ -139,13 +140,14 @@
         {
           "cueLabel": "SLIDE 14",
           "cues": [
-            "Two skills in one problem"
+            "Two skills in one problem",
+            "Work it first, then check the board"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "QUICK CHECK — CONVERT AND RESOLVE",
-            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workLabel": "",
             "workHeightIn": 2.0,
             "statement": "A force of 20 N acts at 70° East of North. Find its angle North of East, then resolve its components."
           }
@@ -174,7 +176,7 @@
           "notes": [],
           "problem": {
             "label": "ADDING PERPENDICULAR VECTORS",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.4
           }
         },
@@ -188,7 +190,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — PLANE IN A CROSSWIND",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 2.4,
             "statement": "A plane flies 80 km/h east relative to the air. A wind blows 20 km/h north. Find the plane’s velocity relative to the ground."
           }
@@ -203,7 +205,7 @@
           "notes": [],
           "problem": {
             "label": "ADDING VECTORS AT ANY ANGLE",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.4
           }
         },
@@ -217,7 +219,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — TWO FORCES ON A BOX",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.0,
             "statement": "A 40 N force acts east, and a 30 N force acts 60° above east. Find the resultant force."
           }
@@ -225,15 +227,32 @@
         {
           "cueLabel": "SLIDE 23",
           "cues": [
-            "Same three steps"
+            "Same three steps",
+            "Work it first, then check the board"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "YOUR TURN — TWO DISPLACEMENTS",
-            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workLabel": "",
             "workHeightIn": 2.6,
             "statement": "Walk 30 m east, then 40 m at 45° above east. Find the resultant displacement."
+          }
+        },
+        {
+          "cueLabel": "ADDED",
+          "cues": [
+            "Three vectors, same three steps",
+            "Resolve every vector, then add",
+            "Work it first, then check the board"
+          ],
+          "notesLabel": "",
+          "notes": [],
+          "problem": {
+            "label": "PRACTICE — THREE FORCES ON A CRATE",
+            "workLabel": "",
+            "workHeightIn": 3.2,
+            "statement": "Three ropes pull on a crate: 30 N east, 40 N north, and 20 N at 30° south of west. Find the resultant force."
           }
         }
       ],
@@ -259,7 +278,7 @@
           "notes": [],
           "problem": {
             "label": "PROJECTILE · TRAJECTORY · RANGE",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 1.8
           }
         },
@@ -274,7 +293,7 @@
           "notes": [],
           "problem": {
             "label": "NO HORIZONTAL FORCE NEEDED",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 1.8
           }
         },
@@ -289,7 +308,7 @@
           "notes": [],
           "problem": {
             "label": "THE FOUR KINEMATIC EQUATIONS",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 2.4
           }
         },
@@ -304,7 +323,7 @@
           "notes": [],
           "problem": {
             "label": "EVERY PROJECTILE SOLUTION STARTS HERE",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 2.6
           }
         },
@@ -319,7 +338,7 @@
           "notes": [],
           "problem": {
             "label": "THE FLAT LAUNCH",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.0
           }
         },
@@ -333,7 +352,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — ROLLING OFF A TABLE",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.6,
             "statement": "A ball leaves a 0.80 m table horizontally at 2.5 m/s. Find flight time, horizontal distance, and final vertical velocity."
           }
@@ -341,13 +360,14 @@
         {
           "cueLabel": "SLIDES 35–36",
           "cues": [
-            "Same method, new numbers"
+            "Same method, new numbers",
+            "Work it first, then check the board"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "YOUR TURN — OFF A HIGHER SHELF",
-            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workLabel": "",
             "workHeightIn": 3.4,
             "statement": "A marble leaves a 1.25 m shelf horizontally at 3.0 m/s. Find its flight time, horizontal distance, and final vertical velocity."
           }
@@ -364,7 +384,7 @@
           "notes": [],
           "problem": {
             "label": "LAUNCHING AT AN ANGLE",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.2
           }
         },
@@ -378,7 +398,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — A KICKED SOCCER BALL",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.6,
             "statement": "A soccer ball launches at 18 m/s, 30° above level ground. Find the time of flight, the range, and the final velocity components."
           }
@@ -386,13 +406,14 @@
         {
           "cueLabel": "SLIDES 42–43",
           "cues": [
-            "Write the general equation first"
+            "Write the general equation first",
+            "Work it first, then check the board"
           ],
           "notesLabel": "",
           "notes": [],
           "problem": {
             "label": "YOUR TURN — A LAUNCHED ARROW",
-            "workLabel": "YOUR TURN — WORK IT FIRST, THEN CHECK THE BOARD",
+            "workLabel": "",
             "workHeightIn": 3.4,
             "statement": "An arrow launches at 45 m/s, 40° above level ground. Find flight time, range, and final velocity components."
           }
@@ -409,7 +430,7 @@
           "notes": [],
           "problem": {
             "label": "WHEN LAUNCH AND LANDING DIFFER",
-            "workLabel": "SKETCH AND RECORD",
+            "workLabel": "",
             "workHeightIn": 2.4
           }
         },
@@ -423,7 +444,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — CLIFF LAUNCH, THE PEAK",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.2,
             "statement": "A rock launches at 20 m/s, 35° above horizontal, from a 15 m cliff. Find the maximum rise above launch and the time to the peak."
           }
@@ -438,7 +459,7 @@
           "notes": [],
           "problem": {
             "label": "EXAMPLE — CLIFF LAUNCH, THE LANDING",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.6,
             "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground. Find flight time, range, and final vertical velocity."
           }
@@ -453,7 +474,7 @@
           "notes": [],
           "problem": {
             "label": "THREE STAGES, ONE IDEA",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 1.8
           }
         },
@@ -467,7 +488,7 @@
           "notes": [],
           "problem": {
             "label": "SCENARIO — THE FORTRESS ARCHER",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.8,
             "statement": "In a historical film, an archer fires from a 20 m fortress roof toward soldiers across a level courtyard. The arrow leaves at 30 m/s and 35° upward. Find its flight time, ground range, and landing velocity components."
           }
@@ -482,7 +503,7 @@
           "notes": [],
           "problem": {
             "label": "SCENARIO — RESCUE SUPPLY DROP",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.4,
             "statement": "A helicopter flies horizontally at 18 m/s, 45 m above an island landing zone. It releases a supply crate without a parachute. Find the fall time, horizontal travel, and landing velocity components."
           }
@@ -497,7 +518,7 @@
           "notes": [],
           "problem": {
             "label": "SCENARIO — THE MOVIE STUNT JUMP",
-            "workLabel": "WORKED EXAMPLE — SETUP, STEPS, ANSWER WITH UNITS",
+            "workLabel": "",
             "workHeightIn": 3.4,
             "statement": "A movie stunt rider leaves a ramp at 14 m/s and 25° upward. The landing surface is at the same height. Model the rider and bike as one projectile: find flight time, range, and landing velocity components."
           }
@@ -513,7 +534,7 @@
           "notes": [],
           "problem": {
             "label": "FINAL COMPONENTS TO FINAL VELOCITY",
-            "workLabel": "RECORD FROM THE BOARD",
+            "workLabel": "",
             "workHeightIn": 2.2
           }
         }

@@ -442,6 +442,12 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None):
     # The label is read; the border is not. Hairline on white measures 1.6:1.
     if label:
         para(inner, label, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+    elif not watermark:
+        # No label: collapse the cell's default empty paragraph so the open box starts
+        # at its top edge instead of a blank line down.
+        p0 = inner.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(0); p0.paragraph_format.space_after = Pt(0)
+        p0.paragraph_format.line_spacing = Pt(1)
     if watermark:
         p = para(inner, watermark, 12, color=pal.watermark, caps_track=True,
                  first=not label)
