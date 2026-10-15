@@ -4,7 +4,7 @@
 |---|---|
 | `ANTI_AI_SLOP_STANDARD.md` | The binding quality standard: documents, slides, voice, and interactive output |
 | `VOICE.md` | How Mr. Shull writes to his own students |
-| `NAMING.md` | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]`, zero-padded |
+| `NAMING.md` | `[S.S] [Type] - [Topic]` or `Unit [X] [Type] - [Unit Title]`; the course is the folder |
 | `DRIVE_ARCHITECTURE.md` | The Drive tree, folder grammar, and routing rules |
 | `QA_GATE.md` | The nine checks every deliverable passes before it ships |
 | `superseded/` | Proposals considered and declined, kept so they are not re-proposed |

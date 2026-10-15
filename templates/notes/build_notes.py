@@ -21,6 +21,8 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "scripts"))
 sys.path.insert(0, HERE)
 import recall                                                          # noqa: E402
+sys.path.insert(0, os.path.join(REPO, "templates"))
+from _shull_name import document_name, section_title                  # noqa: E402
 
 COURSE_CODE = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
 CLASS = {"chemistry": "chem", "physics": "phys", "geology": "geo"}
@@ -130,8 +132,9 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     span = f"S{spec['sections'][0]}-S{spec['sections'][-1]}" if len(spec["sections"]) > 1 \
         else f"S{spec['sections'][0]}"
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.pdf")
+    out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
+        "Guided_Notes", spec["sections"], spec["unit"], unit_title=spec.get("unitTitle"),
+        topic=section_title(spec["course"], spec["sections"][0]), ext="pdf"))
 
     tpl = open(os.path.join(HERE, "SHULL_Notes_TEMPLATE.html")).read()
     doc = (tpl

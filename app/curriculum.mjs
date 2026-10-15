@@ -139,17 +139,14 @@ export function documentTypes(namingText) {
 }
 
 /**
- * The filename SHULL_[COURSE]_[Type]_U##_S##.#[...] from standards/NAMING.md
- * §2. The unit and the digits before the section's decimal point are both
- * zero-padded to two, so a filename sorts and compares against its folder.
+ * The filename from standards/NAMING.md §2 (SHULL-CHG-0024), built by the same
+ * helper the repository builders use so the app cannot drift from them.
  */
+import {createRequire} from 'node:module';
+const {documentName: buildName} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};
 
-export function documentName({course, type, unit, sections: codes, extension = 'docx'}) {
-  const pad = code => {
-    const [whole, decimal] = String(code).split('.');
-    return `S${String(whole).padStart(2, '0')}.${decimal}`;
-  };
-  const span = codes.length > 1 ? `${pad(codes[0])}-${pad(codes[codes.length - 1])}` : pad(codes[0]);
-  return `SHULL_${COURSE_CODE[course]}_${type}_U${String(unit).padStart(2, '0')}_${span}.${extension}`;
+export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx'}) {
+  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension});
 }

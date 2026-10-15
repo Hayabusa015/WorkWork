@@ -15,6 +15,7 @@ is what the legacy `shull-studio` became, and decomposing it is most of this mig
 | `build-lab` | Lab handout and teacher key from the locked template |
 | `apply-shull-design` | Applying tokens and the design system to a deliverable |
 | `anti-ai-slop` | The quality pass, run before anything ships |
+| `humanize` | Rewriting AI-sounding prose; runs inside the anti-ai-slop pass |
 | `verify-content` | Scientific and curricular accuracy |
 | `audit-deliverable` | The QA gate, run independently |
 | `naming` | Filenames and document codes |
