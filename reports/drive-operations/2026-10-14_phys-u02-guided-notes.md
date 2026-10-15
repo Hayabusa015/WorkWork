@@ -60,3 +60,16 @@ Prior names (the upload names, i.e. the prior state for rollback):
 `SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3_Key.docx` → `Unit 2 Guided Notes Key - Motion in Two Dimensions.docx`
 Topic "Motion in Two Dimensions" is the U2 title in `courses/physics/DECISIONS.md`. Object IDs and the
 verified parent lookups are recorded below after execution.
+
+## Result 2026-10-15 — executed and verified
+
+| # | Object ID | Prior name / prior parent | Final name | Final parent |
+|---|---|---|---|---|
+| 1 | `1qd57XMECFshy4k71jgsk71dmvMw3bfcn` | `SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3.docx` / Upload Inbox `1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy` | `Unit 2 Guided Notes - Motion in Two Dimensions.docx` | Guided Notes `1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN` |
+| 2 | `1J9HMsmkMuyRVZa--odOKnlMDoiEsPua9` | `SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3_Key.docx` / Upload Inbox | `Unit 2 Guided Notes Key - Motion in Two Dimensions.docx` | Guided Notes |
+
+Upload: Drive API with the `drive.file` token (scope unchanged), checksum matched the local files
+(43,189 and 46,188 bytes). Move and rename: connector `update_file`, one call per file, IDs preserved.
+Verified afterwards by independent lookups: `parentId = Guided Notes` lists exactly these two files;
+`parentId = Upload Inbox` is empty; Guided Notes' own parent is `Unit 02 - Motion in Two Dimensions`
+(`1rB4t-tF-PygDHIFFQBleIpHV4GHJYBve`). Nothing overwritten, trashed or deleted.
