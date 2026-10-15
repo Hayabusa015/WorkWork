@@ -1,10 +1,11 @@
 ---
 id: SHULL-CHG-0026
 title: Upload built files with gws into an Upload Inbox, then file them with the connector
-status: PENDING
+status: APPROVED
 opened: 2026-10-15
 source: User
-decided_by:
+decided: 2026-10-15
+decided_by: Matthew Shull
 ---
 
 # SHULL-CHG-0026 — Upload Inbox
@@ -56,7 +57,7 @@ myaccount.google.com/permissions. The OAuth client secret appeared in a screensh
 
 Approve, then update `config/drive.json`, the librarian agent and the shelve skill.
 
-Decision:
-Status: PENDING
+Decision: Approved by Matthew Shull, 2026-10-15.
+Status: APPROVED
 Implemented By:
 Verified:

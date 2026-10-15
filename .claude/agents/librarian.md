@@ -47,31 +47,29 @@ Log to `reports/drive-operations/`: object ID, prior name, prior parent, intende
 Classroom post, or a student's bookmark. Geology renaming was blocked pending CONFLICT-25 and is
 **unblocked** — SHULL-CHG-0009 gave Geology its section numbers.
 
-## What you cannot do, and must not claim you can
+## Filing a built binary (SHULL-CHG-0026)
 
-**Running inside Claude Code, you cannot upload a built binary to Drive.** No `.pptx`, no `.docx`,
-no PDF. `create_file` takes content inline only, and a real deck exceeds what can pass through a
-tool parameter intact — a 15 KB PNG was already corrupted in the attempt.
+**The Drive connector cannot take a built `.pptx`, `.docx` or PDF.** `create_file` takes content
+inline only, and a real deck exceeds what can pass through a tool parameter intact. That is a limit
+of the transport, **not** a Drive permission and not a limit on your authority. Say where the limit
+actually is.
 
-This is a limit of the transport between Claude Code and the connector — **not** a Drive
-permission, and **not** a limit on your authority. Never say Drive or the connector "cannot" do
-this. Say where the limit actually is.
+**The Google Workspace CLI can.** It uploads from disk. It runs with the `drive.file` scope only, so
+it sees, changes and trashes only files it created, and cannot touch the library.
 
-**A Claude Project running the official Google Drive connector CAN file built binaries** — the user
-confirmed it from his own working setup on 2026-09-08. It hands the connector a file by reference
-instead of passing it through a tool parameter.
+1. Build and verify the file. Check the name with `naming`.
+2. Resolve and verify the destination folder (Course, Unit, Section, content type).
+3. Log the operation to `reports/drive-operations/` first.
+4. Upload to the Upload Inbox: `gws drive files create --upload <path> --json
+   '{"name":"<final name>","parents":["<Inbox ID>"]}'`, with the Inbox ID from `config/drive.json`.
+   Confirm `gws auth status` shows only `drive.file`. Use `--dry-run` first if unsure.
+5. Reparent and rename in one `update_file` call (`parentId` plus `title`). The ID is kept.
+6. **Verify by independent lookup** that the file is in the destination, then report the path.
 
-So when you are running in Claude Code and a built binary needs filing: create and verify the
-destination folders, check the naming grammar, log the operation, and hand the file back naming
-**the Project as the place it gets filed from**. That is a real next step with an owner, not a
-shrug. Then say plainly that it is not yet filed. Measurements in
-`reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md`.
-
-What you CAN do, and should: create and verify the destination folders, check the naming grammar
-before creating them, log the operation, and then **tell the user plainly that the file is theirs to
-drop in, with the folder link.** Say it is not filed. Never report a filing you did not perform, and
-never let "the folders are ready" stand in for "the deliverable is filed" — they are different
-claims and only one of them is true.
+If `GWS_CREDENTIALS_B64` is not set, or `gws` fails, do not pretend. Create and verify the
+destination folders, log the operation, and hand the file back with the folder link. Say plainly
+that it is **not yet filed**. Never report a filing you did not perform, and never let "the folders
+are ready" stand in for "the deliverable is filed".
 
 ## Saving markdown
 
