@@ -50,6 +50,44 @@ if [ -d "$SLIDE_DIR" ] && ! ( cd "$SLIDE_DIR" && node -e "require('pptxgenjs')" 
     && log "  pptxgenjs OK" || log "  WARNING: npm failed. The slide template cannot be built."
 fi
 
+# 4b. Google Workspace CLI -----------------------------------------------------
+# Uploads built .docx/.pptx/.pdf to Drive from disk. The Drive connector cannot: its
+# create_file takes content inline, so a real deck is too big for it. The CLI needs
+# credentials in GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE (an environment secret); without
+# them it installs but cannot call the API. Drive scope only; see the Drive standard.
+if ! command -v gws >/dev/null 2>&1; then
+  log "installing Google Workspace CLI"
+  npm install -g @googleworkspace/cli --no-audit --no-fund --silent >/dev/null 2>&1 \
+    && log "  gws OK" || log "  WARNING: gws install failed. Drive uploads fall back to the manual route."
+fi
+
+# 4c. Google Workspace CLI credentials -----------------------------------------
+# The environment secret GWS_CREDENTIALS_B64 holds `gws auth export --unmasked`, base64
+# encoded so quotes and line breaks survive an environment-variable box. (GWS_CREDENTIALS_JSON,
+# the raw text, is accepted too.) The CLI wants a file path, so write the secret to a
+# private file and point GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE at it. Never printed or committed.
+GWS_DIR="$HOME/.config/gws"
+if [ -n "${GWS_CREDENTIALS_B64:-}" ] || [ -n "${GWS_CREDENTIALS_JSON:-}" ]; then
+  mkdir -p "$GWS_DIR" && chmod 700 "$GWS_DIR"
+  if [ -n "${GWS_CREDENTIALS_B64:-}" ]; then
+    ( umask 077; printf '%s' "$GWS_CREDENTIALS_B64" | base64 -d > "$GWS_DIR/credentials.json" ) 2>/dev/null \
+      || log "  WARNING: GWS_CREDENTIALS_B64 is not valid base64"
+  else
+    ( umask 077; printf '%s' "$GWS_CREDENTIALS_JSON" > "$GWS_DIR/credentials.json" )
+  fi
+  if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
+    echo "export GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE=$GWS_DIR/credentials.json" >> "$CLAUDE_ENV_FILE"
+  fi
+  log "  gws credentials written (not shown)"
+else
+  log "  gws credentials not set (GWS_CREDENTIALS_B64); Drive uploads need them"
+fi
+
+# 4d. Session-start marker --------------------------------------------------------
+# scripts/find_session_files.py reads this file's modification time as "when the session
+# started". Written once, so a resume does not move it later and hide earlier documents.
+[ -e "$HOME/.shull-session-start" ] || touch "$HOME/.shull-session-start"
+
 # 5. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
@@ -62,4 +100,5 @@ for b in ["soffice","pdffonts","pdftoppm","node","npm"]:
 PY
 ( cd "$SLIDE_DIR" 2>/dev/null && node -e "require('pptxgenjs')" ) >/dev/null 2>&1 \
   && log "    pptxgenjs   OK" || log "    pptxgenjs   MISSING"
+command -v gws >/dev/null 2>&1 && log "    gws         OK" || log "    gws         MISSING"
 log "done"

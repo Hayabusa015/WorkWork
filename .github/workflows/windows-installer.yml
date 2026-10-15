@@ -1,0 +1,162 @@
+# Build the Windows installer and publish it where it can be downloaded.
+#
+# Nothing here can run on a developer's Linux container: NSIS needs Windows, and
+# the bundled Python is a Windows build. That is the whole reason this file
+# exists rather than a script someone runs by hand — the last installer was made
+# on one particular PC, and `installer/SHULL-OS-Setup.sed` still points at that
+# machine's folders.
+#
+# Two ways to run it:
+#
+#   Actions tab → "Windows installer" → Run workflow
+#       Builds and attaches the installer to that run. Download it from the run
+#       page. No release is created. Use this to test.
+#
+#   git tag v0.2.0 && git push origin v0.2.0
+#       Builds, then publishes a GitHub Release with the installer attached.
+#       This is what makes the download link, and what the app's own
+#       "Check for updates" button looks for.
+
+name: Windows installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+# Needed to create the release. Nothing here writes to the repository contents.
+permissions:
+  contents: write
+
+env:
+  # Bundled with the app so a teacher does not have to install Python. 3.12 is
+  # the newest line with wheels for every dependency below.
+  PYTHON_VERSION: "3.12.10"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The gate. A build that ships a failing test is worse than no build.
+      - name: Run tests
+        run: npm test
+
+      # The tag is the version. electron-builder names the artifacts from
+      # package.json, and the in-app updater compares the release tag against
+      # the running app's version — so the two must not drift.
+      - name: Take the version from the tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^v', ''
+          npm version $version --no-git-tag-version --allow-same-version
+          Write-Host "Building version $version"
+
+      # A standalone Python, bundled into the app. desktop/main.cjs looks for
+      # vendor/python/python.exe and sets SHULL_PYTHON when it is there; without
+      # it the app opens but cannot build a document.
+      - name: Bundle Python
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $dest = "desktop/vendor/python"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          $url = "https://www.python.org/ftp/python/$env:PYTHON_VERSION/python-$env:PYTHON_VERSION-embed-amd64.zip"
+          Invoke-WebRequest -Uri $url -OutFile "$env:RUNNER_TEMP/python-embed.zip"
+          Expand-Archive -Path "$env:RUNNER_TEMP/python-embed.zip" -DestinationPath $dest -Force
+
+          # The embeddable build ships with site imports switched off, which
+          # also switches off site-packages. pip needs both.
+          $pth = Get-ChildItem "$dest/python*._pth" | Select-Object -First 1
+          (Get-Content $pth) -replace '^\s*#\s*import site', 'import site' | Set-Content $pth
+
+          Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile "$env:RUNNER_TEMP/get-pip.py"
+          & "$dest/python.exe" "$env:RUNNER_TEMP/get-pip.py" --no-warn-script-location
+          & "$dest/python.exe" -m pip install --no-warn-script-location `
+              python-docx pillow fonttools pymupdf jsonschema
+          if ($LASTEXITCODE -ne 0) { throw "pip install failed" }
+
+      # Prove the bundled Python actually works before it is packaged. A Python
+      # that imports but cannot build a worksheet is an app that opens and then
+      # fails on the one thing it is for.
+      - name: Verify the bundled Python builds a document
+        shell: pwsh
+        env:
+          PYTHONUTF8: "1"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $py = "desktop/vendor/python/python.exe"
+          $out = "$env:RUNNER_TEMP/verify.docx"
+          & $py templates/worksheet/build_worksheet_docx.py `
+              templates/worksheet/specs/chem_u07_s07.4.json $out
+          if (-not (Test-Path $out)) { throw "the bundled Python produced no document" }
+          # The repository validators run through the same interpreter when the
+          # app runs a health review, so check one of them too.
+          & $py scripts/validate_tokens.py
+          if ($LASTEXITCODE -ne 0) { throw "the bundled Python cannot run the validators" }
+          Write-Host "Bundled Python builds documents and runs validators."
+
+      # Boots the real Electron app, waits for the backend, and reads the live
+      # UI back out of the window.
+      - name: Smoke-test the desktop app
+        shell: pwsh
+        run: npx electron desktop/smoke.cjs
+
+      - name: Build the installer
+        shell: pwsh
+        run: npx electron-builder --win nsis zip --publish never
+
+      - name: List what was built
+        shell: pwsh
+        run: Get-ChildItem dist -Filter "SHULL-OS-*" | Select-Object Name, @{n="MB";e={[math]::Round($_.Length/1MB,1)}}
+
+      # Available from the run page whether or not this was a tagged release,
+      # so a test build can still be downloaded and tried.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SHULL-OS-Windows
+          path: |
+            dist/SHULL-OS-Setup-*.exe
+            dist/SHULL-OS-*-Windows.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      # Only a tag publishes. gh is preinstalled on the runner, so this needs no
+      # third-party action.
+      - name: Publish the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^v', ''
+          $notes = @"
+          Download **SHULL-OS-Setup-$version.exe** below and run it.
+
+          The installer is unsigned, so Windows will show a blue "Windows protected your PC"
+          box. Choose **More info**, then **Run anyway**. A school-managed PC may block it
+          outright; that needs IT.
+
+          Installs for the current user only, no administrator rights required. Your saved
+          work lives outside the installation and survives an update.
+
+          Python is bundled. LibreOffice is not — install it separately if you want PDF
+          previews and the print audit. Word documents build and download without it.
+          "@
+          gh release create "${{ github.ref_name }}" `
+            (Get-ChildItem dist/SHULL-OS-Setup-*.exe).FullName `
+            (Get-ChildItem dist/SHULL-OS-*-Windows.zip).FullName `
+            --title "SHULL OS $version" `
+            --notes $notes

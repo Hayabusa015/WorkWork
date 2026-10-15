@@ -25,12 +25,28 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-15
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
+| SHULL-CHG-0028 | 2026-10-15 | reconcile-session-files skill: list session documents not on Drive, file after approval | CONFIRMED | `governance/proposals/SHULL-CHG-0028-reconcile-session-files.md` |
+| SHULL-CHG-0027 | 2026-10-15 | Filing gate: file to Drive only after user approval | CONFIRMED | `governance/proposals/SHULL-CHG-0027-filing-gate.md` |
+| SHULL-CHG-0026 | 2026-10-15 | gws uploads built files to an Upload Inbox; connector files them | CONFIRMED | `governance/proposals/SHULL-CHG-0026-gws-upload-inbox.md` |
+| SHULL-CHG-0025 | 2026-10-15 | Humanize skill and structural prose tells | CONFIRMED | `governance/proposals/SHULL-CHG-0025-humanize-skill.md` |
+
+## 2026-09-20
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0023 | 2026-09-20 | Guided notes are strictly recall; no questions | CONFIRMED | `governance/proposals/SHULL-CHG-0023-notes-are-recall.md` |
+
 ## 2026-09-16
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0024 | 2026-09-16 | Tests-Quizizz renamed Quiz, moves to Unit level; Homework folder removed, filed loose in Section | IMPLEMENTED | `governance/proposals/SHULL-CHG-0024-quiz-unit-level-no-homework-folder.md` |
-| SHULL-CHG-0023 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0023-unit-level-guided-notes-presentations.md` |
+| SHULL-CHG-0030 | 2026-09-16 | Tests-Quizizz renamed Quiz, moves to Unit level; Homework folder removed, filed loose in Section | IMPLEMENTED | `governance/proposals/SHULL-CHG-0030-quiz-unit-level-no-homework-folder.md` |
+| SHULL-CHG-0029 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0029-unit-level-guided-notes-presentations.md` |
 
 ## 2026-09-09 · 2026-09-08
 
@@ -73,6 +89,7 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-20 | SHULL-CHG-0023 made the notes packet strictly recall but scoped three blocks out of it: the closed-notes section summary box, the per-section self-check, and the "still fuzzy on" prompt. They read as the student checking their own notes rather than being quizzed on a slide. Should any of them also lose their question form? | User — SHULL-CHG-0023 §"Deliberately out of scope" |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? **Partial action 2026-09-16:** the physical `GEO_U1_S1.2`/`S1.3` files were relocated to match their own filename/content code (`reports/drive-operations/2026-09-16f_geo-u1-file-relocation.md`) — this only makes the *file location* consistent with the *filename*; it does not answer whether the roadmap's section titles or the filenames are the ones that are wrong. | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |
@@ -83,8 +100,8 @@ with the user.
 | 2026-09-08 | Two Geology section titles in U5 are near-duplicates | User — deferred to "when I get to work" |
 | 2026-09-08 | The Drive Lab folder now holds a duplicate of two template files | User — deferred to "when I get to work" |
 | 2026-09-07 | Chemistry grading framing differs between two legacy sources | User — see `courses/chemistry/DECISIONS.md` open questions |
-| 2026-09-16 | ~~The Librarian's live Geology/Physics folder scaffold logged intent to build the old five-per-section structure the same day SHULL-CHG-0023 replaced it. Does live Drive need remediation?~~ **RESOLVED 2026-09-16.** Yes, it needed remediation, and it's done: Geology, Physics, and Chemistry were all retrofitted through SHULL-CHG-0023 and then SHULL-CHG-0024, and the 220 resulting leftover folders were trashed after Matt's approval. Full trail: `reports/drive-operations/2026-09-16b` through `2026-09-16f`. | Resolved — no longer waiting on anyone |
-| 2026-09-16 | Physics Section 01.1 has 4 homework files named for `S01.2` despite being physically filed in `01.1` — the same class of drift as the Nebular Theory row above, found during the SHULL-CHG-0024 retrofit. Unlike the Geology pair, these were **not** relocated (not explicitly asked). Does `01.1` or the filenames have it right, and should they move? | User — `reports/drive-operations/2026-09-16c_physics-u01-chemistry-shull-chg-0024.md` |
+| 2026-09-16 | ~~The Librarian's live Geology/Physics folder scaffold logged intent to build the old five-per-section structure the same day SHULL-CHG-0029 replaced it. Does live Drive need remediation?~~ **RESOLVED 2026-09-16.** Yes, it needed remediation, and it's done: Geology, Physics, and Chemistry were all retrofitted through SHULL-CHG-0029 and then SHULL-CHG-0030, and the 220 resulting leftover folders were trashed after Matt's approval. Full trail: `reports/drive-operations/2026-09-16b` through `2026-09-16f`. | Resolved — no longer waiting on anyone |
+| 2026-09-16 | Physics Section 01.1 has 4 homework files named for `S01.2` despite being physically filed in `01.1` — the same class of drift as the Nebular Theory row above, found during the SHULL-CHG-0030 retrofit. Unlike the Geology pair, these were **not** relocated (not explicitly asked). Does `01.1` or the filenames have it right, and should they move? | User — `reports/drive-operations/2026-09-16c_physics-u01-chemistry-shull-chg-0024.md` |
 | 2026-09-16 | Naming/zero-padding drift found during the same retrofit, not corrected (out of scope for a folder-structure task): Chemistry Unit 00's two lab PDFs use `S0.4` instead of the standard zero-padded `S00.4`; Chemistry Unit 01's stray `Unit PPT` deck (`Unit 1 - Matter and Atomic Theory Notes.pptx`) carries no `SHULL_` filename code at all. Worth a Naming-skill/Auditor pass whenever convenient. | User/Auditor — `reports/drive-operations/2026-09-16c_physics-u01-chemistry-shull-chg-0024.md` |
 | 2026-09-16 | Chemistry Unit 00 still has a bare `Labs` folder instead of a proper Section folder (known defect, `config/drive.json` → `knownDefects`) — which section it belongs to has never been established, so nothing has renamed or refiled it. | User |
 

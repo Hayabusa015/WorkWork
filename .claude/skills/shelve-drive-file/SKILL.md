@@ -16,14 +16,19 @@ the create call returning success. Not your intention. A confirmed lookup, after
 
 ## Procedure
 
+0. **Confirm the document was approved to file** (`standards/DRIVE_ARCHITECTURE.md` §8): the user
+   said "file it" or ticked its row in `reports/filing-queue.md`. If not, stop. Iterations are not
+   filed.
 1. **Resolve Course → Unit → Section → content type *before* saving.** Not after.
 2. **Check the name** with `naming`. Fix it before filing, not after.
 3. **Look for existing folders** and reuse them exactly, matching case-insensitively.
-   **Never create `Tests` beside `Tests-Quizizz`.**
+   **Never create `Tests` or `Tests-Quizizz` beside `Quiz`** (unit level).
 4. **If the unit or section is unclear, ask.** Never default to a misc folder.
 5. **Log the intended operation** to `reports/drive-operations/` — object ID, prior name, prior
    parent, intended change.
-6. Create or upload.
+6. Create or upload. A **built binary** (`.pptx`, `.docx`, PDF) cannot go through the connector:
+   upload it with `gws` into the Upload Inbox, then reparent and rename it with `update_file`. The
+   procedure and the fallback are in `.claude/agents/librarian.md` §Filing a built binary.
 7. **Verify by independent lookup.** Report the confirmed path and ID.
 
 ## Creating folders
@@ -43,7 +48,7 @@ it into a Google Doc and the file stops being diffable.
 
 | | |
 |---|---|
-| Create, upload | Yes, in authorised teaching locations |
+| Create, upload | Yes, in authorised teaching locations. Built binaries go through the Upload Inbox (`gws`, `drive.file` only). |
 | Rename | Deterministic only — **log the prior name first** |
 | **Move** | **Allowed when deterministic.** `update_file` with a new `parentId` reparents in place and **keeps the file ID**. Log the prior parent first. **Never move by copy-and-trash** — that changes the ID and breaks links. |
 | Overwrite | Explicit workflow authorisation |

@@ -26,8 +26,15 @@ neither gets to drift from the other.
 
 ## The structure, and why it is this way
 
-- **Cornell split, 1.28 in / 6.22 in.** The cue column is questions the student should be able to
-  answer from the notes beside them. It is pinned in both renderers — Word's autofit will discard
+- **The packet is strictly recall. No questions.** A guided-notes page is what a student writes
+  while the slide is up: record the definition, the table, the steps, the concept. The cue column
+  **names the thing to record** — "Definition — singularity", "The three pieces of evidence",
+  "Steps of nebular theory, in order" — it does not ask for it. Asking a question turns the task
+  from recording into answering, and that is what a practice set is for. `recall.py` carries the
+  rule and **both renderers refuse** a spec with a question mark, or an interrogative opener, in a
+  cue or a notes line. Stated by Matthew on 2026-09-20, after it had been asked for before and come
+  back: it was written down nowhere and the opposite was written down everywhere.
+- **Cornell split, 1.28 in / 6.22 in.** Pinned in both renderers — Word's autofit will discard
   it otherwise. It is deliberately narrower than the 1.88 in / 2.00 in his own packets used: the
   cue is a prompt, not a second body column, and the inch it gives back goes to the side students
   write on. The cue label drops its letter tracking at this width — tracked caps wrap.
@@ -36,7 +43,10 @@ neither gets to drift from the other.
 - **Section rhythm:** header bar → learning target → Cornell rows → summary.
 - **The summary box says "close your notes before you write this."** That instruction is the point
   of the box; without it, students copy.
-- **A note line ending in `?` gets two ruled lines. Everything else gets one.**
+- **A note line ending in `:` gets two ruled lines. Everything else gets one.** A label the
+  student writes *under* needs the room — `Define protostar:`, `Core:`. A line with its blanks
+  inline is filled in place and takes one. This used to key off a trailing `?`, which the recall
+  rule above makes unreachable. `recall.ruled_lines()` is the one place it is decided.
 - **Must-write:** prefix a notes line with `*` in the spec. It renders as an accent rule down the
   left. One per idea — not one per line.
 - **A problem to solve gets a box to solve it in.** SHULL-CHG-0016. Add a `problem` block to the

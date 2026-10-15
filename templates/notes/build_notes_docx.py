@@ -19,7 +19,10 @@ from docx.oxml import OxmlElement
 # Every primitive on this page - how a work box is drawn, how a fraction stacks, how a
 # diagram block holds together across a page break - is shared with the worksheet
 # builder. It lives in one file so the two cannot drift.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _shull_name import document_name, section_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
@@ -70,6 +73,11 @@ def main():
               f"courses/{course}/DECISIONS.md.", file=sys.stderr)
         return 1
 
+    # Guided notes are strictly recall: the cue column names what to record, it does
+    # not ask for it. recall.py carries the rule and both renderers check it.
+    if recall.check(spec, "build_notes_docx"):
+        return 1
+
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.
     PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
@@ -113,8 +121,9 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
+    out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
+        "Guided_Notes", spec["sections"], spec["unit"], unit_title=spec.get("unitTitle"),
+        topic=section_title(course, spec["sections"][0])))
 
     doc = Document()
     s = page_setup(doc)
@@ -221,7 +230,7 @@ def main():
                     x.set(qn("w:space"), "6"); x.set(qn("w:color"), hexof(display))
                     bd.append(x); pPr.append(bd)
                 else:
-                    rule_lines(notes, 2 if body.rstrip().endswith("?") else 1, hair)
+                    rule_lines(notes, recall.ruled_lines(body), hair)
 
         gap(doc, 2)
         c = one_cell(doc); borders(c, accent)

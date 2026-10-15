@@ -11,7 +11,9 @@
     "desktop:pack": "electron-builder --win --dir",
     "desktop:dist": "electron-builder --win zip",
     "desktop:installer": "electron-builder --win nsis",
-    "test": "node --test app/*.test.mjs app/test.mjs desktop/*.test.cjs"
+    "test": "node --test app/*.test.mjs app/test.mjs desktop/*.test.cjs",
+    "app:theme": "python3 scripts/build_app_css.py",
+    "app:previews": "python3 scripts/build_template_previews.py"
   },
   "devDependencies": {"electron": "44.3.0", "electron-builder": "26.15.3"},
   "build": {

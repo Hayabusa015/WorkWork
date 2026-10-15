@@ -1,8 +1,13 @@
-# SHULL-CHG-0023 — Guided Notes and Presentations move to the Unit level
+# SHULL-CHG-0029 — Guided Notes and Presentations move to the Unit level
+
+> **Renumbered 2026-10-15.** This record was written on 2026-09-16 as `SHULL-CHG-0023` on a branch cut before
+> the main line reached that number, so the ID collided with a different record. It is now
+> `SHULL-CHG-0029`. The dated operation logs under `reports/drive-operations/` (2026-09-16b to 2026-09-16f)
+> and their `approved-trash` manifests still say `0023`/`0024`; they are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0023 |
+| **Change ID** | SHULL-CHG-0029 |
 | **Date** | 2026-09-16 |
 | **Source** | User — Matt's direct instruction, live conversation, 2026-09-16 |
 | **Current Rule** | `standards/DRIVE_ARCHITECTURE.md` §1 — every `Section ##.# - Name` folder gets exactly five content folders: `Homework`, `Presentations`, `Guided Notes`, `Tests-Quizizz`, `Labs-Case Studies-Projects`. Same list restated in `config/drive.json` → `folderGrammar.contentFolders` (five items) and `folderGrammar.contentFolderRule`. Locked under **SHULL-CHG-0005** ("the structure stays exactly as built"). |
@@ -16,7 +21,7 @@
 | **Recommendation** | Adopt — already instructed directly by the user in the current conversation, which is top precedence per `CLAUDE.md` §2 and `governance/GOVERNANCE.md` §3. |
 | **Decision** | Approved. Matt, direct instruction, live conversation, 2026-09-16. |
 | **Status** | **IMPLEMENTED** (repository record only — see "What this does and does not do" below). The Secretary session that edited these files had no shell/git tool and could not confirm the commit itself; the orchestrating session committed on its behalf immediately after receiving the edits. |
-| **Implemented By** | Commit `3ef3ce8` on `claude/gracious-galileo-drxzqh`, message citing `SHULL-CHG-0023`. |
+| **Implemented By** | Commit `3ef3ce8` on `claude/gracious-galileo-drxzqh`, message citing `SHULL-CHG-0029`. |
 | **Verified** | Yes, by diff review at commit time: `standards/DRIVE_ARCHITECTURE.md` §1 tree and grammar table updated; `config/drive.json.folderGrammar` split into `unitContentFolders` (2) and `sectionContentFolders` (3) with `$comment` citing this ID; `standards/NAMING.md` checked and requires no edit (it documents document/image code grammar only, points to `DRIVE_ARCHITECTURE.md` for folder names, and never restated the five-folder list — no duplication existed there to fix); `change-log/CHANGELOG.md` carries a new row. **Not verified against live Drive** — that is explicitly out of scope for this record (see Risk, above). Live-Drive reconciliation was separately dispatched to the Librarian agent after this commit landed (retrofitting Geology's already-built sections, then building the remaining Physics units under the new scheme); that work is tracked in `reports/drive-operations/`, not here. |
 
 ## What this does and does not do

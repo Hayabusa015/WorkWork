@@ -3,9 +3,13 @@
 The operating system for Matthew Shull's teaching workflow — Chemistry, Physics, and Geology at
 James A. Garfield Local Schools, Ohio.
 
-**Status: Phase 7 of 14.** The skeleton and governance exist. Standards, agents, and skills do not
-yet. Do not build classroom deliverables from this repository until Phase 14 passes — the installed
-legacy SHULL skills are still the working system.
+**Status: Phases 8–12 complete; Phase 13 not started (deliberately); Phase 14's acceptance test
+(T-7, T-10) passed 2026-09-08.** Governance, standards, all seven agents (`.claude/agents/`), and
+all twelve skills (`.claude/skills/`) exist and are validated — do not reason about this repo as if
+they are unbuilt. Legacy skill retirement is the last step of Phase 14 and is deliberately withheld
+until the system has been exercised on real work; until that happens, the installed legacy SHULL
+skills remain the working system alongside this repository's agents and skills. Full record:
+`docs/SHULLOS_IMPLEMENTATION_PLAN.md`, Phase 10–14.
 
 ---
 

@@ -27,9 +27,16 @@ else {
     const token=randomBytes(32).toString('hex');
     process.env.SHULL_DESKTOP_TOKEN=token;
     const python=path.join(vendor,'python','python.exe');
-    const office=path.join(vendor,'LibreOffice','program','soffice.exe');
     if(fs.existsSync(python))process.env.SHULL_PYTHON=python;
-    if(fs.existsSync(office))process.env.SHULL_SOFFICE=office;
+    // LibreOffice is not bundled - it is larger than the rest of the app put together,
+    // and without it the Word document still builds and downloads; only the PDF preview
+    // and the print audit are lost. So take the bundled copy if someone vendored one,
+    // otherwise use an installation already on the machine.
+    const offices=[path.join(vendor,'LibreOffice','program','soffice.exe'),
+      ...[process.env['ProgramFiles'],process.env['ProgramFiles(x86)'],process.env.LOCALAPPDATA]
+        .filter(Boolean).map(root=>path.join(root,'LibreOffice','program','soffice.exe'))];
+    const office=offices.find(x=>{try{return fs.existsSync(x);}catch{return false;}});
+    if(office)process.env.SHULL_SOFFICE=office;
     const serverModule=await import(pathToFileURL(path.join(repo,'app','server.mjs')).href);
     backend=await serverModule.startServer(0);
     const origin=`http://127.0.0.1:${backend.address().port}`;

@@ -3,10 +3,7 @@
 A source-controlled operating system for Matthew Shull's teaching workflow —
 Chemistry, Physics, and Geology at James A. Garfield Local Schools.
 
-**Status: Phase 8 of 14 — governance, design system, standards, and agents exist. Skills do not yet.**
-
-Do not build classroom deliverables from this repository until Phase 14 passes. The installed
-legacy SHULL skills are still the working system.
+**Status: see `CLAUDE.md`.** The phase and skill/agent existence facts live there, not here.
 
 ## What this repository is for
 
@@ -34,13 +31,16 @@ the duplicate must point at the authoritative source.
 | `standards/` | Anti-slop, voice, naming, Drive architecture, QA gate |
 | `governance/` | The two-layer rule, precedence, authority matrix, change control |
 | `.claude/agents/` | All seven agents, validated against the authority matrix |
+| `.claude/skills/` | All twelve skills and their enforcement hooks |
 | `.claude/settings.json` | SessionStart hook that builds the environment |
+| `workflows/` | The build-deliverable, weekly-system-review, and legacy-migration chains |
+| `courses/*/DECISIONS.md` | Chemistry and Physics confirmed; Geology confirmed with two open items |
 | `legacy/` | Verbatim snapshot of the pre-migration system. Read only. |
 | `config/drive.json` | Verified folder IDs, folder grammar, known filing defects |
-| `scripts/` | `measure_tokens.py`, `validate_agents.py` |
+| `scripts/` | `measure_tokens.py`, `validate_agents.py`, `validate_schemas.py`, `validate_references.py`, and others |
 
-**Not yet built:** the twelve skills, the workflows, the three course decisions files, the layer and
-code validators, and the weekly review.
+**Not yet built:** the weekly-review Routine itself (Phase 13 — deliberately deferred until the
+system has real usage to report on).
 
 ## The analysis behind it
 
@@ -66,15 +66,13 @@ Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex
 | Background | White by default; Parchment as a special-purpose surface only |
 | Typography | Trade Gothic Next, falling back to Archivo / Archivo Narrow |
 | Coloured type on white | Each course's text-safe deep variant, never the display colour |
-| Filenames | `SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]`, zero-padded |
+| Filenames | `[S.S] [Type] - [Topic]` or `Unit [X] [Type] - [Unit Title]`, no course prefix (`standards/NAMING.md`) |
 | Geology numbering | Plate Tectonics = U4 |
-| Drive | Unchanged — `SHULL Science/`, Unit → Section → five content folders |
+| Drive | Unchanged — `SHULL Science/`, Unit (Guided Notes, Presentations, Quiz) → Section (Labs-Case Studies-Projects; homework filed loose), per `standards/DRIVE_ARCHITECTURE.md` |
 
 ## Open — important, not blocking
 
 - **CONFLICT-24** — Chemistry grading: gradebook weights vs. the "daily practice ~10%" framing.
-- **CONFLICT-25** — whether Geology has section numbers at all. Blocks Geology renaming and the
-  code validator.
 - **CONFLICT-26** — the Gizmos rule vs. the built U1 materials that use one.
 - **Q-13** — whether to add a `99 Archive/` folder to the Drive content folders.
 

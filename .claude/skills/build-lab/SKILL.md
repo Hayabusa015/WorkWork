@@ -14,7 +14,7 @@ structure is the standard.
 
 1. **Confirm the code exists** in `courses/<course>/DECISIONS.md`. Stop and ask if not.
 2. **Copy both files** — master and teacher key — and rename per `standards/NAMING.md`:
-   `SHULL_CHEM_Lab_U01_S01.4_Isotope_Beans.html` and `..._Key.html`.
+   `1.4 Lab - Isotope Beans.html` and `1.4 Lab Key - Isotope Beans.html`.
 3. **Set the course class** on `<body>`: `chem` · `phys` · `geo`. This now drives the accent colour.
 4. **Fill every `[[ TOKEN ]]`.** Search for `[[`.
 5. **Delete blocks you do not need** — each is marked `BLOCK:` in a comment.
