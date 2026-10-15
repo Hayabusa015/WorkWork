@@ -16,6 +16,9 @@ the create call returning success. Not your intention. A confirmed lookup, after
 
 ## Procedure
 
+0. **Confirm the document was approved to file** (`standards/DRIVE_ARCHITECTURE.md` §8): the user
+   said "file it" or ticked its row in `reports/filing-queue.md`. If not, stop. Iterations are not
+   filed.
 1. **Resolve Course → Unit → Section → content type *before* saving.** Not after.
 2. **Check the name** with `naming`. Fix it before filing, not after.
 3. **Look for existing folders** and reuse them exactly, matching case-insensitively.
