@@ -1,10 +1,11 @@
 ---
 id: SHULL-CHG-0027
 title: Filing gate — documents are filed to Drive only after the user approves them
-status: PENDING
+status: IMPLEMENTED
 opened: 2026-10-15
 source: User
-decided_by:
+decided: 2026-10-15
+decided_by: Matthew Shull
 ---
 
 # SHULL-CHG-0027 — Filing gate
@@ -79,7 +80,7 @@ after a session ends. The committed spec covers that; documents built outside th
 
 Approve.
 
-Decision:
-Status: PENDING
-Implemented By:
-Verified:
+Decision: Approved by Matthew Shull, 2026-10-15.
+Status: IMPLEMENTED
+Implemented By: 12b2d15
+Verified: 2026-10-15. Validators clean. Note: the Librarian now holds Bash, scoped in its prose to running gws for the Inbox upload, because the upload cannot run without it. The flow has not yet been run on a real deliverable.
