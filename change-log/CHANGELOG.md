@@ -30,7 +30,7 @@ supersedes it, exactly as the decision logs work.
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
-| SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | PARTIAL | `governance/proposals/SHULL-CHG-0041-short-topics.md` |
+| SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | CONFIRMED | `governance/proposals/SHULL-CHG-0041-short-topics.md` |
 | SHULL-CHG-0028 | 2026-10-15 | reconcile-session-files skill: list session documents not on Drive, file after approval | CONFIRMED | `governance/proposals/SHULL-CHG-0028-reconcile-session-files.md` |
 | SHULL-CHG-0027 | 2026-10-15 | Filing gate: file to Drive only after user approval | CONFIRMED | `governance/proposals/SHULL-CHG-0027-filing-gate.md` |
 | SHULL-CHG-0026 | 2026-10-15 | gws uploads built files to an Upload Inbox; connector files them | CONFIRMED | `governance/proposals/SHULL-CHG-0026-gws-upload-inbox.md` |
