@@ -34,3 +34,13 @@ silently corrupt. No retry was made. Drive was not modified: no folder created, 
 Destination stays resolved and verified for whoever files it:
 `Physics/Unit 02 - Motion in Two Dimensions/Guided Notes/` — `1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN`
 (empty at 2026-10-14). Files: `SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3.docx` and `..._Key.docx`.
+
+## Retry 2026-10-15 via the Google Workspace credential — NOT executed
+
+`GWS_CREDENTIALS_B64` (OAuth user credential for mshull@jagschools.org) refreshes a token, but its
+only Drive scope is `drive.file`: it sees just the files this app created. The destination folder
+`1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN` returns 404, and searches for `SHULL`, `Physics` and `Guided Notes`
+return nothing. Uploading into that folder would fail, and creating a new folder tree at the Drive
+root would split the library, so nothing was created. Read-only calls only; no file was uploaded, moved
+or changed. The `gws` binary itself is not installed in this container.
+Fix: re-authorise the credential with the full `https://www.googleapis.com/auth/drive` scope.
