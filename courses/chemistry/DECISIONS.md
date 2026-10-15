@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-23
+**Last updated:** 2026-10-15
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -22,9 +22,9 @@ against a code not listed here.
 0.1 Laboratory Equipment · 0.2 Laboratory Safety · 0.3 The Science Laboratory & Basic Skills
 · 0.4 Scientific Observations
 
-**U1 Matter & Atomic Structure** (5 sections)
-1.1 Matter & Changes · 1.2 History of the Atomic Model · 1.3 Atomic Structure · 1.4 Isotopes
-· 1.5 Average Atomic Mass
+**U1 Matter & Atomic Structure** (5 section codes, 4 taught) — *1.4 is folded into 1.3; see the log*
+1.1 Matter & Changes · 1.2 History of the Atomic Model · 1.3 Atomic Structure (includes isotopes)
+· 1.4 Isotopes — FOLDED into 1.3, code retired, never reused · 1.5 Average Atomic Mass
 *Guided-notes difficulty, out of 10:* S1.1 1/10, S1.3 2/10, S1.5 3/10. S1.2 is not yet rated.
 See the 2026-09-23 decision-log entry.
 
@@ -354,6 +354,15 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 2.3 | Electron Configs |
 
 ## Decision log
+
+### 2026-09-23 — U1: 1.4 Isotopes folded into 1.3 Atomic Structure
+Isotope content is taught in 1.3 Atomic Structure and chipped U01 / S01.3. The code 1.4 is
+retired and never reused; 1.5 Average Atomic Mass keeps its code, so no file, folder or chip is
+renumbered. First instructed 2026-09-15 and recorded then only in
+reports/drive-operations/2026-09-15_chem-u01-s01.2-s01.3-s01.5-folder-create.md. Confirmed by Matt
+2026-09-23 ("retry, yes S1.3"), correcting an earlier "Fold into U3", which was a slip.
+Supersedes: Curriculum map, U1 line, "1.4 Isotopes" as a taught section.
+Status: CONFIRMED · SHULL-CHG-0036
 
 ### 2026-09-23 — U1 section difficulty ratings
 Guided-notes covers carry a difficulty rating out of 10 per section ("Estimated for advanced high

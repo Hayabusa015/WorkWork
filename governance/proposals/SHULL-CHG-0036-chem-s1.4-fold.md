@@ -20,8 +20,8 @@
 | **Recommendation** | **Option 1** in §3: keep 1.4 listed, mark it folded, and retire the code. 1.5 keeps its number. |
 | **Decision** | **Approved by the user, 2026-10-15**, in the main session. Verbatim: *"approve 0036, approve 0035 with C yes and D no, reject 0037"*. Recorded under SHULL-CHG-0034. |
 | **Status** | **APPROVED** |
-| **Implemented By** | *(blank. Not implemented.)* |
-| **Verified** | No. Nothing has been implemented. The required checks are in §6. |
+| **Implemented By** | pending commit (main session to replace with the SHA). Option 1, sub-option 1(a), applied exactly as §2a and §2b. The user answered neither §4 question beyond approving the record, so 1(a) is the record's own recommendation and wording, not a user choice. 1(b) was not applied. |
+| **Verified** | **Partly. Not yet verified, so Status stays APPROVED.** Checked by Read/Grep 2026-10-15: U1 line matches §2a exactly; the log entry is the first entry under "Decision log" and no earlier entry was edited; `Last updated` is 2026-10-15. **Not done:** `python3 scripts/validate_codes.py` (no shell; expected under 1(a): passes, Chemistry code count unchanged); the "no other file changed" and commit-message checks (need git, main session). |
 
 ---
 
