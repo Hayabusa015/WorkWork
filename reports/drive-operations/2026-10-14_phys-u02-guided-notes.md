@@ -44,3 +44,19 @@ return nothing. Uploading into that folder would fail, and creating a new folder
 root would split the library, so nothing was created. Read-only calls only; no file was uploaded, moved
 or changed. The `gws` binary itself is not installed in this container.
 Fix: re-authorise the credential with the full `https://www.googleapis.com/auth/drive` scope.
+
+## Plan 2026-10-15 — upload via Upload Inbox, then move and rename (logged BEFORE execution)
+
+Credential scope stays `drive.file` (user instruction). Two-step route:
+
+| # | Operation | Tool | From → To |
+|---|---|---|---|
+| 1 | upload `SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3.docx` and `..._Key.docx` | Drive API, `drive.file` token | local → Upload Inbox `1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy` (inside SHULL Science) |
+| 2 | move each to `Physics/Unit 02 - Motion in Two Dimensions/Guided Notes/` (`1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN`) | Drive connector `update_file` (parentId) | Upload Inbox → Guided Notes |
+| 3 | rename per `standards/NAMING.md` on origin/main (SHULL-CHG-0024, unit-level because the packet covers S2.1–S2.3) | `update_file` (title) | see below |
+
+Prior names (the upload names, i.e. the prior state for rollback):
+`SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3.docx` → `Unit 2 Guided Notes - Motion in Two Dimensions.docx`
+`SHULL_PHYS_Guided_Notes_U02_S02.1-S02.3_Key.docx` → `Unit 2 Guided Notes Key - Motion in Two Dimensions.docx`
+Topic "Motion in Two Dimensions" is the U2 title in `courses/physics/DECISIONS.md`. Object IDs and the
+verified parent lookups are recorded below after execution.
