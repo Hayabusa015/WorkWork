@@ -62,19 +62,25 @@ if ! command -v gws >/dev/null 2>&1; then
 fi
 
 # 4c. Google Workspace CLI credentials -----------------------------------------
-# The environment secret GWS_CREDENTIALS_JSON holds the output of `gws auth export`.
-# The CLI wants a file path, so write the secret to a private file and point
-# GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE at it. The secret is never printed or committed.
-if [ -n "${GWS_CREDENTIALS_JSON:-}" ]; then
-  GWS_DIR="$HOME/.config/gws"
+# The environment secret GWS_CREDENTIALS_B64 holds `gws auth export --unmasked`, base64
+# encoded so quotes and line breaks survive an environment-variable box. (GWS_CREDENTIALS_JSON,
+# the raw text, is accepted too.) The CLI wants a file path, so write the secret to a
+# private file and point GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE at it. Never printed or committed.
+GWS_DIR="$HOME/.config/gws"
+if [ -n "${GWS_CREDENTIALS_B64:-}" ] || [ -n "${GWS_CREDENTIALS_JSON:-}" ]; then
   mkdir -p "$GWS_DIR" && chmod 700 "$GWS_DIR"
-  ( umask 077; printf '%s' "$GWS_CREDENTIALS_JSON" > "$GWS_DIR/credentials.json" )
+  if [ -n "${GWS_CREDENTIALS_B64:-}" ]; then
+    ( umask 077; printf '%s' "$GWS_CREDENTIALS_B64" | base64 -d > "$GWS_DIR/credentials.json" ) 2>/dev/null \
+      || log "  WARNING: GWS_CREDENTIALS_B64 is not valid base64"
+  else
+    ( umask 077; printf '%s' "$GWS_CREDENTIALS_JSON" > "$GWS_DIR/credentials.json" )
+  fi
   if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
     echo "export GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE=$GWS_DIR/credentials.json" >> "$CLAUDE_ENV_FILE"
   fi
   log "  gws credentials written (not shown)"
 else
-  log "  gws credentials not set (GWS_CREDENTIALS_JSON); Drive uploads need them"
+  log "  gws credentials not set (GWS_CREDENTIALS_B64); Drive uploads need them"
 fi
 
 # 5. Report --------------------------------------------------------------------
