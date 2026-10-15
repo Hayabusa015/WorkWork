@@ -33,6 +33,6 @@ Logged before any action. Unit 02 had no folders (parentId lookup, folders only)
 
 | Operation | Object | Intended | Status |
 |---|---|---|---|
-| Create folder | `Section 02.3 - Electron Configurations` | parent Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp); name from courses/chemistry/DECISIONS.md | planned |
-| Create folder | `Homework` | parent: the Section 02.3 folder | planned |
-| Upload then move | 2.3 Activity - Electron Configurations Gizmo.docx / Key.docx / .pdf | Section 02.3 / Homework | planned |
+| Create folder | `Section 02.3 - Electron Configurations` | parent Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp); name from courses/chemistry/DECISIONS.md | created, ID 12xbue3vJTgnkZwn1Fh65ZdaOjRRSmDrT |
+| Create folder | `Homework` | parent: the Section 02.3 folder | created, ID 1DIJnraCcfyNolKZEzAwgnWQA0HahJmiV |
+| Upload then move | 2.3 Activity - Electron Configurations Gizmo.docx / Key.docx / .pdf | Section 02.3 / Homework | filed 2026-10-15, verified by parentId lookup. docx 1_LYqusrdmOSh2FKxoyBCII8Do1TUmYy4, key 1RLCiPx9dKJjuCZCcq7t12ooztLo-gRPx, pdf 1zkRrKHt2Flsfrz6_ZPALMXcpNIHHVIOo. Upload Inbox empty afterwards. |
