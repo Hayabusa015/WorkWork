@@ -1,7 +1,7 @@
 ---
 id: SHULL-CHG-0025
 title: Add a humanize skill (blader/humanizer) that points at the anti-AI-slop standard
-status: APPROVED
+status: IMPLEMENTED
 opened: 2026-10-15
 source: User
 decided: 2026-10-15
@@ -45,6 +45,6 @@ low. Edits to the standard are additive.
 Approve.
 
 Decision: Approved by Matthew Shull, 2026-10-15.
-Status: APPROVED
-Implemented By:
-Verified:
+Status: IMPLEMENTED
+Implemented By: 77fbb9d
+Verified: Verified 2026-10-15: validators clean; skill listed in skills README and called from anti-ai-slop.

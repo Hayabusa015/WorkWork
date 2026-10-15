@@ -25,6 +25,13 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-15
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
+| SHULL-CHG-0025 | 2026-10-15 | Humanize skill and structural prose tells | CONFIRMED | `governance/proposals/SHULL-CHG-0025-humanize-skill.md` |
+
 ## 2026-09-20
 
 | ID | Date | Change | Status | Record |

@@ -1,7 +1,7 @@
 ---
 id: SHULL-CHG-0024
 title: Short, readable filenames — section-led, no course prefix
-status: APPROVED
+status: IMPLEMENTED
 opened: 2026-10-15
 source: User
 decided: 2026-10-15
@@ -71,6 +71,6 @@ links by ID but not links by name.
 Approve the grammar; implement repo changes first; then run the Drive rename as a reviewed batch.
 
 Decision: Approved by Matthew Shull, 2026-10-15.
-Status: APPROVED
-Implemented By:
-Verified:
+Status: IMPLEMENTED
+Implemented By: 77fbb9d
+Verified: Repo side verified 2026-10-15: npm test 36/36; validate_layers, codes, tokens, agents, references, schemas, profiles, notes clean; deck and practice builders produce the new names. Drive renames NOT yet done (separate approval).
