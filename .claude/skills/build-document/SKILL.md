@@ -105,8 +105,8 @@ notes are provisional.
 Set the scaffolding level and **state the choice in one line** so it can be overridden. The ladder
 comes down across the year; the per-course index is in each decisions file.
 
-The packet is a set of designed pages, **one sheet each** (layout: SHULL-CHG-0025; headers:
-SHULL-CHG-0030). It opens with a cover carrying the SHULL-CHG-0014 packet opening: the
+The packet is a set of designed pages, **one sheet each** (layout: SHULL-CHG-0033; headers:
+SHULL-CHG-0038). It opens with a cover carrying the SHULL-CHG-0014 packet opening: the
 course-colour school line, unit title and `GUIDED NOTES · PHASE nn · N SECTIONS` kicker over a
 course-accent rule, Name/Date/Period, unit learning targets ∥ key terms, how these notes work, and
 the sections-in-this-unit checklist, plus the cover image and the equation toolbox. Each section

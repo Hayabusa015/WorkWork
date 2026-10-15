@@ -25,17 +25,33 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-15
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
+| SHULL-CHG-0028 | 2026-10-15 | reconcile-session-files skill: list session documents not on Drive, file after approval | CONFIRMED | `governance/proposals/SHULL-CHG-0028-reconcile-session-files.md` |
+| SHULL-CHG-0027 | 2026-10-15 | Filing gate: file to Drive only after user approval | CONFIRMED | `governance/proposals/SHULL-CHG-0027-filing-gate.md` |
+| SHULL-CHG-0026 | 2026-10-15 | gws uploads built files to an Upload Inbox; connector files them | CONFIRMED | `governance/proposals/SHULL-CHG-0026-gws-upload-inbox.md` |
+| SHULL-CHG-0025 | 2026-10-15 | Humanize skill and structural prose tells | CONFIRMED | `governance/proposals/SHULL-CHG-0025-humanize-skill.md` |
+
+## 2026-09-20
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0023 | 2026-09-20 | Guided notes are strictly recall; no questions | CONFIRMED | `governance/proposals/SHULL-CHG-0023-notes-are-recall.md` |
+
 ## 2026-09-23
 
 `PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0031 | 2026-09-28 | Self-check answer prints inside the work box | PARTIAL | `governance/proposals/SHULL-CHG-0031-selfcheck-in-work-box.md` |
-| SHULL-CHG-0030 | 2026-09-23 | Old notes headers restored on the paged layout | PARTIAL | `governance/proposals/SHULL-CHG-0030-notes-old-headers.md` |
-| SHULL-CHG-0026 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0026-approval-recording.md` |
-| SHULL-CHG-0025 | 2026-09-23 | Guided notes paged redesign from the Codex reference | CONFIRMED | `governance/proposals/SHULL-CHG-0025-notes-paged-redesign.md` |
-| SHULL-CHG-0024 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | CONFIRMED | `governance/proposals/SHULL-CHG-0024-notes-template-retroactive.md` |
+| SHULL-CHG-0039 | 2026-09-28 | Self-check answer prints inside the work box | PARTIAL | `governance/proposals/SHULL-CHG-0039-selfcheck-in-work-box.md` |
+| SHULL-CHG-0038 | 2026-09-23 | Old notes headers restored on the paged layout | PARTIAL | `governance/proposals/SHULL-CHG-0038-notes-old-headers.md` |
+| SHULL-CHG-0034 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0034-approval-recording.md` |
+| SHULL-CHG-0033 | 2026-09-23 | Guided notes paged redesign from the Codex reference | CONFIRMED | `governance/proposals/SHULL-CHG-0033-notes-paged-redesign.md` |
+| SHULL-CHG-0032 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | CONFIRMED | `governance/proposals/SHULL-CHG-0032-notes-template-retroactive.md` |
 
 ## 2026-09-09 · 2026-09-08
 
@@ -78,8 +94,9 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
-| 2026-09-23 | Approve the paged guided-notes redesign? Two conflicts with LOCKED rules come first: block-number chips vs SHULL-CHG-0015, and cue width vs SHULL-CHG-0018. The rebuild stays uncommitted until approval. | User — SHULL-CHG-0025. Answered 2026-09-23 — approved |
-| 2026-09-23 | Acknowledge the retroactive record for seven notes-template commits made without a Change ID (2026-09-16 to 2026-09-23). History is not rewritten. | User — SHULL-CHG-0024. Answered 2026-09-23 — approved |
+| 2026-09-23 | Approve the paged guided-notes redesign? Two conflicts with LOCKED rules come first: block-number chips vs SHULL-CHG-0015, and cue width vs SHULL-CHG-0018. The rebuild stays uncommitted until approval. | User — SHULL-CHG-0033. Answered 2026-09-23 — approved |
+| 2026-09-23 | Acknowledge the retroactive record for seven notes-template commits made without a Change ID (2026-09-16 to 2026-09-23). History is not rewritten. | User — SHULL-CHG-0032. Answered 2026-09-23 — approved |
+| 2026-09-20 | SHULL-CHG-0023 made the notes packet strictly recall but scoped three blocks out of it: the closed-notes section summary box, the per-section self-check, and the "still fuzzy on" prompt. They read as the student checking their own notes rather than being quizzed on a slide. Should any of them also lose their question form? | User — SHULL-CHG-0023 §"Deliberately out of scope" |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? | User — SHULL-CHG-0019 |
 | 2026-09-09 | The practice-set ramp: his shipped Physics packet runs 2/2/1/1 (six questions); the INHERITED studio spec said 2/3/2/1 (eight). Physics now follows the artifact. Should Chemistry adopt 2/2/1/1 too, or keep its own counts? | User — SHULL-CHG-0019 |

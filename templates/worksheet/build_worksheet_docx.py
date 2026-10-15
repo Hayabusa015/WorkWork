@@ -34,6 +34,7 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _shull_name import document_name, section_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
@@ -397,7 +398,7 @@ def question_card(cell, q, n, pal, course, base_dir, width):
 
     if q.get("math"):
         # The self-check answer sits in the box's bottom-right corner, not on a line of
-        # its own below it (SHULL-CHG-0031). Which questions carry one is 0021's call.
+        # its own below it (SHULL-CHG-0039). Which questions carry one is 0021's call.
         work_box(cell, q.get("workLabel", ""), pal,
                  float(q.get("workHeightIn", WORK_MIN_IN)), inner,
                  watermark=q.get("watermark", WATERMARK),
@@ -585,8 +586,9 @@ def main():
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
     kind = spec.get("docType", "Practice_Set")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_{kind}_{unit}_{span}.docx")
+    out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
+        kind, spec["sections"], spec["unit"], unit_title=utitle,
+        topic=section_title(course, spec["sections"][0])))
 
     doc = Document()
     s = page_setup(doc)

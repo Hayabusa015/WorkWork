@@ -15,11 +15,13 @@ is what the legacy `shull-studio` became, and decomposing it is most of this mig
 | `build-lab` | Lab handout and teacher key from the locked template |
 | `apply-shull-design` | Applying tokens and the design system to a deliverable |
 | `anti-ai-slop` | The quality pass, run before anything ships |
+| `humanize` | Rewriting AI-sounding prose; runs inside the anti-ai-slop pass |
 | `verify-content` | Scientific and curricular accuracy |
 | `audit-deliverable` | The QA gate, run independently |
 | `naming` | Filenames and document codes |
 | `retrieve-drive-file` | Finding and reading in the Drive library |
 | `shelve-drive-file` | Filing, folder creation, destination verification |
+| `reconcile-session-files` | Finding the session's documents that are not on Drive and filing them after approval |
 | `weekly-system-review` | The recurring health and learning review — report-only |
 
 Enforced by `scripts/validate_layers.py` and `scripts/validate_tokens.py`, which run on the Stop

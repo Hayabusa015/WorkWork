@@ -1,8 +1,12 @@
-# SHULL-CHG-0032 — Chemistry U1: a single-day unit test, no Day 2
+# SHULL-CHG-0040 — Chemistry U1: a single-day unit test, no Day 2
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0032` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0040`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0032 |
+| **Change ID** | SHULL-CHG-0040 |
 | **Date** | 2026-09-28 |
 | **Source** | User. **Path A, a course fact, Chemistry only.** It touches `courses/chemistry/DECISIONS.md` only. It is written as a record because only the Secretary may edit `courses/`, and only against an APPROVED record. The quote below reached the Secretary through the main session. The Secretary did not hear it directly. |
 | **Current Rule** | See §1 |
@@ -14,7 +18,7 @@
 | **Affected Courses** | Chemistry only |
 | **Risk** | **Low.** One course, one unit, and no section code changes. The two-day default is untouched. |
 | **Recommendation** | Approve §2 after the user answers the open questions in §3. Question 1 (version count) changes what gets built, so it comes first. |
-| **Decision** | **Rejected by the user, 2026-09-28**, in the main session. He first said *"I'm not sure if there's enough in this unit to have a day 2 test."* Then, while thinking it through, he asked: *"Could we add a day 2 written test. Usually I add problem. We could add average atomic mass problems. The table.. what else, I dont really wrong long answer on the day2"*. The main session proposed a short Day 2 (the fill-in chart plus three average-atomic-mass problems, no long answers) and he answered, verbatim: *"yes, do the two-day version."* Unit 1 therefore keeps the two-day unit-test form in `courses/chemistry/DECISIONS.md`, and no exception is needed. The Day 2 tests built earlier are superseded by a new Day 2, not by this record. Recorded under SHULL-CHG-0026. |
+| **Decision** | **Rejected by the user, 2026-09-28**, in the main session. He first said *"I'm not sure if there's enough in this unit to have a day 2 test."* Then, while thinking it through, he asked: *"Could we add a day 2 written test. Usually I add problem. We could add average atomic mass problems. The table.. what else, I dont really wrong long answer on the day2"*. The main session proposed a short Day 2 (the fill-in chart plus three average-atomic-mass problems, no long answers) and he answered, verbatim: *"yes, do the two-day version."* Unit 1 therefore keeps the two-day unit-test form in `courses/chemistry/DECISIONS.md`, and no exception is needed. The Day 2 tests built earlier are superseded by a new Day 2, not by this record. Recorded under SHULL-CHG-0034. |
 | **Status** | **REJECTED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §6. |
@@ -104,7 +108,7 @@ not deleted. Matt, 2026-09-28: "I'm not sure if there's enough in this unit to h
 Create the test with average atomic madden calculations. Maybe 2 if them.  1 with atoms and 1 with
 abundance"
 Supersedes: Assessment shape, "Unit tests — two days", for Unit 1 only.
-Status: CONFIRMED · SHULL-CHG-0032
+Status: CONFIRMED · SHULL-CHG-0040
 ```
 
 `Status: CONFIRMED` is written only on implementation, after approval. The header line
@@ -158,4 +162,4 @@ Status: CONFIRMED · SHULL-CHG-0032
       in `Decision:`. No edit is made without it
 - [ ] The quote in the log entry matches §1d character for character, typos included
 - [ ] No other file changed in the commit. `legacy/` untouched
-- [ ] The commit carries `SHULL-CHG-0032`. `Implemented By` and `Verified` filled in here
+- [ ] The commit carries `SHULL-CHG-0040`. `Implemented By` and `Verified` filled in here

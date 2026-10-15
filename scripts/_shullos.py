@@ -55,7 +55,10 @@ def section_codes(course):
     region = m.group(1) if m else text
     codes = set(re.findall(r"`(\d{1,2}\.\d)`", region))
     # Plain form: a code at a line start or after a separator, followed by a title word.
-    codes |= set(re.findall(r"(?:^|[·|]\s*)(\d{1,2}\.\d)\s+(?=[A-Z(])", region, re.M))
+    # The title word may start lowercase: Chemistry's 14.3 is "pH & pOH", and an
+    # uppercase-only lookahead silently dropped it, so validate_codes.py would have
+    # refused a correctly coded U14/S14.3 document as not being in the decisions.
+    codes |= set(re.findall(r"(?:^|[·|]\s*)(\d{1,2}\.\d)\s+(?=[A-Za-z(])", region, re.M))
     return codes
 
 

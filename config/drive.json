@@ -31,8 +31,8 @@
     },
     "geology": {
       "id": "1lqHHql9cSqOZDGej2ff_121bITWOKZvr",
-      "unitFolders": 0,
-      "state": "empty. Unblocked by SHULL-CHG-0004 (Plate Tectonics = U4); folders may now be created"
+      "unitFolders": 1,
+      "state": "Unit 02 - Geologic Time exists (ID 1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C) with section folders 02.1 to 02.5, Guided Notes, Presentations, a non-standard Quiz folder, and Homework (ID 1W9L10dhOpAt4IPg0zhHQiQPl59cIy9DI, created 2026-10-15). Other units not checked."
     }
   },
   "folderGrammar": {
@@ -53,7 +53,8 @@
     "createFolder": "create_file with mimeType application/vnd.google-apps.folder",
     "saveMarkdown": "disableConversionToGoogleType: true AND contentMimeType: text/plain, or Drive converts it to a Google Doc",
     "move": "SUPPORTED. update_file accepts parentId and replaces the existing parent - a true reparent that PRESERVES the file ID, so links survive and rollback is exact. Verified from the tool contract 2026-09-08 (test T-3). Do NOT use copy_file + trash_file to move: that creates a new ID and breaks every existing link.",
-    "delete": "trash_file only. There is no permanent-delete tool. Emptying the trash is the user's action."
+    "delete": "trash_file only. There is no permanent-delete tool. Emptying the trash is the user's action.",
+    "uploadBinary": "gws drive files create --upload <file> --json '{\"name\":...,\"parents\":[<inbox id>]}', then update_file with parentId and title to file and rename it. gws login is drive.file only. SHULL-CHG-0026."
   },
   "knownDefects": [
     "GEO_U1_S1.2-S1.4_Guided_Cornell_Notes.docx is misfiled in _Brand/Templates/ and is misnamed",
@@ -62,5 +63,11 @@
     "Chemistry Unit 00 has a bare Labs/ folder instead of a Section folder with the five content folders",
     "SHULL_Color_Palette_Library.md and SHULL_Image_Prompt_Pack.md are referenced by filed standards but do not exist",
     "SHULL_Physics_Unit_Map_1.pdf is cited as the source of the confirmed Physics map but is not in Drive"
-  ]
+  ],
+  "uploadInbox": {
+    "name": "Upload Inbox",
+    "id": "1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy",
+    "parent": "SHULL Science",
+    "note": "Created by gws with the drive.file scope, so gws can see only this folder and its own files. Upload here, then reparent and rename with update_file. SHULL-CHG-0026."
+  }
 }

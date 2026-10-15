@@ -4,7 +4,7 @@
 
 One source, so the key is the student structure with answers filled and the two cannot
 drift. Edit this file, not the JSON it writes. Wording follows the U1 deck
-(SHULL_CHEM_Slides_U01_S01.1-S01.5) and the page grouping Matthew approved.
+(the Chemistry Unit 1 slide deck) and the page grouping Matthew approved.
 """
 import copy, json, os
 

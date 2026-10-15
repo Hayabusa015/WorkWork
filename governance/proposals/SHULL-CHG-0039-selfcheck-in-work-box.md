@@ -1,8 +1,12 @@
-# SHULL-CHG-0031 — Worksheets: the self-check bracket prints inside the work box
+# SHULL-CHG-0039 — Worksheets: the self-check bracket prints inside the work box
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0031` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0039`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0031 |
+| **Change ID** | SHULL-CHG-0039 |
 | **Date** | 2026-09-28 |
 | **Source** | User, 2026-09-28. The main session relayed his words, so the Secretary did not hear them directly. He was looking at the optional Chemistry S1.5 practice set, where each self-check answer (for example *"[ 175.03 amu ]"*) sits on its own line below the work box. He said, verbatim: *"Theres so much wasted space with the answer. Remove the answer reallocate space. Condense add a 6th problem"*. Asked whether to drop the answers, he said, verbatim: *"Ok I lied dont remove the answer. Just put it in the work.box, I dont know why you are putting it outside the box and wasting so much space just to put a small answer in the corner"*. **Neither statement approves this record.** They are the finding it is written from. |
 | **Current Rule** | See §1, quoted verbatim. |
@@ -14,7 +18,7 @@
 | **Affected Courses** | All three, because the template is shared. **Chemistry:** the brackets move into the box. **Physics:** no change (§3). **Geology:** no change. Geology has no calculations, so it has no brackets. |
 | **Risk** | **Low.** Placement only. No token, no LOCKED rule and no course fact changes. The one layout risk is a student writing over the bracket in the corner (§4, item 4). |
 | **Recommendation** | Approve §2 as written. Answer §4 item 1 first, because it decides what happens to code that already cites this ID. |
-| **Decision** | **Approved by the user, 2026-09-28**, in the main session. Verbatim: *"Ok I lied dont remove the answer. Just put it in the work.box, I dont know why you are putting it outside the box and wasting so much space just to put a small answer in the corner"*. Recorded under SHULL-CHG-0026. On §4 flag 1: the code was written in the working tree by the main session before this record existed, and was not committed until after this recording. |
+| **Decision** | **Approved by the user, 2026-09-28**, in the main session. Verbatim: *"Ok I lied dont remove the answer. Just put it in the work.box, I dont know why you are putting it outside the box and wasting so much space just to put a small answer in the corner"*. Recorded under SHULL-CHG-0034. On §4 flag 1: the code was written in the working tree by the main session before this record existed, and was not committed until after this recording. |
 | **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. The required checks are in §5. |
@@ -86,10 +90,10 @@ Chemistry box. Whether the Physics line also wastes space is not decided here.
 
 ## 4. Flagged
 
-1. **Code citing SHULL-CHG-0031 appeared before this record existed.** While this record was being
+1. **Code citing SHULL-CHG-0039 appeared before this record existed.** While this record was being
    drafted, the working tree changed in two files:
    - `templates/_shull_docx.py` `work_box()` gained a `corner=` parameter (lines 474–521). Its
-     docstring cites *"SHULL-CHG-0031"*.
+     docstring cites *"SHULL-CHG-0039"*.
    - `templates/worksheet/build_worksheet_docx.py` lines 398–413 now pass `corner=q.get("selfCheck")`
      into `work_box()`. They keep the old below-card paragraph only for `selfCheck and not math`,
      which is the Physics case in §3.
@@ -131,5 +135,5 @@ Chemistry box. Whether the Physics line also wastes space is not decided here.
 - [ ] `pdffonts` / `scripts/audit_fonts.py` shows Archivo only.
 - [ ] `scripts/audit_print_ink.py` passes: toner is within budget and there is no solid band.
 - [ ] The key builder builds the same specs unchanged.
-- [ ] The commit message carries `SHULL-CHG-0031`, and `Implemented By` and `Verified` are filled in
+- [ ] The commit message carries `SHULL-CHG-0039`, and `Implemented By` and `Verified` are filled in
       here.

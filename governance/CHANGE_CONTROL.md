@@ -64,7 +64,7 @@ Verified:         [yes/no — and how]
   `standards/`, `governance/`, or `courses/`, apart from the recording path below — and only against
   an APPROVED record.
 - **The user** approves. Nothing else does.
-- **Recording the decision (SHULL-CHG-0026).** This is the only statement of the recording path;
+- **Recording the decision (SHULL-CHG-0034).** This is the only statement of the recording path;
   other files point here.
   1. **The main session records the decision.** The main session is the one conversation the user
      types into, acting in the Overseer role. It records the user's decision in a change record, and

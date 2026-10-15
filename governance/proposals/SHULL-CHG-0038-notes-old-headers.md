@@ -1,21 +1,25 @@
-# SHULL-CHG-0030 — Guided notes: the SHULL-CHG-0014 headers on the SHULL-CHG-0025 paged layout
+# SHULL-CHG-0038 — Guided notes: the SHULL-CHG-0014 headers on the SHULL-CHG-0033 paged layout
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0030` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0038`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0030 |
+| **Change ID** | SHULL-CHG-0038 |
 | **Date** | 2026-09-23 |
 | **Source** | User, 2026-09-23. The main session relayed his words, so the Secretary did not hear them directly. He asked, verbatim: *"so the tempalte, i hope we didnt change the headers from the old guided note tempalte."* The main session confirmed that the headers had changed, showed him an old/new side-by-side of the Geology notes, and offered three options. **Option 1**, verbatim: *"Old headers on the new layout. Keep the new page structure (a new page per section, RECALL blocks, work boxes, and the Concept Review page) but bring back your old headers: the colored school line and title block; the targets ∥ key terms box and the section checklist; the section title bar with "U1 / S1.2" and the course-color rule; the "LEARNING TARGET" line; the colored small-caps row labels."* He answered, verbatim: *"I want to keep the old header, new slide format"*. The main session reads this as choosing Option 1. **Neither statement approves this record.** They are the finding it is written from. |
-| **Amends** | **SHULL-CHG-0025** (IMPLEMENTED, `71e5e05`). The change is limited to the headers. Everything else in 0025 stays (§3c). |
-| **Current Rule** | See §1. It is quoted verbatim from SHULL-CHG-0025 §3 and §4. |
+| **Amends** | **SHULL-CHG-0033** (IMPLEMENTED, `71e5e05`). The change is limited to the headers. Everything else in 0025 stays (§3c). |
+| **Current Rule** | See §1. It is quoted verbatim from SHULL-CHG-0033 §3 and §4. |
 | **Proposed Rule** | See §3. Five header elements are restored from SHULL-CHG-0014 on top of 0025's paged layout. |
-| **Supersedes** | See §4. In short, from **SHULL-CHG-0025**: part of **§3a**, the per-page head at a section's start. Part of **§3b**, the black block title on the cue side. Part of **§3f**, the cover's title block, kicker, school line, key terms by section and "How to use the notes". The first bullet of **§3h**, *"Greyscale throughout."* Three **§4** rows are also reversed in part. These are the ones that took the 0014 unit wrapper, the 0014 header bar and learning target, and the 0014 accent header rules and labels. |
-| **Reason** | The user wants the header design from his own Geology packet back, and wants 0025's page structure kept. SHULL-CHG-0014 adopted that packet with the words *"the structure is the asset and none of it was redesigned"*. SHULL-CHG-0025 §6 item 6 flagged that 0025 reversed that premise. This record restores the part the user has now asked for. |
+| **Supersedes** | See §4. In short, from **SHULL-CHG-0033**: part of **§3a**, the per-page head at a section's start. Part of **§3b**, the black block title on the cue side. Part of **§3f**, the cover's title block, kicker, school line, key terms by section and "How to use the notes". The first bullet of **§3h**, *"Greyscale throughout."* Three **§4** rows are also reversed in part. These are the ones that took the 0014 unit wrapper, the 0014 header bar and learning target, and the 0014 accent header rules and labels. |
+| **Reason** | The user wants the header design from his own Geology packet back, and wants 0025's page structure kept. SHULL-CHG-0014 adopted that packet with the words *"the structure is the asset and none of it was redesigned"*. SHULL-CHG-0033 §6 item 6 flagged that 0025 reversed that premise. This record restores the part the user has now asked for. |
 | **Affected Agents** | Designer (rebuilds the headers in the builder). Auditor (independent pass, §7). Secretary (records this, and implements it once approved). |
 | **Affected Skills** | `build-document` (`.claude/skills/build-document/SKILL.md`, which describes the cover and page head). `templates/notes/README.md` (spec schema: `unitTargets`, `keyTerms`, `howItWorks`, `sectionList`, `learningTarget`, `cueLabel`, `notesLabel`). |
 | **Affected Courses** | All three: Chemistry, Physics and Geology. The template is shared. |
 | **Risk** | **Medium.** This is a shared template used by three courses. It reverses part of an IMPLEMENTED record (0025 §3h, greyscale) and brings course colour back to the printed notes. No LOCKED rule is changed, but two sit close by: `brand/SHULL_DESIGN_SYSTEM.md` §8 (colour is a thin accent only) and SHULL-CHG-0015 (bare list numbers). See §5, items a and d. |
 | **Recommendation** | Approve the five restored elements in §3a, subject to the user's answers to §5 a–d. Ask **a** first, because it decides whether any colour lands at all. Then ask **b**, because it decides the shape of page 1. |
-| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"I want to keep the old header, new slide format"*. Then, on whether the template changes and not the Unit 1 notes: *"yes, use your recommendations for the template"*. The main session's recommendations he accepted, as he was shown them: a. thin course-color accents only, no fills; b. keep the separate cover page (atom image, difficulty ratings, equation box) with the old header block on it; c. a header only at the start of each section; d. drop the "01" block numbers. Also verbatim: *"no dont rebuild"*. The Chemistry U1 notes already delivered are not rebuilt. Recorded under SHULL-CHG-0026. |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"I want to keep the old header, new slide format"*. Then, on whether the template changes and not the Unit 1 notes: *"yes, use your recommendations for the template"*. The main session's recommendations he accepted, as he was shown them: a. thin course-color accents only, no fills; b. keep the separate cover page (atom image, difficulty ratings, equation box) with the old header block on it; c. a header only at the start of each section; d. drop the "01" block numbers. Also verbatim: *"no dont rebuild"*. The Chemistry U1 notes already delivered are not rebuilt. Recorded under SHULL-CHG-0034. |
 | **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §7. |
@@ -24,7 +28,7 @@
 
 ## 1. Current Rule, verbatim
 
-### 1a. SHULL-CHG-0025 §3a: the per-page head
+### 1a. SHULL-CHG-0033 §3a: the per-page head
 
 > - **Every content page has its own head.** It carries the running head (`SHULL SCIENCE / CHEMISTRY /
 >   GUIDED NOTES`), the section title, the section code at the top right (`S01.1`), and a subtitle
@@ -37,7 +41,7 @@ sit on one row. The title is on the next row, with a hairline rule under it. The
 row after that, with a second hairline rule under it. All four are in `pal.ink` or `pal.label`, so
 the head has no course colour. *The "two rules" detail comes from the builder, not the record text.*
 
-### 1b. SHULL-CHG-0025 §3b: the cue side
+### 1b. SHULL-CHG-0033 §3b: the cue side
 
 > - **Cue side:** the block number (`01`, `02` …), the block title (*"Vocabulary"*, *"The matter
 >   flowchart"*), then one or two cue questions. **The block number is bare**, with no tint, chip or border
@@ -45,7 +49,7 @@ the head has no course colour. *The "two rules" detail comes from the builder, n
 
 As built (`render_cue()`, lines 467–476): the number and the title are bold, in the default ink.
 
-### 1c. SHULL-CHG-0025 §3f: the cover
+### 1c. SHULL-CHG-0033 §3f: the cover
 
 > - The atom image as the hero, at the top right. This replaces the per-page watermark.
 > - Course/unit eyebrow, unit title, `GUIDED NOTES • S01.1 / S01.3 / S01.5`, school, and Name / Date /
@@ -57,11 +61,11 @@ As built (`render_cue()`, lines 467–476): the number and the title are bold, i
 > - **Key terms, grouped by section.**
 > - **How to use the notes.**
 
-### 1d. SHULL-CHG-0025 §3h: ink
+### 1d. SHULL-CHG-0033 §3h: ink
 
 > - **Greyscale throughout.** No course accent colour in the printed notes. See §6 item 5.
 
-### 1e. SHULL-CHG-0025 §4: what it superseded in SHULL-CHG-0014
+### 1e. SHULL-CHG-0033 §4: what it superseded in SHULL-CHG-0014
 
 > | Must-write bar in the course accent (lime in Chemistry), drawn as a cell border | 0014 Finding 1; 0024 `f76fea6` | A grey rule |
 > | Course-accent colour in print: the cue-column accent rail, accent header rules, accent labels | 0014 Finding 4; 0024 `4234b69` | Greyscale |
@@ -122,7 +126,7 @@ Both are LOCKED tokens. **No token changes.**
 - **Every block** carries element 5. Whether the `01`, `02` number stays beside it is §5 d.
 - **Continuation pages** of a section: whether any head appears is §5 c.
 
-### 3c. Kept from SHULL-CHG-0025, unchanged
+### 3c. Kept from SHULL-CHG-0033, unchanged
 
 - A new page for each section.
 - The RECALL, RECAP and REVIEW blocks, and their light tint on the tag only.
@@ -166,7 +170,7 @@ builder does.
 
 **a. Course colour.**
 
-- SHULL-CHG-0025 made the printed notes greyscale (§3h). The user's 0025 request asked for
+- SHULL-CHG-0033 made the printed notes greyscale (§3h). The user's 0025 request asked for
   something *"that would improve this on greyscale"*, and his shading answer was *"Table headers +
   chips (Recommended)"*. 0025 §6 item 5 flagged that greyscale removes each course's printed
   identity, and nothing in the 0025 record shows that point being answered separately.
@@ -202,7 +206,7 @@ the user.
    - 0014 and the Geology spec print `U1 / S1.2`. 0025 prints `S01.1`.
    - `standards/NAMING.md` §4 gives the in-document form as `U10 / S10.4`. That example does not show
      whether a single-digit unit is padded.
-   - SHULL-CHG-0029 §5 item 1 already asks what the chip and footer show on a multi-section file.
+   - SHULL-CHG-0037 §5 item 1 already asks what the chip and footer show on a multi-section file.
    - The title bar should follow whichever answer 0029 gets, and should not decide it here.
 2. **Chemistry has no content for element 2.**
    - The committed Chemistry spec has `learningTarget` per section (lines 100, 264, 412). It has no
@@ -258,5 +262,5 @@ All of these must pass after approval and before Status moves past APPROVED.
       for all three courses.
 - [ ] `templates/notes/README.md` and `.claude/skills/build-document/SKILL.md` describe the restored
       headers.
-- [ ] The commit message carries `SHULL-CHG-0030`, and `Implemented By` and `Verified` are filled in
+- [ ] The commit message carries `SHULL-CHG-0038`, and `Implemented By` and `Verified` are filled in
       here.

@@ -1,8 +1,12 @@
-# SHULL-CHG-0028 — Chemistry U1: 1.4 Isotopes is folded into 1.3 Atomic Structure
+# SHULL-CHG-0036 — Chemistry U1: 1.4 Isotopes is folded into 1.3 Atomic Structure
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0028` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0036`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0028 |
+| **Change ID** | SHULL-CHG-0036 |
 | **Date** | 2026-09-23 |
 | **Source** | User. **Path A, a course fact.** It touches `courses/chemistry/DECISIONS.md` only. It is written as a record because only the Secretary may edit `courses/`, and only against an APPROVED record. Findings: Auditor items 31, 34 and 36 in `reports/2026-09-23_chem-u01-qa-audit.md`, and the Librarian survey `reports/drive-operations/2026-09-23_chem-u01-folder-survey.md`. The quotes below reached the Secretary through the main session. The Secretary did not hear them directly. |
 | **Current Rule** | See §1 |
@@ -84,7 +88,7 @@ renumbered. First instructed 2026-09-15 and recorded then only in
 reports/drive-operations/2026-09-15_chem-u01-s01.2-s01.3-s01.5-folder-create.md. Confirmed by Matt
 2026-09-23 ("retry, yes S1.3"), correcting an earlier "Fold into U3", which was a slip.
 Supersedes: Curriculum map, U1 line, "1.4 Isotopes" as a taught section.
-Status: CONFIRMED · SHULL-CHG-0028
+Status: CONFIRMED · SHULL-CHG-0036
 ```
 
 `Status: CONFIRMED` is written only on implementation, after approval. The header line
@@ -159,4 +163,4 @@ Also found by the Secretary. These are not in the brief, and not fixed:
       1(a): passes, and the Chemistry code count is unchanged. Under 1(b): the count drops by one,
       and failures are limited to the files in §5
 - [ ] No other file changed in the commit. `legacy/` untouched
-- [ ] The commit carries `SHULL-CHG-0028`. `Implemented By` and `Verified` filled in here
+- [ ] The commit carries `SHULL-CHG-0036`. `Implemented By` and `Verified` filled in here

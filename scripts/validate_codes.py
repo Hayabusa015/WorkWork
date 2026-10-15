@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _shullos import REPO, walk, read, report, section_codes, COURSE_BY_CODE
 
 # A code is only checked when the surrounding text says which course it belongs to:
-# either a SHULL_ filename or an explicit CHEM/PHYS/GEO nearby. A bare "U08_S08.2"
+# either a legacy SHULL_ filename (pre SHULL-CHG-0024; the new short names carry no course) or an explicit CHEM/PHYS/GEO nearby. A bare "U08_S08.2"
 # in a generic example is not attributable and is not checked.
 FILENAME = re.compile(r"SHULL_(CHEM|PHYS|GEO)_[A-Za-z_]+_U(\d{1,2})_S(\d{1,2}\.\d)")
 

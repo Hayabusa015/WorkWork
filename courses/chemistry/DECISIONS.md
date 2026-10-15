@@ -346,7 +346,7 @@ school students: 1 = introductory; 10 = highly challenging"). Unit 1: S1.1 Matte
 S1.3 Atomic Structure 2/10 · S1.5 Average Atomic Mass 3/10. S1.2 is not yet rated. The values came
 from the Codex notes cover; Matt kept them 2026-09-23 ("difficulty ratings, keep and add").
 Supersedes: None (first record of difficulty ratings).
-Status: CONFIRMED · SHULL-CHG-0025 (Path A edit split from a Path B record)
+Status: CONFIRMED · SHULL-CHG-0033 (Path A edit split from a Path B record)
 
 ### 2026-09-15 — Standing policy: optional worksheets redeemable at test time, +1 point each, uncapped
 New course-wide grading policy, stated by Matt directly in conversation: "My chemistry worksheets

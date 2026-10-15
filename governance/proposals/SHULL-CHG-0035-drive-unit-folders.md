@@ -1,8 +1,14 @@
-# SHULL-CHG-0027 — Drive: the system creates no folders; file into a matching folder if it exists, else loose in the parent
+# SHULL-CHG-0035 — Drive: the system creates no folders; file into a matching folder if it exists, else loose in the parent
+
+> **Overlap noted 2026-10-15.** This record is still PENDING. PR #1 (`SHULL-CHG-0030`, once merged) already sets the live Drive folder structure and the unit-level folders it proposes, and the Drive was retrofitted to match in September. Decide whether this record is still needed.
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0027` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0035`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0027 |
+| **Change ID** | SHULL-CHG-0035 |
 | **Date** | 2026-09-23 |
 | **Source** | User, 2026-09-23, two answers, both relayed by the main session. The Secretary did not hear either directly. **(1)** Asked whether the unit-level `Presentations` / `Guided Notes` / `Quiz` folders should be added to the rules, he answered, verbatim: *"We changed them i assumed they were added to the rules, update that"*. **(2)** Then he was asked five questions (§1g), and answered, verbatim: *"no keep my folders the way they are, i do not need breakdown within each folder. its too much to click through, in the future if i need it I will add it."* **Neither answer approves the rule text below.** §2 is the main session's reading of answer (2), written after he gave it. Finding: the Librarian's read-only survey, `reports/drive-operations/2026-09-23_chem-u01-folder-survey.md`. Corroborated by Auditor item 35 in `reports/2026-09-23_chem-u01-qa-audit.md`. |
 | **Current Rule** | See §1. Verbatim, from SHULL-CHG-0005, `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/agents/librarian.md` and `.claude/skills/shelve-drive-file/SKILL.md` |
@@ -13,7 +19,7 @@
 | **Affected Skills** | `shelve-drive-file` (lines 22, 26, 29–35, 46). `retrieve-drive-file` reads the same tree. `naming`, only through the separate record in §6 |
 | **Affected Courses** | All three: Chemistry, Physics and Geology. Under `CLAUDE.md` §2 this makes it a standard, not a course decision |
 | **Risk** | **Medium.** It changes routing for all three courses, removes an agent authority (folder creation), and supersedes a LOCKED record (0005). The live Drive already differs from the rule, so leaving the rule as it is carries risk too. |
-| **Recommendation** | Approve §2. Answer §5 item C first. Item D only settles how far "never creates a folder" reaches. The naming gap (§6) is now its own record, SHULL-CHG-0029. |
+| **Recommendation** | Approve §2. Answer §5 item C first. Item D only settles how far "never creates a folder" reaches. The naming gap (§6) is now its own record, SHULL-CHG-0037. |
 | **Decision** | *Pending.* |
 | **Status** | **PENDING** |
 | **Implemented By** | *(blank. Not implemented.)* |
@@ -228,14 +234,14 @@ both went stale.
 
 ### 2d. `config/drive.json`
 
-- `$comment`: "Structure: SHULL-CHG-0005 as amended by SHULL-CHG-0027. The system creates no
+- `$comment`: "Structure: SHULL-CHG-0005 as amended by SHULL-CHG-0035. The system creates no
   folders." Plus the new verification date.
 - `folderGrammar.contentFolders` → `recognisedUnitFolders: ["Presentations", "Guided Notes", "Quiz"]`
   and `recognisedSectionFolders: ["Labs-Case Studies-Projects"]`. `contentFolderRule` is rewritten to
   §2b. These are names to match, **not** folders that must exist.
 - `courses.physics`: `unitFolders: 11`, Unit 00–10. `courses.geology`: `unitFolders: 10`, Unit 01–10.
   Both verified (survey F8).
-- `operations.createFolder`: marked "not used. The system creates no folders (SHULL-CHG-0027)".
+- `operations.createFolder`: marked "not used. The system creates no folders (SHULL-CHG-0035)".
 - `knownDefects[3]`: reworded so it no longer cites "the five content folders". The bare `Labs/`
   folder in CHEM U00 still exists (survey §5). Under this rule it is his folder, so whether it is a
   defect at all is his call.
@@ -273,7 +279,7 @@ Survey §6 action "The user must create `Labs-Case Studies-Projects`, then repar
 | `[Course]/Unit ## - Name/Section ##.# - Name/` and hyphen separators | **Kept** as the naming grammar for folders the user makes |
 | "Section level preserved" | **Kept.** Sections still exist and hold labs and section files |
 | `Section …/{Homework, Presentations, Guided Notes, Tests-Quizizz, Labs-Case Studies-Projects}` | **Superseded.** No required content folders. The system recognises the four named in §2b when present |
-| `DRIVE_ARCHITECTURE.md` line 3, "the structure stays exactly as built" | **Superseded.** Becomes "SHULL-CHG-0005 as amended by SHULL-CHG-0027" |
+| `DRIVE_ARCHITECTURE.md` line 3, "the structure stays exactly as built" | **Superseded.** Becomes "SHULL-CHG-0005 as amended by SHULL-CHG-0035" |
 
 Also superseded, and **not** part of 0005: the Librarian's authority to create folders
 (`DRIVE_ARCHITECTURE.md` §2 rule 3 and the §3 Create row, `librarian.md:32`, `SKILL.md:46`). That
@@ -308,7 +314,7 @@ entry is added for a folder that does not exist.** No key, no `null`, no placeho
 | S01.1 | `1XS4PboqJFcbDmtQWdArK7H54KFGlA0_s` | `12jktWfOEEUPTqvDAdFCAB9B9XY0jOfNl` |
 | S01.2 | `15FUjBMNe9elG0Cod5eNqUTSn9d1cEDWe` | `1EMp9Vi12n39sLv-r2WV_tM7R73Rrdwp5` |
 | S01.3 | `1t_3db6VNrkCYuP73LgQx-sWEVHvz7GIK` | `1IE9wqFT8iXkFkY3Py2OAe-o4brVFlqjS` |
-| S01.4 | `1WU_Mx3hYEDdNR8ADffg_bI16kPZ0GQDK` | *(none exists. No entry.)* The folder is empty. See SHULL-CHG-0028 (the fold) |
+| S01.4 | `1WU_Mx3hYEDdNR8ADffg_bI16kPZ0GQDK` | *(none exists. No entry.)* The folder is empty. See SHULL-CHG-0036 (the fold) |
 | S01.5 | `1WoVqoIbq7nC10gXGM4GC4U8IctJywa5D` | `1QV9m7jqso5CKhkZNWDW8TjAcquLGv14n` |
 
 ### 4c. Other section-level Labs folders the survey verified
@@ -352,9 +358,9 @@ Q1–Q6 are **closed** by the reading in §2e.
 
 ---
 
-## 6. Split out: the NAMING gap. Now SHULL-CHG-0029
+## 6. Split out: the NAMING gap. Now SHULL-CHG-0037
 
-**Raised as its own record: `governance/proposals/SHULL-CHG-0029-multi-section-filenames.md`
+**Raised as its own record: `governance/proposals/SHULL-CHG-0037-multi-section-filenames.md`
 (PENDING).** That record is authoritative for the naming gap. It carries the user's delegation, the
 range form the main session chose, and the validator findings. The notes below are what this record
 said before 0029 existed. They are kept for the audit trail and **superseded by 0029** wherever they
@@ -440,7 +446,7 @@ item 35). Recording that is Librarian work, outside this record.
 | 5 | `README.md:71` | "Unit → Section → five content folders" → a pointer to `standards/DRIVE_ARCHITECTURE.md` |
 | 6 | `change-log/CHANGELOG.md` | Row for 0027, naming 0005 as partly superseded |
 
-Items 3 and 4 are under `.claude/`. As SHULL-CHG-0026 §5 item 2 notes, a sub-agent may not be able to
+Items 3 and 4 are under `.claude/`. As SHULL-CHG-0034 §5 item 2 notes, a sub-agent may not be able to
 edit those on a relayed approval. The user may need to approve those tool calls himself when prompted.
 
 Checks:
@@ -454,4 +460,4 @@ Checks:
 - [ ] No ID from §4d appears in config
 - [ ] `librarian.md` and `SKILL.md` point to `DRIVE_ARCHITECTURE.md` §2 and restate no folder names
 - [ ] `legacy/` and `docs/DECISIONS_2026-09-07.md` untouched
-- [ ] Commit carries `SHULL-CHG-0027`. `Implemented By` and `Verified` filled in here
+- [ ] Commit carries `SHULL-CHG-0035`. `Implemented By` and `Verified` filled in here

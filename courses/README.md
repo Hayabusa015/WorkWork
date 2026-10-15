@@ -16,6 +16,4 @@ instead of silent.
 |---|---|
 | Chemistry | Fully mapped — 16 units, 90 sections. Adopt `CHEM_DECISIONS.md` from Drive wholesale. |
 | Physics | Mapped — 11 units, 48 sections. Source PDF is missing from Drive (Q-14). |
-| Geology | Numbering settled (Plate Tectonics = U4). **Section numbering still open** — CONFLICT-25 blocks the code validator and all Geology renaming. |
-
-*Status: not yet written. Phase 12.*
+| Geology | Numbering settled (Plate Tectonics = U4). Section numbering confirmed 2026-09-08 (SHULL-CHG-0009) — CONFLICT-25 resolved; `validate_codes.py` passes all 54 sections. |

@@ -1,26 +1,30 @@
-# SHULL-CHG-0025 — Guided notes: the paged redesign, from the Codex reference
+# SHULL-CHG-0033 — Guided notes: the paged redesign, from the Codex reference
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0025` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0033`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0025 |
+| **Change ID** | SHULL-CHG-0033 |
 | **Date** | 2026-09-23 |
-| **Source** | User. Verbatim: *"i took this over to chat gpt codex and we worked on this to improve it to this, i like how we seperated and broke down the slides like this a bit more and improved it, can you take what we did here to improve this and add it to our repo to update our guided notes propfile."* and *"maybe any shading or somehting that would improve this on greyscale?"* Four follow-up answers from the same conversation are in §2. **Added 2026-09-23:** a later answer, relayed by the main session, verbatim: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Its first two parts are recorded at §6 items 4 and 8. The third part belongs to SHULL-CHG-0029. **None of it approves this record.** |
+| **Source** | User. Verbatim: *"i took this over to chat gpt codex and we worked on this to improve it to this, i like how we seperated and broke down the slides like this a bit more and improved it, can you take what we did here to improve this and add it to our repo to update our guided notes propfile."* and *"maybe any shading or somehting that would improve this on greyscale?"* Four follow-up answers from the same conversation are in §2. **Added 2026-09-23:** a later answer, relayed by the main session, verbatim: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Its first two parts are recorded at §6 items 4 and 8. The third part belongs to SHULL-CHG-0037. **None of it approves this record.** |
 | **Reference artifact** | `/root/.claude/uploads/26f8099c-89f2-51d6-8b84-531faeb169a3/3933feb4-SHULL_CHEM_U01_Guided_Notes_Cover_and_Review.pdf`. It has 8 pages and was made outside this repository with ChatGPT/Codex, using ReportLab and Helvetica/Arial. **It is not stored in the repo.** It lives under `/root/.claude/uploads/` and may not persist. §3 describes it from the page renders. |
-| **Current Rule** | See §1 — verbatim, from SHULL-CHG-0014, SHULL-CHG-0016 and SHULL-CHG-0024 |
+| **Current Rule** | See §1 — verbatim, from SHULL-CHG-0014, SHULL-CHG-0016 and SHULL-CHG-0032 |
 | **Proposed Rule** | See §3 |
-| **Supersedes** | See §4. In short: from **SHULL-CHG-0024**, the per-page watermark, the per-cue recall lines, the EXTRA box, the 2×2 study recap, the lime/course-accent must-write bar and the course-accent rail. From **SHULL-CHG-0014**, the continuous section rhythm, the full-width summary and closing boxes, and course colour in the printed notes. From **SHULL-CHG-0016**, the GIVEN/NEED table only. The work box itself stays. |
+| **Supersedes** | See §4. In short: from **SHULL-CHG-0032**, the per-page watermark, the per-cue recall lines, the EXTRA box, the 2×2 study recap, the lime/course-accent must-write bar and the course-accent rail. From **SHULL-CHG-0014**, the continuous section rhythm, the full-width summary and closing boxes, and course colour in the printed notes. From **SHULL-CHG-0016**, the GIVEN/NEED table only. The work box itself stays. |
 | **Reason** | The user prefers how the Codex version splits a section into titled blocks and pages, and asked for it to become the template. It also answers his greyscale question without breaking `brand/SHULL_DESIGN_SYSTEM.md` §8. |
-| **Affected Agents** | Designer (is rebuilding the template in the working tree now; builds from it afterwards). Auditor (the independent pass that SHULL-CHG-0024 never had — see §7). Secretary (records, and implements on approval). |
+| **Affected Agents** | Designer (is rebuilding the template in the working tree now; builds from it afterwards). Auditor (the independent pass that SHULL-CHG-0032 never had — see §7). Secretary (records, and implements on approval). |
 | **Affected Skills** | `build-document` — `.claude/skills/build-document/SKILL.md` is being updated by the designer to describe the new layout. `templates/notes/README.md` is being updated by the designer too. **Neither update is committed.** Both land with this change, and not before it. |
 | **Affected Courses** | All three — Chemistry, Physics, Geology. The template is shared. |
 | **Risk** | **Medium** — a shared template, three courses. See §6 for the items that need the user. **Two touched LOCKED rules** (§6, items 1 and 2). Item 1 has been resolved in favour of the LOCKED rule, pending the user's confirmation. Item 2 is open. |
 | **Recommendation** | Approve the layout, subject to the user's answers in §6. The four decisions in §2 are already his. What is left is a set of places where the Codex reference and a standing rule disagree. §6 lists them. None is settled without the user. Items 1 and 3 have been brought back to the existing LOCKED rules (0015, 0016), pending his confirmation. Items 4 and 8 were answered on 2026-09-23. The recorded readings of those answers are the main session's, and his decision on this record confirms them. The others are open. |
-| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"approved"*, then *"i like the newer style."* His answers to §6: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Recorded under SHULL-CHG-0026. The approval covers the amended record, including bare block numbers (0015) and the 1.4 in work box (0016). |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"approved"*, then *"i like the newer style."* His answers to §6: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. Recorded under SHULL-CHG-0034. The approval covers the amended record, including bare block numbers (0015) and the 1.4 in work box (0016). |
 | **Status** | **IMPLEMENTED** (2026-09-23) |
-| **Implemented By** | `71e5e05` (§8 edit 1, Path B: builder, specs, README, skill). §8 edit 2 (Path A, `courses/chemistry/DECISIONS.md`) and the matching `standards/QA_GATE.md` line were applied by the Secretary on 2026-09-23. **The main session commits them with `SHULL-CHG-0025` and adds that SHA here.** |
+| **Implemented By** | `71e5e05` (§8 edit 1, Path B: builder, specs, README, skill). §8 edit 2 (Path A, `courses/chemistry/DECISIONS.md`) and the matching `standards/QA_GATE.md` line were applied by the Secretary on 2026-09-23. **The main session commits them with `SHULL-CHG-0033` and adds that SHA here.** |
 | **Verified** | **Yes, with one partial item.** An independent Auditor passed the template on 2026-09-23 with no blocking rows (recorded in the `71e5e05` commit message; the Auditor's table is not stored in `reports/`). The items checked, and by whom, are in §7. **Partial:** the older Geology and Physics notes still leave some pages under-filled, including a single-block Geology sheet at 61%. This is a content limit (too little content in the old specs), not a builder defect. |
 
-**Depends on SHULL-CHG-0024.** This record's "Current Rule" is the template as the seven commits in
+**Depends on SHULL-CHG-0032.** This record's "Current Rule" is the template as the seven commits in
 0024 left it. The user has not yet acknowledged 0024. This record makes sense whichever way 0024
 goes, because it replaces most of what 0024 added. But 0024 should be answered first.
 
@@ -48,7 +52,7 @@ goes, because it replaces most of what 0024 added. But 0024 should be answered f
 
 with the implemented minimum: *"Implemented at 1.4 in rather than his 0.98 in."*
 
-### 1d. SHULL-CHG-0024, §3 — as committed at `4234b69`
+### 1d. SHULL-CHG-0032, §3 — as committed at `4234b69`
 
 > | 1 | `ed41fa0…` | Each section starts on a new page. The front matter becomes a standalone title page. New optional `titleImage` spec field (Bohr model). |
 > | 4 | `fcdd544…` | `add_watermark()`: a floating behind-text header image on every page. … `study_recap_page()`: a standing last page, with a soft warning when absent. |
@@ -110,7 +114,7 @@ section codes and titles match `courses/chemistry/DECISIONS.md` U1.
 - **Cue side:** the block number (`01`, `02` …), the block title (*"Vocabulary"*, *"The matter
   flowchart"*), then one or two cue questions. **The block number is bare**, with no tint, chip or border
   (SHULL-CHG-0015; see the §2 note). The RECALL / RECAP / REVIEW tags carry the light tint.
-- **Notes side:** capture prompts carried over from SHULL-CHG-0024 `f76fea6` (`DEFINE: matter`,
+- **Notes side:** capture prompts carried over from SHULL-CHG-0032 `f76fea6` (`DEFINE: matter`,
   `Copy: the quick test for telling them apart`), each over a write line. Blocks can also hold a
   fill-in table, the flowchart, or a worked problem.
 - **"Extra notes:"** is a single labelled line at the foot of every block. It replaces the EXTRA box.
@@ -261,7 +265,7 @@ In the order they block. One question at a time. Nothing here is settled without
 
    Still to watch (flagged, not blocking):
    - The Codex cover rated only S01.1, S01.3 and S01.5. **S01.2 has no rating**, and none is invented
-     here. S01.4 has none because it is folded into S01.3 (SHULL-CHG-0028).
+     here. S01.4 has none because it is folded into S01.3 (SHULL-CHG-0036).
    - Physics and Geology have **no values**. Their covers leave the field empty until he gives them.
    - A notes spec that states a rating restates a fact that lives in `DECISIONS.md`. The spec must
      match it, and §7 checks that. A builder that reads the value from `DECISIONS.md` would remove the
@@ -336,7 +340,7 @@ no shell).*
 - [x] Block numbers render bare, with no tint, chip or border (SHULL-CHG-0015). The tint appears
       only on fill-in table header rows and on the RECALL / RECAP / REVIEW tags. **[C]**, and the
       Auditor found no blocking rows. The Secretary did not inspect a render.
-- [x] The mis-cited Change IDs from SHULL-CHG-0024 finding 1 are gone:
+- [x] The mis-cited Change IDs from SHULL-CHG-0032 finding 1 are gone:
       `grep -n "SHULL-CHG-001[89]\|SHULL-CHG-0020" templates/notes/build_notes_docx.py` returns only
       correct citations. **[S]** One hit, line 57, which correctly cites 0018 for the cue split.
 - [x] If `templates/_shull_docx.py` changes, both worksheet builders are rebuilt and checked
@@ -354,10 +358,10 @@ no shell).*
       log entry added under §8 edit 2.
 - [x] The cover equation toolbox and the RECAP block are present, as the §6 item 8 answer requires.
       **[S]** `equationToolbox` on the cover and a `"kind": "recap"` block in the student spec.
-- [x] Commit message carries `SHULL-CHG-0025`, and `Implemented By` / `Verified` are filled in here.
+- [x] Commit message carries `SHULL-CHG-0033`, and `Implemented By` / `Verified` are filled in here.
       **[S]** `71e5e05`. The commit for §8 edit 2 is pending (see Implemented By).
 
-**§8 edit 2 note.** SHULL-CHG-0028 has not landed (still PENDING), so the S1.4 clause of the draft
+**§8 edit 2 note.** SHULL-CHG-0036 has not landed (still PENDING), so the S1.4 clause of the draft
 was dropped, as §8 requires. `scripts/validate_codes.py` was **not run** (no shell). The new U1 line
 was written so that `section_codes()` adds no code: no code follows a line start, `·` or `|`. The
 main session should run the validator before committing and confirm the Chemistry code count is
@@ -381,10 +385,10 @@ Edit 2 draft, for the top of the decision log (`CHANGE_CONTROL.md` §5):
 Guided-notes covers carry a difficulty rating out of 10 per section ("Estimated for advanced high
 school students: 1 = introductory; 10 = highly challenging"). Unit 1: S1.1 Matter & Changes 1/10 ·
 S1.3 Atomic Structure 2/10 · S1.5 Average Atomic Mass 3/10. S1.2 is not yet rated. S1.4 has no
-rating because it is folded into S1.3 (SHULL-CHG-0028). The values came from the Codex notes cover;
+rating because it is folded into S1.3 (SHULL-CHG-0036). The values came from the Codex notes cover;
 Matt kept them 2026-09-23 ("difficulty ratings, keep and add").
 Supersedes: None (first record of difficulty ratings).
-Status: CONFIRMED · SHULL-CHG-0025 (Path A edit split from a Path B record)
+Status: CONFIRMED · SHULL-CHG-0033 (Path A edit split from a Path B record)
 ```
 
 The exact wording and position of the values next to the U1 curriculum map are settled at
@@ -393,6 +397,6 @@ implementation. **They must not break the section-code parse** in `scripts/_shul
 or drops a code. Run `scripts/validate_codes.py` afterwards. The Chemistry code count must not
 change.
 
-Edits 1 and 2 are separate commits, each carrying `SHULL-CHG-0025`. Edit 2 depends on nothing in
-edit 1 and may land first. If SHULL-CHG-0028 lands first, the S1.4 wording above stands. If it does
+Edits 1 and 2 are separate commits, each carrying `SHULL-CHG-0033`. Edit 2 depends on nothing in
+edit 1 and may land first. If SHULL-CHG-0036 lands first, the S1.4 wording above stands. If it does
 not, the S1.4 clause is dropped rather than asserting a fold that is not yet recorded.

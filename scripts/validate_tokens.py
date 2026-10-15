@@ -27,6 +27,7 @@ GENERATED = {
     "templates/lab/shull-lab-tokens.css",       # scripts/build_lab_css.py
     "templates/notes/shull-notes-tokens.css",   # scripts/build_lab_css.py, same content
     "templates/slide/tokens.generated.js",      # scripts/build_slide_tokens.py
+    "app/public/tokens.generated.css",          # scripts/build_app_css.py
 }
 
 # This file names the exception values it permits; that is not duplication.

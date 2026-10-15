@@ -1,8 +1,12 @@
-# SHULL-CHG-0023 — New lab master template (SHULL_Lab_Reference_Master.pdf)
+# SHULL-CHG-0031 — New lab master template (SHULL_Lab_Reference_Master.pdf)
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0023` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0031`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0023 |
+| **Change ID** | SHULL-CHG-0031 |
 | **Date** | 2026-09-14 |
 | **Source** | User — Matt uploaded `SHULL_Lab_Reference_Master.pdf` (4 pages) and asked that it "become (or inform)" the authoritative `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html` |
 | **Current Rule** | See §1 below — verbatim, from `templates/lab/README.md` and `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html` |

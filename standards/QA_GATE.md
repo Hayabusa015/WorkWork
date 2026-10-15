@@ -111,7 +111,7 @@ grammar, not just spelling.
 
 **Guided notes** — student copy and filled key generated from the same source so they cannot drift ·
 every section starts on a new page and ends with a RECALL block (a summary prompt plus a self-check;
-SHULL-CHG-0025) · blanks sized to the expected answer.
+SHULL-CHG-0033) · blanks sized to the expected answer.
 
 **Assessments** — every item maps to a learning target · distractors are real misconceptions ·
 exactly one unambiguously best answer · parallel versions carry identical blueprints, standards

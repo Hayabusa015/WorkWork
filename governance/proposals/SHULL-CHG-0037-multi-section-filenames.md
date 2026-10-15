@@ -1,10 +1,16 @@
-# SHULL-CHG-0029 — Naming: a range form for multi-section and unit-level files; three fixes to the image pattern
+# SHULL-CHG-0037 — Naming: a range form for multi-section and unit-level files; three fixes to the image pattern
+
+> **Overlap noted 2026-10-15.** This record is still PENDING. `SHULL-CHG-0024` (short filenames, implemented 2026-10-15) replaced the `SHULL_..._U##_S##.#` grammar this record extends, so its filename rules no longer apply. Decide whether to reject it.
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0029` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0037`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0029 |
+| **Change ID** | SHULL-CHG-0037 |
 | **Date** | 2026-09-23 |
-| **Source** | User, 2026-09-23, relayed by the main session. The Secretary did not hear it directly. Verbatim: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. The last clause **delegates the choice of form**. The first two clauses belong to SHULL-CHG-0025. **The range form in §2 is the main session's choice, made under that delegation. It is not the user's words, and it is not his approval of this record.** It answers the question already put to him, `_S01.1_S01.3_S01.5` or `_S01.1-S01.5`, in favour of the range. Findings: split out of SHULL-CHG-0027 §6. Librarian survey F9 (`reports/drive-operations/2026-09-23_chem-u01-folder-survey.md`). Auditor items 21 and 35 (`reports/2026-09-23_chem-u01-qa-audit.md`). The image item (§2c) was raised by the main session, from the Designer's notes cover asset. |
+| **Source** | User, 2026-09-23, relayed by the main session. The Secretary did not hear it directly. Verbatim: *"difficulty ratings, keep and add, equation box, keep it, the filename came from codex so you can change it"*. The last clause **delegates the choice of form**. The first two clauses belong to SHULL-CHG-0033. **The range form in §2 is the main session's choice, made under that delegation. It is not the user's words, and it is not his approval of this record.** It answers the question already put to him, `_S01.1_S01.3_S01.5` or `_S01.1-S01.5`, in favour of the range. Findings: split out of SHULL-CHG-0035 §6. Librarian survey F9 (`reports/drive-operations/2026-09-23_chem-u01-folder-survey.md`). Auditor items 21 and 35 (`reports/2026-09-23_chem-u01-qa-audit.md`). The image item (§2c) was raised by the main session, from the Designer's notes cover asset. |
 | **Current Rule** | See §1. `standards/NAMING.md` §2 and §3, verbatim |
 | **Proposed Rule** | See §2 |
 | **Supersedes** | `standards/NAMING.md` §2, in part: the grammar line and the `S##.#` row. It adds an optional range end and replaces nothing else. `NAMING.md` §3, in part: the example and the location sentence. **NAMING's authority is SHULL-CHG-0007 (CONFIRMED).** This record **amends** the grammar 0007 governs. It does not reverse 0007's own decision: zero padding is kept, and the image fix extends it. See §3. |
@@ -173,7 +179,7 @@ Pattern: `SHULL_(CHEM|PHYS|GEO)_[A-Za-z_]+_U(\d{1,2})_S(\d{1,2}\.\d)`
 
 This rename falls out of it and is **not part of this record**: the committed
 `chem_u01_s1.4_nuclear_notation.png` becomes `chem_u01_s01.4_…` under fix 2. The deck spec that
-references it would change in the same commit. It also carries the folded code 1.4 (SHULL-CHG-0028).
+references it would change in the same commit. It also carries the folded code 1.4 (SHULL-CHG-0036).
 So it is flagged for whoever rebuilds that deck, and not renamed here.
 
 ---
@@ -195,9 +201,9 @@ change is visible and not silent.
 
 ## 4. Interactions
 
-- **SHULL-CHG-0027** decides *where* these files go: loose in the unit folder, or in a unit-level
+- **SHULL-CHG-0035** decides *where* these files go: loose in the unit folder, or in a unit-level
   folder if one exists. This record decides only *what they are called*. Neither waits on the other.
-- **SHULL-CHG-0028** retires the code 1.4. A range may **span** a retired code (`S01.1-S01.5`), but
+- **SHULL-CHG-0036** retires the code 1.4. A range may **span** a retired code (`S01.1-S01.5`), but
   may not **end** on one. The validator's both-ends check enforces that once 1.4 stops parsing as a
   live code (0028 option 1(b)).
 - `NAMING.md` §2 "Why padded" argues from comparing a filename against its **section** folder path.
@@ -232,7 +238,7 @@ The earlier question, list form or range form, is **closed** by the delegation. 
 `templates/notes/build_notes_docx.py` already writes the range and needs no change. Its comment
 becomes true once edit 1 lands. **Renames of existing Drive and repo files are not in this record.**
 Each needs confirmation and a pre-rename log (`NAMING.md` §5). Edit 2 is under `.claude/`, with the
-same caveat as SHULL-CHG-0026 §5 item 2.
+same caveat as SHULL-CHG-0034 §5 item 2.
 
 ---
 
@@ -246,4 +252,4 @@ same caveat as SHULL-CHG-0026 §5 item 2.
 - [ ] The validator passes on the repo as it stands, or every new hit is listed and dealt with
 - [ ] `NAMING.md` §3 example is padded. The unit-level image form is present
 - [ ] `legacy/` untouched
-- [ ] Commit carries `SHULL-CHG-0029`. `Implemented By` and `Verified` filled in here
+- [ ] Commit carries `SHULL-CHG-0037`. `Implemented By` and `Verified` filled in here

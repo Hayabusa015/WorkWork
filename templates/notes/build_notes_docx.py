@@ -8,7 +8,7 @@ The packet is a set of designed pages, and each one is meant to be one sheet of 
     cover            the SHULL-CHG-0014 packet opening (school line, unit title, kicker,
                      Name/Date/Period, unit targets | key terms, how these notes work,
                      sections checklist with difficulty), plus the cover image and the
-                     equation toolbox - SHULL-CHG-0030
+                     equation toolbox - SHULL-CHG-0038
     content pages    a new page per section. The first page of a section opens with the
                      0014 section title bar (title, U## / S##.# code, course-accent rule)
                      and its LEARNING TARGET line; continuation pages carry no head.
@@ -46,7 +46,10 @@ from docx.oxml import OxmlElement
 # Every primitive on this page - how a work box is drawn, how a fraction stacks, how a
 # diagram block holds together across a page break - is shared with the worksheet
 # builder. It lives in one file so the two cannot drift.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _shull_name import document_name, section_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
@@ -95,7 +98,7 @@ W_RULE = 6          # the rule between blocks, the column rule, hairlines
 W_LINE = 6          # a writing line - print.weights.writingLine is 0.75 pt minimum
 W_MUST = 12         # the grey rule down the left of a must-write line
 W_TABLE = 4         # inside a fill-in table
-# SHULL-CHG-0030 restores the SHULL-CHG-0014 header rules at 0014's weights: an ink
+# SHULL-CHG-0038 restores the SHULL-CHG-0014 header rules at 0014's weights: an ink
 # rule above a head and a heavy course-accent rule below it. A rule, not a band - 2.25
 # pt is a line's worth of toner (SHULL_DESIGN_SYSTEM section 8).
 W_HEAD_TOP = 12
@@ -108,7 +111,7 @@ BODY, BODY_LINE = 10, 13
 LABEL = 8
 CHIP = 8
 
-# SHULL-CHG-0030: the 0014 header sizes, from the 0f3b078 builder. 0014 set its labels
+# SHULL-CHG-0038: the 0014 header sizes, from the 0f3b078 builder. 0014 set its labels
 # at 7 and 7.5 pt; they are raised to the 8 pt print floor (typography.floors.printBody),
 # the only size that moved. Tracking is 0014's: 26 on caps labels, none on the cue
 # label - "tracking is what made DISTANCE VS. DISPLACEMENT wrap" in the cue column.
@@ -128,7 +131,7 @@ class GreyPalette(Palette):
     so a work box or fill-in table drawn by the same code the worksheet uses comes out
     in the notes' voice without a second copy of the drawing.
 
-    The course colours are kept under their own names for the SHULL-CHG-0030 headers
+    The course colours are kept under their own names for the SHULL-CHG-0038 headers
     and row labels, the only places they are used: `type_accent` is the course
     `primaryDeep` (text-safe on white, for label type) and `rule_accent` is the course
     `primary` (NOT type - rules only, per its measured onWhiteVerdict)."""
@@ -502,7 +505,7 @@ def pad_codes(text):
 
 
 def label_of(row, which):
-    """The cue label or the notes heading of a block (SHULL-CHG-0030).
+    """The cue label or the notes heading of a block (SHULL-CHG-0038).
 
     An old spec names both (`cueLabel` "BASICS", `notesLabel` "THE BIG BANG"). A paged
     spec's block has a `title` and at most a `notesLabel`; its title, in caps, stands
@@ -520,7 +523,7 @@ def label_of(row, which):
 
 def render_cue(col, row, pal):
     """The cue side: a tag on a RECALL / RECAP / REVIEW block, the course-colour cue
-    label (SHULL-CHG-0030; 0014's bold untracked caps), then the cue questions. No
+    label (SHULL-CHG-0038; 0014's bold untracked caps), then the cue questions. No
     block number - the user dropped the 01, 02 (0030 choice d)."""
     kind = row.get("kind", "notes")
     if kind in TAGGED:
@@ -588,7 +591,7 @@ def render_problem(col, prob, key, pal):
 
 def render_notes(col, row, key, pal, base_dir):
     kind = row.get("kind", "notes")
-    # The notes heading, in course colour with 0014's caps tracking (SHULL-CHG-0030).
+    # The notes heading, in course colour with 0014's caps tracking (SHULL-CHG-0038).
     # A heading derived from the title that only repeats the cue label beside it is
     # left out; an explicit notesLabel, or one that differs, is printed.
     heading = label_of(row, "notesLabel")
@@ -763,7 +766,7 @@ BAR_CODE_W_IN = 1.67        # 0014's split: 5.83 in title, 1.67 in code
 
 def section_bar(doc, ctx, title, code, target=None, target_label="LEARNING TARGET",
                 target_color=None):
-    """SHULL-CHG-0030: the SHULL-CHG-0014 section title bar, as the 0f3b078 builder drew
+    """SHULL-CHG-0038: the SHULL-CHG-0014 section title bar, as the 0f3b078 builder drew
     it. The section title at the left, the code at the right in the course's text-safe
     colour, an ink rule above and a heavy course-accent rule below - ruled, never
     filled. Under it the LEARNING TARGET line, closed by a hairline. 0014 boxed that
@@ -860,7 +863,7 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
 
 def content_page(doc, ctx, sec, page):
     """One sheet of a section. Its first sheet opens with the section title bar and
-    learning target (SHULL-CHG-0030); a continuation sheet starts straight on its
+    learning target (SHULL-CHG-0038); a continuation sheet starts straight on its
     blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn."""
     break_before(doc)
     head = None
@@ -921,7 +924,7 @@ _SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z])")
 
 def cover_content(spec, ctx):
     """What the SHULL-CHG-0014 packet opening prints, gathered from the spec
-    (SHULL-CHG-0030). An old flat spec carries all of it; normalize_legacy() moves it
+    (SHULL-CHG-0038). An old flat spec carries all of it; normalize_legacy() moves it
     under `cover`. A paged spec may carry it under `cover` too. Where a paged spec does
     not, only what the spec already holds is used - nothing is written that it does not
     say - and the build says what it derived (ctx["derived"]):
@@ -991,7 +994,7 @@ def cover_content(spec, ctx):
 def _cover(doc, spec, ctx, k):
     """The cover at spacing scale `k` (1 = as designed). Returns its predicted height.
 
-    SHULL-CHG-0030: the SHULL-CHG-0014 packet opening, as the 0f3b078 builder drew it -
+    SHULL-CHG-0038: the SHULL-CHG-0014 packet opening, as the 0f3b078 builder drew it -
     course-colour school line, unit title, kicker, closed by a heavy course-accent rule;
     Name/Date/Period; Unit Learning Targets | Key Terms; How these notes work, with the
     accent rule down its left; Sections in this unit. On top of it, 0025's cover items
@@ -1138,7 +1141,7 @@ def concept_review_page(doc, spec, ctx):
     pal, cr = ctx["pal"], spec["conceptReview"]
     start = len(doc.element.body)
     break_before(doc)
-    # The same title bar as a section (SHULL-CHG-0030), carrying the unit's code, with
+    # The same title bar as a section (SHULL-CHG-0038), carrying the unit's code, with
     # the page's subtitle in the learning-target slot, unlabelled and in label grey.
     section_bar(doc, ctx, cr.get("title", "Concept Review"), ctx["unit_code"],
                 cr.get("subtitle"), target_label=None, target_color=pal.label)
@@ -1214,7 +1217,7 @@ def title_case(s):
 
 def _legacy_row(r):
     # The cue label and notes heading are kept as the spec wrote them and printed in
-    # course colour (SHULL-CHG-0030). `title` names the block in build messages.
+    # course colour (SHULL-CHG-0038). `title` names the block in build messages.
     row = {k: v for k, v in r.items() if k != "problem"}
     row["title"] = title_case(r.get("cueLabel", ""))
     row["notes"] = list(r.get("notes", []))
@@ -1243,7 +1246,7 @@ LEGACY_TERMS = (("Summary boxes", "RECALL blocks"), ("summary boxes", "RECALL bl
                 ("summary box", "RECALL block"))
 # The old how-it-works names the colour of the old must-write rule ("A teal rule down
 # the left of a line", "a gold rule down its left edge"). The rule is grey now
-# (SHULL-CHG-0025, kept by 0030), so the colour word is corrected to match the page.
+# (SHULL-CHG-0033, kept by 0030), so the colour word is corrected to match the page.
 _RULE_COLOUR = re.compile(r"\b(teal|gold|lime|amber|rust|orange|green|aqua|purple|"
                           r"colou?red)(\s+(?:side\s+)?rules?)\b", re.I)
 
@@ -1300,7 +1303,7 @@ def normalize_legacy(spec, ctx):
     first page of a section carries its title bar and learning target; later pages
     carry no head. Each row keeps its cueLabel and notesLabel. The old summary box
     becomes a RECALL block, the old closing checklist a REVIEW block on the last
-    section, and the cover carries the old front matter (SHULL-CHG-0030). Nothing is
+    section, and the cover carries the old front matter (SHULL-CHG-0038). Nothing is
     written that the spec did not already hold.
     """
     spec = copy.deepcopy(spec)
@@ -1330,14 +1333,14 @@ def normalize_legacy(spec, ctx):
         # fit, which left single blocks on 40%-full sheets. See pack_pages().
         heights = [block_height(r, ctx) + 9 for r in rows]
         # A section's first page carries the title bar and learning target; the rest
-        # carry no head (SHULL-CHG-0030).
+        # carry no head (SHULL-CHG-0038).
         heads = (head_height(ctx, sec), 0.0)
         pages = pack_pages(rows, heights, heads, avail)
         sec["pages"] = [{"rows": p} for p in pages]
         sec.pop("rows", None)
 
     # The SHULL-CHG-0014 front matter goes on the cover as the spec wrote it
-    # (SHULL-CHG-0030). Three corrections only: codes are zero-padded (SHULL-CHG-0007);
+    # (SHULL-CHG-0038). Three corrections only: codes are zero-padded (SHULL-CHG-0007);
     # how-it-works names the grey must-write rule the page actually draws, not the old
     # teal/gold rule; and "summary box" becomes "RECALL block".
     has_problem = any(r.get("problem") for s in secs for p in s["pages"] for r in p["rows"])
@@ -1405,6 +1408,11 @@ def validate(spec, course):
         print(f"build_notes_docx: section(s) {', '.join(bad)} are not in "
               f"courses/{course}/DECISIONS.md.", file=sys.stderr)
         return False
+
+    # Guided notes are strictly recall: the cue column names what to record, it does
+    # not ask for it. recall.py carries the rule and both renderers check it.
+    if recall.check(spec, "build_notes_docx"):
+        return 1
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.
@@ -1525,10 +1533,12 @@ def main():
     u = f"U{unit:02d}"
     labels = [sec_label(s["code"]) for s in spec["sectionsContent"]]
     span = f"{labels[0]}-{labels[-1]}" if len(labels) > 1 else labels[0]
-    # standards/NAMING.md range form (S01.1-S01.5). A key gets _Key, so the default for
-    # a key spec can never overwrite its student copy.
-    out = args[1] if len(args) > 1 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{u}_{span}{'_Key' if key else ''}.docx")
+    # standards/NAMING.md §2 (SHULL-CHG-0024): short, section-led, the course is the folder.
+    # A key gets "Key", so the default for a key spec can never overwrite its student copy.
+    codes = [str(s["code"]) for s in spec["sectionsContent"]]
+    out = args[1] if len(args) > 1 else os.path.join(HERE, document_name(
+        "Guided_Notes", codes, unit, key=key, unit_title=ctx["unit_title"],
+        topic=section_title(course, codes[0])))
 
     doc = Document()
     st = doc.styles["Normal"]
@@ -1547,7 +1557,7 @@ def main():
     designed = 1
     ctx["cover"] = cover_content(spec, ctx)
     if ctx["derived"] and not legacy:
-        print("build_notes_docx: cover content derived from this spec (SHULL-CHG-0030):",
+        print("build_notes_docx: cover content derived from this spec (SHULL-CHG-0038):",
               file=sys.stderr)
         for m in ctx["derived"]:
             print("   " + m, file=sys.stderr)

@@ -1,14 +1,18 @@
-# SHULL-CHG-0026 — Approval recording: the main session writes the user's decision into the record
+# SHULL-CHG-0034 — Approval recording: the main session writes the user's decision into the record
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0026` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0034`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0026 |
+| **Change ID** | SHULL-CHG-0034 |
 | **Date** | 2026-09-23 |
 | **Source** | User, 2026-09-23. The main session proposed: *"Write a proposal to allow approvals the Overseer quotes word for word from the main conversation, with a timestamp."* The user answered, verbatim: *"Yes rewite so you can send to secretary, file these away and update, i like the newer style."* That answer is his instruction to draft this record. **It does not approve the rule text below.** The text was written after he answered, so this record still needs his decision. |
 | **Current Rule** | See §1. Verbatim, from `governance/CHANGE_CONTROL.md` §3 and §4, `.claude/agents/secretary.md`, `.claude/agents/overseer.md`, and `CLAUDE.md` §4 |
 | **Proposed Rule** | See §2 |
 | **Supersedes** | See §3. **"The user approves. Nothing else does." is kept.** What goes is the unstated assumption that the Secretary hears the approval itself. Also narrowed: *"Only the Secretary writes to … `governance/`"*, which gets one carve-out for two fields. |
-| **Reason** | Sub-agents cannot receive the user's messages. Only the main Claude Code session hears him. The platform tells every sub-agent that a message from another agent is never the user's approval. So the approval step in `CHANGE_CONTROL.md` §4 has no working path from a Claude Code session, and every approval stalls. It stalled on SHULL-CHG-0024 and SHULL-CHG-0025 on 2026-09-23. The Secretary correctly refused a relayed approval both times. |
+| **Reason** | Sub-agents cannot receive the user's messages. Only the main Claude Code session hears him. The platform tells every sub-agent that a message from another agent is never the user's approval. So the approval step in `CHANGE_CONTROL.md` §4 has no working path from a Claude Code session, and every approval stalls. It stalled on SHULL-CHG-0032 and SHULL-CHG-0033 on 2026-09-23. The Secretary correctly refused a relayed approval both times. |
 | **Affected Agents** | Overseer / main session: gains a narrow write to two fields. Secretary: acts on a committed status, never a relayed message. Researcher, Janitor, Auditor, Designer, Librarian: unchanged. |
 | **Affected Skills** | None |
 | **Affected Courses** | None directly. It changes how every future change is approved, in all three courses. |
@@ -194,7 +198,7 @@ These are in blocking order. Each needs one answer.
       *Partly. `fa92811` carries the rule 2 message (read from `.git/logs/HEAD`). The committed
       Decision field states the §5 item 1 exception. The Secretary could not read the diff (no
       shell), so "touches only" is not verified.*
-- [ ] Implementation commit(s) carry `SHULL-CHG-0026`. *Pending: the main session commits.*
+- [ ] Implementation commit(s) carry `SHULL-CHG-0034`. *Pending: the main session commits.*
 - [ ] First live use: the next recorded decision (0024 or 0025) is checked against rule 2. Its
       diff touches only the two fields and the index row. *Partly. `53661f9` (0024) and `8cee7da`
       (0025) carry the rule 2 message. Their diffs were not read.*

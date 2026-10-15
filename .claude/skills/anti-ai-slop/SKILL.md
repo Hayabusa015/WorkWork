@@ -26,6 +26,8 @@ and instruction. A reflection section added by default rather than by instructio
 **3. Voice.** Read the directions aloud in your head. Any sentence that sounds like a brochure gets
 rewritten. Then run the audit list in the standard — **as an audit, not a word ban.**
 
+Then run `humanize` over any prose you wrote: directions, teacher notes, messages.
+
 **4. Task design.** Vary the thinking, not just the numbers. Ten questions with identical structure
 and different numbers is a defect unless fluency is genuinely the goal — and if it is, say so.
 

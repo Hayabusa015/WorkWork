@@ -489,7 +489,7 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
     heading. The defaults are the worksheet's, unchanged.
 
     `corner` prints a small grey note in the box's bottom-right corner - the self-check
-    answer, which used to cost a line of its own below the box (SHULL-CHG-0031). It is
+    answer, which used to cost a line of its own below the box (SHULL-CHG-0039). It is
     pushed down by space-before rather than bottom-aligning the cell, so the watermark
     stays where it is; the row is atLeast, so a long label only grows the box.
     """

@@ -1,23 +1,27 @@
-# SHULL-CHG-0024 — Retroactive record: seven unrecorded guided-notes template commits
+# SHULL-CHG-0032 — Retroactive record: seven unrecorded guided-notes template commits
+
+> **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0024` on a branch cut before the main line
+> reached that number, so the ID collided with a different record. It is now `SHULL-CHG-0032`. The dated
+> reports under `reports/` that mention the old number are history and were not rewritten.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0024 |
+| **Change ID** | SHULL-CHG-0032 |
 | **Date** | 2026-09-23 (record written). The changes themselves were committed 2026-09-16 to 2026-09-23 — see §3. |
 | **Source** | User — six of the seven commits were made on the user's direct instruction (verbatim in §3). **Not all of it is user-sourced:** `2a02a58` had no user instruction, and the protect fix in `e59ba21`, the must-write border fix in `f76fea6` and the `borders()` schema fix in `4234b69` were the orchestrating session's own bug fixes, found while verifying. |
 | **Current Rule** | See §1 — verbatim, from `governance/proposals/SHULL-CHG-0014-guided-notes-template.md` and `templates/notes/README.md` |
 | **Proposed Rule** | See §3 — the seven changes as already committed. **This record proposes nothing new.** It asks the user to acknowledge changes that were applied without a record. |
 | **Supersedes** | Parts of SHULL-CHG-0014 — see §4. Named individually there; nothing in 0014 is superseded in full. |
 | **Reason** | Seven commits changed the shared guided-notes template, which all three courses build from — a Path B build change under `governance/CHANGE_CONTROL.md` §1 — and none went through a change record, carried a Change ID, or appeared in `change-log/CHANGELOG.md`. See §2. |
-| **Affected Agents** | Designer (builds from this template; is rebuilding it now under SHULL-CHG-0025). Auditor (no pass was run — see §5). Secretary (this record). |
+| **Affected Agents** | Designer (builds from this template; is rebuilding it now under SHULL-CHG-0033). Auditor (no pass was run — see §5). Secretary (this record). |
 | **Affected Skills** | `build-document` — the notes template it builds from changed. `templates/notes/README.md` describes none of the seven changes (§6, finding 3). |
 | **Affected Courses** | All three — Chemistry, Physics, Geology. The template is shared. The worksheet builders share `templates/_shull_docx.py` and are also touched (§6, finding 2). |
 | **Risk** | **Medium** as a change (shared template, three courses). As a process failure, the risk is not the diffs — it is that a reading of the rules existed under which a build change for all three courses needed no record. |
-| **Recommendation** | Acknowledge the record as written. **Do not rewrite git history** — no amend, rebase, or force-push; §2 says why. Treat SHULL-CHG-0025 as the change that settles the template's final form. Several of these seven changes are reversed there. Consider an Auditor pass on the template as it stands after 0025 lands, since none was run on these seven. |
-| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"yes approve 0024 too"*. Recorded under SHULL-CHG-0026. |
+| **Recommendation** | Acknowledge the record as written. **Do not rewrite git history** — no amend, rebase, or force-push; §2 says why. Treat SHULL-CHG-0033 as the change that settles the template's final form. Several of these seven changes are reversed there. Consider an Auditor pass on the template as it stands after 0025 lands, since none was run on these seven. |
+| **Decision** | **Approved by the user, 2026-09-23**, in the main session. Verbatim: *"yes approve 0024 too"*. Recorded under SHULL-CHG-0034. |
 | **Status** | **IMPLEMENTED** (2026-09-23. The seven commits predate the record; see Implemented By) |
 | **Implemented By** | `ed41fa0` · `e59ba21` · `2a02a58` · `fcdd544` · `f76fea6` · `9766298` · `4234b69` (full SHAs in §3). **These were committed before this record existed.** That is the defect this record documents. It is not a normal implementation. |
-| **Verified** | **Partly, by the session that made the changes. Not independently.** See §5. The orchestrating session reports running four checks: `pdffonts` showing Archivo only, a `scripts/audit_print_ink.py` pass, a rebuild of the Geology and Physics specs for backward compatibility, and visual inspection. **No independent Auditor pass was run on any of the seven commits.** The Secretary did not re-run any of these checks for this record. **Update 2026-09-23:** the seven commits themselves stay unverified by any independent check, and that gap is permanent. SHULL-CHG-0025 (`71e5e05`) has since replaced most of what they added (0025 §4). 0025's template did pass an independent Auditor with no blocking rows, as the `71e5e05` commit message records. What survives from these seven commits into 0025 (0025 §4, "Not superseded") was covered by that pass as part of the current template. |
+| **Verified** | **Partly, by the session that made the changes. Not independently.** See §5. The orchestrating session reports running four checks: `pdffonts` showing Archivo only, a `scripts/audit_print_ink.py` pass, a rebuild of the Geology and Physics specs for backward compatibility, and visual inspection. **No independent Auditor pass was run on any of the seven commits.** The Secretary did not re-run any of these checks for this record. **Update 2026-09-23:** the seven commits themselves stay unverified by any independent check, and that gap is permanent. SHULL-CHG-0033 (`71e5e05`) has since replaced most of what they added (0025 §4). 0025's template did pass an independent Auditor with no blocking rows, as the `71e5e05` commit message records. What survives from these seven commits into 0025 (0025 §4, "Not superseded") was covered by that pass as part of the current template. |
 
 ---
 
@@ -123,7 +127,7 @@ Dates are commit dates (UTC), taken from the reflog. The user's words are verbat
 **Also touched, outside 0014.** `9766298` puts a rule line, which is a write surface, inside the cue
 column. SHULL-CHG-0018 narrowed that column because *"the cue is a prompt, not a second body
 column."* The 1.28 in width was not changed. But the column's stated purpose was, and no record says
-so. This is recorded here and not resolved. SHULL-CHG-0025 removes those lines.
+so. This is recorded here and not resolved. SHULL-CHG-0033 removes those lines.
 
 ---
 
@@ -177,7 +181,7 @@ warning, so the wrong ID also reached build output.
 real record that seems to answer the question and does not. The audit trail in the code pointed at
 the wrong records.
 
-**Status: being corrected.** The designer agent rebuilding the template under SHULL-CHG-0025 is
+**Status: being corrected.** The designer agent rebuilding the template under SHULL-CHG-0033 is
 removing these mis-citations. The Secretary has not verified that removal. It should be checked when
 0025 is implemented.
 
@@ -195,7 +199,7 @@ Recorded as unverified. It is not claimed to be broken.
 `templates/notes/README.md` still describes the pre-change template. It has no title page, no
 watermark, no recap page, no fill-in tables and no EXTRA box, and it does not mention the new spec
 keys. A reader who trusts the README gets the old template. The designer is updating it under
-SHULL-CHG-0025.
+SHULL-CHG-0033.
 
 ### Finding 4 — the fill-in table and an existing open question
 
