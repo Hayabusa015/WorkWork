@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0035 | 2026-10-15 | Drive: system creates no folders; file loose if no match | PARTIAL | `governance/proposals/SHULL-CHG-0035-drive-unit-folders.md` |
 | SHULL-CHG-0036 | 2026-10-15 | Chemistry 1.4 Isotopes folded into 1.3; code retired | PARTIAL | `governance/proposals/SHULL-CHG-0036-chem-s1.4-fold.md` |
 | SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
 | SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | PARTIAL | `governance/proposals/SHULL-CHG-0041-short-topics.md` |

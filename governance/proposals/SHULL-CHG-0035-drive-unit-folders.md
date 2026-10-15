@@ -20,8 +20,8 @@
 | **Affected Courses** | All three: Chemistry, Physics and Geology. Under `CLAUDE.md` §2 this makes it a standard, not a course decision |
 | **Risk** | **Medium.** It changes routing for all three courses, removes an agent authority (folder creation), and supersedes a LOCKED record (0005). The live Drive already differs from the rule, so leaving the rule as it is carries risk too. |
 | **Recommendation** | Approve §2. Answer §5 item C first. Item D only settles how far "never creates a folder" reaches. The naming gap (§6) is now its own record, SHULL-CHG-0037. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-10-15**, in the main session, with §5 item C answered yes and item D answered no. Verbatim: *"approve 0036, approve 0035 with C yes and D no, reject 0037"*. C yes: 0035 supersedes 0005 for the content folders. D no: "never creates a folder" covers content subfolders only; the Librarian may still create a missing `Section ##.#` folder. Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §8. |
 
