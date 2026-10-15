@@ -1,10 +1,11 @@
 ---
 id: SHULL-CHG-0028
 title: reconcile-session-files skill — find session documents that are not on Drive and file them
-status: PENDING
+status: IMPLEMENTED
 opened: 2026-10-15
 source: User
-decided_by:
+decided: 2026-10-15
+decided_by: Matthew Shull
 ---
 
 # SHULL-CHG-0028 — reconcile-session-files
@@ -77,7 +78,7 @@ low. It lists before it files, and the filing path is the one already approved. 
 documents built by hand rather than from a spec cannot be rebuilt if the session has already
 ended, so the skill is most useful run **before** the session closes.
 
-Decision:
-Status: PENDING
-Implemented By:
-Verified:
+Decision: Approved by Matthew Shull, 2026-10-15.
+Status: IMPLEMENTED
+Implemented By: 4878b77
+Verified: 2026-10-15. Validators clean. scripts/find_session_files.py tested: finds session documents after the marker, skips templates and previews, errors cleanly with no marker. Dry run against Drive classified one sample as a different version on Drive (same name, different size) and three as not on Drive. Nothing was filed. Not yet run end to end on a real unfiled deliverable.
