@@ -24,9 +24,6 @@ Upload Inbox after the moves: empty (parentId lookup). Existing `U2 Guided Notes
 (16TTgBfLRztysFt54uHiObGghNxzPQb1x) untouched. The gws installation and credentials file written to
 `~/.config/gws/` in the session container were the documented setup from `scripts/setup-environment.sh`.
 
-Row 6 (Gizmo rules, student, key, PDF): not yet filed. Waiting on the user to confirm where the
-Homework folder should be, since the Unit 02 root has none and Section folders were declined.
-
 ## Row 6, Gizmo rules (user chose option a: Section folder with Homework)
 
 Logged before any action. Unit 02 had no folders (parentId lookup, folders only).
