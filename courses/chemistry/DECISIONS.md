@@ -338,6 +338,21 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
 
 ---
 
+## Short titles
+
+The topic in a filename (`standards/NAMING.md` §2, SHULL-CHG-0041). **At most 20 characters.** `U#` is a
+unit, a number such as `1.3` is a section. A section or unit with no row here gets no topic in its
+filename. Never shorten a title automatically; add a row when the user approves one.
+
+| Code | Short title |
+|---|---|
+| U1 | Matter & Atoms |
+| 0.4 | Observations |
+| 1.1 | Matter & Changes |
+| 1.4 | Isotopes |
+| 1.5 | Average Atomic Mass |
+| 2.3 | Electron Configs |
+
 ## Decision log
 
 ### 2026-09-23 — U1 section difficulty ratings

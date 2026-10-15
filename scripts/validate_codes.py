@@ -86,6 +86,20 @@ def main():
                 errors.append(
                     f"{rel.replace(os.sep,'/')}:{line} {m.group(0)} — "
                     f"unit U{unit:02d} disagrees with section {bare}")
+    # Short titles (SHULL-CHG-0041): every row names a code that exists and is at most 20 characters.
+    for c in ("chemistry", "physics", "geology"):
+        text = read(os.path.join("courses", c, "DECISIONS.md"))
+        m = re.search(r"^## Short titles\s*$(.*?)(?=^## )", text, re.S | re.M)
+        rows = re.findall(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$", m.group(1), re.M) if m else []
+        for code, short in rows:
+            if code.lower() == "code" or set(code) <= set("-: "):
+                continue
+            checked += 1
+            if code[:1].upper() != "U" and code not in valid[c]:
+                errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} is not a section in this file")
+            if len(short) > 20:
+                errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} {short!r} is "
+                              f"{len(short)} characters; the limit is 20")
     for c in ("chemistry", "physics", "geology"):
         print(f"  {c:10} {len(valid[c]):>3} valid section codes")
     return report("validate_codes", errors, checked)

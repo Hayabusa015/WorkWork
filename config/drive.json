@@ -32,7 +32,7 @@
     "geology": {
       "id": "1lqHHql9cSqOZDGej2ff_121bITWOKZvr",
       "unitFolders": 1,
-      "state": "Unit 02 - Geologic Time exists (ID 1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C) with Section folders 02.1 to 02.5 and the unit-level Guided Notes, Presentations and Quiz folders. A Homework folder (ID 1W9L10dhOpAt4IPg0zhHQiQPl59cIy9DI) was created inside the unit on 2026-10-15 to hold the Geologic Timeline files; SHULL-CHG-0030 says there is no Homework folder at any level, so that folder is an exception awaiting the user's decision. Other units not checked."
+      "state": "Unit 02 - Geologic Time exists (ID 1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C) with Section folders 02.1 to 02.5 and the unit-level Guided Notes, Presentations and Quiz folders. A Homework folder (ID 1W9L10dhOpAt4IPg0zhHQiQPl59cIy9DI) was created inside the unit on 2026-10-15 to hold the Geologic Timeline files; SHULL-CHG-0030 says there is no Homework folder at any level, so that folder is an exception. The user decided on 2026-10-15 to leave the Geologic Timeline files there; do not remove it. Other units not checked."
     }
   },
   "folderGrammar": {

@@ -125,6 +125,11 @@ export function curriculum(text, course) {
     }
   }
   parsed.units = parsed.units.filter(u => u.sections.length);
+  // The filename topic (SHULL-CHG-0041): attached so the browser never builds a name from a full title.
+  for (const unit of parsed.units) {
+    unit.short = shortTitle(text, `U${unit.unit}`);
+    for (const s of unit.sections) s.short = shortTitle(text, s.code);
+  }
   return parsed;
 }
 
@@ -143,10 +148,13 @@ export function documentTypes(namingText) {
  * helper the repository builders use so the app cannot drift from them.
  */
 import {createRequire} from 'node:module';
-const {documentName: buildName} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+const {documentName: buildName, shortTitle: buildShortTitle} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+
+/** The short title for a section code ("1.3") or unit ("U1"), from a course's decisions text. */
+export const shortTitle = (decisionsText, key) => buildShortTitle(decisionsText, key);
 
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};
 
-export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx'}) {
-  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension});
+export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx', descriptor}) {
+  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor});
 }

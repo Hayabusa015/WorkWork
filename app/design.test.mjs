@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {curriculum, parseCurriculum, documentTypes, documentName} from './curriculum.mjs';
+import {curriculum, parseCurriculum, documentTypes, documentName, shortTitle} from './curriculum.mjs';
 import {checkScope} from './agents.mjs';
 
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
@@ -80,6 +80,19 @@ test('document types come from standards/NAMING.md, not from the app', () => {
   }
   // If NAMING.md's list changes, this parse must follow it rather than a copy here.
   assert.ok(types.length >= 10);
+});
+
+test('short titles come from the course decisions file and are never auto-shortened', () => {
+  const text = `## Short titles\n\n| Code | Short title |\n|---|---|\n| U1 | 1D Motion |\n| 1.3 | Motion Graphs |\n\n## Decision log\n`;
+  assert.equal(shortTitle(text, '1.3'), 'Motion Graphs');
+  assert.equal(shortTitle(text, 'U01'), '1D Motion');
+  assert.equal(shortTitle(text, '1.4'), undefined);
+  assert.throws(() => documentName({type: 'Lab', unit: 1, sections: ['1.3'], topic: 'Position-Velocity-Acceleration Graphing'}), /limit is 20/);
+  assert.equal(documentName({type: 'Lab', unit: 1, sections: ['1.3'], topic: shortTitle(text, '1.3')}), '1.3 Lab - Motion Graphs.docx');
+  assert.equal(documentName({type: 'Practice_Set', unit: 2, sections: ['2.3'], topic: 'Electron Configs', descriptor: 'Longhand', key: true}),
+    '2.3 Practice Set Key - Electron Configs Longhand.docx');
+  assert.equal(documentName({type: 'Lab', unit: 1, sections: ['1.3'], topic: 'Motion Graphs', descriptor: 'Motion Graphs Version 1'}),
+    '1.3 Lab - Motion Graphs Version 1.docx');
 });
 
 test('the filename follows the NAMING grammar: short, section-led, no course prefix', () => {

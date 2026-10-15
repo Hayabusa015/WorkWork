@@ -11,15 +11,9 @@
 
 ## Do now
 
-- [ ] **Trash the test file.** In Drive, open `SHULL Science / Upload Inbox` and move `gws-upload-test.txt` to the trash. (The repo's safety hook stops Claude doing it.)
-- [ ] **Replace the OAuth client secret.** It appeared in a screenshot on 2026-10-15.
-  1. Cloud Console, `shull-science-drive-2026`, APIs & Services, Credentials, open `GWS`.
-  2. Add a new secret, then delete the old one. Download the new JSON.
-  3. Save it as `C:\Users\Shull\.config\gws\client_secret.json` (replace the old file).
-  4. `gws auth logout`
-  5. `gws auth login --scopes https://www.googleapis.com/auth/drive.file`
-  6. `gws auth status` and confirm only `drive.file` plus the sign-in scopes.
-  7. Export and update the variable (see "Re-export the login" below).
+- [x] Test file `gws-upload-test.txt` trashed (by the user, 2026-10-15; checked: no longer found in Drive).
+- [x] OAuth client secret: user confirmed it is fine (2026-10-15).
+
 - [ ] **Check the first real upload.** Ask Claude to build one file and file it through the Upload Inbox. Confirm it lands in the right folder under its new name.
 
 ## Re-export the login (whenever the login changes)
@@ -36,6 +30,7 @@ Then open the environment settings (gear next to **Onboarding**). Keep the Name 
 
 ## Decisions Claude is waiting on
 
+- [ ] **Approve the second Drive rename** (short topics, SHULL-CHG-0041): `reports/drive-operations/2026-10-15_rename-plan-2.md`. 51 files; longest name 81 to 55 characters.
 - [ ] `SHULL_PHYS_Practice_Set_U01_S1.1.docx` would get the same new name as another file in its folder. Duplicate to trash, or a different version?
 - [ ] The group D files (no unit or section code): Element Builder, Atomic Theory Jigsaw, Guided Notes variants, Lab Equipment, Math Skills Pretest and others. What unit and section, or leave alone? The list is in `reports/drive-operations/2026-10-15_rename-plan.md`, section D.
 - [ ] The three duplicates in the `pdf` staging folder (Geologic Timeline 4 Pages Cenozoic, Cutouts 38 Events, Time Reference Guide): trash them?
@@ -43,7 +38,7 @@ Then open the environment settings (gear next to **Onboarding**). Keep the Name 
 ## Later
 
 - [ ] Physics and the other Geology units: Drive folders for them are not checked yet.
-- [ ] **Homework folder in `Unit 02 - Geologic Time`.** The standard (SHULL-CHG-0030) has no Homework folder at any level. The Geologic Timeline files were put there on 2026-10-15 on request. Keep it as an exception, or move the files loose into the unit folder and trash the empty folder?
+- [x] Geologic Timeline files stay in `Unit 02 - Geologic Time / Homework`. User decision 2026-10-15: leave them there. This is a recorded exception to SHULL-CHG-0030 (no Homework folder).
 - [ ] The Desk in the local app does not list governance proposals. Ask Claude to scope it if you want that.
 
 ## If something breaks
