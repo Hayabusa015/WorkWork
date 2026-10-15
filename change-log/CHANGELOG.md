@@ -41,6 +41,18 @@ supersedes it, exactly as the decision logs work.
 |---|---|---|---|---|
 | SHULL-CHG-0023 | 2026-09-20 | Guided notes are strictly recall; no questions | CONFIRMED | `governance/proposals/SHULL-CHG-0023-notes-are-recall.md` |
 
+## 2026-09-23
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0039 | 2026-09-28 | Self-check answer prints inside the work box | PARTIAL | `governance/proposals/SHULL-CHG-0039-selfcheck-in-work-box.md` |
+| SHULL-CHG-0038 | 2026-09-23 | Old notes headers restored on the paged layout | PARTIAL | `governance/proposals/SHULL-CHG-0038-notes-old-headers.md` |
+| SHULL-CHG-0034 | 2026-09-23 | Main session records the user's verbatim decision | PARTIAL | `governance/proposals/SHULL-CHG-0034-approval-recording.md` |
+| SHULL-CHG-0033 | 2026-09-23 | Guided notes paged redesign from the Codex reference | CONFIRMED | `governance/proposals/SHULL-CHG-0033-notes-paged-redesign.md` |
+| SHULL-CHG-0032 | 2026-09-23 | Retroactive: seven unrecorded notes-template commits | CONFIRMED | `governance/proposals/SHULL-CHG-0032-notes-template-retroactive.md` |
+
 ## 2026-09-16
 
 | ID | Date | Change | Status | Record |
@@ -89,6 +101,8 @@ with the user.
 
 | Raised | Question | Waiting on |
 |---|---|---|
+| 2026-09-23 | Approve the paged guided-notes redesign? Two conflicts with LOCKED rules come first: block-number chips vs SHULL-CHG-0015, and cue width vs SHULL-CHG-0018. The rebuild stays uncommitted until approval. | User — SHULL-CHG-0033. Answered 2026-09-23 — approved |
+| 2026-09-23 | Acknowledge the retroactive record for seven notes-template commits made without a Change ID (2026-09-16 to 2026-09-23). History is not rewritten. | User — SHULL-CHG-0032. Answered 2026-09-23 — approved |
 | 2026-09-20 | SHULL-CHG-0023 made the notes packet strictly recall but scoped three blocks out of it: the closed-notes section summary box, the per-section self-check, and the "still fuzzy on" prompt. They read as the student checking their own notes rather than being quizzed on a slide. Should any of them also lose their question form? | User — SHULL-CHG-0023 §"Deliberately out of scope" |
 | 2026-09-08 | File the U01 S1.4 deck into the live teaching Drive? 3 operations logged, not executed | User — `reports/drive-operations/2026-09-08_chem-u01-s01.4-slides.md` |
 | 2026-09-09 | Nebular theory is filed `GEO_U1_S1.3` in his own sheet; the roadmap says 1.3 is *The Scale of the Universe* and 1.4 is *Formation of a Solar System*. Same drift puts *The Sun* at 1.4 in the notes spec where the roadmap says 1.5. Which numbering is right? **Partial action 2026-09-16:** the physical `GEO_U1_S1.2`/`S1.3` files were relocated to match their own filename/content code (`reports/drive-operations/2026-09-16f_geo-u1-file-relocation.md`) — this only makes the *file location* consistent with the *filename*; it does not answer whether the roadmap's section titles or the filenames are the ones that are wrong. | User — SHULL-CHG-0019 |
@@ -116,3 +130,7 @@ history to comply would be forging an audit log to make it look like it was alwa
 The rule binds from the commit that introduces this file forward. To trace a pre-rule change, use
 the Record column: every one of the twelve is fully recorded, and the record names what it
 supersedes. Nothing is lost; it is one hop slower.
+
+The same gap opened again after the rule: seven notes-template commits (2026-09-16 to 2026-09-23)
+carry no Change ID. They are recorded retroactively in SHULL-CHG-0024, and their history is not
+rewritten either.
