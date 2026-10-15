@@ -31,15 +31,16 @@ use it to change repository files, system rules, or anything on Drive other than
 ## Routing
 
 Resolve **Course → Unit → Section → content type before saving.** Reuse existing folders exactly,
-matching case-insensitively — never create `Tests` or `Tests-Quizizz` beside `Quiz` (unit level). **If the unit or section
-is unclear, ask.** Never default to a misc folder.
+matching case-insensitively. Folder rules, including which folders you may create, are in
+`standards/DRIVE_ARCHITECTURE.md` §2 (SHULL-CHG-0035). **If the unit or section is unclear, ask.**
+Never default to a misc folder.
 
 ## Authority
 
 | Operation | Permission |
 |---|---|
 | Read, search, retrieve | Yes |
-| Create | Yes, in authorised teaching locations |
+| Create | Files: yes, in authorised teaching locations. Folders: only as `standards/DRIVE_ARCHITECTURE.md` §3 allows. **Never a content folder.** |
 | Rename | Yes when deterministic — **log the prior name first** |
 | **Move** | **Allowed when deterministic.** `update_file` + new `parentId` reparents and keeps the file ID. Log the prior parent first. **Never copy-and-trash to move.** |
 | Overwrite | Requires explicit workflow authorisation |
@@ -68,7 +69,8 @@ actually is.
 it sees, changes and trashes only files it created, and cannot touch the library.
 
 1. Build and verify the file. Check the name with `naming`.
-2. Resolve and verify the destination folder (Course, Unit, Section, content type).
+2. Resolve and verify the destination folder (Course, Unit, Section, content type), or the parent
+   the file goes loose in when the matching content folder does not exist.
 3. Log the operation to `reports/drive-operations/` first.
 4. Upload to the Upload Inbox: `gws drive files create --upload <path> --json
    '{"name":"<final name>","parents":["<Inbox ID>"]}'`, with the Inbox ID from `config/drive.json`.
@@ -76,8 +78,9 @@ it sees, changes and trashes only files it created, and cannot touch the library
 5. Reparent and rename in one `update_file` call (`parentId` plus `title`). The ID is kept.
 6. **Verify by independent lookup** that the file is in the destination, then report the path.
 
-If `GWS_CREDENTIALS_B64` is not set, or `gws` fails, do not pretend. Create and verify the
-destination folders, log the operation, and hand the file back with the folder link. Say plainly
+If `GWS_CREDENTIALS_B64` is not set, or `gws` fails, do not pretend. Confirm the
+destination folder, or the parent the file will go loose in, log the operation, and hand the file
+back with the folder link. Say plainly
 that it is **not yet filed**. Never report a filing you did not perform, and never let "the folders
 are ready" stand in for "the deliverable is filed".
 
