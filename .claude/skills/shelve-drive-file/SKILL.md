@@ -22,7 +22,7 @@ the create call returning success. Not your intention. A confirmed lookup, after
 1. **Resolve Course → Unit → Section → content type *before* saving.** Not after.
 2. **Check the name** with `naming`. Fix it before filing, not after.
 3. **Look for existing folders** and reuse them exactly, matching case-insensitively.
-   **Never create `Tests` beside `Tests-Quizizz`.**
+   **Never create `Tests` or `Tests-Quizizz` beside `Quiz`** (unit level).
 4. **If the unit or section is unclear, ask.** Never default to a misc folder.
 5. **Log the intended operation** to `reports/drive-operations/` — object ID, prior name, prior
    parent, intended change.

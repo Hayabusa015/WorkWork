@@ -31,7 +31,7 @@ use it to change repository files, system rules, or anything on Drive other than
 ## Routing
 
 Resolve **Course → Unit → Section → content type before saving.** Reuse existing folders exactly,
-matching case-insensitively — never create `Tests` beside `Tests-Quizizz`. **If the unit or section
+matching case-insensitively — never create `Tests` or `Tests-Quizizz` beside `Quiz` (unit level). **If the unit or section
 is unclear, ask.** Never default to a misc folder.
 
 ## Authority
