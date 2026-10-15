@@ -68,7 +68,7 @@ Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex
 | Coloured type on white | Each course's text-safe deep variant, never the display colour |
 | Filenames | `[S.S] [Type] - [Topic]` or `Unit [X] [Type] - [Unit Title]`, no course prefix (`standards/NAMING.md`) |
 | Geology numbering | Plate Tectonics = U4 |
-| Drive | Unchanged — `SHULL Science/`, Unit (Guided Notes, Presentations, Quiz) → Section (Labs-Case Studies-Projects; homework filed loose), per `standards/DRIVE_ARCHITECTURE.md` |
+| Drive | `SHULL Science/`, filed into the folders you made; if a matching content folder is absent the file goes loose in its parent and the system creates no content folder. See `standards/DRIVE_ARCHITECTURE.md` |
 
 ## Open — important, not blocking
 
