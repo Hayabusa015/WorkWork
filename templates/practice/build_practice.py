@@ -14,6 +14,9 @@ import sys
 import zipfile
 from copy import deepcopy
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from _shull_name import document_name, section_title  # noqa: E402
+
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -428,8 +431,9 @@ def build(s,out,checks=True):
     validate_spec(s);out.mkdir(parents=True,exist_ok=True)
     assets=out/".assets";assets.mkdir(exist_ok=True)
     kind="Activity" if s["course"]=="geology" else "Practice_Set"
-    stem=f'SHULL_{CODE[s["course"]]}_{kind}_U{s["unit"]:02d}_S{float(s["section"]):04.1f}'
-    student=out/(stem+".docx");key=out/(stem+"_Key.docx")
+    sec=f'{float(s["section"]):.1f}';topic=section_title(s["course"],sec)
+    student=out/document_name(kind,[sec],s["unit"],topic=topic)
+    key=out/document_name(kind,[sec],s["unit"],topic=topic,key=True)
     build_student(s,assets,checks).save(student)
     build_key(s).save(key)
     save_dotx(student,out/(f'SHULL_{CODE[s["course"]]}_Worksheet_TEMPLATE.dotx'))

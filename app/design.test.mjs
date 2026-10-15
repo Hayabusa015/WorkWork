@@ -82,17 +82,19 @@ test('document types come from standards/NAMING.md, not from the app', () => {
   assert.ok(types.length >= 10);
 });
 
-test('the filename follows the NAMING grammar, zero-padded', () => {
-  assert.equal(documentName({course: 'geology', type: 'Practice_Set', unit: 4, sections: ['4.1']}),
-    'SHULL_GEO_Practice_Set_U04_S04.1.docx');
-  assert.equal(documentName({course: 'chemistry', type: 'Test', unit: 8, sections: ['8.4']}),
-    'SHULL_CHEM_Test_U08_S08.4.docx');
-  assert.equal(documentName({course: 'physics', type: 'Guided_Notes', unit: 1,
-                             sections: ['1.1', '1.2', '1.3', '1.4']}),
-    'SHULL_PHYS_Guided_Notes_U01_S01.1-S01.4.docx');
-  assert.equal(documentName({course: 'physics', type: 'Slides', unit: 10, sections: ['10.2'],
-                             extension: 'pptx'}),
-    'SHULL_PHYS_Slides_U10_S10.2.pptx');
+test('the filename follows the NAMING grammar: short, section-led, no course prefix', () => {
+  assert.equal(documentName({type: 'Practice_Set', unit: 4, sections: ['4.1'], topic: 'Layers of the Earth'}),
+    '4.1 Practice Set - Layers of the Earth.docx');
+  assert.equal(documentName({type: 'Quiz', unit: 1, sections: ['1.4'], topic: 'Reaction Time',
+                             version: 'A', key: true, extension: 'pdf'}),
+    '1.4 Quiz A Key - Reaction Time.pdf');
+  assert.equal(documentName({type: 'Guided_Notes', unit: 3, sections: ['3.1', '3.2', '3.3'],
+                             unitTitle: 'Atomic Structure'}),
+    'Unit 3 Guided Notes - Atomic Structure.docx');
+  assert.equal(documentName({type: 'Slides', unit: 10, sections: ['10.2'], extension: 'pptx'}),
+    '10.2 Slides.pptx');
+  assert.equal(documentName({type: 'Test', unit: 8, sections: ['8.1', '8.2'], unitTitle: 'Stoichiometry: Part 1'}),
+    'Unit 8 Test - Stoichiometry Part 1.docx');
 });
 
 test('the curriculum endpoint serves each course and refuses anything else', async () => {

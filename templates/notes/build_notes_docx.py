@@ -22,6 +22,7 @@ from docx.oxml import OxmlElement
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _shull_name import document_name, section_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     T, G, FONT, FLOOR, COURSE_CODE, Palette, hexof, debullet, known_sections,
     unit_title,
@@ -120,8 +121,9 @@ def main():
     unit = f"U{int(spec['unit']):02d}"
     span = (f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
-    out = sys.argv[2] if len(sys.argv) > 2 else \
-        os.path.join(HERE, f"SHULL_{code}_Guided_Notes_{unit}_{span}.docx")
+    out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
+        "Guided_Notes", spec["sections"], spec["unit"], unit_title=spec.get("unitTitle"),
+        topic=section_title(course, spec["sections"][0])))
 
     doc = Document()
     s = page_setup(doc)

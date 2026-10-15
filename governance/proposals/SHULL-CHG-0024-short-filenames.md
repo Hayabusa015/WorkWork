@@ -1,10 +1,11 @@
 ---
 id: SHULL-CHG-0024
 title: Short, readable filenames — section-led, no course prefix
-status: PENDING
+status: APPROVED
 opened: 2026-10-15
 source: User
-decided_by:
+decided: 2026-10-15
+decided_by: Matthew Shull
 ---
 
 # SHULL-CHG-0024 — Short filenames
@@ -69,7 +70,7 @@ links by ID but not links by name.
 
 Approve the grammar; implement repo changes first; then run the Drive rename as a reviewed batch.
 
-Decision:
-Status: PENDING
+Decision: Approved by Matthew Shull, 2026-10-15.
+Status: APPROVED
 Implemented By:
 Verified:

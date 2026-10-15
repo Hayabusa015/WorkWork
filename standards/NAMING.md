@@ -1,6 +1,6 @@
 # Naming
 
-**Authority:** SHULL-CHG-0007. Zero-padded section codes.
+**Authority:** SHULL-CHG-0024. Short, section-led names.
 **Enforced by:** `scripts/validate_codes.py`
 **Folder names** are in `standards/DRIVE_ARCHITECTURE.md`; this file covers documents and images.
 
@@ -18,20 +18,28 @@ that would have caught the Geology numbering offset before a packet printed with
 
 ## 2. The grammar
 
+**Authority:** SHULL-CHG-0024 (supersedes SHULL-CHG-0007's padded `SHULL_` grammar).
+
+Names are short so they stay readable in a narrow folder window. The **folder path carries the
+course**; the name does not repeat it.
+
 ```
-SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]
+Section-level:  [S.S] [Type] [Version] [Key] - [Topic].[ext]
+Unit-level:     Unit [X] [Type] [Version] [Key] - [Unit Title].[ext]
 ```
 
 | Part | Rule |
 |---|---|
-| Prefix | `SHULL_`, always |
-| `COURSE` | `CHEM` · `PHYS` · `GEO` |
-| `Type` | from the fixed list below |
-| `U##` | unit, **zero-padded to two digits** |
-| `S##.#` | section, **zero-padded to two digits** before the decimal |
-| `_Descriptor` | optional, only when it disambiguates |
-| `_Version` | parallel-form letter, appended last |
-| `_Key` | answer keys are **always separate files**, ending `_Key` |
+| `S.S` | the section code exactly as the course `DECISIONS.md` writes it: `1.2`, `10.4`. Not padded. |
+| `Unit X` | the unit number, not padded: `Unit 3` |
+| `Type` | from the fixed list below, written with spaces |
+| `Version` | parallel-form letter (`A`, `B`, `C`), only when there is one |
+| `Key` | answer keys are **always separate files**; the word `Key` follows the type or version |
+| `Topic` / `Unit Title` | read from the course `DECISIONS.md`, never typed from memory. If it is not there, **leave it off**; a name without a topic is correct, an invented topic is not. |
+| separator | space, hyphen, space. A name never contains `: / \ * ? " < > |`. They are illegal on Windows and in synced folders, so they are dropped from a topic. |
+
+A document that covers **more than one section** is unit-level. A document that covers one is
+section-level.
 
 **Types:** `Slides` · `Guided_Notes` · `Practice_Set` · `Quiz` · `Test` · `Lab` · `Study_Guide` ·
 `Reference` · `Key` · `Rubric` · `Activity` · `Organizer`
@@ -39,19 +47,23 @@ SHULL_[COURSE]_[Type]_U##_S##.#[_Descriptor][_Version].[ext]
 ### Worked examples
 
 ```
-SHULL_CHEM_Slides_U08_S08.2.pptx
-SHULL_PHYS_Guided_Notes_U02_S02.3.docx
-SHULL_GEO_Practice_Set_U04_S04.1.pdf
-SHULL_CHEM_Test_U08_S08.4_A.docx
-SHULL_CHEM_Test_U08_S08.4_A_Key.docx
+Unit 3 Guided Notes - Atomic Structure.docx
+1.2 Practice Set - History of the Atomic Model.docx
+4.1 Slides - Layers of the Earth.pptx
+1.4 Quiz A - Reaction Time.docx
+1.4 Quiz A Key - Reaction Time.docx
+Unit 8 Test B - Unit Title.docx
 ```
 
-### Why padded
+Two courses can both have a `1.4 Slides`. They live in different course folders, so this is not a
+collision. A file copied out of its folder loses its course. Put it back before filing.
 
-The Drive folders are `Section 08.4 - Balancing Equations`. Padding the filename to match lets the
-code validator compare a filename against a folder path without normalising either. Two legacy
-sources disagreed on this — `shull-studio` §2 wrote `S8.4`, the folder standard wrote `S08.4` — and
-that ambiguity is CONFLICT-09.
+The code is carried **inside** the document, in the chip (section 4) and the slide footer, which
+is where it has to match the binder tab and the folder path.
+
+Builders and the app take the name from `templates/_shull_name.py` and
+`templates/shull_name.cjs`. They implement this grammar and are pinned to the examples above by
+their tests.
 
 ## 3. Images are not course documents
 

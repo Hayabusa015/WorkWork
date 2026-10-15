@@ -66,7 +66,14 @@ function pngSize(file) {
 const pad = (n) => String(n).padStart(2, "0");
 const UNIT = `U${pad(spec.unit)}`;
 const SECT = `S${pad(spec.section.split(".")[0])}.${spec.section.split(".")[1]}`;
-const OUT = process.argv[3] || `SHULL_${code}_Slides_${UNIT}_${SECT}.pptx`;
+const { documentName } = require("../shull_name.cjs");
+const sectionTopic = (() => {
+  const text = fs.readFileSync(DECISIONS, "utf8");
+  const m = text.match(new RegExp("(?:^|[·|])\\s*`?" + spec.section.replace(".", "\\.") + "`?\\s+([^·|\\n]+)", "m"));
+  return m ? m[1].replace(/`EXT`/g, "").trim() : undefined;
+})();
+const OUT = process.argv[3] || documentName({ type: "Slides", sections: [spec.section], unit: spec.unit,
+  topic: sectionTopic, extension: "pptx" });
 
 const EYEBROW = `UNIT ${pad(spec.unit)}  •  ${spec.course.toUpperCase()}`;
 const FOOTER_CODE = `${UNIT} • ${SECT}`;
