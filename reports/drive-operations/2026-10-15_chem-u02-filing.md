@@ -26,3 +26,13 @@ Upload Inbox after the moves: empty (parentId lookup). Existing `U2 Guided Notes
 
 Row 6 (Gizmo rules, student, key, PDF): not yet filed. Waiting on the user to confirm where the
 Homework folder should be, since the Unit 02 root has none and Section folders were declined.
+
+## Row 6, Gizmo rules (user chose option a: Section folder with Homework)
+
+Logged before any action. Unit 02 had no folders (parentId lookup, folders only).
+
+| Operation | Object | Intended | Status |
+|---|---|---|---|
+| Create folder | `Section 02.3 - Electron Configurations` | parent Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp); name from courses/chemistry/DECISIONS.md | planned |
+| Create folder | `Homework` | parent: the Section 02.3 folder | planned |
+| Upload then move | 2.3 Activity - Electron Configurations Gizmo.docx / Key.docx / .pdf | Section 02.3 / Homework | planned |
