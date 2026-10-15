@@ -18,8 +18,8 @@
 | **Affected Courses** | Chemistry only |
 | **Risk** | **Low.** One course, one unit, and no code is renumbered. The only thing to watch is the validator (§3). |
 | **Recommendation** | **Option 1** in §3: keep 1.4 listed, mark it folded, and retire the code. 1.5 keeps its number. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-10-15**, in the main session. Verbatim: *"approve 0036, approve 0035 with C yes and D no, reject 0037"*. Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §6. |
 
