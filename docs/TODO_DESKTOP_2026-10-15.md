@@ -43,7 +43,7 @@ Then open the environment settings (gear next to **Onboarding**). Keep the Name 
 ## Later
 
 - [ ] Physics and the other Geology units: Drive folders for them are not checked yet.
-- [ ] `Unit 02 - Geologic Time` has a `Quiz` folder instead of the standard `Tests-Quizizz`.
+- [ ] **Homework folder in `Unit 02 - Geologic Time`.** The standard (SHULL-CHG-0030) has no Homework folder at any level. The Geologic Timeline files were put there on 2026-10-15 on request. Keep it as an exception, or move the files loose into the unit folder and trash the empty folder?
 - [ ] The Desk in the local app does not list governance proposals. Ask Claude to scope it if you want that.
 
 ## If something breaks
