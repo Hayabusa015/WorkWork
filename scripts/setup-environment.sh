@@ -61,6 +61,22 @@ if ! command -v gws >/dev/null 2>&1; then
     && log "  gws OK" || log "  WARNING: gws install failed. Drive uploads fall back to the manual route."
 fi
 
+# 4c. Google Workspace CLI credentials -----------------------------------------
+# The environment secret GWS_CREDENTIALS_JSON holds the output of `gws auth export`.
+# The CLI wants a file path, so write the secret to a private file and point
+# GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE at it. The secret is never printed or committed.
+if [ -n "${GWS_CREDENTIALS_JSON:-}" ]; then
+  GWS_DIR="$HOME/.config/gws"
+  mkdir -p "$GWS_DIR" && chmod 700 "$GWS_DIR"
+  ( umask 077; printf '%s' "$GWS_CREDENTIALS_JSON" > "$GWS_DIR/credentials.json" )
+  if [ -n "${CLAUDE_ENV_FILE:-}" ]; then
+    echo "export GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE=$GWS_DIR/credentials.json" >> "$CLAUDE_ENV_FILE"
+  fi
+  log "  gws credentials written (not shown)"
+else
+  log "  gws credentials not set (GWS_CREDENTIALS_JSON); Drive uploads need them"
+fi
+
 # 5. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
