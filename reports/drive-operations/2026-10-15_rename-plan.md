@@ -1,6 +1,6 @@
 # Drive rename plan, 2026-10-15 (SHULL-CHG-0024)
 
-**Status: PLAN ONLY. Nothing in Drive has been renamed, moved, or trashed.**
+**Status: EXECUTED 2026-10-15 for groups A, B and C (77 operations, all returned success). Held: `SHULL_PHYS_Practice_Set_U01_S1.1.docx` (same new name as another file in its folder, decision pending). Left in place: the three staging duplicates in the `pdf` folder. Created: `Unit 02 - Geologic Time / Homework` (1W9L10dhOpAt4IPg0zhHQiQPl59cIy9DI). Old names, IDs and parents are in `2026-10-15_rename-ops.json` and the manifest. Nothing was trashed or deleted.**
 
 Renames keep file IDs, so links by ID survive. Links by name will not. Before each rename the old name, ID and parent are logged here, and the live name is checked against the "Old name" column; a mismatch stops that row.
 

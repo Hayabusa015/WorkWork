@@ -73,4 +73,4 @@ Approve the grammar; implement repo changes first; then run the Drive rename as 
 Decision: Approved by Matthew Shull, 2026-10-15.
 Status: IMPLEMENTED
 Implemented By: 77fbb9d
-Verified: Repo side verified 2026-10-15: npm test 36/36; validate_layers, codes, tokens, agents, references, schemas, profiles, notes clean; deck and practice builders produce the new names. Drive renames NOT yet done (separate approval).
+Verified: Repo side verified 2026-10-15: npm test 36/36; validate_layers, codes, tokens, agents, references, schemas, profiles, notes clean; deck and practice builders produce the new names. Drive renames for groups A, B, C done 2026-10-15 (77 operations, see reports/drive-operations/2026-10-15_rename-plan.md). Remaining: group D files and one held duplicate.
