@@ -5,6 +5,7 @@
 | `validate_layers.py` | A course fact (unit title, section code, calendar date, grading percentage) appears in a skill |
 | `validate_codes.py` | A `U#/S#.#` code appears anywhere without existing in the matching `courses/*/DECISIONS.md` |
 | `validate_tokens.py` | A raw hex value is typed outside `tokens.json` |
+| `find_session_files.py` | — read-only; lists documents created this session, for `reconcile-session-files` |
 | `publish_standards.py` | — publishes `standards/` and `brand/` to Drive `_Brand/Standards/`, one direction only |
 
 | Generator | Writes | From |

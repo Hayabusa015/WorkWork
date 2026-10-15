@@ -83,6 +83,11 @@ else
   log "  gws credentials not set (GWS_CREDENTIALS_B64); Drive uploads need them"
 fi
 
+# 4d. Session-start marker --------------------------------------------------------
+# scripts/find_session_files.py reads this file's modification time as "when the session
+# started". Written once, so a resume does not move it later and hide earlier documents.
+[ -e "$HOME/.shull-session-start" ] || touch "$HOME/.shull-session-start"
+
 # 5. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
