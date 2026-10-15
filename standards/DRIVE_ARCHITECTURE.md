@@ -106,3 +106,28 @@ and misnamed.
 `scripts/publish_standards.py` renders `standards/` and `brand/` into `_Brand/Standards/` so Claude
 Projects can read them. **One direction only.** Projects never write back, and nothing in
 `_Brand/Standards/` is authoritative — the repository is.
+
+## 8. When to file
+
+**Authority:** SHULL-CHG-0027. How a file is filed is in section 3 and
+`.claude/agents/librarian.md` (SHULL-CHG-0026); this section says *when*.
+
+1. **Iteration never reaches Drive.** Drafts and revisions stay on the session's disk. Drive only
+   receives a version the user has approved.
+2. **A document is ready when the QA gate has passed.** The Overseer adds one unticked row to
+   `reports/filing-queue.md` (document, course, unit, section, spec path, files, status) and
+   commits the final spec, so the document can be rebuilt if the session ends first. A document
+   that cannot be rebuilt from a spec, for example a hand-edited `.docx`, is flagged as such.
+3. **The user approves in either of two ways.** In chat: "file it" for one document, or "file
+   everything built this session". Or by ticking the box on its row in the queue. No agent ticks a
+   box or files on its own judgement.
+4. **On approval the Librarian files the set**: the student file, its separate key where one
+   exists, and the print PDF, into the same folder. If a ticked row's file is gone, rebuild it from
+   the committed spec and run the QA gate again first.
+5. **If the destination is unclear, stop and ask.** Never default to a misc folder, and never leave
+   a file in the Upload Inbox without telling the user.
+6. **After filing**, the Overseer marks the row Filed with the confirmed Drive path, the file ID
+   and the date. A failed step leaves the row Not filed with the reason.
+7. **A revision after filing needs a new approval.** The Librarian never overwrites a filed file.
+   The revision is filed as `Version N` (`standards/NAMING.md`) unless the user asks to replace
+   the old one. Trashing the old one needs the user's approval.
