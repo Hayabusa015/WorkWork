@@ -50,6 +50,17 @@ if [ -d "$SLIDE_DIR" ] && ! ( cd "$SLIDE_DIR" && node -e "require('pptxgenjs')" 
     && log "  pptxgenjs OK" || log "  WARNING: npm failed. The slide template cannot be built."
 fi
 
+# 4b. Google Workspace CLI -----------------------------------------------------
+# Uploads built .docx/.pptx/.pdf to Drive from disk. The Drive connector cannot: its
+# create_file takes content inline, so a real deck is too big for it. The CLI needs
+# credentials in GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE (an environment secret); without
+# them it installs but cannot call the API. Drive scope only; see the Drive standard.
+if ! command -v gws >/dev/null 2>&1; then
+  log "installing Google Workspace CLI"
+  npm install -g @googleworkspace/cli --no-audit --no-fund --silent >/dev/null 2>&1 \
+    && log "  gws OK" || log "  WARNING: gws install failed. Drive uploads fall back to the manual route."
+fi
+
 # 5. Report --------------------------------------------------------------------
 log "toolchain:"
 python3 - <<'PY'
@@ -62,4 +73,5 @@ for b in ["soffice","pdffonts","pdftoppm","node","npm"]:
 PY
 ( cd "$SLIDE_DIR" 2>/dev/null && node -e "require('pptxgenjs')" ) >/dev/null 2>&1 \
   && log "    pptxgenjs   OK" || log "    pptxgenjs   MISSING"
+command -v gws >/dev/null 2>&1 && log "    gws         OK" || log "    gws         MISSING"
 log "done"
