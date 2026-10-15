@@ -30,7 +30,7 @@ from _shull_docx import (          # noqa: E402
     fix_widths, no_split, page_setup, running_footer, cell_margins, gap, trim_tail,
 )
 
-from _shull_name import document_name, section_title   # noqa: E402
+from _shull_name import document_name, short_title   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -116,8 +116,9 @@ def main():
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
     kind = spec.get("docType", "Practice_Set")
     out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
-        kind, spec["sections"], spec["unit"], unit_title=utitle, key=True,
-        topic=section_title(course, spec["sections"][0])))
+        kind, spec["sections"], spec["unit"], key=True,
+        unit_title=short_title(course, f"U{spec['unit']}"),
+        topic=short_title(course, spec["sections"][0])))
 
     doc = Document()
     s = page_setup(doc)

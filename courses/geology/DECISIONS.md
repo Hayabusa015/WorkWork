@@ -247,6 +247,16 @@ the standard grammar.
 
 ---
 
+## Short titles
+
+The topic in a filename (`standards/NAMING.md` §2, SHULL-CHG-0041). **At most 20 characters.** `U#` is a
+unit, a number such as `1.3` is a section. A section or unit with no row here gets no topic in its
+filename. Never shorten a title automatically; add a row when the user approves one.
+
+| Code | Short title |
+|---|---|
+| U2 | Geologic Time |
+
 ## Decision log
 
 ### 2026-09-08 — Section numbering confirmed

@@ -49,7 +49,7 @@ from docx.oxml import OxmlElement
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from _shull_name import document_name, section_title   # noqa: E402
+from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
@@ -1537,8 +1537,8 @@ def main():
     # A key gets "Key", so the default for a key spec can never overwrite its student copy.
     codes = [str(s["code"]) for s in spec["sectionsContent"]]
     out = args[1] if len(args) > 1 else os.path.join(HERE, document_name(
-        "Guided_Notes", codes, unit, key=key, unit_title=ctx["unit_title"],
-        topic=section_title(course, codes[0])))
+        "Guided_Notes", codes, unit, key=key, unit_title=short_title(course, f"U{unit}"),
+        topic=short_title(course, codes[0])))
 
     doc = Document()
     st = doc.styles["Normal"]

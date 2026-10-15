@@ -14,7 +14,9 @@ Rules: `standards/NAMING.md`. This is the procedure.
    there. **If it does not, stop and ask.** Never build against a code that appears only in a skill.
 3. **Pick the type** from the fixed list in the standard. Do not invent one.
 4. **One section** is `[S.S] [Type] - [Topic]`. **More than one** is `Unit [X] [Type] - [Unit Title]`.
-5. **Topic and unit title come from the decisions file.** If it is not there, leave the topic off.
+5. **The topic is the short title** from the "Short titles" table in `courses/<course>/DECISIONS.md`
+   (at most 20 characters). No row means no topic. Never shorten a title yourself; propose one
+   to the user and let the Secretary add it.
 6. **Version letter** after the type, then `Key`: `1.4 Quiz A Key - Reaction Time`.
 7. **A key is always its own file.**
 8. No `: / \ * ? " < > |` in a name. Use the helpers in `templates/` rather than typing it.
@@ -28,6 +30,7 @@ Report as a table, not prose:
 
 Check, in order: valid type · section exists in that course's decisions file · topic matches the
 decisions file · separate key exists if the document has answers · no illegal characters · the
+topic is the short title from the table (not the full title, and at most 20 characters) · the
 folder it sits in is the right course and unit. Names in the old `SHULL_..._U##_S##.#` form are
 legacy: report them as needing rename, not as errors in the content.
 

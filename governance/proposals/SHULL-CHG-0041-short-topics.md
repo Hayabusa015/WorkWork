@@ -1,10 +1,11 @@
 ---
 id: SHULL-CHG-0041
 title: Short topics in filenames — a short title per section, from the course decisions file
-status: PENDING
+status: IMPLEMENTED
 opened: 2026-10-15
 source: User
-decided_by:
+decided: 2026-10-15
+decided_by: Matthew Shull
 ---
 
 # SHULL-CHG-0041 — Short topics
@@ -88,7 +89,7 @@ links by ID are not affected.
 
 `standards/NAMING.md` §2, the rule for the topic part (SHULL-CHG-0024).
 
-Decision:
-Status: PENDING
-Implemented By:
-Verified:
+Decision: Approved by Matthew Shull, 2026-10-15 ("Approve 0041 and merge all").
+Status: IMPLEMENTED
+Implemented By: see the merge commit of the pull request that carries this record
+Verified: 2026-10-15. Repository side only: validators clean; 37 app tests pass, including short titles and descriptors; a too-long or unknown short title is refused by validate_codes (negative test run); the slide deck builder produced "1.4 Slides - Isotopes.pptx". The Drive rename is NOT done: it waits for approval of reports/drive-operations/2026-10-15_rename-plan-2.md.

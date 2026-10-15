@@ -1,6 +1,6 @@
 # Naming
 
-**Authority:** SHULL-CHG-0024. Short, section-led names.
+**Authority:** SHULL-CHG-0024 (short, section-led names), SHULL-CHG-0041 (short topics).
 **Enforced by:** `scripts/validate_codes.py`
 **Folder names** are in `standards/DRIVE_ARCHITECTURE.md`; this file covers documents and images.
 
@@ -35,8 +35,11 @@ Unit-level:     Unit [X] [Type] [Version] [Key] - [Unit Title].[ext]
 | `Type` | from the fixed list below, written with spaces |
 | `Version` | parallel-form letter (`A`, `B`, `C`), only when there is one |
 | `Key` | answer keys are **always separate files**; the word `Key` follows the type or version |
-| `Topic` / `Unit Title` | read from the course `DECISIONS.md`, never typed from memory. If it is not there, **leave it off**; a name without a topic is correct, an invented topic is not. |
+| `Topic` / `Unit Title` | the **short title** (at most 20 characters) from the "Short titles" table in the course `DECISIONS.md`. **No row, no topic**: the name is `1.3 Lab.pdf`. Never shorten a title automatically, and never use the full title. |
 | separator | space, hyphen, space. A name never contains `: / \ * ? " < > |`. They are illegal on Windows and in synced folders, so they are dropped from a topic. |
+
+A **descriptor** (`Longhand`, `Day 2`, `Extended`) follows the short title when it tells two files
+apart. One that repeats the short title is dropped.
 
 A document that covers **more than one section** is unit-level. A document that covers one is
 section-level.
@@ -47,12 +50,13 @@ section-level.
 ### Worked examples
 
 ```
-Unit 3 Guided Notes - Atomic Structure.docx
-1.2 Practice Set - History of the Atomic Model.docx
-4.1 Slides - Layers of the Earth.pptx
-1.4 Quiz A - Reaction Time.docx
-1.4 Quiz A Key - Reaction Time.docx
-Unit 8 Test B - Unit Title.docx
+Unit 1 Guided Notes - Matter & Atoms.docx
+1.3 Lab - Motion Graphs.pdf
+1.3 Lab Key - Motion Graphs.pdf
+2.3 Practice Set - Electron Configs Longhand.docx
+1.4 Slides - Isotopes.pptx
+Unit 1 Test B - Matter & Atoms.docx
+1.3 Lab.pdf                                        (a section with no short title)
 ```
 
 Two courses can both have a `1.4 Slides`. They live in different course folders, so this is not a

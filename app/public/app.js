@@ -395,8 +395,8 @@ function designBrief(unit, type) {
   const span = codes.length > 1 ? `${codes[0]}-${codes[codes.length - 1]}` : codes[0] || '';
   const filename = ready
     ? (picked.length === 1
-        ? `${codes[0]} ${type.type.replace(/_/g, ' ')} - ${picked[0].title}.docx`
-        : `Unit ${unit.unit} ${type.type.replace(/_/g, ' ')} - ${unit.title}.docx`)
+        ? `${codes[0]} ${type.type.replace(/_/g, ' ')}${picked[0].short ? ` - ${picked[0].short}` : ''}.docx`
+        : `Unit ${unit.unit} ${type.type.replace(/_/g, ' ')}${unit.short ? ` - ${unit.short}` : ''}.docx`)
     : null;
 
   return `<aside class="brief" data-course="${esc(design.course)}">

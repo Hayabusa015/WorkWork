@@ -15,7 +15,7 @@ import zipfile
 from copy import deepcopy
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from _shull_name import document_name, section_title  # noqa: E402
+from _shull_name import document_name, short_title  # noqa: E402
 
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
@@ -431,7 +431,7 @@ def build(s,out,checks=True):
     validate_spec(s);out.mkdir(parents=True,exist_ok=True)
     assets=out/".assets";assets.mkdir(exist_ok=True)
     kind="Activity" if s["course"]=="geology" else "Practice_Set"
-    sec=f'{float(s["section"]):.1f}';topic=section_title(s["course"],sec)
+    sec=f'{float(s["section"]):.1f}';topic=short_title(s["course"],sec)
     student=out/document_name(kind,[sec],s["unit"],topic=topic)
     key=out/document_name(kind,[sec],s["unit"],topic=topic,key=True)
     build_student(s,assets,checks).save(student)

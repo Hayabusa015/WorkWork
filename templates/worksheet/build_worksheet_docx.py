@@ -34,7 +34,7 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from _shull_name import document_name, section_title   # noqa: E402
+from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
@@ -587,8 +587,8 @@ def main():
             if len(spec["sections"]) > 1 else f"S{spec['sections'][0]}")
     kind = spec.get("docType", "Practice_Set")
     out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, document_name(
-        kind, spec["sections"], spec["unit"], unit_title=utitle,
-        topic=section_title(course, spec["sections"][0])))
+        kind, spec["sections"], spec["unit"], unit_title=short_title(course, f"U{spec['unit']}"),
+        topic=short_title(course, spec["sections"][0])))
 
     doc = Document()
     s = page_setup(doc)
