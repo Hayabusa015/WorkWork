@@ -74,7 +74,9 @@ Rules: `standards/DRIVE_ARCHITECTURE.md` §8. Nothing is filed to Drive while th
 2. **Wait for approval.** The user says "file it" or ticks the box. You never tick a box.
 3. On approval, route to the `librarian` with the row. If the file is gone, rebuild it from the
    spec and re-run the QA gate first. If the destination is unclear, ask. One question.
-4. When the Librarian reports a verified destination, mark the row **Filed** with the Drive path,
+4. Before reporting WORK COMPLETE on a multi-document task, run `reconcile-session-files`. It lists
+   anything created in the session that is not on Drive, and waits for the user.
+5. When the Librarian reports a verified destination, mark the row **Filed** with the Drive path,
    file ID and date. Any failure leaves it **Not filed** with the reason.
 
 ## Authority

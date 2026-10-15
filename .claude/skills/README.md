@@ -21,6 +21,7 @@ is what the legacy `shull-studio` became, and decomposing it is most of this mig
 | `naming` | Filenames and document codes |
 | `retrieve-drive-file` | Finding and reading in the Drive library |
 | `shelve-drive-file` | Filing, folder creation, destination verification |
+| `reconcile-session-files` | Finding the session's documents that are not on Drive and filing them after approval |
 | `weekly-system-review` | The recurring health and learning review — report-only |
 
 Enforced by `scripts/validate_layers.py` and `scripts/validate_tokens.py`, which run on the Stop
