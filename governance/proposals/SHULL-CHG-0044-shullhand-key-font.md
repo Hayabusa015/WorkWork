@@ -16,10 +16,24 @@
 | **Recommendation** | Approve A, B, C (no edit), D, F, G. Items E is tooling for the main session. Keep the font PROVISIONAL until Matt sees it on a real key. See §6. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("approve 0044, yes to all five"). |
 | **Status** | **APPROVED** |
-| **Implemented By** | not yet |
-| **Verified** | no |
+| **Implemented By** | pending commit |
+| **Verified** | no (applied; main session runs validators and the audit_fonts key/student check) |
 
 ---
+
+## 0. Version note (v0.1 to v0.2, before approval)
+
+This record was written against ShullHand v0.1. Before approval, Matt reviewed and approved v0.2, and was told the record would be updated to v0.2 before it was applied. The following is the main session's account; the Secretary has not opened the font or the scan.
+
+- v0.2 is v0.1 recalibrated to Matt's running writing, fitted on 39 of his own words from page 4 of the sample sheet.
+- Glyph widths scaled x0.83 and letter sidebearing set to 4 units. v0.1 set text about 30% wider than he writes; v0.2 is within 2-4%.
+- Strokes thickened to his pen weight: 5.5 px at 300 dpi (v0.1 was 4.6 px).
+- The comma hangs below the baseline.
+- `.` `,` `:` `;` have 30-unit sidebearings, so "2.0" never reads as "20".
+- Word gap 31 px, giving a space advance of 366.
+- Result: family `ShullHand`, version string `Version 0.2`, 140 glyphs, 36 alternates, built by `scripts/build_handwriting_font.py` from the committed scan.
+
+This changes descriptive text only (the version and its metrics). The approved items (A-G) and their substance are unchanged. Where text below says v0.1 in describing the font as shipped, it now says v0.2; v0.1 figures that no longer apply are labelled as v0.1.
 
 ## 1. Current Rule — verbatim
 
@@ -68,7 +82,7 @@ Proposed entry (replaces 1a; same key, same position):
   "license": "none (Matt's own handwriting; no third-party licence)",
   "source": "SHULL-CHG-0044",
   "scope": "teacher answer keys ONLY",
-  "note": "Teacher answer keys only. Never on a student page. Made from Matt's handwriting sample (v0.1). Letters are separate, not joined. No superscript, subscript, arrow, sigma, or Delta glyphs; the key builder draws those. Fallback for any missing glyph: Patrick Hand."
+  "note": "Teacher answer keys only. Never on a student page. Made from Matt's handwriting sample (v0.2). Letters are separate, not joined. No superscript, subscript, arrow, sigma, or Delta glyphs; the key builder draws those. Fallback for any missing glyph: Patrick Hand."
 },
 ```
 
@@ -81,11 +95,14 @@ Proposed entry (replaces 1a; same key, same position):
 
 1. Add `brand/fonts/ShullHand.ttf` and `brand/fonts/ShullHand_alts.json` (maps a base character to a Private Use alternate; the key helper alternates the two copies so repeated letters do not look stamped).
 2. **Binary copy is a mechanical step by the main session**, under this record once APPROVED, exactly as in SHULL-CHG-0043 Item B (the Secretary has no shell and cannot copy a binary). The Secretary edits the text files around it (tokens.json, README) and records the sha256 of each file in the README. This is the same narrow exception to "only the Secretary writes to `brand/`" that Matt already accepted for 0043; it is restated here so approval of this record covers it explicitly.
-3. `brand/fonts/README.md`: replace the Patrick Hand paragraph with a ShullHand paragraph (what it is, v0.1, made from Matt's handwriting, keys only, glyph gaps, sha256), and keep a shortened Patrick Hand paragraph stating it is now the fallback for any glyph ShullHand lacks.
+3. `brand/fonts/README.md`: replace the Patrick Hand paragraph with a ShullHand paragraph (what it is, v0.2, made from Matt's handwriting, keys only, glyph gaps, sha256), and keep a shortened Patrick Hand paragraph stating it is now the fallback for any glyph ShullHand lacks.
 4. **Patrick Hand files stay** (`PatrickHand-Regular.ttf`, `OFL-PatrickHand.txt`) as the fallback. `OFL-PatrickHand.txt` stays for as long as the font stays. Whether to delete Patrick Hand later is **Matt's call; this record does not decide it** (Question 2).
 5. Known limits, stated plainly in the README (as reported by the main session):
-   - v0.1: 138 characters plus 36 alternate "again" copies of letters and digits; cap height 700/1000 UPM, x-height about 461, space advance about 346; lowercase scaled 0.92 to match his running writing; baseline snapping per letter class.
+   - v0.2: 140 glyphs plus 36 alternate "again" copies of letters and digits; widths x0.83 of v0.1, letter sidebearing 4 units, punctuation (`. , : ;`) sidebearing 30 units, space advance 366, stroke 5.5 px at 300 dpi, comma below the baseline (see §0).
+   - (v0.1, superseded before approval: 138 characters plus 36 alternates; cap height 700/1000 UPM, x-height about 461, space advance about 346; lowercase scaled 0.92; baseline snapping per letter class.)
    - Letters are separate, not joined.
+   - In his running writing "1" is a plain stroke, but the font uses his boxed "1".
+   - The baseline does not drift as real handwriting does.
    - His "2" resembles an "a". Context usually resolves it, but it is a legibility risk (see Item F and §4).
    - No sigma and no vector-arrow glyphs yet (the arrow is drawn by the builder; sigma could be added from his sentence page).
    - Colons and periods are heavy blobs.
@@ -101,7 +118,7 @@ Proposed: commit the source scan and the build scripts.
 
 - Scan: `brand/fonts/source/` (for example `brand/fonts/source/ShullHand-handwriting-sample-2026-10-16.pdf`, 2.4 MB, copied mechanically by the main session).
 - Build scripts: `scripts/build_handwriting_font.py` (to be created by the main session from `extract.py` and `buildfont.py`; tooling, not governed). The font is regenerated from scan plus script.
-- Reasoning: git is the only durable write path in this system (`CLAUDE.md` §5). Without the committed scan, a lost or overwritten `ShullHand.ttf` cannot be rebuilt, and v0.2 would need Matt to rewrite the sheet.
+- Reasoning: git is the only durable write path in this system (`CLAUDE.md` §5). Without the committed scan, a lost or overwritten `ShullHand.ttf` cannot be rebuilt, and a later version would need Matt to rewrite the sheet.
 - **Privacy:** the scan is Matt's personal handwriting sample. It is the sample of his writing only (the Secretary has not seen it and cannot confirm it contains nothing else, for example a name or signature). This is a question for Matt (Question 1). If he says no, the font ships without the scan and cannot be regenerated; the record notes that.
 
 ### Item E — Tooling (not governed; main session; the Secretary does not edit `scripts/`)
@@ -124,7 +141,7 @@ Recommendation:
 - **v0.2 and later regenerated from the same committed scan and script, with the same character set and no new rule: routine regeneration**, no new record. The commit message names SHULL-CHG-0044 and the version, the README sha256 and version line are updated by the Secretary, and the Auditor visually checks one real key. It is a new font file but not a new rule.
 - **A small follow-up record (SHULL-CHG-NNNN) is needed when** the change alters the rule or the inputs: a new source scan (new handwriting sample), a change of scope beyond keys, a change in the fallback policy, or removing Patrick Hand. This keeps drift visible.
 - Why: the font is a build artefact of committed sources. Requiring a change record for every tweak of a colon would be ceremony; requiring one for a change of inputs or scope keeps the audit trail honest. Matt may prefer a record every time; that is his call (Question 4).
-- Planned v0.2 candidates reported by the main session: sigma glyph, lighter colons and periods, more alternates.
+- Candidates for later versions reported by the main session: sigma glyph, lighter colons and periods, more alternates. (When this record was written these were planned for v0.2; v0.2 as approved is instead the recalibration in §0, so they carry forward to v0.3 or later.)
 
 ## 3. Reason in short
 
@@ -135,7 +152,7 @@ Authenticity was Matt's reason for 0043. His own handwriting is the most authent
 - **Keys only.** Student pages stay Archivo.
 - **Legibility beats authenticity.** The visual audit is the backstop (a hook cannot see a misread glyph). Particular attention to "2" versus "a", "1" versus "l".
 - **Handwriting is never used where legibility could fail.** Such steps fall back as in 0043 Item C.8.
-- **v0.1 and PROVISIONAL.** Not a LOCKED token and not presented as settled.
+- **v0.2 and PROVISIONAL.** Not a LOCKED token and not presented as settled.
 - **Grayscale print.** Unchanged from 0043: ink colours and shapes carry the distinctions. The heavier colons and periods should be checked in the print-ink audit.
 - **No claim of verification by the Secretary.** The Secretary has not opened the font, the scan, or the demo images; everything in Item B.5 is the main session's report.
 
