@@ -30,6 +30,10 @@ files by hand.
 
 *Status: not yet written. Phase 9.*
 
+`key_ink.py` is a drawing helper for handwritten-look teacher keys (SHULL-CHG-0043): pencil and pen
+text, stacked fractions, boxes, arrows, strike-throughs, and a pencil-grain sketch layer. Colours come
+from the `keyInk` tokens; it is used by key builders, never run on its own.
+
 `science_tools.py` is a shared helper (not a validator or generator): optional access to RDKit,
 mendeleev and pint, plus brand tokens and fonts. mendeleev is a cross-check only; its values
 are never a source for a student page.
