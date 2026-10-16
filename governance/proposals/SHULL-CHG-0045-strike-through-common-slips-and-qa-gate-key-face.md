@@ -14,8 +14,8 @@
 | **Affected Courses** | All three, keys only. No course `DECISIONS.md` is edited. |
 | **Risk** | Low |
 | **Recommendation** | Approve both items. See §6. |
-| **Decision** | (pending, awaiting the user) |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull, 2026-10-16 ("option 1, and yes to the QA_GATE line"): Item A (option 1) and Item B. |
+| **Status** | **APPROVED** |
 | **Implemented By** | (none; not implemented) |
 | **Verified** | No. Not implemented. See §8 for the plan. |
 
