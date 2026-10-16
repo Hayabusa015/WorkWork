@@ -16,8 +16,8 @@
 | **Recommendation** | Approve both items. See §6. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("option 1, and yes to the QA_GATE line"): Item A (option 1) and Item B. |
 | **Status** | **IMPLEMENTED** (both items applied; see §10) |
-| **Implemented By** | pending commit (main session) |
-| **Verified** | no (applied; main session runs validators) |
+| **Implemented By** | e00b137 |
+| **Verified** | Yes, by the main session (main session's account; the Secretary has no shell and did not run these): validate_tokens, validate_layers, validate_codes, validate_references, validate_agents, validate_schemas, validate_profiles, validate_notes all OK; grep found no font name in `standards/ANSWER_KEYS.md` or `standards/QA_GATE.md`; the diff matches the approved wording for Items A and B. |
 
 ---
 
