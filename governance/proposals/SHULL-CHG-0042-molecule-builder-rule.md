@@ -16,8 +16,8 @@
 | **Recommendation** | Approve. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("Approve it, have the Secretary apply it"). |
 | **Status** | **APPROVED** |
-| **Implemented By** | (not yet implemented) |
-| **Verified** | no (not yet implemented) |
+| **Implemented By** | pending commit (edits applied to the working tree 2026-10-16; main session commits) |
+| **Verified** | no. The five skill edits are applied, but the Secretary had no shell in this run, so no validator and no script run was executed. Status stays APPROVED until the main session runs the §8 verification plan. |
 
 ---
 

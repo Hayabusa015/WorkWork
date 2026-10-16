@@ -31,6 +31,8 @@ structure is the standard.
   items 1–3 change per lab.
 - **Margins are locked.** Never adjust them to fix a page count; reduce body size or line-height.
 - **Every formula appears with its name.**
+- **Molecular structures come from `scripts/build_diagram_molecule.py`**, from a SMILES string
+  verified by `verify-content`. Never hand-drawn, generated, or pasted. SHULL-CHG-0042.
 - **Percent error wherever an accepted value exists** — and the accepted value is always supplied.
 - **"Human error" is never an acceptable error analysis.**
 - **Never invent a safety claim.** Flag uncertain handling or disposal for verification.

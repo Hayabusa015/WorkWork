@@ -52,6 +52,10 @@ Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `st
 
 **Ruled lines are for prose. Open boxes are for math.** This holds everywhere.
 
+**Molecular structures** are built with `scripts/build_diagram_molecule.py` from a SMILES string
+verified by `verify-content` — never hand-drawn, generated, or pasted; stop and ask if RDKit cannot
+draw it. SHULL-CHG-0042.
+
 ## Worksheets and practice sets
 
 ```bash

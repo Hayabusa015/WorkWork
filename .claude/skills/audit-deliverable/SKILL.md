@@ -48,7 +48,9 @@ pulled the substitute in.
 ## 4. Then the rest of the gate
 
 Clipped text — highest priority, scan every page edge · page budget · grayscale · codes match and
-exist in the decisions file · voice · separate answer key · every number re-solved.
+exist in the decisions file · voice · separate answer key · every number re-solved · any molecular structure not produced by
+`scripts/build_diagram_molecule.py` (SHULL-CHG-0042; no hook can detect it, so this line is the last
+gate).
 
 Plus the deliverable-specific additions in the gate.
 
