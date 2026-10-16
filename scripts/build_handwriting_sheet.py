@@ -44,6 +44,19 @@ def characters():
     return out
 
 
+SENTENCES = [
+    "The quick brown fox jumps over the lazy dog.",
+    "Sphinx of black quartz, judge my vow.",
+    "Step 1: convert grams to moles. Step 2: multiply by 6.022 x 10 to the 23rd.",
+    "Subtract 4 from both sides, then divide both sides by 2, so x = 1.",
+    "Net force equals mass times acceleration: F = ma = (4.0 kg)(2.0 m/s) = 8.0 N.",
+    "The mole cancels, molecules remain. 1s 2s 2p 3s 3p, six valence electrons.",
+    "Kinetic energy, momentum, velocity, wavelength, frequency, equilibrium, isotope.",
+    "Now write anything you would normally put on a key: your usual shorthand and abbreviations.",
+]
+LINE_H, SENT_LABEL_H = 1.10, 0.20
+
+
 def layout():
     chars = characters()
     pages = [chars[i:i + PER_PAGE] for i in range(0, len(chars), PER_PAGE)]
@@ -59,6 +72,16 @@ def layout():
                           "write": [wx, wy, BOX_W, wh],
                           "baseline_y": wy + 0.62 * wh, "capline_y": wy + 0.14 * wh})
         manifest["pages"].append({"n": pi, "of": len(pages), "boxes": boxes})
+    n_total = len(manifest["pages"]) + 1
+    for pg in manifest["pages"]:
+        pg["of"] = n_total
+    lines = []
+    for i, text in enumerate(SENTENCES):
+        y = GRID_Y + i * LINE_H
+        wy, wh = y + SENT_LABEL_H, LINE_H - SENT_LABEL_H
+        lines.append({"prompt": text, "box": [GRID_X, y, 7.5, LINE_H], "write": [GRID_X, wy, 7.5, wh],
+                      "baseline_y": wy + 0.62 * wh, "capline_y": wy + 0.14 * wh})
+    manifest["pages"].append({"n": n_total, "of": n_total, "kind": "sentences", "lines": lines})
     return manifest
 
 
@@ -93,12 +116,27 @@ html, body {{ margin: 0; padding: 0; }}
             out.append(f"<div class='reg' style='left:{x}in;top:{y}in'></div>")
         out.append("<div class='h1'>Handwriting font sheet</div>")
         out.append(f"<div class='pg'>Page {pg['n']} of {pg['of']}</div>")
-        out.append("<div class='how'>Write each character <b>once</b> in its box, sitting on the solid blue line, "
-                   "in <b>dark pen or a dark soft pencil</b> (2B or softer), at the size you would write on an answer key. "
-                   "Write naturally. Do not trace and do not touch the box edges. Letters with tails "
-                   "(g j p q y) hang below the line. Where a box says &ldquo;again,&rdquo; write it a second time "
-                   "the way it comes out naturally, not copied from the first. Keep the four black corner squares "
-                   "clear. Scan flat at 300 dpi, or photograph straight down in even light with no shadows.</div>")
+        if pg.get("kind") != "sentences":
+            out.append("<div class='how'>Write each character <b>once</b> in its box, sitting on the solid blue line, "
+                       "in <b>dark pen or a dark soft pencil</b> (2B or softer), at the size you would write on an answer key. "
+                       "Write naturally. Do not trace and do not touch the box edges. Letters with tails "
+                       "(g j p q y) hang below the line. Where a box says &ldquo;again,&rdquo; write it a second time "
+                       "the way it comes out naturally, not copied from the first. Keep the four black corner squares "
+                       "clear. Scan flat at 300 dpi, or photograph straight down in even light with no shadows.</div>")
+        if pg.get("kind") == "sentences":
+            out.append("<div class='how' style='top:0.86in'><b>Sentences.</b> Copy each line once, left to right, "
+                       "in your normal flow, letters joined the way you really join them, at your usual speed. Keep "
+                       "your natural slant and spacing. Do not slow down to make it neat. The last line is yours: write what you "
+                       "would really write on a key. The same dark pen or soft pencil as pages 1 to "
+                       f"{pg['n'] - 1}.</div>")
+            for ln in pg["lines"]:
+                x, y, w, h = ln["box"]
+                bl, cl = ln["baseline_y"] - y, ln["capline_y"] - y
+                out.append(f"<div class='box' style='left:{x}in;top:{y}in;width:{w}in;height:{h}in'>"
+                           f"<div class='lab' style='font-size:10.5pt;color:dimgray'>{esc(ln['prompt'])}</div>"
+                           f"<div class='cap' style='top:{cl}in'></div><div class='base' style='top:{bl}in'></div></div>")
+            out.append("</div>")
+            continue
         for b in pg["boxes"]:
             x, y, w, h = b["box"]
             wx, wy, ww, wh = b["write"]
@@ -123,7 +161,7 @@ def main():
     HTML(string=html(m)).write_pdf(pdf)
     with open(os.path.join(a.out_dir, "handwriting_sheet.json"), "w") as fh:
         json.dump(m, fh, ensure_ascii=False, indent=1)
-    n = sum(len(p["boxes"]) for p in m["pages"])
+    n = sum(len(p.get("boxes", [])) for p in m["pages"])
     print(f"wrote {pdf}  ({len(m['pages'])} pages, {n} characters)")
     return 0
 
