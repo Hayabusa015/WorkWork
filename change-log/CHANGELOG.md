@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-16
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0042 | 2026-10-16 | Molecular structures on student pages are built with the molecule script | APPROVED | `governance/proposals/SHULL-CHG-0042-molecule-builder-rule.md` |
+
 ## 2026-10-15
 
 | ID | Date | Change | Status | Record |

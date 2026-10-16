@@ -14,8 +14,8 @@
 | **Affected Courses** | All three. Chemistry mainly; Geology and Physics rarely. No course `DECISIONS.md` is touched (build mechanics, not a course fact). |
 | **Risk** | Low |
 | **Recommendation** | Approve. |
-| **Decision** | (pending, awaiting the user) |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull, 2026-10-16 ("Approve it, have the Secretary apply it"). |
+| **Status** | **APPROVED** |
 | **Implemented By** | (not yet implemented) |
 | **Verified** | no (not yet implemented) |
 
