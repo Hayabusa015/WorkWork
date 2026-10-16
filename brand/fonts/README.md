@@ -11,7 +11,11 @@ A SessionStart hook installs these to `~/.fonts` and runs `fc-cache`, so the QA 
 shipped PDF are the same artifact. Before this, every QA pass inspected Liberation Sans metrics
 while the document declared Trade Gothic Next.
 
+**Patrick Hand** — SIL Open Font License, committed here (`PatrickHand-Regular.ttf`,
+`OFL-PatrickHand.txt`). Source: `google/fonts` repository, `ofl/patrickhand`. Added by SHULL-CHG-0043
+(PROVISIONAL). **Teacher answer keys only, never a student page** — see `typography.keyHandwriting` in
+`brand/tokens.json`. It is deliberately outside the Archivo stack; it has no superscript, subscript,
+arrow, or Delta glyphs. sha256 of the ttf: `0f173b3e6cb6d1af25babf7f0057c5ac4ee11f9992b0469bb817e967ef4ad0fc`.
+
 **Trade Gothic Next is Monotype-licensed. Never commit it.** It is named first in the font stack so
 files resolve correctly on Matt's own machine.
-
-*Status: fonts not yet added. Phase 8.*

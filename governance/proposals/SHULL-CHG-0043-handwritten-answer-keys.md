@@ -16,8 +16,8 @@
 | **Recommendation** | Approve in two stages. See §6. |
 | **Decision** | Approved in two stages by Matthew Shull, 2026-10-16 ("Approve it in two stages"). |
 | **Status** | **APPROVED** |
-| **Implemented By** | (not implemented) |
-| **Verified** | no — not implemented |
+| **Implemented By** | Stage 1: pending commit |
+| **Verified** | no (Stage 1 applied, not yet verified; Stage 2 not started) |
 
 ---
 
@@ -71,18 +71,20 @@ Line numbers are approximate; the Secretary re-reads them at implementation.
 
 Add under a new top-level group `keyInk` (so they are not mistaken for course or semantic colours), four tokens: `pencil`, `pen`, `box`, `arrow`.
 
-| Token | Role | Candidate hex (test-only, to be confirmed by Matt) |
+| Token | Role | Final candidate hex (PROVISIONAL, 2026-10-16; Matt: "pick new colors") |
 |---|---|---|
-| `keyInk.pencil` | Math and calculation work on a key (physics math, chemistry math) | #4A4E54 (graphite-gray) |
-| `keyInk.pen` | Written answers and non-math keys, e.g. electron configuration | #58348C (purple, per Matt's example image) |
-| `keyInk.box` | Boxes that mark a final answer or key result | #C85028 |
-| `keyInk.arrow` | Arrows and other annotations (flow, "carry this", "because") | #1E6EAA |
+| `keyInk.pencil` | Math and calculation work on a key (physics math, chemistry math) | #5A6068 (graphite-gray) |
+| `keyInk.pen` | Written answers and non-math keys, e.g. electron configuration | #4A2466 (deep plum) |
+| `keyInk.box` | Boxes that mark a final answer or key result | #9F1D2C (crimson) |
+| `keyInk.arrow` | Arrows and other annotations (flow, "carry this", "because") | #16609A |
+
+Main-session checks reported 2026-10-16 (not measured by the Secretary; `scripts/measure_tokens.py` produces the committed `measured` blocks): contrast on white 6.35 / 12.1 / 7.8 / 6.6; CIE distance to the nearest existing token: pencil 12.3 (`ground.footer`, the closest call), pen 42.6 (`ground.graphite`), box 28.8 (`semantic.danger`), arrow 38.5 (`ground.graphite`). `pencil` is close to `ground.footer`; the tokens stay PROVISIONAL, and reusing the existing token instead of a new one is an option for Matt.
 
 - `status` is **PROVISIONAL** for all four, and stays PROVISIONAL until Matt confirms the hex values after seeing them on a real key.
 - **Do not invent measurements.** The `measured` blocks (grayscale, contrast on white and parchment and asphalt, verdicts) must be produced by `scripts/measure_tokens.py` at implementation, as the file header requires ("never hand-edit one"). The record carries no numbers.
 - Requirements the measured values must meet before the status can leave PROVISIONAL: every ink used as type clears `rules.contrastTargetText` (5.5) on white; the print-ink gate in `standards/QA_GATE.md` §5 (`scripts/audit_print_ink.py`) passes on a built sample key; `box` and `arrow` must remain distinguishable **by shape and stroke**, not colour alone, in grayscale (box is a closed rectangle, arrow is an open line with a head), consistent with `standards/QA_GATE.md` §4 and `rules.grayscaleSeparationMin`. If `box` and `arrow` measure within 20 grey levels of each other, that is acceptable only because the shape differs; the audit records it.
 - One-hex rule: the hex values are written only in `brand/tokens.json`. The builder helper (item F) reads them; `scripts/validate_tokens.py` must still pass. The candidate hex values appear in this proposal for review only and must not be copied into any other file.
-- **Overlap to decide (Secretary observation, not resolved here):** candidate `pen` #58348C sits near Physics Deep Purple `courses.physics.secondary` (#8B5CF6, LOCKED), and candidate `box` #C85028 sits near Geology Rust Orange (#E85D24, LOCKED). Course identity colours are display colours on student pages; key inks live on teacher keys only, so a collision is not forbidden, but Matt may want a visibly different value. Offered as a question for implementation, not decided.
+- **Overlap (resolved 2026-10-16):** the earlier test values for `pen` and `box` sat near Physics Deep Purple `courses.physics.secondary` (LOCKED) and Geology Rust Orange `courses.geology.secondary` (LOCKED). Matt answered "Yes to both, pick new colors"; `pen` and `box` were moved to the final values in the table above.
 
 ### Item B — Brand: Patrick Hand font (`brand/fonts/`, `brand/tokens.json` typography)
 
@@ -168,7 +170,7 @@ Authenticity is Matt's call, and it costs nothing on student pages. The risk is 
 |---|---|---|---|
 | 1 | "Never substitute a font outside this stack. Never a novelty 'school' font." (and `typography.primary`, `fallback` LOCKED) | `brand/SHULL_DESIGN_SYSTEM.md` ~line 150; `brand/tokens.json` `typography` | **CONFLICT.** Patrick Hand is outside the stack, and a handwriting face is arguably a "school" font. Item B proposes a narrow, labelled exception (keys only, PROVISIONAL), not a deletion. Approving this record is Matt's explicit decision to make that exception. |
 | 2 | Archivo-only render check | `scripts/audit_fonts.py` `ALLOWED`; `audit-deliverable` §3 | Not a LOCKED token, but an enforced gate that would fail every handwritten key until Item E is done. |
-| 3 | `courses.physics.secondary` #8B5CF6 and `courses.geology.secondary` #E85D24 (LOCKED) | `brand/tokens.json` | Not a conflict in meaning, only candidate hex proximity to `pen` and `box` (Item A). Flagged for Matt, not resolved. |
+| 3 | `courses.physics.secondary` and `courses.geology.secondary` (LOCKED) | `brand/tokens.json` | Candidate hex proximity to `pen` and `box` (Item A). Resolved 2026-10-16: Matt asked for new colours; final values are in Item A. |
 
 No CONFLICT, PROVISIONAL, or UNKNOWN item is converted to LOCKED by this record. The four tokens and the font stay PROVISIONAL.
 
