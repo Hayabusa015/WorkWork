@@ -14,8 +14,8 @@
 | **Affected Courses** | All three, keys only. No course `DECISIONS.md` is touched. |
 | **Risk** | Low-medium. Student pages are unchanged. The risk is in the key itself: a home-made font can make a character ambiguous (Matt's "2" resembles an "a"). Mitigated by the legibility-beats-authenticity rule in SHULL-CHG-0043 Item C.8, the Patrick Hand fallback, and the visual audit. |
 | **Recommendation** | Approve A, B, C (no edit), D, F, G. Items E is tooling for the main session. Keep the font PROVISIONAL until Matt sees it on a real key. See §6. |
-| **Decision** | (pending, awaiting the user) |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull, 2026-10-16 ("approve 0044, yes to all five"). |
+| **Status** | **APPROVED** |
 | **Implemented By** | not yet |
 | **Verified** | no |
 
