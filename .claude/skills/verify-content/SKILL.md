@@ -17,7 +17,9 @@ code exist in the decisions file? Content that is correct but misplaced is still
 differ per course, and the Physics-versus-Chemistry sig-figs difference is the one that bites.
 
 **3. Every calculation, re-solved independently.** Not verified by pattern, not checked against the
-key. Worked from the problem statement. **Including in each parallel version.**
+key. Worked from the problem statement. **Including in each parallel version.** A handwritten key is
+re-solved the same way and read as printed, sketch labels included (`standards/ANSWER_KEYS.md` §8,
+SHULL-CHG-0043).
 
 **4. Units and significant figures.** Every numeric answer carries a unit. Every setup shows units
 cancelling. Precision appropriate to the data.

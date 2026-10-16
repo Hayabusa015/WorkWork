@@ -43,6 +43,9 @@ the standard code · and, for a full teacher key, why each distractor is wrong.
 Note common misconceptions and any grading judgment calls. **Keep teacher-only information off the
 student version.**
 
+Keys are built in the handwritten key style, including the physics scene sketch: see
+`standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
+
 ## Open-response prompts
 
 Replace "Explain your answer" with the evidence expected: *"Name the trend, compare the two atoms,

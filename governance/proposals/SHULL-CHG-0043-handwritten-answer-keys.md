@@ -15,9 +15,9 @@
 | **Risk** | Medium (brand tokens + a new font + a deliberate exception to the Archivo-only rule + five skills) |
 | **Recommendation** | Approve in two stages. See §6. |
 | **Decision** | Approved in two stages by Matthew Shull, 2026-10-16 ("Approve it in two stages"). |
-| **Status** | **APPROVED** |
-| **Implemented By** | Stage 1: pending commit |
-| **Verified** | no (Stage 1 applied, not yet verified; Stage 2 not started) |
+| **Status** | **IMPLEMENTED** (both stages applied; the `keyInk` tokens and `typography.keyHandwriting` stay PROVISIONAL) |
+| **Implemented By** | Stage 1: 39e663a. Stage 2: pending commit (main session). |
+| **Verified** | Stage 1: yes, at 39e663a, by the main session (main session's account): validators all OK, `measure_tokens.py` filled the `keyInk` measured blocks, `audit_fonts.py --key` sample check passed on a key and failed correctly on a student file. Stage 2: yes, by the main session (main session's account): `validate_tokens`, `validate_layers`, `validate_codes`, `validate_references`, `validate_agents`, `validate_schemas`, `validate_profiles`, `validate_notes` all OK; grep confirms no font name or hex value in `standards/ANSWER_KEYS.md` or the five skill pointer lines. One open question on `ANSWER_KEYS.md` §3 is in §10 and is for Matt. |
 
 ---
 
@@ -206,3 +206,68 @@ Stage 2:
 - `scripts/validate_references.py`, `validate_agents.py`, `validate_layers.py` pass.
 - A real key built with the helper is rendered and visually inspected page by page; `audit_print_ink.py` passes; the arithmetic is re-solved independently by `verify-content`.
 - Fill in `Implemented By` with the commit SHA(s) and `Verified` with the result.
+
+## 10. Stage 2 implementation note (Secretary, 2026-10-16)
+
+**Authority.** The committed approval (Decision field, commit 05ab4b9: "Approve it in two stages").
+§6 gates Stage 2 on the helpers existing and being shown on one real key. Main session's account,
+not re-run by the Secretary: `scripts/key_ink.py` and `scripts/key_solution.py` (commit 9e05ca6);
+`templates/worksheet/build_worksheet_key_docx.py` draws any question carrying `"steps"` in the
+key-handwriting face; the real Physics U1 S1.2 practice-set key
+(`templates/worksheet/specs/phys_u01_s01.2_10q.json`, 10 questions, all with steps, 6 with scene
+sketches) built to a 7-page key, rendered via LibreOffice and inspected. The main session tested a
+Physics key, not the suggested Chemistry stoichiometry key as well (§6 says "suggest").
+
+**Context, not a new decision.** On 2026-10-16 Matt said, in the main-session conversation: "yes,
+move on to stage 2". Recorded as direction to proceed under the existing approval. The Decision
+field is unchanged.
+
+**Binding cross-reference.** SHULL-CHG-0044 Item F: the standard and every pointer name "the
+key-handwriting face (`typography.keyHandwriting`)" and no font. Colours are named by token
+(`keyInk.pencil` / `pen` / `box` / `arrow`), never by hex. Grep of the new and edited files for a
+font name or a hex value: none.
+
+**Applied.**
+
+| Item | File | Change |
+|---|---|---|
+| C, H | `standards/ANSWER_KEYS.md` (new) | The full rule once: scope, ink roles, strike-through, algebra steps, stacked division with the unit-slash exception, physics scene sketch (built from the givens, pencil look, omitted where the scene builder would misrepresent the story), legibility (2/a, 1/l, decimal points), re-solve, audit. Points to the `scripts/key_solution.py` docstring for the `"steps"`/`"sketch"` schema; does not restate it. |
+| C | `standards/README.md` | One index row; status line notes the addition. |
+| D | `.claude/skills/build-assessment/SKILL.md` | "Answer keys": pointer line, sketch included (Item H). |
+| D | `.claude/skills/build-document/SKILL.md` | After "Always two files": pointer line. |
+| D | `.claude/skills/build-lab/SKILL.md` | After "Two files, always.": pointer line. |
+| D | `.claude/skills/verify-content/SKILL.md` | Check 3: re-solve as before, read as printed, sketch labels included. |
+| D | `.claude/skills/audit-deliverable/SKILL.md` | §3: `audit_fonts.py --key` on Key files; the face on a student file fails. §4: visual inspection for the legibility pairs, every division stacked, sketch built from problem data. |
+
+**Not affected:** `build-presentation` (no teacher key; not edited), `naming`,
+`reconcile-session-files`.
+
+**Changes from the proposal text, made at Matt's later direction (main session, 2026-10-16):** the
+sketch-omission rule (C.6.3 in the standard) and the explicit 2/a, 1/l, decimal-point checks
+(from SHULL-CHG-0044 Item F). C.8's fallback is worded as "the face's fallback named in the token,
+or the brand face" so no font is named.
+
+**Not done here.** No commit (main session). No validator run. `change-log/CHANGELOG.md` not edited.
+`standards/QA_GATE.md` §1 still says `pdffonts` "should show Archivo or Archivo Narrow", which a
+handwritten key will not; it is not stale in a way that blocks (keys are now governed by
+`ANSWER_KEYS.md` §9), but a one-line pointer there would need its own approval. **Open item, left
+for Matt.**
+
+**Open question for Matt: where "common" comes from in strike-through (`ANSWER_KEYS.md` §3).**
+After reading the standard against Matt's decisions, the main session asked for the §3 sourcing
+sentence to be loosened. The Secretary did **not** apply this, because the sentence is the approved
+text. Item C.4 of this record, as approved, says: "The source of 'common' is the course
+`DECISIONS.md` misconception list or Matt; if neither supports it, no strike-through." Changing
+it would change an approved rule without an approval for that change.
+- The issue: Matt's own words were only "but only if its a common mistake". The only misconception
+  list in `courses/` is the conceptual one in Physics `DECISIONS.md`; Chemistry has none. So under
+  the approved wording, the four strike-throughs on the Physics S1.2 key (flipped sign, t not
+  squared, v0t dropped, whole trip treated as accelerating) are supported only if Matt confirms
+  them.
+- Proposed replacement (main session): "A mistake qualifies only if students at this level
+  genuinely and routinely make it (the course DECISIONS.md misconception list is one source; a
+  well-known calculation slip such as a flipped sign or an unsquared t is another). If it is in
+  doubt, leave it out."
+- Matt's options: (a) approve that rewording, which the main session records against this ID or a
+  follow-up record; or (b) keep §3 as written and confirm the four S1.2 slips as common himself,
+  which the approved wording already allows ("or Matt").

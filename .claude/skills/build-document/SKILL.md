@@ -130,7 +130,7 @@ full-sentence blank must not look identical. Leave a margin note where a common 
 lives, named plainly.
 
 **Always two files** — student copy and filled key — generated from the same source so they cannot
-drift.
+drift. The filled key follows `standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
 
 ## Geology activities
 

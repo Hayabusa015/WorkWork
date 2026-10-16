@@ -43,14 +43,17 @@ ceiling 9%), marked (density, reported), and the widest solid band. Any solid fi
 0.60 in fails regardless of either number. SHULL-CHG-0020.
 
 `audit_fonts.py` fails a PDF that renders in anything but Archivo and names the character that
-pulled the substitute in.
+pulled the substitute in. On a `Key` file run it with `--key`, which also admits the key-handwriting
+face (`typography.keyHandwriting`); that face on a student file is a fail (SHULL-CHG-0043).
 
 ## 4. Then the rest of the gate
 
 Clipped text — highest priority, scan every page edge · page budget · grayscale · codes match and
 exist in the decisions file · voice · separate answer key · every number re-solved · any molecular structure not produced by
 `scripts/build_diagram_molecule.py` (SHULL-CHG-0042; no hook can detect it, so this line is the last
-gate).
+gate) · key handwriting per `standards/ANSWER_KEYS.md`, **visually inspected** page by page: the
+legibility pairs (2/a, 1/l, clear decimal points), every division stacked, any sketch built from the
+problem data (SHULL-CHG-0043).
 
 Plus the deliverable-specific additions in the gate.
 
