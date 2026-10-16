@@ -1,0 +1,565 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.2"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "35–45",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "sectionsContent": [
+    {
+      "code": "2.2",
+      "title": "Vector Addition",
+      "concept": {
+        "summary": "To add vectors, break each one into an x-part and a y-part, add the x-parts together and the y-parts together, then rebuild one resultant from those two totals. When the vectors already point along the axes, the components are given to you and the Pythagorean theorem finishes the job.",
+        "keyIdeas": [
+          "A resultant is not finished until it has a magnitude and a direction.",
+          "The calculator's inverse tangent only returns angles between −90° and 90°. Use your sketch to decide which quadrant the resultant is really in."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "A vector has a magnitude and a direction, and vectors are drawn tip-to-tail (S2.1).",
+          "Pythagorean theorem: a² + b² = c².",
+          "SOH CAH TOA, with the calculator in degree mode."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Start each one with a tip-to-tail sketch. +x is east and +y is north. Every angle on this sheet is measured counterclockwise from east: east is 0°, north is 90°, west is 180°, south is 270°. Give every resultant as a magnitude with units and an angle on that scale, rounded to the nearest degree.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Seaspray, the Autobot hovercraft, heads straight east across a river at 6.0 m/s, while the current pushes him south at 2.5 m/s. He forgot to steer against it. Find Seaspray's resultant velocity: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  6.5 m/s at 337°  ]",
+          "solution": "Components: vx = +6.0 m/s, vy = −2.5 m/s.\nv = √(6.0² + 2.5²) = √(36 + 6.25) = √42.25 = 6.5 m/s.\nReference angle = inverse tan of (2.5 / 6.0) = 22.6° south of east.\nQuadrant IV, so θ = 360° − 22.6° = 337.4°, rounded to 337°.",
+          "finalAnswer": "6.5 m/s at 337° (22.6° south of east)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = +6.0 m/s     v_{y} = −2.5 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v = √(v_{x}^{2} + v_{y}^{2}) = √((6.0)^{2} + (2.5)^{2}) = √42.25"
+              ]
+            },
+            {
+              "answer": [
+                "v ="
+              ],
+              "value": "6.5 m/s"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "2.5",
+                    "6.0"
+                  ]
+                },
+                "= 22.6°"
+              ],
+              "note": "reference angle, below east"
+            },
+            {
+              "mistake": [
+                "θ = 22.6°"
+              ],
+              "note": "that points north of east; the current pushes south"
+            },
+            {
+              "row": [
+                "θ = 360° − 22.6° = 337.4°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "337°"
+            }
+          ]
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Starscream crash-landed in a ditch and is too proud to ask for help. Optimus Prime pulls him north with a force of 840 N while Bumblebee pulls west with 350 N. Find the resultant force on Starscream: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  910 N at 113°  ]",
+          "solution": "Components: Fx = −350 N, Fy = +840 N.\nF = √(350² + 840²) = √(122 500 + 705 600) = √828 100 = 910 N.\nReference angle = inverse tan of (840 / 350) = 67.4° north of west.\nQuadrant II, so θ = 180° − 67.4° = 112.6°, rounded to 113°.",
+          "finalAnswer": "910 N at 113° (67.4° north of west)",
+          "steps": [
+            {
+              "row": [
+                "F_{x} = −350 N     F_{y} = +840 N"
+              ]
+            },
+            {
+              "row": [
+                "F = √((350)^{2} + (840)^{2}) = √828 100"
+              ]
+            },
+            {
+              "answer": [
+                "F ="
+              ],
+              "value": "910 N"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "840",
+                    "350"
+                  ]
+                },
+                "= 67.4°"
+              ],
+              "note": "reference angle, measured up from west"
+            },
+            {
+              "mistake": [
+                "θ = 67.4°"
+              ],
+              "note": "that is measured from west, not from east"
+            },
+            {
+              "row": [
+                "θ = 180° − 67.4° = 112.6°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "113°"
+            }
+          ]
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Jetfire fires his main thruster, giving an acceleration of 4.5 m/s² toward the south, while a damaged side thruster adds 2.0 m/s² toward the west. Ratchet told him to get that fixed. Find Jetfire's resultant acceleration: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  4.9 m/s² at 246°  ]",
+          "solution": "Components: ax = −2.0 m/s², ay = −4.5 m/s².\na = √(2.0² + 4.5²) = √(4.00 + 20.25) = √24.25 = 4.92 m/s², which is 4.9 m/s² to two significant figures.\nReference angle = inverse tan of (4.5 / 2.0) = 66.0° south of west.\nQuadrant III, so θ = 180° + 66.0° = 246.0°, rounded to 246°.",
+          "finalAnswer": "4.9 m/s² at 246° (66.0° south of west)",
+          "steps": [
+            {
+              "row": [
+                "a_{x} = −2.0 m/s^{2}     a_{y} = −4.5 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "a = √((2.0)^{2} + (4.5)^{2}) = √24.25 = 4.92 m/s^{2}"
+              ],
+              "note": "two significant figures"
+            },
+            {
+              "answer": [
+                "a ="
+              ],
+              "value": "4.9 m/s^{2}"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "4.5",
+                    "2.0"
+                  ]
+                },
+                "= 66.0°"
+              ],
+              "note": "reference angle, measured down from west"
+            },
+            {
+              "row": [
+                "θ = 180° + 66.0° = 246.0°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "246°"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Bumblebee drives 20.0 m at 35°, then swerves and drives another 9.0 m at 27° to get around a Decepticon roadblock. Find his resultant displacement: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  29 m at 33°  ]",
+          "solution": "A: Ax = 20.0 cos 35° = 16.38 m, Ay = 20.0 sin 35° = 11.47 m.\nB: Bx = 9.0 cos 27° = 8.02 m, By = 9.0 sin 27° = 4.09 m.\nRx = 24.40 m, Ry = 15.56 m.\nR = √(24.40² + 15.56²) = 28.94 m, which is 29 m to two significant figures.\nθ = inverse tan of (15.56 / 24.40) = 32.5°, rounded to 33°. Quadrant I, no adjustment.",
+          "finalAnswer": "29 m at 33° (R = 28.94 m, θ = 32.5° before rounding)",
+          "steps": [
+            {
+              "row": [
+                "A_{x} = 20.0 cos 35° = 16.38 m     A_{y} = 20.0 sin 35° = 11.47 m"
+              ]
+            },
+            {
+              "row": [
+                "B_{x} = 9.0 cos 27° = 8.02 m     B_{y} = 9.0 sin 27° = 4.09 m"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = 24.40 m     R_{y} = 15.56 m"
+              ]
+            },
+            {
+              "mistake": [
+                "R = 20.0 m + 9.0 m = 29.0 m"
+              ],
+              "note": "adding magnitudes only works for vectors pointing the same way"
+            },
+            {
+              "row": [
+                "R = √((24.40)^{2} + (15.56)^{2}) = 28.94 m"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "29 m"
+            },
+            {
+              "row": [
+                "θ = tan^{−1}",
+                {
+                  "frac": [
+                    "15.56",
+                    "24.40"
+                  ]
+                },
+                "= 32.5°"
+              ],
+              "note": "quadrant I, no adjustment"
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "33°"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Wheeljack walks 45 m at 120°, then 30 m at 200°, looking for the bolt that fell off his latest invention. Find his resultant displacement: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  58 m at 150°  ]",
+          "solution": "A: Ax = 45 cos 120° = −22.50 m, Ay = 45 sin 120° = 38.97 m.\nB: Bx = 30 cos 200° = −28.19 m, By = 30 sin 200° = −10.26 m.\nRx = −50.69 m, Ry = 28.71 m.\nR = √(50.69² + 28.71²) = 58.26 m, which is 58 m.\nReference angle = inverse tan of (28.71 / 50.69) = 29.5°.\nRx negative, Ry positive: quadrant II, so θ = 180° − 29.5° = 150.5°, rounded to 150°.",
+          "finalAnswer": "58 m at 150° (R = 58.26 m, θ = 150.5° before rounding)",
+          "steps": [
+            {
+              "row": [
+                "A_{x} = 45 cos 120° = −22.50 m     A_{y} = 45 sin 120° = 38.97 m"
+              ]
+            },
+            {
+              "row": [
+                "B_{x} = 30 cos 200° = −28.19 m     B_{y} = 30 sin 200° = −10.26 m"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = −50.69 m     R_{y} = 28.71 m"
+              ]
+            },
+            {
+              "row": [
+                "R = √((50.69)^{2} + (28.71)^{2}) = 58.26 m"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "58 m"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "28.71",
+                    "50.69"
+                  ]
+                },
+                "= 29.5°"
+              ],
+              "note": "reference angle"
+            },
+            {
+              "mistake": [
+                "θ = −29.5°"
+              ],
+              "note": "the calculator's answer; R_{x} < 0 puts it in quadrant II"
+            },
+            {
+              "row": [
+                "θ = 180° − 29.5° = 150.5°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "150°"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Jazz drives 65 m at 300°, then 40 m at 35°, chasing Frenzy through a parking garage. Find his resultant displacement: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  73 m at 333°  ]",
+          "solution": "A: Ax = 65 cos 300° = 32.50 m, Ay = 65 sin 300° = −56.29 m.\nB: Bx = 40 cos 35° = 32.77 m, By = 40 sin 35° = 22.94 m.\nRx = 65.27 m, Ry = −33.35 m.\nR = √(65.27² + 33.35²) = 73.29 m, which is 73 m.\nReference angle = inverse tan of (33.35 / 65.27) = 27.1°.\nRx positive, Ry negative: quadrant IV, so θ = 360° − 27.1° = 332.9°, rounded to 333°.",
+          "finalAnswer": "73 m at 333° (R = 73.29 m, θ = 332.9° before rounding)",
+          "steps": [
+            {
+              "row": [
+                "A_{x} = 65 cos 300° = 32.50 m     A_{y} = 65 sin 300° = −56.29 m"
+              ]
+            },
+            {
+              "row": [
+                "B_{x} = 40 cos 35° = 32.77 m     B_{y} = 40 sin 35° = 22.94 m"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = 65.27 m     R_{y} = −33.35 m"
+              ]
+            },
+            {
+              "row": [
+                "R = √((65.27)^{2} + (33.35)^{2}) = 73.29 m"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "73 m"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "33.35",
+                    "65.27"
+                  ]
+                },
+                "= 27.1°"
+              ],
+              "note": "reference angle, below east"
+            },
+            {
+              "row": [
+                "θ = 360° − 27.1° = 332.9°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "333°"
+            }
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "Optimus Prime sends Jetfire on a scouting run: 2.5 km at 60°, then 4.0 km at 150°, then 1.5 km at 250°. Ratchet needs to know where to send the repair crew. Find Jetfire's resultant displacement: magnitude and direction.",
+          "calculation": true,
+          "selfCheck": "[  3.9 km at 135°  ]",
+          "solution": "A: Ax = 2.5 cos 60° = 1.250 km, Ay = 2.5 sin 60° = 2.165 km.\nB: Bx = 4.0 cos 150° = −3.464 km, By = 4.0 sin 150° = 2.000 km.\nC: Cx = 1.5 cos 250° = −0.513 km, Cy = 1.5 sin 250° = −1.410 km.\nRx = −2.727 km, Ry = 2.756 km.\nR = √(2.727² + 2.756²) = 3.877 km, which is 3.9 km.\nReference angle = inverse tan of (2.756 / 2.727) = 45.3°.\nQuadrant II, so θ = 180° − 45.3° = 134.7°, rounded to 135°.",
+          "finalAnswer": "3.9 km at 135° (R = 3.877 km, θ = 134.7° before rounding)",
+          "steps": [
+            {
+              "row": [
+                "A_{x} = 2.5 cos 60° = 1.250 km     A_{y} = 2.5 sin 60° = 2.165 km"
+              ]
+            },
+            {
+              "row": [
+                "B_{x} = 4.0 cos 150° = −3.464 km     B_{y} = 4.0 sin 150° = 2.000 km"
+              ]
+            },
+            {
+              "row": [
+                "C_{x} = 1.5 cos 250° = −0.513 km     C_{y} = 1.5 sin 250° = −1.410 km"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = −2.727 km     R_{y} = 2.756 km"
+              ]
+            },
+            {
+              "row": [
+                "R = √((2.727)^{2} + (2.756)^{2}) = 3.877 km"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "3.9 km"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "2.756",
+                    "2.727"
+                  ]
+                },
+                "= 45.3°"
+              ],
+              "note": "reference angle"
+            },
+            {
+              "row": [
+                "θ = 180° − 45.3° = 134.7°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "135°"
+            }
+          ]
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "Bumblebee, Ironhide, and Jazz each hook a cable to the same Energon cube and pull. Bumblebee pulls with 150 N at 20°, Ironhide with 210 N at 135°, and Jazz, who would rather be dancing, with 180 N at 255°.",
+          "parts": [
+            "Find the resultant force on the Energon cube: magnitude and direction.",
+            "Megatron grabs a fourth cable and pulls so that all four forces add to zero, holding the cube in place. Give his force: magnitude and direction."
+          ],
+          "solution": "B: Bx = 150 cos 20° = 140.95 N, By = 150 sin 20° = 51.30 N.\nI: Ix = 210 cos 135° = −148.49 N, Iy = 210 sin 135° = 148.49 N.\nJ: Jx = 180 cos 255° = −46.59 N, Jy = 180 sin 255° = −173.87 N.\nRx = −54.13 N, Ry = 25.93 N.\n(a) R = √(54.13² + 25.93²) = 60.01 N, which is 60.0 N. Reference angle = inverse tan of (25.93 / 54.13) = 25.6°. Quadrant II, so θ = 180° − 25.6° = 154.4°, rounded to 154°.\n(b) Megatron supplies the opposite of the resultant: same magnitude, direction turned 180°. 60.0 N at 154.4° + 180° = 334.4°, rounded to 334°. Components +54.13 N, −25.93 N.",
+          "finalAnswer": "(a) 60.0 N at 154°   (b) 60.0 N at 334°",
+          "steps": [
+            {
+              "row": [
+                "B_{x} = 150 cos 20° = 140.95 N     B_{y} = 150 sin 20° = 51.30 N"
+              ]
+            },
+            {
+              "row": [
+                "I_{x} = 210 cos 135° = −148.49 N     I_{y} = 210 sin 135° = 148.49 N"
+              ]
+            },
+            {
+              "row": [
+                "J_{x} = 180 cos 255° = −46.59 N     J_{y} = 180 sin 255° = −173.87 N"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = −54.13 N     R_{y} = 25.93 N"
+              ]
+            },
+            {
+              "label": "(a) Resultant"
+            },
+            {
+              "row": [
+                "R = √((54.13)^{2} + (25.93)^{2}) = 60.01 N"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "60.0 N"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "25.93",
+                    "54.13"
+                  ]
+                },
+                "= 25.6°"
+              ],
+              "note": "quadrant II"
+            },
+            {
+              "row": [
+                "θ = 180° − 25.6° = 154.4°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "154°"
+            },
+            {
+              "label": "(b) Megatron: the opposite vector"
+            },
+            {
+              "row": [
+                "F_{M} = 60.0 N at 154.4° + 180° = 334.4°"
+              ]
+            },
+            {
+              "mistake": [
+                "F_{M} = 60.0 N at −154°"
+              ],
+              "note": "a minus sign on the angle does not reverse the vector"
+            },
+            {
+              "answer": [
+                "F_{M} ="
+              ],
+              "value": "60.0 N at 334°"
+            }
+          ]
+        }
+      ],
+      "equations": [
+        {
+          "note": "components of vector A at its angle",
+          "plain": "Ax = A cos(angle)     Ay = A sin(angle)"
+        },
+        {
+          "note": "add like components",
+          "plain": "Rx = Ax + Bx + Cx     Ry = Ay + By + Cy"
+        },
+        {
+          "note": "magnitude of the resultant",
+          "plain": "R = √(Rx² + Ry²)"
+        },
+        {
+          "note": "reference angle, then fix the quadrant from your sketch",
+          "plain": "reference angle = inverse tan (|Ry| / |Rx|)"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 2
+}
