@@ -25,7 +25,7 @@
           "SOH CAH TOA, with the calculator in degree mode."
         ]
       },
-      "directions": "Work every problem in your Hayden-McNeil notebook. Start each one with a tip-to-tail sketch. +x is east and +y is north. Every angle on this sheet is measured counterclockwise from east: east is 0°, north is 90°, west is 180°, south is 270°. Give every resultant as a magnitude with units and an angle on that scale, rounded to the nearest degree.",
+      "directions": "Work every problem in your Hayden-McNeil notebook. Start each one with a tip-to-tail sketch. +x is east and +y is north. Some directions are given on the 0–360° scale, measured counterclockwise from east (east is 0°, north is 90°, west is 180°, south is 270°). Others are compass directions, like 35° north of east or 20° west of south. Convert every compass direction to the 0–360° scale before you find components. Give every resultant as a magnitude with units and an angle on the 0–360° scale, rounded to the nearest degree.",
       "questions": [
         {
           "tier": "warm-up",
@@ -196,12 +196,25 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "Bumblebee drives 20.0 m at 35°, then swerves and drives another 9.0 m at 27° to get around a Decepticon roadblock. Find his resultant displacement: magnitude and direction.",
+          "prompt": "Bumblebee drives 20.0 m at 35° north of east, then swerves and drives another 9.0 m at 27° to get around a Decepticon roadblock. Find his resultant displacement: magnitude and direction.",
           "calculation": true,
           "selfCheck": "[  29 m at 33°  ]",
-          "solution": "A: Ax = 20.0 cos 35° = 16.38 m, Ay = 20.0 sin 35° = 11.47 m.\nB: Bx = 9.0 cos 27° = 8.02 m, By = 9.0 sin 27° = 4.09 m.\nRx = 24.40 m, Ry = 15.56 m.\nR = √(24.40² + 15.56²) = 28.94 m, which is 29 m to two significant figures.\nθ = inverse tan of (15.56 / 24.40) = 32.5°, rounded to 33°. Quadrant I, no adjustment.",
+          "solution": "Convert to the 0–360° scale. A: 35° north of east = 0° + 35° = 35°; B: 27° is already on the 0–360° scale.\nA: Ax = 20.0 cos 35° = 16.38 m, Ay = 20.0 sin 35° = 11.47 m.\nB: Bx = 9.0 cos 27° = 8.02 m, By = 9.0 sin 27° = 4.09 m.\nRx = 24.40 m, Ry = 15.56 m.\nR = √(24.40² + 15.56²) = 28.94 m, which is 29 m to two significant figures.\nθ = inverse tan of (15.56 / 24.40) = 32.5°, rounded to 33°. Quadrant I, no adjustment.",
           "finalAnswer": "29 m at 33° (R = 28.94 m, θ = 32.5° before rounding)",
           "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "A: 35° north of east = 0° + 35° = 35°"
+              ]
+            },
+            {
+              "row": [
+                "B: 27° is already on the 0–360° scale"
+              ]
+            },
             {
               "row": [
                 "A_{x} = 20.0 cos 35° = 16.38 m     A_{y} = 20.0 sin 35° = 11.47 m"
@@ -258,12 +271,31 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "Wheeljack walks 45 m at 120°, then 30 m at 200°, looking for the bolt that fell off his latest invention. Find his resultant displacement: magnitude and direction.",
+          "prompt": "Wheeljack walks 45 m at 30° west of north, then 30 m at 20° south of west, looking for the bolt that fell off his latest invention. Find his resultant displacement: magnitude and direction.",
           "calculation": true,
           "selfCheck": "[  58 m at 150°  ]",
-          "solution": "A: Ax = 45 cos 120° = −22.50 m, Ay = 45 sin 120° = 38.97 m.\nB: Bx = 30 cos 200° = −28.19 m, By = 30 sin 200° = −10.26 m.\nRx = −50.69 m, Ry = 28.71 m.\nR = √(50.69² + 28.71²) = 58.26 m, which is 58 m.\nReference angle = inverse tan of (28.71 / 50.69) = 29.5°.\nRx negative, Ry positive: quadrant II, so θ = 180° − 29.5° = 150.5°, rounded to 150°.",
+          "solution": "Convert to the 0–360° scale. A: 30° west of north = 90° + 30° = 120°; B: 20° south of west = 180° + 20° = 200°.\nA: Ax = 45 cos 120° = −22.50 m, Ay = 45 sin 120° = 38.97 m.\nB: Bx = 30 cos 200° = −28.19 m, By = 30 sin 200° = −10.26 m.\nRx = −50.69 m, Ry = 28.71 m.\nR = √(50.69² + 28.71²) = 58.26 m, which is 58 m.\nReference angle = inverse tan of (28.71 / 50.69) = 29.5°.\nRx negative, Ry positive: quadrant II, so θ = 180° − 29.5° = 150.5°, rounded to 150°.",
           "finalAnswer": "58 m at 150° (R = 58.26 m, θ = 150.5° before rounding)",
           "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "A: 30° west of north = 90° + 30° = 120°"
+              ]
+            },
+            {
+              "row": [
+                "B: 20° south of west = 180° + 20° = 200°"
+              ]
+            },
+            {
+              "mistake": [
+                "A at 30°"
+              ],
+              "note": "30° is measured from north, not from east"
+            },
             {
               "row": [
                 "A_{x} = 45 cos 120° = −22.50 m     A_{y} = 45 sin 120° = 38.97 m"
@@ -325,12 +357,25 @@
         {
           "tier": "practice",
           "points": 3,
-          "prompt": "Jazz drives 65 m at 300°, then 40 m at 35°, chasing Frenzy through a parking garage. Find his resultant displacement: magnitude and direction.",
+          "prompt": "Jazz drives 65 m at 60° south of east, then 40 m at 35°, chasing Frenzy through a parking garage. Find his resultant displacement: magnitude and direction.",
           "calculation": true,
           "selfCheck": "[  73 m at 333°  ]",
-          "solution": "A: Ax = 65 cos 300° = 32.50 m, Ay = 65 sin 300° = −56.29 m.\nB: Bx = 40 cos 35° = 32.77 m, By = 40 sin 35° = 22.94 m.\nRx = 65.27 m, Ry = −33.35 m.\nR = √(65.27² + 33.35²) = 73.29 m, which is 73 m.\nReference angle = inverse tan of (33.35 / 65.27) = 27.1°.\nRx positive, Ry negative: quadrant IV, so θ = 360° − 27.1° = 332.9°, rounded to 333°.",
+          "solution": "Convert to the 0–360° scale. A: 60° south of east = 360° − 60° = 300°; B: 35° is already on the 0–360° scale.\nA: Ax = 65 cos 300° = 32.50 m, Ay = 65 sin 300° = −56.29 m.\nB: Bx = 40 cos 35° = 32.77 m, By = 40 sin 35° = 22.94 m.\nRx = 65.27 m, Ry = −33.35 m.\nR = √(65.27² + 33.35²) = 73.29 m, which is 73 m.\nReference angle = inverse tan of (33.35 / 65.27) = 27.1°.\nRx positive, Ry negative: quadrant IV, so θ = 360° − 27.1° = 332.9°, rounded to 333°.",
           "finalAnswer": "73 m at 333° (R = 73.29 m, θ = 332.9° before rounding)",
           "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "A: 60° south of east = 360° − 60° = 300°"
+              ]
+            },
+            {
+              "row": [
+                "B: 35° is already on the 0–360° scale"
+              ]
+            },
             {
               "row": [
                 "A_{x} = 65 cos 300° = 32.50 m     A_{y} = 65 sin 300° = −56.29 m"
@@ -386,12 +431,36 @@
         {
           "tier": "challenge",
           "points": 4,
-          "prompt": "Optimus Prime sends Jetfire on a scouting run: 2.5 km at 60°, then 4.0 km at 150°, then 1.5 km at 250°. Ratchet needs to know where to send the repair crew. Find Jetfire's resultant displacement: magnitude and direction.",
+          "prompt": "Optimus Prime sends Jetfire on a scouting run: 2.5 km at 60°, then 4.0 km at 30° north of west, then 1.5 km at 20° west of south. Ratchet needs to know where to send the repair crew. Find Jetfire's resultant displacement: magnitude and direction.",
           "calculation": true,
           "selfCheck": "[  3.9 km at 135°  ]",
-          "solution": "A: Ax = 2.5 cos 60° = 1.250 km, Ay = 2.5 sin 60° = 2.165 km.\nB: Bx = 4.0 cos 150° = −3.464 km, By = 4.0 sin 150° = 2.000 km.\nC: Cx = 1.5 cos 250° = −0.513 km, Cy = 1.5 sin 250° = −1.410 km.\nRx = −2.727 km, Ry = 2.756 km.\nR = √(2.727² + 2.756²) = 3.877 km, which is 3.9 km.\nReference angle = inverse tan of (2.756 / 2.727) = 45.3°.\nQuadrant II, so θ = 180° − 45.3° = 134.7°, rounded to 135°.",
+          "solution": "Convert to the 0–360° scale. A: 60° is already on the 0–360° scale; B: 30° north of west = 180° − 30° = 150°; C: 20° west of south = 270° − 20° = 250°.\nA: Ax = 2.5 cos 60° = 1.250 km, Ay = 2.5 sin 60° = 2.165 km.\nB: Bx = 4.0 cos 150° = −3.464 km, By = 4.0 sin 150° = 2.000 km.\nC: Cx = 1.5 cos 250° = −0.513 km, Cy = 1.5 sin 250° = −1.410 km.\nRx = −2.727 km, Ry = 2.756 km.\nR = √(2.727² + 2.756²) = 3.877 km, which is 3.9 km.\nReference angle = inverse tan of (2.756 / 2.727) = 45.3°.\nQuadrant II, so θ = 180° − 45.3° = 134.7°, rounded to 135°.",
           "finalAnswer": "3.9 km at 135° (R = 3.877 km, θ = 134.7° before rounding)",
           "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "A: 60° is already on the 0–360° scale"
+              ]
+            },
+            {
+              "row": [
+                "B: 30° north of west = 180° − 30° = 150°"
+              ]
+            },
+            {
+              "row": [
+                "C: 20° west of south = 270° − 20° = 250°"
+              ]
+            },
+            {
+              "mistake": [
+                "C at 290°"
+              ],
+              "note": "west of south turns from south toward west, so subtract from 270°"
+            },
             {
               "row": [
                 "A_{x} = 2.5 cos 60° = 1.250 km     A_{y} = 2.5 sin 60° = 2.165 km"
@@ -452,14 +521,32 @@
         {
           "tier": "multi-topic",
           "points": 5,
-          "prompt": "Bumblebee, Ironhide, and Jazz each hook a cable to the same Energon cube and pull. Bumblebee pulls with 150 N at 20°, Ironhide with 210 N at 135°, and Jazz, who would rather be dancing, with 180 N at 255°.",
+          "prompt": "Bumblebee, Ironhide, and Jazz each hook a cable to the same Energon cube and pull. Bumblebee pulls with 150 N at 20°, Ironhide with 210 N at 45° north of west, and Jazz, who would rather be dancing, with 180 N at 15° west of south.",
           "parts": [
             "Find the resultant force on the Energon cube: magnitude and direction.",
             "Megatron grabs a fourth cable and pulls so that all four forces add to zero, holding the cube in place. Give his force: magnitude and direction."
           ],
-          "solution": "B: Bx = 150 cos 20° = 140.95 N, By = 150 sin 20° = 51.30 N.\nI: Ix = 210 cos 135° = −148.49 N, Iy = 210 sin 135° = 148.49 N.\nJ: Jx = 180 cos 255° = −46.59 N, Jy = 180 sin 255° = −173.87 N.\nRx = −54.13 N, Ry = 25.93 N.\n(a) R = √(54.13² + 25.93²) = 60.01 N, which is 60.0 N. Reference angle = inverse tan of (25.93 / 54.13) = 25.6°. Quadrant II, so θ = 180° − 25.6° = 154.4°, rounded to 154°.\n(b) Megatron supplies the opposite of the resultant: same magnitude, direction turned 180°. 60.0 N at 154.4° + 180° = 334.4°, rounded to 334°. Components +54.13 N, −25.93 N.",
+          "solution": "Convert to the 0–360° scale. B: 20° is already on the 0–360° scale; I: 45° north of west = 180° − 45° = 135°; J: 15° west of south = 270° − 15° = 255°.\nB: Bx = 150 cos 20° = 140.95 N, By = 150 sin 20° = 51.30 N.\nI: Ix = 210 cos 135° = −148.49 N, Iy = 210 sin 135° = 148.49 N.\nJ: Jx = 180 cos 255° = −46.59 N, Jy = 180 sin 255° = −173.87 N.\nRx = −54.13 N, Ry = 25.93 N.\n(a) R = √(54.13² + 25.93²) = 60.01 N, which is 60.0 N. Reference angle = inverse tan of (25.93 / 54.13) = 25.6°. Quadrant II, so θ = 180° − 25.6° = 154.4°, rounded to 154°.\n(b) Megatron supplies the opposite of the resultant: same magnitude, direction turned 180°. 60.0 N at 154.4° + 180° = 334.4°, rounded to 334°. Components +54.13 N, −25.93 N.",
           "finalAnswer": "(a) 60.0 N at 154°   (b) 60.0 N at 334°",
           "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "B: 20° is already on the 0–360° scale"
+              ]
+            },
+            {
+              "row": [
+                "I: 45° north of west = 180° − 45° = 135°"
+              ]
+            },
+            {
+              "row": [
+                "J: 15° west of south = 270° − 15° = 255°"
+              ]
+            },
             {
               "row": [
                 "B_{x} = 150 cos 20° = 140.95 N     B_{y} = 150 sin 20° = 51.30 N"
