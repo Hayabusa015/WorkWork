@@ -12,6 +12,7 @@
 |---|---|---|
 | `build_app_css.py` | `app/public/tokens.generated.css`, `app/public/icon.svg` | `brand/tokens.json` |
 | `build_template_previews.py` | `app/public/previews/` — a page image per document template, plus `catalog.json` | each template's own builder |
+| `build_diagram_molecule.py` | A branded structure figure (`--out` path) with formula and molar mass | a SMILES string, via RDKit; colours from `brand/tokens.json` |
 
 Both write build artifacts. Never hand-edit one; re-run the script. `build_app_css.py --check`
 fails when the generated theme has drifted from the tokens, and is the reason
@@ -28,3 +29,7 @@ every palette conflict in the system, all of which came from the same hex being 
 files by hand.
 
 *Status: not yet written. Phase 9.*
+
+`science_tools.py` is a shared helper (not a validator or generator): optional access to RDKit,
+mendeleev and pint, plus brand tokens and fonts. mendeleev is a cross-check only; its values
+are never a source for a student page.
