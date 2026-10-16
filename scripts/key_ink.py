@@ -155,11 +155,13 @@ class Page:
             return self.width(it, size)
         if it[0] == "frac":
             return max(self.width(it[1], size), self.width(it[2], size)) + 18
-        return self.width(it[1], size)          # ("ink", text, ink)
+        if it[0] == "sqrt":
+            return self.width(it[1], size) + 30
+        return self.width(it[1], size)          # (ink_name, text)
 
     def row(self, x, y, items, size=36, ink="pencil"):
-        """A line of text and stacked fractions. items: str | (ink_name, str) | ("frac", num, den).
-        Returns end x. Division is always a ("frac", ...) item."""
+        """A line of text and stacked fractions. items: str | (ink_name, str) | ("frac", num, den)
+        | ("sqrt", inner). Returns end x. Division is always a ("frac", ...) item."""
         for it in items:
             if isinstance(it, str):
                 x = self.text(x, y, it, size, ink) + 6
@@ -172,6 +174,15 @@ class Page:
                 self.text(x + (w - dw) / 2, (axis + gap - t0) / SC, it[2], size, ink)
                 self.line((x + 3, axis / SC), (x + w - 3, axis / SC), ink, w=2.4, n=10, amp=0.4)
                 x += w + 6
+            elif it[0] == "sqrt":                   # a hand-drawn radical: tick, long stroke, roof
+                sz = size * self.k
+                top, base = y - 0.08 * sz, y + 1.05 * sz
+                self.line((x, y + 0.62 * sz), (x + 7, y + 0.52 * sz), ink, w=2.2, n=3, amp=0.3)
+                self.line((x + 7, y + 0.52 * sz), (x + 14, base), ink, w=2.2, n=5, amp=0.3)
+                self.line((x + 14, base), (x + 24, top), ink, w=2.2, n=8, amp=0.3)
+                end = self.text(x + 28, y, it[1], size, ink)
+                self.line((x + 24, top), (end + 4, top), ink, w=2.2, n=10, amp=0.3)
+                x = end + 10
             else:
                 x = self.text(x, y, it[1], size, it[0]) + 6
         return x
@@ -186,6 +197,12 @@ class Page:
     # ----------------------------------------------------- pencil sketch
     def sketch(self):
         return PencilSketch(self)
+
+    def crop(self, h):
+        """Trim the canvas to h logical px tall (builders draw on a tall page, then crop)."""
+        self.h = max(1, int(h))
+        self.img = self.img.crop((0, 0, self.img.width, self.h * SC))
+        self.d = ImageDraw.Draw(self.img)
 
     def save(self, png=None, pdf=None, out_scale=2):
         im = self.img.convert("RGB").resize((self.w * out_scale, self.h * out_scale), Image.LANCZOS)
@@ -205,10 +222,16 @@ class PencilSketch:
         r = self.p.rnd
         col = self.p.ink[ink]
         for _ in range(passes):
-            l = Image.new("RGBA", self.layer.size, (0, 0, 0, 0))
             jp = [(x * SC + r.uniform(-amp, amp) * SC, y * SC + r.uniform(-amp, amp) * SC) for x, y in pts]
-            ImageDraw.Draw(l).line(jp, fill=col + (alpha,), width=int(w * SC * r.uniform(0.8, 1.2)), joint="curve")
-            self.layer.alpha_composite(l)
+            lw = int(w * SC * r.uniform(0.8, 1.2))
+            pad = lw + 2                    # draw on a layer only as big as the stroke, then place it
+            x0 = max(0, int(min(p[0] for p in jp)) - pad); y0 = max(0, int(min(p[1] for p in jp)) - pad)
+            x1 = min(self.layer.width, int(max(p[0] for p in jp)) + pad); y1 = min(self.layer.height, int(max(p[1] for p in jp)) + pad)
+            if x1 <= x0 or y1 <= y0:
+                continue
+            l = Image.new("RGBA", (x1 - x0, y1 - y0), (0, 0, 0, 0))
+            ImageDraw.Draw(l).line([(px - x0, py - y0) for px, py in jp], fill=col + (alpha,), width=lw, joint="curve")
+            self.layer.alpha_composite(l, (x0, y0))
 
     def seg(self, a, b, ink="pencil", **k):
         r = self.p.rnd
