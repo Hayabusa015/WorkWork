@@ -30,14 +30,21 @@ def ink_colours():
 
 
 class Page:
-    def __init__(self, w, h, seed=7, bg=None):
+    def __init__(self, w, h, seed=7, bg=None, font_path=None, size_scale=1.0):
         self.w, self.h = w, h
         bg = bg or st.tokens()["ground"]["white"]["hex"]
         self.img = Image.new("RGBA", (w * SC, h * SC), st.hex_to_rgb(bg) + (255,))
         self.d = ImageDraw.Draw(self.img)
         self.ink = ink_colours()
         self.rnd = random.Random(seed)
-        self.fp = st.font_path("PatrickHand-Regular.ttf")
+        self.fp = font_path or st.font_path("PatrickHand-Regular.ttf")
+        self.alts = {}                      # char -> private-use alternate (a second hand-written copy)
+        alt_json = os.path.splitext(self.fp)[0] + "_alts.json"
+        if os.path.exists(alt_json):
+            import json
+            self.alts = json.load(open(alt_json))
+        self._flip = False
+        self.k = size_scale                 # fonts differ in width; scale every hand-written size at once
         self._fonts = {}
 
     # ---------------------------------------------------------------- text
@@ -56,24 +63,31 @@ class Page:
         return out + [(c, "n") for c in s[pos:]]
 
     def width(self, s, size):
+        size = size * self.k
         f, fs = self.font(size), self.font(size * 0.62)
         return sum((f if k == "n" else fs).getlength(c) + 0.5 * SC for c, k in self._runs(s)) / SC
 
     def text(self, x, y, s, size=34, ink="pencil", jitter=1.0):
         """Draw at (x, y) logical px, y = top of line. Returns end x (logical px)."""
         col = self.ink[ink]
+        size = size * self.k
         x *= SC
         y *= SC
         for ch, k in self._runs(s):
             ft = self.font(size if k == "n" else size * 0.62)
+            if ch in self.alts:             # alternate between the two hand-written copies of a letter
+                self._flip = not self._flip
+                draw_ch = self.alts[ch] if self._flip else ch
+            else:
+                draw_ch = ch
             dy = {"n": 0, "^": -0.03 * size * SC, "_": 0.40 * size * SC}[k]
             w, h = int(ft.getlength(ch) + size * SC), int(size * SC * 2)
             layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-            ImageDraw.Draw(layer).text((size * SC * 0.2, size * SC * 0.4), ch, font=ft, fill=col + (235,))
+            ImageDraw.Draw(layer).text((size * SC * 0.2, size * SC * 0.4), draw_ch, font=ft, fill=col + (235,))
             layer = layer.rotate(self.rnd.uniform(-1.8, 1.8) * jitter, resample=Image.BICUBIC)
             self.img.alpha_composite(layer, (int(x - size * SC * 0.2),
                                              int(y + dy - size * SC * 0.4 + self.rnd.uniform(-1, 1) * SC * jitter)))
-            x += ft.getlength(ch) + 0.5 * SC
+            x += ft.getlength(draw_ch) + 0.5 * SC
         return x / SC
 
     # ------------------------------------------------------------- strokes
@@ -106,6 +120,7 @@ class Page:
 
     # ------------------------------------------------------- stacked rows
     def _axis(self, y, size):
+        size = size * self.k
         b = self.font(size).getbbox("0", anchor="la")
         return y * SC + (b[1] + b[3]) / 2, b[1], b[3]
 
@@ -125,7 +140,7 @@ class Page:
             elif it[0] == "frac":
                 w = self.item_w(it, size)
                 axis, t0, b0 = self._axis(y, size)
-                gap = 8 * SC
+                gap = 12 * SC
                 nw, dw = self.width(it[1], size), self.width(it[2], size)
                 self.text(x + (w - nw) / 2, (axis - gap - b0) / SC, it[1], size, ink)
                 self.text(x + (w - dw) / 2, (axis + gap - t0) / SC, it[2], size, ink)
@@ -139,7 +154,7 @@ class Page:
         """The final answer, boxed. Text starts clear of the preceding '=' so the box never touches it."""
         x0 = x + 12
         x1 = self.text(x0, y, s, size, ink)
-        self.box(x0 - 8, y - 5, x1 + 8, y + size * 1.45)
+        self.box(x0 - 8, y - 5, x1 + 8, y + size * self.k * 1.45)
         return x1
 
     # ----------------------------------------------------- pencil sketch
