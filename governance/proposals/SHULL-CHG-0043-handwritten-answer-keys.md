@@ -14,8 +14,8 @@
 | **Affected Courses** | All three. No course `DECISIONS.md` is touched (build mechanics, not a course fact). |
 | **Risk** | Medium (brand tokens + a new font + a deliberate exception to the Archivo-only rule + five skills) |
 | **Recommendation** | Approve in two stages. See §6. |
-| **Decision** | (pending, awaiting the user) |
-| **Status** | **PENDING** |
+| **Decision** | Approved in two stages by Matthew Shull, 2026-10-16 ("Approve it in two stages"). |
+| **Status** | **APPROVED** |
 | **Implemented By** | (not implemented) |
 | **Verified** | no — not implemented |
 

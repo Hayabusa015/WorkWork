@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0043 | 2026-10-16 | Handwritten teacher answer keys: pencil and pen, stacked fractions, algebra steps, physics scenario sketch | APPROVED | `governance/proposals/SHULL-CHG-0043-handwritten-answer-keys.md` |
 | SHULL-CHG-0042 | 2026-10-16 | Molecular structures on student pages are built with the molecule script | CONFIRMED | `governance/proposals/SHULL-CHG-0042-molecule-builder-rule.md` |
 
 ## 2026-10-15
