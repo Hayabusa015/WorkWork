@@ -2,6 +2,7 @@
 """Fail a PDF that renders in anything but the brand face.
 
     python3 scripts/audit_fonts.py out.pdf
+    python3 scripts/audit_fonts.py --key out_key.pdf     # teacher answer keys only
 
 The rule is stated in four places - QA_GATE.md, audit-deliverable, build-presentation,
 apply-shull-design - and until now was enforced in none of them. Every one of them says
@@ -18,6 +19,10 @@ from fontTools.ttLib import TTFont
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = ("Archivo",)
+# Teacher answer keys may also carry the key-handwriting face (SHULL-CHG-0043: ShullHand since
+# SHULL-CHG-0044, with Patrick Hand as its per-glyph fallback). Allowed only when the caller says
+# the file is a key; a student file with either face still fails.
+KEY_ALLOWED = ALLOWED + ("ShullHand", "PatrickHand", "Patrick-Hand")
 
 
 def brand_cmap():
@@ -29,23 +34,26 @@ def brand_cmap():
 
 
 def main():
-    if len(sys.argv) < 2:
+    args = [a for a in sys.argv[1:] if a != "--key"]
+    is_key = len(args) != len(sys.argv) - 1
+    if len(args) < 1:
         print(__doc__.strip(), file=sys.stderr)
         return 2
-    pdf = sys.argv[1]
+    pdf = args[0]
+    allowed = KEY_ALLOWED if is_key else ALLOWED
     out = subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout
     fonts = []
     for line in out.strip().split("\n")[2:]:
         if line.strip():
             fonts.append(line.split()[0].split("+")[-1])
-    strays = [f for f in fonts if not any(f.startswith(a) for a in ALLOWED)]
+    strays = [f for f in fonts if not any(f.startswith(a) for a in allowed)]
 
     print(f"audit_fonts: {os.path.basename(pdf)}")
     for f in fonts:
         print(f"   {'STRAY  ' if f in strays else 'ok     '}{f}")
 
     if not strays:
-        print("\nOK — Archivo only.")
+        print("\nOK — Archivo" + (" and the key handwriting face only." if is_key else " only."))
         return 0
 
     # Name the characters that cannot be set in the brand face, so the fix is one edit

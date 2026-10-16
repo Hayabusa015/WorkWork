@@ -27,6 +27,8 @@ do not ship on the assumption it looks right.
 > Archivo Narrow. If it shows DejaVu or Liberation, the font substitution did not take and you are
 > inspecting different metrics than the classroom copy will have. That was the real state of this
 > system until 2026-09-08.
+>
+> Key files may also carry the key-handwriting face (`typography.keyHandwriting`), per `standards/ANSWER_KEYS.md` §9; `scripts/audit_fonts.py --key` enforces it.
 
 ## 2. Page budget
 

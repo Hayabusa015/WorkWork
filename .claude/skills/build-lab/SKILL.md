@@ -26,11 +26,14 @@ structure is the standard.
 - **No write space on the handout.** No ruled lines, no answer blanks, no fillable data tables. The
   lab notebook is the write-on surface and the carbonless copy is what gets graded. Table skeletons
   exist to be **copied**, not filled.
-- **Two files, always.** The key is never appended to the handout.
+- **Two files, always.** The key is never appended to the handout. The teacher key follows
+  `standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
 - **The Alconox block** — disposal items 4–6 — is standing boilerplate. **Keep it verbatim.** Only
   items 1–3 change per lab.
 - **Margins are locked.** Never adjust them to fix a page count; reduce body size or line-height.
 - **Every formula appears with its name.**
+- **Molecular structures come from `scripts/build_diagram_molecule.py`**, from a SMILES string
+  verified by `verify-content`. Never hand-drawn, generated, or pasted. SHULL-CHG-0042.
 - **Percent error wherever an accepted value exists** — and the accepted value is always supplied.
 - **"Human error" is never an acceptable error analysis.**
 - **Never invent a safety claim.** Flag uncertain handling or disposal for verification.
