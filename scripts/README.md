@@ -30,6 +30,9 @@ files by hand.
 
 *Status: not yet written. Phase 9.*
 
+`build_handwriting_sheet.py` writes the printable handwriting-capture sheet (PDF) and its layout manifest
+(JSON), used to turn Matt's own handwriting into a key font. A tool, not a validator.
+
 `key_ink.py` is a drawing helper for handwritten-look teacher keys (SHULL-CHG-0043): pencil and pen
 text, stacked fractions, boxes, arrows, strike-throughs, and a pencil-grain sketch layer. Colours come
 from the `keyInk` tokens; it is used by key builders, never run on its own.
