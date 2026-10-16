@@ -15,9 +15,9 @@
 | **Risk** | Low |
 | **Recommendation** | Approve both items. See §6. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("option 1, and yes to the QA_GATE line"): Item A (option 1) and Item B. |
-| **Status** | **APPROVED** |
-| **Implemented By** | (none; not implemented) |
-| **Verified** | No. Not implemented. See §8 for the plan. |
+| **Status** | **IMPLEMENTED** (both items applied; see §10) |
+| **Implemented By** | pending commit (main session) |
+| **Verified** | no (applied; main session runs validators) |
 
 ---
 
@@ -135,3 +135,23 @@ Approve both items. Both are low risk, each is one revertible edit in one file, 
 ## 9. Not done by this record
 
 No standard, skill, brand, governance, or course file was edited. SHULL-CHG-0043 was not edited. `change-log/CHANGELOG.md` was not edited (the main session does that when it records the decision). Nothing was committed. This is a proposal only. Implementation waits for a committed record with `Status: APPROVED` and a verbatim `Decision:` quote (`governance/CHANGE_CONTROL.md` §4).
+
+## 10. Implementation note (Secretary, 2026-10-16)
+
+**Authority.** The committed approval. The record was committed PENDING at b82a03e, and the decision was recorded at 5db92b1 ("governance: record user decision on SHULL-CHG-0045"; that is HEAD per `.git/logs/HEAD`). The working-tree record reads `Status: APPROVED`, with a Decision quoting Matt verbatim: "option 1, and yes to the QA_GATE line". The Secretary has no shell and could not diff the committed blob. The commit check rests on the reflog and on the file as it is on disk.
+
+**Context for the Q8 question (§7 Q2), main session's account.** Matt chose option 1 after the main session showed him all four S1.2 strike-throughs by name, Q8 included ("whole trip treated as accelerating"). The main session described option 1 to him as letting well-known calculation slips like these count. The Secretary records this as context only. It is not a separate decision.
+
+**On "or Matt" (§7 Q1).** No wording change was made. Matt's direct instruction outranks any standard (`CLAUDE.md` §2, precedence item 1), so he can still approve or veto any strike-through without being named in §3.
+
+**Applied.**
+
+| Item | File | Change |
+|---|---|---|
+| A | `standards/ANSWER_KEYS.md` §3 | Last sentence replaced with the approved wording, verbatim. The first two sentences are unchanged. |
+| A | `standards/ANSWER_KEYS.md` header | "SHULL-CHG-0045 Item A (§3, what counts as a common mistake)" added to the **Authority** line, which is how this file cites its changes. |
+| B | `standards/QA_GATE.md` §1 | The approved pointer line, verbatim, added as a final paragraph of the existing blockquote after "system until 2026-09-08." Lines 26-29 are unchanged. It names the token, not a font. |
+
+**Checks done (grep).** Neither form of the old sentence ("\"Common\" comes from", "or from Matt; if neither") remains anywhere in `standards/`. The added QA_GATE line names no font and no hex value.
+
+**Not done here.** No commit (main session). No validator run (main session; see §8). `change-log/CHANGELOG.md` not edited. No skill, brand, course, or `scripts/` file touched. SHULL-CHG-0043 gets a one-line superseded-by pointer in its §10 and nothing else.

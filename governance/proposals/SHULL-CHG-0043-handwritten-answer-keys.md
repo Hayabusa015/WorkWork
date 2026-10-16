@@ -271,3 +271,5 @@ it would change an approved rule without an approval for that change.
 - Matt's options: (a) approve that rewording, which the main session records against this ID or a
   follow-up record; or (b) keep §3 as written and confirm the four S1.2 slips as common himself,
   which the approved wording already allows ("or Matt").
+
+**Superseded in part (appended 2026-10-16).** The last sentence of Item C.4, and its implementation in `standards/ANSWER_KEYS.md` §3, is superseded by SHULL-CHG-0045 Item A (see that record's Decision); the rest of this record stands.

@@ -1,7 +1,7 @@
 # Answer Keys — the handwritten look
 
 **Authority:** SHULL-CHG-0043 (Stage 2: Items C, D, H), SHULL-CHG-0044 Item F (name the token,
-never a font).
+never a font), SHULL-CHG-0045 Item A (§3, what counts as a common mistake).
 **Drawn by:** `scripts/key_solution.py` and `scripts/key_ink.py`. The `"steps"` and `"sketch"` spec
 schema is documented **once**, in the docstring of `scripts/key_solution.py`. This file does not
 restate it.
@@ -36,8 +36,10 @@ still tells them apart (`standards/QA_GATE.md` §4).
 ## 3. Strike-through
 
 A crossed-out attempt appears **only for a mistake students genuinely commonly make**, never an
-invented one. A short note in the arrow ink names the mistake. "Common" comes from the course
-`DECISIONS.md` misconception list or from Matt; if neither supports it, there is no strike-through.
+invented one. A short note in the arrow ink names the mistake. A mistake qualifies only if students
+at this level genuinely and routinely make it. The course DECISIONS.md misconception list is one
+source; a well-known calculation slip, such as a flipped sign or an unsquared t, is another. If it
+is in doubt, leave it out.
 
 ## 4. Algebra steps
 
