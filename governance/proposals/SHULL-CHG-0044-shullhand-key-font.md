@@ -15,9 +15,9 @@
 | **Risk** | Low-medium. Student pages are unchanged. The risk is in the key itself: a home-made font can make a character ambiguous (Matt's "2" resembles an "a"). Mitigated by the legibility-beats-authenticity rule in SHULL-CHG-0043 Item C.8, the Patrick Hand fallback, and the visual audit. |
 | **Recommendation** | Approve A, B, C (no edit), D, F, G. Items E is tooling for the main session. Keep the font PROVISIONAL until Matt sees it on a real key. See §6. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("approve 0044, yes to all five"). |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit |
-| **Verified** | no (applied; main session runs validators and the audit_fonts key/student check) |
+| **Status** | **IMPLEMENTED** (record status; the `keyHandwriting` token stays PROVISIONAL until Matt confirms ShullHand on a real key) |
+| **Implemented By** | 1185dd3 (font, alternates map, source scan, build tool, key_ink/audit_fonts tooling) and 6612145 (token, fonts README, record). Close-out correction of the token note (Delta, see Item A) is uncommitted at time of writing; the main session commits it. |
+| **Verified** | Yes, per the main session's report (the Secretary has no shell and did not run these). Validators all OK: validate_tokens, validate_layers, validate_codes, validate_references, validate_agents, validate_schemas, validate_profiles, validate_notes; `build_app_css --check` OK; `measure_tokens --check` current. Font internal family `ShullHand` equals the token family; version `Version 0.2`; 140 glyphs = 138 characters + .notdef + space, so the character set matches v0.1 and Item G holds. The three README sha256 values match the committed files. `scripts/key_ink.py` resolves the face from the token (ShullHand.ttf, fallback PatrickHand-Regular.ttf); the demo key rendered with no font named is 99.994% pixel-identical to the v0.2 demo Matt reviewed (the difference is sub-pixel tracing noise). `audit_fonts`: a PDF set in ShullHand FAILS as a student file and PASSES with `--key`. The implementation diff was limited to `brand/fonts/{ShullHand.ttf,ShullHand_alts.json,source/,README.md}`, `brand/tokens.json`, this record, and `scripts/{build_handwriting_font.py,key_ink.py,audit_fonts.py,README.md,setup-environment.sh}`; `brand/SHULL_DESIGN_SYSTEM.md` unchanged. Visual check of the rendered key: "2" vs "a" distinguishable (his 2 has its loop and tail) but still the pair to watch; "1" vs "l" clear (boxed 1 with flag); colons heavy but legible. |
 
 ---
 
@@ -82,9 +82,11 @@ Proposed entry (replaces 1a; same key, same position):
   "license": "none (Matt's own handwriting; no third-party licence)",
   "source": "SHULL-CHG-0044",
   "scope": "teacher answer keys ONLY",
-  "note": "Teacher answer keys only. Never on a student page. Made from Matt's handwriting sample (v0.2). Letters are separate, not joined. No superscript, subscript, arrow, sigma, or Delta glyphs; the key builder draws those. Fallback for any missing glyph: Patrick Hand."
+  "note": "Teacher answer keys only. Never on a student page. Made from Matt's handwriting sample (v0.2). Letters are separate, not joined. No superscript, subscript or sigma glyphs; vector arrows over letters are drawn by the key builder. Fallback for any missing glyph: Patrick Hand."
 },
 ```
+
+- **Correction at close-out (factual, not a rule change).** As approved, the note read "No superscript, subscript, arrow, sigma, or Delta glyphs; the key builder draws those." That was wrong about Delta: Matt wrote Δ on his sheet and the font contains it (U+0394, checked with fontTools by the main session). Sigma is the glyph that is absent. The note now reads as shown above. Scope, status, family, and fallback are unchanged.
 
 - Status stays **PROVISIONAL** until Matt confirms the font on a real key. Nothing here makes it LOCKED.
 - The family name written in the token must equal the font's internal family name; the main session confirms this at implementation (a mismatch would break `audit_fonts.py`).
