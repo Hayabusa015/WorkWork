@@ -30,6 +30,10 @@ files by hand.
 
 *Status: not yet written. Phase 9.*
 
+`build_handwriting_font.py` rebuilds ShullHand (`brand/fonts/ShullHand.ttf` and its alternates map) from the
+committed scan in `brand/fonts/source/` (SHULL-CHG-0044). Routine regeneration; the command is in
+`brand/fonts/README.md`.
+
 `build_handwriting_sheet.py` writes the printable handwriting-capture sheet (PDF) and its layout manifest
 (JSON), used to turn Matt's own handwriting into a key font. A tool, not a validator.
 

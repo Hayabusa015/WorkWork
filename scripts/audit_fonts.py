@@ -19,9 +19,10 @@ from fontTools.ttLib import TTFont
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = ("Archivo",)
-# Teacher answer keys may also carry the handwriting face (SHULL-CHG-0043). It is allowed
-# only when the caller says the file is a key; a student file with it still fails.
-KEY_ALLOWED = ALLOWED + ("PatrickHand", "Patrick-Hand")
+# Teacher answer keys may also carry the key-handwriting face (SHULL-CHG-0043: ShullHand since
+# SHULL-CHG-0044, with Patrick Hand as its per-glyph fallback). Allowed only when the caller says
+# the file is a key; a student file with either face still fails.
+KEY_ALLOWED = ALLOWED + ("ShullHand", "PatrickHand", "Patrick-Hand")
 
 
 def brand_cmap():

@@ -1,4 +1,4 @@
-"""Hand-written look for teacher answer keys (SHULL-CHG-0043).
+"""Hand-written look for teacher answer keys (SHULL-CHG-0043, SHULL-CHG-0044).
 
 A small drawing helper: pencil and pen text, stacked fractions, raised and lowered
 characters, wobbly boxes / arrows / strike-throughs, and a graphite-grain pencil layer for
@@ -6,8 +6,9 @@ sketches. It draws on a Pillow canvas and saves PNG or PDF.
 
 Rules this helper carries, so the builders do not each re-decide them:
   - Colours are the keyInk tokens in brand/tokens.json, never typed here.
-  - The face is Patrick Hand (typography.keyHandwriting), teacher keys only. It has no
-    super/subscript, arrow or Delta glyphs, so those are drawn here, not typed.
+  - The face is whatever typography.keyHandwriting names (teacher keys only), read from the
+    token, never typed here. A character that face lacks is drawn in the fallback face, one
+    character at a time. Hand fonts have no super/subscript glyphs, so those are drawn here.
   - Division in a calculation step is a stacked fraction, never a divide sign or slash.
     A slash inside a unit name (m/s, g/mol) is a label and stays inline.
   - Legibility beats the look: jitter is small and the grain never covers a value.
@@ -24,6 +25,22 @@ SC = 3                      # internal scale; output is downsampled for smooth e
 _TOK = re.compile(r"([\^_])\{([^}]*)\}")
 
 
+def key_font_path(family=None):
+    """The file for typography.keyHandwriting (or `family`), e.g. 'ShullHand' -> ShullHand.ttf."""
+    family = family or st.tokens()["typography"]["keyHandwriting"]["family"]
+    stem = family.replace(" ", "")
+    for name in (f"{stem}.ttf", f"{stem}-Regular.ttf"):
+        if os.path.exists(st.font_path(name)):
+            return st.font_path(name)
+    sys.exit(f"key-handwriting face '{family}' has no font file in brand/fonts/")
+
+
+def fallback_font_path():
+    kh = st.tokens()["typography"]["keyHandwriting"]
+    fb = kh.get("fallback") or kh.get("fallbackFamily") or "Patrick Hand"
+    return key_font_path(fb if isinstance(fb, str) else fb.get("family", "Patrick Hand"))
+
+
 def ink_colours():
     k = st.tokens()["keyInk"]
     return {n: st.hex_to_rgb(k[n]["hex"]) for n in ("pencil", "pen", "box", "arrow")}
@@ -37,7 +54,11 @@ class Page:
         self.d = ImageDraw.Draw(self.img)
         self.ink = ink_colours()
         self.rnd = random.Random(seed)
-        self.fp = font_path or st.font_path("PatrickHand-Regular.ttf")
+        from fontTools.ttLib import TTFont
+        self.fp = font_path or key_font_path()
+        self.fb = fallback_font_path()
+        self.cmap = set(TTFont(self.fp).getBestCmap())
+        self._fb_fonts = {}
         self.alts = {}                      # char -> private-use alternate (a second hand-written copy)
         alt_json = os.path.splitext(self.fp)[0] + "_alts.json"
         if os.path.exists(alt_json):
@@ -48,8 +69,13 @@ class Page:
         self._fonts = {}
 
     # ---------------------------------------------------------------- text
-    def font(self, size):
+    def font(self, size, ch=None):
+        """The hand face at this size, or the fallback face if it lacks `ch`."""
         key = round(size * SC)
+        if ch is not None and ord(ch) not in self.cmap:
+            if key not in self._fb_fonts:
+                self._fb_fonts[key] = ImageFont.truetype(self.fb, key)
+            return self._fb_fonts[key]
         if key not in self._fonts:
             self._fonts[key] = ImageFont.truetype(self.fp, key)
         return self._fonts[key]
@@ -64,8 +90,8 @@ class Page:
 
     def width(self, s, size):
         size = size * self.k
-        f, fs = self.font(size), self.font(size * 0.62)
-        return sum((f if k == "n" else fs).getlength(c) + 0.5 * SC for c, k in self._runs(s)) / SC
+        return sum(self.font(size if k == "n" else size * 0.62, c).getlength(c) + 0.5 * SC
+                   for c, k in self._runs(s)) / SC
 
     def text(self, x, y, s, size=34, ink="pencil", jitter=1.0):
         """Draw at (x, y) logical px, y = top of line. Returns end x (logical px)."""
@@ -74,7 +100,7 @@ class Page:
         x *= SC
         y *= SC
         for ch, k in self._runs(s):
-            ft = self.font(size if k == "n" else size * 0.62)
+            ft = self.font(size if k == "n" else size * 0.62, ch)
             if ch in self.alts:             # alternate between the two hand-written copies of a letter
                 self._flip = not self._flip
                 draw_ch = self.alts[ch] if self._flip else ch
