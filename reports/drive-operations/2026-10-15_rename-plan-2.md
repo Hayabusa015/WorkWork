@@ -61,3 +61,7 @@ Longest name goes from 81 to 55 characters.
 | Unit 1 Test C Key - Matter & Atomic Structure Day 2.docx | Unit 1 Test C Key - Matter & Atoms Day 2.docx |
 
 Same name in two rows is two files in different folders, which is fine. Two of the same name in one folder are flagged before anything runs.
+
+## Result (2026-10-15)
+
+Approved by the user ("approve plan 2"). 51 of 51 files renamed with `update_file` (title only, IDs and parents unchanged). Each response returned the new title. Prior names are in `_rename-ops-2.json` (`cur`) for rollback.
