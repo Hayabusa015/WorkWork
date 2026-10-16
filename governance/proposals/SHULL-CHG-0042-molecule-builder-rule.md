@@ -15,9 +15,9 @@
 | **Risk** | Low |
 | **Recommendation** | Approve. |
 | **Decision** | Approved by Matthew Shull, 2026-10-16 ("Approve it, have the Secretary apply it"). |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit (edits applied to the working tree 2026-10-16; main session commits) |
-| **Verified** | no. The five skill edits are applied, but the Secretary had no shell in this run, so no validator and no script run was executed. Status stays APPROVED until the main session runs the §8 verification plan. |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | a44b41f |
+| **Verified** | yes. Verification was run by the main session (the Secretary had no shell) and reported to the Secretary: validate_layers, validate_codes, validate_references, validate_tokens, validate_agents, validate_schemas, validate_profiles, and validate_notes all OK; `scripts/build_diagram_molecule.py --smiles "CC(=O)O" --name "acetic acid"` produced C2H4O2, 60.052 g/mol, 3600x2560; the git diff covered only the five skill files plus this record. |
 
 ---
 
