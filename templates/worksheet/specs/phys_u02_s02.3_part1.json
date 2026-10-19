@@ -1,0 +1,616 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "35–45",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Projectile Motion, Part 1: Horizontal Launch",
+      "concept": {
+        "summary": "A horizontally launched projectile leaves with all of its velocity sideways and none of it up or down. Gravity pulls only downward, so the two directions are solved separately. Vertically it is free fall from rest (S1.4). Horizontally it moves at constant velocity. The two motions share one thing: the time.",
+        "keyIdeas": [
+          "The horizontal speed never changes in the air. The vertical speed starts at 0 and grows by 9.8 m/s every second.",
+          "Time is the bridge. Whichever direction gives you the time, carry it over to the other one."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Free fall: the acceleration is g = 9.8 m/s² downward, whatever the object is doing (S1.4).",
+          "Constant velocity: distance = velocity × time (S1.1).",
+          "Constant acceleration: v² = v0² + 2a·d (S1.2)."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Sketch the path first and label what you know. Up is +y and the direction of launch is +x, so g = −9.8 m/s² and a landing spot below the launch point has a negative y. Every object here leaves moving horizontally, so its starting vertical velocity is vy0 = 0. Ignore air resistance. Round answers to the correct number of significant figures; g = 9.8 m/s² has two.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Mario kicks a Koopa shell off the edge of a 45 m cliff. It slides off moving horizontally at 12 m/s, and friction on the ledge is negligible. The Koopa inside was not consulted. Find the time the shell takes to reach the ground and how far from the base of the cliff it lands.",
+          "calculation": true,
+          "selfCheck": "[  3.0 s  ·  36 m  ]",
+          "solution": "vx = 12 m/s, vy0 = 0, y = −45 m.\ny = ½gt², so t² = 2y/g = 2(−45)/(−9.8) = 9.18 s², t = 3.03 s, which is 3.0 s.\nx = vx·t = (12)(3.03) = 36.4 m, which is 36 m.",
+          "finalAnswer": "t = 3.0 s (3.03 s)   x = 36 m (36.4 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 12 m/s     v_{y0} = 0     y = −45 m"
+              ]
+            },
+            {
+              "row": [
+                "y =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "gt^{2}     t^{2} =",
+                {
+                  "frac": [
+                    "2y",
+                    "g"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "2(−45)",
+                    "−9.8"
+                  ]
+                },
+                "= 9.18 s^{2}"
+              ]
+            },
+            {
+              "mistake": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "45",
+                    "9.8"
+                  ]
+                }
+              ],
+              "note": "the 2 from the ½ went missing"
+            },
+            {
+              "row": [
+                "t = √9.18 = 3.03 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "3.0 s"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (12)(3.03) = 36.4 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "36 m"
+            }
+          ]
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Patrick Star runs straight off the end of a pier at 3.5 m/s because he thought he saw a jellyfish. He hits the water 0.80 s later. Find the height of the pier above the water and how far out from the pier he lands.",
+          "calculation": true,
+          "selfCheck": "[  3.1 m  ·  2.8 m  ]",
+          "solution": "vx = 3.5 m/s, vy0 = 0, t = 0.80 s.\ny = ½gt² = ½(−9.8)(0.80)² = −3.14 m, so the pier is 3.1 m above the water.\nx = vx·t = (3.5)(0.80) = 2.8 m.",
+          "finalAnswer": "height = 3.1 m (3.136 m)   x = 2.8 m",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 3.5 m/s     v_{y0} = 0     t = 0.80 s"
+              ]
+            },
+            {
+              "mistake": [
+                "y = (3.5)(0.80) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.80)^{2}"
+              ],
+              "note": "3.5 m/s is horizontal; v_{y0} = 0"
+            },
+            {
+              "row": [
+                "y =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "gt^{2} =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.80)^{2} = −3.14 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "3.1 m"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (3.5)(0.80) = 2.8 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "2.8 m"
+            }
+          ]
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "A Minion in a helicopter flying horizontally at 22 m/s drops a banana to Gru, who is standing 78 m below. Gru did not ask for a banana. Find how long the banana falls and how far before reaching Gru, measured horizontally, the Minion has to let go.",
+          "calculation": true,
+          "selfCheck": "[  4.0 s  ·  88 m  ]",
+          "solution": "The banana leaves with the helicopter's velocity: vx = 22 m/s, vy0 = 0, y = −78 m.\nt² = 2y/g = 2(−78)/(−9.8) = 15.9 s², t = 3.99 s, which is 4.0 s.\nx = vx·t = (22)(3.99) = 87.8 m, which is 88 m.",
+          "finalAnswer": "t = 4.0 s (3.99 s)   x = 88 m (87.8 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 22 m/s     v_{y0} = 0     y = −78 m"
+              ],
+              "note": "the banana keeps the helicopter's speed"
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "2y",
+                    "g"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "2(−78)",
+                    "−9.8"
+                  ]
+                },
+                "= 15.9 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √15.9 = 3.99 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "4.0 s"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (22)(3.99) = 87.8 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "88 m"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Buzz Lightyear leaps horizontally off the top of a bookshelf at 2.0 m/s and lands 1.2 m from its base. Woody calls it falling with style. Find Buzz's time in the air and the height of the bookshelf.",
+          "calculation": true,
+          "selfCheck": "[  0.60 s  ·  1.8 m  ]",
+          "solution": "The horizontal motion gives the time: t = x / vx = 1.2 / 2.0 = 0.60 s.\ny = ½gt² = ½(−9.8)(0.60)² = −1.76 m, so the bookshelf is 1.8 m tall.",
+          "finalAnswer": "t = 0.60 s   height = 1.8 m (1.764 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 2.0 m/s     x = 1.2 m     v_{y0} = 0"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "x",
+                    "v_{x}"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "1.2",
+                    "2.0"
+                  ]
+                },
+                "= 0.60 s"
+              ],
+              "note": "time from the horizontal motion"
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "0.60 s"
+            },
+            {
+              "row": [
+                "y =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "gt^{2} =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.60)^{2} = −1.76 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "1.8 m"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Sonic runs straight off a 22 m ledge and lands 61 m from its base without slowing down to think about it. Find Sonic's time in the air and his launch speed.",
+          "calculation": true,
+          "selfCheck": "[  2.1 s  ·  29 m/s  ]",
+          "solution": "y = −22 m, x = 61 m, vy0 = 0.\nt² = 2y/g = 2(−22)/(−9.8) = 4.49 s², t = 2.12 s, which is 2.1 s.\nvx = x / t = 61 / 2.12 = 28.8 m/s, which is 29 m/s.",
+          "finalAnswer": "t = 2.1 s (2.12 s)   vx = 29 m/s (28.8 m/s)",
+          "steps": [
+            {
+              "row": [
+                "y = −22 m     x = 61 m     v_{y0} = 0"
+              ]
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "2(−22)",
+                    "−9.8"
+                  ]
+                },
+                "= 4.49 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √4.49 = 2.12 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.1 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "x",
+                    "t"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "61",
+                    "2.12"
+                  ]
+                },
+                "= 28.8 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "29 m/s"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Bumblebee, in car mode, drives straight off a loading dock to get away from a Decepticon. A security camera shows him landing 7.7 m from the dock 0.55 s after he leaves the edge. Find Bumblebee's launch speed and the height of the dock.",
+          "calculation": true,
+          "selfCheck": "[  14 m/s  ·  1.5 m  ]",
+          "solution": "vx = x / t = 7.7 / 0.55 = 14 m/s.\ny = ½gt² = ½(−9.8)(0.55)² = −1.48 m, so the dock is 1.5 m high.",
+          "finalAnswer": "vx = 14 m/s   height = 1.5 m (1.48 m)",
+          "steps": [
+            {
+              "row": [
+                "t = 0.55 s     x = 7.7 m     v_{y0} = 0"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "x",
+                    "t"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "7.7",
+                    "0.55"
+                  ]
+                },
+                "= 14 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "14 m/s"
+            },
+            {
+              "mistake": [
+                "y =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.55) = −2.7 m"
+              ],
+              "note": "t has to be squared"
+            },
+            {
+              "row": [
+                "y =",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.55)^{2} = −1.48 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "1.5 m"
+            }
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "Wile E. Coyote runs straight off a cliff at 7.5 m/s, aiming for a ledge across the canyon. The ledge is 5.0 m away horizontally and 2.0 m lower than his cliff. He did not measure first.",
+          "parts": [
+            "(a) Find the time he takes to drop 2.0 m.",
+            "(b) Find how far he moves horizontally in that time. Does he reach the ledge?",
+            "(c) Find the minimum launch speed he needed to reach the ledge."
+          ],
+          "calculation": true,
+          "selfCheck": "[  0.64 s  ·  4.8 m  ·  7.8 m/s  ]",
+          "solution": "vx = 7.5 m/s, y = −2.0 m, vy0 = 0.\n(a) t² = 2(−2.0)/(−9.8) = 0.408 s², t = 0.639 s, which is 0.64 s.\n(b) x = vx·t = (7.5)(0.639) = 4.79 m, which is 4.8 m. 4.8 m is less than 5.0 m, so he falls short of the ledge.\n(c) He still drops 2.0 m in 0.639 s, so he needed vx = 5.0 / 0.639 = 7.82 m/s, which is 7.8 m/s.",
+          "finalAnswer": "(a) 0.64 s   (b) 4.8 m, short of the ledge   (c) 7.8 m/s",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 7.5 m/s     y = −2.0 m     v_{y0} = 0"
+              ]
+            },
+            {
+              "label": "(a) Time to drop 2.0 m"
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "2(−2.0)",
+                    "−9.8"
+                  ]
+                },
+                "= 0.408 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √0.408 = 0.639 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "0.64 s"
+            },
+            {
+              "label": "(b) Horizontal distance"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (7.5)(0.639) = 4.79 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "4.8 m"
+            },
+            {
+              "say": "4.8 m is less than 5.0 m. He falls short.",
+              "ink": "pen"
+            },
+            {
+              "label": "(c) Minimum launch speed"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "5.0",
+                    "0.639"
+                  ]
+                },
+                "= 7.82 m/s"
+              ],
+              "note": "same drop, same time"
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "7.8 m/s"
+            }
+          ]
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "Lightning McQueen starts from rest and accelerates at 3.5 m/s² along a flat 18 m stunt platform, then drives straight off its edge, 7.2 m above the ground. Ka-chow.",
+          "parts": [
+            "(a) Find his speed at the edge of the platform.",
+            "(b) Find his time in the air.",
+            "(c) Find how far from the base of the platform he lands."
+          ],
+          "calculation": true,
+          "solution": "(a) Constant acceleration from rest (S1.2): v² = v0² + 2ad = 0 + 2(3.5)(18) = 126, v = 11.2 m/s, which is 11 m/s.\n(b) He leaves horizontally: vx = 11.2 m/s, vy0 = 0, y = −7.2 m. t² = 2(−7.2)/(−9.8) = 1.47 s², t = 1.21 s, which is 1.2 s.\n(c) x = vx·t = (11.2)(1.21) = 13.6 m, which is 14 m.",
+          "finalAnswer": "(a) 11 m/s (11.2 m/s)   (b) 1.2 s (1.21 s)   (c) 14 m (13.6 m)",
+          "steps": [
+            {
+              "label": "(a) Speed at the edge (S1.2)"
+            },
+            {
+              "row": [
+                "v^{2} = v_{0}^{2} + 2ad = 0 + 2(3.5)(18) = 126"
+              ]
+            },
+            {
+              "row": [
+                "v = √126 = 11.2 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v ="
+              ],
+              "value": "11 m/s"
+            },
+            {
+              "label": "(b) Time in the air"
+            },
+            {
+              "row": [
+                "v_{x} = 11.2 m/s     v_{y0} = 0     y = −7.2 m"
+              ]
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "2(−7.2)",
+                    "−9.8"
+                  ]
+                },
+                "= 1.47 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √1.47 = 1.21 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "1.2 s"
+            },
+            {
+              "label": "(c) Landing distance"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (11.2)(1.21) = 13.6 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "14 m"
+            }
+          ]
+        }
+      ],
+      "equations": [
+        {
+          "note": "horizontal: constant velocity",
+          "plain": "x = vx · t"
+        },
+        {
+          "note": "vertical: starts from vy0 = 0",
+          "plain": "y = ½ g t²     g = −9.8 m/s²"
+        },
+        {
+          "note": "the same equation solved for time",
+          "plain": "t = √(2y / g)"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 2
+}

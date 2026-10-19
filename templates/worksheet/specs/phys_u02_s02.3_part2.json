@@ -1,0 +1,553 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "30–40",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Projectile Motion, Part 2: Angled Launch, Level Ground",
+      "concept": {
+        "summary": "A projectile launched at an angle has an upward velocity as well as a sideways one, so split the launch velocity into components first. The vertical component slows down, reaches 0 at the top, and speeds back up on the way down. The horizontal component stays the same for the whole flight. When the projectile lands at the height it started from, the path is a symmetric parabola and the trip up takes exactly half of the total time.",
+        "keyIdeas": [
+          "At the top, the vertical velocity is 0. The horizontal velocity is not.",
+          "Landing at the launch height means y = 0 at the end of the flight. That is the equation that gives you the total time."
+        ]
+      },
+      "priorKnowledge": {
+        "items": [
+          "Components: the x-part of a vector uses cosine and the y-part uses sine of the angle measured from the horizontal (S2.1). Calculator in degree mode.",
+          "Rebuilding a vector from its components: magnitude with the Pythagorean theorem, angle with inverse tangent (S2.2).",
+          "Horizontal motion is constant velocity and vertical motion is free fall, solved separately and joined by time (Part 1)."
+        ]
+      },
+      "directions": "Work every problem in your Hayden-McNeil notebook. Sketch the parabola and label the launch angle, measured above the horizontal. Up is +y and the direction of launch is +x, so g = −9.8 m/s². Every projectile here lands at the same height it was launched from. Find the components first, then the total time, then use half of the total time for the maximum height. Ignore air resistance. Round answers to the correct number of significant figures; g = 9.8 m/s² has two.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Red, the Angry Bird, leaves the slingshot at 24 m/s, 30° above the horizontal, and lands at the same height he started from. The pigs are not impressed. Find the horizontal and vertical components of his launch velocity, his time in the air, and his range.",
+          "calculation": true,
+          "selfCheck": "[  21 m/s  ·  12 m/s  ·  2.4 s  ·  51 m  ]",
+          "solution": "vx = 24 cos 30° = 20.8 m/s, which is 21 m/s. vy0 = 24 sin 30° = 12.0 m/s, which is 12 m/s.\nLanding at y = 0: 0 = vy0·t + ½gt², so t = −2vy0/g = −2(12.0)/(−9.8) = 2.45 s, which is 2.4 s.\nRange x = vx·t = (20.8)(2.45) = 51.0 m, which is 51 m.",
+          "finalAnswer": "vx = 21 m/s (20.8 m/s)   vy0 = 12 m/s   t = 2.4 s (2.45 s)   range = 51 m (51.0 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 24 cos 30° = 20.8 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "21 m/s"
+            },
+            {
+              "row": [
+                "v_{y0} = 24 sin 30° = 12.0 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{y0} ="
+              ],
+              "value": "12 m/s"
+            },
+            {
+              "row": [
+                "0 = v_{y0}t +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "gt^{2}     t =",
+                {
+                  "frac": [
+                    "−2v_{y0}",
+                    "g"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "−2(12.0)",
+                    "−9.8"
+                  ]
+                },
+                "= 2.45 s"
+              ]
+            },
+            {
+              "mistake": [
+                "t =",
+                {
+                  "frac": [
+                    "2(24)",
+                    "9.8"
+                  ]
+                }
+              ],
+              "note": "use v_{y0}, not the launch speed"
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.4 s"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (20.8)(2.45) = 51.0 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "51 m"
+            }
+          ]
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Lionel Messi chips a ball at 19 m/s, 40° above the level pitch, and it lands back on the pitch. The goalkeeper is still deciding which way to dive. Find the ball's time in the air, its range, and its maximum height.",
+          "calculation": true,
+          "selfCheck": "[  2.5 s  ·  36 m  ·  7.6 m  ]",
+          "solution": "vx = 19 cos 40° = 14.55 m/s. vy0 = 19 sin 40° = 12.21 m/s.\nt = −2vy0/g = −2(12.21)/(−9.8) = 2.49 s, which is 2.5 s.\nRange x = vx·t = (14.55)(2.49) = 36.2 m, which is 36 m.\nTime to the top is half the flight: 1.246 s.\nymax = (12.21)(1.246) + ½(−9.8)(1.246)² = 7.61 m, which is 7.6 m.",
+          "finalAnswer": "t = 2.5 s (2.49 s)   range = 36 m (36.2 m)   ymax = 7.6 m (7.61 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 19 cos 40° = 14.55 m/s     v_{y0} = 19 sin 40° = 12.21 m/s"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−2v_{y0}",
+                    "g"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "−2(12.21)",
+                    "−9.8"
+                  ]
+                },
+                "= 2.49 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.5 s"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (14.55)(2.49) = 36.2 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "36 m"
+            },
+            {
+              "row": [
+                "t_{top} =",
+                {
+                  "frac": [
+                    "2.49",
+                    "2"
+                  ]
+                },
+                "= 1.246 s"
+              ],
+              "note": "half the flight"
+            },
+            {
+              "mistake": [
+                "y = (12.21)(2.49) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(2.49)^{2} = 0.02 m"
+              ],
+              "note": "the full time puts the ball back on the ground"
+            },
+            {
+              "row": [
+                "y_{max} = (12.21)(1.246) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.246)^{2} = 7.61 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "7.6 m"
+            }
+          ]
+        },
+        {
+          "tier": "practice",
+          "points": 3,
+          "prompt": "Mr. Incredible throws a car across a level parking lot at 55° above the horizontal. It lands 4.3 s later. The insurance paperwork will take longer. Find the car's launch speed, its range, and its maximum height.",
+          "calculation": true,
+          "selfCheck": "[  26 m/s  ·  63 m  ·  23 m  ]",
+          "solution": "Time to the top is half the flight: 4.3 / 2 = 2.15 s.\nAt the top vy = 0, so 0 = vy0 + g·t_top and vy0 = (9.8)(2.15) = 21.07 m/s.\nv = vy0 / sin 55° = 21.07 / 0.819 = 25.72 m/s, which is 26 m/s.\nvx = 25.72 cos 55° = 14.75 m/s. Range x = (14.75)(4.3) = 63.4 m, which is 63 m.\nymax = (21.07)(2.15) + ½(−9.8)(2.15)² = 22.7 m, which is 23 m.",
+          "finalAnswer": "v = 26 m/s (25.7 m/s)   range = 63 m (63.4 m)   ymax = 23 m (22.7 m)",
+          "steps": [
+            {
+              "row": [
+                "t = 4.3 s     t_{top} =",
+                {
+                  "frac": [
+                    "4.3",
+                    "2"
+                  ]
+                },
+                "= 2.15 s"
+              ]
+            },
+            {
+              "row": [
+                "top: v_{y} = 0 = v_{y0} + gt_{top}     v_{y0} = (9.8)(2.15) = 21.07 m/s"
+              ]
+            },
+            {
+              "mistake": [
+                "v_{y0} = (9.8)(4.3)"
+              ],
+              "note": "that is the whole trip; the top is at half"
+            },
+            {
+              "row": [
+                "v =",
+                {
+                  "frac": [
+                    "v_{y0}",
+                    "sin 55°"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "21.07",
+                    "0.819"
+                  ]
+                },
+                "= 25.72 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v ="
+              ],
+              "value": "26 m/s"
+            },
+            {
+              "row": [
+                "v_{x} = 25.72 cos 55° = 14.75 m/s     x = (14.75)(4.3) = 63.4 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "63 m"
+            },
+            {
+              "row": [
+                "y_{max} = (21.07)(2.15) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(2.15)^{2} = 22.7 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "23 m"
+            }
+          ]
+        },
+        {
+          "tier": "challenge",
+          "points": 4,
+          "prompt": "Princess Peach and Princess Daisy tee off on a level fairway. Both hit the ball at 28 m/s, Peach at 25° and Daisy at 65° above the horizontal. Each one insists her shot was better.",
+          "parts": [
+            "(a) Find each ball's time in the air.",
+            "(b) Find each ball's range.",
+            "(c) Find each ball's maximum height."
+          ],
+          "calculation": true,
+          "selfCheck": "[  2.4 s, 5.2 s  ·  61 m, 61 m  ·  7.1 m, 33 m  ]",
+          "solution": "Peach, 25°: vx = 28 cos 25° = 25.38 m/s, vy0 = 28 sin 25° = 11.83 m/s. t = −2(11.83)/(−9.8) = 2.41 s. x = (25.38)(2.41) = 61.2 m. t_top = 1.207 s, ymax = (11.83)(1.207) + ½(−9.8)(1.207)² = 7.14 m.\nDaisy, 65°: vx = 28 cos 65° = 11.83 m/s, vy0 = 28 sin 65° = 25.38 m/s. t = −2(25.38)/(−9.8) = 5.18 s. x = (11.83)(5.18) = 61.3 m. t_top = 2.59 s, ymax = (25.38)(2.59) + ½(−9.8)(2.59)² = 32.9 m.\nThe ranges match because 25° and 65° add to 90°, so the components trade places. Daisy's ball stays up more than twice as long and goes over four times as high.",
+          "finalAnswer": "(a) Peach 2.4 s, Daisy 5.2 s   (b) both 61 m   (c) Peach 7.1 m, Daisy 33 m",
+          "steps": [
+            {
+              "label": "Peach, 25°"
+            },
+            {
+              "row": [
+                "v_{x} = 28 cos 25° = 25.38 m/s     v_{y0} = 28 sin 25° = 11.83 m/s"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−2(11.83)",
+                    "−9.8"
+                  ]
+                },
+                "= 2.41 s     x = (25.38)(2.41) = 61.2 m"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11.83)(1.207) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.207)^{2} = 7.14 m"
+              ],
+              "note": "t_{top} = 1.207 s, half the flight"
+            },
+            {
+              "answer": [
+                "Peach:"
+              ],
+              "value": "2.4 s,  61 m,  7.1 m"
+            },
+            {
+              "label": "Daisy, 65°"
+            },
+            {
+              "row": [
+                "v_{x} = 28 cos 65° = 11.83 m/s     v_{y0} = 28 sin 65° = 25.38 m/s"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−2(25.38)",
+                    "−9.8"
+                  ]
+                },
+                "= 5.18 s     x = (11.83)(5.18) = 61.3 m"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (25.38)(2.59) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(2.59)^{2} = 32.9 m"
+              ],
+              "note": "t_{top} = 2.59 s, half the flight"
+            },
+            {
+              "answer": [
+                "Daisy:"
+              ],
+              "value": "5.2 s,  61 m,  33 m"
+            },
+            {
+              "say": "Same range: 25° + 65° = 90°, so the components trade places. Daisy's ball goes higher and stays up longer.",
+              "ink": "pen"
+            }
+          ]
+        },
+        {
+          "tier": "multi-topic",
+          "points": 5,
+          "prompt": "The Hulk leaps across a level parking lot. S.H.I.E.L.D. radar clocks his takeoff velocity at 15 m/s horizontally and 11 m/s upward. Nobody asks him to slow down.",
+          "parts": [
+            "(a) Find his launch speed and launch angle above the horizontal.",
+            "(b) Find his time in the air.",
+            "(c) Find how far he travels horizontally.",
+            "(d) Find his maximum height."
+          ],
+          "calculation": true,
+          "solution": "(a) Rebuild the vector (S2.2): v = √(15² + 11²) = √346 = 18.6 m/s, which is 19 m/s. Angle = inverse tan of (11 / 15) = 36.3°, which is 36° above the horizontal.\n(b) t = −2vy0/g = −2(11)/(−9.8) = 2.245 s, which is 2.2 s.\n(c) x = vx·t = (15)(2.245) = 33.7 m, which is 34 m.\n(d) t_top = 2.245 / 2 = 1.122 s. ymax = (11)(1.122) + ½(−9.8)(1.122)² = 6.17 m, which is 6.2 m.",
+          "finalAnswer": "(a) 19 m/s at 36° above horizontal   (b) 2.2 s   (c) 34 m   (d) 6.2 m",
+          "steps": [
+            {
+              "label": "(a) Launch speed and angle (S2.2)"
+            },
+            {
+              "row": [
+                "v = √((15)^{2} + (11)^{2}) = √346 = 18.6 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v ="
+              ],
+              "value": "19 m/s"
+            },
+            {
+              "row": [
+                "angle = tan^{−1}",
+                {
+                  "frac": [
+                    "11",
+                    "15"
+                  ]
+                },
+                "= 36.3°"
+              ]
+            },
+            {
+              "answer": [
+                "angle ="
+              ],
+              "value": "36° above horizontal"
+            },
+            {
+              "label": "(b) Time in the air"
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−2v_{y0}",
+                    "g"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "−2(11)",
+                    "−9.8"
+                  ]
+                },
+                "= 2.245 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.2 s"
+            },
+            {
+              "label": "(c) Range"
+            },
+            {
+              "row": [
+                "x = v_{x}t = (15)(2.245) = 33.7 m"
+              ]
+            },
+            {
+              "answer": [
+                "x ="
+              ],
+              "value": "34 m"
+            },
+            {
+              "label": "(d) Maximum height"
+            },
+            {
+              "row": [
+                "t_{top} =",
+                {
+                  "frac": [
+                    "2.245",
+                    "2"
+                  ]
+                },
+                "= 1.122 s"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11)(1.122) +",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.122)^{2} = 6.17 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "6.2 m"
+            }
+          ]
+        }
+      ],
+      "equations": [
+        {
+          "note": "components of the launch velocity",
+          "plain": "vx = v cos(angle)     vy0 = v sin(angle)"
+        },
+        {
+          "note": "vertical position, g = −9.8 m/s²",
+          "plain": "y = vy0 · t + ½ g t²"
+        },
+        {
+          "note": "total time: set y = 0 at landing",
+          "plain": "t = −2 vy0 / g"
+        },
+        {
+          "note": "range: horizontal speed never changes",
+          "plain": "x = vx · t"
+        },
+        {
+          "note": "level ground only: the top is halfway",
+          "plain": "time to top = ½ × total time"
+        },
+        {
+          "note": "put the time to the top into the y equation",
+          "plain": "ymax = vy0 · ttop + ½ g ttop²"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 2
+}
