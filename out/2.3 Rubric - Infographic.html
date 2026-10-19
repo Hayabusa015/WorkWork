@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>2.3 Rubric - Infographic</title>
+<link rel="stylesheet" href="../templates/lab/shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left {
+      content: "SHULL SCIENCE \00B7  GEOLOGY \00B7  U02 / S02.3";
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: "PAGE " counter(page) " OF " counter(pages);
+      font-family: var(--display); font-size: 7pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--body);
+    font-size: 10.5pt;
+    line-height: 1.36;
+    color: var(--ink);
+  }
+  .pg { break-after: page; }
+  .pg:last-child { break-after: auto; }
+
+  /* ---------- Masthead ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.4pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .titlerow { display: flex; align-items: flex-end; }
+  h1 {
+    font-family: var(--display); font-weight: bold; font-size: 20pt;
+    line-height: 1.1; flex: 1 1 auto;
+  }
+  h1 .accent { color: var(--accent); }
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; border: 1.1pt solid var(--accent-display);
+    border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; height: 15pt; }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; } .id-row .per { flex: 1; }
+  .id-group { margin: 6pt 1pt 6pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); height: 15pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.6pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 9pt;
+    letter-spacing: 0.20em; border-bottom: 1pt solid var(--accent-display);
+    padding-bottom: 2.5pt; margin: 12pt 0 6pt 0;
+  }
+  table.g { width: 100%; border-collapse: collapse; font-size: 9.6pt; line-height: 1.3; }
+  table.g th {
+    font-family: var(--display); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.14em;
+    text-align: left; padding: 3pt 5pt; border-bottom: 1pt solid var(--ink);
+  }
+  table.g td { padding: 7pt 5pt; border-bottom: 0.75pt solid var(--rule-hairline); vertical-align: top; }
+  table.g .crit { font-family: var(--display); font-weight: bold; font-size: 10.4pt; }
+  table.g .pts { font-size: 8.4pt; color: var(--label); }
+  table.g td.lvl { font-family: var(--display); font-weight: 600; font-size: 9pt; white-space: nowrap; }
+  table.g td.score { border-left: 0.75pt solid var(--rule-hairline); border-right: 0.75pt solid var(--rule-hairline); }
+  table.g td.cmt { height: 46pt; }
+  .total { text-align: right; margin-top: 8pt; font-family: var(--display); font-weight: bold; font-size: 13pt; }
+  .total .blank { display: inline-block; width: 0.8in; border-bottom: 0.9pt solid var(--ink); margin: 0 5pt; }
+  .lines div { border-bottom: 0.9pt solid var(--ink); height: 24pt; }
+  .small { font-size: 9pt; color: var(--label); margin-top: 4pt; }
+</style>
+</head>
+<body class="geo">
+<div class="pg">
+  <div class="masthead">
+    <div class="eyebrow">GEOLOGY &middot; GEOLOGIC TIME &middot; GRADING SHEET</div>
+    <div class="titlerow">
+      <h1>Period <span class="accent">Infographic</span> Rubric</h1>
+      <div class="chip">U02 / S02.3</div>
+    </div>
+  </div>
+
+  <div class="id-row">
+    <div class="name"><div class="f"></div><div class="lbl">PERIOD CHOSEN</div></div>
+    <div class="date"><div class="f"></div><div class="lbl">DATE</div></div>
+    <div class="per"><div class="f"></div><div class="lbl">CLASS PERIOD</div></div>
+  </div>
+  <div class="id-group"><div class="f"></div><div class="lbl">GROUP MEMBERS</div></div>
+
+  <h2>SCORE &middot; 20 POINTS</h2>
+  <table class="g">
+    <thead>
+      <tr><th style="width:17%">PART</th><th style="width:33%">LOOK FOR</th><th style="width:14%">FULL / PARTIAL / NONE</th><th style="width:9%">SCORE</th><th style="width:27%">COMMENT</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="crit">Title and timeline</div><div class="pts">3 points</div></td>
+        <td>Period name and dates, big and clear. Timeline bar with the period highlighted.</td>
+        <td class="lvl">3 &middot; 1 to 2 &middot; 0</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Climate</div><div class="pts">3 points</div></td>
+        <td>Correct for the period. Warm or cold, wet or dry, plus one specific detail.</td>
+        <td class="lvl">3 &middot; 1 to 2 &middot; 0</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Continents map</div><div class="pts">3 points</div></td>
+        <td>Continents where they were in this period. Each one labeled. Not today's map.</td>
+        <td class="lvl">3 &middot; 1 to 2 &middot; 0</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Organisms and pictures</div><div class="pts">5 points</div></td>
+        <td>At least 3 organisms common or new in the period. Labeled picture and one-line caption for each.</td>
+        <td class="lvl">5 &middot; 2 to 4 &middot; 0 to 1</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Clear and visual</div><div class="pts">3 points</div></td>
+        <td>Pictures and short labels, no paragraphs. Zones easy to find. Readable from a few feet away.</td>
+        <td class="lvl">3 &middot; 1 to 2 &middot; 0</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+      <tr>
+        <td><div class="crit">Color</div><div class="pts">3 points</div></td>
+        <td>Whole infographic colored, and the color shows what goes together.</td>
+        <td class="lvl">3 &middot; 1 to 2 &middot; 0</td>
+        <td class="score"></td><td class="cmt"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="total">TOTAL <span class="blank"></span> / 20</div>
+  <p class="small">Full descriptions for each level are on page 4 of the student handout.</p>
+
+  <h2>NOTES</h2>
+  <div class="lines"><div></div><div></div><div></div><div></div></div>
+</div>
+</body>
+</html>
