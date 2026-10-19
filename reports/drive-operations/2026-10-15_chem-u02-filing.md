@@ -49,3 +49,19 @@ pdf 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi) is not touched. Route: gws (drive.file) t
 | Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.pdf | filed 2026-10-19, ID 1Vz7zMvujc5jOy-P4NRs8GmfLSw_ipk3m, verified by parentId lookup |
 
 Upload Inbox empty afterwards. Version 1 files untouched.
+
+## 2026-10-19: trash valence table Version 1 (user approved: "trash the old Version 1 files")
+
+Logged before action. Prior parent of each: Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp). Trash is recoverable.
+
+| Operation | Object | ID | Status |
+|---|---|---|---|
+| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.docx | 1acGH7qHg5f6iHU-HSSNsXxtRo4ocaQBW | planned |
+| Trash | 2.4 Organizer Key - Electron Stability & Valence Electrons.docx | 1VcxC7l33FLH-xnRIOyMChmA-BETR9zbr | planned |
+| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.pdf | 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi | planned |
+
+Defect found while fixing the Battleship table: `periodic_layout()` in build_electron_set.py dropped Ne and
+Ar and shifted B and Al one column right (periods 2 and 3). It affected the Battleship back page AND the
+blank periodic table page of the valence table, in Version 1 and in Version 2 (filed 2026-10-19, IDs
+1-2nj91Yl4FFwrSA_gjOa8nwQqdrkxiJz, 1QeLItYAiIDyuHItyVyAJKS6U07Hsj3TH, 1Vz7zMvujc5jOy-P4NRs8GmfLSw_ipk3m).
+Fixed in the generator and checked against 30 known positions plus a cell count per period.

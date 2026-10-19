@@ -501,8 +501,8 @@ def periodic_layout(rows, f_rows=False):
             base = 3 if r == 1 else 11
             for g in range(2):
                 row[g] = base + g
-            for g in range(13, 18):
-                row[g] = base + 2 + (g - 13)
+            for g in range(12, 18):
+                row[g] = base + 2 + (g - 12)
         elif r in (3, 4):
             base = 19 if r == 3 else 37
             for g in range(18):
