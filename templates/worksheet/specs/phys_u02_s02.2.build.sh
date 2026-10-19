@@ -7,7 +7,7 @@
 # (build_worksheet_docx.py, build_worksheet_key_docx.py, scripts/key_solution.py) are NOT edited:
 #   - 8 problems, ramp 3/3/1/1 (Physics default is 2/2/1/1)
 #   - no tier tags (WARM-UP / PRACTICE / ...) on the student sheet or the key
-#   - condensed key: hand size 17 (KEY_SIZE) and short consecutive rows merged onto one line
+#   - key at the standard hand size 27 (KEY_SIZE), with short consecutive rows merged onto one line
 # None of these is a standing rule yet; making any of them permanent is a Secretary change.
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -38,10 +38,10 @@ sys.path.insert(0, "../../scripts")
 # Matt 2026-10-16: no tier tags on the key either.
 _blk = k.answer_block
 k.answer_block = lambda doc, n, q, pal: _blk(doc, n, {x: v for x, v in q.items() if x != "tier"}, pal)
-# Matt 2026-10-16: condense the key. Smaller hand, and consecutive short plain rows share a line.
+# Matt 2026-10-16/19: shorter key at full hand size (17 was too small to read); consecutive short plain rows share a line.
 # Every step, mistake and boxed answer is kept; only line breaks between short rows go.
 import os, key_solution as ks
-KEY_SIZE = float(os.environ.get("KEY_SIZE", "17"))
+KEY_SIZE = float(os.environ.get("KEY_SIZE", "27"))
 MAX_CHARS = int(os.environ.get("KEY_MERGE", "88"))
 def _plain(st):
     return ("row" in st and "note" not in st and all(isinstance(x, str) for x in st["row"]))
