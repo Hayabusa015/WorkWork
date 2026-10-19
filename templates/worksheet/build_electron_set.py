@@ -386,7 +386,7 @@ def build_valence(out, key, tmp):
     heads = ["ATOMIC #", "SYMBOL", "PROTONS", "ELECTRONS", "ELECTRON CONFIGURATION",
              "VALENCE e^−^", "ELECTRON DOT"]
     ctx = Ctx(pal, key)
-    per_page = [10, 13, 13]
+    per_page = [16, 20]
     z = 1
     for pi, n in enumerate(per_page):
         if pi:
@@ -413,32 +413,32 @@ def build_valence(out, key, tmp):
             rich(p, h, 8, ctx, bold=True, color=pal.accent)
         for r in range(n):
             row = t.rows[1 + r]
-            no_split(row, 0.50)
+            no_split(row, 0.34)
             sym = SYMBOLS[z - 1]
             for ci, cc in enumerate(row.cells):
                 borders(cc, pal.hair, sz=4)
                 cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-                cell_margins(cc, top=20, bottom=20, left=80, right=60)
+                cell_margins(cc, top=8, bottom=8, left=80, right=60)
                 p = cc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             c0, c1, c2, c3, c4, c5, c6 = row.cells
-            _run(c0.paragraphs[0], str(z), 11, bold=True, color=pal.ink)
-            _run(c1.paragraphs[0], sym, 11, bold=True, color=pal.ink)
+            _run(c0.paragraphs[0], str(z), 10.5, bold=True, color=pal.ink)
+            _run(c1.paragraphs[0], sym, 10.5, bold=True, color=pal.ink)
             if key:
-                _run(c2.paragraphs[0], str(z), 11, bold=True, color=pal.accent)
-                _run(c3.paragraphs[0], str(z), 11, bold=True, color=pal.accent)
+                _run(c2.paragraphs[0], str(z), 10.5, bold=True, color=pal.accent)
+                _run(c3.paragraphs[0], str(z), 10.5, bold=True, color=pal.accent)
                 put_config(c4.paragraphs[0], config(z), 10.5, pal.accent, bold=True,
                            underline_top=True)
-                _run(c5.paragraphs[0], str(valence(z)[1]), 11, bold=True, color=pal.accent)
+                _run(c5.paragraphs[0], str(valence(z)[1]), 10.5, bold=True, color=pal.accent)
                 img = os.path.join(tmp, f"dot_{z}.png")
                 if not os.path.exists(img):
                     dot_image(img, sym, valence(z)[1])
-                c6.paragraphs[0].add_run().add_picture(img, width=Inches(0.42))
+                c6.paragraphs[0].add_run().add_picture(img, width=Inches(0.31))
             else:
                 # the dot cell carries the symbol, faint, so the dots have a place to go
                 p = c6.paragraphs[0]
                 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                _run(p, sym, 11, bold=True, color=pal.hair)
+                _run(p, sym, 10.5, bold=True, color=pal.hair)
             z += 1
 
     # ---- blank periodic table, periods 1-4 ----
