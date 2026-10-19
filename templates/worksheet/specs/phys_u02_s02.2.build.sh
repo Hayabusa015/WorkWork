@@ -7,7 +7,8 @@
 # (build_worksheet_docx.py, build_worksheet_key_docx.py, scripts/key_solution.py) are NOT edited:
 #   - 8 problems, ramp 3/3/1/1 (Physics default is 2/2/1/1)
 #   - no tier tags (WARM-UP / PRACTICE / ...) on the student sheet or the key
-#   - key at the standard hand size 27 (KEY_SIZE), with short consecutive rows merged onto one line
+#   - key at the standard hand size 27 (KEY_SIZE), short consecutive rows merged onto one line, and
+#     cards allowed to break across a page at a seam (after a boxed answer or the conversion block)
 # None of these is a standing rule yet; making any of them permanent is a Secretary change.
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -60,6 +61,54 @@ def _small(q, out_png, width_in=7.2, size=27):
     q = dict(q); q["steps"] = _merge(q["steps"])
     return _img(q, out_png, width_in=width_in, size=KEY_SIZE)
 ks.solution_image = _small
+# Matt 2026-10-19: fewer pages at the same hand size. The shared builder keeps each question's
+# card whole (no_split), which strands big gaps at page bottoms. Here a card may break across a
+# page, but only at a natural seam: after a boxed answer, before the next part of the work.
+# The number, the restated prompt and the first piece of work always stay together.
+from docx.shared import Inches
+def _pieces(steps):
+    out, cur = [], []
+    for i, st in enumerate(steps):
+        # also a seam before a labelled part, e.g. after the conversion block
+        if "label" in st and cur and not all("label" in x for x in cur):
+            out.append(cur); cur = []
+        cur.append(st)
+        if "answer" in st and i < len(steps) - 1:
+            out.append(cur); cur = []
+    if cur:
+        out.append(cur)
+    return out
+def _answer_block(doc, n, q, pal):
+    # One table row per piece of work; a page may break between rows, never inside one.
+    # Outer border only, so the rows still read as one card.
+    pieces = _pieces(q["steps"])
+    t = doc.add_table(rows=len(pieces), cols=1)
+    k.fix_widths(t, [k.TEXT_W_IN])
+    last = len(pieces) - 1
+    for j, piece in enumerate(pieces):
+        row = t.rows[j]
+        k.no_split(row)
+        c = row.cells[0]
+        edges = ("left", "right") + (("top",) if j == 0 else ()) + (("bottom",) if j == last else ())
+        k.borders(c, pal.hair, sz=4, edges=edges)
+        k.cell_margins(c, top=70 if j == 0 else 0, bottom=70 if j == last else 0, left=130, right=130)
+        if j == 0:
+            head = c.paragraphs[0]
+            k.run(head, f"{n}.  ", 11, bold=True, color=pal.ink)
+            p = k.para(c, q["prompt"].replace("**", ""), 9, color=pal.label); p.runs[0].italic = True
+            for part in q.get("parts", []):
+                p = k.para(c, "   " + str(part).replace("**", ""), 9, color=pal.label); p.runs[0].italic = True
+            k.gap(c, 2)
+            target = c.add_paragraph()
+        else:
+            target = c.paragraphs[0]
+        png, _ = ks.solution_image(dict(q, steps=piece), os.path.join(k._TMP, f"q{n}_{j}.png"),
+                                   width_in=k.HAND_W_IN)
+        pf = target.paragraph_format
+        pf.space_before = pf.space_after = 0
+        target.add_run().add_picture(png, width=Inches(k.HAND_W_IN))
+    return t
+k.answer_block = _answer_block
 sys.exit(k.main())
 PY2
 
