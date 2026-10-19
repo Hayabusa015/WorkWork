@@ -2,7 +2,7 @@
 """
 SHULL Science — Lab template renderer.
 
-    python3 build_lab.py SHULL_CHEM_Lab_U00_S0.3_Intro_Skills.html
+    python3 build_lab.py "0.3 Lab - Intro Skills.html"
 
 Writes a PDF beside the HTML with the same name, then runs the two checks
 that catch the defects the QA gate cares about most:

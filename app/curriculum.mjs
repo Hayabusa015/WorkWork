@@ -125,6 +125,11 @@ export function curriculum(text, course) {
     }
   }
   parsed.units = parsed.units.filter(u => u.sections.length);
+  // The filename topic (SHULL-CHG-0041): attached so the browser never builds a name from a full title.
+  for (const unit of parsed.units) {
+    unit.short = shortTitle(text, `U${unit.unit}`);
+    for (const s of unit.sections) s.short = shortTitle(text, s.code);
+  }
   return parsed;
 }
 
@@ -139,17 +144,17 @@ export function documentTypes(namingText) {
 }
 
 /**
- * The filename SHULL_[COURSE]_[Type]_U##_S##.#[...] from standards/NAMING.md
- * §2. The unit and the digits before the section's decimal point are both
- * zero-padded to two, so a filename sorts and compares against its folder.
+ * The filename from standards/NAMING.md §2 (SHULL-CHG-0024), built by the same
+ * helper the repository builders use so the app cannot drift from them.
  */
+import {createRequire} from 'node:module';
+const {documentName: buildName, shortTitle: buildShortTitle} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+
+/** The short title for a section code ("1.3") or unit ("U1"), from a course's decisions text. */
+export const shortTitle = (decisionsText, key) => buildShortTitle(decisionsText, key);
+
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};
 
-export function documentName({course, type, unit, sections: codes, extension = 'docx'}) {
-  const pad = code => {
-    const [whole, decimal] = String(code).split('.');
-    return `S${String(whole).padStart(2, '0')}.${decimal}`;
-  };
-  const span = codes.length > 1 ? `${pad(codes[0])}-${pad(codes[codes.length - 1])}` : pad(codes[0]);
-  return `SHULL_${COURSE_CODE[course]}_${type}_U${String(unit).padStart(2, '0')}_${span}.${extension}`;
+export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx', descriptor}) {
+  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor});
 }

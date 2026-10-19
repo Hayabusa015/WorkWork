@@ -179,3 +179,37 @@ If any answer reveals a problem, revise before delivery.
 5. Briefly flag any important assumption, scientific uncertainty, or safety item needing teacher
    verification.
 6. Preserve established formatting and conventions across related materials.
+
+---
+
+## 12. Structural tells in prose
+
+**Authority:** SHULL-CHG-0025. Adapted from blader/humanizer v3.1.0 (MIT), which draws on
+Wikipedia's "Signs of AI writing". Section 6 lists word habits; this section lists the
+**structural** habits, which persist when the words change. The procedure is
+`.claude/skills/humanize/SKILL.md`.
+
+Strongest first. The first five justify an edit on one sighting. The rest need company.
+
+| Tell | What it looks like | Fix |
+|---|---|---|
+| Not X but Y | "It's not just a worksheet, it's a tool." Also split across two sentences. | State the point. Keep a contrast only when the negative half corrects a belief the reader holds. |
+| One-line closers | A sentence that restates the paragraph. "That is the real win." A row of fragments. | Cut it, or merge into a sentence with a specific claim. |
+| Sayings that sound deep | "At its core," "what really matters," "X is the language of Y" | Replace with the specific claim. |
+| Staged run-up | "Let's dive in," "Here's what you need to know," "Honestly?" | Start with the point. |
+| Arguing with no one | "To be clear," "Don't get me wrong," a rejected option nobody proposed | Delete the defense. |
+| Forced triads | Three items because three sounds complete | Keep three only when there are three. |
+| Stacked qualifiers | "could potentially possibly" | Keep one qualifier, and only where the source supports it. |
+| Inflated significance | "a pivotal moment," "stands as a testament," a send-off paragraph | Keep the fact, drop the dressing. End on the last concrete fact. |
+| Vague connection | "associated with," "linked to" | Say how. If the source does not, keep the vague wording rather than invent a role. |
+| Shallow -ing riders | "…, highlighting its importance" | Keep the fact. |
+| Borrowed authority | "experts say," a list of outlets | Name the source or cut it. |
+| Avoiding is/are/has | "serves as," "boasts," "features" | Use the simple verb. |
+| Bold as decoration | A bold label and colon on every list item | Remove, or turn the list into a sentence. |
+| Chatbot residue | "I hope this helps," "Great question!", an offer to do more | Remove the wrapper, keep the content. |
+| Writing about the document | "This section is organized by…", what the text replaced | Delete. A caveat that changes what the reader should do stays. |
+
+**Student pages are exempt where the decisions file defines the wording.** A direction students
+need verbatim stays verbatim. Never add a fact, number, source, or name while rewording.
+
+Dashes are weak alone, as in section 4. Match the teacher's own sample if one exists.

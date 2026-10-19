@@ -150,6 +150,8 @@ typography.stackCondensed  Trade Gothic Next Condensed → Archivo Narrow → Li
 **Never substitute a font outside this stack.** Never a novelty "school" font. Never a convenient
 one.
 
+One exception: `typography.keyHandwriting`, on teacher answer keys only, approved in SHULL-CHG-0043 by Matt, 2026-10-16.
+
 `brand/fonts/trade-gothic-next.conf` maps the brand name to Archivo inside the build container, so a
 document that correctly names Trade Gothic Next renders as Archivo during QA rather than silently
 becoming DejaVu Sans. Without that mapping, **the QA render and the classroom copy are different

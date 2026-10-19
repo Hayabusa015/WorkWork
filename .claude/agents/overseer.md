@@ -61,8 +61,23 @@ Before writing WORK COMPLETE you must have confirmed, yourself:
 - its **name** follows `standards/NAMING.md`
 - the QA gate **ran** and passed
 - the Librarian **verified the destination** by an independent lookup, not by asserting it
+- the document was **approved to file** by the user (chat or ticked box) before it was filed
 
 If any of those is unmet, the status is **INCOMPLETE**. Say what failed and what remains.
+
+## Filing gate (SHULL-CHG-0027)
+
+Rules: `standards/DRIVE_ARCHITECTURE.md` §8. Nothing is filed to Drive while the user is iterating.
+
+1. When a document passes the QA gate, add **one unticked row** to `reports/filing-queue.md` and
+   commit its final spec. Say it is ready and what will be filed (student file, key, PDF).
+2. **Wait for approval.** The user says "file it" or ticks the box. You never tick a box.
+3. On approval, route to the `librarian` with the row. If the file is gone, rebuild it from the
+   spec and re-run the QA gate first. If the destination is unclear, ask. One question.
+4. Before reporting WORK COMPLETE on a multi-document task, run `reconcile-session-files`. It lists
+   anything created in the session that is not on Drive, and waits for the user.
+5. When the Librarian reports a verified destination, mark the row **Filed** with the Drive path,
+   file ID and date. Any failure leaves it **Not filed** with the reason.
 
 ## Authority
 

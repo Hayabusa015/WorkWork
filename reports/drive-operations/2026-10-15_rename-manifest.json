@@ -1,0 +1,1991 @@
+{
+ "rows": [
+  {
+   "id": "1pYgqhT7CHGncbDSApwy-ZijMtGierhxH",
+   "old": "SHULL_CHEM_Activity_U02_S02.3_Electron_Battleship.docx",
+   "parent": "1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp",
+   "mod": "2026-10-06T15:56:29.831Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Battleship\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Activity",
+    "sections": [
+     "2.3"
+    ],
+    "unit": 2,
+    "topic": "Electron Configurations Battleship",
+    "version": null,
+    "key": false
+   },
+   "new": "2.3 Activity - Electron Configurations Battleship.docx"
+  },
+  {
+   "id": "1DQfJnsvqLNq_KEdv8E8ZePlVCKmRLMBv",
+   "old": "SHULL_CHEM_Practice_Set_U02_S02.3_Longhand_Key.docx",
+   "parent": "1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp",
+   "mod": "2026-10-06T15:37:59.815Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Longhand\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "2.3"
+    ],
+    "unit": 2,
+    "topic": "Electron Configurations Longhand",
+    "version": null,
+    "key": true
+   },
+   "new": "2.3 Practice Set Key - Electron Configurations Longhand.docx"
+  },
+  {
+   "id": "1714kkNmjYvWU_I02DqF7orkgOOqdH7Je",
+   "old": "SHULL_CHEM_Practice_Set_U02_S02.3_Shorthand_Key.docx",
+   "parent": "1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp",
+   "mod": "2026-10-06T15:38:02.662Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Shorthand\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "2.3"
+    ],
+    "unit": 2,
+    "topic": "Electron Configurations Shorthand",
+    "version": null,
+    "key": true
+   },
+   "new": "2.3 Practice Set Key - Electron Configurations Shorthand.docx"
+  },
+  {
+   "id": "11HNzajE_jgBR1WIdrjQFedZqpMx0vYuR",
+   "old": "SHULL_CHEM_Practice_Set_U02_S02.3_Shorthand.docx",
+   "parent": "1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp",
+   "mod": "2026-10-06T15:33:26.591Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Shorthand\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "2.3"
+    ],
+    "unit": 2,
+    "topic": "Electron Configurations Shorthand",
+    "version": null,
+    "key": false
+   },
+   "new": "2.3 Practice Set - Electron Configurations Shorthand.docx"
+  },
+  {
+   "id": "1HGYYMLJWTzR9fPo4cjpJXYik0qfEYoJm",
+   "old": "SHULL_CHEM_Practice_Set_U02_S02.3_Longhand.docx",
+   "parent": "1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp",
+   "mod": "2026-10-06T15:32:30.251Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Longhand\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "2.3"
+    ],
+    "unit": 2,
+    "topic": "Electron Configurations Longhand",
+    "version": null,
+    "key": false
+   },
+   "new": "2.3 Practice Set - Electron Configurations Longhand.docx"
+  },
+  {
+   "id": "1TS8Cr2EbXZ0q9qos-yxoxOLHALyNgIjm",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_ABC_Key.pdf",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T14:29:15.823Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "ABC",
+    "key": true
+   },
+   "new": "Unit 1 Test ABC Key - Matter & Atomic Structure Day 2.pdf"
+  },
+  {
+   "id": "1Zn_vIjzDupCUOQtlmyjseD2utpAVasdW",
+   "old": "AutoRecovery save of SHULL_CHEM_Study_Guide_U01_S01.1-S01.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T14:28:44.419Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": true,
+   "flags": [
+    "range end truncated in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Study_Guide",
+    "sections": [
+     "1.1",
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Draft",
+    "version": null,
+    "key": false
+   },
+   "new": "Unit 1 Study Guide - Matter & Atomic Structure Draft.docx"
+  },
+  {
+   "id": "1m6oU28Z8F8u0EtZ9VR2coqAOAWM_X58z",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_ABC_Key.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T14:27:58.842Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "ABC",
+    "key": true
+   },
+   "new": "Unit 1 Test ABC Key - Matter & Atomic Structure Day 2.docx"
+  },
+  {
+   "id": "1xN_513QPbF-2dUu9Y2ZNDvLSDqF1HRgg",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_C_Key.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T14:22:53.710Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "C",
+    "key": true
+   },
+   "new": "Unit 1 Test C Key - Matter & Atomic Structure Day 2.docx"
+  },
+  {
+   "id": "1Jund6oTiUPgqnnqF7J5Yn-dRF58UXX-X",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_C.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T13:32:00.725Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "C",
+    "key": false
+   },
+   "new": "Unit 1 Test C - Matter & Atomic Structure Day 2.docx"
+  },
+  {
+   "id": "1WiQ0HO40LtGna32OLky8ao-RNRCWHJ1C",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_B.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T13:30:33.012Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "B",
+    "key": false
+   },
+   "new": "Unit 1 Test B - Matter & Atomic Structure Day 2.docx"
+  },
+  {
+   "id": "1r6I4P8MceojQrF8YS5Djosc_ecKGfXqd",
+   "old": "SHULL_CHEM_Test_U01_S01.1-S01.5_Day2_A.docx",
+   "parent": "1vYISUV443AAVTmODSnUIwxSUgxCc5i8b",
+   "mod": "2026-10-05T13:17:26.751Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Day 2\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Matter & Atomic Structure Day 2",
+    "version": "A",
+    "key": false
+   },
+   "new": "Unit 1 Test A - Matter & Atomic Structure Day 2.docx"
+  },
+  {
+   "id": "1LSMDlHjuTucRTb7N02-2XvULF2iBBPNL",
+   "old": "SHULL_GEO_Guided_Notes_U02_S02.1-S02.5_Key.docx",
+   "parent": "1_ykbQae1GAKi0hWFn-OWIdvVAWXwc_6D",
+   "mod": "2026-09-24T18:32:20.637Z",
+   "course": "geology",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Guided_Notes",
+    "sections": [
+     "2.1",
+     "2.5"
+    ],
+    "unit": 2,
+    "topic": "Geologic Time",
+    "version": null,
+    "key": true
+   },
+   "new": "Unit 2 Guided Notes Key - Geologic Time.docx"
+  },
+  {
+   "id": "1kn5uklbY5ayEZ4Qe91Dj1I_0m5ryADKP",
+   "old": "SHULL_PHYS_Study_Guide_U01_S01.1-S01.4_Key.docx",
+   "parent": "1OU692bKG70xw_SvZgoCJerCPPX_JenB0",
+   "mod": "2026-09-28T15:20:45.563Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Study_Guide",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": null,
+    "key": true
+   },
+   "new": "Unit 1 Study Guide Key - Motion in One Dimension.docx"
+  },
+  {
+   "id": "1D7z78I1hbJ8N7BRCY4Jzn-0z-eNRgLFA",
+   "old": "SHULL_CHEM_Practice_Set_U01_S01.5_AverageAtomicMass_MassNumbers.docx",
+   "parent": "1WoVqoIbq7nC10gXGM4GC4U8IctJywa5D",
+   "mod": "2026-09-28T15:12:06.101Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Numbers\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Average Atomic Mass Numbers",
+    "version": null,
+    "key": false
+   },
+   "new": "1.5 Practice Set - Average Atomic Mass Numbers.docx"
+  },
+  {
+   "id": "1Jge8N7g1usxt2YoZZP6VTdIaLgh6TkL1",
+   "old": "SHULL_CHEM_Practice_Set_U01_S01.5_AverageAtomicMass_MassNumbers_Key.docx",
+   "parent": "1WoVqoIbq7nC10gXGM4GC4U8IctJywa5D",
+   "mod": "2026-09-28T15:07:55.825Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Numbers\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.5"
+    ],
+    "unit": 1,
+    "topic": "Average Atomic Mass Numbers",
+    "version": null,
+    "key": true
+   },
+   "new": "1.5 Practice Set Key - Average Atomic Mass Numbers.docx"
+  },
+  {
+   "id": "1u-aH-7trw1zFRiuPs50DCAWh27iDhNrl",
+   "old": "SHULL_PHYS_Study_Guide_U01_S01.1-S01.4 - Copy.docx",
+   "parent": "1OU692bKG70xw_SvZgoCJerCPPX_JenB0",
+   "mod": "2026-09-24T12:57:28.317Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Study_Guide",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": null,
+    "key": false
+   },
+   "new": "Unit 1 Study Guide - Motion in One Dimension Version 1.docx"
+  },
+  {
+   "id": "1gxYAh4qi8Pm6Y5kga6GzSH6T7TVIQDdx",
+   "old": "SHULL_PHYS_Study_Guide_U01_S01.1-S01.4.docx",
+   "parent": "1OU692bKG70xw_SvZgoCJerCPPX_JenB0",
+   "mod": "2026-09-24T12:57:28.317Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Study_Guide",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": null,
+    "key": false
+   },
+   "new": "Unit 1 Study Guide - Motion in One Dimension.docx"
+  },
+  {
+   "id": "1ytd2bmYVwD7HUmJLBgsmJn54WEpex7yY",
+   "old": "SHULL_GEO_Guided_Notes_U02_S02.1-S02.5.docx",
+   "parent": "1T31Nn2IUyDiC0gcyZynFq3fWZ3j-4Rj4",
+   "mod": "2026-09-25T17:34:28.529Z",
+   "course": "geology",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Guided_Notes",
+    "sections": [
+     "2.1",
+     "2.5"
+    ],
+    "unit": 2,
+    "topic": "Geologic Time",
+    "version": null,
+    "key": false
+   },
+   "new": "Unit 2 Guided Notes - Geologic Time.docx"
+  },
+  {
+   "id": "1DoZ0DEWuIip5ruw0aHPiWErMjJslBdtS",
+   "old": "SHULL_GEO_Guided_Notes_U02_S02.1-S02.5_Key.docx",
+   "parent": "1T31Nn2IUyDiC0gcyZynFq3fWZ3j-4Rj4",
+   "mod": "2026-09-25T16:52:45.024Z",
+   "course": "geology",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Guided_Notes",
+    "sections": [
+     "2.1",
+     "2.5"
+    ],
+    "unit": 2,
+    "topic": "Geologic Time",
+    "version": null,
+    "key": true
+   },
+   "new": "Unit 2 Guided Notes Key - Geologic Time.docx"
+  },
+  {
+   "id": "151FWfLyqwDDLzRkgqxKeiBBN0uEnz66z",
+   "old": "SHULL_GEO_Guided_Notes_U02_S02.1-S02.5.docx",
+   "parent": "1_ykbQae1GAKi0hWFn-OWIdvVAWXwc_6D",
+   "mod": "2026-09-24T18:32:05.880Z",
+   "course": "geology",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Guided_Notes",
+    "sections": [
+     "2.1",
+     "2.5"
+    ],
+    "unit": 2,
+    "topic": "Geologic Time",
+    "version": null,
+    "key": false
+   },
+   "new": "Unit 2 Guided Notes - Geologic Time.docx"
+  },
+  {
+   "id": "1MVLslHf0FbU5Ebev3tylwxaGcPZsV3AM",
+   "old": "SHULL_PHYS_Test_U01_S01.1-S01.4_C.docx",
+   "parent": "1_ykbQae1GAKi0hWFn-OWIdvVAWXwc_6D",
+   "mod": "2026-09-24T14:59:25.500Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": "C",
+    "key": false
+   },
+   "new": "Unit 1 Test C - Motion in One Dimension.docx"
+  },
+  {
+   "id": "1uosWV6hz6rDMai9_WsW5of5NqwsX-AEW",
+   "old": "SHULL_PHYS_Test_U01_S01.1-S01.4_B.docx",
+   "parent": "1_ykbQae1GAKi0hWFn-OWIdvVAWXwc_6D",
+   "mod": "2026-09-24T14:59:21.426Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": "B",
+    "key": false
+   },
+   "new": "Unit 1 Test B - Motion in One Dimension.docx"
+  },
+  {
+   "id": "1-6QuC9pUTcrfylu5LkzfCrnL9TynMNjT",
+   "old": "SHULL_PHYS_Test_U01_S01.1-S01.4_A.docx",
+   "parent": "1_ykbQae1GAKi0hWFn-OWIdvVAWXwc_6D",
+   "mod": "2026-09-24T14:59:11.510Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Test",
+    "sections": [
+     "1.1",
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Motion in One Dimension",
+    "version": "A",
+    "key": false
+   },
+   "new": "Unit 1 Test A - Motion in One Dimension.docx"
+  },
+  {
+   "id": "1-LSIAD4yAZSsLIrBFAISjalh-uTKWYiF",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.3_Graphing_Key.pdf",
+   "parent": "1KIvgeltwcOBnXLSYRc2O5dWGO9mPVNBO",
+   "mod": "2026-09-23T15:25:18.442Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": true
+   },
+   "new": "1.3 Practice Set Key - Position-Velocity-Acceleration Graphing.pdf"
+  },
+  {
+   "id": "163jzAEouzb6H6bYb8esktfOrAl3TeztI",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.3_Graphing.pdf",
+   "parent": "1KIvgeltwcOBnXLSYRc2O5dWGO9mPVNBO",
+   "mod": "2026-09-23T15:26:36.430Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Practice Set - Position-Velocity-Acceleration Graphing.pdf"
+  },
+  {
+   "id": "1Fa390EHBwRA_yqRd_uldjF8NKfImdEOU",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.3_Graphing.docx",
+   "parent": "1KIvgeltwcOBnXLSYRc2O5dWGO9mPVNBO",
+   "mod": "2026-09-23T15:25:18.018Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Practice Set - Position-Velocity-Acceleration Graphing.docx"
+  },
+  {
+   "id": "1XBZUTnVkBTaZeJlvZAa_d6y3ZzSpSrgI",
+   "old": "SHULL_PHYS_Lab_U01_S01.4_Reaction_Time.pdf",
+   "parent": "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   "mod": "2026-09-22T11:22:13.369Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Reaction Time\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Free Fall Reaction Time",
+    "version": null,
+    "key": false
+   },
+   "new": "1.4 Lab - Free Fall Reaction Time.pdf"
+  },
+  {
+   "id": "1C2zOB2-_DIRrnYZbraYOedFY-sV8BIXR",
+   "old": "SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs - Copy.pdf",
+   "parent": "1MFa1jLRkYaQPrGoXeHpkdnPFfnlOUuAm",
+   "mod": "2026-09-17T11:27:39.017Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Motion Graphs\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing Motion Graphs",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Lab - Position-Velocity-Acceleration Graphing Motion Graphs Version 1.pdf"
+  },
+  {
+   "id": "160zS8yefZldjkI-Gret-8iLNA0iyLLmR",
+   "old": "SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs_Key - Copy.pdf",
+   "parent": "1MFa1jLRkYaQPrGoXeHpkdnPFfnlOUuAm",
+   "mod": "2026-09-17T11:27:43.003Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Motion Graphs\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing Motion Graphs",
+    "version": null,
+    "key": true
+   },
+   "new": "1.3 Lab Key - Position-Velocity-Acceleration Graphing Motion Graphs Version 1.pdf"
+  },
+  {
+   "id": "1amUJXEik_zYBHdejMN5kngnMIaI8yW1m",
+   "old": "SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs_Key.pdf",
+   "parent": "1MFa1jLRkYaQPrGoXeHpkdnPFfnlOUuAm",
+   "mod": "2026-09-16T18:27:01.166Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Motion Graphs\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing Motion Graphs",
+    "version": null,
+    "key": true
+   },
+   "new": "1.3 Lab Key - Position-Velocity-Acceleration Graphing Motion Graphs.pdf"
+  },
+  {
+   "id": "1AOCVa53wH7cJWKSgn7WybeKugHZgZElh",
+   "old": "SHULL_PHYS_Lab_U01_S01.3_Motion_Graphs.pdf",
+   "parent": "1MFa1jLRkYaQPrGoXeHpkdnPFfnlOUuAm",
+   "mod": "2026-09-16T18:22:15.619Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Motion Graphs\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing Motion Graphs",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Lab - Position-Velocity-Acceleration Graphing Motion Graphs.pdf"
+  },
+  {
+   "id": "1hznvdT8elQj0VO5j2lIRsVxiG_3JxH-T",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.2_Key - Copy.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-15T11:22:41.793Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": true
+   },
+   "new": "1.2 Practice Set Key - Acceleration & Kinematic Equations Version 1.pdf"
+  },
+  {
+   "id": "1DAGtUvpT6DB3Eudg97mHpjCiFWJs7H5g",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.2 - Copy.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-15T11:22:21.613Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": false
+   },
+   "new": "1.2 Practice Set - Acceleration & Kinematic Equations Version 1.pdf"
+  },
+  {
+   "id": "19rVOIgumLTYk8hjjPkTrfbmSkKqVRjiZ",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.2_Key.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-14T16:50:47.880Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": true
+   },
+   "new": "1.2 Practice Set Key - Acceleration & Kinematic Equations.pdf"
+  },
+  {
+   "id": "1ebkChLyhhcgc-yahurjTs26NSxlVXJlm",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.2.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-14T16:50:24.091Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": false
+   },
+   "new": "1.2 Practice Set - Acceleration & Kinematic Equations.pdf"
+  },
+  {
+   "id": "1Oh3fJjeOmZHki43eYW55waF_5phFBxjG",
+   "old": "SHULL_CHEM_Lab_U01_S01.1_Chromatography.pdf",
+   "parent": "12jktWfOEEUPTqvDAdFCAB9B9XY0jOfNl",
+   "mod": "2026-09-14T15:12:10.713Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Chromatography\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Matter & Changes Chromatography",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Lab - Matter & Changes Chromatography.pdf"
+  },
+  {
+   "id": "1_d-_D2aG_7FeLmI6-G2rKR2kULMIp25I",
+   "old": "SHULL_CHEM_Lab_U01_S01.1_Chromatography_Key.pdf",
+   "parent": "12jktWfOEEUPTqvDAdFCAB9B9XY0jOfNl",
+   "mod": "2026-09-14T15:12:27.857Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Chromatography\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Matter & Changes Chromatography",
+    "version": null,
+    "key": true
+   },
+   "new": "1.1 Lab Key - Matter & Changes Chromatography.pdf"
+  },
+  {
+   "id": "11764aOp3Dkbpy6R6YvG0kodR70wdV69G",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.1 - Copy.docx",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-14T13:33:40.829Z",
+   "course": "physics",
+   "copy": true,
+   "draft": false,
+   "flags": [],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Practice Set - Distance, Displacement & Velocity Version 1.docx"
+  },
+  {
+   "id": "1TcXWdrKH4UawYF6EC_p8H2InjwNPPAKu",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.1.docx",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-14T13:33:40.829Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "COLLISION: same new name as another file in this folder"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Practice Set - Distance, Displacement & Velocity.docx"
+  },
+  {
+   "id": "1ifko5_EoQLfPAEQGBMO-TbiA0Y4wqWOU",
+   "old": "SHULL_PHYS_Practice_Set_U01_S01.1_Extended.docx",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-14T13:07:54.736Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Extended\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity Extended",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Practice Set - Distance, Displacement & Velocity Extended.docx"
+  },
+  {
+   "id": "10P_8T3zaPOgQeTY-PE0mTO9Xz52suzvj",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.1.docx",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-06T12:41:57.833Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name",
+    "COLLISION: same new name as another file in this folder"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Practice Set - Distance, Displacement & Velocity.docx"
+  },
+  {
+   "id": "1Vzy6nLYEpU4W_sLslyUjeWoXp38Mzecv",
+   "old": "SHULL_CHEM_Lab_U00_S0.4_1.pdf",
+   "parent": "199f-dW2ZxIk99mqmK96HGQGbVHWWqTf6",
+   "mod": "2026-09-08T15:16:01Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name",
+    "descriptor kept: \"1\""
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "0.4"
+    ],
+    "unit": 0,
+    "topic": "Scientific Observations 1",
+    "version": null,
+    "key": false
+   },
+   "new": "0.4 Lab - Scientific Observations 1.pdf"
+  },
+  {
+   "id": "13cRySBJyG2N-tkQ_soYs06E8UNpVhcb8",
+   "old": "SHULL_CHEM_Lab_U00_S0.4_Key.pdf",
+   "parent": "199f-dW2ZxIk99mqmK96HGQGbVHWWqTf6",
+   "mod": "2026-09-08T15:15:11Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "0.4"
+    ],
+    "unit": 0,
+    "topic": "Scientific Observations",
+    "version": null,
+    "key": true
+   },
+   "new": "0.4 Lab Key - Scientific Observations.pdf"
+  },
+  {
+   "id": "1eSuicKHiQ7TzPj-7-Nwa64Vs8fIqj-AQ",
+   "old": "SHULL_CHEM_Slides_U01_S01.4.pptx",
+   "parent": "1bXTWtzWq-13wNTsz7TVD-pN-BwTRQhbx",
+   "mod": "2026-09-08T14:52:48Z",
+   "course": "chemistry",
+   "copy": false,
+   "draft": false,
+   "flags": [],
+   "ext": "pptx",
+   "args": {
+    "type": "Slides",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Isotopes",
+    "version": null,
+    "key": false
+   },
+   "new": "1.4 Slides - Isotopes.pptx"
+  },
+  {
+   "id": "1fykzmwHDgfrCOhGoMCOrN6A9VFH6t9Jo",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.4_Key.pdf",
+   "parent": "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   "mod": "2026-09-06T12:42:00.263Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Free Fall",
+    "version": null,
+    "key": true
+   },
+   "new": "1.4 Practice Set Key - Free Fall.pdf"
+  },
+  {
+   "id": "1s-zRSLyatWfBr1RhKlqKAWstj99JlbIK",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.3_Key.pdf",
+   "parent": "1cfz4I-x4Uei2W5hSd3NDn2AWZA_pRNHw",
+   "mod": "2026-09-06T12:42:00.249Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": true
+   },
+   "new": "1.3 Practice Set Key - Position-Velocity-Acceleration Graphing.pdf"
+  },
+  {
+   "id": "1VRUEMfHhaSaCQ3_T0hhQ52VJ1LA1uQHB",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.4_Key.docx",
+   "parent": "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   "mod": "2026-09-06T12:42:00.242Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Free Fall",
+    "version": null,
+    "key": true
+   },
+   "new": "1.4 Practice Set Key - Free Fall.docx"
+  },
+  {
+   "id": "1ER2GTbMmnKVGhDLolM5Om0OKVUejt6or",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.4.pdf",
+   "parent": "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   "mod": "2026-09-06T12:42:00.180Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Free Fall",
+    "version": null,
+    "key": false
+   },
+   "new": "1.4 Practice Set - Free Fall.pdf"
+  },
+  {
+   "id": "1hLU7-c24XIDfQMuFusSyW8bvLuhPV3cl",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.4.docx",
+   "parent": "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   "mod": "2026-09-06T12:42:00.155Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.4"
+    ],
+    "unit": 1,
+    "topic": "Free Fall",
+    "version": null,
+    "key": false
+   },
+   "new": "1.4 Practice Set - Free Fall.docx"
+  },
+  {
+   "id": "1PPDV-gxhpikH4lTTL9nfD5b72TH4tHCF",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.3.pdf",
+   "parent": "1cfz4I-x4Uei2W5hSd3NDn2AWZA_pRNHw",
+   "mod": "2026-09-06T12:41:59.174Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Practice Set - Position-Velocity-Acceleration Graphing.pdf"
+  },
+  {
+   "id": "1gUCxL1hPLG7a0zUMkHunQXxd8RMl6che",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.3_Key.docx",
+   "parent": "1cfz4I-x4Uei2W5hSd3NDn2AWZA_pRNHw",
+   "mod": "2026-09-06T12:41:59.152Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": true
+   },
+   "new": "1.3 Practice Set Key - Position-Velocity-Acceleration Graphing.docx"
+  },
+  {
+   "id": "1QvAZzTn0cGpxJiELMPJEFIv5aCUnYLcs",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.1_Key.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-06T12:41:57.963Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": true
+   },
+   "new": "1.1 Practice Set Key - Distance, Displacement & Velocity.pdf"
+  },
+  {
+   "id": "1vLSFC8WIAexleJN5Z_7OZW3vSzuPRqMh",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.3.docx",
+   "parent": "1cfz4I-x4Uei2W5hSd3NDn2AWZA_pRNHw",
+   "mod": "2026-09-06T12:41:57.923Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.3"
+    ],
+    "unit": 1,
+    "topic": "Position-Velocity-Acceleration Graphing",
+    "version": null,
+    "key": false
+   },
+   "new": "1.3 Practice Set - Position-Velocity-Acceleration Graphing.docx"
+  },
+  {
+   "id": "1Dq1sdFztOHUWi8bV8HR9GT-64aKTk0Ze",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.2_Key.docx",
+   "parent": "1syvqWt83E0ReKfLvVqF34FAcH2ZkG7i6",
+   "mod": "2026-09-06T12:41:57.812Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": true
+   },
+   "new": "1.2 Practice Set Key - Acceleration & Kinematic Equations.docx"
+  },
+  {
+   "id": "1hblmshsgOAJLEbaJ6Br3o0UCY7_kn8JT",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.2_Key.pdf",
+   "parent": "1syvqWt83E0ReKfLvVqF34FAcH2ZkG7i6",
+   "mod": "2026-09-06T12:41:57.639Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": true
+   },
+   "new": "1.2 Practice Set Key - Acceleration & Kinematic Equations.pdf"
+  },
+  {
+   "id": "1LNmZnH4B7XsKgSk52PWEmycZvrEuNmwU",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.1.pdf",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-06T12:41:57.446Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": false
+   },
+   "new": "1.1 Practice Set - Distance, Displacement & Velocity.pdf"
+  },
+  {
+   "id": "1T9wENk2EiO46IInI70rSDrZzRTFNrZSl",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.1_Key.docx",
+   "parent": "1ctS-nijkqaZqFNxtAjemh569boe2KubK",
+   "mod": "2026-09-06T12:41:57.438Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.1"
+    ],
+    "unit": 1,
+    "topic": "Distance, Displacement & Velocity",
+    "version": null,
+    "key": true
+   },
+   "new": "1.1 Practice Set Key - Distance, Displacement & Velocity.docx"
+  },
+  {
+   "id": "1sIq9cUrNq76rYbzFkLtd1U6PdGRkF8Su",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.2.pdf",
+   "parent": "1syvqWt83E0ReKfLvVqF34FAcH2ZkG7i6",
+   "mod": "2026-09-06T12:41:57.430Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "pdf",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": false
+   },
+   "new": "1.2 Practice Set - Acceleration & Kinematic Equations.pdf"
+  },
+  {
+   "id": "1qGp7hiMZLQNjtGTKHRSS1Kx222iZSZb0",
+   "old": "SHULL_PHYS_Practice_Set_U01_S1.2.docx",
+   "parent": "1syvqWt83E0ReKfLvVqF34FAcH2ZkG7i6",
+   "mod": "2026-09-06T12:41:57.394Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "unpadded section in old name"
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Practice_Set",
+    "sections": [
+     "1.2"
+    ],
+    "unit": 1,
+    "topic": "Acceleration & Kinematic Equations",
+    "version": null,
+    "key": false
+   },
+   "new": "1.2 Practice Set - Acceleration & Kinematic Equations.docx"
+  },
+  {
+   "id": "1gva-LVBl0snq9EyDytU3JcMl5ol-lwFM",
+   "old": "SHULL_PHYS_Lab_U00_S00.4_Jump_Lab.docx",
+   "parent": "0AN7jIuczxHMDUk9PVA",
+   "mod": "2026-09-03T21:00:00.437Z",
+   "course": "physics",
+   "copy": false,
+   "draft": false,
+   "flags": [
+    "descriptor kept: \"Jump Lab\""
+   ],
+   "ext": "docx",
+   "args": {
+    "type": "Lab",
+    "sections": [
+     "0.4"
+    ],
+    "unit": 0,
+    "topic": "Physics Graphing Jump Lab",
+    "version": null,
+    "key": false
+   },
+   "new": "0.4 Lab - Physics Graphing Jump Lab.docx"
+  }
+ ],
+ "geo": [
+  {
+   "id": "1BXJDvWDtvcBGxrbQ9xG62vL0MHEZuhuR",
+   "old": "SHULL_Geologic_Timeline_4_Pages_Cenozoic.pdf",
+   "parent": "1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C",
+   "new": "Unit 2 Activity - Geologic Timeline 4 Pages Cenozoic.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1iGVmY30TKjkTIVp_Naykdpp58wbWbyK4",
+   "old": "SHULL_Geologic_Cutouts_38_Events.pdf",
+   "parent": "1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C",
+   "new": "Unit 2 Activity - Geologic Cutouts 38 Events.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1rGAm9mHYXFy0FZjLr_7xCzcI0ogtiSRh",
+   "old": "SHULL_Geologic_Cutouts_38_Events.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Cutouts 38 Events.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1i1OFCFVkXhyoDC8LChmOLvOAIjs4iYkt",
+   "old": "SHULL_Geologic_Timeline_4_Pages_Cenozoic.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline 4 Pages Cenozoic.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1wTcRePg4Qf4r8orks0Aue-S3EbbebVk0",
+   "old": "SHULL_Geologic_Cutouts_For_4_Page_Timeline.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Cutouts for 4 Page Timeline.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1vEJOYRyrqOEV8VLoCGdUTm8z-4ysOOeO",
+   "old": "SHULL_Geologic_Timeline_4_Pages.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline 4 Pages.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1-rPhjbQaO4BY_v6eG6NNwy2czy61Gos9",
+   "old": "SHULL_Geologic_Time_Reference_Guide.pdf",
+   "parent": "1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C",
+   "new": "Unit 2 Reference - Geologic Time Reference Guide.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1tgQZfLGzy2KRnl0XwxsisdLyBkgmJpsi",
+   "old": "SHULL_Geologic_Time_Reference_Guide.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Reference - Geologic Time Reference Guide.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1L2ZBoLoYvSI47R28YlFYAmEPPimzGdLN",
+   "old": "SHULL_Geologic_Time_Student_Guide.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Study Guide - Geologic Time Student Guide.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1aqkmjfa5-F7LoEeUddo7qNq6p53DTxs5",
+   "old": "SHULL_Geologic_Timeline_Enlarged_Coloring_v2.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline Enlarged Coloring v2.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1-SMLVJnPQeUc6e4xi4uorghvl3-xvhmq",
+   "old": "SHULL_Geologic_Timeline_Color_Cutouts_v2.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline Color Cutouts v2.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1AM-CGg8h9dNN84geAvPp6XudNmUy6nXC",
+   "old": "SHULL_Geologic_Timeline_Enlarged_Coloring.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline Enlarged Coloring.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1taLA9PxgxnpR7VJ8l_gJRRKF6CWJycf9",
+   "old": "SHULL_Geologic_Timeline_Color_Cutouts.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline Color Cutouts.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  },
+  {
+   "id": "1DZpfD1RQsMTls-ySVHL0_6rBI9y4mlH3",
+   "old": "SHULL_Geologic_Timeline.pdf",
+   "parent": "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   "new": "Unit 2 Activity - Geologic Timeline.pdf",
+   "target": "Geology / Unit 02 - Geologic Time / Homework (create)"
+  }
+ ],
+ "quiz": [
+  {
+   "id": "1HVxUSTz58JUNI9Z6tOFZJHyMruB5o8G7",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_A_Key - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:35:41.901Z",
+   "v": "A",
+   "key": true,
+   "copy": true,
+   "new": "Unit 1 Quiz A Key - Motion in One Dimension Fall 2026 Version 1.docx"
+  },
+  {
+   "id": "1pKiLDUrmTE0ok19KlIB7eRIc4ZIrGgTS",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_B_Key - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:35:49.561Z",
+   "v": "B",
+   "key": true,
+   "copy": true,
+   "new": "Unit 1 Quiz B Key - Motion in One Dimension Fall 2026 Version 1.docx"
+  },
+  {
+   "id": "1pGYnkOJdtROYDQlbwcNCvyhaWVo0-DFT",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_C_Key - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:35:56.888Z",
+   "v": "C",
+   "key": true,
+   "copy": true,
+   "new": "Unit 1 Quiz C Key - Motion in One Dimension Fall 2026 Version 1.docx"
+  },
+  {
+   "id": "1I9FgC_R_JrBfEQC9-xRRuOZJDF_wjwIO",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_A - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:40:25.665Z",
+   "v": "A",
+   "key": false,
+   "copy": true,
+   "new": "Unit 1 Quiz A - Motion in One Dimension Fall 2026 Version 1.docx"
+  },
+  {
+   "id": "1DvnvW34hY-aZehdHX8Ydm15ZIGEEFFnN",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_B - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:42:34.212Z",
+   "v": "B",
+   "key": false,
+   "copy": true,
+   "new": "Unit 1 Quiz B - Motion in One Dimension Fall 2026 Version 1.docx"
+  },
+  {
+   "id": "1Gz_iCbckZ37t3koU2zvq7M_j0XU54q2W",
+   "old": "SHULL_PHYS_Quiz_U01_Fall2026_C - Copy.docx",
+   "parent": "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   "mod": "2026-09-17T14:44:06.792Z",
+   "v": "C",
+   "key": false,
+   "copy": true,
+   "new": "Unit 1 Quiz C - Motion in One Dimension Fall 2026 Version 1.docx"
+  }
+ ],
+ "left": [
+  [
+   "1VZHmD3p7WQ_QU0H5W3oIbKnCZr8es-UQ",
+   "SHULL_GEO_Guided_Notes_Modern.docx",
+   "1zrfQ4v3IvQ-ujHyJ25ytCc_2aQq6r7GE",
+   null
+  ],
+  [
+   "1Fzt--4UAQnnJubgzbSvpsA1jwZYyURzicFdRd48WHxM",
+   "SHULL_PHYS_U01_S01.4_Reaction_Time_Data_Dashboard",
+   "1iLe_FEWQVjNAP8ClgDYkOJifvH38YVJW",
+   null
+  ],
+  [
+   "1encHae0mOs59snonuLG4rdCQPxWLhwIy",
+   "SHULL_CHEM_U01_Guided_Notes_Cover_and_Review.pdf",
+   "1zY61_LkoPe7YKARMCfl6E2B3MZAIpHW5",
+   null
+  ],
+  [
+   "1pI-xb1s9OgODYXNVOLG_-Bp3I86jKJZD",
+   "SHULL_CHEM_U01_Guided_Notes_Cover_and_Review.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1M5xCgvG-Xyn2-X3hVX5--Vffj3UQNwhG",
+   "SHULL_CHEM_Guided_Notes_U01_Ink_Saver_Condensed.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1IbaCj_TLJzi_iyjWSqNHrR3-NP5Oiabu",
+   "SHULL_CHEM_Guided_Notes_U01_Ink_Saver.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1tiJiHx8inFfebjvqoh2CnpauUuLNuMnp",
+   "SHULL_CHEM_Guided_Notes_U01_Redesigned.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1xjwRzpsgA6KyLnPSy855GSk3vu0L4rQT",
+   "SHULL_PHYS_Reaction_Time_Refined.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1Q051gCAbpbqrTWhi8FL_WnpLwK9KUiRT",
+   "SHULL_CHEM_Element_Builder_Designed.docx",
+   "1t_3db6VNrkCYuP73LgQx-sWEVHvz7GIK",
+   null
+  ],
+  [
+   "1HJhPRu1eGBTmqGzku71GBJcXMCvsViYh",
+   "SHULL_CHEM_Element_Builder_Designed.docx",
+   "1IE9wqFT8iXkFkY3Py2OAe-o4brVFlqjS",
+   null
+  ],
+  [
+   "1wBYQhb4JyYn4gik87_eD1GcFwdF8M_Wf",
+   "SHULL_CHEM_Element_Builder_Designed.docx",
+   "1_DU3neqzbqWaMdBD1WE9EQtjFrz7RvSk",
+   null
+  ],
+  [
+   "1VDvJLDNhrAv6qeLPGkdu7_C23bz_J-kt",
+   "SHULL_CHEM_Element_Builder_Atomic_Structure.docx",
+   "1_DU3neqzbqWaMdBD1WE9EQtjFrz7RvSk",
+   null
+  ],
+  [
+   "1R-O3_d3mBp1K0HgSE-z5KSWyQqWmLE3b",
+   "SHULL_CHEM_Atomic_Theory_Jigsaw_Original_Drawings.pdf",
+   "15FUjBMNe9elG0Cod5eNqUTSn9d1cEDWe",
+   null
+  ],
+  [
+   "1taTJTzRthUWScl0mMygPnk7Jy4y0eOwb",
+   "SHULL_CHEM_Atomic_Theory_Jigsaw_Original_Drawings.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "148Ijnl90Nk6XSmbKermyoUkEo5uPvGzL",
+   "SHULL_CHEM_Atomic_Theory_Jigsaw_Improved_Models.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "1wH6_DpBnn41nHXd_Ti42aGoHAESoQf0k",
+   "SHULL_CHEM_Atomic_Theory_Jigsaw_Refined.pdf",
+   "13bjAwZfmIxrt0g0W1ozt8lBFfIojWpra",
+   null
+  ],
+  [
+   "19oFgfHRyeAKJwMEbgzkxsxpAxtFVXaX2",
+   "SHULL_Geologic_Cutouts_38_Events-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1Psgr0sDLw7FP057H0WywHmV1B0RzaNcu",
+   "SHULL_Geologic_Timeline_4_Pages_Cenozoic-4.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1lwOKWMhooPW4JFzr62GacCz0xgQSn1Pj",
+   "SHULL_Geologic_Timeline_4_Pages_Cenozoic-3.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1KuBFMgPyNzP5tKxU_7qn1Ob8GwtzlY9w",
+   "SHULL_Geologic_Timeline_4_Pages_Cenozoic-2.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1WRGbHYTOH1gdnDa42PABNqBakaXXAwZs",
+   "SHULL_Geologic_Timeline_4_Pages_Cenozoic-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1MDHd3dgKcoUGi7yAiqeOosn20V9iMXdL",
+   "SHULL_PHYS_Quiz_U01_Fall2026_GradeSheet.pdf",
+   "1aYZtAI2rKprtJIFOjJMKDnTOBteAjqVI",
+   null
+  ],
+  [
+   "1NOLB-9J55LgATcuF2oVmpYvrVUUnstUv",
+   "SHULL_Geologic_Cutouts_For_4_Page_Timeline-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1tGbjnErtSrV0w6DuKY0iBNMn84VBPpu2",
+   "SHULL_Geologic_Timeline_4_Pages-2.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1ST7L_0uLwkV4oHP6qNC1A4zMyv_wYOvW",
+   "SHULL_Geologic_Timeline_4_Pages-3.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1wPngwW3tI_nFQBtqianvV8t1wAr2mBGf",
+   "SHULL_Geologic_Timeline_4_Pages-4.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1v3LfZGgI-Fg3ipit--CDjRVcX1FRjppR",
+   "SHULL_Geologic_Timeline_4_Pages-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "11vN7bHX69YRzk6um_GwJQL--iSc_hrLj",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring_v2-2.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1L7j_-som38-qgk8rV35qBouP261Tq0PX",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring_v2-3.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1xUkwITQ7Rpe3AB1zvxzvcyuvIL3dI3rk",
+   "SHULL_Geologic_Timeline_Color_Cutouts_v2-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1rUn-58KGusug8L65XQrzeJdRRHiqCFAu",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring_v2-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1uUkOYgSMu6zrotZOgQxWwaQ3isJ7RtCx",
+   "SHULL_Geologic_Timeline_Color_Cutouts-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1N29P_ZJ9KXB3uj0daeWWjsO1iJluDtVs",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring-3.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1b1OPVaZCL9Lswe9QSzVfEIVM-BCNJAoy",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring-1.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1CpC7X1wKqHoiYSbPFQtde6mItdSjz2ZL",
+   "SHULL_Geologic_Timeline_Enlarged_Coloring-2.png",
+   "1wZ9t_Ko-45ZnxgSjHojqA--Dan6di8vk",
+   "page-render image of the timeline; not a course document"
+  ],
+  [
+   "1K_Qg5v3IoecLL92c9E77iRmRg9KL81t6",
+   "SHULL_Lab_TEMPLATE_TEACHER_KEY.html",
+   "1GSAZAogiA1hBWd7PBcmLILzO-wBW5_Rs",
+   null
+  ],
+  [
+   "1lrAbuuVbPce_B1Zgbfyqmhuu0QbA4ElY",
+   "SHULL_Lab_TEMPLATE_TEACHER_KEY_PREVIEW.pdf",
+   "1GSAZAogiA1hBWd7PBcmLILzO-wBW5_Rs",
+   null
+  ],
+  [
+   "1skKCQI2ohqGblNdpSEozO74eRHCkHRST",
+   "SHULL_Lab_TEMPLATE_MASTER.html",
+   "1GSAZAogiA1hBWd7PBcmLILzO-wBW5_Rs",
+   null
+  ],
+  [
+   "1MYXot6D0W4FZ_DiF-Uusi5lVNuTxqOTL",
+   "SHULL_Lab_TEMPLATE_MASTER_PREVIEW.pdf",
+   "1GSAZAogiA1hBWd7PBcmLILzO-wBW5_Rs",
+   null
+  ],
+  [
+   "1eAeIvhA-i1ou3FWzzlg2aqmhWxFzoKlo",
+   "SHULL_Science_Slide_Template.pptx",
+   "1cFgdQbW8SSJaaXxzfCCr-IZMFjvaMg6J",
+   null
+  ],
+  [
+   "1XQoKYXcMUDkMAWJ3Sd1UTwtpOKCzWuxo",
+   "SHULL_Slide_System_v2.md",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ],
+  [
+   "1CJ06udmWvBngXnZHZTHs2rC_Fqh2_BN2",
+   "SHULL_PHYS_Palette_QuietVoltage_preview.png",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ],
+  [
+   "1f6uF9N1ajxWIEYrFtieFF6tUTkCM1U8z",
+   "SHULL_PHYS_Palette_QuietVoltage.md",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ],
+  [
+   "1HXulaDFwWKk2jtILI4Z3uU7d62zLcoJW",
+   "SHULL_Physics_Guided_Cornell_Notes_Standard.docx",
+   "128C-OzoQK3U5eKKRibiFAvgv720s2ECx",
+   null
+  ],
+  [
+   "1dCB2EuRmCUd_uPDovJ2Y5_Vj5f2BRiP2",
+   "SHULL_PHYS_Skills_Review_U0.3_U2.1.docx",
+   "11ICpNpipjTWB61hUy2VfgNpA2a-AXmL-",
+   null
+  ],
+  [
+   "1_gyPFNCc3MHFZS5K0FPgahcTlB_5cvt4",
+   "SHULL_CHEM_Lab_Equipment_KEY_U00_S0.1.pdf",
+   "18rM6FgiIViOb5Qooq-N4OoZ4vLFRVF6i",
+   null
+  ],
+  [
+   "1lV2ZG8v77vgYA7xYZkch9umvGwgNfhRN",
+   "SHULL_CHEM_Lab_Equipment_CutSheets_U00_S0.1.pdf",
+   "18rM6FgiIViOb5Qooq-N4OoZ4vLFRVF6i",
+   null
+  ],
+  [
+   "1AbkAmtdvvQEndi53XhNXczYDBui1N-3i",
+   "SHULL_CHEM_Lab_Equipment_Organizer_U00_S0.1.pdf",
+   "18rM6FgiIViOb5Qooq-N4OoZ4vLFRVF6i",
+   null
+  ],
+  [
+   "1dfqAZuMV8b3VLioui3mBu-HCOqBmOCMQ",
+   "SHULL_Day1_I_Am_A_Scientist_LabCoat.pdf",
+   "18rM6FgiIViOb5Qooq-N4OoZ4vLFRVF6i",
+   null
+  ],
+  [
+   "1VAKENnC0Ag25UxrNhIj4NrgDCTZgnCQe",
+   "SHULL_PHYS_Reference_Sheets_LowInk.pdf",
+   "10GDSprppReT5_OJtiRkkQerpjLjYGU9-",
+   null
+  ],
+  [
+   "1xOvb5q3Pf6luiCr8PnAG1bs3OpbEixCh",
+   "SHULL_Roster_Checklist_AllClasses.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "1cLAVPECMb7qrPUdN2AT54pooiooFKnrE",
+   "SHULL_TurnIn_Bin_Sign.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "16KE0mfQU_63dsoFvRMqpnBwkwG3UDkyf",
+   "SHULL_SCIENCE_Binder_Organization_20262027.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "1_Y7bd5u0ZLXn2Vo9sSXJwwS5k3wamyK5",
+   "SHULL_CHEM_Lab_Equipment_KEY_U00_S0.1.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "1Nv2AwiZzbCmapRmim6uCASqwRGh292-r",
+   "SHULL_CHEM_Lab_Equipment_CutSheets_U00_S0.1.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "1NaAT7EYs2RW6lMZAbQg_Vr_dOzS0_lBw",
+   "SHULL_CHEM_Lab_Equipment_Organizer_U00_S0.1.pdf",
+   "1LWw4SYiyoIuMU_-dUXjB-57ieXqOxnJl",
+   null
+  ],
+  [
+   "1Uv7kzc78wDgt3x-Lk_kt8LspaabIIjUF",
+   "SHULL_CHEM_Lab_Equipment_Cut_and_Glue.docx",
+   "17D7vpycd9fKorWHumXS7O_FYLNR4pi1Q",
+   null
+  ],
+  [
+   "1YG6sHQHqByVnoHiNIdYOwkpYdnFth13j",
+   "SHULL_PHYS_Math_Skills_Pretest_U0_KEY.docx",
+   "128C-OzoQK3U5eKKRibiFAvgv720s2ECx",
+   null
+  ],
+  [
+   "1Qjq9ldB0W9GepyNLTbPAZdIDJxYvCiRL",
+   "SHULL_PHYS_Math_Skills_Pretest_U0.docx",
+   "128C-OzoQK3U5eKKRibiFAvgv720s2ECx",
+   null
+  ],
+  [
+   "1FizQQqXkqk946Ap7xb6Qv516Lewgadzp",
+   "SHULL_SCIENCE_Binder_Organization_20262027.pdf",
+   "0AN7jIuczxHMDUk9PVA",
+   null
+  ],
+  [
+   "1phh8oWGNE0gkmisogWQ5qK-gGWfXRDCM",
+   "SHULL_System_Governance.md",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ],
+  [
+   "1j3Ee1LIG20IFFUQ42H0TF2ptn286ZVYL",
+   "SHULL_Cowork_Folder_Organization_v2.md",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ],
+  [
+   "1gyGaueDuCTkJgRRj2hO0r6_1BmcoVu0U",
+   "SHULL_Studio_Architecture_v2.md",
+   "1aLMHcKoF4nrAKh121O2w5WgzVwSqOgZK",
+   null
+  ]
+ ]
+}

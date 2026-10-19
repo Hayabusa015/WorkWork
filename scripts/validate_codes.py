@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _shullos import REPO, walk, read, report, section_codes, COURSE_BY_CODE
 
 # A code is only checked when the surrounding text says which course it belongs to:
-# either a SHULL_ filename or an explicit CHEM/PHYS/GEO nearby. A bare "U08_S08.2"
+# either a legacy SHULL_ filename (pre SHULL-CHG-0024; the new short names carry no course) or an explicit CHEM/PHYS/GEO nearby. A bare "U08_S08.2"
 # in a generic example is not attributable and is not checked.
 FILENAME = re.compile(r"SHULL_(CHEM|PHYS|GEO)_[A-Za-z_]+_U(\d{1,2})_S(\d{1,2}\.\d)")
 
@@ -86,6 +86,20 @@ def main():
                 errors.append(
                     f"{rel.replace(os.sep,'/')}:{line} {m.group(0)} — "
                     f"unit U{unit:02d} disagrees with section {bare}")
+    # Short titles (SHULL-CHG-0041): every row names a code that exists and is at most 20 characters.
+    for c in ("chemistry", "physics", "geology"):
+        text = read(os.path.join("courses", c, "DECISIONS.md"))
+        m = re.search(r"^## Short titles\s*$(.*?)(?=^## )", text, re.S | re.M)
+        rows = re.findall(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$", m.group(1), re.M) if m else []
+        for code, short in rows:
+            if code.lower() == "code" or set(code) <= set("-: "):
+                continue
+            checked += 1
+            if code[:1].upper() != "U" and code not in valid[c]:
+                errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} is not a section in this file")
+            if len(short) > 20:
+                errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} {short!r} is "
+                              f"{len(short)} characters; the limit is 20")
     for c in ("chemistry", "physics", "geology"):
         print(f"  {c:10} {len(valid[c]):>3} valid section codes")
     return report("validate_codes", errors, checked)

@@ -27,6 +27,8 @@ do not ship on the assumption it looks right.
 > Archivo Narrow. If it shows DejaVu or Liberation, the font substitution did not take and you are
 > inspecting different metrics than the classroom copy will have. That was the real state of this
 > system until 2026-09-08.
+>
+> Key files may also carry the key-handwriting face (`typography.keyHandwriting`), per `standards/ANSWER_KEYS.md` §9; `scripts/audit_fonts.py --key` enforces it.
 
 ## 2. Page budget
 
@@ -110,8 +112,8 @@ clear of the first bullet · rail card content vertically centred · headlines r
 grammar, not just spelling.
 
 **Guided notes** — student copy and filled key generated from the same source so they cannot drift ·
-every section starts on a new page and ends with a summary box plus self-check · blanks sized to the
-expected answer.
+every section starts on a new page and ends with a RECALL block (a summary prompt plus a self-check;
+SHULL-CHG-0033) · blanks sized to the expected answer.
 
 **Assessments** — every item maps to a learning target · distractors are real misconceptions ·
 exactly one unambiguously best answer · parallel versions carry identical blueprints, standards
