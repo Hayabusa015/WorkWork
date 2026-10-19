@@ -56,9 +56,9 @@ Logged before action. Prior parent of each: Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsM
 
 | Operation | Object | ID | Status |
 |---|---|---|---|
-| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.docx | 1acGH7qHg5f6iHU-HSSNsXxtRo4ocaQBW | planned |
-| Trash | 2.4 Organizer Key - Electron Stability & Valence Electrons.docx | 1VcxC7l33FLH-xnRIOyMChmA-BETR9zbr | planned |
-| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.pdf | 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi | planned |
+| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.docx | 1acGH7qHg5f6iHU-HSSNsXxtRo4ocaQBW | blocked by scripts/hook-drive-guard.sh; user to trash in Drive |
+| Trash | 2.4 Organizer Key - Electron Stability & Valence Electrons.docx | 1VcxC7l33FLH-xnRIOyMChmA-BETR9zbr | blocked by the same guard hook |
+| Trash | 2.4 Organizer - Electron Stability & Valence Electrons.pdf | 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi | blocked by the same guard hook |
 
 Defect found while fixing the Battleship table: `periodic_layout()` in build_electron_set.py dropped Ne and
 Ar and shifted B and Al one column right (periods 2 and 3). It affected the Battleship back page AND the
