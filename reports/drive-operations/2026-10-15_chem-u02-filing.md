@@ -44,6 +44,8 @@ pdf 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi) is not touched. Route: gws (drive.file) t
 
 | Operation | Final name | Status |
 |---|---|---|
-| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.docx | planned |
-| Upload then move | 2.4 Organizer Version 2 Key - Electron Stability & Valence Electrons.docx | planned |
-| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.pdf | planned |
+| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.docx | filed 2026-10-19, ID 1-2nj91Yl4FFwrSA_gjOa8nwQqdrkxiJz, verified by parentId lookup |
+| Upload then move | 2.4 Organizer Version 2 Key - Electron Stability & Valence Electrons.docx | filed 2026-10-19, ID 1QeLItYAiIDyuHItyVyAJKS6U07Hsj3TH, verified by parentId lookup |
+| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.pdf | filed 2026-10-19, ID 1Vz7zMvujc5jOy-P4NRs8GmfLSw_ipk3m, verified by parentId lookup |
+
+Upload Inbox empty afterwards. Version 1 files untouched.
