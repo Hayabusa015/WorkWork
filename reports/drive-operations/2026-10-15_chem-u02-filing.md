@@ -33,3 +33,17 @@ Logged before any action. Unit 02 had no folders (parentId lookup, folders only)
 | Create folder | `Section 02.3 - Electron Configurations` | parent Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp); name from courses/chemistry/DECISIONS.md | created, ID 12xbue3vJTgnkZwn1Fh65ZdaOjRRSmDrT |
 | Create folder | `Homework` | parent: the Section 02.3 folder | created, ID 1DIJnraCcfyNolKZEzAwgnWQA0HahJmiV |
 | Upload then move | 2.3 Activity - Electron Configurations Gizmo.docx / Key.docx / .pdf | Section 02.3 / Homework | filed 2026-10-15, verified by parentId lookup. docx 1_LYqusrdmOSh2FKxoyBCII8Do1TUmYy4, key 1RLCiPx9dKJjuCZCcq7t12ooztLo-gRPx, pdf 1zkRrKHt2Flsfrz6_ZPALMXcpNIHHVIOo. Upload Inbox empty afterwards. |
+
+## 2026-10-19: valence electron table, Version 2 (user approved: "file it as Version 2")
+
+Condensed to 3 pages (elements 1-36 on two pages plus the blank periodic table). Logged before any
+action. The filed Version 1 (docx 1acGH7qHg5f6iHU-HSSNsXxtRo4ocaQBW, key 1VcxC7l33FLH-xnRIOyMChmA-BETR9zbr,
+pdf 1S5AGFP3JxB4u15Z_mmeJTy-Mr0b9C3Yi) is not touched. Route: gws (drive.file) to the Upload Inbox
+(1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy), then update_file to the Unit 02 root
+(1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp). Prior parent of each new file: the Upload Inbox.
+
+| Operation | Final name | Status |
+|---|---|---|
+| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.docx | planned |
+| Upload then move | 2.4 Organizer Version 2 Key - Electron Stability & Valence Electrons.docx | planned |
+| Upload then move | 2.4 Organizer Version 2 - Electron Stability & Valence Electrons.pdf | planned |
