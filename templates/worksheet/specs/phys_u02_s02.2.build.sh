@@ -73,7 +73,8 @@ def _pieces(steps):
         if "label" in st and cur and not all("label" in x for x in cur):
             out.append(cur); cur = []
         cur.append(st)
-        if "answer" in st and i < len(steps) - 1:
+        nxt = steps[i + 1].get("row", [""])[0] if i < len(steps) - 1 else ""
+        if "answer" in st and i < len(steps) - 1 and not str(nxt).startswith("same direction"):
             out.append(cur); cur = []
     if cur:
         out.append(cur)

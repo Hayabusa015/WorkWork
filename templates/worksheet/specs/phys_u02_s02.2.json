@@ -81,6 +81,11 @@
                 "θ ="
               ],
               "value": "337°"
+            },
+            {
+              "row": [
+                "same direction:  −23°  =  23° south of east  =  67° east of south"
+              ]
             }
           ]
         },
@@ -138,6 +143,11 @@
                 "θ ="
               ],
               "value": "113°"
+            },
+            {
+              "row": [
+                "same direction:  −247°  =  23° west of north  =  67° north of west"
+              ]
             }
           ]
         },
@@ -190,6 +200,11 @@
                 "θ ="
               ],
               "value": "246°"
+            },
+            {
+              "row": [
+                "same direction:  −114°  =  24° west of south  =  66° south of west"
+              ]
             }
           ]
         },
@@ -265,6 +280,11 @@
                 "θ ="
               ],
               "value": "33°"
+            },
+            {
+              "row": [
+                "same direction:  −327°  =  33° north of east  =  57° east of north"
+              ]
             }
           ]
         },
@@ -351,6 +371,11 @@
                 "θ ="
               ],
               "value": "150°"
+            },
+            {
+              "row": [
+                "same direction:  −210°  =  30° north of west  =  60° west of north"
+              ]
             }
           ]
         },
@@ -425,6 +450,11 @@
                 "θ ="
               ],
               "value": "333°"
+            },
+            {
+              "row": [
+                "same direction:  −27°  =  27° south of east  =  63° east of south"
+              ]
             }
           ]
         },
@@ -515,6 +545,11 @@
                 "θ ="
               ],
               "value": "135°"
+            },
+            {
+              "row": [
+                "same direction:  −225°  =  45° west of north  =  45° north of west"
+              ]
             }
           ]
         },
@@ -606,6 +641,11 @@
               "value": "154°"
             },
             {
+              "row": [
+                "same direction:  −206°  =  26° north of west  =  64° west of north"
+              ]
+            },
+            {
               "label": "(b) Megatron: the opposite vector"
             },
             {
@@ -624,6 +664,11 @@
                 "F_{M} ="
               ],
               "value": "60.0 N at 334°"
+            },
+            {
+              "row": [
+                "same direction:  −26°  =  26° south of east  =  64° east of south"
+              ]
             }
           ]
         }

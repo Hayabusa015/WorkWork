@@ -131,4 +131,50 @@ bad = sorted({c for s in visible for c in s if c in BAD_GLYPHS})
 report(not bad, f"student page free of {BAD_GLYPHS!r}" + (f"  found {bad}" if bad else ""))
 report(not any("**" in s for s in visible), "no ** markup on the student page")
 
+import os
+SPEC_PATH = SPEC
+
+# Matt 2026-10-20: every boxed direction carries a "same direction:" line listing its other forms.
+# Independent check: turn each listed form into a unit vector and confirm all point the same way
+# as the boxed answer, to within half a degree (the answers are rounded to whole degrees).
+def _dir_check():
+    import json as _j, math as _m, re as _re
+    _spec = _j.load(open(SPEC_PATH, encoding="utf-8"))
+    AX = {"east": 0, "north": 90, "west": 180, "south": 270}
+    def ang(form, ref):
+        form = form.strip().replace("−", "-")
+        m = _re.fullmatch(r"(-?[\d.]+)°", form)
+        if m: return float(m.group(1))
+        m = _re.fullmatch(r"([\d.]+)° (\w+) of (\w+)", form)
+        if m:
+            d, to, frm = float(m.group(1)), AX[m.group(2)], AX[m.group(3)]
+            turn = ((to - frm + 180) % 360) - 180          # +90 or -90: which way "toward" is
+            return frm + d * (1 if turn > 0 else -1)
+        m = _re.fullmatch(r"due (\w+)", form)
+        if m: return AX[m.group(1)]
+        m = _re.fullmatch(r"([\d.]+)° from straight (up|down)", form)
+        if m: return (90 - float(m.group(1))) if m.group(2) == "up" else (-90 + float(m.group(1)))
+        raise ValueError(form)
+    def boxed(v):
+        v = v.split(" at ")[-1]
+        m = _re.match(r"([\d.]+)° (above|below) horizontal", v)
+        if m: return float(m.group(1)) * (1 if m.group(2) == "above" else -1)
+        return float(v.rstrip("°"))
+    n = bad = 0
+    for qi, q in enumerate(_spec["sectionsContent"][0]["questions"], 1):
+        last = None
+        for st in q["steps"]:
+            if "answer" in st: last = st
+            r = st.get("row", [""])[0]
+            if isinstance(r, str) and r.startswith("same direction:"):
+                ref = boxed(last["value"])
+                for form in r.split(":", 1)[1].split("="):
+                    a = ang(form, ref); n += 1
+                    dev = abs(((a - ref + 180) % 360) - 180)
+                    if dev > 0.5:
+                        bad += 1; print(f"FAIL  Q{qi} '{form.strip()}' is {a}°, boxed answer is {ref}°")
+    print(f"{'PASS' if not bad else 'FAIL'}  {n} equivalent-direction forms all match their boxed answers")
+    return bad
+
+fail += _dir_check()
 sys.exit(1 if fail else 0)
