@@ -32,7 +32,7 @@ from build_electron_set import (                                  # noqa: E402
 from _shull_docx import (                                          # noqa: E402
     T, hexof, borders, para, fix_widths, one_cell, no_split, gap, running_footer, trim_tail,
 )
-from build_notes_packet import Ctx, rich, spacer, cell_margins, _run   # noqa: E402
+from build_notes_packet import Ctx, rich, spacer, cell_margins, _run, page_break_before   # noqa: E402
 from _shull_name import document_name                              # noqa: E402
 
 HAND = T["typography"]["keyHandwriting"]["family"]
@@ -267,6 +267,290 @@ def build_quiz(out, ver, key):
     doc.save(out)
 
 
+# =======================================================================================
+# Shared item helpers for the spectra sheet and the study guide
+# =======================================================================================
+def item(doc, pal, n, prompt, key, answer=None, lines=1, line_h=0.32, label_w=0.0,
+         ctx=None, width=7.5):
+    """A numbered prompt with ruled answer lines. The key writes the answer on the first line."""
+    c = one_cell(doc, width); borders(c, pal.hair, sz=4, edges=("bottom",))
+    cell_margins(c, top=30, bottom=30, left=40, right=40)
+    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.left_indent = Inches(0.25)
+    p.paragraph_format.first_line_indent = Inches(-0.25)
+    _run(p, f"{n}   ", 10, bold=True, color=pal.accent)
+    rich(p, prompt, 10, ctx)
+    for i in range(lines):
+        t = c.add_table(rows=1, cols=1)
+        fix_widths(t, [width - 0.45])
+        no_split(t.rows[0], line_h)
+        cc = t.rows[0].cells[0]
+        cc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        borders(cc, pal.hair, sz=6, edges=("bottom",))
+        cell_margins(cc, top=0, bottom=10, left=60, right=0)
+        q = cc.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
+        if key and answer is not None and i == 0:
+            if callable(answer):
+                answer(q)
+            else:
+                hand(q, answer, 12)
+    pin_tail(c)
+    return c
+
+
+def section_bar(doc, pal, text, width=7.5, new_page=False):
+    if new_page:
+        page_break_before(doc)
+    else:
+        gap(doc, 4)
+    c = one_cell(doc, width); borders(c, pal.ink, sz=12, edges=("top",))
+    borders(c, pal.display, sz=18, edges=("bottom",))
+    para(c, text, 8.5, bold=True, color=pal.ink, caps_track=True, first=True)
+    c.paragraphs[0].paragraph_format.keep_with_next = True
+
+
+def keep_together(t):
+    """Keep a short table on one page: every row except the last keeps with the next."""
+    for row in t.rows[:-1]:
+        for cc in row.cells:
+            for q in cc.paragraphs:
+                q.paragraph_format.keep_with_next = True
+
+
+def small_table(doc, pal, heads, rows, answers, key, widths, ctx, row_h=0.32):
+    t = doc.add_table(rows=1 + len(rows), cols=len(heads))
+    fix_widths(t, widths)
+    for i, h in enumerate(heads):
+        cc = t.rows[0].cells[i]
+        borders(cc, pal.display, sz=12, edges=("bottom",))
+        cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell_margins(cc, top=20, bottom=20, left=60, right=40)
+        q = cc.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
+        rich(q, h, 8, ctx, bold=True, color=pal.accent)
+    for ri, row in enumerate(rows, start=1):
+        no_split(t.rows[ri], row_h)
+        for ci, val in enumerate(row):
+            cc = t.rows[ri].cells[ci]
+            borders(cc, pal.hair, sz=4)
+            cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_margins(cc, top=10, bottom=10, left=60, right=40)
+            q = cc.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
+            if val is not None:
+                rich(q, val, 10, ctx, bold=(ci == 0))
+            elif key:
+                hand(q, answers[ri - 1][ci], 12)
+    keep_together(t)
+    return t
+
+
+def ladder_png(path, drops=()):
+    """Hydrogen energy levels n = 1 to 6, drawn to scale (E = -13.6 / n^2 eV), with the
+    ionization limit. Optional arrows for the key."""
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = 2400, 1000
+    im = Image.new("RGB", (W, H), "white")
+    d = ImageDraw.Draw(im)
+    f = ImageFont.truetype(os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf"), 34)
+    top, bot = 70, 1040
+
+    # Not to scale: the real n=1 to n=2 gap is three quarters of the whole ladder, which
+    # crowds n=3 to n=6 into a strip too thin to draw in. The order and the shrinking gaps
+    # are kept, and the figure says so.
+    frac = {1: 0.0, 2: 0.42, 3: 0.62, 4: 0.75, 5: 0.84, 6: 0.90, 0: 1.0}
+
+    def y(n):
+        return bot - frac[n] * (bot - top)
+    ink = (60, 60, 60)
+    for n in range(1, 7):
+        d.line((260, y(n), 2300, y(n)), fill=ink, width=4)
+        d.text((130, y(n) - 20), f"n = {n}", font=f, fill=ink)
+    d.line((260, y(0), 2300, y(0)), fill=(150, 150, 150), width=3)
+    d.text((1900, bot - 60), "not to scale", font=f, fill=(120, 120, 120))
+    d.text((300, y(0) - 50), "ionization limit", font=f, fill=(120, 120, 120))
+    d.line((80, bot, 80, top), fill=ink, width=4)
+    d.polygon([(80, top - 10), (65, top + 25), (95, top + 25)], fill=ink)
+    d.text((95, top + 30), "Energy", font=f, fill=ink)
+    pen = tuple(int(hexof(INK["pen"])[i:i + 2], 16) for i in (0, 2, 4))
+    for i, (a, b) in enumerate(drops):
+        x = 700 + i * 380
+        d.line((x, y(a), x, y(b) - 26), fill=pen, width=6)
+        d.polygon([(x, y(b)), (x - 16, y(b) - 32), (x + 16, y(b) - 32)], fill=pen)
+        d.text((x - 50, y(b) + 12), f"{a}→{b}", font=f, fill=pen)
+    im.save(path)
+
+
+# =======================================================================================
+# Optional practice: atomic spectra (S2.5). No wave math (Matt, 2026-10-20).
+# =======================================================================================
+H_LINES = [((3, 2), "656", "red"), ((4, 2), "486", "blue-green"),
+           ((5, 2), "434", "blue-violet"), ((6, 2), "410", "violet")]
+
+
+def build_spectra(out, key, tmp):
+    pal = Palette(COURSE)
+    ctx = Ctx(pal, key)
+    doc, s = new_doc()
+    header(doc, pal, "OPTIONAL PRACTICE  ·  ATOMIC & ELECTRON SPECTRA" +
+           ("  ·  TEACHER KEY" if key else ""), "Light from Electron Drops")
+    gap(doc, 3)
+    c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
+    para(c, "When an electron drops to a lower energy level, the atom gives off a photon. The "
+            "bigger the drop, the more energy the photon carries. Use your notes from S2.5.",
+         9.5, first=True)
+
+    section_bar(doc, pal, "PART A  ·  HYDROGEN'S VISIBLE LINES")
+    img = os.path.join(tmp, "ladder_key.png" if key else "ladder.png")
+    ladder_png(img, [l[0] for l in H_LINES] if key else ())
+    c = one_cell(doc)
+    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(3)
+    _run(p, "1   ", 10, bold=True, color=pal.accent)
+    rich(p, "On the energy ladder, draw an arrow for each drop: 3 \u2192 2, 4 \u2192 2, "
+            "5 \u2192 2 and 6 \u2192 2.", 10, ctx)
+    q = c.add_paragraph(); q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    q.add_run().add_picture(img, width=Inches(6.6))
+    p = c.add_paragraph(); p.paragraph_format.space_after = Pt(3)
+    _run(p, "2   ", 10, bold=True, color=pal.accent)
+    rich(p, "Fill in the wavelength and color of each line.", 10, ctx)
+    no_split(doc.tables[-1].rows[0])
+    gap(doc, 2)
+    small_table(doc, pal, ["DROP", "WAVELENGTH (nm)", "COLOR"],
+                [[f"n = {x} \u2192 {y_}", None, None] for (x, y_), wl, col in H_LINES],
+                [[None, wl, col] for (x, y_), wl, col in H_LINES], key, [2.5, 2.5, 2.5], ctx)
+
+    item(doc, pal, 3, "Rank the four drops from least energy to most energy.", key,
+         "3→2,  4→2,  5→2,  6→2", ctx=ctx)
+    item(doc, pal, 4, "Use the ladder to explain why the 6 → 2 photon has the most energy "
+         "and the shortest wavelength of the four.", key,
+         "It is the biggest gap, so the photon carries the most energy.", lines=2, ctx=ctx)
+
+    section_bar(doc, pal, "PART B  ·  IN OR OUT", new_page=True)
+    gap(doc, 2)
+    small_table(doc, pal, ["ELECTRON MOVES", "ABSORBS OR EMITS", "PHOTON IN OR OUT"],
+                [["n = 1 → 3", None, None], ["n = 4 → 2", None, None],
+                 ["n = 2 → 6", None, None], ["n = 5 → 1", None, None]],
+                [[None, "absorbs", "in"], [None, "emits", "out"],
+                 [None, "absorbs", "in"], [None, "emits", "out"]],
+                key, [2.4, 2.55, 2.55], ctx)
+    item(doc, pal, 6, "Which drop gives off more energy, 3 → 1 or 3 → 2? Use the "
+         "size of the gap in your answer.", key,
+         "3→1. It is a bigger gap than 3→2.", lines=2, ctx=ctx)
+
+    section_bar(doc, pal, "PART C  ·  THREE KINDS OF SPECTRA")
+    gap(doc, 2)
+    small_table(doc, pal, ["WHAT YOU SEE", "KIND OF SPECTRUM"],
+                [["Every color, with no gaps", None],
+                 ["Bright colored lines on a dark background", None],
+                 ["Dark lines across a full rainbow", None]],
+                [[None, "continuous"], [None, "emission"], [None, "absorption"]],
+                key, [4.6, 2.9], ctx)
+
+    section_bar(doc, pal, "PART D  ·  FLAME TESTS")
+    gap(doc, 2)
+    small_table(doc, pal, ["FLAME COLOR", "ION IT POINTS TO"],
+                [["Yellow", None], ["Lilac", None], ["Blue-green", None]],
+                [[None, "Na+"], [None, "K+"], [None, "Cu2+"]],
+                key, [3.75, 3.75], ctx)
+    item(doc, pal, 9, "Li^+^ and Sr^2+^ both give a red flame. Why is a flame color only a "
+         "clue, not proof of which ion is there?", key,
+         "Different ions can give similar colors, so another test is needed.", lines=2, ctx=ctx)
+
+    running_footer(s, f"SHULL SCIENCE          {UNIT} · S02.5" +
+                   ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
+    trim_tail(doc)
+    doc.save(out)
+
+
+# =======================================================================================
+# Unit 2 study guide: two pages plus key. Practises the same skills as the quiz and test
+# without reusing any quiz element (checked in check_study_guide).
+# =======================================================================================
+SG_IONS = [(13, "Aluminum, Al"), (56, "Barium, Ba"), (7, "Nitrogen, N"), (37, "Rubidium, Rb")]
+SG_ION_ANS = {13: ("3", "Al^3+^"), 56: ("2", "Ba^2+^"), 7: ("5", "N^3−^"),
+              37: ("1", "Rb^+^")}
+
+
+def check_study_guide():
+    quiz = set()
+    for v in VERSIONS.values():
+        quiz |= set(v["long"]) | set(v["short"]) | set(v["ions"])
+    used = {31, 40, 7, 6, 24, 30} | {z for z, _ in SG_IONS}
+    clash = quiz & used
+    assert not clash, f"study guide reuses quiz elements: {sorted(clash)}"
+    assert flat(config(31)) == "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p1"
+    core, rest = shorthand(40); assert (core, flat(rest)) == (36, "5s2 4d2")
+    core, rest = shorthand(24); assert (core, flat(rest)) == (18, "4s1 3d5")
+    for z, (v, _) in SG_ION_ANS.items():
+        assert str(valence(z)[1]) == v, (z, valence(z))
+    print("study guide answers re-solved; no quiz element reused")
+
+
+def build_study_guide(out, key):
+    pal = Palette(COURSE)
+    ctx = Ctx(pal, key)
+    doc, s = new_doc()
+    header(doc, pal, "STUDY GUIDE  ·  UNIT 2  ·  S2.1 – S2.5" +
+           ("  ·  TEACHER KEY" if key else ""), "Unit 2 Study Guide: Electrons & Atomic Theory")
+    gap(doc, 3)
+    c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
+    para(c, "Work each section, then check it against your notes. Anything you miss tells you "
+            "what to practise before the test.", 9.5, first=True)
+
+    section_bar(doc, pal, "S2.1  ·  THE BOHR MODEL")
+    item(doc, pal, 1, "What does quantized mean for an electron's energy?", key,
+         "Set amounts only. It cannot sit between levels.", ctx=ctx)
+    item(doc, pal, 2, "Hydrogen's electron is in n = 1. Name that state, and name the state "
+         "when it is in n = 3.", key, "n=1 ground state; n=3 excited state", ctx=ctx)
+
+    section_bar(doc, pal, "S2.2  ·  ENERGY LEVELS, SUBLEVELS & ORBITALS")
+    item(doc, pal, 3, "List the sublevels in n = 4.", key, "4s, 4p, 4d, 4f", ctx=ctx)
+    item(doc, pal, 4, "How many electrons fit in one d sublevel? How many fit in all of n = 2?",
+         key, "d holds 10.  n=2 holds 8.", ctx=ctx)
+
+    section_bar(doc, pal, "S2.3  ·  ELECTRON CONFIGURATIONS")
+    item(doc, pal, 5, "Write the longhand configuration for gallium, Ga.", key,
+         lambda q: hand_config(q, 31, size=12), ctx=ctx)
+    item(doc, pal, 6, "Write the noble-gas shorthand for zirconium, Zr.", key,
+         lambda q: hand_config(q, 40, short=True, size=12), ctx=ctx)
+    c = item(doc, pal, 7, "Draw the orbital diagram for nitrogen, N, and count its unpaired "
+             "electrons.", key, None, lines=0, ctx=ctx)
+    if key:
+        key_strip(c, pal, 7)
+        q = c.add_paragraph(); hand(q, "3 unpaired", 12, boxed=True)
+    else:
+        spacer(c, 46)
+    item(doc, pal, 8, "A student draws carbon's 2p as [↑↓] [   ] [   ]. Which rule "
+         "did they break?", key, "Hund rule. It should be [↑] [↑] [   ].", ctx=ctx)
+    item(doc, pal, 9, "Write chromium's actual shorthand configuration. Why is it an "
+         "exception?", key,
+         lambda q: (hand_config(q, 24, short=True, size=12),
+                    hand(q, "   4s and 3d are close; this has less energy", 11, ink="arrow")),
+         lines=2, ctx=ctx)
+
+    section_bar(doc, pal, "S2.4  ·  VALENCE ELECTRONS & IONS", new_page=True)
+    gap(doc, 2)
+    small_table(doc, pal, ["ATOM", "VALENCE e^−^", "ION IT FORMS"],
+                [[nm, None, None] for _, nm in SG_IONS],
+                [[None, SG_ION_ANS[z][0], SG_ION_ANS[z][1].replace("^", "")]
+                 for z, _ in SG_IONS], key, [2.5, 2.5, 2.5], ctx)
+    item(doc, pal, 11, "Name two ions that have the same electron arrangement as neon.", key,
+         "any two of Na+, Mg2+, Al3+, F-, O2-, N3-", ctx=ctx)
+    item(doc, pal, 12, "Write the configuration of Zn^2+^. Which electrons left first?", key,
+         "[Ar] 3d10. The two 4s electrons left first.", ctx=ctx)
+
+    section_bar(doc, pal, "S2.5  ·  ATOMIC & ELECTRON SPECTRA")
+    item(doc, pal, 13, "An electron moves from n = 2 to n = 5. Does the atom absorb or emit "
+         "a photon?", key, "Absorbs. It moves up, so energy goes in.", ctx=ctx)
+    item(doc, pal, 14, "Which photon has more energy, 486 nm or 656 nm?", key,
+         "486 nm. Shorter wavelength, more energy.", ctx=ctx)
+    item(doc, pal, 15, "Why does every element give off its own pattern of lines?", key,
+         "Only certain energy gaps exist, and each element's gaps are different.", ctx=ctx)
+
+    running_footer(s, f"SHULL SCIENCE          {UNIT} · S2.1-S2.5" +
+                   ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
+    trim_tail(doc)
+    doc.save(out)
+
+
 def main():
     outdir = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(outdir, exist_ok=True)
@@ -276,6 +560,16 @@ def main():
             name = document_name("Quiz", ["2.3", "2.4"], 2, version=ver, key=key)
             build_quiz(os.path.join(outdir, name), ver, key)
             print("wrote", name)
+    tmp = os.path.join(outdir, ".dots"); os.makedirs(tmp, exist_ok=True)
+    for key in (False, True):
+        name = document_name("Practice_Set", ["2.5"], 2, key=key)
+        build_spectra(os.path.join(outdir, name), key, tmp)
+        print("wrote", name)
+    check_study_guide()
+    for key in (False, True):
+        name = document_name("Study_Guide", ["2.1", "2.2", "2.3", "2.4", "2.5"], 2, key=key)
+        build_study_guide(os.path.join(outdir, name), key)
+        print("wrote", name)
 
 
 if __name__ == "__main__":
