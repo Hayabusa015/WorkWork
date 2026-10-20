@@ -145,13 +145,13 @@ def hand_config(p, z, short=False, size=13):
             hand(p, " ", size, boxed=True)
 
 
-def key_strip(cell, pal, z):
+def key_strip(cell, pal, z, lab_w=0.30, box_w=0.25):
     """The filled orbital diagram on the key: every sublevel the atom uses, arrows in pen
     ink. Arrows are set in the brand face, which the key-face fallback rule allows."""
     subs = config(z)
     widths = []
     for n, l, c in subs:
-        widths += [0.30] + [0.25] * {"s": 1, "p": 3, "d": 5}[l]
+        widths += [lab_w] + [box_w] * {"s": 1, "p": 3, "d": 5}[l]
     t = cell.add_table(rows=1, cols=len(widths))
     fix_widths(t, widths)
     no_split(t.rows[0], 0.30)
@@ -189,77 +189,213 @@ def name_of(z):
     return f"{NAMES.get(z, SYMBOLS[z - 1])}, {SYMBOLS[z - 1]}"
 
 
+# Multiple choice (Matt, 2026-10-20: "add maybe 5"). Each version asks the same five skills
+# with a different case; distractors are the usual mistakes. The correct option is listed
+# first here and placed by MC_ORDER, so the answer letter moves between versions.
+MC = {
+    "A": [
+        ("Which rule says electrons fill the lowest-energy sublevel first?",
+         ["Aufbau principle", "Pauli exclusion", "Hund's rule", "Bohr model"],
+         "Aufbau, lowest energy first"),
+        ("Which orbital diagram for nitrogen's 2p^3^ follows Hund's rule?",
+         ["[↑] [↑] [↑]", "[↑↓] [↑] [   ]", "[↑] [↓] [↑]",
+          "[↑↓] [   ] [↑]"], "one in each box, same direction"),
+        ("How many electrons can a p sublevel hold?", ["6", "3", "2", "10"],
+         "3 orbitals x 2 = 6"),
+        ("An atom gains 2 electrons. What is the charge of its ion?", ["2−", "2+", "0", "6−"],
+         "more electrons than protons, so negative"),
+        ("Which sublevel fills right after 4s?", ["3d", "4p", "4d", "5s"], "4s, then 3d"),
+    ],
+    "B": [
+        ("Which rule says two electrons in one orbital must have opposite spins?",
+         ["Pauli exclusion", "Aufbau principle", "Hund's rule", "Bohr model"],
+         "Pauli, 2 per orbital, opposite"),
+        ("Which orbital diagram for oxygen's 2p^4^ follows Hund's rule?",
+         ["[↑↓] [↑] [↑]", "[↑↓] [↑↓] [   ]", "[↑] [↑] [↑]",
+          "[↑↓] [↑] [↓]"], "spread out, then pair the 4th"),
+        ("How many electrons can a d sublevel hold?", ["10", "5", "6", "14"],
+         "5 orbitals x 2 = 10"),
+        ("An atom loses 3 electrons. What is the charge of its ion?", ["3+", "3−", "0", "5+"],
+         "more protons than electrons, so positive"),
+        ("Which sublevel fills right after 3d?", ["4p", "4s", "4d", "3f"], "3d, then 4p"),
+    ],
+    "C": [
+        ("Which rule says put one electron in each box before pairing?",
+         ["Hund's rule", "Aufbau principle", "Pauli exclusion", "Bohr model"],
+         "Hund, one in each before pairing"),
+        ("Which orbital diagram for carbon's 2p^2^ follows Hund's rule?",
+         ["[↑] [↑] [   ]", "[↑↓] [   ] [   ]", "[↑] [↓] [   ]",
+          "[   ] [↑↓] [   ]"], "one in each box, same direction"),
+        ("How many orbitals are in a d sublevel?", ["5", "10", "3", "7"],
+         "d has 5 orbitals (holds 10 electrons)"),
+        ("An atom gains 1 electron. What is the charge of its ion?", ["1−", "1+", "0", "7−"],
+         "more electrons than protons, so negative"),
+        ("Which sublevel fills right after 4p?", ["5s", "4d", "5p", "4f"], "4p, then 5s"),
+    ],
+}
+# Position of the correct option (0 = A) for each question, per version.
+MC_ORDER = {"A": [0, 2, 1, 3, 1], "B": [2, 0, 3, 1, 2], "C": [1, 3, 0, 2, 3]}
+LETTERS = "ABCD"
+
+
+def mc_options(ver, i):
+    q, opts, why = MC[ver][i]
+    pos = MC_ORDER[ver][i]
+    rest = opts[1:]
+    out = rest[:pos] + [opts[0]] + rest[pos:]
+    return q, out, pos, why
+
+
+def check_mc():
+    for ver in MC:
+        letters = []
+        for i in range(5):
+            q, out, pos, why = mc_options(ver, i)
+            assert out[pos] == MC[ver][i][1][0] and len(set(out)) == 4, (ver, i)
+            letters.append(LETTERS[pos])
+        assert len(set(letters)) >= 3, (ver, letters)    # answers are spread out
+    print("multiple choice: one correct option each, answer letters spread:",
+          {v: "".join(LETTERS[p] for p in MC_ORDER[v]) for v in MC})
+
+
+def cellfmt(cc, pal, line=True, top=40, bottom=40, left=60, right=60):
+    """Left-aligned, vertically centred: the one cell style used on the whole quiz."""
+    cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cell_margins(cc, top=top, bottom=bottom, left=left, right=right)
+    if line:
+        borders(cc, pal.hair, sz=4, edges=("bottom",))
+    p = cc.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    return p
+
+
+def part_bar(doc, pal, text, pts):
+    gap(doc, 6)
+    t = doc.add_table(rows=1, cols=2)
+    fix_widths(t, [6.3, 1.2])
+    a, b = t.rows[0].cells
+    for x in (a, b):
+        borders(x, pal.ink, sz=12, edges=("top",))
+        borders(x, pal.display, sz=18, edges=("bottom",))
+    pa = cellfmt(a, pal, line=False, top=30, bottom=30, left=0)
+    _run(pa, text, 9, bold=True, color=pal.ink)
+    pb = cellfmt(b, pal, line=False, top=30, bottom=30)
+    pb.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    _run(pb, f"{pts} pts", 8.5, bold=True, color=pal.label)
+    for x in (a, b):
+        x.paragraphs[0].paragraph_format.keep_with_next = True
+
+
+NUM_W = 0.45
+
+
 def build_quiz(out, ver, key):
     pal = Palette(COURSE)
+    ctx = Ctx(pal, key)
     v = VERSIONS[ver]
-    total = 2 * POINTS["long"] + 2 * POINTS["short"] + 4 * POINTS["ion"]
+    total = 5 + 2 * POINTS["long"] + 2 * POINTS["short"] + 4 * POINTS["ion"]
     doc, s = new_doc()
     header(doc, pal, f"QUIZ  ·  VERSION {ver}  ·  ELECTRON CONFIGURATIONS AND IONS" +
            ("  ·  TEACHER KEY" if key else ""), f"Unit 2 Quiz {ver}", score=total)
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
-    para(c, "You may use your periodic table. Draw an arrow for every electron in the orbital "
-            "diagrams.", 9.5, first=True)
+    p = cellfmt(c, pal, line=False, top=30, bottom=30)
+    _run(p, "You may use your periodic table. Circle one letter for each multiple-choice "
+            "question. Draw an arrow for every electron in the orbital diagrams.", 9.5,
+         color=pal.ink)
 
-    # ---- Part 1: longhand + orbital diagram ----
-    gap(doc, 5)
-    c = one_cell(doc); borders(c, pal.ink, sz=12, edges=("top",))
-    label(c, "PART 1  ·  LONGHAND CONFIGURATION AND ORBITAL DIAGRAM", pal, first=True)
-    for i, z in enumerate(v["long"], 1):
-        gap(doc, 4)
-        c = one_cell(doc); borders(c, pal.hair)
-        qhead(c, i, name_of(z), POINTS["long"], pal)
-        write_line(c, "Electron configuration", pal, lambda p, z=z: hand_config(p, z), key,
-                   label_w=1.6, total_w=7.1, height=0.36)
-        spacer(c, 4)
-        para(c, "Orbital diagram", 8.5, bold=True, color=pal.label)
+    # ---- Part 1: multiple choice ----
+    part_bar(doc, pal, "PART 1  ·  MULTIPLE CHOICE", 5)
+    for i in range(5):
+        q, opts, pos, why = mc_options(ver, i)
+        t = doc.add_table(rows=2, cols=5)
+        fix_widths(t, [NUM_W, 1.76, 1.76, 1.76, 1.77])
+        no_split(t.rows[0]); no_split(t.rows[1])
+        num = t.cell(0, 0).merge(t.cell(1, 0))
+        pn = cellfmt(num, pal, top=40)
+        pn.paragraph_format.keep_with_next = True
+        _run(pn, str(i + 1), 11, bold=True, color=pal.accent)
+        qc = t.cell(0, 1).merge(t.cell(0, 4))
+        pq = cellfmt(qc, pal, line=False, top=50, bottom=20)
+        pq.paragraph_format.keep_with_next = True
+        rich(pq, q, 10, ctx, bold=True)
         if key:
-            key_strip(c, pal, z)
-            p = c.add_paragraph(); p.paragraph_format.space_after = Pt(2)
-            hand(p, f"→ Hund rule, one arrow in each box before pairing. "
-                    f"{EXPECT_UNPAIRED[z]} unpaired.", 11, ink="arrow")
-            hand(p, "   2 pts configuration, 2 pts diagram", 10, ink="pencil")
-        else:
-            spacer(c, 84)
-        no_split(doc.tables[-1].rows[0])
+            hand(pq, "   " + LETTERS[pos], 13, boxed=True)
+            hand(pq, "  " + why, 10, ink="arrow")
+        for k, o in enumerate(opts):
+            oc = t.cell(1, 1 + k)
+            po = cellfmt(oc, pal, top=20, bottom=60)
+            _run(po, f"{LETTERS[k]}   ", 10, bold=True, color=pal.accent)
+            rich(po, o, 10, ctx, bold=(key and k == pos))
 
-    # ---- Part 2: shorthand ----
-    gap(doc, 6)
-    c = one_cell(doc); borders(c, pal.ink, sz=12, edges=("top",))
-    label(c, "PART 2  ·  NOBLE-GAS SHORTHAND", pal, first=True)
-    for i, z in enumerate(v["short"], 3):
-        gap(doc, 4)
-        c = one_cell(doc); borders(c, pal.hair)
-        qhead(c, i, name_of(z), POINTS["short"], pal)
-        write_line(c, "Shorthand", pal, lambda p, z=z: hand_config(p, z, short=True), key,
-                   label_w=1.1, total_w=7.1, height=0.38)
-        spacer(c, 3)
-        no_split(doc.tables[-1].rows[0])
+    # ---- Part 2: longhand + orbital diagram ----
+    part_bar(doc, pal, "PART 2  ·  LONGHAND CONFIGURATION AND ORBITAL DIAGRAM",
+             2 * POINTS["long"])
+    for i, z in enumerate(v["long"], 6):
+        t = doc.add_table(rows=3, cols=3)
+        fix_widths(t, [NUM_W, 1.75, 5.3])
+        for r in t.rows:
+            no_split(r)
+        num = t.cell(0, 0).merge(t.cell(2, 0))
+        pn = cellfmt(num, pal)
+        _run(pn, str(i), 11, bold=True, color=pal.accent)
+        el = t.cell(0, 1).merge(t.cell(0, 2))
+        pe = cellfmt(el, pal, line=False, top=50, bottom=10)
+        pe.paragraph_format.keep_with_next = True
+        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
+        _run(pe, f"     {POINTS['long']} pts: 2 configuration, 2 diagram", 8, color=pal.label)
+        for r, lab in ((1, "Electron configuration"), (2, "Orbital diagram")):
+            lc = t.cell(r, 1)
+            pl = cellfmt(lc, pal, line=False)
+            pl.paragraph_format.keep_with_next = (r == 1)
+            _run(pl, lab, 9, bold=True, color=pal.ink)
+            ac = t.cell(r, 2)
+            pa = cellfmt(ac, pal, line=(r == 1), top=40, bottom=40)
+            if r == 2:
+                borders(ac, pal.hair, sz=4)
+                no_split(t.rows[2], 0.85)
+                if key:
+                    pin_first(ac)
+                    key_strip(ac, pal, z, lab_w=0.22, box_w=0.19)
+                    q = ac.add_paragraph(); q.paragraph_format.space_after = Pt(0)
+                    hand(q, f"→ one arrow in each box before pairing, "
+                            f"{EXPECT_UNPAIRED[z]} unpaired", 10, ink="arrow")
+            elif key:
+                hand_config(pa, z, size=12)
+        gap(doc, 2)
 
-    # ---- Part 3: ion charges ----
-    gap(doc, 6)
-    c = one_cell(doc); borders(c, pal.ink, sz=12, edges=("top",))
-    label(c, "PART 3  ·  CHARGE OF THE ION EACH ATOM FORMS", pal, first=True)
-    gap(doc, 4)
-    t = doc.add_table(rows=2, cols=2)
-    fix_widths(t, [3.75, 3.75])
+    # ---- Part 3: shorthand ----
+    part_bar(doc, pal, "PART 3  ·  NOBLE-GAS SHORTHAND", 2 * POINTS["short"])
+    t = doc.add_table(rows=2, cols=3)
+    fix_widths(t, [NUM_W, 1.75, 5.3])
+    for r, z in enumerate(v["short"]):
+        no_split(t.rows[r], 0.45)
+        pn = cellfmt(t.cell(r, 0), pal)
+        _run(pn, str(8 + r), 11, bold=True, color=pal.accent)
+        pe = cellfmt(t.cell(r, 1), pal)
+        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
+        pa = cellfmt(t.cell(r, 2), pal)
+        if key:
+            hand_config(pa, z, short=True, size=12)
+
+    # ---- Part 4: ion charges ----
+    part_bar(doc, pal, "PART 4  ·  CHARGE OF THE ION EACH ATOM FORMS", 4 * POINTS["ion"])
+    t = doc.add_table(rows=2, cols=6)
+    fix_widths(t, [NUM_W, 1.55, 1.75, NUM_W, 1.55, 1.75])
     for k, z in enumerate(v["ions"]):
-        cc = t.rows[k // 2].cells[k % 2]
-        borders(cc, pal.hair)
-        cell_margins(cc, top=40, bottom=40, left=80, right=80)
-        no_split(t.rows[k // 2], 0.62)
-        qhead(cc, 5 + k, name_of(z), POINTS["ion"], pal)
-        p = cc.add_paragraph(); p.paragraph_format.space_after = Pt(0)
-        _run(p, "Charge of its ion  ", 9, bold=True, color=pal.ink)
+        r, side = k // 2, (k % 2) * 3
+        no_split(t.rows[r], 0.45)
+        pn = cellfmt(t.cell(r, side), pal)
+        _run(pn, str(10 + k), 11, bold=True, color=pal.accent)
+        pe = cellfmt(t.cell(r, side + 1), pal)
+        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
+        pa = cellfmt(t.cell(r, side + 2), pal)
+        _run(pa, "charge  ", 8.5, color=pal.label)
         if key:
-            ch = ion_charge(z)
-            hand(p, ch, 14, boxed=True)
             vcount = valence(z)[1]
-            why = f"{vcount} valence e⁻ → " + (f"loses {vcount}" if vcount <= 3
-                                                      else f"gains {8 - vcount}")
-            hand(p, "   " + why.replace("⁻", "-"), 10, ink="arrow")
-        else:
-            _run(p, "__________", 10, color=pal.ink)
+            hand(pa, ion_charge(z), 13, boxed=True)
+            hand(pa, f"  {vcount} val. e-", 9, ink="arrow")
 
     running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  QUIZ {ver}" +
                    ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
@@ -555,6 +691,7 @@ def main():
     outdir = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(outdir, exist_ok=True)
     check()
+    check_mc()
     for ver in VERSIONS:
         for key in (False, True):
             name = document_name("Quiz", ["2.3", "2.4"], 2, version=ver, key=key)
