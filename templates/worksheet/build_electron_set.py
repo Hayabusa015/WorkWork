@@ -876,6 +876,110 @@ def build_gizmo(out, key):
     doc.save(out)
 
 
+# ---------------------------------------------------------------------------------------
+# Item 6: Ion Formation (rebuild of Matt's worksheet), S2.4
+# ---------------------------------------------------------------------------------------
+ION_EXAMPLES = [
+    ("Na", ["11", "11", "1", "metal", "Ne", "lose 1", "1+", "Na^+^"]),
+    ("S", ["16", "16", "6", "nonmetal", "Ar", "gain 2", "2−", "S^2−^"]),
+]
+ION_ROWS = [
+    ("Mg", ["12", "12", "2", "metal", "Ne", "lose 2", "2+", "Mg^2+^"]),
+    ("Na", ["11", "11", "1", "metal", "Ne", "lose 1", "1+", "Na^+^"]),
+    ("Cl", ["17", "17", "7", "nonmetal", "Ar", "gain 1", "1−", "Cl^−^"]),
+    ("O", ["8", "8", "6", "nonmetal", "Ne", "gain 2", "2−", "O^2−^"]),
+    ("Be", ["4", "4", "2", "metal", "He", "lose 2", "2+", "Be^2+^"]),
+    ("B", ["5", "5", "3", "metalloid *", "He", "lose 3", "3+", "B^3+^ *"]),
+    ("N", ["7", "7", "5", "nonmetal", "Ne", "gain 3", "3−", "N^3−^"]),
+    ("C", ["6", "6", "4", "nonmetal", "Ne or He *", "gain 4 or lose 4", "4− or 4+", "C^4−^ or C^4+^"]),
+    ("Sc", ["21", "21", "2 *", "metal", "Ar", "lose 3", "3+", "Sc^3+^"]),
+    ("Al", ["13", "13", "3", "metal", "Ne", "lose 3", "3+", "Al^3+^"]),
+]
+
+
+def build_ion_formation(out, key):
+    pal = Palette(COURSE)
+    ctx = Ctx(pal, key)
+    doc, s = new_doc(landscape=True)
+    W = 10.0
+    header(doc, pal, "PRACTICE  ·  ION FORMATION" + ("  ·  TEACHER KEY" if key else ""),
+           "Ion Formation", width=W, score=5)
+    gap(doc, 3)
+    c = one_cell(doc, W); borders(c, pal.display, sz=18, edges=("left",))
+    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
+    rich(p, "An ion is an atom that has gained or lost electrons so that it has the same "
+            "electron arrangement as a noble gas. Lose electrons and the atom has more protons "
+            "than electrons, so its charge is positive. Gain electrons and it has more electrons "
+            "than protons, so its charge is negative. Metals lose electrons until they match the "
+            "noble gas before them on the periodic table. Nonmetals gain electrons until they "
+            "match the noble gas after them.", 9.5, ctx)
+    q = c.add_paragraph(); q.paragraph_format.space_after = Pt(0)
+    _run(q, "Scored on effort, work shown and reasoning (5 points). Use your periodic table.",
+         8.5, color=pal.label)
+    gap(doc, 4)
+
+    heads = ["ATOM", "PROTONS", "ELECTRONS", "VALENCE e^−^", "METAL OR NONMETAL",
+             "NOBLE GAS IT WILL MATCH", "ELECTRONS GAINED OR LOST", "CHARGE", "ION"]
+    widths = [1.0, 0.9, 0.95, 1.0, 1.25, 1.45, 1.5, 0.9, 1.05]
+    rows = ION_EXAMPLES + ION_ROWS
+    t = doc.add_table(rows=1 + len(rows), cols=len(heads))
+    fix_widths(t, widths)
+    for i, h in enumerate(heads):
+        cc = t.rows[0].cells[i]
+        borders(cc, pal.display, sz=12, edges=("bottom",))
+        cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell_margins(cc, top=30, bottom=30, left=60, right=40)
+        p = cc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        rich(p, h, 8, ctx, bold=True, color=pal.accent)
+    for ri, (sym, vals) in enumerate(rows, start=1):
+        example = ri <= len(ION_EXAMPLES)
+        row = t.rows[ri]
+        no_split(row, 0.32 if key else 0.40)   # the key gives back row height for its notes
+        for ci, cc in enumerate(row.cells):
+            borders(cc, pal.hair, sz=4)
+            cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_margins(cc, top=10, bottom=10, left=60, right=40)
+            p = cc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            if ci == 0:
+                if example:
+                    _run(p, "Example  ", 8, bold=True, color=pal.label)
+                _run(p, sym, 11, bold=True, color=pal.ink)
+                continue
+            v = vals[ci - 1]
+            if example:
+                rich(p, v, 10, ctx, color=pal.ink)
+            elif key:
+                rich(p, v, 10, ctx, bold=True, color=pal.accent)
+        if example:
+            # the worked examples are separated from the practice rows by a heavier rule
+            if ri == len(ION_EXAMPLES):
+                for cc in row.cells:
+                    borders(cc, pal.display, sz=12, edges=("bottom",))
+
+    if key:
+        gap(doc, 4)
+        c = one_cell(doc, W); borders(c, pal.hair)
+        label(c, "TEACHER NOTES  ·  KEY ONLY", pal, first=True)
+        for x in [
+            "B (*): boron is a metalloid. The lose-3 rule gives B^3+^ with the He arrangement, "
+            "but boron does not form simple ions in practice. Accept the reasoning.",
+            "C (*): carbon can reach a noble-gas arrangement either way: gain 4 (C^4−^, Ne) "
+            "or lose 4 (C^4+^, He). Accept either with matching charge and noble gas.",
+            "Sc (*): [Ar] 4s^2^ 3d^1^ has 2 electrons in its highest level, but it loses 3 "
+            "(both 4s and the 3d) to match Ar. Accept 2 or 3 for valence electrons.",
+            "Na repeats the first example on purpose; check it is copied correctly.",
+        ]:
+            p = c.add_paragraph(); p.paragraph_format.space_after = Pt(1)
+            rich(p, "•  " + x, 8.5, ctx)
+
+    running_footer(s, f"SHULL SCIENCE          {UNIT} · S02.4" +
+                   ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
+    trim_tail(doc)
+    doc.save(out)
+
+
 def main():
     outdir = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(outdir, exist_ok=True)
@@ -895,6 +999,9 @@ def main():
     g = "SHULL_CHEM_Activity_U02_S02.3_Gizmo_Rules"
     build_gizmo(os.path.join(outdir, g + ".docx"), False)
     build_gizmo(os.path.join(outdir, g + "_Key.docx"), True)
+    i = "SHULL_CHEM_Practice_Set_U02_S02.4_Ion_Formation"
+    build_ion_formation(os.path.join(outdir, i + ".docx"), False)
+    build_ion_formation(os.path.join(outdir, i + "_Key.docx"), True)
     print("wrote 9 files to", outdir)
 
 
