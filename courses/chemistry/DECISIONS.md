@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-09-23
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -25,6 +25,8 @@ against a code not listed here.
 **U1 Matter & Atomic Structure** (5 sections)
 1.1 Matter & Changes · 1.2 History of the Atomic Model · 1.3 Atomic Structure · 1.4 Isotopes
 · 1.5 Average Atomic Mass
+*Guided-notes difficulty, out of 10:* S1.1 1/10, S1.3 2/10, S1.5 3/10. S1.2 is not yet rated.
+See the 2026-09-23 decision-log entry.
 
 **U2 Electrons & Atomic Theory** (5 sections)
 2.1 The Bohr Model · 2.2 Energy Levels, Sublevels & Orbitals · 2.3 Electron Configurations ·
@@ -327,14 +329,97 @@ archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
    Projects 15 / Homework 7 / Binders 3. This file says daily practice is ~10%. Homework 7 +
    Binders 3 = 10, so they *may* reconcile — but "daily practice" and "homework + binders" are not
    obviously the same category. **Confirm which framing is the real gradebook.** (CONFLICT-24)
-4. **Lab placements beyond U0.** Only U0.3 (Intro Skills Lab) and U0.4 (11 Unknowns Lab) are
-   confirmed. The pacing guide's other lab slots (e.g. Calorimetry in U9, Titration in U14)
-   are reasonable PROVISIONAL suggestions, not confirmed lab names or procedures. *Blocks:
-   building any lab past Unit 0 as final rather than draft.*
+4. **Lab placements beyond U0.** U0.3 (Intro Skills Lab), U0.4 (11 Unknowns Lab), and now U1.1
+   (Paper Chromatography: Rf Values of Food Colorings — Matt's direct placement choice,
+   2026-09-14; see decision log) are confirmed. The pacing guide's other lab slots (e.g.
+   Calorimetry in U9, Titration in U14) remain reasonable PROVISIONAL suggestions, not confirmed
+   lab names or procedures. *Blocks: building any lab past Unit 0 as final rather than draft,
+   except U1.1.*
 
 ---
 
+## Short titles
+
+The topic in a filename (`standards/NAMING.md` §2, SHULL-CHG-0041). **At most 20 characters.** `U#` is a
+unit, a number such as `1.3` is a section. A section or unit with no row here gets no topic in its
+filename. Never shorten a title automatically; add a row when the user approves one.
+
+| Code | Short title |
+|---|---|
+| U1 | Matter & Atoms |
+| 0.4 | Observations |
+| 1.1 | Matter & Changes |
+| 1.4 | Isotopes |
+| 1.5 | Average Atomic Mass |
+| 2.3 | Electron Configs |
+
 ## Decision log
+
+### 2026-09-23 — U1 section difficulty ratings
+Guided-notes covers carry a difficulty rating out of 10 per section ("Estimated for advanced high
+school students: 1 = introductory; 10 = highly challenging"). Unit 1: S1.1 Matter & Changes 1/10 ·
+S1.3 Atomic Structure 2/10 · S1.5 Average Atomic Mass 3/10. S1.2 is not yet rated. The values came
+from the Codex notes cover; Matt kept them 2026-09-23 ("difficulty ratings, keep and add").
+Supersedes: None (first record of difficulty ratings).
+Status: CONFIRMED · SHULL-CHG-0033 (Path A edit split from a Path B record)
+
+### 2026-09-15 — Standing policy: optional worksheets redeemable at test time, +1 point each, uncapped
+New course-wide grading policy, stated by Matt directly in conversation: "My chemistry worksheets
+are sometimes optional and they get to turn in any optional assignment at test time, add optional
+assignments point to the test, 1 point per optional assignment on the test." This is a Chemistry
+course-wide standing policy, not scoped to any single worksheet: a worksheet may be explicitly
+marked OPTIONAL. A student may turn in a completed optional worksheet at test time — the day of the
+relevant unit test — rather than on the worksheet's original due date. Each completed optional
+worksheet turned in this way adds 1 point to that test's score. Matt did not specify a maximum
+number of optional assignments/points this can add to a single test; record this as currently
+UNCAPPED. **Open question:** a class turning in an unbounded number of optional worksheets at test
+time could meaningfully inflate a test score, so a per-test cap may eventually be wanted — confirm
+with Matt whether one should exist, and if so what it is. No cap is invented here.
+Context for how this is first being applied: the immediate trigger was Matt building a new optional
+Section 1.5 (Average Atomic Mass) worksheet for the Unit 1 Chemistry unit, marked with this exact
+optional/1-point framing directly in its own header. That worksheet is being built by a separate
+agent in parallel and is not created or touched by this entry; this entry exists so the policy is
+durable and applies to every future optional worksheet, not just S1.5's.
+Supersedes: None (first record of this policy).
+Status: CONFIRMED — Path A (course-specific grading convention; no governance/proposals/ record
+needed, matching the pattern of other course-convention entries already in this file)
+
+### 2026-09-14 — U1.1 lab redesigned: mystery mixture removed, primary-color pairs + off-the-shelf green
+The data-collection shape for U1.1's confirmed lab ("Paper Chromatography: Rf Values of Food
+Colorings") has been redesigned by Matt, directly in conversation, later the same day as the entry
+below — a real design change, not a wording tweak. There is no more secret "mystery mixture"
+dropper. New design: only the three primary colors (red, blue, yellow) are tested as knowns — green
+is not treated as an independent "known," since it is understood to be a real mixture. The six lab
+groups are assigned in pairs across the three primaries for replication: Red+Blue (groups 1–2),
+Red+Yellow (groups 3–4), Blue+Yellow (groups 5–6) — each pair run by two groups. Every group's third
+station is green, run from a standard off-the-shelf bottle — no pre-mixing, no secret recipe. Green
+is expected to separate into two bands matching blue's and yellow's Rf values; the exercise asks
+students to confirm this with data (Rf values), not to blindly "eyeball" identify an unknown. This
+design is simpler to run than the mystery-mixture version it replaces: no advance mixing, no
+verifying a custom recipe, and no risk of a mislabeled or dried-out mystery dropper between class
+periods. `SHULL_CHEM_Lab_U01_S01.1_Chromatography.html` and `_Key.html` have been rebuilt to match;
+both remain 4 pages, and page-budget, ink, and font audits all still pass.
+Supersedes: the data-collection-shape description ("each group runs only 2 of the 4 known food
+colorings plus a shared mystery mixture, not all 4 per group") in the 2026-09-14 "U1.1 lab
+confirmed: Paper Chromatography" entry immediately below. That entry's lab-placement confirmation —
+U1.1 has a confirmed lab, built and filed as those two files — is NOT superseded and still stands;
+only its mystery-mixture data-collection description is replaced by the design above.
+Status: CONFIRMED · Path A (course-specific; no standard or skill file touched)
+
+### 2026-09-14 — U1.1 lab confirmed: Paper Chromatography
+U1.1 (Matter & Changes) now has a confirmed lab: "Paper Chromatography: Rf Values of Food
+Colorings," built and filed as `SHULL_CHEM_Lab_U01_S01.1_Chromatography.html` /
+`SHULL_CHEM_Lab_U01_S01.1_Chromatography_Key.html` (not yet filed to Drive — that is a separate
+step). Placement was Matt's direct choice in conversation, given U1.1 pairs naturally with
+separating-mixtures content — not inferred from the pacing guide and not a builder guess.
+Data-collection shape for this lab: each group runs only 2 of the 4 known food colorings plus a
+shared mystery mixture (not all 4 per group), pooling data via the course's existing
+one-shared-Google-Sheet-per-lab convention (see "Lab data collection," above) — this is the
+existing mechanism, not a new one.
+Supersedes: item 4 ("Lab placements beyond U0") in Open Questions, updated below to add U1.1 to
+the confirmed list. U0.3 and U0.4 remain confirmed as before; every other lab slot past Unit 0
+(Calorimetry U9, Titration U14, etc.) remains PROVISIONAL and still blocked.
+Status: CONFIRMED
 
 ### 2026-09-05 — Chemistry decisions file created
 Curriculum map, calendar/pacing, grading policy, lab template, and assessment structure moved

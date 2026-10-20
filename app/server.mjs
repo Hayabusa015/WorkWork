@@ -2,7 +2,7 @@ import http from 'node:http';
 import {recordCharge,balanceSummary,estimateWorkflow,usageCost} from './billing.mjs';
 import {deliverSuggestion,addSuggestionFocus,handToLibrarian} from './suggestions.mjs';
 import {references,agentNames,createAgentRunner,draftWithAgents,checkScope} from './agents.mjs';
-import {curriculum,documentTypes,documentName,COURSE_CODE} from './curriculum.mjs';
+import {curriculum,documentTypes,documentName,shortTitle,COURSE_CODE} from './curriculum.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -129,7 +129,7 @@ if(p==='/api/design'&&req.method==='POST'){const b=await body(req);
  if(!example)throw Error(`No ${course} worksheet template to take a structure from`);
  const target={course,unit,sections,type,unitTitle:unitEntry.title,sectionTitles:chosen.map(x=>x.title)};
  const run={id:randomUUID(),kind:'design',template:example.id,course,templateCourse:course,model,agents:[],target,
-  filename:documentName({course,type,unit,sections}),
+  filename:documentName({type,unit,sections,topic:chosen.length===1?shortTitle(decisions,chosen[0].code):undefined,unitTitle:shortTitle(decisions,`U${unit}`)}),
   title:chosen.map(x=>x.title).join(', '),prompt:String(b.prompt||'').slice(0,6000),
   created:new Date().toISOString(),status:'Drafting'};
  db.runs.unshift(run);save();send(201,{id:run.id});void draft(run,target);return;}

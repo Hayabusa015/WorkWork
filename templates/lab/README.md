@@ -51,12 +51,11 @@ hand-typed hexes permitted in this directory and `validate_tokens.py` must allow
 1. Copy the two HTML files and rename them to the `standards/NAMING.md` grammar:
 
    ```
-   SHULL_CHEM_Lab_U01_S01.4_Isotope_Beans.html
-   SHULL_CHEM_Lab_U01_S01.4_Isotope_Beans_Key.html
+   1.4 Lab - Isotope Beans.html
+   1.4 Lab Key - Isotope Beans.html
    ```
 
-   *Note the zero-padded section code — `S01.4`, not `S1.4`. The original README predates
-   SHULL-CHG-0007.*
+   *Names follow SHULL-CHG-0024: section-led, no course prefix. The course is the folder.*
 
 2. Set the course class on `<body>`: `chem`, `phys`, or `geo`.
 
@@ -66,7 +65,7 @@ hand-typed hexes permitted in this directory and `validate_tokens.py` must allow
 4. Render:
 
    ```
-   python3 templates/lab/build_lab.py SHULL_CHEM_Lab_U01_S01.4_Isotope_Beans.html
+   python3 templates/lab/build_lab.py "1.4 Lab - Isotope Beans.html"
    ```
 
    It writes the PDF, lists any token you missed, and reports the page count. Pass an expected page

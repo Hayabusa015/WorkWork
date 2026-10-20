@@ -14,6 +14,8 @@ Voice: `standards/VOICE.md`. Assessment shape is a **course fact** — read
 - **If the exact standard code is uncertain, say so.** A wrong code is worse than none.
 - Tests the intended reasoning, not confusing wording.
 - Uses vocabulary already taught, or defines it.
+- Any molecular structure is built with `scripts/build_diagram_molecule.py` from a SMILES string
+  verified by `verify-content` — never hand-drawn, generated, or pasted. SHULL-CHG-0042.
 - **Distractors are real student misconceptions**, never random wrong values.
 - No "all of the above" or "none of the above". No trick questions on wording.
 - **Exactly one unambiguously best answer.**
@@ -40,6 +42,9 @@ the standard code · and, for a full teacher key, why each distractor is wrong.
 
 Note common misconceptions and any grading judgment calls. **Keep teacher-only information off the
 student version.**
+
+Keys are built in the handwritten key style, including the physics scene sketch: see
+`standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
 
 ## Open-response prompts
 

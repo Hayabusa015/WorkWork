@@ -68,6 +68,10 @@ type. See `apply-shull-design`.
 Anything students **read** as science is hand-built. Anything they only **look** at may be generated.
 A generated Bohr diagram will have the wrong electron count in a way nobody catches at a glance.
 Geology specimen photographs for identification are **shot, never generated**.
+**Molecular structures** are the exception to hand-built: build them from a SMILES string with
+`scripts/build_diagram_molecule.py`, never drawn, generated, or pasted. If RDKit cannot draw it well,
+stop and ask Matt. Verify the SMILES with `verify-content` first; the `--name` label is not checked
+by the script. SHULL-CHG-0042.
 
 ## Animation
 

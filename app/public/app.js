@@ -392,10 +392,11 @@ function designBrief(unit, type) {
   const picked = chosenSections();
   const ready = !!(design.course && unit && picked.length && type);
   const codes = picked.map(s => s.code);
-  const pad = c => { const [w, d] = c.split('.'); return `S${w.padStart(2, '0')}.${d}`; };
-  const span = codes.length > 1 ? `${pad(codes[0])}-${pad(codes[codes.length - 1])}` : codes[0] ? pad(codes[0]) : '';
+  const span = codes.length > 1 ? `${codes[0]}-${codes[codes.length - 1]}` : codes[0] || '';
   const filename = ready
-    ? `SHULL_${map.code}_${type.type}_U${String(unit.unit).padStart(2, '0')}_${span}.docx`
+    ? (picked.length === 1
+        ? `${codes[0]} ${type.type.replace(/_/g, ' ')}${picked[0].short ? ` - ${picked[0].short}` : ''}.docx`
+        : `Unit ${unit.unit} ${type.type.replace(/_/g, ' ')}${unit.short ? ` - ${unit.short}` : ''}.docx`)
     : null;
 
   return `<aside class="brief" data-course="${esc(design.course)}">
