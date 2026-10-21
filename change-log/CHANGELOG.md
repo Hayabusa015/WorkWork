@@ -25,6 +25,14 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-21
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0046 | 2026-10-21 | Teacher keys list every equivalent form of a direction answer | APPROVED | `governance/proposals/SHULL-CHG-0046-equivalent-directions-on-keys.md` |
+
 ## 2026-10-16
 
 | ID | Date | Change | Status | Record |
