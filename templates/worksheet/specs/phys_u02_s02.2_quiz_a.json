@@ -1,0 +1,300 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.2"
+  ],
+  "docType": "Quiz",
+  "timeTargetMin": "12–15",
+  "equationLabel": "EQUATIONS YOU MAY USE",
+  "pagesPerSection": 2,
+  "sectionsContent": [
+    {
+      "code": "2.2",
+      "title": "Vectors Quiz, Version A",
+      "conceptLabel": "HOW TO ANSWER",
+      "concept": {
+        "summary": "Write directly on this quiz. Sketch each vector problem, show your setup, and box your final answers with units.",
+        "keyIdeas": [
+          "A direction has more than one correct name. Any correct form earns credit.",
+          "Calculation answers use two significant figures."
+        ]
+      },
+      "equations": [
+        {
+          "note": "components of vector A at its angle",
+          "plain": "Ax = A cos(angle)     Ay = A sin(angle)"
+        },
+        {
+          "note": "add like components",
+          "plain": "Rx = Ax + Bx + Cx     Ry = Ay + By + Cy"
+        },
+        {
+          "note": "magnitude of the resultant",
+          "plain": "R = √(Rx² + Ry²)"
+        },
+        {
+          "note": "reference angle, then fix the quadrant from your sketch",
+          "plain": "reference angle = inverse tan (|Ry| / |Rx|)"
+        }
+      ],
+      "directions": "Angles on the 0–360° scale are measured counterclockwise from east: east is 0°, north is 90°, west is 180°, south is 270°. Compass directions such as 35° north of east are measured from the axis named last. +x is east and +y is north.",
+      "questions": [
+        {
+          "points": 2,
+          "prompt": "The direction 215° (0–360° scale, counterclockwise from east). Write the same direction two other ways.",
+          "answerLines": 2,
+          "solution": "215° is between 180° and 270°: past west, toward south 215° − 180° = 35° 215° − 360° = −145° same direction:  −145°  =  35° south of west  =  55° west of south",
+          "steps": [
+            {
+              "row": [
+                "215° is between 180° and 270°: past west, toward south"
+              ]
+            },
+            {
+              "row": [
+                "215° − 180° = 35°"
+              ]
+            },
+            {
+              "answer": [
+                "compass ="
+              ],
+              "value": "35° south of west"
+            },
+            {
+              "row": [
+                "215° − 360° = −145°"
+              ]
+            },
+            {
+              "answer": [
+                "negative ="
+              ],
+              "value": "−145°"
+            },
+            {
+              "row": [
+                "same direction:  −145°  =  35° south of west  =  55° west of south"
+              ]
+            },
+            {
+              "label": "Grading (2): 1 point for each correct form"
+            }
+          ]
+        },
+        {
+          "points": 2,
+          "prompt": "The direction 40° north of west. Write the same direction two other ways.",
+          "answerLines": 2,
+          "solution": "north of west is up and to the left: 180° − 40° = 140° 140° − 360° = −220° same direction:  140°  =  −220°  =  50° west of north",
+          "steps": [
+            {
+              "row": [
+                "north of west is up and to the left: 180° − 40° = 140°"
+              ]
+            },
+            {
+              "answer": [
+                "0–360 ="
+              ],
+              "value": "140°"
+            },
+            {
+              "row": [
+                "140° − 360° = −220°"
+              ]
+            },
+            {
+              "answer": [
+                "negative ="
+              ],
+              "value": "−220°"
+            },
+            {
+              "row": [
+                "same direction:  140°  =  −220°  =  50° west of north"
+              ]
+            },
+            {
+              "label": "Grading (2): 1 point for each correct form"
+            }
+          ]
+        },
+        {
+          "points": 2,
+          "prompt": "The direction −70° (negative means clockwise from east). Write the same direction two other ways.",
+          "answerLines": 2,
+          "solution": "−70° + 360° = 290° 290° is 70° short of 360°: below east same direction:  290°  =  20° east of south  =  70° south of east",
+          "steps": [
+            {
+              "row": [
+                "−70° + 360° = 290°"
+              ]
+            },
+            {
+              "answer": [
+                "0–360 ="
+              ],
+              "value": "290°"
+            },
+            {
+              "row": [
+                "290° is 70° short of 360°: below east"
+              ]
+            },
+            {
+              "answer": [
+                "compass ="
+              ],
+              "value": "70° south of east"
+            },
+            {
+              "row": [
+                "same direction:  290°  =  20° east of south  =  70° south of east"
+              ]
+            },
+            {
+              "label": "Grading (2): 1 point for each correct form"
+            }
+          ]
+        },
+        {
+          "points": 5,
+          "prompt": "Pac-Man travels 45 m north and then 28 m west through the maze. Find his resultant displacement: magnitude and direction.",
+          "math": true,
+          "workHeightIn": 2.2,
+          "solution": "Components, Pythagorean theorem, then inverse tangent with the quadrant fixed from a sketch.",
+          "finalAnswer": "53 m at 122°",
+          "steps": [
+            {
+              "row": [
+                "x = −28 m     y = +45 m"
+              ]
+            },
+            {
+              "row": [
+                "R = √((28)^{2} + (45)^{2}) = √2809 = 53 m"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "53 m"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "45",
+                    "28"
+                  ]
+                },
+                "= 58.1° north of west"
+              ],
+              "note": "reference angle"
+            },
+            {
+              "mistake": [
+                "θ = 58.1°"
+              ],
+              "note": "that is measured from west; the vector points up and left"
+            },
+            {
+              "row": [
+                "θ = 180° − 58.1° = 121.9°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "122°"
+            },
+            {
+              "row": [
+                "same direction:  −238°  =  32° west of north  =  58° north of west"
+              ]
+            },
+            {
+              "label": "Grading (5): sketch 1 · R setup 1 · R and unit 1 · tan setup 1 · direction 1"
+            }
+          ]
+        },
+        {
+          "points": 5,
+          "prompt": "Sam Wilson flies the Falcon at 240 km/h at 40° north of east. A wind blowing toward 30° south of east at 65 km/h also acts on him. Find his resultant velocity: magnitude and direction.",
+          "math": true,
+          "workHeightIn": 4.6,
+          "solution": "Convert to 0-360, find components, add, then magnitude and direction.",
+          "finalAnswer": "270 km/h at 27°",
+          "steps": [
+            {
+              "label": "Convert to the 0–360° scale"
+            },
+            {
+              "row": [
+                "P: 40° north of east = 40°     W: 30° south of east = 360° − 30° = 330°"
+              ]
+            },
+            {
+              "row": [
+                "P_{x} = 240 cos 40° = 183.85 km/h     P_{y} = 240 sin 40° = 154.27 km/h"
+              ]
+            },
+            {
+              "row": [
+                "W_{x} = 65 cos 330° = 56.29 km/h     W_{y} = 65 sin 330° = −32.50 km/h"
+              ]
+            },
+            {
+              "row": [
+                "R_{x} = 240.14 km/h     R_{y} = 121.77 km/h"
+              ]
+            },
+            {
+              "row": [
+                "R = √((240.14)^{2} + (121.77)^{2}) = 269.25 km/h"
+              ]
+            },
+            {
+              "answer": [
+                "R ="
+              ],
+              "value": "270 km/h"
+            },
+            {
+              "row": [
+                "tan^{−1}",
+                {
+                  "frac": [
+                    "121.77",
+                    "240.14"
+                  ]
+                },
+                "= 26.9°"
+              ],
+              "note": "quadrant I, no adjustment"
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "27°"
+            },
+            {
+              "row": [
+                "same direction:  −333°  =  27° north of east  =  63° east of north"
+              ]
+            },
+            {
+              "label": "Grading (5): components 2 · add components 1 · R 1 · direction 1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
