@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-14
+**Last updated:** 2026-10-21
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -234,6 +234,15 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.4 | Free Fall |
 
 ## Decision log
+
+### 2026-10-21 — Value of g: 9.8 m/s² (two significant figures), Unit 2 onward
+Physics uses **g = 9.8 m/s²** in Unit 2 onward. Because 9.8 has two significant figures, answers that
+depend on g are reported to two significant figures. Sign convention for projectile motion: up is
+positive, so g = −9.8 m/s². Matt, in answer to whether the projectile-motion sets should use 9.8 or
+9.81: "use 9.8 for g". The earlier U1 sheet (`phys_u01_s01.1-s01.4`) used 9.81 and is **not**
+retroactively changed.
+Supersedes: None — the U1 sheet's 9.81 stands as built; no prior entry in this file stated a value of g.
+Status: CONFIRMED — Path A (course-specific; no `governance/proposals/` record filed).
 
 ### 2026-09-14 — First Physics lab built: Section 1.3 (Position-Velocity-Acceleration Graphing)
 Matt asked for a new Physics lab on Section 1.3, confirmed above in the curriculum map — no new code
