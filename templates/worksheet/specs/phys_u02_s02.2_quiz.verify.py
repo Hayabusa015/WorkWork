@@ -53,7 +53,7 @@ for v, c in CASES.items():
         report(all(d < 1e-9 for d in devs) and len(forms) >= 3, f"{v.upper()} Q{i+1}: {len(forms)} listed forms all equal the given direction")
         boxed = [s["value"] for s in qs[i]["steps"] if "answer" in s]
         report(all(abs(((ang(b) - g + 180) % 360) - 180) < 1e-9 for b in boxed), f"{v.upper()} Q{i+1}: boxed restatements are correct")
-        given_in_prompt = re.search(r"direction (\S+(?: \w+ of \w+)?)", qs[i]["prompt"]).group(1)
+        given_in_prompt = re.search(r"Restate (.+?) in two other ways", qs[i]["prompt"]).group(1)
         report(abs(((ang(given_in_prompt) - g + 180) % 360) - 180) < 1e-9, f"{v.upper()} Q{i+1}: prompt direction '{given_in_prompt}' matches the key's direction")
     # Q4, Q5
     for qi, key in ((3, "q4"), (4, "q5")):
@@ -72,7 +72,7 @@ for v, c in CASES.items():
     report(abs(((a1 - a2) % 360) - 90) > 5 and abs(((a1 - a2) % 360) - 270) > 5, f"{v.upper()} Q5: vectors are {abs(a1-a2)}° apart, not 90°")
     # Q4 vectors are along the axes
     report(all(a % 90 == 0 for _, a in c["q4"]), f"{v.upper()} Q4: both vectors lie along north/south/east/west")
-    visible = [qq["prompt"] for qq in qs] + [spec["sectionsContent"][0]["directions"]]
+    visible = [qq["prompt"] for qq in qs] + [spec["sectionsContent"][0]["directions"]]  # θ is allowed only in "equations": the builder draws it
     bad = sorted({ch for s in visible for ch in s if ch in "θΔ₀₁₂₃₄₅₆₇₈₉"})
     report(not bad, f"{v.upper()}: student page free of unsupported glyphs" + (f" found {bad}" if bad else ""))
 sys.exit(1 if fail else 0)

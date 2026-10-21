@@ -5,44 +5,24 @@
     "2.2"
   ],
   "docType": "Quiz",
-  "timeTargetMin": "12–15",
-  "equationLabel": "EQUATIONS YOU MAY USE",
-  "pagesPerSection": 2,
+  "pagesPerSection": 1,
   "sectionsContent": [
     {
       "code": "2.2",
       "title": "Vectors Quiz, Version A",
-      "conceptLabel": "HOW TO ANSWER",
-      "concept": {
-        "summary": "Write directly on this quiz. Sketch each vector problem, show your setup, and box your final answers with units.",
-        "keyIdeas": [
-          "A direction has more than one correct name. Any correct form earns credit.",
-          "Calculation answers use two significant figures."
-        ]
-      },
       "equations": [
-        {
-          "note": "components of vector A at its angle",
-          "plain": "Ax = A cos(angle)     Ay = A sin(angle)"
-        },
-        {
-          "note": "add like components",
-          "plain": "Rx = Ax + Bx + Cx     Ry = Ay + By + Cy"
-        },
-        {
-          "note": "magnitude of the resultant",
-          "plain": "R = √(Rx² + Ry²)"
-        },
-        {
-          "note": "reference angle, then fix the quadrant from your sketch",
-          "plain": "reference angle = inverse tan (|Ry| / |Rx|)"
-        }
+        "R_x = R cos θ",
+        "R_y = R sin θ",
+        "tan θ = R_y / R_x",
+        "R^2 = R_x^2 + R_y^2",
+        "R_x = A_x + B_x",
+        "R_y = A_y + B_y"
       ],
-      "directions": "Angles on the 0–360° scale are measured counterclockwise from east: east is 0°, north is 90°, west is 180°, south is 270°. Compass directions such as 35° north of east are measured from the axis named last. +x is east and +y is north.",
+      "directions": "Show your work in the boxes and box your final answers with units. Round calculations to two significant figures. Angles on the 0–360° scale start at east and run counterclockwise: north is 90°, west is 180°, south is 270°. A negative angle runs clockwise from east. Any correct way of writing a direction counts.",
       "questions": [
         {
           "points": 2,
-          "prompt": "The direction 215° (0–360° scale, counterclockwise from east). Write the same direction two other ways.",
+          "prompt": "Restate 215° in two other ways.",
           "answerLines": 2,
           "solution": "215° is between 180° and 270°: past west, toward south 215° − 180° = 35° 215° − 360° = −145° same direction:  −145°  =  35° south of west  =  55° west of south",
           "steps": [
@@ -81,11 +61,13 @@
             {
               "label": "Grading (2): 1 point for each correct form"
             }
-          ]
+          ],
+          "inRow": true,
+          "cardHeightIn": 1.75
         },
         {
           "points": 2,
-          "prompt": "The direction 40° north of west. Write the same direction two other ways.",
+          "prompt": "Restate 40° north of west in two other ways.",
           "answerLines": 2,
           "solution": "north of west is up and to the left: 180° − 40° = 140° 140° − 360° = −220° same direction:  140°  =  −220°  =  50° west of north",
           "steps": [
@@ -119,11 +101,13 @@
             {
               "label": "Grading (2): 1 point for each correct form"
             }
-          ]
+          ],
+          "inRow": true,
+          "cardHeightIn": 1.75
         },
         {
           "points": 2,
-          "prompt": "The direction −70° (negative means clockwise from east). Write the same direction two other ways.",
+          "prompt": "Restate −70° in two other ways.",
           "answerLines": 2,
           "solution": "−70° + 360° = 290° 290° is 70° short of 360°: below east same direction:  290°  =  20° east of south  =  70° south of east",
           "steps": [
@@ -157,13 +141,13 @@
             {
               "label": "Grading (2): 1 point for each correct form"
             }
-          ]
+          ],
+          "inRow": true,
+          "cardHeightIn": 1.75
         },
         {
           "points": 5,
           "prompt": "Pac-Man travels 45 m north and then 28 m west through the maze. Find his resultant displacement: magnitude and direction.",
-          "math": true,
-          "workHeightIn": 2.2,
           "solution": "Components, Pythagorean theorem, then inverse tangent with the quadrant fixed from a sketch.",
           "finalAnswer": "53 m at 122°",
           "steps": [
@@ -221,13 +205,12 @@
             {
               "label": "Grading (5): sketch 1 · R setup 1 · R and unit 1 · tan setup 1 · direction 1"
             }
-          ]
+          ],
+          "cardHeightIn": 2.45
         },
         {
           "points": 5,
           "prompt": "Sam Wilson flies the Falcon at 240 km/h at 40° north of east. A wind blowing toward 30° south of east at 65 km/h also acts on him. Find his resultant velocity: magnitude and direction.",
-          "math": true,
-          "workHeightIn": 4.6,
           "solution": "Convert to 0-360, find components, add, then magnitude and direction.",
           "finalAnswer": "270 km/h at 27°",
           "steps": [
@@ -292,7 +275,8 @@
             {
               "label": "Grading (5): components 2 · add components 1 · R 1 · direction 1"
             }
-          ]
+          ],
+          "cardHeightIn": 2.9
         }
       ]
     }

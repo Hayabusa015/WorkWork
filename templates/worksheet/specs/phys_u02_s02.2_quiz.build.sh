@@ -4,8 +4,8 @@
 #   bash templates/worksheet/specs/phys_u02_s02.2_quiz.build.sh [out_dir]
 #
 # Matt's choices for THIS document, applied in memory only (shared builders are NOT edited):
-#   - a quiz on the practice-set builder: work boxes on the page, no self-check brackets, no ramp
-#     (check_profile is switched off; the Physics practice-set profile does not govern quizzes)
+#   - a quiz layout (templates/quiz/build_quiz_docx.py): short questions share a row, the cards are the
+#     work space, equations in plain notation with a drawn theta
 #   - 16 points: three angle-restating questions at 2, two vector problems at 5
 #   - keys: full-size hand, short rows merged, cards may break at a seam, and every boxed direction
 #     is followed by a "same direction:" line (standards/ANSWER_KEYS.md section 10, SHULL-CHG-0046)
@@ -23,16 +23,7 @@ STU="$OUT/2.2 Quiz $VER.docx"
 KEY="$OUT/2.2 Quiz $VER Key.docx"
 echo "===== Version $VER"
 cd "$REPO/templates/worksheet"
-python3 - "$SPEC" "$STU" <<'PY'
-import sys
-sys.path.insert(0, "."); sys.path.insert(0, "..")
-import build_worksheet_docx as b
-# Matt 2026-10-21: a QUIZ, not a practice set. The Physics practice-set profile (no work areas,
-# self-check answers on every calculation but the last, a 2/2/1/1 ramp) does not apply, so
-# check_profile is switched off in memory for this document. Work boxes are the point of a quiz.
-b.check_profile = lambda *a, **k: None
-sys.exit(b.main())
-PY
+python3 "$REPO/templates/quiz/build_quiz_docx.py" "$SPEC" "$STU"
 python3 - "$SPEC" "$KEY" <<'PY2'
 import sys
 sys.path.insert(0, "."); sys.path.insert(0, "..")
