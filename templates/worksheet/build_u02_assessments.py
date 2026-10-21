@@ -111,14 +111,28 @@ def check():
 
 
 # ---------------------------------------------------------------------------------------
+# Box padding: a no-break space, which Word keeps inside a run border. ShullHand has no such
+# glyph, so the pads are always set in the fallback face, which keeps both sides equal.
+PAD = " "
+
+
 def hand(p, text, size=13, ink="pen", sup=False, boxed=False):
-    """Key handwriting. Digits are split out into the fallback face (legibility rule)."""
-    parts = _re.split(r"(\d+)", text)
+    """Key handwriting. Digits are split out into the fallback face (legibility rule).
+    A boxed answer keeps any lead-in spacing outside the border and gets one even pad
+    inside on each side, so the answer sits centred in its box."""
     last = None
+    if boxed:
+        lead = text[:len(text) - len(text.lstrip())]
+        if lead:
+            _hand_run(p, lead, size, ink, False, False, HAND)
+        _hand_run(p, PAD, size, ink, False, True, HAND_FALLBACK)
+    parts = _re.split(r"(\d+)", text.strip() if boxed else text)
     for part in parts:
         if part:
             last = _hand_run(p, part, size, ink, sup, boxed,
                              HAND_FALLBACK if part.isdigit() else HAND)
+    if boxed:
+        last = _hand_run(p, PAD, size, ink, False, True, HAND_FALLBACK)
     return last
 
 
@@ -143,6 +157,7 @@ def hand_config(p, z, short=False, size=13):
     """A configuration is mostly digits, so it is written wholly in the fallback face: one
     face means one unbroken answer box instead of a box split at every font change."""
     face = HAND_FALLBACK
+    _hand_run(p, PAD, size, "pen", False, True, face)
     if short:
         core, subs = shorthand(z)
         _hand_run(p, f"[{NOBLE_SYM[core]}] ", size, "pen", False, True, face)
@@ -153,6 +168,7 @@ def hand_config(p, z, short=False, size=13):
         _hand_run(p, str(c), size, "pen", True, True, face)
         if i < len(subs) - 1:
             _hand_run(p, " ", size, "pen", False, True, face)
+    _hand_run(p, PAD, size, "pen", False, True, face)
 
 
 def key_strip(cell, pal, z, lab_w=0.30, box_w=0.25):
