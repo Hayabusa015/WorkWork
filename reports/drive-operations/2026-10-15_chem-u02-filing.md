@@ -65,3 +65,63 @@ Ar and shifted B and Al one column right (periods 2 and 3). It affected the Batt
 blank periodic table page of the valence table, in Version 1 and in Version 2 (filed 2026-10-19, IDs
 1-2nj91Yl4FFwrSA_gjOa8nwQqdrkxiJz, 1QeLItYAiIDyuHItyVyAJKS6U07Hsj3TH, 1Vz7zMvujc5jOy-P4NRs8GmfLSw_ipk3m).
 Fixed in the generator and checked against 30 known positions plus a cell count per period.
+
+## 2026-10-21: file all remaining Unit 2 work (user approved: "file all")
+
+Logged before any action. Route: gws (drive.file only, `gws auth status` checked) uploads to the
+Upload Inbox (1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy), then `update_file` reparents. Names are set at
+upload from `templates/_shull_name.py` (no rename needed). Prior parent of every new file: the
+Upload Inbox. Nothing in Drive is overwritten; Battleship original (1pYgqhT7CHGncbDSApwy-ZijMtGierhxH)
+and valence Version 2 (1-2nj91Yl4FFwrSA_gjOa8nwQqdrkxiJz and siblings) are untouched.
+No U2 / 2.4 / 2.5 short title exists in DECISIONS.md and the full titles exceed the 20-character
+topic limit, so those names carry no topic (NAMING §2, CHG-0041).
+
+Folders to create in Unit 02 (1caxbGbuk4m-18ERTvk5Le_NNsMLmQ3Xp), checked absent by parentId lookup:
+`Quiz` (CHG-0030), `Section 02.4 - Electron Stability & Valence Electrons`,
+`Section 02.5 - Atomic & Electron Spectra` (names from courses/chemistry/DECISIONS.md).
+
+| Operation | Final name | Destination | Status |
+|---|---|---|---|
+| Upload then move | Unit 2 Quiz A/B/C .docx, Key .docx, .pdf (9 files) | Unit 02 / Quiz | filed 2026-10-21, verified by parentId lookup |
+| Upload then move | Unit 2 Study Guide .docx, Key .docx, .pdf | Unit 02 root | filed 2026-10-21, verified by parentId lookup |
+| Upload then move | 2.4 Organizer - Valence Electrons Version 3 .docx, Key .docx, .pdf | Unit 02 root (beside Version 2, user's earlier choice) | filed 2026-10-21, verified by parentId lookup |
+| Upload then move | 2.3 Activity - Electron Configs Battleship Version 2 .docx, .pdf | Unit 02 root (beside the original) | filed 2026-10-21, verified by parentId lookup |
+| Upload then move | 2.4 Practice Set - Ion Formation .docx, Key .docx, .pdf | Section 02.4, loose | filed 2026-10-21, verified by parentId lookup |
+| Upload then move | 2.5 Practice Set .docx, Key .docx, .pdf | Section 02.5, loose | filed 2026-10-21, verified by parentId lookup |
+| Move (CHG-0030) | 2.3 Activity - Electron Configurations Gizmo .docx 1_LYqusrdmOSh2FKxoyBCII8Do1TUmYy4, Key 1RLCiPx9dKJjuCZCcq7t12ooztLo-gRPx, .pdf 1zkRrKHt2Flsfrz6_ZPALMXcpNIHHVIOo | prior parent Section 02.3/Homework (1DIJnraCcfyNolKZEzAwgnWQA0HahJmiV) to Section 02.3 (12xbue3vJTgnkZwn1Fh65ZdaOjRRSmDrT) | filed 2026-10-21, verified by parentId lookup |
+
+Folders created 2026-10-21: Quiz 1WFRGEoIjT6N49lzQBDYHCOw-scjAdRZM · Section 02.4 1JzSSNSC7rntJRNnk3ORgPQVAcSwEJFwp ·
+Section 02.5 1eNnO-0BvAmBfgsHkR0122CUY8j004OzM (all parent Unit 02).
+
+File IDs (all verified by parentId lookup 2026-10-21):
+
+| File | ID | Folder |
+|---|---|---|
+| Unit 2 Quiz A.docx | 1GJY8hXfKNKqYDeXa0aySdcnmI-nd-eqM | Quiz |
+| Unit 2 Quiz A Key.docx | 1GNLxcY9JkorNuylboHoHmGO3XzxkQc2l | Quiz |
+| Unit 2 Quiz A.pdf | 1UtEKPPmsUq9q1-YIPTaNBPgv8Yy5hYWU | Quiz |
+| Unit 2 Quiz B.docx | 13evY-msQPo0wdQLf6CNuvFpXf6tgPfKW | Quiz |
+| Unit 2 Quiz B Key.docx | 18qqcuQxnfdJkV5j-IzKYokze5QCEfkGL | Quiz |
+| Unit 2 Quiz B.pdf | 1qDZRWBpd2R8-83YyiLGcx5a0XSq64KXZ | Quiz |
+| Unit 2 Quiz C.docx | 11vEpok6MPjXKtXZkgKohmZMFzURdbNiF | Quiz |
+| Unit 2 Quiz C Key.docx | 15HJ3gCUN96NeMAJy9Ln6sVaoivO8oBew | Quiz |
+| Unit 2 Quiz C.pdf | 1yxR1PG0GDxqC7ShxQa8PTACMXLe_rvL_ | Quiz |
+| Unit 2 Study Guide.docx | 16d0ggc0SQ91PH8hXNS_u_vhyYKuSl7aH | Unit 02 root |
+| Unit 2 Study Guide Key.docx | 1JwPzq8ePI2WYxjNvPv6WCuma-x9zUBT5 | Unit 02 root |
+| Unit 2 Study Guide.pdf | 1_qCw42_mmBXVPGv7gbO7Lo11QO8Ul5gS | Unit 02 root |
+| 2.4 Organizer - Valence Electrons Version 3.docx | 15efkXLSAyOoOOVStSwo_NeDvofkLWhq5 | Unit 02 root |
+| 2.4 Organizer Key - Valence Electrons Version 3.docx | 136YPuly9nbaGpiMal8WR0TD_YrmF2WuJ | Unit 02 root |
+| 2.4 Organizer - Valence Electrons Version 3.pdf | 1w1O9GaVfR-tts20swlxGT_UF8rcgRH9i | Unit 02 root |
+| 2.3 Activity - Electron Configs Battleship Version 2.docx | 1fAQG0xjNzwpcLYIh2GKo3Aq4jmqLzvWg | Unit 02 root |
+| 2.3 Activity - Electron Configs Battleship Version 2.pdf | 1misQsj9YGmY2EDcPJNOv-_fBSEwXHWap | Unit 02 root |
+| 2.4 Practice Set - Ion Formation.docx | 1POkgsmJLa3-GJQBwvuwR2V7Ed9ljOaGR | Section 02.4 |
+| 2.4 Practice Set Key - Ion Formation.docx | 1cor26yVx78iOWjuFTGAVOkDcf4848Cs2 | Section 02.4 |
+| 2.4 Practice Set - Ion Formation.pdf | 1PHqgWzSW_gL6FXWyrsLWcdJT8Nopybk_ | Section 02.4 |
+| 2.5 Practice Set.docx | 1v6WfLNXHl65tcD6vKThlZHMabCyNd7iX | Section 02.5 |
+| 2.5 Practice Set Key.docx | 10w7gef1GQ7kirAEtx_x8XmrNWKcmUU7a | Section 02.5 |
+| 2.5 Practice Set.pdf | 1oBjN8ZNwcx3UwEYptwLaK2zZcinljkAV | Section 02.5 |
+
+Upload Inbox empty afterwards. Section 02.3/Homework (1DIJnraCcfyNolKZEzAwgnWQA0HahJmiV) is now empty;
+trashing it needs user approval and the guard hook blocks trash, so it stays for the user to remove.
+Still open from 2026-10-19: valence Version 1 (3 files) and Version 2 (bad periodic table, 3 files) remain
+at the Unit 02 root; Battleship original (1pYgqhT7CHGncbDSApwy-ZijMtGierhxH) still has the bad table.
