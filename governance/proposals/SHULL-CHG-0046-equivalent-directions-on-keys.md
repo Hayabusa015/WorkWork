@@ -16,8 +16,8 @@
 | **Recommendation** | Approve. See §6. |
 | **Decision** | "refile the 2.2 key and make it the standard" — Matt, 2026-10-21, replying to the question of whether this should become the standard for every key with a direction answer. Question 2 in §7 (naming the check in the QA gate) was not answered, so the §7 default stands: QA gate left alone. |
 | **Status** | **IMPLEMENTED** |
-| **Implemented By** | pending, filled by main session (commit "SHULL-CHG-0046: teacher keys list every equivalent form of a direction answer") |
-| **Verified** | Partly. Secretary had no shell. Checked by reading: the edit adds only §10 and the Authority-line clause to `standards/ANSWER_KEYS.md`, plus this record and the changelog row. §10 contains no font name, no hex value, no spec schema and no `_dir_check()` code. Still to do by the main session: run `scripts/validate_references.py`, `scripts/validate_layers.py`, `scripts/validate_tokens.py`, and `git diff` to confirm only those files changed. |
+| **Implemented By** | commit c1fbf69 |
+| **Verified** | Yes. 2026-10-21, main session: `git diff` showed only §10, the Authority-line clause, this record and the changelog row; `scripts/validate_references.py`, `validate_layers.py` and `validate_tokens.py` all report OK; §10 holds no font name, hex value, spec schema or `_dir_check()` code. Reference build: `phys_u02_s02.2.verify.py` passes (27 forms) and fails on a planted error. |
 
 ---
 
