@@ -43,7 +43,8 @@ HAND_FALLBACK = _re.search(r"Fallback for any missing glyph: ([^.]+)\.",
                            T["typography"]["keyHandwriting"]["note"]).group(1).strip()
 INK = {k: T["keyInk"][k]["hex"] for k in ("pencil", "pen", "box", "arrow")}
 
-NAMES = {3: "Lithium", 8: "Oxygen", 9: "Fluorine", 11: "Sodium", 12: "Magnesium",
+NAMES = {7: "Nitrogen", 13: "Aluminum", 14: "Silicon", 31: "Gallium", 36: "Krypton",
+         3: "Lithium", 8: "Oxygen", 9: "Fluorine", 11: "Sodium", 12: "Magnesium",
          15: "Phosphorus", 16: "Sulfur", 17: "Chlorine", 19: "Potassium", 20: "Calcium",
          25: "Manganese", 26: "Iron", 27: "Cobalt", 33: "Arsenic", 34: "Selenium",
          35: "Bromine", 38: "Strontium", 50: "Tin", 51: "Antimony", 52: "Tellurium",
@@ -52,9 +53,9 @@ NAMES = {3: "Lithium", 8: "Oxygen", 9: "Fluorine", 11: "Sodium", 12: "Magnesium"
 # Version blueprints. Q1 near 4p, Q2 in 3p, Q3 a 4th-row d-block, Q4 a 5th-row p-block,
 # Q5-8 one each of group 1, 2, 16, 17, in a different order per version.
 VERSIONS = {
-    "A": {"long": [34, 15], "short": [26, 50], "ions": [11, 8, 12, 17]},
-    "B": {"long": [33, 17], "short": [27, 51], "ions": [16, 19, 9, 20]},
-    "C": {"long": [35, 16], "short": [25, 52], "ions": [38, 53, 3, 34]},
+    "A": {"long": [34, 15], "short": [26, 50], "ions": [12, 7, 13, 17]},
+    "B": {"long": [33, 17], "short": [27, 51], "ions": [15, 20, 35, 31]},
+    "C": {"long": [35, 16], "short": [25, 52], "ions": [38, 53, 19, 33]},
 }
 
 # Hand-written answers, used only to check the generator. A mismatch stops the build.
@@ -65,11 +66,13 @@ EXPECT_LONG = {
 }
 EXPECT_SHORT = {26: "[Ar] 4s2 3d6", 27: "[Ar] 4s2 3d7", 25: "[Ar] 4s2 3d5",
                 50: "[Kr] 5s2 4d10 5p2", 51: "[Kr] 5s2 4d10 5p3", 52: "[Kr] 5s2 4d10 5p4"}
-EXPECT_ION = {11: "1+", 19: "1+", 3: "1+", 12: "2+", 20: "2+", 38: "2+",
-              8: "2−", 16: "2−", 34: "2−", 17: "1−", 9: "1−", 53: "1−"}
+# Matt, 2026-10-21: four ions, two positive and two negative ("something like Mg, B, N, Cl").
+# Boron is a metalloid that does not form B3+, so group 13 is Al or Ga.
+EXPECT_ION = {19: "1+", 12: "2+", 20: "2+", 38: "2+", 13: "3+", 31: "3+",
+              7: "3\u2212", 15: "3\u2212", 33: "3\u2212", 17: "1\u2212", 35: "1\u2212", 53: "1\u2212"}
 EXPECT_UNPAIRED = {34: 2, 33: 3, 35: 1, 15: 3, 17: 1, 16: 2}
 
-POINTS = {"long": 4, "short": 2, "ion": 1}
+POINTS = {"mc": 1, "long": 4, "short": 2, "ion": 2}
 
 
 def flat(subs):
@@ -100,6 +103,10 @@ def check():
             assert not any(l == "f" for _, l, _ in rest)
         for z in v["ions"]:
             assert ion_charge(z) == EXPECT_ION[z], (z, ion_charge(z))
+        signs = [ion_charge(z)[-1] for z in v["ions"]]
+        assert signs.count("+") == 2 and signs.count("\u2212") == 2, signs
+        allz = v["long"] + v["short"] + v["ions"]
+        assert len(allz) == len(set(allz)), allz
     print("quiz answers re-solved for A, B and C: all match")
 
 
@@ -133,16 +140,19 @@ def _hand_run(p, text, size, ink, sup, boxed, face):
 
 
 def hand_config(p, z, short=False, size=13):
+    """A configuration is mostly digits, so it is written wholly in the fallback face: one
+    face means one unbroken answer box instead of a box split at every font change."""
+    face = HAND_FALLBACK
     if short:
         core, subs = shorthand(z)
-        hand(p, f"[{NOBLE_SYM[core]}] ", size, boxed=True)
+        _hand_run(p, f"[{NOBLE_SYM[core]}] ", size, "pen", False, True, face)
     else:
         subs = config(z)
     for i, (n, l, c) in enumerate(subs):
-        hand(p, f"{n}{l}", size, boxed=True)
-        hand(p, str(c), size, sup=True, boxed=True)
+        _hand_run(p, f"{n}{l}", size, "pen", False, True, face)
+        _hand_run(p, str(c), size, "pen", True, True, face)
         if i < len(subs) - 1:
-            hand(p, " ", size, boxed=True)
+            _hand_run(p, " ", size, "pen", False, True, face)
 
 
 def key_strip(cell, pal, z, lab_w=0.30, box_w=0.25):
@@ -170,7 +180,8 @@ def key_strip(cell, pal, z, lab_w=0.30, box_w=0.25):
             cell_margins(bc, top=0, bottom=0, left=0, right=0)
             p = bc.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            _run(p, m, 10, bold=True, color=INK["pen"])
+            r = p.add_run(m); r.font.name = HAND; r.font.size = Pt(10)
+            r.font.color.rgb = RGBColor.from_string(hexof(INK["pen"]))
     pin_tail(cell)
 
 
@@ -290,112 +301,176 @@ def part_bar(doc, pal, text, pts):
 NUM_W = 0.45
 
 
+MC_USE = [0, 1, 4]        # Matt, 2026-10-21: three multiple choice (rule, Hund diagram, order)
+
+
+def tile(cell, pal, z, big=True):
+    """A periodic-table style tile, outlined (no fill): atomic number, symbol, name."""
+    t = cell.add_table(rows=1, cols=1)
+    w = 0.86 if big else 0.70
+    fix_widths(t, [w])
+    no_split(t.rows[0], 0.86 if big else 0.62)
+    c = t.rows[0].cells[0]
+    borders(c, pal.display, sz=12)
+    cell_margins(c, top=20, bottom=20, left=50, right=40)
+    c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+    _run(p, str(z), 8, bold=True, color=pal.label)
+    q = c.add_paragraph(); q.paragraph_format.space_after = Pt(0)
+    q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    _run(q, SYMBOLS[z - 1], 20 if big else 16, bold=True, color=pal.ink)
+    if big:
+        r = c.add_paragraph(); r.paragraph_format.space_after = Pt(0)
+        r.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        _run(r, NAMES.get(z, SYMBOLS[z - 1]), 8, color=pal.label)
+    pin_tail(cell)
+    return t
+
+
+def mini_boxes(cell, pal, text, highlight=False):
+    """An option like "[\u2191\u2193] [\u2191] [   ]" drawn as three real orbital boxes, the same
+    boxes students draw in Part 2."""
+    import re as __re
+    marks = [m.strip() for m in __re.findall(r"\[([^\]]*)\]", text)]
+    p = cell.paragraphs[0]
+    t = cell.add_table(rows=1, cols=len(marks))
+    fix_widths(t, [0.30] * len(marks))
+    no_split(t.rows[0], 0.27)
+    for i, m in enumerate(marks):
+        c = t.rows[0].cells[i]
+        borders(c, INK["box"] if highlight else pal.ink, sz=10 if highlight else 6)
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell_margins(c, top=0, bottom=0, left=0, right=0)
+        q = c.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
+        q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if m:
+            _run(q, m, 10.5, bold=True, color=pal.ink)
+    # the letter sits on the first line; the boxes follow it
+    pin_tail(cell)
+
+
+def numcell(cc, pal, n):
+    p = cellfmt(cc, pal, line=False, left=20, right=20)
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    _run(p, str(n), 13, bold=True, color=pal.accent)
+
+
 def build_quiz(out, ver, key):
     pal = Palette(COURSE)
     ctx = Ctx(pal, key)
     v = VERSIONS[ver]
-    total = 5 + 2 * POINTS["long"] + 2 * POINTS["short"] + 4 * POINTS["ion"]
+    pts_mc = len(MC_USE) * POINTS["mc"]
+    pts_long, pts_short, pts_ion = 2 * POINTS["long"], 2 * POINTS["short"], 4 * POINTS["ion"]
+    total = pts_mc + pts_long + pts_short + pts_ion
     doc, s = new_doc()
     header(doc, pal, f"QUIZ  ·  VERSION {ver}  ·  ELECTRON CONFIGURATIONS AND IONS" +
            ("  ·  TEACHER KEY" if key else ""), f"Unit 2 Quiz {ver}", score=total)
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
-    p = cellfmt(c, pal, line=False, top=30, bottom=30)
-    _run(p, "You may use your periodic table. Circle one letter for each multiple-choice "
-            "question. Draw an arrow for every electron in the orbital diagrams.", 9.5,
-         color=pal.ink)
+    p = cellfmt(c, pal, line=False, top=20, bottom=20)
+    _run(p, "Use your periodic table.  Circle one letter for each multiple-choice question.  "
+            "Draw an arrow for every electron.", 9.5, color=pal.ink)
+    n = 1
 
     # ---- Part 1: multiple choice ----
-    part_bar(doc, pal, "PART 1  ·  MULTIPLE CHOICE", 5)
-    for i in range(5):
+    part_bar(doc, pal, "PART 1  ·  MULTIPLE CHOICE", pts_mc)
+    for i in MC_USE:
         q, opts, pos, why = mc_options(ver, i)
         t = doc.add_table(rows=2, cols=5)
         fix_widths(t, [NUM_W, 1.76, 1.76, 1.76, 1.77])
         no_split(t.rows[0]); no_split(t.rows[1])
-        num = t.cell(0, 0).merge(t.cell(1, 0))
-        pn = cellfmt(num, pal, top=40)
-        pn.paragraph_format.keep_with_next = True
-        _run(pn, str(i + 1), 11, bold=True, color=pal.accent)
+        numcell(t.cell(0, 0).merge(t.cell(1, 0)), pal, n)
         qc = t.cell(0, 1).merge(t.cell(0, 4))
-        pq = cellfmt(qc, pal, line=False, top=50, bottom=20)
+        pq = cellfmt(qc, pal, line=False, top=50, bottom=10)
         pq.paragraph_format.keep_with_next = True
-        rich(pq, q, 10, ctx, bold=True)
+        rich(pq, q, 10.5, ctx, bold=True)
         if key:
             hand(pq, "   " + LETTERS[pos], 13, boxed=True)
             hand(pq, "  " + why, 10, ink="arrow")
         for k, o in enumerate(opts):
-            oc = t.cell(1, 1 + k)
-            po = cellfmt(oc, pal, top=20, bottom=60)
-            _run(po, f"{LETTERS[k]}   ", 10, bold=True, color=pal.accent)
-            rich(po, o, 10, ctx, bold=(key and k == pos))
+            po = cellfmt(t.cell(1, 1 + k), pal, line=False, top=10, bottom=50)
+            _run(po, f"{LETTERS[k]}   ", 10.5, bold=True, color=pal.accent)
+            if o.startswith("["):
+                mini_boxes(oc_cell := t.cell(1, 1 + k), pal, o, highlight=(key and k == pos))
+            else:
+                rich(po, o, 10.5, ctx, bold=(key and k == pos))
+        n += 1
 
     # ---- Part 2: longhand + orbital diagram ----
-    part_bar(doc, pal, "PART 2  ·  LONGHAND CONFIGURATION AND ORBITAL DIAGRAM",
-             2 * POINTS["long"])
-    for i, z in enumerate(v["long"], 6):
-        t = doc.add_table(rows=3, cols=3)
-        fix_widths(t, [NUM_W, 1.75, 5.3])
-        for r in t.rows:
-            no_split(r)
-        num = t.cell(0, 0).merge(t.cell(2, 0))
-        pn = cellfmt(num, pal)
-        _run(pn, str(i), 11, bold=True, color=pal.accent)
-        el = t.cell(0, 1).merge(t.cell(0, 2))
-        pe = cellfmt(el, pal, line=False, top=50, bottom=10)
-        pe.paragraph_format.keep_with_next = True
-        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
-        _run(pe, f"     {POINTS['long']} pts: 2 configuration, 2 diagram", 8, color=pal.label)
-        for r, lab in ((1, "Electron configuration"), (2, "Orbital diagram")):
-            lc = t.cell(r, 1)
-            pl = cellfmt(lc, pal, line=False)
-            pl.paragraph_format.keep_with_next = (r == 1)
-            _run(pl, lab, 9, bold=True, color=pal.ink)
-            ac = t.cell(r, 2)
-            pa = cellfmt(ac, pal, line=(r == 1), top=40, bottom=40)
-            if r == 2:
-                borders(ac, pal.hair, sz=4)
-                no_split(t.rows[2], 0.85)
-                if key:
-                    pin_first(ac)
-                    key_strip(ac, pal, z, lab_w=0.22, box_w=0.19)
-                    q = ac.add_paragraph(); q.paragraph_format.space_after = Pt(0)
-                    hand(q, f"→ one arrow in each box before pairing, "
-                            f"{EXPECT_UNPAIRED[z]} unpaired", 10, ink="arrow")
-            elif key:
-                hand_config(pa, z, size=12)
-        gap(doc, 2)
+    part_bar(doc, pal, "PART 2  ·  LONGHAND CONFIGURATION  +  ORBITAL DIAGRAM", pts_long)
+    for z in v["long"]:
+        gap(doc, 3)
+        t = doc.add_table(rows=1, cols=3)
+        fix_widths(t, [NUM_W, 1.05, 6.0])
+        no_split(t.rows[0])
+        numcell(t.cell(0, 0), pal, n)
+        tc = t.cell(0, 1); cellfmt(tc, pal, line=False, left=0); pin_first(tc)
+        tile(tc, pal, z)
+        w = t.cell(0, 2); cellfmt(w, pal, line=False, top=10, bottom=10); pin_first(w)
+        write_line(w, "Electron configuration", pal,
+                   lambda pp, z=z: hand_config(pp, z, size=12), key,
+                   label_w=1.55, total_w=5.9, height=0.36)
+        box = w.add_table(rows=1, cols=1)
+        fix_widths(box, [5.9])
+        no_split(box.rows[0], 0.72)
+        bc = box.rows[0].cells[0]
+        borders(bc, pal.hair, sz=6)
+        pb = cellfmt(bc, pal, line=False, top=20, bottom=20)
+        _run(pb, "ORBITAL DIAGRAM", 7.5, bold=True, color=pal.label)
+        if key:
+            key_strip(bc, pal, z, lab_w=0.22, box_w=0.19)
+        pin_tail(w)
+        n += 1
 
     # ---- Part 3: shorthand ----
-    part_bar(doc, pal, "PART 3  ·  NOBLE-GAS SHORTHAND", 2 * POINTS["short"])
-    t = doc.add_table(rows=2, cols=3)
-    fix_widths(t, [NUM_W, 1.75, 5.3])
-    for r, z in enumerate(v["short"]):
-        no_split(t.rows[r], 0.45)
-        pn = cellfmt(t.cell(r, 0), pal)
-        _run(pn, str(8 + r), 11, bold=True, color=pal.accent)
-        pe = cellfmt(t.cell(r, 1), pal)
-        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
-        pa = cellfmt(t.cell(r, 2), pal)
-        if key:
-            hand_config(pa, z, short=True, size=12)
+    part_bar(doc, pal, "PART 3  ·  NOBLE-GAS SHORTHAND", pts_short)
+    for z in v["short"]:
+        gap(doc, 3)
+        t = doc.add_table(rows=1, cols=3)
+        fix_widths(t, [NUM_W, 1.05, 6.0])
+        no_split(t.rows[0])
+        numcell(t.cell(0, 0), pal, n)
+        tc = t.cell(0, 1); cellfmt(tc, pal, line=False, left=0); pin_first(tc)
+        tile(tc, pal, z, big=False)
+        w = t.cell(0, 2); cellfmt(w, pal, line=False, top=10, bottom=10); pin_first(w)
+        write_line(w, "Shorthand", pal, lambda pp, z=z: hand_config(pp, z, short=True, size=12),
+                   key, label_w=1.0, total_w=5.9, height=0.44)
+        n += 1
 
-    # ---- Part 4: ion charges ----
-    part_bar(doc, pal, "PART 4  ·  CHARGE OF THE ION EACH ATOM FORMS", 4 * POINTS["ion"])
-    t = doc.add_table(rows=2, cols=6)
-    fix_widths(t, [NUM_W, 1.55, 1.75, NUM_W, 1.55, 1.75])
+    # ---- Part 4: ions ----
+    if key:
+        page_break_before(doc)     # the key's filled diagrams push Part 4 over; keep it whole
+    part_bar(doc, pal, "PART 4  ·  IONS:  CHARGE, AND CATION OR ANION", pts_ion)
+    gap(doc, 3)
+    t = doc.add_table(rows=1, cols=4)
+    fix_widths(t, [1.875] * 4)
+    no_split(t.rows[0])
     for k, z in enumerate(v["ions"]):
-        r, side = k // 2, (k % 2) * 3
-        no_split(t.rows[r], 0.45)
-        pn = cellfmt(t.cell(r, side), pal)
-        _run(pn, str(10 + k), 11, bold=True, color=pal.accent)
-        pe = cellfmt(t.cell(r, side + 1), pal)
-        _run(pe, name_of(z), 10.5, bold=True, color=pal.ink)
-        pa = cellfmt(t.cell(r, side + 2), pal)
-        _run(pa, "charge  ", 8.5, color=pal.label)
+        cc = t.cell(0, k)
+        borders(cc, pal.hair, sz=4)
+        p0 = cellfmt(cc, pal, line=False, top=40, bottom=60, left=80, right=60)
+        _run(p0, str(n), 13, bold=True, color=pal.accent)
+        tile(cc, pal, z, big=False)
+        pc = cc.add_paragraph(); pc.paragraph_format.space_before = Pt(6)
+        pc.paragraph_format.space_after = Pt(4)
+        _run(pc, "Charge  ", 9, bold=True, color=pal.ink)
+        ch = ion_charge(z)
         if key:
+            hand(pc, ch, 14, boxed=True)
+        else:
+            _run(pc, "________", 10, color=pal.ink)
+        pt = cc.add_paragraph(); pt.paragraph_format.space_after = Pt(0)
+        _run(pt, "Circle  ", 9, bold=True, color=pal.ink)
+        cat = ch.endswith("+")
+        _run(pt, "cation", 10.5, bold=(key and cat), color=INK["box"] if (key and cat) else pal.ink)
+        _run(pt, "   /   ", 9, color=pal.label)
+        _run(pt, "anion", 10.5, bold=(key and not cat), color=INK["box"] if (key and not cat) else pal.ink)
+        if key:
+            pw = cc.add_paragraph(); pw.paragraph_format.space_after = Pt(0)
             vcount = valence(z)[1]
-            hand(pa, ion_charge(z), 13, boxed=True)
-            hand(pa, f"  {vcount} val. e-", 9, ink="arrow")
+            hand(pw, f"{vcount} val. e-, " + (f"loses {vcount}" if cat else f"gains {8 - vcount}"),
+                 10, ink="arrow")
+        n += 1
 
     running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  QUIZ {ver}" +
                    ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
@@ -600,19 +675,20 @@ def build_spectra(out, key, tmp):
 # Unit 2 study guide: two pages plus key. Practises the same skills as the quiz and test
 # without reusing any quiz element (checked in check_study_guide).
 # =======================================================================================
-SG_IONS = [(13, "Aluminum, Al"), (56, "Barium, Ba"), (7, "Nitrogen, N"), (37, "Rubidium, Rb")]
-SG_ION_ANS = {13: ("3", "Al^3+^"), 56: ("2", "Ba^2+^"), 7: ("5", "N^3−^"),
-              37: ("1", "Rb^+^")}
+SG_IONS = [(56, "Barium, Ba"), (8, "Oxygen, O"), (37, "Rubidium, Rb"), (9, "Fluorine, F")]
+SG_ION_ANS = {56: ("2", "Ba^2+^"), 8: ("6", "O^2−^"), 37: ("1", "Rb^+^"),
+              9: ("7", "F^−^")}
 
 
 def check_study_guide():
     quiz = set()
     for v in VERSIONS.values():
         quiz |= set(v["long"]) | set(v["short"]) | set(v["ions"])
-    used = {31, 40, 7, 6, 24, 30} | {z for z, _ in SG_IONS}
+    used = {36, 40, 14, 6, 24, 30} | {z for z, _ in SG_IONS}
     clash = quiz & used
     assert not clash, f"study guide reuses quiz elements: {sorted(clash)}"
-    assert flat(config(31)) == "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p1"
+    assert flat(config(36)) == "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p6"
+    assert unpaired(14) == 2
     core, rest = shorthand(40); assert (core, flat(rest)) == (36, "5s2 4d2")
     core, rest = shorthand(24); assert (core, flat(rest)) == (18, "4s1 3d5")
     for z, (v, _) in SG_ION_ANS.items():
@@ -643,15 +719,15 @@ def build_study_guide(out, key):
          key, "d holds 10.  n=2 holds 8.", ctx=ctx)
 
     section_bar(doc, pal, "S2.3  ·  ELECTRON CONFIGURATIONS")
-    item(doc, pal, 5, "Write the longhand configuration for gallium, Ga.", key,
-         lambda q: hand_config(q, 31, size=12), ctx=ctx)
+    item(doc, pal, 5, "Write the longhand configuration for krypton, Kr.", key,
+         lambda q: hand_config(q, 36, size=12), ctx=ctx)
     item(doc, pal, 6, "Write the noble-gas shorthand for zirconium, Zr.", key,
          lambda q: hand_config(q, 40, short=True, size=12), ctx=ctx)
-    c = item(doc, pal, 7, "Draw the orbital diagram for nitrogen, N, and count its unpaired "
+    c = item(doc, pal, 7, "Draw the orbital diagram for silicon, Si, and count its unpaired "
              "electrons.", key, None, lines=0, ctx=ctx)
     if key:
-        key_strip(c, pal, 7)
-        q = c.add_paragraph(); hand(q, "3 unpaired", 12, boxed=True)
+        key_strip(c, pal, 14)
+        q = c.add_paragraph(); hand(q, "2 unpaired", 12, boxed=True)
     else:
         spacer(c, 46)
     item(doc, pal, 8, "A student draws carbon's 2p as [↑↓] [   ] [   ]. Which rule "
