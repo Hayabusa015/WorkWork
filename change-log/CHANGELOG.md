@@ -31,7 +31,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0046 | 2026-10-21 | Teacher keys list every equivalent form of a direction answer | APPROVED | `governance/proposals/SHULL-CHG-0046-equivalent-directions-on-keys.md` |
+| SHULL-CHG-0046 | 2026-10-21 | Teacher keys list every equivalent form of a direction answer | IMPLEMENTED | `governance/proposals/SHULL-CHG-0046-equivalent-directions-on-keys.md` |
 
 ## 2026-10-16
 

@@ -1,7 +1,8 @@
 # Answer Keys — the handwritten look
 
 **Authority:** SHULL-CHG-0043 (Stage 2: Items C, D, H), SHULL-CHG-0044 Item F (name the token,
-never a font), SHULL-CHG-0045 Item A (§3, what counts as a common mistake).
+never a font), SHULL-CHG-0045 Item A (§3, what counts as a common mistake), SHULL-CHG-0046 (§10, equivalent
+forms of a direction answer).
 **Drawn by:** `scripts/key_solution.py` and `scripts/key_ink.py`. The `"steps"` and `"sketch"` spec
 schema is documented **once**, in the docstring of `scripts/key_solution.py`. This file does not
 restate it.
@@ -102,3 +103,25 @@ checked against the problem statement the same way.
 Rendered keys are **visually inspected page by page** (`audit-deliverable`). No hook can see a wrong
 glyph, so this inspection is the last gate. `scripts/audit_fonts.py --key` admits the
 key-handwriting face on `Key` files only; on a student file it is a fail.
+
+## 10. Direction answers list every equivalent form
+
+A boxed answer that is a direction, an angle or a compass direction, is followed by one more line
+headed **same direction:**. It lists every other acceptable way to write that direction, so a
+student who reached a different form can check.
+
+1. **Angle measured from the axes (0 to 360 degrees).** List the clockwise-negative form (the angle
+   minus 360), then both compass forms, one measured from each neighbouring axis. List the smaller
+   angle first. Use a true minus sign.
+   Example: 337 degrees = -23 degrees = 23 degrees south of east = 67 degrees east of south.
+2. **Exactly on an axis.** Write the compass name, for example "due east".
+3. **A launch angle given above or below the horizontal** (projectile sets, which have no compass).
+   List the clockwise or anticlockwise equivalent and the angle from straight up or straight down.
+   Example: 36 degrees above horizontal = -324 degrees = 54 degrees from straight up.
+4. **Same page.** The line stays on the same page as its boxed answer and is never split from it.
+5. **Verified at build.** Every listed form is checked independently: each form is turned back into a
+   direction and must match the boxed answer to within half a degree for a whole-degree answer. A
+   mismatch fails the build. The reference implementation is `_dir_check()` in
+   `templates/worksheet/specs/phys_u02_s02.2.verify.py`. This file does not restate it.
+6. **Keys only.** Student pages are unchanged. The `"steps"` spec schema stays documented once, in
+   the docstring of `scripts/key_solution.py`.
