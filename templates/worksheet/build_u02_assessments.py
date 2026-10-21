@@ -282,20 +282,21 @@ def cellfmt(cc, pal, line=True, top=40, bottom=40, left=60, right=60):
 
 
 def part_bar(doc, pal, text, pts):
-    gap(doc, 6)
+    """Part heading: the name and its points on one ink rule. One rule, no colour band."""
+    gap(doc, 7)
     t = doc.add_table(rows=1, cols=2)
     fix_widths(t, [6.3, 1.2])
     a, b = t.rows[0].cells
     for x in (a, b):
-        borders(x, pal.ink, sz=12, edges=("top",))
-        borders(x, pal.display, sz=18, edges=("bottom",))
-    pa = cellfmt(a, pal, line=False, top=30, bottom=30, left=0)
-    _run(pa, text, 9, bold=True, color=pal.ink)
-    pb = cellfmt(b, pal, line=False, top=30, bottom=30)
+        borders(x, pal.ink, sz=10, edges=("bottom",))
+    pa = cellfmt(a, pal, line=False, top=0, bottom=30, left=0)
+    _run(pa, text, 10, bold=True, color=pal.ink)
+    pb = cellfmt(b, pal, line=False, top=0, bottom=30, right=0)
     pb.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    _run(pb, f"{pts} pts", 8.5, bold=True, color=pal.label)
+    _run(pb, f"{pts} points", 9, color=pal.label)
     for x in (a, b):
         x.paragraphs[0].paragraph_format.keep_with_next = True
+    gap(doc, 3)
 
 
 NUM_W = 0.45
@@ -304,27 +305,46 @@ NUM_W = 0.45
 MC_USE = [0, 1, 4]        # Matt, 2026-10-21: three multiple choice (rule, Hund diagram, order)
 
 
-def tile(cell, pal, z, big=True):
-    """A periodic-table style tile, outlined (no fill): atomic number, symbol, name."""
-    t = cell.add_table(rows=1, cols=1)
-    w = 0.86 if big else 0.70
-    fix_widths(t, [w])
-    no_split(t.rows[0], 0.86 if big else 0.62)
-    c = t.rows[0].cells[0]
-    borders(c, pal.display, sz=12)
-    cell_margins(c, top=20, bottom=20, left=50, right=40)
-    c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
-    _run(p, str(z), 8, bold=True, color=pal.label)
-    q = c.add_paragraph(); q.paragraph_format.space_after = Pt(0)
-    q.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    _run(q, SYMBOLS[z - 1], 20 if big else 16, bold=True, color=pal.ink)
-    if big:
-        r = c.add_paragraph(); r.paragraph_format.space_after = Pt(0)
-        r.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        _run(r, NAMES.get(z, SYMBOLS[z - 1]), 8, color=pal.label)
-    pin_tail(cell)
-    return t
+# Standard atomic weights, IUPAC values rounded to two decimals, for the elements on the quiz.
+MASS = {7: "14.01", 12: "24.31", 13: "26.98", 15: "30.97", 16: "32.06", 17: "35.45",
+        19: "39.10", 20: "40.08", 25: "54.94", 26: "55.85", 27: "58.93", 31: "69.72",
+        33: "74.92", 34: "78.97", 35: "79.90", 38: "87.62", 50: "118.71", 51: "121.76",
+        52: "127.60", 53: "126.90"}
+TILE_DIR = None
+
+
+def tile_png(z):
+    """Matt's tile (his sample, 2026-10-21): heavy black border, atomic number top left,
+    large symbol, name, atomic mass. Drawn as an image so every tile is identical."""
+    from PIL import Image, ImageDraw, ImageFont
+    path = os.path.join(TILE_DIR, f"tile_{z}.png")
+    if os.path.exists(path):
+        return path
+    S = 600
+    im = Image.new("RGB", (S, S), "white")
+    d = ImageDraw.Draw(im)
+    bold = os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf")
+    reg = os.path.join(REPO, "brand", "fonts", "Archivo-Regular.ttf")
+    d.rectangle((6, 6, S - 7, S - 7), outline=(20, 20, 20), width=12)
+
+    def centred(text, font, y):
+        bb = d.textbbox((0, 0), text, font=font)
+        d.text(((S - (bb[2] - bb[0])) / 2 - bb[0], y), text, font=font, fill=(20, 20, 20))
+    d.text((36, 22), str(z), font=ImageFont.truetype(bold, 92), fill=(20, 20, 20))
+    centred(SYMBOLS[z - 1], ImageFont.truetype(bold, 250), 112)
+    name = NAMES.get(z, SYMBOLS[z - 1])
+    size = 92 if len(name) <= 8 else int(92 * 8 / len(name)) + 6
+    centred(name, ImageFont.truetype(bold, size), 405)
+    centred(MASS[z], ImageFont.truetype(reg, 66), 505)
+    im.save(path)
+    return path
+
+
+def tile(cell, pal, z, size_in=1.0, align=WD_ALIGN_PARAGRAPH.LEFT):
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    p.alignment = align
+    p.add_run().add_picture(tile_png(z), width=Inches(size_in))
 
 
 def mini_boxes(cell, pal, text, highlight=False):
@@ -368,12 +388,12 @@ def build_quiz(out, ver, key):
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     p = cellfmt(c, pal, line=False, top=20, bottom=20)
-    _run(p, "Use your periodic table.  Circle one letter for each multiple-choice question.  "
-            "Draw an arrow for every electron.", 9.5, color=pal.ink)
+    _run(p, "You may use a periodic table. For multiple choice, circle one letter. In an "
+            "orbital diagram, each electron gets one arrow.", 9.5, color=pal.ink)
     n = 1
 
     # ---- Part 1: multiple choice ----
-    part_bar(doc, pal, "PART 1  ·  MULTIPLE CHOICE", pts_mc)
+    part_bar(doc, pal, "Part 1   Multiple choice", pts_mc)
     for i in MC_USE:
         q, opts, pos, why = mc_options(ver, i)
         t = doc.add_table(rows=2, cols=5)
@@ -383,7 +403,7 @@ def build_quiz(out, ver, key):
         qc = t.cell(0, 1).merge(t.cell(0, 4))
         pq = cellfmt(qc, pal, line=False, top=50, bottom=10)
         pq.paragraph_format.keep_with_next = True
-        rich(pq, q, 10.5, ctx, bold=True)
+        rich(pq, q, 10.5, ctx)
         if key:
             hand(pq, "   " + LETTERS[pos], 13, boxed=True)
             hand(pq, "  " + why, 10, ink="arrow")
@@ -397,73 +417,87 @@ def build_quiz(out, ver, key):
         n += 1
 
     # ---- Part 2: longhand + orbital diagram ----
-    part_bar(doc, pal, "PART 2  ·  LONGHAND CONFIGURATION  +  ORBITAL DIAGRAM", pts_long)
+    # One row per question. The tile is 1.0 in square; the configuration line (0.34 in)
+    # plus the diagram box (0.66 in) make 1.0 in, so tops and bottoms line up.
+    part_bar(doc, pal, "Part 2   Longhand configurations and orbital diagrams", pts_long)
     for z in v["long"]:
-        gap(doc, 3)
-        t = doc.add_table(rows=1, cols=3)
-        fix_widths(t, [NUM_W, 1.05, 6.0])
-        no_split(t.rows[0])
-        numcell(t.cell(0, 0), pal, n)
-        tc = t.cell(0, 1); cellfmt(tc, pal, line=False, left=0); pin_first(tc)
-        tile(tc, pal, z)
-        w = t.cell(0, 2); cellfmt(w, pal, line=False, top=10, bottom=10); pin_first(w)
-        write_line(w, "Electron configuration", pal,
-                   lambda pp, z=z: hand_config(pp, z, size=12), key,
-                   label_w=1.55, total_w=5.9, height=0.36)
-        box = w.add_table(rows=1, cols=1)
-        fix_widths(box, [5.9])
-        no_split(box.rows[0], 0.72)
-        bc = box.rows[0].cells[0]
+        t = doc.add_table(rows=3, cols=3)
+        fix_widths(t, [NUM_W, 1.15, 5.9])
+        num = t.cell(0, 0).merge(t.cell(2, 0)); numcell(num, pal, n)
+        tc = t.cell(0, 1).merge(t.cell(2, 1))
+        tc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(tc, top=0, bottom=0, left=0, right=0)
+        tile(tc, pal, z, 1.0)
+        # writing line 0.40 + gap 0.08 + diagram box 0.52 = the 1.0 in tile
+        no_split(t.rows[0], 0.40); no_split(t.rows[1], 0.08); no_split(t.rows[2], 0.52)
+        gc = t.cell(1, 2); cell_margins(gc, top=0, bottom=0, left=0, right=0)
+        gp = gc.paragraphs[0]; gp.paragraph_format.space_after = Pt(0)
+        _run(gp, "", 2)
+        lc = t.cell(0, 2)
+        pl = cellfmt(lc, pal, top=0, bottom=20, left=80)
+        lc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        pl.paragraph_format.tab_stops.add_tab_stop(Inches(1.25))
+        _run(pl, "Configuration", 9, bold=True, color=pal.ink)
+        _run(pl, "\t", 9)
+        if key:
+            hand_config(pl, z, size=12)
+        bc = t.cell(2, 2)
         borders(bc, pal.hair, sz=6)
-        pb = cellfmt(bc, pal, line=False, top=20, bottom=20)
-        _run(pb, "ORBITAL DIAGRAM", 7.5, bold=True, color=pal.label)
+        bc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(bc, top=30, bottom=20, left=80, right=40)
+        pb = bc.paragraphs[0]; pb.paragraph_format.space_after = Pt(1)
+        _run(pb, "Orbital diagram", 8.5, color=pal.label)
         if key:
             key_strip(bc, pal, z, lab_w=0.22, box_w=0.19)
-        pin_tail(w)
+        gap(doc, 8)
         n += 1
 
     # ---- Part 3: shorthand ----
-    part_bar(doc, pal, "PART 3  ·  NOBLE-GAS SHORTHAND", pts_short)
-    for z in v["short"]:
-        gap(doc, 3)
-        t = doc.add_table(rows=1, cols=3)
-        fix_widths(t, [NUM_W, 1.05, 6.0])
-        no_split(t.rows[0])
-        numcell(t.cell(0, 0), pal, n)
-        tc = t.cell(0, 1); cellfmt(tc, pal, line=False, left=0); pin_first(tc)
-        tile(tc, pal, z, big=False)
-        w = t.cell(0, 2); cellfmt(w, pal, line=False, top=10, bottom=10); pin_first(w)
-        write_line(w, "Shorthand", pal, lambda pp, z=z: hand_config(pp, z, short=True, size=12),
-                   key, label_w=1.0, total_w=5.9, height=0.44)
+    part_bar(doc, pal, "Part 3   Noble-gas shorthand", pts_short)
+    t = doc.add_table(rows=1, cols=6)
+    fix_widths(t, [NUM_W, 0.85, 2.45, NUM_W, 0.85, 2.45])
+    no_split(t.rows[0], 0.86)
+    for k, z in enumerate(v["short"]):
+        o = 3 * k
+        numcell(t.cell(0, o), pal, n)
+        tc = t.cell(0, o + 1)
+        tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        cell_margins(tc, top=0, bottom=0, left=0, right=0)
+        tile(tc, pal, z, 0.72)
+        ac = t.cell(0, o + 2)
+        pa = cellfmt(ac, pal, line=False, top=0, bottom=40, left=80, right=60)
+        ac.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        borders(ac, pal.hair, sz=6, edges=("bottom",))
+        if key:
+            hand_config(pa, z, short=True, size=11)
         n += 1
 
     # ---- Part 4: ions ----
     if key:
         page_break_before(doc)     # the key's filled diagrams push Part 4 over; keep it whole
-    part_bar(doc, pal, "PART 4  ·  IONS:  CHARGE, AND CATION OR ANION", pts_ion)
-    gap(doc, 3)
+    part_bar(doc, pal, "Part 4   Ions: the charge, and cation or anion", pts_ion)
     t = doc.add_table(rows=1, cols=4)
     fix_widths(t, [1.875] * 4)
     no_split(t.rows[0])
     for k, z in enumerate(v["ions"]):
         cc = t.cell(0, k)
-        borders(cc, pal.hair, sz=4)
-        p0 = cellfmt(cc, pal, line=False, top=40, bottom=60, left=80, right=60)
+        cc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(cc, top=20, bottom=40, left=40, right=40)
+        p0 = cc.paragraphs[0]; p0.paragraph_format.space_after = Pt(2)
         _run(p0, str(n), 13, bold=True, color=pal.accent)
-        tile(cc, pal, z, big=False)
-        pc = cc.add_paragraph(); pc.paragraph_format.space_before = Pt(6)
-        pc.paragraph_format.space_after = Pt(4)
-        _run(pc, "Charge  ", 9, bold=True, color=pal.ink)
+        q = cc.add_paragraph(); q.paragraph_format.space_after = Pt(4)
+        q.add_run().add_picture(tile_png(z), width=Inches(0.8))
+        pc = cc.add_paragraph(); pc.paragraph_format.space_after = Pt(5)
+        _run(pc, "Charge  ", 9.5, color=pal.ink)
         ch = ion_charge(z)
         if key:
             hand(pc, ch, 14, boxed=True)
         else:
-            _run(pc, "________", 10, color=pal.ink)
+            _run(pc, "_________", 10, color=pal.ink)
         pt = cc.add_paragraph(); pt.paragraph_format.space_after = Pt(0)
-        _run(pt, "Circle  ", 9, bold=True, color=pal.ink)
         cat = ch.endswith("+")
         _run(pt, "cation", 10.5, bold=(key and cat), color=INK["box"] if (key and cat) else pal.ink)
-        _run(pt, "   /   ", 9, color=pal.label)
+        _run(pt, "   or   ", 9, color=pal.label)
         _run(pt, "anion", 10.5, bold=(key and not cat), color=INK["box"] if (key and not cat) else pal.ink)
         if key:
             pw = cc.add_paragraph(); pw.paragraph_format.space_after = Pt(0)
@@ -766,8 +800,13 @@ def build_study_guide(out, key):
 def main():
     outdir = sys.argv[1] if len(sys.argv) > 1 else "."
     os.makedirs(outdir, exist_ok=True)
+    global TILE_DIR
+    TILE_DIR = os.path.join(outdir, ".dots"); os.makedirs(TILE_DIR, exist_ok=True)
     check()
     check_mc()
+    for v_ in VERSIONS.values():
+        for z in v_["long"] + v_["short"] + v_["ions"]:
+            assert z in MASS, z
     for ver in VERSIONS:
         for key in (False, True):
             name = document_name("Quiz", ["2.3", "2.4"], 2, version=ver, key=key)
