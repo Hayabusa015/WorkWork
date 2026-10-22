@@ -73,3 +73,24 @@ Upload: Drive API with the `drive.file` token (scope unchanged), checksum matche
 Verified afterwards by independent lookups: `parentId = Guided Notes` lists exactly these two files;
 `parentId = Upload Inbox` is empty; Guided Notes' own parent is `Unit 02 - Motion in Two Dimensions`
 (`1rB4t-tF-PygDHIFFQBleIpHV4GHJYBve`). Nothing overwritten, trashed or deleted.
+
+## Plan 2026-10-22 — replace the filed copies with the rebuilt files (logged BEFORE execution)
+
+Matt approved: "Yes, replace the Drive copies with the rebuilt files." Reason: the filed copies are the
+old 11-page layout built before the merge of main; the rebuilt files use main's paged builder
+(14 pages, standard cover, keyInk.pen on the key).
+
+| # | Object ID | Operation | Prior state |
+|---|---|---|---|
+| 1 | `1qd57XMECFshy4k71jgsk71dmvMw3bfcn` | replace content in place (Drive API `files.update`, media upload, `drive.file` token; the app created this file) | 43,189 bytes, named `Unit 2 Guided Notes - Motion in Two Dimensions.docx`, parent Guided Notes `1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN` |
+| 2 | `1J9HMsmkMuyRVZa--odOKnlMDoiEsPua9` | same | 46,188 bytes, named `Unit 2 Guided Notes Key - Motion in Two Dimensions.docx`, same parent |
+| 3 | both | rename via connector `update_file` to the compliant names: `Unit 2 Guided Notes.docx`, `Unit 2 Guided Notes Key.docx` | the names above |
+
+IDs are preserved, so existing links survive, and Drive keeps the previous revision, so the old content
+is recoverable from version history. The rename drops the topic because `standards/NAMING.md`
+(SHULL-CHG-0041) allows only a short title (at most 20 characters) from the Physics "Short titles"
+table, and Unit 2 has no row. A short title is not applied without Matt's approval. Not a trash or
+delete; nothing is removed.
+
+Rebuilt file checksums (md5): student `eb6f1a91eae1b0cf2aaf9da8c06c60dd` (46,039 bytes), key
+`26f99f5d1cee4ed14743424a0993550c` (48,871 bytes). Built from branch commit `0380c1c`.
