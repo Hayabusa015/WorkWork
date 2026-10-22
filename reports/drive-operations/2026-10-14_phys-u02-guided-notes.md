@@ -94,3 +94,16 @@ delete; nothing is removed.
 
 Rebuilt file checksums (md5): student `eb6f1a91eae1b0cf2aaf9da8c06c60dd` (46,039 bytes), key
 `26f99f5d1cee4ed14743424a0993550c` (48,871 bytes). Built from branch commit `0380c1c`.
+
+## Result 2026-10-22 — executed and verified
+
+| Object ID | Final name | Final size | Content check | Parent |
+|---|---|---|---|---|
+| `1qd57XMECFshy4k71jgsk71dmvMw3bfcn` | `Unit 2 Guided Notes.docx` | 46,039 bytes | Drive md5 matched local `eb6f1a91…` right after the replace | Guided Notes `1EkaGgN5rCqWC0tmCQutdjwY6eM9_8FaN` |
+| `1J9HMsmkMuyRVZa--odOKnlMDoiEsPua9` | `Unit 2 Guided Notes Key.docx` | 48,871 bytes | Drive md5 matched local `26f99f5d…` right after the replace | same |
+
+Content replaced in place (Drive API, `drive.file` token), so both IDs are unchanged and the previous
+revisions are in Drive version history. Renamed with connector `update_file`. Verified afterwards by
+`parentId` lookup: Guided Notes lists exactly these two files with these names and sizes; Upload Inbox
+`1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy` is empty. Nothing trashed or deleted. No short title was applied to
+Unit 2 (none approved), so the names carry no topic.
