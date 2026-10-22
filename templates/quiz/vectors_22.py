@@ -11,7 +11,7 @@ Greek letters are not written anywhere: Archivo has no theta, so the text says "
 import math
 
 CODE = "U02 / S02.2"
-TITLE_LINES = ("UNIT 2 · MOTION IN TWO DIMENSIONS", "VECTORS QUIZ")
+TITLE_LINES = ("UNIT 2 · MOTION IN TWO DIMENSIONS", "VECTOR ADDITION QUIZ")
 TOTAL = 16
 
 # ---- angle forms ---------------------------------------------------------------------
@@ -93,9 +93,9 @@ VERSIONS = {
     "q4": {"x": 3.0, "y": 7.5, "unit": "m/s", "kind": "velocity", "frame": "v",
            "text": "Buzz Lightyear flies north at 7.5 m/s while a crosswind blows him east at 3.0 m/s. "
                    "Find his resultant velocity: magnitude and direction."},
-    "q5": {"unit": "N", "kind": "force", "v": [(35, (20, "south", "east")), (45, (10, "west", "north"))],
-           "text": "Mario pulls a crate with 35 N toward 20° south of east while Luigi pulls with 45 N toward "
-                   "10° west of north. Find the resultant force on the crate: magnitude and direction."},
+    "q5": {"unit": "m", "kind": "displacement", "v": [(35, (20, "south", "east")), (45, (10, "west", "north"))],
+           "text": "Mario walks 35 m toward 20° south of east, then turns and walks 45 m toward 10° west of "
+                   "north. Find Mario’s resultant displacement: magnitude and direction."},
   },
 }
 
@@ -105,7 +105,9 @@ def restate_items(v):
     t3 = v["q3"] % 360
     items = []
     for n, theta, given in ((1, t1, f"{t1:.0f}°"), (2, t2, fmt(*v["q2"])), (3, t3, f"−{abs(v['q3'])}°")):
-        items.append({"n": n, "given": given, "theta": theta, "eq": equivalents(theta)})
+        eq = equivalents(theta)
+        given_key = {1: "deg", 2: "c1", 3: "neg"}[n]       # the form the prompt itself uses
+        items.append({"n": n, "given": given, "theta": theta, "eq": eq, "given_key": given_key})
     return items
 
 def solve_q4(q):

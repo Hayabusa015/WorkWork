@@ -27,7 +27,7 @@ from _shull_docx import (T, FONT, Palette, hexof, borders, para, rule_lines, fix
                          trim_tail, schema_order, tight_cells)
 
 KEY_INK = T["keyInk"]["pen"]["hex"]          # written answers on a key (standards/ANSWER_KEYS.md)
-DIRECTIONS = ("Show your work in the boxes and box your final answers with units. Round calculations "
+DIRECTIONS = ("Show your work in the boxes and write questions 1–3 on the lines. Box your final answers with units. Round calculations "
               "to two significant figures. Angles on the 0–360° scale start at east and run "
               "counterclockwise: north is 90°, west is 180°, south is 270°. A negative angle runs "
               "clockwise from east. Any correct way of writing a direction counts.")
@@ -121,6 +121,11 @@ def sgn(x, nd=2):
     return f"{x:.{nd}f}".replace("-", "−")
 
 
+def term(x, nd=2):
+    """A term in a sum: negatives are bracketed, positives are not."""
+    return f"({sgn(x, nd)})" if x < 0 else sgn(x, nd)
+
+
 def key_doc(L, d, out):
     pal = Palette("physics")
     doc = new_doc(pal, f"SHULL SCIENCE / PHYSICS / UNIT 02 / QUIZ {L} / TEACHER KEY")
@@ -140,9 +145,9 @@ def key_doc(L, d, out):
         para(c, f"Restate {it['given']}.", 9.5, color=pal.ink)
         e = it["eq"]
         kp(c, "Accept any two of:", 8, bold=True)
-        for form in (e["deg"], e["neg"], e["c1"], e["c2"]):
-            if form.rstrip("°") != it["given"].rstrip("°").replace("−", "−"):
-                kp(c, "•  " + form)
+        for k in ("deg", "neg", "c1", "c2"):
+            if k != it["given_key"]:
+                kp(c, "•  " + e[k])
     q4, q5 = d["q4"], d["q5"]
     v4, v5 = d["v"]["q4"], d["v"]["q5"]
     u4, u5 = v4["unit"], v5["unit"]
@@ -153,13 +158,13 @@ def key_doc(L, d, out):
     para(c, v4["text"], 9.5, color=pal.ink)
     x, y = v4["x"], v4["y"]
     lab = (lambda v: f"{abs(v):.1f}") if u4 == "m/s" else (lambda v: f"{abs(v):g}")
-    kp(c, f"R² = Rx² + Ry² = ({lab(x)})² + ({lab(y)})²,  so  R = {q4['R']:.2f} = {V.two_sf(q4['R'])} {u4}")
+    kp(c, f"R² = Rx² + Ry² = ({lab(x)})² + ({lab(y)})²,  so  R = {q4['R']:.2f}, round to {V.two_sf(q4['R'])} {u4}")
     if v4.get("frame") == "v":      # direction told from the north axis
         import math
         ang = math.degrees(math.atan(abs(x) / abs(y)))
-        kp(c, f"tan(angle) = {lab(x)} / {lab(y)} measured from north, so the angle is {ang:.1f} = {ang:.0f}°")
+        kp(c, f"tan(angle) = {lab(x)} / {lab(y)} measured from north, so the angle is {ang:.1f}, round to {ang:.0f}°")
     else:
-        kp(c, f"tan(angle) = {lab(y)} / {lab(x)}, so the reference angle is {q4['ref']:.1f} = {q4['ref']:.0f}°")
+        kp(c, f"tan(angle) = {lab(y)} / {lab(x)}, so the reference angle is {q4['ref']:.1f}, round to {q4['ref']:.0f}°")
     other = q4["eq"]["c1"] if v4.get("frame") == "v" else q4["eq"]["c2"]
     kp(c, f"Answer: {V.two_sf(q4['R'])} {u4} at {q4['stated']}.  Also correct: {q4['eq']['deg']}, {q4['eq']['neg']}, "
           f"{other}.", bold=True)
@@ -173,10 +178,10 @@ def key_doc(L, d, out):
     for (m, th), (ax, ay), name in zip(q5["vs"], q5["parts"], ("A", "B")):
         kp(c, f"{name} = {m:g} {u5} at {th:.0f}°:   {name}x = {m:g} cos {th:.0f}° = {sgn(ax)} {u5}      "
               f"{name}y = {m:g} sin {th:.0f}° = {sgn(ay)} {u5}")
-    kp(c, f"Rx = {sgn(q5['parts'][0][0])} + ({sgn(q5['parts'][1][0])}) = {sgn(q5['rx'])} {u5}      "
-          f"Ry = {sgn(q5['parts'][0][1])} + ({sgn(q5['parts'][1][1])}) = {sgn(q5['ry'])} {u5}")
+    kp(c, f"Rx = {term(q5['parts'][0][0])} + {term(q5['parts'][1][0])} = {sgn(q5['rx'])} {u5}      "
+          f"Ry = {term(q5['parts'][0][1])} + {term(q5['parts'][1][1])} = {sgn(q5['ry'])} {u5}")
     ref = abs(__import__("math").degrees(__import__("math").atan(abs(q5["ry"]) / abs(q5["rx"]))))
-    kp(c, f"R = √({sgn(q5['rx'])}² + {sgn(q5['ry'])}²) = {q5['R']:.2f} = {V.two_sf(q5['R'])} {u5}.   "
+    kp(c, f"R = √({term(q5['rx'])}² + {term(q5['ry'])}²) = {q5['R']:.2f}, round to {V.two_sf(q5['R'])} {u5}.   "
           f"Reference angle = arctan({abs(q5['ry']):.2f} / {abs(q5['rx']):.2f}) = {ref:.1f}°")
     kp(c, f"Answer: {V.two_sf(q5['R'])} {u5} at {q5['stated']}.  Also correct: {q5['eq']['deg']}, {q5['eq']['neg']}, "
           f"{q5['eq']['c2']}.", bold=True)
@@ -223,8 +228,8 @@ def grade_sheet(data, out):
             d, cell = data[L], row[3 + ci]
             if qi < 3:
                 it = d["restate"][qi]; e = it["eq"]
-                forms = [f for f in (e["deg"], e["neg"], e["c1s"], e["c2s"])
-                         if f.rstrip("°") != it["given"].rstrip("°")]
+                forms = [e[k + "s"] if k in ("c1", "c2") else e[k]
+                         for k in ("deg", "neg", "c1", "c2") if k != it["given_key"]]
                 para(cell, f"given {it['given']}", 7.5, color=pal.label, first=True)
                 para(cell, "  ·  ".join(forms), 8.5, bold=True, color=KEY_INK)
             elif qi == 3:
@@ -249,12 +254,12 @@ def grade_sheet(data, out):
     tight_cells(t2, top=30, bottom=30, left=20, right=20)
     for i in range(n):
         pts = V.TOTAL - i
-        for r, txt, bold in ((0, str(pts), True), (1, f"{round(100 * pts / V.TOTAL)}", False)):
+        for r, txt, bold in ((0, str(pts), True), (1, f"{int(100 * pts / V.TOTAL + 0.5)}", False)):
             cell = t2.rows[r].cells[i]
             borders(cell, pal.hair, sz=4)
             p = para(cell, txt, 8.5, bold=bold, color=pal.ink, first=True)
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    para(c, "Top row: points earned out of 16. Bottom row: percent, rounded.", 7.5, color=pal.label)
+    para(c, "Top row: points earned out of 16. Bottom row: percent, rounded half up.", 7.5, color=pal.label)
     finish(doc, out)
 
 
