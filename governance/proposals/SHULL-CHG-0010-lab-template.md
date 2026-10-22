@@ -12,9 +12,14 @@
 | **Affected Courses** | All three |
 | **Risk** | Medium — see the two findings below |
 | **Decision** | Approved by the user |
-| **Status** | **IMPLEMENTED** — see the RESOLUTION section below, which closed both findings on 2026-09-08. This header previously said PARTIALLY IMPLEMENTED after the resolution closed it; corrected (SHULL-CHG-0051). |
+| **Status** | **IMPLEMENTED** |
 | **Implemented By** | `templates/lab/build_lab.py`, `templates/lab/README.md`, `scripts/build_lab_css.py` |
 | **Verified** | Rendered, font-checked, ink-measured, and visually inspected at 110 dpi (see RESOLUTION). |
+
+*Correction (SHULL-CHG-0051, 2026-10-22): the header above previously read a different status than
+the RESOLUTION section below it, which had already closed both findings. Corrected to match. Kept
+out of the Status cell itself — `scripts/desk_export.py` matches that cell by substring, and an
+explanatory aside describing the old wrong value was getting matched as the real one.*
 
 ## Finding 1 — the HTML template files do not exist
 
