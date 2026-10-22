@@ -52,6 +52,10 @@ Design: `brand/SHULL_DESIGN_SYSTEM.md`. Voice: `standards/VOICE.md`. Naming: `st
 
 **Ruled lines are for prose. Open boxes are for math.** This holds everywhere.
 
+**Molecular structures** are built with `scripts/build_diagram_molecule.py` from a SMILES string
+verified by `verify-content` — never hand-drawn, generated, or pasted; stop and ask if RDKit cannot
+draw it. SHULL-CHG-0042.
+
 ## Worksheets and practice sets
 
 ```bash
@@ -126,7 +130,7 @@ full-sentence blank must not look identical. Leave a margin note where a common 
 lives, named plainly.
 
 **Always two files** — student copy and filled key — generated from the same source so they cannot
-drift.
+drift. The filled key follows `standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
 
 ## Geology activities
 

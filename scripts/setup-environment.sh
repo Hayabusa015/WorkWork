@@ -36,7 +36,8 @@ fi
 # 3. Python build libraries ----------------------------------------------------
 log "installing python build libraries"
 python3 -m pip install --quiet --disable-pip-version-check \
-  python-docx python-pptx pymupdf pillow weasyprint fonttools jsonschema 2>&1 \
+  python-docx python-pptx pymupdf pillow weasyprint fonttools jsonschema \
+  rdkit mendeleev pint opencv-python-headless potracer 2>&1 \
   | grep -vi "warning: running pip" || true
 
 # 4. Node libraries for the slide template ------------------------------------

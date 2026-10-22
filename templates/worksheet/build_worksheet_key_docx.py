@@ -20,8 +20,9 @@ Each question in the spec must carry a "solution" field: the full worked steps a
 answer, independent of any "selfCheck" bracket. A question with no "solution" is refused -
 a key that silently skips a question is worse than no key.
 """
-import json, os, sys
+import json, os, sys, tempfile
 from docx import Document
+from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -34,6 +35,9 @@ from _shull_name import document_name, short_title   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
+HAND_W_IN = 7.20            # handwritten solution image width; fits the 7.50 in card less its margins
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), "scripts"))
+_TMP = tempfile.mkdtemp(prefix="shull_key_")
 
 
 def refuse(msg, *more):
@@ -69,13 +73,20 @@ def answer_block(doc, n, q, pal):
     if q.get("tier"):
         run(head, q["tier"].upper(), 7, bold=True, color=pal.accent)
 
-    p = para(c, q["prompt"], 9, color=pal.label)
+    p = para(c, q["prompt"].replace("**", ""), 9, color=pal.label)   # the key restates; bold is the handout's job
     p.runs[0].italic = True
     for part in q.get("parts", []):
-        p = para(c, "   " + str(part), 9, color=pal.label)
+        p = para(c, "   " + str(part).replace("**", ""), 9, color=pal.label)
         p.runs[0].italic = True
 
     gap(c, 2)
+    if q.get("steps"):
+        # Handwritten worked solution in the key-handwriting face (standards/ANSWER_KEYS.md):
+        # the steps, any scene sketch and the boxed answer are drawn, so no typed copy follows.
+        from key_solution import solution_image
+        png, _ = solution_image(q, os.path.join(_TMP, f"q{n}.png"), width_in=HAND_W_IN)
+        c.add_paragraph().add_run().add_picture(png, width=Inches(HAND_W_IN))
+        return c
     for line in str(q["solution"]).split("\n"):
         if line.strip():
             para(c, line.strip(), 10, color=pal.ink)
@@ -108,6 +119,13 @@ def main():
     if missing:
         return refuse("no \"solution\" field for: " + ", ".join(missing),
                        "A key that silently skips a question is worse than no key.")
+
+    typed_div = [f"{sec['code']} Q{i}" for sec in sections
+                 for i, q in enumerate(sec.get("questions", []), start=1)
+                 if not q.get("steps") and "÷" in str(q.get("solution", ""))]
+    if typed_div:
+        print("build_worksheet_key_docx: WARNING typed solution uses ÷ (keys show division as a stacked "
+              "fraction; add \"steps\"): " + ", ".join(typed_div), file=sys.stderr)
 
     code = COURSE_CODE[course]
     unit = f"U{int(spec['unit']):02d}"
