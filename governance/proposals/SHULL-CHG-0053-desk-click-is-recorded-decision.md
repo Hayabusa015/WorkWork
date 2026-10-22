@@ -14,8 +14,8 @@
 | **Affected Courses** | None. |
 | **Risk** | Medium. It changes how approvals are recorded. |
 | **Recommendation** | Approve, with the safeguards in section 2. |
-| **Decision** | Pending. |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-10-22**, in the main session. Verbatim: *"approve 0053`"*. Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | No |
 
