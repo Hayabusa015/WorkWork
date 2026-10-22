@@ -27,13 +27,19 @@ supersedes it, exactly as the decision logs work.
 
 ## 2026-10-22
 
+Two sessions independently drafted SHULL-CHG-0046 through 0052 in parallel (see each record's
+"Reconciliation note" and SHULL-CHG-0052's addendum). One session's drafts were implemented first and
+are what the rows below describe; the other's PROPOSED drafts of the same seven findings were not
+separately rows here, to avoid listing the same fact twice under two statuses.
+
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0053 | 2026-10-22 | A Secretary's Desk click is the user's recorded decision | CONFIRMED | `governance/proposals/SHULL-CHG-0053-desk-click-is-recorded-decision.md` |
 | SHULL-CHG-0052 | 2026-10-22 | Dashboard IDs 0024-0038 collided with real git records of the same ID; re-filed at 0046-0051 | CONFIRMED | `governance/proposals/SHULL-CHG-0052-dashboard-id-desync.md` |
 | SHULL-CHG-0051 | 2026-10-22 | SHULL-CHG-0010's own header Status contradicted its own resolution | CONFIRMED | `governance/proposals/SHULL-CHG-0051-chg-0010-header-status.md` |
-| SHULL-CHG-0050 | 2026-10-22 | Agents README claimed a `model` frontmatter field no agent has | CONFIRMED | `governance/proposals/SHULL-CHG-0050-agents-readme-model-field.md` |
-| SHULL-CHG-0049 | 2026-10-22 | standards/README.md referenced a `superseded/` directory that was never built | CONFIRMED | `governance/proposals/SHULL-CHG-0049-standards-superseded-dir.md` |
-| SHULL-CHG-0048 | 2026-10-22 | scripts/README.md documented 8 of 28 scripts; now documents all of them | CONFIRMED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
+| SHULL-CHG-0050 | 2026-10-22 | Agents README claimed a `model` frontmatter field no agent has (judgment call — see record) | CONFIRMED | `governance/proposals/SHULL-CHG-0050-agents-readme-model-field.md` |
+| SHULL-CHG-0049 | 2026-10-22 | standards/README.md referenced a `superseded/` directory that was never built (judgment call — see record) | CONFIRMED | `governance/proposals/SHULL-CHG-0049-standards-superseded-dir.md` |
+| SHULL-CHG-0048 | 2026-10-22 | scripts/README.md documented 12 of 32 scripts; now documents all of them | CONFIRMED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
 | SHULL-CHG-0047 | 2026-10-22 | Three READMEs still said "Status: not yet written" for files long since written | CONFIRMED | `governance/proposals/SHULL-CHG-0047-not-yet-written-readmes.md` |
 | SHULL-CHG-0046 | 2026-10-22 | Phase 13 status stale in CLAUDE.md and the implementation plan (4th occurrence) | CONFIRMED | `governance/proposals/SHULL-CHG-0046-phase-13-status-stale.md` |
 
@@ -50,6 +56,8 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0035 | 2026-10-15 | Drive: system creates no folders; file loose if no match | PARTIAL | `governance/proposals/SHULL-CHG-0035-drive-unit-folders.md` |
+| SHULL-CHG-0036 | 2026-10-15 | Chemistry 1.4 Isotopes folded into 1.3; code retired | CONFIRMED | `governance/proposals/SHULL-CHG-0036-chem-s1.4-fold.md` |
 | SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
 | SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | PARTIAL | `governance/proposals/SHULL-CHG-0041-short-topics.md` |
 | SHULL-CHG-0028 | 2026-10-15 | reconcile-session-files skill: list session documents not on Drive, file after approval | CONFIRMED | `governance/proposals/SHULL-CHG-0028-reconcile-session-files.md` |

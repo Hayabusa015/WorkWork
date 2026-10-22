@@ -18,10 +18,10 @@
 | **Affected Courses** | Chemistry only |
 | **Risk** | **Low.** One course, one unit, and no code is renumbered. The only thing to watch is the validator (§3). |
 | **Recommendation** | **Option 1** in §3: keep 1.4 listed, mark it folded, and retire the code. 1.5 keeps its number. |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
-| **Implemented By** | *(blank. Not implemented.)* |
-| **Verified** | No. Nothing has been implemented. The required checks are in §6. |
+| **Decision** | **Approved by the user, 2026-10-15**, in the main session. Verbatim: *"approve 0036, approve 0035 with C yes and D no, reject 0037"*. Recorded under SHULL-CHG-0034. |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | 85ac4e1. Option 1, sub-option 1(a), applied exactly as §2a and §2b. The user answered neither §4 question beyond approving the record, so 1(a) is the record's own recommendation and wording, not a user choice. 1(b) was not applied. |
+| **Verified** | **Yes, under validator option 1(a).** Read/Grep 2026-10-15: U1 line matches §2a exactly; the log entry is the first entry under "Decision log" and no earlier entry was edited; `Last updated` is 2026-10-15. Main session, after commit 85ac4e1: `scripts/validate_codes.py` passes with the Chemistry code count unchanged (90; Physics 48, Geology 54), and `validate_layers`, `validate_references`, `validate_agents` and `validate_schemas` pass. The commit carries the Change ID and touched the DECISIONS file and this record. Option 1(b) was not applied and would need its own record. |
 
 ---
 

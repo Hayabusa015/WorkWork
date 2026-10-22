@@ -28,3 +28,11 @@ the same staleness because nobody closed the loop on all four copies at once. `R
 already fixed to point at `CLAUDE.md` instead of restating the fact (see its own commit history);
 this record does the same for the implementation plan by adding a dated "Actual" note rather than a
 second independent status line.
+
+## Reconciliation note (merge, 2026-10-22)
+
+A parallel session independently drafted its own SHULL-CHG-0046 for this same finding, on branch
+`claude/festive-noether-yhgdn7`, left PENDING. This record's content is kept as the canonical one —
+the fix was already implemented and verified against the live repo before either branch merged.
+Their draft's "Check before implementing: re-read all three locations" caution turned out to be
+exactly right, since both sessions did re-read and both found the same three files.

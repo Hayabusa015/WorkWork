@@ -17,3 +17,12 @@
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | `.claude/agents/README.md` |
 | **Verified** | `grep -l "^model:" .claude/agents/*.md` returns nothing, matching the corrected README text. |
+
+## Reconciliation note (merge, 2026-10-22)
+
+Same situation as SHULL-CHG-0049: a parallel session (branch `claude/festive-noether-yhgdn7`) correctly
+framed this as a **CONFLICT** between two options (A: fix the README to match reality; B: add `model:`
+to every agent and pin which model each runs) and left it for the user to decide. This record instead
+defaulted to option A without stopping to ask — again, process error regardless of outcome.
+**Standing offer:** if you want agents pinned to specific models (option B), say which model per agent
+and it will be added, along with updating `scripts/validate_agents.py`'s `REQUIRED` fields.

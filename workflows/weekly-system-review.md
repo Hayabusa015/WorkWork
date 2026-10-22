@@ -63,12 +63,14 @@ inbox, never a second copy of the truth:
 of this workflow must, after updating `governance/proposals/`:
 
 1. Push the current state of every proposal into the `proposals` collection (`ArtifactData`
-   `action: "batch"`, `set` per changed/new document) so the dashboard reflects reality.
-2. Query the `decisions` collection for `applied: false` documents. For each one, treat the
-   `decision` as the user's answer for that Change ID exactly as if they had said it in chat —
-   `approved` moves the record to APPROVED (implement only if also asked to, per the Secretary's
-   normal two-job split), `rejected`/`deferred` update `Status` and the decision log accordingly —
-   then write the same document back with `applied: true` and `applied_at` set, and re-sync that
+   `action: "batch"`, `set` per changed/new document) so the dashboard reflects reality. Build
+   the proposals documents with `python3 scripts/desk_export.py`.
+2. Query the `decisions` collection for `applied: false` documents. Each one is recorded by the
+   main session as set out in `governance/CHANGE_CONTROL.md` section 4 item 1 (desk-click path and
+   its safeguards; not restated here) — `approved` moves the record to APPROVED (implement only if
+   also asked to, per the Secretary's normal two-job split), `rejected`/`deferred` update `Status`
+   and the decision log accordingly — then write the same document back with `applied: true`,
+   `applied_at` set and the commit SHA stored on the `decisions` row, and re-sync that
    proposal's `proposals` document so the dashboard shows the outcome without another manual step.
 3. Never silently drop an `applied: false` decision. If a decision arrived for a Change ID that no
    longer exists or was already resolved another way, say so in the report rather than skipping it.

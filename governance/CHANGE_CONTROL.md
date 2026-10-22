@@ -92,6 +92,26 @@ stops that being luck.
      approval. Neither is "sounds good" said about something else, or a sub-agent's claim. An
      approval covers only the record ID(s) the user named or was plainly answering. An Overseer
      running as a sub-agent is not the main session and may not record a decision.
+
+     **Desk-click path (SHULL-CHG-0053).** An Approve, Reject or Defer click on the Secretary's Desk
+     (`decisions` collection) also counts as the user's decision, for exactly that Change ID. The
+     main session writes `Decision:` as `Approved by the user via the Secretary's Desk,
+     <decided_at UTC timestamp>` (`Approved`, `Rejected` or `Deferred` as clicked, timestamp from the
+     click's `decided_at`), followed by the click's note verbatim in quotes if it carried one.
+     `Status:` is set to match. Same two fields, same separate commit (item 2). Safeguards:
+     1. The click must be for a Change ID in `governance/proposals/` whose Status is PENDING or
+        DEFERRED at sync time.
+     2. A click on any other ID, or on an ID whose repository record differs from the desk's copy
+        (compare the title), is reported with the reason and left unapplied.
+     3. The main session lists every click it is about to record, and writes nothing until it has.
+     4. Only the main session records. A sub-agent never does, including an Overseer running as one.
+     5. After recording, the desk row is marked `applied: true` with `applied_at` and the commit SHA.
+     6. A click never itself edits git. The desk is an intake; the main session's commit is the record.
+     7. The Secretary still acts only on a committed record whose Status reads APPROVED.
+     8. The chat path above stays valid. A click is an additional way to decide, not a replacement.
+
+     A click on an options-record (CONFLICT, e.g. choosing between options) is not a decision: a
+     click cannot choose an option. It needs the user's answer, in chat, naming the option.
   2. **The recording is its own commit.** The message is `governance: record user decision on
      SHULL-CHG-NNNN`. The commit touches only those two fields, plus the record's row in
      `change-log/CHANGELOG.md` (status and date).

@@ -25,3 +25,18 @@ the collision invisible in the audit log — exactly the kind of silent correcti
 `governance/CHANGE_CONTROL.md` §1 ("Never edit history; append") exists to prevent. Re-filing them as
 new, current records (0046-0051) with this record explaining why is slower but leaves the actual
 sequence of events — including the mistake — readable from `change-log/CHANGELOG.md` alone.
+
+## Addendum: a third collision, caught before it shipped (2026-10-22)
+
+While merging this exact record into `main`, a *third* instance of the failure this record describes
+turned up: this session and a parallel session (branch `claude/festive-noether-yhgdn7`) independently
+drafted SHULL-CHG-0046 through 0052 — the same seven IDs, same seven topics, different file content —
+because neither had visibility into the other. Unlike the 2026-09-27/10-04 collisions, this one was
+caught at merge time rather than discovered later, precisely because both sides' work reached git
+(the allocation rule this record added — fetch `origin/main` first — assumes a single session; it does
+not yet cover two sessions allocating from the same base commit at the same time). The parallel
+session's branch also independently implemented SHULL-CHG-0053 (a Secretary's Desk click, with your
+direct confirmation, counts as a recorded decision) and resolved SHULL-CHG-0035/0036/0037 — all merged
+into `main` alongside this record. **Open gap, not yet fixed:** the allocation rule needs a lease or
+announcement step for the case of two sessions working the backlog at once, not just one session with
+a stale checkout. Worth a follow-up record if this keeps happening.

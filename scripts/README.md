@@ -16,6 +16,7 @@
 | `audit_worksheet.py` | — read-only; measures pages-per-section and print ink on a built worksheet |
 | `find_session_files.py` | — read-only; lists documents created this session, for `reconcile-session-files` |
 | `publish_standards.py` | — publishes `standards/` and `brand/` to Drive `_Brand/Standards/`, one direction only |
+| `desk_export.py` | — read-only; exports `governance/proposals/*.md` as a JSON batch for the Secretary's Desk dashboard's `proposals` collection. The records are authoritative; this only reads them. |
 
 | Generator | Writes | From |
 |---|---|---|

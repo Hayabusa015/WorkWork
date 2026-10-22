@@ -17,3 +17,12 @@
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | `scripts/README.md` |
 | **Verified** | Every `.py` and `.sh` file under `scripts/` now appears in `scripts/README.md` — checked by diffing `ls scripts/*.py scripts/*.sh` against the file's own contents. |
+
+## Reconciliation note (merge, 2026-10-22)
+
+A parallel session independently drafted its own SHULL-CHG-0048, branch `claude/festive-noether-yhgdn7`,
+left PENDING, with a different script count (21 of 33) than this record's (20 of 32, later corrected
+to "all 32 documented, count could not be reproduced"). Both counts were taken at different moments
+against a directory that may have been changing; this record's live recount at merge time confirms
+32 total scripts, all now documented. If a script was added between the two counts and is still
+missing, the next weekly sweep will catch it.

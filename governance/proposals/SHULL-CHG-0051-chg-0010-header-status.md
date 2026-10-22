@@ -17,3 +17,9 @@
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | `governance/proposals/SHULL-CHG-0010-lab-template.md` |
 | **Verified** | The header now reads `IMPLEMENTED` and both status tables in the file agree. |
+
+## Reconciliation note (merge, 2026-10-22)
+
+A parallel session independently drafted its own SHULL-CHG-0051 for the same finding, branch
+`claude/festive-noether-yhgdn7`, left PENDING. This record's content and the already-applied fix are
+kept as canonical; no conflict in substance, only in which session got there first.

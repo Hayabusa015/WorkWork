@@ -17,3 +17,11 @@
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | `governance/README.md`, `schemas/README.md`, `scripts/README.md` |
 | **Verified** | All three status lines now state what is actually built, with `governance/README.md` deliberately avoiding a hardcoded proposal count (the exact stale-fact pattern this record exists to stop) and pointing at `ls governance/proposals/ | wc -l` instead. |
+
+## Reconciliation note (merge, 2026-10-22)
+
+A parallel session independently drafted its own SHULL-CHG-0047, branch `claude/festive-noether-yhgdn7`,
+left PENDING with a slightly different proposed wording for each line. This record's content (and the
+already-applied fix) is kept as canonical. Their draft correctly flagged the sequencing risk with
+SHULL-CHG-0048 (both touch `scripts/README.md`'s status line) — handled here by doing both edits in
+the same pass, so there is no double-apply.

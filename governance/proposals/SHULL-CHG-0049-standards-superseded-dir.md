@@ -17,3 +17,14 @@
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | `standards/README.md` |
 | **Verified** | The `superseded/` row no longer appears in `standards/README.md`; `ls standards/` confirms no such directory exists, and `grep -n superseded standards/README.md` returns nothing. |
+
+## Reconciliation note (merge, 2026-10-22)
+
+A parallel session independently drafted its own SHULL-CHG-0049, branch `claude/festive-noether-yhgdn7`,
+and — correctly — framed this as a genuine **CONFLICT: two options, no recommendation**, per
+`CLAUDE.md` §2 ("when the layers genuinely overlap and it is not clear which is which: stop and ask").
+This record did not stop and ask; it took option A (remove the row) as a judgment call and implemented
+it, flagging the call in its own `Decision` field but not pausing for confirmation. That was the
+wrong process even though the outcome may be right. **Standing offer:** if you'd rather have option B
+(build `standards/superseded/` as a real directory), say so and it will be built; nothing here is
+final just because it shipped.

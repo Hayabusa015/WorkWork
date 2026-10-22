@@ -20,8 +20,8 @@
 | **Affected Courses** | All three |
 | **Risk** | **Medium.** It is a grammar change in all three courses, to a standard that SHULL-CHG-0007 governs. It needs a validator change. Renames of existing files follow, each needing its own confirmation. |
 | **Recommendation** | Approve §2a–§2b, the range form. Answer §5 item 1 (what the chip shows) first, because the builders and the Day 2 tests depend on it. Approve §2c, the image fix, if he agrees with it (§5 item 2). |
-| **Decision** | *Pending.* |
-| **Status** | **PENDING** |
+| **Decision** | **Rejected by the user, 2026-10-15**, in the main session. Verbatim: *"approve 0036, approve 0035 with C yes and D no, reject 0037"*. Kept, not deleted, so it is not re-proposed. Recorded under SHULL-CHG-0034. |
+| **Status** | **REJECTED** |
 | **Implemented By** | *(blank. Not implemented.)* |
 | **Verified** | No. Nothing has been implemented. The required checks are in §7. |
 
