@@ -31,7 +31,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0053 | 2026-10-22 | A Secretary's Desk click is the user's recorded decision | PARTIAL | `governance/proposals/SHULL-CHG-0053-desk-click-is-recorded-decision.md` |
+| SHULL-CHG-0053 | 2026-10-22 | A Secretary's Desk click is the user's recorded decision | CONFIRMED | `governance/proposals/SHULL-CHG-0053-desk-click-is-recorded-decision.md` |
 | SHULL-CHG-0052 |  | The repository, not the desk, allocates Change IDs | PROPOSED | `governance/proposals/SHULL-CHG-0052-dashboard-id-desync.md` |
 | SHULL-CHG-0051 |  | SHULL-CHG-0010 header Status contradicts its own resolution | PROPOSED | `governance/proposals/SHULL-CHG-0051-chg-0010-header-status.md` |
 | SHULL-CHG-0050 |  | Agents README lists a `model` frontmatter field no agent has | PROPOSED | `governance/proposals/SHULL-CHG-0050-agents-readme-model-field.md` |
