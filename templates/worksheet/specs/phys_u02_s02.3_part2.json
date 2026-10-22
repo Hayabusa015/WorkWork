@@ -702,7 +702,8 @@
         "v_i = √(v_{ix}^2 + v_{iy}^2)",
         "tan θ = [v_{iy}|v_{ix}]"
       ],
-      "equationNote": "along x or y"
+      "equationNote": "along x or y",
+      "equationColumns": 4
     }
   ],
   "pagesPerSection": 1

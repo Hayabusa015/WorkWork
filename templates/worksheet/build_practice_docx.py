@@ -15,7 +15,7 @@ built from the same spec by build_worksheet_key_docx.py.
 
 Spec, one section: code, title, directions (plain text), equations (strings; "_i" subscript,
 "^2" superscript, "[n|d]" a stacked fraction, "θ" and "Δ" drawn), equationNote (optional, shown
-beside the label), questions[] with points, prompt, parts[], selfCheck.
+beside the label), equationColumns (default 3), questions[] with points, prompt, parts[], selfCheck.
 """
 import json, os, sys
 from docx import Document
@@ -32,7 +32,9 @@ from _shull_docx import (          # noqa: E402
 )
 from build_quiz_docx import masthead, name_row, equation_block   # noqa: E402
 
-INDENT = 0.34                # the number's column; the text and the parts hang from it
+INDENT = 0.36                # the number's column; the text and the parts hang from it
+BODY = 11                    # question text
+LEAD = 1.12                  # line spacing for question text
 
 
 def question(doc, q, n, pal):
@@ -41,19 +43,21 @@ def question(doc, q, n, pal):
     no_split(t.rows[0])
     c = t.rows[0].cells[0]
     borders(c, pal.hair, sz=4, edges=("bottom",))
-    cell_margins(c, top=70, bottom=60, left=0, right=0)
+    cell_margins(c, top=100, bottom=90, left=0, right=0)
 
     p = c.paragraphs[0]
     pf = p.paragraph_format
-    pf.left_indent, pf.first_line_indent, pf.space_after = Inches(INDENT), Inches(-INDENT), Pt(2)
+    pf.left_indent, pf.first_line_indent, pf.space_after = Inches(INDENT), Inches(-INDENT), Pt(3)
+    pf.line_spacing = LEAD
     pf.tab_stops.add_tab_stop(Inches(INDENT))
-    run(p, f"{n}.", 11, bold=True, color=pal.ink)
-    run(p, "\t", 10.5)
-    run(p, q["prompt"], 10.5, color=pal.ink)
+    run(p, f"{n}.", 12, bold=True, color=pal.accent)
+    run(p, "\t", BODY)
+    run(p, q["prompt"], BODY, color=pal.ink)
     for part in q.get("parts", []):
-        pp = para(c, part, 10.5, color=pal.ink)
+        pp = para(c, part, BODY, color=pal.ink)
         pp.paragraph_format.left_indent = Inches(INDENT)
-        pp.paragraph_format.space_after = Pt(1)
+        pp.paragraph_format.space_after = Pt(1.5)
+        pp.paragraph_format.line_spacing = LEAD
     if q.get("selfCheck"):
         sp = para(c, q["selfCheck"], 8, color=pal.label)
         sp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
@@ -86,7 +90,8 @@ def main():
     cell = c.rows[0].cells[0]
     cell_margins(cell, top=0, bottom=0, left=0, right=0)
     para(cell, sec["directions"], 9.5, color=pal.ink, first=True)
-    equation_block(doc, sec["equations"], pal, note=sec.get("equationNote"))
+    equation_block(doc, sec["equations"], pal, note=sec.get("equationNote"), size=9.5, bold=False,
+                   italic_vars=True, row_in=0.26, per_row=int(sec.get("equationColumns", 3)))
     gap(doc, 4)
     for i, q in enumerate(qs, start=1):
         question(doc, q, i, pal)

@@ -568,7 +568,8 @@
         "tan θ = [v_{iy}|v_{ix}]",
         "t = [−b ± √(b^2 − 4ac)|2a]"
       ],
-      "equationNote": "along x or y"
+      "equationNote": "along x or y",
+      "equationColumns": 4
     }
   ],
   "pagesPerSection": 1

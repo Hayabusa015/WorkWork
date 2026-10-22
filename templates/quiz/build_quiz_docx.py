@@ -40,6 +40,7 @@ from _shull_docx import (          # noqa: E402
 )
 
 THETA_FACE = "/usr/share/fonts/opentype/inter/Inter-Bold.otf"
+THETA_FACE_REGULAR = "/usr/share/fonts/opentype/inter/Inter-Regular.otf"
 THETA_CAP = 0.74            # theta stands about this tall as a fraction of the type size
 _TMP = tempfile.mkdtemp(prefix="shull_quiz_")
 
@@ -52,11 +53,11 @@ def refuse(msg):
 GLYPHS = "θΔ"              # Greek the brand face cannot set; each is drawn as a small picture
 
 
-def glyph_png(ch):
-    path = os.path.join(_TMP, f"glyph_{ord(ch):x}.png")
+def glyph_png(ch, bold=True):
+    path = os.path.join(_TMP, f"glyph_{ord(ch):x}_{'b' if bold else 'r'}.png")
     if not os.path.exists(path):
         from PIL import Image, ImageDraw, ImageFont
-        f = ImageFont.truetype(THETA_FACE, 900)
+        f = ImageFont.truetype(THETA_FACE if bold else THETA_FACE_REGULAR, 900)
         im = Image.new("L", (1600, 1600), 0)
         ImageDraw.Draw(im).text((200, 200), ch, font=f, fill=255)
         im = im.crop(im.getbbox())
@@ -66,7 +67,7 @@ def glyph_png(ch):
     return path
 
 
-def marked(paragraph, text, size, *, bold=True, color=None):
+def marked(paragraph, text, size, *, bold=True, color=None, italic_vars=False):
     """Write `text` into a paragraph, turning _x, ^2 and θ into subscripts, superscripts and a
     drawn theta."""
     buf = ""
@@ -74,15 +75,23 @@ def marked(paragraph, text, size, *, bold=True, color=None):
 
     def flush():
         nonlocal buf
-        if buf:
+        if not buf:
+            return
+        if not italic_vars:
             run(paragraph, buf, size, bold=bold, color=color)
-            buf = ""
+        else:
+            # variables slant; cos, sin, tan, units, digits and operators stay upright
+            for piece in re.split(r"(cos|sin|tan|m/s)", buf):
+                for sub in re.findall(r"[A-Za-z]+|[^A-Za-z]+", piece):
+                    slant = sub.isalpha() and sub not in ("cos", "sin", "tan", "m", "s")
+                    run(paragraph, sub, size, bold=bold, color=color, italic=slant)
+        buf = ""
 
     while i < len(text):
         ch = text[i]
         if ch in GLYPHS:
             flush()
-            png = glyph_png(ch)
+            png = glyph_png(ch, bold)
             h = size * THETA_CAP
             pic = paragraph.add_run().add_picture(png, height=Pt(h))
             for att in ("distT", "distB", "distL", "distR"):   # LibreOffice pads an inline picture
@@ -111,7 +120,7 @@ def _plain(t):
     return re.sub(r"[_^{}]", "", t).replace("Δ", "M").replace("θ", "O")
 
 
-def _frac_cell(cell, num, den, size, pal):
+def _frac_cell(cell, num, den, size, pal, bold=True, italic_vars=False):
     cell_margins(cell, top=0, bottom=0, left=15, right=15)
     p = cell.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -120,44 +129,45 @@ def _frac_cell(cell, num, den, size, pal):
     bd = OxmlElement("w:pBdr"); bt = OxmlElement("w:bottom")
     bt.set(qn("w:val"), "single"); bt.set(qn("w:sz"), "8"); bt.set(qn("w:space"), "1")
     bt.set(qn("w:color"), hexof(pal.ink)); bd.append(bt); pPr.append(bd)
-    marked(p, num, size, color=pal.ink)
+    marked(p, num, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
     q = cell.add_paragraph()
     q.alignment = WD_ALIGN_PARAGRAPH.CENTER
     q.paragraph_format.space_after = Pt(0)
-    marked(q, den, size, color=pal.ink)
+    marked(q, den, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
 
 
-def equation_cell(cell, eq, pal, size=11):
+def equation_cell(cell, eq, pal, size=11, bold=True, italic_vars=False):
     """One equation. "[n|d]" is a stacked fraction: numerator over a horizontal bar over denominator."""
     parts = [x for x in re.split(r"(\[[^\]]+\|[^\]]+\])", eq) if x != ""]
     if not any(x.startswith("[") for x in parts):
         p = cell.paragraphs[0]
         p.paragraph_format.space_after = Pt(0)
-        marked(p, eq, size, color=pal.ink)
+        marked(p, eq, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
         return
     t = cell.add_table(rows=1, cols=len(parts))
     widths = []
     for x in parts:
         if x.startswith("["):
             n, d = x[1:-1].split("|")
-            widths.append(max(text_width_in(_plain(n), size, True), text_width_in(_plain(d), size, True)) + 0.10)
+            widths.append(max(text_width_in(_plain(n), size, bold), text_width_in(_plain(d), size, bold)) + 0.10)
         else:
-            widths.append(text_width_in(_plain(x), size, True) + 0.06)
+            widths.append(text_width_in(_plain(x), size, bold) + 0.06)
     fix_widths(t, [round(w, 3) for w in widths])
     tight_cells(t, left=0, right=0)
     for x, c in zip(parts, t.rows[0].cells):
         c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         if x.startswith("["):
             n, d = x[1:-1].split("|")
-            _frac_cell(c, n, d, size, pal)
+            _frac_cell(c, n, d, size, pal, bold, italic_vars)
         else:
             p = c.paragraphs[0]
             p.paragraph_format.space_after = Pt(0)
-            marked(p, x, size, color=pal.ink)
+            marked(p, x, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
     unpad_cell(cell)
 
 
-def equation_block(doc, eqs, pal, label="Equations", width=7.5, per_row=3, note=None):
+def equation_block(doc, eqs, pal, label="Equations", width=7.5, per_row=3, note=None, size=11, bold=True,
+                   italic_vars=False, row_in=None):
     gap(doc, 5)
     t = doc.add_table(rows=1, cols=1)
     fix_widths(t, [width])
@@ -176,7 +186,10 @@ def equation_block(doc, eqs, pal, label="Equations", width=7.5, per_row=3, note=
     for i, eq in enumerate(eqs):
         cell = g.rows[i // per_row].cells[i % per_row]
         cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        equation_cell(cell, eq, pal)
+        equation_cell(cell, eq, pal, size, bold, italic_vars)
+    if row_in:
+        for r in g.rows:
+            no_split(r, row_in)
     unpad_cell(c)
 
 
