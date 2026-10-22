@@ -3,13 +3,15 @@
 The operating system for Matthew Shull's teaching workflow — Chemistry, Physics, and Geology at
 James A. Garfield Local Schools, Ohio.
 
-**Status: Phases 8–12 complete; Phase 13 not started (deliberately); Phase 14's acceptance test
-(T-7, T-10) passed 2026-09-08.** Governance, standards, all seven agents (`.claude/agents/`), and
-all twelve skills (`.claude/skills/`) exist and are validated — do not reason about this repo as if
-they are unbuilt. Legacy skill retirement is the last step of Phase 14 and is deliberately withheld
-until the system has been exercised on real work; until that happens, the installed legacy SHULL
-skills remain the working system alongside this repository's agents and skills. Full record:
-`docs/SHULLOS_IMPLEMENTATION_PLAN.md`, Phase 10–14.
+**Status: Phases 8–13 complete; Phase 14's acceptance test (T-7, T-10) passed 2026-09-08.**
+Governance, standards, all seven agents (`.claude/agents/`), and all twelve skills
+(`.claude/skills/`) exist and are validated — do not reason about this repo as if they are unbuilt.
+Phase 13 (the weekly `researcher`/`janitor` sweep) was activated 2026-09-24: a Routine runs it
+Sundays and writes findings as `PENDING` proposals, surfaced in the Secretary's Desk dashboard (see
+`workflows/weekly-system-review.md`). Legacy skill retirement is the last step of Phase 14 and is
+deliberately withheld until the system has been exercised on real work; until that happens, the
+installed legacy SHULL skills remain the working system alongside this repository's agents and
+skills. Full record: `docs/SHULLOS_IMPLEMENTATION_PLAN.md`, Phase 10–14.
 
 ---
 
@@ -70,7 +72,8 @@ Geology numbering problem before a packet printed with the wrong footer.
 ## 4. Safety and change control
 
 - **Only the Secretary writes to `brand/`, `standards/`, `governance/`, and `courses/`, and only
-  against an APPROVED proposal ID.** Everyone else proposes.
+  against an APPROVED proposal ID.** Everyone else proposes. (The main session records the user's
+  decision; see `governance/CHANGE_CONTROL.md` §4.)
 - Every rule change is a commit carrying its Change ID. Git history is the audit log.
 - **Permanent deletion requires explicit user approval.** Drive objects can only be trashed
   (recoverable), never permanently deleted, by design.

@@ -15,4 +15,5 @@ A to-do list inside a document is not a mechanism. The legacy governance file ca
 well-written fix list that nobody worked through, and the drift it described was still live days
 later. That is why the validators in `scripts/` exist.
 
-*Status: not yet written. Phase 8.*
+*Status: written (Phase 8). `proposals/` now holds dozens of change records spanning Phases 8–13 —
+count them with `ls governance/proposals/ | wc -l` rather than trusting a number here.*

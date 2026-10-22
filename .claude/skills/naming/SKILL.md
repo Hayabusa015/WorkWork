@@ -9,14 +9,17 @@ Rules: `standards/NAMING.md`. This is the procedure.
 
 ## Building a filename
 
-1. **Resolve the course** — `CHEM` · `PHYS` · `GEO`.
+1. **Resolve the course** (chemistry, physics, geology). It selects the folder; it is not in the name.
 2. **Resolve unit and section.** Read `courses/<course>/DECISIONS.md` and confirm the code exists
    there. **If it does not, stop and ask.** Never build against a code that appears only in a skill.
 3. **Pick the type** from the fixed list in the standard. Do not invent one.
-4. **Zero-pad both** the unit and the section: `U08_S08.2`, never `U8_S8.2`.
-5. **Add a descriptor** only if it disambiguates. Most files do not need one.
-6. **Version letter last**, before `_Key`.
-7. **A key is always its own file**, ending `_Key`.
+4. **One section** is `[S.S] [Type] - [Topic]`. **More than one** is `Unit [X] [Type] - [Unit Title]`.
+5. **The topic is the short title** from the "Short titles" table in `courses/<course>/DECISIONS.md`
+   (at most 20 characters). No row means no topic. Never shorten a title yourself; propose one
+   to the user and let the Secretary add it.
+6. **Version letter** after the type, then `Key`: `1.4 Quiz A Key - Reaction Time`.
+7. **A key is always its own file.**
+8. No `: / \ * ? " < > |` in a name. Use the helpers in `templates/` rather than typing it.
 
 ## Checking an existing filename
 
@@ -25,9 +28,11 @@ Report as a table, not prose:
 | File | Problem | Correct name |
 |---|---|---|
 
-Check, in order: `SHULL_` prefix · valid course · valid type · both codes zero-padded · the section
-exists in that course's decisions file · a separate key exists if the document has answers · the
-code matches the folder path it sits in.
+Check, in order: valid type · section exists in that course's decisions file · topic matches the
+decisions file · separate key exists if the document has answers · no illegal characters · the
+topic is the short title from the table (not the full title, and at most 20 characters) · the
+folder it sits in is the right course and unit. Names in the old `SHULL_..._U##_S##.#` form are
+legacy: report them as needing rename, not as errors in the content.
 
 ## Before renaming anything
 

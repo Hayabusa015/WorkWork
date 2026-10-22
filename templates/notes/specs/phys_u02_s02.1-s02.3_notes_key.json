@@ -44,13 +44,13 @@
             "Definition of each term",
             "Magnitude — its range of values"
           ],
-          "notesLabel": "",
+          "notesLabel": "VECTOR · MAGNITUDE · DIRECTION",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "VECTOR · MAGNITUDE · DIRECTION",
             "workLabel": "",
             "workHeightIn": 1.7,
-            "key": [
+            "solution": [
               "Vector: magnitude AND direction; drawn as an arrow.",
               "Magnitude: the size or length; never negative, zero is possible.",
               "Direction: which way it points, given relative to a reference direction.",
@@ -64,13 +64,13 @@
             "Tail, tip and scale",
             "Length as magnitude, angle as direction"
           ],
-          "notesLabel": "",
+          "notesLabel": "DRAWING A VECTOR",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "DRAWING A VECTOR",
             "workLabel": "",
             "workHeightIn": 2.0,
-            "key": [
+            "solution": [
               "Choose a scale first. Tail = start, tip = end.",
               "Arrow length = magnitude. Angle measured from a reference axis at the tail.",
               "Tip points the way the vector acts.",
@@ -84,13 +84,13 @@
             "The two component equations",
             "Adjacent side and opposite side"
           ],
-          "notesLabel": "",
+          "notesLabel": "RESOLVING A VECTOR INTO COMPONENTS",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "RESOLVING A VECTOR INTO COMPONENTS",
             "workLabel": "",
             "workHeightIn": 2.2,
-            "key": [
+            "solution": [
               "Ax = A cos theta   (adjacent to theta)        Ay = A sin theta   (opposite theta)",
               "theta measured from +x. Components let you add vectors.",
               "Sketch: right triangle with A as the hypotenuse, Ax along x, Ay along y."
@@ -102,14 +102,14 @@
           "cues": [
             "The setup, before any number"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — RESOLVING A DISPLACEMENT",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — RESOLVING A DISPLACEMENT",
             "workLabel": "",
             "workHeightIn": 2.0,
             "statement": "A hiker walks 50 m at 30° above the horizontal. Find the x- and y-components.",
-            "key": [
+            "solution": [
               "Given: A = 50 m, theta = 30°.   Find: Ax and Ay.",
               "Ax = 50 cos 30° = 43.3 m        Ay = 50 sin 30° = 25.0 m",
               "Check: Ax² + Ay² = A², allowing for rounding."
@@ -122,13 +122,13 @@
             "Axis angle and compass bearing",
             "Two names for one direction"
           ],
-          "notesLabel": "",
+          "notesLabel": "DEGREES AND COMPASS DIRECTIONS",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "DEGREES AND COMPASS DIRECTIONS",
             "workLabel": "",
             "workHeightIn": 2.0,
-            "key": [
+            "solution": [
               "From an axis: measure from the horizontal or vertical reference.",
               "Compass bearing: “40° North of East” starts at east, then turns toward north.",
               "One vector, two names: 40° N of E = 50° E of N, because 40° + 50° = 90°."
@@ -140,14 +140,14 @@
           "cues": [
             "The relationship between the two angles"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — CONVERTING THE ANGLE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — CONVERTING THE ANGLE",
             "workLabel": "",
             "workHeightIn": 1.5,
             "statement": "A vector points 40° North of East. Express its direction as an angle East of North.",
-            "key": [
+            "solution": [
               "East of North = 90° − North of East",
               "90° − 40° = 50°",
               "Answer: 50° East of North (same direction as 40° North of East)."
@@ -160,14 +160,14 @@
             "Same method, new numbers",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "YOUR TURN — A HIKING BEARING",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "YOUR TURN — A HIKING BEARING",
             "workLabel": "",
             "workHeightIn": 1.5,
             "statement": "A hiker walks at 65° East of North. Express this as an angle North of East.",
-            "key": [
+            "solution": [
               "North of East = 90° − East of North",
               "90° − 65° = 25°",
               "Answer: 25° North of East."
@@ -180,14 +180,14 @@
             "Two skills in one problem",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "QUICK CHECK — CONVERT AND RESOLVE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "QUICK CHECK — CONVERT AND RESOLVE",
             "workLabel": "",
             "workHeightIn": 2.0,
             "statement": "A force of 20 N acts at 70° East of North. Find its angle North of East, then resolve its components.",
-            "key": [
+            "solution": [
               "theta = 90° − 70° = 20° North of East",
               "Fx = 20 cos 20° = 18.8 N        Fy = 20 sin 20° = 6.84 N"
             ]
@@ -200,7 +200,7 @@
         "I can convert North of East to East of North.",
         "I can resolve a vector into x- and y-components."
       ],
-      "summaryKey": "Sample: a number alone gives only a size, so a vector also needs a direction. To resolve one you need its magnitude and its angle from a reference axis, then Ax = A cos theta and Ay = A sin theta."
+      "summaryAnswer": "Sample: a number alone gives only a size, so a vector also needs a direction. To resolve one you need its magnitude and its angle from a reference axis, then Ax = A cos theta and Ay = A sin theta."
     },
     {
       "code": "U2 / S2.2",
@@ -214,13 +214,13 @@
             "Magnitude and direction equations",
             "The condition for this shortcut"
           ],
-          "notesLabel": "",
+          "notesLabel": "ADDING PERPENDICULAR VECTORS",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "ADDING PERPENDICULAR VECTORS",
             "workLabel": "",
             "workHeightIn": 2.4,
-            "key": [
+            "solution": [
               "Tip-to-tail; the resultant joins the original tail to the final tip.",
               "Magnitude: R = √(A² + B²)        Direction: theta = arctan(B/A), from the A direction.",
               "Only for perpendicular vectors."
@@ -233,14 +233,14 @@
             "Magnitude and direction, both required",
             "Common error — a magnitude with no direction"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — PLANE IN A CROSSWIND",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — PLANE IN A CROSSWIND",
             "workLabel": "",
             "workHeightIn": 2.4,
             "statement": "A plane flies 80 km/h east relative to the air. A wind blows 20 km/h north. Find the plane’s velocity relative to the ground.",
-            "key": [
+            "solution": [
               "R = √(80² + 20²) = 82.5 km/h",
               "theta = arctan(20/80) = 14°",
               "Answer: 82.5 km/h at 14° N of E.  Always report magnitude AND direction."
@@ -253,13 +253,13 @@
             "The three steps, in order",
             "Reason components come first"
           ],
-          "notesLabel": "",
+          "notesLabel": "ADDING VECTORS AT ANY ANGLE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "ADDING VECTORS AT ANY ANGLE",
             "workLabel": "",
             "workHeightIn": 2.4,
-            "key": [
+            "solution": [
               "1 • Resolve: Ax = A cos theta, Ay = A sin theta",
               "2 • Add: Rx = sum of the x-components, Ry = sum of the y-components",
               "3 • Recombine: R = √(Rx² + Ry²), theta = arctan(Ry/Rx)",
@@ -273,14 +273,14 @@
             "Add x to x and y to y",
             "Extra digits kept until the final answer"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — TWO FORCES ON A BOX",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — TWO FORCES ON A BOX",
             "workLabel": "",
             "workHeightIn": 3.0,
             "statement": "A 40 N force acts east, and a 30 N force acts 60° above east. Find the resultant force.",
-            "key": [
+            "solution": [
               "F₁ = (40, 0) N        F₂ = (30 cos 60°, 30 sin 60°) = (15, 25.98) N",
               "Rx = 40 + 15 = 55 N        Ry = 0 + 25.98 = 25.98 N",
               "R = 60.8 N at 25.3° N of E"
@@ -293,14 +293,14 @@
             "Same three steps",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "YOUR TURN — TWO DISPLACEMENTS",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "YOUR TURN — TWO DISPLACEMENTS",
             "workLabel": "",
             "workHeightIn": 2.6,
             "statement": "Walk 30 m east, then 40 m at 45° above east. Find the resultant displacement.",
-            "key": [
+            "solution": [
               "Rx = 30 + 40 cos 45° = 58.28 m        Ry = 40 sin 45° = 28.28 m",
               "R = √(58.28² + 28.28²) = 64.8 m        theta = arctan(28.28/58.28) = 25.9°",
               "Answer: R ≈ 64.8 m at 25.9° N of E."
@@ -314,14 +314,14 @@
             "Resolve every vector, then add",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "PRACTICE — THREE FORCES ON A CRATE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "PRACTICE — THREE FORCES ON A CRATE",
             "workLabel": "",
             "workHeightIn": 3.2,
             "statement": "Three ropes pull on a crate: 30 N east, 40 N north, and 20 N at 30° south of west. Find the resultant force.",
-            "key": [
+            "solution": [
               "F₁ = (30, 0) N        F₂ = (0, 40) N",
               "F₃ = (−20 cos 30°, −20 sin 30°) = (−17.32, −10.0) N",
               "Rx = 30 − 17.32 = 12.68 N        Ry = 40 − 10.0 = 30.0 N",
@@ -337,7 +337,7 @@
         "I can add vectors at any angle using components.",
         "I can state a resultant with magnitude and direction."
       ],
-      "summaryKey": "Sample: use R = √(A² + B²) when the vectors are perpendicular. Otherwise resolve each vector, add the x-components and the y-components, then recombine."
+      "summaryAnswer": "Sample: use R = √(A² + B²) when the vectors are perpendicular. Otherwise resolve each vector, add the x-components and the y-components, then recombine."
     },
     {
       "code": "U2 / S2.3",
@@ -350,13 +350,13 @@
             "Definition of each term",
             "Assumptions of the model"
           ],
-          "notesLabel": "",
+          "notesLabel": "PROJECTILE · TRAJECTORY · RANGE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "PROJECTILE · TRAJECTORY · RANGE",
             "workLabel": "",
             "workHeightIn": 1.8,
-            "key": [
+            "solution": [
               "Projectile: an object moving under gravity alone after release.",
               "Trajectory: the path it follows; a parabola when horizontal velocity is nonzero.",
               "Range: horizontal distance from launch to landing.",
@@ -371,13 +371,13 @@
             "Inertia as the reason",
             "Common error — a force is needed to keep it moving sideways"
           ],
-          "notesLabel": "",
+          "notesLabel": "NO HORIZONTAL FORCE NEEDED",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "NO HORIZONTAL FORCE NEEDED",
             "workLabel": "",
             "workHeightIn": 1.8,
-            "key": [
+            "solution": [
               "Gravity acts downward. With no air resistance, vx stays constant.",
               "Inertia: no horizontal net force means no horizontal acceleration.",
               "Common error: a force is needed to keep it moving sideways. It is not."
@@ -391,13 +391,13 @@
             "Horizontal and vertical motion, separately",
             "The time-to-land equation"
           ],
-          "notesLabel": "",
+          "notesLabel": "THE FLAT LAUNCH",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "THE FLAT LAUNCH",
             "workLabel": "",
             "workHeightIn": 2.0,
-            "key": [
+            "solution": [
               "Horizontal: vx = vix = constant;  x = vix t",
               "Vertical drop: viy = 0;  h = ½gt²   (h = positive drop distance)",
               "Time to land: t = √(2h/g).   Equal time steps → equal horizontal spacing."
@@ -410,14 +410,14 @@
             "Vertical motion first, for the shared time",
             "Horizontal distance from that time"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — ROLLING OFF A TABLE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — ROLLING OFF A TABLE",
             "workLabel": "",
             "workHeightIn": 2.6,
             "statement": "A ball rolls off a 0.80 m table at 2.5 m/s. How long until it lands, and how far does it travel horizontally?",
-            "key": [
+            "solution": [
               "Given: h = 0.80 m;  vix = 2.5 m/s, viy = 0.",
               "Vertical first: 0.80 = ½(9.8)t²  →  t = √(1.60/9.8) = 0.404 s",
               "Horizontal: x = vix t = 2.5(0.404) = 1.01 m",
@@ -431,14 +431,14 @@
             "Same two steps",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "YOUR TURN — OFF A HIGHER SHELF",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "YOUR TURN — OFF A HIGHER SHELF",
             "workLabel": "",
             "workHeightIn": 2.4,
             "statement": "A marble rolls off a 1.25 m shelf at 3.0 m/s. How far from the shelf does it land?",
-            "key": [
+            "solution": [
               "t = √(2h/g) = √(2(1.25)/9.8) = 0.505 s",
               "x = vix t = 3.0(0.505) = 1.52 m",
               "Answer: x ≈ 1.5 m from the shelf."
@@ -453,13 +453,13 @@
             "Time of flight, and when it applies",
             "The range equation"
           ],
-          "notesLabel": "",
+          "notesLabel": "LAUNCHING AT AN ANGLE",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "LAUNCHING AT AN ANGLE",
             "workLabel": "",
             "workHeightIn": 2.2,
-            "key": [
+            "solution": [
               "Components: vix = vi cos theta;  viy = vi sin theta",
               "Time of flight: t = 2viy/g   (same launch and landing height only)",
               "Range: R = vix t",
@@ -473,14 +473,14 @@
             "Resolve the velocity first",
             "Time depends on viy, range on both components"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — A KICKED SOCCER BALL",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — A KICKED SOCCER BALL",
             "workLabel": "",
             "workHeightIn": 2.8,
             "statement": "A ball is kicked at 18 m/s at 30° above level ground. Find its time of flight and range.",
-            "key": [
+            "solution": [
               "vix = 18 cos 30° = 15.59 m/s        viy = 18 sin 30° = 9.00 m/s",
               "t = 2(9.00)/9.8 = 1.84 s",
               "R = vix t = 15.59(1.84) ≈ 28.6 m"
@@ -493,14 +493,14 @@
             "Resolve first, then the level-ground formulas",
             "Work it first, then check the board"
           ],
-          "notesLabel": "",
+          "notesLabel": "YOUR TURN — A LAUNCHED ARROW",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "YOUR TURN — A LAUNCHED ARROW",
             "workLabel": "",
             "workHeightIn": 2.6,
             "statement": "An arrow is shot at 45 m/s at 40° above level ground. Find its range, neglecting air resistance.",
-            "key": [
+            "solution": [
               "vix = 45 cos 40° = 34.47 m/s        viy = 45 sin 40° = 28.93 m/s",
               "t = 2viy/g = 2(28.93)/9.8 ≈ 5.90 s",
               "R = vix t = 34.47(5.90) ≈ 203 m"
@@ -515,13 +515,13 @@
             "Height gained",
             "Reason the level-ground shortcut fails"
           ],
-          "notesLabel": "",
+          "notesLabel": "WHEN LAUNCH AND LANDING DIFFER",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "WHEN LAUNCH AND LANDING DIFFER",
             "workLabel": "",
             "workHeightIn": 2.4,
-            "key": [
+            "solution": [
               "Not symmetric about the peak; the level-ground shortcut fails.",
               "Choose +y upward. Landing lower means more time descending than ascending.",
               "At the peak: vy = 0;  t_apex = viy/g.        Height gained: Δy = viy²/(2g).",
@@ -535,14 +535,14 @@
             "Vertical velocity at the peak",
             "Height above launch, then above ground"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — MAX HEIGHT FROM A CLIFF",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — MAX HEIGHT FROM A CLIFF",
             "workLabel": "",
             "workHeightIn": 2.6,
             "statement": "A rock is launched at 20 m/s at 35° from a 15 m cliff. Find its maximum height above the launch point.",
-            "key": [
+            "solution": [
               "viy = 20 sin 35° = 11.47 m/s;  vy = 0 at the top.",
               "Δy = viy²/(2g) = 11.47²/(2·9.8) = 6.71 m above the launch point",
               "(Above the ground: 15 + 6.71 = 21.7 m.)"
@@ -555,14 +555,14 @@
             "The full position equation",
             "The quadratic and the root to keep"
           ],
-          "notesLabel": "",
+          "notesLabel": "EXAMPLE — LANDING BELOW THE LAUNCH",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "EXAMPLE — LANDING BELOW THE LAUNCH",
             "workLabel": "",
             "workHeightIn": 2.8,
             "statement": "The same rock (20 m/s, 35°, from a 15 m cliff) lands on the ground below. Find its total time of flight.",
-            "key": [
+            "solution": [
               "y(t) = y₀ + viy t − ½gt²   →   0 = 15 + 11.47t − 4.9t²",
               "t = [11.47 ± √(11.47² + 4(4.9)(15))] / 9.8",
               "Keep the positive root: t ≈ 3.28 s ≈ 3.3 s. The negative root is before release."
@@ -575,13 +575,13 @@
             "One approach for each stage",
             "The quantity shared by both axes"
           ],
-          "notesLabel": "",
+          "notesLabel": "THREE STAGES, ONE IDEA",
           "notes": [],
+          "extraNotes": false,
           "problem": {
-            "label": "THREE STAGES, ONE IDEA",
             "workLabel": "",
             "workHeightIn": 1.8,
-            "key": [
+            "solution": [
               "1 • Horizontal launch: viy = 0; find time from the drop.",
               "2 • Angled, level ground: resolve vi first; t = 2viy/g.",
               "3 • Different heights: find the peak or solve the full vertical-position equation.",
@@ -596,7 +596,7 @@
         "I can solve a flat, an angled and a different-height launch.",
         "I can find the peak height and the total flight time from a cliff."
       ],
-      "summaryKey": "Sample: horizontally the velocity is constant (no horizontal force); vertically it accelerates at g. The two motions share the same time, found from the vertical motion."
+      "summaryAnswer": "Sample: horizontally the velocity is constant (no horizontal force); vertically it accelerates at g. The two motions share the same time, found from the vertical motion."
     }
   ],
   "close": {
@@ -610,5 +610,6 @@
     "bigPicture": "Trace one projectile all the way through: resolve the launch velocity, solve the vertical motion for time, then use that same time horizontally.",
     "fuzzyLabel": "STILL FUZZY ON — bring these to review day"
   },
-  "noEquationBar": true
+  "noEquationBar": true,
+  "key": true
 }

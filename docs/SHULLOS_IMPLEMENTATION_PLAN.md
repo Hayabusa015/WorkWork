@@ -1136,10 +1136,16 @@ Drive independently corroborated Plate Tectonics = U4 and supplied all 54 sectio
 write still goes through the Librarian. **Two items are still open with the user:** the U5
 near-duplicate section titles, and the duplicated build files now in the Drive Lab folder.
 
-### ⬜ Phase 13 — Weekly Researcher reporting
+### ✅ Phase 13 — Weekly Researcher reporting
 1. `weekly-system-review` skill — report-only, three hard limits (§16).
 2. A Routine, at the time confirmed in Q-8.
 3. Run T-9. *Deliverable: a system that notices its own drift and changes nothing on its own.*
+
+**Actual:** activated 2026-09-24. A Routine fires weekly (Sundays, cron evaluated in UTC — see the
+DST caveat in `workflows/weekly-system-review.md`) running `researcher` and `janitor`, with findings
+recorded by `secretary` as PENDING proposals and mirrored into the Secretary's Desk dashboard
+(a Claude Artifact) for sign-off. Still report-only: the sweep records findings and syncs decisions,
+it does not implement anything on its own initiative.
 
 **Not started, deliberately.** The Routine is scheduled only after the system has been exercised on
 real work — a weekly review of a system nobody has used yet reports on nothing.

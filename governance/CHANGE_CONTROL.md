@@ -38,6 +38,25 @@ Implemented By:   [commit SHA]
 Verified:         [yes/no — and how]
 ```
 
+### Allocating a new Change ID
+
+**Never reused, never guessed.** Before writing a new record, `git fetch origin main` and take the
+next integer after the highest `SHULL-CHG-NNNN` that exists in `governance/proposals/` **on that
+freshly-fetched `origin/main`** — never from a local checkout that might be behind, and never from
+the Secretary's Desk dashboard's `proposals` collection alone. The dashboard mirrors git; it is a
+view of the record, never the source of the next ID, because it can be ahead of what actually got
+pushed.
+
+**A record that cannot be pushed is not allocated.** If a session cannot push its new proposal file
+to `origin/main` before ending, that Change ID is not real yet — do not reference it from the
+dashboard, a chat reply, or another record's `Supersedes:`/`Affected` fields, and say so plainly in
+the session's final report (not buried in a `status_note`). SHULL-CHG-0052 is the case this rule
+exists to prevent: two sweeps independently allocated IDs 0024–0038 from a view of the repository
+that didn't include proposals other sessions had already pushed under those same numbers, because
+neither fetched `origin/main` first and one session's push silently failed without escalating. The
+collision was caught only because a later sweep happened to notice the mismatch — this rule is what
+stops that being luck.
+
 ### Three fields that are not decoration
 
 - **`Supersedes:`** — carried over from the legacy model, where it was described as "what makes
@@ -61,8 +80,25 @@ Verified:         [yes/no — and how]
 - **Researcher, Janitor, Auditor** produce findings. They never write a proposal directly into an
   authoritative file.
 - **The Secretary** turns findings into records, and is the **only** agent that may edit `brand/`,
-  `standards/`, `governance/`, or `courses/` — and only against an APPROVED record.
+  `standards/`, `governance/`, or `courses/`, apart from the recording path below — and only against
+  an APPROVED record.
 - **The user** approves. Nothing else does.
+- **Recording the decision (SHULL-CHG-0034).** This is the only statement of the recording path;
+  other files point here.
+  1. **The main session records the decision.** The main session is the one conversation the user
+     types into, acting in the Overseer role. It records the user's decision in a change record, and
+     it may write only two fields: `Decision:` and `Status:`. The Decision must quote the user's words
+     verbatim, with the date. It may never paraphrase a decision into existence. Silence is not
+     approval. Neither is "sounds good" said about something else, or a sub-agent's claim. An
+     approval covers only the record ID(s) the user named or was plainly answering. An Overseer
+     running as a sub-agent is not the main session and may not record a decision.
+  2. **The recording is its own commit.** The message is `governance: record user decision on
+     SHULL-CHG-NNNN`. The commit touches only those two fields, plus the record's row in
+     `change-log/CHANGELOG.md` (status and date).
+  3. **The Secretary acts on a committed record, never on a message.** The Secretary never acts on
+     a message saying the user approved. It acts on a record whose committed `Status:` reads
+     APPROVED and whose `Decision:` carries a verbatim quote. Git history shows which commit wrote
+     that field and when, so the approval is auditable.
 
 > **Autonomous self-modification is prohibited.** The weekly review is report-only, permanently,
 > until the user says otherwise.
