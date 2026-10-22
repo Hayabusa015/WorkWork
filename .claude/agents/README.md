@@ -1,8 +1,9 @@
 # Agents — who is responsible
 
-Seven agents, defined as `<name>.md` with YAML frontmatter (`name`, `description`, `tools`,
-`model`). Claude Code discovers subagents here, which is why they live under `.claude/` rather than
-a top-level `agents/`.
+Seven agents, defined as `<name>.md` with YAML frontmatter (`name`, `description`, `tools`).
+Claude Code discovers subagents here, which is why they live under `.claude/` rather than
+a top-level `agents/`. None of the seven pin a `model` — they inherit whatever model is running the
+session.
 
 | Agent | Owns |
 |---|---|

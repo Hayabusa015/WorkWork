@@ -8,7 +8,6 @@
 | `DRIVE_ARCHITECTURE.md` | The Drive tree, folder grammar, and routing rules |
 | `QA_GATE.md` | The nine checks every deliverable passes before it ships |
 | `ANSWER_KEYS.md` | The handwritten look on teacher answer keys: inks, steps, stacked division, physics sketches, legibility (SHULL-CHG-0043) |
-| `superseded/` | Proposals considered and declined, kept so they are not re-proposed |
 
 Skills point at these. Standards do not restate each other.
 

@@ -12,9 +12,9 @@
 | **Affected Courses** | All three |
 | **Risk** | Medium — see the two findings below |
 | **Decision** | Approved by the user |
-| **Status** | **PARTIALLY IMPLEMENTED** |
-| **Implemented By** | `templates/lab/build_lab.py`, `templates/lab/README.md` |
-| **Verified** | `build_lab.py` migrated and executed successfully — token detection and the page-count check both fire correctly. |
+| **Status** | **IMPLEMENTED** — see the RESOLUTION section below, which closed both findings on 2026-09-08. This header previously said PARTIALLY IMPLEMENTED after the resolution closed it; corrected (SHULL-CHG-0051). |
+| **Implemented By** | `templates/lab/build_lab.py`, `templates/lab/README.md`, `scripts/build_lab_css.py` |
+| **Verified** | Rendered, font-checked, ink-measured, and visually inspected at 110 dpi (see RESOLUTION). |
 
 ## Finding 1 — the HTML template files do not exist
 

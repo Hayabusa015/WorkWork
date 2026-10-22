@@ -72,6 +72,17 @@ of this workflow must, after updating `governance/proposals/`:
    proposal's `proposals` document so the dashboard shows the outcome without another manual step.
 3. Never silently drop an `applied: false` decision. If a decision arrived for a Change ID that no
    longer exists or was already resolved another way, say so in the report rather than skipping it.
+4. **Allocate every new Change ID per `governance/CHANGE_CONTROL.md`'s "Allocating a new Change ID"
+   rule** — fetch `origin/main` first, take the next number after the highest proposal file actually
+   on it, and never finish a run leaving a proposal "committed locally only" with its ID already
+   referenced in the dashboard. SHULL-CHG-0052 is what step 1's `proposals`-collection sync looked
+   like before this rule existed: two sweeps (2026-09-27, 2026-10-04) each picked IDs from a
+   checkout that didn't include what the other had already pushed, so 0024–0038 now mean two
+   different things depending on whether you're reading git or that era's dashboard snapshot. Those
+   old dashboard entries were never corrected in place — correcting history would hide that the
+   collision happened — they were superseded by fresh records at 0046–0051, and the stale 0024–0038
+   dashboard documents were marked `applied: true` with a note pointing here instead of being
+   silently overwritten.
 
 ## The failure mode this exists to catch
 

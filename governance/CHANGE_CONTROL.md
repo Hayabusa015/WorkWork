@@ -38,6 +38,25 @@ Implemented By:   [commit SHA]
 Verified:         [yes/no — and how]
 ```
 
+### Allocating a new Change ID
+
+**Never reused, never guessed.** Before writing a new record, `git fetch origin main` and take the
+next integer after the highest `SHULL-CHG-NNNN` that exists in `governance/proposals/` **on that
+freshly-fetched `origin/main`** — never from a local checkout that might be behind, and never from
+the Secretary's Desk dashboard's `proposals` collection alone. The dashboard mirrors git; it is a
+view of the record, never the source of the next ID, because it can be ahead of what actually got
+pushed.
+
+**A record that cannot be pushed is not allocated.** If a session cannot push its new proposal file
+to `origin/main` before ending, that Change ID is not real yet — do not reference it from the
+dashboard, a chat reply, or another record's `Supersedes:`/`Affected` fields, and say so plainly in
+the session's final report (not buried in a `status_note`). SHULL-CHG-0052 is the case this rule
+exists to prevent: two sweeps independently allocated IDs 0024–0038 from a view of the repository
+that didn't include proposals other sessions had already pushed under those same numbers, because
+neither fetched `origin/main` first and one session's push silently failed without escalating. The
+collision was caught only because a later sweep happened to notice the mismatch — this rule is what
+stops that being luck.
+
 ### Three fields that are not decoration
 
 - **`Supersedes:`** — carried over from the legacy model, where it was described as "what makes

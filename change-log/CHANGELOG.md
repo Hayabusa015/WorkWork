@@ -25,6 +25,18 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-22
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0052 | 2026-10-22 | Dashboard IDs 0024-0038 collided with real git records of the same ID; re-filed at 0046-0051 | CONFIRMED | `governance/proposals/SHULL-CHG-0052-dashboard-id-desync.md` |
+| SHULL-CHG-0051 | 2026-10-22 | SHULL-CHG-0010's own header Status contradicted its own resolution | CONFIRMED | `governance/proposals/SHULL-CHG-0051-chg-0010-header-status.md` |
+| SHULL-CHG-0050 | 2026-10-22 | Agents README claimed a `model` frontmatter field no agent has | CONFIRMED | `governance/proposals/SHULL-CHG-0050-agents-readme-model-field.md` |
+| SHULL-CHG-0049 | 2026-10-22 | standards/README.md referenced a `superseded/` directory that was never built | CONFIRMED | `governance/proposals/SHULL-CHG-0049-standards-superseded-dir.md` |
+| SHULL-CHG-0048 | 2026-10-22 | scripts/README.md documented 8 of 28 scripts; now documents all of them | CONFIRMED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
+| SHULL-CHG-0047 | 2026-10-22 | Three READMEs still said "Status: not yet written" for files long since written | CONFIRMED | `governance/proposals/SHULL-CHG-0047-not-yet-written-readmes.md` |
+| SHULL-CHG-0046 | 2026-10-22 | Phase 13 status stale in CLAUDE.md and the implementation plan (4th occurrence) | CONFIRMED | `governance/proposals/SHULL-CHG-0046-phase-13-status-stale.md` |
+
 ## 2026-10-16
 
 | ID | Date | Change | Status | Record |

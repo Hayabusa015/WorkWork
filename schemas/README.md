@@ -7,4 +7,5 @@ Machine-readable shapes for things the system produces.
 | `change-proposal.schema.json` | A Secretary change record |
 | `task-report.schema.json` | A completion report — WORK COMPLETE requires a verified artifact at a verified path |
 
-*Status: not yet written. Phase 8–11.*
+*Status: written (Phase 8–11). Both schemas are behaviour-tested by `validate_schemas.py`, not
+merely valid JSON Schema.*
