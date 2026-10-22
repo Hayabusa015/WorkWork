@@ -34,6 +34,21 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0043 | 2026-10-16 | Handwritten teacher answer keys: pencil and pen, stacked fractions, algebra steps, physics scenario sketch | CONFIRMED | `governance/proposals/SHULL-CHG-0043-handwritten-answer-keys.md` |
 | SHULL-CHG-0042 | 2026-10-16 | Molecular structures on student pages are built with the molecule script | CONFIRMED | `governance/proposals/SHULL-CHG-0042-molecule-builder-rule.md` |
 
+## 2026-10-22
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0053 |  | A Secretary's Desk click is the user's recorded decision | PROPOSED | `governance/proposals/SHULL-CHG-0053-desk-click-is-recorded-decision.md` |
+| SHULL-CHG-0052 |  | The repository, not the desk, allocates Change IDs | PROPOSED | `governance/proposals/SHULL-CHG-0052-dashboard-id-desync.md` |
+| SHULL-CHG-0051 |  | SHULL-CHG-0010 header Status contradicts its own resolution | PROPOSED | `governance/proposals/SHULL-CHG-0051-chg-0010-header-status.md` |
+| SHULL-CHG-0050 |  | Agents README lists a `model` frontmatter field no agent has | PROPOSED | `governance/proposals/SHULL-CHG-0050-agents-readme-model-field.md` |
+| SHULL-CHG-0049 |  | standards/README.md references a directory that does not exist | PROPOSED | `governance/proposals/SHULL-CHG-0049-standards-superseded-dir.md` |
+| SHULL-CHG-0048 |  | scripts/README.md omits 21 of the 33 scripts in scripts/ | PROPOSED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
+| SHULL-CHG-0047 |  | Three READMEs still say "Status: not yet written" | PROPOSED | `governance/proposals/SHULL-CHG-0047-not-yet-written-readmes.md` |
+| SHULL-CHG-0046 |  | README.md, CLAUDE.md and the implementation plan still say Phase 13... | PROPOSED | `governance/proposals/SHULL-CHG-0046-phase-13-status-stale.md` |
+
 ## 2026-10-15
 
 | ID | Date | Change | Status | Record |
