@@ -833,11 +833,15 @@ def build_study_guide(out, key):
         fix_widths(t, [NUM_W, 1.0, 6.05])
         numcell(t.cell(0, 0).merge(t.cell(2, 0)), pal, n)
         tc = t.cell(0, 1).merge(t.cell(2, 1))
-        tc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         cell_margins(tc, top=0, bottom=0, left=0, right=0)
         tile(tc, pal, z, 0.88)
-        # writing line 0.34 + gap 0.06 + diagram box 0.48 = the 0.88 in tile
-        no_split(t.rows[0], 0.34); no_split(t.rows[1], 0.06); no_split(t.rows[2], 0.48)
+        # writing line 0.30 + gap 0.04 + diagram box 0.58 = 0.92 in, the 0.88 in tile plus
+        # the picture's line slack. The heights are exact: "at least" let the text and box
+        # grow past the tile, so they never lined up; too tight and the tile is clipped.
+        for row, h in zip(t.rows, (0.30, 0.04, 0.58)):
+            no_split(row, h)
+            row._tr.trPr.find(qn("w:trHeight")).set(qn("w:hRule"), "exact")
         gc = t.cell(1, 2); cell_margins(gc, top=0, bottom=0, left=0, right=0)
         gp = gc.paragraphs[0]; gp.paragraph_format.space_after = Pt(0); _run(gp, "", 2)
         lc = t.cell(0, 2)
@@ -947,6 +951,10 @@ def build_study_guide(out, key):
     item(doc, pal, n, "What decides the color of the light an atom gives off?", key,
          "The size of the drop. A bigger drop is more energy and a shorter wavelength.",
          lines=2, ctx=ctx)
+    n += 1
+    item(doc, pal, n, "One drop gives off red light and another gives off violet light. Which "
+         "drop was bigger? How do you know?", key,
+         "Violet. It has a shorter wavelength, so more energy and a bigger drop.", ctx=ctx)
     n += 1
     gap(doc, 3)
     c = one_cell(doc); cell_margins(c, top=0, bottom=20, left=40, right=40)
