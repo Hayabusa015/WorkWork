@@ -126,11 +126,14 @@ def hand(p, text, size=13, ink="pen", sup=False, boxed=False):
         if lead:
             _hand_run(p, lead, size, ink, False, False, HAND)
         _hand_run(p, PAD, size, ink, False, True, HAND_FALLBACK)
-    parts = _re.split(r"(\d+)", text.strip() if boxed else text)
-    for part in parts:
-        if part:
-            last = _hand_run(p, part, size, ink, sup, boxed,
-                             HAND_FALLBACK if part.isdigit() else HAND)
+    for seg in _re.split(r"(\^[^^]+\^)", text.strip() if boxed else text):
+        is_sup = sup or (seg.startswith("^") and seg.endswith("^") and len(seg) > 2)
+        if is_sup and seg.startswith("^"):
+            seg = seg[1:-1]
+        for part in _re.split(r"(\d+)", seg):
+            if part:
+                last = _hand_run(p, part, size, ink, is_sup, boxed,
+                                 HAND_FALLBACK if part.isdigit() else HAND)
     if boxed:
         last = _hand_run(p, PAD, size, ink, False, True, HAND_FALLBACK)
     return last
@@ -722,92 +725,244 @@ def build_spectra(out, key, tmp):
 
 
 # =======================================================================================
-# Unit 2 study guide: two pages plus key. Practises the same skills as the quiz and test
-# without reusing any quiz element (checked in check_study_guide).
+# Unit 2 test study guide (Matt, 2026-10-22): two pages plus key, six sections in his order:
+# sublevels and filling rules; longhand with orbital diagrams; shorthand with one f-block atom
+# and one stability exception, plus an exception question; valence electrons; ions; ground and
+# excited states, color and flame tests. No element from the quiz is reused
+# (check_study_guide). Flame colors and the Cr/Cu exceptions are the ones in the S2.4/S2.5
+# guided notes.
 # =======================================================================================
-SG_IONS = [(56, "Barium, Ba"), (8, "Oxygen, O"), (37, "Rubidium, Rb"), (9, "Fluorine, F")]
-SG_ION_ANS = {56: ("2", "Ba^2+^"), 8: ("6", "O^2−^"), 37: ("1", "Rb^+^"),
-              9: ("7", "F^−^")}
+SG_LONG = [32, 14]                      # Ge reaches 3d and 4p; Si stops at 3p
+SG_SHORT = [40, 82, 29]                 # Zr d-block, Pb has 4f, Cu is the exception
+SG_VAL = [55, 5, 83, 54]                # Cs 1, B 3, Bi 5, Xe 8
+SG_IONS = [3, 8, 56, 9]                 # Li 1+, O 2-, Ba 2+, F 1-
+SG_FLAME = [("Yellow", "Na^+^"), ("Crimson red", "Li^+^"), ("Blue-green", "Cu^2+^"),
+            ("Lilac", "K^+^")]
+NAMES.update({32: "Germanium", 40: "Zirconium", 82: "Lead", 29: "Copper", 55: "Cesium",
+              5: "Boron", 83: "Bismuth", 54: "Xenon", 56: "Barium"})
+MASS.update({14: "28.09", 32: "72.63", 40: "91.22", 82: "207.2", 29: "63.55"})
 
 
 def check_study_guide():
     quiz = set()
     for v in VERSIONS.values():
         quiz |= set(v["long"]) | set(v["short"]) | set(v["ions"])
-    used = {36, 40, 14, 6, 24, 30} | {z for z, _ in SG_IONS}
+    used = set(SG_LONG) | set(SG_SHORT) | set(SG_VAL) | set(SG_IONS)
     clash = quiz & used
     assert not clash, f"study guide reuses quiz elements: {sorted(clash)}"
-    assert flat(config(36)) == "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p6"
-    assert unpaired(14) == 2
-    core, rest = shorthand(40); assert (core, flat(rest)) == (36, "5s2 4d2")
-    core, rest = shorthand(24); assert (core, flat(rest)) == (18, "4s1 3d5")
-    for z, (v, _) in SG_ION_ANS.items():
-        assert str(valence(z)[1]) == v, (z, valence(z))
+    assert flat(config(32)) == "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p2"
+    assert flat(config(14)) == "1s2 2s2 2p6 3s2 3p2"
+    assert unpaired(32) == 2 and unpaired(14) == 2
+    expect = {40: (36, "5s2 4d2"), 82: (54, "6s2 4f14 5d10 6p2"), 29: (18, "4s1 3d10")}
+    for z, (core, rest) in expect.items():
+        c, r = shorthand(z)
+        assert (c, flat(r)) == (core, rest), (z, c, flat(r))
+    assert any(l == "f" for _, l, _ in shorthand(82)[1])
+    assert [valence(z)[1] for z in SG_VAL] == [1, 3, 5, 8]
+    signs = [ion_charge(z) for z in SG_IONS]
+    assert signs == ["1+", "2−", "2+", "1−"], signs
     print("study guide answers re-solved; no quiz element reused")
+
+
+def blank(p, ans, key, chars=10, size=10):
+    """An inline answer: a rule on the student copy, Matt's handwriting on the key."""
+    if key:
+        hand(p, " " + ans + " ", size + 2)
+    else:
+        _run(p, " " + "_" * chars + " ", size)
+
+
+def sg_prompt(cell, n, text, ctx, pal, first=False, after=2):
+    p = cell.paragraphs[0] if first else cell.add_paragraph()
+    p.paragraph_format.space_after = Pt(after)
+    p.paragraph_format.left_indent = Inches(0.25)
+    p.paragraph_format.first_line_indent = Inches(-0.25)
+    _run(p, f"{n}   ", 10, bold=True, color=pal.accent)
+    rich(p, text, 10, ctx)
+    return p
 
 
 def build_study_guide(out, key):
     pal = Palette(COURSE)
     ctx = Ctx(pal, key)
     doc, s = new_doc()
-    header(doc, pal, "STUDY GUIDE  ·  UNIT 2  ·  S2.1 – S2.5" +
-           ("  ·  TEACHER KEY" if key else ""), "Unit 2 Study Guide: Electrons & Atomic Theory")
+    header(doc, pal, "UNIT 2 TEST  ·  S2.2 – S2.5" + ("  ·  TEACHER KEY" if key else ""),
+           "Unit 2 Test Study Guide: Electrons & Atomic Theory")
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
-    para(c, "Work each section, then check it against your notes. Anything you miss tells you "
-            "what to practise before the test.", 9.5, first=True)
+    para(c, "Use a periodic table. Work each section, then check it against your notes. "
+            "Anything you miss tells you what to practise before the test.", 9.5, first=True)
+    n = 1
 
-    section_bar(doc, pal, "S2.1  ·  THE BOHR MODEL")
-    item(doc, pal, 1, "What does quantized mean for an electron's energy?", key,
-         "Set amounts only. It cannot sit between levels.", ctx=ctx)
-    item(doc, pal, 2, "Hydrogen's electron is in n = 1. Name that state, and name the state "
-         "when it is in n = 3.", key, "n=1 ground state; n=3 excited state", ctx=ctx)
+    # ---- 1  Sublevels, energy levels, filling rules ----
+    section_bar(doc, pal, "1  ·  SUBLEVELS, ENERGY LEVELS & FILLING RULES")
+    gap(doc, 2)
+    small_table(doc, pal, ["SUBLEVEL", "s", "p", "d", "f"],
+                [["Orbitals", None, None, None, None],
+                 ["Max electrons", None, None, None, None]],
+                [[None, "1", "3", "5", "7"], [None, "2", "6", "10", "14"]],
+                key, [1.9, 1.4, 1.4, 1.4, 1.4], ctx, row_h=0.30)
+    c = one_cell(doc); cell_margins(c, top=60, bottom=20, left=40, right=40)
+    p = sg_prompt(c, n, "The sublevels in n = 3 are", ctx, pal, first=True)
+    blank(p, "3s, 3p, 3d", key, 14)
+    _run(p, ".   Level n = 3 holds at most", 10)
+    blank(p, "18", key, 6)
+    _run(p, "electrons (2n", 10); _run(p, "2", 10, sup=True); _run(p, ").", 10)
+    n += 1
+    p = sg_prompt(c, n, "Which sublevel fills right after 4s?", ctx, pal)
+    blank(p, "3d", key, 8)
+    _run(p, "   Which fills right after 5p?", 10)
+    blank(p, "6s", key, 8)
+    n += 1
+    sg_prompt(c, n, "Name the rule each statement describes: Aufbau, Pauli exclusion or Hund.",
+              ctx, pal, after=0)
+    pin_tail(c)
+    small_table(doc, pal, ["STATEMENT", "RULE"],
+                [["Electrons fill the lowest-energy sublevel first.", None],
+                 ["One orbital holds two electrons with opposite spins.", None],
+                 ["Put one electron in each orbital of a sublevel before pairing.", None]],
+                [[None, "Aufbau"], [None, "Pauli exclusion"], [None, "Hund"]],
+                key, [5.4, 2.1], ctx, row_h=0.30)
+    n += 1
 
-    section_bar(doc, pal, "S2.2  ·  ENERGY LEVELS, SUBLEVELS & ORBITALS")
-    item(doc, pal, 3, "List the sublevels in n = 4.", key, "4s, 4p, 4d, 4f", ctx=ctx)
-    item(doc, pal, 4, "How many electrons fit in one d sublevel? How many fit in all of n = 2?",
-         key, "d holds 10.  n=2 holds 8.", ctx=ctx)
+    # ---- 2  Longhand with orbital diagrams (the quiz's Part 2 row, slightly smaller) ----
+    section_bar(doc, pal, "2  ·  LONGHAND CONFIGURATIONS & ORBITAL DIAGRAMS")
+    gap(doc, 4)
+    for z in SG_LONG:
+        t = doc.add_table(rows=3, cols=3)
+        fix_widths(t, [NUM_W, 1.0, 6.05])
+        numcell(t.cell(0, 0).merge(t.cell(2, 0)), pal, n)
+        tc = t.cell(0, 1).merge(t.cell(2, 1))
+        tc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(tc, top=0, bottom=0, left=0, right=0)
+        tile(tc, pal, z, 0.88)
+        # writing line 0.34 + gap 0.06 + diagram box 0.48 = the 0.88 in tile
+        no_split(t.rows[0], 0.34); no_split(t.rows[1], 0.06); no_split(t.rows[2], 0.48)
+        gc = t.cell(1, 2); cell_margins(gc, top=0, bottom=0, left=0, right=0)
+        gp = gc.paragraphs[0]; gp.paragraph_format.space_after = Pt(0); _run(gp, "", 2)
+        lc = t.cell(0, 2)
+        pl = cellfmt(lc, pal, top=0, bottom=20, left=80)
+        lc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        pl.paragraph_format.tab_stops.add_tab_stop(Inches(1.15))
+        pl.paragraph_format.tab_stops.add_tab_stop(Inches(5.95), WD_TAB_ALIGNMENT.RIGHT)
+        _run(pl, "Configuration", 9, bold=True, color=pal.ink)
+        _run(pl, "\t", 9)
+        if key:
+            hand_config(pl, z, size=12)
+        _run(pl, "\tUnpaired", 9, bold=True, color=pal.ink)
+        blank(pl, str(unpaired(z)), key, 4, size=9)
+        bc = t.cell(2, 2)
+        borders(bc, pal.hair, sz=6)
+        bc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(bc, top=30, bottom=20, left=80, right=40)
+        pb = bc.paragraphs[0]; pb.paragraph_format.space_after = Pt(1)
+        _run(pb, "Orbital diagram", 8.5, color=pal.label)
+        if key:
+            key_strip(bc, pal, z, lab_w=0.22, box_w=0.19)
+        gap(doc, 3)
+        n += 1
 
-    section_bar(doc, pal, "S2.3  ·  ELECTRON CONFIGURATIONS")
-    item(doc, pal, 5, "Write the longhand configuration for krypton, Kr.", key,
-         lambda q: hand_config(q, 36, size=12), ctx=ctx)
-    item(doc, pal, 6, "Write the noble-gas shorthand for zirconium, Zr.", key,
-         lambda q: hand_config(q, 40, short=True, size=12), ctx=ctx)
-    c = item(doc, pal, 7, "Draw the orbital diagram for silicon, Si, and count its unpaired "
-             "electrons.", key, None, lines=0, ctx=ctx)
-    if key:
-        key_strip(c, pal, 14)
-        q = c.add_paragraph(); hand(q, "2 unpaired", 12, boxed=True)
-    else:
-        spacer(c, 46)
-    item(doc, pal, 8, "A student draws carbon's 2p as [↑↓] [   ] [   ]. Which rule "
-         "did they break?", key, "Hund rule. It should be [↑] [↑] [   ].", ctx=ctx)
-    item(doc, pal, 9, "Write chromium's actual shorthand configuration. Why is it an "
-         "exception?", key,
+    # ---- 3  Shorthand: one f-block atom, one exception, one exception question ----
+    section_bar(doc, pal, "3  ·  NOBLE-GAS SHORTHAND & STABILITY EXCEPTIONS")
+    gap(doc, 2)
+    t = doc.add_table(rows=1, cols=3)
+    fix_widths(t, [2.5, 2.5, 2.5])
+    no_split(t.rows[0])
+    for k, z in enumerate(SG_SHORT):
+        cc = t.cell(0, k)
+        cc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        cell_margins(cc, top=0, bottom=0, left=0, right=120)
+        p0 = cc.paragraphs[0]; p0.paragraph_format.space_after = Pt(1)
+        _run(p0, str(n), 12, bold=True, color=pal.accent)
+        pt_ = cc.add_paragraph(); pt_.paragraph_format.space_after = Pt(2)
+        pt_.add_run().add_picture(tile_png(z), width=Inches(0.72))
+        lt = cc.add_table(rows=1, cols=1)
+        fix_widths(lt, [2.35])
+        no_split(lt.rows[0], 0.34)
+        lcell = lt.rows[0].cells[0]
+        lcell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+        borders(lcell, pal.hair, sz=6, edges=("bottom",))
+        cell_margins(lcell, top=0, bottom=20, left=40, right=0)
+        q = lcell.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
+        if key:
+            hand_config(q, z, short=True, size=11)
+            if z == 29:
+                hand(lcell.add_paragraph(), "exception, 4s gives one to 3d", 9, ink="arrow")
+        pin_tail(cc)
+        n += 1
+    gap(doc, 2)
+    item(doc, pal, n, "Chromium is predicted to be [Ar] 4s^2^ 3d^4^. Write its actual "
+         "configuration and explain why it changes.", key,
          lambda q: (hand_config(q, 24, short=True, size=12),
-                    hand(q, "   4s and 3d are close; this has less energy", 11, ink="arrow")),
+                    hand(q, "   4s and 3d are close. A half-full 3d has less energy.", 10,
+                         ink="arrow")),
+         lines=1 if key else 2, ctx=ctx)    # the key's answer fits one line; keeps it 2 pages
+    n += 1
+
+    # ---- 4  Valence electrons ----
+    section_bar(doc, pal, "4  ·  VALENCE ELECTRONS", new_page=True)
+    item(doc, pal, n, "Which sublevels hold an atom's valence electrons? Why don't the d "
+         "electrons in germanium count?", key,
+         "The s and p of the highest level (4s, 4p). The 3d is an inner level.", ctx=ctx)
+    n += 1
+    gap(doc, 3)
+    c = one_cell(doc); cell_margins(c, top=0, bottom=20, left=40, right=40)
+    sg_prompt(c, n, "How many valence electrons does each atom have?", ctx, pal, first=True,
+              after=0)
+    pin_tail(c)
+    small_table(doc, pal, ["ATOM"] + [name_of(z) for z in SG_VAL],
+                [["Valence e^−^"] + [None] * len(SG_VAL)],
+                [[None] + [str(valence(z)[1]) for z in SG_VAL]],
+                key, [1.5, 1.5, 1.5, 1.5, 1.5], ctx, row_h=0.34)
+    n += 1
+
+    # ---- 5  Cations and anions ----
+    section_bar(doc, pal, "5  ·  CATION & ANION FORMATION")
+    gap(doc, 2)
+    rows, ans = [], []
+    for z in SG_IONS:
+        ch = ion_charge(z)
+        v = valence(z)[1]
+        move = f"loses {v}" if ch.endswith("+") else f"gains {8 - v}"
+        rows.append([name_of(z), None, None, None])
+        ans.append([None, move, ch, "cation" if ch.endswith("+") else "anion"])
+    small_table(doc, pal, ["ATOM", "GAINS OR LOSES e^−^", "ION CHARGE",
+                           "CATION OR ANION"], rows, ans, key, [1.9, 2.0, 1.6, 2.0], ctx)
+    item(doc, pal, n, "An ion has 18 electrons and a 2− charge. Which element is it, "
+         "and did it gain or lose electrons?", key,
+         "Sulfur (16 + 2 = 18). It gained 2 electrons.", ctx=ctx)
+    n += 1
+
+    # ---- 6  Ground state, excited state, emission, color, flame tests ----
+    section_bar(doc, pal, "6  ·  GROUND STATE, EXCITED STATE & FLAME TESTS")
+    gap(doc, 2)
+    small_table(doc, pal, ["STATE", "WHAT THE ELECTRON IS DOING"],
+                [["Ground state", None], ["Excited state", None]],
+                [[None, "In the lowest energy level it can be in"],
+                 [None, "Absorbed energy and moved to a higher level"]],
+                key, [1.9, 5.6], ctx)
+    item(doc, pal, n, "An electron drops from n = 4 to n = 2. Is light absorbed or emitted? "
+         "Explain.", key, "Emitted. It drops, so it gives off a photon.", ctx=ctx)
+    n += 1
+    item(doc, pal, n, "What decides the color of the light an atom gives off?", key,
+         "The size of the drop. A bigger drop is more energy and a shorter wavelength.",
+         lines=2, ctx=ctx)
+    n += 1
+    gap(doc, 3)
+    c = one_cell(doc); cell_margins(c, top=0, bottom=20, left=40, right=40)
+    sg_prompt(c, n, "In a flame test, which ion gives each color?", ctx, pal, first=True,
+              after=0)
+    pin_tail(c)
+    small_table(doc, pal, ["FLAME COLOR"] + [col for col, _ in SG_FLAME],
+                [["Ion"] + [None] * len(SG_FLAME)],
+                [[None] + [ion for _, ion in SG_FLAME]],
+                key, [1.5, 1.5, 1.5, 1.5, 1.5], ctx, row_h=0.34)
+    n += 1
+    item(doc, pal, n, "Why does each element give its own flame color?", key,
+         "Each element has its own energy gaps, so its electrons give off their own colors.",
          lines=2, ctx=ctx)
 
-    section_bar(doc, pal, "S2.4  ·  VALENCE ELECTRONS & IONS", new_page=True)
-    gap(doc, 2)
-    small_table(doc, pal, ["ATOM", "VALENCE e^−^", "ION IT FORMS"],
-                [[nm, None, None] for _, nm in SG_IONS],
-                [[None, SG_ION_ANS[z][0], SG_ION_ANS[z][1].replace("^", "")]
-                 for z, _ in SG_IONS], key, [2.5, 2.5, 2.5], ctx)
-    item(doc, pal, 11, "Name two ions that have the same electron arrangement as neon.", key,
-         "any two of Na+, Mg2+, Al3+, F-, O2-, N3-", ctx=ctx)
-    item(doc, pal, 12, "Write the configuration of Zn^2+^. Which electrons left first?", key,
-         "[Ar] 3d10. The two 4s electrons left first.", ctx=ctx)
-
-    section_bar(doc, pal, "S2.5  ·  ATOMIC & ELECTRON SPECTRA")
-    item(doc, pal, 13, "An electron moves from n = 2 to n = 5. Does the atom absorb or emit "
-         "a photon?", key, "Absorbs. It moves up, so energy goes in.", ctx=ctx)
-    item(doc, pal, 14, "Which photon has more energy, 486 nm or 656 nm?", key,
-         "486 nm. Shorter wavelength, more energy.", ctx=ctx)
-    item(doc, pal, 15, "Why does every element give off its own pattern of lines?", key,
-         "Only certain energy gaps exist, and each element's gaps are different.", ctx=ctx)
-
-    running_footer(s, f"SHULL SCIENCE          {UNIT} · S2.1-S2.5" +
+    running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  UNIT TEST STUDY GUIDE" +
                    ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
     trim_tail(doc)
     doc.save(out)
