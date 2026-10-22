@@ -12,8 +12,8 @@ built by build_worksheet_key_docx.py from the same spec, so the two cannot drift
 
 Spec, one section:
     code, title, directions         plain text; no label, no box
-    equations                       short strings; "_x" is a subscript, "^2" a superscript,
-                                    "θ" is drawn (the brand face has no theta glyph)
+    equations                       short strings; "_x" or "_{ix}" is a subscript, "^2" a superscript,
+                                    "θ" and "Δ" are drawn (the brand face has no Greek)
     questions[]                     points, prompt, and either
         inRow: true                 shares one row with the other inRow questions; answerLines
                                     ruled lines under the prompt
@@ -23,17 +23,20 @@ Theta. The brand face (Archivo) has no Greek, and standards/QA_GATE.md fails a P
 to a second font. So theta is set as a small inline picture cut from a Greek-capable face and sized
 to the equation text. A picture is not a font, so the page is still Archivo only.
 """
-import json, os, sys, tempfile
+import json, os, re, sys, tempfile
 from docx import Document
 from docx.shared import Inches, Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
+from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run, fix_widths,
     no_split, page_setup, running_footer, cell_margins, gap, trim_tail, tight_cells,
-    unpad_cell, rule_lines,
+    unpad_cell, rule_lines, text_width_in, hexof,
 )
 
 THETA_FACE = "/usr/share/fonts/opentype/inter/Inter-Bold.otf"
@@ -46,19 +49,20 @@ def refuse(msg):
     return 1
 
 
-def theta_png():
-    path = os.path.join(_TMP, "theta.png")
+GLYPHS = "θΔ"              # Greek the brand face cannot set; each is drawn as a small picture
+
+
+def glyph_png(ch):
+    path = os.path.join(_TMP, f"glyph_{ord(ch):x}.png")
     if not os.path.exists(path):
         from PIL import Image, ImageDraw, ImageFont
         f = ImageFont.truetype(THETA_FACE, 900)
-        im = Image.new("L", (1400, 1400), 0)
-        ImageDraw.Draw(im).text((200, 200), "θ", font=f, fill=255)
-        box = im.getbbox()
-        im = im.crop(box)
+        im = Image.new("L", (1600, 1600), 0)
+        ImageDraw.Draw(im).text((200, 200), ch, font=f, fill=255)
+        im = im.crop(im.getbbox())
         out = Image.new("RGBA", im.size, (0, 0, 0, 0))
         out.putalpha(im)
         out.save(path)
-        theta_png.aspect = im.width / im.height
     return path
 
 
@@ -76,25 +80,104 @@ def marked(paragraph, text, size, *, bold=True, color=None):
 
     while i < len(text):
         ch = text[i]
-        if ch == "θ":
+        if ch in GLYPHS:
             flush()
-            png = theta_png()
+            png = glyph_png(ch)
             h = size * THETA_CAP
             pic = paragraph.add_run().add_picture(png, height=Pt(h))
             for att in ("distT", "distB", "distL", "distR"):   # LibreOffice pads an inline picture
                 pic._inline.set(att, "0")                       # unless the margins are stated
         elif ch in "_^" and i + 1 < len(text):
             flush()
-            r = run(paragraph, text[i + 1], size, bold=bold, color=color)
+            if text[i + 1] == "{" and "}" in text[i + 2:]:      # _{ix}: a multi-character sub/superscript
+                end = text.index("}", i + 2)
+                body = text[i + 2:end]
+                i = end
+            else:
+                body = text[i + 1]
+                i += 1
+            r = run(paragraph, body, size, bold=bold, color=color)
             if ch == "_":
                 r.font.subscript = True
             else:
                 r.font.superscript = True
-            i += 1
         else:
             buf += ch
         i += 1
     flush()
+
+
+def _plain(t):
+    return re.sub(r"[_^{}]", "", t).replace("Δ", "M").replace("θ", "O")
+
+
+def _frac_cell(cell, num, den, size, pal):
+    cell_margins(cell, top=0, bottom=0, left=15, right=15)
+    p = cell.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_after = Pt(0)
+    pPr = p._p.get_or_add_pPr()
+    bd = OxmlElement("w:pBdr"); bt = OxmlElement("w:bottom")
+    bt.set(qn("w:val"), "single"); bt.set(qn("w:sz"), "8"); bt.set(qn("w:space"), "1")
+    bt.set(qn("w:color"), hexof(pal.ink)); bd.append(bt); pPr.append(bd)
+    marked(p, num, size, color=pal.ink)
+    q = cell.add_paragraph()
+    q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    q.paragraph_format.space_after = Pt(0)
+    marked(q, den, size, color=pal.ink)
+
+
+def equation_cell(cell, eq, pal, size=11):
+    """One equation. "[n|d]" is a stacked fraction: numerator over a horizontal bar over denominator."""
+    parts = [x for x in re.split(r"(\[[^\]]+\|[^\]]+\])", eq) if x != ""]
+    if not any(x.startswith("[") for x in parts):
+        p = cell.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        marked(p, eq, size, color=pal.ink)
+        return
+    t = cell.add_table(rows=1, cols=len(parts))
+    widths = []
+    for x in parts:
+        if x.startswith("["):
+            n, d = x[1:-1].split("|")
+            widths.append(max(text_width_in(_plain(n), size, True), text_width_in(_plain(d), size, True)) + 0.10)
+        else:
+            widths.append(text_width_in(_plain(x), size, True) + 0.06)
+    fix_widths(t, [round(w, 3) for w in widths])
+    tight_cells(t, left=0, right=0)
+    for x, c in zip(parts, t.rows[0].cells):
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        if x.startswith("["):
+            n, d = x[1:-1].split("|")
+            _frac_cell(c, n, d, size, pal)
+        else:
+            p = c.paragraphs[0]
+            p.paragraph_format.space_after = Pt(0)
+            marked(p, x, size, color=pal.ink)
+    unpad_cell(cell)
+
+
+def equation_block(doc, eqs, pal, label="Equations", width=7.5, per_row=3, note=None):
+    gap(doc, 5)
+    t = doc.add_table(rows=1, cols=1)
+    fix_widths(t, [width])
+    c = t.rows[0].cells[0]
+    borders(c, pal.hair, sz=4, edges=("top", "bottom"))
+    cell_margins(c, top=60, bottom=50, left=0, right=0)
+    p = para(c, label, 9.5, bold=True, color=pal.ink, first=True)
+    p.paragraph_format.space_after = Pt(3)
+    if note:
+        run(p, "   " + note, 9, color=pal.label)
+    rows = (len(eqs) + per_row - 1) // per_row
+    g = c.add_table(rows=rows, cols=per_row)
+    colw = round(width / per_row - 0.02, 2)
+    fix_widths(g, [colw] * per_row)
+    tight_cells(g, top=30, bottom=40, left=0, right=60)
+    for i, eq in enumerate(eqs):
+        cell = g.rows[i // per_row].cells[i % per_row]
+        cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        equation_cell(cell, eq, pal)
+    unpad_cell(c)
 
 
 def masthead(doc, spec, sec, pal):

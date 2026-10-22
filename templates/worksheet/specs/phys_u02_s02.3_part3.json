@@ -6,62 +6,57 @@
   ],
   "docType": "Practice_Set",
   "timeTargetMin": "40–50",
-  "equationLabel": "EQUATIONS YOU MAY USE",
   "sectionsContent": [
     {
       "code": "2.3",
       "title": "Projectile Motion, Part 3: Full Projectile Motion",
-      "concept": {
-        "summary": "Every projectile problem is the same two motions sharing one clock: constant velocity sideways, free fall up and down. In the full version the landing can be higher or lower than the launch, and the launch can point up, down, or level. Without a symmetric path there is no half-time shortcut. Solve the vertical equation for the time directly, which usually takes the quadratic formula.",
-        "keyIdeas": [
-          "y is the landing height measured from the launch point: negative below it, positive above it.",
-          "The quadratic gives two times. Keep the one that makes physical sense. A landing on the way down is the larger positive time."
-        ]
-      },
-      "priorKnowledge": {
-        "items": [
-          "Components of the launch velocity, with the calculator in degree mode (Part 2).",
-          "Horizontal velocity never changes in the air; vertical velocity changes by 9.8 m/s every second (Parts 1 and 2).",
-          "Rebuilding a vector from its components: magnitude with the Pythagorean theorem, angle with inverse tangent (S2.2)."
-        ]
-      },
-      "directions": "Work every problem in your Hayden-McNeil notebook. Sketch the path, mark the launch point as the origin, and label the landing height. Up is +y and the direction of launch is +x, so g = −9.8 m/s². A launch below the horizontal has a negative vy0. When you use the quadratic formula, say which of the two times you kept and why. Ignore air resistance. Round answers to the correct number of significant figures; g = 9.8 m/s² has two.",
+      "directions": "Work in your notebook. Up is positive, the launch point is the origin, and the vertical acceleration is −9.8 m/s². Ignore air resistance and round to two significant figures.",
       "questions": [
         {
-          "tier": "warm-up",
           "points": 2,
           "prompt": "Captain Jack Sparrow's crew fires a cannonball at 22 m/s, 25° above the horizontal, from a clifftop fort 18 m above the sea. Jack insists he was aiming at that rock. Find the time the cannonball takes to hit the water and how far from the base of the cliff it lands.",
-          "calculation": true,
           "selfCheck": "[  3.1 s  ·  62 m  ]",
-          "solution": "vx = 22 cos 25° = 19.94 m/s. vy0 = 22 sin 25° = 9.30 m/s. The water is 18 m below the launch, so y = −18 m.\n−18 = 9.30t + ½(−9.8)t², so 4.9t² − 9.30t − 18 = 0.\nt = [9.30 + √(9.30² + 4(4.9)(18))] / 2(4.9) = (9.30 + 20.96) / 9.8 = 3.09 s, which is 3.1 s. The other root is negative and is thrown out.\nx = vx·t = (19.94)(3.09) = 61.6 m, which is 62 m.",
-          "finalAnswer": "t = 3.1 s (3.09 s)   x = 62 m (61.6 m)",
+          "solution": "Quadratic root 3.087 s; range 61.6 m.",
+          "finalAnswer": "t = 3.1 s (3.087 s)   x = 62 m (61.6 m)",
           "steps": [
             {
               "row": [
-                "v_{x} = 22 cos 25° = 19.94 m/s     v_{y0} = 22 sin 25° = 9.30 m/s"
+                "v_{ix} = 22 cos 25° = 19.94 m/s     v_{iy} = 22 sin 25° = 9.298 m/s"
               ]
             },
             {
               "row": [
-                "y = −18 m:   −18 = 9.30t +",
+                "Δy = v_{iy} t + ",
                 {
                   "frac": [
                     "1",
                     "2"
                   ]
                 },
-                "(−9.8)t^{2}"
+                " a_{y} t^{2}"
               ]
             },
             {
               "mistake": [
-                "+18 = 9.30t − 4.9t^{2}"
+                "+18 = 9.298 t − 4.9 t^{2}"
               ],
-              "note": "the water is below the launch, so y is negative"
+              "note": "the water is below the launch, so Δy is negative"
             },
             {
               "row": [
-                "4.9t^{2} − 9.30t − 18 = 0"
+                "−18 = (9.298) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} − 9.298 t − 18 = 0"
               ]
             },
             {
@@ -69,20 +64,27 @@
                 "t =",
                 {
                   "frac": [
-                    "9.30 + √((9.30)^{2} + 4(4.9)(18))",
+                    "9.298 ± √((9.298)^{2} + 4(4.9)(18))",
                     "2(4.9)"
                   ]
-                },
-                "=",
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
                 {
                   "frac": [
-                    "9.30 + 20.96",
+                    "9.298 ± √439.2",
                     "9.8"
                   ]
                 },
-                "= 3.09 s"
-              ],
-              "note": "the other root is negative"
+                "= 3.09 s  or  −1.19 s"
+              ]
+            },
+            {
+              "say": "The negative time is before the launch, so it is thrown out.",
+              "ink": "pen"
             },
             {
               "answer": [
@@ -92,38 +94,43 @@
             },
             {
               "row": [
-                "x = v_{x}t = (19.94)(3.09) = 61.6 m"
-              ]
+                "Δx = v_{ix} t = (19.94)(3.087) = 61.6 m"
+              ],
+              "note": "a_{x} = 0"
             },
             {
               "answer": [
-                "x ="
+                "Δx ="
               ],
               "value": "62 m"
             }
           ]
         },
         {
-          "tier": "practice",
           "points": 3,
           "prompt": "Link fires an arrow at 45 m/s, 10° above the horizontal, at a target 62 m away horizontally. The Bokoblin holding the target has made some poor choices. Find the time the arrow takes to reach the target and how far above or below the launch height it hits.",
-          "calculation": true,
           "selfCheck": "[  1.4 s  ·  1.3 m above  ]",
-          "solution": "vx = 45 cos 10° = 44.32 m/s. vy0 = 45 sin 10° = 7.81 m/s.\nThe horizontal distance gives the time: t = 62 / 44.32 = 1.399 s, which is 1.4 s.\ny = (7.81)(1.399) + ½(−9.8)(1.399)² = 1.34 m. Positive, so the arrow hits 1.3 m above the launch height.",
+          "solution": "t 1.399 s, Δy 1.34 m.",
           "finalAnswer": "t = 1.4 s (1.399 s)   y = 1.3 m above launch height (1.34 m)",
           "steps": [
             {
               "row": [
-                "v_{x} = 45 cos 10° = 44.32 m/s     v_{y0} = 45 sin 10° = 7.81 m/s"
+                "v_{ix} = 45 cos 10° = 44.32 m/s     v_{iy} = 45 sin 10° = 7.814 m/s"
               ]
+            },
+            {
+              "row": [
+                "Δx = v_{ix} t"
+              ],
+              "note": "a_{x} = 0"
             },
             {
               "row": [
                 "t =",
                 {
                   "frac": [
-                    "x",
-                    "v_{x}"
+                    "Δx",
+                    "v_{ix}"
                   ]
                 },
                 "=",
@@ -134,8 +141,7 @@
                   ]
                 },
                 "= 1.399 s"
-              ],
-              "note": "time from the horizontal motion"
+              ]
             },
             {
               "answer": [
@@ -145,7 +151,19 @@
             },
             {
               "row": [
-                "y = (7.81)(1.399) +",
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = (7.814)(1.399) + ",
                 {
                   "frac": [
                     "1",
@@ -153,46 +171,59 @@
                   ]
                 },
                 "(−9.8)(1.399)^{2} = 1.34 m"
-              ],
-              "note": "positive: above the launch"
+              ]
             },
             {
               "answer": [
-                "y ="
+                "Δy ="
               ],
               "value": "1.3 m above"
+            },
+            {
+              "say": "Positive, so the arrow is above the launch height.",
+              "ink": "pen"
             }
           ]
         },
         {
-          "tier": "practice",
           "points": 3,
           "prompt": "Michelangelo tosses a pizza box at 14 m/s, 60° above the horizontal, up onto a rooftop 6.0 m above his hand. It lands on the roof on its way down. Leonardo suggested the stairs. Find the time until the box lands on the roof and the horizontal distance it travels.",
-          "calculation": true,
           "selfCheck": "[  1.8 s  ·  13 m  ]",
-          "solution": "vx = 14 cos 60° = 7.0 m/s. vy0 = 14 sin 60° = 12.124 m/s. The roof is above the hand, so y = +6.0 m.\n6.0 = 12.124t + ½(−9.8)t², so 4.9t² − 12.124t + 6.0 = 0.\nt = [12.124 ± √(12.124² − 4(4.9)(6.0))] / 9.8 = (12.124 ± 5.421) / 9.8, so t = 0.684 s or 1.790 s.\nThe box passes roof height on the way up at 0.684 s and lands on the way down, so t = 1.790 s, which is 1.8 s.\nx = vx·t = (7.0)(1.790) = 12.53 m, which is 13 m.",
+          "solution": "Later root 1.790 s; Δx 12.5 m.",
           "finalAnswer": "t = 1.8 s (1.79 s, the later root)   x = 13 m (12.5 m)",
           "steps": [
             {
               "row": [
-                "v_{x} = 14 cos 60° = 7.0 m/s     v_{y0} = 14 sin 60° = 12.124 m/s"
+                "v_{ix} = 14 cos 60° = 7.00 m/s     v_{iy} = 14 sin 60° = 12.124 m/s"
               ]
             },
             {
               "row": [
-                "y = +6.0 m:   6.0 = 12.124t +",
+                "Δy = v_{iy} t + ",
                 {
                   "frac": [
                     "1",
                     "2"
                   ]
                 },
-                "(−9.8)t^{2}"
+                " a_{y} t^{2}"
               ]
             },
             {
               "row": [
-                "4.9t^{2} − 12.124t + 6.0 = 0"
+                "+6.0 = (12.124) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} − 12.124 t + 6.0 = 0"
               ]
             },
             {
@@ -203,26 +234,26 @@
                     "12.124 ± √((12.124)^{2} − 4(4.9)(6.0))",
                     "2(4.9)"
                   ]
-                },
-                "=",
-                {
-                  "frac": [
-                    "12.124 ± 5.421",
-                    "9.8"
-                  ]
                 }
               ]
             },
             {
               "row": [
-                "t = 0.684 s   or   t = 1.790 s"
+                "t =",
+                {
+                  "frac": [
+                    "12.124 ± √29.4",
+                    "9.8"
+                  ]
+                },
+                "= 1.79 s  or  0.68 s"
               ]
             },
             {
               "mistake": [
-                "t = 0.684 s"
+                "t = 0.68 s"
               ],
-              "note": "that is roof height on the way up; it lands on the way down"
+              "note": "that is on the way up; the box lands on the way down"
             },
             {
               "answer": [
@@ -232,19 +263,19 @@
             },
             {
               "row": [
-                "x = v_{x}t = (7.0)(1.790) = 12.53 m"
-              ]
+                "Δx = v_{ix} t = (7.0)(1.790) = 12.5 m"
+              ],
+              "note": "a_{x} = 0"
             },
             {
               "answer": [
-                "x ="
+                "Δx ="
               ],
               "value": "13 m"
             }
           ]
         },
         {
-          "tier": "challenge",
           "points": 4,
           "prompt": "Shrek and Donkey borrow a trebuchet and fling a giant onion at 28 m/s, 40° above the horizontal, from the top of a 15 m castle wall. It lands on the level field below. Ogres have layers, and so does this problem.",
           "parts": [
@@ -252,14 +283,13 @@
             "(b) Find its time in the air.",
             "(c) Find how far from the base of the wall it lands."
           ],
-          "calculation": true,
           "selfCheck": "[  32 m  ·  4.4 s  ·  94 m  ]",
-          "solution": "vx = 28 cos 40° = 21.45 m/s. vy0 = 28 sin 40° = 18.00 m/s.\n(a) At the top vy = 0: 0 = vy0² + 2gy, so y = (18.00)² / 2(9.8) = 16.53 m above the wall top. Add the wall: 16.53 + 15 = 31.53 m, which is 32 m above the field.\n(b) The field is 15 m below the launch: −15 = 18.00t + ½(−9.8)t², so 4.9t² − 18.00t − 15 = 0. t = [18.00 + √(18.00² + 4(4.9)(15))] / 9.8 = (18.00 + 24.86) / 9.8 = 4.37 s, which is 4.4 s. The other root is negative.\n(c) x = vx·t = (21.45)(4.37) = 93.7 m, which is 94 m.",
-          "finalAnswer": "(a) 32 m above the field (31.5 m)   (b) 4.4 s (4.37 s)   (c) 94 m (93.7 m)",
+          "solution": "(a) 31.5 m (b) 4.373 s (c) 93.8 m",
+          "finalAnswer": "(a) 32 m above the field (31.5 m)   (b) 4.4 s (4.37 s)   (c) 94 m (93.8 m)",
           "steps": [
             {
               "row": [
-                "v_{x} = 28 cos 40° = 21.45 m/s     v_{y0} = 28 sin 40° = 18.00 m/s"
+                "v_{ix} = 28 cos 40° = 21.45 m/s     v_{iy} = 28 sin 40° = 18.00 m/s"
               ]
             },
             {
@@ -267,31 +297,36 @@
             },
             {
               "row": [
-                "top: v_{y} = 0     0 = (18.00)^{2} + 2(−9.8)y"
+                "v_{fy}^{2} = v_{iy}^{2} + 2 a_{y} Δy"
+              ],
+              "note": "at the top v_{fy} = 0"
+            },
+            {
+              "row": [
+                "0 = (18.00)^{2} + 2(−9.8) Δy"
               ]
             },
             {
               "row": [
-                "y =",
+                "Δy =",
                 {
                   "frac": [
-                    "(18.00)^{2}",
-                    "2(9.8)"
+                    "−(18.00)^{2}",
+                    "2(−9.8)"
                   ]
                 },
                 "= 16.53 m"
-              ],
-              "note": "above the top of the wall"
+              ]
             },
             {
               "mistake": [
-                "y_{max} = 16.53 m"
+                "y_{max} = 16.5 m"
               ],
               "note": "that is above the wall, not the field"
             },
             {
               "row": [
-                "y_{max} = 16.53 m + 15 m = 31.53 m"
+                "y_{max} = 16.53 + 15 = 31.5 m"
               ]
             },
             {
@@ -305,19 +340,19 @@
             },
             {
               "row": [
-                "y = −15 m:   −15 = 18.00t +",
+                "−15 = (18.00) t + ",
                 {
                   "frac": [
                     "1",
                     "2"
                   ]
                 },
-                "(−9.8)t^{2}"
+                "(−9.8) t^{2}"
               ]
             },
             {
               "row": [
-                "4.9t^{2} − 18.00t − 15 = 0"
+                "4.9 t^{2} − 18.00 t − 15 = 0"
               ]
             },
             {
@@ -325,20 +360,23 @@
                 "t =",
                 {
                   "frac": [
-                    "18.00 + √((18.00)^{2} + 4(4.9)(15))",
+                    "18.00 ± √((18.00)^{2} + 4(4.9)(15))",
                     "2(4.9)"
                   ]
-                },
-                "=",
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
                 {
                   "frac": [
-                    "18.00 + 24.86",
+                    "18.00 ± √617.9",
                     "9.8"
                   ]
                 },
-                "= 4.37 s"
-              ],
-              "note": "the other root is negative"
+                "= 4.37 s  or  −0.70 s"
+              ]
             },
             {
               "answer": [
@@ -351,19 +389,19 @@
             },
             {
               "row": [
-                "x = v_{x}t = (21.45)(4.37) = 93.7 m"
-              ]
+                "Δx = v_{ix} t = (21.45)(4.373) = 93.8 m"
+              ],
+              "note": "a_{x} = 0"
             },
             {
               "answer": [
-                "x ="
+                "Δx ="
               ],
               "value": "94 m"
             }
           ]
         },
         {
-          "tier": "multi-topic",
           "points": 5,
           "prompt": "Ash throws a Poké Ball at 18 m/s, 20° below the horizontal, from a cliff 35 m above a lake where a Gyarados is waiting. Pikachu declined to throw it for him.",
           "parts": [
@@ -371,39 +409,55 @@
             "(b) Find how far from the base of the cliff it lands.",
             "(c) Find the ball's velocity as it hits the water: speed and angle below the horizontal."
           ],
-          "calculation": true,
-          "solution": "vx = 18 cos 20° = 16.91 m/s. Thrown below the horizontal, so vy0 = −18 sin 20° = −6.16 m/s. The water is 35 m below, so y = −35 m.\n(a) −35 = −6.16t + ½(−9.8)t², so 4.9t² + 6.16t − 35 = 0. t = [−6.16 + √(6.16² + 4(4.9)(35))] / 9.8 = (−6.16 + 26.91) / 9.8 = 2.117 s, which is 2.1 s. The other root is negative.\n(b) x = vx·t = (16.91)(2.117) = 35.8 m, which is 36 m.\n(c) vy = vy0 + gt = −6.16 + (−9.8)(2.117) = −26.91 m/s. vx is still 16.91 m/s. Rebuild the vector (S2.2): v = √(16.91² + 26.91²) = 31.78 m/s, which is 32 m/s. Angle = inverse tan of (26.91 / 16.91) = 57.9°, which is 58° below the horizontal. (Unrounded components give 57.84°, also 58°.)",
+          "solution": "(a) 2.117 s (b) 35.8 m (c) 31.8 m/s at 57.8° below",
           "finalAnswer": "(a) 2.1 s (2.12 s)   (b) 36 m (35.8 m)   (c) 32 m/s at 58° below the horizontal",
           "steps": [
             {
               "row": [
-                "v_{x} = 18 cos 20° = 16.91 m/s     v_{y0} = −18 sin 20° = −6.16 m/s"
+                "v_{ix} = 18 cos 20° = 16.91 m/s"
               ]
             },
             {
               "mistake": [
-                "v_{y0} = +6.16 m/s"
+                "v_{iy} = +6.156 m/s"
               ],
-              "note": "thrown below the horizontal, so v_{y0} is negative"
+              "note": "thrown below the horizontal, so v_{iy} is negative"
+            },
+            {
+              "row": [
+                "v_{iy} = −18 sin 20° = −6.156 m/s"
+              ]
             },
             {
               "label": "(a) Time to the water"
             },
             {
               "row": [
-                "y = −35 m:   −35 = −6.16t +",
+                "Δy = v_{iy} t + ",
                 {
                   "frac": [
                     "1",
                     "2"
                   ]
                 },
-                "(−9.8)t^{2}"
+                " a_{y} t^{2}"
               ]
             },
             {
               "row": [
-                "4.9t^{2} + 6.16t − 35 = 0"
+                "−35 = (−6.156) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} + 6.156 t − 35 = 0"
               ]
             },
             {
@@ -411,20 +465,23 @@
                 "t =",
                 {
                   "frac": [
-                    "−6.16 + √((6.16)^{2} + 4(4.9)(35))",
+                    "−6.156 ± √((6.156)^{2} + 4(4.9)(35))",
                     "2(4.9)"
                   ]
-                },
-                "=",
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
                 {
                   "frac": [
-                    "−6.16 + 26.91",
+                    "−6.156 ± √723.9",
                     "9.8"
                   ]
                 },
-                "= 2.117 s"
-              ],
-              "note": "the other root is negative"
+                "= 2.12 s  or  −3.37 s"
+              ]
             },
             {
               "answer": [
@@ -433,54 +490,60 @@
               "value": "2.1 s"
             },
             {
-              "label": "(b) Horizontal distance"
+              "label": "(b) Distance from the cliff"
             },
             {
               "row": [
-                "x = v_{x}t = (16.91)(2.117) = 35.8 m"
-              ]
+                "Δx = v_{ix} t = (16.91)(2.117) = 35.8 m"
+              ],
+              "note": "a_{x} = 0"
             },
             {
               "answer": [
-                "x ="
+                "Δx ="
               ],
               "value": "36 m"
             },
             {
-              "label": "(c) Velocity at the water (S2.2)"
+              "label": "(c) Velocity at the water"
             },
             {
               "row": [
-                "v_{y} = v_{y0} + gt = −6.16 + (−9.8)(2.117) = −26.91 m/s"
+                "v_{fy} = v_{iy} + a_{y} t"
               ]
             },
             {
               "row": [
-                "v = √((16.91)^{2} + (26.91)^{2}) = 31.78 m/s"
+                "v_{fy} = −6.156 + (−9.8)(2.117) = −26.9 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{f} = √((16.91)^{2} + (26.9)^{2}) = 31.8 m/s"
               ]
             },
             {
               "answer": [
-                "v ="
+                "v_{f} ="
               ],
               "value": "32 m/s"
             },
             {
               "row": [
-                "angle = tan^{−1}",
+                "θ = tan^{−1}",
                 {
                   "frac": [
-                    "26.91",
+                    "26.9",
                     "16.91"
                   ]
                 },
-                "= 57.9°"
+                "= 57.8°"
               ],
               "note": "below the horizontal"
             },
             {
               "answer": [
-                "angle ="
+                "θ ="
               ],
               "value": "58° below horizontal"
             },
@@ -493,32 +556,20 @@
         }
       ],
       "equations": [
-        {
-          "note": "components; vy0 is negative for a launch below the horizontal",
-          "plain": "vx = v cos(angle)     vy0 = v sin(angle)"
-        },
-        {
-          "note": "horizontal: constant velocity",
-          "plain": "x = vx · t"
-        },
-        {
-          "note": "vertical position, g = −9.8 m/s²",
-          "plain": "y = vy0 · t + ½ g t²"
-        },
-        {
-          "note": "vertical velocity at a time",
-          "plain": "vy = vy0 + g t"
-        },
-        {
-          "note": "vertical velocity at a height",
-          "plain": "vy² = vy0² + 2 g y"
-        },
-        {
-          "note": "quadratic formula, for at² + bt + c = 0",
-          "plain": "t = (−b ± √(b² − 4ac)) / 2a"
-        }
-      ]
+        "v_f = v_i + a t",
+        "Δx = v_i t + [1|2] a t^2",
+        "v_f^2 = v_i^2 + 2 a Δx",
+        "Δx = [1|2](v_i + v_f) t",
+        "a_{x} = 0",
+        "a_{y} = −9.8 m/s^2",
+        "v_{ix} = v_i cos θ",
+        "v_{iy} = v_i sin θ",
+        "v_i = √(v_{ix}^2 + v_{iy}^2)",
+        "tan θ = [v_{iy}|v_{ix}]",
+        "t = [−b ± √(b^2 − 4ac)|2a]"
+      ],
+      "equationNote": "along x or y"
     }
   ],
-  "pagesPerSection": 2
+  "pagesPerSection": 1
 }

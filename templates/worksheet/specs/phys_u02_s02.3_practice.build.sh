@@ -1,39 +1,28 @@
 #!/usr/bin/env bash
-# Build + QA for Physics U02 S2.3 Practice Set, Part 3 (Full Projectile Motion), and its key.
+# Build + QA for the three Physics U02 S2.3 projectile-motion practice sets and their keys.
 #
-#   bash templates/worksheet/specs/phys_u02_s02.3_part3.build.sh [out_dir]
+#   bash templates/worksheet/specs/phys_u02_s02.3_practice.build.sh [out_dir]
 #
-# Matt's one-off choices for THIS document, applied in memory only. The shared builders
-# (build_worksheet_docx.py, build_worksheet_key_docx.py, scripts/key_solution.py) are NOT edited:
-#   - 5 problems, ramp 1/2/1/1 (Physics default is 2/2/1/1)
-#   - no tier tags (WARM-UP / PRACTICE / ...) on the student sheet or the key
-#   - key at the standard hand size 27 (KEY_SIZE), short consecutive rows merged onto one line, and
-#     cards allowed to break across a page at a seam (after a boxed answer or before a labelled part)
-# The key overrides are copied unchanged from phys_u02_s02.2.build.sh (Matt 2026-10-16/19).
-# None of these is a standing rule yet; making any of them permanent is a Secretary change.
+# Student sheets use the plain practice-set layout (templates/worksheet/build_practice_docx.py):
+# one short directions paragraph, the kinematic equations with stacked fractions and v_i / v_f,
+# and the question text on the same line as its number. Keys use the answer-key builder with:
+# full-size hand, short rows merged, cards that may break at a seam, and a "same direction:" line
+# after every boxed angle (standards/ANSWER_KEYS.md section 10, SHULL-CHG-0046).
+# Five problems per set at Matt's request. Names per standards/NAMING.md ("2.3 Practice Set - Part N").
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../../.." && pwd)"
-SPEC="$HERE/phys_u02_s02.3_part3.json"
-OUT="${1:-$REPO/out/phys_u02_s02.3_part3}"; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
-# Names per standards/NAMING.md: 2.3 has no short title in courses/physics/DECISIONS.md, so no
-# topic; "Part 3" is the descriptor that tells the three parts apart (templates/_shull_name.py).
-STU="$OUT/2.3 Practice Set - Part 3.docx"
-KEY="$OUT/2.3 Practice Set Key - Part 3.docx"
+OUT="${1:-$REPO/out/phys_u02_s02.3_practice}"; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
 
-python3 -I "$HERE/phys_u02_s02.3_part3.verify.py"
+python3 -I "$HERE/phys_u02_s02.3_practice.verify.py"
 
+for PART in 1 2 3; do
+SPEC="$HERE/phys_u02_s02.3_part${PART}.json"
+STU="$OUT/2.3 Practice Set - Part $PART.docx"
+KEY="$OUT/2.3 Practice Set Key - Part $PART.docx"
+echo "===== Part $PART"
 cd "$REPO/templates/worksheet"
-python3 - "$SPEC" "$STU" <<'PY'
-import sys
-sys.path.insert(0, "."); sys.path.insert(0, "..")
-import build_worksheet_docx as b
-b.RAMP["physics"] = {"warm-up": 1, "practice": 2, "challenge": 1, "multi-topic": 1}
-# Matt 2026-10-16: no tier tags on the student sheet. Tiers stay in the spec for the ramp check.
-_card = b.question_card
-b.question_card = lambda cell, q, *a, **k: _card(cell, {x: v for x, v in q.items() if x != "tier"}, *a, **k)
-sys.exit(b.main())
-PY
+python3 "$REPO/templates/worksheet/build_practice_docx.py" "$SPEC" "$STU"
 python3 - "$SPEC" "$KEY" <<'PY2'
 import sys
 sys.path.insert(0, "."); sys.path.insert(0, "..")
@@ -121,8 +110,9 @@ soffice --headless --convert-to pdf "$STU" "$KEY" --outdir "$OUT"
 
 cd "$REPO"
 python3 scripts/audit_worksheet.py "$STU" "$SPEC"
-python3 scripts/audit_fonts.py "$OUT/2.3 Practice Set - Part 3.pdf"
-python3 scripts/audit_fonts.py "$OUT/2.3 Practice Set Key - Part 3.pdf"
-python3 scripts/audit_print_ink.py "$OUT/2.3 Practice Set - Part 3.pdf"
-python3 scripts/audit_print_ink.py "$OUT/2.3 Practice Set Key - Part 3.pdf"
-echo "Builds and audits finished. Next: rasterize and inspect each page visually, then run audit-deliverable."
+python3 scripts/audit_fonts.py "$OUT/2.3 Practice Set - Part $PART.pdf"
+python3 scripts/audit_fonts.py "$OUT/2.3 Practice Set Key - Part $PART.pdf"
+python3 scripts/audit_print_ink.py "$OUT/2.3 Practice Set - Part $PART.pdf"
+python3 scripts/audit_print_ink.py "$OUT/2.3 Practice Set Key - Part $PART.pdf"
+done
+echo "Builds and audits finished. Next: rasterize and inspect each page visually."
