@@ -16,8 +16,8 @@
 | **Recommendation** | Approve, with the safeguards in section 2. |
 | **Decision** | **Approved by the user, 2026-10-22**, in the main session. Verbatim: *"approve 0053`"*. Recorded under SHULL-CHG-0034. |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | No |
+| **Implemented By** | pending commit |
+| **Verified** | Partial, by Read/Grep only (validators not run; main session to run them and close). Desk-click path, safeguards 1-8 and the options-record rule exist in `governance/CHANGE_CONTROL.md` section 4 item 1. `workflows/weekly-system-review.md` Sign-off dashboard step 2 points at that item, notes the SHA is stored on the `decisions` row, and step 1 names `python3 scripts/desk_export.py` (file exists). "exactly as if they had said it in chat" no longer appears anywhere. Grep for "desk click", "Secretary's Desk" and "decided_at" outside `legacy/`, `change-log/`, `docs/` finds no other file restating the safeguards or recording path (hits: CHANGE_CONTROL, the workflow pointer, records 0051-0053, and `scripts/desk_export.py` docstring only). No skill restates the path. |
 
 ---
 
