@@ -424,8 +424,8 @@ def build_quiz(out, ver, key):
         pq.paragraph_format.keep_with_next = True
         rich(pq, q, 10.5, ctx)
         if key:
-            hand(pq, "   " + LETTERS[pos], 13, boxed=True)
-            hand(pq, "  " + why, 10, ink="arrow")
+            hand(pq, "   " + LETTERS[pos], 11, boxed=True)
+            hand(pq, "  " + why, 9, ink="arrow")
         for k, o in enumerate(opts):
             po = cellfmt(t.cell(1, 1 + k), pal, line=False, top=10, bottom=50)
             _run(po, f"{LETTERS[k]}   ", 10.5, bold=True, color=pal.accent)
@@ -444,11 +444,15 @@ def build_quiz(out, ver, key):
         fix_widths(t, [NUM_W, 1.15, 5.9])
         num = t.cell(0, 0).merge(t.cell(2, 0)); numcell(num, pal, n)
         tc = t.cell(0, 1).merge(t.cell(2, 1))
-        tc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+        tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         cell_margins(tc, top=0, bottom=0, left=0, right=0)
-        tile(tc, pal, z, 1.0)
-        # writing line 0.40 + gap 0.08 + diagram box 0.52 = the 1.0 in tile
-        no_split(t.rows[0], 0.40); no_split(t.rows[1], 0.08); no_split(t.rows[2], 0.52)
+        tile(tc, pal, z, 0.96)
+        # writing line 0.38 + gap 0.06 + diagram box 0.56 = 1.0 in, the 0.96 in tile plus the
+        # picture's line slack. Exact heights, so the key's answers cannot grow the rows and
+        # the tile lines up with the line and the box on both copies.
+        for row, h in zip(t.rows, (0.38, 0.06, 0.56)):
+            no_split(row, h)
+            row._tr.trPr.find(qn("w:trHeight")).set(qn("w:hRule"), "exact")
         gc = t.cell(1, 2); cell_margins(gc, top=0, bottom=0, left=0, right=0)
         gp = gc.paragraphs[0]; gp.paragraph_format.space_after = Pt(0)
         _run(gp, "", 2)
@@ -468,7 +472,7 @@ def build_quiz(out, ver, key):
         _run(pb, "Orbital diagram", 8.5, color=pal.label)
         if key:
             key_strip(bc, pal, z, lab_w=0.22, box_w=0.19)
-        gap(doc, 8)
+        gap(doc, 5)
         n += 1
 
     # ---- Part 3: shorthand ----
@@ -492,8 +496,6 @@ def build_quiz(out, ver, key):
         n += 1
 
     # ---- Part 4: ions ----
-    if key:
-        page_break_before(doc)     # the key's filled diagrams push Part 4 over; keep it whole
     part_bar(doc, pal, "Part 4   Ions: the charge, and cation or anion", pts_ion)
     t = doc.add_table(rows=1, cols=4)
     fix_widths(t, [1.875] * 4)
@@ -510,7 +512,7 @@ def build_quiz(out, ver, key):
         _run(pc, "Charge  ", 9.5, color=pal.ink)
         ch = ion_charge(z)
         if key:
-            hand(pc, ch, 14, boxed=True)
+            hand(pc, ch, 12, boxed=True)
         else:
             _run(pc, "_________", 10, color=pal.ink)
         pt = cc.add_paragraph(); pt.paragraph_format.space_after = Pt(0)
@@ -522,7 +524,7 @@ def build_quiz(out, ver, key):
             pw = cc.add_paragraph(); pw.paragraph_format.space_after = Pt(0)
             vcount = valence(z)[1]
             hand(pw, f"{vcount} val. e-, " + (f"loses {vcount}" if cat else f"gains {8 - vcount}"),
-                 10, ink="arrow")
+                 9, ink="arrow")
         n += 1
 
     running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  QUIZ {ver}" +
