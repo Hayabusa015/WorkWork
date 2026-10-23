@@ -6,7 +6,7 @@
 Writes, named per standards/NAMING.md (templates/_shull_name.py):
     2.2 Quiz A.docx  /  B  /  C                 student copies
     2.2 Quiz A Key.docx  /  B  /  C             teacher keys, key text in keyInk.pen
-    2.2 Quiz - Grade Sheet.docx                 final answers for all three versions
+    2.2 Quiz Key - Grade Sheet.docx             final answers for all three versions
 
 Every answer comes from vectors_22.py, which solves it in code. Colour is read from
 brand/tokens.json; none is typed here. Every file is one page: the builder converts each with
@@ -288,7 +288,7 @@ def main():
     for L in "ABC":
         p = os.path.join(outdir, document_name("Quiz", ["2.2"], 2, version=L)); student(L, data[L], p); made.append(p)
         p = os.path.join(outdir, document_name("Quiz", ["2.2"], 2, version=L, key=True)); key_doc(L, data[L], p); made.append(p)
-    p = os.path.join(outdir, document_name("Quiz", ["2.2"], 2, descriptor="Grade Sheet")); grade_sheet(data, p); made.append(p)
+    p = os.path.join(outdir, document_name("Quiz", ["2.2"], 2, key=True, descriptor="Grade Sheet")); grade_sheet(data, p); made.append(p)
     bad = 0
     for p in made:
         n = pages(p)
