@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-23
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | | Guided notes follow the slides: every block names its slide | PROPOSED | `governance/proposals/SHULL-CHG-0054-notes-follow-slides.md` |
+
 ## 2026-10-22
 
 Two sessions independently drafted SHULL-CHG-0046 through 0052 in parallel (see each record's
