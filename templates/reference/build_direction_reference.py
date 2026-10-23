@@ -3,13 +3,20 @@
 
     python3 templates/reference/build_direction_reference.py OUTDIR
 
-Rebuilt from Matt's "physics direction reference" sheet in the SHULL Physics identity. Every angle
-and every "standard angle" line is computed from the direction words (theta_from in
-templates/quiz/vectors_22.py), so a diagram cannot disagree with its caption. Colour comes from
-brand/tokens.json; none is typed here. Output name follows standards/NAMING.md.
+Rebuilt from Matt's "physics direction reference" sheet. Every angle and every "standard angle" line
+is computed from the direction words (theta_from in templates/quiz/vectors_22.py), so a diagram
+cannot disagree with its caption. Colour comes from brand/tokens.json; none is typed here. Output
+name follows standards/NAMING.md.
 
-The two columns are told apart by three things at once, so a photocopy still works: colour, a
-solid versus a dashed final arrow, and the words themselves.
+Follows brand/SHULL_DESIGN_SYSTEM.md and matches the Physics notes and quiz headers:
+  - Coloured TYPE is ink or Quantum Gold Deep only. Deep Purple is never type on white (section 3);
+    it appears only as a graphic: the final arrow and a small tag on the "words swapped" column.
+  - Nothing is filled: colour is a thin rule, a small tag, or an arrow (section 8). No solid-fill
+    headline word, no tinted chart.
+  - Nothing below the 8 pt print floor except the running footer (section 4).
+  - Page 2 is a real table, not a card grid (section 11).
+  - The two columns are told apart by the words themselves, an outline round the gold arrow, and the
+    tag, so a photocopy still works (section 3, grayscale survival).
 """
 import json, math, os, sys, html
 
@@ -29,6 +36,7 @@ FONT = T["typography"]["stack"]
 M = T["print"]["margins"]
 AXIS = {"east": 0, "north": 90, "west": 180, "south": 270}
 UP = lambda w: w.upper()
+CODE = "U02  ·  S02.1 – S02.3"        # the sections this unit-level sheet serves
 
 
 # ---- svg helpers (1 user unit = 1 pt) ----------------------------------------------------
@@ -38,20 +46,25 @@ def pol(cx, cy, r, deg):
     return cx + r * math.cos(a), cy - r * math.sin(a)
 
 
-def line(x1, y1, x2, y2, color, w=1.0, dash=None, cap="round"):
-    d = f' stroke-dasharray="{dash}"' if dash else ""
+def line(x1, y1, x2, y2, color, w=1.0, cap="round", op=1.0):
+    o = f' stroke-opacity="{op}"' if op < 1 else ""
     return (f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="{color}" '
-            f'stroke-width="{w}" stroke-linecap="{cap}"{d}/>')
+            f'stroke-width="{w}" stroke-linecap="{cap}"{o}/>')
 
 
-def arrow(cx, cy, r, deg, color, w=1.6, head=6.5, dash=None):
-    """A shaft from (cx, cy) to radius r at `deg`, with a drawn head (no SVG markers)."""
+def arrow(cx, cy, r, deg, color, w=1.6, head=6.5, outline=None):
+    """A shaft from (cx, cy) to radius r at `deg`, with a drawn head (no SVG markers).
+    `outline` puts a thin dark edge round it, so a pale arrow still shows when photocopied."""
     x2, y2 = pol(cx, cy, r, deg)
     bx, by = pol(cx, cy, r - head, deg)
-    out = [line(cx, cy, bx, by, color, w, dash)]
     px, py = -math.sin(math.radians(deg)), -math.cos(math.radians(deg))      # perpendicular
     hw = head * 0.42
     pts = f"{x2:.2f},{y2:.2f} {bx + px * hw:.2f},{by + py * hw:.2f} {bx - px * hw:.2f},{by - py * hw:.2f}"
+    out = []
+    if outline:
+        out.append(line(cx, cy, bx, by, outline, w + 1.8))
+        out.append(f'<polygon points="{pts}" fill="{outline}" stroke="{outline}" stroke-width="1.8" stroke-linejoin="round"/>')
+    out.append(line(cx, cy, bx, by, color, w))
     out.append(f'<polygon points="{pts}" fill="{color}"/>')
     return "".join(out)
 
@@ -83,15 +96,11 @@ def arc(cx, cy, r, d0, d1, color, w=1.2, head=True):
 def circle_svg():
     W, H, cx, cy, R = 452, 358, 226, 180, 140
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}pt" height="{H}pt">']
-    s.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{GRAPHITE}" stroke-width="1.1"/>')
-    s.append(f'<circle cx="{cx}" cy="{cy}" r="{R * 0.5:.1f}" fill="none" stroke="{HAIR}" stroke-width="0.6"/>')
+    s.append(f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="none" stroke="{GRAPHITE}" stroke-width="1.2"/>')
     for d in range(0, 360, 15):
         major = d % 45 == 0
         x2, y2 = pol(cx, cy, R, d)
-        s.append(line(cx, cy, x2, y2, GRAPHITE if major else HAIR, 0.55 if major else 0.55))
-        ox, oy = pol(cx, cy, R + 4, d)
-        ix, iy = pol(cx, cy, R - 6, d)
-        s.append(line(ix, iy, ox, oy, GRAPHITE, 0.9))
+        s.append(line(cx, cy, x2, y2, GRAPHITE, 0.8, op=0.55 if major else 0.32))
         if d % 90:
             lx, ly = pol(cx, cy, R + 17, d)
             s.append(text(lx, ly + 2.8, f"{d}°", 8, LABEL if not major else INK, 700 if major else 400))
@@ -106,8 +115,9 @@ def circle_svg():
     s.append(text(cx - R - 28, cy + 8, "−x", 9.5, INK, 700, "end", 0.6))
     s.append(text(cx + R + 28, cy - 4, "EAST", 9.5, INK, 700, "start", 0.6))
     s.append(text(cx + R + 28, cy + 8, "+x", 9.5, INK, 700, "start", 0.6))
-    s.append(arc(cx, cy, 52, 6, 74, PURPLE, 1.6))
-    s.append(text(pol(cx, cy, 70, 40)[0], pol(cx, cy, 70, 40)[1] + 3, "CCW", 9, PURPLE, 700, "start", 0.8))
+    s.append(arc(cx, cy, 52, 6, 74, INK, 1.4))
+    cxl, cyl = pol(cx, cy, 70, 40)
+    s.append(text(cxl, cyl + 3, "CCW", 8.5, INK, 700, "start", 0.8))
     s.append("</svg>")
     return "".join(s)
 
@@ -121,22 +131,22 @@ def standard_formula(a, first, second):
     return f"{s0 if s0 else 360}° − {a}° = {th:.0f}°", th
 
 
-def mini_svg(first, second, a, color, dashed, size=106, big=False):
-    """One compass diagram: grey starting axis, coloured final arrow, the turn between them."""
+def mini_svg(first, second, a, color, outlined, size=106):
+    """One compass diagram: dark starting axis, coloured final arrow, the turn between them."""
     c = size / 2
     L = size / 2 - 17
     th = theta_from(a, first, second)
     s0 = AXIS[second]
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width="{size}pt" height="{size}pt">']
     for d in (0, 90, 180, 270):
-        s.append(line(*pol(c, c, 14, d), *pol(c, c, L + 2, d), HAIR, 0.8, cap="butt"))
+        s.append(line(*pol(c, c, 14, d), *pol(c, c, L + 2, d), GRAPHITE, 0.8, cap="butt", op=0.4))
     for d, lab in ((90, "N"), (270, "S"), (0, "E"), (180, "W")):
         x, y = pol(c, c, L + 11, d)
         s.append(text(x, y + 2.9, lab, 8.5, LABEL, 700))
     s.append(arrow(c, c, L, s0, GRAPHITE, 1.5, 6.5))
-    s.append(arrow(c, c, L, th, color, 2.4, 8, dash="5 2.6" if dashed else None))
+    s.append(arrow(c, c, L, th, color, 2.4, 8, outline=GRAPHITE if outlined else None))
     ar = L * 0.58
-    s.append(arc(c, c, ar, s0, th, color, 1.3))
+    s.append(arc(c, c, ar, s0, th, INK, 1.2))
     # A 30 degree wedge is too narrow to hold its own label, so the label sits just outside it,
     # beside the starting axis, on the side away from the turn.
     sd = 1 if (th - s0 + 180) % 360 - 180 > 0 else -1
@@ -152,22 +162,16 @@ ORDER = [(("north", "east"), ("east", "north")), (("north", "west"), ("west", "n
          (("south", "west"), ("west", "south")), (("east", "south"), ("south", "east"))]
 
 
-def card(first, second, right):
-    color = PURPLE if right else GOLD
-    title_color = PURPLE if right else GOLD_DEEP
-    f, th = standard_formula(30, first, second)
+def cell(first, second, swapped):
+    color = PURPLE if swapped else GOLD
+    f, _ = standard_formula(30, first, second)
     return f"""
-    <div class="card">
-      <div class="ctitle" style="color:{title_color}">30° {first} of {second}</div>
-      <div class="cbody">
-        <div class="cdiag">{mini_svg(first, second, 30, color, right)}</div>
-        <div class="csteps">
-          <div class="s1">Start {UP(second)}.</div>
-          <div>Turn 30° toward<br><b>{UP(first)}</b>.</div>
-        </div>
-      </div>
-      <div class="cform"><span class="bar" style="background:{color}"></span>Standard angle: <b>{f}</b></div>
-    </div>"""
+      <div class="ctitle"><span class="tag" style="background:{color}"></span>30° {first} of {second}</div>
+      <table class="inner"><tr>
+        <td class="cdiag">{mini_svg(first, second, 30, color, not swapped)}</td>
+        <td class="csteps"><div class="s1">Start {UP(second)}.</div>
+          <div>Turn 30° toward<br><b>{UP(first)}</b>.</div></td></tr></table>
+      <div class="cform">Standard angle: <b>{f}</b></div>"""
 
 
 def build_html():
@@ -178,90 +182,92 @@ def build_html():
     * {{ box-sizing: border-box; }}
     html {{ font-family: {FONT}; color: {INK}; font-size: 10.5pt; }}
     body {{ margin: 0; }}
-    .page {{ page-break-after: always; padding: 0 .12in; }}
+    .page {{ page-break-after: always; }}
     .page:last-child {{ page-break-after: auto; }}
-    .head {{ display: flex; justify-content: space-between; align-items: flex-start;
-             border-bottom: 3.2pt solid {GOLD}; padding-bottom: 7pt; margin-bottom: 9pt; }}
-    .head > div:first-child {{ flex: 1; }}
-    .kicker {{ font-size: 7.5pt; font-weight: 700; letter-spacing: .14em; color: {GOLD_DEEP}; text-transform: uppercase; }}
-    h1 {{ white-space: nowrap; font-size: 25pt; line-height: 1.05; margin: 3pt 0 3pt; font-weight: 800; color: {INK}; letter-spacing: -.01em; }}
-    h1 .acc {{ box-shadow: inset 0 -6pt 0 {GOLD}; }}
+    table {{ border-collapse: collapse; }}
+    td {{ padding: 0; vertical-align: top; }}
+    .head {{ width: 100%; border-bottom: 2.25pt solid {GOLD}; margin-bottom: 8pt; }}
+    .head td {{ padding-bottom: 6pt; }}
+    .kicker {{ font-size: 8pt; font-weight: 700; letter-spacing: .14em; color: {GOLD_DEEP}; text-transform: uppercase; }}
+    h1 {{ font-size: 15pt; line-height: 1.1; margin: 3pt 0 2pt; font-weight: 700; color: {INK}; text-transform: uppercase; letter-spacing: .01em; }}
+    .doc {{ font-size: 8pt; font-weight: 700; letter-spacing: .14em; color: {LABEL}; text-transform: uppercase; }}
+    .code {{ text-align: right; font-size: 8.5pt; font-weight: 700; letter-spacing: .14em; color: {GOLD_DEEP}; white-space: nowrap; padding-top: 1pt; }}
     .sub {{ font-size: 10.5pt; color: {GRAPHITE}; margin: 0; }}
-    .chip {{ border: .9pt solid {INK}; border-radius: 8pt; padding: 3pt 9pt; font-size: 8pt; font-weight: 700;
-            letter-spacing: .12em; color: {INK}; margin-top: 2pt; white-space: nowrap; }}
-    .eyebrow {{ font-size: 8pt; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: {GOLD_DEEP}; margin: 0 0 2pt; }}
-    .rule {{ border-top: .75pt solid {HAIR}; }}
-    .lead {{ font-size: 10pt; margin: 0 0 4pt; color: {GRAPHITE}; }}
-    .circle {{ text-align: center; margin: 0; }}
-    h2 {{ font-size: 13pt; letter-spacing: .01em; margin: 0 0 1pt; font-weight: 800; text-transform: uppercase; }}
-    .read {{ border-left: 3.2pt solid {GOLD}; padding: 1pt 0 1pt 9pt; margin: 6pt 0 4pt; }}
-    .read p {{ margin: 0; font-size: 10pt; color: {GRAPHITE}; }}
-    .two {{ display: flex; }}
-    .two > div {{ flex: 1; text-align: center; padding: 0 6pt; }}
-    .two > div + div {{ border-left: .75pt solid {HAIR}; }}
-    .big {{ font-size: 14.5pt; font-weight: 800; margin: 2pt 0 0; }}
+    .eyebrow {{ font-size: 8pt; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: {GOLD_DEEP}; margin: 7pt 0 2pt; }}
+    .lead {{ font-size: 10pt; margin: 0 0 3pt; color: {GRAPHITE}; }}
+    .circle {{ text-align: center; }}
+    .rule {{ border-top: .75pt solid {HAIR}; margin-top: 2pt; }}
+    .callout {{ border-left: 2.25pt solid {GOLD}; padding: 1pt 0 1pt 9pt; margin: 7pt 0 5pt; }}
+    .callout .h {{ font-weight: 700; font-size: 11.5pt; margin: 0 0 1pt; color: {INK}; }}
+    .callout p {{ margin: 0; font-size: 10pt; color: {GRAPHITE}; }}
+    .pair {{ width: 100%; }}
+    .pair td {{ width: 50%; text-align: center; padding: 0 6pt; }}
+    .pair td + td {{ border-left: .75pt solid {HAIR}; }}
+    .big {{ font-size: 13pt; font-weight: 700; margin: 2pt 0 0; color: {INK}; }}
     .cap {{ font-size: 9.5pt; margin: 0; }}
-    .cap b {{ font-weight: 800; }}
-    .callout {{ text-align: center; font-weight: 800; font-size: 10.5pt; margin: 7pt 0 1pt; }}
+    .cap b {{ font-weight: 700; }}
+    .tag {{ display: inline-block; width: 2.25pt; height: 11pt; vertical-align: -1.5pt; margin-right: 6pt; }}
+    .center {{ text-align: center; font-weight: 700; font-size: 10.5pt; margin: 6pt 0 1pt; }}
     .note {{ text-align: center; font-size: 9pt; color: {GRAPHITE}; margin: 0; }}
-    .conv {{ border-top: .75pt solid {HAIR}; margin-top: 8pt; padding-top: 5pt; font-size: 8.5pt; color: {GRAPHITE}; }}
-    .key {{ font-size: 8.5pt; color: {GRAPHITE}; margin: 3pt 0 4pt; }}
+    .conv {{ border-top: .75pt solid {HAIR}; margin-top: 7pt; padding-top: 4pt; font-size: 8.5pt; color: {GRAPHITE}; }}
+    .key {{ font-size: 8.5pt; color: {GRAPHITE}; margin: 3pt 0 5pt; }}
     .key svg {{ vertical-align: middle; margin: 0 4pt 0 10pt; }}
-    .grid {{ display: grid; grid-template-columns: 1fr 1fr; column-gap: 20pt; }}
-    .card {{ padding: 4pt 0 3pt; border-top: .75pt solid {HAIR}; }}
-    .ctitle {{ font-size: 14.5pt; font-weight: 800; margin-bottom: 1pt; }}
-    .cbody {{ display: flex; align-items: center; }}
+    .grid {{ width: 100%; table-layout: fixed; }}
+    .grid > tbody > tr > td {{ width: 50%; padding: 5pt 9pt 3pt 0; border-top: .75pt solid {HAIR}; }}
+    .grid > tbody > tr > td + td {{ padding: 5pt 0 3pt 14pt; border-left: .75pt solid {HAIR}; }}
+    .ctitle {{ font-size: 13pt; font-weight: 700; margin-bottom: 1pt; color: {INK}; }}
+    .inner td {{ vertical-align: middle; }}
     .cdiag {{ width: 106pt; height: 106pt; }}
     .csteps {{ padding-left: 8pt; font-size: 10.5pt; line-height: 1.45; }}
-    .s1 {{ font-weight: 800; letter-spacing: .02em; }}
+    .s1 {{ font-weight: 700; letter-spacing: .02em; }}
     .cform {{ font-size: 10pt; }}
-    .bar {{ display: inline-block; width: 3.2pt; height: 10pt; vertical-align: -1.5pt; margin-right: 5pt; }}
-    .why {{ border-left: 3.2pt solid {GOLD}; padding: 1pt 0 1pt 9pt; margin-top: 8pt; }}
-    .why .h {{ font-weight: 800; font-size: 10.5pt; margin: 0 0 1pt; }}
+    .why {{ border-left: 2.25pt solid {GOLD}; padding: 1pt 0 1pt 9pt; margin-top: 8pt; }}
+    .why .h {{ font-weight: 700; font-size: 10.5pt; margin: 0 0 1pt; color: {INK}; }}
     .why p {{ margin: 0; font-size: 9.5pt; color: {GRAPHITE}; }}
-    .why p.h {{ color: {INK}; }}
     """
     head = lambda title: f"""
-      <div class="head"><div>
-        <div class="kicker">SHULL SCIENCE &nbsp;/&nbsp; PHYSICS REFERENCE</div>
-        <h1>{title}</h1></div><div class="chip">U02</div></div>"""
+      <table class="head"><tr><td>
+        <div class="kicker">SHULL SCIENCE &nbsp;·&nbsp; JAMES A. GARFIELD LOCAL SCHOOLS</div>
+        <h1>{title}</h1>
+        <div class="doc">Physics reference</div></td>
+        <td class="code">{CODE}</td></tr></table>"""
     pa = standard_formula(30, "west", "north")[0]
     pb = standard_formula(30, "north", "west")[0]
     p1 = f"""
     <div class="page">
-      {head('Angles &amp; <span class="acc">directions</span>')}
+      {head('Angles &amp; directions')}
       <p class="sub">A full turn is 360°. A quarter turn is 90°.</p>
-      <div class="eyebrow" style="margin-top:7pt">Standard physics angles</div>
+      <div class="eyebrow">Standard physics angles</div>
       <p class="lead">Start at EAST (0°). Measure counterclockwise.</p>
       <div class="circle">{circle_svg()}</div>
-      <div class="rule" style="margin-top:2pt"></div>
-      <div class="read"><h2>Read the direction after “of” first.</h2>
+      <div class="rule"></div>
+      <div class="callout"><p class="h">Read the direction after “of” first.</p>
         <p>That is your starting axis. Turn toward the direction before “of.”</p></div>
-      <div class="two">
-        <div><div class="big" style="color:{GOLD_DEEP}">30° west of north</div>
-          {mini_svg('west', 'north', 30, GOLD, False, size=128, big=True)}
+      <table class="pair"><tr>
+        <td><div class="big"><span class="tag" style="background:{GOLD}"></span>30° west of north</div>
+          {mini_svg('west', 'north', 30, GOLD, True, size=128)}
           <p class="cap">Start NORTH. Turn 30° toward WEST.</p>
-          <p class="cap"><b>Standard angle: {pa}</b></p></div>
-        <div><div class="big" style="color:{PURPLE}">30° north of west</div>
-          {mini_svg('north', 'west', 30, PURPLE, True, size=128, big=True)}
+          <p class="cap"><b>Standard angle: {pa}</b></p></td>
+        <td><div class="big"><span class="tag" style="background:{PURPLE}"></span>30° north of west</div>
+          {mini_svg('north', 'west', 30, PURPLE, False, size=128)}
           <p class="cap">Start WEST. Turn 30° toward NORTH.</p>
-          <p class="cap"><b>Standard angle: {pb}</b></p></div>
-      </div>
-      <div class="callout">Same quadrant. Different directions. The starting axis matters!</div>
+          <p class="cap"><b>Standard angle: {pb}</b></p></td></tr></table>
+      <div class="center">Same quadrant. Different directions. The starting axis matters!</div>
       <p class="note">Same direction, two names: 30° west of north = 60° north of west.</p>
       <div class="conv">Convention note: compass bearings start at north and increase clockwise.</div>
     </div>"""
-    rows = "".join(card(*l, right=False) + card(*r, right=True) for l, r in ORDER)
-    sw = lambda c, w, dash="": (f'<svg width="22pt" height="6pt" viewBox="0 0 22 6"><line x1="0" y1="3" x2="22" y2="3" '
-                                f'stroke="{c}" stroke-width="{w}"{dash}/></svg>')
+    rows = "".join(f"<tr><td>{cell(*l, False)}</td><td>{cell(*r, True)}</td></tr>" for l, r in ORDER)
+    sw = lambda c, w, ol=None: (f'<svg width="22pt" height="7pt" viewBox="0 0 22 7">'
+                                + (f'<line x1="0" y1="3.5" x2="22" y2="3.5" stroke="{ol}" stroke-width="{w + 1.8}" stroke-linecap="round"/>' if ol else "")
+                                + f'<line x1="0" y1="3.5" x2="22" y2="3.5" stroke="{c}" stroke-width="{w}" stroke-linecap="round"/></svg>')
     p2 = f"""
     <div class="page">
-      {head('Directions in <span class="acc">every</span> quadrant')}
+      {head('Directions in every quadrant')}
       <p class="sub">Start with the direction AFTER “of.” Then turn toward the other direction.</p>
-      <p class="key">{sw(GRAPHITE, 1.6)}Grey arrow = starting axis
-        {sw(GOLD, 2.4)}Solid = final direction
-        {sw(PURPLE, 2.4, ' stroke-dasharray="5 2.6"')}Dashed = the same words swapped</p>
-      <div class="grid">{rows}</div>
+      <p class="key">{sw(GRAPHITE, 1.6)}Starting axis
+        {sw(GOLD, 2.4, GRAPHITE)}Final direction
+        {sw(PURPLE, 2.4)}Final direction, the same words swapped</p>
+      <table class="grid"><tbody>{rows}</tbody></table>
       <div class="why"><p class="h">Why use 30°? Swapping the words changes the direction.</p>
         <p>At 45°, the two names match: 45° north of east = 45° east of north.</p>
         <p>All standard angles here start at east and increase counterclockwise. A negative angle runs clockwise from east: −30° = 330°.</p></div>
@@ -275,8 +281,7 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     pdf = os.path.join(outdir, document_name("Reference", ["2.1", "2.2", "2.3"], 2, ext="pdf"))
     from weasyprint import HTML
-    html_str = build_html()
-    HTML(string=html_str, base_url=outdir).write_pdf(pdf)
+    HTML(string=build_html(), base_url=outdir).write_pdf(pdf)
     print("wrote", pdf)
     return 0
 
