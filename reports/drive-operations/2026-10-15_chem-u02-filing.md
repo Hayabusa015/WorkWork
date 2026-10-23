@@ -125,3 +125,20 @@ Upload Inbox empty afterwards. Section 02.3/Homework (1DIJnraCcfyNolKZEzAwgnWQA0
 trashing it needs user approval and the guard hook blocks trash, so it stays for the user to remove.
 Still open from 2026-10-19: valence Version 1 (3 files) and Version 2 (bad periodic table, 3 files) remain
 at the Unit 02 root; Battleship original (1pYgqhT7CHGncbDSApwy-ZijMtGierhxH) still has the bad table.
+
+## 2026-10-23: one-page quiz keys A-C (user approved: "upload them, I'll trash the old ones")
+
+Logged before action. Rebuilt keys (commit 9e4cff9) uploaded as new files via gws (drive.file) to the
+Upload Inbox, then `update_file` to Unit 02 / Quiz (1WFRGEoIjT6N49lzQBDYHCOw-scjAdRZM). Prior parent:
+Upload Inbox. Nothing overwritten. The user trashes the old two-page keys (1GNLxcY9JkorNuylboHoHmGO3XzxkQc2l,
+18qqcuQxnfdJkV5j-IzKYokze5QCEfkGL, 15HJ3gCUN96NeMAJy9Ln6sVaoivO8oBew); at upload time the connector
+still listed them in the Quiz folder.
+
+| Operation | Final name | Status |
+|---|---|---|
+| Upload then move | Unit 2 Quiz A Key.docx | filed, ID 18i1BLi78GEZoYWTHnwbvRVByV3vXy9z6, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz B Key.docx | filed, ID 1gxkcsCkfI8IcWiwoOHGlEg1VRWKW9GNK, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz C Key.docx | filed, ID 1Ea3NWuUbz8rsA0aAjy7zbzF7PLAjaIF6, verified by parentId lookup |
+
+After the moves, a parentId lookup lists only these three keys in Quiz (the old ones no longer
+appear), and the Upload Inbox is empty.
