@@ -25,7 +25,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "templates"))
 sys.path.insert(0, os.path.join(REPO, "templates", "quiz"))
 from _shull_name import document_name          # noqa: E402
-from vectors_22 import theta_from                # noqa: E402
+from vectors_22 import theta_from, standard_formula   # noqa: E402
 
 T = json.load(open(os.path.join(REPO, "brand", "tokens.json")))
 G, PH = T["ground"], T["courses"]["physics"]
@@ -120,15 +120,6 @@ def circle_svg():
     s.append(text(cxl, cyl + 3, "CCW", 8.5, INK, 700, "start", 0.8))
     s.append("</svg>")
     return "".join(s)
-
-
-def standard_formula(a, first, second):
-    th = theta_from(a, first, second)
-    s0 = AXIS[second]
-    delta = (th - s0 + 180) % 360 - 180
-    if delta > 0:
-        return f"{s0}° + {a}° = {th:.0f}°", th
-    return f"{s0 if s0 else 360}° − {a}° = {th:.0f}°", th
 
 
 def mini_svg(first, second, a, color, outlined, size=106):

@@ -28,6 +28,20 @@ def theta_from(a, first, second):
         return (90 - a if first == "east" else 90 + a) % 360
     return (270 + a if first == "east" else 270 - a) % 360
 
+AXIS = {"east": 0, "north": 90, "west": 180, "south": 270}
+
+
+def standard_formula(a, first, second):
+    """The turn written as arithmetic from the starting axis: 'a degrees FIRST of SECOND' ->
+    ('180° − 30° = 150°', 150). Used by the direction reference and the worked keys."""
+    th = theta_from(a, first, second)
+    s0 = AXIS[second]
+    delta = (th - s0 + 180) % 360 - 180
+    if delta > 0:
+        return f"{s0}° + {a}° = {th:.0f}°", th
+    return f"{s0 if s0 else 360}° − {a}° = {th:.0f}°", th
+
+
 def compass(theta):
     """(a, 'north', 'west') style, measured from the nearer horizontal axis."""
     t = theta % 360
