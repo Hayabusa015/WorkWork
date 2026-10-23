@@ -59,7 +59,7 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 | SHULL-CHG-0035 | 2026-10-15 | Drive: system creates no folders; file loose if no match | PARTIAL | `governance/proposals/SHULL-CHG-0035-drive-unit-folders.md` |
 | SHULL-CHG-0036 | 2026-10-15 | Chemistry 1.4 Isotopes folded into 1.3; code retired | CONFIRMED | `governance/proposals/SHULL-CHG-0036-chem-s1.4-fold.md` |
 | SHULL-CHG-0024 | 2026-10-15 | Short section-led filenames; no course prefix | PARTIAL | `governance/proposals/SHULL-CHG-0024-short-filenames.md` |
-| SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | PARTIAL | `governance/proposals/SHULL-CHG-0041-short-topics.md` |
+| SHULL-CHG-0041 | 2026-10-15 | Short topics: 20-character short titles from the course decisions file | CONFIRMED | `governance/proposals/SHULL-CHG-0041-short-topics.md` |
 | SHULL-CHG-0028 | 2026-10-15 | reconcile-session-files skill: list session documents not on Drive, file after approval | CONFIRMED | `governance/proposals/SHULL-CHG-0028-reconcile-session-files.md` |
 | SHULL-CHG-0027 | 2026-10-15 | Filing gate: file to Drive only after user approval | CONFIRMED | `governance/proposals/SHULL-CHG-0027-filing-gate.md` |
 | SHULL-CHG-0026 | 2026-10-15 | gws uploads built files to an Upload Inbox; connector files them | CONFIRMED | `governance/proposals/SHULL-CHG-0026-gws-upload-inbox.md` |

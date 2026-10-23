@@ -30,7 +30,7 @@ Then open the environment settings (gear next to **Onboarding**). Keep the Name 
 
 ## Decisions Claude is waiting on
 
-- [ ] **Approve the second Drive rename** (short topics, SHULL-CHG-0041): `reports/drive-operations/2026-10-15_rename-plan-2.md`. 51 files; longest name 81 to 55 characters.
+- [x] **DONE 2026-10-15, 51/51 renamed.** Second Drive rename (short topics, SHULL-CHG-0041): `reports/drive-operations/2026-10-15_rename-plan-2.md`. 51 files; longest name 81 to 55 characters.
 - [ ] `SHULL_PHYS_Practice_Set_U01_S1.1.docx` would get the same new name as another file in its folder. Duplicate to trash, or a different version?
 - [ ] The group D files (no unit or section code): Element Builder, Atomic Theory Jigsaw, Guided Notes variants, Lab Equipment, Math Skills Pretest and others. What unit and section, or leave alone? The list is in `reports/drive-operations/2026-10-15_rename-plan.md`, section D.
 - [ ] The three duplicates in the `pdf` staging folder (Geologic Timeline 4 Pages Cenozoic, Cutouts 38 Events, Time Reference Guide): trash them?
