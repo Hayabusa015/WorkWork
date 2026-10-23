@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0054 | | Guided notes follow the slides: every block names its slide | PROPOSED | `governance/proposals/SHULL-CHG-0054-notes-follow-slides.md` |
+| SHULL-CHG-0054 | 2026-10-23 | Guided notes follow the slides: every block names its slide | PARTIAL | `governance/proposals/SHULL-CHG-0054-notes-follow-slides.md` |
 
 ## 2026-10-22
 

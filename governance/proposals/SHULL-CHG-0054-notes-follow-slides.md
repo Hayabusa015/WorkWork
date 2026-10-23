@@ -14,8 +14,8 @@
 | **Affected Courses** | All three: Chemistry, Physics and Geology (the rules are in shared templates). Chemistry U1 is rebuilt now. Existing Physics and Geology specs have no `"deck"` field and build unchanged. |
 | **Risk** | Low-medium. Existing specs are unaffected unless they opt in with `"deck"` (notes) or `"notesPacket"` (slides). The slide template's `MUST WRITE` label became a placeholder (`mwlabel`) that `build_deck.js` always fills, so every deck build now passes through new code. |
 | **Recommendation** | Approve as written. The user has already seen and accepted the rendered result of rules 1-4. |
-| **Decision** | (blank) |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-10-23**, in the main session, after seeing the rendered mockup of rules 1–4 (Chem U1 S1.3, slides 11–14 and the two notes pages). Verbatim: *"Yeah 1-4 looks correct now finish writing the rest."* Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | (blank) |
 | **Verified** | (blank) |
 
