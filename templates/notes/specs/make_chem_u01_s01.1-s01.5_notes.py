@@ -3,16 +3,26 @@
     python3 templates/notes/specs/make_chem_u01_s01.1-s01.5_notes.py
 
 One source, so the key is the student structure with answers filled and the two cannot
-drift. Edit this file, not the JSON it writes. Wording follows the U1 deck
-(the Chemistry Unit 1 slide deck) and the page grouping Matthew approved.
+drift. Edit this file, not the JSON it writes.
+
+Written from the deck, slide by slide (SHULL-CHG-0054): "Unit 1 - Matter and Atomic
+Theory Notes.pptx", 22 slides, in Drive under Unit 01 / Presentations. Every block's
+title is its slide's headline, word for word; `slides` names the slide(s); blocks follow
+slide order; and a fill-in is the slide's own sentence with its key words blanked.
+The must-write lines are the slide's lime blocks. Rebuilt 2026-10-23.
 """
-import copy, json, os
+import copy, json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STEM = "chem_u01_s01.1-s01.5_notes"
 
-def P(prompt, answer):            # a prompt with a writing line; `answer` is the key's
-    return {"prompt": prompt, "answer": answer}
+def F(sentence):
+    """A slide sentence with its key words in {braces}. The student copy gets a blank
+    sized to the word; the key gets the finished sentence."""
+    blank = lambda m: "_" * max(6, len(m.group(1)) + 3)
+    return {"prompt": re.sub(r"\{([^}]*)\}", blank, sentence),
+            "answer": re.sub(r"\{([^}]*)\}", r"\1", sentence),
+            "lines": 0, "fill": True}
 
 def prob(given, find, answer_blank, answer_key, solution):
     return {"given": given, "find": find, "answer": answer_blank,
@@ -28,6 +38,7 @@ spec = {
   "course": "chemistry",
   "unit": 1,
   "key": False,
+  "deck": "Unit 1 - Matter and Atomic Theory Notes.pptx",
   "cover": {
     "image": {"path": "../assets/chem_u01_cover_atom.png", "widthIn": 1.95},
     "sections": [
@@ -59,7 +70,7 @@ spec = {
       {"code": "1.5", "terms": ["Isotope", "abundance", "weighted average",
                                 "average atomic mass"]}
     ],
-    "howToUse": "Quiz yourself with the left-column questions. Gray side rules mark must-write notes (lime blocks in the slides). Show your reasoning and units in each work box."
+    "howToUse": "Every block is titled with its slide's headline and names the slide it comes from. A lime block on the slide marked IN YOUR NOTES tells you which block to fill. Bold lines with a gray rule are those lime blocks: copy them word for word. Show your reasoning and units in each work box."
   },
   "sectionsContent": [
     {
@@ -67,52 +78,49 @@ spec = {
       "title": "Matter & Changes",
       "learningTarget": "I can sort any sample of matter as an element, compound, or mixture, and homogeneous or heterogeneous if it is a mixture.",
       "pages": [
-        {"subtitle": "Classify matter as an element, compound, or mixture; then classify mixtures.",
-         "rows": [
-          {"title": "Vocabulary",
-           "cues": ["How do pure substances and mixtures differ?",
-                    "Which term means evenly mixed throughout?"],
-           "notes": [P("DEFINE: matter", "Anything that has mass and takes up space."),
-                     P("DEFINE: pure substance", "One kind of particle throughout; fixed composition."),
-                     P("DEFINE: mixture", "Two or more substances physically combined; composition can vary."),
-                     "*Solution: a homogeneous mixture, evenly mixed and the same throughout."]},
-          {"title": "The matter flowchart",
-           "cues": ["What two questions help classify a sample?",
-                    "Where does the chart split into element vs. compound?"],
+        {"rows": [
+          {"title": "Four Terms You'll Use All Unit", "slides": 4,
+           "cues": ["All four definitions, then examples."],
+           "notes": [F("Matter: anything that has {mass} and takes up {space}."),
+                     F("Pure substance: {one kind} of particle throughout. {Fixed} composition."),
+                     F("Mixture: two or more substances {physically} combined. Composition {can vary}."),
+                     F("Solution: a {homogeneous} mixture, evenly mixed, same throughout.")]},
+          {"title": "The Matter Flowchart", "slides": 5,
+           "cues": ["The full chart, every box.", "An example under each leaf."],
            "notesLabel": "COPY THE FLOWCHART",
            "flowchart": {"root": "MATTER", "branches": ["Pure substance", "Mixture"],
                          "leaves": ["Element", "Compound", "Homogeneous", "Heterogeneous"]},
-           "notes": []},
-          {"title": "Element, compound, molecule",
-           "cues": ["Why is O₂ not a compound?", "What makes something a molecule?"],
-           "notes": [P("DEFINE: element", "One kind of atom only; can’t be broken down chemically."),
-                     P("DEFINE: compound", "Two or more elements chemically bonded in a fixed, repeating ratio."),
-                     P("DEFINE: molecule", "Atoms bonded together; one element (O₂) or a compound (H₂O)."),
-                     "*O₂ is a molecule with one element. A compound needs at least two different elements."]}
+           "notes": [F("Element: {Cu, O₂, He}    Compound: {H₂O, NaCl}"),
+                     F("Homogeneous: {salt water, air}    Heterogeneous: {sand in water}"),
+                     "*Ask two questions: can it be separated physically, and are the parts evenly mixed."]},
+          {"title": "Element, Compound, Molecule", "slides": 6,
+           "cues": ["Three definitions.", "The one students miss."],
+           "notes": [F("Element: one kind of {atom} only. Cannot be broken down {chemically}."),
+                     F("Compound: two or more {elements} bonded in a {fixed ratio}."),
+                     F("Molecule: atoms {bonded together}, element or compound."),
+                     "*O₂ is a molecule but not a compound. Compound needs two different elements."]}
          ]},
-        {"subtitle": "Mixtures, classification practice, and a check of your understanding.",
-         "rows": [
-          {"title": "Homogeneous vs. heterogeneous",
-           "cues": ["Which mixture is a solution?", "What test tells the two apart?"],
-           "notes": [P("DEFINE: homogeneous", "Evenly mixed and the same throughout; also called a solution."),
-                     P("DEFINE: heterogeneous", "The parts stay separate; you can see distinct pieces or layers."),
-                     dict(P("Copy: the quick test for telling them apart",
-                       "If a scoop from the top matches a scoop from the bottom, it’s homogeneous. If not, heterogeneous."), lines=2)]},
-          {"title": "Classify six samples",
-           "cues": ["What’s the first question you ask about any sample?"],
+        {"rows": [
+          {"title": "Evenly Mixed, or Not", "slides": 7,
+           "cues": ["Homogeneous vs. heterogeneous.", "The scoop test."],
+           "notes": [F("Homogeneous = {solution}. Same throughout. You {cannot} see the parts."),
+                     F("Heterogeneous: parts stay {separate}. You {can} see them."),
+                     "*If a scoop from the top matches a scoop from the bottom, it is homogeneous."]},
+          {"title": "Run Six Samples Through the Chart", "slides": [8, 9],
+           "cues": ["Separated physically first, then evenly mixed."],
            "noWorkBox": True,
-           "table": {"headers": ["Sample", "Classification", "Reasoning"],
+           "table": {"headers": ["Sample", "Classification", "Why"],
                      "widths": [0.36, 0.27, 0.37], "rowHeightIn": 0.30,
                      "rows": [["Copper wire", "", ""], ["Salt water", "", ""],
-                              ["Carbon dioxide, CO₂", "", ""], ["Granite", "", ""],
+                              ["Carbon dioxide", "", ""], ["Granite", "", ""],
                               ["Oxygen gas, O₂", "", ""], ["Stainless steel", "", ""]],
                      "_key": [["Copper wire", "Element", "One kind of atom, Cu"],
-                              ["Salt water", "Mixture — homogeneous", "Solution, evenly mixed"],
-                              ["Carbon dioxide, CO₂", "Compound", "C and O bonded in a fixed ratio"],
-                              ["Granite", "Mixture — heterogeneous", "Grains visible to the eye"],
-                              ["Oxygen gas, O₂", "Element", "Molecule of one element"],
-                              ["Stainless steel", "Mixture — homogeneous", "Alloy of metals, evenly mixed"]]},
-           "notes": []},
+                              ["Salt water", "Solution", "Homogeneous mixture"],
+                              ["Carbon dioxide", "Compound", "C and O bonded, CO₂"],
+                              ["Granite", "Heterogeneous", "Grains you can see"],
+                              ["Oxygen gas, O₂", "Element", "Molecule, one element"],
+                              ["Stainless steel", "Solution", "Alloy, evenly mixed"]]},
+           "notes": ["*O₂ is an element, not a compound. Steel is a solution too."]},
           {"kind": "recall", "title": "Section summary", "cues": RECALL_CUES, "lines": 3,
            "prompt": "Explain how to decide whether a new sample is an element, compound, or mixture — and whether a mixture is homogeneous or heterogeneous.",
            "answer": "If it can be separated physically, it’s a mixture: homogeneous if evenly mixed, heterogeneous if not. If not, it’s a pure substance: one kind of atom is an element; two or more bonded elements is a compound.",
@@ -127,54 +135,48 @@ spec = {
       "title": "Atomic Structure",
       "learningTarget": "I can find the protons, neutrons, and electrons in an atom or ion from its symbol, mass number, and atomic number.",
       "pages": [
-        {"subtitle": "Find protons, neutrons, and electrons from atomic number, mass number, and charge.",
-         "rows": [
-          {"title": "Subatomic particles",
-           "cues": ["Which particles live in the nucleus?", "Which particle has almost no mass?"],
+        {"rows": [
+          {"title": "Three Particles, Two Regions", "slides": 11,
+           "cues": ["The particle table.", "The ID-number particle."],
            "table": {"headers": ["Particle", "Charge", "Mass (amu)", "Location"],
                      "widths": [0.23, 0.18, 0.25, 0.34], "rowHeightIn": 0.38,
                      "rows": [["Proton", "", "", ""], ["Neutron", "", "", ""],
                               ["Electron", "", "", ""]],
                      "_key": [["Proton", "+1", "1", "Nucleus"], ["Neutron", "0", "1", "Nucleus"],
                               ["Electron", "−1", "about 0", "Electron cloud"]]},
-           "notes": ["*Protons determine the element. Forming an ion changes electrons, not protons."]},
-          {"title": "Atomic & mass numbers",
-           "cues": ["How do you find neutrons from A and Z?", "When does electrons ≠ Z?"],
-           "notes": [P("Fill in: protons =", "Z"),
-                     P("Fill in: neutrons =", "A − Z"),
-                     P("Fill in: electrons (neutral atom) =", "Z"),
-                     P("Fill in: electrons (ion) =", "Z, adjusted for charge (a 2+ ion has two fewer)")]},
-          {"kind": "example", "title": "Neutral iron-56",
-           "cues": ["What do you read straight off the periodic table?"],
+           "notes": ["*Protons are the ID number. Change the protons, change the element. Only electrons come and go."]},
+          {"title": "Two Numbers Tell You Everything", "slides": 12,
+           "cues": ["The three particle counts.", "Mass number A, atomic number Z."],
+           "notes": [F("protons = {Z}   (straight off the periodic table)"),
+                     F("neutrons = {A − Z}   (mass number minus atomic number)"),
+                     F("electrons = {Z}   (neutral atom; adjust for an ion's charge)"),
+                     "*Neutrons are never listed. You always subtract: A − Z."]}
+         ]},
+        {"rows": [
+          {"kind": "example", "title": "Find the Protons, Neutrons, and Electrons",
+           "slides": [13, 14], "notesLabel": "PART A · NEUTRAL ATOM",
+           "cues": ["Write the subtraction, not just the answer."],
            "problem": prob("Iron-56; A = 56; Z = 26; neutral atom.", FIND_PNE, PARTICLES,
                            "Protons = 26   Neutrons = 30   Electrons = 26",
                            ["protons = Z = 26",
-                            "neutrons = A − Z = 56 − 26 = 30",
-                            "electrons = 26 (neutral, so the same as protons)"]),
-           "notes": []}
-         ]},
-        {"subtitle": "Ions, section summary, and an essential particle-count reminder.",
-         "rows": [
-          {"kind": "example", "title": "Calcium ion, 2+",
-           "cues": ["Why does an ion have a different number of electrons than protons?"],
-           "problem": prob("Calcium ion; A = 40; Z = 20; charge = 2+.", FIND_PNE, PARTICLES,
+                            "neutrons = 56 − 26 = 30",
+                            "electrons: neutral, so 26"]),
+           "notes": []},
+          {"kind": "example", "title": "Find the Protons, Neutrons, and Electrons",
+           "slides": [13, 14], "notesLabel": "PART B · AN ION",
+           "cues": ["A 2+ charge means two electrons left."],
+           "problem": prob("Calcium-40; A = 40; Z = 20; charge 2+.", FIND_PNE, PARTICLES,
                            "Protons = 20   Neutrons = 20   Electrons = 18",
                            ["protons = Z = 20",
-                            "neutrons = A − Z = 40 − 20 = 20",
-                            "electrons = 20 − 2 = 18 (a 2+ ion lost two electrons)"]),
+                            "neutrons = 40 − 20 = 20",
+                            "electrons = 20 − 2 = 18 (it is still calcium: protons never change)"]),
            "notes": []},
           {"kind": "recall", "title": "Section summary", "cues": RECALL_CUES, "lines": 3,
            "prompt": "Explain how protons, neutrons, and electrons come from Z, A, and charge. Why does the proton count stay the same when an atom becomes an ion?",
            "answer": "Protons = Z, neutrons = A − Z, electrons = Z adjusted for charge. The proton count is the element’s identity, so an ion only gains or loses electrons.",
            "selfCheck": ["I can state protons = Z and neutrons = A − Z.",
                          "I can find electrons for a neutral atom.",
-                         "I can adjust electrons for an ion’s charge."]},
-          {"kind": "recap", "title": "Particle-count reminders",
-           "cues": ["Use these relationships to check your work."],
-           "notes": [{"text": "**Protons = Z:** the element’s identity.", "after": 0},
-                     {"text": "**Neutrons = A − Z:** calculate them from mass and atomic numbers.", "after": 0},
-                     {"text": "**Electrons = Z, adjusted for charge.** A 2+ ion has two fewer electrons; a 1− ion has one more.", "after": 10},
-                     {"text": "**Isotopes:** same protons, different neutrons. Their mass numbers differ, but their element does not."}]}
+                         "I can adjust electrons for an ion’s charge."]}
          ]}
       ]
     },
@@ -183,30 +185,25 @@ spec = {
       "title": "Average Atomic Mass",
       "learningTarget": "I can calculate a weighted average atomic mass from isotope masses and abundances.",
       "pages": [
-        {"subtitle": "Calculate a weighted average from isotope masses and abundances written as decimals.",
-         "rows": [
-          {"title": "Isotopes",
-           "cues": ["What is the same in Cl-35 and Cl-37? What differs?",
-                    "Which isotope is more common?"],
-           "table": {"headers": ["Isotope", "Protons", "Neutrons", "Mass no.", "Abundance"],
-                     "widths": [0.18, 0.17, 0.19, 0.21, 0.25], "rowHeightIn": 0.36,
-                     "rows": [["Cl-35", "", "", "", ""], ["Cl-37", "", "", "", ""]],
-                     "_key": [["Cl-35", "17", "18", "35", "75.76%"],
-                              ["Cl-37", "17", "20", "37", "24.24%"]]},
-           "notes": [P("Copy: why 35.45 is closer to 35",
-                       "Cl-35 is about 76% of chlorine atoms, so it pulls the weighted average toward 35."),
-                     "*Same protons, different neutrons: mass number changes; the element does not."]},
-          {"title": "The calculation",
-           "cues": ["Why a weighted average, not a plain average?",
-                    "What must happen to a percent first?"],
-           "notes": [P("DEFINE: mass (in this formula)",
-                       "That isotope’s mass in amu; usually given, close to its mass number."),
-                     P("DEFINE: abundance",
-                       "How common that isotope is, written as a decimal before you multiply."),
-                     P("Copy: what to do after weighting each isotope",
-                       "Add every isotope’s mass × abundance. The sum is the average atomic mass.")]},
-          {"kind": "example", "title": "Chlorine example",
-           "cues": ["What’s the first step before you touch the calculator?"],
+        {"rows": [
+          {"title": "Isotopes: Same Element, Different Mass", "slides": 16,
+           "cues": ["The chlorine isotope table.", "The reason 35.45 sits closer to 35."],
+           "table": {"headers": ["Isotope", "Protons", "Neutrons", "Abundance"],
+                     "widths": [0.22, 0.24, 0.24, 0.30], "rowHeightIn": 0.36,
+                     "rows": [["Chlorine-35", "", "", ""], ["Chlorine-37", "", "", ""]],
+                     "_key": [["Chlorine-35", "17", "18", "75.76%"],
+                              ["Chlorine-37", "17", "20", "24.24%"]]},
+           "notes": [F("Cl on the periodic table: {35.45}, closer to 35. Most Cl atoms are {Cl-35}."),
+                     "*Same protons, different neutrons. Mass number changes; the element does not."]},
+          {"title": "A Weighted Average, Not a Plain One", "slides": 17,
+           "cues": ["The formula.", "The meaning of each part."],
+           "notes": [F("average atomic mass = ({mass₁} × {abundance₁}) + ({mass₂} × {abundance₂}) + …"),
+                     F("mass: the isotope's mass in {amu}. Usually given, close to its {mass number}."),
+                     F("abundance: how common that isotope is, written as a {decimal}."),
+                     F("the sum: add every isotope's {contribution}. Answer lands {between} the masses."),
+                     "*Turn the percent into a decimal first: 75.76% becomes 0.7576."]},
+          {"kind": "example", "title": "Average Atomic Mass of Chlorine", "slides": [18, 19],
+           "cues": ["Percents to decimals first."],
            "problem": prob(["Cl-35: 34.969 amu, 75.76%.", "Cl-37: 36.966 amu, 24.24%."], FIND_AAM,
                            "Average atomic mass of chlorine = __________ amu.",
                            "Average atomic mass of chlorine = 35.45 amu.",
@@ -216,11 +213,9 @@ spec = {
                             "26.493 + 8.961 = 35.45 amu"]),
            "notes": []}
          ]},
-        {"subtitle": "Independent practice, section summary, and readiness for the Unit 1 test.",
-         "rows": [
-          {"kind": "example", "title": "Your turn: copper",
-           "cues": ["Predict: closer to 63 or 65?",
-                    "Which isotope’s abundance does the pulling, and why?"],
+        {"rows": [
+          {"kind": "example", "title": "Now Do Copper", "slides": [20, 21],
+           "cues": ["Predict first: closer to 63 or to 65."],
            "problem": prob(["Cu-63: 62.930 amu, 69.15%.", "Cu-65: 64.928 amu, 30.85%."], FIND_AAM,
                            "Average atomic mass of copper = __________ amu.",
                            "Average atomic mass of copper = 63.55 amu.",
@@ -235,7 +230,8 @@ spec = {
            "selfCheck": ["I can explain what makes two atoms isotopes.",
                          "I can convert percent abundance to a decimal.",
                          "I can calculate a weighted average from isotope data."]},
-          {"kind": "review", "title": "Pulling it together",
+          {"kind": "review", "title": "Three Questions You Should Be Able to Answer",
+           "slides": 22,
            "cues": ["Day 1: conceptual test.", "Day 2: calculations from S01.3 and S01.5."],
            "bigPicture": "Matter is built from atoms; atoms contain protons, neutrons, and electrons. Periodic-table atomic mass is a weighted average of isotopes.",
            "checklist": ["Notes complete for all three sections",

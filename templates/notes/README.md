@@ -36,6 +36,32 @@ the thing to record** ("Definition — singularity", "The three pieces of eviden
 for it. `recall.py` carries the rule and the renderers refuse a cue or notes line with a question
 mark or an interrogative opener. Record: `governance/proposals/SHULL-CHG-0023-notes-are-recall.md`.
 
+**The notes and the deck are one object** (SHULL-CHG-0054). A student looks at the slide and
+knows which block it fills, and looks at a block and knows which slide to watch. A packet written
+from a deck says so with a top-level `"deck"`, and from then on the build holds it to four rules:
+
+1. **Every block names its slide(s).** `"slides": 12` or `"slides": [13, 14]` prints `SLIDE 12` /
+   `SLIDES 13–14` under the cue label. A RECALL block prints `NO SLIDE · CLOSE YOUR NOTES`; a RECAP
+   or REVIEW block prints `NO SLIDE` unless it gives its slide. A block students fill with no
+   `slides` is refused.
+2. **A block's title is its slide's headline, word for word**, and blocks follow slide order. The
+   build refuses a block whose first slide comes before the block above it, and refuses two blocks
+   written from the same slide on different pages: **one slide is never split by a page turn.**
+   Two blocks from one slide (Part A and Part B of a worked example) share the title and differ by
+   `notesLabel`.
+3. **The deck's must-write blocks say which notes block they fill**, and appear only on slides that
+   have something to write. A slide with nothing new to write (a solution slide) says *check your
+   work* instead. That half lives in the slide template: `templates/slide/README.md`.
+4. **A fill-in is the slide's own sentence with its key words blanked.** In a generator,
+   `F("Matter: anything that has {mass} and takes up {space}.")` writes
+   `{"prompt": "…has _______ and takes up ________.", "answer": "…has mass and takes up space.",
+   "lines": 0, "fill": true}`: the student copy shows the blanks, sized to the word, and the key
+   prints the finished sentence in the same place. A must-write line (`*…`) copies the slide's
+   block word for word.
+
+The headline match in rule 2 is checked by eye against the deck: the build has the slide numbers
+but not the slide text. The Chemistry U1 generator is the worked example of all four.
+
 **Option B is the old layout and reads only the old flat schema** (rows directly under each section).
 It has no work box, equation toolbox, cover, or concept review page. It refuses a spec that uses
 `problem`, `equations` or `diagram` rather than dropping them. Do not use it for a paged spec.
@@ -168,6 +194,8 @@ type to fit, and never shrink the work box.
   "course": "chemistry",               // chemistry | physics | geology
   "unit": 1,                           // the unit title is read from DECISIONS.md
   "key": false,                        // true = teacher key: answers shown, flowchart filled
+  "deck": "Unit 1 - ….pptx",           // optional; the deck this packet is written from. Turns on
+                                       // the slide rules (SHULL-CHG-0054)
   "cover": {
     "image": {"path": "../assets/x.png", "widthIn": 1.95},   // optional; relative to the spec
     "sections": [{"code": "1.1", "blurb": "…", "difficulty": 1}],   // difficulty 1–10, course content
@@ -194,7 +222,8 @@ type to fit, and never shrink the work box.
     "pages": [{
       "subtitle": "…",                             // not printed since SHULL-CHG-0038
       "rows": [
-        {"title": "Vocabulary", "cues": ["…?"],
+        {"title": "Four Terms You'll Use All Unit", "cues": ["All four definitions."],
+         "slides": 4,                                 // or [13, 14]; required when "deck" is set
          "cueLabel": "BASICS",                        // optional; default: title in caps
          "notesLabel": "COPY THE FLOWCHART",          // optional; default: title in caps. Printed as written
          "notes": [

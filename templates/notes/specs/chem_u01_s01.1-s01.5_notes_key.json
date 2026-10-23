@@ -2,6 +2,7 @@
   "course": "chemistry",
   "unit": 1,
   "key": true,
+  "deck": "Unit 1 - Matter and Atomic Theory Notes.pptx",
   "cover": {
     "image": {
       "path": "../assets/chem_u01_cover_atom.png",
@@ -91,7 +92,7 @@
         ]
       }
     ],
-    "howToUse": "Quiz yourself with the left-column questions. Gray side rules mark must-write notes (lime blocks in the slides). Show your reasoning and units in each work box."
+    "howToUse": "Every block is titled with its slide's headline and names the slide it comes from. A lime block on the slide marked IN YOUR NOTES tells you which block to fill. Bold lines with a gray rule are those lime blocks: copy them word for word. Show your reasoning and units in each work box."
   },
   "sectionsContent": [
     {
@@ -100,35 +101,46 @@
       "learningTarget": "I can sort any sample of matter as an element, compound, or mixture, and homogeneous or heterogeneous if it is a mixture.",
       "pages": [
         {
-          "subtitle": "Classify matter as an element, compound, or mixture; then classify mixtures.",
           "rows": [
             {
-              "title": "Vocabulary",
+              "title": "Four Terms You'll Use All Unit",
+              "slides": 4,
               "cues": [
-                "How do pure substances and mixtures differ?",
-                "Which term means evenly mixed throughout?"
+                "All four definitions, then examples."
               ],
               "notes": [
                 {
-                  "prompt": "DEFINE: matter",
-                  "answer": "Anything that has mass and takes up space."
+                  "prompt": "Matter: anything that has _______ and takes up ________.",
+                  "answer": "Matter: anything that has mass and takes up space.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: pure substance",
-                  "answer": "One kind of particle throughout; fixed composition."
+                  "prompt": "Pure substance: ___________ of particle throughout. ________ composition.",
+                  "answer": "Pure substance: one kind of particle throughout. Fixed composition.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: mixture",
-                  "answer": "Two or more substances physically combined; composition can vary."
+                  "prompt": "Mixture: two or more substances _____________ combined. Composition ___________.",
+                  "answer": "Mixture: two or more substances physically combined. Composition can vary.",
+                  "lines": 0,
+                  "fill": true
                 },
-                "*Solution: a homogeneous mixture, evenly mixed and the same throughout."
+                {
+                  "prompt": "Solution: a ______________ mixture, evenly mixed, same throughout.",
+                  "answer": "Solution: a homogeneous mixture, evenly mixed, same throughout.",
+                  "lines": 0,
+                  "fill": true
+                }
               ]
             },
             {
-              "title": "The matter flowchart",
+              "title": "The Matter Flowchart",
+              "slides": 5,
               "cues": [
-                "What two questions help classify a sample?",
-                "Where does the chart split into element vs. compound?"
+                "The full chart, every box.",
+                "An example under each leaf."
               ],
               "notesLabel": "COPY THE FLOWCHART",
               "flowchart": {
@@ -144,68 +156,93 @@
                   "Heterogeneous"
                 ]
               },
-              "notes": []
+              "notes": [
+                {
+                  "prompt": "Element: _____________    Compound: ____________",
+                  "answer": "Element: Cu, O₂, He    Compound: H₂O, NaCl",
+                  "lines": 0,
+                  "fill": true
+                },
+                {
+                  "prompt": "Homogeneous: __________________    Heterogeneous: ________________",
+                  "answer": "Homogeneous: salt water, air    Heterogeneous: sand in water",
+                  "lines": 0,
+                  "fill": true
+                },
+                "*Ask two questions: can it be separated physically, and are the parts evenly mixed."
+              ]
             },
             {
-              "title": "Element, compound, molecule",
+              "title": "Element, Compound, Molecule",
+              "slides": 6,
               "cues": [
-                "Why is O₂ not a compound?",
-                "What makes something a molecule?"
+                "Three definitions.",
+                "The one students miss."
               ],
               "notes": [
                 {
-                  "prompt": "DEFINE: element",
-                  "answer": "One kind of atom only; can’t be broken down chemically."
+                  "prompt": "Element: one kind of _______ only. Cannot be broken down _____________.",
+                  "answer": "Element: one kind of atom only. Cannot be broken down chemically.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: compound",
-                  "answer": "Two or more elements chemically bonded in a fixed, repeating ratio."
+                  "prompt": "Compound: two or more ___________ bonded in a ______________.",
+                  "answer": "Compound: two or more elements bonded in a fixed ratio.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: molecule",
-                  "answer": "Atoms bonded together; one element (O₂) or a compound (H₂O)."
+                  "prompt": "Molecule: atoms __________________, element or compound.",
+                  "answer": "Molecule: atoms bonded together, element or compound.",
+                  "lines": 0,
+                  "fill": true
                 },
-                "*O₂ is a molecule with one element. A compound needs at least two different elements."
+                "*O₂ is a molecule but not a compound. Compound needs two different elements."
               ]
             }
           ]
         },
         {
-          "subtitle": "Mixtures, classification practice, and a check of your understanding.",
           "rows": [
             {
-              "title": "Homogeneous vs. heterogeneous",
+              "title": "Evenly Mixed, or Not",
+              "slides": 7,
               "cues": [
-                "Which mixture is a solution?",
-                "What test tells the two apart?"
+                "Homogeneous vs. heterogeneous.",
+                "The scoop test."
               ],
               "notes": [
                 {
-                  "prompt": "DEFINE: homogeneous",
-                  "answer": "Evenly mixed and the same throughout; also called a solution."
+                  "prompt": "Homogeneous = ___________. Same throughout. You _________ see the parts.",
+                  "answer": "Homogeneous = solution. Same throughout. You cannot see the parts.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: heterogeneous",
-                  "answer": "The parts stay separate; you can see distinct pieces or layers."
+                  "prompt": "Heterogeneous: parts stay ___________. You ______ see them.",
+                  "answer": "Heterogeneous: parts stay separate. You can see them.",
+                  "lines": 0,
+                  "fill": true
                 },
-                {
-                  "prompt": "Copy: the quick test for telling them apart",
-                  "answer": "If a scoop from the top matches a scoop from the bottom, it’s homogeneous. If not, heterogeneous.",
-                  "lines": 2
-                }
+                "*If a scoop from the top matches a scoop from the bottom, it is homogeneous."
               ]
             },
             {
-              "title": "Classify six samples",
+              "title": "Run Six Samples Through the Chart",
+              "slides": [
+                8,
+                9
+              ],
               "cues": [
-                "What’s the first question you ask about any sample?"
+                "Separated physically first, then evenly mixed."
               ],
               "noWorkBox": true,
               "table": {
                 "headers": [
                   "Sample",
                   "Classification",
-                  "Reasoning"
+                  "Why"
                 ],
                 "widths": [
                   0.36,
@@ -221,32 +258,34 @@
                   ],
                   [
                     "Salt water",
-                    "Mixture — homogeneous",
-                    "Solution, evenly mixed"
+                    "Solution",
+                    "Homogeneous mixture"
                   ],
                   [
-                    "Carbon dioxide, CO₂",
+                    "Carbon dioxide",
                     "Compound",
-                    "C and O bonded in a fixed ratio"
+                    "C and O bonded, CO₂"
                   ],
                   [
                     "Granite",
-                    "Mixture — heterogeneous",
-                    "Grains visible to the eye"
+                    "Heterogeneous",
+                    "Grains you can see"
                   ],
                   [
                     "Oxygen gas, O₂",
                     "Element",
-                    "Molecule of one element"
+                    "Molecule, one element"
                   ],
                   [
                     "Stainless steel",
-                    "Mixture — homogeneous",
-                    "Alloy of metals, evenly mixed"
+                    "Solution",
+                    "Alloy, evenly mixed"
                   ]
                 ]
               },
-              "notes": []
+              "notes": [
+                "*O₂ is an element, not a compound. Steel is a solution too."
+              ]
             },
             {
               "kind": "recall",
@@ -274,13 +313,13 @@
       "learningTarget": "I can find the protons, neutrons, and electrons in an atom or ion from its symbol, mass number, and atomic number.",
       "pages": [
         {
-          "subtitle": "Find protons, neutrons, and electrons from atomic number, mass number, and charge.",
           "rows": [
             {
-              "title": "Subatomic particles",
+              "title": "Three Particles, Two Regions",
+              "slides": 11,
               "cues": [
-                "Which particles live in the nucleus?",
-                "Which particle has almost no mass?"
+                "The particle table.",
+                "The ID-number particle."
               ],
               "table": {
                 "headers": [
@@ -318,39 +357,52 @@
                 ]
               },
               "notes": [
-                "*Protons determine the element. Forming an ion changes electrons, not protons."
+                "*Protons are the ID number. Change the protons, change the element. Only electrons come and go."
               ]
             },
             {
-              "title": "Atomic & mass numbers",
+              "title": "Two Numbers Tell You Everything",
+              "slides": 12,
               "cues": [
-                "How do you find neutrons from A and Z?",
-                "When does electrons ≠ Z?"
+                "The three particle counts.",
+                "Mass number A, atomic number Z."
               ],
               "notes": [
                 {
-                  "prompt": "Fill in: protons =",
-                  "answer": "Z"
+                  "prompt": "protons = ______   (straight off the periodic table)",
+                  "answer": "protons = Z   (straight off the periodic table)",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "Fill in: neutrons =",
-                  "answer": "A − Z"
+                  "prompt": "neutrons = ________   (mass number minus atomic number)",
+                  "answer": "neutrons = A − Z   (mass number minus atomic number)",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "Fill in: electrons (neutral atom) =",
-                  "answer": "Z"
+                  "prompt": "electrons = ______   (neutral atom; adjust for an ion's charge)",
+                  "answer": "electrons = Z   (neutral atom; adjust for an ion's charge)",
+                  "lines": 0,
+                  "fill": true
                 },
-                {
-                  "prompt": "Fill in: electrons (ion) =",
-                  "answer": "Z, adjusted for charge (a 2+ ion has two fewer)"
-                }
+                "*Neutrons are never listed. You always subtract: A − Z."
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
-              "title": "Neutral iron-56",
+              "title": "Find the Protons, Neutrons, and Electrons",
+              "slides": [
+                13,
+                14
+              ],
+              "notesLabel": "PART A · NEUTRAL ATOM",
               "cues": [
-                "What do you read straight off the periodic table?"
+                "Write the subtraction, not just the answer."
               ],
               "problem": {
                 "given": "Iron-56; A = 56; Z = 26; neutral atom.",
@@ -358,31 +410,31 @@
                 "answer": "Protons = 26   Neutrons = 30   Electrons = 26",
                 "solution": [
                   "protons = Z = 26",
-                  "neutrons = A − Z = 56 − 26 = 30",
-                  "electrons = 26 (neutral, so the same as protons)"
+                  "neutrons = 56 − 26 = 30",
+                  "electrons: neutral, so 26"
                 ]
               },
               "notes": []
-            }
-          ]
-        },
-        {
-          "subtitle": "Ions, section summary, and an essential particle-count reminder.",
-          "rows": [
+            },
             {
               "kind": "example",
-              "title": "Calcium ion, 2+",
+              "title": "Find the Protons, Neutrons, and Electrons",
+              "slides": [
+                13,
+                14
+              ],
+              "notesLabel": "PART B · AN ION",
               "cues": [
-                "Why does an ion have a different number of electrons than protons?"
+                "A 2+ charge means two electrons left."
               ],
               "problem": {
-                "given": "Calcium ion; A = 40; Z = 20; charge = 2+.",
+                "given": "Calcium-40; A = 40; Z = 20; charge 2+.",
                 "find": "protons, neutrons, electrons.",
                 "answer": "Protons = 20   Neutrons = 20   Electrons = 18",
                 "solution": [
                   "protons = Z = 20",
-                  "neutrons = A − Z = 40 − 20 = 20",
-                  "electrons = 20 − 2 = 18 (a 2+ ion lost two electrons)"
+                  "neutrons = 40 − 20 = 20",
+                  "electrons = 20 − 2 = 18 (it is still calcium: protons never change)"
                 ]
               },
               "notes": []
@@ -402,30 +454,6 @@
                 "I can find electrons for a neutral atom.",
                 "I can adjust electrons for an ion’s charge."
               ]
-            },
-            {
-              "kind": "recap",
-              "title": "Particle-count reminders",
-              "cues": [
-                "Use these relationships to check your work."
-              ],
-              "notes": [
-                {
-                  "text": "**Protons = Z:** the element’s identity.",
-                  "after": 0
-                },
-                {
-                  "text": "**Neutrons = A − Z:** calculate them from mass and atomic numbers.",
-                  "after": 0
-                },
-                {
-                  "text": "**Electrons = Z, adjusted for charge.** A 2+ ion has two fewer electrons; a 1− ion has one more.",
-                  "after": 10
-                },
-                {
-                  "text": "**Isotopes:** same protons, different neutrons. Their mass numbers differ, but their element does not."
-                }
-              ]
             }
           ]
         }
@@ -437,81 +465,97 @@
       "learningTarget": "I can calculate a weighted average atomic mass from isotope masses and abundances.",
       "pages": [
         {
-          "subtitle": "Calculate a weighted average from isotope masses and abundances written as decimals.",
           "rows": [
             {
-              "title": "Isotopes",
+              "title": "Isotopes: Same Element, Different Mass",
+              "slides": 16,
               "cues": [
-                "What is the same in Cl-35 and Cl-37? What differs?",
-                "Which isotope is more common?"
+                "The chlorine isotope table.",
+                "The reason 35.45 sits closer to 35."
               ],
               "table": {
                 "headers": [
                   "Isotope",
                   "Protons",
                   "Neutrons",
-                  "Mass no.",
                   "Abundance"
                 ],
                 "widths": [
-                  0.18,
-                  0.17,
-                  0.19,
-                  0.21,
-                  0.25
+                  0.22,
+                  0.24,
+                  0.24,
+                  0.3
                 ],
                 "rowHeightIn": 0.36,
                 "rows": [
                   [
-                    "Cl-35",
+                    "Chlorine-35",
                     "17",
                     "18",
-                    "35",
                     "75.76%"
                   ],
                   [
-                    "Cl-37",
+                    "Chlorine-37",
                     "17",
                     "20",
-                    "37",
                     "24.24%"
                   ]
                 ]
               },
               "notes": [
                 {
-                  "prompt": "Copy: why 35.45 is closer to 35",
-                  "answer": "Cl-35 is about 76% of chlorine atoms, so it pulls the weighted average toward 35."
+                  "prompt": "Cl on the periodic table: ________, closer to 35. Most Cl atoms are ________.",
+                  "answer": "Cl on the periodic table: 35.45, closer to 35. Most Cl atoms are Cl-35.",
+                  "lines": 0,
+                  "fill": true
                 },
-                "*Same protons, different neutrons: mass number changes; the element does not."
+                "*Same protons, different neutrons. Mass number changes; the element does not."
               ]
             },
             {
-              "title": "The calculation",
+              "title": "A Weighted Average, Not a Plain One",
+              "slides": 17,
               "cues": [
-                "Why a weighted average, not a plain average?",
-                "What must happen to a percent first?"
+                "The formula.",
+                "The meaning of each part."
               ],
               "notes": [
                 {
-                  "prompt": "DEFINE: mass (in this formula)",
-                  "answer": "That isotope’s mass in amu; usually given, close to its mass number."
+                  "prompt": "average atomic mass = (________ × _____________) + (________ × _____________) + …",
+                  "answer": "average atomic mass = (mass₁ × abundance₁) + (mass₂ × abundance₂) + …",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "DEFINE: abundance",
-                  "answer": "How common that isotope is, written as a decimal before you multiply."
+                  "prompt": "mass: the isotope's mass in ______. Usually given, close to its ______________.",
+                  "answer": "mass: the isotope's mass in amu. Usually given, close to its mass number.",
+                  "lines": 0,
+                  "fill": true
                 },
                 {
-                  "prompt": "Copy: what to do after weighting each isotope",
-                  "answer": "Add every isotope’s mass × abundance. The sum is the average atomic mass."
-                }
+                  "prompt": "abundance: how common that isotope is, written as a __________.",
+                  "answer": "abundance: how common that isotope is, written as a decimal.",
+                  "lines": 0,
+                  "fill": true
+                },
+                {
+                  "prompt": "the sum: add every isotope's _______________. Answer lands __________ the masses.",
+                  "answer": "the sum: add every isotope's contribution. Answer lands between the masses.",
+                  "lines": 0,
+                  "fill": true
+                },
+                "*Turn the percent into a decimal first: 75.76% becomes 0.7576."
               ]
             },
             {
               "kind": "example",
-              "title": "Chlorine example",
+              "title": "Average Atomic Mass of Chlorine",
+              "slides": [
+                18,
+                19
+              ],
               "cues": [
-                "What’s the first step before you touch the calculator?"
+                "Percents to decimals first."
               ],
               "problem": {
                 "given": [
@@ -532,14 +576,16 @@
           ]
         },
         {
-          "subtitle": "Independent practice, section summary, and readiness for the Unit 1 test.",
           "rows": [
             {
               "kind": "example",
-              "title": "Your turn: copper",
+              "title": "Now Do Copper",
+              "slides": [
+                20,
+                21
+              ],
               "cues": [
-                "Predict: closer to 63 or 65?",
-                "Which isotope’s abundance does the pulling, and why?"
+                "Predict first: closer to 63 or to 65."
               ],
               "problem": {
                 "given": [
@@ -575,7 +621,8 @@
             },
             {
               "kind": "review",
-              "title": "Pulling it together",
+              "title": "Three Questions You Should Be Able to Answer",
+              "slides": 22,
               "cues": [
                 "Day 1: conceptual test.",
                 "Day 2: calculations from S01.3 and S01.5."

@@ -47,7 +47,12 @@ def offences(spec):
     found = []
     for section in spec.get("sectionsContent", []):
         code = section.get("code", "?")
-        for row in section.get("rows", []):
+        # An old flat spec holds rows on the section; a paged spec holds them on its
+        # pages. Reading only the first let a paged packet ship with question cues.
+        rows = list(section.get("rows", []))
+        for page in section.get("pages", []):
+            rows += page.get("rows", [])
+        for row in rows:
             for field in FIELDS:
                 for entry in row.get(field, []) or []:
                     text = entry if isinstance(entry, str) else entry.get("text", "")

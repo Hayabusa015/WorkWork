@@ -46,6 +46,15 @@ is empty on purpose — it gets filled live on the board.
 ## The rules the layouts encode
 
 - **One must-write bar per slide, never two.** Two write-this cues means students copy neither.
+- **The bar says where it goes in the notes** (SHULL-CHG-0054). On a slide spec, `"notes": "Two
+  Numbers Tell You Everything"` hangs a tab under the bar reading *✎ IN YOUR NOTES: Two Numbers
+  Tell You Everything*. That is the title of the notes block it fills, which is this slide's
+  headline. `"notes": false` marks a slide with nothing new to write, such as a solution slide:
+  the bar's label reads *CHECK ONLY* and the tab *CHECK YOUR WORK · nothing new to write*. A deck
+  spec with a `"notesPacket"` must say one or the other on every slide with a bar, or the build
+  refuses. Only 03, 07, 09 and 10 have a bar, so a slide students write from uses one of them.
+  The tab is a single 16pt line, right-aligned, in the 0.28 in the masters leave above the footer
+  (`SLOTS[master].notestab`). The notes half of the rule: `templates/notes/README.md`.
 - **Dark grounds are structural** — 01, 02, 04, 12. Content slides are light. 06 is the single
   deliberate exception.
 - **Reserve, don't layer.** A block reserves its height and text flows in what remains. Placing

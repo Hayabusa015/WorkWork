@@ -529,8 +529,11 @@ def render_cue(col, row, pal):
     if kind in TAGGED:
         chip(col, kind.upper(), pal)
         col.gap(6)
+    slides = row.get("_slideLabel")
     col.text(label_of(row, "cueLabel"), LABEL, line=10.5, bold=True,
-             color=pal.type_accent, after=6)
+             color=pal.type_accent, after=3 if slides else 6)
+    if slides:          # SHULL-CHG-0054: the slide(s) this block is written from
+        col.text(slides, CUE, line=10.5, bold=True, color=pal.ink, after=6)
     for q in row.get("cues", []):
         col.text(q, CUE, line=10.5, color=pal.label, after=5)
 
@@ -643,7 +646,12 @@ def render_notes(col, row, key, pal, base_dir):
 
     for n in row.get("notes", []):
         if isinstance(n, dict):
-            if "prompt" in n:
+            if "prompt" in n and n.get("fill"):
+                # SHULL-CHG-0054: the slide's own sentence with its key words blanked.
+                # The key prints the finished sentence in the same place.
+                col.text(n["answer"] if key and n.get("answer") else n["prompt"], BODY,
+                         line=BODY_LINE, bold=bool(key and n.get("answer")), after=7)
+            elif "prompt" in n:
                 render_prompt(col, n["prompt"], n.get("answer") if key else None,
                               int(n.get("lines", 1)), key, pal)
             elif "text" in n:
@@ -1390,6 +1398,56 @@ def all_rows(spec):
                 yield sec, row
 
 
+def slide_span(row):
+    """A row's `slides` as (first, last), or None. `12` is one slide; `[13, 14]` a run."""
+    v = row.get("slides")
+    if v is None:
+        return None
+    a, b = (v, v) if isinstance(v, int) else (v[0], v[-1])
+    return (int(a), int(b))
+
+
+def check_slides(spec):
+    """SHULL-CHG-0054. A packet that names its deck (`deck`) is written from it: every
+    block students fill says which slide(s), blocks follow slide order, and the blocks
+    written from one slide sit on one page - a slide is never split by a page turn.
+    Sets each row's printed label. Returns a list of problems."""
+    deck = spec.get("deck")
+    problems, prev = [], None
+    for sec in spec["sectionsContent"]:
+        for pi, page in enumerate(sec.get("pages", [])):
+            for row in page["rows"]:
+                kind = row.get("kind", "notes")
+                where = f"{sec_label(sec['code'])} · {row.get('title')}"
+                span = slide_span(row)
+                if span:
+                    a, b = span
+                    row["_slideLabel"] = f"SLIDE {a}" if a == b else f"SLIDES {a}\u2013{b}"
+                elif deck and kind == "recall":
+                    row["_slideLabel"] = "NO SLIDE \u00b7 CLOSE YOUR NOTES"
+                elif deck and kind in TAGGED:
+                    row["_slideLabel"] = "NO SLIDE"
+                if not deck or kind in TAGGED:
+                    continue
+                if not span:
+                    problems.append(f'{where}: no "slides" - which slide is this written from?')
+                    continue
+                if span[0] > span[1] or span[0] < 1:
+                    problems.append(f"{where}: slides {span} is not a run of slide numbers")
+                    continue
+                here = (id(sec), pi)
+                if prev:
+                    pspan, pwhere, phere = prev
+                    if span[0] < pspan[0]:
+                        problems.append(f"{where}: slide {span[0]} comes before {pwhere}'s "
+                                        f"slide {pspan[0]} - blocks follow slide order")
+                    elif span[0] <= pspan[1] and here != phere:
+                        problems.append(f"{where}: shares slide {span[0]} with {pwhere}, on "
+                                        f"another page - one slide is never split by a page turn")
+                prev = (span, where, here)
+    return problems
+
+
 def validate(spec, course):
     valid = known_sections(course)
     codes = [sec_num(s) for s in spec.get("sections", [])]
@@ -1411,8 +1469,18 @@ def validate(spec, course):
 
     # Guided notes are strictly recall: the cue column names what to record, it does
     # not ask for it. recall.py carries the rule and both renderers check it.
+    # validate() answers True/False. This returned 1 once, which main() read as a pass,
+    # so a packet with questions in it built anyway.
     if recall.check(spec, "build_notes_docx"):
-        return 1
+        return False
+
+    bad_slides = check_slides(spec)
+    if bad_slides:
+        print(f"build_notes_docx: slide check failed against {spec.get('deck')}:", file=sys.stderr)
+        for m in bad_slides:
+            print("   " + m, file=sys.stderr)
+        print("\nThe notes and the deck are one object. SHULL-CHG-0054.", file=sys.stderr)
+        return False
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.

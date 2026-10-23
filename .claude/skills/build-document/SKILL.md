@@ -106,6 +106,13 @@ not a section that was always three.
 blank it fills. **Locate the section deck first.** If it does not exist, build it first or say the
 notes are provisional.
 
+**Write the notes from the deck, slide by slide** (SHULL-CHG-0054). Give the spec its `"deck"` and
+every block its `"slides"`; title each block with its slide's headline, word for word; keep slide
+order; keep one slide's blocks on one page; and make each fill-in the slide's own sentence with the
+key words blanked. The build enforces what it can see. The four rules and the spec fields:
+`templates/notes/README.md`, "The notes and the deck are one object". Then mark the deck's
+must-write blocks with the block each one fills: `templates/slide/README.md`.
+
 Set the scaffolding level and **state the choice in one line** so it can be overridden. The ladder
 comes down across the year; the per-course index is in each decisions file.
 

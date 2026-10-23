@@ -75,6 +75,10 @@ const defineMaster = (def) => {
   PLACEHOLDERS[def.title] = phs.map(o => o.name);
   SLOTS[def.title] = {};
   for (const o of phs) SLOTS[def.title][o.name] = { x: o.x, y: o.y, w: o.w, h: o.h };
+  // The notes tab hangs under the must-write bar (SHULL-CHG-0054). It is not a
+  // placeholder because it is sized to its text; the master still owns where it goes.
+  const mw = SLOTS[def.title].mustwrite;
+  if (mw) SLOTS[def.title].notestab = { x: M.l, y: mw.y - 0.08 + mustWriteH, w: CONTENT_W, h: 0.28 };
   pres.defineSlideMaster(def);
 };
 
@@ -128,9 +132,13 @@ const footer = (dark) => ([
    below the SHULL target of 5.5. */
 const mustWrite = (y) => ([
   { rect: { x: M.l, y, w: CONTENT_W, h: mustWriteH, fill: { color: C.darkGround } } },
-  { text: { text: "MUST WRITE",
-      options: { x: M.l + padX, y: y + 0.06, w: 1.3, h: 0.22, fontFace: F.body, fontSize: 9,
-                 bold: true, charSpacing: 1.5, color: C.accent, margin: 0, isTextBox: true } } },
+  // A placeholder, not fixed text: a solution slide's bar reads CHECK ONLY, because
+  // it has nothing new to write (SHULL-CHG-0054). build_deck.js always fills it.
+  { placeholder: {
+      options: { name: "mwlabel", type: "body", x: M.l + padX, y: y + 0.06, w: 1.45, h: 0.22,
+                 fontFace: F.body, fontSize: 9, bold: true, charSpacing: 1.5, color: C.accent,
+                 margin: 0, isTextBox: true },
+      text: "MUST WRITE" } },
   { placeholder: {
       options: { name: "mustwrite", type: "body", x: M.l + 1.7, y: y + 0.08, w: CONTENT_W - 2.0,
                  h: 0.44, fontFace: F.body, fontSize: T.body, bold: true, color: C.textOnDark,
@@ -538,7 +546,7 @@ if (require.main === module) {
   set(s, "headline", HEAD); set(s, "subhead", SUB);
   set(s, "c1_l", "GROUP ONE"); set(s, "c1_b", "The first idea, in one or two lines.\n\nSupporting detail.");
   set(s, "c2_l", "GROUP TWO"); set(s, "c2_b", "The contrasting idea.\n\nSupporting detail.");
-  set(s, "mustwrite", MW);
+  set(s, "mustwrite", MW); set(s, "mwlabel", "MUST WRITE");
 
   s = pres.addSlide({ masterName: "04_DIVIDER" }); set(s, "code", CODE);
   set(s, "eyebrow", "0.0  •  SECTION NAME");
@@ -559,7 +567,7 @@ if (require.main === module) {
   set(s, "k1_l", "ITEM ONE");   set(s, "k1_b", "Three parallel items.\nOne job each.");
   set(s, "k2_l", "ITEM TWO");   set(s, "k2_b", "Not a wall of bullets.");
   set(s, "k3_l", "ITEM THREE"); set(s, "k3_b", "The third parallel item.");
-  set(s, "mustwrite", MW);
+  set(s, "mustwrite", MW); set(s, "mwlabel", "MUST WRITE");
 
   s = pres.addSlide({ masterName: "08_DIAGRAM_ANNOTATION" }); common(s);
   set(s, "headline", HEAD); set(s, "subhead", "The diagram gets room; the rules sit beside it.");
@@ -575,14 +583,14 @@ if (require.main === module) {
   set(s, "g1_l", "GIVEN"); set(s, "g1_b", "What the problem hands you.");
   set(s, "g2_l", "NEED");  set(s, "g2_b", "What you are solving for.");
   set(s, "work", "");
-  set(s, "mustwrite", MW);
+  set(s, "mustwrite", MW); set(s, "mwlabel", "MUST WRITE");
 
   s = pres.addSlide({ masterName: "10_WORKED_SOLUTION" }); common(s);
   set(s, "headline", "Example: Worked Solution");
   set(s, "subhead", "Data, process, and answer stay visually separate.");
   set(s, "f1_l", "FORMULA"); set(s, "f1_b", "The relationship,\nbefore any numbers.");
   set(s, "work", "The completed work,\nstep by step.");
-  set(s, "mustwrite", MW);
+  set(s, "mustwrite", MW); set(s, "mwlabel", "MUST WRITE");
 
   s = pres.addSlide({ masterName: "11_GIVENS_EQUATION_ANSWER" }); common(s);
   set(s, "headline", "Example: Given, Equation, Answer");

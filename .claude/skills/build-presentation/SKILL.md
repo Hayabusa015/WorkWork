@@ -33,6 +33,10 @@ and clipped text is the highest-priority visual defect in the gate.
 ## Non-negotiables
 
 - **Exactly one highlight / must-write block per slide.** Two cues means students copy neither.
+- **A must-write block says which notes block it fills** (SHULL-CHG-0054): `"notes": "<block
+  title>"` on the slide, or `"notes": false` on a slide with nothing new to write. A deck with a
+  guided-notes packet sets `"notesPacket"` and the build refuses a bar that says neither. Fields
+  and geometry: `templates/slide/README.md`.
 - **Every worked example is followed by its solution slide, every time.** A worked example with no
   solution slide is a bug, not a style choice.
 - **Dark grounds are structural only** — unit title, section divider, unit summary, index. Content

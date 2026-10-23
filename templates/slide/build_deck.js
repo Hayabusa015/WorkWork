@@ -78,6 +78,21 @@ const FOOTER_CODE = `${UNIT} • ${SECT}`;
    Slide System v2: over the cap you split the slide, you never shrink type to fit. */
 const CAPS = K.lineCaps;
 
+/* The tab under a must-write bar: which notes block this slide fills (SHULL-CHG-0054).
+   One run at the 16pt floor, sized to its text and right-aligned to the bar. Every bar
+   leaves at least 0.28 in above the footer, which is what one 16pt line needs. */
+const TAB_PT = 16;
+const tabText = (title, write) => write ? `\u270E  IN YOUR NOTES:  ${title}` : `CHECK YOUR WORK  \u00B7  ${title}`;
+const tabWidth = (text) => 0.13 * text.length + 0.4;
+function notesTab(s, slot, title, write) {
+  const text = tabText(title, write);
+  const w = tabWidth(text);
+  s.addText(text, { x: slot.x + slot.w - w, y: slot.y, w, h: slot.h, fontFace: K.fonts.body,
+    fontSize: TAB_PT, bold: true, color: write ? K.ground.parchment : K.ground.graphite,
+    align: "center", valign: "middle", margin: 0,
+    fill: { color: write ? K.ground.asphalt : K.ground.parchment } });
+}
+
 const problems = [];
 let n = 0;
 
@@ -115,6 +130,29 @@ for (const slide of spec.slides) {
     }
     s.addImage({ path: imgPath, x, y, w, h });
     delete fields[slotName];   // the slot's prompt text is replaced by the image
+  }
+
+  /* SHULL-CHG-0054: a must-write bar means "this goes in your notes", and it says where.
+     `notes` names the notes block the slide fills (its title, which is this slide's
+     headline). `notes: false` marks a slide with nothing new to write - a solution slide -
+     and its bar reads CHECK ONLY. A spec that names its notes packet (`notesPacket`)
+     must say one or the other on every slide that has a bar. */
+  const hasBar = declared.includes("mustwrite");
+  if (hasBar && !("mwlabel" in fields)) fields.mwlabel = slide.notes === false ? "CHECK ONLY" : "MUST WRITE";
+  if (typeof slide.notes === "string") {
+    if (!hasBar) {
+      problems.push(`slide ${n} (${slide.master}): "notes" needs a must-write bar, and this layout has none. ` +
+                    "Students write from a slide with a bar: use 03, 07, 09 or 10.");
+    } else if (tabWidth(tabText(slide.notes, true)) > pres.SLOTS[slide.master].notestab.w) {
+      problems.push(`slide ${n}: notes tab "${slide.notes}" is wider than the must-write bar`);
+    } else {
+      notesTab(s, pres.SLOTS[slide.master].notestab, slide.notes, true);
+    }
+  } else if (slide.notes === false && hasBar) {
+    notesTab(s, pres.SLOTS[slide.master].notestab, "nothing new to write", false);
+  } else if (spec.notesPacket && hasBar) {
+    problems.push(`slide ${n} (${slide.master}): it has a must-write bar, so say which notes block it fills ` +
+                  `("notes": "<block title>") or that it has nothing to write ("notes": false)`);
   }
 
   for (const [ph, txt] of Object.entries(fields)) {
