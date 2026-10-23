@@ -142,3 +142,23 @@ still listed them in the Quiz folder.
 
 After the moves, a parentId lookup lists only these three keys in Quiz (the old ones no longer
 appear), and the Upload Inbox is empty.
+
+## 2026-10-23: current student quizzes A-C (user approved: "upload them, I'll trash the old ones")
+
+Logged before action. Rebuilt student files (commit 9e4cff9, Part 2 alignment) and PDFs rendered from
+them, uploaded as new files via gws (drive.file) to the Upload Inbox, then `update_file` to Unit 02 /
+Quiz (1WFRGEoIjT6N49lzQBDYHCOw-scjAdRZM). Nothing overwritten. The user trashes the 10/21 copies:
+docx 1GJY8hXfKNKqYDeXa0aySdcnmI-nd-eqM, 13evY-msQPo0wdQLf6CNuvFpXf6tgPfKW, 11vEpok6MPjXKtXZkgKohmZMFzURdbNiF;
+pdf 1UtEKPPmsUq9q1-YIPTaNBPgv8Yy5hYWU, 1qDZRWBpd2R8-83YyiLGcx5a0XSq64KXZ, 1yxR1PG0GDxqC7ShxQa8PTACMXLe_rvL_.
+
+| Operation | Final name | Status |
+|---|---|---|
+| Upload then move | Unit 2 Quiz A.docx | filed, ID 1OOE4XhPQH9FxAwpnsPQ2sEPG5yKTgaWU, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz B.docx | filed, ID 1O5oJeD3dubMTfideXDoVv-Wy8HUnlouK, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz C.docx | filed, ID 1bMvAi2-FMgXu4tzQUH3QfDG6uXpRH_Qx, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz A.pdf | filed, ID 17h8WpCEpJGiAXB402KlWgg3G5DevtaQy, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz B.pdf | filed, ID 1KtZbRcHFPEWPuF0oTACdIk4e9kDhcY-3, verified by parentId lookup |
+| Upload then move | Unit 2 Quiz C.pdf | filed, ID 1_DjWOltYT98ILgBxkGphZQgvKPknS3PW, verified by parentId lookup |
+
+Upload Inbox empty afterwards. The six 10/21 student copies were still in Quiz at verification,
+for the user to trash.
