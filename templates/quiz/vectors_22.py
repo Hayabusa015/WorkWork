@@ -22,8 +22,11 @@ def theta_from(a, first, second):
         base = 0 if second == "east" else 180
         up = (first == "north")
         return (base + a if (second == "east") == up else base - a) % 360
-    base = 90 if second == "north" else 270        # measured from the vertical axis
-    return (base - a if first == "east" else base + a) % 360
+    # measured from the vertical axis: east of north is clockwise from north (90 - a), but east of
+    # south is counterclockwise from south (270 + a); west is the mirror of each.
+    if second == "north":
+        return (90 - a if first == "east" else 90 + a) % 360
+    return (270 + a if first == "east" else 270 - a) % 360
 
 def compass(theta):
     """(a, 'north', 'west') style, measured from the nearer horizontal axis."""
