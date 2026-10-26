@@ -1,0 +1,363 @@
+{
+ "course": "chemistry",
+ "unit": 3,
+ "sections": [
+  "3.1",
+  "3.2",
+  "3.3",
+  "3.4",
+  "3.6",
+  "3.7"
+ ],
+ "docType": "Activity",
+ "descriptor": "Operation Periodic Table",
+ "timeTargetMin": "45",
+ "sources": "Melting points and first ionization energies: CRC Handbook values, rounded. Atomic radii: calculated values (Clementi et al., 1967) so every element comes from one consistent set; they differ from the Gizmo's numbers. Electronegativity: Pauling scale. Noble gases carry no Pauling value on most school tables, so their cards say Not measured.",
+ "grid": {
+  "columns": [
+   1,
+   2,
+   14,
+   17,
+   18
+  ],
+  "rows": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ]
+ },
+ "cards": [
+  {
+   "code": "Alpha",
+   "symbol": "Na",
+   "element": "sodium",
+   "group": 1,
+   "period": 3,
+   "appearance": "Silver, soft metal",
+   "mp": 98,
+   "radius": 190,
+   "ie": 496,
+   "en": "0.93",
+   "ion": "1+"
+  },
+  {
+   "code": "Beta",
+   "symbol": "Ar",
+   "element": "argon",
+   "group": 18,
+   "period": 3,
+   "appearance": "Colorless gas",
+   "mp": -189,
+   "radius": 71,
+   "ie": 1521,
+   "en": "Not measured",
+   "ion": "None. Almost never reacts."
+  },
+  {
+   "code": "Gamma",
+   "symbol": "Br",
+   "element": "bromine",
+   "group": 17,
+   "period": 4,
+   "appearance": "Red-brown liquid",
+   "mp": -7,
+   "radius": 94,
+   "ie": 1140,
+   "en": "2.96",
+   "ion": "1−"
+  },
+  {
+   "code": "Delta",
+   "symbol": "Be",
+   "element": "beryllium",
+   "group": 2,
+   "period": 2,
+   "appearance": "Steel-gray, hard metal",
+   "mp": 1287,
+   "radius": 112,
+   "ie": 900,
+   "en": "1.57",
+   "ion": "2+"
+  },
+  {
+   "code": "Epsilon",
+   "symbol": "C",
+   "element": "carbon",
+   "group": 14,
+   "period": 2,
+   "appearance": "Black, brittle solid",
+   "mp": "Does not melt; turns to gas at 3642 °C",
+   "radius": 67,
+   "ie": 1086,
+   "en": "2.55",
+   "ion": "None. Shares electrons."
+  },
+  {
+   "code": "Zeta",
+   "symbol": "Mg",
+   "element": "magnesium",
+   "group": 2,
+   "period": 3,
+   "appearance": "Silver-white metal",
+   "mp": 650,
+   "radius": 145,
+   "ie": 738,
+   "en": "1.31",
+   "ion": "2+"
+  },
+  {
+   "code": "Eta",
+   "symbol": "Kr",
+   "element": "krypton",
+   "group": 18,
+   "period": 4,
+   "appearance": "Colorless gas",
+   "mp": -157,
+   "radius": 88,
+   "ie": 1351,
+   "en": "Not measured",
+   "ion": "None. Almost never reacts."
+  },
+  {
+   "code": "Theta",
+   "symbol": "Sn",
+   "element": "tin",
+   "group": 14,
+   "period": 5,
+   "appearance": "Silver-white, soft metal",
+   "mp": 232,
+   "radius": 145,
+   "ie": 709,
+   "en": "1.96",
+   "ion": "2+ or 4+"
+  },
+  {
+   "code": "Iota",
+   "symbol": "Ba",
+   "element": "barium",
+   "group": 2,
+   "period": 6,
+   "appearance": "Silver-gray metal",
+   "mp": 727,
+   "radius": 253,
+   "ie": 503,
+   "en": "0.89",
+   "ion": "2+"
+  },
+  {
+   "code": "Kappa",
+   "symbol": "Rb",
+   "element": "rubidium",
+   "group": 1,
+   "period": 5,
+   "appearance": "Silver-white, soft metal",
+   "mp": 39,
+   "radius": 265,
+   "ie": 403,
+   "en": "0.82",
+   "ion": "1+"
+  },
+  {
+   "code": "Lambda",
+   "symbol": "Sr",
+   "element": "strontium",
+   "group": 2,
+   "period": 5,
+   "appearance": "Silver-white metal, yellow tint",
+   "mp": 777,
+   "radius": 219,
+   "ie": 549,
+   "en": "0.95",
+   "ion": "2+"
+  },
+  {
+   "code": "Mu",
+   "symbol": "Ne",
+   "element": "neon",
+   "group": 18,
+   "period": 2,
+   "appearance": "Colorless gas",
+   "mp": -249,
+   "radius": 38,
+   "ie": 2081,
+   "en": "Not measured",
+   "ion": "None. Almost never reacts."
+  },
+  {
+   "code": "Nu",
+   "symbol": "Xe",
+   "element": "xenon",
+   "group": 18,
+   "period": 5,
+   "appearance": "Colorless gas",
+   "mp": -112,
+   "radius": 108,
+   "ie": 1170,
+   "en": "Not measured",
+   "ion": "None. Almost never reacts."
+  },
+  {
+   "code": "Xi",
+   "symbol": "Pb",
+   "element": "lead",
+   "group": 14,
+   "period": 6,
+   "appearance": "Bluish-gray, soft metal",
+   "mp": 327,
+   "radius": 154,
+   "ie": 716,
+   "en": "2.33",
+   "ion": "2+ (4+ is rare)"
+  },
+  {
+   "code": "Omicron",
+   "symbol": "F",
+   "element": "fluorine",
+   "group": 17,
+   "period": 2,
+   "appearance": "Pale yellow gas",
+   "mp": -220,
+   "radius": 42,
+   "ie": 1681,
+   "en": "3.98",
+   "ion": "1−"
+  },
+  {
+   "code": "Pi",
+   "symbol": "Li",
+   "element": "lithium",
+   "group": 1,
+   "period": 2,
+   "appearance": "Silver-white, soft metal",
+   "mp": 181,
+   "radius": 167,
+   "ie": 520,
+   "en": "0.98",
+   "ion": "1+"
+  },
+  {
+   "code": "Rho",
+   "symbol": "K",
+   "element": "potassium",
+   "group": 1,
+   "period": 4,
+   "appearance": "Silver, soft metal",
+   "mp": 64,
+   "radius": 243,
+   "ie": 419,
+   "en": "0.82",
+   "ion": "1+"
+  },
+  {
+   "code": "Sigma",
+   "symbol": "Cl",
+   "element": "chlorine",
+   "group": 17,
+   "period": 3,
+   "appearance": "Yellow-green gas",
+   "mp": -102,
+   "radius": 79,
+   "ie": 1251,
+   "en": "3.16",
+   "ion": "1−"
+  },
+  {
+   "code": "Tau",
+   "symbol": "Si",
+   "element": "silicon",
+   "group": 14,
+   "period": 3,
+   "appearance": "Shiny gray, brittle solid",
+   "mp": 1414,
+   "radius": 111,
+   "ie": 787,
+   "en": "1.90",
+   "ion": "None. Shares electrons."
+  },
+  {
+   "code": "Upsilon",
+   "symbol": "Cs",
+   "element": "cesium",
+   "group": 1,
+   "period": 6,
+   "appearance": "Silver-gold, soft metal",
+   "mp": 28,
+   "radius": 298,
+   "ie": 376,
+   "en": "0.79",
+   "ion": "1+"
+  },
+  {
+   "code": "Phi",
+   "symbol": "I",
+   "element": "iodine",
+   "group": 17,
+   "period": 5,
+   "appearance": "Gray-black crystals",
+   "mp": 114,
+   "radius": 115,
+   "ie": 1008,
+   "en": "2.66",
+   "ion": "1−"
+  },
+  {
+   "code": "Chi",
+   "symbol": "He",
+   "element": "helium",
+   "group": 18,
+   "period": 1,
+   "appearance": "Colorless gas",
+   "mp": "Does not freeze at normal pressure",
+   "radius": 31,
+   "ie": 2372,
+   "en": "Not measured",
+   "ion": "None. Almost never reacts."
+  },
+  {
+   "code": "Psi",
+   "symbol": "Ca",
+   "element": "calcium",
+   "group": 2,
+   "period": 4,
+   "appearance": "Silver-white metal",
+   "mp": 842,
+   "radius": 194,
+   "ie": 590,
+   "en": "1.00",
+   "ion": "2+"
+  }
+ ],
+ "missing": {
+  "symbol": "Ge",
+  "element": "germanium",
+  "group": 14,
+  "period": 4,
+  "mp": 938,
+  "radius": 125,
+  "ie": 762,
+  "en": "2.01",
+  "ion": "None. Shares electrons.",
+  "ranges": {
+   "mp": [
+    800,
+    1080
+   ],
+   "radius": [
+    115,
+    135
+   ],
+   "ie": [
+    700,
+    825
+   ],
+   "en": [
+    1.8,
+    2.2
+   ]
+  }
+ }
+}

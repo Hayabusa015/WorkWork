@@ -1,0 +1,282 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "section": "3.6",
+  "sectionTitle": "Trends and Ions",
+  "note": "Day 3 of the short U3 (SHULL-CHG-0054). Covers 3.4 electronegativity, 3.6 explaining the trends, 3.7 ion formation; comes after the Periodic Trends Gizmo (radius, IE, metallic character). One deck spans three sections, so each slide sets its own footer code and the file is named at unit level. Charges are written Na+ / Cl− on the baseline because Archivo has no superscript plus or minus; the minus is U+2212.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "Trends\nand Ions",
+        "subhead": "Electronegativity, why the trends happen, and the ions atoms form.",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": { "section": "a printed periodic table wall chart on a lab wall, shallow angle, soft light" }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "What the Gizmo Showed You",
+        "subhead": "Atoms get smaller across a period and bigger down a group. Ionization energy does the opposite.",
+        "keyq": "Why would a smaller atom hold on to its electrons more tightly?",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": { "concept": "a magnet holding steel paper clips, close-up, dark bench" }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words for Today",
+        "subhead": "Write these first. The rest of the deck uses all three.",
+        "k1_l": "ELECTRONEGATIVITY",
+        "k1_b": "How strongly an atom pulls on electrons it shares in a bond.",
+        "k2_l": "CATION",
+        "k2_b": "A positive ion. The atom lost electrons.",
+        "k3_l": "ANION",
+        "k3_b": "A negative ion. The atom gained electrons.",
+        "mustwrite": "Electronegativity is an atom's pull on the electrons it shares in a bond.",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": { "aside": "a chemistry notebook open to a hand-ruled vocabulary page" }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Ionization Energy vs. Electronegativity",
+        "subhead": "They sound alike. One is about losing an electron, the other about pulling on a shared one.",
+        "c1_l": "IONIZATION ENERGY",
+        "c1_b": "Energy needed to pull one electron off an atom.\n\nMeasured in kJ/mol.",
+        "c2_l": "ELECTRONEGATIVITY",
+        "c2_b": "Pull on electrons shared with another atom.\n\nNo units. Fluorine is highest at 4.0.",
+        "mustwrite": "Both rise across a period and fall down a group.",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": { "concept": "two hands pulling on opposite ends of a rope, cropped tight" }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Electronegativity Across Period 2",
+        "subhead": "Down group 17 it falls: F 4.0, Cl 3.2, Br 3.0, I 2.7.",
+        "k1_l": "LITHIUM",
+        "k1_b": "1.0\n\nA metal. It lets go of electrons easily.",
+        "k2_l": "CARBON",
+        "k2_b": "2.6\n\nIn the middle. It shares electrons.",
+        "k3_l": "FLUORINE",
+        "k3_b": "4.0\n\nThe strongest pull of any element.",
+        "mustwrite": "Electronegativity increases across a period and decreases down a group.",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": { "aside": "a sealed glass ampoule of pale yellow gas" }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "SECTION 3.6",
+        "headline": "Why the\nTrends Happen",
+        "subhead": "Two ideas explain radius, ionization energy and electronegativity.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "divider": "a dark bench with a single glowing hydrogen discharge tube" }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Two Things Control the Pull",
+        "subhead": "Every trend today comes from these two.",
+        "c1_l": "NUCLEAR CHARGE",
+        "c1_b": "More protons pull harder on every electron.\n\nAcross a period, each element adds one proton.",
+        "c2_l": "SHIELDING",
+        "c2_b": "Inner electrons block part of that pull.\n\nDown a group, each period adds an energy level.",
+        "mustwrite": "More protons pull harder. More energy levels put electrons farther out.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "concept": "concentric ripples on dark water seen from above" }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "One Picture, Three Trends",
+        "subhead": "Copy these arrows onto the table from your Gizmo sheet.",
+        "a1_l": "ACROSS A PERIOD",
+        "a1_b": "Same levels, more protons: smaller, tighter grip.",
+        "a2_l": "DOWN A GROUP",
+        "a2_b": "One more level each row: bigger, looser grip.",
+        "a3_l": "THE CORNERS",
+        "a3_b": "Green is fluorine (tightest). Black is cesium (loosest).",
+        "code": "U03 • S03.6"
+      },
+      "images": { "diagram": "../assets/chem_u03_s3.6_trend_arrows.png" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Which Atom Is Smaller?",
+        "subhead": "We do this one together. The reason matters more than the answer.",
+        "problem": "Which atom is smaller, sodium or chlorine? Explain using nuclear charge.",
+        "g1_l": "GIVEN",
+        "g1_b": "Both in period 3\nNa: 11 protons\nCl: 17 protons",
+        "g2_l": "NEED",
+        "g2_b": "The smaller atom\nThe reason",
+        "work": "",
+        "mustwrite": "Same period: compare protons. Same group: compare energy levels.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "aside": "a small pile of sodium metal under oil in a dish" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Sodium vs. Chlorine, Worked",
+        "subhead": "Name the trend, compare the atoms, then give the reason.",
+        "f1_l": "SETUP",
+        "f1_b": "Same period\nSame 3 energy levels\nCompare protons",
+        "work": "Cl has 6 more protons.\nStronger pull, same levels.\nChlorine is smaller.",
+        "mustwrite": "Across a period, more protons pull the electrons in closer.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "data": "none" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Your Turn: Higher Ionization Energy?",
+        "subhead": "Work it in your notes, then we compare.",
+        "problem": "Which has the higher ionization energy, magnesium or barium? Explain using energy levels.",
+        "g1_l": "GIVEN",
+        "g1_b": "Both in group 2\nMg: period 3\nBa: period 6",
+        "g2_l": "NEED",
+        "g2_b": "Higher IE\nThe reason",
+        "work": "",
+        "mustwrite": "Name the trend first, then give the reason.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "aside": "a strip of magnesium ribbon coiled on a watch glass" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Magnesium vs. Barium, Worked",
+        "subhead": "Check yours against this before we move on.",
+        "f1_l": "SETUP",
+        "f1_b": "Same group\nCompare energy levels",
+        "work": "Mg: 3 levels. Ba: 6 levels.\nMg's outer electron is closer.\nMagnesium has the higher IE.",
+        "mustwrite": "Down a group, outer electrons are farther away and easier to remove.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": { "data": "none" }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "SECTION 3.7",
+        "headline": "Ion\nFormation",
+        "subhead": "Atoms gain or lose electrons until they match the nearest noble gas.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "divider": "table salt crystals under a hand lens, macro, dark ground" }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Metals Lose, Nonmetals Gain",
+        "subhead": "Each one ends with the electron arrangement of a noble gas.",
+        "k1_l": "GROUP 1",
+        "k1_b": "Loses 1 electron\nCharge 1+\nNa becomes Na+",
+        "k2_l": "GROUP 2",
+        "k2_b": "Loses 2 electrons\nCharge 2+\nMg becomes Mg2+",
+        "k3_l": "GROUP 17",
+        "k3_b": "Gains 1 electron\nCharge 1−\nCl becomes Cl−",
+        "mustwrite": "Metals lose electrons and form cations. Nonmetals gain electrons and form anions.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "aside": "a beaker of clear salt water on a white bench" }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "The Rest of the Main Groups",
+        "subhead": "Group 14 usually shares electrons instead. That is Unit 4.",
+        "k1_l": "GROUP 13",
+        "k1_b": "Loses 3 electrons\nCharge 3+\nAl becomes Al3+",
+        "k2_l": "GROUPS 15 AND 16",
+        "k2_b": "Gain 3 or 2 electrons\nCharge 3− or 2−\nN3−, O2−",
+        "k3_l": "GROUP 18",
+        "k3_b": "Already stable\nNo ion",
+        "mustwrite": "The charge is the number of electrons lost (+) or gained (−).",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "aside": "a roll of aluminum foil, edge on, soft light" }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Ions Are Not the Same Size as Their Atoms",
+        "subhead": "Circles drawn to scale. Outlined: neutral atom. Filled: its ion.",
+        "a1_l": "CATION",
+        "a1_b": "It loses its outer energy level, so it shrinks.",
+        "a2_l": "ANION",
+        "a2_b": "Same protons, more electrons repelling, so it grows.",
+        "a3_l": "THE NUMBERS",
+        "a3_b": "Na 186 pm to 102 pm. Cl 99 pm to 181 pm.",
+        "code": "U03 • S03.7"
+      },
+      "images": { "diagram": "../assets/chem_u03_s3.7_ion_size.png" }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Predict the Ion",
+        "subhead": "Use the group number. Then decide which way the size goes.",
+        "problem": "Predict the ion formed by calcium and by sulfur. Which ion is larger than its atom?",
+        "g1_l": "GIVEN",
+        "g1_b": "Ca: group 2\nS: group 16",
+        "g2_l": "NEED",
+        "g2_b": "Each ion\nWhich one grows",
+        "work": "",
+        "mustwrite": "For main-group elements, the group tells you the charge.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "aside": "a lump of yellow sulfur on a watch glass" }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Calcium and Sulfur, Worked",
+        "subhead": "Charge first, then size.",
+        "f1_l": "SETUP",
+        "f1_b": "Ca loses 2 electrons\nS gains 2 electrons",
+        "work": "Ca2+: cation, smaller\nS2−: anion, larger\nS2− is larger than S.",
+        "mustwrite": "A cation is smaller than its atom. An anion is larger.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "data": "none" }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Two minutes in your notes. Then we go over it.",
+        "c1_l": "RANK BY ELECTRONEGATIVITY",
+        "c1_b": "Lowest to highest:\n\nK, Br, Ca",
+        "c2_l": "PREDICT THE ION",
+        "c2_b": "Write the ion each forms:\n\nLi, O, Al",
+        "mustwrite": "Answers: K < Ca < Br. Li+, O2−, Al3+.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "concept": "a stopwatch on a lab bench" }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "TOMORROW",
+        "headline": "Operation\nPeriodic Table",
+        "subhead": "23 mystery elements. Your team places them using today's trends.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": { "divider": "a scatter of blank index cards on a dark table" }
+    }
+  ]
+}

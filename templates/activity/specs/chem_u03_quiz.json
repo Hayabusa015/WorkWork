@@ -1,0 +1,200 @@
+{
+ "course": "chemistry",
+ "unit": 3,
+ "sections": [
+  "3.1",
+  "3.2",
+  "3.3",
+  "3.4",
+  "3.6",
+  "3.7"
+ ],
+ "docType": "Quiz",
+ "timeTargetMin": "15",
+ "note": "Ends U3 in place of the unit test (SHULL-CHG-0054). Quiz shape from courses/chemistry/DECISIONS.md: 6 questions, 3 parallel versions, same blueprint and points. Charges are written on the baseline (Sr2+, Br−) because Archivo has no superscript plus/minus.",
+ "versions": {
+  "A": [
+   {
+    "prompt": "An element is in group 2, period 4.",
+    "parts": [
+     "a.  Which family is it in?",
+     "b.  Is it a metal, nonmetal or metalloid?"
+    ],
+    "answer": "a. alkaline earth metals   b. metal",
+    "solution": "Group 2 is the alkaline earth metals (the element is calcium). Everything in group 2 is a metal. 1 point each.",
+    "section": "3.1",
+    "points": 2,
+    "lines": 0,
+    "item": "fam",
+    "sectionLabel": "3.1–S3.2"
+   },
+   {
+    "prompt": "Rank these atoms from smallest to largest atomic radius: K, Na, Mg.",
+    "answer": "Mg < Na < K",
+    "solution": "Mg and Na share period 3; Mg has more protons, so it is smaller. K is one period below Na, with an extra energy level, so it is largest. Mg < Na < K. 2 points for the full order, 1 for one pair right.",
+    "section": "3.3",
+    "points": 2,
+    "lines": 1,
+    "item": "rad"
+   },
+   {
+    "prompt": "Which has the higher electronegativity, nitrogen or phosphorus? Name the trend you used.",
+    "answer": "nitrogen; EN decreases down a group",
+    "solution": "Nitrogen (3.0) is above phosphorus (2.2) in group 15, and electronegativity decreases down a group. 1 point answer, 1 point trend.",
+    "section": "3.4",
+    "points": 2,
+    "lines": 2,
+    "item": "en"
+   },
+   {
+    "prompt": "Chlorine has a higher ionization energy than sodium. Explain why. Name the trend, compare the two atoms, and give the cause.",
+    "answer": "IE rises across a period; same energy levels; Cl has more protons pulling",
+    "solution": "Trend: ionization energy increases across a period (1). Both are in period 3 with the same three energy levels (1). Chlorine has 17 protons to sodium's 11, so it holds its outer electrons more tightly and more energy is needed to remove one (1).\nValues: Cl 1251, Na 496 kJ/mol.\nCommon error: 'chlorine has more electrons'. No credit for that as the cause.",
+    "section": "3.6",
+    "points": 3,
+    "lines": 3,
+    "item": "why"
+   },
+   {
+    "prompt": "Write the ion each element forms: strontium, bromine, aluminum.",
+    "answer": "Sr2+, Br−, Al3+",
+    "solution": "Sr2+ (group 2), Br− (group 17), Al3+ (group 13). 1 point each; the charge must have the right sign and number.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 1,
+    "item": "ion"
+   },
+   {
+    "prompt": "Which is larger, a calcium atom or a calcium ion, Ca2+? Explain.",
+    "answer": "the Ca atom",
+    "solution": "The calcium atom (1). Losing two electrons empties calcium's outer energy level (1), and the 20 protons now pull on fewer electrons, so the ion is smaller (1).\nValues: Ca 197 pm, Ca2+ 100 pm.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 3,
+    "item": "size"
+   }
+  ],
+  "B": [
+   {
+    "prompt": "Rank these atoms from smallest to largest atomic radius: S, Cl, Se.",
+    "answer": "Cl < S < Se",
+    "solution": "Cl and S share period 3; Cl has more protons, so it is smaller. Se is below S, with an extra energy level, so it is largest. Cl < S < Se. 2 points for the full order, 1 for one pair right.",
+    "section": "3.3",
+    "points": 2,
+    "lines": 1,
+    "item": "rad"
+   },
+   {
+    "prompt": "An element is in group 17, period 3.",
+    "parts": [
+     "a.  Which family is it in?",
+     "b.  Is it a metal, nonmetal or metalloid?"
+    ],
+    "answer": "a. halogens   b. nonmetal",
+    "solution": "Group 17 is the halogens (the element is chlorine), all nonmetals. 1 point each.",
+    "section": "3.1",
+    "points": 2,
+    "lines": 0,
+    "item": "fam",
+    "sectionLabel": "3.1–S3.2"
+   },
+   {
+    "prompt": "Which has the higher electronegativity, chlorine or iodine? Name the trend you used.",
+    "answer": "chlorine; EN decreases down a group",
+    "solution": "Chlorine (3.2) is above iodine (2.7) in group 17, and electronegativity decreases down a group. 1 point answer, 1 point trend.",
+    "section": "3.4",
+    "points": 2,
+    "lines": 2,
+    "item": "en"
+   },
+   {
+    "prompt": "Write the ion each element forms: potassium, sulfur, nitrogen.",
+    "answer": "K+, S2−, N3−",
+    "solution": "K+ (group 1), S2− (group 16), N3− (group 15). 1 point each; the charge must have the right sign and number.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 1,
+    "item": "ion"
+   },
+   {
+    "prompt": "Fluorine has a higher ionization energy than lithium. Explain why. Name the trend, compare the two atoms, and give the cause.",
+    "answer": "IE rises across a period; same energy levels; F has more protons pulling",
+    "solution": "Trend: ionization energy increases across a period (1). Both are in period 2 with the same two energy levels (1). Fluorine has 9 protons to lithium's 3, so it holds its outer electrons more tightly (1).\nValues: F 1681, Li 520 kJ/mol.\nCommon error: 'fluorine has more electrons'. No credit for that as the cause.",
+    "section": "3.6",
+    "points": 3,
+    "lines": 3,
+    "item": "why"
+   },
+   {
+    "prompt": "Which is larger, a chlorine atom or a chloride ion, Cl−? Explain.",
+    "answer": "the Cl− ion",
+    "solution": "The chloride ion (1). It has the same 17 protons but one more electron (1); the extra electron repels the others and the same nuclear pull is shared over more electrons, so the ion spreads out (1).\nValues: Cl 99 pm, Cl− 181 pm.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 3,
+    "item": "size"
+   }
+  ],
+  "C": [
+   {
+    "prompt": "An element is in group 1, period 5.",
+    "parts": [
+     "a.  Which family is it in?",
+     "b.  Is it a metal, nonmetal or metalloid?"
+    ],
+    "answer": "a. alkali metals   b. metal",
+    "solution": "Group 1 below hydrogen is the alkali metals (the element is rubidium), all metals. 1 point each. Do not accept 'hydrogen family'.",
+    "section": "3.1",
+    "points": 2,
+    "lines": 0,
+    "item": "fam",
+    "sectionLabel": "3.1–S3.2"
+   },
+   {
+    "prompt": "Which has the higher electronegativity, oxygen or sulfur? Name the trend you used.",
+    "answer": "oxygen; EN decreases down a group",
+    "solution": "Oxygen (3.4) is above sulfur (2.6) in group 16, and electronegativity decreases down a group. 1 point answer, 1 point trend.",
+    "section": "3.4",
+    "points": 2,
+    "lines": 2,
+    "item": "en"
+   },
+   {
+    "prompt": "Rank these atoms from smallest to largest atomic radius: Li, Be, Na.",
+    "answer": "Be < Li < Na",
+    "solution": "Be and Li share period 2; Be has more protons, so it is smaller. Na is below Li, with an extra energy level, so it is largest. Be < Li < Na. 2 points for the full order, 1 for one pair right.",
+    "section": "3.3",
+    "points": 2,
+    "lines": 1,
+    "item": "rad"
+   },
+   {
+    "prompt": "Sulfur has a higher ionization energy than magnesium. Explain why. Name the trend, compare the two atoms, and give the cause.",
+    "answer": "IE rises across a period; same energy levels; S has more protons pulling",
+    "solution": "Trend: ionization energy increases across a period (1). Both are in period 3 with the same three energy levels (1). Sulfur has 16 protons to magnesium's 12, so it holds its outer electrons more tightly (1).\nValues: S 1000, Mg 738 kJ/mol.\nCommon error: 'sulfur has more electrons'. No credit for that as the cause.",
+    "section": "3.6",
+    "points": 3,
+    "lines": 3,
+    "item": "why"
+   },
+   {
+    "prompt": "Which is larger, a bromine atom or a bromide ion, Br−? Explain.",
+    "answer": "the Br− ion",
+    "solution": "The bromide ion (1). It has the same 35 protons but one more electron (1); the extra electron repels the others and the same nuclear pull is shared over more electrons, so the ion spreads out (1).\nValues: Br 114 pm, Br− 196 pm.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 3,
+    "item": "size"
+   },
+   {
+    "prompt": "Write the ion each element forms: rubidium, selenium, phosphorus.",
+    "answer": "Rb+, Se2−, P3−",
+    "solution": "Rb+ (group 1), Se2− (group 16), P3− (group 15). 1 point each; the charge must have the right sign and number.",
+    "section": "3.7",
+    "points": 3,
+    "lines": 1,
+    "item": "ion"
+   }
+  ]
+ }
+}
