@@ -14,8 +14,8 @@
 | **Affected Courses** | Chemistry only |
 | **Risk** | **Low.** One course, one unit, and no code is renumbered. Two things to watch: the validator (§3), and the optional-worksheet policy, which is tied to "test time" (§4, question 3). |
 | **Recommendation** | Apply §2a, §2b and §2c. For 3.5, **Option 1** in §3: keep it listed, mark it DROPPED, and retire the code. 3.6 and 3.7 keep their numbers. Validator sub-choice: see §3. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | **Approved by the user, 2026-10-26**, in the main session, answering the two questions this record formalizes (does the quiz replace the U3 test; what to do with 3.5). Verbatim: *"Quiz replaces the test, drop 3.5, build all of it"*. Recorded under SHULL-CHG-0034. The user did not answer the validator sub-choice or the §4 follow-ups; those are not decided by this quote. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
