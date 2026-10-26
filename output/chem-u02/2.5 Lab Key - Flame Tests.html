@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>2.5 Lab Key - Flame Tests</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB TEACHER PREP + KEY (MASTER)  v1.0
+=====================================================================
+ Ships as its OWN FILE, always. Never staple teacher content onto the
+ student handout.
+
+ Filename:  SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor]_Key.html
+ Same folder as the student lab:
+   [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ Fill every [[ TOKEN ]]. Render with:  python3 build_lab.py yourfile.html
+=====================================================================
+-->
+
+<link rel="stylesheet" href="shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left { content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode)
+                            " · TEACHER COPY";
+                   font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                   color: var(--footer); margin-bottom: 0.14in; }
+    @bottom-right { content: "PAGE " counter(page) " OF " counter(pages) " · DO NOT DISTRIBUTE";
+                    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                    color: var(--footer); margin-bottom: 0.14in; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); font-size: 10.2pt;
+         line-height: 1.40; color: var(--ink); }
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  .meta { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code { string-set: unitcode content(); }
+
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow { font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--warn); margin-bottom: 3pt; }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 { font-family: var(--display); font-weight: bold; font-size: 16pt;
+    line-height: 1.12; flex: 1 1 auto; }
+  .chip { flex: 0 0 auto; margin-left: 12pt; font-family: var(--display); font-weight: 600;
+    font-size: 8pt; letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--warn-rule); border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap; }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.20em;
+    color: var(--ink); border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt;
+    margin: 12pt 0 5pt 0; }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 9.6pt; margin: 8pt 0 3pt 0; }
+  p { margin-bottom: 4.5pt; }
+
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3pt; }
+  /* Drawn, not typed - see the master template. U+25AA is not in Archivo. */
+  ul.dot li::before { content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent); }
+
+  table.grid { width: 100%; border-collapse: collapse; margin-top: 5pt; }
+  table.grid th { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; text-align: left; padding: 0 5pt 3pt 5pt;
+    border-bottom: 1.2pt solid var(--accent); }
+  table.grid td { padding: 3.6pt 5pt; font-size: 9.7pt; vertical-align: top;
+    border-bottom: 0.6pt solid var(--rule-hairline); }
+
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li { counter-increment: q; position: relative; padding-left: 20pt;
+    margin-bottom: 6pt; page-break-inside: avoid; }
+  /* Just the number. No box. SHULL-CHG-0015. */
+  ol.q > li::before { content: counter(q); position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--warn);
+    width: 13pt; text-align: right; }
+  .ans { color: var(--warn); }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body>
+<div class="meta">
+  <span class="m-course">CHEMISTRY</span>
+  <span class="m-code">U2 / S2.5</span>
+</div>
+<div class="masthead">
+  <div class="eyebrow">TEACHER PREP + KEY · UNIT 2 · SECTION 5 · NOT FOR STUDENTS</div>
+  <div class="titlerow">
+    <h1>Flame Tests: Identifying Metal Ions by Color</h1>
+    <div class="chip">U2 / S2.5</div>
+  </div>
+</div>
+
+<h2 class="warn">BEFORE THIS IS COPIED — OPEN ITEMS</h2>
+<ul class="dot">
+  <li><b>Draft.</b> A flame-test lab at S2.5 is not yet a confirmed lab placement in
+      courses/chemistry/DECISIONS.md. It becomes final once you confirm it.</li>
+  <li><b>Iron nitrate.</b> Your list reads "FeNO<sub>3</sub> (Fe<sup>+2</sup>)". The
+      iron(II) compound is Fe(NO<sub>3</sub>)<sub>2</sub>, which is what the handout prints.
+      Most stockrooms carry iron(III) nitrate, Fe(NO<sub>3</sub>)<sub>3</sub>, instead. Check the
+      bottle and change the name and formula at station 5 to match it.</li>
+  <li><b>Cobalt(II) chloride.</b> Its SDS hazard statements need checking before students handle
+      it; cobalt compounds are commonly classed as sensitizers and carcinogens. If the SDS confirms
+      that, swap it for a compound already in the set, or run cobalt as a teacher demonstration.</li>
+  <li><b>Heat source.</b> The handout assumes a Bunsen burner at each of the six stations.</li>
+  <li><b>Every hazard and disposal statement</b> on the handout is marked not yet verified below.
+      Check each against the SDS and district policy and date it.</li>
+</ul>
+
+<h2>PREP — THE DAY BEFORE</h2>
+<table class="grid">
+  <tr><th>WHEN</th><th>TASK</th><th>DETAIL</th></tr>
+  <tr><td>Day before</td><td>Check stock solutions</td>
+      <td>Use the solutions from previous years. Record each concentration here so the next
+      batch matches: ______________________. Top up any cup below about 1 cm deep.</td></tr>
+  <tr><td>Day before</td><td>Make the unknowns</td>
+      <td>Pour a sample cup of each and label only the letter:
+      <b>A = copper(II) nitrate · B = strontium chloride · C = potassium nitrate</b>
+      (your choice of copper, strontium and potassium).</td></tr>
+  <tr><td>Morning of</td><td>Load stations</td>
+      <td>Six stations, each with a burner, a striker, two labeled cups (layout below) and a cup of
+      clean sticks. Sticks per period = students × 12 tests.</td></tr>
+  <tr><td>Before 1st period</td><td>Room</td>
+      <td>Clear the sinks so used sticks can drop in. Notebooks stay closed and away from flames
+      except when recording.</td></tr>
+</table>
+
+<h3>Station layout</h3>
+<table class="grid">
+  <tr><th>STATION</th><th>SAMPLE 1</th><th>SAMPLE 2</th></tr>
+  <tr><td>1</td><td>Lithium chloride, LiCl</td><td>Sodium nitrate, NaNO<sub>3</sub></td></tr>
+  <tr><td>2</td><td>Potassium nitrate, KNO<sub>3</sub></td><td>Calcium nitrate, Ca(NO<sub>3</sub>)<sub>2</sub></td></tr>
+  <tr><td>3</td><td>Strontium chloride, SrCl<sub>2</sub></td><td>Barium nitrate, Ba(NO<sub>3</sub>)<sub>2</sub></td></tr>
+  <tr><td>4</td><td>Copper(II) nitrate, Cu(NO<sub>3</sub>)<sub>2</sub></td><td>Cobalt(II) chloride, CoCl<sub>2</sub></td></tr>
+  <tr><td>5</td><td>Iron nitrate (confirm which, above)</td><td>Unknown A — copper(II) nitrate</td></tr>
+  <tr><td>6</td><td>Unknown B — strontium chloride</td><td>Unknown C — potassium nitrate</td></tr>
+</table>
+
+<h2>TIMING — 50-MINUTE PERIOD</h2>
+<table class="grid">
+  <tr><th>MIN</th><th>PHASE</th><th>WATCH FOR</th></tr>
+  <tr><td>0–5</td><td>Pre-lab check, goggles on, hair tied</td><td>No pre-lab, no burner.</td></tr>
+  <tr><td>5–8</td><td>Part A: light burners at the first station</td><td>Yellow, smoky flames: open
+      the air.</td></tr>
+  <tr><td>8–38</td><td>Part B and C: six rotations of 5 minutes</td><td>Call "rotate" on the minute.
+      Groups that finish early wait; they do not drift.</td></tr>
+  <tr><td>38–45</td><td>Finish the table, compare with the group</td><td>Colors written from memory.</td></tr>
+  <tr><td>45–50</td><td>Cleanup, goggles off last</td><td>Sticks in the trash instead of the sink.</td></tr>
+</table>
+
+<h2 class="warn">FAILURE POINTS</h2>
+<ul class="dot">
+  <li><b>Everything looks yellow.</b> Sodium is everywhere, and the burning wood is yellow-orange.
+      Say: "Record the first two seconds, then the stick goes in the sink."</li>
+  <li><b>Potassium's lilac is faint.</b> Any trace of sodium swamps it. Students who see yellow
+      at station 2 or for unknown C usually re-dipped a stick or touched the tip.</li>
+  <li><b>Re-dipped sticks.</b> One dirty stick contaminates a cup for every later group. Watch
+      the first rotation closely.</li>
+  <li><b>The stick catches fire.</b> Usually from holding it in the flame too long. Tip out, into
+      the sink, new stick.</li>
+  <li><b>"Red" for three compounds.</b> Push for crimson, bright red or orange-red. Lithium,
+      strontium and calcium are where students lose the unknown.</li>
+</ul>
+
+<h2>EXPECTED RESULTS</h2>
+<p>A good group records the reference color for all seven ions on the table and names all three
+unknowns. A group that records "red" without more detail still gets A and C, but cannot separate
+B from lithium chloride: that is exactly post-lab question 2.</p>
+<table class="grid">
+  <tr><th>SAMPLE</th><th>EXPECTED (S2.5 NOTES)</th><th>WHAT STUDENTS OFTEN WRITE</th></tr>
+  <tr><td>LiCl · SrCl<sub>2</sub> · Ca(NO<sub>3</sub>)<sub>2</sub></td><td>Crimson red · red ·
+      orange-red</td><td>"Red" for all three</td></tr>
+  <tr><td>NaNO<sub>3</sub></td><td>Yellow</td><td>Yellow, strong and long-lasting</td></tr>
+  <tr><td>KNO<sub>3</sub></td><td>Lilac</td><td>Faint purple, or yellow if contaminated</td></tr>
+  <tr><td>Ba(NO<sub>3</sub>)<sub>2</sub> · Cu(NO<sub>3</sub>)<sub>2</sub></td><td>Pale green ·
+      blue-green</td><td>"Green" for both; copper is the brighter, bluer one</td></tr>
+  <tr><td>CoCl<sub>2</sub> · iron nitrate</td><td>Not on the reference table</td><td>Record what
+      your first class sees and add it here: ___________</td></tr>
+</table>
+
+<h2>SAFETY + DISPOSAL — NOT YET VERIFIED</h2>
+<ul class="dot">
+  <li>Nitrates as oxidizers (Na, K, Ca, Ba, Cu, Fe nitrate) — check each SDS. Verified on: ______</li>
+  <li>Barium, copper and cobalt compounds harmful by swallowing and on skin or eyes — check each
+      SDS. Verified on: ______</li>
+  <li>Strontium chloride and calcium nitrate eye hazard — check each SDS. Verified on: ______</li>
+  <li>Eyewash duration (15 minutes) — matches the room's standing procedure? Verified on: ______</li>
+  <li>Disposal: students pour nothing out; the cups are collected and stored. The end-of-year
+      disposal route for the copper, barium, cobalt and strontium stock solutions follows the
+      district chemical-waste policy — confirm it. Verified on: ______</li>
+  <li>Used sticks: collected from the sink after class, drained, and put in the trash.</li>
+  <li>Alconox cleanup block is the standing default and needs no per-lab check.</li>
+</ul>
+
+<div class="pagebreak"></div>
+<h2>PRE-LAB KEY</h2>
+<ol class="q">
+  <li>Ground and excited state. <span class="ans">The electron absorbs energy from the flame and
+      jumps from its ground state to a higher level (excited state). It drops back and gives off
+      the energy as a photon of light. Both terms must appear.</span></li>
+  <li>Same color, NaNO<sub>3</sub> and NaCl. <span class="ans">The metal ion (sodium) makes the
+      color, not the nitrate or chloride part.</span></li>
+  <li>Hardest pair. <span class="ans">Lithium (crimson red) and strontium (red); calcium
+      (orange-red) is also accepted with one of them. An unknown red could be either, so color
+      alone cannot decide.</span></li>
+  <li>Part B, step 2. <span class="ans">About 1 cm of the tip, for a few seconds; held at the
+      edge of the flame just above the blue inner cone.</span></li>
+  <li>Part B, step 3. <span class="ans">After two or three seconds the wood burns yellow-orange,
+      which is the stick's color, not the solution's.</span></li>
+  <li>Part B, steps 4–5. <span class="ans">It goes in the sink. A used stick carries the first
+      metal into the next cup and contaminates it for every later group.</span></li>
+  <li>Stick on fire. <span class="ans">Take it out of the flame and drop it in the sink; never on
+      the bench or the trash. Full credit needs both room locations written correctly.</span></li>
+  <li>Data table. <span class="ans">Twelve rows in station order, three columns, in ink; expected
+      colors filled from the reference table, with cobalt, iron and the unknowns left blank.</span></li>
+</ol>
+
+<h2>POST-LAB KEY</h2>
+<ol class="q">
+  <li>Identify A, B, C. <span class="ans">A: copper(II) nitrate, blue-green. B: strontium chloride,
+      red. C: potassium nitrate, lilac. Each needs the color from the student's own table. If a
+      student names lithium chloride for B and backs it with a crimson-red observation, give
+      partial credit and expect question 2 to catch it.</span></li>
+  <li>Unknown with two matches. <span class="ans">B (red) could be strontium chloride or lithium
+      chloride. The two reds are too close to separate by eye, so the color is a clue, not proof.
+      Accept another test or comparing B side by side with both known samples. Calcium nitrate is
+      also accepted as a second match.</span></li>
+  <li>A mismatch, with a cause. <span class="ans">Accept a real procedural cause tied to what they
+      saw: recording after the wood started burning (yellow-orange), a re-dipped or touched stick
+      bringing in sodium (yellow over lilac), holding the tip too low or too high in the flame
+      (faint color). For cobalt or iron, describing the color they saw and saying it is not on the
+      reference table is enough. "Human error" earns nothing.</span></li>
+</ol>
+
+<h2>GRADING</h2>
+<p>Suggested split, PROVISIONAL until you set it: pre-lab 8 (1 each) · data table 12 (1 per
+row with a specific color) · post-lab 6 (2 each). Carbonless copy is graded individually.</p>
+
+<h2>MISSED LAB</h2>
+<p>If the setup is already torn down, the student completes a Missed Lab Analysis rather
+than the class re-running the lab. Hand them a real class data table from this period (all twelve
+rows, unknowns labeled A to C only) and have them answer the pre-lab questions 1 to 3 and all three
+post-lab questions from it.</p>
+
+</body>
+</html>

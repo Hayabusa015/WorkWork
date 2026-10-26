@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>2.5 Lab - Flame Tests</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB DOCUMENT TEMPLATE (MASTER)  v1.0
+ Works for CHEMISTRY · PHYSICS · GEOLOGY
+=====================================================================
+
+ HOW TO USE
+ 1. Copy this file. Rename it using the doc-code grammar:
+       SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor].html
+ 2. On the <body> tag, set the course class:  chem  |  phys  |  geo
+ 3. Replace every [[ BRACKETED TOKEN ]]. Search for "[[" to find them all.
+ 4. Delete any block you do not need. Blocks are marked "BLOCK:" in comments.
+ 5. Render:  python3 build_lab.py yourfile.html
+ 6. File the PDF in:  [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ RULES BAKED IN — DO NOT OVERRIDE
+ · Ink-friendly. Outline and rule treatments only. No solid fills, no
+   shaded banners, no colored table headers.
+ · No write-lines, no answer spaces, no fillable data tables on the
+   handout. The lab notebook is the write-on surface. The pre-lab
+   instructs students to draw their own tables.
+ · Print palette is the same for all three courses. The per-course
+   accent palettes (Lab Lime / Kinetic / Terra Teal) are PROJECTION
+   ONLY and never touch a printed page.
+ · Margins are the confirmed SHULL print standard and are locked.
+=====================================================================
+-->
+
+<link rel="stylesheet" href="shull-lab-tokens.css">
+<style>
+  /* ---------- Locked SHULL print margins ---------- */
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+
+    @top-right {
+      content: string(runhead);
+      font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+      letter-spacing: 0.30em; color: var(--footer);
+      margin-top: 0.16in;
+    }
+    @bottom-left {
+      content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: string(footright);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  @page :first { @top-right { content: ""; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    font-size: 10.3pt;
+    line-height: 1.40;
+    color: var(--ink);
+  }
+
+  /* Brand values come from shull-lab-tokens.css, generated from brand/tokens.json.
+     Never hand-type a hex here. See SHULL-CHG-0008 for the colour-as-type rule. */
+
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  b, strong { font-weight: bold; }
+
+  /* string-set carriers — set once, used by every running head/footer */
+  .meta, .runhead { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code   { string-set: unitcode content(); }
+  .m-fright { string-set: footright content(); }
+
+  /* Any section can set the running header for the pages that follow */
+  .runhead { string-set: runhead content(); }
+
+  /* ---------- Masthead (page 1 only) ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 {
+    font-family: var(--display); font-weight: bold; font-size: 17pt;
+    line-height: 1.12; letter-spacing: -0.005em; flex: 1 1 auto;
+  }
+  .masthead h1 .accent { color: var(--accent); }   /* ONE accent word max */
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--accent); border-radius: 9pt;
+    padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  /* ---------- Name / Date / Period / Group ---------- */
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; }
+  .id-row .per  { flex: 1; }
+  .id-group { margin: 6pt 1pt 11pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 8.6pt;
+    letter-spacing: 0.20em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent);
+    padding-bottom: 2.5pt; margin: 13pt 0 6pt 0;
+  }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 {
+    font-family: var(--display); font-weight: 600; font-size: 10.2pt;
+    color: var(--ink); margin: 10pt 0 4pt 0;
+  }
+  h3 .flag {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--warn);
+    border: 0.8pt solid var(--warn-rule); border-radius: 7pt;
+    padding: 1.5pt 6pt; margin-left: 7pt; vertical-align: 1.5pt;
+  }
+
+  p { margin-bottom: 5pt; }
+  p.lead { margin-bottom: 7pt; }
+
+  /* ---------- Bulleted lists (goals, safety, materials) ---------- */
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3.5pt; }
+  /* Drawn, not typed. U+25AA is absent from Archivo, so a literal square bullet
+     dropped the whole run to the last-resort fallback and pulled Liberation Sans into
+     every lab PDF. A box needs no glyph and no font. */
+  ul.dot li::before {
+    content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent);
+  }
+
+  /* ---------- Numbered question lists (pre-lab, post-lab) ---------- */
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li {
+    counter-increment: q; position: relative;
+    padding-left: 20pt; margin-bottom: 7pt;
+    page-break-inside: avoid;
+  }
+  /* Just the number. No box. SHULL-CHG-0015 — the user's standing rule for every
+     numbered list in every format. Right-aligned so 9 and 10 line up. */
+  ol.q > li::before {
+    content: counter(q);
+    position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt;
+    color: var(--accent);
+    width: 13pt; text-align: right;
+  }
+  .ref {
+    font-family: var(--display); font-weight: 600; font-size: 6.4pt;
+    letter-spacing: 0.16em; color: var(--accent); white-space: nowrap;
+    margin-left: 5pt;
+  }
+
+  /* ---------- Numbered procedure ---------- */
+  ol.proc { margin: 3pt 0 4pt 17pt; }
+  ol.proc > li { margin-bottom: 4.5pt; page-break-inside: avoid; }
+  ol.proc ul { list-style: none; margin: 3pt 0 1pt 0; }
+  ol.proc ul li {
+    padding-left: 11pt; position: relative; margin-bottom: 2.5pt;
+    font-size: 9.9pt;
+  }
+  ol.proc ul li::before {
+    content: "–"; position: absolute; left: 1pt; color: var(--accent);
+  }
+
+  /* ---------- Formula callout (outline only) ---------- */
+  .formula {
+    border-left: 2.5pt solid var(--accent);
+    padding: 5pt 0 5pt 10pt; margin: 6pt 0 7pt 0;
+  }
+  .formula .fname {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2.5pt;
+  }
+  .formula .fx { font-family: var(--display); font-size: 10.6pt; font-weight: 500; }
+
+  /* ---------- Data-table skeletons students copy into the notebook ---- */
+  .tables { display: flex; gap: 10pt; margin-top: 7pt; align-items: flex-start; }
+  .tbl { flex: 1 1 0; page-break-inside: avoid; }
+  .tbl .cap {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; margin-bottom: 0;
+  }
+  .tbl table { width: 100%; border-collapse: collapse; }
+  .tbl td {
+    border-bottom: 0.6pt solid var(--rule-hairline);
+    padding: 3.2pt 2pt; font-size: 9.1pt; line-height: 1.25;
+  }
+  .tbl td.note {
+    font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); text-align: right; border-bottom: none;
+  }
+
+  /* ---------- Reference data table (e.g. accepted densities) ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
+  table.data th {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
+  }
+  table.data td {
+    padding: 3.6pt 4pt; font-size: 9.8pt;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+  }
+  .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
+
+  /* ---------- Two-column figure/table row ---------- */
+  .split { display: flex; gap: 14pt; align-items: flex-start; }
+  .split .wide { flex: 3 1 0; } .split .narrow { flex: 1 1 0; padding-top: 8pt; }
+  .figcap {
+    font-size: 8pt; color: var(--label); text-align: center;
+    margin-top: 4pt; line-height: 1.3;
+  }
+
+  /* ---------- Inline emphasis rule (the "read this" line) ---------- */
+  .rule-note {
+    border-top: 0.8pt solid var(--rule-hairline); border-bottom: 0.8pt solid var(--rule-hairline);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.9pt;
+  }
+
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body class="chem">
+
+<div class="meta">
+  <span class="m-course">CHEMISTRY</span>
+  <span class="m-code">U2 / S2.5</span>
+  <span class="m-fright">FLAME TEST LAB · CARBONLESS COPY GRADED INDIVIDUALLY</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">UNIT 2 — ELECTRONS &amp; ATOMIC THEORY · SECTION 5</div>
+  <div class="titlerow">
+    <h1>Flame Tests: Identifying Metal Ions by <span class="accent">Color</span></h1>
+    <div class="chip">U2 / S2.5</div>
+  </div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>
+  <div class="date"><div class="f">&nbsp;</div><div class="lbl">DATE</div></div>
+  <div class="per"><div class="f">&nbsp;</div><div class="lbl">PERIOD</div></div>
+</div>
+<div class="id-group">
+  <div class="f">&nbsp;</div><div class="lbl">GROUP MEMBERS</div>
+</div>
+
+<h2>GOALS</h2>
+<ul class="dot">
+  <li>Run a flame test safely: one clean stick per solution, tip in the flame for a few seconds.</li>
+  <li>Record the flame color of nine known compounds, and compare each one with its expected color.</li>
+  <li>Identify three unknowns by matching their flame colors to the known compounds.</li>
+  <li>Explain each color with ground and excited states: electrons absorb energy, drop back, and
+      give off light.</li>
+  <li>Record each color in your lab notebook the moment you see it, not from memory afterward.</li>
+</ul>
+
+<h2>PURPOSE</h2>
+<p class="lead">You will heat twelve solutions and watch the color each one gives the flame.
+Nine are known compounds and three are unknowns. By the end of the period you will name the
+three unknowns using nothing but the colors you recorded.</p>
+
+<h2>BACKGROUND</h2>
+<p><b>Heat excites electrons.</b> In the flame, electrons in the metal ions absorb energy and
+jump from their ground state to higher energy levels. That excited state does not last. Each
+electron drops back down and gives off the energy as a photon of light.</p>
+
+<p><b>The size of the drop sets the color.</b> A photon's energy equals the gap between the two
+levels. A bigger drop gives more energy and a shorter wavelength, toward violet. A smaller drop
+gives a longer wavelength, toward red. Each metal has its own set of energy levels, so each
+gives off its own mix of colors.</p>
+
+<p><b>The color comes from the metal ion.</b> Sodium nitrate and sodium chloride both give a
+yellow flame, because the sodium ion is doing the work. That is why the table below lists ions,
+not whole compounds. Two cautions: the wooden stick itself burns yellow-orange once it catches,
+so watch the <b>first two or three seconds</b>; and a color is a clue, not proof, because two ions
+can give nearly the same color.</p>
+
+<table class="data">
+  <tr><th>ION IN THE COMPOUND</th><th>SYMBOL</th><th>TYPICAL FLAME COLOR</th></tr>
+  <tr><td>Lithium</td><td>Li<sup>+</sup></td><td>Crimson red</td></tr>
+  <tr><td>Sodium</td><td>Na<sup>+</sup></td><td>Yellow</td></tr>
+  <tr><td>Potassium</td><td>K<sup>+</sup></td><td>Lilac</td></tr>
+  <tr><td>Calcium</td><td>Ca<sup>2+</sup></td><td>Orange-red</td></tr>
+  <tr><td>Strontium</td><td>Sr<sup>2+</sup></td><td>Red</td></tr>
+  <tr><td>Barium</td><td>Ba<sup>2+</sup></td><td>Pale green</td></tr>
+  <tr><td>Copper(II)</td><td>Cu<sup>2+</sup></td><td>Blue-green</td></tr>
+</table>
+<div class="caption">The same colors as your S2.5 notes. Cobalt and iron are not on this
+table: for those two, predict what you think you will see, then record what you actually see.</div>
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U2 / S2.5 · FLAME TEST LAB · SAFETY &amp; PRE-LAB</div>
+
+<h2 class="warn">SAFETY</h2>
+<ul class="dot">
+  <li>Splash goggles go on before any burner is lit and stay on until every station is cleaned
+      up, including while other groups are still testing.</li>
+  <li>Long hair is tied back and loose sleeves are pushed up before you reach toward a flame.
+      The flame on a burner can be nearly invisible in a bright room. Assume it is lit.</li>
+  <li>A wet stick can catch fire in the flame. Hold only the dry end, keep the tip in the flame
+      for just a few seconds, and if the tip keeps burning, drop it in the sink. Never set a
+      burning or used stick on the bench.</li>
+  <li>The nitrates on the list (sodium, potassium, calcium, barium, copper and iron nitrate) are
+      oxidizers: they make wood and paper burn faster. Keep paper, notebooks and the box of
+      clean sticks away from the flame.</li>
+  <li>Several solutions are harmful if swallowed or if they touch your skin or eyes, especially
+      the barium, copper and cobalt compounds. Never taste, smell or touch a solution. If one
+      gets on your skin, rinse it with running water and tell me. In your eyes: go straight to
+      the eyewash, hold your eyelids open for at least 15 minutes, and send a group member for
+      me immediately.</li>
+  <li>Do not pick up or move a sample cup. If one tips over, step back and tell me. Do not wipe
+      it up yourself.</li>
+  <li>Report every spill, including water. Water on the floor is how people fall.</li>
+</ul>
+
+<h2>PRE-LAB — DUE AT THE START OF THE PERIOD</h2>
+<p class="lead">Answer all of these in your lab notebook, numbered 1 through 8, before you walk
+in. Do not write on this handout. You will not be allowed to light a burner without the pre-lab
+finished.</p>
+
+<ol class="q">
+  <li>Use the words <b>ground state</b> and <b>excited state</b> to describe what happens to an
+      electron in the flame, from the moment it absorbs energy to the moment light comes out.</li>
+  <li>Sodium nitrate and sodium chloride give the same flame color. What does that tell you about
+      which part of a compound makes the color?</li>
+  <li>Look at the reference table. Name the two ions whose colors are hardest to tell apart, and
+      explain why that is a problem when you are identifying an unknown.</li>
+  <li>Read Part B, step 2. How much of the stick goes into the solution, and where do you hold
+      it in the flame?</li>
+  <li>Read Part B, step 3. Why do you record the color from the first two or three seconds and
+      not after that?</li>
+  <li>Read Part B, steps 4 and 5. What happens to a stick after one test, and why is a stick
+      never dipped into a second solution?</li>
+  <li>The tip of your stick catches fire and keeps burning. Say exactly what you do. Then write
+      where the fire blanket and the eyewash are in this room.</li>
+  <li>Set up the data table in your notebook, in ink, exactly as shown below: one row for each
+      of the twelve samples. Fill in the <b>Expected color</b> column from the reference table
+      before you walk in. For cobalt, iron and the unknowns, leave it blank.</li>
+</ol>
+
+<div class="tables">
+  <div class="tbl">
+    <div class="cap">TABLE 1 · FLAME TEST RESULTS (12 ROWS: STATIONS 1–6, TWO SAMPLES EACH)</div>
+    <table>
+      <tr><td><b>Compound (name and formula)</b></td><td><b>Expected color</b></td><td><b>Actual color</b></td></tr>
+      <tr><td>Lithium chloride, LiCl</td><td></td><td></td></tr>
+      <tr><td>Sodium nitrate, NaNO<sub>3</sub></td><td></td><td></td></tr>
+      <tr><td>… one row for each sample, in station order …</td><td></td><td></td></tr>
+      <tr><td>Unknown C</td><td></td><td></td></tr>
+    </table>
+  </div>
+</div>
+
+
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U2 / S2.5 · FLAME TEST LAB · PROCEDURE</div>
+
+<h2>MATERIALS</h2>
+<p><b>At each of the six stations:</b> Bunsen burner and striker · two labeled sample cups of
+solution · a cup of clean wooden stir sticks (one per test, per student) · nothing else on the
+bench but your lab notebook, closed and away from the flame.</p>
+
+<table class="data">
+  <tr><th>STATION</th><th>SAMPLE 1</th><th>SAMPLE 2</th></tr>
+  <tr><td>1</td><td>Lithium chloride, LiCl</td><td>Sodium nitrate, NaNO<sub>3</sub></td></tr>
+  <tr><td>2</td><td>Potassium nitrate, KNO<sub>3</sub></td><td>Calcium nitrate, Ca(NO<sub>3</sub>)<sub>2</sub></td></tr>
+  <tr><td>3</td><td>Strontium chloride, SrCl<sub>2</sub></td><td>Barium nitrate, Ba(NO<sub>3</sub>)<sub>2</sub></td></tr>
+  <tr><td>4</td><td>Copper(II) nitrate, Cu(NO<sub>3</sub>)<sub>2</sub></td><td>Cobalt(II) chloride, CoCl<sub>2</sub></td></tr>
+  <tr><td>5</td><td>Iron(II) nitrate, Fe(NO<sub>3</sub>)<sub>2</sub></td><td>Unknown A</td></tr>
+  <tr><td>6</td><td>Unknown B</td><td>Unknown C</td></tr>
+</table>
+
+<h2>PROCEDURE</h2>
+
+<h3>Part A — Set up at your first station</h3>
+<ol class="proc">
+  <li>Go to the station I assign. Goggles on, hair tied back, sleeves up.</li>
+  <li>Light the burner the way you learned in the Intro Skills Lab, and adjust it to a steady blue
+      flame with a visible inner cone.</li>
+  <li>Read both labels. Find those two rows in your table before you test anything.</li>
+</ol>
+
+<h3>Part B — Test each solution <span class="flag">ABOUT 5 MINUTES PER STATION</span></h3>
+<ol class="proc">
+  <li>Take one clean stick for each student in your group. Hold it by the dry end.</li>
+  <li>Dip only the tip, about 1 cm, into the first solution for a few seconds. Then hold the wet
+      tip at the edge of the flame, just above the blue inner cone.</li>
+  <li>Watch the color the instant the tip enters the flame. Record it in the <b>Actual color</b>
+      column before you do anything else.
+    <ul>
+      <li>After two or three seconds the wood itself starts to burn yellow-orange. That color is
+          the stick, not the solution. Do not record it.</li>
+      <li>Each person tests and records their own sample. Compare colors with your group, but
+          write what you saw.</li>
+    </ul>
+  </li>
+  <li>Drop the used stick in the sink. Never put a used stick back into any solution: it carries
+      the first metal into the second sample and every group after you sees the wrong color.</li>
+  <li>Repeat steps 1–4 with the second solution, using new sticks.</li>
+  <li>Leave the burner lit. When I call "rotate," move to the next station number (station 6
+      moves to station 1). Do not move early.</li>
+</ol>
+
+<h3>Part C — The unknowns</h3>
+<ol class="proc">
+  <li>Unknowns A, B and C are tested at stations 5 and 6 exactly like the others. Each one is a
+      compound you have already tested.</li>
+  <li>Record the actual color in the unknown's row. Leave the identification for the post-lab.</li>
+</ol>
+
+<h2>DATA TABLES</h2>
+<p>You built Table 1 in your pre-lab. Have it open and ready before the first stick goes into a
+solution, and fill in each color <b>as you see it</b>, not at the end of the period.</p>
+<div class="rule-note">
+  Describe the color you see, not the color you expect. "Red" is not enough when there are two
+  reds on the table: say crimson, bright red or orange-red, and whether it was strong or faint.
+  If you write something wrong, draw one line through it and write the correction beside it.
+</div>
+
+<h2 class="warn">DISPOSAL AND CLEANUP — LAST FIVE MINUTES</h2>
+<ol class="proc">
+  <li>Every used stick goes in the sink, never the trash can, where a smoldering stick could
+      start a fire. I collect them from the sink after class.</li>
+  <li>The sample cups stay at their stations, exactly where they were. Do not pour any solution
+      out, down the drain or anywhere else. I collect and store them.</li>
+  <li>Turn the gas off at the valve, then leave the burner where it is until it is cool to touch.
+      Put the box of clean sticks back on the cart.</li>
+  <li><b>Wash all glassware with the Alconox solution in the blue spray bottle.</b> Spray inside,
+      scrub with a brush, and rinse thoroughly — soap left in a beaker changes the next
+      measurement made in it.</li>
+  <li>Rinse with distilled water and invert everything on the rack to dry.</li>
+  <li>Wipe your bench, push in your stool, and wash your hands. <b>Goggles come off last</b>, once
+      the whole room is finished — not once you are.</li>
+</ol>
+
+<div class="runhead">U2 / S2.5 · FLAME TEST LAB · POST-LAB</div>
+<h2>POST-LAB ANALYSIS</h2>
+<p class="lead">Answer these in your lab notebook, numbered 1 through 3.</p>
+
+<ol class="q">
+  <li>Identify unknowns A, B and C. For each one, name the known compound it matches and the
+      color evidence from your table.  <span class="ref">PART C</span></li>
+  <li>Pick one unknown that could have matched two different known compounds. Name both, explain
+      why the flame color alone could not settle it, and say what you would use to decide.
+      <span class="ref">REFERENCE TABLE</span></li>
+  <li>Find one compound whose actual color did not match its expected color, or cobalt or iron,
+      which had no expected color. Give a specific reason from the procedure that could explain
+      what you saw. "Human error" is not a reason.  <span class="ref">PART B</span></li>
+</ol>
+
+</body>
+</html>
