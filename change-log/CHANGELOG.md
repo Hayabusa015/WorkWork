@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-26
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | 2026-10-26 | Chemistry U3: quiz replaces unit test; 3.5 dropped | PROPOSED | `governance/proposals/SHULL-CHG-0054-chem-u3-short-unit.md` |
+
 ## 2026-10-22
 
 Two sessions independently drafted SHULL-CHG-0046 through 0052 in parallel (see each record's
