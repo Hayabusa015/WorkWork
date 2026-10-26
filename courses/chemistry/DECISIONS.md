@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-10-15
+**Last updated:** 2026-10-26
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -32,10 +32,10 @@ See the 2026-09-23 decision-log entry.
 2.1 The Bohr Model · 2.2 Energy Levels, Sublevels & Orbitals · 2.3 Electron Configurations ·
 2.4 Electron Stability & Valence Electrons · 2.5 Atomic & Electron Spectra
 
-**U3 The Periodic Table** (7 sections)
+**U3 The Periodic Table** (7 section codes, 6 taught) — *3.5 is dropped; see the log*
 3.1 Organization, Families & Groups · 3.2 Metals, Nonmetals & Metalloids · 3.3 Atomic & Ionic
-Radius · 3.4 Ionization Energy & Electronegativity · 3.5 Additional Periodic Trends · 3.6
-Explaining Periodic Trends · 3.7 Ion Formation
+Radius · 3.4 Ionization Energy & Electronegativity · 3.5 Additional Periodic Trends — DROPPED,
+code retired, never reused · 3.6 Explaining Periodic Trends · 3.7 Ion Formation
 
 ### Phase 2 — Bonding Logic (U4–U7)
 
@@ -152,6 +152,9 @@ rigor, strong distractors from real misconceptions.
 **Day 2, computational:** ~5 free-response calculation problems, partial credit available,
 work and units required. Covers the current unit only — never insert an earlier-unit
 calculation just to make it cumulative.
+
+**Exception — U3 only:** U3 ends with one quiz in the Quizzes shape above, not a unit test. Every
+other unit keeps the two-day test. See the 2026-10-26 decision-log entry.
 
 Brief durable-skill recall may appear on quizzes and the conceptual test; the computational
 test stays focused on the current unit. No curve. No retakes. Study guides align to concepts
@@ -354,6 +357,17 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 2.3 | Electron Configs |
 
 ## Decision log
+
+### 2026-10-26 — U3: a quiz replaces the unit test; 3.5 Additional Periodic Trends dropped
+U3 The Periodic Table ends with a single quiz in the standard quiz shape (Assessment shape →
+Quizzes) instead of the two-day unit test. This is a U3-only exception; every other unit keeps the
+two-day test. Section 3.5 Additional Periodic Trends is dropped. The code 3.5 is retired and never
+reused; 3.6 Explaining Periodic Trends and 3.7 Ion Formation keep their codes, so nothing is
+renumbered. Decided by Matt 2026-10-26 while planning a short U3 ("Quiz replaces the test, drop
+3.5, build all of it"), in answer to whether the quiz replaces the U3 test and what 3.5 contains.
+Supersedes: Assessment shape, "Unit tests — two days", as applied to U3; Curriculum map, U3 line,
+"3.5 Additional Periodic Trends" as a taught section.
+Status: CONFIRMED · SHULL-CHG-0054
 
 ### 2026-09-23 — U1: 1.4 Isotopes folded into 1.3 Atomic Structure
 Isotope content is taught in 1.3 Atomic Structure and chipped U01 / S01.3. The code 1.4 is
