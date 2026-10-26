@@ -41,7 +41,7 @@ def question(doc, pal, n, q, key=False):
     run(p, q["prompt"], 10, color=pal.ink)
     run(p, "\t", 10)
     pts = f"{q['points']} pt" + ("s" if q["points"] != 1 else "")
-    run(p, f"S{q.get('sectionLabel', q['section'])}  ·  {pts}", 7, bold=True, color=pal.label)
+    run(p, f"S{q.get('sectionLabel', q['section'])}  ·  {pts}", 8, bold=True, color=pal.label)
     for part in q.get("parts", []):
         para(c, part, 10, color=pal.ink)
         if not key:
@@ -71,7 +71,7 @@ def build(spec, pal, version, qs, key, out):
     gap(doc, 8)
     if not key:
         p = para(doc, "Answer every question. For an explanation, name the trend, compare the atoms, and give "
-                      "the cause. Write charges after the symbol, number first: Mg2+, O2−.", 9.5, color=pal.ink)
+                      "the cause. Write charges after the symbol, number first: Mg^{2+}, O^{2−}.", 9.5, color=pal.ink)
         gap(doc, 6)
     for n, q in enumerate(qs, 1):
         question(doc, pal, n, q, key)

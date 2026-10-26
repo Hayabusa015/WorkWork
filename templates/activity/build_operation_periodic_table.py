@@ -116,7 +116,7 @@ def cards_pages(doc, pal, spec):
                 for k, v in card_rows(card):
                     q = para(cell, "", 8.5)
                     q.paragraph_format.space_after = Pt(1)
-                    run(q, k.upper() + "  ", 7, bold=True, color=pal.label)
+                    run(q, k.upper() + "  ", 8, bold=True, color=pal.label)
                     run(q, str(v), 10, color=pal.ink)
             gap(doc, 6)
 
@@ -148,7 +148,9 @@ def build_student(spec, pal, code, out):
         ("Sort into families (10 min).  ", "Use the ion each element forms. You should end up with five families."),
         ("Order each family (10 min).  ", "Smallest atom at the top. Check the order against ionization energy."),
         ("Line up the rows (10 min).  ", "Put the families side by side so atoms shrink from left to right "
-                                         "along each row, the way they do across a real period. One row has a gap."),
+                                         "along each row, the way they do across a real period. Two clues: the "
+                                         "smallest atom of all sits alone in the top row, at the right. The "
+                                         "missing element is in the middle of its family, not at either end."),
         ("Record and predict (10 min).  ", "Copy your table onto the grid on page 2 and fill in your predictions."),
     ], numbered=True)
     gap(doc, 6)
@@ -231,8 +233,9 @@ def build_key(spec, pal, code, out):
 
     page_break(doc)
     plain(doc, pal, "WHERE THE DATA BREAKS THE TREND — GOOD DISCUSSION, NOT A MISTAKE", [
-        ("Group 14 electronegativity  ", "goes 2.55, 1.90, (2.01), 1.96, 2.33. Real data. Teams that order "
-         "group 14 by electronegativity get Sn and Pb wrong. Radius gives the right order."),
+        ("Group 14 electronegativity  ", "goes 2.55, 1.90, (2.01), 1.96, 2.33. These are the values most "
+         "tables print; for Sn and Pb they belong to the 4+ state (2+ values are near 1.8–1.9), so tables "
+         "disagree. Teams that order group 14 by electronegativity get Sn and Pb wrong. Radius gives the right order."),
         ("Lead vs. tin ionization energy:  ", "Pb 716 is slightly above Sn 709. Again, radius sorts it."),
         ("Group 2 melting points  ", "jump around (Be 1287, Mg 650, Ca 842, Sr 777, Ba 727). Melting point is "
          "weak evidence for order."),
@@ -241,6 +244,8 @@ def build_key(spec, pal, code, out):
         ("Radii are calculated values  ", "(one consistent source), so they will not match the Gizmo's numbers. "
          "The trend is the same."),
         ("Hydrogen is left out  ", "because it fits no family cleanly. That is why period 1 holds only one card."),
+        ("The two round-3 clues  ", "pin the layout. Without them, sliding the noble gases down a row, or leaving "
+         "the gap at the bottom of group 14, also keeps every row shrinking left to right."),
     ])
     gap(doc, 6)
     plain(doc, pal, "AFTER THE REVEAL — MODEL ANSWERS", [

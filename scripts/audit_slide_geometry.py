@@ -115,11 +115,14 @@ def overflow_check(shapes, fills, label):
         box_w = box[2] - box[0]
         total_lines, size = 0, None
         for para in sh.text_frame.paragraphs:
-            for run in para.runs:
-                if not run.text.strip():
-                    continue
-                size = run.font.size.pt if run.font.size else 18
-                total_lines += wrapped_lines(run.text, size, bool(run.font.bold), box_w)
+            # Measure the paragraph, not each run: a superscript charge splits "Ca2+: cation"
+            # into three runs on one line, and counting each run as its own line overcounts.
+            runs = [r for r in para.runs if r.text]
+            if not "".join(r.text for r in runs).strip():
+                continue
+            size = max(r.font.size.pt if r.font.size else 18 for r in runs)
+            bold = any(bool(r.font.bold) for r in runs)
+            total_lines += wrapped_lines("".join(r.text for r in runs), size, bold, box_w)
         if not size or not total_lines:
             continue
 

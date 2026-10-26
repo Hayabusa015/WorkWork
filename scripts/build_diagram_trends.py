@@ -107,9 +107,13 @@ def ion_sizes():
         col = white if ion else asphalt
         if ion:
             d.ellipse(box, fill=accent)
-            d.text((s(cx) + s(4), cy), sym, font=f_sym, fill=col, anchor="rm")
             # Archivo has no superscript plus/minus glyphs, so the charge is set small and raised.
-            d.text((s(cx) + s(6), cy - s(16)), charge, font=f_chg, fill=col, anchor="lm")
+            # Symbol and charge are centred as one unit so the pair stays inside the circle.
+            f_ion = font("Archivo-Bold.ttf", 42)
+            sw, chw = d.textlength(sym, font=f_ion), d.textlength(charge, font=f_chg)
+            left = s(cx) - (sw + chw + s(2)) / 2
+            d.text((left, cy), sym, font=f_ion, fill=col, anchor="lm")
+            d.text((left + sw + s(2), cy - s(14)), charge, font=f_chg, fill=col, anchor="lm")
         else:
             d.ellipse(box, outline=asphalt, width=s(3))
             d.text((s(cx), cy), sym, font=f_sym, fill=col, anchor="mm")
@@ -124,7 +128,56 @@ def ion_sizes():
     print(f"wrote {os.path.relpath(out, REPO)}  {im.width}x{im.height}")
 
 
+def cells_row(d, labels, hi, y, cw, ch, x0, f, white, ink, accent, graphite, under=None, f_under=None):
+    for i, lab in enumerate(labels):
+        box = [x0 + i * cw, y, x0 + (i + 1) * cw - s(6), y + ch]
+        on = i in hi
+        d.rectangle(box, outline=graphite, width=s(2), fill=accent if on else None)
+        d.text(((box[0] + box[2]) // 2, y + ch // 2), lab, font=f, fill=white if on else ink, anchor="mm")
+        if under:
+            d.text(((box[0] + box[2]) // 2, y + ch + s(18)), under[i], font=f_under,
+                   fill=accent if on else ink, anchor="ma")
+
+
+def worked_strips():
+    """Small figures for the data slot of the three worked-solution slides (4.23 x 2.48 in).
+    Text is at least 48 of 900 px, so it clears 16pt once placed."""
+    white, asphalt, graphite, hair, accent = tokens()
+    f = font("Archivo-Bold.ttf", 52)
+    f_u = font("Archivo-SemiBold.ttf", 48)
+
+    im = Image.new("RGB", (W, H), white); d = ImageDraw.Draw(im)
+    cells_row(d, ["Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar"], {0, 6}, s(200), s(110), s(120),
+              s(10), f, white, asphalt, accent, graphite)
+    d.text((s(450), s(110)), "PERIOD 3", font=f_u, fill=asphalt, anchor="mm")
+    d.text((s(450), s(410)), "same 3 energy levels", font=f_u, fill=asphalt, anchor="mm")
+    im.save(os.path.join(ASSETS, "chem_u03_s3.6_period3.png"))
+
+    im = Image.new("RGB", (W, H), white); d = ImageDraw.Draw(im)
+    syms = ["Be", "Mg", "Ca", "Sr", "Ba"]
+    for i, sym in enumerate(syms):
+        y = s(20) + i * s(100)
+        box = [s(130), y, s(330), y + s(90)]
+        on = sym in ("Mg", "Ba")
+        d.rectangle(box, outline=graphite, width=s(2), fill=accent if on else None)
+        d.text((s(230), y + s(45)), sym, font=f, fill=white if on else asphalt, anchor="mm")
+        d.text((s(370), y + s(45)), f"{i + 2} levels", font=f_u,
+               fill=accent if on else asphalt, anchor="lm")
+    im.save(os.path.join(ASSETS, "chem_u03_s3.6_group2.png"))
+
+    im = Image.new("RGB", (W, H), white); d = ImageDraw.Draw(im)
+    groups = ["1", "2", "13", "14", "15", "16", "17", "18"]
+    charges = ["1+", "2+", "3+", "—", "3−", "2−", "1−", "—"]
+    d.text((s(450), s(90)), "GROUP", font=f_u, fill=asphalt, anchor="mm")
+    cells_row(d, groups, {1, 5}, s(150), s(110), s(110), s(10), f, white, asphalt, accent, graphite,
+              under=charges, f_under=f)
+    d.text((s(450), s(440)), "usual ion charge", font=f_u, fill=asphalt, anchor="mm")
+    im.save(os.path.join(ASSETS, "chem_u03_s3.7_group_charges.png"))
+    print("wrote three worked-solution strips")
+
+
 if __name__ == "__main__":
     trend_arrows()
     ion_sizes()
+    worked_strips()
     sys.exit(0)

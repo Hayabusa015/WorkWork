@@ -3,7 +3,7 @@
   "unit": 3,
   "section": "3.6",
   "sectionTitle": "Trends and Ions",
-  "note": "Day 3 of the short U3 (SHULL-CHG-0054). Covers 3.4 electronegativity, 3.6 explaining the trends, 3.7 ion formation; comes after the Periodic Trends Gizmo (radius, IE, metallic character). One deck spans three sections, so each slide sets its own footer code and the file is named at unit level. Charges are written Na+ / Cl− on the baseline because Archivo has no superscript plus or minus; the minus is U+2212.",
+  "note": "Day 3 of the short U3 (SHULL-CHG-0054). Covers 3.4 electronegativity, 3.6 explaining the trends, 3.7 ion formation; comes after the Periodic Trends Gizmo (radius, IE, metallic character). One deck spans three sections, so each slide sets its own footer code and the file is named at unit level. Charges use ^{...} superscript markup (build_deck.js richText); the minus is U+2212.",
   "slides": [
     {
       "master": "02_SECTION_TITLE",
@@ -13,7 +13,9 @@
         "subhead": "Electronegativity, why the trends happen, and the ions atoms form.",
         "code": "U03 • S03.4"
       },
-      "imageSubjects": { "section": "a printed periodic table wall chart on a lab wall, shallow angle, soft light" }
+      "imageSubjects": {
+        "section": "a row of sealed glass vials holding element samples: a gray metal, yellow sulfur, a red-brown liquid"
+      }
     },
     {
       "master": "06_CONCEPT_IMAGE",
@@ -23,7 +25,9 @@
         "keyq": "Why would a smaller atom hold on to its electrons more tightly?",
         "code": "U03 • S03.4"
       },
-      "imageSubjects": { "concept": "a magnet holding steel paper clips, close-up, dark bench" }
+      "imageSubjects": {
+        "concept": "a magnet holding steel paper clips, close-up, dark bench"
+      }
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -39,7 +43,9 @@
         "mustwrite": "Electronegativity is an atom's pull on the electrons it shares in a bond.",
         "code": "U03 • S03.4"
       },
-      "imageSubjects": { "aside": "a chemistry notebook open to a hand-ruled vocabulary page" }
+      "imageSubjects": {
+        "aside": "a chemistry notebook open to a hand-ruled vocabulary page"
+      }
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -53,7 +59,9 @@
         "mustwrite": "Both rise across a period and fall down a group.",
         "code": "U03 • S03.4"
       },
-      "imageSubjects": { "concept": "two hands pulling on opposite ends of a rope, cropped tight" }
+      "imageSubjects": {
+        "concept": "two hands pulling on opposite ends of a rope, cropped tight"
+      }
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -69,7 +77,9 @@
         "mustwrite": "Electronegativity increases across a period and decreases down a group.",
         "code": "U03 • S03.4"
       },
-      "imageSubjects": { "aside": "a sealed glass ampoule of pale yellow gas" }
+      "imageSubjects": {
+        "aside": "a sealed glass ampoule of pale yellow gas"
+      }
     },
     {
       "master": "04_DIVIDER",
@@ -79,7 +89,9 @@
         "subhead": "Two ideas explain radius, ionization energy and electronegativity.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "divider": "a dark bench with a single glowing hydrogen discharge tube" }
+      "imageSubjects": {
+        "divider": "a dark bench with a single glowing hydrogen discharge tube"
+      }
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -93,22 +105,26 @@
         "mustwrite": "More protons pull harder. More energy levels put electrons farther out.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "concept": "concentric ripples on dark water seen from above" }
+      "imageSubjects": {
+        "concept": "concentric ripples on dark water seen from above"
+      }
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
       "fields": {
         "headline": "One Picture, Three Trends",
-        "subhead": "Copy these arrows onto the table from your Gizmo sheet.",
+        "subhead": "Label the arrows on your Gizmo sheet, including the diagonal.",
         "a1_l": "ACROSS A PERIOD",
-        "a1_b": "Same levels, more protons: smaller, tighter grip.",
+        "a1_b": "Radius shrinks. Ionization energy and EN rise.",
         "a2_l": "DOWN A GROUP",
-        "a2_b": "One more level each row: bigger, looser grip.",
-        "a3_l": "THE CORNERS",
-        "a3_b": "Green is fluorine (tightest). Black is cesium (loosest).",
+        "a2_b": "Radius grows. Ionization energy and EN fall.",
+        "a3_l": "THE DIAGONAL",
+        "a3_b": "Metallic character: highest at cesium (black).",
         "code": "U03 • S03.6"
       },
-      "images": { "diagram": "../assets/chem_u03_s3.6_trend_arrows.png" }
+      "images": {
+        "diagram": "../assets/chem_u03_s3.6_trend_arrows.png"
+      }
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -124,7 +140,9 @@
         "mustwrite": "Same period: compare protons. Same group: compare energy levels.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "aside": "a small pile of sodium metal under oil in a dish" }
+      "imageSubjects": {
+        "aside": "a small pile of sodium metal under oil in a dish"
+      }
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -137,7 +155,9 @@
         "mustwrite": "Across a period, more protons pull the electrons in closer.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "data": "none" }
+      "images": {
+        "data": "../assets/chem_u03_s3.6_period3.png"
+      }
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -153,7 +173,9 @@
         "mustwrite": "Name the trend first, then give the reason.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "aside": "a strip of magnesium ribbon coiled on a watch glass" }
+      "imageSubjects": {
+        "aside": "a strip of magnesium ribbon coiled on a watch glass"
+      }
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -166,7 +188,9 @@
         "mustwrite": "Down a group, outer electrons are farther away and easier to remove.",
         "code": "U03 • S03.6"
       },
-      "imageSubjects": { "data": "none" }
+      "images": {
+        "data": "../assets/chem_u03_s3.6_group2.png"
+      }
     },
     {
       "master": "04_DIVIDER",
@@ -176,7 +200,9 @@
         "subhead": "Atoms gain or lose electrons until they match the nearest noble gas.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "divider": "table salt crystals under a hand lens, macro, dark ground" }
+      "imageSubjects": {
+        "divider": "table salt crystals under a hand lens, macro, dark ground"
+      }
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -184,15 +210,17 @@
         "headline": "Metals Lose, Nonmetals Gain",
         "subhead": "Each one ends with the electron arrangement of a noble gas.",
         "k1_l": "GROUP 1",
-        "k1_b": "Loses 1 electron\nCharge 1+\nNa becomes Na+",
+        "k1_b": "Loses 1 electron\nCharge 1+\nNa becomes Na^{+}",
         "k2_l": "GROUP 2",
-        "k2_b": "Loses 2 electrons\nCharge 2+\nMg becomes Mg2+",
+        "k2_b": "Loses 2 electrons\nCharge 2+\nMg becomes Mg^{2+}",
         "k3_l": "GROUP 17",
-        "k3_b": "Gains 1 electron\nCharge 1−\nCl becomes Cl−",
+        "k3_b": "Gains 1 electron\nCharge 1−\nCl becomes Cl^{−}",
         "mustwrite": "Metals lose electrons and form cations. Nonmetals gain electrons and form anions.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "aside": "a beaker of clear salt water on a white bench" }
+      "imageSubjects": {
+        "aside": "a beaker of clear salt water on a white bench"
+      }
     },
     {
       "master": "07_COMPARISON_CARDS",
@@ -200,15 +228,17 @@
         "headline": "The Rest of the Main Groups",
         "subhead": "Group 14 usually shares electrons instead. That is Unit 4.",
         "k1_l": "GROUP 13",
-        "k1_b": "Loses 3 electrons\nCharge 3+\nAl becomes Al3+",
+        "k1_b": "Loses 3 electrons\nCharge 3+\nAl becomes Al^{3+}",
         "k2_l": "GROUPS 15 AND 16",
-        "k2_b": "Gain 3 or 2 electrons\nCharge 3− or 2−\nN3−, O2−",
+        "k2_b": "Gain 3 or 2 electrons\nCharge 3− or 2−\nN^{3−}, O^{2−}",
         "k3_l": "GROUP 18",
         "k3_b": "Already stable\nNo ion",
         "mustwrite": "The charge is the number of electrons lost (+) or gained (−).",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "aside": "a roll of aluminum foil, edge on, soft light" }
+      "imageSubjects": {
+        "aside": "a roll of aluminum foil, edge on, soft light"
+      }
     },
     {
       "master": "08_DIAGRAM_ANNOTATION",
@@ -223,7 +253,9 @@
         "a3_b": "Na 186 pm to 102 pm. Cl 99 pm to 181 pm.",
         "code": "U03 • S03.7"
       },
-      "images": { "diagram": "../assets/chem_u03_s3.7_ion_size.png" }
+      "images": {
+        "diagram": "../assets/chem_u03_s3.7_ion_size.png"
+      }
     },
     {
       "master": "09_EXAMPLE_PROBLEM",
@@ -239,7 +271,9 @@
         "mustwrite": "For main-group elements, the group tells you the charge.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "aside": "a lump of yellow sulfur on a watch glass" }
+      "imageSubjects": {
+        "aside": "a lump of yellow sulfur on a watch glass"
+      }
     },
     {
       "master": "10_WORKED_SOLUTION",
@@ -248,11 +282,13 @@
         "subhead": "Charge first, then size.",
         "f1_l": "SETUP",
         "f1_b": "Ca loses 2 electrons\nS gains 2 electrons",
-        "work": "Ca2+: cation, smaller\nS2−: anion, larger\nS2− is larger than S.",
+        "work": "Ca^{2+}: cation, smaller\nS^{2−}: anion, larger\nS^{2−} is larger than S.",
         "mustwrite": "A cation is smaller than its atom. An anion is larger.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "data": "none" }
+      "images": {
+        "data": "../assets/chem_u03_s3.7_group_charges.png"
+      }
     },
     {
       "master": "03_GROUPED_CONCEPT",
@@ -263,10 +299,28 @@
         "c1_b": "Lowest to highest:\n\nK, Br, Ca",
         "c2_l": "PREDICT THE ION",
         "c2_b": "Write the ion each forms:\n\nLi, O, Al",
-        "mustwrite": "Answers: K < Ca < Br. Li+, O2−, Al3+.",
+        "mustwrite": "Write both answers before the next slide.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "concept": "a stopwatch on a lab bench" }
+      "imageSubjects": {
+        "concept": "a stopwatch on a lab bench"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Check Yourself, Answers",
+        "subhead": "Fix anything you missed in your notes.",
+        "c1_l": "ELECTRONEGATIVITY",
+        "c1_b": "K < Ca < Br\n\nAll three are in period 4. EN rises left to right.",
+        "c2_l": "IONS",
+        "c2_b": "Li^{+}, O^{2−}, Al^{3+}\n\nGroups 1, 16 and 13.",
+        "mustwrite": "Metals form positive ions. Nonmetals form negative ions.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": {
+        "concept": "a red pen resting on a marked-up worksheet"
+      }
     },
     {
       "master": "04_DIVIDER",
@@ -276,7 +330,9 @@
         "subhead": "23 mystery elements. Your team places them using today's trends.",
         "code": "U03 • S03.7"
       },
-      "imageSubjects": { "divider": "a scatter of blank index cards on a dark table" }
+      "imageSubjects": {
+        "divider": "a scatter of blank index cards on a dark table"
+      }
     }
   ]
 }

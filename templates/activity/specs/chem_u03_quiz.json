@@ -11,7 +11,7 @@
  ],
  "docType": "Quiz",
  "timeTargetMin": "15",
- "note": "Ends U3 in place of the unit test (SHULL-CHG-0054). Quiz shape from courses/chemistry/DECISIONS.md: 6 questions, 3 parallel versions, same blueprint and points. Charges are written on the baseline (Sr2+, Br−) because Archivo has no superscript plus/minus.",
+ "note": "Ends U3 in place of the unit test (SHULL-CHG-0054). Quiz shape from courses/chemistry/DECISIONS.md: 6 questions, 3 parallel versions, same blueprint and points. Charges use ^{...} superscript markup, rendered by _shull_docx.run.",
  "versions": {
   "A": [
    {
@@ -57,17 +57,17 @@
    },
    {
     "prompt": "Write the ion each element forms: strontium, bromine, aluminum.",
-    "answer": "Sr2+, Br−, Al3+",
-    "solution": "Sr2+ (group 2), Br− (group 17), Al3+ (group 13). 1 point each; the charge must have the right sign and number.",
+    "answer": "Sr^{2+}, Br^{−}, Al^{3+}",
+    "solution": "Sr^{2+} (group 2), Br^{−} (group 17), Al^{3+} (group 13). 1 point each; the charge must have the right sign and number.",
     "section": "3.7",
     "points": 3,
     "lines": 1,
     "item": "ion"
    },
    {
-    "prompt": "Which is larger, a calcium atom or a calcium ion, Ca2+? Explain.",
+    "prompt": "Which is larger, a calcium atom or a calcium ion, Ca^{2+}? Explain.",
     "answer": "the Ca atom",
-    "solution": "The calcium atom (1). Losing two electrons empties calcium's outer energy level (1), and the 20 protons now pull on fewer electrons, so the ion is smaller (1).\nValues: Ca 197 pm, Ca2+ 100 pm.",
+    "solution": "The calcium atom (1). Losing two electrons empties calcium's outer energy level (1), and the 20 protons now pull on fewer electrons, so the ion is smaller (1).\nValues: Ca 197 pm, Ca^{2+} 100 pm.",
     "section": "3.7",
     "points": 3,
     "lines": 3,
@@ -109,8 +109,8 @@
    },
    {
     "prompt": "Write the ion each element forms: potassium, sulfur, nitrogen.",
-    "answer": "K+, S2−, N3−",
-    "solution": "K+ (group 1), S2− (group 16), N3− (group 15). 1 point each; the charge must have the right sign and number.",
+    "answer": "K^{+}, S^{2−}, N^{3−}",
+    "solution": "K^{+} (group 1), S^{2−} (group 16), N^{3−} (group 15). 1 point each; the charge must have the right sign and number.",
     "section": "3.7",
     "points": 3,
     "lines": 1,
@@ -126,9 +126,9 @@
     "item": "why"
    },
    {
-    "prompt": "Which is larger, a chlorine atom or a chloride ion, Cl−? Explain.",
-    "answer": "the Cl− ion",
-    "solution": "The chloride ion (1). It has the same 17 protons but one more electron (1); the extra electron repels the others and the same nuclear pull is shared over more electrons, so the ion spreads out (1).\nValues: Cl 99 pm, Cl− 181 pm.",
+    "prompt": "Which is larger, a potassium atom or a potassium ion, K^{+}? Explain.",
+    "answer": "the K atom",
+    "solution": "The potassium atom (1). Losing one electron empties potassium's outer energy level (1), and the 19 protons now pull on fewer electrons, so the ion is smaller (1).\nValues: K 227 pm, K^{+} 138 pm.",
     "section": "3.7",
     "points": 3,
     "lines": 3,
@@ -178,9 +178,9 @@
     "item": "why"
    },
    {
-    "prompt": "Which is larger, a bromine atom or a bromide ion, Br−? Explain.",
-    "answer": "the Br− ion",
-    "solution": "The bromide ion (1). It has the same 35 protons but one more electron (1); the extra electron repels the others and the same nuclear pull is shared over more electrons, so the ion spreads out (1).\nValues: Br 114 pm, Br− 196 pm.",
+    "prompt": "Which is larger, a strontium atom or a strontium ion, Sr^{2+}? Explain.",
+    "answer": "the Sr atom",
+    "solution": "The strontium atom (1). Losing two electrons empties strontium's outer energy level (1), and the 38 protons now pull on fewer electrons, so the ion is smaller (1).\nValues: Sr 215 pm, Sr^{2+} 118 pm.",
     "section": "3.7",
     "points": 3,
     "lines": 3,
@@ -188,8 +188,8 @@
    },
    {
     "prompt": "Write the ion each element forms: rubidium, selenium, phosphorus.",
-    "answer": "Rb+, Se2−, P3−",
-    "solution": "Rb+ (group 1), Se2− (group 16), P3− (group 15). 1 point each; the charge must have the right sign and number.",
+    "answer": "Rb^{+}, Se^{2−}, P^{3−}",
+    "solution": "Rb^{+} (group 1), Se^{2−} (group 16), P^{3−} (group 15). 1 point each; the charge must have the right sign and number.",
     "section": "3.7",
     "points": 3,
     "lines": 1,

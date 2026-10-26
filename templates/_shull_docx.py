@@ -186,14 +186,38 @@ def check_item(cell, text, pal, size=9):
     return p
 
 
+SUP = re.compile(r"\^\{([^}]*)\}")
+
+
+def pieces(text):
+    """Split `^{...}` superscript markup out of a string: [(text, is_superscript), ...].
+
+    Ion charges are the reason: written on the baseline, O2- reads as O2 with a minus
+    (superoxide), and Archivo has no U+207A/U+207B superscript glyphs to fall back on.
+    A spec writes O^{2−}; the run is set superscript, so the ordinary glyphs are raised.
+    """
+    out, at = [], 0
+    for m in SUP.finditer(str(text)):
+        if m.start() > at:
+            out.append((text[at:m.start()], False))
+        out.append((m.group(1), True))
+        at = m.end()
+    if at < len(str(text)) or not out:
+        out.append((str(text)[at:], False))
+    return out
+
+
 def run(paragraph, text, size, *, bold=False, color=None, italic=False):
-    r = paragraph.add_run(text)
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = bold
-    r.italic = italic
-    if color:
-        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    r = None
+    for piece, sup in pieces(text):
+        r = paragraph.add_run(piece)
+        r.font.name = FONT
+        r.font.size = Pt(size)
+        r.bold = bold
+        r.italic = italic
+        r.font.superscript = sup or None
+        if color:
+            r.font.color.rgb = RGBColor.from_string(hexof(color))
     return r
 
 
@@ -201,12 +225,7 @@ def para(cell, text, size, *, bold=False, color=None, spacing=0.14, caps_track=F
     p = cell.paragraphs[0] if first else cell.add_paragraph()
     p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.space_before = Pt(0)
-    r = p.add_run(text)
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = bold
-    if color:
-        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    r = run(p, text, size, bold=bold, color=color)
     if caps_track:
         # True is the standard label tracking; an int is a looser or tighter one, for
         # a label that has to read as quieter than the headings around it. Tracking is

@@ -12,7 +12,7 @@
  "docType": "Activity",
  "descriptor": "Operation Periodic Table",
  "timeTargetMin": "45",
- "sources": "Melting points and first ionization energies: CRC Handbook values, rounded. Atomic radii: calculated values (Clementi et al., 1967) so every element comes from one consistent set; they differ from the Gizmo's numbers. Electronegativity: Pauling scale. Noble gases carry no Pauling value on most school tables, so their cards say Not measured.",
+ "sources": "Melting points and first ionization energies: CRC Handbook values, rounded. Atomic radii: calculated values (Clementi et al., 1967) so every element comes from one consistent set; they differ from the Gizmo's numbers. Electronegativity: Pauling scale; Sn and Pb are the values most school tables print (their 4+ state). He, Ne and Ar have no Pauling value.",
  "grid": {
   "columns": [
    1,
@@ -54,7 +54,7 @@
    "mp": -189,
    "radius": 71,
    "ie": 1521,
-   "en": "Not measured",
+   "en": "No value (rarely bonds)",
    "ion": "None. Almost never reacts."
   },
   {
@@ -89,8 +89,8 @@
    "element": "carbon",
    "group": 14,
    "period": 2,
-   "appearance": "Black, brittle solid",
-   "mp": "Does not melt; turns to gas at 3642 °C",
+   "appearance": "Black solid",
+   "mp": "Does not melt at normal pressure; turns to gas near 3640 °C",
    "radius": 67,
    "ie": 1086,
    "en": "2.55",
@@ -119,7 +119,7 @@
    "mp": -157,
    "radius": 88,
    "ie": 1351,
-   "en": "Not measured",
+   "en": "3.00",
    "ion": "None. Almost never reacts."
   },
   {
@@ -184,7 +184,7 @@
    "mp": -249,
    "radius": 38,
    "ie": 2081,
-   "en": "Not measured",
+   "en": "No value (rarely bonds)",
    "ion": "None. Almost never reacts."
   },
   {
@@ -197,7 +197,7 @@
    "mp": -112,
    "radius": 108,
    "ie": 1170,
-   "en": "Not measured",
+   "en": "2.60",
    "ion": "None. Almost never reacts."
   },
   {
@@ -314,7 +314,7 @@
    "mp": "Does not freeze at normal pressure",
    "radius": 31,
    "ie": 2372,
-   "en": "Not measured",
+   "en": "No value (rarely bonds)",
    "ion": "None. Almost never reacts."
   },
   {

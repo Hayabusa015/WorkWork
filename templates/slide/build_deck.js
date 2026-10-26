@@ -78,6 +78,26 @@ const FOOTER_CODE = `${UNIT} • ${SECT}`;
    Slide System v2: over the cap you split the slide, you never shrink type to fit. */
 const CAPS = K.lineCaps;
 
+/* `^{...}` in a spec string is superscript - ion charges, so O2- is not read as O2 with a
+   minus. Archivo has no U+207A/U+207B glyphs; a superscript run raises the ordinary ones.
+   A string without markup is passed through unchanged. */
+function richText(txt) {
+  if (!txt.includes("^{")) return txt;
+  const lines = txt.split("\n");
+  const runs = [];
+  lines.forEach((line, i) => {
+    const parts = line.split(/(\^\{[^}]*\})/).filter(p => p !== "");
+    if (!parts.length) parts.push("");
+    parts.forEach((p, j) => {
+      const m = p.match(/^\^\{([^}]*)\}$/);
+      const options = m ? { superscript: true } : {};
+      if (j === parts.length - 1 && i < lines.length - 1) options.breakLine = true;
+      runs.push({ text: m ? m[1] : p, options });
+    });
+  });
+  return runs;
+}
+
 const problems = [];
 let n = 0;
 
@@ -123,7 +143,7 @@ for (const slide of spec.slides) {
       problems.push(`slide ${n} (${slide.master}): no placeholder "${ph}" — declared: ${declared.join(", ")}`);
       continue;
     }
-    s.addText(String(txt), { placeholder: ph });
+    s.addText(richText(String(txt)), { placeholder: ph });
   }
 
   // Cap check. A card body of five lines is a slide that should have been two slides.
