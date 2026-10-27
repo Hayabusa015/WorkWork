@@ -62,7 +62,7 @@ b {{ font-weight: bold; }}
 
 /* masthead, page 1 only (lab template) */
 .masthead {{ border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }}
-.eyebrow {{ font-family: var(--display); font-weight: 600; font-size: 7.6pt;
+.eyebrow {{ font-family: var(--display); font-weight: 600; font-size: 8pt;
   letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt; }}
 .titlerow {{ display: flex; align-items: flex-end; }}
 h1 {{ font-family: var(--display); font-weight: bold; font-size: 19pt; line-height: 1.1; flex: 1 1 auto; }}
@@ -212,16 +212,16 @@ def page_menu(spec, d):
     mp = d["menuPage"]
     h = [pagehead(mp["kicker"], mp["title"]), f'<p class="lead">{fmt(mp["lead"])}</p>']
     widths = [13.5, 6, 9, 5.5, 10.5, 6, 8, 28, 13.5]
-    h.append("<table><colgroup>" + "".join(f'<col style="width:{w}%">' for w in widths) + "</colgroup><tr>")
+    h.append("<table><colgroup>" + "".join(f'<col style="width:{w}%">' for w in widths) + "</colgroup><thead><tr>")
     h += [f"<th>{escape(c)}</th>" for c in mp["columns"]]
-    h.append("</tr>")
+    h.append("</tr></thead>")
     per = {p["name"]: p for p in spec["periods"]}
     for g in spec["menu"]:
         p = per[g["period"]]
         h.append(f'<tr class="group"><td colspan="9">{escape(g["period"].upper())} PERIOD · '
                  f'{p["start"]} TO {p["end"]} MYA</td></tr>')
         for r in g["rows"]:
-            h.append(f'<tr><td class="name">{escape(r["name"])}</td><td>{escape(r["part"])}</td><td>{escape(r["mya"])}</td>'
+            h.append(f'<tr><td class="name"><i>{escape(r["name"])}</i></td><td>{escape(r["part"])}</td><td>{escape(r["mya"])}</td>'
                      f'<td>{escape(r["hip"])}</td><td>{escape(r["diet"])}</td><td>{escape(r["legs"])}</td>'
                      f'<td>{escape(r["length"])}</td><td>{escape(r["fossils"])}</td><td>{escape(r["means"])}</td></tr>')
     h.append("</table>")
@@ -244,7 +244,7 @@ def page_outline(spec, d):
     h.append(f'<div class="zone facts" style="height:0.85in;margin-bottom:9pt">{label("name")}</div>')
     cells = "".join(
         f'<div class="cell" style="flex:{p["start"] - p["end"]}"><div class="pname">{escape(p["name"].upper())}</div>'
-        f'<div class="pdates">{p["start"]} to {p["end"]} mya</div></div>' for p in spec["periods"])
+        f'<div class="pdates">{p["start"]} to {p["end"]}&nbsp;mya</div></div>' for p in spec["periods"])
     h.append(f'<div class="zone facts" style="margin-bottom:9pt">{label("timeline")}'
              f'<div class="tl">{cells}</div><div class="tlends"><span>OLDER</span><span>YOUNGER</span></div></div>')
     fills = "".join(f'<div class="fill"><span>{escape(f["line"])}</span></div>' for f in spec["aboutFields"])
@@ -269,9 +269,9 @@ def page_plan(spec, d):
         h.append(f'<div class="row"><div class="k">{escape(k)}</div><div class="v"></div></div>')
         h += ['<div class="more"></div>'] * (n - 1)
     h.append(f'</div><h2>{escape(rub["heading"])}</h2><table class="rub"><colgroup>'
-             '<col style="width:16%"><col style="width:35%"><col style="width:20%"><col style="width:19%"><col style="width:10%"></colgroup><tr>')
+             '<col style="width:16%"><col style="width:35%"><col style="width:20%"><col style="width:19%"><col style="width:10%"></colgroup><thead><tr>')
     h += [f"<th>{escape(c)}</th>" for c in pp["columns"]]
-    h.append("</tr>")
+    h.append("</tr></thead>")
     for r in rub["rows"]:
         lv = r["levels"]
         h.append(f'<tr><td class="part">{escape(r["part"])}<span class="pts">{r["points"]} points</span></td>'
@@ -290,9 +290,9 @@ def build_activity(spec, d):
 def build_rubric(spec, d):
     rub = spec["rubric"]
     h = [masthead(d, spec["code"]), f'<h2>{escape(d["scoreHeading"])}</h2><table class="rub sheet"><colgroup>'
-         '<col style="width:16%"><col style="width:36%"><col style="width:14%"><col style="width:10%"><col style="width:24%"></colgroup><tr>']
+         '<col style="width:16%"><col style="width:36%"><col style="width:14%"><col style="width:10%"><col style="width:24%"></colgroup><thead><tr>']
     h += [f"<th>{escape(c)}</th>" for c in d["columns"]]
-    h.append("</tr>")
+    h.append("</tr></thead>")
     for r in rub["rows"]:
         h.append(f'<tr><td class="part">{escape(r["part"])}<span class="pts">{r["points"]} points</span></td>'
                  f'<td>{fmt(r["full"])}</td><td>{" · ".join(escape(x) for x in r["levels"])}</td>'
@@ -309,18 +309,18 @@ def build_key(spec, d):
          f'<p class="lead">{fmt(d["factLead"])}</p><table><colgroup>']
     for w in (12, 15, 11, 4, 14, 5, 9, 30):
         h.append(f'<col style="width:{w}%">')
-    h.append("</colgroup><tr>" + "".join(f"<th>{escape(c)}</th>" for c in d["factColumns"]) + "</tr>")
+    h.append("</colgroup><thead><tr>" + "".join(f"<th>{escape(c)}</th>" for c in d["factColumns"]) + "</tr></thead>")
     for g in d["facts"]:
         h.append(f'<tr class="group"><td colspan="8">{escape(g["period"].upper())}</td></tr>')
         for r in g["rows"]:
-            h.append('<tr><td class="name">' + escape(r[0]) + "</td>" + "".join(f"<td>{fmt(c)}</td>" for c in r[1:]) + "</tr>")
+            h.append('<tr><td class="name">' + fmt(r[0]) + "</td>" + "".join(f"<td>{fmt(c)}</td>" for c in r[1:]) + "</tr>")
     h.append("</table>")
     h.append(f'<h2>{escape(d["gradingHeading"])}</h2><ul class="dot">')
     h += [f"<li>{fmt(x)}</li>" for x in d["grading"]]
     h.append(f'</ul><h2>{escape(d["spinoHeading"])}</h2><ul class="dot">')
     h += [f"<li>{fmt(x)}</li>" for x in d["spino"]]
     h.append(f'</ul><h2>{escape(d["mistakesHeading"])}</h2><table><colgroup><col style="width:38%"><col style="width:62%"></colgroup>'
-             '<tr><th>STUDENTS SAY OR DRAW</th><th>CORRECTION</th></tr>')
+             '<thead><tr><th>STUDENTS SAY OR DRAW</th><th>CORRECTION</th></tr></thead>')
     h += [f"<tr><td>{fmt(a)}</td><td>{fmt(b)}</td></tr>" for a, b in d["mistakes"]]
     h.append("</table>")
     return f'<section class="page first key">{"".join(h)}</section>'

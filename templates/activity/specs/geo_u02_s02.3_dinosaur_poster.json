@@ -137,8 +137,8 @@
           "diet": "Herbivore",
           "legs": "2",
           "length": "5 to 10",
-          "fossils": "Germany, Switzerland, France",
-          "means": "probably “broad lizard”"
+          "fossils": "Germany; Switzerland; France",
+          "means": "probably broad lizard"
         },
         {
           "name": "Liliensternus",
@@ -186,7 +186,7 @@
           "diet": "Carnivore",
           "legs": "2",
           "length": "about 8.5",
-          "fossils": "Colorado, Utah, Wyoming. Portugal",
+          "fossils": "Colorado, Utah, Wyoming; Portugal",
           "means": ""
         },
         {
@@ -197,7 +197,7 @@
           "diet": "Herbivore",
           "legs": "4",
           "length": "7 to 9",
-          "fossils": "Colorado, Utah, Wyoming. Portugal",
+          "fossils": "Colorado, Utah, Wyoming; Portugal",
           "means": "roof lizard"
         },
         {
@@ -229,13 +229,13 @@
       "rows": [
         {
           "name": "Spinosaurus",
-          "part": "Middle",
+          "part": "Late",
           "mya": "100 to 94",
           "hip": "Lizard",
           "diet": "Fish-eater",
           "legs": "2",
           "length": "12 to 15",
-          "fossils": "Egypt, Morocco. Niger (a second species, named 2026)",
+          "fossils": "Egypt; Morocco",
           "means": "spine lizard"
         },
         {
@@ -246,7 +246,7 @@
           "diet": "Carnivore",
           "legs": "2",
           "length": "1.5 to 2",
-          "fossils": "Mongolia, China",
+          "fossils": "Mongolia; China",
           "means": "swift thief"
         },
         {
@@ -257,7 +257,7 @@
           "diet": "Carnivore",
           "legs": "2",
           "length": "12 to 13",
-          "fossils": "Montana, South Dakota, Wyoming. Canada: Saskatchewan",
+          "fossils": "Montana, South Dakota, Wyoming; Canada: Saskatchewan",
           "means": "tyrant lizard king"
         },
         {
@@ -268,7 +268,7 @@
           "diet": "Herbivore",
           "legs": "4",
           "length": "7 to 9",
-          "fossils": "Montana, North Dakota, South Dakota, Wyoming. Canada: Alberta, Saskatchewan",
+          "fossils": "Montana, North Dakota, South Dakota, Wyoming; Canada: Alberta, Saskatchewan",
           "means": "three-horned face"
         },
         {
@@ -279,7 +279,7 @@
           "diet": "Herbivore",
           "legs": "4",
           "length": "6 to 8",
-          "fossils": "Montana, Wyoming. Canada: Alberta",
+          "fossils": "Montana, Wyoming; Canada: Alberta",
           "means": "fused lizard"
         }
       ]
@@ -313,7 +313,7 @@
     },
     {
       "label": "Size",
-      "options": "length in meters, next to a school bus (about 12 m). A 24 m dinosaur is about 2 buses long.",
+      "options": "length in meters, next to a school bus (about 12 m). A 24 m dinosaur is about 2 buses long.",
       "line": "Size (m, and buses)"
     },
     {
@@ -323,7 +323,7 @@
     },
     {
       "label": "Fossils found in",
-      "options": "the countries or states. These become the dots on your map.",
+      "options": "every country or state where its fossils have been found, not just one. Each one becomes a dot on your map.",
       "line": "Fossils found in"
     }
   ],
@@ -367,7 +367,7 @@
           ],
           [
             "Mesozoic timeline.",
-            "A strip with three boxes: Triassic (252 to 201 mya), Jurassic (201 to 145 mya), and Cretaceous (145 to 66 mya). Mark when your dinosaur lived. mya means million years ago."
+            "A strip with three boxes: Triassic (252 to 201 mya), Jurassic (201 to 145 mya), and Cretaceous (145 to 66 mya). Mark when your dinosaur lived. mya means million years ago."
           ],
           [
             "Drawing.",
@@ -394,12 +394,12 @@
           {
             "term": "Saurischian",
             "plain": "lizard-hipped",
-            "text": "In most of them, one hip bone (the pubis) points forward and down, like a lizard's. The meat-eaters like T. rex, Velociraptor, and Spinosaurus are in this group, and so are the long-necked plant-eaters like Brachiosaurus."
+            "text": "In most of them, one hip bone (the pubis) points forward and down, like a lizard's. The meat-eaters like <i>T. rex</i>, <i>Velociraptor</i>, and <i>Spinosaurus</i> are in this group, and so are the long-necked plant-eaters like <i>Brachiosaurus</i>."
           },
           {
             "term": "Ornithischian",
             "plain": "bird-hipped",
-            "text": "The pubis points backward, like a bird's. Every dinosaur in this group ate plants. Stegosaurus, Triceratops, and Ankylosaurus are bird-hipped."
+            "text": "The pubis points backward, like a bird's. Every dinosaur in this group ate plants. <i>Stegosaurus</i>, <i>Triceratops</i>, and <i>Ankylosaurus</i> are bird-hipped."
           }
         ],
         "note": "The names are backwards from what you'd guess. Birds come from the lizard-hipped group, not the bird-hipped one. Their ancestors were small meat-eating dinosaurs."
@@ -421,7 +421,7 @@
           "NAME MEANS"
         ],
         "offMenu": "You can pick a dinosaur that isn't on the menu if it lived in the Mesozoic, but you'll have to find its facts yourself. Pterosaurs, plesiosaurs, ichthyosaurs, and mosasaurs aren't dinosaurs.",
-        "aboutHeading": "ABOUT MY DINOSAUR · PICK ONE ANSWER FOR EACH"
+        "aboutHeading": "ABOUT MY DINOSAUR · WHAT GOES IN EACH LINE"
       },
       "outlinePage": {
         "kicker": "POSTER OUTLINE",
@@ -442,7 +442,7 @@
           ],
           "about": [
             "ABOUT MY DINOSAUR",
-            "one answer for each, from the list on page 2"
+            "from the list on page 2. List every fossil site."
           ],
           "map": [
             "MAP OF EARTH BACK THEN",
@@ -559,10 +559,10 @@
       ],
       "facts": [
         {
-          "period": "Triassic · 252 to 201 mya · all lizard-hipped",
+          "period": "Triassic · 252 to 201 mya · all lizard-hipped",
           "rows": [
             [
-              "Herrerasaurus",
+              "<i>Herrerasaurus</i>",
               "Late Triassic",
               "~231",
               "L",
@@ -572,7 +572,7 @@
               "Argentina"
             ],
             [
-              "Eoraptor",
+              "<i>Eoraptor</i>",
               "Late Triassic",
               "~231–228",
               "L",
@@ -582,17 +582,17 @@
               "Argentina"
             ],
             [
-              "Plateosaurus",
+              "<i>Plateosaurus</i>",
               "Late Triassic",
               "~214–204",
               "L",
               "Plants",
               "2",
               "~5–10",
-              "Germany, Switzerland, France"
+              "Germany; Switzerland; France"
             ],
             [
-              "Liliensternus",
+              "<i>Liliensternus</i>",
               "Late Triassic",
               "poorly dated; 228–202 across sources",
               "L",
@@ -602,7 +602,7 @@
               "Germany"
             ],
             [
-              "Coelophysis",
+              "<i>Coelophysis</i>",
               "Late Triassic (latest)",
               "~206–201",
               "L",
@@ -614,10 +614,10 @@
           ]
         },
         {
-          "period": "Jurassic · 201 to 145 mya",
+          "period": "Jurassic · 201 to 145 mya",
           "rows": [
             [
-              "Dilophosaurus",
+              "<i>Dilophosaurus</i>",
               "Early Jurassic",
               "~196–183",
               "L",
@@ -627,7 +627,7 @@
               "USA: Arizona"
             ],
             [
-              "Allosaurus",
+              "<i>Allosaurus</i>",
               "Late Jurassic",
               "~155–147",
               "L",
@@ -637,7 +637,7 @@
               "USA: Colorado, Utah, Wyoming; Portugal"
             ],
             [
-              "Stegosaurus",
+              "<i>Stegosaurus</i>",
               "Late Jurassic",
               "~155–150",
               "B",
@@ -647,7 +647,7 @@
               "USA: Colorado, Utah, Wyoming; Portugal"
             ],
             [
-              "Diplodocus",
+              "<i>Diplodocus</i>",
               "Late Jurassic",
               "~155–147",
               "L",
@@ -657,7 +657,7 @@
               "USA: Colorado, Utah, Wyoming, Montana"
             ],
             [
-              "Brachiosaurus",
+              "<i>Brachiosaurus</i>",
               "Late Jurassic",
               "~154–153",
               "L",
@@ -669,20 +669,20 @@
           ]
         },
         {
-          "period": "Cretaceous · 145 to 66 mya",
+          "period": "Cretaceous · 145 to 66 mya",
           "rows": [
             [
-              "Spinosaurus",
+              "<i>Spinosaurus</i>",
               "Cenomanian (early Late Cretaceous)",
               "~100–94",
               "L",
               "Mostly fish",
               "2",
               "~12–15",
-              "Egypt, Morocco; Niger (S. mirabilis, genus level); Algeria optional, marked “?”"
+              "Egypt; Morocco (required dots). Niger also accepted (<i>S. mirabilis</i>, 2026, PROVISIONAL). Algeria optional, marked “?”"
             ],
             [
-              "Velociraptor",
+              "<i>Velociraptor</i>",
               "Late Cretaceous (Campanian)",
               "~75–71 (tentative)",
               "L",
@@ -692,7 +692,7 @@
               "Mongolia; China (Inner Mongolia)"
             ],
             [
-              "Tyrannosaurus rex",
+              "<i>Tyrannosaurus rex</i>",
               "Late Cretaceous (Maastrichtian)",
               "~68–66",
               "L",
@@ -702,7 +702,7 @@
               "USA: Montana, South Dakota, Wyoming; Canada: Saskatchewan"
             ],
             [
-              "Triceratops",
+              "<i>Triceratops</i>",
               "Late Cretaceous (Maastrichtian)",
               "~68–66",
               "B",
@@ -712,7 +712,7 @@
               "USA: Montana, North Dakota, South Dakota, Wyoming; Canada: Alberta, Saskatchewan"
             ],
             [
-              "Ankylosaurus",
+              "<i>Ankylosaurus</i>",
               "Late Cretaceous (Maastrichtian)",
               "~68–66",
               "B",
@@ -726,18 +726,18 @@
       ],
       "gradingHeading": "GRADING NOTES",
       "grading": [
-        "<b>Period dates.</b> The menu uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
-        "<b>Triassic hip types.</b> The whole Triassic row is lizard-hipped on purpose. No securely bird-hipped Triassic dinosaur is known. The best candidate, Eocursor, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
-        "<b>Hip type from a picture.</b> Velociraptor and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a Velociraptor skeleton will get it wrong. The student page says “in most of them” for this reason.",
-        "<b>Habitat and special feature</b> are not on the menu and were not researched for this key. Accept any reasonable answer from the habitat list that the student can point to a source for. <b>PROVISIONAL</b>: there is no checked habitat for 14 of the 15 menu dinosaurs. Spinosaurus is river floodplain (rivers and deltas in what is now the Sahara).",
+        "<b>Period dates.</b> The menu uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
+        "<b>Triassic hip types.</b> The whole Triassic row is lizard-hipped on purpose. No securely bird-hipped Triassic dinosaur is known. The best candidate, <i>Eocursor</i>, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
+        "<b>Hip type from a picture.</b> <i>Velociraptor</i> and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a <i>Velociraptor</i> skeleton will get it wrong. The student page says “in most of them” for this reason.",
+        "<b>Habitat and special feature</b> are not on the menu and were not researched for this key. Accept any reasonable answer from the habitat list that the student can point to a source for. <b>PROVISIONAL</b>: there is no checked habitat for 14 of the 15 menu dinosaurs. <i>Spinosaurus</i>: river floodplain (river and delta systems).",
         "<b>Coelophysis dates.</b> A 2024 study puts it at ~206–201 (Rhaetian). Older books give ~225. Accept either.",
         "<b>Eoraptor.</b> Sources disagree on diet (Sereno lab: meat eater) and on whether it is an early theropod or an early sauropodomorph. It is lizard-hipped either way. Accept carnivore or omnivore.",
         "<b>Liliensternus</b> is the weakest menu slot: its dates are poorly pinned. Accept any Late Triassic date.",
-        "<b>Walks on.</b> 4 legs for Stegosaurus, the sauropods, Triceratops and Ankylosaurus is standard textbook knowledge. It was not separately re-sourced.",
-        "<b>Map dots not verified.</b> T. rex in North Dakota and Alberta, and Triceratops in Colorado, are likely but were not confirmed. A dot there is <b>PROVISIONAL</b>. Decide before grading whether it costs points.",
-        "<b>Name meanings</b> are left off the menu for Herrerasaurus, Coelophysis, Allosaurus and Liliensternus. They were not verified. Name meaning is not graded.",
-        "<b>No paleomap is supplied.</b> Students draw or trace their own. The map row grades “not today's map” and dots in the right places, not accurate coastlines. Open question for a class reference map (report §4): Blakey's 90 Ma Commons map (CC BY-SA 3.0, low-res only) or a trace from Scotese & Wright 2018 PALEOMAP.",
-        "<b>School bus.</b> A full-size Type C bus is 12.0 m (39.3 ft). Re-solved: T. rex 12–13 m is about 1 bus; Brachiosaurus 18–22 m is 1.5 to 1.8 buses; Diplodocus 24–26 m is 2 to 2.2 buses; Velociraptor 1.5–2 m is an eighth to a sixth of a bus."
+        "<b>Walks on.</b> 4 legs for <i>Stegosaurus</i>, the sauropods, <i>Triceratops</i> and <i>Ankylosaurus</i> is standard textbook knowledge. It was not separately re-sourced.",
+        "<b>Map dots not verified.</b> <i>T. rex</i> in North Dakota and Alberta, and <i>Triceratops</i> in Colorado, are likely but were not confirmed. A dot there is <b>PROVISIONAL</b>. Decide before grading whether it costs points.",
+        "<b>Name meanings</b> are left off the menu for <i>Herrerasaurus</i>, <i>Coelophysis</i>, <i>Allosaurus</i> and <i>Liliensternus</i>. They were not verified. Name meaning is not graded.",
+        "<b>No paleomap is supplied.</b> Students draw or trace their own. The map row grades “not today's map” and dots in the right places, not accurate coastlines. Open question for a class reference map (report §4): Blakey's 90 Ma Commons map (CC BY-SA 3.0, low-res only) or a trace from Scotese & Wright 2018 PALEOMAP.",
+        "<b>School bus.</b> A full-size Type C bus is 12.0 m (39.3 ft). Re-solved: <i>T. rex</i> 12–13 m is about 1 bus; <i>Brachiosaurus</i> 18–22 m is 1.5 to 1.8 buses; <i>Diplodocus</i> 24–26 m is 2 to 2.2 buses; <i>Velociraptor</i> 1.5–2 m is an eighth to a sixth of a bus."
       ],
       "mistakesHeading": "COMMON MISTAKES",
       "mistakes": [
@@ -750,7 +750,7 @@
           "Marine reptiles, not dinosaurs. Mosasaurs are lizards (squamates)."
         ],
         [
-          "“Dimetrodon is a dinosaur.”",
+          "“<i>Dimetrodon</i> is a dinosaur.”",
           "A Permian synapsid, closer to mammals. It died out roughly 60 million years before the first dinosaurs."
         ],
         [
@@ -758,58 +758,58 @@
           "Grass was absent or rare for most of the Mesozoic. Grasslands spread in the Cenozoic. Use ferns, conifers, cycads, and flowering plants in the Cretaceous."
         ],
         [
-          "T. rex fighting Stegosaurus.",
-          "At least 77 million years apart (~145–150 vs ~68 mya). T. rex lived closer in time to us than to Stegosaurus."
+          "<i>T. rex</i> fighting <i>Stegosaurus</i>.",
+          "At least 77 million years apart (~145–150 vs ~68 mya). <i>T. rex</i> lived closer in time to us than to <i>Stegosaurus</i>."
         ],
         [
-          "Spinosaurus fighting T. rex.",
+          "<i>Spinosaurus</i> fighting <i>T. rex</i>.",
           "At least ~26 million years apart (93.9 − 68), and on different continents."
         ],
         [
-          "Movie-sized Velociraptor with scales.",
-          "Turkey-sized (~1.5–2 m, mostly tail) and feathered: quill knobs on its forearm (Turner et al. 2007). Movie raptors are closer to Deinonychus."
+          "Movie-sized <i>Velociraptor</i> with scales.",
+          "Turkey-sized (~1.5–2 m, mostly tail) and feathered: quill knobs on its forearm (Turner et al. 2007). Movie raptors are closer to <i>Deinonychus</i>."
         ],
         [
-          "Dilophosaurus with a frill that spits venom.",
-          "No evidence for either. The real animal was bigger than the movie one, ~6–7 m."
+          "<i>Dilophosaurus</i> with a frill that spits venom.",
+          "No evidence for either. The real animal was bigger than the movie one, ~6–7 m."
         ],
         [
           "“Bird-hipped dinosaurs became birds.”",
           "No. Birds came from lizard-hipped theropods."
         ],
         [
-          "Mussaurus as a Triassic dinosaur.",
-          "Now dated to the Early Jurassic, ~193 mya. Older books say Triassic."
+          "<i>Mussaurus</i> as a Triassic dinosaur.",
+          "Now dated to the Early Jurassic, ~193 mya. Older books say Triassic."
         ],
         [
-          "The Berlin “Brachiosaurus” skeleton (Tanzania).",
-          "Giraffatitan since Taylor 2009. Real Brachiosaurus is North American. No Africa dot."
+          "The Berlin “<i>Brachiosaurus</i>” skeleton (Tanzania).",
+          "<i>Giraffatitan</i> since Taylor 2009. Real <i>Brachiosaurus</i> is North American. No Africa dot."
         ],
         [
           "Dinosaurs and people at the same time.",
-          "Non-bird dinosaurs died out 66 mya. Homo sapiens is about 300,000 years old."
+          "Non-bird dinosaurs died out 66 mya. <i>Homo sapiens</i> is about 300,000 years old."
         ],
         [
-          "Hip type judged from a Velociraptor or bird skeleton.",
+          "Hip type judged from a <i>Velociraptor</i> or bird skeleton.",
           "Pubis points backward even though it is lizard-hipped."
         ],
         [
-          "One “official” length or weight for Spinosaurus.",
-          "Estimates run 12–18 m and 6–21 t. Teach the range."
+          "One “official” length or weight for <i>Spinosaurus</i>.",
+          "Estimates run 12–18 m and 6–21 t. Teach the range."
         ],
         [
           "“All dinosaurs are extinct.”",
-          "Birds are living dinosaurs. All dinosaurs except birds died out 66 mya."
+          "Birds are living dinosaurs. All dinosaurs except birds died out 66 mya."
         ]
       ],
       "spinoHeading": "SPINOSAURUS NOTES",
       "spino": [
         "<b>Swim or wade? Unresolved.</b> Everyone agrees it lived around water and ate fish. Ibrahim et al. 2014 (Science) and 2020 (Nature, the fin-like tail) and Fabbri et al. 2022 (dense, diver-like bones) argue it hunted underwater. Henderson 2018, Hone & Holtz 2021 (a wading “shoreline generalist”, like a giant heron), Sereno et al. 2022 (“not an aquatic dinosaur”) and Myhrvold et al. 2024 (Fabbri's statistics unreliable; Fabbri's team says its result holds) argue it waded and ambushed from the shore. Student-safe line: “Scientists are still arguing about whether it swam underwater to hunt or waded in the shallows like a giant heron.”",
         "<b>Holotype destroyed.</b> BSP 1912 VIII 19, found in Egypt's Bahariya Formation in 1912 and named by Stromer in 1915, was destroyed on the night of 24/25 April 1944 when a British bombing raid hit the Munich museum. Only Stromer's descriptions, drawings and a photograph survive. The Moroccan neotype (FSAC-KK 11888, Ibrahim et al. 2014) has a disputed status.",
-        "<b>S. mirabilis, 2026.</b> A second species named in February 2026 from Niger's Farak Formation (~95 Ma; Sereno et al., Science 391). <b>PROVISIONAL</b>: one paper, not yet independently tested. The menu treats Spinosaurus as a genus, so a Niger dot is acceptable. A student who leaves Niger off because they mean S. aegyptiacus is also right.",
-        "<b>Age.</b> The rocks are Cenomanian, the first stage of the Late Cretaceous. “Middle” on the menu is the informal “mid-Cretaceous” label papers also use. Accept Middle or Late Cretaceous.",
+        "<b>Fossil dots.</b> Egypt and Morocco are the required dots. A Niger dot is also accepted: a second species, <i>S. mirabilis</i>, was named in February 2026 from Niger's Farak Formation (~95 Ma; Sereno et al., Science 391). <b>PROVISIONAL</b>: one paper, not yet independently tested, and not decided for the student page, so the menu lists Egypt and Morocco only.",
+        "<b>Age.</b> The rocks are Cenomanian, the first stage of the Late Cretaceous, so the menu says Late. Papers also use the informal label “mid-Cretaceous”. Accept a student who writes “middle of the Cretaceous”.",
         "<b>Posture.</b> The menu says 2 legs. The 4-leg reconstruction (Ibrahim 2014) is older and now mostly rejected.",
-        "<b>Size.</b> Length estimates run 12.6 to 18 m; the menu uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster as fact."
+        "<b>Size.</b> Length estimates run 12.6 to 18 m; the menu uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster as fact."
       ]
     }
   ]
