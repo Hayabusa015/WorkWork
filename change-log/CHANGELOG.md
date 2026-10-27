@@ -34,6 +34,7 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0054 | | An Overseer running as a sub-agent returns a routing brief and does not delegate | PROPOSED | `governance/proposals/SHULL-CHG-0054-overseer-as-subagent-routing-brief.md` |
 | SHULL-CHG-0053 | 2026-10-22 | A Secretary's Desk click is the user's recorded decision | CONFIRMED | `governance/proposals/SHULL-CHG-0053-desk-click-is-recorded-decision.md` |
 | SHULL-CHG-0052 | 2026-10-22 | Dashboard IDs 0024-0038 collided with real git records of the same ID; re-filed at 0046-0051 | CONFIRMED | `governance/proposals/SHULL-CHG-0052-dashboard-id-desync.md` |
 | SHULL-CHG-0051 | 2026-10-22 | SHULL-CHG-0010's own header Status contradicted its own resolution | CONFIRMED | `governance/proposals/SHULL-CHG-0051-chg-0010-header-status.md` |
