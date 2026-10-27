@@ -4,8 +4,9 @@ separate teacher key, from one spec so the two cannot drift.
 
     python3 templates/activity/build_operation_periodic_table.py specs/chem_u03_operation_periodic_table.json OUTDIR
 
-Teams get 23 element cards under Greek code names and place them on a blank 6 x 5 grid using
-the trends. Germanium is held out, so one cell stays empty and each team predicts what belongs
+Teams get 25 element cards under letter code names (A-Y, none on its own symbol) and place
+them on a blank 6 x 5 grid using the trends. Hydrogen is in on purpose: it is the card that
+fits no family cleanly. Germanium is held out, so one cell stays empty and each team predicts what belongs
 there - Mendeleev's eka-silicon. The key maps every code name back to its element.
 
 The drawing primitives come from templates/_shull_docx.py, so this sheet shares its header,
@@ -73,52 +74,104 @@ def answer_lines(doc, pal, prompts, n=2):
 
 
 def card_rows(card):
-    return [("Appearance", card["appearance"]),
-            ("Melting point", fmt_mp(card["mp"])),
-            ("Atomic radius", f"{card['radius']} pm"),
-            ("Ionization energy", f"{card['ie']} kJ/mol"),
-            ("Electronegativity", card["en"]),
-            ("Ion it forms", card["ion"])]
+    """(label, value, unit) in the order the rounds use them: ion sorts, radius orders."""
+    return [("Ion it forms", card["ion"], ""),
+            ("Atomic radius", str(card["radius"]), "pm"),
+            ("Ionization energy", str(card["ie"]), "kJ/mol"),
+            ("Electronegativity", card["en"], ""),
+            ("Melting point", *(fmt_mp(card["mp"]).rsplit(" ", 1) if isinstance(card["mp"], int)
+                               else (card["mp"], "")))]
+
+
+CARD_ACROSS, CARD_ROWS, CARD_H, CARD_GUTTER = 3, 5, 1.78, 0.15
+
+
+def card_face(cell, card, pal, inner_w):
+    """One card. The letter is the largest thing on it, the five numbers line up in a right-hand
+    column so a team can compare cards held side by side, and hairlines separate the rows.
+    No fills: the card is cut from cardstock and the ink budget still applies."""
+    head = cell.add_table(rows=1, cols=2)
+    fix_widths(head, [0.55, inner_w - 0.55])
+    lc, ac = head.rows[0].cells
+    for c in (lc, ac):
+        cell_margins(c, top=0, bottom=30, left=0, right=0)
+    borders(lc, pal.hair, sz=4, edges=("bottom",))
+    borders(ac, pal.hair, sz=4, edges=("bottom",))
+    para(lc, card["code"], 28, bold=True, color=pal.accent, first=True)
+    from docx.enum.table import WD_ALIGN_VERTICAL
+    ac.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    p = para(ac, card["appearance"], 9, color=pal.ink, first=True)
+    p.runs[0].italic = True
+    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT     # ends on the same edge as the value column
+    rows = card_rows(card)
+    t = cell.add_table(rows=len(rows), cols=2)
+    fix_widths(t, [1.05, inner_w - 1.05])
+    for r, (lab, val, unit) in enumerate(rows):
+        lcell, vcell = t.rows[r].cells
+        for c in (lcell, vcell):
+            cell_margins(c, top=22, bottom=22, left=0, right=0)
+            if r < len(rows) - 1:
+                borders(c, pal.hair, sz=2, edges=("bottom",))
+        from docx.enum.table import WD_ALIGN_VERTICAL as V
+        lcell.vertical_alignment = vcell.vertical_alignment = V.CENTER
+        para(lcell, lab, 8.5, color=pal.label, first=True)
+        q = para(vcell, "", 10.5, first=True)
+        q.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        run(q, val, 10.5 if len(val) < 14 else 9, bold=True, color=pal.ink)
+        if unit:
+            run(q, " " + unit, 8, color=pal.label)
+
+
+def tidy_cell(cell):
+    """python-docx puts an empty paragraph before the first nested table (the cell's own) and
+    one after every nested table. Each is a full 10pt line, and three of them made a card a
+    third taller than its content. Keep only the last, which Word requires, at 1pt."""
+    from docx.oxml.ns import qn
+    paras = [el for el in cell._tc if el.tag == qn("w:p")]
+    for el in paras[:-1]:
+        if not el.xpath(".//w:t"):
+            cell._tc.remove(el)
+    last = cell.paragraphs[-1]
+    last.paragraph_format.space_after = Pt(0)
+    last.paragraph_format.space_before = Pt(0)
+    last.paragraph_format.line_spacing = Pt(1)
 
 
 def cards_pages(doc, pal, spec):
-    cards = spec["cards"] + [None]          # the 24th slot is the gap card
-    across, h = 3, 2.2
-    gutter = 0.15
-    cw = round((TEXT_W - gutter * (across - 1)) / across, 3)
-    for start in range(0, len(cards), 12):
+    cards = spec["cards"] + [None]          # the last slot is the gap card
+    per_page = CARD_ACROSS * CARD_ROWS
+    cw = round((TEXT_W - CARD_GUTTER * (CARD_ACROSS - 1)) / CARD_ACROSS, 3)
+    inner = round(cw - 0.20, 3)
+    for start in range(0, len(cards), per_page):
         page_break(doc)
-        p = para(doc, "", 7.5)
-        run(p, "ELEMENT CARDS  ·  CUT ALONG THE DASHED LINES  ·  ONE SET PER TEAM", 7.5, bold=True,
-            color=pal.accent)
+        p = para(doc, "", 8)
+        run(p, "ELEMENT CARDS  ·  CUT ON THE DASHED LINES  ·  LETTERS ARE CODE NAMES, NOT SYMBOLS", 8,
+            bold=True, color=pal.accent)
         gap(doc, 4)
-        chunk = cards[start:start + 12]
-        for r in range(0, len(chunk), across):
-            t = doc.add_table(rows=1, cols=across * 2 - 1)
+        chunk = cards[start:start + per_page]
+        for r in range(0, len(chunk), CARD_ACROSS):
+            t = doc.add_table(rows=1, cols=CARD_ACROSS * 2 - 1)
             widths = []
-            for i in range(across):
+            for i in range(CARD_ACROSS):
                 widths.append(cw)
-                if i < across - 1:
-                    widths.append(gutter)
+                if i < CARD_ACROSS - 1:
+                    widths.append(CARD_GUTTER)
             fix_widths(t, widths)
-            no_split(t.rows[0], h)
-            for i, card in enumerate(chunk[r:r + across]):
+            no_split(t.rows[0], CARD_H)
+            for i, card in enumerate(chunk[r:r + CARD_ACROSS]):
                 cell = t.rows[0].cells[i * 2]
                 borders(cell, pal.label, sz=6, val="dashed")
-                cell_margins(cell, top=70, bottom=40, left=100, right=80)
+                cell_margins(cell, top=60, bottom=40, left=100, right=100)
                 if card is None:
-                    para(cell, "?", 22, bold=True, color=pal.accent, first=True)
+                    para(cell, "?", 26, bold=True, color=pal.accent, first=True)
                     para(cell, "THE MISSING ELEMENT", 9, bold=True, color=pal.ink)
                     para(cell, "Put this card in the gap your team leaves. Write your predictions "
-                               "on page 2.", 9, color=pal.ink)
+                               "on page 2.", 9.5, color=pal.ink)
                     continue
-                para(cell, card["code"], 14, bold=True, color=pal.accent, first=True)
-                for k, v in card_rows(card):
-                    q = para(cell, "", 8.5)
-                    q.paragraph_format.space_after = Pt(1)
-                    run(q, k.upper() + "  ", 8, bold=True, color=pal.label)
-                    run(q, str(v), 10, color=pal.ink)
-            gap(doc, 6)
+                card_face(cell, card, pal, inner)
+                tidy_cell(cell)
+            if r + CARD_ACROSS < len(chunk):
+                gap(doc, 5)         # none after the last row: it would spill onto a blank page
 
 
 def build_student(spec, pal, code, out):
@@ -127,10 +180,10 @@ def build_student(spec, pal, code, out):
     running_footer(sec, f"SHULL SCIENCE   {code}   ACTIVITY", pal, with_page_numbers=True)
     header(doc, spec, pal, "Operation Periodic Table", "ACTIVITY  ·  ~45 MIN", code)
     gap(doc, 5)
-    fields(doc, pal, [("TEAM MEMBERS", 4.6), ("PERIOD", 1.2), ("TEAM SCORE         / 28", 1.7)])
+    fields(doc, pal, [("TEAM MEMBERS", 4.6), ("PERIOD", 1.2), ("TEAM SCORE         / 30", 1.7)])
     gap(doc, 6)
     boxed(doc, pal, "YOUR MISSION", [
-        "Your team has 23 cards. Each one is a real element under a code name. Arrange them into a "
+        "Your team has 25 cards. Each one is a real element under a letter code name. Arrange them into a "
         "table that shows the patterns you learned this week. When everyone is done, your teacher "
         "reveals the real table. The team whose table is closest to it wins.",
         "One element is missing on purpose. Leave a gap for it and predict its properties. In 1871 "
@@ -145,12 +198,14 @@ def build_student(spec, pal, code, out):
     ])
     gap(doc, 6)
     plain(doc, pal, "FOUR ROUNDS", [
-        ("Sort into families (10 min).  ", "Use the ion each element forms. You should end up with five families."),
+        ("Sort into families (10 min).  ", "Use the ion each element forms. You should end up with five families "
+                                         "and one card that does not fit cleanly anywhere. Decide where it goes "
+                                         "and be ready to defend it."),
         ("Order each family (10 min).  ", "Smallest atom at the top. Check the order against ionization energy."),
         ("Line up the rows (10 min).  ", "Put the families side by side so atoms shrink from left to right "
                                          "along each row, the way they do across a real period. Two clues: the "
-                                         "smallest atom of all sits alone in the top row, at the right. The "
-                                         "missing element is in the middle of its family, not at either end."),
+                                         "top row holds just two cards, one at each end. The missing element "
+                                         "is in the middle of its family, not at either end."),
         ("Record and predict (10 min).  ", "Copy your table onto the grid on page 2 and fill in your predictions."),
     ], numbered=True)
     gap(doc, 6)
@@ -162,7 +217,7 @@ def build_student(spec, pal, code, out):
     page_break(doc)
     p = para(doc, "", 7.5)
     run(p, "YOUR TABLE", 7.5, bold=True, color=pal.accent)
-    para(doc, "Write each code name in the cell where your team placed it. Write ? in the gap. "
+    para(doc, "Write each letter in the cell where your team placed it. Write ? in the gap. "
               "Some cells stay empty.", 9.5)
     gap(doc, 4)
     grid_table(doc, pal, spec)
@@ -181,7 +236,7 @@ def build_student(spec, pal, code, out):
         para(t.rows[r].cells[0], prop, 9.5, color=pal.ink, first=True)
     gap(doc, 8)
     plain(doc, pal, "SCORING", [
-        "1 point for each card in exactly the right cell (23).  1 point for a gap in the right cell.  "
+        "1 point for each card in exactly the right cell (25).  1 point for a gap in the right cell.  "
         "1 point for each prediction inside your teacher's range (4, ion not scored).",
     ])
     gap(doc, 8)
@@ -210,7 +265,7 @@ def build_key(spec, pal, code, out):
     ])
     gap(doc, 6)
     plain(doc, pal, "THE REVEAL AND SCORING", [
-        "Project the answer grid below (code names only first, then elements). Teams score their own grid "
+        "Project the answer grid below (letters only first, then elements). Teams score their own grid "
         "with a different-colored pen.",
         f"Prediction ranges, 1 point each: melting point {m['ranges']['mp'][0]}–{m['ranges']['mp'][1]} °C "
         f"(actual {m['mp']}) · radius {m['ranges']['radius'][0]}–{m['ranges']['radius'][1]} pm (actual "
@@ -218,6 +273,9 @@ def build_key(spec, pal, code, out):
         f"{m['ie']}) · electronegativity {m['ranges']['en'][0]}–{m['ranges']['en'][1]} (actual {m['en']}). "
         "Ion: none, shares electrons (not scored).",
         "Ties: closest ionization energy prediction wins.",
+        "Hydrogen: score its point for the group 1, period 1 cell. A team that put it above fluorine and "
+        "can say why (it also forms 1−, it is a nonmetal gas) has a good argument; discuss it rather than "
+        "argue the point.",
     ])
     gap(doc, 6)
 
@@ -243,9 +301,13 @@ def build_key(spec, pal, code, out):
          "electronegativity and the lower melting points separate them."),
         ("Radii are calculated values  ", "(one consistent source), so they will not match the Gizmo's numbers. "
          "The trend is the same."),
-        ("Hydrogen is left out  ", "because it fits no family cleanly. That is why period 1 holds only one card."),
-        ("The two round-3 clues  ", "pin the layout. Without them, sliding the noble gases down a row, or leaving "
-         "the gap at the bottom of group 14, also keeps every row shrinking left to right."),
+        ("Hydrogen  ", "fits no family cleanly: it forms 1+ like group 1, but it is a nonmetal gas, forms 1− "
+         "like group 17, and its ionization energy (1312) is far above lithium's. Most tables put it over "
+         "lithium for its single valence electron. Expect the best argument of the day here."),
+        ("The two round-3 clues  ", "pin the layout. Without them, hydrogen over fluorine, or the gap at the "
+         "bottom of group 14, also keeps every row shrinking left to right."),
+        ("Letters are code names.  ", "Some match other elements' symbols (card C is not carbon). The card "
+         "header says so; repeat it out loud."),
     ])
     gap(doc, 6)
     plain(doc, pal, "AFTER THE REVEAL — MODEL ANSWERS", [
@@ -263,7 +325,7 @@ def build_key(spec, pal, code, out):
         "Your students just repeated that prediction with better data.",
     ])
     gap(doc, 6)
-    para(doc, "CODE NAMES BY GROUP", 7.5, bold=True, color=pal.accent, caps_track=True)
+    para(doc, "LETTERS BY GROUP", 7.5, bold=True, color=pal.accent, caps_track=True)
     t = doc.add_table(rows=1, cols=5)
     fix_widths(t, [1.5] * 5)
     for c, g in zip(t.rows[0].cells, cols):
@@ -287,8 +349,11 @@ def main():
     bad = [s for s in spec["sections"] if s not in valid]
     if bad:
         refuse(f"section(s) {bad} not in courses/{spec['course']}/DECISIONS.md. Stop and ask.")
-    if len(spec["cards"]) != 23:
-        refuse(f"{len(spec['cards'])} cards; the grid and the scoring assume 23")
+    if len(spec["cards"]) != 25:
+        refuse(f"{len(spec['cards'])} cards; the grid and the scoring assume 25")
+    for c in spec["cards"]:
+        if c["code"] == c["symbol"]:
+            refuse(f"card {c['code']} carries its own element's symbol")
     pal = Palette(spec["course"])
     code = f"U{int(spec['unit']):02d} / S{spec['sections'][0]}–S{spec['sections'][-1]}"
     outdir = sys.argv[2]
