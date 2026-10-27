@@ -185,7 +185,7 @@
             1
           ],
           [
-            "Where I got my picture",
+            "Where I got my facts and picture (website or book)",
             1
           ]
         ],
@@ -260,7 +260,7 @@
           "FACT",
           "WHAT TO PUT"
         ],
-        "pick": "Pick any Mesozoic dinosaur and look up its facts yourself. Pterosaurs, plesiosaurs, ichthyosaurs, and mosasaurs aren't dinosaurs."
+        "pick": "Pick any Mesozoic dinosaur and look up its facts. Pterosaurs, plesiosaurs, ichthyosaurs, and mosasaurs don't count."
       }
     },
     {
