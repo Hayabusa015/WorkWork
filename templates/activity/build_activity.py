@@ -80,7 +80,7 @@ h1 .accent {{ color: var(--accent); }}
 .lbl {{ font-family: var(--display); font-size: {floor}pt; letter-spacing: 0.18em; color: var(--label); margin-top: 2.5pt; }}
 
 h2 {{ font-family: var(--display); font-weight: 600; font-size: 9pt; letter-spacing: 0.20em;
-  border-bottom: 1pt solid var(--accent-display); padding-bottom: 2.5pt; margin: 14pt 0 6pt 0; }}
+  border-bottom: 1pt solid var(--accent-display); padding-bottom: 2.5pt; margin: 11pt 0 5pt 0; }}
 p {{ margin-bottom: 6pt; }}
 .lead {{ margin-bottom: 7pt; }}
 
@@ -121,7 +121,7 @@ tr {{ page-break-inside: avoid; }}
 .zhint {{ font-size: 8.6pt; color: var(--label); }}
 .zrow {{ display: flex; gap: 9pt; margin-bottom: 9pt; }}
 .tl {{ display: flex; margin-top: 5pt; border: 0.9pt solid var(--structure); }}
-.tl .cell {{ padding: 4pt 6pt; height: 0.5in; border-left: 0.9pt solid var(--structure); }}
+.tl .cell {{ padding: 3pt 6pt; border-left: 0.9pt solid var(--structure); }}
 .tl .cell:first-child {{ border-left: none; }}
 .tl .pname {{ font-family: var(--display); font-weight: 600; font-size: 8.4pt; letter-spacing: 0.14em; }}
 .tl .pdates {{ font-size: 8.4pt; color: var(--label); }}
@@ -131,7 +131,16 @@ tr {{ page-break-inside: avoid; }}
 .fill span {{ font-family: var(--display); font-weight: 600; font-size: 8.2pt; letter-spacing: 0.06em; color: var(--label); padding-bottom: 2pt; }}
 .sitedot {{ display: inline-block; width: 7pt; height: 7pt; border-radius: 50%; background: var(--ink); vertical-align: -0.5pt; margin-right: 4pt; }}
 .maplegend {{ position: absolute; right: 8pt; bottom: 6pt; border: 0.9pt solid var(--structure); padding: 3pt 7pt; font-size: 8.6pt; }}
-.legend {{ font-size: 9pt; margin-top: 6pt; }}
+.legend {{ font-size: 9pt; margin-top: 5pt; }}
+.pick {{ margin-top: 6pt; }}
+.parts2 {{ display: flex; gap: 14pt; }}
+.parts2 ol {{ flex: 1 1 0; }}
+.parts2 ol.parts > li {{ margin-bottom: 4pt; }}
+.zlabel .zhint {{ font-family: var(--body); font-weight: normal; letter-spacing: 0; margin-left: 4pt; }}
+.outline h2, h2.tight {{ margin-top: 10pt; }}
+.zrow .zlabel .zhint {{ display: block; margin-left: 0; }}
+.zrow .zone .zhint {{ font-size: 8.4pt; }}
+table.aboutt {{ margin-top: 4pt; font-size: 9.4pt; }}
 .swatch {{ display: inline-block; width: 22pt; height: 9pt; vertical-align: -1pt; margin-right: 4pt; }}
 .swatch.f {{ border: 2.2pt solid var(--accent-display); }}
 .swatch.p {{ border: 1.6pt dashed var(--ink); }}
@@ -191,73 +200,40 @@ def descriptor(level, text):
 
 
 # ---------------------------------------------------------------- handout
-def page_job(spec, d):
-    h = [masthead(d, spec["code"])]
-    h.append(f'<h2>{escape(d["job"]["heading"])}</h2>')
-    h += [f"<p>{fmt(p)}</p>" for p in d["job"]["paragraphs"]]
-    h.append(f'<h2>{escape(d["parts"]["heading"])}</h2><ol class="parts">')
-    h += [f"<li><b>{escape(a)}</b> {fmt(b)}</li>" for a, b in d["parts"]["items"]]
-    h.append("</ol>")
-    hp = d["hips"]
-    h.append(f'<h2>{escape(hp["heading"])}</h2><p class="lead">{fmt(hp["lead"])}</p><div class="hips">')
-    for t in hp["types"]:
-        h.append(f'<div class="hip"><div class="term">{escape(t["term"])}</div>'
-                 f'<div class="plain">MEANS {escape(t["plain"].upper())}</div><div>{fmt(t["text"])}</div></div>')
-    h.append(f'</div><div class="note">{fmt(hp["note"])}</div>')
-    h.append(f'<p style="margin-top:12pt">{fmt(d["closing"])}</p>')
-    return "".join(h)
-
-
-def page_menu(spec, d):
-    mp = d["menuPage"]
-    h = [pagehead(mp["kicker"], mp["title"]), f'<p class="lead">{fmt(mp["lead"])}</p>']
-    widths = [13.5, 6, 9, 5.5, 10.5, 6, 8, 28, 13.5]
-    h.append("<table><colgroup>" + "".join(f'<col style="width:{w}%">' for w in widths) + "</colgroup><thead><tr>")
-    h += [f"<th>{escape(c)}</th>" for c in mp["columns"]]
-    h.append("</tr></thead>")
-    per = {p["name"]: p for p in spec["periods"]}
-    for g in spec["menu"]:
-        p = per[g["period"]]
-        h.append(f'<tr class="group"><td colspan="9">{escape(g["period"].upper())} PERIOD · '
-                 f'{p["start"]} TO {p["end"]} MYA</td></tr>')
-        for r in g["rows"]:
-            h.append(f'<tr><td class="name"><i>{escape(r["name"])}</i></td><td>{escape(r["part"])}</td><td>{escape(r["mya"])}</td>'
-                     f'<td>{escape(r["hip"])}</td><td>{escape(r["diet"])}</td><td>{escape(r["legs"])}</td>'
-                     f'<td>{escape(r["length"])}</td><td>{escape(r["fossils"])}</td><td>{escape(r["means"])}</td></tr>')
-    h.append("</table>")
-    h.append(f'<p style="margin-top:7pt">{fmt(mp["offMenu"])}</p>')
-    h.append(f'<h2>{escape(mp["aboutHeading"])}</h2><div class="about">')
-    items = [f'<li><b>{escape(f["label"])}:</b> {fmt(f["options"])}</li>' for f in spec["aboutFields"]]
-    half = (len(items) + 1) // 2
-    h.append('<ul class="dot">' + "".join(items[:half]) + '</ul><ul class="dot">' + "".join(items[half:]) + "</ul></div>")
-    return "".join(h)
-
-
-def page_outline(spec, d):
-    op = d["outlinePage"]; z = op["zones"]
-    h = [pagehead(op["kicker"], op["title"]), f'<p class="lead">{fmt(op["lead"])}</p>']
+def page_one(spec, d):
+    """Page 1: the job, the condensed outline (top), what the poster needs (bottom)."""
+    po = d["pageOne"]; z = po["zones"]
+    h = [masthead(d, spec["code"]), f'<h2>{escape(po["jobHeading"])}</h2><p>{fmt(po["job"])}</p>']
 
     def label(key):
         lab, hint = z[key]
-        return f'<div class="zlabel">{escape(lab)}</div><div class="zhint">{escape(hint)}</div>'
+        return f'<div class="zlabel">{escape(lab)} <span class="zhint">{fmt(hint)}</span></div>'
 
-    h.append(f'<div class="zone facts" style="height:0.85in;margin-bottom:9pt">{label("name")}</div>')
+    h.append(f'<h2>{escape(po["outlineHeading"])}</h2><div class="outline">')
+    h.append(f'<div class="zone facts" style="height:0.36in;margin-bottom:6pt">{label("name")}</div>')
     cells = "".join(
-        f'<div class="cell" style="flex:{p["start"] - p["end"]}"><div class="pname">{escape(p["name"].upper())}</div>'
-        f'<div class="pdates">{p["start"]} to {p["end"]}&nbsp;mya</div></div>' for p in spec["periods"])
-    h.append(f'<div class="zone facts" style="margin-bottom:9pt">{label("timeline")}'
-             f'<div class="tl">{cells}</div><div class="tlends"><span>OLDER</span><span>YOUNGER</span></div></div>')
-    fills = "".join(f'<div class="fill"><span>{escape(f["line"])}</span></div>' for f in spec["aboutFields"])
-    h.append(f'<div class="zrow" style="height:3.95in">'
-             f'<div class="zone pics" style="flex:56">{label("drawing")}</div>'
-             f'<div class="zone facts" style="flex:44">{label("about")}{fills}</div></div>')
-    h.append(f'<div class="zone pics" style="height:2.3in">{label("map")}'
-             f'<div class="maplegend"><span class="sitedot"></span>{escape(z["mapLegend"])}</div></div>')
-    lab, hint = z["color"]
-    h.append(f'<p class="legend"><b>{escape(lab)}:</b> {escape(hint)}.</p>')
-    lf, lp = op["legend"]
+        f'<div class="cell" style="flex:{p["start"] - p["end"]}"><span class="pname">{escape(p["name"].upper())}</span> '
+        f'<span class="pdates">{p["start"]} to {p["end"]}&nbsp;mya</span></div>' for p in spec["periods"])
+    h.append(f'<div class="zone facts" style="margin-bottom:6pt">{label("timeline")}<div class="tl">{cells}</div></div>')
+    h.append(f'<div class="zrow" style="height:1.55in;margin-bottom:0">'
+             f'<div class="zone pics" style="flex:36">{label("drawing")}</div>'
+             f'<div class="zone facts" style="flex:28">{label("about")}</div>'
+             f'<div class="zone pics" style="flex:36">{label("map")}'
+             f'<div class="maplegend"><span class="sitedot"></span>{escape(z["mapLegend"])}</div></div></div>')
+    lf, lp, lw = po["legend"]
     h.append(f'<p class="legend"><span class="swatch f"></span>{escape(lf)} &nbsp; '
-             f'<span class="swatch p"></span>{escape(lp)}</p>')
+             f'<span class="swatch p"></span>{escape(lp)} &nbsp; {escape(lw)}</p></div>')
+
+    h.append(f'<h2>{escape(po["needsHeading"])}</h2><div class="parts2">')
+    items = [f"<li><b>{escape(a)}</b> {fmt(b)}</li>" for a, b in po["parts"]]
+    half = (len(items) + 1) // 2
+    h.append('<ol class="parts">' + "".join(items[:half]) + '</ol><ol class="parts" start="4" style="counter-reset: q 3">'
+             + "".join(items[half:]) + "</ol></div>")
+    h.append('<table class="aboutt"><colgroup><col style="width:16%"><col style="width:84%"></colgroup><thead><tr>')
+    h += [f"<th>{escape(c)}</th>" for c in po["aboutColumns"]]
+    h.append("</tr></thead>")
+    h += [f'<tr><td class="name">{escape(f["label"])}</td><td>{fmt(f["options"])}</td></tr>' for f in spec["aboutFields"]]
+    h.append(f'</table><p class="pick">{fmt(po["pick"])}</p>')
     return "".join(h)
 
 
@@ -282,7 +258,7 @@ def page_plan(spec, d):
 
 
 def build_activity(spec, d):
-    pages = [page_job(spec, d), page_menu(spec, d), page_outline(spec, d), page_plan(spec, d)]
+    pages = [page_one(spec, d), page_plan(spec, d)]
     return "".join(f'<section class="page{" first" if i == 0 else ""}">{p}</section>' for i, p in enumerate(pages))
 
 

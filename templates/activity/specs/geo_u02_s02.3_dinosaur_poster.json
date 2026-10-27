@@ -1,5 +1,5 @@
 {
-  "$comment": "Geology S2.3 Dinosaur Poster: individual project handout, grading sheet and teacher key. Rebuild: python3 templates/activity/build_activity.py templates/activity/specs/geo_u02_s02.3_dinosaur_poster.json output/geology/u02. Facts come only from reports/2026-10-27_geo-s02.3-dinosaur-poster-research.md; nothing marked UNVERIFIED there appears on a student page. The rubric rows are written once, here, and both the handout (page 4) and the grading sheet render from them, so they cannot drift. Strings may carry <i> and <b>.",
+  "$comment": "Geology S2.3 Dinosaur Poster: individual project handout, grading sheet and teacher key. Rebuild: python3 templates/activity/build_activity.py templates/activity/specs/geo_u02_s02.3_dinosaur_poster.json output/geology/u02. Facts come only from reports/2026-10-27_geo-s02.3-dinosaur-poster-research.md; nothing marked UNVERIFIED there appears on a student page. The rubric rows are written once, here, and both the handout (page 2) and the grading sheet render from them, so they cannot drift. Strings may carry <i> and <b>.",
   "course": "geology",
   "courseLabel": "GEOLOGY",
   "unit": 2,
@@ -103,228 +103,38 @@
       "end": 66
     }
   ],
-  "menu": [
-    {
-      "period": "Triassic",
-      "rows": [
-        {
-          "name": "Herrerasaurus",
-          "part": "Late",
-          "mya": "231",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "3 to 6",
-          "fossils": "Argentina",
-          "means": ""
-        },
-        {
-          "name": "Eoraptor",
-          "part": "Late",
-          "mya": "231 to 228",
-          "hip": "Lizard",
-          "diet": "Carnivore, maybe omnivore",
-          "legs": "2",
-          "length": "about 1",
-          "fossils": "Argentina",
-          "means": "dawn thief"
-        },
-        {
-          "name": "Plateosaurus",
-          "part": "Late",
-          "mya": "214 to 204",
-          "hip": "Lizard",
-          "diet": "Herbivore",
-          "legs": "2",
-          "length": "5 to 10",
-          "fossils": "Germany; Switzerland; France",
-          "means": "probably broad lizard"
-        },
-        {
-          "name": "Liliensternus",
-          "part": "Late",
-          "mya": "uncertain",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "about 5",
-          "fossils": "Germany",
-          "means": ""
-        },
-        {
-          "name": "Coelophysis",
-          "part": "Late",
-          "mya": "206 to 201",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "2 to 3",
-          "fossils": "New Mexico",
-          "means": ""
-        }
-      ]
-    },
-    {
-      "period": "Jurassic",
-      "rows": [
-        {
-          "name": "Dilophosaurus",
-          "part": "Early",
-          "mya": "196 to 183",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "6 to 7",
-          "fossils": "Arizona",
-          "means": "two-crested lizard"
-        },
-        {
-          "name": "Allosaurus",
-          "part": "Late",
-          "mya": "155 to 147",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "about 8.5",
-          "fossils": "Colorado, Utah, Wyoming; Portugal",
-          "means": ""
-        },
-        {
-          "name": "Stegosaurus",
-          "part": "Late",
-          "mya": "155 to 150",
-          "hip": "Bird",
-          "diet": "Herbivore",
-          "legs": "4",
-          "length": "7 to 9",
-          "fossils": "Colorado, Utah, Wyoming; Portugal",
-          "means": "roof lizard"
-        },
-        {
-          "name": "Diplodocus",
-          "part": "Late",
-          "mya": "155 to 147",
-          "hip": "Lizard",
-          "diet": "Herbivore",
-          "legs": "4",
-          "length": "24 to 26",
-          "fossils": "Colorado, Utah, Wyoming, Montana",
-          "means": "double beam"
-        },
-        {
-          "name": "Brachiosaurus",
-          "part": "Late",
-          "mya": "154 to 153",
-          "hip": "Lizard",
-          "diet": "Herbivore",
-          "legs": "4",
-          "length": "18 to 22",
-          "fossils": "Colorado, Utah, Wyoming, Oklahoma",
-          "means": "arm lizard"
-        }
-      ]
-    },
-    {
-      "period": "Cretaceous",
-      "rows": [
-        {
-          "name": "Spinosaurus",
-          "part": "Late",
-          "mya": "100 to 94",
-          "hip": "Lizard",
-          "diet": "Fish-eater",
-          "legs": "2",
-          "length": "12 to 15",
-          "fossils": "Egypt; Morocco",
-          "means": "spine lizard"
-        },
-        {
-          "name": "Velociraptor",
-          "part": "Late",
-          "mya": "75 to 71",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "1.5 to 2",
-          "fossils": "Mongolia; China",
-          "means": "swift thief"
-        },
-        {
-          "name": "Tyrannosaurus rex",
-          "part": "Late",
-          "mya": "68 to 66",
-          "hip": "Lizard",
-          "diet": "Carnivore",
-          "legs": "2",
-          "length": "12 to 13",
-          "fossils": "Montana, South Dakota, Wyoming; Canada: Saskatchewan",
-          "means": "tyrant lizard king"
-        },
-        {
-          "name": "Triceratops",
-          "part": "Late",
-          "mya": "68 to 66",
-          "hip": "Bird",
-          "diet": "Herbivore",
-          "legs": "4",
-          "length": "7 to 9",
-          "fossils": "Montana, North Dakota, South Dakota, Wyoming; Canada: Alberta, Saskatchewan",
-          "means": "three-horned face"
-        },
-        {
-          "name": "Ankylosaurus",
-          "part": "Late",
-          "mya": "68 to 66",
-          "hip": "Bird",
-          "diet": "Herbivore",
-          "legs": "4",
-          "length": "6 to 8",
-          "fossils": "Montana, Wyoming; Canada: Alberta",
-          "means": "fused lizard"
-        }
-      ]
-    }
-  ],
   "aboutFields": [
     {
       "label": "Period",
-      "options": "Early, Middle, or Late, plus Triassic, Jurassic, or Cretaceous. For example, Late Jurassic.",
-      "line": "Period"
+      "options": "Early, Middle, or Late, plus Triassic, Jurassic, or Cretaceous. For example, Late Jurassic."
     },
     {
       "label": "Hip type",
-      "options": "lizard-hipped (saurischian) or bird-hipped (ornithischian)",
-      "line": "Hip type"
+      "options": "<b>Lizard-hipped (saurischian):</b> in most of them, the pubis hip bone points forward, like a lizard's. <i>T. rex</i>, <i>Velociraptor</i>, and the long-necked plant-eaters are in this group. <b>Bird-hipped (ornithischian):</b> the pubis points backward, like a bird's. All of them ate plants, like <i>Stegosaurus</i> and <i>Triceratops</i>. The names are backwards from what you'd guess: birds come from the lizard-hipped group."
     },
     {
       "label": "Diet",
-      "options": "carnivore (meat), herbivore (plants), omnivore (both), or fish-eater",
-      "line": "Diet"
+      "options": "carnivore (meat), herbivore (plants), omnivore (both), or fish-eater"
     },
     {
       "label": "Habitat",
-      "options": "forest, river floodplain, coastal plain, swamp or wetland, desert dunes, or open woodland. It isn't on the menu, so look it up.",
-      "line": "Habitat"
+      "options": "forest, river floodplain, coastal plain, swamp or wetland, desert dunes, or open woodland"
     },
     {
       "label": "Walks on",
-      "options": "2 legs, 4 legs, or both",
-      "line": "Walks on"
+      "options": "2 legs, 4 legs, or both"
     },
     {
       "label": "Size",
-      "options": "length in meters, next to a school bus (about 12 m). A 24 m dinosaur is about 2 buses long.",
-      "line": "Size (m, and buses)"
+      "options": "length in meters, next to a school bus (about 12 m). A 24 m dinosaur is about 2 buses long."
     },
     {
       "label": "Special feature",
-      "options": "horns, frill, armor, plates or spikes, claws, crest, feathers, speed, or size",
-      "line": "Special feature"
+      "options": "horns, frill, armor, plates or spikes, claws, crest, feathers, speed, or size"
     },
     {
       "label": "Fossils found in",
-      "options": "every country or state where its fossils have been found, not just one. Each one becomes a dot on your map.",
-      "line": "Fossils found in"
+      "options": "every country or state where its fossils have been found, not just one. Each one becomes a dot on your map."
     }
   ],
   "documents": [
@@ -334,7 +144,7 @@
       "type": "Activity",
       "topic": "Dinosaur Poster",
       "filename": "2.3 Activity - Dinosaur Poster.pdf",
-      "pages": 4,
+      "pages": 2,
       "kicker": "GEOLOGY · GEOLOGIC TIME · INDIVIDUAL PROJECT",
       "title": "Dinosaur Poster",
       "titleAccent": "Dinosaur",
@@ -352,125 +162,18 @@
           1
         ]
       ],
-      "job": {
-        "heading": "THE JOB",
-        "paragraphs": [
-          "Pick one dinosaur that lived in the Mesozoic Era, during the Triassic, Jurassic, or Cretaceous Period, and make a colored infographic poster about it. An infographic tells its story with pictures, a map, and short labels, not paragraphs. Page 2 is a menu of dinosaurs with the facts you'll need. Page 3 is the outline. This one is an individual project."
-        ]
-      },
-      "parts": {
-        "heading": "WHAT GOES ON THE POSTER",
-        "items": [
-          [
-            "Name header.",
-            "Your dinosaur's name across the top, big enough to read from across the room."
-          ],
-          [
-            "Mesozoic timeline.",
-            "A strip with three boxes: Triassic (252 to 201 mya), Jurassic (201 to 145 mya), and Cretaceous (145 to 66 mya). Mark when your dinosaur lived. mya means million years ago."
-          ],
-          [
-            "Drawing.",
-            "A big drawing of your dinosaur. Tracing is fine."
-          ],
-          [
-            "About My Dinosaur.",
-            "Eight facts, picked from the list on page 2: period, hip type, diet, habitat, what it walked on, size, special feature, and where its fossils were found."
-          ],
-          [
-            "Map.",
-            "Earth the way it looked when your dinosaur was alive, not today's map. Put a dot on every place its fossils have been found, and add a key that says what the dots mean."
-          ],
-          [
-            "Color.",
-            "The whole poster is in color, not pencil or pen alone."
-          ]
-        ]
-      },
-      "hips": {
-        "heading": "LIZARD-HIPPED OR BIRD-HIPPED",
-        "lead": "Scientists sort dinosaurs into two groups by the shape of their hip bones. Your poster has to say which group yours is in.",
-        "types": [
-          {
-            "term": "Saurischian",
-            "plain": "lizard-hipped",
-            "text": "In most of them, one hip bone (the pubis) points forward and down, like a lizard's. The meat-eaters like <i>T. rex</i>, <i>Velociraptor</i>, and <i>Spinosaurus</i> are in this group, and so are the long-necked plant-eaters like <i>Brachiosaurus</i>."
-          },
-          {
-            "term": "Ornithischian",
-            "plain": "bird-hipped",
-            "text": "The pubis points backward, like a bird's. Every dinosaur in this group ate plants. <i>Stegosaurus</i>, <i>Triceratops</i>, and <i>Ankylosaurus</i> are bird-hipped."
-          }
-        ],
-        "note": "The names are backwards from what you'd guess. Birds come from the lizard-hipped group, not the bird-hipped one. Their ancestors were small meat-eating dinosaurs."
-      },
-      "closing": "The rubric is on page 4. Check your poster against it before you turn it in.",
-      "menuPage": {
-        "kicker": "CHOOSE YOUR DINOSAUR",
-        "title": "The Menu: 15 Dinosaurs",
-        "lead": "mya means million years ago. Dates and lengths are approximate. Lengths are in meters. The states are all in the USA. Oldest period at the top.",
-        "columns": [
-          "DINOSAUR",
-          "PART",
-          "MYA",
-          "HIP",
-          "DIET",
-          "WALKS ON",
-          "LENGTH (M)",
-          "FOSSILS FOUND IN",
-          "NAME MEANS"
-        ],
-        "offMenu": "You can pick a dinosaur that isn't on the menu if it lived in the Mesozoic, but you'll have to find its facts yourself. Pterosaurs, plesiosaurs, ichthyosaurs, and mosasaurs aren't dinosaurs.",
-        "aboutHeading": "ABOUT MY DINOSAUR · WHAT GOES IN EACH LINE"
-      },
-      "outlinePage": {
-        "kicker": "POSTER OUTLINE",
-        "title": "What Goes Where",
-        "lead": "Your poster needs every zone on this page. Where the zones sit is up to you.",
-        "zones": {
-          "name": [
-            "NAME HEADER",
-            "your dinosaur's name, big"
-          ],
-          "timeline": [
-            "MESOZOIC TIMELINE",
-            "mark when your dinosaur lived"
-          ],
-          "drawing": [
-            "DRAWING",
-            "your dinosaur, big. Tracing is fine."
-          ],
-          "about": [
-            "ABOUT MY DINOSAUR",
-            "from the list on page 2. List every fossil site."
-          ],
-          "map": [
-            "MAP OF EARTH BACK THEN",
-            "the continents where they were when your dinosaur lived"
-          ],
-          "mapLegend": "fossil site",
-          "color": [
-            "COLOR",
-            "the whole poster, every zone"
-          ]
-        },
-        "legend": [
-          "Solid teal border: facts.",
-          "Dashed black border: pictures."
-        ]
-      },
       "planPage": {
         "kicker": "DINOSAUR POSTER",
         "title": "My Plan and Rubric",
         "planHeading": "MY PLAN",
-        "planLead": "Fill this in before you start the poster.",
+        "planLead": "Fill this in before you start.",
         "fields": [
           [
             "My dinosaur",
             1
           ],
           [
-            "Period (Early, Middle, or Late, and which period)",
+            "Period",
             1
           ],
           [
@@ -478,12 +181,12 @@
             1
           ],
           [
-            "Fossils found in (countries or states)",
-            2
+            "Fossils found in (every country or state)",
+            1
           ],
           [
-            "Where I got my picture (website or book)",
-            2
+            "Where I got my picture",
+            1
           ]
         ],
         "columns": [
@@ -493,6 +196,71 @@
           "LITTLE OR NONE",
           "SCORE"
         ]
+      },
+      "pageOne": {
+        "jobHeading": "THE JOB",
+        "job": "Make a colored infographic poster about one Mesozoic dinosaur: pictures, a map, and short labels, not paragraphs.",
+        "outlineHeading": "POSTER OUTLINE",
+        "zones": {
+          "name": [
+            "NAME HEADER",
+            "your dinosaur's name, big"
+          ],
+          "timeline": [
+            "MESOZOIC TIMELINE",
+            "mark when your dinosaur lived (mya means million years ago)"
+          ],
+          "drawing": [
+            "DRAWING",
+            "your dinosaur, big. Tracing is fine."
+          ],
+          "about": [
+            "ABOUT MY DINOSAUR",
+            "period · hip type · diet · habitat · walks on · size · special feature · fossils found in"
+          ],
+          "map": [
+            "MAP OF EARTH BACK THEN",
+            "continents where they were, with a dot on each fossil site"
+          ],
+          "mapLegend": "fossil site"
+        },
+        "legend": [
+          "Solid teal border: facts.",
+          "Dashed black border: pictures.",
+          "Where the zones sit is up to you."
+        ],
+        "needsHeading": "WHAT YOUR POSTER NEEDS",
+        "parts": [
+          [
+            "Name header.",
+            "Big enough to read across the room."
+          ],
+          [
+            "Mesozoic timeline.",
+            "All three periods with their dates. Mark when your dinosaur lived."
+          ],
+          [
+            "Drawing.",
+            "Big. Tracing is fine."
+          ],
+          [
+            "About My Dinosaur.",
+            "One answer for each fact in the table below."
+          ],
+          [
+            "Map.",
+            "Earth when your dinosaur lived, not today's map. A dot on every fossil site, and a key for the dots."
+          ],
+          [
+            "Color.",
+            "The whole poster, not pencil or pen alone."
+          ]
+        ],
+        "aboutColumns": [
+          "FACT",
+          "WHAT TO PUT"
+        ],
+        "pick": "Pick any Mesozoic dinosaur and look up its facts yourself. Pterosaurs, plesiosaurs, ichthyosaurs, and mosasaurs aren't dinosaurs."
       }
     },
     {
@@ -531,7 +299,7 @@
         "SCORE",
         "COMMENT"
       ],
-      "pointer": "Full descriptions for each level are on page 4 of the student handout.",
+      "pointer": "Full descriptions for each level are on page 2 of the student handout.",
       "notesHeading": "NOTES"
     },
     {
@@ -545,8 +313,8 @@
       "kicker": "GEOLOGY · GEOLOGIC TIME · TEACHER KEY",
       "title": "Dinosaur Poster Key",
       "titleAccent": "Dinosaur",
-      "factHeading": "MENU FACTS · ALL 15",
-      "factLead": "From the 2026-10-27 research report. Hip: L = lizard-hipped (saurischian), B = bird-hipped (ornithischian). Lengths in meters. Fossil sites list solid finds only.",
+      "factHeading": "COMMON PICKS · QUICK-CHECK FACTS",
+      "factLead": "Fifteen dinosaurs students are likely to choose, from the 2026-10-27 research report. Hip: L = lizard-hipped (saurischian), B = bird-hipped (ornithischian). Lengths in meters. Fossil sites list solid finds only. For a dinosaur not in this table, check the student's facts against their source.",
       "factColumns": [
         "DINOSAUR",
         "PERIOD",
@@ -726,16 +494,15 @@
       ],
       "gradingHeading": "GRADING NOTES",
       "grading": [
-        "<b>Period dates.</b> The menu uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
-        "<b>Triassic hip types.</b> The whole Triassic row is lizard-hipped on purpose. No securely bird-hipped Triassic dinosaur is known. The best candidate, <i>Eocursor</i>, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
-        "<b>Hip type from a picture.</b> <i>Velociraptor</i> and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a <i>Velociraptor</i> skeleton will get it wrong. The student page says “in most of them” for this reason.",
-        "<b>Habitat and special feature</b> are not on the menu and were not researched for this key. Accept any reasonable answer from the habitat list that the student can point to a source for. <b>PROVISIONAL</b>: there is no checked habitat for 14 of the 15 menu dinosaurs. <i>Spinosaurus</i>: river floodplain (river and delta systems).",
+        "<b>Period dates.</b> The handout uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
+        "<b>Triassic hip types.</b> Every Triassic common pick is lizard-hipped. No securely bird-hipped Triassic dinosaur is known. The best candidate, <i>Eocursor</i>, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
+        "<b>Hip type from a picture.</b> <i>Velociraptor</i> and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a <i>Velociraptor</i> skeleton will get it wrong. The hip-type row on the handout says “in most of them” for this reason.",
+        "<b>Habitat and special feature</b> aren't in this table and were not researched for this key. Accept any reasonable answer from the habitat list that the student can point to a source for. <b>PROVISIONAL</b>: there is no checked habitat for 14 of the 15 common picks. <i>Spinosaurus</i>: river floodplain (river and delta systems).",
         "<b><i>Coelophysis</i> dates.</b> A 2024 study puts it at ~206–201 (Rhaetian). Older books give ~225. Accept either.",
         "<b><i>Eoraptor</i>.</b> Sources disagree on diet (Sereno lab: meat eater) and on whether it is an early theropod or an early sauropodomorph. It is lizard-hipped either way. Accept carnivore or omnivore.",
-        "<b><i>Liliensternus</i></b> is the weakest menu slot: its dates are poorly pinned. Accept any Late Triassic date.",
+        "<b><i>Liliensternus</i></b> is the weakest of the common picks: its dates are poorly pinned. Accept any Late Triassic date.",
         "<b>Walks on.</b> 4 legs for <i>Stegosaurus</i>, the sauropods, <i>Triceratops</i> and <i>Ankylosaurus</i> is standard textbook knowledge. It was not separately re-sourced.",
         "<b>Map dots not verified.</b> <i>T. rex</i> in North Dakota and Alberta, and <i>Triceratops</i> in Colorado, are likely but were not confirmed. A dot there is <b>PROVISIONAL</b>. Decide before grading whether it costs points.",
-        "<b>Name meanings</b> are left off the menu for <i>Herrerasaurus</i>, <i>Coelophysis</i>, <i>Allosaurus</i> and <i>Liliensternus</i>. They were not verified. Name meaning is not graded.",
         "<b>No paleomap is supplied.</b> Students draw or trace their own. The map row grades “not today's map” and dots in the right places, not accurate coastlines. Open question for a class reference map (report §4): Blakey's 90 Ma Commons map (CC BY-SA 3.0, low-res only) or a trace from Scotese & Wright 2018 PALEOMAP.",
         "<b>School bus.</b> A full-size Type C bus is 12.0 m (39.3 ft). Re-solved: <i>T. rex</i> 12–13 m is about 1 bus; <i>Brachiosaurus</i> 18–22 m is 1.5 to 1.8 buses; <i>Diplodocus</i> 24–26 m is 2 to 2.2 buses; <i>Velociraptor</i> 1.5–2 m is an eighth to a sixth of a bus."
       ],
@@ -806,10 +573,10 @@
       "spino": [
         "<b>Swim or wade? Unresolved.</b> Everyone agrees it lived around water and ate fish. Ibrahim et al. 2014 (Science) and 2020 (Nature, the fin-like tail) and Fabbri et al. 2022 (dense, diver-like bones) argue it hunted underwater. Henderson 2018, Hone & Holtz 2021 (a wading “shoreline generalist”, like a giant heron), Sereno et al. 2022 (“not an aquatic dinosaur”) and Myhrvold et al. 2024 (Fabbri's statistics unreliable; Fabbri's team says its result holds) argue it waded and ambushed from the shore. Student-safe line: “Scientists are still arguing about whether it swam underwater to hunt or waded in the shallows like a giant heron.”",
         "<b>Holotype destroyed.</b> BSP 1912 VIII 19, found in Egypt's Bahariya Formation in 1912 and named by Stromer in 1915, was destroyed on the night of 24/25 April 1944 when a British bombing raid hit the Munich museum. Only Stromer's descriptions, drawings and a photograph survive. The Moroccan neotype (FSAC-KK 11888, Ibrahim et al. 2014) has a disputed status.",
-        "<b>Fossil dots.</b> Egypt and Morocco are the required dots. A Niger dot is also accepted: a second species, <i>S. mirabilis</i>, was named in February 2026 from Niger's Farak Formation (~95 Ma; Sereno et al., Science 391). <b>PROVISIONAL</b>: one paper, not yet independently tested, and not decided for the student page, so the menu lists Egypt and Morocco only.",
-        "<b>Age.</b> The rocks are Cenomanian, the first stage of the Late Cretaceous, so the menu says Late. Papers also use the informal label “mid-Cretaceous”. Accept a student who writes “middle of the Cretaceous”.",
-        "<b>Posture.</b> The menu says 2 legs. The 4-leg reconstruction (Ibrahim 2014) is older and now mostly rejected.",
-        "<b>Size.</b> Length estimates run 12.6 to 18 m; the menu uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster as fact."
+        "<b>Fossil dots.</b> Egypt and Morocco are the required dots. A Niger dot is also accepted: a second species, <i>S. mirabilis</i>, was named in February 2026 from Niger's Farak Formation (~95 Ma; Sereno et al., Science 391). <b>PROVISIONAL</b>: one paper, not yet independently tested, and not decided for student pages.",
+        "<b>Age.</b> The rocks are Cenomanian, the first stage of the Late Cretaceous, so the table says Late. Papers also use the informal label “mid-Cretaceous”. Accept a student who writes “middle of the Cretaceous”.",
+        "<b>Posture.</b> The table says 2 legs. The 4-leg reconstruction (Ibrahim 2014) is older and now mostly rejected.",
+        "<b>Size.</b> Length estimates run 12.6 to 18 m; this key uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster as fact."
       ]
     }
   ]
