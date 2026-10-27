@@ -1,0 +1,223 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "sections": [
+    "3.4",
+    "3.4",
+    "3.6"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "30",
+  "pagesPerSection": 1,
+  "sectionsContent": [
+    {
+      "code": "3.4",
+      "title": "Ionization Energy & Electronegativity",
+      "concept": {
+        "summary": "Ionization energy is the energy needed to pull one electron off an atom. Electronegativity is how strongly an atom pulls on electrons it shares in a bond. Both rise across a period and fall down a group.",
+        "keyIdeas": [
+          "Fluorine has the highest electronegativity, 4.0. Noble gases are usually left off electronegativity tables because they rarely bond."
+        ]
+      },
+      "directions": "Use the trends, not a data table. A periodic table is allowed.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "In your own words, what is electronegativity?",
+          "answerLines": 2,
+          "solution": "How strongly an atom pulls on the electrons it shares with another atom in a bond. Accept any wording that includes pulling on shared electrons. Do not accept 'energy to remove an electron' (that is ionization energy).",
+          "finalAnswer": "an atom's pull on shared electrons in a bond"
+        },
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Which element has the highest electronegativity of all?",
+          "answerLines": 1,
+          "solution": "Fluorine (4.0), top right of the table, not counting the noble gases.",
+          "finalAnswer": "fluorine"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Rank these from lowest to highest electronegativity: Na, Cl, P, Mg.",
+          "answerLines": 1,
+          "solution": "All four are in period 3, so electronegativity rises left to right: Na < Mg < P < Cl.\nValues for reference: Na 0.93, Mg 1.31, P 2.19, Cl 3.16.",
+          "finalAnswer": "Na < Mg < P < Cl"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Rank these from lowest to highest ionization energy: Cs, Li, K.",
+          "answerLines": 1,
+          "solution": "All three are in group 1, so ionization energy falls going down: Cs < K < Li.\nValues for reference (kJ/mol): Cs 376, K 419, Li 520.\nCommon error: ranking by atomic number in the wrong direction.",
+          "finalAnswer": "Cs < K < Li"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Rank these from lowest to highest electronegativity: Ba, Be, Mg.",
+          "answerLines": 1,
+          "solution": "All three are in group 2, so electronegativity falls going down: Ba < Mg < Be.\nValues for reference: Ba 0.89, Mg 1.31, Be 1.57.",
+          "finalAnswer": "Ba < Mg < Be"
+        },
+        {
+          "tier": "challenge",
+          "points": 3,
+          "prompt": "Oxygen's electronegativity is 3.4 and sulfur's is 2.6. Selenium sits directly below sulfur. Predict a value for selenium and give the trend you used.",
+          "answerLines": 2,
+          "solution": "Any value below 2.6 (and above about 2.0) with the reason 'electronegativity decreases down a group'.\nActual value: 2.55. Full credit for the trend and a value under 2.6; the exact number is not the point.",
+          "finalAnswer": "below 2.6 (actual 2.55); EN decreases down a group"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 4,
+          "prompt": "Metals sit on the left of the table and have low ionization energy and low electronegativity. Using what the Gizmo showed you about atomic radius, explain why.",
+          "answerLines": 3,
+          "solution": "Atoms on the left of a period are the largest in that period (Gizmo, 3.3). Their outer electrons are far from the nucleus and held loosely, so little energy removes one (low IE) and they pull weakly on shared electrons (low EN).\nGrading: 1 point for large radius on the left, 2 points for outer electrons far from the nucleus / weakly held, 1 point for linking that to both IE and EN.",
+          "finalAnswer": "large atoms, outer electrons far away and loosely held, so low IE and low EN"
+        }
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Successive Ionization Energy",
+      "concept": {
+        "summary": "Successive ionization energies remove electrons one at a time, and each costs more than the last. When the next electron must come from an inner energy level, the cost jumps. The electrons removed before the jump are the valence electrons.",
+        "keyIdeas": []
+      },
+      "directions": "All values are in kJ/mol. Look for the one big jump.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "What does an element's second ionization energy measure?",
+          "answerLines": 1,
+          "solution": "The energy needed to remove a second electron, from the ion that already lost one (the 1+ ion). Accept 'energy to remove the 2nd electron'.",
+          "finalAnswer": "energy to remove the second electron, from the 1+ ion"
+        },
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Is the second ionization energy always larger than the first? Give one reason.",
+          "answerLines": 1,
+          "solution": "Yes. The second electron is pulled off a positive ion: the same protons now hold fewer electrons, so each one is held more tightly. Accept 'it is harder to remove an electron from a positive ion'.",
+          "finalAnswer": "yes; the electron comes off a positive ion"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Element X has these ionization energies: 801, 2,427, 3,660, 25,026. How many valence electrons does it have, and which group is it in?",
+          "answerLines": 1,
+          "solution": "The jump is from 3,660 to 25,026, after the 3rd electron, so 3 valence electrons: group 13. (It is boron.) 1 point each.",
+          "finalAnswer": "3 valence electrons; group 13"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Element Y has these ionization energies: 590, 1,145, 4,912, 6,491. How many valence electrons does it have, and which group is it in?",
+          "answerLines": 1,
+          "solution": "The jump is from 1,145 to 4,912, after the 2nd electron, so 2 valence electrons: group 2. (It is calcium.) 1 point each.",
+          "finalAnswer": "2 valence electrons; group 2"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Sodium's first four ionization energies are 496, 4,562, 6,910 and 9,543. Its electrons are arranged 2-8-1. Where is the big jump, and why is it there?",
+          "answerLines": 2,
+          "solution": "Between the 1st and 2nd (496 to 4,562). Sodium's one valence electron is in level 3; the 2nd electron comes from level 2, an inner level that is closer to the nucleus and less shielded.",
+          "finalAnswer": "between the 1st and 2nd; the 2nd electron is an inner (level 2) electron"
+        },
+        {
+          "tier": "challenge",
+          "points": 3,
+          "prompt": "Silicon has 4 valence electrons. Its first four ionization energies are 787, 1,577, 3,232 and 4,356. Predict whether its 5th is closer to 5,000 or to 16,000, and explain.",
+          "answerLines": 2,
+          "solution": "Closer to 16,000 (actual: 16,091). Electrons 1–4 are silicon's valence electrons in level 3; the 5th comes from level 2, an inner level, so the cost jumps.\nGrading: 1 point for 16,000, 2 points for 'the 5th electron is an inner electron / from level 2'.\nCommon error: continuing the steady rise and choosing 5,000.",
+          "finalAnswer": "closer to 16,000 (16,091); the 5th electron is an inner electron"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 4,
+          "prompt": "Lithium's first three ionization energies are 520, 7,298 and 11,815. Beryllium's first ionization energy is 900.",
+          "parts": [
+            "a.  How many valence electrons does lithium have? How do you know?",
+            "b.  Lithium and beryllium are both in period 2. Explain why beryllium's first ionization energy is higher than lithium's."
+          ],
+          "answerLines": 2,
+          "solution": "a.  1 valence electron: the jump comes right after the 1st (520 to 7,298). (2 points: 1 for the number, 1 for the jump.)\nb.  Same period, same two energy levels; beryllium has 4 protons to lithium's 3, so it holds its outer electrons more tightly. (2 points: 1 for same levels, 1 for more protons.)",
+          "finalAnswer": "a. 1, the jump is after the 1st   b. more protons on the same energy levels"
+        }
+      ]
+    },
+    {
+      "code": "3.6",
+      "title": "Explaining Periodic Trends",
+      "concept": {
+        "summary": "Two things set every trend. Nuclear charge: more protons pull harder on the electrons. Energy levels: each new level puts the outer electrons farther out, behind more inner electrons that block part of the pull.",
+        "keyIdeas": [
+          "Same period: compare protons. Same group: compare energy levels."
+        ]
+      },
+      "directions": "For every 'explain', name the trend, compare the two atoms, and say what causes the difference.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Moving left to right across period 3, what happens to the number of protons?",
+          "answerLines": 1,
+          "solution": "It goes up by one with each element (Na 11 to Ar 18).",
+          "finalAnswer": "increases by one each element"
+        },
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Moving down group 1, what happens to the number of energy levels?",
+          "answerLines": 1,
+          "solution": "It goes up by one with each period (Li 2, Na 3, K 4 ...).",
+          "finalAnswer": "increases by one each period"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which atom is larger, magnesium or sulfur? Explain using nuclear charge.",
+          "answerLines": 2,
+          "solution": "Magnesium. Both are in period 3 with the same three energy levels. Sulfur has 16 protons to magnesium's 12, so it pulls the same levels in tighter.\nValues for reference: Mg 160 pm, S 103 pm (textbook values vary by source).",
+          "finalAnswer": "magnesium; S has more protons pulling on the same levels"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the lower ionization energy, lithium or cesium? Explain using energy levels.",
+          "answerLines": 2,
+          "solution": "Cesium. It has six energy levels to lithium's two, so its outer electron is much farther from the nucleus and easier to remove.\nValues: Cs 376 kJ/mol, Li 520 kJ/mol.",
+          "finalAnswer": "cesium; outer electron is farther out"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the higher electronegativity, fluorine or bromine? Explain using energy levels.",
+          "answerLines": 2,
+          "solution": "Fluorine. It has two energy levels to bromine's four, so a shared electron sits much closer to its nucleus and feels a stronger pull.\nValues: F 3.98, Br 2.96.",
+          "finalAnswer": "fluorine; fewer energy levels, shared electrons closer"
+        },
+        {
+          "tier": "challenge",
+          "points": 3,
+          "prompt": "A student writes: \"Chlorine is smaller than sodium because chlorine has more electrons.\" What is wrong with this reasoning? Give the correct reason.",
+          "answerLines": 2,
+          "solution": "More electrons by themselves would not shrink an atom; electrons repel each other. The real cause is the protons: chlorine has 17 to sodium's 11, and both use three energy levels, so chlorine pulls its electrons in closer.\nGrading: 1 point for rejecting 'more electrons', 2 points for more protons with the same energy levels.",
+          "finalAnswer": "electrons do not shrink an atom; more protons on the same levels do"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 4,
+          "prompt": "Potassium (outer electron in energy level 4) has a first ionization energy of 419 kJ/mol. Sodium (level 3) has 496 kJ/mol. Explain why potassium's is lower. Which of Li, Na, K, Rb and Cs should be lowest?",
+          "answerLines": 2,
+          "solution": "Potassium's outer electron is one energy level farther out, with more inner electrons blocking the nucleus, so less energy removes it. The trend continues down the group, so cesium is lowest (376 kJ/mol).\nTeacher note: francium, below cesium, breaks the trend slightly. Its measured value is about 393 kJ/mol, a little above cesium's. If a student names francium from the trend, give the point and mention this.\nGrading: 2 points for farther out / more shielding, 1 point for linking to less energy, 1 point for cesium.",
+          "finalAnswer": "farther out and more shielded; cesium"
+        }
+      ]
+    }
+  ]
+}
