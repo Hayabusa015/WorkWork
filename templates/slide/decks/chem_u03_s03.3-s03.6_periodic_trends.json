@@ -1,0 +1,345 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "section": "3.4",
+  "sectionTitle": "Periodic Trends",
+  "note": "Day 3 of the short U3 (SHULL-CHG-0054), after the Gizmo. Covers 3.3 atomic radius (with one ion example, Mg vs Mg2+), 3.4 ionization energy (successive IE, aluminum) and electronegativity, 3.6 why. Ion formation (3.7) is not in this deck: taught before, per Matt 2026-10-27. Each example is one slide that builds on click (Matt's instruction), so the solution is revealed on the same slide instead of the next one. Every image slot holds a built figure from scripts/build_diagram_u03_slides.py or build_diagram_trends.py. Charges use ^{...} superscript markup.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "Periodic\nTrends",
+        "subhead": "Ionization energy, electronegativity and atomic radius, and the one idea behind all three.",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "section": "../assets/chem_u03_s3.6_trend_arrows.png"
+      },
+      "alt": {
+        "section": "Periodic table outline with arrows across and down"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Two Things Control Every Trend",
+        "subhead": "Keep both in mind. Every slide after this one uses them.",
+        "c1_l": "NUCLEAR CHARGE",
+        "c1_b": "More protons pull harder on every electron.\n\nAcross a period: one more proton each step.",
+        "c2_l": "ENERGY LEVELS",
+        "c2_b": "Each new level puts electrons farther out.\n\nDown a group: one more level each step.",
+        "mustwrite": "More protons pull harder. More energy levels put electrons farther out.",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "concept": "../assets/chem_u03_s3.6_two_atoms.png"
+      },
+      "alt": {
+        "concept": "Lithium and fluorine atoms: same two levels, fluorine smaller with 9 protons"
+      },
+      "builds": [
+        [
+          "c1_l",
+          "c1_b"
+        ],
+        [
+          "c2_l",
+          "c2_b"
+        ],
+        [
+          "mustwrite"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Ionization Energy",
+        "subhead": "The energy needed to pull one electron off an atom, in kJ/mol.",
+        "a1_l": "ACROSS A PERIOD",
+        "a1_b": "Rises: more protons, same levels, tighter grip.",
+        "a2_l": "DOWN A GROUP",
+        "a2_b": "Falls: the outer electron is farther out.",
+        "a3_l": "THE PATTERN",
+        "a3_b": "Noble gases peak. Group 1 metals bottom out.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.4_ie_chart.png"
+      },
+      "alt": {
+        "diagram": "First ionization energy for elements 1 to 20"
+      },
+      "builds": [
+        [
+          "a1_l",
+          "a1_b"
+        ],
+        [
+          "a2_l",
+          "a2_b"
+        ],
+        [
+          "a3_l",
+          "a3_b"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Predict: Pulling Electrons Off Aluminum",
+        "subhead": "Aluminum has 3 valence electrons. Which removal costs the most?",
+        "a1_l": "PREDICT FIRST",
+        "a1_b": "Which bar jumps? Write your guess and why.",
+        "a2_l": "THE DATA",
+        "a2_b": "The 4th electron costs four times the 3rd.",
+        "a3_l": "WHY",
+        "a3_b": "Electron 4 comes from level 2: closer, less shielded.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.4_al_ie_a.png"
+      },
+      "reveal": {
+        "diagram": "../assets/chem_u03_s3.4_al_ie_b.png"
+      },
+      "alt": {
+        "diagram": "Aluminum's first four ionization energies"
+      },
+      "builds": [
+        [
+          "reveal:diagram",
+          "a2_l",
+          "a2_b"
+        ],
+        [
+          "a3_l",
+          "a3_b"
+        ]
+      ]
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Your Turn: Use the Jump",
+        "subhead": "Find the jump, then count the electrons before it.",
+        "problem": "These are magnesium's first four ionization energies. How many valence electrons does magnesium have?",
+        "q1_l": "FIND THE JUMP",
+        "q1_b": "1,451 to 7,733: right after the 2nd electron.",
+        "q2_l": "SO",
+        "q2_b": "2 valence electrons. Magnesium is in group 2.",
+        "answer": "The jump follows the last valence electron.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "setup": "../assets/chem_u03_s3.4_mg_ie.png"
+      },
+      "alt": {
+        "setup": "Magnesium's first four ionization energies"
+      },
+      "builds": [
+        [
+          "q1_l",
+          "q1_b"
+        ],
+        [
+          "q2_l",
+          "q2_b"
+        ],
+        [
+          "answer"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Electronegativity",
+        "subhead": "How strongly an atom pulls on electrons it shares in a bond. No units.",
+        "a1_l": "ACROSS A PERIOD",
+        "a1_b": "Rises: more protons pull the shared pair harder.",
+        "a2_l": "DOWN A GROUP",
+        "a2_b": "Falls: the shared pair sits farther out.",
+        "a3_l": "NOT THE SAME AS IE",
+        "a3_b": "IE removes an electron. EN pulls on a shared one.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.4_en_charts.png"
+      },
+      "alt": {
+        "diagram": "Electronegativity across period 2 and down group 17"
+      },
+      "builds": [
+        [
+          "a1_l",
+          "a1_b"
+        ],
+        [
+          "a2_l",
+          "a2_b"
+        ],
+        [
+          "a3_l",
+          "a3_b"
+        ]
+      ]
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Example: Rank by Electronegativity",
+        "subhead": "Use where they sit, not memorized numbers.",
+        "problem": "Rank oxygen, sulfur and fluorine from lowest to highest electronegativity.",
+        "q1_l": "S VS. O",
+        "q1_b": "S is below O: one more level, so S < O.",
+        "q2_l": "O VS. F",
+        "q2_b": "F is right of O: more protons, so O < F.",
+        "answer": "S < O < F   (2.6, 3.4, 4.0)",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "setup": "../assets/chem_u03_s3.4_en_example.png"
+      },
+      "alt": {
+        "setup": "Positions of oxygen, fluorine and sulfur"
+      },
+      "builds": [
+        [
+          "q1_l",
+          "q1_b"
+        ],
+        [
+          "q2_l",
+          "q2_b"
+        ],
+        [
+          "answer"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Atomic Radius",
+        "subhead": "Distance from the nucleus to the outer electrons, in picometers (pm).",
+        "a1_l": "ACROSS A PERIOD",
+        "a1_b": "Shrinks: more protons pull the same levels in.",
+        "a2_l": "DOWN A GROUP",
+        "a2_b": "Grows: each period adds an energy level.",
+        "a3_l": "SAME CAUSE",
+        "a3_b": "Radius runs opposite to IE and EN.",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.3_radius_rows.png"
+      },
+      "alt": {
+        "diagram": "Atoms drawn to scale across period 3 and down group 1"
+      },
+      "builds": [
+        [
+          "a1_l",
+          "a1_b"
+        ],
+        [
+          "a2_l",
+          "a2_b"
+        ],
+        [
+          "a3_l",
+          "a3_b"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Predict: Mg vs. Mg^{2+}",
+        "subhead": "Magnesium loses its 2 valence electrons. Bigger, smaller or the same?",
+        "a1_l": "PREDICT FIRST",
+        "a1_b": "Write your guess and one reason.",
+        "a2_l": "THE DATA",
+        "a2_b": "160 pm down to 72 pm: less than half.",
+        "a3_l": "WHY",
+        "a3_b": "Its outer level is gone. 12 protons hold 2 levels.",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.3_mg_ion_a.png"
+      },
+      "reveal": {
+        "diagram": "../assets/chem_u03_s3.3_mg_ion_b.png"
+      },
+      "alt": {
+        "diagram": "Magnesium atom and magnesium ion drawn to scale"
+      },
+      "builds": [
+        [
+          "reveal:diagram",
+          "a2_l",
+          "a2_b"
+        ],
+        [
+          "a3_l",
+          "a3_b"
+        ]
+      ]
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "One Picture, Three Trends",
+        "subhead": "Label the arrows on your Gizmo sheet, including the diagonal.",
+        "a1_l": "ACROSS A PERIOD",
+        "a1_b": "Radius shrinks. Ionization energy and EN rise.",
+        "a2_l": "DOWN A GROUP",
+        "a2_b": "Radius grows. Ionization energy and EN fall.",
+        "a3_l": "THE DIAGONAL",
+        "a3_b": "Metallic character: highest at cesium (black).",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "diagram": "../assets/chem_u03_s3.6_trend_arrows.png"
+      },
+      "alt": {
+        "diagram": "Periodic table outline with trend arrows"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Answer in your notes first. Then we click through.",
+        "problem": "Calcium and bromine are both in period 4. Which atom is larger? Which has the higher ionization energy?",
+        "q1_l": "LARGER",
+        "q1_b": "Calcium. Bromine has 15 more protons on 4 levels.",
+        "q2_l": "HIGHER IE",
+        "q2_b": "Bromine. More protons grip its electrons tighter.",
+        "answer": "Same cause: more protons, same levels.",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "setup": "../assets/chem_u03_s3.6_period4.png"
+      },
+      "alt": {
+        "setup": "Period 4 main-group elements with calcium and bromine highlighted"
+      },
+      "builds": [
+        [
+          "q1_l",
+          "q1_b"
+        ],
+        [
+          "q2_l",
+          "q2_b"
+        ],
+        [
+          "answer"
+        ]
+      ]
+    }
+  ]
+}

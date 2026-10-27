@@ -121,7 +121,11 @@ for (const slide of spec.slides) {
      at an arbitrary x/y would be a deck that can invent geometry, which is the one thing
      this split exists to prevent. The image is fitted inside the slot and centred, so a
      wrong aspect ratio letterboxes instead of stretching. */
-  for (const [slotName, imgRel] of Object.entries(slide.images || {})) {
+  /* `reveal` stacks a second image of the same size over a slot, so a click can show the
+     answer after the class predicts: same slot, same fit, so it lands exactly on top. */
+  const placements = Object.entries(slide.images || {}).map(([k, v]) => [k, v, "img"])
+    .concat(Object.entries(slide.reveal || {}).map(([k, v]) => [k, v, "reveal"]));
+  for (const [slotName, imgRel, kind] of placements) {
     const slot = (pres.SLOTS[slide.master] || {})[slotName];
     if (!slot) { problems.push(`slide ${n} (${slide.master}): no slot "${slotName}"`); continue; }
     const imgPath = path.resolve(path.dirname(specPath), imgRel);
@@ -133,7 +137,8 @@ for (const slide of spec.slides) {
       const fw = dim.w * scale, fh = dim.h * scale;
       x += (w - fw) / 2; y += (h - fh) / 2; w = fw; h = fh;
     }
-    s.addImage({ path: imgPath, x, y, w, h });
+    s.addImage({ path: imgPath, x, y, w, h, objectName: `${kind}:${slotName}`,
+      altText: slide.alt && slide.alt[slotName] ? slide.alt[slotName] : path.basename(imgPath) });
     delete fields[slotName];   // the slot's prompt text is replaced by the image
   }
 
@@ -143,7 +148,20 @@ for (const slide of spec.slides) {
       problems.push(`slide ${n} (${slide.master}): no placeholder "${ph}" — declared: ${declared.join(", ")}`);
       continue;
     }
-    s.addText(richText(String(txt)), { placeholder: ph });
+    s.addText(richText(String(txt)), { placeholder: ph, objectName: `ph:${ph}` });
+  }
+
+  /* Builds: click groups, in order. Each name is a placeholder ("a2_b") or an image
+     ("img:diagram", "reveal:diagram"). Everything not named is on the slide from the start.
+     The timing XML is written by scripts/add_slide_builds.py after the file exists. */
+  const named = new Set(Object.keys(fields).map(k => `ph:${k}`)
+    .concat(Object.keys(slide.images || {}).map(k => `img:${k}`))
+    .concat(Object.keys(slide.reveal || {}).map(k => `reveal:${k}`)));
+  for (const group of slide.builds || []) {
+    for (const nm of group) {
+      const full = nm.includes(":") ? nm : `ph:${nm}`;
+      if (!named.has(full)) problems.push(`slide ${n}: build names "${nm}", which is not on the slide`);
+    }
   }
 
   // Cap check. A card body of five lines is a slide that should have been two slides.
@@ -175,4 +193,16 @@ pres.writeFile({ fileName: OUT }).then(f => {
     { encoding: "utf8" });
   if (r.status === 0) process.stdout.write(r.stdout);
   else console.error("repack skipped:", (r.stderr || "").trim());
+  if (spec.slides.some(sl => (sl.builds || []).length)) {
+    // Placeholders ignore objectName, so the post-processor finds them by their layout
+    // index instead; it needs each master's placeholder names in declared order to do that.
+    const phMap = path.join(require("os").tmpdir(), `shull_ph_${process.pid}.json`);
+    fs.writeFileSync(phMap, JSON.stringify(spec.slides.map(sl => pres.PLACEHOLDERS[sl.master])));
+    const b = require("child_process").spawnSync(
+      "python3", [path.join(__dirname, "..", "..", "scripts", "add_slide_builds.py"), f, specPath, phMap],
+      { encoding: "utf8" });
+    fs.unlinkSync(phMap);
+    if (b.status === 0) process.stdout.write(b.stdout);
+    else { console.error("add_slide_builds failed:", (b.stderr || "").trim()); process.exitCode = 1; }
+  }
 });
