@@ -39,26 +39,41 @@ def fmt_mp(v):
     return f"{v} °C".replace("-", "−") if isinstance(v, int) else v
 
 
-def grid_table(doc, pal, spec, fill=None):
-    """The blank 6 x 5 placement grid. No group or period labels: finding those is the task."""
+def grid_table(doc, pal, spec, fill=None, ions=None, row_h=0.72):
+    """The 6 x 5 placement grid, topped by a row for the ion each column forms. No group or
+    period labels: finding those is the task. The key draws the same grid at the same size,
+    so it can be held beside a group's sheet and graded square by square."""
     cols, rows = len(spec["grid"]["columns"]), len(spec["grid"]["rows"])
     w = round(TEXT_W / cols, 3)
-    t = doc.add_table(rows=rows, cols=cols)
+    t = doc.add_table(rows=rows + 1, cols=cols)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     fix_widths(t, [w] * cols)
+    no_split(t.rows[0], 0.5)
+    for c in range(cols):
+        cell = t.rows[0].cells[c]
+        borders(cell, pal.ink, sz=6)
+        borders(cell, pal.ink, sz=18, edges=("bottom",))
+        para(cell, "ION FORMED", 8, bold=True, color=pal.label, first=True)
+        if ions:
+            q = para(cell, ions[c], 11, bold=True, color=pal.accent)
+            q.alignment = WD_ALIGN_PARAGRAPH.CENTER
     for r in range(rows):
-        no_split(t.rows[r], 0.62)
+        no_split(t.rows[r + 1], row_h)
         for c in range(cols):
-            cell = t.rows[r].cells[c]
+            cell = t.rows[r + 1].cells[c]
             borders(cell, pal.ink, sz=6)
             if fill:
                 txt = fill.get((r, c))
                 if txt:
-                    p = para(cell, txt[0], 10, bold=True, color=txt[2], first=True)
+                    p = para(cell, txt[0], 18, bold=True, color=txt[2], first=True)
                     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                     p = para(cell, txt[1], 8.5, color=pal.ink)
                     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     return t
+
+
+SCORE = [("Each card in the right square", 25), ("The gap in the right square", 1),
+         ("Each column's ion", 5), ("Each prediction in range (ion not scored)", 4)]
 
 
 def answer_lines(doc, pal, prompts, n=2):
@@ -165,8 +180,8 @@ def cards_pages(doc, pal, spec):
                 if card is None:
                     para(cell, "?", 26, bold=True, color=pal.accent, first=True)
                     para(cell, "THE MISSING ELEMENT", 9, bold=True, color=pal.ink)
-                    para(cell, "Put this card in the gap your team leaves. Write your predictions "
-                               "on page 2.", 9.5, color=pal.ink)
+                    para(cell, "Put this card in the gap your group leaves. Write your predictions "
+                               "on the answer sheet.", 9.5, color=pal.ink)
                     continue
                 card_face(cell, card, pal, inner)
                 tidy_cell(cell)
@@ -180,12 +195,12 @@ def build_student(spec, pal, code, out):
     running_footer(sec, f"SHULL SCIENCE   {code}   ACTIVITY", pal, with_page_numbers=True)
     header(doc, spec, pal, "Operation Periodic Table", "ACTIVITY  ·  ~45 MIN", code)
     gap(doc, 5)
-    fields(doc, pal, [("TEAM MEMBERS", 4.6), ("PERIOD", 1.2), ("TEAM SCORE         / 30", 1.7)])
+    fields(doc, pal, [("NAME", 4.6), ("PERIOD", 1.2), ("LAB GROUP", 1.7)])
     gap(doc, 6)
     boxed(doc, pal, "YOUR MISSION", [
-        "Your team has 25 cards. Each one is a real element under a letter code name. Arrange them into a "
+        "Your lab group has 25 cards. Each one is a real element under a letter code name. Arrange them into a "
         "table that shows the patterns you learned this week. When everyone is done, your teacher "
-        "reveals the real table. The team whose table is closest to it wins.",
+        "reveals the real table. Your lab group turns in one answer sheet, graded square by square.",
         "One element is missing on purpose. Leave a gap for it and predict its properties. In 1871 "
         "Dmitri Mendeleev did exactly this for an element nobody had found yet.",
     ])
@@ -206,7 +221,8 @@ def build_student(spec, pal, code, out):
                                          "along each row, the way they do across a real period. Two clues: the "
                                          "top row holds just two cards, one at each end. The missing element "
                                          "is in the middle of its family, not at either end."),
-        ("Record and predict (10 min).  ", "Copy your table onto the grid on page 2 and fill in your predictions."),
+        ("Record and predict (10 min).  ", "Fill in the Lab Group Answer Sheet: every letter, the ion for each "
+                                         "column, and your predictions. One sheet per group is graded."),
     ], numbered=True)
     gap(doc, 6)
     plain(doc, pal, "RULES", [
@@ -214,40 +230,62 @@ def build_student(spec, pal, code, out):
         "Every card goes on the grid. Every team member has to be able to explain one placement.",
     ])
 
+    gap(doc, 6)
+    answer_lines(doc, pal, [
+        "Which card property helped your group most when ordering a family? Why that one?",
+        "Find one family where a property did not follow the trend. Name the property and the family.",
+        "What is the real element in the gap? How close was your group's ionization energy prediction?",
+    ])
+
+    # ---- Page 2: the one sheet each lab group turns in. It stands alone, so it carries its
+    # own header and names, and the score breakdown the teacher grades against.
     page_break(doc)
-    p = para(doc, "", 7.5)
-    run(p, "YOUR TABLE", 7.5, bold=True, color=pal.accent)
-    para(doc, "Write each letter in the cell where your team placed it. Write ? in the gap. "
-              "Some cells stay empty.", 9.5)
+    header(doc, spec, pal, "Lab Group Answer Sheet", "OPERATION PERIODIC TABLE  ·  ONE PER GROUP", code)
+    gap(doc, 5)
+    total = sum(n for _, n in SCORE)
+    fields(doc, pal, [("LAB GROUP MEMBERS", 4.6), ("PERIOD", 1.2), (f"SCORE         / {total}", 1.7)])
+    gap(doc, 6)
+    para(doc, "Write each card's letter in the square where your group placed it, and ? in the gap. "
+              "Some squares stay empty. Across the top, write the ion each column forms.", 9.5)
     gap(doc, 4)
     grid_table(doc, pal, spec)
     gap(doc, 8)
-    t = doc.add_table(rows=6, cols=4)
-    fix_widths(t, [2.2, 1.9, 1.9, 1.5])
-    heads = ("THE MISSING ELEMENT", "YOUR PREDICTION", "ACTUAL (AT THE REVEAL)", "IN RANGE?")
-    for c, hd in zip(t.rows[0].cells, heads):
+    t = doc.add_table(rows=6, cols=2)
+    fix_widths(t, [3.0, 4.5])
+    for c, hd in zip(t.rows[0].cells, ("THE MISSING ELEMENT", "YOUR GROUP'S PREDICTION")):
         borders(c, pal.ink, sz=6, edges=("bottom",))
         para(c, hd, 6.5, bold=True, color=pal.label, caps_track=True, first=True)
     for r, prop in enumerate(("Melting point (°C)", "Atomic radius (pm)", "Ionization energy (kJ/mol)",
                               "Electronegativity", "Ion it forms"), 1):
-        no_split(t.rows[r], 0.36)
+        no_split(t.rows[r], 0.34)
         for c in t.rows[r].cells:
             borders(c, pal.hair, sz=4, edges=("bottom",))
         para(t.rows[r].cells[0], prop, 9.5, color=pal.ink, first=True)
     gap(doc, 8)
-    plain(doc, pal, "SCORING", [
-        "1 point for each card in exactly the right cell (25).  1 point for a gap in the right cell.  "
-        "1 point for each prediction inside your teacher's range (4, ion not scored).",
-    ])
-    gap(doc, 8)
-    answer_lines(doc, pal, [
-        "Which card property helped your team most when ordering a family? Why that one?",
-        "Find one family where a property did not follow the trend. Name the property and the family.",
-        "What is the real element in the gap? How close was your team's ionization energy prediction?",
-    ])
+    t = doc.add_table(rows=1, cols=len(SCORE))
+    fix_widths(t, [TEXT_W / len(SCORE)] * len(SCORE))
+    for c, (lab, n) in zip(t.rows[0].cells, SCORE):
+        borders(c, pal.hair, sz=4)
+        cell_margins(c, top=50, bottom=50, left=90, right=60)
+        para(c, lab, 8, color=pal.label, first=True)
+        q = para(c, "", 10)
+        run(q, "____ / " + str(n), 10, bold=True, color=pal.ink)
 
     cards_pages(doc, pal, spec)
     doc.save(out)
+
+
+def letters_by_group(doc, pal, spec, cols, m):
+    t = doc.add_table(rows=1, cols=5)
+    fix_widths(t, [1.5] * 5)
+    for c, g in zip(t.rows[0].cells, cols):
+        borders(c, pal.hair, sz=4)
+        cell_margins(c, top=40, bottom=40, left=80, right=60)
+        para(c, f"GROUP {g}", 6.5, bold=True, color=pal.label, caps_track=True, first=True)
+        for cd in sorted([x for x in spec["cards"] if x["group"] == g], key=lambda x: x["period"]):
+            para(c, f"{cd['code']} = {cd['symbol']}", 9.5, color=pal.ink)
+        if g == m["group"]:
+            para(c, f"? = {m['symbol']} (held out)", 9.5, color=pal.ink)
 
 
 def build_key(spec, pal, code, out):
@@ -258,36 +296,49 @@ def build_key(spec, pal, code, out):
     gap(doc, 6)
     m = spec["missing"]
     plain(doc, pal, "BEFORE CLASS", [
-        "Print pages 3 and 4 of the student file on cardstock, one set per team (about six), and cut them "
-        "once. Keep each set in an envelope; they last all day and next year.",
-        "Print pages 1 and 2 once per team. Hide wall periodic tables or plan to turn them.",
+        "Print pages 3 and 4 of the student file on cardstock, one set per lab group (about six), and cut "
+        "them once. Keep each set in an envelope; they last all day and next year.",
+        "Print page 1 for every student. Print page 2, the Lab Group Answer Sheet, once per group. Hide wall "
+        "periodic tables or plan to turn them.",
         "Germanium is held out on purpose. Its gap is group 14, period 4.",
     ])
     gap(doc, 6)
-    plain(doc, pal, "THE REVEAL AND SCORING", [
-        "Project the answer grid below (letters only first, then elements). Teams score their own grid "
-        "with a different-colored pen.",
-        f"Prediction ranges, 1 point each: melting point {m['ranges']['mp'][0]}–{m['ranges']['mp'][1]} °C "
-        f"(actual {m['mp']}) · radius {m['ranges']['radius'][0]}–{m['ranges']['radius'][1]} pm (actual "
-        f"{m['radius']}) · ionization energy {m['ranges']['ie'][0]}–{m['ranges']['ie'][1]} kJ/mol (actual "
-        f"{m['ie']}) · electronegativity {m['ranges']['en'][0]}–{m['ranges']['en'][1]} (actual {m['en']}). "
-        "Ion: none, shares electrons (not scored).",
-        "Ties: closest ionization energy prediction wins.",
-        "Hydrogen: score its point for the group 1, period 1 cell. A team that put it above fluorine and "
-        "can say why (it also forms 1−, it is a nonmetal gas) has a good argument; discuss it rather than "
-        "argue the point.",
+    total = sum(n for _, n in SCORE)
+    plain(doc, pal, f"GRADING THE ANSWER SHEET — {total} POINTS", [
+        "Collect one Lab Group Answer Sheet per group. Page 2 of this key is the answer grid at the same "
+        "size and layout, so the two sheets can sit side by side and be checked square by square.",
+        "Squares (25): 1 point per letter in the exact square. Gap (1): ? in group 14, period 4.",
+        "Ions (5): 1+, 2+, none, 1−, none. For group 14 accept none, shares, or 4+; carbon and silicon form "
+        "no simple ion, tin and lead form 2+ and 4+.",
+        f"Predictions (4), 1 point each inside the range: melting point {m['ranges']['mp'][0]}–"
+        f"{m['ranges']['mp'][1]} °C (actual {m['mp']}) · radius {m['ranges']['radius'][0]}–"
+        f"{m['ranges']['radius'][1]} pm (actual {m['radius']}) · ionization energy "
+        f"{m['ranges']['ie'][0]}–{m['ranges']['ie'][1]} kJ/mol (actual {m['ie']}) · electronegativity "
+        f"{m['ranges']['en'][0]}–{m['ranges']['en'][1]} (actual {m['en']}). Ion: none, not scored.",
+        "Hydrogen: its point is for the group 1, period 1 square. A group that put it above fluorine and "
+        "wrote why (it also forms 1−, it is a nonmetal gas) has a real argument; it is your call whether "
+        "to credit it.",
+        "A misplaced card can move its neighbors. Grade each square as written; do not chase a shift.",
     ])
     gap(doc, 6)
+    plain(doc, pal, "AFTER GRADING", [
+        "Project the answer grid (letters first, then elements) and tell the germanium story below.",
+    ])
 
-    para(doc, "ANSWER GRID", 7.5, bold=True, color=pal.accent, caps_track=True)
+    page_break(doc)
+    para(doc, "ANSWER GRID — SAME SIZE AS THE LAB GROUP ANSWER SHEET", 7.5, bold=True, color=pal.accent,
+         caps_track=True)
     para(doc, "Columns are groups 1, 2, 14, 17, 18. Rows are periods 1–6.", 9.5, color=pal.ink)
-    gap(doc, 3)
+    gap(doc, 4)
     cols, rows = spec["grid"]["columns"], spec["grid"]["rows"]
     fill = {}
     for cd in spec["cards"]:
         fill[(rows.index(cd["period"]), cols.index(cd["group"]))] = (cd["code"], f"{cd['symbol']} · {cd['element']}", pal.accent)
     fill[(rows.index(m["period"]), cols.index(m["group"]))] = ("?", f"{m['symbol']} · {m['element']}", pal.ink)
-    grid_table(doc, pal, spec, fill)
+    grid_table(doc, pal, spec, fill, ions=spec["columnIons"])
+    gap(doc, 8)
+    para(doc, "LETTERS BY GROUP", 7.5, bold=True, color=pal.accent, caps_track=True)
+    letters_by_group(doc, pal, spec, cols, m)
 
     page_break(doc)
     plain(doc, pal, "WHERE THE DATA BREAKS THE TREND — GOOD DISCUSSION, NOT A MISTAKE", [
@@ -325,17 +376,6 @@ def build_key(spec, pal, code, out):
         "Your students just repeated that prediction with better data.",
     ])
     gap(doc, 6)
-    para(doc, "LETTERS BY GROUP", 7.5, bold=True, color=pal.accent, caps_track=True)
-    t = doc.add_table(rows=1, cols=5)
-    fix_widths(t, [1.5] * 5)
-    for c, g in zip(t.rows[0].cells, cols):
-        borders(c, pal.hair, sz=4)
-        cell_margins(c, top=40, bottom=40, left=80, right=60)
-        para(c, f"GROUP {g}", 6.5, bold=True, color=pal.label, caps_track=True, first=True)
-        for cd in sorted([x for x in spec["cards"] if x["group"] == g], key=lambda x: x["period"]):
-            para(c, f"{cd['code']} = {cd['symbol']}", 9.5, color=pal.ink)
-        if g == m["group"]:
-            para(c, f"? = {m['symbol']} (held out)", 9.5, color=pal.ink)
     gap(doc, 6)
     para(doc, "Sources: " + spec["sources"], 8, color=pal.label)
     doc.save(out)
