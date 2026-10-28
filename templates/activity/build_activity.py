@@ -133,6 +133,13 @@ tr {{ page-break-inside: avoid; }}
 .maplegend {{ position: absolute; right: 8pt; bottom: 6pt; border: 0.9pt solid var(--structure); padding: 3pt 7pt; font-size: 8.6pt; }}
 .legend {{ font-size: 9pt; margin-top: 5pt; }}
 .pick {{ margin-top: 6pt; }}
+.formats {{ display: flex; gap: 10pt; font-size: 9.6pt; line-height: 1.32; }}
+.fbox {{ border: 1pt solid var(--structure); padding: 6pt 9pt; }}
+.fbox p {{ margin-bottom: 4pt; }}
+.ftitle .fl {{ font-family: var(--body); font-weight: normal; letter-spacing: 0; color: var(--ink); font-size: 9.6pt; margin-left: 4pt; }}
+.scorebox {{ width: 30pt; }}
+.fbox ul.dot li {{ margin-bottom: 3pt; }}
+.ftitle {{ font-family: var(--display); font-weight: bold; font-size: 9pt; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 4pt; }}
 .parts2 {{ display: flex; gap: 14pt; }}
 .parts2 ol {{ flex: 1 1 0; }}
 .parts2 ol.parts > li {{ margin-bottom: 4pt; }}
@@ -148,7 +155,7 @@ table.aboutt {{ margin-top: 4pt; font-size: 9.4pt; }}
 /* plan */
 .plan .row {{ display: flex; align-items: flex-end; margin-bottom: 3pt; }}
 .plan .row .k {{ flex: 0 0 auto; font-weight: 600; margin-right: 8pt; padding-bottom: 2pt; }}
-.plan .row .v {{ flex: 1 1 auto; border-bottom: {line_w} solid var(--ink); height: 20pt; }}
+.plan .row .v {{ flex: 1 1 0; margin-right: 6pt; border-bottom: {line_w} solid var(--ink); height: 20pt; }}
 .plan .more {{ border-bottom: {line_w} solid var(--ink); height: 20pt; margin-bottom: 3pt; }}
 
 /* rubric */
@@ -240,12 +247,27 @@ def page_one(spec, d):
 def page_plan(spec, d):
     pp = d["planPage"]; rub = spec["rubric"]
     h = [pagehead(pp["kicker"], pp["title"])]
-    h.append(f'<h2 style="margin-top:6pt">{escape(pp["planHeading"])}</h2><p class="lead">{fmt(pp["planLead"])}</p><div class="plan">')
-    for k, n in pp["fields"]:
-        h.append(f'<div class="row"><div class="k">{escape(k)}</div><div class="v"></div></div>')
-        h += ['<div class="more"></div>'] * (n - 1)
+    fm = pp.get("format")
+    if fm:
+        ps, sl = fm["poster"], fm["slide"]
+        h.append(f'<h2 style="margin-top:6pt">{escape(fm["heading"])}</h2><div class="formats">'
+                 f'<div class="fbox" style="flex:28"><div class="ftitle">{escape(ps["title"])}</div>'
+                 + "".join(f"<p>{fmt(x)}</p>" for x in ps["lines"]) + '</div>'
+                 f'<div class="fbox" style="flex:72"><div class="ftitle">{escape(sl["title"])} <span class="fl">{fmt(sl["lead"])}</span></div>'
+                 '<ul class="dot">' + "".join(f"<li>{fmt(x)}</li>" for x in sl["bullets"]) + '</ul></div></div>')
+    lead = f'<p class="lead">{fmt(pp["planLead"])}</p>' if pp.get("planLead") else ""
+    h.append(f'<h2>{escape(pp["planHeading"])}</h2>{lead}<div class="plan">')
+    # Each plan row holds one or more [label, flex] fields. flex 0 = label only, no write line.
+    for row in pp["fields"]:
+        cells = []
+        for k, n in row:
+            if n == 0:
+                cells.append(f'<div class="k" style="padding-bottom:2pt;margin-left:14pt">{fmt(k)}</div>')
+            else:
+                cells.append(f'<div class="k">{fmt(k)}</div><div class="v" style="flex:{n} 1 0"></div>')
+        h.append(f'<div class="row">{"".join(cells)}</div>')
     h.append(f'</div><h2>{escape(rub["heading"])}</h2><table class="rub"><colgroup>'
-             '<col style="width:16%"><col style="width:35%"><col style="width:20%"><col style="width:19%"><col style="width:10%"></colgroup><thead><tr>')
+             '<col style="width:15%"><col style="width:37%"><col style="width:22%"><col style="width:18%"><col style="width:8%"></colgroup><thead><tr>')
     h += [f"<th>{escape(c)}</th>" for c in pp["columns"]]
     h.append("</tr></thead>")
     for r in rub["rows"]:

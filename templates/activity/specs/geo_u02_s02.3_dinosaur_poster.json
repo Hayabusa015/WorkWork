@@ -20,7 +20,7 @@
           "1",
           "0"
         ],
-        "full": "Dinosaur's name across the top, spelled right and big enough to read from across the room.",
+        "full": "Dinosaur's name across the top, spelled right and big enough to read from across the room (poster) or when projected (slide).",
         "partial": "Name is there but small or misspelled.",
         "none": "No name."
       },
@@ -44,9 +44,9 @@
           "1 to 2",
           "0"
         ],
-        "full": "A big, clear drawing of your dinosaur. Tracing is fine.",
+        "full": "A big, clear drawing of your dinosaur, drawn or traced by you. A pasted photo doesn't count.",
         "partial": "Small, unfinished, or hard to tell what it is.",
-        "none": "No drawing."
+        "none": "No drawing, or only a pasted photo."
       },
       {
         "part": "About My Dinosaur",
@@ -80,9 +80,9 @@
           "1 to 2",
           "0"
         ],
-        "full": "Pictures and short labels, no paragraphs. The whole poster is colored and readable from a few feet away.",
-        "partial": "Too much writing, or only parts are colored.",
-        "none": "Mostly paragraphs, or mostly black and white."
+        "full": "Pictures and short labels in your own words, no paragraphs. Poster: colored all over. Slide: your own color scheme and design, with image sources listed.",
+        "partial": "Too much writing, only parts colored, or a Slides theme left as is.",
+        "none": "Mostly paragraphs, mostly black and white, or mostly pasted from the internet."
       }
     ]
   },
@@ -146,7 +146,7 @@
       "filename": "2.3 Activity - Dinosaur Poster.pdf",
       "pages": 2,
       "kicker": "GEOLOGY · GEOLOGIC TIME · INDIVIDUAL PROJECT",
-      "title": "Dinosaur Poster",
+      "title": "Dinosaur Poster or Slide",
       "titleAccent": "Dinosaur",
       "idFields": [
         [
@@ -163,30 +163,42 @@
         ]
       ],
       "planPage": {
-        "kicker": "DINOSAUR POSTER",
-        "title": "My Plan and Rubric",
+        "kicker": "DINOSAUR POSTER OR SLIDE",
+        "title": "Format, Plan, and Rubric",
         "planHeading": "MY PLAN",
-        "planLead": "Fill this in before you start.",
+        "planLead": "",
         "fields": [
           [
-            "My dinosaur",
-            1
+            [
+              "My dinosaur",
+              3
+            ],
+            [
+              "Period",
+              2
+            ]
           ],
           [
-            "Period",
-            1
+            [
+              "Hip type",
+              3
+            ],
+            [
+              "My format (circle one):&nbsp;&nbsp; Poster &nbsp;/&nbsp; Google Slide",
+              0
+            ]
           ],
           [
-            "Hip type",
-            1
+            [
+              "Fossils found in (every country or state)",
+              1
+            ]
           ],
           [
-            "Fossils found in (every country or state)",
-            1
-          ],
-          [
-            "Where I got my facts and picture (website or book)",
-            1
+            [
+              "Where I got my facts and picture (website or book)",
+              1
+            ]
           ]
         ],
         "columns": [
@@ -195,12 +207,34 @@
           "PARTIAL",
           "LITTLE OR NONE",
           "SCORE"
-        ]
+        ],
+        "format": {
+          "heading": "PICK YOUR FORMAT",
+          "poster": {
+            "title": "POSTER",
+            "lines": [
+              "Paper, in color all over.",
+              "Readable from across the room.",
+              "Both formats are graded with the same rubric."
+            ]
+          },
+          "slide": {
+            "title": "ONE GOOGLE SLIDE",
+            "lead": "All 5 parts on one slide, set up like the outline. Turn it in on Google Classroom.",
+            "bullets": [
+              "Your own color scheme: 2 or 3 colors that go together. Don't leave the white default or a Slides theme as is.",
+              "Labels and short phrases in your own words. No pasted paragraphs.",
+              "Draw the dinosaur yourself, with Slides shapes and lines, a drawing app, or on paper with a photo of it added. Tracing is fine. A pasted photo of a dinosaur doesn't count.",
+              "A map image of Earth back then is fine, but you add the fossil dots and the key.",
+              "Any image you didn't make gets its source in small text on the slide."
+            ]
+          }
+        }
       },
       "pageOne": {
         "jobHeading": "THE JOB",
-        "job": "Make a colored infographic poster about one Mesozoic dinosaur: pictures, a map, and short labels, not paragraphs.",
-        "outlineHeading": "POSTER OUTLINE",
+        "job": "Make a colored infographic about one Mesozoic dinosaur, either a paper poster or one Google Slide.",
+        "outlineHeading": "OUTLINE · POSTER OR SLIDE",
         "zones": {
           "name": [
             "NAME HEADER",
@@ -229,11 +263,11 @@
           "Dashed black border: pictures.",
           "Where the zones sit is up to you."
         ],
-        "needsHeading": "WHAT YOUR POSTER NEEDS",
+        "needsHeading": "WHAT IT NEEDS",
         "parts": [
           [
             "Name header.",
-            "Big enough to read across the room."
+            "Big and easy to read."
           ],
           [
             "Mesozoic timeline.",
@@ -253,7 +287,7 @@
           ],
           [
             "Color.",
-            "The whole poster, not pencil or pen alone."
+            "All of it in color, not pencil or pen alone."
           ]
         ],
         "aboutColumns": [
@@ -271,7 +305,7 @@
       "filename": "2.3 Rubric - Dinosaur Poster.pdf",
       "pages": 1,
       "kicker": "GEOLOGY · GEOLOGIC TIME · GRADING SHEET",
-      "title": "Dinosaur Poster Rubric",
+      "title": "Dinosaur Poster or Slide Rubric",
       "titleAccent": "Dinosaur",
       "idFields": [
         [
@@ -311,7 +345,7 @@
       "filename": "2.3 Activity Key - Dinosaur Poster.pdf",
       "pages": 3,
       "kicker": "GEOLOGY · GEOLOGIC TIME · TEACHER KEY",
-      "title": "Dinosaur Poster Key",
+      "title": "Dinosaur Poster or Slide Key",
       "titleAccent": "Dinosaur",
       "factHeading": "COMMON PICKS · QUICK-CHECK FACTS",
       "factLead": "Fifteen dinosaurs students are likely to choose, from the 2026-10-27 research report. Hip: L = lizard-hipped (saurischian), B = bird-hipped (ornithischian). Lengths in meters. Fossil sites list solid finds only. For a dinosaur not in this table, check the student's facts against their source.",
@@ -494,6 +528,7 @@
       ],
       "gradingHeading": "GRADING NOTES",
       "grading": [
+        "<b>Google Slide.</b> Same rubric and points as the poster. Copy-paste shows up as pasted paragraphs, a pasted photo used as the drawing, a default theme or white template left untouched, and images with no source on the slide. Pasted paragraphs, an untouched theme and missing sources cost points on Clear, visual, color. A pasted photo with no drawing of their own is a 0 on Drawing. A pasted map image is fine if the student added the fossil dots and the key.",
         "<b>Period dates.</b> The handout uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
         "<b>Triassic hip types.</b> Every Triassic common pick is lizard-hipped. No securely bird-hipped Triassic dinosaur is known. The best candidate, <i>Eocursor</i>, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
         "<b>Hip type from a picture.</b> <i>Velociraptor</i> and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a <i>Velociraptor</i> skeleton will get it wrong. The hip-type row on the handout says “in most of them” for this reason.",
