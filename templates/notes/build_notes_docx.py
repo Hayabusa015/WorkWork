@@ -545,7 +545,7 @@ def render_prompt(col, text, answer, lines, key, pal):
 
 
 def render_must_write(col, text, pal):
-    """A line the student must have in their notes - lime on the slide. A grey rule
+    """A line the student must have in their notes - course colour on the slide. A grey rule
     down its left edge, drawn as a cell border: a paragraph border inside a nested
     cell is valid OOXML that LibreOffice does not paint."""
     col.gap(3)

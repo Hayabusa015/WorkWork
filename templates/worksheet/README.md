@@ -55,9 +55,9 @@ tab stop — a nested table there drags a blank paragraph in with it and the car
 nothing. **Two short questions share a row**; `is_short()` decides, so the pairing follows the
 content rather than a hand-placed break.
 
-**Tier colours** run quiet grey → amber → red → full ink. `semantic.success` measures 5.02 on white
-even at its deep variant, under the 5.5 house target, so the easiest tier takes the muted label
-grey instead; the hardest takes ink, because after red there is nowhere to go in colour.
+**Tier tags** are all the muted label grey (SHULL-CHG-0055). The word names the tier and the
+question order carries the difficulty; colour carries nothing, so amber and red stay free to mean
+caution and danger.
 
 - **The score total is summed from the questions, never typed.** A header reading `/ 20` over
   questions adding to 18 is one fact stored twice.

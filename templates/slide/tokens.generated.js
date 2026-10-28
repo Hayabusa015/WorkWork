@@ -18,9 +18,9 @@ module.exports = {
   },
   "courses": {
     "chemistry": {
-      "primary": "A3E635",
-      "secondary": "22D3EE",
-      "primaryDeep": "4D730E",
+      "primary": "FF6B1A",
+      "secondary": "3DD6F4",
+      "primaryDeep": "B84100",
       "label": "CHEMISTRY"
     },
     "physics": {

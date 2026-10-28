@@ -39,3 +39,11 @@ was on the not-selected list.
 
 Before proposing a colour, read this. The instruction in the original memo still stands:
 **do not invent a new option without checking here first.**
+
+## Note added 2026-10-28: SHULL-CHG-0054
+
+The Physics "Kinetic" pair in the table above, Energy Orange and Ice Blue, was **revived for
+Chemistry** by SHULL-CHG-0054. The user chose it knowingly from a reference image. It was
+DEPRECATED here as a *Physics* palette and was never a rejected Chemistry option. The text above is
+unchanged. The Chemistry "Lab Lime" row it replaced is archived in `chem-lab-lime.md`. Current
+values live in `brand/tokens.json` `courses.chemistry`.
