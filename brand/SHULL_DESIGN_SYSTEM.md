@@ -89,7 +89,7 @@ PRIMARY  →  SECONDARY  →  SEMANTIC  →  NEUTRAL  →  WHITE
 
 **Semantic colours are permitted even when they are not in the course palette.** A safety warning is
 red because it is a warning. Do **not** substitute a course colour to avoid using a semantically
-correct one — a Chemistry hazard note in Lab Lime is a defect, not brand consistency.
+correct one — a Chemistry hazard note in the course primary is a defect, not brand consistency.
 
 ### Course-first, but functional
 

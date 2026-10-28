@@ -16,6 +16,7 @@ To be archived in Phase 8:
 | Per-course memo 2026-09-06, plus its six back-burner alternates | CHG-0002, CHG-0003 |
 | Geology earth tones — Canyon Umber, Basalt Brown, Rust Red, Amber Ochre, Sage Moss, Sandstone | CHG-0003 |
 | Physics "Quiet Voltage" — Violet / Violet Static / Porcelain | CHG-0002 |
+| Chemistry "Lab Lime" — Lab Lime / Aqua / Lab Lime Deep (`chem-lab-lime.md`) | CHG-0054 |
 
 Each entry records: the tokens, where it was authoritative, its dates, what superseded it, and
 **which existing materials were built on it** — so the Janitor does not later flag them as defects.

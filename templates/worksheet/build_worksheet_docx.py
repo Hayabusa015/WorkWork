@@ -94,24 +94,14 @@ SHORT_PROMPT_CH = 118           # two such questions sit side by side
 
 
 def tier_colour(tier, pal):
-    """The tier ramp: quiet grey, amber, red, then full ink.
+    """Every tier tag is the muted label grey. SHULL-CHG-0055.
 
-    Taken from his Master_Physics layout, which tags the tiers green / amber / red.
-    Two changes. `semantic.success` measures 2.28 on white and its deep variant 5.02,
-    both under the 5.5 house target, so the easiest tier is set in the muted label grey
-    instead - which suits a warm-up anyway. And the hardest tier is full ink rather than
-    a fourth hue: after red there is nowhere to go in colour, and black is
-    unambiguously the heaviest thing on a page.
-
-    SHULL-CHG-0020 records the cost: `semantic.danger` means "danger, safety warning,
-    error, stop". Spending it on CHALLENGE dilutes that in a room where red also means
-    hazard. The word CHALLENGE disambiguates it and it is his design, so it ships - but
-    it is named rather than buried.
+    The word carries the tier and the order of the questions carries the difficulty. The
+    old ramp (grey, amber, red, ink - SHULL-CHG-0020) put an amber PRACTICE tag beside
+    Chemistry's Energy Orange Deep headings, the same grey once photocopied (SHULL-CHG-0054),
+    and spent semantic red on CHALLENGE in a room where red means hazard.
     """
-    return {"warm-up": pal.label,
-            "practice": T["semantic"]["caution"]["deep"],
-            "challenge": T["semantic"]["danger"]["deep"],
-            "multi-topic": pal.ink}[tier]
+    return pal.label
 
 
 def is_short(q):

@@ -311,8 +311,8 @@ PROVISIONAL until validated against real classroom pace.
 
 ## Course brand exceptions
 
-**None.** Chemistry uses Lab Lime + Aqua inside the shared system, per SHULL-CHG-0002 context.
-Values live in `brand/tokens.json`; this file does not restate them.
+**None.** Chemistry's identity colours are `courses.chemistry` in `brand/tokens.json`, inside the
+shared system (SHULL-CHG-0054). This file does not restate them.
 
 *Superseded 2026-09-07: this section previously named the base SHULL palette, which is now
 archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
@@ -354,6 +354,13 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 2.3 | Electron Configs |
 
 ## Decision log
+
+### 2026-10-28 — Palette changed
+Chemistry's identity colours changed. Values live in `brand/tokens.json` `courses.chemistry`; the
+retired palette is preserved in `brand/palette-archive/chem-lab-lime.md`. Finished documents on
+Drive stay as built until rebuilt.
+Supersedes: 2026-09-07 — Palette (this log).
+Status: CONFIRMED · SHULL-CHG-0054
 
 ### 2026-09-23 — U1: 1.4 Isotopes folded into 1.3 Atomic Structure
 Isotope content is taught in 1.3 Atomic Structure and chipped U01 / S01.3. The code 1.4 is

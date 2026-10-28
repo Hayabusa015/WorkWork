@@ -59,7 +59,7 @@ spec = {
       {"code": "1.5", "terms": ["Isotope", "abundance", "weighted average",
                                 "average atomic mass"]}
     ],
-    "howToUse": "Quiz yourself with the left-column questions. Gray side rules mark must-write notes (lime blocks in the slides). Show your reasoning and units in each work box."
+    "howToUse": "Quiz yourself with the left-column questions. Gray side rules mark must-write notes (highlighted blocks in the slides). Show your reasoning and units in each work box."
   },
   "sectionsContent": [
     {
