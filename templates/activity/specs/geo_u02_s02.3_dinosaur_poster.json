@@ -81,7 +81,7 @@
           "0"
         ],
         "full": "Pictures and short labels in your own words, no paragraphs. Poster: colored all over. Slide: your own color scheme and design, with image sources listed.",
-        "partial": "Too much writing, only parts colored, or a Slides theme left as is.",
+        "partial": "Too much writing, only parts colored, a Slides theme left as is, or some text pasted.",
         "none": "Mostly paragraphs, mostly black and white, or mostly pasted from the internet."
       }
     ]
@@ -215,20 +215,21 @@
             "lines": [
               "Paper, in color all over.",
               "Readable from across the room.",
-              "Both formats are graded with the same rubric."
+              "A printed map of Earth back then can be glued on, but you add the fossil dots and the key."
             ]
           },
           "slide": {
             "title": "ONE GOOGLE SLIDE",
-            "lead": "All 5 parts on one slide, set up like the outline. Turn it in on Google Classroom.",
+            "lead": "All 5 outline zones on one slide, set up like the outline. Turn it in on Google Classroom.",
             "bullets": [
               "Your own color scheme: 2 or 3 colors that go together. Don't leave the white default or a Slides theme as is.",
-              "Labels and short phrases in your own words. No pasted paragraphs.",
+              "Your own words. Don't copy and paste any text.",
               "Draw the dinosaur yourself, with Slides shapes and lines, a drawing app, or on paper with a photo of it added. Tracing is fine. A pasted photo of a dinosaur doesn't count.",
               "A map image of Earth back then is fine, but you add the fossil dots and the key.",
               "Any image you didn't make gets its source in small text on the slide."
             ]
-          }
+          },
+          "note": "Both formats are graded with the same rubric."
         }
       },
       "pageOne": {
@@ -279,7 +280,7 @@
           ],
           [
             "About My Dinosaur.",
-            "One answer for each fact in the table below."
+            "One answer for each fact below."
           ],
           [
             "Map.",
@@ -287,7 +288,7 @@
           ],
           [
             "Color.",
-            "All of it in color, not pencil or pen alone."
+            "A poster colored all over, or a slide in your own color scheme."
           ]
         ],
         "aboutColumns": [
@@ -528,7 +529,7 @@
       ],
       "gradingHeading": "GRADING NOTES",
       "grading": [
-        "<b>Google Slide.</b> Same rubric and points as the poster. Copy-paste shows up as pasted paragraphs, a pasted photo used as the drawing, a default theme or white template left untouched, and images with no source on the slide. Pasted paragraphs, an untouched theme and missing sources cost points on Clear, visual, color. A pasted photo with no drawing of their own is a 0 on Drawing. A pasted map image is fine if the student added the fossil dots and the key.",
+        "<b>Google Slide.</b> Same rubric and points as the poster. Copy-paste shows up as pasted text of any length, a pasted photo used as the drawing, a default theme or white template left untouched, and images with no source on the slide. Pasted text, an untouched theme and missing sources cost points on Clear, visual, color. A pasted photo with no drawing of their own is a 0 on Drawing.",
         "<b>Period dates.</b> The handout uses rounded dates: 252–201, 201–145, 145–66 mya. The ICS values are 251.902, 201.4, 145.0 and 66.0 Ma. The researcher could not re-read the ICS chart this session, so those are <b>PROVISIONAL</b> until checked. Rounded dates are full credit either way.",
         "<b>Triassic hip types.</b> Every Triassic common pick is lizard-hipped. No securely bird-hipped Triassic dinosaur is known. The best candidate, <i>Eocursor</i>, may really be Early Jurassic. Worth saying out loud: early dinosaurs were mostly lizard-hipped.",
         "<b>Hip type from a picture.</b> <i>Velociraptor</i> and birds are lizard-hipped, but their pubis points backward. A student who reads hip type off a <i>Velociraptor</i> skeleton will get it wrong. The hip-type row on the handout says “in most of them” for this reason.",
@@ -538,7 +539,7 @@
         "<b><i>Liliensternus</i></b> is the weakest of the common picks: its dates are poorly pinned. Accept any Late Triassic date.",
         "<b>Walks on.</b> 4 legs for <i>Stegosaurus</i>, the sauropods, <i>Triceratops</i> and <i>Ankylosaurus</i> is standard textbook knowledge. It was not separately re-sourced.",
         "<b>Map dots not verified.</b> <i>T. rex</i> in North Dakota and Alberta, and <i>Triceratops</i> in Colorado, are likely but were not confirmed. A dot there is <b>PROVISIONAL</b>. Decide before grading whether it costs points.",
-        "<b>No paleomap is supplied.</b> Students draw or trace their own. The map row grades “not today's map” and dots in the right places, not accurate coastlines. Open question for a class reference map (report §4): Blakey's 90 Ma Commons map (CC BY-SA 3.0, low-res only) or a trace from Scotese & Wright 2018 PALEOMAP.",
+        "<b>Map, both formats.</b> Students may draw or trace the map, glue on a printed one (poster), or paste one in (slide). The fossil dots and the key must be the student's own. The map row grades “not today's map” and dots in the right places, not accurate coastlines. Open question for a class reference map (report §4): Blakey's 90 Ma Commons map (CC BY-SA 3.0, low-res only) or a trace from Scotese & Wright 2018 PALEOMAP.",
         "<b>School bus.</b> A full-size Type C bus is 12.0 m (39.3 ft). Re-solved: <i>T. rex</i> 12–13 m is about 1 bus; <i>Brachiosaurus</i> 18–22 m is 1.5 to 1.8 buses; <i>Diplodocus</i> 24–26 m is 2 to 2.2 buses; <i>Velociraptor</i> 1.5–2 m is an eighth to a sixth of a bus."
       ],
       "mistakesHeading": "COMMON MISTAKES",
@@ -611,7 +612,7 @@
         "<b>Fossil dots.</b> Egypt and Morocco are the required dots. A Niger dot is also accepted: a second species, <i>S. mirabilis</i>, was named in February 2026 from Niger's Farak Formation (~95 Ma; Sereno et al., Science 391). <b>PROVISIONAL</b>: one paper, not yet independently tested, and not decided for student pages.",
         "<b>Age.</b> The rocks are Cenomanian, the first stage of the Late Cretaceous, so the table says Late. Papers also use the informal label “mid-Cretaceous”. Accept a student who writes “middle of the Cretaceous”.",
         "<b>Posture.</b> The table says 2 legs. The 4-leg reconstruction (Ibrahim 2014) is older and now mostly rejected.",
-        "<b>Size.</b> Length estimates run 12.6 to 18 m; this key uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster as fact."
+        "<b>Size.</b> Length estimates run 12.6 to 18 m; this key uses 12 to 15. Mass estimates run from about 6 to 21 t, because no complete skeleton exists. Say “one of the longest meat-eating dinosaurs known.” Do not let “the biggest meat-eater ever” onto a poster or slide as fact."
       ]
     }
   ]

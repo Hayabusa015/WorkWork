@@ -136,6 +136,7 @@ tr {{ page-break-inside: avoid; }}
 .formats {{ display: flex; gap: 10pt; font-size: 9.6pt; line-height: 1.32; }}
 .fbox {{ border: 1pt solid var(--structure); padding: 6pt 9pt; }}
 .fbox p {{ margin-bottom: 4pt; }}
+.fnote {{ margin-bottom: 5pt; }}
 .ftitle .fl {{ font-family: var(--body); font-weight: normal; letter-spacing: 0; color: var(--ink); font-size: 9.6pt; margin-left: 4pt; }}
 .scorebox {{ width: 30pt; }}
 .fbox ul.dot li {{ margin-bottom: 3pt; }}
@@ -250,7 +251,8 @@ def page_plan(spec, d):
     fm = pp.get("format")
     if fm:
         ps, sl = fm["poster"], fm["slide"]
-        h.append(f'<h2 style="margin-top:6pt">{escape(fm["heading"])}</h2><div class="formats">'
+        note = f'<p class="fnote">{fmt(fm["note"])}</p>' if fm.get("note") else ""
+        h.append(f'<h2 style="margin-top:6pt">{escape(fm["heading"])}</h2>{note}<div class="formats">'
                  f'<div class="fbox" style="flex:28"><div class="ftitle">{escape(ps["title"])}</div>'
                  + "".join(f"<p>{fmt(x)}</p>" for x in ps["lines"]) + '</div>'
                  f'<div class="fbox" style="flex:72"><div class="ftitle">{escape(sl["title"])} <span class="fl">{fmt(sl["lead"])}</span></div>'
