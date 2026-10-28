@@ -14,8 +14,8 @@
 | **Affected Courses** | Chemistry (identity colours). Geology and all-course surfaces are affected indirectly through risk 1. |
 | **Risk** | Medium. See section 3. Risk 5 was found while drafting and is not in the original brief. |
 | **Recommendation** | Implement as requested, with the risks in section 3 put to the user first. Before approving, the user needs to answer the one question in section 5: the status of the derived `primaryDeep`. Optional follow-up, the user's choice only: if two oranges bother them in practice, shift Chemistry's secondary or Geology's Rust Orange. That would need its own record. |
-| **Decision** | |
-| **Status** | PENDING |
+| **Decision** | **Approved by the user, 2026-10-28**, in the main session. Verbatim: *"I want to swap the color pallette of chemsitry to kinetic orange. It just works better for me. Approve file change color"*. The user did not answer the section 5 question, so `primaryDeep` is PROVISIONAL per that section. Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
