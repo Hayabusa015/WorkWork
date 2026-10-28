@@ -15,9 +15,9 @@
 | **Risk** | Medium. See section 3. Risk 5 was found while drafting and is not in the original brief. |
 | **Recommendation** | Implement as requested, with the risks in section 3 put to the user first. Before approving, the user needs to answer the one question in section 5: the status of the derived `primaryDeep`. Optional follow-up, the user's choice only: if two oranges bother them in practice, shift Chemistry's secondary or Geology's Rust Orange. That would need its own record. |
 | **Decision** | **Approved by the user, 2026-10-28**, in the main session. Verbatim: *"I want to swap the color pallette of chemsitry to kinetic orange. It just works better for me. Approve file change color"*. The user did not answer the section 5 question, so `primaryDeep` is PROVISIONAL per that section. Recorded under SHULL-CHG-0034. |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** (the changelog says PARTIAL because the app preview images were not regenerated; see section 7) |
+| **Implemented By** | 63c0e19 |
+| **Verified** | Yes, with one gap: the app preview images still show Lab Lime. The main session reported running these and the results below, and I did not re-run them. `measure_tokens.py` rewrote the measurements and `--check` passes. `build_app_css.py --check` passes, and `icon.svg`, the lab and notes token CSS and the slide tokens were all regenerated. All eight `validate_*.py` pass. `npm test` reports 37 pass, 0 fail. The Grep sweep found only the preserved 2026-09-07 log entry and the `_RULE_COLOUR` legacy regex, both expected. The rebuilt Chem U01 S1.5 worksheet and Chem U1 notes packet (`--verify`: 8 sheets for 8 designed pages) were rendered to PDF and checked by eye: the accent bars are orange, the headings and labels are in the orange deep, and the pages are legible. The Secretary checked by Read/Grep: the `tokens.json` values and measurements match section 7. The generated CSS, JS and `icon.svg` carry the new hexes. The old hexes, "Lab Lime" and "lime blocks/lime on" appear nowhere outside the excluded directories except `courses/chemistry/DECISIONS.md` lines 456-457 (the preserved 2026-09-07 entry). The edits in 2b (template comment, notes text, docstring), 2c and 2d are in place. The main session then did the rest of plan step 5 on the rebuilt Chem U01 S1.5 worksheet, viewing colour and greyscale side by side at 130 dpi. **Risks 3 and 5 are CONFIRMED on the page.** The amber PRACTICE tier label (`semantic.caution` deep) and the Chemistry section labels and headings in Energy Orange Deep look like nearly the same orange-brown in colour, and the same grey in greyscale. With Lab Lime Deep the tier stood apart from the course headings; it no longer does. The grey warm-up tier and the accent bars are fine. That sheet has no caution or danger note, so semantic notes beside orange text (risk 2) are **still not checked on paper**. A lab or notes page with a hazard note would show it. |
 
 ---
 
@@ -292,3 +292,43 @@ sets it PROVISIONAL.
 5. Rebuild one Chemistry worksheet **and** one Chemistry notes packet, render both to PDF, and
    check them by eye: accent and coloured type are visible, the amber tier and any caution note
    still read as warnings, and the page survives a greyscale view.
+
+## 7. Implementation (63c0e19)
+
+**Authoritative measurements** from `scripts/measure_tokens.py`. These replace the drafting values
+in 2a.
+
+| Token | Grey | On white | On parchment | On asphalt | Verdict on white |
+|---|---:|---:|---:|---:|---|
+| Energy Orange | 142 | 2.85 | 2.47 | 6.35 | Not type |
+| Ice Blue | 172 | 1.73 | 1.5 | 10.45 | Not type |
+| Energy Orange Deep (PROVISIONAL) | 93 | 5.53 | 4.8 | 3.27 | Body text, meets SHULL target |
+
+The pre-existing `pair_warnings` note is unchanged: Geology's display pair is 6 grey levels apart.
+
+**Where the edits were made.** The Secretary edited `brand/tokens.json`, `README.md`,
+`brand/SHULL_DESIGN_SYSTEM.md`, `courses/chemistry/DECISIONS.md` and `brand/palette-archive/`
+(`chem-lab-lime.md`, its `README.md` row, and the note in `per-course-2026-09-06.md`). The main session
+made the 2b template edits: the lab master comment, `build_notes_docx.py` line 548, and the generator
+line 62 with both notes JSONs regenerated. It also ran the generators and validators and made the
+commit.
+
+**Why the changelog row stays PARTIAL.** The `app/public/previews/` PNGs were not regenerated and
+still show Lab Lime. `scripts/build_template_previews.py` fails its whole worksheet family because it
+refuses a ramp in one spec ("section 1.1 ... warm-up 4, practice 3"). That failure also happens on
+the base before this change, and the script would drop the worksheet previews from
+`catalog.json`. The failure is not caused by SHULL-CHG-0054, but it blocks finishing this change.
+
+**Open follow-ups**
+
+1. Fix the preview builder's ramp refusal (its own finding and record), then regenerate
+   `app/public/previews/`. Once the previews are rebuilt the row can move to CONFIRMED.
+2. A collision between the worksheet tier colour and the course deep was seen on the page (risks 3
+   and 5; see Verified). It needs a decision, for example a different tier colour on Chemistry or a
+   different `primaryDeep`. That is the user's call, and it gets its own record. Risk 2, a hazard
+   note next to orange text, has still not been checked on a lab or notes page.
+3. `primaryDeep` stays PROVISIONAL until the user confirms it (section 5).
+4. F-2: the lab template comment still says course accents are "PROJECTION ONLY". This needs its
+   own proposal.
+5. Finished Chemistry documents on Drive stay as built (no retrofit). The Drive list of materials
+   in `brand/palette-archive/chem-lab-lime.md` is still to be filled in.
