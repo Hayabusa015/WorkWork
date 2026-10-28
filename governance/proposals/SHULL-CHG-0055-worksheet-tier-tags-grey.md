@@ -14,8 +14,8 @@
 | **Affected Courses** | All three: Chemistry, Physics, Geology. See section 3 for why this is wider than the SHULL-CHG-0054 follow-up. |
 | **Risk** | Low. Students lose colour as a difficulty cue. The tags stay as words in a fixed order. |
 | **Recommendation** | Approve. Optional follow-up, the user's choice only: remove the tier tags altogether. The user said they "almost don't even like" the label, but did not ask for it to go. Removing it would be its own record. |
-| **Decision** | |
-| **Status** | PENDING |
+| **Decision** | **Approved by the user, 2026-10-28**, in the main session. Verbatim: *"You could change the difficulty label, but I almost don't even like the difficulty label in there."* Recorded under SHULL-CHG-0034. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
