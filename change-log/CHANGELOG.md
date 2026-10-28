@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-10-28
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | | Chemistry palette: Lab Lime + Aqua becomes Kinetic Orange | PROPOSED | `governance/proposals/SHULL-CHG-0054-chemistry-kinetic-orange.md` |
+
 ## 2026-10-22
 
 Two sessions independently drafted SHULL-CHG-0046 through 0052 in parallel (see each record's
