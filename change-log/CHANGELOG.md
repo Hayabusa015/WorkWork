@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0055 | 2026-10-28 | Worksheet tier tags set in the muted label grey | PARTIAL | `governance/proposals/SHULL-CHG-0055-worksheet-tier-tags-grey.md` |
+| SHULL-CHG-0055 | 2026-10-28 | Worksheet tier tags set in the muted label grey | CONFIRMED | `governance/proposals/SHULL-CHG-0055-worksheet-tier-tags-grey.md` |
 | SHULL-CHG-0054 | 2026-10-28 | Chemistry palette: Lab Lime + Aqua becomes Kinetic Orange | PARTIAL | `governance/proposals/SHULL-CHG-0054-chemistry-kinetic-orange.md` |
 
 ## 2026-10-22

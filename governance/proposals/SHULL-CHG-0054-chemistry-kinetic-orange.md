@@ -324,9 +324,9 @@ the base before this change, and the script would drop the worksheet previews fr
 1. Fix the preview builder's ramp refusal (its own finding and record), then regenerate
    `app/public/previews/`. Once the previews are rebuilt the row can move to CONFIRMED.
 2. A collision between the worksheet tier colour and the course deep was seen on the page (risks 3
-   and 5; see Verified). It needs a decision, for example a different tier colour on Chemistry or a
-   different `primaryDeep`. That is the user's call, and it gets its own record. Risk 2, a hazard
-   note next to orange text, has still not been checked on a lab or notes page.
+   and 5; see Verified). **Resolved by SHULL-CHG-0055** (10c8a7f): every tier tag is now the muted
+   label grey. Risk 2, a hazard note next to orange text, has still not been checked on a lab or
+   notes page.
 3. `primaryDeep` stays PROVISIONAL until the user confirms it (section 5).
 4. F-2: the lab template comment still says course accents are "PROJECTION ONLY". This needs its
    own proposal.

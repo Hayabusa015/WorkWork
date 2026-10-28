@@ -15,9 +15,9 @@
 | **Risk** | Low. Students lose colour as a difficulty cue. The tags stay as words in a fixed order. |
 | **Recommendation** | Approve. Optional follow-up, the user's choice only: remove the tier tags altogether. The user said they "almost don't even like" the label, but did not ask for it to go. Removing it would be its own record. |
 | **Decision** | **Approved by the user, 2026-10-28**, in the main session. Verbatim: *"You could change the difficulty label, but I almost don't even like the difficulty label in there."* Recorded under SHULL-CHG-0034. |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | 10c8a7f |
+| **Verified** | Yes. The main session reported running these and the results below; I did not re-run them. It rebuilt the worksheets `chem_u01_s01.5_massnumbers`, `phys_u01_s01.1-s01.4` and `geo_u04_s04.1`. `audit_worksheet.py` passes on all three (page budget and ink). `validate_profiles.py` passes (15 refusals fire, 2 allowances hold, 4 real specs build). `npm test` reports 37 pass, 0 fail. The sheets were rendered through LibreOffice and checked by eye: on the Chemistry and Physics sheets every tier tag (WARM-UP, PRACTICE, CHALLENGE, MULTI-TOPIC) is in the label grey. **The Geology sheet has no tier tags, so Geology was checked by the shared builder only, not on a page.** The Grep sweep found no remaining statement of the old grey, amber, red, ink ramp outside the excluded directories. The Secretary checked by Read/Grep: `tier_colour()` (lines 96-104) returns `pal.label` and its docstring cites 0055, 0020 and 0054. `templates/worksheet/README.md` line 58 states the new rule and cites SHULL-CHG-0055. The key builder line 74 is unchanged, as section 2 requires. |
 
 ---
 
