@@ -218,6 +218,26 @@ def para(cell, text, size, *, bold=False, color=None, spacing=0.14, caps_track=F
     return p
 
 
+_RICH = re.compile(r"(</?[bi]>)")
+
+
+def rich(paragraph, text, size, *, color=None, bold=False, italic=False):
+    """Runs from text carrying <b> and <i>, and &nbsp; for a non-breaking space.
+
+    Genus and species names are italic and a lead-in is bold; both live in the spec's own
+    text, so the markup is the smallest thing that keeps them there instead of splitting
+    a sentence into a list of run objects by hand."""
+    b, i = bold, italic
+    for piece in _RICH.split(str(text).replace("&nbsp;", " ")):
+        if piece in ("<b>", "</b>"):
+            b = bold or piece == "<b>"
+        elif piece in ("<i>", "</i>"):
+            i = italic or piece == "<i>"
+        elif piece:
+            run(paragraph, piece, size, bold=b, italic=i, color=color)
+    return paragraph
+
+
 def rule_lines(cell, n, hexval):
     for _ in range(n):
         p = cell.add_paragraph()

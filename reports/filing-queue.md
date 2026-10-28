@@ -10,4 +10,4 @@ file, the key and the PDF together. The Overseer then fills in Status, Drive pat
 
 | File it | Document | Course | Unit | Section | Spec | Files | Status | Drive path | File ID | Date |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [ ] | Dinosaur Poster (handout, grading sheet, key) | Geology | 2 | 2.3 | `templates/activity/specs/geo_u02_s02.3_dinosaur_poster.json` | `output/geology/u02/2.3 Activity - Dinosaur Poster.pdf`; `output/geology/u02/2.3 Rubric - Dinosaur Poster.pdf`; `output/geology/u02/2.3 Activity Key - Dinosaur Poster.pdf` | Ready | | | 2026-10-27 |
+| [ ] | Dinosaur Poster (handout, grading sheet, key) | Geology | 2 | 2.3 | `templates/worksheet/specs/geo_u02_s02.3_dinosaur_poster.json` | `output/geology/u02/2.3 Activity - Dinosaur Poster.docx` + `.pdf`; `output/geology/u02/2.3 Rubric - Dinosaur Poster.docx` + `.pdf`; `output/geology/u02/2.3 Activity Key - Dinosaur Poster.docx` + `.pdf` | Ready | | | 2026-10-27 |
