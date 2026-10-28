@@ -704,17 +704,30 @@ def field(paragraph, instr, pal, *, size=None, bold=False, color=None):
     """A Word field. Page numbers have to be computed by the reader, not by us -
     a worksheet that says "page 2 of 3" in fixed text lies the moment it is edited.
 
-    `instr` is the whole field code, switches included (`PAGE \\# "00"`)."""
-    r = paragraph.add_run()
-    r.font.name = FONT; r.font.size = Pt(size or FOOTER_FLOOR)
-    r.bold = bold
-    r.font.color.rgb = RGBColor.from_string(hexof(color or pal.footer))
+    `instr` is the whole field code, switches included (`PAGE \\# "00"`).
+
+    Written as the full five-run sequence - begin, instruction, separate, result, end -
+    with the formatting on every run. Packed into one run with no result, LibreOffice
+    drew the computed number in the document default (10pt black) inside a 7pt grey
+    footer: the reader formats the result from the result run, and there was none."""
+    def fmt_run():
+        r = paragraph.add_run()
+        r.font.name = FONT; r.font.size = Pt(size or FOOTER_FLOOR)
+        r.bold = bold
+        r.font.color.rgb = RGBColor.from_string(hexof(color or pal.footer))
+        return r
+    first = fmt_run()
     beg = OxmlElement("w:fldChar"); beg.set(qn("w:fldCharType"), "begin")
+    first._r.append(beg)
     it = OxmlElement("w:instrText"); it.set(qn("xml:space"), "preserve")
     it.text = f" {instr} "
+    fmt_run()._r.append(it)
+    sep = OxmlElement("w:fldChar"); sep.set(qn("w:fldCharType"), "separate")
+    fmt_run()._r.append(sep)
+    fmt_run().text = "1"                 # placeholder result; the reader recomputes it
     end = OxmlElement("w:fldChar"); end.set(qn("w:fldCharType"), "end")
-    r._r.append(beg); r._r.append(it); r._r.append(end)
-    return r
+    fmt_run()._r.append(end)
+    return first
 
 
 def _field(paragraph, instr, pal):

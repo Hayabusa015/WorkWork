@@ -384,14 +384,14 @@ def zone_border(cell, kind, pal):
 def zone_label(cell, lab, hint, pal, kind, first=True, hint_below=False):
     p = cell.paragraphs[0] if first else cell.add_paragraph()
     p.paragraph_format.space_after = Pt(1)
-    r = run(p, lab, 7.5, bold=True, color=pal.accent if kind == "facts" else pal.ink)
+    r = run(p, lab, 8, bold=True, color=pal.accent if kind == "facts" else pal.ink)
     el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
     r._element.get_or_add_rPr().append(el)
     if hint:
         if hint_below:
             p = cell.add_paragraph(); p.paragraph_format.space_after = Pt(1)
         else:
-            run(p, "   ", 8)
+            run(p, "   ", 8, color=pal.label)
         run(p, hint, 8, color=pal.label)
     return p
 
@@ -426,7 +426,7 @@ def outline_block(doc, block, pal):
                 if zz.get("legend"):
                     # The fossil-site dot, pushed to the bottom of the zone. U+25CF is not
                     # in Archivo, so the dot is a bullet set large.
-                    used = 7.5 * 1.3 + 8 * 1.3 * 2
+                    used = 8 * 1.3 + 8 * 1.3 * 2
                     p = zc.add_paragraph()
                     p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
                     p.paragraph_format.space_before = Pt(max(0, float(z.get("heightIn", 1.5)) * 72
@@ -535,7 +535,7 @@ def table_block(doc, block, pal, width=TEXT_W_IN):
     for hc, h in zip(hr.cells, heads):
         borders(hc, pal.ink, sz=8, edges=("bottom",))
         cell_margins(hc, top=20, bottom=30, left=60, right=60)
-        para(hc, h, 7, bold=True, color=pal.label, caps_track=True, first=True)
+        para(hc, h, 8, bold=True, color=pal.label, caps_track=True, first=True)
     for ri, row in enumerate(rows, 1):
         tr = t.rows[ri]
         no_split(tr)
@@ -544,7 +544,7 @@ def table_block(doc, block, pal, width=TEXT_W_IN):
             borders(merged, pal.display, sz=8, edges=("top",))
             borders(merged, pal.hair, sz=4, edges=("bottom",))
             cell_margins(merged, top=60, bottom=30, left=60, right=60)
-            para(merged, row["group"], 7.5, bold=True, color=pal.accent, caps_track=True,
+            para(merged, row["group"], 8, bold=True, color=pal.accent, caps_track=True,
                  first=True)
             continue
         for k, (tc, val) in enumerate(zip(tr.cells, row)):
@@ -700,7 +700,7 @@ def rubric_block(doc, block, pal, spec, sheet=False):
     for hc, h in zip(t.rows[0].cells, heads):
         borders(hc, pal.ink, sz=8, edges=("bottom",))
         cell_margins(hc, top=20, bottom=30, left=60, right=60)
-        para(hc, h, 7, bold=True, color=pal.label, caps_track=True, first=True)
+        para(hc, h, 8, bold=True, color=pal.label, caps_track=True, first=True)
     for ri, r in enumerate(rub["rows"], 1):
         tr = t.rows[ri]
         no_split(tr, 0.62 if sheet else None)

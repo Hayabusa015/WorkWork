@@ -204,7 +204,7 @@
               "A poster colored all over, or a slide in your own color scheme."
             ]
           ],
-          "gapBefore": 4
+          "gapBefore": 9
         },
         {
           "kind": "table",
@@ -359,11 +359,11 @@
           0.13,
           0.14,
           0.11,
-          0.04,
+          0.05,
           0.12,
           0.06,
-          0.08,
-          0.32
+          0.095,
+          0.295
         ],
         "rows": [
           {

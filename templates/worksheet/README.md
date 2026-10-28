@@ -20,7 +20,7 @@ They are enforced at build time. Each refusal names the rule and the change reco
 | Equations at top | required when the sheet has math | required | refused |
 | Prior-knowledge block | optional | **required** | optional |
 | Ramp | order enforced, counts free | **2 / 2 / 1 / 1**, enforced | not a question ladder |
-| Visual work | diagrams and charts to complete | — | **required**: diagram, draw, cards or slots |
+| Visual work | diagrams and charts to complete | — | **required**: diagram, draw, cards, slots, sort, match or outline |
 | Page budget | 4 for eight boxed questions | 1 per section | **1** normally; 2 for a cut-and-glue |
 
 **Physics carries no work areas at all.** Students work in their Hayden-McNeil carbonless lab
@@ -102,6 +102,68 @@ equation you would use" reads like a physics problem and has no number in it.
 - **`draw`** — blank captioned panels, when there is nothing to cut.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.
+
+### Project blocks
+
+A project handout (a poster, a slide, anything students make rather than answer) needs a few
+blocks a question sheet does not. All of them are opt-in: a spec that does not name them builds
+exactly as before. Spec text in these blocks may carry `<b>`, `<i>` (genus and species names) and
+`&nbsp;`, read by `rich()` in `templates/_shull_docx.py`. First use:
+`specs/geo_u02_s02.3_dinosaur_poster.json`.
+
+- **`outline`** — a labelled blank layout of the product: where each part goes. `zones` is a list
+  of full-width zones (`kind`, `label`, `hint`, `heightIn`, optional `periods` for a timeline
+  strip whose cells are sized to each period's length) or a `row` of side-by-side zones, each with
+  a `share` of the width and an optional fossil-site style `legend`. A zone's `kind` is `facts`
+  (solid course-colour border) or `pics` (dashed ink border). The two kinds differ by border style
+  and label, never by hue alone, because Geology's two colours photocopy to the same grey.
+  `legend` is three strings: the facts swatch, the pictures swatch, and a closing line. It counts
+  as Geology visual work.
+- **`list`** — a numbered requirement list in `across` columns. Each item is `[lead, text]`; the
+  lead is bold. Just the number, no box (SHULL-CHG-0015).
+- **`table`** — a reference table: `headers`, `widths` (fractions of the page), `rows`. A row may
+  be `{"group": "..."}` to open a labelled group. The first column is bold unless
+  `"boldFirst": false`. Optional `label`, `lead` and `size`. The header row repeats on a new page.
+- **`notes`** — a `label` and bulleted `items`, or plain lines with `"bullets": false`.
+- **`formats`** — two (or more) ways to do the same task, side by side: a `note` above the boxes,
+  then `boxes`, each with a `title`, a `share` of the width, and `lines`, or a `lead` plus
+  `bullets`.
+- **`plan`** — labelled write-on lines. `rows` is a list of lines, each a list of `[label, flex]`
+  fields; flex `0` is a label with no line (a circle-one choice). Ruled lines, because a plan is
+  prose.
+- **`rubric`** — draws the spec's top-level `rubric.rows` (`part`, `points`, `levels`, `full`,
+  `partial`, `none`) with full level descriptors, a score box per row, and a TOTAL. Its points
+  count toward the header's SCORE total, which stays summed, never typed.
+
+Any block may carry **`gapBefore`** (points of space above it) and **`pageBreakBefore`** with a
+**`heading`** (the page's title).
+
+### Section and spec options
+
+- **`eyebrowNote`** — text appended to the header eyebrow ("INDIVIDUAL PROJECT").
+- **`directionsLabel`** — renames the DIRECTIONS label ("THE JOB").
+- **`concept`** is optional. A project handout has no recall block; its job line is the
+  directions.
+
+### The grading sheet: `--rubric-sheet`
+
+```bash
+python3 templates/worksheet/build_worksheet_docx.py specs/<spec>.json out.docx --rubric-sheet
+```
+
+The same spec, drawn as the teacher's one-page grading sheet: the header, the fields in
+`rubricSheet.fields` (with `rubricSheet.widths`), the rubric with each row's full-credit text as
+its LOOK FOR (word for word, from the same `rubric.rows`), a comment column, the TOTAL,
+`rubricSheet.pointer`, and a NOTES box (`rubricSheet.notesHeightIn`). The handout and the sheet
+cannot drift, because there is one copy of the rubric. `audit_worksheet.py` has no sheet mode yet,
+so it measures the sheet against `pagesPerSection` and reports a false budget fail.
+
+### The key: `key.blocks`
+
+`build_worksheet_key_docx.py` also renders a top-level `key` object: `key.title` replaces the
+section title on the key, and `key.blocks` (kinds `table` and `notes`, as above) draw a project
+key's reference tables and grading notes, after any worked questions. A key is teacher-only, so
+PROVISIONAL labels belong there and never on the student page.
 
 ## Vertical space
 
