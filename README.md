@@ -60,7 +60,7 @@ Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex
 
 | | |
 |---|---|
-| Chemistry | Lab Lime + Aqua |
+| Chemistry | Energy Orange + Ice Blue |
 | Physics | Quantum Gold + Deep Purple |
 | Geology | Terra Teal + Rust Orange |
 | Background | White by default; Parchment as a special-purpose surface only |

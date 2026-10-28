@@ -19,15 +19,15 @@
   --warn-rule:     #F59E0B;
 
   /* Course accent. Defaults to Chemistry; the body class overrides. */
-  --accent:        #4D730E;
-  --accent-display:#A3E635;
+  --accent:        #B84100;
+  --accent-display:#FF6B1A;
 
   /* Type */
   --display: "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
   --body:    "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
 }
 
-body.chem { --accent: #4D730E; --accent-display: #A3E635; }
+body.chem { --accent: #B84100; --accent-display: #FF6B1A; }
 body.phys { --accent: #896107;   --accent-display: #F5B82E; }
 body.geo  { --accent: #0E766A;   --accent-display: #16B8A6; }
 
