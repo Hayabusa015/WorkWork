@@ -1,11 +1,11 @@
-# SHULL-CHG-0054 — An Overseer running as a sub-agent returns a routing brief and does not delegate
+# SHULL-CHG-0056 — An Overseer running as a sub-agent returns a routing brief and does not delegate
 
 > **ID allocation note.** The main session fetched `origin/main` on 2026-10-27 and confirmed
-> 0054 was free before committing this record.
+> 0054 was free. `main` later allocated 0054 to the Kinetic Orange change, so this record was renumbered to 0056 on 2026-10-28 after a fresh fetch.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0054 (unconfirmed; see the note above) |
+| **Change ID** | SHULL-CHG-0056 (unconfirmed; see the note above) |
 | **Date** | 2026-10-27 |
 | **Source** | User. Matt asked the main session to propose this on 2026-10-27, after the Geology S2.3 Dinosaur Poster build. The finding came from the main session. |
 | **Current Rule** | See section 1, verbatim, with file and line. |
@@ -57,7 +57,7 @@ No line in the file covers the case where the Overseer has no `Agent` tool.
 
 Add this subsection to `.claude/agents/overseer.md`, directly after the Delegation table:
 
-> ### When you are running as a sub-agent (SHULL-CHG-0054)
+> ### When you are running as a sub-agent (SHULL-CHG-0056)
 >
 > A sub-agent cannot start sub-agents. If the `Agent` tool is not available to you, you cannot
 > delegate. Do not try, and do not return a bare INCOMPLETE. Instead:
