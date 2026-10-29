@@ -116,10 +116,14 @@ def diagram_row(doc, pal, n, z, key):
     pl = cellfmt(lc, pal, top=0, bottom=20, left=80)
     lc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
     pl.paragraph_format.tab_stops.add_tab_stop(Inches(1.25))
+    pl.paragraph_format.tab_stops.add_tab_stop(Inches(5.8), WD_TAB_ALIGNMENT.RIGHT)
     _run(pl, "Configuration", 9, bold=True, color=pal.ink)
     _run(pl, "\t", 9)
     if key:
         hand_config(pl, z, size=12)
+    # Matt, 2026-10-29: ask how many half-filled orbitals (= unpaired electrons)
+    _run(pl, "\tHalf-filled orbitals", 9, bold=True, color=pal.ink)
+    Q.blank(pl, str(unpaired(z)), key, 4, size=9)
     bc = t.cell(2, 2)
     borders(bc, pal.hair, sz=6)
     bc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
@@ -176,14 +180,15 @@ def build_written(out, ver, key, total):
              PTS["diagram"] + len(v["long"]) * PTS["long"])
     c = one_cell(doc); cell_margins(c, top=0, bottom=30, left=0, right=0)
     p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
-    _run(p, "Number 1 also needs its orbital diagram.", 9.5, color=pal.label)
+    _run(p, "Number 1 also needs its orbital diagram and the number of half-filled orbitals.",
+         9.5, color=pal.label)
     diagram_row(doc, pal, n, v["diagram"], key)
     n += 1
     for z in v["long"]:
         config_row(doc, pal, n, z, key)
         n += 1
     if key:
-        note(doc, pal, "1 is 4 pts, configuration 2 and diagram 2 (take 1 off per rule broken). "
+        note(doc, pal, "1 is 4 pts, configuration 2, diagram 1, half-filled count 1. "
                        "2 and 3 are 2 pts each, 1 off for one wrong sublevel.")
 
     part_bar(doc, pal, "Part 2   Noble-gas shorthand", len(v["short"]) * PTS["short"])
