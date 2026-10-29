@@ -6,10 +6,10 @@
 Day 1 is conceptual and runs on Edulastic, so it is built as a teacher build sheet: every item in
 the order the Edulastic editor asks for it (question type, stem, choices, correct answer, points,
 why each wrong choice is wrong), plus the PNG images for the label-an-image items. Day 2 is the
-paper, handwritten part: configurations, orbital diagrams, ions and one explanation. Unit 2 has
-no wave math (Matt, 2026-10-20), so the paper part is write-it-out skills rather than calculations.
+paper, handwritten part: six configurations, one with an orbital diagram, and nothing else
+(Matt, 2026-10-29: no written responses, no multiple choice).
 
-Every configuration, valence count and ion on the paper test is computed by the Aufbau generator
+Every configuration on the paper test is computed by the Aufbau generator
 and checked against a hand-written table before anything is written. Nothing copies a study
 guide question (DECISIONS.md, Assessment shape).
 """
@@ -34,49 +34,43 @@ FONT_B = os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf")
 FONT_R = os.path.join(REPO, "brand", "fonts", "Archivo-Regular.ttf")
 
 # =======================================================================================
-# Day 2, paper
+# Day 2, paper (Matt, 2026-10-29): six configurations and nothing else. One longhand with an
+# orbital diagram from the third energy level, two more longhand, three noble-gas shorthand.
+# No written responses and no multiple choice: every answer is right or wrong.
 # =======================================================================================
-W_LONG = [23, 13]            # V reaches 3d (Hund in d), Al stops at 3p^1
-W_SHORT = [80, 24]           # Hg has 4f^14; Cr is the taught exception
-W_IONS = [37, 4, 34, 13]     # Rb, Be, Se, Al
-Q.NAMES.update({23: "Vanadium", 80: "Mercury", 24: "Chromium", 37: "Rubidium",
-                4: "Beryllium"})
-Q.MASS.update({23: "50.94", 80: "200.59", 24: "52.00", 37: "85.47", 4: "9.01"})
+W_DIAGRAM = 15               # P: 3p^3, three unpaired, so the diagram checks Hund's rule
+W_LONG = [23, 31]            # V: 4s before 3d; Ga: 3d before 4p
+W_SHORT = [48, 80, 24]       # Cd: 5th row d-block; Hg: has 4f^14; Cr: the taught exception
+Q.NAMES.update({23: "Vanadium", 31: "Gallium", 48: "Cadmium", 80: "Mercury", 24: "Chromium"})
+Q.MASS.update({23: "50.94", 31: "69.72", 48: "112.41", 80: "200.59", 24: "52.00"})
 
 EXPECT = {
-    "long": {23: "1s2 2s2 2p6 3s2 3p6 4s2 3d3", 13: "1s2 2s2 2p6 3s2 3p1"},
-    "unpaired": {23: 3, 13: 1},
-    "short": {80: "[Xe] 6s2 4f14 5d10", 24: "[Ar] 4s1 3d5"},
-    # atom: (valence e-, ion, electrons in ion, noble gas it matches)
-    "ions": {37: (1, "Rb^+^", 36, "Kr"), 4: (2, "Be^2+^", 2, "He"),
-             34: (6, "Se^2−^", 36, "Kr"), 13: (3, "Al^3+^", 10, "Ne")},
+    "long": {15: "1s2 2s2 2p6 3s2 3p3", 23: "1s2 2s2 2p6 3s2 3p6 4s2 3d3",
+             31: "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p1"},
+    "unpaired": {15: 3},
+    "short": {48: "[Kr] 5s2 4d10", 80: "[Xe] 6s2 4f14 5d10", 24: "[Ar] 4s1 3d5"},
 }
-NOBLE_Z = {"He": 2, "Ne": 10, "Ar": 18, "Kr": 36, "Xe": 54}
-PTS = {"long": 4, "short": 2, "why": 2, "ion": 2, "flame": 3}
+PTS = {"diagram": 4, "long": 2, "short": 2}
 
 
 def check_written():
-    for z in W_LONG:
+    for z in [W_DIAGRAM] + W_LONG:
         assert flat(config(z)) == EXPECT["long"][z], (z, flat(config(z)))
-        assert unpaired(z) == EXPECT["unpaired"][z], (z, unpaired(z))
+        assert sum(c for *_, c in config(z)) == z
+    assert unpaired(W_DIAGRAM) == EXPECT["unpaired"][W_DIAGRAM]
+    assert config(W_DIAGRAM)[-1][0] == 3          # third energy level
     for z in W_SHORT:
         c, r = shorthand(z)
         assert f"[{NOBLE_SYM[c]}] " + flat(r) == EXPECT["short"][z], (z, c, flat(r))
+        assert c + sum(n for *_, n in r) == z
     assert any(l == "f" for _, l, _ in shorthand(80)[1])
-    for z, (v, ion, n_e, gas) in EXPECT["ions"].items():
-        assert valence(z)[1] == v, (z, valence(z))
-        charge = ion_charge(z)
-        sign = -1 if charge.endswith("−") else 1
-        assert z - sign * int(charge[:-1]) == n_e == NOBLE_Z[gas], (z, charge, n_e, gas)
-    total = (len(W_LONG) * PTS["long"] + len(W_SHORT) * PTS["short"] + PTS["why"]
-             + len(W_IONS) * PTS["ion"] + PTS["flame"])
-    assert total == 25, total
-    print("written test answers re-solved: all match")
+    total = PTS["diagram"] + len(W_LONG) * PTS["long"] + len(W_SHORT) * PTS["short"]
+    print(f"written test answers re-solved: all match ({total} points)")
     return total
 
 
-def long_row(doc, pal, n, z, key):
-    """The quiz's Part 2 row with exact heights, plus an unpaired-electron count."""
+def diagram_row(doc, pal, n, z, key):
+    """The quiz's Part 2 row, exact heights: tile, configuration line, orbital diagram box."""
     t = doc.add_table(rows=3, cols=3)
     fix_widths(t, [NUM_W, 1.15, 5.9])
     numcell(t.cell(0, 0).merge(t.cell(2, 0)), pal, n)
@@ -93,13 +87,10 @@ def long_row(doc, pal, n, z, key):
     pl = cellfmt(lc, pal, top=0, bottom=20, left=80)
     lc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
     pl.paragraph_format.tab_stops.add_tab_stop(Inches(1.25))
-    pl.paragraph_format.tab_stops.add_tab_stop(Inches(5.8), WD_TAB_ALIGNMENT.RIGHT)
     _run(pl, "Configuration", 9, bold=True, color=pal.ink)
     _run(pl, "\t", 9)
     if key:
         hand_config(pl, z, size=12)
-    _run(pl, "\tUnpaired", 9, bold=True, color=pal.ink)
-    Q.blank(pl, str(unpaired(z)), key, 4, size=9)
     bc = t.cell(2, 2)
     borders(bc, pal.hair, sz=6)
     bc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
@@ -108,7 +99,28 @@ def long_row(doc, pal, n, z, key):
     _run(pb, "Orbital diagram", 8.5, color=pal.label)
     if key:
         key_strip(bc, pal, z, lab_w=0.22, box_w=0.19)
-    gap(doc, 5)
+    gap(doc, 8)
+
+
+def config_row(doc, pal, n, z, key):
+    """Tile and one configuration line, the line level with the bottom of the tile."""
+    t = doc.add_table(rows=1, cols=3)
+    fix_widths(t, [NUM_W, 1.0, 6.05])
+    no_split(t.rows[0], 0.84)
+    numcell(t.cell(0, 0), pal, n)
+    tc = t.cell(0, 1)
+    tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    cell_margins(tc, top=0, bottom=0, left=0, right=0)
+    tile(tc, pal, z, 0.80)
+    lc = t.cell(0, 2)
+    pl = cellfmt(lc, pal, top=0, bottom=30, left=80)
+    lc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    pl.paragraph_format.tab_stops.add_tab_stop(Inches(1.25))
+    _run(pl, "Configuration", 9, bold=True, color=pal.ink)
+    _run(pl, "\t", 9)
+    if key:
+        hand_config(pl, z, size=12)
+    gap(doc, 8)
 
 
 def note(doc, pal, text):
@@ -120,99 +132,62 @@ def note(doc, pal, text):
 
 def build_written(out, key, total):
     pal = Palette(COURSE)
-    ctx = Ctx(pal, key)
     doc, s = new_doc()
     header(doc, pal, "UNIT 2 TEST  ·  DAY 2  ·  WRITTEN" + ("  ·  TEACHER KEY" if key else ""),
            "Unit 2 Test: Written", score=total)
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     p = cellfmt(c, pal, line=False, top=20, bottom=20)
-    _run(p, "You may use a periodic table. Write every configuration in order of filling. In an "
+    _run(p, "You may use a periodic table. Write every configuration in order of filling. In the "
             "orbital diagram, each electron gets one arrow.", 9.5, color=pal.ink)
     n = 1
 
-    part_bar(doc, pal, "Part 1   Longhand configurations and orbital diagrams",
-             len(W_LONG) * PTS["long"])
+    part_bar(doc, pal, "Part 1   Longhand configurations",
+             PTS["diagram"] + len(W_LONG) * PTS["long"])
+    c = one_cell(doc); cell_margins(c, top=0, bottom=30, left=0, right=0)
+    p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
+    _run(p, "Number 1 also needs its orbital diagram.", 9.5, color=pal.label)
+    diagram_row(doc, pal, n, W_DIAGRAM, key)
+    n += 1
     for z in W_LONG:
-        long_row(doc, pal, n, z, key)
+        config_row(doc, pal, n, z, key)
         n += 1
     if key:
-        note(doc, pal, "4 pts each. Configuration 2, diagram 1, unpaired count 1. "
-                       "Take 1 off the diagram for each rule broken.")
+        note(doc, pal, "1 is 4 pts, configuration 2 and diagram 2 (take 1 off per rule broken). "
+                       "2 and 3 are 2 pts each, 1 off for one wrong sublevel.")
 
-    part_bar(doc, pal, "Part 2   Noble-gas shorthand",
-             len(W_SHORT) * PTS["short"] + PTS["why"])
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [3.75, 3.75])
+    part_bar(doc, pal, "Part 2   Noble-gas shorthand", len(W_SHORT) * PTS["short"])
+    t = doc.add_table(rows=1, cols=3)
+    fix_widths(t, [2.5, 2.5, 2.5])
     no_split(t.rows[0])
     for k, z in enumerate(W_SHORT):
         cc = t.cell(0, k)
         cc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-        cell_margins(cc, top=0, bottom=0, left=0, right=160)
+        cell_margins(cc, top=0, bottom=0, left=0, right=140)
         p0 = cc.paragraphs[0]; p0.paragraph_format.space_after = Pt(1)
         _run(p0, str(n), 13, bold=True, color=pal.accent)
         pt_ = cc.add_paragraph(); pt_.paragraph_format.space_after = Pt(2)
         pt_.add_run().add_picture(tile_png(z), width=Inches(0.8))
         lt = cc.add_table(rows=1, cols=1)
-        fix_widths(lt, [3.5]); no_split(lt.rows[0], 0.36)
+        fix_widths(lt, [2.3]); no_split(lt.rows[0], 0.40)
         lcell = lt.rows[0].cells[0]
         lcell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
         borders(lcell, pal.hair, sz=6, edges=("bottom",))
         cell_margins(lcell, top=0, bottom=20, left=40, right=0)
         q = lcell.paragraphs[0]; q.paragraph_format.space_after = Pt(0)
         if key:
-            hand_config(q, z, short=True, size=12)
+            hand_config(q, z, short=True, size=11)
         pin_tail(cc)
         n += 1
-    gap(doc, 4)
-    item(doc, pal, n, "Chromium's configuration is not the one the filling order predicts. "
-         "Write the predicted shorthand, then explain why the actual one has lower energy.", key,
-         lambda q: (hand(q, "Predicted [Ar] 4s^2^ 3d^4^.", 11),
-                    hand(q, "   4s and 3d are close in energy. A half-full 3d (five "
-                            "unpaired) is more stable.", 10, ink="arrow")),
-         lines=2, ctx=ctx)
-    n += 1
     if key:
-        note(doc, pal, "Shorthand 2 pts each (core 1, rest in order 1). Explanation 2 pts, "
-                       "predicted 1 and why 1.")
-
-    page_break_before(doc)
-    part_bar(doc, pal, "Part 3   Ions", len(W_IONS) * PTS["ion"])
-    c = one_cell(doc); cell_margins(c, top=0, bottom=20, left=40, right=40)
-    Q.sg_prompt(c, n, "Complete the table. For the last column, name the noble gas with the "
-                "same number of electrons as the ion.", ctx, pal, first=True, after=0)
-    pin_tail(c)
-    rows, ans = [], []
-    for z in W_IONS:
-        v, ion, n_e, gas = EXPECT["ions"][z]
-        rows.append([Q.name_of(z), None, None, None, None])
-        ans.append([None, str(v), ion, str(n_e), gas])
-    small_table(doc, pal, ["ATOM", "VALENCE e^−^", "ION IT FORMS", "e^−^ IN THE ION",
-                           "SAME AS"], rows, ans, key, [1.9, 1.3, 1.5, 1.5, 1.3], ctx,
-                row_h=0.40)
-    n += 1
-    if key:
-        note(doc, pal, "2 pts per row, half a point per box.")
-
-    part_bar(doc, pal, "Part 4   Flame colors", PTS["flame"])
-    item(doc, pal, n, "A sodium flame is yellow (589 nm). A lithium flame is crimson red "
-         "(671 nm). Explain how the heated atoms give off light, and say which element's "
-         "color comes from the larger energy drop and how you know.", key,
-         lambda q: hand(q, "Heat excites electrons to higher levels. They drop back and give "
-                           "off photons.", 10.5),
-         lines=4, ctx=ctx)
-    if key:
-        c = doc.tables[-1].rows[0].cells[0]
-        hand(c.tables[1].rows[0].cells[0].paragraphs[0],
-             "Sodium. 589 nm is shorter, so more energy, so a bigger drop.", 10.5)
-        note(doc, pal, "1 pt for excited electrons dropping and giving off light. 1 pt for sodium. "
-                       "1 pt for shorter wavelength means more energy.")
+        gap(doc, 4)
+        note(doc, pal, "2 pts each, noble-gas core 1 and the rest in order 1. "
+                       "Chromium is the exception, so [Ar] 4s^2^ 3d^4^ earns 1.")
 
     running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  UNIT TEST DAY 2" +
                    ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
     trim_tail(doc)
     doc.save(out)
-
 
 # =======================================================================================
 # Day 1, Edulastic. Images first.
