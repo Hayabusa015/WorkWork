@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Build + QA for Physics U02 S2.2 Practice Set and its key, exactly as filed in Drive 2026-10-16.
+# Build + QA for Physics U02 S2.2 Practice Set and its key (plain layout, 2026-10-29; first filed 2026-10-16).
 #
 #   bash templates/worksheet/specs/phys_u02_s02.2.build.sh [out_dir]
 #
 # Matt's one-off choices for THIS document, applied in memory only. The shared builders
 # (build_worksheet_docx.py, build_worksheet_key_docx.py, scripts/key_solution.py) are NOT edited:
-#   - 8 problems, ramp 3/3/1/1 (Physics default is 2/2/1/1)
-#   - no tier tags (WARM-UP / PRACTICE / ...) on the student sheet or the key
+#   - 8 problems (Physics default is six); no tier tags on the student sheet or the key
+#   - student sheet in the plain practice-set layout (templates/worksheet/build_practice_docx.py)
 #   - key at the standard hand size 27 (KEY_SIZE), short consecutive rows merged onto one line, and
 #     cards allowed to break across a page at a seam (after a boxed answer or the conversion block)
 # None of these is a standing rule yet; making any of them permanent is a Secretary change.
@@ -21,16 +21,7 @@ KEY="$OUT/2.2 Practice Set Key.docx"
 python3 -I "$HERE/phys_u02_s02.2.verify.py"
 
 cd "$REPO/templates/worksheet"
-python3 - "$SPEC" "$STU" <<'PY'
-import sys
-sys.path.insert(0, "."); sys.path.insert(0, "..")
-import build_worksheet_docx as b
-b.RAMP["physics"] = {"warm-up": 3, "practice": 3, "challenge": 1, "multi-topic": 1}
-# Matt 2026-10-16: no tier tags on this student sheet. Tiers stay in the spec for the ramp check.
-_card = b.question_card
-b.question_card = lambda cell, q, *a, **k: _card(cell, {x: v for x, v in q.items() if x != "tier"}, *a, **k)
-sys.exit(b.main())
-PY
+python3 "$REPO/templates/worksheet/build_practice_docx.py" "$SPEC" "$STU"
 python3 - "$SPEC" "$KEY" <<'PY2'
 import sys
 sys.path.insert(0, "."); sys.path.insert(0, "..")

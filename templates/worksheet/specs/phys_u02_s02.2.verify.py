@@ -77,4 +77,13 @@ def _dir_check():
     return bad
 
 fail += _dir_check()
+
+# Notation on the sheet (Matt 2026-10-29): equations as written on a board, division as a stacked fraction.
+import json as _json
+_sec = _json.load(open(SPEC_PATH, encoding="utf-8"))["sectionsContent"][0]
+_eqs = _sec["equations"]
+_ok = (all(isinstance(e, str) for e in _eqs) and " / " not in " ".join(_eqs)
+       and "tan θ = [R_y|R_x]" in _eqs and "R_x = A_x + B_x + C_x" in _eqs)
+print(f"{'PASS' if _ok else 'FAIL'}  equations: component, sum, magnitude and tan θ = R_y / R_x as a stacked fraction, no slash division")
+fail += not _ok
 sys.exit(1 if fail else 0)
