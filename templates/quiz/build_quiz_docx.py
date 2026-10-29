@@ -193,6 +193,53 @@ def equation_block(doc, eqs, pal, label="Equations", width=7.5, per_row=3, note=
     unpad_cell(c)
 
 
+def equation_groups(doc, groups, pal, width=7.5, size=9.5, bold=False, italic_vars=True, row_in=0.26,
+                    split=(4.35, 3.15)):
+    """Equations in labelled groups, two columns of groups.
+
+    Each group is {"label", "note", "eqs", "columns", "col": "L"|"R"}. A group's label says what the
+    equations are for ("Vertical (y)"), its note says how to use them. Used where a sheet must say
+    which direction an equation belongs to: the kinematic equations are y-only in projectile motion.
+    """
+    gap(doc, 5)
+    t = doc.add_table(rows=1, cols=2)
+    fix_widths(t, list(split))
+    cells = {"L": t.rows[0].cells[0], "R": t.rows[0].cells[1]}
+    for key, c in cells.items():
+        borders(c, pal.hair, sz=4, edges=("top", "bottom"))
+        cell_margins(c, top=60, bottom=50, left=0 if key == "L" else 140, right=0)
+    borders(cells["R"], pal.hair, sz=4, edges=("left",))
+    for key, c in cells.items():
+        mine = [g for g in groups if g.get("col", "L") == key]
+        colw = split[0] if key == "L" else split[1] - 0.14
+        for gi, grp in enumerate(mine):
+            last = c.paragraphs[-1]
+            if gi == 0:
+                p = c.paragraphs[0]
+            elif not last.text.strip() and not last.runs:
+                p = last                      # the empty paragraph python-docx leaves after a table
+            else:
+                p = c.add_paragraph()
+            p.paragraph_format.space_after = Pt(2)
+            p.paragraph_format.space_before = Pt(0 if gi == 0 else 5)
+            run(p, grp["label"], 9, bold=True, color=pal.ink)
+            if grp.get("note"):
+                run(p, "   " + grp["note"], 8.5, color=pal.label)
+            cols = int(grp.get("columns", 1))
+            rows = (len(grp["eqs"]) + cols - 1) // cols
+            g = c.add_table(rows=rows, cols=cols)
+            fix_widths(g, [round(colw / cols - 0.02, 2)] * cols)
+            tight_cells(g, top=25, bottom=35, left=0, right=50)
+            for i, eq in enumerate(grp["eqs"]):
+                cell = g.rows[i // cols].cells[i % cols]
+                cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+                equation_cell(cell, eq, pal, size, bold, italic_vars)
+            if row_in:
+                for r in g.rows:
+                    no_split(r, row_in)
+        unpad_cell(c)
+
+
 def masthead(doc, spec, sec, pal):
     unit = f"U{int(spec['unit']):02d}"
     t = doc.add_table(rows=1, cols=2)

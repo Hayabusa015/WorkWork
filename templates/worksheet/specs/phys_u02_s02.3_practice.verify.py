@@ -6,8 +6,9 @@ algebra cannot hide behind the same slip here. Checks, per set:
   - five questions; points total as the sheet states
   - every value appears in the finalAnswer and in a boxed key answer, and (Q1-Q4) in the self-check
     bracket; the last question carries no bracket (SHULL-CHG-0021)
-  - notation: equations use v_i and v_f (never v or v_0), give the kinematic equations, not an equation
-    solved for time, and show division as a stacked fraction, never a slash
+  - notation: equations use v_i and v_f (never v or v_0), the kinematic equations are written for y only
+    and labelled so, x has exactly one equation (v_x = Δx / t) and is labelled so, nothing is solved for
+    time, and division is a stacked fraction, never a slash
   - the keys use the same symbols the equations give
   - every "same direction:" line points the same way as its boxed angle
 """
@@ -49,10 +50,9 @@ def expected():
     E = {1: [], 2: [], 3: []}
     t = later_root(0, -45);            E[1].append([s2(t), s2(12 * t)])
     E[1].append([s2(0.5 * g * 0.8 ** 2), s2(3.5 * 0.8)])
+    t = 1.2 / 2.0;                     E[1].append([s2(t), s2(0.5 * g * t * t)])
     t = later_root(0, -22);            E[1].append([s2(t), s2(61 / t)])
     t = later_root(0, -2.0);           E[1].append([s2(t), s2(7.5 * t), s2(5.0 / t)])
-    vf = math.sqrt(2 * 3.5 * 18); t = later_root(0, -7.2)
-    E[1].append([s2(vf), s2(t), s2(vf * t)])
     # part 2
     vx, vy = comp(24, 30); t = later_root(vy, 0)
     E[2].append([s2(vx), s2(vy), s2(t), s2(vx * t)])
@@ -69,13 +69,9 @@ def expected():
     E[2].append([s2(vi), str(round(math.degrees(math.atan2(11, 15)))), s2(t), s2(15 * t), s2(ym)])
     # part 3
     vx, vy = comp(22, 25); t = later_root(vy, -18);  E[3].append([s2(t), s2(vx * t)])
-    vx, vy = comp(45, 10); t = 62 / vx;              E[3].append([s2(t), s2(vy * t - 0.5 * g * t * t)])
     vx, vy = comp(14, 60); t = later_root(vy, 6.0);  E[3].append([s2(t), s2(vx * t)])
     vx, vy = comp(28, 40); t = later_root(vy, -15)
     E[3].append([s2(vy * vy / (2 * g) + 15), s2(t), s2(vx * t)])
-    vx = 18 * math.cos(math.radians(20)); vy = -18 * math.sin(math.radians(20)); t = later_root(vy, -35)
-    vfy = vy - g * t
-    E[3].append([s2(t), s2(vx * t), s2(math.hypot(vx, vfy)), str(round(math.degrees(math.atan2(-vfy, vx))))])
     return E
 
 AX = {"east": 0, "north": 90, "west": 180, "south": 270}
@@ -98,13 +94,14 @@ def flat(steps):
     return " ".join(out)
 
 E = expected()
-POINTS = {1: 16, 2: 16, 3: 17}
+POINTS = {1: 14, 2: 16, 3: 9}
+NQ = {1: 5, 2: 5, 3: 3}
 for part in (1, 2, 3):
     spec = json.load(open(os.path.join(HERE, f"phys_u02_s02.3_part{part}.json"), encoding="utf-8"))
     sec = spec["sectionsContent"][0]
     qs = sec["questions"]
     tag = f"P{part}"
-    report(len(qs) == 5, f"{tag}: five questions")
+    report(len(qs) == NQ[part], f"{tag}: {NQ[part]} questions")
     report(sum(q["points"] for q in qs) == POINTS[part], f"{tag}: points total {POINTS[part]}")
     for i, (q, exp) in enumerate(zip(qs, E[part]), start=1):
         boxed = [s["value"] for s in q["steps"] if "answer" in s]
@@ -112,20 +109,31 @@ for part in (1, 2, 3):
         okf = all(has(fa, e) for e in exp)
         okb = all(any(has(b, e) for b in boxed) for e in exp)
         report(okf and okb, f"{tag} Q{i}: {', '.join(exp)}  (finalAnswer {'ok' if okf else 'MISMATCH ' + q['finalAnswer']}; boxed {'ok' if okb else 'MISMATCH ' + str(boxed)})")
-        if i < 5:
+        if i < len(qs):
             report(all(has(q.get("selfCheck", ""), e) for e in exp), f"{tag} Q{i}: self-check bracket shows {', '.join(exp)}")
         else:
             report(not q.get("selfCheck"), f"{tag} Q{i}: last question has no self-check")
         text = flat(q["steps"])
-        bad = [p for p in (r"v_\{0\}", r"v_\{y0\}", r"vy0", r"v_\{x\}", r"v_\{y\}", r"v_\{o", r"t\s*=\s*√\(2") if re.search(p, text)]
+        bad = [p for p in (r"v_\{0\}", r"v_\{y0\}", r"vy0", r"v_\{ix\}", r"v_\{y\}", r"v_\{o", r"t\s*=\s*√\(2") if re.search(p, text)]
         report(not bad, f"{tag} Q{i}: key uses v_i / v_f notation" + (f"  found {bad}" if bad else ""))
-    eqs = sec["equations"]
+    groups = sec["equationGroups"]
+    eqs = [e for grp in groups for e in grp["eqs"]]
     alltext = " ".join(eqs)
-    report("v_f" in alltext and "v_i" in alltext, f"{tag}: equations use v_i and v_f")
+    labels = {grp["label"]: grp for grp in groups}
+    report("v_{fy}" in alltext and "v_{iy}" in alltext, f"{tag}: equations use v_i and v_f (v_iy, v_fy)")
     report(not re.search(r"v_0|v_o|\bv_\{0|\bvo\b", alltext), f"{tag}: no v_0 or v_o in the equations")
     report(not any(re.match(r"\s*t\s*=\s*√", e) for e in eqs), f"{tag}: no equation solved for time by square root")
     report(" / " not in alltext and "/" not in re.sub(r"m/s", "", alltext), f"{tag}: no slash division in the equations (stacked fractions)")
-    report(any("[1|2]" in e for e in eqs) and any(e.startswith("v_f^2") for e in eqs), f"{tag}: the kinematic equations are given")
+    ygrp, xgrp = labels.get("Vertical (y)"), labels.get("Horizontal (x)")
+    report(ygrp is not None and xgrp is not None and "y only" in ygrp["note"], f"{tag}: the y group and the x group are labelled, with the y-only note")
+    yset = ygrp["eqs"] if ygrp else []
+    report(any(e.startswith("v_{fy} = v_{iy}") for e in yset) and any("[1|2] a_{y} t^2" in e for e in yset)
+           and any(e.startswith("v_{fy}^2") for e in yset) and any("(v_{iy} + v_{fy})" in e for e in yset),
+           f"{tag}: all four kinematic equations are given, written for y")
+    report(all(("Δx" not in e and "v_{ix}" not in e and "a_{x}" not in e) for e in yset), f"{tag}: nothing in the y group uses x")
+    report((xgrp["eqs"] if xgrp else []) == ["v_{x} = [Δx|t]"], f"{tag}: the x group is exactly v_x = Δx / t")
+    others = [e for grp in groups if grp["label"] != "Horizontal (x)" for e in grp["eqs"] if "Δx" in e]
+    report(not others, f"{tag}: no other equation uses Δx")
     vis = sec["directions"] + " ".join(q["prompt"] + " ".join(q.get("parts", [])) for q in qs)
     badg = sorted({c for c in vis if c in "θΔ₀₁₂₃₄₅₆₇₈₉"})
     report(not badg, f"{tag}: directions and prompts free of unsupported glyphs" + (f" found {badg}" if badg else ""))

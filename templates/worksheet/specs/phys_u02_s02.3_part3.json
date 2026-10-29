@@ -21,7 +21,7 @@
           "steps": [
             {
               "row": [
-                "v_{ix} = 22 cos 25° = 19.94 m/s     v_{iy} = 22 sin 25° = 9.298 m/s"
+                "v_{x} = 22 cos 25° = 19.94 m/s     v_{iy} = 22 sin 25° = 9.298 m/s"
               ]
             },
             {
@@ -94,94 +94,21 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (19.94)(3.087) = 61.6 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (19.94)(3.087) = 61.6 m"
+              ]
             },
             {
               "answer": [
                 "Δx ="
               ],
               "value": "62 m"
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "prompt": "Link fires an arrow at 45 m/s, 10° above the horizontal, at a target 62 m away horizontally. The Bokoblin holding the target has made some poor choices. Find the time the arrow takes to reach the target and how far above or below the launch height it hits.",
-          "selfCheck": "[  1.4 s  ·  1.3 m above  ]",
-          "solution": "t 1.399 s, Δy 1.34 m.",
-          "finalAnswer": "t = 1.4 s (1.399 s)   y = 1.3 m above launch height (1.34 m)",
-          "steps": [
-            {
-              "row": [
-                "v_{ix} = 45 cos 10° = 44.32 m/s     v_{iy} = 45 sin 10° = 7.814 m/s"
-              ]
-            },
-            {
-              "row": [
-                "Δx = v_{ix} t"
-              ],
-              "note": "a_{x} = 0"
-            },
-            {
-              "row": [
-                "t =",
-                {
-                  "frac": [
-                    "Δx",
-                    "v_{ix}"
-                  ]
-                },
-                "=",
-                {
-                  "frac": [
-                    "62",
-                    "44.32"
-                  ]
-                },
-                "= 1.399 s"
-              ]
-            },
-            {
-              "answer": [
-                "t ="
-              ],
-              "value": "1.4 s"
-            },
-            {
-              "row": [
-                "Δy = v_{iy} t + ",
-                {
-                  "frac": [
-                    "1",
-                    "2"
-                  ]
-                },
-                " a_{y} t^{2}"
-              ]
-            },
-            {
-              "row": [
-                "Δy = (7.814)(1.399) + ",
-                {
-                  "frac": [
-                    "1",
-                    "2"
-                  ]
-                },
-                "(−9.8)(1.399)^{2} = 1.34 m"
-              ]
-            },
-            {
-              "answer": [
-                "Δy ="
-              ],
-              "value": "1.3 m above"
-            },
-            {
-              "say": "Positive, so the arrow is above the launch height.",
-              "ink": "pen"
             }
           ]
         },
@@ -194,7 +121,7 @@
           "steps": [
             {
               "row": [
-                "v_{ix} = 14 cos 60° = 7.00 m/s     v_{iy} = 14 sin 60° = 12.124 m/s"
+                "v_{x} = 14 cos 60° = 7.00 m/s     v_{iy} = 14 sin 60° = 12.124 m/s"
               ]
             },
             {
@@ -263,9 +190,15 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (7.0)(1.790) = 12.5 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (7.0)(1.790) = 12.5 m"
+              ]
             },
             {
               "answer": [
@@ -283,13 +216,12 @@
             "(b) Find its time in the air.",
             "(c) Find how far from the base of the wall it lands."
           ],
-          "selfCheck": "[  32 m  ·  4.4 s  ·  94 m  ]",
           "solution": "(a) 31.5 m (b) 4.373 s (c) 93.8 m",
           "finalAnswer": "(a) 32 m above the field (31.5 m)   (b) 4.4 s (4.37 s)   (c) 94 m (93.8 m)",
           "steps": [
             {
               "row": [
-                "v_{ix} = 28 cos 40° = 21.45 m/s     v_{iy} = 28 sin 40° = 18.00 m/s"
+                "v_{x} = 28 cos 40° = 21.45 m/s     v_{iy} = 28 sin 40° = 18.00 m/s"
               ]
             },
             {
@@ -389,9 +321,15 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (21.45)(4.373) = 93.8 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (21.45)(4.373) = 93.8 m"
+              ]
             },
             {
               "answer": [
@@ -400,176 +338,53 @@
               "value": "94 m"
             }
           ]
-        },
-        {
-          "points": 5,
-          "prompt": "Ash throws a Poké Ball at 18 m/s, 20° below the horizontal, from a cliff 35 m above a lake where a Gyarados is waiting. Pikachu declined to throw it for him.",
-          "parts": [
-            "(a) Find the time the ball takes to reach the water.",
-            "(b) Find how far from the base of the cliff it lands.",
-            "(c) Find the ball's velocity as it hits the water: speed and angle below the horizontal."
-          ],
-          "solution": "(a) 2.117 s (b) 35.8 m (c) 31.8 m/s at 57.8° below",
-          "finalAnswer": "(a) 2.1 s (2.12 s)   (b) 36 m (35.8 m)   (c) 32 m/s at 58° below the horizontal",
-          "steps": [
-            {
-              "row": [
-                "v_{ix} = 18 cos 20° = 16.91 m/s"
-              ]
-            },
-            {
-              "mistake": [
-                "v_{iy} = +6.156 m/s"
-              ],
-              "note": "thrown below the horizontal, so v_{iy} is negative"
-            },
-            {
-              "row": [
-                "v_{iy} = −18 sin 20° = −6.156 m/s"
-              ]
-            },
-            {
-              "label": "(a) Time to the water"
-            },
-            {
-              "row": [
-                "Δy = v_{iy} t + ",
-                {
-                  "frac": [
-                    "1",
-                    "2"
-                  ]
-                },
-                " a_{y} t^{2}"
-              ]
-            },
-            {
-              "row": [
-                "−35 = (−6.156) t + ",
-                {
-                  "frac": [
-                    "1",
-                    "2"
-                  ]
-                },
-                "(−9.8) t^{2}"
-              ]
-            },
-            {
-              "row": [
-                "4.9 t^{2} + 6.156 t − 35 = 0"
-              ]
-            },
-            {
-              "row": [
-                "t =",
-                {
-                  "frac": [
-                    "−6.156 ± √((6.156)^{2} + 4(4.9)(35))",
-                    "2(4.9)"
-                  ]
-                }
-              ]
-            },
-            {
-              "row": [
-                "t =",
-                {
-                  "frac": [
-                    "−6.156 ± √723.9",
-                    "9.8"
-                  ]
-                },
-                "= 2.12 s  or  −3.37 s"
-              ]
-            },
-            {
-              "answer": [
-                "t ="
-              ],
-              "value": "2.1 s"
-            },
-            {
-              "label": "(b) Distance from the cliff"
-            },
-            {
-              "row": [
-                "Δx = v_{ix} t = (16.91)(2.117) = 35.8 m"
-              ],
-              "note": "a_{x} = 0"
-            },
-            {
-              "answer": [
-                "Δx ="
-              ],
-              "value": "36 m"
-            },
-            {
-              "label": "(c) Velocity at the water"
-            },
-            {
-              "row": [
-                "v_{fy} = v_{iy} + a_{y} t"
-              ]
-            },
-            {
-              "row": [
-                "v_{fy} = −6.156 + (−9.8)(2.117) = −26.9 m/s"
-              ]
-            },
-            {
-              "row": [
-                "v_{f} = √((16.91)^{2} + (26.9)^{2}) = 31.8 m/s"
-              ]
-            },
-            {
-              "answer": [
-                "v_{f} ="
-              ],
-              "value": "32 m/s"
-            },
-            {
-              "row": [
-                "θ = tan^{−1}",
-                {
-                  "frac": [
-                    "26.9",
-                    "16.91"
-                  ]
-                },
-                "= 57.8°"
-              ],
-              "note": "below the horizontal"
-            },
-            {
-              "answer": [
-                "θ ="
-              ],
-              "value": "58° below horizontal"
-            },
-            {
-              "row": [
-                "same direction:  −58°  =  302°  =  32° from straight down"
-              ]
-            }
-          ]
         }
       ],
-      "equations": [
-        "v_f = v_i + a t",
-        "Δx = v_i t + [1|2] a t^2",
-        "v_f^2 = v_i^2 + 2 a Δx",
-        "Δx = [1|2](v_i + v_f) t",
-        "a_{x} = 0",
-        "a_{y} = −9.8 m/s^2",
-        "v_{ix} = v_i cos θ",
-        "v_{iy} = v_i sin θ",
-        "v_i = √(v_{ix}^2 + v_{iy}^2)",
-        "tan θ = [v_{iy}|v_{ix}]",
-        "t = [−b ± √(b^2 − 4ac)|2a]"
-      ],
-      "equationNote": "along x or y",
-      "equationColumns": 4
+      "equationGroups": [
+        {
+          "label": "Vertical (y)",
+          "note": "the kinematic equations, y only",
+          "eqs": [
+            "v_{fy} = v_{iy} + a_{y} t",
+            "Δy = v_{iy} t + [1|2] a_{y} t^2",
+            "v_{fy}^2 = v_{iy}^2 + 2 a_{y} Δy",
+            "Δy = [1|2](v_{iy} + v_{fy}) t",
+            "a_{y} = −9.8 m/s^2"
+          ],
+          "columns": 2,
+          "col": "L"
+        },
+        {
+          "label": "If t² shows up",
+          "note": "quadratic formula",
+          "eqs": [
+            "t = [−b ± √(b^2 − 4ac)|2a]"
+          ],
+          "columns": 1,
+          "col": "L"
+        },
+        {
+          "label": "Horizontal (x)",
+          "note": "no acceleration, so only this one",
+          "eqs": [
+            "v_{x} = [Δx|t]"
+          ],
+          "columns": 1,
+          "col": "R"
+        },
+        {
+          "label": "Launch velocity",
+          "eqs": [
+            "v_{x} = v_i cos θ",
+            "v_{iy} = v_i sin θ",
+            "t_{top} = [t|2]",
+            "v_i = √(v_{x}^2 + v_{iy}^2)",
+            "tan θ = [v_{iy}|v_{x}]"
+          ],
+          "columns": 2,
+          "col": "R"
+        }
+      ]
     }
   ],
   "pagesPerSection": 1

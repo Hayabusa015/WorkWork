@@ -13,7 +13,8 @@ Same masthead, palette, fonts and footer as every other SHULL print document, an
 drawn-Greek handling as the quiz builder (the brand face has no theta or delta). The answer key is
 built from the same spec by build_worksheet_key_docx.py.
 
-Spec, one section: code, title, directions (plain text), equations (strings; "_i" subscript,
+Spec, one section: code, title, directions (plain text), equationGroups (labelled groups of equations,
+each {label, note, eqs, columns, col}) or equations (one flat list), where equations are strings; "_i" subscript,
 "^2" superscript, "[n|d]" a stacked fraction, "θ" and "Δ" drawn), equationNote (optional, shown
 beside the label), equationColumns (default 3), questions[] with points, prompt, parts[], selfCheck.
 """
@@ -30,7 +31,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, borders, para, run, fix_widths, no_split, page_setup,
     running_footer, cell_margins, gap, trim_tail,
 )
-from build_quiz_docx import masthead, name_row, equation_block   # noqa: E402
+from build_quiz_docx import masthead, name_row, equation_block, equation_groups   # noqa: E402
 
 INDENT = 0.36                # the number's column; the text and the parts hang from it
 BODY = 11                    # question text
@@ -90,8 +91,11 @@ def main():
     cell = c.rows[0].cells[0]
     cell_margins(cell, top=0, bottom=0, left=0, right=0)
     para(cell, sec["directions"], 9.5, color=pal.ink, first=True)
-    equation_block(doc, sec["equations"], pal, note=sec.get("equationNote"), size=9.5, bold=False,
-                   italic_vars=True, row_in=0.26, per_row=int(sec.get("equationColumns", 3)))
+    if sec.get("equationGroups"):
+        equation_groups(doc, sec["equationGroups"], pal)
+    else:
+        equation_block(doc, sec["equations"], pal, note=sec.get("equationNote"), size=9.5, bold=False,
+                       italic_vars=True, row_in=0.26, per_row=int(sec.get("equationColumns", 3)))
     gap(doc, 4)
     for i, q in enumerate(qs, start=1):
         question(doc, q, i, pal)

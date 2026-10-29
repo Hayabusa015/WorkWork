@@ -21,7 +21,7 @@
           "steps": [
             {
               "row": [
-                "Δy = −45 m     v_{iy} = 0     v_{ix} = 12 m/s     a_{y} = −9.8 m/s^{2}"
+                "Δy = −45 m     v_{iy} = 0     v_{x} = 12 m/s     a_{y} = −9.8 m/s^{2}"
               ]
             },
             {
@@ -91,9 +91,15 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (12)(3.03) = 36.4 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (12)(3.03) = 36.4 m"
+              ]
             },
             {
               "answer": [
@@ -112,7 +118,7 @@
           "steps": [
             {
               "row": [
-                "v_{ix} = 3.5 m/s     v_{iy} = 0     t = 0.80 s     a_{y} = −9.8 m/s^{2}"
+                "v_{x} = 3.5 m/s     v_{iy} = 0     t = 0.80 s     a_{y} = −9.8 m/s^{2}"
               ]
             },
             {
@@ -153,15 +159,101 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (3.5)(0.80) = 2.80 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (3.5)(0.80) = 2.80 m"
+              ]
             },
             {
               "answer": [
                 "Δx ="
               ],
               "value": "2.8 m"
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "prompt": "Buzz Lightyear leaps horizontally off the top of a bookshelf at 2.0 m/s and lands 1.2 m from its base. Woody calls it falling with style. Find Buzz's time in the air and the height of the bookshelf.",
+          "selfCheck": "[  0.60 s  ·  1.8 m  ]",
+          "solution": "t = Δx / v_x = 0.60 s; Δy = 1/2 a t^2 = −1.764 m.",
+          "finalAnswer": "t = 0.60 s (0.60 s)   height = 1.8 m (1.764 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 2.0 m/s     Δx = 1.2 m     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "Δx",
+                    "v_{x}"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "1.2",
+                    "2.0"
+                  ]
+                },
+                "= 0.60 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "0.60 s"
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = 0 + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.60)^{2} = −1.76 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "1.8 m"
             }
           ]
         },
@@ -231,12 +323,7 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t"
-              ]
-            },
-            {
-              "row": [
-                "v_{ix} =",
+                "v_{x} =",
                 {
                   "frac": [
                     "Δx",
@@ -255,7 +342,7 @@
             },
             {
               "answer": [
-                "v_{ix} ="
+                "v_{x} ="
               ],
               "value": "29 m/s"
             }
@@ -269,13 +356,12 @@
             "(b) Find how far he moves horizontally in that time. Does he reach the ledge?",
             "(c) Find the minimum launch speed he needed to reach the ledge."
           ],
-          "selfCheck": "[  0.64 s  ·  4.8 m  ·  7.8 m/s  ]",
           "solution": "(a) 0.639 s (b) 4.79 m, short (c) 7.83 m/s",
           "finalAnswer": "(a) 0.64 s   (b) 4.8 m, short of the ledge   (c) 7.8 m/s",
           "steps": [
             {
               "row": [
-                "v_{ix} = 7.5 m/s     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
+                "v_{x} = 7.5 m/s     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
               ]
             },
             {
@@ -326,9 +412,15 @@
             },
             {
               "row": [
-                "Δx = v_{ix} t = (7.5)(0.639) = 4.79 m"
-              ],
-              "note": "a_{x} = 0"
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (7.5)(0.639) = 4.79 m"
+              ]
             },
             {
               "answer": [
@@ -345,7 +437,7 @@
             },
             {
               "row": [
-                "v_{ix} =",
+                "v_{x} =",
                 {
                   "frac": [
                     "Δx",
@@ -364,127 +456,37 @@
             },
             {
               "answer": [
-                "v_{ix} ="
+                "v_{x} ="
               ],
               "value": "7.8 m/s"
             }
           ]
-        },
-        {
-          "points": 5,
-          "prompt": "Lightning McQueen starts from rest and accelerates at 3.5 m/s² along a flat 18 m stunt platform, then drives straight off its edge, 7.2 m above the ground. Ka-chow.",
-          "parts": [
-            "(a) Find his speed at the edge of the platform.",
-            "(b) Find his time in the air.",
-            "(c) Find how far from the base of the platform he lands."
-          ],
-          "solution": "(a) 11.2 m/s (b) 1.21 s (c) 13.6 m",
-          "finalAnswer": "(a) 11 m/s (11.2 m/s)   (b) 1.2 s (1.21 s)   (c) 14 m (13.6 m)",
-          "steps": [
-            {
-              "label": "(a) Speed at the edge"
-            },
-            {
-              "row": [
-                "v_{i} = 0     a = 3.5 m/s^{2}     Δx = 18 m"
-              ]
-            },
-            {
-              "row": [
-                "v_{f}^{2} = v_{i}^{2} + 2 a Δx"
-              ]
-            },
-            {
-              "row": [
-                "v_{f}^{2} = 0 + 2(3.5)(18) = 126"
-              ]
-            },
-            {
-              "row": [
-                "v_{f} = √(126) = 11.2 m/s"
-              ]
-            },
-            {
-              "answer": [
-                "v_{f} ="
-              ],
-              "value": "11 m/s"
-            },
-            {
-              "label": "(b) Time in the air, from the edge"
-            },
-            {
-              "row": [
-                "v_{ix} = 11.2 m/s     v_{iy} = 0     Δy = −7.2 m"
-              ]
-            },
-            {
-              "row": [
-                "Δy = v_{iy} t + ",
-                {
-                  "frac": [
-                    "1",
-                    "2"
-                  ]
-                },
-                " a_{y} t^{2}"
-              ]
-            },
-            {
-              "row": [
-                "−7.2 = −4.9 t^{2}"
-              ]
-            },
-            {
-              "row": [
-                "t^{2} =",
-                {
-                  "frac": [
-                    "−7.2",
-                    "−4.9"
-                  ]
-                },
-                "= 1.469 s^{2}"
-              ]
-            },
-            {
-              "row": [
-                "t = √(1.469) = 1.21 s"
-              ]
-            },
-            {
-              "answer": [
-                "t ="
-              ],
-              "value": "1.2 s"
-            },
-            {
-              "label": "(c) Landing distance"
-            },
-            {
-              "row": [
-                "Δx = v_{ix} t = (11.2)(1.21) = 13.6 m"
-              ],
-              "note": "a_{x} = 0"
-            },
-            {
-              "answer": [
-                "Δx ="
-              ],
-              "value": "14 m"
-            }
-          ]
         }
       ],
-      "equations": [
-        "v_f = v_i + a t",
-        "Δx = v_i t + [1|2] a t^2",
-        "v_f^2 = v_i^2 + 2 a Δx",
-        "Δx = [1|2](v_i + v_f) t",
-        "a_{x} = 0",
-        "a_{y} = −9.8 m/s^2"
-      ],
-      "equationNote": "along x or y"
+      "equationGroups": [
+        {
+          "label": "Vertical (y)",
+          "note": "the kinematic equations, y only",
+          "eqs": [
+            "v_{fy} = v_{iy} + a_{y} t",
+            "Δy = v_{iy} t + [1|2] a_{y} t^2",
+            "v_{fy}^2 = v_{iy}^2 + 2 a_{y} Δy",
+            "Δy = [1|2](v_{iy} + v_{fy}) t",
+            "a_{y} = −9.8 m/s^2"
+          ],
+          "columns": 2,
+          "col": "L"
+        },
+        {
+          "label": "Horizontal (x)",
+          "note": "no acceleration, so only this one",
+          "eqs": [
+            "v_{x} = [Δx|t]"
+          ],
+          "columns": 1,
+          "col": "R"
+        }
+      ]
     }
   ],
   "pagesPerSection": 1
