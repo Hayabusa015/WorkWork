@@ -4,11 +4,12 @@
     python3 templates/activity/build_periodic_table_sheet.py OUTDIR
 
 Student sheet: a correct, full-size periodic table to color by family, a ten-family color
-key along the bottom, two large trend arrows to label, and a trend chart in the empty space
-above the transition metals (electronegativity, ionization energy, atomic radius, melting
-point, boiling point). Uncolored and unfilled: the students do both.
+key along the bottom, and five arrow lanes along the top and five down the left side
+(electronegativity, ionization energy, atomic radius, melting point, boiling point) where
+students draw the way each property increases. The title and directions sit in the empty
+block above the transition metals, so the table keeps its size.
 
-Key: the family of every element, and the trend chart filled in.
+Key: the same sheet with the arrows drawn, and the family of every element in words.
 
 The page is HTML rendered by WeasyPrint, so every cell lands where it is placed; a Word
 table would reflow 118 cells. Element data lives in specs/periodic_table_elements.json and
@@ -34,23 +35,27 @@ FAMILIES = [("alkali", "Alkali metals"), ("alkaline-earth", "Alkaline earth meta
             ("metalloid", "Metalloids"), ("nonmetal", "Nonmetals"), ("halogen", "Halogens"),
             ("noble-gas", "Noble gases"), ("lanthanide", "Lanthanides"), ("actinide", "Actinides")]
 TRENDS = ["Electronegativity", "Ionization energy", "Atomic radius", "Melting point", "Boiling point"]
-ANSWERS = {   # (across a period, down a group) - the key only
-    "Electronegativity": ("Increases →", "Decreases ↓"),
-    "Ionization energy": ("Increases →", "Decreases ↓"),
-    "Atomic radius": ("Decreases →", "Increases ↓"),
-    "Melting point": ("Peaks at group 14, then falls", "Varies by group"),
-    "Boiling point": ("Peaks at group 14, then falls", "Varies by group"),
+# The key only: the way each property INCREASES. "right"/"left" across the top, "up"/"down" down the
+# side; text where no single arrow is true (melting and boiling point - see the key's notes).
+ANSWERS = {
+    "Electronegativity": ("right", "up"),
+    "Ionization energy": ("right", "up"),
+    "Atomic radius": ("left", "down"),
+    "Melting point": ("Rises to group 14, then falls", "Varies by group"),
+    "Boiling point": ("Rises to group 14, then falls", "Varies by group"),
 }
 
 # ---- page geometry, inches. Landscape letter; every number below is placed, not flowed.
 PW, PH = 11.0, 8.5
 ML, MT = 0.35, 0.30
-LEFT_BAND = 0.62                     # period numbers + the down arrow
+LANE = 0.17                          # one arrow lane, top or side, per trend
+PERIOD_W = 0.18
+LEFT_BAND = 5 * LANE + PERIOD_W      # side lanes + period numbers
 CW = round((PW - 2 * ML - LEFT_BAND) / 18, 4)
 CH = 0.665
-TITLE_H, ARROW_H, GROUP_H, FGAP = 0.40, 0.40, 0.17, 0.14
+ARROW_H, GROUP_H, FGAP = 5 * LANE, 0.17, 0.14
 X0 = ML + LEFT_BAND
-Y0 = MT + TITLE_H + ARROW_H + GROUP_H
+Y0 = MT + ARROW_H + GROUP_H
 
 
 def face(name, file, weight=400, style="normal", stretch="normal"):
@@ -83,10 +88,8 @@ body {{ font-family: 'Archivo'; color: {INK}; }}
 table.trend {{ border-collapse: collapse; width: 100%; height: 100%; }}
 table.trend th {{ font-size: 8pt; font-weight: 600; color: {LABEL}; letter-spacing: 0.04em; text-align: left;
                   padding: 0.03in 0.06in; border-bottom: 1pt solid {INK}; }}
-table.trend td {{ font-size: 9pt; padding: 0.02in 0.06in; border-bottom: 0.5pt solid {HAIR};
-                  height: {(3 * CH - 0.12 - 0.40) / 5:.3f}in; vertical-align: middle; }}
+table.trend td {{ font-size: 9pt; padding: 0.05in 0.06in; border-bottom: 0.5pt solid {HAIR}; vertical-align: top; }}
 table.trend td.t {{ font-weight: 600; width: 1.45in; }}
-td.ans {{ color: {ACCENT}; font-weight: 700; font-size: 8.5pt; }}
 .line {{ border-bottom: 0.75pt solid {STRUCT}; }}
 """
 
@@ -126,62 +129,81 @@ def cell(x, y, e, family_label=None):
             f'<div class="sym">{esc(e["symbol"])}</div><div class="name">{name_html(e["name"])}</div></div>')
 
 
-def arrow_svg(w, h, horizontal):
-    """An arrow drawn as SVG so it scales exactly; ink only, no fill bands."""
-    if horizontal:
+def lane_arrow(w, h, direction):
+    """A drawn answer arrow for the key, filling its lane."""
+    ink = ACCENT
+    if direction in ("right", "left"):
+        y = h * 50
+        x1, x2 = (4, w * 100 - 4) if direction == "right" else (w * 100 - 4, 4)
+        head = -12 if direction == "right" else 12
         return (f'<svg width="{w}in" height="{h}in" viewBox="0 0 {w*100:.0f} {h*100:.0f}">'
-                f'<line x1="0" y1="{h*50:.0f}" x2="{w*100-14:.0f}" y2="{h*50:.0f}" stroke="{INK}" stroke-width="2.4"/>'
-                f'<polygon points="{w*100:.0f},{h*50:.0f} {w*100-16:.0f},{h*50-7:.0f} {w*100-16:.0f},{h*50+7:.0f}" fill="{INK}"/></svg>')
+                f'<line x1="{x1:.0f}" y1="{y:.0f}" x2="{x2 + head * 0.8:.0f}" y2="{y:.0f}" stroke="{ink}" stroke-width="2.4"/>'
+                f'<polygon points="{x2:.0f},{y:.0f} {x2 + head:.0f},{y - 5:.0f} {x2 + head:.0f},{y + 5:.0f}" fill="{ink}"/></svg>')
+    x = w * 50
+    y1, y2 = (h * 100 - 4, 4) if direction == "up" else (4, h * 100 - 4)
+    head = 12 if direction == "up" else -12
     return (f'<svg width="{w}in" height="{h}in" viewBox="0 0 {w*100:.0f} {h*100:.0f}">'
-            f'<line x1="{w*50:.0f}" y1="0" x2="{w*50:.0f}" y2="{h*100-14:.0f}" stroke="{INK}" stroke-width="2.4"/>'
-            f'<polygon points="{w*50:.0f},{h*100:.0f} {w*50-7:.0f},{h*100-16:.0f} {w*50+7:.0f},{h*100-16:.0f}" fill="{INK}"/></svg>')
+            f'<line x1="{x:.0f}" y1="{y1:.0f}" x2="{x:.0f}" y2="{y2 + head * 0.8:.0f}" stroke="{ink}" stroke-width="2.4"/>'
+            f'<polygon points="{x:.0f},{y2:.0f} {x - 5:.0f},{y2 + head:.0f} {x + 5:.0f},{y2 + head:.0f}" fill="{ink}"/></svg>')
 
 
 def student_page(key=False):
     out = []
-    # ---- title strip: outlined, accent bar on the left, no solid slab (ink budget)
-    out.append(f'<div class="abs" style="left:{ML}in;top:{MT}in;width:{PW-2*ML}in;height:{TITLE_H-0.06}in;'
-               f'border-left:4pt solid {ACC["primary"]["hex"]};padding-left:0.1in;display:flex;'
-               f'align-items:center;justify-content:space-between">'
-               f'<div><span style="font-size:15pt;font-weight:700">The Periodic Table</span>'
-               f'<span style="font-size:9pt;color:{LABEL};margin-left:0.15in">'
-               f'{"KEY · " if key else ""}Color each family. Label the trends. Keep it in your binder.</span></div>'
-               f'<div style="display:flex;gap:0.2in;align-items:flex-end">'
-               f'<span class="lab">NAME</span><span class="line" style="width:2.1in;height:0.16in"></span>'
-               f'<span class="lab">PERIOD</span><span class="line" style="width:0.55in;height:0.16in"></span>'
-               f'<span style="font-size:10pt;font-weight:700;color:{ACCENT};margin-left:0.1in;white-space:nowrap">{CODE}</span>'
-               f'</div></div>')
-    # ---- the across arrow, with a line to write which trends increase that way
-    ay = MT + TITLE_H
-    out.append(f'<div class="abs" style="left:{X0}in;top:{ay}in;width:{18*CW}in;height:{ARROW_H}in">'
-               f'<div style="display:flex;align-items:flex-end;gap:0.1in;height:0.2in">'
-               f'<span class="lab">ACROSS A PERIOD — INCREASES THIS WAY:</span>'
-               f'<span class="line" style="flex:1;height:0.17in;font-size:9pt;color:{ACCENT};font-weight:700">'
-               f'{"Electronegativity, ionization energy" if key else ""}</span></div>'
-               f'{arrow_svg(18*CW, 0.18, True)}</div>')
-    # ---- the down arrow, label rotated to run along it
-    tbl_h = 7 * CH
-    out.append(f'<div class="abs" style="left:{ML}in;top:{Y0}in;width:0.18in;height:{tbl_h}in">'
-               f'{arrow_svg(0.18, tbl_h, False)}</div>')
-    # Label in the lower half, a write-on line in the upper half, both running along the arrow.
-    half = tbl_h / 2
-    lx = ML + 0.22
-    out.append(f'<div class="abs" style="left:{lx}in;top:{Y0+half}in;width:0.2in;height:{half}in;'
-               f'display:flex;align-items:center;justify-content:center">'
-               f'<div class="lab" style="transform:rotate(-90deg);white-space:nowrap">'
-               f'DOWN A GROUP — INCREASES THIS WAY:</div></div>')
-    out.append(f'<div class="abs" style="left:{lx}in;top:{Y0+0.1}in;width:0.2in;height:{half-0.2}in;'
-               f'border-left:0.75pt solid {STRUCT}"></div>')
-    if key:
-        out.append(f'<div class="abs" style="left:{lx}in;top:{Y0+0.1}in;width:0.2in;height:{half-0.2}in;'
+    tbl_w, tbl_h = 18 * CW, 7 * CH
+    # ---- title block, in the empty space above the transition metals (groups 3-12, periods 1-3)
+    bx, by, bw, bh = X0 + 2 * CW + 0.08, Y0 + 0.04, 10 * CW - 0.16, 3 * CH - 0.08
+    out.append(f'<div class="abs" style="left:{bx}in;top:{by}in;width:{bw}in;height:{bh}in;'
+               f'border-left:4pt solid {ACC["primary"]["hex"]};padding:0.02in 0 0 0.12in">'
+               f'<div style="display:flex;justify-content:space-between;align-items:baseline">'
+               f'<span style="font-size:20pt;font-weight:700">The Periodic Table{" — Key" if key else ""}</span>'
+               f'<span style="font-size:10pt;font-weight:700;color:{ACCENT};white-space:nowrap">{CODE}</span></div>'
+               f'<div style="display:flex;gap:0.12in;align-items:flex-end;margin-top:0.1in">'
+               f'<span class="lab">NAME</span><span class="line" style="width:2.6in;height:0.17in"></span>'
+               f'<span class="lab">PERIOD</span><span class="line" style="width:0.6in;height:0.17in"></span></div>'
+               f'<div style="font-size:9.5pt;line-height:1.35;margin-top:0.12in">'
+               f'<b>1.</b> Color each box in the key at the bottom, then color every element in that family.<br>'
+               f'<b>2.</b> In each lane along the top and down the left side, draw an arrow pointing the '
+               f'way that property <b>increases</b>.<br>'
+               f'<b>3.</b> Keep this sheet. It is your reference for the rest of the unit.</div></div>')
+    # ---- five arrow lanes across the top: label in the corner, guide line over the table
+    for i, t in enumerate(TRENDS):
+        y = MT + i * LANE
+        out.append(f'<div class="abs lab" style="left:{ML}in;top:{y}in;width:{LEFT_BAND-0.08}in;height:{LANE}in;'
+                   f'text-align:right;line-height:{LANE}in;white-space:nowrap;font-size:8pt">{t.upper()}</div>')
+        out.append(f'<div class="abs" style="left:{X0}in;top:{y}in;width:{tbl_w}in;height:{LANE}in;'
+                   f'border-bottom:0.5pt dotted {LABEL}"></div>')
+        if key:
+            ans = ANSWERS[t][0]
+            if ans in ("right", "left"):
+                out.append(f'<div class="abs" style="left:{X0+0.4}in;top:{y}in">{lane_arrow(tbl_w-0.8, LANE, ans)}</div>')
+            else:
+                out.append(f'<div class="abs ans" style="left:{X0+0.4}in;top:{y}in;font-size:8.5pt;font-weight:700;'
+                           f'color:{ACCENT};line-height:{LANE}in">{ans}</div>')
+    # ---- five arrow lanes down the left side: rotated label at the bottom, guide line above it
+    label_h = 1.45
+    for i, t in enumerate(TRENDS):
+        x = ML + i * LANE
+        out.append(f'<div class="abs" style="left:{x}in;top:{Y0+tbl_h-label_h}in;width:{LANE}in;height:{label_h}in;'
                    f'display:flex;align-items:center;justify-content:center">'
-                   f'<div style="transform:rotate(-90deg);white-space:nowrap;font-size:9pt;font-weight:700;'
-                   f'color:{ACCENT}">Atomic radius</div></div>')
+                   f'<div class="lab" style="transform:rotate(-90deg);white-space:nowrap;font-size:8pt">'
+                   f'{t.upper()}</div></div>')
+        out.append(f'<div class="abs" style="left:{x}in;top:{Y0}in;width:{LANE}in;height:{tbl_h-label_h-0.05}in;'
+                   f'border-right:0.5pt dotted {LABEL}"></div>')
+        if key:
+            ans = ANSWERS[t][1]
+            if ans in ("up", "down"):
+                out.append(f'<div class="abs" style="left:{x}in;top:{Y0+0.2}in">'
+                           f'{lane_arrow(LANE, tbl_h-label_h-0.4, ans)}</div>')
+            else:
+                out.append(f'<div class="abs" style="left:{x}in;top:{Y0}in;width:{LANE}in;height:{tbl_h-label_h}in;'
+                           f'display:flex;align-items:center;justify-content:center"><div style="transform:'
+                           f'rotate(-90deg);white-space:nowrap;font-size:8.5pt;font-weight:700;color:{ACCENT}">'
+                           f'{ans}</div></div>')
     # ---- group and period numbers
     for g in range(1, 19):
         out.append(f'<div class="abs num" style="left:{X0+(g-1)*CW}in;top:{Y0-GROUP_H}in;width:{CW}in">{g}</div>')
     for p in range(1, 8):
-        out.append(f'<div class="abs num" style="left:{X0-0.18}in;top:{Y0+(p-1)*CH+CH/2-0.07}in;width:0.16in">{p}</div>')
+        out.append(f'<div class="abs num" style="left:{X0-PERIOD_W}in;top:{Y0+(p-1)*CH+CH/2-0.07}in;width:0.16in">{p}</div>')
     # ---- the elements
     fy = Y0 + 7 * CH + FGAP
     for e in DATA["elements"]:
@@ -195,24 +217,13 @@ def student_page(key=False):
     for r, txt in enumerate(("Lanthanides  57–71", "Actinides  89–103")):
         out.append(f'<div class="abs lab" style="left:{X0}in;top:{fy+r*CH+CH/2-0.07}in;width:{2*CW-0.06}in;'
                    f'text-align:right">{txt.split()[0].upper()}</div>')
-    # ---- trend chart in the empty block above the transition metals (groups 3-12, periods 1-3)
-    rows = "".join(
-        f'<tr><td class="t">{t}</td>'
-        + (f'<td class="ans">{ANSWERS[t][0]}</td><td class="ans">{ANSWERS[t][1]}</td>' if key else '<td></td><td></td>')
-        + '</tr>' for t in TRENDS)
-    out.append(f'<div class="abs" style="left:{X0+2*CW+0.06}in;top:{Y0+0.02}in;width:{10*CW-0.12}in;'
-               f'height:{3*CH-0.08}in;border:0.75pt solid {STRUCT};padding:0.02in 0.04in">'
-               f'<table class="trend"><tr><th>TREND</th><th>ACROSS A PERIOD →<br>'
-               f'<span style="font-weight:400;letter-spacing:0">draw the arrow, write increases or decreases</span></th>'
-               f'<th>DOWN A GROUP ↓<br><span style="font-weight:400;letter-spacing:0">draw the arrow, write increases '
-               f'or decreases</span></th></tr>{rows}</table></div>')
     # ---- color key along the bottom
     ky = fy + 2 * CH + 0.12
-    out.append(f'<div class="abs lab" style="left:{X0}in;top:{ky}in">COLOR KEY — COLOR EACH BOX, THEN EVERY '
+    out.append(f'<div class="abs lab" style="left:{ML}in;top:{ky}in">COLOR KEY — COLOR EACH BOX, THEN EVERY '
                f'ELEMENT IN THAT FAMILY</div>')
-    kw = (18 * CW) / 10
+    kw = (PW - 2 * ML) / 10
     for i, (cat, lab) in enumerate(FAMILIES):
-        x = X0 + i * kw
+        x = ML + i * kw
         out.append(f'<div class="abs" style="left:{x}in;top:{ky+0.17}in;width:{kw-0.06}in;display:flex;gap:0.06in;'
                    f'align-items:center">'
                    f'<div style="width:0.3in;height:0.26in;border:0.75pt solid {STRUCT};flex:none"></div>'
