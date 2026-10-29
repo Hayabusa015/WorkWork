@@ -151,7 +151,7 @@ def diagonal_png(path, pal):
         if not pts:
             continue
         (xa, ya), (xb, yb) = centre[pts[0]], centre[pts[-1]]
-        sx, sy = xa - ux * 55, ya - uy * 55            # start just above-right of the first
+        sx, sy = xa, ya                                # start under the first label's box
         ex, ey = xb + ux * 55, yb + uy * 55            # end just below-left of the last
         d.line((sx, sy, ex, ey), fill=acc, width=10)
         px, py = -uy, ux
@@ -174,7 +174,7 @@ def build(out, imgdir):
     check(main, frows)
     doc, s = new_doc(landscape=True)
     total_w = sum(WIDTHS)
-    header(doc, pal, "UNIT 2 TEST  ·  REFERENCE  ·  YOU MAY WRITE ON THIS SHEET ONLY IF I SAY SO",
+    header(doc, pal, "UNIT 2 TEST  ·  REFERENCE  ·  DO NOT WRITE ON THIS SHEET",
            "Periodic Table by Sublevel", width=total_w, fields=False)
     gap(doc, 4)
 
@@ -191,7 +191,9 @@ def build(out, imgdir):
     for g in range(1, 19):
         cell_text(t.cell(1, COL[g]), pal, str(g), 7, bold=True, color=pal.label)
     for g, v in VALENCE.items():
-        cell_text(t.cell(2, COL[g]), pal, v, 8.5, bold=True, color=pal.ink)
+        p_ = cell_text(t.cell(2, COL[g]), pal, v, 8.5, bold=True, color=pal.ink)
+        if g == 18:
+            _run(p_, "  He: 2", 6.5, color=pal.label)
     dv = t.cell(2, COL[3]).merge(t.cell(2, COL[12]))
     cell_text(dv, pal, "valence = the electrons in the outer s sublevel", 6.5,
               color=pal.label)
@@ -205,7 +207,7 @@ def build(out, imgdir):
     # ---- periods ----
     for per in range(1, 8):
         r = t.rows[2 + per]
-        exact(r, ROW_H)
+        exact(r, ROW_H + (0.07 if per <= 3 else 0))   # periods 1-3 hold the diagram box
         for (pp, g), z in main.items():
             if pp == per:
                 element(t.cell(2 + per, COL[g]), pal, z)
@@ -241,7 +243,7 @@ def build(out, imgdir):
     c0 = inner.cell(1, 0); c0.vertical_alignment = WD_ALIGN_VERTICAL.TOP
     cell_margins(c0, top=20, bottom=0, left=0, right=0)
     p0 = c0.paragraphs[0]; p0.paragraph_format.space_after = Pt(0)
-    p0.add_run().add_picture(img, height=Inches(1.12))
+    p0.add_run().add_picture(img, height=Inches(1.3))
     # filling order written as the periodic-table rows read, one row per line
     c1 = inner.cell(1, 1); c1.vertical_alignment = WD_ALIGN_VERTICAL.TOP
     cell_margins(c1, top=40, bottom=0, left=60, right=0)
