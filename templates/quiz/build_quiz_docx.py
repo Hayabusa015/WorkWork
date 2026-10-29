@@ -136,32 +136,73 @@ def _frac_cell(cell, num, den, size, pal, bold=True, italic_vars=False):
     marked(q, den, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
 
 
+def _raise(r, half_points):
+    pos = OxmlElement("w:position")
+    pos.set(qn("w:val"), str(half_points))
+    r._element.get_or_add_rPr().append(pos)
+
+
 def equation_cell(cell, eq, pal, size=11, bold=True, italic_vars=False):
-    """One equation. "[n|d]" is a stacked fraction: numerator over a horizontal bar over denominator."""
+    """One equation. "[n|d]" is a stacked fraction: numerator over a horizontal bar over denominator.
+    A "(" just before a fraction and a ")" just after one are drawn tall enough to wrap it, and an
+    exponent after that ")" ("^2") is raised to the top of it."""
+    BIG = 1.75
     parts = [x for x in re.split(r"(\[[^\]]+\|[^\]]+\])", eq) if x != ""]
     if not any(x.startswith("[") for x in parts):
         p = cell.paragraphs[0]
         p.paragraph_format.space_after = Pt(0)
         marked(p, eq, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
         return
-    t = cell.add_table(rows=1, cols=len(parts))
-    widths = []
-    for x in parts:
+    segs = []                                     # (kind, text): kind is "f", "t", "open" or "close"
+    for i, x in enumerate(parts):
         if x.startswith("["):
-            n, d = x[1:-1].split("|")
-            widths.append(max(text_width_in(_plain(n), size, bold), text_width_in(_plain(d), size, bold)) + 0.10)
+            segs.append(("f", x))
+            continue
+        nxt = i + 1 < len(parts) and parts[i + 1].startswith("[")
+        prv = i > 0 and parts[i - 1].startswith("[")
+        if nxt and x.endswith("("):
+            if x[:-1]:
+                segs.append(("t", x[:-1]))
+            segs.append(("open", "("))
+        elif prv and x.startswith(")"):
+            m = re.match(r"\)(\^\{[^}]*\}|\^.)?", x)
+            segs.append(("close", m.group(0)))    # ")" and its exponent, e.g. ")^2"
+            if x[m.end():]:
+                segs.append(("t", x[m.end():]))   # what follows sits in its own centred cell
+        else:
+            segs.append(("t", x))
+    t = cell.add_table(rows=1, cols=len(segs))
+    widths = []
+    for kind, x in segs:
+        if kind == "f":
+            n_, d_ = x[1:-1].split("|")
+            widths.append(max(text_width_in(_plain(n_), size, bold), text_width_in(_plain(d_), size, bold)) + 0.10)
+        elif kind == "open":
+            widths.append(text_width_in("(", size * BIG, bold) + 0.02)
+        elif kind == "close":
+            widths.append(text_width_in(")", size * BIG, bold) + (0.10 if "^" in x else 0.02))
         else:
             widths.append(text_width_in(_plain(x), size, bold) + 0.06)
     fix_widths(t, [round(w, 3) for w in widths])
     tight_cells(t, left=0, right=0)
-    for x, c in zip(parts, t.rows[0].cells):
+    for (kind, x), c in zip(segs, t.rows[0].cells):
         c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        if x.startswith("["):
-            n, d = x[1:-1].split("|")
-            _frac_cell(c, n, d, size, pal, bold, italic_vars)
+        if kind == "f":
+            n_, d_ = x[1:-1].split("|")
+            _frac_cell(c, n_, d_, size, pal, bold, italic_vars)
+            continue
+        p = c.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        if kind == "open":
+            run(p, "(", size * BIG, bold=False, color=pal.ink)
+        elif kind == "close":
+            run(p, ")", size * BIG, bold=False, color=pal.ink)
+            exp = x[1:]
+            if exp:
+                body = exp[2:-1] if exp.startswith("^{") else exp[1:]
+                r = run(p, body, size * 0.8, bold=bold, color=pal.ink)
+                _raise(r, 14)
         else:
-            p = c.paragraphs[0]
-            p.paragraph_format.space_after = Pt(0)
             marked(p, x, size, bold=bold, color=pal.ink, italic_vars=italic_vars)
     unpad_cell(cell)
 
