@@ -98,11 +98,18 @@ def check_written():
     return total
 
 
+def pts_label(cell, pal, pts):
+    """The question's points, small, under its number (Matt, 2026-10-29: 1 is worth 4, 2 and 3
+    are worth 2)."""
+    p = cell.add_paragraph(); p.paragraph_format.space_after = Pt(0)
+    _run(p, f"{pts} pts", 8, bold=True, color=pal.label)
+
+
 def diagram_row(doc, pal, n, z, key):
     """The quiz's Part 2 row, exact heights: tile, configuration line, orbital diagram box."""
     t = doc.add_table(rows=3, cols=3)
     fix_widths(t, [NUM_W, 1.15, 5.9])
-    numcell(t.cell(0, 0).merge(t.cell(2, 0)), pal, n)
+    nc = t.cell(0, 0).merge(t.cell(2, 0)); numcell(nc, pal, n); pts_label(nc, pal, PTS["diagram"])
     tc = t.cell(0, 1).merge(t.cell(2, 1))
     tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cell_margins(tc, top=0, bottom=0, left=0, right=0)
@@ -140,7 +147,7 @@ def config_row(doc, pal, n, z, key):
     t = doc.add_table(rows=1, cols=3)
     fix_widths(t, [NUM_W, 1.0, 6.05])
     no_split(t.rows[0], 0.84)
-    numcell(t.cell(0, 0), pal, n)
+    numcell(t.cell(0, 0), pal, n); pts_label(t.cell(0, 0), pal, PTS["long"])
     tc = t.cell(0, 1)
     tc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cell_margins(tc, top=0, bottom=0, left=0, right=0)
