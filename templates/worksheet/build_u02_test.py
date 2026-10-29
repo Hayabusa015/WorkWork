@@ -38,34 +38,63 @@ FONT_R = os.path.join(REPO, "brand", "fonts", "Archivo-Regular.ttf")
 # orbital diagram from the third energy level, two more longhand, three noble-gas shorthand.
 # No written responses and no multiple choice: every answer is right or wrong.
 # =======================================================================================
-W_DIAGRAM = 15               # P: 3p^3, three unpaired, so the diagram checks Hund's rule
-W_LONG = [23, 31]            # V: 4s before 3d; Ga: 3d before 4p
-W_SHORT = [48, 80, 24]       # Cd: 5th row d-block; Hg: has 4f^14; Cr: the taught exception
-Q.NAMES.update({23: "Vanadium", 31: "Gallium", 48: "Cadmium", 80: "Mercury", 24: "Chromium"})
-Q.MASS.update({23: "50.94", 31: "69.72", 48: "112.41", 80: "200.59", 24: "52.00"})
+# Three versions on one blueprint (Matt, 2026-10-29: "3 versions of equal difficulty").
+#   diagram: a row-3 p-block atom, so the diagram checks Hund's rule
+#   long:    one atom ending in 3d (4s before 3d) and one ending in 4p (3d before 4p)
+#   short:   a 5th-row atom, a 6th-row atom with 4f^14, and Cr or Cu (the taught exceptions)
+# The order of the slots changes between versions so the exception is not always number 6.
+WVERSIONS = {
+    "A": {"diagram": 15, "long": [23, 31], "short": [48, 80, 24]},   # P · V, Ga · Cd, Hg, Cr
+    "B": {"diagram": 14, "long": [34, 22], "short": [74, 29, 39]},   # Si · Se, Ti · W, Cu, Y
+    "C": {"diagram": 16, "long": [28, 35], "short": [24, 76, 49]},   # S · Ni, Br · Cr, Os, In
+}
+Q.NAMES.update({23: "Vanadium", 31: "Gallium", 48: "Cadmium", 80: "Mercury", 24: "Chromium",
+                22: "Titanium", 28: "Nickel", 39: "Yttrium", 74: "Tungsten", 76: "Osmium",
+                49: "Indium"})
+Q.MASS.update({23: "50.94", 31: "69.72", 48: "112.41", 80: "200.59", 24: "52.00",
+               22: "47.87", 28: "58.69", 39: "88.91", 74: "183.84", 76: "190.23",
+               49: "114.82", 14: "28.09", 16: "32.06", 29: "63.55"})
 
+# Hand-written answers, used only to check the generator. A mismatch stops the build.
 EXPECT = {
-    "long": {15: "1s2 2s2 2p6 3s2 3p3", 23: "1s2 2s2 2p6 3s2 3p6 4s2 3d3",
-             31: "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p1"},
-    "unpaired": {15: 3},
-    "short": {48: "[Kr] 5s2 4d10", 80: "[Xe] 6s2 4f14 5d10", 24: "[Ar] 4s1 3d5"},
+    "long": {15: "1s2 2s2 2p6 3s2 3p3", 14: "1s2 2s2 2p6 3s2 3p2", 16: "1s2 2s2 2p6 3s2 3p4",
+             23: "1s2 2s2 2p6 3s2 3p6 4s2 3d3", 22: "1s2 2s2 2p6 3s2 3p6 4s2 3d2",
+             28: "1s2 2s2 2p6 3s2 3p6 4s2 3d8",
+             31: "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p1", 34: "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p4",
+             35: "1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p5"},
+    "unpaired": {15: 3, 14: 2, 16: 2},
+    "short": {48: "[Kr] 5s2 4d10", 39: "[Kr] 5s2 4d1", 49: "[Kr] 5s2 4d10 5p1",
+              80: "[Xe] 6s2 4f14 5d10", 74: "[Xe] 6s2 4f14 5d4", 76: "[Xe] 6s2 4f14 5d6",
+              24: "[Ar] 4s1 3d5", 29: "[Ar] 4s1 3d10"},
 }
 PTS = {"diagram": 4, "long": 2, "short": 2}
 
 
 def check_written():
-    for z in [W_DIAGRAM] + W_LONG:
-        assert flat(config(z)) == EXPECT["long"][z], (z, flat(config(z)))
-        assert sum(c for *_, c in config(z)) == z
-    assert unpaired(W_DIAGRAM) == EXPECT["unpaired"][W_DIAGRAM]
-    assert config(W_DIAGRAM)[-1][0] == 3          # third energy level
-    for z in W_SHORT:
-        c, r = shorthand(z)
-        assert f"[{NOBLE_SYM[c]}] " + flat(r) == EXPECT["short"][z], (z, c, flat(r))
-        assert c + sum(n for *_, n in r) == z
-    assert any(l == "f" for _, l, _ in shorthand(80)[1])
-    total = PTS["diagram"] + len(W_LONG) * PTS["long"] + len(W_SHORT) * PTS["short"]
-    print(f"written test answers re-solved: all match ({total} points)")
+    totals = set()
+    for ver, v in WVERSIONS.items():
+        d = v["diagram"]
+        for z in [d] + v["long"]:
+            assert flat(config(z)) == EXPECT["long"][z], (ver, z, flat(config(z)))
+            assert sum(c for *_, c in config(z)) == z
+        assert unpaired(d) == EXPECT["unpaired"][d], (ver, d)
+        assert config(d)[-1][:2] == (3, "p")                     # third energy level, p-block
+        ends = sorted(config(z)[-1][:2] for z in v["long"])
+        assert ends == [(3, "d"), (4, "p")], (ver, ends)          # one of each kind
+        cores = []
+        for z in v["short"]:
+            c, r = shorthand(z)
+            assert f"[{NOBLE_SYM[c]}] " + flat(r) == EXPECT["short"][z], (ver, z, c, flat(r))
+            assert c + sum(n for *_, n in r) == z
+            cores.append(NOBLE_SYM[c])
+        assert sorted(cores) == ["Ar", "Kr", "Xe"], (ver, cores)    # exception, 5th row, 6th row
+        assert sum(any(l == "f" for _, l, _ in shorthand(z)[1]) for z in v["short"]) == 1
+        all_z = [d] + v["long"] + v["short"]
+        assert len(all_z) == len(set(all_z)), ver
+        totals.add(PTS["diagram"] + len(v["long"]) * PTS["long"] + len(v["short"]) * PTS["short"])
+    assert len(totals) == 1
+    total = totals.pop()
+    print(f"written test answers re-solved for A, B and C: all match ({total} points each)")
     return total
 
 
@@ -130,11 +159,12 @@ def note(doc, pal, text):
     hand(p, text, 9.5, ink="arrow")
 
 
-def build_written(out, key, total):
+def build_written(out, ver, key, total):
     pal = Palette(COURSE)
+    v = WVERSIONS[ver]
     doc, s = new_doc()
-    header(doc, pal, "UNIT 2 TEST  ·  DAY 2  ·  WRITTEN" + ("  ·  TEACHER KEY" if key else ""),
-           "Unit 2 Test: Written", score=total)
+    header(doc, pal, f"UNIT 2 TEST  ·  DAY 2  ·  WRITTEN  ·  VERSION {ver}" +
+           ("  ·  TEACHER KEY" if key else ""), f"Unit 2 Test {ver}: Written", score=total)
     gap(doc, 3)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     p = cellfmt(c, pal, line=False, top=20, bottom=20)
@@ -143,24 +173,24 @@ def build_written(out, key, total):
     n = 1
 
     part_bar(doc, pal, "Part 1   Longhand configurations",
-             PTS["diagram"] + len(W_LONG) * PTS["long"])
+             PTS["diagram"] + len(v["long"]) * PTS["long"])
     c = one_cell(doc); cell_margins(c, top=0, bottom=30, left=0, right=0)
     p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
     _run(p, "Number 1 also needs its orbital diagram.", 9.5, color=pal.label)
-    diagram_row(doc, pal, n, W_DIAGRAM, key)
+    diagram_row(doc, pal, n, v["diagram"], key)
     n += 1
-    for z in W_LONG:
+    for z in v["long"]:
         config_row(doc, pal, n, z, key)
         n += 1
     if key:
         note(doc, pal, "1 is 4 pts, configuration 2 and diagram 2 (take 1 off per rule broken). "
                        "2 and 3 are 2 pts each, 1 off for one wrong sublevel.")
 
-    part_bar(doc, pal, "Part 2   Noble-gas shorthand", len(W_SHORT) * PTS["short"])
+    part_bar(doc, pal, "Part 2   Noble-gas shorthand", len(v["short"]) * PTS["short"])
     t = doc.add_table(rows=1, cols=3)
     fix_widths(t, [2.5, 2.5, 2.5])
     no_split(t.rows[0])
-    for k, z in enumerate(W_SHORT):
+    for k, z in enumerate(v["short"]):
         cc = t.cell(0, k)
         cc.vertical_alignment = WD_ALIGN_VERTICAL.TOP
         cell_margins(cc, top=0, bottom=0, left=0, right=140)
@@ -181,10 +211,12 @@ def build_written(out, key, total):
         n += 1
     if key:
         gap(doc, 4)
+        exc = next(z for z in v["short"] if z in (24, 29))
+        pred = {24: "[Ar] 4s^2^ 3d^4^", 29: "[Ar] 4s^2^ 3d^9^"}[exc]
         note(doc, pal, "2 pts each, noble-gas core 1 and the rest in order 1. "
-                       "Chromium is the exception, so [Ar] 4s^2^ 3d^4^ earns 1.")
+                       f"{Q.NAMES[exc]} is the exception, so the predicted {pred} earns 1.")
 
-    running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  UNIT TEST DAY 2" +
+    running_footer(s, f"SHULL SCIENCE          {UNIT}  ·  UNIT TEST DAY 2  ·  VERSION {ver}" +
                    ("          TEACHER KEY" if key else ""), pal, with_page_numbers=True)
     trim_tail(doc)
     doc.save(out)
@@ -585,10 +617,12 @@ def main():
     ladder_drops_png(os.path.join(imgdir, "u02_test_energy_drops.png"))
 
     total = check_written()
-    for key in (False, True):
-        name = document_name("Test", ["2.1", "2.5"], 2, key=key, descriptor="Day 2 Written")
-        build_written(os.path.join(outdir, name), key, total)
-        print("wrote", name)
+    for ver in WVERSIONS:
+        for key in (False, True):
+            name = document_name("Test", ["2.1", "2.5"], 2, version=ver, key=key,
+                                 descriptor="Day 2 Written")
+            build_written(os.path.join(outdir, name), ver, key, total)
+            print("wrote", name)
     pts = check_edulastic()
     name = document_name("Test", ["2.1", "2.5"], 2, descriptor="Day 1 Edulastic Build Sheet")
     build_edulastic(os.path.join(outdir, name), imgdir, pts)
