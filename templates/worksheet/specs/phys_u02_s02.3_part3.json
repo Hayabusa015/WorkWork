@@ -377,7 +377,6 @@
           "eqs": [
             "v_{x} = v_i cos θ",
             "v_{iy} = v_i sin θ",
-            "t_{top} = [t|2]",
             "v_i = √(v_{x}^2 + v_{iy}^2)",
             "tan θ = [v_{iy}|v_{x}]"
           ],

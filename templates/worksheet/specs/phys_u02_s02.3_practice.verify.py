@@ -114,7 +114,7 @@ for part in (1, 2, 3):
         else:
             report(not q.get("selfCheck"), f"{tag} Q{i}: last question has no self-check")
         text = flat(q["steps"])
-        bad = [p for p in (r"v_\{0\}", r"v_\{y0\}", r"vy0", r"v_\{ix\}", r"v_\{y\}", r"v_\{o", r"t\s*=\s*√\(2") if re.search(p, text)]
+        bad = [p for p in (r"v_\{0\}", r"v_\{y0\}", r"vy0", r"v_\{ix\}", r"v_\{y\}", r"v_\{o", r"t\s*=\s*√\(2", r"t_\{top\}", r"Δy_\{max\}") if re.search(p, text)]
         report(not bad, f"{tag} Q{i}: key uses v_i / v_f notation" + (f"  found {bad}" if bad else ""))
     groups = sec["equationGroups"]
     eqs = [e for grp in groups for e in grp["eqs"]]
@@ -132,6 +132,14 @@ for part in (1, 2, 3):
            f"{tag}: all four kinematic equations are given, written for y")
     report(all(("Δx" not in e and "v_{ix}" not in e and "a_{x}" not in e) for e in yset), f"{tag}: nothing in the y group uses x")
     report((xgrp["eqs"] if xgrp else []) == ["v_{x} = [Δx|t]"], f"{tag}: the x group is exactly v_x = Δx / t")
+    report(not re.search(r"t_\{top\}", alltext), f"{tag}: no t_top in the equations (the maximum height is y_max)")
+    half = [e for e in eqs if e.startswith("y_{max}")]
+    if part == 2:
+        report(len(half) == 1 and half[0] == "y_{max} = v_{iy}([t|2]) + [1|2] a_{y}([t|2])^2", f"{tag}: the half-time y_max equation is given")
+        lvl = [grp for grp in groups if grp["eqs"] == half]
+        report(bool(lvl) and "Level ground" in lvl[0]["label"], f"{tag}: the half-time equation is labelled level ground only")
+    else:
+        report(not half and "[t|2]" not in alltext, f"{tag}: no half-time shortcut (launch and landing heights differ in cliff and rooftop launches)" if part == 3 else f"{tag}: no half-time shortcut")
     others = [e for grp in groups if grp["label"] != "Horizontal (x)" for e in grp["eqs"] if "Δx" in e]
     report(not others, f"{tag}: no other equation uses Δx")
     vis = sec["directions"] + " ".join(q["prompt"] + " ".join(q.get("parts", [])) for q in qs)
