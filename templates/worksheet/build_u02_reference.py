@@ -7,8 +7,9 @@ One landscape page. Every row carries its sublevel labels in front of each block
 order (row 4 reads 4s, 3d, 4p). The f-block sits below as two 14-element rows, 4f and 5f, with
 its insertion point marked between Ba and Lu and between Ra and Lr, so the sublevel counts come
 out exactly: 6s holds Cs and Ba, 4f holds La to Yb, 5d starts at Lu. Valence electrons are listed
-over the main-group columns. Cr and Cu are marked as electron-stability exceptions. A diagonal
-filling diagram and a sublevel capacity table sit in the blank space above the d-block.
+over the main-group columns. The blank space above the d-block holds the diagonal filling
+diagram, the filling order row by row, and a sublevel capacity table (Matt, 2026-10-29: no
+exception marking on this sheet).
 
 Every placement is checked against the Aufbau generator before anything is written.
 """
@@ -111,14 +112,11 @@ def cell_text(cell, pal, text, size, bold=False, color=None, align=WD_ALIGN_PARA
 
 
 def element(cell, pal, z):
-    exc = z in EXCEPTIONS
-    borders(cell, pal.accent if exc else pal.ink, sz=16 if exc else 6)
+    borders(cell, pal.ink, sz=6)
     cell.vertical_alignment = WD_ALIGN_VERTICAL.TOP
     cell_margins(cell, top=10, bottom=0, left=25, right=15)
     p = cell.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
     _run(p, str(z), 6.5, color=pal.label)
-    if exc:
-        _run(p, "  *", 7.5, bold=True, color=pal.accent)
     q = cell.add_paragraph(); q.alignment = WD_ALIGN_PARAGRAPH.CENTER
     q.paragraph_format.space_after = Pt(0)
     _run(q, SYMBOLS[z - 1], 11.5, bold=True, color=pal.ink)
@@ -138,7 +136,7 @@ def diagonal_png(path, pal):
     W, H = x0 + 4 * dx, y0 + 7 * dy
     im = Image.new("RGB", (W, H), "white")
     d = ImageDraw.Draw(im)
-    f = ImageFont.truetype(os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf"), 50)
+    f = ImageFont.truetype(os.path.join(REPO, "brand", "fonts", "Archivo-Bold.ttf"), 62)
     ink = tuple(int(hexof(pal.ink)[i:i + 2], 16) for i in (0, 2, 4))
     acc = tuple(int(hexof(pal.accent)[i:i + 2], 16) for i in (0, 2, 4))
     centre = {}
@@ -155,10 +153,10 @@ def diagonal_png(path, pal):
         (xa, ya), (xb, yb) = centre[pts[0]], centre[pts[-1]]
         sx, sy = xa - ux * 55, ya - uy * 55            # start just above-right of the first
         ex, ey = xb + ux * 55, yb + uy * 55            # end just below-left of the last
-        d.line((sx, sy, ex, ey), fill=acc, width=6)
+        d.line((sx, sy, ex, ey), fill=acc, width=10)
         px, py = -uy, ux
-        d.polygon([(ex + ux * 22, ey + uy * 22), (ex + px * 14, ey + py * 14),
-                   (ex - px * 14, ey - py * 14)], fill=acc)
+        d.polygon([(ex + ux * 30, ey + uy * 30), (ex + px * 19, ey + py * 19),
+                   (ex - px * 19, ey - py * 19)], fill=acc)
     for (n, l), (cx, cy) in centre.items():
         text = f"{n}{l}"
         bb = d.textbbox((0, 0), text, font=f)
@@ -195,7 +193,7 @@ def build(out, imgdir):
     for g, v in VALENCE.items():
         cell_text(t.cell(2, COL[g]), pal, v, 8.5, bold=True, color=pal.ink)
     dv = t.cell(2, COL[3]).merge(t.cell(2, COL[12]))
-    cell_text(dv, pal, "valence = the outer s electrons (2 for most; 1 for Cr and Cu)", 6.5,
+    cell_text(dv, pal, "valence = the electrons in the outer s sublevel", 6.5,
               color=pal.label)
     gp_ = cell_text(t.cell(1, FM).merge(t.cell(1, DL)), pal, "group", 6.5, bold=True,
                     color=pal.label, align=WD_ALIGN_PARAGRAPH.RIGHT)
@@ -230,62 +228,76 @@ def build(out, imgdir):
     # ---- the blank space above the d-block: diagonal diagram + capacity table ----
     gap_cell = t.cell(3, FM).merge(t.cell(5, COL[12]))
     gap_cell.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-    cell_margins(gap_cell, top=30, bottom=0, left=60, right=40)
-    inner = gap_cell.add_table(rows=1, cols=2)
-    fix_widths(inner, [1.75, 3.7])
+    cell_margins(gap_cell, top=20, bottom=0, left=60, right=40)
+    inner = gap_cell.add_table(rows=2, cols=3)
+    fix_widths(inner, [1.55, 2.0, 1.8])
+    exact(inner.rows[0], 0.19)
+    for ci, h in enumerate(["DIAGONAL RULE", "FILLING ORDER, ROW BY ROW", "SUBLEVEL CAPACITY"]):
+        c = inner.cell(0, ci)
+        borders(c, pal.accent, sz=10, edges=("bottom",))
+        cell_text(c, pal, h, 6.5, bold=True, color=pal.accent, align=WD_ALIGN_PARAGRAPH.LEFT)
     img = os.path.join(imgdir, "u02_reference_diagonal.png")
     diagonal_png(img, pal)
-    a = inner.cell(0, 0); a.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-    cell_margins(a, top=0, bottom=0, left=0, right=0)
-    pa = a.paragraphs[0]; pa.paragraph_format.space_after = Pt(0)
-    pa.add_run().add_picture(img, height=Inches(1.5))
-    b = inner.cell(0, 1); b.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-    cell_margins(b, top=0, bottom=0, left=80, right=0)
-    pb = b.paragraphs[0]; pb.paragraph_format.space_after = Pt(2)
-    _run(pb, "FILLING ORDER  ", 6.5, bold=True, color=pal.accent)
-    _run(pb, "follow each arrow, top to bottom", 7, color=pal.label)
-    po = b.add_paragraph(); po.paragraph_format.space_after = Pt(3)
-    _run(po, "1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p 7s 5f 6d 7p", 7.5, bold=True,
-         color=pal.ink)
-    cap = b.add_table(rows=3, cols=5)
-    fix_widths(cap, [1.0, 0.55, 0.55, 0.55, 0.55])
-    for ri, rowvals in enumerate([["SUBLEVEL", "s", "p", "d", "f"],
-                                  ["Orbitals", "1", "3", "5", "7"],
-                                  ["Max e^−^", "2", "6", "10", "14"]]):
-        exact(cap.rows[ri], 0.15)
+    c0 = inner.cell(1, 0); c0.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+    cell_margins(c0, top=20, bottom=0, left=0, right=0)
+    p0 = c0.paragraphs[0]; p0.paragraph_format.space_after = Pt(0)
+    p0.add_run().add_picture(img, height=Inches(1.12))
+    # filling order written as the periodic-table rows read, one row per line
+    c1 = inner.cell(1, 1); c1.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+    cell_margins(c1, top=40, bottom=0, left=60, right=0)
+    order = {1: "1s", 2: "2s  2p", 3: "3s  3p", 4: "4s  3d  4p", 5: "5s  4d  5p",
+             6: "6s  4f  5d  6p", 7: "7s  5f  6d  7p"}
+    for k, (row, subs) in enumerate(order.items()):
+        q = c1.paragraphs[0] if k == 0 else c1.add_paragraph()
+        q.paragraph_format.space_after = Pt(1)
+        q.paragraph_format.tab_stops.add_tab_stop(Inches(0.5))
+        _run(q, f"Row {row}", 7, color=pal.label)
+        _run(q, "\t" + subs, 8, bold=True, color=pal.ink)
+    # capacity: one row per sublevel
+    c2 = inner.cell(1, 2); c2.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+    cell_margins(c2, top=40, bottom=0, left=60, right=0)
+    cap = c2.add_table(rows=5, cols=3)
+    fix_widths(cap, [0.55, 0.6, 0.55])
+    for ri, rowvals in enumerate([["", "ORBITALS", "MAX e^−^"], ["s", "1", "2"],
+                                  ["p", "3", "6"], ["d", "5", "10"], ["f", "7", "14"]]):
+        exact(cap.rows[ri], 0.18)
         for ci, v in enumerate(rowvals):
             c = cap.cell(ri, ci)
             if ri == 0:
-                borders(c, pal.accent, sz=8, edges=("bottom",))
-            cp = cell_text(c, pal, "", 8,
-                           align=WD_ALIGN_PARAGRAPH.LEFT if ci == 0 else WD_ALIGN_PARAGRAPH.CENTER)
-            rich(cp, v, 7 if ci == 0 else 8, ctx, bold=(ri == 0 or ci == 0),
-                 color=pal.accent if ri == 0 else pal.ink)
+                borders(c, pal.hair, sz=6, edges=("bottom",))
+            cp = cell_text(c, pal, "", 8)
+            rich(cp, v, 6.5 if ri == 0 else 8.5, ctx, bold=(ri == 0 or ci == 0),
+                 color=pal.label if ri == 0 else (pal.accent if ci == 0 else pal.ink))
+    # the cell's own empty first paragraph would push the table down a line; make it 1 pt
+    from docx.shared import Pt as _Pt
+    pf = c2.paragraphs[0].paragraph_format
+    pf.space_after = _Pt(0); pf.line_spacing = _Pt(1)
     # the empty first-row cells between H and He stay blank; no borders anywhere outside cells
 
-    # ---- f-block rows ----
+    # ---- f-block rows: one continuous 14-element strip, lined up under the d-block ----
     gap(doc, 6)
-    ft = doc.add_table(rows=2, cols=len(WIDTHS))
-    fix_widths(ft, WIDTHS)
+    lead = WIDTHS[SL] + WIDTHS[1] + WIDTHS[2] + WIDTHS[FM]
+    ft = doc.add_table(rows=3, cols=2 + 14)
+    fix_widths(ft, [lead, W_LABEL] + [W_EL] * 14)
+    exact(ft.rows[0], 0.20)
+    hc = ft.cell(0, 2).merge(ft.cell(0, 15))
+    borders(hc, pal.accent, sz=14, edges=("bottom",))
+    cell_text(hc, pal, "f-BLOCK  ·  fits between groups 2 and 3 in rows 6 and 7", 7, bold=True,
+              color=pal.accent)
     for i, per in enumerate((6, 7)):
-        exact(ft.rows[i], ROW_H)
+        exact(ft.rows[i + 1], ROW_H)
         name = ("LANTHANIDES", "ACTINIDES")[i]
-        c = ft.cell(i, SL).merge(ft.cell(i, FM))
-        cell_text(c, pal, name, 7, bold=True, color=pal.label, align=WD_ALIGN_PARAGRAPH.RIGHT)
-        sub_label(ft.cell(i, DL), pal, f"{per - 2}f")
-        fcols = [COL[g] for g in range(3, 17)]      # 14 element columns, skipping the p label
+        cell_text(ft.cell(i + 1, 0), pal, name, 7, bold=True, color=pal.label,
+                  align=WD_ALIGN_PARAGRAPH.RIGHT)
+        sub_label(ft.cell(i + 1, 1), pal, f"{per - 2}f")
         for k, z in enumerate(frows[per]):
-            element(ft.cell(i, fcols[k]), pal, z)
+            element(ft.cell(i + 1, 2 + k), pal, z)
 
     # ---- notes ----
     gap(doc, 6)
-    nt = doc.add_table(rows=1, cols=3)
-    fix_widths(nt, [3.6, 3.1, total_w - 6.7])
+    nt = doc.add_table(rows=1, cols=2)
+    fix_widths(nt, [total_w / 2, total_w / 2])
     notes = [
-        ("* ELECTRON STABILITY EXCEPTIONS",
-         "Cr is [Ar] 4s^1^ 3d^5^, not 4s^2^ 3d^4^. Cu is [Ar] 4s^1^ 3d^10^, not 4s^2^ 3d^9^. "
-         "One 4s electron moves into 3d because a half-full (d^5^) or full (d^10^) d sublevel "
-         "has lower energy."),
         ("READING A ROW",
          "Read left to right and say the sublevel labels as you pass them. Row 4: 4s, then 3d, "
          "then 4p. The d sublevel is always one level lower than the row; f is two lower."),
@@ -296,10 +308,10 @@ def build(out, imgdir):
     for i, (h, body) in enumerate(notes):
         c = nt.cell(0, i)
         c.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-        borders(c, pal.accent if i == 0 else pal.hair, sz=8, edges=("top",))
+        borders(c, pal.hair, sz=8, edges=("top",))
         cell_margins(c, top=40, bottom=0, left=40, right=120)
         p = c.paragraphs[0]; p.paragraph_format.space_after = Pt(2)
-        _run(p, h, 6.8, bold=True, color=pal.accent if i == 0 else pal.ink)
+        _run(p, h, 6.8, bold=True, color=pal.ink)
         q = c.add_paragraph(); q.paragraph_format.space_after = Pt(0)
         rich(q, body, 8, ctx, color=pal.ink)
 
