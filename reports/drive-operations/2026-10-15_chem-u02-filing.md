@@ -162,3 +162,40 @@ pdf 1UtEKPPmsUq9q1-YIPTaNBPgv8Yy5hYWU, 1qDZRWBpd2R8-83YyiLGcx5a0XSq64KXZ, 1yxR1P
 
 Upload Inbox empty afterwards. The six 10/21 student copies were still in Quiz at verification,
 for the user to trash.
+
+## 2026-10-29: file the rest of Unit 2 (user approved: "file them all")
+
+Logged before action. Route: gws (drive.file only) to the Upload Inbox (1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy),
+then `update_file` to the destination. Nothing overwritten. The 10/21 study guide (16d0ggc0SQ91PH8hXNS_u_vhyYKuSl7aH,
+1JwPzq8ePI2WYxjNvPv6WCuma-x9zUBT5, 1_qCw42_mmBXVPGv7gbO7Lo11QO8Ul5gS) stays; the rebuilt guide files as Version 2.
+Six "Snow Day Activity" Google Docs in the Upload Inbox (created 2026-10-28, not from this session) are not touched.
+The flame test lab files as a draft: its key still lists SDS verification and the lab-placement confirmation as open.
+
+Folder to create: `Labs-Case Studies-Projects` in Section 02.5 (1eNnO-0BvAmBfgsHkR0122CUY8j004OzM), checked absent.
+
+| Operation | Final name | Destination | Status |
+|---|---|---|---|
+| Upload then move | Unit 2 Study Guide - Version 2.docx | Unit 02 root | filed 2026-10-29, ID 1sHTbPUqlmi7jSgEcR0Nn_M8PZ8vxOHgD, verified by parentId lookup |
+| Upload then move | Unit 2 Study Guide Key - Version 2.docx | Unit 02 root | filed 2026-10-29, ID 1El9cejguF9U3GtGbl_PHD7b1V4QXixnL, verified by parentId lookup |
+| Upload then move | Unit 2 Test - Day 1 Edulastic Build Sheet.docx | Unit 02 / Quiz | filed 2026-10-29, ID 1ELMQIFtDzvYNTDDq9EkJxGxZDIQqQgJj, verified by parentId lookup |
+| Upload then move | Unit 2 Test A - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 1oUes2C2z3qSCFn51iFjOMs85vXKMiCsh, verified by parentId lookup |
+| Upload then move | Unit 2 Test A Key - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 1Zz3ztBfAII5FXn7fmwu0rnbN5TOMeCLT, verified by parentId lookup |
+| Upload then move | Unit 2 Test B - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 1rAfd3sfhVFPvMDZsDnmHYw6hcIuLBlJN, verified by parentId lookup |
+| Upload then move | Unit 2 Test B Key - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 1-f93QCy8HcfS8c4nMXyKtzCSGsH6IkpY, verified by parentId lookup |
+| Upload then move | Unit 2 Test C - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 19FefD1R9AGdn8ZwIp-EI6miGyJ09Jib_, verified by parentId lookup |
+| Upload then move | Unit 2 Test C Key - Day 2 Written.docx | Unit 02 / Quiz | filed 2026-10-29, ID 10QxoQHQ3nLPlp8gkMFMt_rLNYZIqJhIj, verified by parentId lookup |
+| Upload then move | 2.5 Lab - Flame Tests.pdf | Section 02.5 / Labs-Case Studies-Projects (1GlwQgqW4IshtnR4H50bPk3KP-s-QEpx3, created) | filed 2026-10-29, ID 1QFyQ117KUap2rvkCWKpCOkX_TxuKyGmZ, verified by parentId lookup |
+| Upload then move | 2.5 Lab Key - Flame Tests.pdf | Section 02.5 / Labs-Case Studies-Projects (1GlwQgqW4IshtnR4H50bPk3KP-s-QEpx3, created) | filed 2026-10-29, ID 1w-Isd8uzAD4DHz_jysFw9E4iO_nR5wqc, verified by parentId lookup |
+| Upload then move | Unit 2 Study Guide - Version 2.pdf | Unit 02 root | filed 2026-10-29, ID 1DPkwNSUN6294Sf8SbODPDj3z19J-2tWh, verified by parentId lookup |
+| Upload then move | Unit 2 Test - Day 1 Edulastic Build Sheet.pdf | Unit 02 / Quiz | filed 2026-10-29, ID 1F0uSxmR2MjZngJWPju8W265E0EdG045j, verified by parentId lookup |
+| Upload then move | Unit 2 Test A - Day 2 Written.pdf | Unit 02 / Quiz | filed 2026-10-29, ID 14ijSkaKk6_4C-6_AZDZj3ieVkGD4yTKO, verified by parentId lookup |
+| Upload then move | Unit 2 Test B - Day 2 Written.pdf | Unit 02 / Quiz | filed 2026-10-29, ID 1vvVcdTTTgtcYyV4x-c3dYEn_4IcS7LuU, verified by parentId lookup |
+| Upload then move | Unit 2 Test C - Day 2 Written.pdf | Unit 02 / Quiz | filed 2026-10-29, ID 1dW5U-iSuaQMXig1uugzVQig7oZzsE6nc, verified by parentId lookup |
+| Upload then move | u02_test_energy_drops.png | Unit 02 / Quiz | filed 2026-10-29, ID 1NKyLfb7rnGj6Km-DYlU2T1cPGvjZW3Ex, verified by parentId lookup |
+| Upload then move | u02_test_periodic_blocks.png | Unit 02 / Quiz | filed 2026-10-29, ID 1GVu8SuLdhPit5Xj0ygDwiXgNLRjKbBxC, verified by parentId lookup |
+| Upload then move | u02_test_sulfur_orbitals.png | Unit 02 / Quiz | filed 2026-10-29, ID 1EFYTMOo4IJaVmNSEZcP0WGMyJy2xxUa0, verified by parentId lookup |
+
+Upload Inbox holds nothing from this session afterwards. The six 10/21 student quiz copies
+(1GJY8hXfKNKqYDeXa0aySdcnmI-nd-eqM, 13evY-msQPo0wdQLf6CNuvFpXf6tgPfKW, 11vEpok6MPjXKtXZkgKohmZMFzURdbNiF,
+1UtEKPPmsUq9q1-YIPTaNBPgv8Yy5hYWU, 1qDZRWBpd2R8-83YyiLGcx5a0XSq64KXZ, 1yxR1PG0GDxqC7ShxQa8PTACMXLe_rvL_)
+were still in Quiz at verification, for the user to trash.
