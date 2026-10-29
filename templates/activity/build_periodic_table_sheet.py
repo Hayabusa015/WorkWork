@@ -48,11 +48,11 @@ ANSWERS = {
 # ---- page geometry, inches. Landscape letter; every number below is placed, not flowed.
 PW, PH = 11.0, 8.5
 ML, MT = 0.35, 0.30
-LANE = 0.17                          # one arrow lane, top or side, per trend
+LANE = 0.21                          # one arrow lane, top or side, per trend: room to write a word
 PERIOD_W = 0.18
 LEFT_BAND = 5 * LANE + PERIOD_W      # side lanes + period numbers
 CW = round((PW - 2 * ML - LEFT_BAND) / 18, 4)
-CH = 0.665
+CH = 0.64
 ARROW_H, GROUP_H, FGAP = 5 * LANE, 0.17, 0.14
 X0 = ML + LEFT_BAND
 Y0 = MT + ARROW_H + GROUP_H
@@ -137,13 +137,13 @@ def lane_arrow(w, h, direction):
         x1, x2 = (4, w * 100 - 4) if direction == "right" else (w * 100 - 4, 4)
         head = -12 if direction == "right" else 12
         return (f'<svg width="{w}in" height="{h}in" viewBox="0 0 {w*100:.0f} {h*100:.0f}">'
-                f'<line x1="{x1:.0f}" y1="{y:.0f}" x2="{x2 + head * 0.8:.0f}" y2="{y:.0f}" stroke="{ink}" stroke-width="2.4"/>'
+                f'<line x1="{x1:.0f}" y1="{y:.0f}" x2="{x2 + head * 0.8:.0f}" y2="{y:.0f}" stroke="{ink}" stroke-width="1.6"/>'
                 f'<polygon points="{x2:.0f},{y:.0f} {x2 + head:.0f},{y - 5:.0f} {x2 + head:.0f},{y + 5:.0f}" fill="{ink}"/></svg>')
     x = w * 50
     y1, y2 = (h * 100 - 4, 4) if direction == "up" else (4, h * 100 - 4)
     head = 12 if direction == "up" else -12
     return (f'<svg width="{w}in" height="{h}in" viewBox="0 0 {w*100:.0f} {h*100:.0f}">'
-            f'<line x1="{x:.0f}" y1="{y1:.0f}" x2="{x:.0f}" y2="{y2 + head * 0.8:.0f}" stroke="{ink}" stroke-width="2.4"/>'
+            f'<line x1="{x:.0f}" y1="{y1:.0f}" x2="{x:.0f}" y2="{y2 + head * 0.8:.0f}" stroke="{ink}" stroke-width="1.6"/>'
             f'<polygon points="{x:.0f},{y2:.0f} {x - 5:.0f},{y2 + head:.0f} {x + 5:.0f},{y2 + head:.0f}" fill="{ink}"/></svg>')
 
 
@@ -162,14 +162,17 @@ def student_page(key=False):
                f'<span class="lab">PERIOD</span><span class="line" style="width:0.6in;height:0.17in"></span></div>'
                f'<div style="font-size:9.5pt;line-height:1.35;margin-top:0.12in">'
                f'<b>1.</b> Color each box in the key at the bottom, then color every element in that family.<br>'
-               f'<b>2.</b> In each lane along the top and down the left side, draw an arrow pointing the '
-               f'way that property <b>increases</b>.<br>'
+               f'<b>2.</b> In each box on the top and the left, write a trend: electronegativity, ionization energy, '
+               f'atomic radius, melting point, boiling point. On its line, draw an arrow pointing the way it '
+               f'<b>increases</b>. One color per trend.<br>'
                f'<b>3.</b> Keep this sheet. It is your reference for the rest of the unit.</div></div>')
-    # ---- five arrow lanes across the top: label in the corner, guide line over the table
+    # ---- five arrow lanes across the top: a blank name box in the corner, guide line over the table
     for i, t in enumerate(TRENDS):
         y = MT + i * LANE
-        out.append(f'<div class="abs lab" style="left:{ML}in;top:{y}in;width:{LEFT_BAND-0.08}in;height:{LANE}in;'
-                   f'text-align:right;line-height:{LANE}in;white-space:nowrap;font-size:8pt">{t.upper()}</div>')
+        # A blank box for the trend's name; the student writes it, and can color it to match the arrow.
+        out.append(f'<div class="abs" style="left:{ML}in;top:{y+0.02}in;width:{LEFT_BAND-0.1}in;height:{LANE-0.04}in;'
+                   f'border:0.75pt solid {STRUCT};font-size:8pt;font-weight:700;color:{ACCENT};text-align:center;'
+                   f'line-height:{LANE-0.04}in;white-space:nowrap;overflow:hidden">{t if key else ""}</div>')
         out.append(f'<div class="abs" style="left:{X0}in;top:{y}in;width:{tbl_w}in;height:{LANE}in;'
                    f'border-bottom:0.5pt dotted {LABEL}"></div>')
         if key:
@@ -179,14 +182,14 @@ def student_page(key=False):
             else:
                 out.append(f'<div class="abs ans" style="left:{X0+0.4}in;top:{y}in;font-size:8.5pt;font-weight:700;'
                            f'color:{ACCENT};line-height:{LANE}in">{ans}</div>')
-    # ---- five arrow lanes down the left side: rotated label at the bottom, guide line above it
+    # ---- five arrow lanes down the left side: a blank name box at the bottom, guide line above it
     label_h = 1.45
     for i, t in enumerate(TRENDS):
         x = ML + i * LANE
-        out.append(f'<div class="abs" style="left:{x}in;top:{Y0+tbl_h-label_h}in;width:{LANE}in;height:{label_h}in;'
-                   f'display:flex;align-items:center;justify-content:center">'
-                   f'<div class="lab" style="transform:rotate(-90deg);white-space:nowrap;font-size:8pt">'
-                   f'{t.upper()}</div></div>')
+        out.append(f'<div class="abs" style="left:{x+0.02}in;top:{Y0+tbl_h-label_h}in;width:{LANE-0.04}in;'
+                   f'height:{label_h}in;border:0.75pt solid {STRUCT};display:flex;align-items:center;'
+                   f'justify-content:center"><div style="transform:rotate(-90deg);white-space:nowrap;font-size:8pt;'
+                   f'font-weight:700;color:{ACCENT}">{t if key else ""}</div></div>')
         out.append(f'<div class="abs" style="left:{x}in;top:{Y0}in;width:{LANE}in;height:{tbl_h-label_h-0.05}in;'
                    f'border-right:0.5pt dotted {LABEL}"></div>')
         if key:
