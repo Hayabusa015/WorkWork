@@ -8,8 +8,7 @@ order (row 4 reads 4s, 3d, 4p). The f-block sits below as two 14-element rows, 4
 its insertion point marked between Ba and Lu and between Ra and Lr, so the sublevel counts come
 out exactly: 6s holds Cs and Ba, 4f holds La to Yb, 5d starts at Lu. Valence electrons are listed
 over the main-group columns. The blank space above the d-block holds the diagonal filling
-diagram, the filling order row by row, and a sublevel capacity table (Matt, 2026-10-29: no
-exception marking on this sheet).
+diagram (Matt, 2026-10-29: no exception marking, no capacity table, no written order).
 
 Every placement is checked against the Aufbau generator before anything is written.
 """
@@ -231,49 +230,20 @@ def build(out, imgdir):
     gap_cell = t.cell(3, FM).merge(t.cell(5, COL[12]))
     gap_cell.vertical_alignment = WD_ALIGN_VERTICAL.TOP
     cell_margins(gap_cell, top=20, bottom=0, left=60, right=40)
-    inner = gap_cell.add_table(rows=2, cols=3)
-    fix_widths(inner, [1.55, 2.0, 1.8])
-    exact(inner.rows[0], 0.19)
-    for ci, h in enumerate(["DIAGONAL RULE", "FILLING ORDER, ROW BY ROW", "SUBLEVEL CAPACITY"]):
-        c = inner.cell(0, ci)
-        borders(c, pal.accent, sz=10, edges=("bottom",))
-        cell_text(c, pal, h, 6.5, bold=True, color=pal.accent, align=WD_ALIGN_PARAGRAPH.LEFT)
+    # Only the diagonal diagram (Matt, 2026-10-29). A capacity table and a written filling
+    # order were tried here and removed: they answered Unit 2 test items outright.
+    hp = gap_cell.paragraphs[0]
+    hp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    hp.paragraph_format.space_after = Pt(2)
+    _run(hp, "DIAGONAL RULE  ", 7, bold=True, color=pal.accent)
+    _run(hp, "follow each arrow, top to bottom, to fill the sublevels in order", 7,
+         color=pal.label)
     img = os.path.join(imgdir, "u02_reference_diagonal.png")
     diagonal_png(img, pal)
-    c0 = inner.cell(1, 0); c0.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-    cell_margins(c0, top=20, bottom=0, left=0, right=0)
-    p0 = c0.paragraphs[0]; p0.paragraph_format.space_after = Pt(0)
-    p0.add_run().add_picture(img, height=Inches(1.3))
-    # filling order written as the periodic-table rows read, one row per line
-    c1 = inner.cell(1, 1); c1.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-    cell_margins(c1, top=40, bottom=0, left=60, right=0)
-    order = {1: "1s", 2: "2s  2p", 3: "3s  3p", 4: "4s  3d  4p", 5: "5s  4d  5p",
-             6: "6s  4f  5d  6p", 7: "7s  5f  6d  7p"}
-    for k, (row, subs) in enumerate(order.items()):
-        q = c1.paragraphs[0] if k == 0 else c1.add_paragraph()
-        q.paragraph_format.space_after = Pt(1)
-        q.paragraph_format.tab_stops.add_tab_stop(Inches(0.5))
-        _run(q, f"Row {row}", 7, color=pal.label)
-        _run(q, "\t" + subs, 8, bold=True, color=pal.ink)
-    # capacity: one row per sublevel
-    c2 = inner.cell(1, 2); c2.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-    cell_margins(c2, top=40, bottom=0, left=60, right=0)
-    cap = c2.add_table(rows=5, cols=3)
-    fix_widths(cap, [0.55, 0.6, 0.55])
-    for ri, rowvals in enumerate([["", "ORBITALS", "MAX e^−^"], ["s", "1", "2"],
-                                  ["p", "3", "6"], ["d", "5", "10"], ["f", "7", "14"]]):
-        exact(cap.rows[ri], 0.18)
-        for ci, v in enumerate(rowvals):
-            c = cap.cell(ri, ci)
-            if ri == 0:
-                borders(c, pal.hair, sz=6, edges=("bottom",))
-            cp = cell_text(c, pal, "", 8)
-            rich(cp, v, 6.5 if ri == 0 else 8.5, ctx, bold=(ri == 0 or ci == 0),
-                 color=pal.label if ri == 0 else (pal.accent if ci == 0 else pal.ink))
-    # the cell's own empty first paragraph would push the table down a line; make it 1 pt
-    from docx.shared import Pt as _Pt
-    pf = c2.paragraphs[0].paragraph_format
-    pf.space_after = _Pt(0); pf.line_spacing = _Pt(1)
+    ip = gap_cell.add_paragraph()
+    ip.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    ip.paragraph_format.space_after = Pt(0)
+    ip.add_run().add_picture(img, height=Inches(1.45))
     # the empty first-row cells between H and He stay blank; no borders anywhere outside cells
 
     # ---- f-block rows: one continuous 14-element strip, lined up under the d-block ----
