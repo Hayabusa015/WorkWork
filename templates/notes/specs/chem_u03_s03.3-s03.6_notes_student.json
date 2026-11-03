@@ -1,0 +1,554 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "key": false,
+  "cover": {
+    "keyTerms": [
+      {
+        "code": "3.6",
+        "terms": [
+          "Period",
+          "group",
+          "shielding",
+          "metallic character",
+          "melting point",
+          "boiling point"
+        ]
+      },
+      {
+        "code": "3.4",
+        "terms": [
+          "Ionization energy",
+          "successive ionization energy",
+          "valence electron",
+          "electronegativity"
+        ]
+      },
+      {
+        "code": "3.3",
+        "terms": [
+          "Atomic radius",
+          "picometer (pm)",
+          "ion"
+        ]
+      }
+    ],
+    "howToUse": "Fill in each blank while its slide is up. Record the important items, not every word. Gray side rules mark must-write notes."
+  },
+  "sectionsContent": [
+    {
+      "code": "3.6",
+      "title": "Why Periodic Trends Change",
+      "learningTarget": "I can explain periodic trends using protons, energy levels, and shielding.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Across a row",
+              "cues": [
+                "Slide 2: period and group",
+                "The change across a row",
+                "Example: Li and F"
+              ],
+              "notes": [
+                {
+                  "prompt": "Period and group"
+                },
+                {
+                  "prompt": "Across a row, atoms gain more"
+                },
+                {
+                  "prompt": "Effect on the outer electrons"
+                },
+                {
+                  "prompt": "Protons: Li and F"
+                }
+              ]
+            },
+            {
+              "title": "Down a group",
+              "cues": [
+                "The change down a group",
+                "Example: Li and Na"
+              ],
+              "notes": [
+                {
+                  "prompt": "Down a column, atoms gain another"
+                },
+                {
+                  "prompt": "Energy levels: Li and Na"
+                },
+                {
+                  "prompt": "DEFINE: shielding",
+                  "lines": 2
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 3,
+              "prompt": "Explain what changes across a row and what changes down a group, and how each one affects the outer electrons.",
+              "selfCheck": [
+                "I can tell a period from a group.",
+                "I can explain what changes across a row and down a group.",
+                "I can define shielding."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Ionization Energy & Electronegativity",
+      "learningTarget": "I can describe and explain the trends in ionization energy and electronegativity.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Ionization energy",
+              "cues": [
+                "Slide 3: definition, units, trend, reason"
+              ],
+              "notes": [
+                {
+                  "prompt": "DEFINE: ionization energy",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Units"
+                },
+                {
+                  "prompt": "Trend"
+                },
+                {
+                  "prompt": "Why (both parts)",
+                  "lines": 2
+                }
+              ]
+            },
+            {
+              "title": "Ca vs. Br",
+              "cues": [
+                "Slide 3 example: higher ionization energy"
+              ],
+              "noWorkBox": true,
+              "notes": [
+                {
+                  "prompt": "Higher ionization energy"
+                },
+                {
+                  "prompt": "Reason",
+                  "lines": 2
+                }
+              ]
+            },
+            {
+              "title": "Successive ionization energy",
+              "cues": [
+                "Slide 4: removing electrons one at a time",
+                "Record both elements"
+              ],
+              "notes": [
+                {
+                  "prompt": "A large jump shows"
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Element",
+                  "1st",
+                  "2nd",
+                  "3rd",
+                  "4th",
+                  "Valence electrons"
+                ],
+                "widths": [
+                  0.22,
+                  0.14,
+                  0.14,
+                  0.14,
+                  0.14,
+                  0.22
+                ],
+                "rowHeightIn": 0.36,
+                "rows": [
+                  [
+                    "Aluminum",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Magnesium",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Electronegativity",
+              "cueLabel": "ELECTRO-NEGATIVITY",
+              "cues": [
+                "Slide 5: definition, units, trend, reason"
+              ],
+              "notes": [
+                {
+                  "prompt": "DEFINE: electronegativity",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Units"
+                },
+                {
+                  "prompt": "Trend"
+                },
+                {
+                  "prompt": "Why (both parts)",
+                  "lines": 2
+                },
+                "*Noble gases are not included in this trend."
+              ]
+            },
+            {
+              "title": "Rank S, O, F",
+              "cues": [
+                "Slide 5 example: lowest to highest"
+              ],
+              "noWorkBox": true,
+              "notes": [
+                {
+                  "prompt": "Order, lowest to highest"
+                },
+                {
+                  "prompt": "Reason"
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 3,
+              "prompt": "Describe the trends in ionization energy and electronegativity, and give the reason for both.",
+              "selfCheck": [
+                "I can define ionization energy and electronegativity.",
+                "I can find the valence electrons from a jump in successive ionization energies.",
+                "I can rank elements by ionization energy or electronegativity."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Atomic & Ionic Radius",
+      "learningTarget": "I can describe and explain the atomic radius trend and compare an ion to its atom.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Atomic radius",
+              "cues": [
+                "Slide 6: definition, units, trend, reason"
+              ],
+              "notes": [
+                {
+                  "prompt": "DEFINE: atomic radius"
+                },
+                {
+                  "prompt": "Units"
+                },
+                {
+                  "prompt": "Trend"
+                },
+                {
+                  "prompt": "Why (both parts)",
+                  "lines": 2
+                }
+              ]
+            },
+            {
+              "title": "Ca vs. Br",
+              "cues": [
+                "Slide 6 example: the larger atom"
+              ],
+              "noWorkBox": true,
+              "notes": [
+                {
+                  "prompt": "Larger atom"
+                },
+                {
+                  "prompt": "Reason",
+                  "lines": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Ion size: magnesium",
+              "cues": [
+                "Slide 7: magnesium loses its two outer electrons"
+              ],
+              "table": {
+                "headers": [
+                  "Particle",
+                  "Electrons",
+                  "Larger or smaller"
+                ],
+                "widths": [
+                  0.3,
+                  0.3,
+                  0.4
+                ],
+                "rowHeightIn": 0.34,
+                "rows": [
+                  [
+                    "Mg",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Mg^{2+}",
+                    "",
+                    ""
+                  ]
+                ]
+              },
+              "notes": [
+                {
+                  "prompt": "Why the ion is smaller",
+                  "lines": 2
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 3,
+              "prompt": "Describe the atomic radius trend, give both reasons, and explain why the magnesium ion is smaller than the magnesium atom.",
+              "selfCheck": [
+                "I can define atomic radius and give its units.",
+                "I can compare the sizes of two atoms in the same period or group.",
+                "I can explain why a positive ion is smaller than its atom."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.6",
+      "title": "Melting & Boiling Points; Trend Summary",
+      "learningTarget": "I can describe the melting and boiling point patterns in groups 1 and 17 and summarize the periodic trends.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Melting and boiling points",
+              "cues": [
+                "Slide 8: definitions, trend, reason"
+              ],
+              "notes": [
+                {
+                  "prompt": "DEFINE: melting point"
+                },
+                {
+                  "prompt": "DEFINE: boiling point"
+                },
+                {
+                  "prompt": "Units used here"
+                },
+                {
+                  "prompt": "Trend",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Why",
+                  "lines": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Group 17 data",
+              "cues": [
+                "Slide 8 example: the halogens"
+              ],
+              "table": {
+                "headers": [
+                  "Element",
+                  "Melt (°C)",
+                  "Boil (°C)"
+                ],
+                "widths": [
+                  0.34,
+                  0.33,
+                  0.33
+                ],
+                "rowHeightIn": 0.32,
+                "rows": [
+                  [
+                    "Cl₂",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Br₂",
+                    "",
+                    ""
+                  ],
+                  [
+                    "I₂",
+                    "",
+                    ""
+                  ]
+                ]
+              },
+              "notes": [
+                {
+                  "prompt": "Highest melting and boiling point"
+                },
+                {
+                  "prompt": "Reason"
+                }
+              ]
+            },
+            {
+              "title": "Trend summary",
+              "cues": [
+                "Slide 9: the two corners of the table"
+              ],
+              "table": {
+                "headers": [
+                  "Direction",
+                  "Trends"
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ],
+                "rowHeightIn": 0.42,
+                "rows": [
+                  [
+                    "Toward the top right",
+                    ""
+                  ],
+                  [
+                    "Toward the bottom left",
+                    ""
+                  ]
+                ]
+              },
+              "notes": [
+                {
+                  "prompt": "DEFINE: metallic character"
+                },
+                "*Use the arrows to label your Gizmo sheet. There are exceptions."
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 3,
+              "prompt": "Summarize which way each trend points, and explain why melting and boiling points have no single trend.",
+              "selfCheck": [
+                "I can define melting point, boiling point, and metallic character.",
+                "I can describe the melting and boiling point patterns in groups 1 and 17.",
+                "I can state which corner of the table each trend points to."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "conceptReview": {
+    "title": "Concept Review",
+    "subtitle": "Periodic trends, from the unit slides",
+    "sections": [
+      {
+        "code": "3.6",
+        "heading": "Why trends change",
+        "paragraphs": [
+          [
+            "**Across a row:** more protons pull the outer electrons inward.",
+            "**Down a group:** another energy level; inner electrons shield the outer ones."
+          ]
+        ],
+        "watchOut": "Shielding comes from inner electrons, not from protons."
+      },
+      {
+        "code": "3.4",
+        "heading": "Ionization energy and electronegativity",
+        "paragraphs": [
+          [
+            "**Ionization energy:** energy to remove an electron (kJ/mol). **Electronegativity:** pull on shared electrons (no units).",
+            "Both generally increase across a row and up a column. A large jump in successive ionization energies marks the first inner electron."
+          ]
+        ],
+        "watchOut": "Noble gases are left out of the electronegativity trend."
+      },
+      {
+        "code": "3.3",
+        "heading": "Atomic and ionic radius",
+        "paragraphs": [
+          [
+            "**Atomic radius:** the size of an atom, in pm. Increases down a column and to the left across a row.",
+            "**The magnesium ion is smaller than the atom:** its outer level is gone, and the same 12 protons hold fewer electrons."
+          ]
+        ],
+        "watchOut": "Radius runs opposite to ionization energy and electronegativity."
+      },
+      {
+        "code": "3.6",
+        "heading": "Melting and boiling points",
+        "paragraphs": [
+          [
+            "No single trend across the table. Down group 1 both fall; down group 17 both rise.",
+            "**Toward the top right:** higher IE and EN. **Toward the bottom left:** larger radius, stronger metallic character."
+          ]
+        ],
+        "watchOut": "Melting and boiling points are temperatures (°C), not energies."
+      }
+    ],
+    "quickRecall": [
+      "Which has the higher ionization energy, Ca or Br, and why?",
+      "Why does aluminum's 4th ionization energy jump?",
+      "Why is the magnesium ion smaller than the magnesium atom?"
+    ]
+  }
+}
