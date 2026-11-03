@@ -25,14 +25,10 @@ from _shull_docx import (Palette, borders, para, fix_widths, gap, one_cell, equa
 
 KEY_INK = Q.KEY_INK
 LET = "ABCD"
-DIRECTIONS = ("Choose the best answer and write its letter on the line. Use scratch paper for any work. Up is +y, "
+DIRECTIONS = ("Choose the best answer and write its letter on the line. Use scratch paper for any work. No equation sheet on "
+              "this part; it comes with the Day 2 written test. Up is +y, "
               "g = 9.8 m/s², and air resistance is ignored. Angles on the 0–360° scale start at east and run "
               "counterclockwise.")
-EQ = [{"plain": "Rx = R cos(angle)"}, {"plain": "Ry = R sin(angle)"}, {"plain": "tan(angle) = Ry / Rx"},
-      {"plain": "R² = Rx² + Ry²"}, {"plain": "vix = vi cos(angle)"}, {"plain": "viy = vi sin(angle)"},
-      {"plain": "Δx = vix t"}, {"plain": "vy = viy − g t"}]
-
-
 def keep(cell_paras):
     for p in cell_paras:
         p.paragraph_format.keep_with_next = True
@@ -80,8 +76,6 @@ def student(L, out):
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     para(c, DIRECTIONS, 8.5, color=pal.ink, first=True)
-    gap(doc, 3)
-    equation_bar(doc, EQ, pal, "EQUATIONS YOU MAY USE")
     qs = D.build_mc(L)
     for lo, hi, label in D.MC_SECTIONS:
         section_label(doc, pal, label)
