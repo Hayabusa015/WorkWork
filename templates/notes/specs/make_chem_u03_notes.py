@@ -20,7 +20,8 @@ Strictly recall (templates/notes/recall.py): cues name what to record; the deck'
 questions become records of the example and its answer.
 
 Condensed on Matt's instruction (2026-11-03): one block per slide, the example as the block's last
-line, one line per item, no extra-notes lines, no recall blocks, no concept review page.
+line, one inline ruled row per item, two content pages, no extra-notes lines, no recall
+blocks, no concept review page.
 """
 import json, os
 
@@ -28,8 +29,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STEM = "chem_u03_s03.3-s03.6_notes"
 
 
-def P(prompt, answer, lines=None):          # a prompt with one writing line; `answer` is the key's
-    d = {"prompt": prompt, "answer": answer}
+def P(prompt, answer, lines=None):          # one inline ruled row; `answer` is the key's
+    d = {"prompt": prompt, "answer": answer, "inline": True}
     if lines:
         d["lines"] = lines
     return d
@@ -57,76 +58,64 @@ spec = {
                  "The last line of each block is the slide's example."),
   },
   "sectionsContent": [
-    {
-      "code": "3.6",
-      "title": "Why Periodic Trends Change",
-      "learningTarget": "I can explain periodic trends using protons, energy levels, and shielding.",
-      "pages": [{"rows": [
-        block("Why trends change", "Slide 2", [
-          P("Period and group", "A period is a row. A group is a column."),
-          P("Across a row, atoms gain more", "protons, so the outer electrons are pulled inward"),
-          P("Down a group, atoms gain another", "energy level"),
-          P("DEFINE: shielding", "Inner electrons reduce the pull felt by outer electrons."),
-          P("Example: Li vs. F, Li vs. Na", "Li 3 protons, F 9 protons. Li 2 levels, Na 3 levels."),
-        ]),
-      ]}],
-    },
+    # Two content pages (Matt, 2026-11-03: condense). Each block's cue names its slide and
+    # its own section code, since a page can carry only one code in its title bar.
     {
       "code": "3.4",
-      "title": "Ionization Energy & Electronegativity",
-      "learningTarget": "I can describe and explain the trends in ionization energy and electronegativity.",
+      "title": "Why Trends Change, Ionization Energy & Electronegativity",
+      "learningTarget": "I can explain why trends change and describe the ionization energy and electronegativity trends.",
       "pages": [{"rows": [
-        block("Ionization energy", "Slide 3", [
-          P("DEFINE: ionization energy (units)", "Energy needed to remove an electron from a gas atom (kJ/mol)."),
-          P("Trend", "Generally increases across a row → and up a column ↑."),
-          P("Why", "More nuclear pull = harder to remove. More distance and shielding = easier."),
-          P("Example: Ca vs. Br, higher ionization energy", "Br. Same period; 15 more protons."),
+        block("Why trends change", "Slide 2 · S3.6", [
+          P("Period / group", "A period is a row. A group is a column."),
+          P("Across a row", "More protons; outer electrons pulled inward."),
+          P("Down a group", "Another energy level."),
+          P("Shielding", "Inner electrons reduce the pull felt by outer electrons."),
+          P("Example: Li vs. F; Li vs. Na", "Li 3 protons, F 9. Li 2 levels, Na 3."),
         ]),
-        block("Successive ionization energy", "Slide 4", [
-          P("A large jump shows", "an inner electron was removed"),
-          P("Example: Al 578, 1,817, 2,745, 11,577 — valence electrons", "3 (the jump is at the 4th)"),
-          P("Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons", "2 (the jump is at the 3rd)"),
+        block("Ionization energy", "Slide 3 · S3.4", [
+          P("Definition (units)", "Energy to remove an electron from a gas atom (kJ/mol)."),
+          P("Trend", "Increases across a row → and up a column ↑."),
+          P("Why", "More nuclear pull = harder. More distance and shielding = easier."),
+          P("Example: Ca vs. Br, higher IE", "Br. Same period; 15 more protons."),
         ]),
-        block("Electro-negativity", "Slide 5", [
-          P("DEFINE: electronegativity (units)", "How strongly an atom pulls on shared electrons in a bond (no units)."),
-          P("Trend", "Generally increases across a row → and up a column ↑. Fluorine is highest; noble gases excluded."),
-          P("Why", "More nuclear pull attracts shared electrons. More distance and shielding weaken it."),
-          P("Example: rank S, O, F, lowest to highest", "S < O < F"),
+        block("Successive ionization energy", "Slide 4 · S3.4", [
+          P("A large jump shows", "An inner electron was removed."),
+          P("Example: Al 578, 1,817, 2,745, 11,577 — valence electrons", "3 (jump at the 4th)"),
+          P("Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons", "2 (jump at the 3rd)"),
+        ]),
+        block("Electro-negativity", "Slide 5 · S3.4", [
+          P("Definition (units)", "Pull on shared electrons in a bond (no units)."),
+          P("Trend", "Increases across → and up ↑. F highest; noble gases excluded."),
+          P("Why", "More nuclear pull attracts shared electrons; distance and shielding weaken it."),
+          P("Example: rank S, O, F", "S < O < F"),
         ]),
       ]}],
     },
     {
       "code": "3.3",
-      "title": "Atomic & Ionic Radius",
-      "learningTarget": "I can describe and explain the atomic radius trend and compare an ion to its atom.",
+      "title": "Atomic Radius, Ion Size, Melting & Boiling Points",
+      "learningTarget": "I can describe the atomic radius trend, compare an ion to its atom, and summarize the periodic trends.",
       "pages": [{"rows": [
-        block("Atomic radius", "Slide 6", [
-          P("DEFINE: atomic radius (units)", "The size of an atom (pm)."),
-          P("Trend", "Generally increases down a column ↓ and to the left across a row ←."),
-          P("Why", "Down: another energy level adds size. Across: more protons pull electrons inward."),
-          P("Example: Ca vs. Br, larger atom", "Ca. Same period; Br has more protons pulling inward."),
+        block("Atomic radius", "Slide 6 · S3.3", [
+          P("Definition (units)", "The size of an atom (pm)."),
+          P("Trend", "Increases down a column ↓ and to the left across a row ←."),
+          P("Why", "Down: another energy level. Across: more protons pull inward."),
+          P("Example: Ca vs. Br, larger atom", "Ca. Same period; Br has more protons."),
         ]),
-        block("Ion size", "Slide 7", [
-          P("Magnesium ion vs. magnesium atom", "The ion is smaller: 12 electrons → 10 electrons."),
-          P("Why", "The outer level is gone. The nucleus still has 12 protons."),
+        block("Ion size", "Slide 7 · S3.3", [
+          P("Magnesium ion vs. atom", "Ion is smaller: 12 → 10 electrons."),
+          P("Why", "Outer level gone; still 12 protons."),
         ]),
-      ]}],
-    },
-    {
-      "code": "3.6",
-      "title": "Melting & Boiling Points; Trend Summary",
-      "learningTarget": "I can describe the melting and boiling point patterns in groups 1 and 17 and summarize the periodic trends.",
-      "pages": [{"rows": [
-        block("Melting and boiling points", "Slide 8", [
-          P("DEFINE: melting point, boiling point (units)", "Melting: solid → liquid. Boiling: liquid → gas. Both in °C."),
-          P("Trend", "No single trend. Down group 1 both fall (Li → Cs); down group 17 both rise (F → I)."),
-          P("Why", "Stronger attractions need more energy to overcome. Different bonds give different patterns."),
-          P("Example: group 17, highest melting and boiling point", "Iodine, I₂ (113.7 °C, 184.4 °C): larger molecules attract more strongly."),
+        block("Melting and boiling points", "Slide 8 · S3.6", [
+          P("Definitions (units)", "Melting: solid → liquid. Boiling: liquid → gas. °C."),
+          P("Trend", "No single trend. Group 1: both fall. Group 17: both rise."),
+          P("Why", "Stronger attractions need more energy to overcome."),
+          P("Example: group 17, highest MP and BP", "Iodine, I₂ (113.7 °C, 184.4 °C)"),
         ]),
-        block("Trend summary", "Slide 9", [
-          P("Toward the top right", "Higher ionization energy, higher electronegativity"),
+        block("Trend summary", "Slide 9 · S3.6", [
+          P("Toward the top right", "Higher ionization energy and electronegativity"),
           P("Toward the bottom left", "Larger atomic radius, stronger metallic character"),
-          P("DEFINE: metallic character", "How easily an atom loses electrons; strong near Cs."),
+          P("Metallic character", "How easily an atom loses electrons; strong near Cs."),
         ]),
       ]}],
     },

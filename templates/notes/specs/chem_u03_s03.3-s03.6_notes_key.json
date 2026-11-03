@@ -37,124 +37,129 @@
   },
   "sectionsContent": [
     {
-      "code": "3.6",
-      "title": "Why Periodic Trends Change",
-      "learningTarget": "I can explain periodic trends using protons, energy levels, and shielding.",
+      "code": "3.4",
+      "title": "Why Trends Change, Ionization Energy & Electronegativity",
+      "learningTarget": "I can explain why trends change and describe the ionization energy and electronegativity trends.",
       "pages": [
         {
           "rows": [
             {
               "title": "Why trends change",
               "cues": [
-                "Slide 2"
+                "Slide 2 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Period and group",
-                  "answer": "A period is a row. A group is a column."
+                  "prompt": "Period / group",
+                  "answer": "A period is a row. A group is a column.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Across a row, atoms gain more",
-                  "answer": "protons, so the outer electrons are pulled inward"
+                  "prompt": "Across a row",
+                  "answer": "More protons; outer electrons pulled inward.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Down a group, atoms gain another",
-                  "answer": "energy level"
+                  "prompt": "Down a group",
+                  "answer": "Another energy level.",
+                  "inline": true
                 },
                 {
-                  "prompt": "DEFINE: shielding",
-                  "answer": "Inner electrons reduce the pull felt by outer electrons."
+                  "prompt": "Shielding",
+                  "answer": "Inner electrons reduce the pull felt by outer electrons.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Li vs. F, Li vs. Na",
-                  "answer": "Li 3 protons, F 9 protons. Li 2 levels, Na 3 levels."
+                  "prompt": "Example: Li vs. F; Li vs. Na",
+                  "answer": "Li 3 protons, F 9. Li 2 levels, Na 3.",
+                  "inline": true
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "3.4",
-      "title": "Ionization Energy & Electronegativity",
-      "learningTarget": "I can describe and explain the trends in ionization energy and electronegativity.",
-      "pages": [
-        {
-          "rows": [
+            },
             {
               "title": "Ionization energy",
               "cues": [
-                "Slide 3"
+                "Slide 3 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: ionization energy (units)",
-                  "answer": "Energy needed to remove an electron from a gas atom (kJ/mol)."
+                  "prompt": "Definition (units)",
+                  "answer": "Energy to remove an electron from a gas atom (kJ/mol).",
+                  "inline": true
                 },
                 {
                   "prompt": "Trend",
-                  "answer": "Generally increases across a row → and up a column ↑."
+                  "answer": "Increases across a row → and up a column ↑.",
+                  "inline": true
                 },
                 {
                   "prompt": "Why",
-                  "answer": "More nuclear pull = harder to remove. More distance and shielding = easier."
+                  "answer": "More nuclear pull = harder. More distance and shielding = easier.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Ca vs. Br, higher ionization energy",
-                  "answer": "Br. Same period; 15 more protons."
+                  "prompt": "Example: Ca vs. Br, higher IE",
+                  "answer": "Br. Same period; 15 more protons.",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Successive ionization energy",
               "cues": [
-                "Slide 4"
+                "Slide 4 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
                   "prompt": "A large jump shows",
-                  "answer": "an inner electron was removed"
+                  "answer": "An inner electron was removed.",
+                  "inline": true
                 },
                 {
                   "prompt": "Example: Al 578, 1,817, 2,745, 11,577 — valence electrons",
-                  "answer": "3 (the jump is at the 4th)"
+                  "answer": "3 (jump at the 4th)",
+                  "inline": true
                 },
                 {
                   "prompt": "Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons",
-                  "answer": "2 (the jump is at the 3rd)"
+                  "answer": "2 (jump at the 3rd)",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Electro-negativity",
               "cues": [
-                "Slide 5"
+                "Slide 5 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: electronegativity (units)",
-                  "answer": "How strongly an atom pulls on shared electrons in a bond (no units)."
+                  "prompt": "Definition (units)",
+                  "answer": "Pull on shared electrons in a bond (no units).",
+                  "inline": true
                 },
                 {
                   "prompt": "Trend",
-                  "answer": "Generally increases across a row → and up a column ↑. Fluorine is highest; noble gases excluded."
+                  "answer": "Increases across → and up ↑. F highest; noble gases excluded.",
+                  "inline": true
                 },
                 {
                   "prompt": "Why",
-                  "answer": "More nuclear pull attracts shared electrons. More distance and shielding weaken it."
+                  "answer": "More nuclear pull attracts shared electrons; distance and shielding weaken it.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: rank S, O, F, lowest to highest",
-                  "answer": "S < O < F"
+                  "prompt": "Example: rank S, O, F",
+                  "answer": "S < O < F",
+                  "inline": true
                 }
               ]
             }
@@ -164,111 +169,113 @@
     },
     {
       "code": "3.3",
-      "title": "Atomic & Ionic Radius",
-      "learningTarget": "I can describe and explain the atomic radius trend and compare an ion to its atom.",
+      "title": "Atomic Radius, Ion Size, Melting & Boiling Points",
+      "learningTarget": "I can describe the atomic radius trend, compare an ion to its atom, and summarize the periodic trends.",
       "pages": [
         {
           "rows": [
             {
               "title": "Atomic radius",
               "cues": [
-                "Slide 6"
+                "Slide 6 · S3.3"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: atomic radius (units)",
-                  "answer": "The size of an atom (pm)."
+                  "prompt": "Definition (units)",
+                  "answer": "The size of an atom (pm).",
+                  "inline": true
                 },
                 {
                   "prompt": "Trend",
-                  "answer": "Generally increases down a column ↓ and to the left across a row ←."
+                  "answer": "Increases down a column ↓ and to the left across a row ←.",
+                  "inline": true
                 },
                 {
                   "prompt": "Why",
-                  "answer": "Down: another energy level adds size. Across: more protons pull electrons inward."
+                  "answer": "Down: another energy level. Across: more protons pull inward.",
+                  "inline": true
                 },
                 {
                   "prompt": "Example: Ca vs. Br, larger atom",
-                  "answer": "Ca. Same period; Br has more protons pulling inward."
+                  "answer": "Ca. Same period; Br has more protons.",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Ion size",
               "cues": [
-                "Slide 7"
+                "Slide 7 · S3.3"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Magnesium ion vs. magnesium atom",
-                  "answer": "The ion is smaller: 12 electrons → 10 electrons."
+                  "prompt": "Magnesium ion vs. atom",
+                  "answer": "Ion is smaller: 12 → 10 electrons.",
+                  "inline": true
                 },
                 {
                   "prompt": "Why",
-                  "answer": "The outer level is gone. The nucleus still has 12 protons."
+                  "answer": "Outer level gone; still 12 protons.",
+                  "inline": true
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "3.6",
-      "title": "Melting & Boiling Points; Trend Summary",
-      "learningTarget": "I can describe the melting and boiling point patterns in groups 1 and 17 and summarize the periodic trends.",
-      "pages": [
-        {
-          "rows": [
+            },
             {
               "title": "Melting and boiling points",
               "cues": [
-                "Slide 8"
+                "Slide 8 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: melting point, boiling point (units)",
-                  "answer": "Melting: solid → liquid. Boiling: liquid → gas. Both in °C."
+                  "prompt": "Definitions (units)",
+                  "answer": "Melting: solid → liquid. Boiling: liquid → gas. °C.",
+                  "inline": true
                 },
                 {
                   "prompt": "Trend",
-                  "answer": "No single trend. Down group 1 both fall (Li → Cs); down group 17 both rise (F → I)."
+                  "answer": "No single trend. Group 1: both fall. Group 17: both rise.",
+                  "inline": true
                 },
                 {
                   "prompt": "Why",
-                  "answer": "Stronger attractions need more energy to overcome. Different bonds give different patterns."
+                  "answer": "Stronger attractions need more energy to overcome.",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: group 17, highest melting and boiling point",
-                  "answer": "Iodine, I₂ (113.7 °C, 184.4 °C): larger molecules attract more strongly."
+                  "prompt": "Example: group 17, highest MP and BP",
+                  "answer": "Iodine, I₂ (113.7 °C, 184.4 °C)",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Trend summary",
               "cues": [
-                "Slide 9"
+                "Slide 9 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
                   "prompt": "Toward the top right",
-                  "answer": "Higher ionization energy, higher electronegativity"
+                  "answer": "Higher ionization energy and electronegativity",
+                  "inline": true
                 },
                 {
                   "prompt": "Toward the bottom left",
-                  "answer": "Larger atomic radius, stronger metallic character"
+                  "answer": "Larger atomic radius, stronger metallic character",
+                  "inline": true
                 },
                 {
-                  "prompt": "DEFINE: metallic character",
-                  "answer": "How easily an atom loses electrons; strong near Cs."
+                  "prompt": "Metallic character",
+                  "answer": "How easily an atom loses electrons; strong near Cs.",
+                  "inline": true
                 }
               ]
             }

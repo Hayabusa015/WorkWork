@@ -535,7 +535,22 @@ def render_cue(col, row, pal):
         col.text(q, CUE, line=10.5, color=pal.label, after=5)
 
 
-def render_prompt(col, text, answer, lines, key, pal):
+INLINE_LINE, INLINE_AFTER = 22, 4     # an inline prompt row: tall enough to write in by hand
+
+
+def render_prompt(col, text, answer, lines, key, pal, inline=False):
+    if inline:
+        # One ruled row: the label, then the writing space on the same line. The key prints
+        # the answer, bold, on that row. Half the height of a label over a writing line;
+        # a spec opts in per prompt ("inline": true) for a condensed packet.
+        p = col.para()
+        write(p, text + ":   ", BODY, line=INLINE_LINE, color=pal.label)
+        if answer:
+            for seg, b in segments(answer):
+                _run(p, seg, BODY, bold=True, color=pal.ink)
+        _bottom_rule(p, pal.hair, W_LINE, 1)
+        col.gap(INLINE_AFTER)
+        return
     col.text(text, BODY, line=BODY_LINE)
     if answer:
         col.text(answer, BODY, line=BODY_LINE, bold=True, before=4, after=8)
@@ -645,7 +660,7 @@ def render_notes(col, row, key, pal, base_dir):
         if isinstance(n, dict):
             if "prompt" in n:
                 render_prompt(col, n["prompt"], n.get("answer") if key else None,
-                              int(n.get("lines", 1)), key, pal)
+                              int(n.get("lines", 1)), key, pal, inline=bool(n.get("inline")))
             elif "text" in n:
                 col.text(n["text"], BODY, line=BODY_LINE + 1, after=n.get("after", 3))
             elif "check" in n:

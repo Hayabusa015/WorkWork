@@ -37,108 +37,113 @@
   },
   "sectionsContent": [
     {
-      "code": "3.6",
-      "title": "Why Periodic Trends Change",
-      "learningTarget": "I can explain periodic trends using protons, energy levels, and shielding.",
+      "code": "3.4",
+      "title": "Why Trends Change, Ionization Energy & Electronegativity",
+      "learningTarget": "I can explain why trends change and describe the ionization energy and electronegativity trends.",
       "pages": [
         {
           "rows": [
             {
               "title": "Why trends change",
               "cues": [
-                "Slide 2"
+                "Slide 2 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Period and group"
+                  "prompt": "Period / group",
+                  "inline": true
                 },
                 {
-                  "prompt": "Across a row, atoms gain more"
+                  "prompt": "Across a row",
+                  "inline": true
                 },
                 {
-                  "prompt": "Down a group, atoms gain another"
+                  "prompt": "Down a group",
+                  "inline": true
                 },
                 {
-                  "prompt": "DEFINE: shielding"
+                  "prompt": "Shielding",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Li vs. F, Li vs. Na"
+                  "prompt": "Example: Li vs. F; Li vs. Na",
+                  "inline": true
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "3.4",
-      "title": "Ionization Energy & Electronegativity",
-      "learningTarget": "I can describe and explain the trends in ionization energy and electronegativity.",
-      "pages": [
-        {
-          "rows": [
+            },
             {
               "title": "Ionization energy",
               "cues": [
-                "Slide 3"
+                "Slide 3 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: ionization energy (units)"
+                  "prompt": "Definition (units)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Trend"
+                  "prompt": "Trend",
+                  "inline": true
                 },
                 {
-                  "prompt": "Why"
+                  "prompt": "Why",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Ca vs. Br, higher ionization energy"
+                  "prompt": "Example: Ca vs. Br, higher IE",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Successive ionization energy",
               "cues": [
-                "Slide 4"
+                "Slide 4 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "A large jump shows"
+                  "prompt": "A large jump shows",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Al 578, 1,817, 2,745, 11,577 — valence electrons"
+                  "prompt": "Example: Al 578, 1,817, 2,745, 11,577 — valence electrons",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons"
+                  "prompt": "Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Electro-negativity",
               "cues": [
-                "Slide 5"
+                "Slide 5 · S3.4"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: electronegativity (units)"
+                  "prompt": "Definition (units)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Trend"
+                  "prompt": "Trend",
+                  "inline": true
                 },
                 {
-                  "prompt": "Why"
+                  "prompt": "Why",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: rank S, O, F, lowest to highest"
+                  "prompt": "Example: rank S, O, F",
+                  "inline": true
                 }
               ]
             }
@@ -148,98 +153,100 @@
     },
     {
       "code": "3.3",
-      "title": "Atomic & Ionic Radius",
-      "learningTarget": "I can describe and explain the atomic radius trend and compare an ion to its atom.",
+      "title": "Atomic Radius, Ion Size, Melting & Boiling Points",
+      "learningTarget": "I can describe the atomic radius trend, compare an ion to its atom, and summarize the periodic trends.",
       "pages": [
         {
           "rows": [
             {
               "title": "Atomic radius",
               "cues": [
-                "Slide 6"
+                "Slide 6 · S3.3"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: atomic radius (units)"
+                  "prompt": "Definition (units)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Trend"
+                  "prompt": "Trend",
+                  "inline": true
                 },
                 {
-                  "prompt": "Why"
+                  "prompt": "Why",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: Ca vs. Br, larger atom"
+                  "prompt": "Example: Ca vs. Br, larger atom",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Ion size",
               "cues": [
-                "Slide 7"
+                "Slide 7 · S3.3"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Magnesium ion vs. magnesium atom"
+                  "prompt": "Magnesium ion vs. atom",
+                  "inline": true
                 },
                 {
-                  "prompt": "Why"
+                  "prompt": "Why",
+                  "inline": true
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "3.6",
-      "title": "Melting & Boiling Points; Trend Summary",
-      "learningTarget": "I can describe the melting and boiling point patterns in groups 1 and 17 and summarize the periodic trends.",
-      "pages": [
-        {
-          "rows": [
+            },
             {
               "title": "Melting and boiling points",
               "cues": [
-                "Slide 8"
+                "Slide 8 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "DEFINE: melting point, boiling point (units)"
+                  "prompt": "Definitions (units)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Trend"
+                  "prompt": "Trend",
+                  "inline": true
                 },
                 {
-                  "prompt": "Why"
+                  "prompt": "Why",
+                  "inline": true
                 },
                 {
-                  "prompt": "Example: group 17, highest melting and boiling point"
+                  "prompt": "Example: group 17, highest MP and BP",
+                  "inline": true
                 }
               ]
             },
             {
               "title": "Trend summary",
               "cues": [
-                "Slide 9"
+                "Slide 9 · S3.6"
               ],
               "noWorkBox": true,
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Toward the top right"
+                  "prompt": "Toward the top right",
+                  "inline": true
                 },
                 {
-                  "prompt": "Toward the bottom left"
+                  "prompt": "Toward the bottom left",
+                  "inline": true
                 },
                 {
-                  "prompt": "DEFINE: metallic character"
+                  "prompt": "Metallic character",
+                  "inline": true
                 }
               ]
             }
