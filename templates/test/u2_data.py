@@ -545,35 +545,26 @@ def build_mc(L):
 # Study guide problems
 # ---------------------------------------------------------------------------------------
 
-GUIDE = {
-    "s1_p1": {"given": 300},                                   # restate as compass and negative
-    "s1_p2": {"mag": 40, "spec": (35, "south", "west"), "unit": "m/s"},
-    "s2_p1": {"x": 6.0, "y": 8.0, "unit": "m"},
-    "s2_p2": {"x": -1.5, "y": 2.5, "unit": "m/s"},
-    "s3_p1": {"unit": "km/h", "v": [(150, (40, "north", "east")), (40, (20, "south", "east"))]},
-    "s3_p2": {"unit": "m", "v": [(30, (0, "north", "east")), (20, (90, "north", "east")), (25, (45, "south", "west"))]},
-    "s4_p1": {"h": 1.5, "vx": 2.5},
-    "s4_p2": {"y0": 10.0, "v": 20.0, "ang": 35.0},
+GUIDE = {          # five problems, same types as the Day 2 written test, new numbers
+    "p1": {"x": 2.5, "y": -6.0, "unit": "m/s"},
+    "p2": {"unit": "km/h", "v": [(210, (15, "north", "east")), (70, (55, "north", "west"))]},
+    "p3": {"h": 3.0, "vx": 4.5},
+    "p4": {"v": 30.0, "ang": 40.0},
+    "p5": {"y0": 20.0, "v": 30.0, "ang": 25.0},
 }
 
 
 def solve_guide():
     g = GUIDE
     out = {}
-    out["s1_p1"] = V.equivalents(g["s1_p1"]["given"])
-    th = V.theta_from(*g["s1_p2"]["spec"])
-    out["s1_p2"] = {"theta": th, "comps": V.comps(g["s1_p2"]["mag"], th), "eq": V.equivalents(th)}
-    for k in ("s2_p1", "s2_p2"):
-        x, y = g[k]["x"], g[k]["y"]
-        th = math.degrees(math.atan2(y, x)) % 360
-        out[k] = {"R": math.hypot(x, y), "th": th, "ref": math.degrees(math.atan(abs(y) / abs(x))), "eq": V.equivalents(round(th))}
-    for k in ("s3_p1", "s3_p2"):
-        vs = [(m, V.theta_from(*s)) for m, s in g[k]["v"]]
-        rx, ry, R, th = V.addition(vs)
-        out[k] = {"vs": vs, "parts": [V.comps(m, t) for m, t in vs], "rx": rx, "ry": ry, "R": R, "th": th,
-                  "ref": math.degrees(math.atan(abs(ry) / abs(rx))), "eq": V.equivalents(round(th))}
-    out["s4_p1"] = horizontal_launch(g["s4_p1"]["h"], g["s4_p1"]["vx"])
-    out["s4_p2"] = from_height(g["s4_p2"]["y0"], g["s4_p2"]["v"], g["s4_p2"]["ang"])
+    x, y = g["p1"]["x"], g["p1"]["y"]
+    out["p1"] = {"R": math.hypot(x, y), "th": math.degrees(math.atan2(y, x)) % 360}
+    vs = [(m, V.theta_from(*sp)) for m, sp in g["p2"]["v"]]
+    rx, ry, R, th = V.addition(vs)
+    out["p2"] = {"vs": vs, "parts": [V.comps(m, t) for m, t in vs], "rx": rx, "ry": ry, "R": R, "th": th}
+    out["p3"] = horizontal_launch(g["p3"]["h"], g["p3"]["vx"])
+    out["p4"] = level_angled(g["p4"]["v"], g["p4"]["ang"])
+    out["p5"] = from_height(g["p5"]["y0"], g["p5"]["v"], g["p5"]["ang"])
     return out
 
 
@@ -584,4 +575,4 @@ if __name__ == "__main__":
     for L in VERS:
         mc = build_mc(L)
         print(L, "answers", "".join("ABCD"[q["answer"]] for q in mc))
-    print(solve_guide()["s4_p2"])
+    print(solve_guide())

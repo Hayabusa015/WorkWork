@@ -53,17 +53,16 @@ for L in D.VERS:
     check(L + "q5 vx", vx, s["q5"]["vx"], 1e-9); check(L + "q5 vy", vy, s["q5"]["vy"], 1e-9)
 
 g, s = D.GUIDE, D.solve_guide()
-for k in ("s2_p1", "s2_p2"):
-    zz = complex(g[k]["x"], g[k]["y"])
-    check(k + " R", abs(zz), s[k]["R"], 1e-9)
-for k in ("s3_p1", "s3_p2"):
-    tot = sum(z(m, V.theta_from(*sp)) for m, sp in g[k]["v"])
-    check(k + " R", abs(tot), s[k]["R"], 1e-9); check(k + " th", math.degrees(cmath.phase(tot)) % 360, s[k]["th"], 1e-9)
-t, x, _ = simulate(g["s4_p1"]["h"], g["s4_p1"]["vx"], 0)
-check("s4_p1 t", t, s["s4_p1"]["t"], 2e-4); check("s4_p1 x", x, s["s4_p1"]["x"], 2e-3)
-a = g["s4_p2"]; vx, vy = a["v"] * math.cos(math.radians(a["ang"])), a["v"] * math.sin(math.radians(a["ang"]))
-t, x, _ = simulate(a["y0"], vx, vy)
-check("s4_p2 t", t, s["s4_p2"]["t"], 2e-4); check("s4_p2 x", x, s["s4_p2"]["x"], 2e-3)
+zz = complex(g["p1"]["x"], g["p1"]["y"])
+check("p1 R", abs(zz), s["p1"]["R"], 1e-9); check("p1 th", math.degrees(cmath.phase(zz)) % 360, s["p1"]["th"], 1e-9)
+tot = sum(z(m, V.theta_from(*sp)) for m, sp in g["p2"]["v"])
+check("p2 R", abs(tot), s["p2"]["R"], 1e-9); check("p2 th", math.degrees(cmath.phase(tot)) % 360, s["p2"]["th"], 1e-9)
+t, x, _ = simulate(g["p3"]["h"], g["p3"]["vx"], 0)
+check("p3 t", t, s["p3"]["t"], 2e-4); check("p3 x", x, s["p3"]["x"], 2e-3)
+for k in ("p4", "p5"):
+    a = g[k]; vx, vy = a["v"] * math.cos(math.radians(a["ang"])), a["v"] * math.sin(math.radians(a["ang"]))
+    t, x, _ = simulate(a.get("y0", 1e-12), vx, vy)
+    check(k + " t", t, s[k]["t"], 2e-4); check(k + " x", x, s[k].get("x", s[k].get("R")), 2e-3)
 
 # multiple-choice calculation items: correct text vs an independent number, per version
 EXPECT = {   # base index -> [A, B, C] expected correct answer text
