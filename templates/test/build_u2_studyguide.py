@@ -22,7 +22,7 @@ import build_quiz_worked_keys as WK                                    # noqa: E
 import build_u2_written as W                                           # noqa: E402
 from key_solution import solution_image                                # noqa: E402
 from _shull_name import document_name                                  # noqa: E402
-from _shull_docx import (Palette, borders, para, fix_widths, gap, one_cell, equation_bar,  # noqa: E402
+from _shull_docx import (Palette, borders, para, run, fix_widths, gap, one_cell, equation_bar,  # noqa: E402
                          work_box, rule_lines)
 
 KEY_INK = Q.KEY_INK
@@ -30,50 +30,63 @@ G = D.GUIDE
 S = D.solve_guide()
 sf, n = D.sf, WK.n
 
+# Each section: the concept statements as fill-ins. "{}" marks a blank; the answers are listed in order.
+# One source: the student page prints blanks, the key and the Key Concepts sheet print the same
+# sentences completed.
 SECTIONS = [
     ("1", "VECTOR BASICS", "S2.1", [
-        "A vector has a magnitude and a direction. A scalar has a magnitude only.",
-        "One direction, three ways: compass (35° south of west), the 0–360° scale (counterclockwise from east: north 90°, "
-        "west 180°, south 270°), and a negative angle (clockwise from east).",
-        "To convert, start from the axis after “of” and turn: 30° north of west is 180° − 30° = 150°.",
-        "Draw a vector as an arrow: tail at the start, length to scale, arrowhead for the direction, label with size and unit.",
-        "Signs of the components by quadrant: I (+, +) · II (−, +) · III (−, −) · IV (+, −).",
+        ("A {} has both a magnitude and a direction. A {} has a magnitude only.", ["vector", "scalar"]),
+        ("On the 0–360° scale, angles start at {} and run {}.", ["east", "counterclockwise"]),
+        ("A negative angle runs {} from east, so −60° and 300° point the same way.", ["clockwise"]),
+        ("In a vector drawing, the {} shows the direction and the {} shows the magnitude.", ["arrowhead", "length"]),
+        ("A vector in quadrant III has an x component that is {} and a y component that is {}.", ["negative", "negative"]),
     ]),
     ("2", "ADDING AT 90°", "S2.2", [
-        "Perpendicular vectors form the legs of a right triangle. The resultant is the hypotenuse: R² = Rx² + Ry².",
-        "The angle comes from tan(angle) = Ry / Rx. It is a size only. The signs of Rx and Ry give the quadrant.",
-        "Name the reference with every direction: “53° north of east,” never a bare 53°.",
-        "Never add the magnitudes of perpendicular vectors. Round last. Put the unit on every answer.",
+        ("Perpendicular vectors are the {} of a right triangle, and the resultant is the {}.", ["legs", "hypotenuse"]),
+        ("The size of a resultant at 90° comes from the {} theorem, R² = Rx² + Ry².", ["Pythagorean"]),
+        ("The angle comes from tan(angle) = {} ÷ {}.", ["Ry", "Rx"]),
+        ("The signs of Rx and Ry decide the {} of the direction, such as south of east.", ["quadrant"]),
+        ("Every vector answer needs a magnitude with {} and a direction with a named {}.", ["units", "reference"]),
     ]),
     ("3", "ADDING AT OTHER ANGLES", "S2.2", [
-        "Vectors that are not perpendicular get split into x and y parts first: Ax = A cos(angle), Ay = A sin(angle).",
-        "Write each angle on the 0–360° scale so the signs of the parts come out right.",
-        "Add the x parts and the y parts: Rx = Ax + Bx and Ry = Ay + By. Then finish as in section 2.",
-        "Three vectors work the same way: one more term in each sum.",
-        "A tip-to-tail sketch is a quick check on the quadrant of your answer.",
+        ("A vector that is not along an axis is first split into {} and {} components.", ["x", "y"]),
+        ("Ax = A {}(angle) and Ay = A {}(angle).", ["cos", "sin"]),
+        ("To add vectors, add all of the {} parts together and all of the {} parts together.", ["x", "y"]),
+        ("Writing each angle on the 0–360° scale makes the {} of the components come out right.", ["signs"]),
+        ("Adding three vectors works the same way, with one more {} in each sum.", ["term"]),
     ]),
     ("4", "PROJECTILE MOTION", "S2.3", [
-        "Horizontal and vertical motion are independent and share the same time. Horizontal: constant velocity, Δx = vix t. "
-        "Vertical: acceleration is −9.8 m/s².",
-        "Launched horizontally: viy = 0, and the fall time comes from the height, t = √(2h/g).",
-        "Launched at an angle: vix = vi cos(angle) and viy = vi sin(angle). On level ground, t = 2viy/g.",
-        "Landing at a different height: solve Δy = viy t − ½ g t² for t. It is a quadratic; keep the positive root.",
-        "At the highest point vy = 0, vx is unchanged, and the acceleration is still 9.8 m/s² downward.",
+        ("A projectile’s horizontal and vertical motions are {} of each other and share the same {}.", ["independent", "time"]),
+        ("Horizontal velocity stays {} because the horizontal acceleration is {}.", ["constant", "zero"]),
+        ("At the highest point, vy is {}, but the acceleration is still {} downward.", ["zero", "9.8 m/s²"]),
+        ("For a horizontal launch, viy = {}, and the fall time comes from t = {}.", ["0", "√(2h/g)"]),
+        ("When the landing height differs from the launch height, solve Δy = viy t − ½ g t² and keep the {} root.", ["positive"]),
     ]),
 ]
 
-CONCEPT = [
-    "At the highest point of a projectile’s path, what are its vertical velocity and its acceleration?",
-    "Ignoring air, what stays constant for a projectile during its flight?",
-    "One ball is dropped and another is shot horizontally from the same height at the same instant. Which lands first? Why?",
-    "At the same launch speed on level ground, two angles give the same range. How are those two angles related?",
-]
-CONCEPT_KEY = [
-    "vy = 0 at the top. The acceleration is still 9.8 m/s² downward; gravity never stops acting.",
-    "The horizontal velocity. Nothing pushes sideways, so it does not change.",
-    "They land together. The vertical motion is the same for both; the horizontal speed does not change the fall.",
-    "They add to 90° (for example 30° and 60°). 45° gives the greatest range.",
-]
+
+def blank(answer):
+    return "_" * max(9, int(len(answer) * 1.5))
+
+
+def fill_text(template, answers, solved=False):
+    """The sentence with its blanks, or with the answers written in."""
+    out = template
+    for a in answers:
+        out = out.replace("{}", a if solved else blank(a), 1)
+    return out
+
+
+def fill_para(cell, number, template, answers, pal, solved=False, size=10, color=None):
+    """One numbered statement; when solved, the answers are bold in the accent colour."""
+    p = para(cell, "", size)
+    run(p, f"{number}.  ", size, bold=True, color=pal.ink)
+    parts = template.split("{}")
+    for i, part in enumerate(parts):
+        run(p, part, size, color=pal.ink)
+        if i < len(answers):
+            run(p, answers[i] if solved else blank(answers[i]), size, bold=solved, color=color if solved else pal.ink)
+    return p
 
 
 def problems():
@@ -97,6 +110,9 @@ def problems():
     return p
 
 
+BOX = {"1.1": 1.2, "1.2": 3.0, "2.1": 2.3, "2.2": 2.9, "3.1": 2.9, "3.2": 3.4, "4.1": 2.2, "4.2": 3.4}
+
+
 def student(out):
     pal = Palette("physics")
     doc = Q.new_doc(pal, "SHULL SCIENCE / PHYSICS / UNIT 02 / STUDY GUIDE")
@@ -111,27 +127,22 @@ def student(out):
         c.paragraphs[0].paragraph_format.space_after = Pt(9)
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
-    para(c, "Read each review box, then work the two problems under it on this paper. The simple one checks the skill; the "
+    para(c, "In each section, complete the statements, then work the two problems on this paper. The simple one checks the skill; the "
             "average one is closer to test level. Every answer needs a unit, and every vector answer needs a direction. "
             "Up is +y, g = 9.8 m/s², and air resistance is ignored.", 8.5, color=pal.ink, first=True)
     probs = problems()
     for num, title, std, bullets in SECTIONS:
+        if num != "1":
+            W.page_break(doc)
         gap(doc, 8)
         c = one_cell(doc, 7.5, protect=True)
         borders(c, pal.display, sz=12, edges=("bottom",))
         para(c, f"SECTION {num}  ·  {title}  ·  {std}", 9, bold=True, color=pal.accent, caps_track=True, first=True)
         c.paragraphs[0].paragraph_format.keep_with_next = True
         c = one_cell(doc, 7.5, protect=True)
-        para(c, "WHAT WE COVERED", 7.5, bold=True, color=pal.label, caps_track=True, first=True)
-        for b in bullets:
-            para(c, "•  " + b, 9.5)
-        if num == "4":
-            gap(doc, 4)
-            c = one_cell(doc, 7.5, protect=True); borders(c, pal.hair)
-            para(c, "QUICK CHECK  ·  answer in a line", 7.5, bold=True, color=pal.label, caps_track=True, first=True)
-            for i, q in enumerate(CONCEPT, 1):
-                para(c, f"{i}.  {q}", 9.5)
-                rule_lines(c, 1, pal.hair)
+        para(c, "COMPLETE EACH STATEMENT", 7.5, bold=True, color=pal.label, caps_track=True, first=True)
+        for i, (tpl, ans) in enumerate(bullets, 1):
+            fill_para(c, i, tpl, ans, pal)
         k = 0
         for pn, kind, text, box in probs:
             if pn != num:
@@ -141,7 +152,7 @@ def student(out):
             c = one_cell(doc, 7.5, protect=True)
             para(c, f"{num}.{k}   {kind.upper()}", 8, bold=True, color=pal.accent, caps_track=True, first=True)
             para(c, text, 10)
-            work_box(c, "", pal, box, 7.2)
+            work_box(c, "", pal, BOX[f"{num}.{k}"], 7.2)
     Q.finish(doc, out)
 
 
@@ -204,6 +215,7 @@ def key_doc(out, tmp):
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     para(c, "East is +x and north is +y. Up is +y. Keep the extra digits until the last step, then round to two significant figures.",
          8.5, color=pal.ink, first=True)
+    para(c, "The answers to the fill-in statements are the completed sentences on the Key Concepts sheet.", 8.5, color=KEY_INK)
     steps = key_steps()
     probs = problems()
     counter = {}
@@ -215,16 +227,34 @@ def key_doc(out, tmp):
         para(c, f"{code}   {kind.upper()}", 8, bold=True, color=pal.accent, caps_track=True, first=True)
         para(c, text, 9.5, color=pal.ink)
         w = 7.0 if code not in ("1.1",) else 7.0
-        png, _ = solution_image({"prompt": code, "steps": steps[code]}, os.path.join(tmp, f"sg{code}.png"), width_in=w, size=22)
+        png, _ = solution_image({"prompt": code, "steps": steps[code]}, os.path.join(tmp, f"sg{code}.png"), width_in=w, size=21)
         WK.picture(c, png, w)
         if code == "4.2":
             pass
-    gap(doc, 6)
-    c = one_cell(doc, protect=True); borders(c, pal.hair)
-    para(c, "SECTION 4 QUICK CHECK", 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
-    for i, (q, a) in enumerate(zip(CONCEPT, CONCEPT_KEY), 1):
-        para(c, f"{i}.  {q}", 8.5, color=pal.ink)
-        para(c, a, 8.5, color=KEY_INK)
+    Q.finish(doc, out)
+
+
+def review(out):
+    """One page to hand out: every concept statement, completed. Built from the same SECTIONS."""
+    pal = Palette("physics")
+    doc = Q.new_doc(pal, "SHULL SCIENCE / PHYSICS / UNIT 02 / KEY CONCEPTS")
+    W.header(doc, pal, "UNIT 2 KEY CONCEPTS  ·  VECTORS & PROJECTILE MOTION")
+    gap(doc, 4)
+    t = doc.add_table(rows=1, cols=3)
+    fix_widths(t, [3.6, 2.2, 1.7])
+    for c, lab in zip(t.rows[0].cells, ("NAME", "DATE", "PERIOD")):
+        borders(c, pal.hair, sz=6)
+        para(c, lab, 8.5, bold=True, color=pal.label, caps_track=True, first=True)
+        c.paragraphs[0].paragraph_format.space_after = Pt(9)
+    for num, title, std, items in SECTIONS:
+        gap(doc, 8)
+        c = one_cell(doc, 7.5, protect=True)
+        borders(c, pal.display, sz=12, edges=("bottom",))
+        para(c, f"SECTION {num}  ·  {title}  ·  {std}", 9, bold=True, color=pal.accent, caps_track=True, first=True)
+        c.paragraphs[0].paragraph_format.keep_with_next = True
+        c = one_cell(doc, 7.5, protect=True)
+        for i, (tpl, ans) in enumerate(items, 1):
+            fill_para(c, i, tpl, ans, pal, solved=True, size=11.5, color=pal.accent)
     Q.finish(doc, out)
 
 
@@ -234,11 +264,16 @@ def main():
     V.VERSIONS_Q2 = {}
     bad = 0
     with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(outdir, document_name("Study_Guide", ["2.1", "2.2", "2.3"], 2, descriptor="Key Concepts"))
+        review(p)
+        nn = Q.pages(p)
+        print("ok " if nn == 1 else "BAD", nn, "page", os.path.basename(p))
+        bad += nn != 1
         for key in (False, True):
             p = os.path.join(outdir, document_name("Study_Guide", ["2.1", "2.2", "2.3"], 2, key=key))
             key_doc(p, tmp) if key else student(p)
             nn = Q.pages(p)
-            ok = nn <= (4 if key else 5)
+            ok = nn <= 4
             print("ok " if ok else "BAD", nn, "page", os.path.basename(p))
             bad += not ok
     return 1 if bad else 0
