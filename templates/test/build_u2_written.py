@@ -17,6 +17,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 for p in (HERE, os.path.join(REPO, "templates"), os.path.join(REPO, "templates", "quiz"), os.path.join(REPO, "scripts")):
     sys.path.insert(0, p)
 import u2_data as D                                                    # noqa: E402
+import u2_equations as EQ                                              # noqa: E402
 import vectors_22 as V                                                 # noqa: E402
 import build_quiz_docx as Q                                            # noqa: E402
 import build_quiz_worked_keys as WK                                    # noqa: E402
@@ -87,11 +88,11 @@ def student(L, out):
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     para(c, DIRECTIONS, 8.5, color=pal.ink, first=True)
     gap(doc, 3)
-    equation_bar(doc, VEC_EQ, pal, "VECTOR EQUATIONS")
+    EQ.vector_block(doc, pal)
     q_block(doc, pal, 1, D.POINTS[0], w["q1"]["text"], 2.0)
     q_block(doc, pal, 2, D.POINTS[1], w["q2"]["text"], 3.4)
     page_break(doc)
-    equation_bar(doc, PROJ_EQ, pal, "PROJECTILE EQUATIONS")
+    EQ.projectile_block(doc, pal)
     q_block(doc, pal, 3, D.POINTS[2], w["q3"]["text"], 1.1)
     q_block(doc, pal, 4, D.POINTS[3], w["q4"]["text"], 1.9)
     q_block(doc, pal, 5, D.POINTS[4], w["q5"]["text"], 2.85)

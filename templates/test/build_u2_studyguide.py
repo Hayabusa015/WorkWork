@@ -80,6 +80,14 @@ def part_label(doc, pal, text, sub):
     c.paragraphs[0].paragraph_format.keep_with_next = True
 
 
+def tight_rules(cell, n, hexval):
+    """Ruled answer lines at 4 pt spacing, so eleven questions fit on one page."""
+    rule_lines(cell, n, hexval)
+    for p in cell.paragraphs[-n:]:
+        p.paragraph_format.space_after = Pt(3)
+        p.paragraph_format.line_spacing = Pt(13)
+
+
 def student(out):
     pal = Palette("physics")
     doc = Q.new_doc(pal, "SHULL SCIENCE / PHYSICS / UNIT 02 / STUDY GUIDE")
@@ -96,13 +104,14 @@ def student(out):
         gap(doc, 1)
         c = one_cell(doc, 7.5, protect=True)
         p = para(c, f"{i}.  {q}", 9.5, first=True)
-        rule_lines(c, 2, pal.hair)
+        tight_rules(c, 2, pal.hair)
+    W.page_break(doc)
     part_label(doc, pal, "PART 2  ·  PROBLEMS", "The same kinds of problems you will see on the written test. Show the givens, the equation, and units. "
                "Up is +y, g = 9.8 m/s², and air resistance is ignored.")
     gap(doc, 3)
-    equation_bar(doc, W.VEC_EQ, pal, "VECTOR EQUATIONS")
+    W.EQ.vector_block(doc, pal)
     gap(doc, 2)
-    equation_bar(doc, W.PROJ_EQ, pal, "PROJECTILE EQUATIONS")
+    W.EQ.projectile_block(doc, pal)
     for i, ((label, text), box) in enumerate(zip(PROBLEMS, BOX), 1):
         if i == 3:
             W.page_break(doc)
