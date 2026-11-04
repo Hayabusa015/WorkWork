@@ -16,7 +16,7 @@ TOKEN = re.compile(r"(_\{[^}]*\}|\^\{[^}]*\})")
 
 VECTOR = [
     ("COMPONENTS", ["R_{x} = R cos(angle)", "R_{y} = R sin(angle)"]),
-    ("ADDING", ["R_{x} = A_{x} + B_{x}", "R_{y} = A_{y} + B_{y}"]),
+    ("ADDING", ["R_{x} = x_{1} + x_{2} + x_{3} + …", "R_{y} = y_{1} + y_{2} + y_{3} + …"]),
     ("RESULTANT", ["R^{2} = R_{x}^{2} + R_{y}^{2}", "tan(angle) = R_{y} / R_{x}"]),
 ]
 PROJECTILE = [
