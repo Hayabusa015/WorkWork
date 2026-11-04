@@ -112,13 +112,13 @@ def steps(s1, s2, s3):
     st1 = W.p5_steps(P1, s1)
     st1 += [WK.say("Landing velocity: the horizontal part is unchanged, the vertical part keeps changing.", "arrow"),
             WK.row(f"vy = viy − g t = {s1['vy']:.2f} − (9.8)({s1['t']:.2f}) = {n(s1['vyf'])} m/s"),
-            WK.row("speed =", {"sqrt": f"({s1['vx']:.2f})^{2} + ({abs(s1['vyf']):.2f})^{2}"}, f"= {s1['speed']:.2f} m/s"),
+            WK.row("speed =", {"sqrt": f"{s1['vx'] ** 2 + s1['vyf'] ** 2:.1f}"}, f"= {s1['speed']:.2f} m/s"),
             WK.row("tan(angle) =", {"frac": [f"{abs(s1['vyf']):.2f}", f"{s1['vx']:.2f}"]}, f"= {abs(s1['vyf']) / s1['vx']:.2f}"),
             WK.ans("(d)", f"{sf(s1['speed'])} m/s at {sf(s1['below'])}° below the horizontal")]
     st2 = W.p3_steps(P2, s2)
     st2 += [WK.say("Landing velocity: vx stays 9.0 m/s; vy comes from the fall.", "arrow"),
             WK.row(f"vy = −g t = −(9.8)({s2['t']:.2f}) = {n(s2['vy'])} m/s"),
-            WK.row("speed =", {"sqrt": f"({P2['vx']:.1f})^{2} + ({abs(s2['vy']):.2f})^{2}"}, f"= {s2['speed']:.2f} m/s"),
+            WK.row("speed =", {"sqrt": f"{P2['vx'] ** 2 + s2['vy'] ** 2:.1f}"}, f"= {s2['speed']:.2f} m/s"),
             WK.row("tan(angle) =", {"frac": [f"{abs(s2['vy']):.2f}", f"{P2['vx']:.1f}"]}, f"= {abs(s2['vy']) / P2['vx']:.2f}"),
             WK.ans("(c)", f"{sf(s2['speed'])} m/s at {sf(s2['below'])}° below the horizontal")]
     L = P3["ledge"]
