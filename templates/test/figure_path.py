@@ -57,7 +57,7 @@ def checks():
 def font(px, bold=True):
     f = ImageFont.truetype(os.path.expanduser("~/.fonts/Archivo[wdth,wght].ttf"), px)
     try:
-        f.set_variation_by_axes([100, 700 if bold else 400])
+        f.set_variation_by_axes([700 if bold else 400, 100])
     except Exception:
         pass
     return f
@@ -65,12 +65,11 @@ def font(px, bold=True):
 
 def figure(path):
     S = 3
-    W_, H_ = 1500 * S, 780 * S
+    W_, H_ = 1500 * S, 740 * S
     im = Image.new("RGB", (W_, H_), "white")
     d = ImageDraw.Draw(im)
-    ink = hexof(T["courses"]["physics"]["ink"]["hex"]) if "ink" in T["courses"]["physics"] else "#1A1A1A"
     pal = Palette("physics")
-    ink, label, accent = hexof(pal.ink), hexof(pal.label), hexof(pal.accent)
+    ink, label, accent = "#" + hexof(pal.ink), "#" + hexof(pal.label), "#" + hexof(pal.accent)
     ox, oy = 150 * S, 700 * S                       # ground-left origin
     sx, sy = 46 * S, 44 * S                         # px per metre
     X = lambda x: ox + x * sx
@@ -85,7 +84,7 @@ def figure(path):
     while x < X(26.5):
         d.line([(x, Y(H0)), (x + 14 * S, Y(H0))], fill=label, width=2 * S)
         x += 26 * S
-    d.text((X(26.7), Y(H0) - 14 * S), "launch height", font=font(26 * S, False), fill=label, anchor="lm")
+    d.text((X(13.5), Y(H0) + 18 * S), "launch height", font=font(26 * S, False), fill=label, anchor="mm")
     # path
     pts = [(X(pos(t)[0]), Y(pos(t)[1])) for t in [i * t_land / 300 for i in range(301)]]
     d.line(pts, fill=ink, width=4 * S, joint="curve")
@@ -100,7 +99,7 @@ def figure(path):
         tx, ty = px + off[0] * S, py + off[1] * S
         d.ellipse([tx - 20 * S, ty - 20 * S, tx + 20 * S, ty + 20 * S], fill="white", outline=accent, width=3 * S)
         d.text((tx, ty), str(k), font=font(28 * S), fill=ink, anchor="mm")
-    d.text((X(-1.2), Y(H0 / 2)), "platform", font=font(26 * S, False), fill=label, anchor="mm")
+    d.text((X(-1.2), Y(H0 / 2)), "platform", font=font(22 * S, False), fill=label, anchor="mm")
     im = im.resize((W_ // S, H_ // S), Image.LANCZOS)
     im.save(path, dpi=(300, 300))
     return path
