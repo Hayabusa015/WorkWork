@@ -1,0 +1,83 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.3",
+  "sectionTitle": "Inclined Plane FBDs",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "3.3\nInclined Plane FBDs",
+        "subhead": "Tilt the axes and split the weight into parts along and into the slope."
+      },
+      "imageSubjects": {
+        "section": "a wooden ramp leaning against a loading dock in low light"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Tilt the Axes on a Slope",
+        "subhead": "The angle between W and the tilted y-axis equals the ramp angle.",
+        "a1_l": "TILT THE AXES",
+        "a1_b": "x along the slope, y perpendicular to the slope.",
+        "a2_l": "ALONG THE SLOPE",
+        "a2_b": "mg sin(angle), pointing down the slope.",
+        "a3_l": "INTO THE SLOPE",
+        "a3_b": "mg cos(angle), pressing into the surface."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s33_components.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Normal Force Is Not the Weight",
+        "subhead": "The steeper the ramp, the less the surface pushes back.",
+        "c1_l": "NEARLY FLAT",
+        "c1_b": "N gets close to mg.\nAlmost nothing pulls\nthe block along.",
+        "c2_l": "NEARLY VERTICAL",
+        "c2_b": "N gets close to 0.\nThe pull along the\nslope nears mg.",
+        "mustwrite": "On an incline, N = mg cos(angle), not mg."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s33_angle_extremes.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a 30° Ramp",
+        "subhead": "Frictionless. Tilt your axes before you calculate anything.",
+        "problem": "A 5.0 kg block sits on a 30° ramp. Draw its FBD. Find both weight components and N.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 5.0 kg\nangle = 30°\nW = 49 N",
+        "q2_l": "EQUATION",
+        "q2_b": "along: mg sin(angle)\ninto: mg cos(angle)",
+        "answer": "Along: 24.5 N  ·  Into: 42.4 N  ·  N = 42.4 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s33_block_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Net Force Along the Slope",
+        "subhead": "Frictionless. The push is parallel to the ramp.",
+        "problem": "A worker pushes a 12 kg crate up a 25° ramp with 30 N. Find the net force along the ramp.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 12 kg, angle = 25°\npush = 30 N up the ramp",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = mg sin(angle) − 30",
+        "answer": "Fnet = 19.7 N down the ramp"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s33_push_problem.png"
+      }
+    }
+  ]
+}

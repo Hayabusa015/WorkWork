@@ -1,0 +1,145 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.2",
+  "sectionTitle": "Free Body Diagrams",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "02",
+        "headline": "3.2\nFree Body Diagrams",
+        "subhead": "Draw free body diagrams, find the net force, and break angled forces into components."
+      },
+      "imageSubjects": {
+        "section": "a tug-of-war rope pulled taut across a gym floor"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Drawing a Free Body Diagram",
+        "subhead": "One arrow per force, never one for motion. Friction waits until 3.6.",
+        "a1_l": "THE RULES",
+        "a1_b": "A box or dot, one labeled arrow per force, to scale.",
+        "a2_l": "FORCE TYPES",
+        "a2_b": "Weight W, normal N, applied F_app, tension T.",
+        "a3_l": "TENSION",
+        "a3_b": "A rope only pulls, along the rope, away from the object."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s32_rules.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Draw the FBDs",
+        "subhead": "Both objects are at rest, so the forces on each one balance.",
+        "problem": "Draw and label FBDs: a 2.0 kg book on a table, and a 1.5 kg lamp hanging from a cord.",
+        "q1_l": "GIVEN",
+        "q1_b": "Book: m = 2.0 kg\nLamp: m = 1.5 kg\nBoth at rest",
+        "q2_l": "EQUATION",
+        "q2_b": "W = mg\nAt rest: Fnet = 0",
+        "answer": "Book: N = W = 19.6 N  ·  Lamp: T = W = 14.7 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_draw_problem.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Net Force in One Dimension",
+        "subhead": "Add the forces along each axis, with signs.",
+        "c1_l": "SIGN CONVENTION",
+        "c1_b": "Right and up are +.\nLeft and down are −.\nState it every time.",
+        "c2_l": "ADD BY AXIS",
+        "c2_b": "Fnet,x: the horizontals.\nFnet,y: the verticals.\nNever mix the two.",
+        "mustwrite": "Net force is the sum of every force, with signs: Fnet = F1 + F2 + ..."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s32_net1d.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Net Force and Equilibrium",
+        "subhead": "Use +x right and +y up.",
+        "problem": "Find the net force on the crate, then the one force that would put it in equilibrium.",
+        "q1_l": "GIVEN",
+        "q1_b": "50 N right, 20 N left\n40 N up, 40 N down",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet,x = 50 − 20\nFnet,y = 40 − 40",
+        "answer": "Fnet = 30 N right  ·  Balancing force: 30 N left"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_crate_problem.png"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Resultant and Angle",
+        "subhead": "When Fnet,x and Fnet,y are both nonzero, combine them into one force.",
+        "f1_l": "FORMULA",
+        "f1_b": "F = √(Fx² + Fy²)\nangle = tan inverse (Fy/Fx)\nmeasured from +x",
+        "work": "F = √(40² + 30²)\n= 50 N\nangle = 37° above +x",
+        "mustwrite": "A resultant needs a size and a direction. State both, every time."
+      },
+      "images": {
+        "data": "../assets/phys_u03/s32_resultant.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Forces at Angles",
+        "subhead": "Break an angled force into the part along x and the part along y.",
+        "a1_l": "X-COMPONENT",
+        "a1_b": "Fx = F cos(angle) = 100 cos 30° = 87 N",
+        "a2_l": "Y-COMPONENT",
+        "a2_b": "Fy = F sin(angle) = 100 sin 30° = 50 N",
+        "a3_l": "CHECK",
+        "a3_b": "√(87² + 50²) = 100 N. The parts rebuild the force."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s32_components.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "One Angled Force, One Straight",
+        "subhead": "Seen from above, on frictionless ice. Use +x right.",
+        "problem": "Two ropes pull a crate: 80 N at 40° above +x, and 30 N toward −x. Find the net force.",
+        "q1_l": "GIVEN",
+        "q1_b": "80 N at 40°\n30 N toward −x",
+        "q2_l": "EQUATION",
+        "q2_b": "Fx = F cos(angle)\nFy = F sin(angle)",
+        "answer": "Fnet = 60 N at 59° above +x"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_two_force_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Two Angled Forces",
+        "subhead": "Seen from above. Angles are measured from the x-axis.",
+        "problem": "Two tugboats pull a barge: 500 N at 30° above +x, 400 N at 45° above −x. Find Fnet.",
+        "q1_l": "GIVEN",
+        "q1_b": "500 N at 30° (+x)\n400 N at 45° (−x)",
+        "q2_l": "EQUATION",
+        "q2_b": "Sum Fx, sum Fy, then\nF = √(Fx² + Fy²)",
+        "answer": "Fnet = 554 N at 74° above +x"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_two_angled_problem.png"
+      }
+    }
+  ]
+}

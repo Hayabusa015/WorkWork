@@ -1,0 +1,99 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.7",
+  "sectionTitle": "Multi-Body Systems",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "07",
+        "headline": "3.7\nMulti-Body Systems",
+        "subhead": "Solve pulley systems as one object for a, then one mass alone for tension."
+      },
+      "imageSubjects": {
+        "section": "a steel pulley wheel and rope hanging in a workshop"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Ideal Strings and Pulleys",
+        "subhead": "Massless string, frictionless pulley: the string just changes direction.",
+        "c1_l": "WHAT IS THE SAME",
+        "c1_b": "One tension T all\nalong the string.\nOne size of a for all.",
+        "c2_l": "TWO WAYS TO SOLVE",
+        "c2_b": "System: a = Fnet/total m.\nThen one mass alone\nfor T.",
+        "mustwrite": "Solve the whole system for a first, then one mass alone for T."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s37_ideal.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Atwood Machine",
+        "subhead": "The heavier mass goes down. Use its direction as positive.",
+        "problem": "A 5.0 kg mass and a 3.0 kg mass hang over a pulley. Find a and the string tension.",
+        "q1_l": "GIVEN",
+        "q1_b": "m1 = 5.0 kg\nm2 = 3.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "a = (m1 − m2)g/(m1 + m2)\nT = m2(g + a)",
+        "answer": "a = 2.45 m/s²  ·  T = 36.8 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_atwood_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a Table",
+        "subhead": "Frictionless table. Only the hanging weight drives the system.",
+        "problem": "A 4.0 kg block on a table is tied over a pulley to a 2.0 kg hanging mass. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 4.0 kg\nhanging 2.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "a = m2 g/(m1 + m2)\nT = m1 a",
+        "answer": "a = 3.27 m/s²  ·  T = 13.1 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_table_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a Table, with Friction",
+        "subhead": "Same setup, now μk = 0.20 between block and table.",
+        "problem": "Repeat the table problem with μk = 0.20. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 4.0 kg, μk = 0.20\nhanging 2.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = m2 g − μk m1 g\nT = m1 a + fk",
+        "answer": "a = 1.96 m/s²  ·  T = 15.7 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_table_friction.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Challenge: Incline and Pulley",
+        "subhead": "Frictionless incline. Decide which way it moves first.",
+        "problem": "A 6.0 kg block on a 30° incline is tied over a pulley to a 5.0 kg hanging mass. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 6.0 kg, 30°\nhanging 5.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = m2 g − m1 g sin(angle)\nT = m2(g − a)",
+        "answer": "a = 1.78 m/s²  ·  T = 40.1 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_incline_pulley.png"
+      }
+    }
+  ]
+}

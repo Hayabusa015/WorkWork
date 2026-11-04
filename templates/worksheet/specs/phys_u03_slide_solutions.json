@@ -1,0 +1,1035 @@
+{
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.1",
+  "3.2",
+  "3.3",
+  "3.4",
+  "3.5",
+  "3.6",
+  "3.7"
+ ],
+ "docType": "Slide_Solutions",
+ "sectionsContent": [
+  {
+   "code": "3.1",
+   "title": "3.1 Newton's Laws",
+   "questions": [
+    {
+     "prompt": "A 60 kg student stands on Earth, then on the Moon (g = 1.6 m/s²). Find the weight in each place.",
+     "solution": "Earth 588 N down; Moon 96 N down",
+     "finalAnswer": "Earth 588 N down; Moon 96 N down",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "W = mg"
+       ]
+      },
+      {
+       "row": [
+        "W_{Earth} = (60 kg)(9.8 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "W_{Earth} ="
+       ],
+       "value": "588 N down"
+      },
+      {
+       "row": [
+        "W_{Moon} = (60 kg)(1.6 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "W_{Moon} ="
+       ],
+       "value": "96 N down"
+      },
+      {
+       "say": "The mass is 60 kg in both places. Only g changed."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.2",
+   "title": "3.2 Free Body Diagrams",
+   "questions": [
+    {
+     "prompt": "Draw and label FBDs: a 2.0 kg book on a table, and a 1.5 kg lamp hanging from a cord.",
+     "solution": "Book: N = W = 19.6 N; Lamp: T = W = 14.7 N",
+     "finalAnswer": "Book: N = W = 19.6 N; Lamp: T = W = 14.7 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "W_{book} = (2.0 kg)(9.8 m/s^{2}) = 19.6 N"
+       ]
+      },
+      {
+       "row": [
+        "at rest, so N = W"
+       ],
+       "note": "up balances down"
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "19.6 N up"
+      },
+      {
+       "row": [
+        "W_{lamp} = (1.5 kg)(9.8 m/s^{2}) = 14.7 N"
+       ]
+      },
+      {
+       "row": [
+        "at rest, so T = W"
+       ]
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "14.7 N up"
+      },
+      {
+       "say": "Book FBD: N up, W down. Lamp FBD: T up, W down. Two arrows each, equal length."
+      }
+     ]
+    },
+    {
+     "prompt": "Forces on a crate: 50 N right, 20 N left, 40 N up, 40 N down. Find the net force, then the one force that would put it in equilibrium.",
+     "solution": "Fnet = 30 N right; balancing force 30 N left",
+     "finalAnswer": "Fnet = 30 N right; balancing force 30 N left",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "Fnet_{x} = +50 N − 20 N = +30 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet_{y} = +40 N − 40 N = 0"
+       ]
+      },
+      {
+       "answer": [
+        "Fnet ="
+       ],
+       "value": "30 N right"
+      },
+      {
+       "say": "Equilibrium needs Fnet = 0, so add a force equal and opposite to the net force."
+      },
+      {
+       "answer": [
+        "balancing force ="
+       ],
+       "value": "30 N left"
+      }
+     ]
+    },
+    {
+     "prompt": "Two ropes pull a crate on frictionless ice (top view): 80 N at 40° above +x, and 30 N toward −x. Find the net force.",
+     "solution": "60 N at 59° above +x",
+     "finalAnswer": "60 N at 59° above +x",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "F_{1x} = 80 cos 40° = 61.3 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{1y} = 80 sin 40° = 51.4 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet_{x} = 61.3 N − 30 N = 31.3 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet_{y} = 51.4 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet =",
+        {
+         "sqrt": "31.3^{2} + 51.4^{2}"
+        },
+        " = 60.2 N"
+       ]
+      },
+      {
+       "row": [
+        "angle = tan^{−1}",
+        {
+         "frac": [
+          "51.4",
+          "31.3"
+         ]
+        },
+        " = 58.7°"
+       ]
+      },
+      {
+       "answer": [
+        "Fnet ="
+       ],
+       "value": "60 N at 59° above +x"
+      }
+     ]
+    },
+    {
+     "prompt": "Two tugboats pull a barge (top view): 500 N at 30° above +x, 400 N at 45° above −x. Find Fnet.",
+     "solution": "554 N at 74° above +x",
+     "finalAnswer": "554 N at 74° above +x",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "F_{1x} = 500 cos 30° = +433.0 N"
+       ],
+       "note": "right"
+      },
+      {
+       "row": [
+        "F_{1y} = 500 sin 30° = +250.0 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{2x} = −400 cos 45° = −282.8 N"
+       ],
+       "note": "points left, so negative"
+      },
+      {
+       "row": [
+        "F_{2y} = 400 sin 45° = +282.8 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet_{x} = 433.0 − 282.8 = 150.2 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet_{y} = 250.0 + 282.8 = 532.8 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet =",
+        {
+         "sqrt": "150.2^{2} + 532.8^{2}"
+        },
+        " = 554 N"
+       ]
+      },
+      {
+       "row": [
+        "angle = tan^{−1}",
+        {
+         "frac": [
+          "532.8",
+          "150.2"
+         ]
+        },
+        " = 74.3°"
+       ]
+      },
+      {
+       "answer": [
+        "Fnet ="
+       ],
+       "value": "554 N at 74° above +x"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.3",
+   "title": "3.3 Inclined Plane FBDs",
+   "questions": [
+    {
+     "prompt": "A 5.0 kg block sits on a frictionless 30° ramp. Draw its FBD. Find both weight components and N.",
+     "solution": "Along 24.5 N; into 42.4 N; N = 42.4 N",
+     "finalAnswer": "Along 24.5 N; into 42.4 N; N = 42.4 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "W = (5.0 kg)(9.8 m/s^{2}) = 49 N"
+       ]
+      },
+      {
+       "row": [
+        "W_{along} = mg sin(angle) = 49 sin 30°"
+       ]
+      },
+      {
+       "answer": [
+        "W_{along} ="
+       ],
+       "value": "24.5 N down the slope"
+      },
+      {
+       "row": [
+        "W_{into} = mg cos(angle) = 49 cos 30°"
+       ]
+      },
+      {
+       "answer": [
+        "W_{into} ="
+       ],
+       "value": "42.4 N"
+      },
+      {
+       "row": [
+        "nothing moves into the ramp, so N = W_{into}"
+       ]
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "42.4 N"
+      },
+      {
+       "say": "FBD: W straight down, N perpendicular out of the ramp. The components replace W; do not draw all three as separate forces."
+      }
+     ]
+    },
+    {
+     "prompt": "A worker pushes a 12 kg crate up a frictionless 25° ramp with 30 N, parallel to the ramp. Find the net force along the ramp.",
+     "solution": "19.7 N down the ramp",
+     "finalAnswer": "19.7 N down the ramp",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "down the slope is positive"
+       ]
+      },
+      {
+       "row": [
+        "W_{along} = (12)(9.8) sin 25° = 49.7 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = 49.7 N − 30 N"
+       ]
+      },
+      {
+       "answer": [
+        "Fnet ="
+       ],
+       "value": "19.7 N down the ramp"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.4",
+   "title": "3.4 F = ma Calculations",
+   "questions": [
+    {
+     "prompt": "A 1500 kg car has 4500 N of engine force forward and 1200 N of drag. Find a.",
+     "solution": "2.2 m/s² forward",
+     "finalAnswer": "2.2 m/s² forward",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "Fnet = 4500 N − 1200 N = 3300 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = ma"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "Fnet",
+          "m"
+         ]
+        }
+       ],
+       "note": "divide both sides by m"
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "3300 N",
+          "1500 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.2 m/s^{2} forward"
+      }
+     ]
+    },
+    {
+     "prompt": "The graph shows net force against acceleration for one cart, through (0, 0) and (3.2 m/s², 8.0 N). Find the cart's mass.",
+     "solution": "2.5 kg",
+     "finalAnswer": "2.5 kg",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "slope =",
+        {
+         "frac": [
+          "ΔF",
+          "Δa"
+         ]
+        },
+        " = m"
+       ]
+      },
+      {
+       "row": [
+        "m =",
+        {
+         "frac": [
+          "8.0 N − 0",
+          "3.2 m/s^{2} − 0"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "m ="
+       ],
+       "value": "2.5 kg"
+      },
+      {
+       "say": "N divided by m/s² is kg, so the slope's unit checks out."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.5",
+   "title": "3.5 Net Force & Acceleration",
+   "questions": [
+    {
+     "prompt": "A 20 kg sled on frictionless ice is pulled with 60 N at 35° above horizontal. Find a and the normal force.",
+     "solution": "a = 2.5 m/s² right; N = 162 N",
+     "finalAnswer": "a = 2.5 m/s² right; N = 162 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "F_{x} = 60 cos 35° = 49.1 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 60 sin 35° = 34.4 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "F_{x}",
+          "m"
+         ]
+        },
+        " =",
+        {
+         "frac": [
+          "49.1 N",
+          "20 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.5 m/s^{2} right"
+      },
+      {
+       "row": [
+        "vertical: N + F_{y} − mg = 0"
+       ]
+      },
+      {
+       "row": [
+        "N = mg − F_{y}"
+       ],
+       "note": "subtract F_{y} from both sides"
+      },
+      {
+       "row": [
+        "N = 196 N − 34.4 N"
+       ]
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "162 N"
+      }
+     ]
+    },
+    {
+     "prompt": "An 8.0 kg box slides down a frictionless 20° ramp. Find its acceleration.",
+     "solution": "3.4 m/s² down the ramp",
+     "finalAnswer": "3.4 m/s² down the ramp",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "Fnet = mg sin(angle)"
+       ]
+      },
+      {
+       "row": [
+        "ma = mg sin(angle)"
+       ]
+      },
+      {
+       "row": [
+        "a = g sin(angle)"
+       ],
+       "note": "divide both sides by m"
+      },
+      {
+       "row": [
+        "a = (9.8 m/s^{2}) sin 20°"
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "3.4 m/s^{2} down the ramp"
+      },
+      {
+       "say": "The 8.0 kg is not needed. Mass cancels on a frictionless ramp."
+      }
+     ]
+    },
+    {
+     "prompt": "A 70 kg person stands on a scale in an elevator accelerating up at 2.0 m/s². Find the reading.",
+     "solution": "826 N",
+     "finalAnswer": "826 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "up is positive: N − mg = ma"
+       ]
+      },
+      {
+       "row": [
+        "N = mg + ma = m(g + a)"
+       ],
+       "note": "add mg to both sides"
+      },
+      {
+       "row": [
+        "N = (70 kg)(9.8 + 2.0 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "826 N"
+      },
+      {
+       "say": "True weight is 686 N. The scale reads more because it must also speed the person up."
+      }
+     ]
+    },
+    {
+     "prompt": "The same 70 kg person rides an elevator accelerating down at 2.0 m/s². Find the reading.",
+     "solution": "546 N",
+     "finalAnswer": "546 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "up is positive, so a = −2.0 m/s^{2}"
+       ]
+      },
+      {
+       "row": [
+        "N = m(g + a)"
+       ]
+      },
+      {
+       "row": [
+        "N = (70 kg)(9.8 − 2.0 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "546 N"
+      },
+      {
+       "mistake": [
+        "N = (70)(9.8 + 2.0) = 826 N"
+       ],
+       "note": "ignoring the sign of a"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.6",
+   "title": "3.6 Frictional Forces",
+   "questions": [
+    {
+     "prompt": "A 40 kg box is pushed across the floor at constant velocity with 120 N. Find μk.",
+     "solution": "0.31",
+     "finalAnswer": "0.31",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "constant velocity, so Fnet = 0 and f_{k} = 120 N"
+       ]
+      },
+      {
+       "row": [
+        "N = mg = (40)(9.8) = 392 N"
+       ]
+      },
+      {
+       "row": [
+        "f_{k} = μ_{k} N"
+       ]
+      },
+      {
+       "row": [
+        "μ_{k} =",
+        {
+         "frac": [
+          "f_{k}",
+          "N"
+         ]
+        },
+        " =",
+        {
+         "frac": [
+          "120 N",
+          "392 N"
+         ]
+        }
+       ],
+       "note": "divide both sides by N"
+      },
+      {
+       "answer": [
+        "μ_{k} ="
+       ],
+       "value": "0.31"
+      }
+     ]
+    },
+    {
+     "prompt": "A 25 kg box (μs = 0.40, μk = 0.30) is pushed with 90 N. Does it move? If the push rises to 110 N, find a.",
+     "solution": "90 N: no motion; 110 N: a = 1.5 m/s²",
+     "finalAnswer": "90 N: no motion; 110 N: a = 1.5 m/s²",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "N = (25)(9.8) = 245 N"
+       ]
+      },
+      {
+       "row": [
+        "f_{s,max} = (0.40)(245 N) = 98 N"
+       ]
+      },
+      {
+       "say": "90 N < 98 N, so static friction holds it. No motion."
+      },
+      {
+       "row": [
+        "110 N > 98 N, so it slides: f_{k} = (0.30)(245 N) = 73.5 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = 110 N − 73.5 N = 36.5 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "36.5 N",
+          "25 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "1.5 m/s^{2}"
+      }
+     ]
+    },
+    {
+     "prompt": "A 30 kg crate is pulled with 150 N at 30° above horizontal. μk = 0.25. Find N and a.",
+     "solution": "N = 219 N; a = 2.5 m/s²",
+     "finalAnswer": "N = 219 N; a = 2.5 m/s²",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "F_{y} = 150 sin 30° = 75 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{x} = 150 cos 30° = 129.9 N"
+       ]
+      },
+      {
+       "row": [
+        "N = mg − F_{y} = 294 N − 75 N"
+       ]
+      },
+      {
+       "answer": [
+        "N ="
+       ],
+       "value": "219 N"
+      },
+      {
+       "mistake": [
+        "N = mg = 294 N"
+       ],
+       "note": "the pull lifts part of the weight"
+      },
+      {
+       "row": [
+        "f_{k} = (0.25)(219 N) = 54.8 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = 129.9 N − 54.8 N = 75.1 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "75.1 N",
+          "30 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.5 m/s^{2}"
+      }
+     ]
+    },
+    {
+     "prompt": "A 10 kg block rests on a 35° incline. μs = 0.50, μk = 0.40. Does it slide? If so, find a.",
+     "solution": "Slides; a = 2.4 m/s²",
+     "finalAnswer": "Slides; a = 2.4 m/s²",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "W_{along} = (10)(9.8) sin 35° = 56.2 N"
+       ]
+      },
+      {
+       "row": [
+        "N = (10)(9.8) cos 35° = 80.3 N"
+       ]
+      },
+      {
+       "row": [
+        "f_{s,max} = (0.50)(80.3 N) = 40.1 N"
+       ]
+      },
+      {
+       "say": "56.2 N > 40.1 N, so it slides. Kinetic friction takes over."
+      },
+      {
+       "row": [
+        "f_{k} = (0.40)(80.3 N) = 32.1 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = 56.2 N − 32.1 N = 24.1 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "24.1 N",
+          "10 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.4 m/s^{2} down the slope"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.7",
+   "title": "3.7 Multi-Body Systems",
+   "questions": [
+    {
+     "prompt": "A 5.0 kg mass and a 3.0 kg mass hang over a pulley (Atwood machine). Find a and the string tension.",
+     "solution": "a = 2.45 m/s²; T = 36.8 N",
+     "finalAnswer": "a = 2.45 m/s²; T = 36.8 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "system: Fnet = (5.0 − 3.0)(9.8) = 19.6 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "19.6 N",
+          "8.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.45 m/s^{2}"
+      },
+      {
+       "row": [
+        "3.0 kg alone (moves up): T − m_{2}g = m_{2}a"
+       ]
+      },
+      {
+       "row": [
+        "T = m_{2}(g + a) = (3.0)(9.8 + 2.45)"
+       ],
+       "note": "add m_{2}g to both sides"
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "36.8 N"
+      }
+     ]
+    },
+    {
+     "prompt": "A 4.0 kg block on a frictionless table is tied over a pulley to a 2.0 kg hanging mass. Find a and T.",
+     "solution": "a = 3.27 m/s²; T = 13.1 N",
+     "finalAnswer": "a = 3.27 m/s²; T = 13.1 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "only the hanging weight drives it: Fnet = (2.0)(9.8) = 19.6 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "19.6 N",
+          "6.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "3.27 m/s^{2}"
+      },
+      {
+       "row": [
+        "block alone: T = m_{1}a = (4.0)(3.27)"
+       ]
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "13.1 N"
+      }
+     ]
+    },
+    {
+     "prompt": "Repeat the table problem with μk = 0.20 between the 4.0 kg block and the table. Find a and T.",
+     "solution": "a = 1.96 m/s²; T = 15.7 N",
+     "finalAnswer": "a = 1.96 m/s²; T = 15.7 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "f_{k} = (0.20)(4.0)(9.8) = 7.84 N"
+       ]
+      },
+      {
+       "row": [
+        "Fnet = 19.6 N − 7.84 N = 11.76 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "11.76 N",
+          "6.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "1.96 m/s^{2}"
+      },
+      {
+       "row": [
+        "block alone: T − f_{k} = m_{1}a"
+       ]
+      },
+      {
+       "row": [
+        "T = (4.0)(1.96) + 7.84"
+       ],
+       "note": "add f_{k} to both sides"
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "15.7 N"
+      }
+     ]
+    },
+    {
+     "prompt": "A 6.0 kg block on a frictionless 30° incline is tied over a pulley to a 5.0 kg hanging mass. Find a and T.",
+     "solution": "a = 1.78 m/s²; T = 40.1 N",
+     "finalAnswer": "a = 1.78 m/s²; T = 40.1 N",
+     "calculation": true,
+     "steps": [
+      {
+       "row": [
+        "hanging pull: (5.0)(9.8) = 49.0 N"
+       ]
+      },
+      {
+       "row": [
+        "block's pull down the slope: (6.0)(9.8) sin 30° = 29.4 N"
+       ]
+      },
+      {
+       "say": "49.0 N > 29.4 N, so the hanging mass goes down and the block goes up the slope."
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "49.0 N − 29.4 N",
+          "11.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "1.78 m/s^{2}"
+      },
+      {
+       "row": [
+        "hanging mass alone: m_{2}g − T = m_{2}a"
+       ]
+      },
+      {
+       "row": [
+        "T = m_{2}(g − a) = (5.0)(9.8 − 1.78)"
+       ]
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "40.1 N"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
