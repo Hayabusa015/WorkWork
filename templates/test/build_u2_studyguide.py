@@ -128,7 +128,7 @@ def student(out):
 def key_doc(out, tmp):
     pal = Palette("physics")
     doc = Q.new_doc(pal, "SHULL SCIENCE / PHYSICS / UNIT 02 / STUDY GUIDE / TEACHER KEY")
-    W.header(doc, pal, "UNIT 2 STUDY GUIDE  ·  VECTORS & PROJECTILE MOTION", key=True)
+    W.header(doc, pal, "UNIT 2 STUDY GUIDE  ·  VECTORS & PROJECTILES", key=True)
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     para(c, "East is +x and north is +y. Up is +y. Keep the extra digits until the last step, then round to two significant figures. "

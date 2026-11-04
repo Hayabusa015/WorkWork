@@ -131,7 +131,7 @@ def p5_steps(spec, s):
     other = (-s["b"] - root) / (2 * s["a"])
     return [
         WK.row(f"vix = {v:g} cos {a:g}° = {s['vx']:.2f} m/s", "     ", f"viy = {v:g} sin {a:g}° = {s['vy']:.2f} m/s"),
-        WK.ans("(a)", f"vix = {s['vx']:.1f} m/s,  viy = {s['vy']:.1f} m/s"),
+        WK.ans("(a)", f"vix = {D.sf(s['vx'])} m/s,  viy = {D.sf(s['vy'])} m/s"),
         WK.say("It lands on the ground, 15 m below the start, so Δy = −" + f"{y0:g} m. Up is +y.".replace("15", f"{y0:g}")
                if False else f"The arrow lands on the ground, {y0:g} m below the start, so Δy = −{y0:g} m (up is +y)."),
         WK.row(f"Δy = viy t − ½ g t^{{2}}   →   −{y0:g} = {s['vy']:.2f} t − 4.9 t^{{2}}"),

@@ -1,7 +1,7 @@
 """Physics Unit 2 test data: every answer solved in code, nothing typed by hand.
 
 Three things live here, all for S2.1-S2.3 (Vectors, Vector Addition, Projectile Motion):
-  WRITTEN   the Day 2 written test, versions A / B / C (five problems, 30 points)
+  WRITTEN   the Day 2 written test, versions A / B / C (five problems, 5 points each, 25 in all)
   MC        the 30-question multiple-choice test, versions A / B / C
   GUIDE     the study-guide problems (one version)
 

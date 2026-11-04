@@ -81,7 +81,9 @@ def addition(vs):
     return rx, ry, math.hypot(rx, ry), math.degrees(math.atan2(ry, rx)) % 360
 
 def two_sf(x):
-    return f"{x:.2g}"
+    """Two significant figures, never in scientific notation (a key prints 220, not 2.2e+02)."""
+    s = f"{x:.2g}"
+    return str(int(float(s))) if "e" in s else s
 
 # ---- the three versions ----------------------------------------------------------------
 # restate: Q1 gives 0-360; Q2 gives a compass direction; Q3 gives a negative angle.
