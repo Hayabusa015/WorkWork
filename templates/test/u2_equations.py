@@ -21,7 +21,8 @@ VECTOR = [
 ]
 PROJECTILE = [
     ("x  ·  HORIZONTAL", ["v_{ix} = v_{i} cos(angle)", "Δx = v_{ix} t", "a_{x} = 0,  so v_{x} is constant"]),
-    ("y  ·  VERTICAL", ["v_{iy} = v_{i} sin(angle)", "v_{y} = v_{iy} − g t", "Δy = v_{iy} t − ½ g t^{2}"]),
+    ("y  ·  VERTICAL", ["v_{iy} = v_{i} sin(angle)", "v_{y} = v_{iy} − g t", "Δy = v_{iy} t − ½ g t^{2}",
+                        "v_{y}^{2} = v_{iy}^{2} − 2 g Δy", "Δy = ½ (v_{iy} + v_{y}) t"]),
     ("SOLVING FOR t", ["t = [−b ± √(b^{2} − 4ac)] / 2a", "g = 9.8 m/s^{2},  up is +y"]),
 ]
 
