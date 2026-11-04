@@ -1015,7 +1015,13 @@ def main():
         sec = sections[0]
         header(sec, rs["title"], "Rubric")
         gap(doc, 5)
-        id_row(rs["fields"], rs["widths"], rubric_total(spec))
+        # One ruled row, or several ("fieldRows") when the sheet asks for more than
+        # fits on one line.
+        rows = rs.get("fieldRows") or [{"fields": rs["fields"], "widths": rs["widths"]}]
+        for ri, r in enumerate(rows):
+            if ri:
+                gap(doc, float(rs.get("fieldRowGapPt", 16)))
+            id_row(r["fields"], r["widths"], rubric_total(spec))
         gap(doc, 8)
         rubric_block(doc, {"label": rs["scoreLabel"]}, pal, spec, sheet=True)
         gap(doc, 4)

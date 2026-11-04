@@ -152,7 +152,8 @@ python3 templates/worksheet/build_worksheet_docx.py specs/<spec>.json out.docx -
 ```
 
 The same spec, drawn as the teacher's one-page grading sheet: the header, the fields in
-`rubricSheet.fields` (with `rubricSheet.widths`), the rubric with each row's full-credit text as
+`rubricSheet.fields` (with `rubricSheet.widths`), or several ruled rows in `rubricSheet.fieldRows`
+(each `{fields, widths}`, `fieldRowGapPt` apart) when one line will not hold them, the rubric with each row's full-credit text as
 its LOOK FOR (word for word, from the same `rubric.rows`), a comment column, the TOTAL,
 `rubricSheet.pointer`, and a NOTES box (`rubricSheet.notesHeightIn`). The handout and the sheet
 cannot drift, because there is one copy of the rubric. `audit_worksheet.py` has no sheet mode yet,

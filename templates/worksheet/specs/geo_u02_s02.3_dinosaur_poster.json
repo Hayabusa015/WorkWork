@@ -86,22 +86,38 @@
   },
   "rubricSheet": {
     "title": "Dinosaur Poster or Slide Rubric",
-    "fields": [
-      "STUDENT",
-      "DINOSAUR CHOSEN",
-      "DATE",
-      "CLASS PERIOD"
-    ],
-    "widths": [
-      2.45,
-      2.15,
-      1.4,
-      1.5
-    ],
     "scoreLabel": "SCORE · 20 POINTS",
     "pointer": "Full descriptions for each level are on page 2 of the student handout.",
     "notesLabel": "NOTES",
-    "notesHeightIn": 2.4
+    "notesHeightIn": 2.0,
+    "fieldRows": [
+      {
+        "fields": [
+          "STUDENT NAME(S)",
+          "CLASS PERIOD",
+          "DATE",
+          "SCORE"
+        ],
+        "widths": [
+          3.3,
+          1.3,
+          1.3,
+          1.6
+        ]
+      },
+      {
+        "fields": [
+          "DINOSAUR",
+          "WHEN IT LIVED",
+          "FORMAT (POSTER / SLIDE)"
+        ],
+        "widths": [
+          2.6,
+          2.3,
+          2.6
+        ]
+      }
+    ]
   },
   "sectionsContent": [
     {
