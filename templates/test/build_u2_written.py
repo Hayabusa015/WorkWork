@@ -24,7 +24,7 @@ import build_quiz_worked_keys as WK                                    # noqa: E
 from key_solution import solution_image                                # noqa: E402
 from _shull_name import document_name                                  # noqa: E402
 from _shull_docx import (T, Palette, borders, para, fix_widths, gap, one_cell, equation_bar,  # noqa: E402
-                         work_box)
+                         work_box, tight_cells)
 
 KEY_INK = Q.KEY_INK
 TITLE = "UNIT 2 · MOTION IN TWO DIMENSIONS"
@@ -146,12 +146,20 @@ def p5_steps(spec, s):
     ]
 
 
+RUBRIC_SCALE = [
+    ("5", "All answers correct, and all words and thought process shown."),
+    ("4", "A minor error, such as a missed negative, but all other work is correct even if the final answer ends up wrong."),
+    ("3", "Correct thought process, but wrong variables or wrong calculations."),
+    ("2", "The problem is started correctly, but the variables and math are incorrect."),
+    ("1", "Variables listed; everything else wrong; no correct problem solving."),
+    ("0", "No attempt."),
+]
 RUBRIC = {
-    1: "1 Rx and Ry set up with signs · 1 Pythagoras · 1 R with units · 1 angle by tan · 1 direction named.",
-    2: "1 each vector resolved (2) · 1 Rx and Ry sums · 1 R with units · 1 angle · 1 direction from the signs.",
-    3: "1 vertical setup (viy = 0) · 1 time · 1 horizontal equation · 1 distance with units · 1 same time used.",
-    4: "1 components · 1 time equation · 1 time · 1 range equation · 1 range with units · 1 same time used.",
-    5: "2 launch components · 1 Δy = −y0 · 2 quadratic and its root · 1 positive root kept · 1 distance with units · 1 same time used.",
+    1: "A 5 shows: Rx and Ry with signs · Pythagoras · R with units · angle by tan · direction named.",
+    2: "A 5 shows: each vector resolved · Rx and Ry sums · R with units · angle · direction from the signs.",
+    3: "A 5 shows: viy = 0 · fall time from the height · Δx = vix t · distance with units · the same time used.",
+    4: "A 5 shows: vix and viy · t = 2viy/g · time · R = vix t · range with units.",
+    5: "A 5 shows: vix and viy · Δy = −y0 · the quadratic and its roots · positive root kept · distance with units.",
 }
 
 
@@ -163,8 +171,17 @@ def worked_key(L, out, tmp):
     gap(doc, 4)
     c = one_cell(doc); borders(c, pal.display, sz=18, edges=("left",))
     para(c, "East is +x and north is +y. Up is +y. Keep the extra digits until the last step, then round to two "
-            "significant figures. Points per problem: " + ", ".join(f"Q{i + 1} {p}" for i, p in enumerate(D.POINTS)) + f" · total {TOTAL}.",
+            "significant figures. Each problem is scored out of 5, " + f"{TOTAL} points in all.",
          8.5, color=pal.ink, first=True)
+    gap(doc, 5)
+    c = one_cell(doc); borders(c, pal.hair)
+    para(c, "SCORING RUBRIC  ·  EACH PROBLEM", 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+    t = c.add_table(rows=len(RUBRIC_SCALE), cols=2)
+    fix_widths(t, [0.5, 6.7])
+    tight_cells(t, top=10, bottom=10, left=40, right=40)
+    for (pt, desc), row in zip(RUBRIC_SCALE, t.rows):
+        para(row.cells[0], pt, 9, bold=True, color=KEY_INK, first=True)
+        para(row.cells[1], desc, 8.5, color=pal.ink, first=True)
     q1 = V.solve_q4(w["q1"])
     q2 = V.solve_q5(w["q2"])
     items = [
@@ -181,7 +198,7 @@ def worked_key(L, out, tmp):
         para(c, text, 9.5, color=pal.ink)
         png, _ = solution_image({"prompt": f"{L}{n}", "steps": steps}, os.path.join(tmp, f"{L}q{n}.png"), width_in=7.0, size=22)
         WK.picture(c, png, 7.0)
-        para(c, "Points: " + RUBRIC[n], 7.5, color=pal.label)
+        para(c, RUBRIC[n], 7.5, color=pal.label)
     gap(doc, 6)
     c = one_cell(doc); borders(c, pal.hair)
     para(c, "GRADING NOTES", 7.5, bold=True, color=pal.accent, caps_track=True, first=True)

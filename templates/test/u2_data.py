@@ -111,7 +111,7 @@ WRITTEN = {
                        "velocities, (b) the time until it lands, and (c) how far from the tower it lands."},
     },
 }
-POINTS = (5, 6, 5, 6, 8)           # 30
+POINTS = (5, 5, 5, 5, 5)           # 25, each scored on the 0-5 rubric
 
 
 def solve_written(L):
