@@ -24,7 +24,7 @@ import build_quiz_worked_keys as WK                                    # noqa: E
 from key_solution import solution_image                                # noqa: E402
 from _shull_name import document_name                                  # noqa: E402
 from _shull_docx import (T, Palette, borders, para, fix_widths, gap, one_cell, equation_bar,  # noqa: E402
-                         work_box, tight_cells)
+                         work_box)
 
 KEY_INK = Q.KEY_INK
 TITLE = "UNIT 2 · MOTION IN TWO DIMENSIONS"
@@ -62,28 +62,12 @@ def fields_row(doc, pal):
         c.paragraphs[0].paragraph_format.space_after = Pt(9)
 
 
-ANSWER_LABELS = {1: ("MAGNITUDE", "DIRECTION"), 2: ("MAGNITUDE", "DIRECTION"), 3: ("(a)  TIME", "(b)  DISTANCE"),
-                 4: ("(a)  TIME", "(b)  RANGE"), 5: ("(a)  vix and viy", "(b)  TIME", "(c)  DISTANCE")}
-
-
-def answer_row(cell, pal, labels):
-    """A row of small ruled blanks, one per answer the problem asks for, under the work box."""
-    t = cell.add_table(rows=1, cols=len(labels))
-    fix_widths(t, [round(7.2 / len(labels), 2)] * len(labels))
-    tight_cells(t, top=10, bottom=10, left=30, right=60)
-    for c, lab in zip(t.rows[0].cells, labels):
-        borders(c, pal.hair, sz=6, edges=("bottom",))
-        para(c, lab, 7.5, bold=True, color=pal.label, caps_track=True, first=True)
-        c.paragraphs[0].paragraph_format.space_after = Pt(9)
-
-
 def q_block(doc, pal, n, pts, text, box_in):
     gap(doc, 6)
     c = one_cell(doc)
     para(c, f"{n}.   {pts} pts", 8, bold=True, color=pal.accent, caps_track=True, first=True)
     para(c, text, 10.5)
-    work_box(c, "", pal, box_in - 0.65, 7.2)
-    answer_row(c, pal, ANSWER_LABELS[n])
+    work_box(c, "", pal, box_in, 7.2)
 
 
 def page_break(doc):
