@@ -114,12 +114,16 @@ def overflow_check(shapes, fills, label):
         box = rect(sh)
         box_w = box[2] - box[0]
         total_lines, size = 0, None
+        # Measure a paragraph as one string. A paragraph split into runs - a superscript
+        # charge, a bold word - still wraps as one line of text, not one line per run.
         for para in sh.text_frame.paragraphs:
-            for run in para.runs:
-                if not run.text.strip():
-                    continue
-                size = run.font.size.pt if run.font.size else 18
-                total_lines += wrapped_lines(run.text, size, bool(run.font.bold), box_w)
+            runs = [r for r in para.runs if r.text]
+            text = "".join(r.text for r in runs)
+            if not text.strip():
+                continue
+            size = max((r.font.size.pt if r.font.size else 18) for r in runs)
+            bold = any(bool(r.font.bold) for r in runs if r.text.strip())
+            total_lines += wrapped_lines(text, size, bold, box_w)
         if not size or not total_lines:
             continue
 
