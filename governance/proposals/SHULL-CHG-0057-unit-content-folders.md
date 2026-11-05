@@ -26,8 +26,8 @@
 | **Affected Courses** | **All three: Chemistry, Physics, Geology** (his answer, §5 Q4). It changes all three courses, so it is a standard under CLAUDE.md §2 (Path B), not a course decision. No `courses/*/DECISIONS.md` edit. |
 | **Risk** | **Medium.** It changes routing in all three courses and introduces two layouts that coexist (new and legacy), which the Librarian must tell apart per unit. It reverses part of an APPROVED rule (0035) and an IMPLEMENTED rule (0030) for new units. It gives the Librarian back an authority 0035 removed, for four names only. No retrofit, so no bulk Drive moves. The repository edit is one revertible commit. |
 | **Recommendation** | Approve. §5 is fully answered: Q1, Q2 and Q4 in his words, Q3, Q5 and Q6 by the stated defaults, which he did not object to. Before approving, the main session should put two points to him (§2a.1 definition wording; §2a.5 activities and organizers), since both go slightly beyond his literal words. No retrofit is part of this record (§2e). |
-| **Decision** | *(pending, awaiting the user. §5 answers are not a decision on this record.)* |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-05: "approve 0057" |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | No. Not implemented. Plan in §7. |
 
