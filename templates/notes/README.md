@@ -200,6 +200,7 @@ type to fit, and never shrink the work box.
          "notes": [
            "DEFINE: matter",                             // prompt + 1 writing line (2 if it ends in ?)
            {"prompt": "DEFINE: matter", "answer": "…"},  // the key prints the answer, bold, in the line's place
+           {"prompt": "Trend", "answer": "…", "inline": true},  // opt-in: label and writing space on one ruled row
            "*A must-write line.",                        // bold, grey rule down the left
            {"text": "**Bold lead:** plain rest."},       // a statement, no writing line
            {"check": "I can …"}, {"label": "…"}, {"lines": 2}
@@ -212,6 +213,7 @@ type to fit, and never shrink the work box.
                      "solution": ["key only: lines written inside the work box"]},
          "diagram": {},                                  // Geology figure-to-label, unchanged
          "noWorkBox": true,                              // explicit opt-out, see below
+         "notesFirst": true,                             // opt-in: notes above the table and work box
          "extraNotes": false},                           // default true for notes/recap blocks
         {"kind": "example", "title": "Neutral iron-56", "cues": ["…"],
          "problem": {}},                                 // a worked example: MUST carry a problem

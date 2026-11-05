@@ -4,37 +4,18 @@
   "key": false,
   "noEquationBar": true,
   "cover": {
-    "sections": [
-      {
-        "code": "4.1"
-      },
-      {
-        "code": "4.2"
-      },
-      {
-        "code": "4.3"
-      },
-      {
-        "code": "4.5"
-      },
-      {
-        "code": "4.6"
-      },
-      {
-        "code": "5.2"
-      },
-      {
-        "code": "5.1"
-      },
-      {
-        "code": "5.3"
-      },
-      {
-        "code": "5.4"
-      },
-      {
-        "code": "5.5"
-      }
+    "kicker": "GUIDED NOTES  ·  PHASE 02  ·  10 SECTIONS",
+    "sectionList": [
+      "S04.1   Why Atoms Bond",
+      "S04.2   Ionic Bonding",
+      "S04.3   Covalent Bonding",
+      "S04.5   Electronegativity & Bond Type",
+      "S04.6   Bond Polarity",
+      "S05.2   VSEPR Theory",
+      "S05.1   Lewis Electron Structures",
+      "S05.3   Molecular Geometry",
+      "S05.4   Molecular Polarity",
+      "S05.5   Intermolecular Forces"
     ],
     "keyTerms": [
       {
@@ -124,122 +105,85 @@
         ]
       }
     ],
-    "howToUse": "Every block names the slides it covers, so you can match this page to the screen. Fill in each blank with the slide's wording while that slide is up. When the slide works an example, copy it into the box under the notes, including dipole arrows where the slide shows them."
+    "howToUse": "Each block names its slides, so you can match the page to the screen. Fill in each line while that slide is up. When a slide works an example, copy it into the box at the end of that block, with dipole arrows where the slide shows them."
   },
   "sectionsContent": [
     {
       "code": "4.1",
-      "title": "Why Atoms Bond",
-      "learningTarget": "I can define a chemical bond and state the octet rule.",
+      "title": "Why Atoms Bond & Ionic Bonding",
+      "learningTarget": "I can define a chemical bond, state the octet rule, and describe ionic bonding.",
       "pages": [
         {
           "rows": [
             {
-              "title": "Slides 1–2 · Unit overview",
+              "title": "Slides 1–3 · Why atoms bond",
               "cues": [
-                "Three ideas for this unit"
+                "S04.1"
               ],
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "01 Bonding: electrons are"
+                  "prompt": "Three ideas",
+                  "inline": true
                 },
                 {
-                  "prompt": "02 Molecular structure: the way"
+                  "prompt": "The unit",
+                  "inline": true
                 },
                 {
-                  "prompt": "03 Intermolecular forces: the way"
+                  "prompt": "Atoms bond when",
+                  "inline": true
                 },
                 {
-                  "prompt": "The unit in one line: draw the electrons →"
+                  "prompt": "Chemical bond",
+                  "inline": true
+                },
+                {
+                  "prompt": "Octet rule",
+                  "inline": true
+                },
+                {
+                  "prompt": "The octet rule is",
+                  "inline": true
                 }
-              ]
-            },
-            {
-              "title": "Slide 3 · Why atoms bond",
-              "cues": [
-                "Definition: chemical bond",
-                "The octet rule"
               ],
-              "notes": [
-                {
-                  "prompt": "Atoms bond when the bonded arrangement has"
-                },
-                {
-                  "prompt": "Chemical bond:"
-                },
-                {
-                  "prompt": "The octet rule: many atoms bond with"
-                },
-                {
-                  "prompt": "Hydrogen needs only"
-                },
-                {
-                  "prompt": "Neon:"
-                },
-                {
-                  "prompt": "The octet rule is a"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "4.2",
-      "title": "Ionic Bonding",
-      "learningTarget": "I can describe ionic bonding as electron transfer between a metal and a nonmetal.",
-      "pages": [
-        {
-          "rows": [
-            {
-              "title": "Slide 4 · Ionic bonding",
-              "cues": [
-                "The bonding partners",
-                "The electron transfer",
-                "Properties"
-              ],
-              "notes": [
-                {
-                  "prompt": "Ionic bonding: electrons"
-                },
-                {
-                  "prompt": "The bonding partners: usually"
-                },
-                {
-                  "prompt": "Na"
-                },
-                {
-                  "prompt": "Cl"
-                },
-                {
-                  "prompt": "Property:"
-                },
-                {
-                  "prompt": "Property:"
-                },
-                {
-                  "prompt": "Ions form a"
-                },
-                {
-                  "prompt": "Conducts when"
-                }
-              ]
+              "notesFirst": true
             },
             {
               "kind": "example",
-              "title": "Slide 4 · Example: Na and Cl",
+              "title": "Slide 4 · Ionic bonding",
               "cues": [
-                "Electron transfer"
+                "S04.2"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Ionic bonding",
+                  "inline": true
+                },
+                {
+                  "prompt": "Usually between",
+                  "inline": true
+                },
+                {
+                  "prompt": "Properties",
+                  "inline": true
+                },
+                {
+                  "prompt": "Ions form",
+                  "inline": true
+                },
+                {
+                  "prompt": "Conducts",
+                  "inline": true
+                }
               ],
               "problem": {
-                "given": "Sodium (Na) and chlorine (Cl).",
-                "find": "the electron transfer and the two ions it makes.",
-                "answer": "Ions formed: ________ and ________",
-                "workHeightIn": 1.6,
-                "workLabel": "Draw it as shown on the slide"
-              },
-              "notes": []
+                "workLabel": "Slide 4 · Na and Cl: show the electron transfer and the two ions it makes",
+                "workHeightIn": 1.6
+              }
             }
           ]
         }
@@ -247,75 +191,65 @@
     },
     {
       "code": "4.3",
-      "title": "Covalent Bonding",
-      "learningTarget": "I can describe covalent bonding as atoms sharing pairs of electrons.",
+      "title": "Covalent Bonding & Electronegativity",
+      "learningTarget": "I can describe covalent bonding and classify a bond from its EN difference.",
       "pages": [
         {
           "rows": [
             {
               "title": "Slide 5 · Covalent bonding",
               "cues": [
-                "The bonding partners",
-                "One bond",
-                "Properties",
-                "The exception"
-              ],
-              "notes": [
-                {
-                  "prompt": "Covalent bonding: atoms"
-                },
-                {
-                  "prompt": "The bonding partners: usually"
-                },
-                {
-                  "prompt": "One shared pair makes"
-                },
-                {
-                  "prompt": "Property:"
-                },
-                {
-                  "prompt": "Property:"
-                },
-                {
-                  "prompt": "Property:"
-                },
-                {
-                  "prompt": "Exception:"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "4.5",
-      "title": "Electronegativity & Bond Type",
-      "learningTarget": "I can use the EN difference to classify a bond as nonpolar covalent, polar covalent, or ionic.",
-      "pages": [
-        {
-          "rows": [
-            {
-              "title": "Slide 6 · Electronegativity",
-              "cues": [
-                "Definition: electronegativity",
-                "The ΔEN rule"
-              ],
-              "notes": [
-                {
-                  "prompt": "Electronegativity (EN):"
-                },
-                {
-                  "prompt": "ΔEN ="
-                }
-              ]
-            },
-            {
-              "title": "Slide 6 · Bond type from ΔEN",
-              "cues": [
-                "The three bond types and their cutoffs"
+                "S04.3"
               ],
               "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Covalent bonding",
+                  "inline": true
+                },
+                {
+                  "prompt": "Usually between",
+                  "inline": true
+                },
+                {
+                  "prompt": "One bond",
+                  "inline": true
+                },
+                {
+                  "prompt": "Properties",
+                  "inline": true
+                },
+                {
+                  "prompt": "Found as",
+                  "inline": true
+                },
+                {
+                  "prompt": "Exception",
+                  "inline": true
+                }
+              ],
+              "notesFirst": true
+            },
+            {
+              "title": "Slide 6 · EN and bond type",
+              "cues": [
+                "S04.5",
+                "The cutoffs are class guidelines, not sharp boundaries."
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Electronegativity",
+                  "inline": true
+                },
+                {
+                  "prompt": "ΔEN",
+                  "inline": true
+                }
+              ],
+              "notesFirst": true,
               "table": {
                 "headers": [
                   "Bond type",
@@ -327,7 +261,7 @@
                   0.26,
                   0.4
                 ],
-                "rowHeightIn": 0.34,
+                "rowHeightIn": 0.3,
                 "rows": [
                   [
                     "Nonpolar covalent",
@@ -345,36 +279,27 @@
                     ""
                   ]
                 ]
-              },
-              "notes": [
-                {
-                  "prompt": "These cutoffs are class"
-                }
-              ]
+              }
             },
             {
               "kind": "example",
-              "title": "Slide 7 · Example: classifying bonds",
+              "title": "Slide 7 · Classifying bonds",
               "cues": [
-                "Subtract the EN values",
-                "Match the difference to a bond type"
+                "S04.5",
+                "Subtract the EN values. Match the difference to a bond type."
               ],
-              "problem": {
-                "given": [
-                  "C–H: C 2.55, H 2.20",
-                  "C–O: O 3.44, C 2.55",
-                  "Na–Cl: Cl 3.16, Na 0.93"
-                ],
-                "find": "ΔEN and bond type for each bond.",
-                "answer": "C–H ____________   C–O ____________   Na–Cl ____________",
-                "workHeightIn": 1.6,
-                "workLabel": "Show the subtraction for each bond"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bigger EN difference ="
+                  "prompt": "Bigger EN difference",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 7 · EN: H 2.20, C 2.55, O 3.44, Na 0.93, Cl 3.16. Find ΔEN and the bond type for C–H, C–O and Na–Cl.",
+                "workHeightIn": 1.6
+              }
             }
           ]
         }
@@ -388,61 +313,58 @@
         {
           "rows": [
             {
+              "kind": "example",
               "title": "Slide 8 · Bond polarity and dipole arrows",
               "cues": [
-                "Nonpolar bond",
-                "Polar bond",
-                "Reading δ+ and δ−"
+                "S04.6"
               ],
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "The dipole arrow points toward"
+                  "prompt": "Dipole arrow points toward",
+                  "inline": true
                 },
                 {
-                  "prompt": "Nonpolar bond:"
+                  "prompt": "Nonpolar bond",
+                  "inline": true
                 },
                 {
-                  "prompt": "Nonpolar examples:"
+                  "prompt": "Polar bond",
+                  "inline": true
                 },
                 {
-                  "prompt": "Polar bond:"
+                  "prompt": "Polar examples",
+                  "inline": true
                 },
                 {
-                  "prompt": "Polar examples:"
-                },
-                {
-                  "prompt": "δ− ="
-                },
-                {
-                  "prompt": "δ+ ="
+                  "prompt": "δ− and δ+",
+                  "inline": true
                 }
-              ]
-            },
-            {
-              "kind": "example",
-              "title": "Slide 8 · Example: H–H and H–Cl",
-              "cues": [
-                "Dipole arrow on a polar bond"
               ],
               "problem": {
-                "given": "H–H (nonpolar) and H–Cl (polar), as drawn on slide 8.",
-                "find": "each bond, with the dipole arrow and δ+ / δ− on the polar one.",
-                "answer": "",
-                "workHeightIn": 1.5,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
-              "notes": []
-            }
-          ]
-        },
-        {
-          "rows": [
+                "workLabel": "Slide 8 · Draw H–H and H–Cl. Add the dipole arrow, δ+ and δ− to the polar bond.",
+                "workHeightIn": 1.8
+              }
+            },
             {
               "title": "Slide 9 · Bond types at a glance",
               "cues": [
-                "Compare how the electrons are shared or transferred"
+                "S04.6",
+                "Compare how the electrons are shared or transferred."
               ],
               "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Ionic bonds, usually",
+                  "inline": true
+                },
+                {
+                  "prompt": "Covalent bonds, usually",
+                  "inline": true
+                }
+              ],
               "table": {
                 "headers": [
                   "Bond type",
@@ -471,16 +393,8 @@
                   0.42,
                   0.28
                 ],
-                "rowHeightIn": 0.34
-              },
-              "notes": [
-                {
-                  "prompt": "Ionic: usually"
-                },
-                {
-                  "prompt": "Covalent: usually"
-                }
-              ]
+                "rowHeightIn": 0.3
+              }
             }
           ]
         }
@@ -488,116 +402,104 @@
     },
     {
       "code": "5.2",
-      "title": "VSEPR Theory",
-      "learningTarget": "I can state the VSEPR idea: electron groups repel and spread out around the central atom.",
+      "title": "VSEPR Theory & Lewis Structures",
+      "learningTarget": "I can state the VSEPR idea and draw a Lewis structure by counting, connecting, filling, and checking.",
       "pages": [
         {
           "rows": [
             {
               "title": "Slides 10–11 · VSEPR theory",
               "cues": [
-                "The VSEPR sequence",
-                "The name, spelled out",
-                "The idea"
+                "S05.2"
               ],
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Lewis structure →"
+                  "prompt": "VSEPR",
+                  "inline": true
                 },
                 {
-                  "prompt": "VSEPR ="
+                  "prompt": "The sequence",
+                  "inline": true
                 },
                 {
-                  "prompt": "The idea: electron groups"
+                  "prompt": "Electron groups",
+                  "inline": true
                 },
                 {
-                  "prompt": "They spread out around the central atom"
+                  "prompt": "Lewis structures show",
+                  "inline": true
                 },
                 {
-                  "prompt": "Lewis structures come first. They show"
+                  "prompt": "To predict shape",
+                  "inline": true
                 },
                 {
-                  "prompt": "Count the groups to"
-                },
-                {
-                  "prompt": "4 bonds, no lone pairs →"
+                  "prompt": "4 bonds, no lone pairs",
+                  "inline": true
                 }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "code": "5.1",
-      "title": "Lewis Electron Structures",
-      "learningTarget": "I can draw a Lewis structure by counting, connecting, filling, and checking electrons.",
-      "pages": [
-        {
-          "rows": [
+              ],
+              "notesFirst": true
+            },
             {
               "title": "Slide 12 · Drawing Lewis structures",
               "cues": [
-                "The four steps, in order"
+                "S05.1",
+                "Follow the steps, then check your electron count."
               ],
               "noWorkBox": true,
-              "table": {
-                "headers": [
-                  "Step",
-                  "What to do"
-                ],
-                "widths": [
-                  0.18,
-                  0.82
-                ],
-                "rowHeightIn": 0.52,
-                "rows": [
-                  [
-                    "1  Count",
-                    ""
-                  ],
-                  [
-                    "2  Connect",
-                    ""
-                  ],
-                  [
-                    "3  Fill",
-                    ""
-                  ],
-                  [
-                    "4  Check",
-                    ""
-                  ]
-                ]
-              },
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Bond line ="
+                  "prompt": "1  Count",
+                  "inline": true
                 },
                 {
-                  "prompt": "Lone pair ="
+                  "prompt": "2  Connect",
+                  "inline": true
+                },
+                {
+                  "prompt": "3  Fill",
+                  "inline": true
+                },
+                {
+                  "prompt": "4  Check",
+                  "inline": true
+                },
+                {
+                  "prompt": "If not, fix",
+                  "inline": true
+                },
+                {
+                  "prompt": "Bond line / lone pair",
+                  "inline": true
                 }
-              ]
+              ],
+              "notesFirst": true
             },
             {
               "kind": "example",
-              "title": "Slide 13 · Example: BF₃",
+              "title": "Slide 13 · Lewis structure: BF₃",
               "cues": [
-                "Boron trifluoride",
-                "Count, connect, fill and check"
+                "S05.1"
               ],
-              "problem": {
-                "given": "BF₃, boron trifluoride.",
-                "find": "the Lewis structure.",
-                "answer": "Valence electrons = ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "B has 6 electrons:"
+                  "prompt": "BF₃ valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Boron ends with",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 13 · Draw the BF₃ Lewis structure",
+                "workHeightIn": 1.7
+              }
             }
           ]
         },
@@ -605,66 +507,73 @@
           "rows": [
             {
               "kind": "example",
-              "title": "Slide 14 · Example: CO₂",
+              "title": "Slide 14 · Lewis structure: CO₂",
               "cues": [
-                "Carbon dioxide"
+                "S05.1"
               ],
-              "problem": {
-                "given": "CO₂, carbon dioxide.",
-                "find": "the Lewis structure.",
-                "answer": "Valence electrons = ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "O=C=O:"
+                  "prompt": "CO₂ valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Fix",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 14 · Draw the CO₂ Lewis structure",
+                "workHeightIn": 1.7
+              }
             },
             {
               "kind": "example",
-              "title": "Slide 15 · Example: NH₃",
+              "title": "Slide 15 · Lewis structure: NH₃",
               "cues": [
-                "Ammonia",
-                "The leftover electrons"
+                "S05.1"
               ],
-              "problem": {
-                "given": "NH₃, ammonia.",
-                "find": "the Lewis structure.",
-                "answer": "Valence electrons = ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Check: N has"
+                  "prompt": "NH₃ valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Leftovers",
+                  "inline": true
                 }
-              ]
-            }
-          ]
-        },
-        {
-          "rows": [
+              ],
+              "problem": {
+                "workLabel": "Slide 15 · Draw the NH₃ Lewis structure",
+                "workHeightIn": 1.7
+              }
+            },
             {
               "kind": "example",
-              "title": "Slide 16 · Example: CH₂O",
+              "title": "Slide 16 · Lewis structure: CH₂O",
               "cues": [
-                "Formaldehyde",
-                "H gets 2; C and O get 8"
+                "S05.1",
+                "H gets 2; C and O get 8."
               ],
-              "problem": {
-                "given": "CH₂O, formaldehyde.",
-                "find": "the Lewis structure.",
-                "answer": "Valence electrons = ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Electron total:"
+                  "prompt": "CH₂O valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Fix",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 16 · Draw the CH₂O Lewis structure",
+                "workHeightIn": 1.7
+              }
             }
           ]
         }
@@ -680,30 +589,21 @@
             {
               "title": "Slide 17 · VSEPR: predicting shape",
               "cues": [
-                "Bonding groups",
-                "Lone pairs"
-              ],
-              "notes": [
-                {
-                  "prompt": "Electron groups repel each other, so they"
-                },
-                {
-                  "prompt": "A single, double, or triple bond counts as"
-                },
-                {
-                  "prompt": "Lone pairs also"
-                },
-                {
-                  "prompt": "Lone pairs usually make bond angles"
-                }
-              ]
-            },
-            {
-              "title": "Slide 17 · Bond angles",
-              "cues": [
-                "Three molecules, same four electron groups"
+                "S05.3"
               ],
               "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Bonding groups",
+                  "inline": true
+                },
+                {
+                  "prompt": "Lone pairs",
+                  "inline": true
+                }
+              ],
+              "notesFirst": true,
               "table": {
                 "headers": [
                   "Molecule",
@@ -715,7 +615,7 @@
                   0.4,
                   0.32
                 ],
-                "rowHeightIn": 0.34,
+                "rowHeightIn": 0.28,
                 "rows": [
                   [
                     "CH₄",
@@ -733,26 +633,30 @@
                     ""
                   ]
                 ]
-              },
-              "notes": [
-                {
-                  "prompt": "VSEPR ="
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "rows": [
+              }
+            },
             {
               "title": "Slide 18 · Octet rule exceptions",
               "cues": [
-                "Count all bonding and lone-pair electrons around the atom",
-                "Fewer than 8",
-                "More than 8",
-                "Odd total"
+                "S05.3",
+                "Count all bonding and lone-pair electrons around the atom."
               ],
               "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Cl, Br, and I",
+                  "inline": true
+                },
+                {
+                  "prompt": "Odd total",
+                  "inline": true
+                },
+                {
+                  "prompt": "Period-2 atoms (C, N, O, F)",
+                  "inline": true
+                }
+              ],
               "table": {
                 "headers": [
                   "",
@@ -761,12 +665,12 @@
                   "Example"
                 ],
                 "widths": [
-                  0.22,
-                  0.16,
-                  0.26,
-                  0.36
+                  0.2,
+                  0.12,
+                  0.24,
+                  0.44
                 ],
-                "rowHeightIn": 0.3,
+                "rowHeightIn": 0.28,
                 "rows": [
                   [
                     "Fewer than 8",
@@ -805,26 +709,22 @@
                     ""
                   ]
                 ]
-              },
-              "notes": [
-                {
-                  "prompt": "Cl, Br, and I can also"
-                },
-                {
-                  "prompt": "Odd total: NO has"
-                },
-                {
-                  "prompt": "Period-2 atoms (including C, N, O, and F)"
-                }
-              ]
+              }
             },
             {
               "title": "Slide 19 · Common molecular shapes",
               "cues": [
-                "Count electron groups",
-                "Name the shape using the atoms"
+                "S05.3",
+                "Count electron groups. Name the shape using the atoms."
               ],
               "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Lone pairs change the shape; the shape name",
+                  "inline": true
+                }
+              ],
               "table": {
                 "headers": [
                   "Groups",
@@ -870,13 +770,8 @@
                   0.38,
                   0.24
                 ],
-                "rowHeightIn": 0.32
-              },
-              "notes": [
-                {
-                  "prompt": "Lone pairs change the shape. The shape name"
-                }
-              ]
+                "rowHeightIn": 0.3
+              }
             }
           ]
         }
@@ -890,90 +785,74 @@
         {
           "rows": [
             {
+              "kind": "example",
               "title": "Slides 20–21 · Bond vs. molecular polarity",
               "cues": [
-                "Bond polarity",
-                "Molecular polarity"
+                "S05.4"
               ],
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Polar molecules: how bond pulls and"
+                  "prompt": "A molecule with polar bonds can",
+                  "inline": true
                 },
                 {
-                  "prompt": "A molecule can contain polar bonds and"
+                  "prompt": "Bond polarity (one bond)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Bond polarity, one bond: compare"
+                  "prompt": "Molecular polarity (whole molecule)",
+                  "inline": true
                 },
                 {
-                  "prompt": "HCl: one polar bond →"
+                  "prompt": "HCl",
+                  "inline": true
                 },
                 {
-                  "prompt": "Molecular polarity, whole molecule: check that"
+                  "prompt": "CO₂",
+                  "inline": true
                 },
                 {
-                  "prompt": "CO₂: equal opposite pulls →"
-                },
-                {
-                  "prompt": "To find molecular polarity, check"
+                  "prompt": "To find molecular polarity, check",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 21 · Draw HCl and CO₂ with their dipole arrows",
+                "workHeightIn": 1.7
+              }
             },
             {
               "kind": "example",
-              "title": "Slide 21 · Example: HCl and CO₂",
-              "cues": [
-                "One polar bond",
-                "Two equal, opposite pulls"
-              ],
-              "problem": {
-                "given": "HCl and CO₂, as drawn on slide 21.",
-                "find": "each molecule with its dipole arrows, then polar or nonpolar.",
-                "answer": "HCl: ____________   CO₂: ____________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
-              "notes": []
-            }
-          ]
-        },
-        {
-          "rows": [
-            {
               "title": "Slide 22 · Canceling bond dipoles",
               "cues": [
-                "Balanced pulls",
-                "Pulls that do not cancel"
+                "S05.4"
               ],
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bond pulls cancel when"
+                  "prompt": "Bond pulls cancel when",
+                  "inline": true
                 },
                 {
-                  "prompt": "Balanced pulls → nonpolar:"
+                  "prompt": "Balanced pulls → nonpolar",
+                  "inline": true
                 },
                 {
-                  "prompt": "Pulls do not cancel → polar:"
+                  "prompt": "Pulls do not cancel → polar",
+                  "inline": true
                 },
                 {
-                  "prompt": "Before deciding, check"
+                  "prompt": "Before deciding, check",
+                  "inline": true
                 }
-              ]
-            },
-            {
-              "kind": "example",
-              "title": "Slide 22 · Example: BF₃ and NH₃",
-              "cues": [
-                "Balanced vs. unbalanced"
               ],
               "problem": {
-                "given": "BF₃ and NH₃, as drawn on slide 22.",
-                "find": "each molecule with its dipole arrows, then polar or nonpolar.",
-                "answer": "BF₃: ____________   NH₃: ____________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
-              "notes": []
+                "workLabel": "Slide 22 · Draw BF₃ and NH₃ with their dipole arrows",
+                "workHeightIn": 1.7
+              }
             }
           ]
         },
@@ -981,41 +860,75 @@
           "rows": [
             {
               "kind": "example",
-              "title": "Slide 23 · Example: H₂O",
+              "title": "Slide 23 · Molecular polarity: H₂O",
               "cues": [
-                "Draw it, check the bonds, then check the shape"
+                "S05.4",
+                "Draw it, check the bonds, then check the shape."
               ],
-              "problem": {
-                "given": "H₂O. EN: O 3.44, H 2.20.",
-                "find": "Lewis structure, bond polarity, shape, and molecular polarity.",
-                "answer": "Electrons ______   ΔEN ______   Shape ____________   Molecule ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Oxygen side:"
+                  "prompt": "H₂O electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "ΔEN (O 3.44, H 2.20)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Shape",
+                  "inline": true
+                },
+                {
+                  "prompt": "Molecule",
+                  "inline": true
+                },
+                {
+                  "prompt": "Partial charges",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 23 · Draw H₂O with its dipole arrows, δ+ and δ−",
+                "workHeightIn": 2.0
+              }
             },
             {
               "kind": "example",
-              "title": "Slide 24 · Example: NH₃",
+              "title": "Slide 24 · Molecular polarity: NH₃",
               "cues": [
-                "A lone pair changes the arrangement of the three N–H bonds"
+                "S05.4",
+                "A lone pair changes the arrangement of the three N–H bonds."
               ],
-              "problem": {
-                "given": "NH₃. EN: N 3.04, H 2.20.",
-                "find": "Lewis structure, bond polarity, shape, and molecular polarity.",
-                "answer": "Electrons ______   ΔEN ______   Shape ____________   Molecule ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "NH₃ is a three-dimensional"
+                  "prompt": "NH₃ electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "ΔEN (N 3.04, H 2.20)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Shape",
+                  "inline": true
+                },
+                {
+                  "prompt": "Molecule",
+                  "inline": true
+                },
+                {
+                  "prompt": "NH₃ is",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 24 · Draw NH₃ with its dipole arrows",
+                "workHeightIn": 2.0
+              }
             }
           ]
         },
@@ -1023,41 +936,67 @@
           "rows": [
             {
               "kind": "example",
-              "title": "Slide 25 · Example: CCl₄",
+              "title": "Slide 25 · Molecular polarity: carbon tetrachloride",
               "cues": [
-                "Four polar bonds can balance in three dimensions"
+                "S05.4",
+                "Four polar bonds can balance in three dimensions."
               ],
-              "problem": {
-                "given": "CCl₄. EN: Cl 3.16, C 2.55.",
-                "find": "Lewis structure, bond polarity, shape, and molecular polarity.",
-                "answer": "Electrons ______   ΔEN ______   Shape ____________   Molecule ________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Solid wedge ="
+                  "prompt": "CCl₄ electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "ΔEN (Cl 3.16, C 2.55)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Shape",
+                  "inline": true
+                },
+                {
+                  "prompt": "Molecule",
+                  "inline": true
+                },
+                {
+                  "prompt": "Solid wedge / dashed wedge",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 25 · Draw CCl₄ with wedges and its dipole arrows",
+                "workHeightIn": 2.0
+              }
             },
             {
               "kind": "example",
-              "title": "Slide 26 · Example: CCl₄ vs. CH₃Cl",
+              "title": "Slide 26 · Tetrahedral molecules",
               "cues": [
-                "Both have 4 bonds and no lone pairs on the central carbon"
+                "S05.4",
+                "Both have 4 bonds and no lone pairs on the central carbon."
               ],
-              "problem": {
-                "given": "CCl₄ and CH₃Cl, both tetrahedral.",
-                "find": "each molecule with its dipole arrows and net pull, then polar or nonpolar.",
-                "answer": "CCl₄: ____________   CH₃Cl: ____________",
-                "workHeightIn": 2.0,
-                "workLabel": "Draw it as shown on the slide, with dipole arrows"
-              },
+              "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Shape alone does not decide polarity."
+                  "prompt": "CCl₄",
+                  "inline": true
+                },
+                {
+                  "prompt": "CH₃Cl",
+                  "inline": true
+                },
+                {
+                  "prompt": "Shape alone does not decide polarity",
+                  "inline": true
                 }
-              ]
+              ],
+              "problem": {
+                "workLabel": "Slide 26 · Draw CCl₄ and CH₃Cl with their dipole arrows and the net pull",
+                "workHeightIn": 2.0
+              }
             }
           ]
         }
@@ -1073,143 +1012,202 @@
             {
               "title": "Slides 27–28 · Intermolecular forces",
               "cues": [
-                "The three IMFs",
-                "Inside vs. between molecules"
+                "S05.5"
               ],
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "The three IMFs:"
+                  "prompt": "The three IMFs",
+                  "inline": true
                 },
                 {
-                  "prompt": "Intermolecular forces: attractions"
+                  "prompt": "Intermolecular forces (IMFs)",
+                  "inline": true
                 },
                 {
-                  "prompt": "Inside a molecule: covalent bonds connect its atoms. These are"
+                  "prompt": "Inside a molecule",
+                  "inline": true
                 },
                 {
-                  "prompt": "Between molecules: intermolecular forces (IMFs)"
-                },
-                {
-                  "prompt": "Boiling water separates H₂O molecules; it does not"
+                  "prompt": "Boiling water",
+                  "inline": true
                 }
-              ]
+              ],
+              "notesFirst": true
             },
             {
               "title": "Slide 29 · Hydrogen bonding",
               "cues": [
-                "Look for",
-                "In the picture",
-                "Examples"
+                "S05.5"
               ],
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Hydrogen bonding: a partly positive H attracts"
+                  "prompt": "Hydrogen bonding",
+                  "inline": true
                 },
                 {
-                  "prompt": "Look for: H bonded directly to"
+                  "prompt": "Look for",
+                  "inline": true
                 },
                 {
-                  "prompt": "In the picture: Hδ+ in one water molecule attracts"
+                  "prompt": "In the picture",
+                  "inline": true
                 },
                 {
-                  "prompt": "Examples:"
+                  "prompt": "Examples",
+                  "inline": true
                 },
                 {
-                  "prompt": "Helps raise water’s boiling point and"
+                  "prompt": "Effects",
+                  "inline": true
                 },
                 {
-                  "prompt": "Strength:"
+                  "prompt": "Strength",
+                  "inline": true
                 }
-              ]
-            }
-          ]
-        },
-        {
-          "rows": [
+              ],
+              "notesFirst": true
+            },
             {
               "title": "Slide 30 · Dipole–dipole forces",
               "cues": [
-                "Look for",
-                "In the picture",
-                "Examples"
+                "S05.5"
               ],
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Dipole–dipole: polar molecules attract through"
+                  "prompt": "Dipole–dipole",
+                  "inline": true
                 },
                 {
-                  "prompt": "Look for:"
+                  "prompt": "Look for",
+                  "inline": true
                 },
                 {
-                  "prompt": "In the picture: Clδ− on one HCl molecule attracts"
+                  "prompt": "In the picture",
+                  "inline": true
                 },
                 {
-                  "prompt": "Examples:"
+                  "prompt": "Examples",
+                  "inline": true
                 },
                 {
-                  "prompt": "These partial charges are"
+                  "prompt": "These partial charges are",
+                  "inline": true
                 }
-              ]
-            },
-            {
-              "title": "Slide 31 · London dispersion forces",
-              "cues": [
-                "The molecules that have them",
-                "The electron shift",
-                "The strength factor"
               ],
-              "notes": [
-                {
-                  "prompt": "London dispersion: moving electrons create"
-                },
-                {
-                  "prompt": "Found in:"
-                },
-                {
-                  "prompt": "Main attraction for"
-                },
-                {
-                  "prompt": "Electrons shift →"
-                },
-                {
-                  "prompt": "Stronger with"
-                },
-                {
-                  "prompt": "Example:"
-                },
-                {
-                  "prompt": "The picture shows"
-                }
-              ]
+              "notesFirst": true
             }
           ]
         },
         {
           "rows": [
             {
-              "kind": "example",
-              "title": "Slide 32 · Practice: identifying IMFs",
+              "title": "Slide 31 · London dispersion forces",
               "cues": [
-                "Every molecule has dispersion",
-                "Check what else it has"
+                "S05.5"
               ],
-              "problem": {
-                "given": [
-                  "Molecules from slide 32: CO₂, CCl₄, HCl, CH₃Cl, H₂O, NH₃, HF."
-                ],
-                "find": "the IMFs each molecule has.",
-                "answer": "",
-                "workHeightIn": 2.4,
-                "workLabel": "Sketch each molecule and list its IMFs"
-              },
+              "noWorkBox": true,
+              "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Every molecule has"
+                  "prompt": "London dispersion",
+                  "inline": true
                 },
                 {
-                  "prompt": "Stronger attractions usually mean"
+                  "prompt": "Found in",
+                  "inline": true
+                },
+                {
+                  "prompt": "Main attraction for",
+                  "inline": true
+                },
+                {
+                  "prompt": "Electrons shift",
+                  "inline": true
+                },
+                {
+                  "prompt": "Stronger with",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example",
+                  "inline": true
+                },
+                {
+                  "prompt": "The picture shows",
+                  "inline": true
                 }
-              ]
+              ],
+              "notesFirst": true
+            },
+            {
+              "kind": "example",
+              "title": "Slide 32 · Identifying intermolecular forces",
+              "cues": [
+                "S05.5"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Every molecule has",
+                  "inline": true
+                },
+                {
+                  "prompt": "Stronger attractions",
+                  "inline": true
+                }
+              ],
+              "problem": {
+                "workLabel": "Slide 32 · Sketch any molecule you need, to check its polarity and its H–N, H–O or H–F bonds",
+                "workHeightIn": 1.4
+              },
+              "table": {
+                "headers": [
+                  "Molecule",
+                  "IMFs it has"
+                ],
+                "widths": [
+                  0.22,
+                  0.78
+                ],
+                "rowHeightIn": 0.28,
+                "rows": [
+                  [
+                    "CO₂",
+                    ""
+                  ],
+                  [
+                    "CCl₄",
+                    ""
+                  ],
+                  [
+                    "HCl",
+                    ""
+                  ],
+                  [
+                    "CH₃Cl",
+                    ""
+                  ],
+                  [
+                    "H₂O",
+                    ""
+                  ],
+                  [
+                    "NH₃",
+                    ""
+                  ],
+                  [
+                    "HF",
+                    ""
+                  ]
+                ]
+              }
             }
           ]
         }
