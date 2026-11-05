@@ -17,10 +17,10 @@
 | **Affected Courses** | None. This is about how the system runs, not about course content. |
 | **Risk** | Low. It adds a fallback for a case that already fails. When the Overseer has the `Agent` tool (main-session role), nothing changes. The QA gate, the filing gate and the verification list are untouched. |
 | **Recommendation** | Approve. Optional follow-up, not part of this record: decide whether `Agent` should stay in the `tools:` line of `overseer.md`. It only works when the Overseer is not a sub-agent, and listing it suggests a capability the sub-agent case does not have. If Matt wants that changed, it gets its own record. |
-| **Decision** | |
-| **Status** | **PENDING** |
-| **Implemented By** | |
-| **Verified** | |
+| **Decision** | **Approved by the user, 2026-11-05**, in the main session: "Approve 0056". |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Secretary, 2026-11-05 (commit in the PR carrying this record) |
+| **Verified** | 2026-11-05. `overseer.md` has the new subsection after the Delegation table and the amended description; `workflows/build-deliverable.md` points to it; validate_agents and validate_references pass. |
 
 ---
 

@@ -25,11 +25,17 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-05
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0057 | 2026-11-05 | A Snow Day folder under each course holds snow-day assignments | IMPLEMENTED | `governance/proposals/SHULL-CHG-0057-snow-day-folder.md` |
+| SHULL-CHG-0056 | 2026-11-05 | An Overseer running as a sub-agent returns a routing brief and does not delegate | IMPLEMENTED | `governance/proposals/SHULL-CHG-0056-overseer-as-subagent-routing-brief.md` |
+
 ## 2026-10-28
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0056 | | An Overseer running as a sub-agent returns a routing brief and does not delegate | PROPOSED | `governance/proposals/SHULL-CHG-0056-overseer-as-subagent-routing-brief.md` |
 | SHULL-CHG-0055 | 2026-10-28 | Worksheet tier tags set in the muted label grey | CONFIRMED | `governance/proposals/SHULL-CHG-0055-worksheet-tier-tags-grey.md` |
 | SHULL-CHG-0054 | 2026-10-28 | Chemistry palette: Lab Lime + Aqua becomes Kinetic Orange | PARTIAL | `governance/proposals/SHULL-CHG-0054-chemistry-kinetic-orange.md` |
 

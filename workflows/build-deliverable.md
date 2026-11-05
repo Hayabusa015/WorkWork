@@ -25,6 +25,9 @@ LIBRARIAN     file it, then VERIFY the destination
 OVERSEER      verify deployment · task report
 ```
 
+An Overseer running as a sub-agent cannot dispatch these steps. It returns a routing brief and the
+main session dispatches: `.claude/agents/overseer.md`, "When you are running as a sub-agent".
+
 ## Step 0 — before anything is built
 
 The Overseer:

@@ -28,6 +28,7 @@ SHULL Science/
 │   └── Image Library/
 │       ├── Chemistry/  Physics/  Geology/  Shared/
 └── [Course]/                        Chemistry · Physics · Geology
+    ├── Snow Day/                    course level; snow-day assignments and keys (SHULL-CHG-0057)
     └── Unit ## - Unit Name/
         ├── Guided Notes/                  if the user made it
         ├── Presentations/                 if the user made it
@@ -58,6 +59,10 @@ that must exist.
 - **No `Homework` folder exists at any level.** Homework files — practice sets, worksheets,
   take-home work, keys — are filed as loose files directly inside the Section folder itself.
   (**SHULL-CHG-0030**.)
+- **`Snow Day` is the one course-level folder** (SHULL-CHG-0057). A snow-day assignment belongs to no
+  unit or section, so it is filed in `[Course]/Snow Day/`, a sibling of the Unit folders. The user
+  created it in all three courses on 2026-11-05. Match it case-insensitively; if a course lacks one,
+  ask before creating it, as with any folder outside §2 rule 3.
 - **The system never creates a content folder** (SHULL-CHG-0035). The user adds those himself, and a
   unit that lacks one stays without it. If the matching folder is not there, the file goes **loose
   in its parent**. This covers content subfolders only: a missing `Section ##.#` folder may still be
