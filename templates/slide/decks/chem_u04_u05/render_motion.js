@@ -14,7 +14,17 @@ const path = require("path");
   const [src, out, a3, a4] = process.argv.slice(2);
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
-  await page.goto("file://" + path.resolve(src));
+  // Colours live only in brand/tokens.json: fill the {{ground.x}} / {{chemistry.x}} placeholders,
+  // then load the filled copy beside the source so its relative font paths still resolve.
+  const fs = require("fs");
+  const tok = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "..", "..", "brand", "tokens.json"), "utf8"));
+  const hexOf = (grp, k) => { const v = grp === "ground" ? tok.ground[k] : tok.courses[grp][k]; return v && v.hex; };
+  const html = fs.readFileSync(path.resolve(src), "utf8").replace(/\{\{(\w+)\.(\w+)\}\}/g, (m, g, k) => {
+    const h = hexOf(g, k); if (!h) throw new Error("no token " + m); return h; });
+  const filled = path.join(path.dirname(path.resolve(src)), ".render_" + path.basename(src));
+  fs.writeFileSync(filled, html);
+  process.on("exit", () => { try { fs.unlinkSync(filled); } catch (e) {} });
+  await page.goto("file://" + filled);
   await page.evaluate(() => document.fonts.ready);
   if (a3 === "--still") {
     await page.evaluate((t) => render(t), parseFloat(a4));

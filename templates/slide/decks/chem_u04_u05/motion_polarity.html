@@ -1,89 +1,90 @@
 <!DOCTYPE html>
 <!-- 4.6 Bond Polarity motion graphic. Rendered frame by frame by render_motion.js:
      render(t) sets every attribute from the time alone, so any frame can be reproduced.
+     Colours are {{token}} placeholders filled from brand/tokens.json by render_motion.js.
      Matches the 4.2 / 4.3 dark motion graphics: asphalt ground, step counter, numbered caption,
      data card bottom right. Electronegativity values are Pauling, two decimals. -->
 <html><head><meta charset="utf-8">
 <style>
 @font-face{font-family:"Archivo";src:url("../../../../brand/fonts/Archivo[wdth,wght].ttf");font-weight:100 900;}
 @font-face{font-family:"Archivo Narrow";src:url("../../../../brand/fonts/ArchivoNarrow[wght].ttf");font-weight:400 700;}
-html,body{margin:0;background:#14161B;}
+html,body{margin:0;background:{{ground.asphalt}};}
 svg{display:block}
 text{font-family:"Archivo",sans-serif}
 .n{font-family:"Archivo Narrow",sans-serif}
 </style></head><body>
 <svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <radialGradient id="glowO"><stop offset="0" stop-color="#FF6B1A" stop-opacity=".35"/><stop offset="1" stop-color="#FF6B1A" stop-opacity="0"/></radialGradient>
-  <radialGradient id="glowC"><stop offset="0" stop-color="#3DD6F4" stop-opacity=".30"/><stop offset="1" stop-color="#3DD6F4" stop-opacity="0"/></radialGradient>
-  <radialGradient id="cloud"><stop offset="0" stop-color="#3DD6F4" stop-opacity=".28"/><stop offset=".7" stop-color="#3DD6F4" stop-opacity=".10"/><stop offset="1" stop-color="#3DD6F4" stop-opacity="0"/></radialGradient>
-  <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B1A"/></marker>
+  <radialGradient id="glowO"><stop offset="0" stop-color="{{chemistry.primary}}" stop-opacity=".35"/><stop offset="1" stop-color="{{chemistry.primary}}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowC"><stop offset="0" stop-color="{{chemistry.secondary}}" stop-opacity=".30"/><stop offset="1" stop-color="{{chemistry.secondary}}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="cloud"><stop offset="0" stop-color="{{chemistry.secondary}}" stop-opacity=".28"/><stop offset=".7" stop-color="{{chemistry.secondary}}" stop-opacity=".10"/><stop offset="1" stop-color="{{chemistry.secondary}}" stop-opacity="0"/></radialGradient>
+  <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="{{chemistry.primary}}"/></marker>
 </defs>
-<rect width="1920" height="1080" fill="#14161B"/>
+<rect width="1920" height="1080" fill="{{ground.asphalt}}"/>
 <!-- eyebrow -->
-<text x="96" y="78" font-size="22" fill="#EDF0E5" letter-spacing="3" font-weight="500">UNIT 4 · <tspan font-weight="800">4.6</tspan> BOND POLARITY</text>
-<rect x="96" y="96" width="170" height="3" fill="#FF6B1A"/>
-<text id="stepc" x="1824" y="78" font-size="22" fill="#EDF0E5" letter-spacing="3" text-anchor="end" font-weight="700">STEP 01 / 04</text>
+<text x="96" y="78" font-size="22" fill="{{ground.parchment}}" letter-spacing="3" font-weight="500">UNIT 4 · <tspan font-weight="800">4.6</tspan> BOND POLARITY</text>
+<rect x="96" y="96" width="170" height="3" fill="{{chemistry.primary}}"/>
+<text id="stepc" x="1824" y="78" font-size="22" fill="{{ground.parchment}}" letter-spacing="3" text-anchor="end" font-weight="700">STEP 01 / 04</text>
 <g id="prog"></g>
 
 <!-- left: H–H -->
 <g id="left">
   <ellipse id="cl1" cx="560" cy="420" rx="230" ry="120" fill="url(#cloud)"/>
-  <ellipse cx="560" cy="420" rx="230" ry="120" fill="none" stroke="#BDB6AA" stroke-opacity=".35" stroke-dasharray="8 10" stroke-width="2"/>
+  <ellipse cx="560" cy="420" rx="230" ry="120" fill="none" stroke="{{ground.mutedOnDark}}" stroke-opacity=".35" stroke-dasharray="8 10" stroke-width="2"/>
   <circle cx="465" cy="420" r="120" fill="url(#glowO)"/>
   <circle cx="655" cy="420" r="120" fill="url(#glowO)"/>
-  <text x="465" y="462" font-size="120" font-weight="800" fill="#FFFFFF" text-anchor="middle">H</text>
-  <text x="655" y="462" font-size="120" font-weight="800" fill="#FFFFFF" text-anchor="middle">H</text>
-  <g id="pairL"><text x="548" y="436" font-size="44" font-weight="800" fill="#FF6B1A" text-anchor="middle">×</text><circle cx="574" cy="421" r="8" fill="#FFFFFF"/></g>
-  <text id="enL" x="560" y="590" font-size="26" fill="#BDB6AA" text-anchor="middle" opacity="0">2.20 vs 2.20 · equal pull</text>
-  <text id="dL" x="560" y="270" font-size="30" fill="#BDB6AA" text-anchor="middle" opacity="0">no partial charges</text>
-  <text id="arL" x="560" y="300" font-size="30" fill="#BDB6AA" text-anchor="middle" opacity="0">no dipole</text>
-  <text x="560" y="660" font-size="34" font-weight="700" fill="#FFFFFF" text-anchor="middle">H–H  hydrogen</text>
-  <text id="tagL" x="560" y="702" font-size="26" fill="#BDB6AA" text-anchor="middle">shared pair</text>
+  <text x="465" y="462" font-size="120" font-weight="800" fill="{{ground.white}}" text-anchor="middle">H</text>
+  <text x="655" y="462" font-size="120" font-weight="800" fill="{{ground.white}}" text-anchor="middle">H</text>
+  <g id="pairL"><text x="548" y="436" font-size="44" font-weight="800" fill="{{chemistry.primary}}" text-anchor="middle">×</text><circle cx="574" cy="421" r="8" fill="{{ground.white}}"/></g>
+  <text id="enL" x="560" y="590" font-size="26" fill="{{ground.mutedOnDark}}" text-anchor="middle" opacity="0">2.20 vs 2.20 · equal pull</text>
+  <text id="dL" x="560" y="270" font-size="30" fill="{{ground.mutedOnDark}}" text-anchor="middle" opacity="0">no partial charges</text>
+  <text id="arL" x="560" y="300" font-size="30" fill="{{ground.mutedOnDark}}" text-anchor="middle" opacity="0">no dipole</text>
+  <text x="560" y="660" font-size="34" font-weight="700" fill="{{ground.white}}" text-anchor="middle">H–H  hydrogen</text>
+  <text id="tagL" x="560" y="702" font-size="26" fill="{{ground.mutedOnDark}}" text-anchor="middle">shared pair</text>
 </g>
 
 <!-- right: H–Cl -->
 <g id="right">
   <ellipse id="cl2" cx="1360" cy="420" rx="250" ry="125" fill="url(#cloud)"/>
-  <ellipse id="cl2e" cx="1360" cy="420" rx="250" ry="125" fill="none" stroke="#BDB6AA" stroke-opacity=".35" stroke-dasharray="8 10" stroke-width="2"/>
+  <ellipse id="cl2e" cx="1360" cy="420" rx="250" ry="125" fill="none" stroke="{{ground.mutedOnDark}}" stroke-opacity=".35" stroke-dasharray="8 10" stroke-width="2"/>
   <circle cx="1245" cy="420" r="115" fill="url(#glowO)"/>
   <circle id="clglow" cx="1480" cy="420" r="150" fill="url(#glowC)"/>
-  <text x="1245" y="462" font-size="120" font-weight="800" fill="#FFFFFF" text-anchor="middle">H</text>
-  <text x="1480" y="462" font-size="120" font-weight="800" fill="#FFFFFF" text-anchor="middle">Cl</text>
+  <text x="1245" y="462" font-size="120" font-weight="800" fill="{{ground.white}}" text-anchor="middle">H</text>
+  <text x="1480" y="462" font-size="120" font-weight="800" fill="{{ground.white}}" text-anchor="middle">Cl</text>
   <!-- chlorine lone pairs: top, bottom, right -->
-  <g fill="#FFFFFF"><circle cx="1466" cy="318" r="8"/><circle cx="1494" cy="318" r="8"/>
+  <g fill="{{ground.white}}"><circle cx="1466" cy="318" r="8"/><circle cx="1494" cy="318" r="8"/>
     <circle cx="1466" cy="500" r="8"/><circle cx="1494" cy="500" r="8"/>
     <circle cx="1588" cy="406" r="8"/><circle cx="1588" cy="434" r="8"/></g>
-  <g id="pairR"><text x="1328" y="436" font-size="44" font-weight="800" fill="#FF6B1A" text-anchor="middle">×</text><circle cx="1354" cy="421" r="8" fill="#FFFFFF"/></g>
-  <text id="enH" x="1245" y="590" font-size="26" fill="#BDB6AA" text-anchor="middle" opacity="0">EN 2.20</text>
-  <text id="enC" x="1480" y="590" font-size="26" fill="#3DD6F4" text-anchor="middle" opacity="0">EN 3.16</text>
-  <text id="dP" x="1245" y="292" font-size="56" font-weight="800" fill="#FF6B1A" text-anchor="middle" opacity="0">δ+</text>
-  <text id="dM" x="1480" y="290" font-size="56" font-weight="800" fill="#3DD6F4" text-anchor="middle" opacity="0">δ−</text>
+  <g id="pairR"><text x="1328" y="436" font-size="44" font-weight="800" fill="{{chemistry.primary}}" text-anchor="middle">×</text><circle cx="1354" cy="421" r="8" fill="{{ground.white}}"/></g>
+  <text id="enH" x="1245" y="590" font-size="26" fill="{{ground.mutedOnDark}}" text-anchor="middle" opacity="0">EN 2.20</text>
+  <text id="enC" x="1480" y="590" font-size="26" fill="{{chemistry.secondary}}" text-anchor="middle" opacity="0">EN 3.16</text>
+  <text id="dP" x="1245" y="292" font-size="56" font-weight="800" fill="{{chemistry.primary}}" text-anchor="middle" opacity="0">δ+</text>
+  <text id="dM" x="1480" y="290" font-size="56" font-weight="800" fill="{{chemistry.secondary}}" text-anchor="middle" opacity="0">δ−</text>
   <g id="dip" opacity="0">
-    <line id="dipline" x1="1230" y1="190" x2="1500" y2="190" stroke="#FF6B1A" stroke-width="7" marker-end="url(#ah)"/>
-    <line id="dipcross" x1="1262" y1="168" x2="1262" y2="212" stroke="#FF6B1A" stroke-width="7"/>
+    <line id="dipline" x1="1230" y1="190" x2="1500" y2="190" stroke="{{chemistry.primary}}" stroke-width="7" marker-end="url(#ah)"/>
+    <line id="dipcross" x1="1262" y1="168" x2="1262" y2="212" stroke="{{chemistry.primary}}" stroke-width="7"/>
   </g>
-  <text x="1360" y="660" font-size="34" font-weight="700" fill="#FFFFFF" text-anchor="middle">H–Cl  hydrogen chloride</text>
-  <text id="tagR" x="1360" y="702" font-size="26" fill="#BDB6AA" text-anchor="middle">shared pair</text>
+  <text x="1360" y="660" font-size="34" font-weight="700" fill="{{ground.white}}" text-anchor="middle">H–Cl  hydrogen chloride</text>
+  <text id="tagR" x="1360" y="702" font-size="26" fill="{{ground.mutedOnDark}}" text-anchor="middle">shared pair</text>
 </g>
 
 <!-- caption -->
-<text id="num" class="n" x="96" y="950" font-size="120" font-weight="700" fill="#FF6B1A">01</text>
-<text id="title" class="n" x="250" y="882" font-size="52" font-weight="700" fill="#FFFFFF"></text>
-<text id="d1" x="252" y="930" font-size="26" fill="#BDB6AA"></text>
-<text id="d2" x="252" y="966" font-size="26" fill="#BDB6AA"></text>
+<text id="num" class="n" x="96" y="950" font-size="120" font-weight="700" fill="{{chemistry.primary}}">01</text>
+<text id="title" class="n" x="250" y="882" font-size="52" font-weight="700" fill="{{ground.white}}"></text>
+<text id="d1" x="252" y="930" font-size="26" fill="{{ground.mutedOnDark}}"></text>
+<text id="d2" x="252" y="966" font-size="26" fill="{{ground.mutedOnDark}}"></text>
 
 <!-- data card -->
-<rect x="1290" y="806" width="534" height="210" rx="14" fill="#1F2328" stroke="#2E3338" stroke-width="2"/>
-<g font-size="22" fill="#BDB6AA" text-anchor="middle"><text x="1480" y="846">larger</text><text x="1580" y="846">smaller</text><text x="1700" y="846">ΔEN</text></g>
-<g font-size="30" font-weight="700" fill="#FFFFFF">
+<rect x="1290" y="806" width="534" height="210" rx="14" fill="{{ground.graphite}}" stroke="{{ground.graphite}}" stroke-width="2"/>
+<g font-size="22" fill="{{ground.mutedOnDark}}" text-anchor="middle"><text x="1480" y="846">larger</text><text x="1580" y="846">smaller</text><text x="1700" y="846">ΔEN</text></g>
+<g font-size="30" font-weight="700" fill="{{ground.white}}">
   <text x="1320" y="892">H–H</text><text x="1320" y="942">H–Cl</text></g>
-<g id="row1" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="0">
+<g id="row1" font-size="30" font-weight="700" fill="{{ground.white}}" text-anchor="middle" opacity="0">
   <text x="1480" y="892">2.20</text><text x="1580" y="892">2.20</text><text x="1700" y="892">0.00</text></g>
-<g id="row2" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="0">
-  <text x="1480" y="942">3.16</text><text x="1580" y="942">2.20</text><text x="1700" y="942" fill="#FF6B1A">0.96</text></g>
-<line x1="1316" y1="964" x2="1798" y2="964" stroke="#2E3338" stroke-width="2"/>
-<text id="foot" x="1557" y="998" font-size="22" fill="#BDB6AA" text-anchor="middle">ΔEN = larger − smaller</text>
+<g id="row2" font-size="30" font-weight="700" fill="{{ground.white}}" text-anchor="middle" opacity="0">
+  <text x="1480" y="942">3.16</text><text x="1580" y="942">2.20</text><text x="1700" y="942" fill="{{chemistry.primary}}">0.96</text></g>
+<line x1="1316" y1="964" x2="1798" y2="964" stroke="{{ground.graphite}}" stroke-width="2"/>
+<text id="foot" x="1557" y="998" font-size="22" fill="{{ground.mutedOnDark}}" text-anchor="middle">ΔEN = larger − smaller</text>
 </svg>
 <script>
 const STEPS = [
@@ -100,10 +101,10 @@ for (let i=0;i<4;i++){const r=document.createElementNS("http://www.w3.org/2000/s
   r.setAttribute("x",1824-4*52+i*52+4);r.setAttribute("y",96);r.setAttribute("width",44);r.setAttribute("height",3);prog.appendChild(r);}
 function setTitle(s){
   const st = STEPS[s], parts = st.t.split(st.hi);
-  $("title").innerHTML = parts[0] + `<tspan fill="#FF6B1A">${st.hi}</tspan>` + (parts[1]||"");
+  $("title").innerHTML = parts[0] + `<tspan fill="{{chemistry.primary}}">${st.hi}</tspan>` + (parts[1]||"");
   $("d1").textContent = st.d[0]; $("d2").textContent = st.d[1];
   $("num").textContent = "0"+(s+1); $("stepc").textContent = `STEP 0${s+1} / 04`;
-  [...prog.children].forEach((r,i)=>r.setAttribute("fill", i===s?"#FF6B1A":"#3A4047"));
+  [...prog.children].forEach((r,i)=>r.setAttribute("fill", i===s?"{{chemistry.primary}}":"{{ground.graphite}}"));
 }
 function render(t){
   const s = Math.min(3, Math.floor(t/DUR)); setTitle(s);
