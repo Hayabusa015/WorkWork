@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-05
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0057 | 2026-11-05 | Every unit gets four content folders: Quiz, Test, Presentations + Guided Notes, Worksheets | PENDING | `governance/proposals/SHULL-CHG-0057-unit-content-folders.md` |
+
 ## 2026-10-28
 
 | ID | Date | Change | Status | Record |
