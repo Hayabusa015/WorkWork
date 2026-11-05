@@ -7,3 +7,6 @@ installer/*.zip
 .vercel/
 
 credentials.json
+
+# Local build output. Finished documents are filed to Drive, not committed.
+build/
