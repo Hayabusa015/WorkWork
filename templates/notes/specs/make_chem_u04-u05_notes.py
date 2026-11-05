@@ -51,7 +51,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STEM = "chem_u04-u05_notes"
 
 # --------------------------------------------------------------------------------------------
-# Slide content the text extraction could not read (slides 9, 19, 32), filled from the
+# Slide content the text extraction could not read (slides 9, 32; Matt hides slide 19, 2026-11-05, so the notes skip it), filled from the
 # rendered Astra slides by the main session. Until filled, the generator writes nothing.
 # --------------------------------------------------------------------------------------------
 SLIDE_09 = {   # Astra slide 9, as rendered: bond type given, the rest filled in
@@ -63,15 +63,6 @@ SLIDE_09 = {   # Astra slide 9, as rendered: bond type given, the rest filled in
     "widths": [0.3, 0.42, 0.28], "rowHeightIn": 0.30,
 }
 
-SLIDE_19 = {   # Astra slide 19, "Common Molecular Shapes"
-    "headers": ["Groups", "Lone pairs on center", "Molecular shape", "Example"],
-    "rows": [["2", "0", "", ""], ["3", "0", "", ""], ["4", "0", "", ""], ["4", "1", "", ""], ["4", "2", "", ""]],
-    "_key": [["2", "0", "Linear • 180°", "CO₂"], ["3", "0", "Trigonal planar • 120°", "BF₃, CH₂O"],
-             ["4", "0", "Tetrahedral • 109.5°", "CH₄, CCl₄"], ["4", "1", "Trigonal pyramidal • ≈107°", "NH₃"],
-             ["4", "2", "Bent • ≈104.5°", "H₂O"]],
-    "widths": [0.14, 0.24, 0.38, 0.24], "rowHeightIn": 0.30,
-}
-
 SLIDE_32 = [   # Astra slide 32, as rendered
     ("CO₂", "Dispersion only"), ("CCl₄", "Dispersion only"),
     ("HCl", "Dispersion, dipole–dipole"), ("CH₃Cl", "Dispersion, dipole–dipole"),
@@ -79,7 +70,7 @@ SLIDE_32 = [   # Astra slide 32, as rendered
     ("HF", "Dispersion, dipole–dipole, hydrogen bonding"),
 ]
 
-missing = [n for n, v in (("SLIDE_19", SLIDE_19), ("SLIDE_32", SLIDE_32)) if v is None]
+missing = [n for n, v in (("SLIDE_32", SLIDE_32),) if v is None]
 if missing:
     sys.exit("make_chem_u04-u05_notes: fill " + " and ".join(missing) + " from the rendered "
              "Astra slides before generating. Nothing was written.")
@@ -96,7 +87,7 @@ def P(label, answer):
 
 def notes(title, cues, rows, table=None, rows_first=True):
     """One slide's block with no example. `rows_first` False keeps the table above the rows,
-    for a slide whose table comes before its closing line (slides 9, 18, 19)."""
+    for a slide whose table comes before its closing line (slides 9, 18)."""
     d = {"title": title, "cues": cues, "noWorkBox": True, "extraNotes": False, "notes": rows}
     if rows_first:
         d["notesFirst"] = True
@@ -105,12 +96,17 @@ def notes(title, cues, rows, table=None, rows_first=True):
     return d
 
 
-def example(title, cues, rows, box_label, height, solution, table=None):
+KEY_IMG = "../assets/chem_u04-u05_key/"   # drawn answers, from templates/slide/decks/chem_u04_u05/key_structures.js
+
+
+def example(title, cues, rows, box_label, height, solution, table=None, img=None):
     """One slide's block that works an example: its rows, then (if any) its table, then the work
     box, last, directly under them. The box label names the slide (rule 3)."""
     d = {"kind": "example", "title": title, "cues": cues, "extraNotes": False,
          "notesFirst": True, "notes": rows,
          "problem": {"workLabel": box_label, "workHeightIn": height, "solution": solution}}
+    if img:
+        d["problem"]["keyImage"] = KEY_IMG + img + ".png"
     if table:
         d["table"] = table
     return d
@@ -123,10 +119,11 @@ PAIR_IN = 1.7       # two small molecules with arrows (slides 21, 22)
 
 spec = {
   "course": "chemistry",
-  # The builder holds one unit per packet. 4 puts "CHEMICAL BONDING" on the cover and
-  # "UNIT 04" in every footer, including the U5 pages. Section bars and cues still read
-  # U05 / S05.x. A template gap, reported; not worked around here.
+  # The packet spans two units. "unit" is the first; footerPerUnit gives the U5 pages a
+  # UNIT 05 footer, and coverTitle names both units (Matt, 2026-11-05).
   "unit": 4,
+  "footerPerUnit": True,
+  "coverTitle": "Bonding & Molecular Structure",
   "key": False,
   "noEquationBar": True,
   "cover": {
@@ -180,20 +177,22 @@ spec = {
          P("Conducts", "when molten or dissolved, not as a solid"),
        ], "Slide 4 · Na and Cl: show the electron transfer and the two ions it makes", 1.6,
           ["Na loses one electron → Na+", "Cl gains that electron → Cl−",
-           "The opposite ions attract."]),
+           "The opposite ions attract."], img="s04_ionic"),
      ]}]},
     # ======================================================== slides 5-7 · S04.3, S04.5
     {"code": "4.3", "title": "Covalent Bonding & Electronegativity",
      "learningTarget": "I can describe covalent bonding and classify a bond from its EN difference.",
      "pages": [{"rows": [
-       notes("Slide 5 · Covalent bonding", ["S04.3"], [
+       example("Slide 5 · Covalent bonding", ["S04.3"], [
          P("Covalent bonding", "atoms share pairs of electrons"),
          P("Usually between", "nonmetals"),
          P("One bond", "one shared pair of electrons"),
          P("Properties", "often low melting points; usually poor conductors"),
          P("Found as", "gases, liquids, or soft solids"),
          P("Exception", "network solids (diamond): strong bonds throughout"),
-       ]),
+       ], "Slide 5 · H and O: show the shared pairs that make H₂O", 1.5,
+          ["O shares one pair with each H.", "O: 2 shared + 2 lone pairs = 8.", "Each H: 1 shared pair = 2."],
+          img="s05_covalent"),
        notes("Slide 6 · EN and bond type",
              ["S04.5", "The cutoffs are class guidelines, not sharp boundaries."], [
          P("Electronegativity", "how strongly an atom pulls on shared electrons"),
@@ -225,7 +224,7 @@ spec = {
          P("δ− and δ+", "partly negative; partly positive (crossed end of the arrow)"),
        ], "Slide 8 · Draw H–H and H–Cl. Add the dipole arrow, δ+ and δ− to the polar bond.", 1.8,
           ["H–H: no arrow; equal sharing.",
-           "H–Cl: arrow points toward Cl; crossed end at H. H is δ+, Cl is δ−."]),
+           "H–Cl: arrow points toward Cl; crossed end at H. H is δ+, Cl is δ−."], img="s08_dipole"),
        notes("Slide 9 · Bond types at a glance",
              ["S04.6", "Compare how the electrons are shared or transferred."], [
          P("Ionic bonds, usually", "metal + nonmetal"),
@@ -260,7 +259,7 @@ spec = {
        ], "Slide 13 · Draw the BF₃ Lewis structure", LEWIS_IN,
           ["Connect: three B–F bonds use 6 electrons.",
            "Fill: each F gets 3 lone pairs, 18 electrons.",
-           "Check: 6 bonding + 18 lone-pair electrons = 24."]),
+           "Check: 6 bonding + 18 lone-pair electrons = 24."], img="s13_bf3"),
       ]},
       {"rows": [
        example("Slide 14 · Lewis structure: CO₂", ["S05.1"], [
@@ -270,14 +269,14 @@ spec = {
           ["Connect: O–C–O uses 4 electrons.",
            "Fill: the other 12 go on the oxygens. Carbon has only 4.",
            "Fix: share one lone pair from each O → O=C=O.",
-           "Check: 8 bonding + 8 lone-pair electrons = 16. All atoms have 8."]),
+           "Check: 8 bonding + 8 lone-pair electrons = 16. All atoms have 8."], img="s14_co2"),
        example("Slide 15 · Lewis structure: NH₃", ["S05.1"], [
          P("NH₃ valence electrons", "5 + 3(1) = 8"),
          P("Leftovers", "8 − 6 = 2 electrons: one lone pair on N"),
        ], "Slide 15 · Draw the NH₃ Lewis structure", LEWIS_IN,
           ["Connect: three N–H bonds use 6 electrons. Each H now has 2.",
            "Leftovers: 8 − 6 = 2. Both go on N as one lone pair.",
-           "Check: N has 8 around it. Total used = 8."]),
+           "Check: N has 8 around it. Total used = 8."], img="s15_nh3"),
        example("Slide 16 · Lewis structure: CH₂O", ["S05.1", "H gets 2; C and O get 8."], [
          P("CH₂O valence electrons", "4 + 2(1) + 6 = 12"),
          P("Fix", "share one O lone pair to make C=O"),
@@ -285,10 +284,10 @@ spec = {
           ["Connect: three single bonds use 6 electrons.",
            "Fill: 6 electrons on O. Carbon has only 6.",
            "Fix: share one O lone pair → C=O.",
-           "Check: C=O 4 + two C–H 4 + two O lone pairs 4 = 12."]),
+           "Check: C=O 4 + two C–H 4 + two O lone pairs 4 = 12."], img="s16_ch2o"),
       ]},
      ]},
-    # ======================================================== slides 17-19 · S05.3
+    # ======================================================== slides 17-18 · S05.3
     {"code": "5.3", "title": "Molecular Geometry",
      "learningTarget": "I can use electron groups and lone pairs to predict a molecule's shape and bond angle.",
      "pages": [{"rows": [
@@ -317,10 +316,6 @@ spec = {
                           ["More than 8", "S", "12", "SF₆: 6 bonds"],
                           ["More than 8", "Xe", "12", "XeF₄: 4 bonds + 2 lone pairs"]]},
              rows_first=False),
-       notes("Slide 19 · Common molecular shapes",
-             ["S05.3", "Count electron groups. Name the shape using the atoms."], [
-         P("Lone pairs change the shape; the shape name", "describes the atoms"),
-       ], table=SLIDE_19, rows_first=False),
      ]}]},
     # ======================================================== slides 20-26 · S05.4
     {"code": "5.4", "title": "Molecular Polarity",
@@ -336,7 +331,7 @@ spec = {
          P("To find molecular polarity, check", "the bonds AND the shape"),
        ], "Slide 21 · Draw HCl and CO₂ with their dipole arrows", PAIR_IN,
           ["H–Cl: arrow toward Cl, crossed end at H. H δ+, Cl δ−.",
-           "O=C=O: two arrows from C toward each O, equal and opposite, so they cancel."]),
+           "O=C=O: two arrows from C toward each O, equal and opposite, so they cancel."], img="s21_hcl_co2"),
        example("Slide 22 · Canceling bond dipoles", ["S05.4"], [
          P("Bond pulls cancel when", "their directions balance"),
          P("Balanced pulls → nonpolar", "CO₂, BF₃, CH₄, CCl₄"),
@@ -344,7 +339,7 @@ spec = {
          P("Before deciding, check", "the 3D shape and the outer atoms"),
        ], "Slide 22 · Draw BF₃ and NH₃ with their dipole arrows", PAIR_IN,
           ["BF₃: three B–F arrows toward each F, spread evenly around B; they cancel.",
-           "NH₃: three N–H arrows toward N; the pyramid leaves a net pull toward N."]),
+           "NH₃: three N–H arrows toward N; the pyramid leaves a net pull toward N."], img="s22_bf3_nh3"),
       ]},
       {"rows": [
        example("Slide 23 · Molecular polarity: H₂O",
@@ -356,7 +351,7 @@ spec = {
          P("Partial charges", "oxygen side δ−, hydrogen side δ+"),
        ], "Slide 23 · Draw H₂O with its dipole arrows, δ+ and δ−", POLAR_IN,
           ["Bent H–O–H with two lone pairs on O.",
-           "Arrows from each H toward O. O δ−, H δ+. The pulls do not cancel."]),
+           "Arrows from each H toward O. O δ−, H δ+. The pulls do not cancel."], img="s23_h2o"),
        example("Slide 24 · Molecular polarity: NH₃",
                ["S05.4", "A lone pair changes the arrangement of the three N–H bonds."], [
          P("NH₃ electrons", "5 + 3(1) = 8: three bonds, one N lone pair"),
@@ -366,7 +361,7 @@ spec = {
          P("NH₃ is", "a 3D pyramid, not a flat triangle"),
        ], "Slide 24 · Draw NH₃ with its dipole arrows", POLAR_IN,
           ["Pyramid: N on top with one lone pair, three H below.",
-           "Arrows from each H toward N. Net pull toward N."]),
+           "Arrows from each H toward N. Net pull toward N."], img="s24_nh3"),
       ]},
       {"rows": [
        example("Slide 25 · Molecular polarity: carbon tetrachloride",
@@ -378,7 +373,7 @@ spec = {
          P("Solid wedge / dashed wedge", "toward you / away from you"),
        ], "Slide 25 · Draw CCl₄ with wedges and its dipole arrows", POLAR_IN,
           ["Tetrahedral C with four Cl; one solid wedge, one dashed wedge.",
-           "Four equal arrows from C toward each Cl. They cancel."]),
+           "Four equal arrows from C toward each Cl. They cancel."], img="s25_ccl4"),
        example("Slide 26 · Tetrahedral molecules",
                ["S05.4", "Both have 4 bonds and no lone pairs on the central carbon."], [
          P("CCl₄", "four identical C–Cl pulls cancel → NONPOLAR"),
@@ -386,7 +381,7 @@ spec = {
          P("Shape alone does not decide polarity", "the outer atoms matter"),
        ], "Slide 26 · Draw CCl₄ and CH₃Cl with their dipole arrows and the net pull", POLAR_IN,
           ["CCl₄: four equal C–Cl arrows cancel. No net pull.",
-           "CH₃Cl: the C–Cl arrow is not balanced. Net pull toward Cl."]),
+           "CH₃Cl: the C–Cl arrow is not balanced. Net pull toward Cl."], img="s26_ccl4_ch3cl"),
       ]},
      ]},
     # ======================================================== slides 27-32 · S05.5

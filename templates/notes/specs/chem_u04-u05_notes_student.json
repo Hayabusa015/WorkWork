@@ -1,6 +1,8 @@
 {
   "course": "chemistry",
   "unit": 4,
+  "footerPerUnit": true,
+  "coverTitle": "Bonding & Molecular Structure",
   "key": false,
   "noEquationBar": true,
   "cover": {
@@ -182,7 +184,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 4 · Na and Cl: show the electron transfer and the two ions it makes",
-                "workHeightIn": 1.6
+                "workHeightIn": 1.6,
+                "keyImage": "../assets/chem_u04-u05_key/s04_ionic.png"
               }
             }
           ]
@@ -197,12 +200,13 @@
         {
           "rows": [
             {
+              "kind": "example",
               "title": "Slide 5 · Covalent bonding",
               "cues": [
                 "S04.3"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Covalent bonding",
@@ -229,7 +233,11 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
+              "problem": {
+                "workLabel": "Slide 5 · H and O: show the shared pairs that make H₂O",
+                "workHeightIn": 1.5,
+                "keyImage": "../assets/chem_u04-u05_key/s05_covalent.png"
+              }
             },
             {
               "title": "Slide 6 · EN and bond type",
@@ -344,7 +352,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 8 · Draw H–H and H–Cl. Add the dipole arrow, δ+ and δ− to the polar bond.",
-                "workHeightIn": 1.8
+                "workHeightIn": 1.8,
+                "keyImage": "../assets/chem_u04-u05_key/s08_dipole.png"
               }
             },
             {
@@ -498,7 +507,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 13 · Draw the BF₃ Lewis structure",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s13_bf3.png"
               }
             }
           ]
@@ -525,7 +535,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 14 · Draw the CO₂ Lewis structure",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s14_co2.png"
               }
             },
             {
@@ -548,7 +559,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 15 · Draw the NH₃ Lewis structure",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s15_nh3.png"
               }
             },
             {
@@ -572,7 +584,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 16 · Draw the CH₂O Lewis structure",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s16_ch2o.png"
               }
             }
           ]
@@ -710,68 +723,6 @@
                   ]
                 ]
               }
-            },
-            {
-              "title": "Slide 19 · Common molecular shapes",
-              "cues": [
-                "S05.3",
-                "Count electron groups. Name the shape using the atoms."
-              ],
-              "noWorkBox": true,
-              "extraNotes": false,
-              "notes": [
-                {
-                  "prompt": "Lone pairs change the shape; the shape name",
-                  "inline": true
-                }
-              ],
-              "table": {
-                "headers": [
-                  "Groups",
-                  "Lone pairs on center",
-                  "Molecular shape",
-                  "Example"
-                ],
-                "rows": [
-                  [
-                    "2",
-                    "0",
-                    "",
-                    ""
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "",
-                    ""
-                  ],
-                  [
-                    "4",
-                    "0",
-                    "",
-                    ""
-                  ],
-                  [
-                    "4",
-                    "1",
-                    "",
-                    ""
-                  ],
-                  [
-                    "4",
-                    "2",
-                    "",
-                    ""
-                  ]
-                ],
-                "widths": [
-                  0.14,
-                  0.24,
-                  0.38,
-                  0.24
-                ],
-                "rowHeightIn": 0.3
-              }
             }
           ]
         }
@@ -820,7 +771,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 21 · Draw HCl and CO₂ with their dipole arrows",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s21_hcl_co2.png"
               }
             },
             {
@@ -851,7 +803,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 22 · Draw BF₃ and NH₃ with their dipole arrows",
-                "workHeightIn": 1.7
+                "workHeightIn": 1.7,
+                "keyImage": "../assets/chem_u04-u05_key/s22_bf3_nh3.png"
               }
             }
           ]
@@ -891,7 +844,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 23 · Draw H₂O with its dipole arrows, δ+ and δ−",
-                "workHeightIn": 2.0
+                "workHeightIn": 2.0,
+                "keyImage": "../assets/chem_u04-u05_key/s23_h2o.png"
               }
             },
             {
@@ -927,7 +881,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 24 · Draw NH₃ with its dipole arrows",
-                "workHeightIn": 2.0
+                "workHeightIn": 2.0,
+                "keyImage": "../assets/chem_u04-u05_key/s24_nh3.png"
               }
             }
           ]
@@ -967,7 +922,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 25 · Draw CCl₄ with wedges and its dipole arrows",
-                "workHeightIn": 2.0
+                "workHeightIn": 2.0,
+                "keyImage": "../assets/chem_u04-u05_key/s25_ccl4.png"
               }
             },
             {
@@ -995,7 +951,8 @@
               ],
               "problem": {
                 "workLabel": "Slide 26 · Draw CCl₄ and CH₃Cl with their dipole arrows and the net pull",
-                "workHeightIn": 2.0
+                "workHeightIn": 2.0,
+                "keyImage": "../assets/chem_u04-u05_key/s26_ccl4_ch3cl.png"
               }
             }
           ]

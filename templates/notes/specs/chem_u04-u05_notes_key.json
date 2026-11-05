@@ -1,6 +1,8 @@
 {
   "course": "chemistry",
   "unit": 4,
+  "footerPerUnit": true,
+  "coverTitle": "Bonding & Molecular Structure",
   "key": true,
   "noEquationBar": true,
   "cover": {
@@ -198,7 +200,8 @@
                   "Na loses one electron → Na+",
                   "Cl gains that electron → Cl−",
                   "The opposite ions attract."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s04_ionic.png"
               }
             }
           ]
@@ -213,12 +216,13 @@
         {
           "rows": [
             {
+              "kind": "example",
               "title": "Slide 5 · Covalent bonding",
               "cues": [
                 "S04.3"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Covalent bonding",
@@ -251,7 +255,16 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
+              "problem": {
+                "workLabel": "Slide 5 · H and O: show the shared pairs that make H₂O",
+                "workHeightIn": 1.5,
+                "solution": [
+                  "O shares one pair with each H.",
+                  "O: 2 shared + 2 lone pairs = 8.",
+                  "Each H: 1 shared pair = 2."
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s05_covalent.png"
+              }
             },
             {
               "title": "Slide 6 · EN and bond type",
@@ -383,7 +396,8 @@
                 "solution": [
                   "H–H: no arrow; equal sharing.",
                   "H–Cl: arrow points toward Cl; crossed end at H. H is δ+, Cl is δ−."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s08_dipole.png"
               }
             },
             {
@@ -558,7 +572,8 @@
                   "Connect: three B–F bonds use 6 electrons.",
                   "Fill: each F gets 3 lone pairs, 18 electrons.",
                   "Check: 6 bonding + 18 lone-pair electrons = 24."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s13_bf3.png"
               }
             }
           ]
@@ -593,7 +608,8 @@
                   "Fill: the other 12 go on the oxygens. Carbon has only 4.",
                   "Fix: share one lone pair from each O → O=C=O.",
                   "Check: 8 bonding + 8 lone-pair electrons = 16. All atoms have 8."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s14_co2.png"
               }
             },
             {
@@ -623,7 +639,8 @@
                   "Connect: three N–H bonds use 6 electrons. Each H now has 2.",
                   "Leftovers: 8 − 6 = 2. Both go on N as one lone pair.",
                   "Check: N has 8 around it. Total used = 8."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s15_nh3.png"
               }
             },
             {
@@ -655,7 +672,8 @@
                   "Fill: 6 electrons on O. Carbon has only 6.",
                   "Fix: share one O lone pair → C=O.",
                   "Check: C=O 4 + two C–H 4 + two O lone pairs 4 = 12."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s16_ch2o.png"
               }
             }
           ]
@@ -798,69 +816,6 @@
                   ]
                 ]
               }
-            },
-            {
-              "title": "Slide 19 · Common molecular shapes",
-              "cues": [
-                "S05.3",
-                "Count electron groups. Name the shape using the atoms."
-              ],
-              "noWorkBox": true,
-              "extraNotes": false,
-              "notes": [
-                {
-                  "prompt": "Lone pairs change the shape; the shape name",
-                  "answer": "describes the atoms",
-                  "inline": true
-                }
-              ],
-              "table": {
-                "headers": [
-                  "Groups",
-                  "Lone pairs on center",
-                  "Molecular shape",
-                  "Example"
-                ],
-                "rows": [
-                  [
-                    "2",
-                    "0",
-                    "Linear • 180°",
-                    "CO₂"
-                  ],
-                  [
-                    "3",
-                    "0",
-                    "Trigonal planar • 120°",
-                    "BF₃, CH₂O"
-                  ],
-                  [
-                    "4",
-                    "0",
-                    "Tetrahedral • 109.5°",
-                    "CH₄, CCl₄"
-                  ],
-                  [
-                    "4",
-                    "1",
-                    "Trigonal pyramidal • ≈107°",
-                    "NH₃"
-                  ],
-                  [
-                    "4",
-                    "2",
-                    "Bent • ≈104.5°",
-                    "H₂O"
-                  ]
-                ],
-                "widths": [
-                  0.14,
-                  0.24,
-                  0.38,
-                  0.24
-                ],
-                "rowHeightIn": 0.3
-              }
             }
           ]
         }
@@ -919,7 +874,8 @@
                 "solution": [
                   "H–Cl: arrow toward Cl, crossed end at H. H δ+, Cl δ−.",
                   "O=C=O: two arrows from C toward each O, equal and opposite, so they cancel."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s21_hcl_co2.png"
               }
             },
             {
@@ -958,7 +914,8 @@
                 "solution": [
                   "BF₃: three B–F arrows toward each F, spread evenly around B; they cancel.",
                   "NH₃: three N–H arrows toward N; the pyramid leaves a net pull toward N."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s22_bf3_nh3.png"
               }
             }
           ]
@@ -1007,7 +964,8 @@
                 "solution": [
                   "Bent H–O–H with two lone pairs on O.",
                   "Arrows from each H toward O. O δ−, H δ+. The pulls do not cancel."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s23_h2o.png"
               }
             },
             {
@@ -1052,7 +1010,8 @@
                 "solution": [
                   "Pyramid: N on top with one lone pair, three H below.",
                   "Arrows from each H toward N. Net pull toward N."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s24_nh3.png"
               }
             }
           ]
@@ -1101,7 +1060,8 @@
                 "solution": [
                   "Tetrahedral C with four Cl; one solid wedge, one dashed wedge.",
                   "Four equal arrows from C toward each Cl. They cancel."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s25_ccl4.png"
               }
             },
             {
@@ -1136,7 +1096,8 @@
                 "solution": [
                   "CCl₄: four equal C–Cl arrows cancel. No net pull.",
                   "CH₃Cl: the C–Cl arrow is not balanced. Net pull toward Cl."
-                ]
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s26_ccl4_ch3cl.png"
               }
             }
           ]

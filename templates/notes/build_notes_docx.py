@@ -39,6 +39,7 @@ import copy, io, json, os, re, shutil, subprocess, sys, tempfile
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
+from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -576,7 +577,7 @@ def render_must_write(col, text, pal):
     col.gap(6)
 
 
-def render_problem(col, prob, key, pal):
+def render_problem(col, prob, key, pal, base_dir=None):
     if prob.get("statement"):
         col.text(prob["statement"], BODY, line=BODY_LINE, after=3)
     given = prob.get("given")
@@ -595,7 +596,27 @@ def render_problem(col, prob, key, pal):
                      label_size=LABEL, label_bold=False, label_caps=False,
                      label_color=pal.label)
     mar(inner, 3, 3, 6, 6)
-    if key:
+    img = prob.get("keyImage") if key else None
+    if img:
+        # "keyImage" (opt-in, key only): the drawn answer at the left of the box, the
+        # written steps beside it. Sized to fit inside the box's height, so the key
+        # paginates exactly like the student copy.
+        path = os.path.join(base_dir or ".", img)
+        if not os.path.exists(path):
+            sys.exit(f"build_notes_docx: keyImage not found: {path}")
+        pic_h = max(height - 0.4, 0.8)
+        pic_w = min(pic_h * 3.3 / 1.6, 3.4)
+        pic_h = pic_w * 1.6 / 3.3
+        side = inner.add_table(rows=1, cols=2)
+        fix_widths(side, [pic_w + 0.08, col.w - pic_w - 0.5])
+        left, right = side.rows[0].cells
+        p = left.paragraphs[0]
+        _spacing(p, 0, 0)
+        p.add_run().add_picture(path, width=Inches(pic_w), height=Inches(pic_h))
+        for i, s in enumerate(prob.get("solution", [])):
+            q = right.paragraphs[0] if i == 0 else right.add_paragraph()
+            write(q, s, BODY, line=BODY_LINE, color=pal.ink, before=2)
+    elif key:
         for s in prob.get("solution", []):
             write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=pal.ink,
                   before=2)
@@ -637,7 +658,7 @@ def render_notes(col, row, key, pal, base_dir):
         p.add_run().add_picture(flowchart_png(pal, w, row["flowchart"], key),
                                 width=Inches(w))
     if row.get("problem"):
-        render_problem(col, row["problem"], key, pal)
+        render_problem(col, row["problem"], key, pal, base_dir)
 
     if kind == "recall":
         col.text(row.get("prompt", ""), BODY, line=BODY_LINE)
@@ -827,6 +848,11 @@ def section_bar(doc, ctx, title, code, target=None, target_label="LEARNING TARGE
     return t
 
 
+def footer_text(ctx, unit):
+    return (f"SHULL SCIENCE / {ctx['course'].upper()} / UNIT {unit:02d}"
+            + (" / TEACHER KEY" if ctx["key"] else ""))
+
+
 def footer(section, ctx):
     pal = ctx["pal"]
     section.footer_distance = Inches(FOOTER_DIST_IN)
@@ -893,7 +919,17 @@ def content_page(doc, ctx, sec, page):
     """One sheet of a section. Its first sheet opens with the section title bar and
     learning target (SHULL-CHG-0038); a continuation sheet starts straight on its
     blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn."""
-    break_before(doc)
+    # "footerPerUnit": true (opt-in) - a packet spanning two units starts a new Word
+    # section where the unit changes, so each unit's pages carry their own footer. The
+    # section break takes the place of the page break; page numbers keep counting.
+    unit = int(sec["code"].split(".")[0]) if ctx.get("footer_per_unit") else None
+    if unit is not None and unit != ctx["cur_unit"]:
+        ctx["cur_unit"] = unit
+        new = doc.add_section(WD_SECTION.NEW_PAGE)
+        new.footer.is_linked_to_previous = False
+        footer(new, dict(ctx, footer=footer_text(ctx, unit)))
+    else:
+        break_before(doc)
     head = None
     if page["_n"] == 1:
         head = section_bar(doc, ctx, sec["title"], bar_code(sec["code"]),
@@ -1531,7 +1567,9 @@ def main():
     COURSE = course.upper()
     ctx = {
         "pal": pal, "key": key, "base_dir": base_dir, "report": [], "overfull": [],
-        "unit_title": unit_title(course, unit),
+        # "coverTitle" names a packet that spans units; otherwise the unit's own title.
+        "unit_title": spec.get("coverTitle") or unit_title(course, unit),
+        "footer_per_unit": bool(spec.get("footerPerUnit")), "cur_unit": unit,
         "unit_code": f"U{unit:02d}", "course": course, "unit": unit, "derived": [],
         "footer": f"SHULL SCIENCE / {COURSE} / UNIT {unit:02d}" + (" / TEACHER KEY" if key
                                                                     else ""),
@@ -1604,7 +1642,10 @@ def main():
               "standing Concept Review page. Every packet should end with one.",
               file=sys.stderr)
 
-    footer(s, ctx)
+    # The first Word section's footer. Re-read from doc.sections: `s` was taken from the
+    # body's section properties, which become the LAST section once footerPerUnit has
+    # added a unit break.
+    footer(doc.sections[0], ctx)
     nobreak_hyphens(doc.element.body)
     trim_tail(doc)
     schema_order(doc)
