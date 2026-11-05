@@ -545,7 +545,11 @@ def render_prompt(col, text, answer, lines, key, pal, inline=False):
         # the answer, bold, on that row. Half the height of a label over a writing line;
         # a spec opts in per prompt ("inline": true) for a condensed packet.
         p = col.para()
-        write(p, text + ":   ", BODY, line=INLINE_LINE, color=pal.label)
+        # A label that ends in "…" is the start of a sentence copied from the slide: no
+        # colon, and the ellipsis is dropped, so the row reads as one sentence.
+        stem = text.endswith("…")
+        write(p, (text[:-1].rstrip() + "   ") if stem else (text + ":   "), BODY,
+              line=INLINE_LINE, color=pal.label)
         if answer:
             for seg, b in segments(answer):
                 _run(p, seg, BODY, bold=True, color=pal.ink)
@@ -640,6 +644,18 @@ def render_notes(col, row, key, pal, base_dir):
     notes_first = bool(row.get("notesFirst"))
     if notes_first:
         render_items(col, row, key, pal)
+    if row.get("figure"):
+        # "figure" (opt-in): a full-width picture, e.g. a flowchart rebuilt from the slide.
+        # "keyImage" replaces it in the key, so the student copy can carry blanks.
+        fig = row["figure"]
+        img = fig.get("keyImage") if key and fig.get("keyImage") else fig["image"]
+        path = os.path.join(base_dir or ".", img)
+        if not os.path.exists(path):
+            sys.exit(f"build_notes_docx: figure not found: {path}")
+        p = col.para()
+        _spacing(p, 2, 6)
+        p.add_run().add_picture(path, width=Inches(min(float(fig.get("widthIn", col.w - 0.1)),
+                                                       col.w - 0.1)))
     if row.get("diagram"):
         diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
         col.after_table()

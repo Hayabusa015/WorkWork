@@ -85,7 +85,7 @@ def P(label, answer):
     return {"prompt": label, "answer": answer, "inline": True}
 
 
-def notes(title, cues, rows, table=None, rows_first=True):
+def notes(title, cues, rows, table=None, rows_first=True, figure=None):
     """One slide's block with no example. `rows_first` False keeps the table above the rows,
     for a slide whose table comes before its closing line (slides 9, 18)."""
     d = {"title": title, "cues": cues, "noWorkBox": True, "extraNotes": False, "notes": rows}
@@ -93,6 +93,10 @@ def notes(title, cues, rows, table=None, rows_first=True):
         d["notesFirst"] = True
     if table:
         d["table"] = table
+    if figure:   # a picture from templates/notes/assets: (student file, key file)
+        d["figure"] = {"image": "../assets/chem_u04-u05_key/" + figure[0],
+                       "keyImage": "../assets/chem_u04-u05_key/" + figure[1],
+                       "widthIn": 5.55}   # inside the notes column's cell margins
     return d
 
 
@@ -112,7 +116,7 @@ def example(title, cues, rows, box_label, height, solution, table=None, img=None
     return d
 
 
-LEWIS_IN = 1.7      # Lewis structure boxes (slides 13-16)
+LEWIS_IN = 2.2      # Lewis structure boxes (slides 13-16)
 POLAR_IN = 2.0      # Lewis + dipole arrows (slides 23-26)
 PAIR_IN = 1.7       # two small molecules with arrows (slides 21, 22)
 
@@ -162,19 +166,22 @@ spec = {
      "learningTarget": "I can define a chemical bond, state the octet rule, and describe ionic bonding.",
      "pages": [{"rows": [
        notes("Slides 1–3 · Why atoms bond", ["S04.1"], [
-         P("Three ideas", "bonding, molecular structure, intermolecular forces"),
-         P("The unit", "draw the electrons → find the shape → explain the properties"),
-         P("Atoms bond when", "the bonded arrangement has lower energy"),
-         P("Chemical bond", "an attraction that holds atoms or ions together"),
-         P("Octet rule", "many atoms bond with 8 outer electrons (H needs only 2)"),
-         P("The octet rule is", "a guide; some atoms are exceptions"),
+         P("Three ideas for this unit", "bonding, molecular structure, intermolecular forces"),
+         P("Draw the electrons →…", "find the shape → explain the properties"),
+         P("Atoms bond when the bonded arrangement has…", "lower energy"),
+         P("A chemical bond is…", "an attraction that holds atoms or ions together"),
+         P("The octet rule: Many atoms bond with…", "8 outer electrons around them"),
+         P("Hydrogen needs only…", "2"),
+         P("The octet rule is a…", "guide. Some atoms are exceptions."),
        ]),
        example("Slide 4 · Ionic bonding", ["S04.2"], [
-         P("Ionic bonding", "electrons transfer; opposite ions attract"),
-         P("Usually between", "a metal and a nonmetal"),
-         P("Properties", "hard and brittle, high melting points"),
-         P("Ions form", "a repeating crystal"),
-         P("Conducts", "when molten or dissolved, not as a solid"),
+         P("Ionic bonding", "Electrons transfer. Opposite ions attract."),
+         P("Ionic: usually…", "a metal and a nonmetal"),
+         P("Na…", "loses an electron → Na+"),
+         P("Cl…", "gains an electron → Cl−"),
+         P("Properties", "hard and brittle; high melting points"),
+         P("Ions form a…", "repeating crystal"),
+         P("Conducts when…", "molten or dissolved, but not as a solid"),
        ], "Slide 4 · Na and Cl: show the electron transfer and the two ions it makes", 1.6,
           ["Na loses one electron → Na+", "Cl gains that electron → Cl−",
            "The opposite ions attract."], img="s04_ionic"),
@@ -184,19 +191,19 @@ spec = {
      "learningTarget": "I can describe covalent bonding and classify a bond from its EN difference.",
      "pages": [{"rows": [
        example("Slide 5 · Covalent bonding", ["S04.3"], [
-         P("Covalent bonding", "atoms share pairs of electrons"),
-         P("Usually between", "nonmetals"),
-         P("One bond", "one shared pair of electrons"),
+         P("Covalent bonding", "Atoms share pairs of electrons."),
+         P("Covalent: usually…", "nonmetals"),
+         P("One shared pair makes…", "one bond"),
          P("Properties", "often low melting points; usually poor conductors"),
-         P("Found as", "gases, liquids, or soft solids"),
-         P("Exception", "network solids (diamond): strong bonds throughout"),
+         P("Gases, liquids, or…", "soft solids"),
+         P("Exception: network solids such as diamond have…", "strong bonds throughout"),
        ], "Slide 5 · H and O: show the shared pairs that make H₂O", 1.5,
           ["O shares one pair with each H.", "O: 2 shared + 2 lone pairs = 8.", "Each H: 1 shared pair = 2."],
           img="s05_covalent"),
        notes("Slide 6 · EN and bond type",
              ["S04.5", "The cutoffs are class guidelines, not sharp boundaries."], [
-         P("Electronegativity", "how strongly an atom pulls on shared electrons"),
-         P("ΔEN", "higher EN − lower EN"),
+         P("Electronegativity (EN) =…", "how strongly an atom pulls on shared electrons"),
+         P("ΔEN =…", "higher EN − lower EN"),
        ], table={"headers": ["Bond type", "ΔEN", "Sharing"],
                  "widths": [0.34, 0.26, 0.40], "rowHeightIn": 0.30,
                  "rows": [["Nonpolar covalent", "", ""], ["Polar covalent", "", ""],
@@ -205,7 +212,7 @@ spec = {
                           ["Polar covalent", "0.40–1.80", "Unequal sharing"],
                           ["Ionic", "Over 1.80", "Opposite ions attract"]]}),
        example("Slide 7 · Classifying bonds", ["S04.5", "Subtract the EN values. Match the difference to a bond type."], [
-         P("Bigger EN difference", "more uneven electron sharing"),
+         P("Bigger EN difference =…", "more uneven electron sharing"),
        ], "Slide 7 · EN: H 2.20, C 2.55, O 3.44, Na 0.93, Cl 3.16. Find ΔEN and the bond type "
           "for C–H, C–O and Na–Cl.", 1.6,
           ["C–H: 2.55 − 2.20 = 0.35; 0.35 < 0.40 → nonpolar covalent",
@@ -217,18 +224,19 @@ spec = {
      "learningTarget": "I can draw a dipole arrow on a polar bond and label its δ+ and δ− ends.",
      "pages": [{"rows": [
        example("Slide 8 · Bond polarity and dipole arrows", ["S04.6"], [
-         P("Dipole arrow points toward", "the atom pulling harder"),
-         P("Nonpolar bond", "equal or nearly equal sharing (H–H, Cl–Cl, C–H)"),
-         P("Polar bond", "unequal sharing; electrons closer to the higher-EN atom"),
-         P("Polar examples", "H–Cl, O–H, C–O"),
-         P("δ− and δ+", "partly negative; partly positive (crossed end of the arrow)"),
+         P("The dipole arrow points toward…", "the atom pulling harder"),
+         P("Nonpolar bond", "Equal or nearly equal sharing. Examples: H–H, Cl–Cl, C–H."),
+         P("Polar bond", "Unequal sharing: electrons stay closer to the higher-EN atom."),
+         P("Examples", "H–Cl, O–H, C–O"),
+         P("δ− =…", "partly negative"),
+         P("δ+ =…", "partly positive (crossed end of the arrow)"),
        ], "Slide 8 · Draw H–H and H–Cl. Add the dipole arrow, δ+ and δ− to the polar bond.", 1.8,
           ["H–H: no arrow; equal sharing.",
            "H–Cl: arrow points toward Cl; crossed end at H. H is δ+, Cl is δ−."], img="s08_dipole"),
        notes("Slide 9 · Bond types at a glance",
              ["S04.6", "Compare how the electrons are shared or transferred."], [
-         P("Ionic bonds, usually", "metal + nonmetal"),
-         P("Covalent bonds, usually", "nonmetal + nonmetal"),
+         P("Ionic: usually…", "metal + nonmetal"),
+         P("Covalent: usually…", "nonmetal + nonmetal"),
        ], table=SLIDE_09, rows_first=False),
      ]}]},
     # ======================================================== slides 10-16 · S05.2, S05.1
@@ -237,49 +245,56 @@ spec = {
      "pages": [
       {"rows": [
        notes("Slides 10–11 · VSEPR theory", ["S05.2"], [
-         P("VSEPR", "Valence Shell Electron Pair Repulsion"),
-         P("The sequence", "Lewis structure → electron groups → 3D shape"),
-         P("Electron groups", "repel and spread out around the central atom"),
-         P("Lewis structures show", "bonds and lone pairs"),
-         P("To predict shape", "count the groups"),
-         P("4 bonds, no lone pairs", "tetrahedral"),
+         P("Lewis structure →…", "electron groups → 3D shape"),
+         P("VSEPR =…", "Valence Shell Electron Pair Repulsion"),
+         P("The idea: Electron groups…", "repel each other"),
+         P("They spread out around the central atom…", "as far as possible"),
+         P("Lewis structures come first. They show…", "bonds and lone pairs"),
+         P("Count the groups to…", "predict shape"),
+         P("4 bonds, no lone pairs →…", "tetrahedral"),
        ]),
        notes("Slide 12 · Drawing Lewis structures",
              ["S05.1", "Follow the steps, then check your electron count."], [
-         P("1  Count", "add valence electrons; − charge: add, + charge: subtract"),
-         P("2  Connect", "center usually lowest EN, never H; add single bonds"),
-         P("3  Fill", "outer atoms first (H 2, usually 8); leftovers on center"),
-         P("4  Check", "total and shells correct"),
-         P("If not, fix", "recount, check exceptions, or make double/triple bonds"),
-         P("Bond line / lone pair", "2 shared / 2 unshared electrons"),
-       ]),
+         P("Bond line =…", "2 shared electrons"),
+         P("Lone pair =…", "2 unshared electrons"),
+       ], rows_first=False,
+          # slide 12's flowchart, from make_chem_u04-u05_flowchart.py (Matt, 2026-11-05)
+          figure=("s12_flow_student.png", "s12_flow_key.png")),
+      ]},
+      {"rows": [
        example("Slide 13 · Lewis structure: BF₃", ["S05.1"], [
-         P("BF₃ valence electrons", "3 + 3(7) = 24"),
-         P("Boron ends with", "6 electrons: an octet exception"),
+         P("Boron trifluoride", "24 valence electrons"),
+         P("1  Count", "3 + 3(7) = 24 valence electrons"),
+         P("B has 6 electrons—…", "an octet exception"),
        ], "Slide 13 · Draw the BF₃ Lewis structure", LEWIS_IN,
           ["Connect: three B–F bonds use 6 electrons.",
            "Fill: each F gets 3 lone pairs, 18 electrons.",
            "Check: 6 bonding + 18 lone-pair electrons = 24."], img="s13_bf3"),
-      ]},
-      {"rows": [
        example("Slide 14 · Lewis structure: CO₂", ["S05.1"], [
-         P("CO₂ valence electrons", "4 + 2(6) = 16"),
-         P("Fix", "share one lone pair from each O: O=C=O"),
+         P("Carbon dioxide", "16 valence electrons"),
+         P("1  Count", "4 + 2(6) = 16 valence electrons"),
+         P("Carbon still has only…", "4 around it"),
+         P("Share one lone pair from…", "each O"),
        ], "Slide 14 · Draw the CO₂ Lewis structure", LEWIS_IN,
           ["Connect: O–C–O uses 4 electrons.",
            "Fill: the other 12 go on the oxygens. Carbon has only 4.",
            "Fix: share one lone pair from each O → O=C=O.",
            "Check: 8 bonding + 8 lone-pair electrons = 16. All atoms have 8."], img="s14_co2"),
+      ]},
+      {"rows": [
        example("Slide 15 · Lewis structure: NH₃", ["S05.1"], [
-         P("NH₃ valence electrons", "5 + 3(1) = 8"),
-         P("Leftovers", "8 − 6 = 2 electrons: one lone pair on N"),
+         P("Ammonia: the electrons left over become…", "a lone pair on nitrogen"),
+         P("1  Count", "5 + 3(1) = 8 valence electrons"),
+         P("8 − 6 =…", "2 electrons left. Put both on N: one lone pair."),
        ], "Slide 15 · Draw the NH₃ Lewis structure", LEWIS_IN,
           ["Connect: three N–H bonds use 6 electrons. Each H now has 2.",
            "Leftovers: 8 − 6 = 2. Both go on N as one lone pair.",
            "Check: N has 8 around it. Total used = 8."], img="s15_nh3"),
        example("Slide 16 · Lewis structure: CH₂O", ["S05.1", "H gets 2; C and O get 8."], [
-         P("CH₂O valence electrons", "4 + 2(1) + 6 = 12"),
-         P("Fix", "share one O lone pair to make C=O"),
+         P("Formaldehyde", "12 valence electrons. H gets 2; C and O get 8."),
+         P("1  Count", "4 + 2(1) + 6 = 12 valence electrons"),
+         P("Carbon has only…", "6"),
+         P("Share one O lone pair to make…", "C=O"),
        ], "Slide 16 · Draw the CH₂O Lewis structure", LEWIS_IN,
           ["Connect: three single bonds use 6 electrons.",
            "Fill: 6 electrons on O. Carbon has only 6.",
@@ -292,8 +307,9 @@ spec = {
      "learningTarget": "I can use electron groups and lone pairs to predict a molecule's shape and bond angle.",
      "pages": [{"rows": [
        notes("Slide 17 · VSEPR: predicting shape", ["S05.3"], [
-         P("Bonding groups", "a single, double, or triple bond counts as ONE group"),
-         P("Lone pairs", "take up space; usually make bond angles smaller"),
+         P("Electron groups repel each other, so they…", "spread out"),
+         P("Bonding groups: A single, double, or triple bond counts as…", "ONE electron group"),
+         P("Lone pairs also…", "take up space. They usually make bond angles smaller."),
        ], table={"headers": ["Molecule", "Lone pairs on the center", "Bond angle"],
                  "widths": [0.28, 0.40, 0.32], "rowHeightIn": 0.28,
                  "rows": [["CH₄", "", ""], ["NH₃", "", ""], ["H₂O", "", ""]],
@@ -301,9 +317,9 @@ spec = {
                           ["H₂O", "2", "about 104.5°"]]}),
        notes("Slide 18 · Octet rule exceptions",
              ["S05.3", "Count all bonding and lone-pair electrons around the atom."], [
-         P("Cl, Br, and I", "can also exceed 8 in some compounds"),
-         P("Odd total", "NO has 11 valence electrons; one stays unpaired"),
-         P("Period-2 atoms (C, N, O, F)", "cannot have more than 8"),
+         P("Cl, Br, and I can also…", "exceed 8 in some compounds"),
+         P("Odd total: NO has…", "11 valence electrons total, so one electron stays unpaired"),
+         P("Remember: period-2 atoms (including C, N, O, and F)…", "cannot have more than 8"),
        ], table={"headers": ["", "Atom", "Electrons around it", "Example"],
                  "widths": [0.20, 0.12, 0.24, 0.44], "rowHeightIn": 0.28,
                  "rows": [["Fewer than 8", "H", "", ""], ["Fewer than 8", "Be", "", ""],
@@ -323,20 +339,20 @@ spec = {
      "pages": [
       {"rows": [
        example("Slides 20–21 · Bond vs. molecular polarity", ["S05.4"], [
-         P("A molecule with polar bonds can", "still be nonpolar"),
-         P("Bond polarity (one bond)", "compare the atoms’ EN values"),
-         P("Molecular polarity (whole molecule)", "check whether the bond pulls cancel"),
-         P("HCl", "one polar bond → polar molecule"),
-         P("CO₂", "equal, opposite pulls → nonpolar"),
-         P("To find molecular polarity, check", "the bonds AND the shape"),
+         P("A molecule can contain polar bonds and…", "still be nonpolar"),
+         P("Bond polarity: One bond:…", "are electrons shared evenly? Compare the atoms’ EN values."),
+         P("Molecular polarity: Whole molecule:…", "do the bond pulls cancel?"),
+         P("HCl: one polar bond →…", "polar molecule"),
+         P("CO₂: equal opposite pulls →…", "nonpolar"),
+         P("To find molecular polarity, check…", "the bonds AND the shape"),
        ], "Slide 21 · Draw HCl and CO₂ with their dipole arrows", PAIR_IN,
           ["H–Cl: arrow toward Cl, crossed end at H. H δ+, Cl δ−.",
            "O=C=O: two arrows from C toward each O, equal and opposite, so they cancel."], img="s21_hcl_co2"),
        example("Slide 22 · Canceling bond dipoles", ["S05.4"], [
-         P("Bond pulls cancel when", "their directions balance"),
-         P("Balanced pulls → nonpolar", "CO₂, BF₃, CH₄, CCl₄"),
-         P("Pulls do not cancel → polar", "H₂O, NH₃, HCl, CH₃Cl"),
-         P("Before deciding, check", "the 3D shape and the outer atoms"),
+         P("Bond pulls cancel when…", "their directions balance"),
+         P("Balanced pulls →…", "nonpolar: CO₂, BF₃, CH₄, CCl₄"),
+         P("Pulls do not cancel →…", "polar: H₂O, NH₃, HCl, CH₃Cl"),
+         P("Check the…", "3D shape and the outer atoms before deciding"),
        ], "Slide 22 · Draw BF₃ and NH₃ with their dipole arrows", PAIR_IN,
           ["BF₃: three B–F arrows toward each F, spread evenly around B; they cancel.",
            "NH₃: three N–H arrows toward N; the pyramid leaves a net pull toward N."], img="s22_bf3_nh3"),
@@ -344,21 +360,19 @@ spec = {
       {"rows": [
        example("Slide 23 · Molecular polarity: H₂O",
                ["S05.4", "Draw it, check the bonds, then check the shape."], [
-         P("H₂O electrons", "6 + 2(1) = 8: two bonds, two O lone pairs"),
-         P("ΔEN (O 3.44, H 2.20)", "1.24: each O–H bond is polar"),
-         P("Shape", "bent; the bond pulls do not cancel"),
-         P("Molecule", "POLAR"),
-         P("Partial charges", "oxygen side δ−, hydrogen side δ+"),
+         P("1  Lewis structure", "6 + 2(1) = 8 electrons. Two bonds and two O lone pairs."),
+         P("2  Bond polarity", "3.44 − 2.20 = 1.24. Each O–H bond is polar."),
+         P("3  Shape", "Bent: the bond pulls do not cancel → POLAR"),
+         P("Oxygen side…", "δ−. Hydrogen side: δ+."),
        ], "Slide 23 · Draw H₂O with its dipole arrows, δ+ and δ−", POLAR_IN,
           ["Bent H–O–H with two lone pairs on O.",
            "Arrows from each H toward O. O δ−, H δ+. The pulls do not cancel."], img="s23_h2o"),
        example("Slide 24 · Molecular polarity: NH₃",
                ["S05.4", "A lone pair changes the arrangement of the three N–H bonds."], [
-         P("NH₃ electrons", "5 + 3(1) = 8: three bonds, one N lone pair"),
-         P("ΔEN (N 3.04, H 2.20)", "0.84: each N–H bond is polar"),
-         P("Shape", "trigonal pyramidal; the pulls do not cancel"),
-         P("Molecule", "POLAR"),
-         P("NH₃ is", "a 3D pyramid, not a flat triangle"),
+         P("1  Lewis structure", "5 + 3(1) = 8 electrons. Three bonds and one N lone pair."),
+         P("2  Bond polarity", "3.04 − 2.20 = 0.84. Each N–H bond is polar."),
+         P("3  Shape", "Trigonal pyramidal: the pulls do not cancel → POLAR"),
+         P("NH₃ is a three-dimensional…", "pyramid, not a flat triangle"),
        ], "Slide 24 · Draw NH₃ with its dipole arrows", POLAR_IN,
           ["Pyramid: N on top with one lone pair, three H below.",
            "Arrows from each H toward N. Net pull toward N."], img="s24_nh3"),
@@ -366,19 +380,18 @@ spec = {
       {"rows": [
        example("Slide 25 · Molecular polarity: carbon tetrachloride",
                ["S05.4", "Four polar bonds can balance in three dimensions."], [
-         P("CCl₄ electrons", "4 + 4(7) = 32: four bonds, 3 lone pairs on each Cl"),
-         P("ΔEN (Cl 3.16, C 2.55)", "0.61: each C–Cl bond is polar"),
-         P("Shape", "tetrahedral; four equal pulls cancel"),
-         P("Molecule", "NONPOLAR"),
-         P("Solid wedge / dashed wedge", "toward you / away from you"),
+         P("1  Lewis structure", "4 + 4(7) = 32 electrons. Four bonds; 3 lone pairs on each Cl."),
+         P("2  Bond polarity", "3.16 − 2.55 = 0.61. Each C–Cl bond is polar."),
+         P("3  Shape", "Tetrahedral: four equal pulls cancel → NONPOLAR"),
+         P("Solid wedge =…", "toward you. Dashed wedge = away."),
        ], "Slide 25 · Draw CCl₄ with wedges and its dipole arrows", POLAR_IN,
           ["Tetrahedral C with four Cl; one solid wedge, one dashed wedge.",
            "Four equal arrows from C toward each Cl. They cancel."], img="s25_ccl4"),
        example("Slide 26 · Tetrahedral molecules",
                ["S05.4", "Both have 4 bonds and no lone pairs on the central carbon."], [
-         P("CCl₄", "four identical C–Cl pulls cancel → NONPOLAR"),
-         P("CH₃Cl", "the C–Cl pull is not balanced → POLAR"),
-         P("Shape alone does not decide polarity", "the outer atoms matter"),
+         P("CCl₄", "Four identical C–Cl pulls cancel → NONPOLAR"),
+         P("CH₃Cl", "The C–Cl pull is not balanced → POLAR"),
+         P("Shape alone does not decide polarity. The…", "outer atoms matter"),
        ], "Slide 26 · Draw CCl₄ and CH₃Cl with their dipole arrows and the net pull", POLAR_IN,
           ["CCl₄: four equal C–Cl arrows cancel. No net pull.",
            "CH₃Cl: the C–Cl arrow is not balanced. Net pull toward Cl."], img="s26_ccl4_ch3cl"),
@@ -390,40 +403,39 @@ spec = {
      "pages": [
       {"rows": [
        notes("Slides 27–28 · Intermolecular forces", ["S05.5"], [
-         P("The three IMFs", "hydrogen bonding, dipole–dipole, London dispersion"),
-         P("Intermolecular forces (IMFs)", "attractions between separate molecules"),
-         P("Inside a molecule", "covalent (intramolecular) bonds connect its atoms"),
-         P("Boiling water", "separates H₂O molecules; does not break O–H bonds"),
+         P("Intermolecular forces", "attractions between separate molecules"),
+         P("Inside a molecule", "Covalent bonds connect its atoms. These are intramolecular bonds."),
+         P("Between molecules", "Intermolecular forces (IMFs) attract one molecule to another."),
+         P("Boiling water separates H₂O molecules; it does not…", "break their O–H bonds"),
        ]),
        notes("Slide 29 · Hydrogen bonding", ["S05.5"], [
-         P("Hydrogen bonding", "a partly positive H attracts a lone pair on N, O, or F"),
+         P("A partly positive H attracts…", "a lone pair on a nearby N, O, or F"),
          P("Look for", "H bonded directly to N, O, or F"),
-         P("In the picture", "Hδ+ on one water molecule attracts Oδ− on another"),
+         P("In the picture", "Hδ+ in one water molecule attracts Oδ− in another"),
          P("Examples", "H₂O, NH₃, HF"),
-         P("Effects", "helps raise water’s boiling point; holds DNA strands together"),
-         P("Strength", "often strong for similar-sized molecules; not always strongest"),
+         P("Helps raise…", "water’s boiling point and hold DNA strands together"),
+         P("Often strong for similar-sized molecules;…", "not always strongest"),
        ]),
        notes("Slide 30 · Dipole–dipole forces", ["S05.5"], [
-         P("Dipole–dipole", "polar molecules attract through opposite partial charges"),
+         P("Polar molecules attract through…", "their opposite partial charges"),
          P("Look for", "polar molecules with δ+ and δ− ends"),
          P("In the picture", "Clδ− on one HCl molecule attracts Hδ+ on another"),
-         P("Examples", "HCl, CH₃Cl, SO₂; all also have dispersion"),
-         P("These partial charges are", "lasting features of each polar molecule"),
+         P("Examples", "HCl, CH₃Cl, SO₂. All also have dispersion."),
+         P("These partial charges are…", "lasting features of each polar molecule"),
        ]),
       ]},
       {"rows": [
        notes("Slide 31 · London dispersion forces", ["S05.5"], [
-         P("London dispersion", "moving electrons create temporary + and − ends"),
-         P("Found in", "every atom and molecule"),
-         P("Main attraction for", "nonpolar molecules"),
-         P("Electrons shift", "a brief dipole; the neighboring cloud shifts too"),
-         P("Stronger with", "larger, easier-to-shift electron clouds"),
-         P("Example", "I₂ is solid at room temperature"),
-         P("The picture shows", "changing charge, not permanently charged atoms"),
+         P("Moving electrons create…", "temporary positive and negative ends"),
+         P("Main attraction for…", "nonpolar molecules"),
+         P("Electrons shift →…", "a brief dipole. The neighboring cloud shifts too."),
+         P("Larger, easier-to-shift clouds…", "often attract more strongly"),
+         P("I₂ is…", "solid at room temperature"),
+         P("The picture shows…", "changing charge, not permanent charged atoms"),
        ]),
        example("Slide 32 · Identifying intermolecular forces", ["S05.5"], [
-         P("Every molecule has", "dispersion; check what else it has"),
-         P("Stronger attractions", "higher boiling point (size and shape matter too)"),
+         P("Every molecule has…", "dispersion. Check what else it has."),
+         P("Stronger attractions usually mean…", "a higher boiling point. Size and shape matter too."),
        ], "Slide 32 · Sketch any molecule you need, to check its polarity and its H–N, H–O or H–F bonds",
           1.4,
           ["Polar: HCl, CH₃Cl, H₂O, NH₃, HF. Nonpolar: CO₂, CCl₄.",

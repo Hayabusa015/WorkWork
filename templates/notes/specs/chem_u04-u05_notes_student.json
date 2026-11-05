@@ -126,27 +126,31 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Three ideas",
+                  "prompt": "Three ideas for this unit",
                   "inline": true
                 },
                 {
-                  "prompt": "The unit",
+                  "prompt": "Draw the electrons →…",
                   "inline": true
                 },
                 {
-                  "prompt": "Atoms bond when",
+                  "prompt": "Atoms bond when the bonded arrangement has…",
                   "inline": true
                 },
                 {
-                  "prompt": "Chemical bond",
+                  "prompt": "A chemical bond is…",
                   "inline": true
                 },
                 {
-                  "prompt": "Octet rule",
+                  "prompt": "The octet rule: Many atoms bond with…",
                   "inline": true
                 },
                 {
-                  "prompt": "The octet rule is",
+                  "prompt": "Hydrogen needs only…",
+                  "inline": true
+                },
+                {
+                  "prompt": "The octet rule is a…",
                   "inline": true
                 }
               ],
@@ -166,7 +170,15 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Usually between",
+                  "prompt": "Ionic: usually…",
+                  "inline": true
+                },
+                {
+                  "prompt": "Na…",
+                  "inline": true
+                },
+                {
+                  "prompt": "Cl…",
                   "inline": true
                 },
                 {
@@ -174,11 +186,11 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Ions form",
+                  "prompt": "Ions form a…",
                   "inline": true
                 },
                 {
-                  "prompt": "Conducts",
+                  "prompt": "Conducts when…",
                   "inline": true
                 }
               ],
@@ -213,11 +225,11 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Usually between",
+                  "prompt": "Covalent: usually…",
                   "inline": true
                 },
                 {
-                  "prompt": "One bond",
+                  "prompt": "One shared pair makes…",
                   "inline": true
                 },
                 {
@@ -225,11 +237,11 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Found as",
+                  "prompt": "Gases, liquids, or…",
                   "inline": true
                 },
                 {
-                  "prompt": "Exception",
+                  "prompt": "Exception: network solids such as diamond have…",
                   "inline": true
                 }
               ],
@@ -249,11 +261,11 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Electronegativity",
+                  "prompt": "Electronegativity (EN) =…",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN",
+                  "prompt": "ΔEN =…",
                   "inline": true
                 }
               ],
@@ -300,7 +312,7 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bigger EN difference",
+                  "prompt": "Bigger EN difference =…",
                   "inline": true
                 }
               ],
@@ -330,7 +342,7 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Dipole arrow points toward",
+                  "prompt": "The dipole arrow points toward…",
                   "inline": true
                 },
                 {
@@ -342,11 +354,15 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Polar examples",
+                  "prompt": "Examples",
                   "inline": true
                 },
                 {
-                  "prompt": "δ− and δ+",
+                  "prompt": "δ− =…",
+                  "inline": true
+                },
+                {
+                  "prompt": "δ+ =…",
                   "inline": true
                 }
               ],
@@ -366,11 +382,11 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Ionic bonds, usually",
+                  "prompt": "Ionic: usually…",
                   "inline": true
                 },
                 {
-                  "prompt": "Covalent bonds, usually",
+                  "prompt": "Covalent: usually…",
                   "inline": true
                 }
               ],
@@ -425,27 +441,31 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "VSEPR",
+                  "prompt": "Lewis structure →…",
                   "inline": true
                 },
                 {
-                  "prompt": "The sequence",
+                  "prompt": "VSEPR =…",
                   "inline": true
                 },
                 {
-                  "prompt": "Electron groups",
+                  "prompt": "The idea: Electron groups…",
                   "inline": true
                 },
                 {
-                  "prompt": "Lewis structures show",
+                  "prompt": "They spread out around the central atom…",
                   "inline": true
                 },
                 {
-                  "prompt": "To predict shape",
+                  "prompt": "Lewis structures come first. They show…",
                   "inline": true
                 },
                 {
-                  "prompt": "4 bonds, no lone pairs",
+                  "prompt": "Count the groups to…",
+                  "inline": true
+                },
+                {
+                  "prompt": "4 bonds, no lone pairs →…",
                   "inline": true
                 }
               ],
@@ -461,32 +481,24 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "1  Count",
+                  "prompt": "Bond line =…",
                   "inline": true
                 },
                 {
-                  "prompt": "2  Connect",
-                  "inline": true
-                },
-                {
-                  "prompt": "3  Fill",
-                  "inline": true
-                },
-                {
-                  "prompt": "4  Check",
-                  "inline": true
-                },
-                {
-                  "prompt": "If not, fix",
-                  "inline": true
-                },
-                {
-                  "prompt": "Bond line / lone pair",
+                  "prompt": "Lone pair =…",
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "figure": {
+                "image": "../assets/chem_u04-u05_key/s12_flow_student.png",
+                "keyImage": "../assets/chem_u04-u05_key/s12_flow_key.png",
+                "widthIn": 5.55
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 13 · Lewis structure: BF₃",
@@ -497,24 +509,24 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "BF₃ valence electrons",
+                  "prompt": "Boron trifluoride",
                   "inline": true
                 },
                 {
-                  "prompt": "Boron ends with",
+                  "prompt": "1  Count",
+                  "inline": true
+                },
+                {
+                  "prompt": "B has 6 electrons—…",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 13 · Draw the BF₃ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "keyImage": "../assets/chem_u04-u05_key/s13_bf3.png"
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "kind": "example",
               "title": "Slide 14 · Lewis structure: CO₂",
@@ -525,20 +537,32 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CO₂ valence electrons",
+                  "prompt": "Carbon dioxide",
                   "inline": true
                 },
                 {
-                  "prompt": "Fix",
+                  "prompt": "1  Count",
+                  "inline": true
+                },
+                {
+                  "prompt": "Carbon still has only…",
+                  "inline": true
+                },
+                {
+                  "prompt": "Share one lone pair from…",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 14 · Draw the CO₂ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "keyImage": "../assets/chem_u04-u05_key/s14_co2.png"
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 15 · Lewis structure: NH₃",
@@ -549,17 +573,21 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "NH₃ valence electrons",
+                  "prompt": "Ammonia: the electrons left over become…",
                   "inline": true
                 },
                 {
-                  "prompt": "Leftovers",
+                  "prompt": "1  Count",
+                  "inline": true
+                },
+                {
+                  "prompt": "8 − 6 =…",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 15 · Draw the NH₃ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "keyImage": "../assets/chem_u04-u05_key/s15_nh3.png"
               }
             },
@@ -574,17 +602,25 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CH₂O valence electrons",
+                  "prompt": "Formaldehyde",
                   "inline": true
                 },
                 {
-                  "prompt": "Fix",
+                  "prompt": "1  Count",
+                  "inline": true
+                },
+                {
+                  "prompt": "Carbon has only…",
+                  "inline": true
+                },
+                {
+                  "prompt": "Share one O lone pair to make…",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 16 · Draw the CH₂O Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "keyImage": "../assets/chem_u04-u05_key/s16_ch2o.png"
               }
             }
@@ -608,11 +644,15 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Bonding groups",
+                  "prompt": "Electron groups repel each other, so they…",
                   "inline": true
                 },
                 {
-                  "prompt": "Lone pairs",
+                  "prompt": "Bonding groups: A single, double, or triple bond counts as…",
+                  "inline": true
+                },
+                {
+                  "prompt": "Lone pairs also…",
                   "inline": true
                 }
               ],
@@ -658,15 +698,15 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Cl, Br, and I",
+                  "prompt": "Cl, Br, and I can also…",
                   "inline": true
                 },
                 {
-                  "prompt": "Odd total",
+                  "prompt": "Odd total: NO has…",
                   "inline": true
                 },
                 {
-                  "prompt": "Period-2 atoms (C, N, O, F)",
+                  "prompt": "Remember: period-2 atoms (including C, N, O, and F)…",
                   "inline": true
                 }
               ],
@@ -745,27 +785,27 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "A molecule with polar bonds can",
+                  "prompt": "A molecule can contain polar bonds and…",
                   "inline": true
                 },
                 {
-                  "prompt": "Bond polarity (one bond)",
+                  "prompt": "Bond polarity: One bond:…",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecular polarity (whole molecule)",
+                  "prompt": "Molecular polarity: Whole molecule:…",
                   "inline": true
                 },
                 {
-                  "prompt": "HCl",
+                  "prompt": "HCl: one polar bond →…",
                   "inline": true
                 },
                 {
-                  "prompt": "CO₂",
+                  "prompt": "CO₂: equal opposite pulls →…",
                   "inline": true
                 },
                 {
-                  "prompt": "To find molecular polarity, check",
+                  "prompt": "To find molecular polarity, check…",
                   "inline": true
                 }
               ],
@@ -785,19 +825,19 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bond pulls cancel when",
+                  "prompt": "Bond pulls cancel when…",
                   "inline": true
                 },
                 {
-                  "prompt": "Balanced pulls → nonpolar",
+                  "prompt": "Balanced pulls →…",
                   "inline": true
                 },
                 {
-                  "prompt": "Pulls do not cancel → polar",
+                  "prompt": "Pulls do not cancel →…",
                   "inline": true
                 },
                 {
-                  "prompt": "Before deciding, check",
+                  "prompt": "Check the…",
                   "inline": true
                 }
               ],
@@ -822,23 +862,19 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "H₂O electrons",
+                  "prompt": "1  Lewis structure",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (O 3.44, H 2.20)",
+                  "prompt": "2  Bond polarity",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
+                  "prompt": "3  Shape",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "inline": true
-                },
-                {
-                  "prompt": "Partial charges",
+                  "prompt": "Oxygen side…",
                   "inline": true
                 }
               ],
@@ -859,23 +895,19 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "NH₃ electrons",
+                  "prompt": "1  Lewis structure",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (N 3.04, H 2.20)",
+                  "prompt": "2  Bond polarity",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
+                  "prompt": "3  Shape",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "inline": true
-                },
-                {
-                  "prompt": "NH₃ is",
+                  "prompt": "NH₃ is a three-dimensional…",
                   "inline": true
                 }
               ],
@@ -900,23 +932,19 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CCl₄ electrons",
+                  "prompt": "1  Lewis structure",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (Cl 3.16, C 2.55)",
+                  "prompt": "2  Bond polarity",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
+                  "prompt": "3  Shape",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "inline": true
-                },
-                {
-                  "prompt": "Solid wedge / dashed wedge",
+                  "prompt": "Solid wedge =…",
                   "inline": true
                 }
               ],
@@ -945,7 +973,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Shape alone does not decide polarity",
+                  "prompt": "Shape alone does not decide polarity. The…",
                   "inline": true
                 }
               ],
@@ -975,11 +1003,7 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "The three IMFs",
-                  "inline": true
-                },
-                {
-                  "prompt": "Intermolecular forces (IMFs)",
+                  "prompt": "Intermolecular forces",
                   "inline": true
                 },
                 {
@@ -987,7 +1011,11 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Boiling water",
+                  "prompt": "Between molecules",
+                  "inline": true
+                },
+                {
+                  "prompt": "Boiling water separates H₂O molecules; it does not…",
                   "inline": true
                 }
               ],
@@ -1002,7 +1030,7 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Hydrogen bonding",
+                  "prompt": "A partly positive H attracts…",
                   "inline": true
                 },
                 {
@@ -1018,11 +1046,11 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Effects",
+                  "prompt": "Helps raise…",
                   "inline": true
                 },
                 {
-                  "prompt": "Strength",
+                  "prompt": "Often strong for similar-sized molecules;…",
                   "inline": true
                 }
               ],
@@ -1037,7 +1065,7 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Dipole–dipole",
+                  "prompt": "Polar molecules attract through…",
                   "inline": true
                 },
                 {
@@ -1053,7 +1081,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "These partial charges are",
+                  "prompt": "These partial charges are…",
                   "inline": true
                 }
               ],
@@ -1072,31 +1100,27 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "London dispersion",
+                  "prompt": "Moving electrons create…",
                   "inline": true
                 },
                 {
-                  "prompt": "Found in",
+                  "prompt": "Main attraction for…",
                   "inline": true
                 },
                 {
-                  "prompt": "Main attraction for",
+                  "prompt": "Electrons shift →…",
                   "inline": true
                 },
                 {
-                  "prompt": "Electrons shift",
+                  "prompt": "Larger, easier-to-shift clouds…",
                   "inline": true
                 },
                 {
-                  "prompt": "Stronger with",
+                  "prompt": "I₂ is…",
                   "inline": true
                 },
                 {
-                  "prompt": "Example",
-                  "inline": true
-                },
-                {
-                  "prompt": "The picture shows",
+                  "prompt": "The picture shows…",
                   "inline": true
                 }
               ],
@@ -1112,11 +1136,11 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Every molecule has",
+                  "prompt": "Every molecule has…",
                   "inline": true
                 },
                 {
-                  "prompt": "Stronger attractions",
+                  "prompt": "Stronger attractions usually mean…",
                   "inline": true
                 }
               ],

@@ -126,33 +126,38 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Three ideas",
+                  "prompt": "Three ideas for this unit",
                   "answer": "bonding, molecular structure, intermolecular forces",
                   "inline": true
                 },
                 {
-                  "prompt": "The unit",
-                  "answer": "draw the electrons → find the shape → explain the properties",
+                  "prompt": "Draw the electrons →…",
+                  "answer": "find the shape → explain the properties",
                   "inline": true
                 },
                 {
-                  "prompt": "Atoms bond when",
-                  "answer": "the bonded arrangement has lower energy",
+                  "prompt": "Atoms bond when the bonded arrangement has…",
+                  "answer": "lower energy",
                   "inline": true
                 },
                 {
-                  "prompt": "Chemical bond",
+                  "prompt": "A chemical bond is…",
                   "answer": "an attraction that holds atoms or ions together",
                   "inline": true
                 },
                 {
-                  "prompt": "Octet rule",
-                  "answer": "many atoms bond with 8 outer electrons (H needs only 2)",
+                  "prompt": "The octet rule: Many atoms bond with…",
+                  "answer": "8 outer electrons around them",
                   "inline": true
                 },
                 {
-                  "prompt": "The octet rule is",
-                  "answer": "a guide; some atoms are exceptions",
+                  "prompt": "Hydrogen needs only…",
+                  "answer": "2",
+                  "inline": true
+                },
+                {
+                  "prompt": "The octet rule is a…",
+                  "answer": "guide. Some atoms are exceptions.",
                   "inline": true
                 }
               ],
@@ -169,27 +174,37 @@
               "notes": [
                 {
                   "prompt": "Ionic bonding",
-                  "answer": "electrons transfer; opposite ions attract",
+                  "answer": "Electrons transfer. Opposite ions attract.",
                   "inline": true
                 },
                 {
-                  "prompt": "Usually between",
+                  "prompt": "Ionic: usually…",
                   "answer": "a metal and a nonmetal",
                   "inline": true
                 },
                 {
+                  "prompt": "Na…",
+                  "answer": "loses an electron → Na+",
+                  "inline": true
+                },
+                {
+                  "prompt": "Cl…",
+                  "answer": "gains an electron → Cl−",
+                  "inline": true
+                },
+                {
                   "prompt": "Properties",
-                  "answer": "hard and brittle, high melting points",
+                  "answer": "hard and brittle; high melting points",
                   "inline": true
                 },
                 {
-                  "prompt": "Ions form",
-                  "answer": "a repeating crystal",
+                  "prompt": "Ions form a…",
+                  "answer": "repeating crystal",
                   "inline": true
                 },
                 {
-                  "prompt": "Conducts",
-                  "answer": "when molten or dissolved, not as a solid",
+                  "prompt": "Conducts when…",
+                  "answer": "molten or dissolved, but not as a solid",
                   "inline": true
                 }
               ],
@@ -226,17 +241,17 @@
               "notes": [
                 {
                   "prompt": "Covalent bonding",
-                  "answer": "atoms share pairs of electrons",
+                  "answer": "Atoms share pairs of electrons.",
                   "inline": true
                 },
                 {
-                  "prompt": "Usually between",
+                  "prompt": "Covalent: usually…",
                   "answer": "nonmetals",
                   "inline": true
                 },
                 {
-                  "prompt": "One bond",
-                  "answer": "one shared pair of electrons",
+                  "prompt": "One shared pair makes…",
+                  "answer": "one bond",
                   "inline": true
                 },
                 {
@@ -245,13 +260,13 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Found as",
-                  "answer": "gases, liquids, or soft solids",
+                  "prompt": "Gases, liquids, or…",
+                  "answer": "soft solids",
                   "inline": true
                 },
                 {
-                  "prompt": "Exception",
-                  "answer": "network solids (diamond): strong bonds throughout",
+                  "prompt": "Exception: network solids such as diamond have…",
+                  "answer": "strong bonds throughout",
                   "inline": true
                 }
               ],
@@ -276,12 +291,12 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Electronegativity",
+                  "prompt": "Electronegativity (EN) =…",
                   "answer": "how strongly an atom pulls on shared electrons",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN",
+                  "prompt": "ΔEN =…",
                   "answer": "higher EN − lower EN",
                   "inline": true
                 }
@@ -329,7 +344,7 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bigger EN difference",
+                  "prompt": "Bigger EN difference =…",
                   "answer": "more uneven electron sharing",
                   "inline": true
                 }
@@ -365,28 +380,33 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Dipole arrow points toward",
+                  "prompt": "The dipole arrow points toward…",
                   "answer": "the atom pulling harder",
                   "inline": true
                 },
                 {
                   "prompt": "Nonpolar bond",
-                  "answer": "equal or nearly equal sharing (H–H, Cl–Cl, C–H)",
+                  "answer": "Equal or nearly equal sharing. Examples: H–H, Cl–Cl, C–H.",
                   "inline": true
                 },
                 {
                   "prompt": "Polar bond",
-                  "answer": "unequal sharing; electrons closer to the higher-EN atom",
+                  "answer": "Unequal sharing: electrons stay closer to the higher-EN atom.",
                   "inline": true
                 },
                 {
-                  "prompt": "Polar examples",
+                  "prompt": "Examples",
                   "answer": "H–Cl, O–H, C–O",
                   "inline": true
                 },
                 {
-                  "prompt": "δ− and δ+",
-                  "answer": "partly negative; partly positive (crossed end of the arrow)",
+                  "prompt": "δ− =…",
+                  "answer": "partly negative",
+                  "inline": true
+                },
+                {
+                  "prompt": "δ+ =…",
+                  "answer": "partly positive (crossed end of the arrow)",
                   "inline": true
                 }
               ],
@@ -410,12 +430,12 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Ionic bonds, usually",
+                  "prompt": "Ionic: usually…",
                   "answer": "metal + nonmetal",
                   "inline": true
                 },
                 {
-                  "prompt": "Covalent bonds, usually",
+                  "prompt": "Covalent: usually…",
                   "answer": "nonmetal + nonmetal",
                   "inline": true
                 }
@@ -471,32 +491,37 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "VSEPR",
+                  "prompt": "Lewis structure →…",
+                  "answer": "electron groups → 3D shape",
+                  "inline": true
+                },
+                {
+                  "prompt": "VSEPR =…",
                   "answer": "Valence Shell Electron Pair Repulsion",
                   "inline": true
                 },
                 {
-                  "prompt": "The sequence",
-                  "answer": "Lewis structure → electron groups → 3D shape",
+                  "prompt": "The idea: Electron groups…",
+                  "answer": "repel each other",
                   "inline": true
                 },
                 {
-                  "prompt": "Electron groups",
-                  "answer": "repel and spread out around the central atom",
+                  "prompt": "They spread out around the central atom…",
+                  "answer": "as far as possible",
                   "inline": true
                 },
                 {
-                  "prompt": "Lewis structures show",
+                  "prompt": "Lewis structures come first. They show…",
                   "answer": "bonds and lone pairs",
                   "inline": true
                 },
                 {
-                  "prompt": "To predict shape",
-                  "answer": "count the groups",
+                  "prompt": "Count the groups to…",
+                  "answer": "predict shape",
                   "inline": true
                 },
                 {
-                  "prompt": "4 bonds, no lone pairs",
+                  "prompt": "4 bonds, no lone pairs →…",
                   "answer": "tetrahedral",
                   "inline": true
                 }
@@ -513,38 +538,26 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "1  Count",
-                  "answer": "add valence electrons; − charge: add, + charge: subtract",
+                  "prompt": "Bond line =…",
+                  "answer": "2 shared electrons",
                   "inline": true
                 },
                 {
-                  "prompt": "2  Connect",
-                  "answer": "center usually lowest EN, never H; add single bonds",
-                  "inline": true
-                },
-                {
-                  "prompt": "3  Fill",
-                  "answer": "outer atoms first (H 2, usually 8); leftovers on center",
-                  "inline": true
-                },
-                {
-                  "prompt": "4  Check",
-                  "answer": "total and shells correct",
-                  "inline": true
-                },
-                {
-                  "prompt": "If not, fix",
-                  "answer": "recount, check exceptions, or make double/triple bonds",
-                  "inline": true
-                },
-                {
-                  "prompt": "Bond line / lone pair",
-                  "answer": "2 shared / 2 unshared electrons",
+                  "prompt": "Lone pair =…",
+                  "answer": "2 unshared electrons",
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "figure": {
+                "image": "../assets/chem_u04-u05_key/s12_flow_student.png",
+                "keyImage": "../assets/chem_u04-u05_key/s12_flow_key.png",
+                "widthIn": 5.55
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 13 · Lewis structure: BF₃",
@@ -555,19 +568,24 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "BF₃ valence electrons",
-                  "answer": "3 + 3(7) = 24",
+                  "prompt": "Boron trifluoride",
+                  "answer": "24 valence electrons",
                   "inline": true
                 },
                 {
-                  "prompt": "Boron ends with",
-                  "answer": "6 electrons: an octet exception",
+                  "prompt": "1  Count",
+                  "answer": "3 + 3(7) = 24 valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "B has 6 electrons—…",
+                  "answer": "an octet exception",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 13 · Draw the BF₃ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "solution": [
                   "Connect: three B–F bonds use 6 electrons.",
                   "Fill: each F gets 3 lone pairs, 18 electrons.",
@@ -575,11 +593,7 @@
                 ],
                 "keyImage": "../assets/chem_u04-u05_key/s13_bf3.png"
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "kind": "example",
               "title": "Slide 14 · Lewis structure: CO₂",
@@ -590,19 +604,29 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CO₂ valence electrons",
-                  "answer": "4 + 2(6) = 16",
+                  "prompt": "Carbon dioxide",
+                  "answer": "16 valence electrons",
                   "inline": true
                 },
                 {
-                  "prompt": "Fix",
-                  "answer": "share one lone pair from each O: O=C=O",
+                  "prompt": "1  Count",
+                  "answer": "4 + 2(6) = 16 valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Carbon still has only…",
+                  "answer": "4 around it",
+                  "inline": true
+                },
+                {
+                  "prompt": "Share one lone pair from…",
+                  "answer": "each O",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 14 · Draw the CO₂ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "solution": [
                   "Connect: O–C–O uses 4 electrons.",
                   "Fill: the other 12 go on the oxygens. Carbon has only 4.",
@@ -611,7 +635,11 @@
                 ],
                 "keyImage": "../assets/chem_u04-u05_key/s14_co2.png"
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 15 · Lewis structure: NH₃",
@@ -622,19 +650,24 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "NH₃ valence electrons",
-                  "answer": "5 + 3(1) = 8",
+                  "prompt": "Ammonia: the electrons left over become…",
+                  "answer": "a lone pair on nitrogen",
                   "inline": true
                 },
                 {
-                  "prompt": "Leftovers",
-                  "answer": "8 − 6 = 2 electrons: one lone pair on N",
+                  "prompt": "1  Count",
+                  "answer": "5 + 3(1) = 8 valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "8 − 6 =…",
+                  "answer": "2 electrons left. Put both on N: one lone pair.",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 15 · Draw the NH₃ Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "solution": [
                   "Connect: three N–H bonds use 6 electrons. Each H now has 2.",
                   "Leftovers: 8 − 6 = 2. Both go on N as one lone pair.",
@@ -654,19 +687,29 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CH₂O valence electrons",
-                  "answer": "4 + 2(1) + 6 = 12",
+                  "prompt": "Formaldehyde",
+                  "answer": "12 valence electrons. H gets 2; C and O get 8.",
                   "inline": true
                 },
                 {
-                  "prompt": "Fix",
-                  "answer": "share one O lone pair to make C=O",
+                  "prompt": "1  Count",
+                  "answer": "4 + 2(1) + 6 = 12 valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Carbon has only…",
+                  "answer": "6",
+                  "inline": true
+                },
+                {
+                  "prompt": "Share one O lone pair to make…",
+                  "answer": "C=O",
                   "inline": true
                 }
               ],
               "problem": {
                 "workLabel": "Slide 16 · Draw the CH₂O Lewis structure",
-                "workHeightIn": 1.7,
+                "workHeightIn": 2.2,
                 "solution": [
                   "Connect: three single bonds use 6 electrons.",
                   "Fill: 6 electrons on O. Carbon has only 6.",
@@ -696,13 +739,18 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Bonding groups",
-                  "answer": "a single, double, or triple bond counts as ONE group",
+                  "prompt": "Electron groups repel each other, so they…",
+                  "answer": "spread out",
                   "inline": true
                 },
                 {
-                  "prompt": "Lone pairs",
-                  "answer": "take up space; usually make bond angles smaller",
+                  "prompt": "Bonding groups: A single, double, or triple bond counts as…",
+                  "answer": "ONE electron group",
+                  "inline": true
+                },
+                {
+                  "prompt": "Lone pairs also…",
+                  "answer": "take up space. They usually make bond angles smaller.",
                   "inline": true
                 }
               ],
@@ -748,17 +796,17 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Cl, Br, and I",
-                  "answer": "can also exceed 8 in some compounds",
+                  "prompt": "Cl, Br, and I can also…",
+                  "answer": "exceed 8 in some compounds",
                   "inline": true
                 },
                 {
-                  "prompt": "Odd total",
-                  "answer": "NO has 11 valence electrons; one stays unpaired",
+                  "prompt": "Odd total: NO has…",
+                  "answer": "11 valence electrons total, so one electron stays unpaired",
                   "inline": true
                 },
                 {
-                  "prompt": "Period-2 atoms (C, N, O, F)",
+                  "prompt": "Remember: period-2 atoms (including C, N, O, and F)…",
                   "answer": "cannot have more than 8",
                   "inline": true
                 }
@@ -838,32 +886,32 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "A molecule with polar bonds can",
+                  "prompt": "A molecule can contain polar bonds and…",
                   "answer": "still be nonpolar",
                   "inline": true
                 },
                 {
-                  "prompt": "Bond polarity (one bond)",
-                  "answer": "compare the atoms’ EN values",
+                  "prompt": "Bond polarity: One bond:…",
+                  "answer": "are electrons shared evenly? Compare the atoms’ EN values.",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecular polarity (whole molecule)",
-                  "answer": "check whether the bond pulls cancel",
+                  "prompt": "Molecular polarity: Whole molecule:…",
+                  "answer": "do the bond pulls cancel?",
                   "inline": true
                 },
                 {
-                  "prompt": "HCl",
-                  "answer": "one polar bond → polar molecule",
+                  "prompt": "HCl: one polar bond →…",
+                  "answer": "polar molecule",
                   "inline": true
                 },
                 {
-                  "prompt": "CO₂",
-                  "answer": "equal, opposite pulls → nonpolar",
+                  "prompt": "CO₂: equal opposite pulls →…",
+                  "answer": "nonpolar",
                   "inline": true
                 },
                 {
-                  "prompt": "To find molecular polarity, check",
+                  "prompt": "To find molecular polarity, check…",
                   "answer": "the bonds AND the shape",
                   "inline": true
                 }
@@ -888,23 +936,23 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Bond pulls cancel when",
+                  "prompt": "Bond pulls cancel when…",
                   "answer": "their directions balance",
                   "inline": true
                 },
                 {
-                  "prompt": "Balanced pulls → nonpolar",
-                  "answer": "CO₂, BF₃, CH₄, CCl₄",
+                  "prompt": "Balanced pulls →…",
+                  "answer": "nonpolar: CO₂, BF₃, CH₄, CCl₄",
                   "inline": true
                 },
                 {
-                  "prompt": "Pulls do not cancel → polar",
-                  "answer": "H₂O, NH₃, HCl, CH₃Cl",
+                  "prompt": "Pulls do not cancel →…",
+                  "answer": "polar: H₂O, NH₃, HCl, CH₃Cl",
                   "inline": true
                 },
                 {
-                  "prompt": "Before deciding, check",
-                  "answer": "the 3D shape and the outer atoms",
+                  "prompt": "Check the…",
+                  "answer": "3D shape and the outer atoms before deciding",
                   "inline": true
                 }
               ],
@@ -933,28 +981,23 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "H₂O electrons",
-                  "answer": "6 + 2(1) = 8: two bonds, two O lone pairs",
+                  "prompt": "1  Lewis structure",
+                  "answer": "6 + 2(1) = 8 electrons. Two bonds and two O lone pairs.",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (O 3.44, H 2.20)",
-                  "answer": "1.24: each O–H bond is polar",
+                  "prompt": "2  Bond polarity",
+                  "answer": "3.44 − 2.20 = 1.24. Each O–H bond is polar.",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
-                  "answer": "bent; the bond pulls do not cancel",
+                  "prompt": "3  Shape",
+                  "answer": "Bent: the bond pulls do not cancel → POLAR",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "answer": "POLAR",
-                  "inline": true
-                },
-                {
-                  "prompt": "Partial charges",
-                  "answer": "oxygen side δ−, hydrogen side δ+",
+                  "prompt": "Oxygen side…",
+                  "answer": "δ−. Hydrogen side: δ+.",
                   "inline": true
                 }
               ],
@@ -979,28 +1022,23 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "NH₃ electrons",
-                  "answer": "5 + 3(1) = 8: three bonds, one N lone pair",
+                  "prompt": "1  Lewis structure",
+                  "answer": "5 + 3(1) = 8 electrons. Three bonds and one N lone pair.",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (N 3.04, H 2.20)",
-                  "answer": "0.84: each N–H bond is polar",
+                  "prompt": "2  Bond polarity",
+                  "answer": "3.04 − 2.20 = 0.84. Each N–H bond is polar.",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
-                  "answer": "trigonal pyramidal; the pulls do not cancel",
+                  "prompt": "3  Shape",
+                  "answer": "Trigonal pyramidal: the pulls do not cancel → POLAR",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "answer": "POLAR",
-                  "inline": true
-                },
-                {
-                  "prompt": "NH₃ is",
-                  "answer": "a 3D pyramid, not a flat triangle",
+                  "prompt": "NH₃ is a three-dimensional…",
+                  "answer": "pyramid, not a flat triangle",
                   "inline": true
                 }
               ],
@@ -1029,28 +1067,23 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "CCl₄ electrons",
-                  "answer": "4 + 4(7) = 32: four bonds, 3 lone pairs on each Cl",
+                  "prompt": "1  Lewis structure",
+                  "answer": "4 + 4(7) = 32 electrons. Four bonds; 3 lone pairs on each Cl.",
                   "inline": true
                 },
                 {
-                  "prompt": "ΔEN (Cl 3.16, C 2.55)",
-                  "answer": "0.61: each C–Cl bond is polar",
+                  "prompt": "2  Bond polarity",
+                  "answer": "3.16 − 2.55 = 0.61. Each C–Cl bond is polar.",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape",
-                  "answer": "tetrahedral; four equal pulls cancel",
+                  "prompt": "3  Shape",
+                  "answer": "Tetrahedral: four equal pulls cancel → NONPOLAR",
                   "inline": true
                 },
                 {
-                  "prompt": "Molecule",
-                  "answer": "NONPOLAR",
-                  "inline": true
-                },
-                {
-                  "prompt": "Solid wedge / dashed wedge",
-                  "answer": "toward you / away from you",
+                  "prompt": "Solid wedge =…",
+                  "answer": "toward you. Dashed wedge = away.",
                   "inline": true
                 }
               ],
@@ -1076,17 +1109,17 @@
               "notes": [
                 {
                   "prompt": "CCl₄",
-                  "answer": "four identical C–Cl pulls cancel → NONPOLAR",
+                  "answer": "Four identical C–Cl pulls cancel → NONPOLAR",
                   "inline": true
                 },
                 {
                   "prompt": "CH₃Cl",
-                  "answer": "the C–Cl pull is not balanced → POLAR",
+                  "answer": "The C–Cl pull is not balanced → POLAR",
                   "inline": true
                 },
                 {
-                  "prompt": "Shape alone does not decide polarity",
-                  "answer": "the outer atoms matter",
+                  "prompt": "Shape alone does not decide polarity. The…",
+                  "answer": "outer atoms matter",
                   "inline": true
                 }
               ],
@@ -1120,23 +1153,23 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "The three IMFs",
-                  "answer": "hydrogen bonding, dipole–dipole, London dispersion",
-                  "inline": true
-                },
-                {
-                  "prompt": "Intermolecular forces (IMFs)",
+                  "prompt": "Intermolecular forces",
                   "answer": "attractions between separate molecules",
                   "inline": true
                 },
                 {
                   "prompt": "Inside a molecule",
-                  "answer": "covalent (intramolecular) bonds connect its atoms",
+                  "answer": "Covalent bonds connect its atoms. These are intramolecular bonds.",
                   "inline": true
                 },
                 {
-                  "prompt": "Boiling water",
-                  "answer": "separates H₂O molecules; does not break O–H bonds",
+                  "prompt": "Between molecules",
+                  "answer": "Intermolecular forces (IMFs) attract one molecule to another.",
+                  "inline": true
+                },
+                {
+                  "prompt": "Boiling water separates H₂O molecules; it does not…",
+                  "answer": "break their O–H bonds",
                   "inline": true
                 }
               ],
@@ -1151,8 +1184,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Hydrogen bonding",
-                  "answer": "a partly positive H attracts a lone pair on N, O, or F",
+                  "prompt": "A partly positive H attracts…",
+                  "answer": "a lone pair on a nearby N, O, or F",
                   "inline": true
                 },
                 {
@@ -1162,7 +1195,7 @@
                 },
                 {
                   "prompt": "In the picture",
-                  "answer": "Hδ+ on one water molecule attracts Oδ− on another",
+                  "answer": "Hδ+ in one water molecule attracts Oδ− in another",
                   "inline": true
                 },
                 {
@@ -1171,13 +1204,13 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Effects",
-                  "answer": "helps raise water’s boiling point; holds DNA strands together",
+                  "prompt": "Helps raise…",
+                  "answer": "water’s boiling point and hold DNA strands together",
                   "inline": true
                 },
                 {
-                  "prompt": "Strength",
-                  "answer": "often strong for similar-sized molecules; not always strongest",
+                  "prompt": "Often strong for similar-sized molecules;…",
+                  "answer": "not always strongest",
                   "inline": true
                 }
               ],
@@ -1192,8 +1225,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Dipole–dipole",
-                  "answer": "polar molecules attract through opposite partial charges",
+                  "prompt": "Polar molecules attract through…",
+                  "answer": "their opposite partial charges",
                   "inline": true
                 },
                 {
@@ -1208,11 +1241,11 @@
                 },
                 {
                   "prompt": "Examples",
-                  "answer": "HCl, CH₃Cl, SO₂; all also have dispersion",
+                  "answer": "HCl, CH₃Cl, SO₂. All also have dispersion.",
                   "inline": true
                 },
                 {
-                  "prompt": "These partial charges are",
+                  "prompt": "These partial charges are…",
                   "answer": "lasting features of each polar molecule",
                   "inline": true
                 }
@@ -1232,38 +1265,33 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "London dispersion",
-                  "answer": "moving electrons create temporary + and − ends",
+                  "prompt": "Moving electrons create…",
+                  "answer": "temporary positive and negative ends",
                   "inline": true
                 },
                 {
-                  "prompt": "Found in",
-                  "answer": "every atom and molecule",
-                  "inline": true
-                },
-                {
-                  "prompt": "Main attraction for",
+                  "prompt": "Main attraction for…",
                   "answer": "nonpolar molecules",
                   "inline": true
                 },
                 {
-                  "prompt": "Electrons shift",
-                  "answer": "a brief dipole; the neighboring cloud shifts too",
+                  "prompt": "Electrons shift →…",
+                  "answer": "a brief dipole. The neighboring cloud shifts too.",
                   "inline": true
                 },
                 {
-                  "prompt": "Stronger with",
-                  "answer": "larger, easier-to-shift electron clouds",
+                  "prompt": "Larger, easier-to-shift clouds…",
+                  "answer": "often attract more strongly",
                   "inline": true
                 },
                 {
-                  "prompt": "Example",
-                  "answer": "I₂ is solid at room temperature",
+                  "prompt": "I₂ is…",
+                  "answer": "solid at room temperature",
                   "inline": true
                 },
                 {
-                  "prompt": "The picture shows",
-                  "answer": "changing charge, not permanently charged atoms",
+                  "prompt": "The picture shows…",
+                  "answer": "changing charge, not permanent charged atoms",
                   "inline": true
                 }
               ],
@@ -1279,13 +1307,13 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Every molecule has",
-                  "answer": "dispersion; check what else it has",
+                  "prompt": "Every molecule has…",
+                  "answer": "dispersion. Check what else it has.",
                   "inline": true
                 },
                 {
-                  "prompt": "Stronger attractions",
-                  "answer": "higher boiling point (size and shape matter too)",
+                  "prompt": "Stronger attractions usually mean…",
+                  "answer": "a higher boiling point. Size and shape matter too.",
                   "inline": true
                 }
               ],
