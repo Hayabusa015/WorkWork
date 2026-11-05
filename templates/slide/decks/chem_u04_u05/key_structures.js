@@ -17,7 +17,7 @@ const pres = new pptxgen();
 pres.defineLayout({ name: "KEY", width: 3.3, height: 1.6 });
 pres.layout = "KEY";
 const M = require("./molecules")(pres);
-const { line, dot, oval, label, dipole, lewis, at, MOL, bondDipole, INK, DEEP } = M;
+const { line, dot, oval, label, dipole, lewis, at, MOL, bondDipole, water, hbond, INK, DEEP, CYAN } = M;
 const W = 3.3, H = 1.6, FS = 20;
 const OUT = path.join(__dirname, "..", "..", "..", "notes", "assets", "chem_u04-u05_key");
 
@@ -146,6 +146,39 @@ pic("s26_ccl4_ch3cl", (s) => {
   bondDipole(s, Q, "C", "A", 1, DEEP, 0, 0.1, 0.28, 0.7);
   dipole(s, 3.05, 1.15, 3.05, 0.3, DEEP, 0, 2.5);
   small(s, "net pull to Cl", 2.4, 1.45, 1.2);
+});
+
+/* 29 · hydrogen bond: H(δ+) on one water attracts O(δ−) on another */
+pic("s29_hbond", (s) => {
+  const u = 0.45;
+  const W1 = water(s, 0.75, 0.82, -52.25, u, { fs: FS });
+  const W2 = water(s, 0.75 + 2.6 * u, 0.82, 0, u, { fs: FS });
+  hbond(s, W1.H1, W2.O, DEEP, 0.15, 0.26);
+  delta(s, "δ+", W1.H1[0], W1.H1[1] + 0.27);
+  delta(s, "δ−", W2.O[0] - 0.02, W2.O[1] + 0.36);
+  small(s, "hydrogen bond (dashed)", 1.45, 1.45, 1.8);
+});
+
+/* 30 · dipole-dipole: Cl(δ−) on one HCl attracts H(δ+) on the next */
+pic("s30_dipole_dipole", (s) => {
+  const y = 0.82, m = { atoms: { H: ["H", -0.5, 0], Cl: ["Cl", 0.5, 0] }, bonds: [["H", "Cl", 1]], pairs: [] };
+  const A = lewis(s, m, 0.75, y, 0.62, { fs: FS }), B = lewis(s, m, 2.45, y, 0.62, { fs: FS });
+  for (const P of [A, B]) { delta(s, "δ+", P("H")[0], y - 0.32); delta(s, "δ−", P("Cl")[0], y - 0.32); }
+  line(s, A("Cl")[0] + 0.24, y, B("H")[0] - 0.16, y, { color: DEEP, width: 1.75, dash: "dash" });
+  small(s, "δ− attracts δ+ (dashed)", W / 2, 1.42, 1.8);
+});
+
+/* 31 · London dispersion: a brief dipole, and the neighbor's cloud shifts too */
+pic("s31_ldf", (s) => {
+  const y = 0.78, R = 0.62;
+  for (const x of [0.95, 2.25]) {
+    oval(s, x, y, R, R, { fill: CYAN, transparency: 82, line: INK, lineWidth: 0.75 });
+    oval(s, x - 0.12, y, R * 0.55, R * 0.78, { fill: CYAN, transparency: 45 });
+    dot(s, x, y, 0.07, INK);
+    delta(s, "δ−", x - 0.2, y - 0.44); delta(s, "δ+", x + 0.2, y - 0.44);
+  }
+  line(s, 0.95 + R / 2 + 0.05, y, 2.25 - R / 2 - 0.05, y, { color: DEEP, width: 1.75, dash: "dash" });
+  small(s, "brief dipole; the neighbor shifts too", W / 2, 1.42, 3.2);
 });
 
 fs.mkdirSync(OUT, { recursive: true });

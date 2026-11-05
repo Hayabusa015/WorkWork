@@ -1176,12 +1176,13 @@
               "notesFirst": true
             },
             {
+              "kind": "example",
               "title": "Slide 29 · Hydrogen bonding",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "A partly positive H attracts…",
@@ -1191,11 +1192,6 @@
                 {
                   "prompt": "Look for",
                   "answer": "H bonded directly to N, O, or F",
-                  "inline": true
-                },
-                {
-                  "prompt": "In the picture",
-                  "answer": "Hδ+ in one water molecule attracts Oδ− in another",
                   "inline": true
                 },
                 {
@@ -1214,15 +1210,28 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "problem": {
+                "workLabel": "Slide 29 · Draw the picture: Hδ+ in one water molecule attracts Oδ− in another",
+                "workHeightIn": 2.2,
+                "solution": [
+                  "H on one water (δ+), dashed line to the O of the next water (δ−).",
+                  "That dashed attraction is the hydrogen bond."
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s29_hbond.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
+              "kind": "example",
               "title": "Slide 30 · Dipole–dipole forces",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Polar molecules attract through…",
@@ -1232,11 +1241,6 @@
                 {
                   "prompt": "Look for",
                   "answer": "polar molecules with δ+ and δ− ends",
-                  "inline": true
-                },
-                {
-                  "prompt": "In the picture",
-                  "answer": "Clδ− on one HCl molecule attracts Hδ+ on another",
                   "inline": true
                 },
                 {
@@ -1250,19 +1254,23 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            }
-          ]
-        },
-        {
-          "rows": [
+              "problem": {
+                "workLabel": "Slide 30 · Draw the picture: Clδ− on one HCl molecule attracts Hδ+ on another",
+                "workHeightIn": 2.2,
+                "solution": [
+                  "H–Cl  - - -  H–Cl: the Cl (δ−) of one, dashed to the H (δ+) of the next."
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s30_dipole_dipole.png"
+              }
+            },
             {
+              "kind": "example",
               "title": "Slide 31 · London dispersion forces",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Moving electrons create…",
@@ -1295,8 +1303,20 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "problem": {
+                "workLabel": "Slide 31 · Draw the picture: electrons shift → a brief dipole; the neighboring cloud shifts too",
+                "workHeightIn": 2.2,
+                "solution": [
+                  "One cloud: electrons bunched on one side (δ− and δ+).",
+                  "The neighbor's cloud shifts to match; δ+ sits next to δ−, a brief attraction."
+                ],
+                "keyImage": "../assets/chem_u04-u05_key/s31_ldf.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 32 · Identifying intermolecular forces",

@@ -1022,12 +1022,13 @@
               "notesFirst": true
             },
             {
+              "kind": "example",
               "title": "Slide 29 · Hydrogen bonding",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "A partly positive H attracts…",
@@ -1035,10 +1036,6 @@
                 },
                 {
                   "prompt": "Look for",
-                  "inline": true
-                },
-                {
-                  "prompt": "In the picture",
                   "inline": true
                 },
                 {
@@ -1054,15 +1051,24 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "problem": {
+                "workLabel": "Slide 29 · Draw the picture: Hδ+ in one water molecule attracts Oδ− in another",
+                "workHeightIn": 2.2,
+                "keyImage": "../assets/chem_u04-u05_key/s29_hbond.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
+              "kind": "example",
               "title": "Slide 30 · Dipole–dipole forces",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Polar molecules attract through…",
@@ -1070,10 +1076,6 @@
                 },
                 {
                   "prompt": "Look for",
-                  "inline": true
-                },
-                {
-                  "prompt": "In the picture",
                   "inline": true
                 },
                 {
@@ -1085,19 +1087,20 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            }
-          ]
-        },
-        {
-          "rows": [
+              "problem": {
+                "workLabel": "Slide 30 · Draw the picture: Clδ− on one HCl molecule attracts Hδ+ on another",
+                "workHeightIn": 2.2,
+                "keyImage": "../assets/chem_u04-u05_key/s30_dipole_dipole.png"
+              }
+            },
             {
+              "kind": "example",
               "title": "Slide 31 · London dispersion forces",
               "cues": [
                 "S05.5"
               ],
-              "noWorkBox": true,
               "extraNotes": false,
+              "notesFirst": true,
               "notes": [
                 {
                   "prompt": "Moving electrons create…",
@@ -1124,8 +1127,16 @@
                   "inline": true
                 }
               ],
-              "notesFirst": true
-            },
+              "problem": {
+                "workLabel": "Slide 31 · Draw the picture: electrons shift → a brief dipole; the neighboring cloud shifts too",
+                "workHeightIn": 2.2,
+                "keyImage": "../assets/chem_u04-u05_key/s31_ldf.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slide 32 · Identifying intermolecular forces",

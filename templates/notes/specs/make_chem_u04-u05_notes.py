@@ -119,6 +119,7 @@ def example(title, cues, rows, box_label, height, solution, table=None, img=None
 LEWIS_IN = 2.2      # Lewis structure boxes (slides 13-16)
 POLAR_IN = 2.0      # Lewis + dipole arrows (slides 23-26)
 PAIR_IN = 1.7       # two small molecules with arrows (slides 21, 22)
+IMF_IN = 2.2        # draw-the-picture boxes (slides 29-31)
 
 
 spec = {
@@ -408,31 +409,39 @@ spec = {
          P("Between molecules", "Intermolecular forces (IMFs) attract one molecule to another."),
          P("Boiling water separates H₂O molecules; it does not…", "break their O–H bonds"),
        ]),
-       notes("Slide 29 · Hydrogen bonding", ["S05.5"], [
+       example("Slide 29 · Hydrogen bonding", ["S05.5"], [
          P("A partly positive H attracts…", "a lone pair on a nearby N, O, or F"),
          P("Look for", "H bonded directly to N, O, or F"),
-         P("In the picture", "Hδ+ in one water molecule attracts Oδ− in another"),
          P("Examples", "H₂O, NH₃, HF"),
          P("Helps raise…", "water’s boiling point and hold DNA strands together"),
          P("Often strong for similar-sized molecules;…", "not always strongest"),
-       ]),
-       notes("Slide 30 · Dipole–dipole forces", ["S05.5"], [
-         P("Polar molecules attract through…", "their opposite partial charges"),
-         P("Look for", "polar molecules with δ+ and δ− ends"),
-         P("In the picture", "Clδ− on one HCl molecule attracts Hδ+ on another"),
-         P("Examples", "HCl, CH₃Cl, SO₂. All also have dispersion."),
-         P("These partial charges are…", "lasting features of each polar molecule"),
-       ]),
+       ], "Slide 29 · Draw the picture: Hδ+ in one water molecule attracts Oδ− in another", IMF_IN,
+          ["H on one water (δ+), dashed line to the O of the next water (δ−).",
+           "That dashed attraction is the hydrogen bond."], img="s29_hbond"),
       ]},
       {"rows": [
-       notes("Slide 31 · London dispersion forces", ["S05.5"], [
+       example("Slide 30 · Dipole–dipole forces", ["S05.5"], [
+         P("Polar molecules attract through…", "their opposite partial charges"),
+         P("Look for", "polar molecules with δ+ and δ− ends"),
+         P("Examples", "HCl, CH₃Cl, SO₂. All also have dispersion."),
+         P("These partial charges are…", "lasting features of each polar molecule"),
+       ], "Slide 30 · Draw the picture: Clδ− on one HCl molecule attracts Hδ+ on another", IMF_IN,
+          ["H–Cl  - - -  H–Cl: the Cl (δ−) of one, dashed to the H (δ+) of the next."],
+          img="s30_dipole_dipole"),
+       example("Slide 31 · London dispersion forces", ["S05.5"], [
          P("Moving electrons create…", "temporary positive and negative ends"),
          P("Main attraction for…", "nonpolar molecules"),
          P("Electrons shift →…", "a brief dipole. The neighboring cloud shifts too."),
          P("Larger, easier-to-shift clouds…", "often attract more strongly"),
          P("I₂ is…", "solid at room temperature"),
          P("The picture shows…", "changing charge, not permanent charged atoms"),
-       ]),
+       ], "Slide 31 · Draw the picture: electrons shift → a brief dipole; the neighboring cloud shifts too",
+          IMF_IN,
+          ["One cloud: electrons bunched on one side (δ− and δ+).",
+           "The neighbor's cloud shifts to match; δ+ sits next to δ−, a brief attraction."],
+          img="s31_ldf"),
+      ]},
+      {"rows": [
        example("Slide 32 · Identifying intermolecular forces", ["S05.5"], [
          P("Every molecule has…", "dispersion. Check what else it has."),
          P("Stronger attractions usually mean…", "a higher boiling point. Size and shape matter too."),

@@ -161,6 +161,20 @@ function bondDipole(s, P, from, to, side, color, click, off = 0.2, f0 = 0.22, f1
 }
 
 
-return { rich, line, dot, oval, rect, label, dipole, lewis, at, MOL, bondDipole,
+/* Water molecule for networks: O at (x, y); the H atoms point along `dir`. */
+function water(s, x, y, dir, u, o = {}) {
+  const H1 = at(dir + 52.25, u), H2 = at(dir - 52.25, u);
+  const mol = { atoms: { O: ["O", 0, 0], H1: ["H", H1[0] / u, H1[1] / u], H2: ["H", H2[0] / u, H2[1] / u] },
+    bonds: [["O", "H1", 1], ["O", "H2", 1]], pairs: o.pairs === false ? [] : [["O", dir + 180 - 55], ["O", dir + 180 + 55]] };
+  lewis(s, mol, x, y, u, { fs: o.fs || 22, color: o.color });
+  return { O: [x, y], H1: [x + H1[0], y + H1[1]], H2: [x + H2[0], y + H2[1]] };
+}
+function hbond(s, from, to, color, trimA = 0.17, trimB = 0.24) {
+  const L = Math.hypot(to[0] - from[0], to[1] - from[1]), ux = (to[0] - from[0]) / L, uy = (to[1] - from[1]) / L;
+  line(s, from[0] + ux * trimA, from[1] + uy * trimA, to[0] - ux * trimB, to[1] - uy * trimB,
+    { color, width: 2.25, dash: "dash" });
+}
+
+return { rich, line, dot, oval, rect, label, dipole, lewis, at, MOL, bondDipole, water, hbond,
          INK, PAPER, DEEP, ORANGE, CYAN };
 };
