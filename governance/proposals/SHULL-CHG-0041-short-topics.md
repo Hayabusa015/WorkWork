@@ -92,4 +92,4 @@ links by ID are not affected.
 Decision: Approved by Matthew Shull, 2026-10-15 ("Approve 0041 and merge all").
 Status: IMPLEMENTED
 Implemented By: see the merge commit of the pull request that carries this record
-Verified: 2026-10-15. Repository side only: validators clean; 37 app tests pass, including short titles and descriptors; a too-long or unknown short title is refused by validate_codes (negative test run); the slide deck builder produced "1.4 Slides - Isotopes.pptx". The Drive rename is NOT done: it waits for approval of reports/drive-operations/2026-10-15_rename-plan-2.md.
+Verified: 2026-10-15. Repository side only: validators clean; 37 app tests pass, including short titles and descriptors; a too-long or unknown short title is refused by validate_codes (negative test run); the slide deck builder produced "1.4 Slides - Isotopes.pptx". Drive rename done 2026-10-15 after approval of reports/drive-operations/2026-10-15_rename-plan-2.md: 51 of 51 files renamed by ID (update_file title only, no moves); each update response returned the new title.
