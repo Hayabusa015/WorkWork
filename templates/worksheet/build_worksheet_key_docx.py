@@ -32,6 +32,9 @@ from _shull_docx import (          # noqa: E402
 )
 
 from _shull_name import document_name, short_title   # noqa: E402
+# A project key is reference tables and grading notes, not worked questions. It draws them
+# with the handout's own blocks, so the key and the handout share one look.
+from build_worksheet_docx import table_block, notes_block   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -155,7 +158,7 @@ def main():
         cell_margins(hr, top=80, bottom=80, left=80, right=60)
         para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()} · TEACHER KEY", 7.5,
              bold=True, color=pal.accent, caps_track=True, first=True)
-        para(h, sec["title"], 15, bold=True, color=pal.ink)
+        para(h, spec.get("key", {}).get("title", sec["title"]), 15, bold=True, color=pal.ink)
         pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
                   caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
@@ -167,6 +170,16 @@ def main():
         for i, q in enumerate(sec.get("questions", []), start=1):
             answer_block(doc, i, q, pal)
             gap(doc, 4)
+
+        for block in spec.get("key", {}).get("blocks", []) if si == 0 else []:
+            if block.get("gapBefore"):
+                gap(doc, float(block["gapBefore"]))
+            if block["kind"] == "table":
+                table_block(doc, block, pal)
+            elif block["kind"] == "notes":
+                notes_block(doc, block, pal)
+            else:
+                return refuse(f"unknown key block kind {block['kind']!r}.")
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span} · KEY", pal,
                    with_page_numbers=True)
