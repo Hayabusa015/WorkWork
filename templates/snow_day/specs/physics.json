@@ -1,0 +1,66 @@
+{
+  "course": "physics",
+  "title": "The Physics of Sledding",
+  "subtitle": "Forces, friction, and why some sleds win",
+  "time": "About 30 to 50 minutes",
+  "readings": [
+    {
+      "label": "Reading 1",
+      "title": "Sledding & Physics",
+      "source": "Home Science Tools",
+      "url": "https://learning-center.homesciencetools.com/article/sledding-and-physics/",
+      "note": "Read the What Happened section (Newton's laws, gravity, normal force, friction). You can skim the project steps above it."
+    },
+    {
+      "label": "Reading 2",
+      "title": "The Science of Sledding: How Friction & Wind Resistance Affect a Sled's Speed",
+      "source": "WUWM 89.7, Milwaukee's NPR station",
+      "url": "https://www.wuwm.com/podcast/lake-effect-segments/2021-02-02/the-science-of-sledding-how-friction-wind-resistance-affect-a-sleds-speed",
+      "note": "Read the article or press Listen (8 minutes). It's an interview with a Marquette University physics professor."
+    }
+  ],
+  "questions": [
+    {
+      "q": "List the four forces acting on a sledder going down a hill. Use both readings. For each one, say which direction it points.",
+      "lines": 4,
+      "key": "Gravity: straight down. Normal force: perpendicular to the hill, away from the surface. Friction: along the hill, opposite the motion (back up the hill). Air resistance: opposite the motion."
+    },
+    {
+      "q": "Use Newton's first law to explain why the sled keeps moving on the flat ground at the bottom of the hill. Then explain why it eventually stops.",
+      "lines": 3,
+      "key": "An object in motion stays in motion unless a force acts on it, so the sled keeps going (inertia). Friction (and air resistance) act opposite the motion and slow it until it stops."
+    },
+    {
+      "q": "A rider and sled have a combined mass of 50 kg. The net force on them going down the hill is 100 N. Use the formula from Reading 1 to find their acceleration. Include units.",
+      "lines": 2,
+      "calc": true,
+      "key": "F = ma, so a = F / m = 100 N / 50 kg = 2 m/s^2 down the hill."
+    },
+    {
+      "q": "In Reading 2, Professor Sanders says to lean back if you want to go faster. Which force does leaning back reduce, and how?",
+      "lines": 3,
+      "key": "Air resistance. Leaning back makes the rider flatter and pointier, so they have a smaller cross-sectional area facing the direction of travel and push through less air."
+    },
+    {
+      "q": "Sanders says a sliding sled rides on a very thin layer of water. Where does the heat that melts that water come from?",
+      "lines": 2,
+      "key": "Friction between the sled and the snow. Friction turns some of the motion's energy into heat, the same as rubbing your hands together."
+    },
+    {
+      "q": "According to Sanders, which is faster: very fresh snow or snow that has been sitting for a while? What does that tell you about the friction on fresh snow?",
+      "lines": 2,
+      "key": "Snow that has been sitting is faster. Fresh snow has a higher coefficient of friction, so it exerts a larger friction force on the sled."
+    }
+  ],
+  "write": {
+    "q": "Reading 1 asks whether adding weight, like a second rider, makes a sled go faster or farther, but it never answers the question. Design a fair test you could run on a real sledding hill to find out. In one paragraph, name your independent variable, your dependent variable and how you would measure it, at least two things you would keep the same, and your prediction with a reason from the readings.",
+    "lines": 9,
+    "key": "Independent variable: total mass on the sled (one rider vs. two, or a rider plus added weight). Dependent variable: time to cross a line near the bottom (stopwatch) or distance traveled (tape measure, marked spot). Controls: same sled, same hill and starting point, same starting push (or none), same body position, same snow conditions and time of day, several trials each. Predictions vary. Physics: with friction alone, mass cancels out and the acceleration is about the same. Air resistance matters relatively less for a heavier sled, so the heavier one often goes a bit faster and farther. Give credit for any prediction backed by a reason."
+  },
+  "teacher_notes": [
+    "Reading 1 is a commercial science-supply site's free article. It is stable but not a .gov source. Reading 2 is a 2021 public-radio piece, republished in 2023.",
+    "Reading 2 says the sled 'technically isn't touching the snow.' Melt-water lubrication is a real part of how snow and ice friction works, but 'never touches' overstates it. Worth a sentence if a student brings it up. Question 5 only asks where the heat comes from, which is correct as written.",
+    "Question 3 is the only calculation. Physics students work in their notebooks, so they can show the work there and type only the answer.",
+    "Suggested grading if you want one: complete (every question answered with real effort), mostly complete, partial, or missing. Score it however your snow-day policy says."
+  ]
+}

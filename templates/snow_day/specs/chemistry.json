@@ -1,0 +1,71 @@
+{
+  "course": "chemistry",
+  "title": "Why Salt Melts Road Ice",
+  "subtitle": "The chemistry behind the salt trucks",
+  "time": "About 30 to 50 minutes",
+  "readings": [
+    {
+      "label": "Reading 1",
+      "title": "How Does Salt Battle Road Ice?",
+      "source": "PBS NewsHour",
+      "url": "https://www.pbs.org/newshour/science/why-does-salt-melt-road-ice",
+      "note": "About 5 minutes."
+    },
+    {
+      "label": "Reading 2",
+      "title": "Salt vs. Ice",
+      "source": "A Moment of Science, Indiana Public Media",
+      "url": "https://indianapublicmedia.org/amomentofscience/salt-vs-ice.php",
+      "note": "Very short. You can read it or press Listen. It explains the same thing a second way."
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Reading 1, what happens to water molecules when liquid water freezes into ice?",
+      "lines": 2,
+      "key": "The loose water molecules arrange themselves into a more ordered structure."
+    },
+    {
+      "q": "When sodium chloride (NaCl) dissolves in water, what two ions does it break into? Write each one's name and its symbol with its charge.",
+      "lines": 2,
+      "key": "Sodium ion, Na+, and chloride ion, Cl-."
+    },
+    {
+      "q": "In your own words, explain how those dissolved ions make it harder for water to freeze. Two or three sentences.",
+      "lines": 4,
+      "key": "The ions are foreign particles that get between the water molecules and push them apart. That makes it harder for the water molecules to find each other and lock into the ordered ice structure, so the water has to get colder before it freezes. The freezing point drops."
+    },
+    {
+      "q": "Reading 2 says that at 32 degrees F, freezing and melting happen at the same rate. Explain what salt changes about that balance and why the ice melts as a result.",
+      "lines": 4,
+      "key": "Dissolved salt replaces some of the liquid water molecules at the surface, so fewer water molecules are available to be captured by the ice. The freezing rate drops, but the melting rate stays the same. With more melting than freezing, the ice melts."
+    },
+    {
+      "q": "Calcium chloride (CaCl2) and magnesium chloride (MgCl2) each break into three ions instead of two. Reading 1 says they lower the freezing point even further. Use the idea from question 3 to explain why.",
+      "lines": 3,
+      "key": "More ions means more dissolved particles in the water. More particles get in the way of the water molecules, so the freezing point drops further. (CaCl2 -> Ca2+ + 2 Cl-.)"
+    },
+    {
+      "q": "List two problems road salt causes, according to Reading 1.",
+      "lines": 3,
+      "key": "Any two: salty runoff contaminates soil and kills plants along the road; salt leaches into groundwater and contaminates rivers and lakes; it speeds up rusting of metal, including cars; it may add chlorine compounds to the air (researchers suspect this but have no direct evidence)."
+    },
+    {
+      "q": "Optional challenge. Reading 1 calls it a \"sodium chloride molecule.\" A chemist would object to the word molecule here. Why?",
+      "lines": 2,
+      "optional": true,
+      "key": "NaCl is an ionic compound, a lattice of Na+ and Cl- ions held together by ionic bonds. It doesn't form separate molecules. The correct term is formula unit. Only give credit if you've taught ionic vs. covalent; otherwise ignore it."
+    }
+  ],
+  "write": {
+    "q": "Reading 1 describes three ways to treat icy roads: spreading chunky rock salt, spraying salt that has already been dissolved in water, and spreading dirt and rock. Pick the one you would recommend for the roads around Garfield and defend it in one paragraph of at least five sentences. Use at least one fact from each reading, and include one downside of the method you picked.",
+    "lines": 9,
+    "key": "Any choice is fine if it is defended with evidence. Strong answers explain the melting with freezing point depression or the freezing and melting rates from Reading 2, use a fact from Reading 1 (which salts lower the freezing point more, how trucks spread or spray it, the roughly 60 million tons used each year), and honestly name a downside (runoff, groundwater, rust, or grit thrown at windshields for dirt and rock)."
+  },
+  "teacher_notes": [
+    "Reading 1 (PBS, 2011) still loads. It says NaCl \"molecule.\" That's the reason for the optional challenge question; skip it if ionic bonding hasn't come up yet.",
+    "Reading 2's old indianapublicmedia.org address redirects to ipm.org. If it ever breaks, search \"A Moment of Science Salt vs. Ice\".",
+    "The FP-depression idea here is qualitative. No calculation is required and none is on the sheet.",
+    "Suggested grading if you want one: complete (every question answered with real effort), mostly complete, partial, or missing. Score it however your snow-day policy says."
+  ]
+}

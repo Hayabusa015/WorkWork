@@ -1,0 +1,60 @@
+{
+  "course": "geology",
+  "title": "Lake Effect Snow",
+  "subtitle": "Why Northeast Ohio gets buried when the rest of the state doesn't",
+  "time": "About 30 to 50 minutes",
+  "readings": [
+    {
+      "label": "Reading 1",
+      "title": "What Is Lake Effect Snow?",
+      "source": "NOAA (National Environmental Satellite, Data, and Information Service)",
+      "url": "https://www.nesdis.noaa.gov/about/k-12-education/ice-snow/what-lake-effect-snow",
+      "note": "Short read, about 5 minutes. Look at the diagram and the satellite animation too."
+    },
+    {
+      "label": "Reading 2",
+      "title": "Late November into Early December, 2024 Lake Effect Snow Storm",
+      "source": "National Weather Service, Cleveland office",
+      "url": "https://www.weather.gov/cle/event_20241128_1203",
+      "note": "Read the Overview paragraphs. Then scroll down to the Storm Total Snow Reports table. You need it for question 5."
+    }
+  ],
+  "questions": [
+    {
+      "q": "Using Reading 1, explain how lake-effect snow forms. Start with cold air over the lake and end with snow on the ground. Three or four sentences.",
+      "lines": 5,
+      "key": "Cold, below-freezing air moves over the lake, and the lake water is warmer than the air. Some of that water evaporates into the air, which warms it and adds moisture. The warm, moist air rises and cools as it moves away from the lake onto land. When it cools, the moisture falls out, as snow if it's cold enough."
+    },
+    {
+      "q": "Why does lake-effect snow usually slow down around February?",
+      "lines": 2,
+      "key": "The lakes freeze over, so the air can no longer pick up moisture from the water."
+    },
+    {
+      "q": "Reading 1 says the wind direction matters. Explain why wind that blows across a long stretch of the lake produces more snow than wind that only crosses a short stretch.",
+      "lines": 3,
+      "key": "The longer the air travels over open water, the more water it can pick up. More moisture in the air means more snow when it reaches land."
+    },
+    {
+      "q": "Reading 2 gives the Lake Erie water temperature during the 2024 storm, and says the cold front brought the coldest air of the season. What was the water temperature? Use Reading 1 to explain why that combination made the storm so strong.",
+      "lines": 4,
+      "key": "Upper 40s to near 50 degrees F (the satellite analysis shows a mid-to-upper 50s hot spot in the central basin). Reading 1 says the greater the temperature difference between the air and the water, the more water the air takes in. Very cold air over unusually warm water is a large difference, so the air picked up a lot of moisture and dropped it as heavy snow."
+    },
+    {
+      "q": "In the Storm Total Snow Reports table in Reading 2, find Saybrook (Ashtabula County) and Hiram (Portage County). Write each town's storm total. Hiram is right next to Garrettsville, and the two towns are only about 40 miles apart. Use both readings to explain why their totals are so different.",
+      "lines": 5,
+      "key": "Saybrook: 63.2 inches. Hiram: 2.0 inches. Saybrook sits right along the Lake Erie shore and was under the single dominant snow band. Reading 1 says most of the moisture falls within about 25 miles of the lake, and Hiram is much farther inland than that. The band was also narrow and its position depended on the wind direction, so towns outside it got very little. Accept any answer that uses distance from the lake or the position of the band with a number from the table."
+    }
+  ],
+  "write": {
+    "q": "A family is moving to Northeast Ohio and wants the fewest snow days possible. Write them a short recommendation, one paragraph of at least five sentences. Tell them which direction from Lake Erie to live, roughly how far, and why. Use at least one fact from each reading. Reading 1 also has an opinion about whether moving to the snowbelt would get you more snow days. Include it.",
+    "lines": 9,
+    "key": "Strong answers: live well away from the lake (more than about 25 miles), and not on the south and east (downwind) shore, because lake-effect bands form when cold air crosses the lake and dump their moisture downwind, mostly within about 25 miles. They cite the 2024 table (Saybrook or Erie County 4 to 5 feet vs. Hiram or Ravenna at 0.5 to 2 inches). They mention Reading 1's point that snowbelt towns are well trained in snow removal, so more snow doesn't automatically mean more snow days."
+  },
+  "teacher_notes": [
+    "Readings are U.S. government pages (NOAA, NWS) and should stay up. Reading 1's page was republished on the NESDIS site in August 2025 after SciJinks.gov was retired. If the link ever dies, search the title on nesdis.noaa.gov.",
+    "Reading 2 is a 2024 event page. The NWS keeps these archived, but if it disappears, any NWS Cleveland lake-effect event page with a storm-total table works for question 5.",
+    "Distances checked from the NWS coordinates: Saybrook to Hiram is about 39 miles in a straight line.",
+    "Suggested grading if you want one: complete (every question answered with real effort), mostly complete, partial, or missing. Score it however your snow-day policy says."
+  ]
+}
