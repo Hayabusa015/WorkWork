@@ -28,8 +28,8 @@
 | **Recommendation** | Approve. §5 is fully answered: Q1, Q2 and Q4 in his words, Q3, Q5 and Q6 by the stated defaults, which he did not object to. Before approving, the main session should put two points to him (§2a.1 definition wording; §2a.5 activities and organizers), since both go slightly beyond his literal words. No retrofit is part of this record (§2e). |
 | **Decision** | Approved by the user, 2026-11-05: "approve 0057" |
 | **Status** | **IMPLEMENTED** |
-| **Implemented By** | Secretary, 2026-11-05, against the APPROVED record at commit `113ca6f`. Files: `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/skills/retrieve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, `README.md`, and one-line pointer banners at the top of SHULL-CHG-0029, 0030 and 0035 (no field edits). Implementation commit SHA: to be added by the main session when it commits. |
-| **Verified** | **Partly.** Done by the Secretary: grep outside `legacy/`, `docs/`, `reports/`, `governance/proposals/` finds no live "never creates a content folder" without the 0057 exception, no live "beside 'Quiz'" clause unqualified by legacy layout, and the layout test stated only in `DRIVE_ARCHITECTURE.md` §1 Grammar. `librarian.md` and both Drive skills point to it and do not restate it or the four names. `scripts/` reads none of the changed `folderGrammar` keys. `config/drive.json` was checked by eye only (no shell). **Not yet done:** `json.load`, the five validators, and the three read-only Librarian dry runs in §7. |
+| **Implemented By** | Secretary, 2026-11-05, against the APPROVED record at commit `113ca6f`. Files: `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/skills/retrieve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, `README.md`, and one-line pointer banners at the top of SHULL-CHG-0029, 0030 and 0035 (no field edits). Implementation commit: **`c5e64a0`** ("Implement SHULL-CHG-0057: four unit content folders for new units"; parent `113ca6f`, confirmed in the reflog by the Secretary). |
+| **Verified** | **Partly.** Done by the Secretary: grep outside `legacy/`, `docs/`, `reports/`, `governance/proposals/` finds no live "never creates a content folder" without the 0057 exception, no live "beside 'Quiz'" clause unqualified by legacy layout, and the layout test stated only in `DRIVE_ARCHITECTURE.md` §1 Grammar. `librarian.md` and both Drive skills point to it and do not restate it or the four names. `scripts/` reads none of the changed `folderGrammar` keys. Reported by the main session after commit `c5e64a0` (run in its shell, not by the Secretary): `json.load(config/drive.json)` OK, and `folderGrammar.newLayoutUnitFolders` = `['Presentations + Guided Notes', 'Quiz', 'Test', 'Worksheets']`. `validate_agents`, `validate_codes`, `validate_layers`, `validate_notes`, `validate_profiles`, `validate_references`, `validate_schemas` all OK; counts were not reported. `validate_tokens` FAILS, only on `templates/slide/decks/chem_u04_u05/motion_polarity.html` (raw hex). That file comes from an earlier, unrelated commit, not from 0057, and the main session is fixing it separately. **Not yet done:** the three read-only Librarian dry runs in §7. |
 
 ---
 
@@ -469,14 +469,15 @@ whole of §2, defaults included.
 
 Checks:
 
-- [ ] `json.load` of `config/drive.json` succeeds
-- [ ] `validate_layers`, `validate_references`, `validate_agents`, `validate_schemas`,
-      `validate_codes.py` pass, counts unchanged
-- [ ] Grep (outside `legacy/`, `docs/`, `reports/`, `governance/proposals/`): no live text says
+- [x] `json.load` of `config/drive.json` succeeds (main session, after `c5e64a0`)
+- [x] `validate_layers`, `validate_references`, `validate_agents`, `validate_schemas`,
+      `validate_codes.py` pass, counts unchanged (pass per the main session; counts not reported.
+      `validate_tokens` fails on an unrelated pre-existing file; see `Verified`)
+- [x] Grep (outside `legacy/`, `docs/`, `reports/`, `governance/proposals/`): no live text says
       "never creates a content folder" without the 0057 new-layout exception; no live "beside 'Quiz'"
       clause prohibits `Test` in a new-layout unit; no live text states the layout test outside
       `DRIVE_ARCHITECTURE.md`
-- [ ] `librarian.md` and both Drive skills point to `DRIVE_ARCHITECTURE.md` §2 and restate neither
+- [x] `librarian.md` and both Drive skills point to `DRIVE_ARCHITECTURE.md` §2 and restate neither
       the four names nor the layout test
 - [ ] Dry run, read-only: the Librarian classifies CHEM U04 and U05 as new-layout (step 2), resolves
       one of each type (deck, quiz, unit test, worksheet) to the existing four folders, and creates
@@ -486,5 +487,6 @@ Checks:
       loose) and a practice set loose in the section, creating nothing
 - [ ] Dry run, read-only: for a new unit with no folders, the Librarian's plan for a worksheet says
       "create `Worksheets` only", lists the case-insensitive check, and logs before creating
-- [ ] `legacy/` and `docs/` untouched; 0029, 0030, 0035 fields untouched
-- [ ] `Implemented By` and `Verified` filled in here
+- [x] `legacy/` and `docs/` untouched; 0029, 0030, 0035 fields untouched (Secretary's edits only:
+      one banner line each on 0029, 0030, 0035; the commit diff itself not inspected)
+- [x] `Implemented By` and `Verified` filled in here
