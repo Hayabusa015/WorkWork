@@ -1,5 +1,7 @@
 # SHULL-CHG-0035 — Drive: the system creates no folders; file into a matching folder if it exists, else loose in the parent
 
+> **Superseded in part by SHULL-CHG-0057 (new-layout units only).**
+
 > **Overlap noted 2026-10-15.** This record is still PENDING. `SHULL-CHG-0030` (merged 2026-10-15) already sets the live Drive folder structure and the unit-level folders it proposes, and the Drive was retrofitted to match in September. Decide whether this record is still needed.
 
 > **Renumbered 2026-10-15.** Written on 2026-09-17 to 28 as `SHULL-CHG-0027` on a branch cut before the main line

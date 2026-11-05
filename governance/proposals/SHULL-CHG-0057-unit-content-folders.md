@@ -27,9 +27,9 @@
 | **Risk** | **Medium.** It changes routing in all three courses and introduces two layouts that coexist (new and legacy), which the Librarian must tell apart per unit. It reverses part of an APPROVED rule (0035) and an IMPLEMENTED rule (0030) for new units. It gives the Librarian back an authority 0035 removed, for four names only. No retrofit, so no bulk Drive moves. The repository edit is one revertible commit. |
 | **Recommendation** | Approve. §5 is fully answered: Q1, Q2 and Q4 in his words, Q3, Q5 and Q6 by the stated defaults, which he did not object to. Before approving, the main session should put two points to him (§2a.1 definition wording; §2a.5 activities and organizers), since both go slightly beyond his literal words. No retrofit is part of this record (§2e). |
 | **Decision** | Approved by the user, 2026-11-05: "approve 0057" |
-| **Status** | **APPROVED** |
-| **Implemented By** | — |
-| **Verified** | No. Not implemented. Plan in §7. |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Secretary, 2026-11-05, against the APPROVED record at commit `113ca6f`. Files: `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/skills/retrieve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, `README.md`, and one-line pointer banners at the top of SHULL-CHG-0029, 0030 and 0035 (no field edits). Implementation commit SHA: to be added by the main session when it commits. |
+| **Verified** | **Partly.** Done by the Secretary: grep outside `legacy/`, `docs/`, `reports/`, `governance/proposals/` finds no live "never creates a content folder" without the 0057 exception, no live "beside 'Quiz'" clause unqualified by legacy layout, and the layout test stated only in `DRIVE_ARCHITECTURE.md` §1 Grammar. `librarian.md` and both Drive skills point to it and do not restate it or the four names. `scripts/` reads none of the changed `folderGrammar` keys. `config/drive.json` was checked by eye only (no shell). **Not yet done:** `json.load`, the five validators, and the three read-only Librarian dry runs in §7. |
 
 ---
 

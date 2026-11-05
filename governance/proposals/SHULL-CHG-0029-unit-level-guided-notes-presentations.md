@@ -1,5 +1,7 @@
 # SHULL-CHG-0029 — Guided Notes and Presentations move to the Unit level
 
+> **Superseded in part by SHULL-CHG-0057 (new-layout units only).**
+
 > **Renumbered 2026-10-15.** This record was written on 2026-09-16 as `SHULL-CHG-0023` on a branch cut before
 > the main line reached that number, so the ID collided with a different record. It is now
 > `SHULL-CHG-0029`. The dated operation logs under `reports/drive-operations/` (2026-09-16b to 2026-09-16f)

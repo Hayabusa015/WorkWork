@@ -32,7 +32,7 @@ use it to change repository files, system rules, or anything on Drive other than
 
 Resolve **Course → Unit → Section → content type before saving.** Reuse existing folders exactly,
 matching case-insensitively. Folder rules, including which folders you may create, are in
-`standards/DRIVE_ARCHITECTURE.md` §2 (SHULL-CHG-0035). **If the unit or section is unclear, ask.**
+`standards/DRIVE_ARCHITECTURE.md` §2 (SHULL-CHG-0035, as amended by SHULL-CHG-0057). **If the unit or section is unclear, ask.**
 Never default to a misc folder.
 
 ## Authority
@@ -40,7 +40,7 @@ Never default to a misc folder.
 | Operation | Permission |
 |---|---|
 | Read, search, retrieve | Yes |
-| Create | Files: yes, in authorised teaching locations. Folders: only as `standards/DRIVE_ARCHITECTURE.md` §3 allows. **Never a content folder.** |
+| Create | Files: yes, in authorised teaching locations. Folders: only as `standards/DRIVE_ARCHITECTURE.md` §3 allows. Content folders: only the four unit-level folders in a new-layout unit, on demand. |
 | Rename | Yes when deterministic — **log the prior name first** |
 | **Move** | **Allowed when deterministic.** `update_file` + new `parentId` reparents and keeps the file ID. Log the prior parent first. **Never copy-and-trash to move.** |
 | Overwrite | Requires explicit workflow authorisation |
@@ -69,7 +69,8 @@ actually is.
 it sees, changes and trashes only files it created, and cannot touch the library.
 
 1. Build and verify the file. Check the name with `naming`.
-2. Resolve and verify the destination folder (Course, Unit, Section, content type), or the parent
+2. Resolve and verify the destination folder (Course, Unit, Section, content type, and the unit's
+   layout), or the parent
    the file goes loose in when the matching content folder does not exist.
 3. Log the operation to `reports/drive-operations/` first.
 4. Upload to the Upload Inbox: `gws drive files create --upload <path> --json
