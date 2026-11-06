@@ -88,7 +88,6 @@ def sheet_equations():
     ]) + block("The Mole", [
         ("Moles from mass", f"n = {frac('m','M')}<span class='note'>&nbsp; n moles · m mass (g) · M molar mass (g/mol)</span>"),
         ("Particles", "particles = n × N<sub>A</sub>"),
-        ("Gas at STP", "1 mol = 22.4 L"),
     ]) + block("Gas Laws <span class='note'>T in kelvin</span>", [
         ("Boyle's law", f"{P1}{V1} = {P2}{V2}"),
         ("Charles's law", f"{frac(V1,T1)} = {frac(V2,T2)}"),
@@ -107,7 +106,7 @@ def sheet_equations():
     ]) + block("Acids &amp; Bases", [
         ("pH", "pH = −log[H<sup>+</sup>]&nbsp;&nbsp;&nbsp; [H<sup>+</sup>] = 10<sup>−pH</sup>"),
         ("pOH", "pOH = −log[OH<sup>−</sup>]&nbsp;&nbsp;&nbsp; [OH<sup>−</sup>] = 10<sup>−pOH</sup>"),
-        ("pH and pOH", "pH + pOH = 14"),
+        ("pH and pOH", "pH + pOH = 14 &nbsp;<span class='note'>at 25 °C</span>"),
         ("Titration (1 : 1)", "M<sub>a</sub>V<sub>a</sub> = M<sub>b</sub>V<sub>b</sub>"),
     ]) + block("Light", [
         ("Wave speed", f"c = {LAMBDA}{NU}"),
@@ -138,7 +137,7 @@ def sheet_equations():
           "<li>Multiply by a conversion factor written so the unit you have is on the bottom.</li>"
           "<li>Cancel units. Repeat until only the unit you want is left.</li>"
           "<li>Multiply across the top, divide by everything on the bottom.</li></ol>"
-          f"<p class='ex'><b>Example</b>&nbsp; 2.50 mol H<sub>2</sub>O × {frac('18.02 g H<sub>2</sub>O','1 mol H<sub>2</sub>O')} = 45.1 g H<sub>2</sub>O</p>")
+          f"<p class='ex'><b>Example</b>&nbsp; 1.75 mol H<sub>2</sub>O × {frac('18.02 g H<sub>2</sub>O','1 mol H<sub>2</sub>O')} = 31.5 g H<sub>2</sub>O</p>")
     p2 = (f"<section><h2>Constants</h2><table class='kv'>{ct}</table></section>"
           f"<div class='two'><section><h2>Metric Prefixes</h2><table class='pre'><tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr>{pt}</table></section>"
           f"<section><h2>Conversions</h2><table class='kv'>{cv}</table></section></div>"
@@ -169,7 +168,7 @@ def sheet_sigfigs():
             ("Exact numbers (counted items, defined conversions) have unlimited significant figures.","12 eggs · 1 m = 100 cm","∞")]
     t = "".join(f"<tr><td>{a}</td><td class='x'>{b}</td><td class='c'>{c}</td></tr>" for a, b, c in rows)
     calc = (f"<div class='calc'><div class='cbox'><h3>Multiplying and dividing</h3><p>The answer has the same number of "
-            f"<b>significant figures</b> as the measurement with the fewest.</p><p class='x'>2.5 cm × 3.42 cm = 8.55 → <b>8.6 cm<sup>2</sup></b></p>"
+            f"<b>significant figures</b> as the measurement with the fewest.</p><p class='x'>2.5 cm × 3.47 cm = 8.675 → <b>8.7 cm<sup>2</sup></b></p>"
             f"<p class='note'>2.5 has 2 significant figures, so the answer has 2.</p></div>"
             f"<div class='cbox'><h3>Adding and subtracting</h3><p>The answer has the same number of <b>decimal places</b> as the "
             f"measurement with the fewest.</p><p class='x'>12.11 g + 3.2 g = 15.31 → <b>15.3 g</b></p>"

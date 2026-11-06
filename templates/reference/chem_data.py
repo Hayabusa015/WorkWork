@@ -14,7 +14,7 @@ ELEMENTS = [
  (29,"Cu","Copper","63.55"),(30,"Zn","Zinc","65.38"),(31,"Ga","Gallium","69.72"),(32,"Ge","Germanium","72.63"),
  (33,"As","Arsenic","74.92"),(34,"Se","Selenium","78.97"),(35,"Br","Bromine","79.90"),(36,"Kr","Krypton","83.80"),
  (37,"Rb","Rubidium","85.47"),(38,"Sr","Strontium","87.62"),(39,"Y","Yttrium","88.91"),(40,"Zr","Zirconium","91.22"),
- (41,"Nb","Niobium","92.91"),(42,"Mo","Molybdenum","95.95"),(43,"Tc","Technetium","[98]"),(44,"Ru","Ruthenium","101.07"),
+ (41,"Nb","Niobium","92.91"),(42,"Mo","Molybdenum","95.95"),(43,"Tc","Technetium","[97]"),(44,"Ru","Ruthenium","101.07"),
  (45,"Rh","Rhodium","102.91"),(46,"Pd","Palladium","106.42"),(47,"Ag","Silver","107.87"),(48,"Cd","Cadmium","112.41"),
  (49,"In","Indium","114.82"),(50,"Sn","Tin","118.71"),(51,"Sb","Antimony","121.76"),(52,"Te","Tellurium","127.60"),
  (53,"I","Iodine","126.90"),(54,"Xe","Xenon","131.29"),(55,"Cs","Cesium","132.91"),(56,"Ba","Barium","137.33"),
@@ -30,7 +30,7 @@ ELEMENTS = [
  (93,"Np","Neptunium","[237]"),(94,"Pu","Plutonium","[244]"),(95,"Am","Americium","[243]"),(96,"Cm","Curium","[247]"),
  (97,"Bk","Berkelium","[247]"),(98,"Cf","Californium","[251]"),(99,"Es","Einsteinium","[252]"),(100,"Fm","Fermium","[257]"),
  (101,"Md","Mendelevium","[258]"),(102,"No","Nobelium","[259]"),(103,"Lr","Lawrencium","[266]"),(104,"Rf","Rutherfordium","[267]"),
- (105,"Db","Dubnium","[268]"),(106,"Sg","Seaborgium","[269]"),(107,"Bh","Bohrium","[270]"),(108,"Hs","Hassium","[269]"),
+ (105,"Db","Dubnium","[268]"),(106,"Sg","Seaborgium","[269]"),(107,"Bh","Bohrium","[270]"),(108,"Hs","Hassium","[271]"),
  (109,"Mt","Meitnerium","[278]"),(110,"Ds","Darmstadtium","[281]"),(111,"Rg","Roentgenium","[282]"),(112,"Cn","Copernicium","[285]"),
  (113,"Nh","Nihonium","[286]"),(114,"Fl","Flerovium","[289]"),(115,"Mc","Moscovium","[290]"),(116,"Lv","Livermorium","[293]"),
  (117,"Ts","Tennessine","[294]"),(118,"Og","Oganesson","[294]"),
@@ -136,7 +136,8 @@ SOLUBILITY_RULES = [
  "Chlorides, bromides and iodides are soluble, except with Ag<sup>+</sup>, Hg<sub>2</sub><sup>2+</sup> and Pb<sup>2+</sup>.",
  "Sulfates are soluble, except with Sr<sup>2+</sup>, Ba<sup>2+</sup>, Pb<sup>2+</sup> and Hg<sub>2</sub><sup>2+</sup>. Ca<sup>2+</sup> and Ag<sup>+</sup> sulfates are slightly soluble.",
  "Hydroxides are insoluble, except with Group 1, NH<sub>4</sub><sup>+</sup> and Ba<sup>2+</sup>. Ca<sup>2+</sup> and Sr<sup>2+</sup> hydroxides are slightly soluble.",
- "Carbonates, phosphates and sulfides are insoluble, except with Group 1 and NH<sub>4</sub><sup>+</sup>.",
+ "Carbonates, phosphates and sulfides are insoluble, except with Group 1 and NH<sub>4</sub><sup>+</sup>. Group 2 sulfides react with water.",
+ "<b>X</b> cells break these rules on purpose: those ions react with each other or with water instead of forming the compound. Check the grid.",
 ]
 
 # Activity series, most active first.
