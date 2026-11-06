@@ -22,8 +22,8 @@ record's open points. See "Resolved".
 | **Affected Courses** | Chemistry. |
 | **Risk** | low |
 | **Recommendation** | Approve as amended. It replaces a short list with a complete one inside one course file; nothing else reads the old list. The packet can be named and filed only once SHULL-CHG-0059 is implemented. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
+| **Status** | **APPROVED** |
 | **Implemented By** | — (not implemented) |
 | **Verified** | no — not implemented |
 

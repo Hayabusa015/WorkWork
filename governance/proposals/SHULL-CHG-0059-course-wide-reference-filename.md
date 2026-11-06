@@ -22,8 +22,8 @@ record's open points. See "Resolved".
 | **Affected Courses** | Chemistry, Physics, Geology (the form is available to all three; Chemistry is the first user, SHULL-CHG-0058). |
 | **Risk** | medium — two standards files, both filename builders, and a new course-level folder. |
 | **Recommendation** | Approve as amended. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
+| **Status** | **APPROVED** |
 | **Implemented By** | — (not implemented) |
 | **Verified** | no — not implemented |
 
