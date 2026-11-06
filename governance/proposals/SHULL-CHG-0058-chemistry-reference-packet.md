@@ -1,8 +1,12 @@
 # SHULL-CHG-0058 — Chemistry reference packet becomes a 12-sheet packet
 
 **Path A — a course change.** Only `courses/chemistry/DECISIONS.md` is affected. No standard or skill
-is edited by this record. (The filename this packet needs is a separate Path B question:
-SHULL-CHG-0059.)
+is edited by this record. It edits two parts of that file: "Reference packet contents" and the
+"Short titles" table. (The filename form and the `Chemistry/Reference/` folder are the separate Path B
+change SHULL-CHG-0059.)
+
+**Amended 2026-11-06** to state exactly the changes the main session offered to resolve this
+record's open points. See "Resolved".
 
 | Field | Value |
 |---|---|
@@ -10,14 +14,14 @@ SHULL-CHG-0059.)
 | **Date** | 2026-11-06 |
 | **Source** | User. Contents and exclusions as specified by the user; the naming-procedure exclusion is the user's decision of 2026-11-05 (see Proposed Rule, sheet 7). |
 | **Current Rule** | `courses/chemistry/DECISIONS.md`, "## Reference packet contents", verbatim — see "Current Rule (verbatim)" below. |
-| **Proposed Rule** | Replace that section with the text under "Proposed Rule (verbatim)" below. The given-Week-2 / usable-on-tests sentence and the "Do not test pure recall" line are kept unchanged. |
-| **Supersedes** | `courses/chemistry/DECISIONS.md` § "Reference packet contents" (the four-item list). |
+| **Proposed Rule** | Replace that section with the text under "Proposed Rule (verbatim)" below: twelve sheets, delivered as 12 separate PDF files plus one combined `Reference - Full Packet.pdf` for printing, filed in `Chemistry/Reference/`. The given-Week-2 / usable-on-tests sentence and the "Do not test pure recall" line are kept unchanged. Also add thirteen `REF` rows to the "Short titles" table (text below). |
+| **Supersedes** | `courses/chemistry/DECISIONS.md` § "Reference packet contents" (the four-item list). The "Short titles" table is extended, not superseded. |
 | **Reason** | The four-item list (periodic table, polyatomic ions, solubility rules, percent error) does not describe the packet the user wants to hand out. The user has specified a 12-sheet packet, including which polyatomic ions must be memorized and what is deliberately left out. |
 | **Affected Agents** | None directly. Builders and checkers read the course file. |
 | **Affected Skills** | `build-document` (builds the packet against this list), `verify-content` (checks a built packet against this list). Neither skill file is edited: neither currently states packet contents (a search of `.claude/skills/` for "reference packet", "polyatomic", "solubility" finds nothing), so there is no stale copy to report. |
 | **Affected Courses** | Chemistry. |
 | **Risk** | low |
-| **Recommendation** | Approve. It replaces a short list with a complete one inside one course file; nothing else reads the old list. Two items under "Open points" should be answered first or alongside, because they decide how the packet is filed and named. |
+| **Recommendation** | Approve as amended. It replaces a short list with a complete one inside one course file; nothing else reads the old list. The packet can be named and filed only once SHULL-CHG-0059 is implemented. |
 | **Decision** | |
 | **Status** | **PENDING** |
 | **Implemented By** | — (not implemented) |
@@ -48,8 +52,11 @@ requires memorization.
 ```markdown
 ## Reference packet contents
 
-Given to students around Week 2, usable throughout the year including on tests. A print PDF of
-twelve sheets, in this order. Molecular shapes are drawn as SVG.
+Given to students around Week 2, usable throughout the year including on tests. Twelve sheets, in
+this order. Each sheet is its own PDF, and all twelve are also combined into one
+`Reference - Full Packet.pdf` for printing. Filed in `Chemistry/Reference/` and named at course
+level (`standards/NAMING.md` §2); each file's topic is its `REF` row in "Short titles". The sheet
+titles below are the on-page titles. Molecular shapes are drawn as SVG.
 
 1. **Equations & Constants**
    - *Measurement:* density, percent error, percent composition, average atomic mass.
@@ -104,6 +111,50 @@ Note on ion-count arithmetic, checked while drafting: by group, 1+ = 2, 2+ = 1, 
 2− = 4 + 6 = 10, 3− = 1 + 3 = 4; total 37 = 15 memorize + 22 reference-only. The brief's counts are
 internally consistent.
 
+### Short titles (verbatim rows to add)
+
+In `courses/chemistry/DECISIONS.md` § "Short titles", append these rows to the table, after the
+last existing row (`| 2.3 | Electron Configs |`). The code `REF` marks a course-level Reference
+topic (SHULL-CHG-0059). Each is at most 20 characters; the sheet titles above stay as the on-page
+titles.
+
+```markdown
+| REF | Equations |
+| REF | Sig Figs |
+| REF | VSEPR Shapes |
+| REF | Periodic Table |
+| REF | Electronegativity |
+| REF | Polyatomic Ions |
+| REF | Naming Toolkit |
+| REF | Multi-Charge Metals |
+| REF | Solubility |
+| REF | Activity Series |
+| REF | Strong Acids & Bases |
+| REF | Specific Heats |
+| REF | Full Packet |
+```
+
+Length check, and the sheet each row names:
+
+| Sheet | On-page title | Short title | Characters |
+|---|---|---|---|
+| 1 | Equations & Constants | Equations | 9 |
+| 2 | Significant Figure Rules | Sig Figs | 8 |
+| 3 | VSEPR Geometry | VSEPR Shapes | 12 |
+| 4 | Periodic Table | Periodic Table | 14 |
+| 5 | Electronegativity Table | Electronegativity | 17 |
+| 6 | Polyatomic Ions | Polyatomic Ions | 15 |
+| 7 | Naming Toolkit | Naming Toolkit | 14 |
+| 8 | Metals with Multiple Charges | Multi-Charge Metals | 19 |
+| 9 | Solubility Grid | Solubility | 10 |
+| 10 | Activity Series | Activity Series | 15 |
+| 11 | Strong Acids & Bases | Strong Acids & Bases | 20 |
+| 12 | Specific Heats | Specific Heats | 14 |
+| all | (combined print file) | Full Packet | 11 |
+
+All thirteen are at most 20. `&` is a legal filename character (it is not in NAMING.md §2's
+dropped set), and `U1 | Matter & Atoms` already uses it.
+
 ## Decision-log entry (to append on approval)
 
 To go at the **top** of `courses/chemistry/DECISIONS.md` § "Decision log"
@@ -123,20 +174,22 @@ rules, percent error).
 Status: CONFIRMED · SHULL-CHG-0058
 ```
 
-## Open points (not resolved by this record)
+## Resolved
 
-1. **One file or twelve?** "Format: print PDF" reads as one packet PDF, but SHULL-CHG-0059's examples
-   (`Chemistry Reference - Equations.pdf`, `Chemistry Reference - Polyatomic Ions.pdf`) read as one
-   file per sheet. Which it is decides how many names SHULL-CHG-0059 has to produce. (0059's own
-   example `Equations` is already a shortened form of sheet 1's title.)
-2. **Short-title length.** If each sheet is its own file and its title becomes the filename topic,
-   four sheet titles exceed the 20-character limit in `standards/NAMING.md` §2: Equations &
-   Constants (21), Significant Figure Rules (24), Electronegativity Table (23), Metals with
-   Multiple Charges (28). Strong Acids & Bases is exactly 20; the rest are under. Short forms are
-   the user's call; this record does not invent them. See SHULL-CHG-0059.
-3. **Filing and naming.** The packet spans the whole year, so it has no `S.S` or `Unit X` code. It
-   cannot be named under the current grammar or filed under the current Drive architecture. That is
-   SHULL-CHG-0059 (Path B). This record does not depend on 0059 being approved, but the packet
-   cannot be filed until it is.
-4. **Unit 6 organizer.** "Possibly a U6 organizer" is not a decision to build one. Nothing here
+The main session offered these changes on 2026-11-06, and this record now states them. The user's
+reply referred to them as "with your changes". The user's decision itself is recorded in
+`Decision:` and `Status:` by the main session, not here.
+
+1. **One file or twelve?** Both: 12 separate PDF files, one per sheet, plus one combined
+   `Reference - Full Packet.pdf` for printing. Filed in `Chemistry/Reference/`.
+2. **Short titles over 20 characters.** Resolved by the thirteen `REF` short-title rows above, each
+   at most 20 characters. The full sheet titles stay as the on-page titles.
+
+## Still open
+
+1. **Filing and naming depend on SHULL-CHG-0059.** The course-level name (`Reference - [Topic].pdf`)
+   and the `Chemistry/Reference/` folder are defined there. This record does not depend on 0059
+   to be applied, but the packet cannot be named or filed until 0059 is implemented, including its
+   builder change, and until the Librarian has confirmed `Chemistry/Reference/` exists.
+2. **Unit 6 organizer.** "Possibly a U6 organizer" is not a decision to build one. Nothing here
    commits to it.
