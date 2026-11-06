@@ -39,11 +39,31 @@ def fmt_mp(v):
     return f"{v} °C".replace("-", "−") if isinstance(v, int) else v
 
 
-def grid_table(doc, pal, spec, fill=None, ions=None, row_h=0.72):
+def empty_squares(spec):
+    """Grid squares no element occupies (the cards and the gap fill the rest)."""
+    cols, rows = spec["grid"]["columns"], spec["grid"]["rows"]
+    used = {(rows.index(c["period"]), cols.index(c["group"])) for c in spec["cards"]}
+    m = spec["missing"]
+    used.add((rows.index(m["period"]), cols.index(m["group"])))
+    return {(r, c) for r in range(len(rows)) for c in range(len(cols))} - used
+
+
+def mystery_clue(spec):
+    """Matt, 2026-11-06: the missing element was too open-ended. Name its group and the two
+    cards directly above and below it, so the prediction is an estimate from its neighbours."""
+    m = spec["missing"]
+    above = next(c for c in spec["cards"] if c["group"] == m["group"] and c["period"] == m["period"] - 1)
+    below = next(c for c in spec["cards"] if c["group"] == m["group"] and c["period"] == m["period"] + 1)
+    return (f"Clue: it is in group {m['group']}, directly below card {above['code']} and directly above "
+            f"card {below['code']}. Predict each property from those two cards.")
+
+
+def grid_table(doc, pal, spec, fill=None, ions=None, row_h=0.72, shade_empty=True):
     """The 6 x 5 placement grid, topped by a row for the ion each column forms. No group or
     period labels: finding those is the task. The key draws the same grid at the same size,
     so it can be held beside a group's sheet and graded square by square."""
     cols, rows = len(spec["grid"]["columns"]), len(spec["grid"]["rows"])
+    blanks = empty_squares(spec)
     w = round(TEXT_W / cols, 3)
     t = doc.add_table(rows=rows + 1, cols=cols)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -62,6 +82,12 @@ def grid_table(doc, pal, spec, fill=None, ions=None, row_h=0.72):
         for c in range(cols):
             cell = t.rows[r + 1].cells[c]
             borders(cell, pal.ink, sz=6)
+            if shade_empty and (r, c) in blanks:
+                # No element belongs here: tinted and marked, so groups know where not to place a card.
+                shade(cell, pal.surface)
+                q = para(cell, "no element", 8, color=pal.label, first=True)
+                q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                continue
             if fill:
                 txt = fill.get((r, c))
                 if txt:
@@ -180,8 +206,9 @@ def cards_pages(doc, pal, spec):
                 if card is None:
                     para(cell, "?", 26, bold=True, color=pal.accent, first=True)
                     para(cell, "THE MISSING ELEMENT", 9, bold=True, color=pal.ink)
-                    para(cell, "Put this card in the gap your group leaves. Write your predictions "
-                               "on the answer sheet.", 9.5, color=pal.ink)
+                    para(cell, mystery_clue(spec), 9.5, bold=True, color=pal.ink)
+                    para(cell, "Put this card in its gap. Write your predictions on the answer sheet.",
+                         9.5, color=pal.ink)
                     continue
                 card_face(cell, card, pal, inner)
                 tidy_cell(cell)
@@ -219,8 +246,9 @@ def build_student(spec, pal, code, out):
         ("Order each family (10 min).  ", "Smallest atom at the top. Check the order against ionization energy."),
         ("Line up the rows (10 min).  ", "Put the families side by side so atoms shrink from left to right "
                                          "along each row, the way they do across a real period. Two clues: the "
-                                         "top row holds just two cards, one at each end. The missing element "
-                                         "is in the middle of its family, not at either end."),
+                                         "top row holds just two cards, one at each end. Gray squares on the "
+                                         "answer sheet hold no element. The ? card tells you where the "
+                                         "missing element goes."),
         ("Record and predict (10 min).  ", "Fill in the Lab Group Answer Sheet: every letter, the ion for each "
                                          "column, and your predictions. One sheet per group is graded."),
     ], numbered=True)
@@ -246,10 +274,12 @@ def build_student(spec, pal, code, out):
     fields(doc, pal, [("LAB GROUP MEMBERS", 4.6), ("PERIOD", 1.2), (f"SCORE         / {total}", 1.7)])
     gap(doc, 6)
     para(doc, "Write each card's letter in the square where your group placed it, and ? in the gap. "
-              "Some squares stay empty. Across the top, write the ion each column forms.", 9.5)
+              "Gray squares hold no element. Across the top, write the ion each column forms.", 9.5)
     gap(doc, 4)
     grid_table(doc, pal, spec)
-    gap(doc, 8)
+    gap(doc, 6)
+    para(doc, mystery_clue(spec), 9.5, bold=True)
+    gap(doc, 4)
     t = doc.add_table(rows=6, cols=2)
     fix_widths(t, [3.0, 4.5])
     for c, hd in zip(t.rows[0].cells, ("THE MISSING ELEMENT", "YOUR GROUP'S PREDICTION")):
