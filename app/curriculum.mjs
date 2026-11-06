@@ -148,13 +148,16 @@ export function documentTypes(namingText) {
  * helper the repository builders use so the app cannot drift from them.
  */
 import {createRequire} from 'node:module';
-const {documentName: buildName, shortTitle: buildShortTitle} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+const {documentName: buildName, shortTitle: buildShortTitle, referenceTitles: buildReferenceTitles} = createRequire(import.meta.url)('../templates/shull_name.cjs');
 
 /** The short title for a section code ("1.3") or unit ("U1"), from a course's decisions text. */
 export const shortTitle = (decisionsText, key) => buildShortTitle(decisionsText, key);
 
+/** The course-level Reference topics (REF rows) from a course's decisions text. SHULL-CHG-0059. */
+export const referenceTitles = (decisionsText) => buildReferenceTitles(decisionsText);
+
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};
 
-export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx', descriptor}) {
-  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor});
+export function documentName({type, unit, sections: codes = [], topic, unitTitle, version, key, extension = 'docx', descriptor, scope}) {
+  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor, scope});
 }

@@ -7,6 +7,7 @@ the same examples by their tests.
     1.2 Practice Set - Balancing.docx                  one section, short title
     1.2 Quiz A Key - Balancing.docx                    version letter, key
     Unit 1 Guided Notes - 1D Motion.docx               more than one section
+    Reference - Polyatomic Ions.pdf                    course-level, whole year (SHULL-CHG-0059)
 """
 import os, re
 
@@ -44,9 +45,39 @@ def short_title(course, key):
     return None
 
 
+def reference_titles(course):
+    """The course-level topics: every row coded REF in the Short titles table of
+    courses/<course>/DECISIONS.md (SHULL-CHG-0059). Empty if there are none."""
+    path = os.path.join(REPO, "courses", course, "DECISIONS.md")
+    try:
+        text = open(path).read()
+    except OSError:
+        return []
+    m = re.search(r"^## Short titles\s*$(.*?)(?=^## )", text, re.S | re.M)
+    if not m:
+        return []
+    rows = re.finditer(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$", m.group(1), re.M)
+    return [t for t in (clean(r.group(2)) for r in rows if r.group(1).strip().upper() == "REF") if t]
+
+
 def document_name(type_, sections, unit, topic=None, unit_title=None,
-                  version=None, key=False, ext="docx", descriptor=None):
-    """`type_` may use underscores ("Practice_Set"); the name uses spaces."""
+                  version=None, key=False, ext="docx", descriptor=None, scope=None):
+    """`type_` may use underscores ("Practice_Set"); the name uses spaces.
+    scope="course" is a whole-year document: Reference only, no code and no course word, because
+    the folder ([Course]/Reference/) carries the course (SHULL-CHG-0059, SHULL-CHG-0024)."""
+    if scope == "course":
+        if str(type_) != "Reference":
+            raise ValueError(f"course-level names are for Reference only, not {type_!r}")
+        if version or key:
+            raise ValueError("a course-level Reference takes no version or key")
+        tail = clean(topic) if topic else ""
+        if not tail:
+            raise ValueError("a course-level name always has a topic: a REF row in the course "
+                             "Short titles table")
+        if len(tail) > MAX_TOPIC:
+            raise ValueError(f"topic {tail!r} is {len(tail)} characters; the limit is {MAX_TOPIC}. "
+                             "Use the short title from the course decisions file.")
+        return f"Reference - {tail}.pdf"
     label = str(type_).replace("_", " ")
     if version:
         label += f" {version}"
