@@ -170,12 +170,56 @@ and skills but never duplicate test questions.
 
 ## Reference packet contents
 
-Given to students around Week 2, usable throughout the year including on tests:
+Given to students around Week 2, usable throughout the year including on tests. Twelve sheets, in
+this order. Each sheet is its own PDF, and all twelve are also combined into one
+`Reference - Full Packet.pdf` for printing. Filed in `Chemistry/Reference/` and named at course
+level (`standards/NAMING.md` §2); each file's topic is its `REF` row in "Short titles". The sheet
+titles below are the on-page titles. Molecular shapes are drawn as SVG.
 
-- Periodic table
-- Polyatomic ions, with an indication of which ones must be memorized
-- Solubility rules
-- Percent-error formula/reference
+1. **Equations & Constants**
+   - *Measurement:* density, percent error, percent composition, average atomic mass.
+   - *Mole:* n = m/M; particles = n × N_A.
+   - *Gases:* Boyle, Charles, Gay-Lussac, combined, Avogadro, ideal gas, Dalton partial pressures.
+   - *Solutions:* molarity; dilution M1V1 = M2V2.
+   - *Thermochemistry:* q = mcΔT.
+   - *Acid/base:* pH, pOH, pH + pOH = 14, titration.
+   - *Light:* c = λν, E = hν.
+   - *Nuclear:* half-life.
+   - *Constants:* N_A; R in L·atm, L·kPa and L·mmHg units; c; h; specific heat of water;
+     pressure equivalents (atm, mmHg, kPa); K = °C + 273. STP = 0 °C and 1 atm; molar volume
+     22.4 L.
+   - Unit conversions, including metric prefixes; a dimensional-analysis setup template.
+2. **Significant Figure Rules** — counting rules, plus the ×/÷ and +/− rounding rules.
+3. **VSEPR Geometry** — up to 6 electron domains. Columns: domains, bonding vs lone pairs,
+   electron geometry, molecular geometry, bond angle, drawn shape.
+4. **Periodic Table** — atomic number, symbol, name, average atomic mass to 2 decimals.
+5. **Electronegativity Table** — Pauling values to 2 decimals; noble gases blank.
+6. **Polyatomic Ions** — 37 ions grouped by charge (1+, 2+, 1−, 2−, 3−). In each group the
+   ions students must memorize come first, marked ★ and set in bold.
+   - *Memorize (15):* ammonium NH4+, hydronium H3O+, acetate C2H3O2−, hydrogen carbonate HCO3−,
+     chlorate ClO3−, cyanide CN−, hydroxide OH−, nitrate NO3−, nitrite NO2−, permanganate MnO4−,
+     carbonate CO3 2−, chromate CrO4 2−, sulfate SO4 2−, sulfite SO3 2−, phosphate PO4 3−.
+   - *Reference only, unstarred (22):* mercury(I) Hg2 2+; perchlorate ClO4−, chlorite ClO2−,
+     hypochlorite ClO−, bromate BrO3−, iodate IO3−, periodate IO4−, hydrogen sulfate HSO4−,
+     hydrogen sulfite HSO3−, hydrogen sulfide HS−, dihydrogen phosphate H2PO4−, thiocyanate SCN−,
+     cyanate OCN−; dichromate Cr2O7 2−, hydrogen phosphate HPO4 2−, oxalate C2O4 2−, peroxide
+     O2 2−, thiosulfate S2O3 2−, silicate SiO3 2−; phosphite PO3 3−, arsenate AsO4 3−,
+     borate BO3 3−.
+7. **Naming Toolkit** — Roman numerals I–VIII; covalent prefixes mono–deca; the seven diatomic
+   elements (H, N, O, F, Cl, Br, I). **No naming procedure or rules** for ionic, covalent, or
+   acid names: the procedure stays in the Unit 6 materials (possibly a U6 organizer), so the
+   test-usable packet does not answer naming items.
+8. **Metals with Multiple Charges** — Cu, Fe, Pb, Sn, Hg, Co, Ni, Cr, Mn, Au; plus Ag+, Zn2+ and
+   Cd2+ shown as fixed-charge exceptions.
+9. **Solubility Grid** — cations × anions (polyatomic anions included). Each cell is soluble,
+   slightly soluble, or insoluble, marked by letter so it reads in greyscale. Plus a five-line
+   rules summary.
+10. **Activity Series** — metals and halogens.
+11. **Strong Acids & Bases** — list.
+12. **Specific Heats** — common substances.
+
+**Deliberately excluded** (user decision): the electronegativity-difference bond-type scale,
+nuclear particle symbols, acid naming rules.
 
 Do not test pure recall of anything in the packet unless the learning target explicitly
 requires memorization.
@@ -352,8 +396,33 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.4 | Isotopes |
 | 1.5 | Average Atomic Mass |
 | 2.3 | Electron Configs |
+| REF | Equations |
+| REF | Sig Figs |
+| REF | VSEPR Shapes |
+| REF | Periodic Table |
+| REF | Electronegativity |
+| REF | Polyatomic Ions |
+| REF | Naming Toolkit |
+| REF | Multi-Charge Metals |
+| REF | Solubility |
+| REF | Activity Series |
+| REF | Strong Acids & Bases |
+| REF | Specific Heats |
+| REF | Full Packet |
 
 ## Decision log
+
+### 2026-11-06 — Reference packet: twelve sheets
+The Week-2 reference packet is twelve sheets: Equations & Constants, Significant Figure Rules,
+VSEPR Geometry, Periodic Table, Electronegativity Table, Polyatomic Ions (37, the 15 to memorize
+starred and bold), Naming Toolkit, Metals with Multiple Charges, Solubility Grid, Activity Series,
+Strong Acids & Bases, Specific Heats. The naming procedure is left out on purpose and stays in
+Unit 6 materials (user, 2026-11-05), so the packet does not answer naming items on a test. Also
+excluded: the electronegativity-difference bond-type scale, nuclear particle symbols, acid naming
+rules. Full list in "Reference packet contents".
+Supersedes: Reference packet contents (four-item list: periodic table, polyatomic ions, solubility
+rules, percent error).
+Status: CONFIRMED · SHULL-CHG-0058
 
 ### 2026-10-28 — Palette changed
 Chemistry's identity colours changed. Values live in `brand/tokens.json` `courses.chemistry`; the
