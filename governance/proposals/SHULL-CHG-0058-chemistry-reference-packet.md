@@ -23,9 +23,9 @@ record's open points. See "Resolved".
 | **Risk** | low |
 | **Recommendation** | Approve as amended. It replaces a short list with a complete one inside one course file; nothing else reads the old list. The packet can be named and filed only once SHULL-CHG-0059 is implemented. |
 | **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
-| **Status** | **APPROVED** |
-| **Implemented By** | — (not implemented) |
-| **Verified** | no — not implemented |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | 59858c0 |
+| **Verified** | yes — `courses/chemistry/DECISIONS.md` diff checked against this record by the main session; `reference_titles('chemistry')` returns all 13 `REF` rows and each builds a valid `Reference - <topic>.pdf` name. |
 
 ---
 

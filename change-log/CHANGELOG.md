@@ -31,8 +31,8 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0059 | 2026-11-06 | Course-level filename form for whole-year documents | PARTIAL | `governance/proposals/SHULL-CHG-0059-course-wide-reference-filename.md` |
-| SHULL-CHG-0058 | 2026-11-06 | Chemistry reference packet becomes twelve sheets | PARTIAL | `governance/proposals/SHULL-CHG-0058-chemistry-reference-packet.md` |
+| SHULL-CHG-0059 | 2026-11-06 | Course-level filename form for whole-year documents | CONFIRMED | `governance/proposals/SHULL-CHG-0059-course-wide-reference-filename.md` |
+| SHULL-CHG-0058 | 2026-11-06 | Chemistry reference packet becomes twelve sheets | CONFIRMED | `governance/proposals/SHULL-CHG-0058-chemistry-reference-packet.md` |
 
 ## 2026-11-05
 

@@ -23,9 +23,9 @@ record's open points. See "Resolved".
 | **Risk** | medium — two standards files, both filename builders, and a new course-level folder. |
 | **Recommendation** | Approve as amended. |
 | **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
-| **Status** | **APPROVED** |
-| **Implemented By** | — (not implemented) |
-| **Verified** | no — not implemented |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | 0ba1b27 (standards: `NAMING.md`, `DRIVE_ARCHITECTURE.md`); de467b1 (builders and tests: `templates/`, `app/`) |
+| **Verified** | yes — `npm test` 38/38 pass, including the new course-level test in `app/design.test.mjs`; new `templates/test_shull_name.py` 4/4 pass; the `standards/NAMING.md` §2 worked examples are now pinned by both builders' tests. |
 
 ---
 
