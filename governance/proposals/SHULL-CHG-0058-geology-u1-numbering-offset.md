@@ -18,8 +18,8 @@
 | **Affected Courses** | Geology. |
 | **Risk** | High if left. Packets can print with the wrong footer. Low for the record itself (it adds an open question only). |
 | **Recommendation** | Approve adding Geology open question 7. Do not build further Geology U1 material until Matt answers. |
-| **Decision** | PENDING. Questions for Matt, unadopted: (1) Renumber the built U1 material to the roadmap codes, or is the roadmap map wrong? (2) Is the Red Shift Gizmo a named exception to the no-Gizmo-in-new-material rule (open Q2), or should it be replaced? (3) Does Geology use phases at all? |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:33.854Z. Still open — Questions for Matt, not answered by the click: (1) Renumber the built U1 material to the roadmap codes, or is the roadmap map wrong? (2) Is the Red Shift Gizmo a named exception to the no-Gizmo-in-new-material rule (open Q2), or should it be replaced? (3) Does Geology use phases at all? |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 

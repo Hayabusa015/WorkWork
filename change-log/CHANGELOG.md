@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-08
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0058 | 2026-11-08 | Geology U1 section-code offset becomes open question 7 | APPROVED | `governance/proposals/SHULL-CHG-0058-geology-u1-numbering-offset.md` |
+
 ## 2026-11-05
 
 | ID | Date | Change | Status | Record |
