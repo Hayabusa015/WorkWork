@@ -18,7 +18,7 @@
 | **Affected Courses** | Physics. |
 | **Risk** | Low to medium. Changes how every Physics worksheet is built. |
 | **Recommendation** | Ask Matt; decide once rather than a fourth monkeypatch. |
-| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:22.709Z. Still open — Question for Matt, not answered by the click: make "no tier label on the student page" and a larger default ramp (about 9-10 questions) the standing Physics rule, and retire the monkeypatch? |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:22.709Z. Still open — Question for Matt, not answered by the click: make "no tier label on the student page" and a larger default ramp (about 9-10 questions) the standing Physics rule, and retire the monkeypatch? Answered in chat 2026-11-08: "Yes, make it the rule" — option text: "Retires the one-off overrides" |
 | **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
