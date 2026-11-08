@@ -17,7 +17,7 @@
 | **Affected Courses** | Chemistry. |
 | **Risk** | Low. |
 | **Recommendation** | Approve the NAMING example swap. Ask Matt on the table row. |
-| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:25.887Z. Still open — Questions for Matt, not answered by the click: (1) Remove the 1.4 row, or keep it annotated "retired"? (2) Delete the orphan deck spec `chem_u01_s01.4_isotopes.json`, or keep it as history? |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:25.887Z. Still open — Questions for Matt, not answered by the click: (1) Remove the 1.4 row, or keep it annotated "retired"? (2) Delete the orphan deck spec `chem_u01_s01.4_isotopes.json`, or keep it as history? Answered in chat 2026-11-08 (Q1 and Q2): "Mark it 'retired' (Recommended)" — option text: "Keeps the history; the orphan deck spec stays as history too" |
 | **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
