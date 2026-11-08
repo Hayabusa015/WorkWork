@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0065 | 2026-11-08 | Weekly sweep fire time and legacy retirement condition | APPROVED | `governance/proposals/SHULL-CHG-0065-dst-cron-recheck-and-legacy-retirement.md` |
 | SHULL-CHG-0064 | 2026-11-08 | Finish four APPROVED records stuck short of IMPLEMENTED | APPROVED | `governance/proposals/SHULL-CHG-0064-approved-records-still-open.md` |
 | SHULL-CHG-0063 | 2026-11-08 | Evidence and questions for open course questions | APPROVED | `governance/proposals/SHULL-CHG-0063-open-question-evidence-and-pacing-checks.md` |
 | SHULL-CHG-0062 | 2026-11-08 | Physics tier labels and question-count ramp | APPROVED | `governance/proposals/SHULL-CHG-0062-physics-student-page-tier-label-pattern.md` |
