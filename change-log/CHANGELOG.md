@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0063 | 2026-11-08 | Evidence and questions for open course questions | APPROVED | `governance/proposals/SHULL-CHG-0063-open-question-evidence-and-pacing-checks.md` |
 | SHULL-CHG-0062 | 2026-11-08 | Physics tier labels and question-count ramp | APPROVED | `governance/proposals/SHULL-CHG-0062-physics-student-page-tier-label-pattern.md` |
 | SHULL-CHG-0061 | 2026-11-08 | Stop listing retired Chemistry 1.4 as live | APPROVED | `governance/proposals/SHULL-CHG-0061-chem-retired-1.4-still-listed.md` |
 | SHULL-CHG-0060 | 2026-11-08 | Remove stale Drive-state prose from decisions files | APPROVED | `governance/proposals/SHULL-CHG-0060-stale-drive-state-prose-in-decisions.md` |
