@@ -18,8 +18,8 @@
 | **Affected Courses** | None directly. |
 | **Risk** | Low. |
 | **Recommendation** | Run the follow-ups in the table. |
-| **Decision** | PENDING. Questions for Matt, unadopted: (1) Finish CHG-0034 and CHG-0038, or defer? (2) For CHG-0035, drop the unpassable Tests-Quizizz check? |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:17.128Z. Still open — Questions for Matt, not answered by the click: (1) Finish CHG-0034 and CHG-0038, or defer? (2) For CHG-0035, drop the unpassable Tests-Quizizz check? |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
