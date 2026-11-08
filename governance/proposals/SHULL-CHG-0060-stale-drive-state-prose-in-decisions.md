@@ -18,8 +18,8 @@
 | **Affected Courses** | Physics, Geology, Chemistry. |
 | **Risk** | Low for the prose deletions. Medium for the validator check, which is new tooling. |
 | **Recommendation** | Approve the deletions. Treat the standing rule and validator check as separate decisions. |
-| **Decision** | PENDING. Questions for Matt, unadopted: (1) Delete the Drive-state sections and point at `config/drive.json`? (2) Make "course DECISIONS files carry no Drive-state prose" a standing rule? (3) Add a validator check that `Last updated` is at or after the newest log date? (4) Is the misfiled-Geology-notes defect still blocking, once Drive is re-checked? |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:27.892Z. Still open — Questions for Matt, not answered by the click: (1) Delete the Drive-state sections and point at `config/drive.json`? (2) Make "course DECISIONS files carry no Drive-state prose" a standing rule? (3) Add a validator check that `Last updated` is at or after the newest log date? (4) Is the misfiled-Geology-notes defect still blocking, once Drive is re-checked? |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
