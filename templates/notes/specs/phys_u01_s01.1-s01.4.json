@@ -318,7 +318,10 @@
             "need": "(a) time to reach the ground    (b) velocity on impact",
             "workLabel": "WORK — BOTH NEGATIVES MATTER",
             "workHeightIn": 1.4,
-            "answer": "Answers: t =  __________  and v =  _______________ , meaning 29.7 m/s downward."
+            "answer": "Answers: t =  __________  and v =  _______________ .",
+            "solution": [
+              "meaning 29.7 m/s downward."
+            ]
           }
         }
       ],
