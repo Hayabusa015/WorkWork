@@ -16,7 +16,7 @@
 | **Affected Courses** | None. |
 | **Risk** | Low. |
 | **Recommendation** | Ask both questions. If a time change is wanted, the Routine's cron is outside the repo and is changed by Matt, not by an agent. |
-| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:14.477Z. Still open — Questions for Matt, not answered by the click: (1) What Ohio local time do you want the Sunday sweep to fire? If it should stay at 17:56, the Routine cron moves to 22:56 UTC. (2) Do you want to schedule legacy skill retirement now, or restate the condition for it? |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:14.477Z. Still open — Questions for Matt, not answered by the click: (1) What Ohio local time do you want the Sunday sweep to fire? If it should stay at 17:56, the Routine cron moves to 22:56 UTC. (2) Do you want to schedule legacy skill retirement now, or restate the condition for it? Answered in chat 2026-11-08 (Q1): "Keep 4:56 PM". Q2 (legacy retirement) still open. |
 | **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
