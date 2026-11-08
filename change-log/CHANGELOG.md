@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0059 | 2026-11-08 | Remove the answer leak from Physics S1.1 student notes | APPROVED | `governance/proposals/SHULL-CHG-0059-physics-s1.1-answer-leak.md` |
 | SHULL-CHG-0058 | 2026-11-08 | Geology U1 section-code offset becomes open question 7 | APPROVED | `governance/proposals/SHULL-CHG-0058-geology-u1-numbering-offset.md` |
 
 ## 2026-11-05

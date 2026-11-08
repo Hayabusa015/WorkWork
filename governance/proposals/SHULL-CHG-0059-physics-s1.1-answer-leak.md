@@ -17,8 +17,8 @@
 | **Affected Courses** | Physics. |
 | **Risk** | Low. |
 | **Recommendation** | Approve; designer fixes the spec and rebuilds. Confirm no filed Drive copy carries the leak. |
-| **Decision** | PENDING. Question for Matt, unadopted: if a filed Drive copy has the leak, rebuild and refile it, or leave the filed copy? |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user via the Secretary's Desk, 2026-11-08T22:43:30.674Z. Still open — Question for Matt, not answered by the click: if a filed Drive copy has the leak, rebuild and refile it, or leave the filed copy? |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
