@@ -54,7 +54,7 @@ Unit 1 Guided Notes - Matter & Atoms.docx
 1.3 Lab - Motion Graphs.pdf
 1.3 Lab Key - Motion Graphs.pdf
 2.3 Practice Set - Electron Configs Longhand.docx
-1.4 Slides - Isotopes.pptx
+1.5 Slides - Average Atomic Mass.pptx
 Unit 1 Test B - Matter & Atoms.docx
 1.3 Lab.pdf                                        (a section with no short title)
 ```
@@ -110,8 +110,8 @@ The Librarian logs an object's ID, prior name, and prior parent to `reports/driv
 ### Previously blocked, now clear
 
 **Geology renaming was blocked** while CONFLICT-25 left it open whether Geology had section numbers
-at all. **CLOSED by SHULL-CHG-0009** — Geology has section numbers, 10 units and 54 sections, and
-the codes are in `courses/geology/DECISIONS.md`. All three courses are unblocked.
+at all. **CLOSED by SHULL-CHG-0009** — Geology has section numbers; the map and section count are
+in `courses/geology/DECISIONS.md`. All three courses are unblocked.
 
 The logging rule above still binds: ID, prior name, and prior parent to `reports/drive-operations/`
 **before** the rename.
