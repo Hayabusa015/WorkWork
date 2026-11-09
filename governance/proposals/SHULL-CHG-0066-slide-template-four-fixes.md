@@ -24,9 +24,9 @@
 | **Risk** | Low for items 1, 2 and 4. Medium for item 3, because it changes what a master draws. |
 | **Recommendation** | Approve items 1, 2 and 4. Decide item 3 after answering the question in §4. |
 | **Decision** | Approved by Matthew Shull in chat, 2026-11-09, verbatim: "approve all of 0066 and 0067 option B, leave wells empty". All four items approved. On §4 question 1: unused wells stay empty. §4 question 2 was not answered separately; the approval covers item 1 as proposed (neutral label). |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `1f43962`. Implemented by the main session, not the Secretary. Files: `templates/slide/build.js`, `templates/slide/build_deck.js`, `scripts/audit_slide_geometry.py`, `scripts/image_prompts.py`, `templates/slide/assets/chem_u01_s1.4_nuclear_notation.png`, `templates/slide/README.md`, `.claude/skills/build-presentation/SKILL.md`, and three slide preview images. No file in `brand/`, `standards/`, `governance/` or `courses/` was touched by that commit. |
+| **Verified** | Yes, by the main session; this is its account, recorded by the Secretary, who did not run any of it. `audit_slide_geometry.py` reports zero problems on the blank template built for chemistry, physics and geology and on the rebuilt isotopes sample deck, with and without every slot marked unused. The same audit run on the pre-change template reports the Grouped Concept margin overrun and the two PROBLEM contrast failures. `pdffonts` shows Archivo embedded. The rebuilt sample deck, the divider, concept-image and example-problem slides with unused slots, and the rebuilt figure were rasterised and looked at. All eight validators, the three `--check` generators and `npm test` (37 pass) are clean. Slide previews regenerated. |
 
 Drive verification is not needed; this is a repository-only change. No deck on Drive is rebuilt by
 this record.
@@ -82,3 +82,16 @@ it before committing.
 - `pdffonts` on each: Archivo, embedded.
 - Every slide of the rebuilt isotopes deck rasterised and looked at.
 - `scripts/build_template_previews.py slide` re-run so the gallery shows the fixed layouts.
+
+## 6. Implementation notes
+
+Reported by the main session, which implemented this record in `1f43962`.
+
+- **(a) How a slot is marked unused.** Per slide, as `"unusedImages"` in the deck spec.
+- **(b) One audit change beyond the margin check.** The audit stopped measuring a layout
+  placeholder's prompt text. That text never shows on a slide, and it produced two false failures
+  once a well was covered.
+- **(c) Not done, and outside the approved scope.**
+  - The three cards on `08_DIAGRAM_ANNOTATION` end 0.17 in past the content edge. Their text stays
+    inside it, so the new audit check does not flag them.
+  - The literal "SECTION TITLE" label question (§3) is still open.

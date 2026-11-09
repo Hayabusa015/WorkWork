@@ -22,9 +22,9 @@
 | **Risk** | Low. |
 | **Recommendation** | Option B. |
 | **Decision** | Approved by Matthew Shull in chat, 2026-11-09, verbatim: "approve all of 0066 and 0067 option B, leave wells empty". Option B. §3 question 2 was not answered separately; the approval covers the option B line as written. |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Secretary, 2026-11-09. One file edited: `standards/QA_GATE.md`. The Secretary has no git tool, so the main session commits on its behalf; the commit message carries the Change ID (`SHULL-CHG-0067`). The SHA is in git history under that ID. |
+| **Verified** | Partly, and by two parties. **Checked by the Secretary:** the Option B line is present in `standards/QA_GATE.md`, "Deliverable-specific additions", as its own sentence directly under the Slide decks item, worded as §2 proposes; nothing else in that file was changed; no file in `.claude/agents/` was edited, and a search shows `audit_slide_geometry.py` is not named in any agent file (Option A not applied); `audit-deliverable` was searched and does not name the script, so the name now lives in the QA gate and not in a second authoritative place. **Not run by the Secretary:** `validate_references.py` and `validate_agents.py` (§4). Validator runs are the main session's, not the Secretary's. |
 
 Drive verification is not needed; this is a repository-only change.
 
