@@ -148,10 +148,36 @@ sed = lambda k: id_key("VISIBLE GRAINS?",
      ("Black + plant material", "Coal")],
     ["conglomerate", "breccia", "sandstone", "shale", "limestone", "coal"], k)
 met = lambda k: id_key("FOLIATION VISIBLE?",
-    [("Fine + flat split", "Slate"), ("Silky sheen", "Phyllite"), ("Visible mica flakes", "Schist"),
-     ("Light and dark bands", "Gneiss")],
+    [("Fine + flat split", "Slate"), ("Silky sheen", "Phyllite"), ("Visible mica", "Schist"),
+     ("Light/dark bands", "Gneiss")],
     [("Fizzes in dilute acid", "Marble"), ("Hard, quartz-rich,\nscratches glass", "Quartzite")],
     ["slate", "phyllite", "schist", "gneiss", "marble", "quartzite"], k)
+
+# ---------------------------------------------------------------- two branches
+def branch2(root, branches, leaves, key):
+    """One root, two branches, two leaves under each - the builder's flowchart shape,
+    drawn wide enough to hold the slide's full wording. The student copy prints only
+    the root, as the builder's flowchart does."""
+    W, H = 6.2, 2.15
+    g = Fig(W, H)
+    g.box(W / 2, 0.22, 2.1, 0.38, root)
+    for b, cx in enumerate((1.55, 4.65)):
+        g.arrow((W / 2 + (-0.5 if b == 0 else 0.5), 0.41), (cx, 0.66))
+        g.box(cx, 0.85, 2.6, 0.38, branches[b] if key else "", key)
+        for j in range(2):
+            y = 1.38 + j * 0.5
+            g.box(cx, y, 2.9, 0.42, leaves[2 * b + j] if key else "", key, bold=False, pt=8.5)
+        g.d.line([px(cx), px(1.04), px(cx), px(1.17)], fill=rgb(LABEL), width=3)
+    return g
+
+FLOWS = {
+    "geo_u03_s18_intrusive_extrusive": ("IGNEOUS ROCK", ["INTRUSIVE", "EXTRUSIVE"],
+        ["Cools inside Earth.", "Usually has larger crystals.",
+         "Cools at the surface.", "Usually has smaller crystals."]),
+    "geo_u03_s39_contact_regional": ("METAMORPHISM", ["CONTACT METAMORPHISM", "REGIONAL METAMORPHISM"],
+        ["Nearby magma heats the rock.", "The change is mostly local.",
+         "Heat and pressure affect a large area,", "often during mountain building."]),
+}
 
 # ---------------------------------------------------------------- chains
 def chain(steps, blank, key, caption=None, desc_pt=7.5):
@@ -240,6 +266,8 @@ for name, fn in (("geo_u03_rock_cycle", rock_cycle), ("geo_u03_bowens", bowen),
     for k in (False, True):
         fn(k).save(os.path.join(OUT, f"{name}{'_key' if k else ''}.png"))
 for k in (False, True):
+    for name, args in FLOWS.items():
+        branch2(*args, k).save(os.path.join(OUT, f"{name}{'_key' if k else ''}.png"))
     foliation(k).save(os.path.join(OUT, f"geo_u03_s40_foliation{'_key' if k else ''}.png"))
     for name, kw in CHAINS.items():
         chain(key=k, **kw).save(os.path.join(OUT, f"{name}{'_key' if k else ''}.png"))

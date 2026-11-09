@@ -603,18 +603,9 @@
                 "Record: where each cools and its crystal size"
               ],
               "extraNotes": false,
-              "flowchart": {
-                "root": "IGNEOUS ROCK",
-                "branches": [
-                  "INTRUSIVE",
-                  "EXTRUSIVE"
-                ],
-                "leaves": [
-                  "Cools inside Earth",
-                  "Larger crystals",
-                  "Cools at the surface",
-                  "Smaller crystals"
-                ]
+              "figure": {
+                "image": "../assets/geo_u03_s18_intrusive_extrusive.png",
+                "keyImage": "../assets/geo_u03_s18_intrusive_extrusive_key.png"
               },
               "notes": [
                 "*Both form when melted rock cools and hardens."
@@ -835,8 +826,8 @@
                   "answer": "Holes, usually light: pumice"
                 },
                 {
-                  "prompt": "Holes: ______________",
-                  "answer": "Holes: scoria"
+                  "prompt": "Holes, usually dark: ______________",
+                  "answer": "Holes, usually dark: scoria"
                 }
               ],
               "table": {
@@ -915,9 +906,7 @@
               ],
               "extraNotes": false,
               "lead": [
-                "*Large crystals tell us the rock cooled slowly underground."
-              ],
-              "notes": [
+                "*Large crystals tell us the rock cooled slowly underground.",
                 {
                   "prompt": "Rock A = ______________",
                   "answer": "Rock A = granite"
@@ -1252,13 +1241,13 @@
               ],
               "extraNotes": false,
               "lead": [
-                "*Rounded gravel-sized pieces are the key clue."
-              ],
-              "notes": [
+                "*Rounded gravel-sized pieces are the key clue.",
                 {
                   "prompt": "Rock B = ______________",
                   "answer": "Rock B = conglomerate"
-                },
+                }
+              ],
+              "notes": [
                 "*Breccia has angular pieces."
               ],
               "table": {
@@ -1344,18 +1333,9 @@
                   "answer": "Metamorphism changes an existing rock without melting it."
                 }
               ],
-              "flowchart": {
-                "root": "METAMORPHISM",
-                "branches": [
-                  "CONTACT",
-                  "REGIONAL"
-                ],
-                "leaves": [
-                  "Nearby magma heats it",
-                  "Change is mostly local",
-                  "Heat + pressure, large area",
-                  "Often mountain building"
-                ]
+              "figure": {
+                "image": "../assets/geo_u03_s39_contact_regional.png",
+                "keyImage": "../assets/geo_u03_s39_contact_regional_key.png"
               },
               "notes": [
                 "*The rock stays solid. If it melts and then cools, the new rock is igneous."
@@ -1553,9 +1533,7 @@
               ],
               "extraNotes": false,
               "lead": [
-                "*The mineral bands are the strongest clue."
-              ],
-              "notes": [
+                "*The mineral bands are the strongest clue.",
                 {
                   "prompt": "Rock C = ______________",
                   "answer": "Rock C = gneiss"
