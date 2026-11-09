@@ -20,8 +20,8 @@
 | **Affected Courses** | All three, because the builder is shared. Only the Geology U2 study guide uses the option at first. |
 | **Risk** | Low. It is opt-in and off by default: an entry without the key goes down the unchanged code path. The remaining risk is that a range header such as `S2.1-S2.5` claims every section in between. The gap check in section 2 covers that. |
 | **Recommendation** | Approve section 2. Answer Q1 (section 5), which decides whether README line 37 changes too. The follow-ups in section 6 are out of scope and are **not** bundled here. |
-| **Decision** | *(blank: recorded by the main session per `governance/CHANGE_CONTROL.md` §4)* |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull in conversation, 2026-11-09. Asked "OK to add a small option so one study guide can cover all of Unit 2 (2.1–2.5) under a single header? Existing worksheets would build exactly as before.", he answered: "Yes, add it (Recommended)". Q1, asked "Geology worksheets must include a visual activity (sort, match, label…). Your unit summary is big-idea blanks + a period table. How should the study guide satisfy that rule?", he answered: "Text-only is fine" (option A: the study guide sets `proseOnly`, and README line 37 adds study guides to what the flag is for). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | *(blank. Plan in section 7.)* |
 

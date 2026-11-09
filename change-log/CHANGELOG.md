@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0066 | | One worksheet entry may cover a section span | PROPOSED | `governance/proposals/SHULL-CHG-0066-study-guide-unit-span.md` |
+| SHULL-CHG-0066 | 2026-11-09 | One worksheet entry may cover a section span | APPROVED | `governance/proposals/SHULL-CHG-0066-study-guide-unit-span.md` |
 
 ## 2026-11-08
 
