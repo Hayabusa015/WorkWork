@@ -57,6 +57,9 @@ const LABEL_ON_LIGHT_CARD = C.mutedOnLight;  // graphite on parchment,   11.05:1
 const LABEL_ON_DARK_CARD  = C.mutedOnDark;   // mutedOnDark on graphite,  6.34:1
 
 const CONTENT_W = W - M.l - M.r;
+const DIVIDER_CARD = { x: 0.62, y: 1.62, w: 4.05, h: 4.02 };
+const GROUP_GAP = 0.25;
+const GROUP_CARD_W = (W - M.r - 6.05 - GROUP_GAP) / 2;
 
 const pres = new pptxgen();
 
@@ -68,6 +71,12 @@ const pres = new pptxgen();
  * eyebrow. Nothing failed; the text simply arrived in the wrong font. */
 const PLACEHOLDERS = {};
 const SLOTS = {};   // name -> {x, y, w, h}, so a deck can fill a slot without knowing where it is
+/* name -> {x, y, w, h, color}: what a deck paints over to leave an image slot unused
+ * (SHULL-CHG-0066 item 3). A slide cannot remove a shape its master drew, so an unused
+ * slot is covered with the slide's own ground. The region is the slot, or the frame
+ * around it where the master draws one (def.wells). The layout does not re-flow. */
+const WELLS = {};
+const PIC_SLOTS = {};
 const defineMaster = (def) => {
   const phs = (def.objects || [])
     .filter(o => o.placeholder && o.placeholder.options && o.placeholder.options.name)
@@ -75,6 +84,19 @@ const defineMaster = (def) => {
   PLACEHOLDERS[def.title] = phs.map(o => o.name);
   SLOTS[def.title] = {};
   for (const o of phs) SLOTS[def.title][o.name] = { x: o.x, y: o.y, w: o.w, h: o.h };
+  const frames = def.wells || {};
+  const redraw = def.redraw || {};
+  delete def.wells;
+  delete def.redraw;
+  WELLS[def.title] = {};
+  PIC_SLOTS[def.title] = phs.filter(o => o.type === "pic").map(o => o.name);
+  for (const o of phs.filter(o => o.type === "pic")) {
+    // One rect, or several where a single cover would also hide something the master
+    // draws on top of the well (04's floating card).
+    const rs = [].concat(frames[o.name] || o);
+    WELLS[def.title][o.name] = { color: def.background.color, redraw: redraw[o.name] || [],
+                                 rects: rs.map(r => ({ x: r.x, y: r.y, w: r.w, h: r.h })) };
+  }
   pres.defineSlideMaster(def);
 };
 
@@ -238,8 +260,12 @@ defineMaster({
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
     ...imageSlot("concept", M.l, bodyTopY - 0.02, 5.10, 2.87, "CONCEPT IMAGE  •  16:9"),
-    ...card("c1", 6.05, 2.60, 3.45, 2.87, "GROUP ONE", "The first idea, in one or two lines."),
-    ...card("c2", 9.75, 2.60, 3.45, 2.87, "GROUP TWO", "The contrasting idea.", { dark: true }),
+    // Two equal cards from the image's right gutter to the content edge, the same edge
+    // the must-write bar stops at. SHULL-CHG-0066 item 2: the right card used to run
+    // 0.62 in into the margin.
+    ...card("c1", 6.05, 2.60, GROUP_CARD_W, 2.87, "GROUP ONE", "The first idea, in one or two lines."),
+    ...card("c2", 6.05 + GROUP_CARD_W + GROUP_GAP, 2.60, GROUP_CARD_W, 2.87, "GROUP TWO",
+            "The contrasting idea.", { dark: true }),
     ...mustWrite(5.82), ...footer(false),
   ],
 });
@@ -247,12 +273,23 @@ defineMaster({
 /* 04 — SECTION DIVIDER (dark, full-bleed image, floating card) */
 defineMaster({
   title: "04_DIVIDER", background: { color: C.darkGround },
+  // The floating card sits across the image's left edge, so the cover stops at the
+  // card's right edge and leaves a strip above and below it.
+  wells: { divider: [
+    { x: 3.20, y: 0, w: W - 3.20, h: DIVIDER_CARD.y },
+    { x: 3.20, y: DIVIDER_CARD.y + DIVIDER_CARD.h, w: W - 3.20, h: H - DIVIDER_CARD.y - DIVIDER_CARD.h },
+    { x: DIVIDER_CARD.x + DIVIDER_CARD.w, y: DIVIDER_CARD.y,
+      w: W - DIVIDER_CARD.x - DIVIDER_CARD.w, h: DIVIDER_CARD.h },
+  ] },
+  // ...and the card's outline is drawn again on top, because a cover that meets the
+  // outline edge-on eats half its width.
+  redraw: { divider: [{ ...DIVIDER_CARD, line: { color: C.accent, width: 1.25 } }] },
   objects: [
     bgDark(),
     ...imageSlot("divider", 3.20, 0, 10.13, H, "FULL-BLEED CONCEPT IMAGE  •  one image, no decoration", true),
     { rect: { x: 0, y: 0, w: 4.30, h: H, fill: { color: C.darkGround } } },
     rail(),
-    { rect: { x: 0.62, y: 1.62, w: 4.05, h: 4.02, fill: { color: C.darkGround },
+    { rect: { ...DIVIDER_CARD, fill: { color: C.darkGround },
               line: { color: C.accent, width: 1.25 } } },
     { placeholder: {
         options: { name: "eyebrow", type: "body", x: 0.92, y: 1.92, w: 3.45, h: 0.50,
@@ -295,6 +332,7 @@ const step = (n, x) => ([
 
 defineMaster({
   title: "05_PROCESS_TIMELINE", background: { color: C.lightGround },
+  wells: { band: { x: M.l, y: bodyTopY, w: CONTENT_W, h: 2.20 } },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
     { rect: { x: M.l, y: bodyTopY, w: CONTENT_W, h: 2.20, fill: { color: C.darkGround } } },
@@ -307,6 +345,7 @@ defineMaster({
 /* 06 — CONCEPT + IMAGE PANEL (dark — the one deliberate dark content slide) */
 defineMaster({
   title: "06_CONCEPT_IMAGE", background: { color: C.darkGround },
+  wells: { concept: { x: 6.75, y: 0.95, w: 5.85, h: 4.55 } },
   objects: [
     bgDark(), rail(),
     { rect: { x: 6.75, y: 0.95, w: 5.85, h: 4.55, fill: { color: C.accent } } },
@@ -337,6 +376,7 @@ defineMaster({
 /* 07 — COMPARISON CARDS (light, 3 parallel cards) */
 defineMaster({
   title: "07_COMPARISON_CARDS", background: { color: C.lightGround },
+  wells: { aside: { x: 9.20, y: 1.05, w: 3.38, h: 1.90 } },
   objects: [
     bgLight(), ...eyebrow(false),
     headline(false, headlineY, 8.05), subhead(false, subheadY, 8.05),
@@ -375,6 +415,7 @@ defineMaster({
 /* 09 — EXAMPLE PROBLEM (light — problem, givens, EMPTY work area) */
 defineMaster({
   title: "09_EXAMPLE_PROBLEM", background: { color: C.lightGround },
+  wells: { aside: { x: 9.75, y: 1.05, w: 2.83, h: 1.45 } },
   objects: [
     bgLight(), ...eyebrow(false),
     headline(false, headlineY, 8.60), subhead(false, subheadY, 8.60),
@@ -386,7 +427,7 @@ defineMaster({
     { rect: { x: M.l, y: bodyTopY, w: 5.90, h: 1.15, fill: { color: C.cardDark } } },
     { text: { text: "PROBLEM",
         options: { x: M.l + padX, y: 2.76, w: 2.0, h: 0.24, fontFace: F.body, fontSize: 9, bold: true,
-                   charSpacing: 1.4, color: C.accent, margin: 0, isTextBox: true } } },
+                   charSpacing: 1.4, color: LABEL_ON_DARK_CARD, margin: 0, isTextBox: true } } },
     { placeholder: {
         options: { name: "problem", type: "body", x: M.l + padX, y: 3.06, w: 5.46, h: 0.60,
                    fontFace: F.body, fontSize: T.body, color: C.textOnDark, margin: 0, isTextBox: true },
@@ -409,6 +450,7 @@ defineMaster({
 /* 10 — WORKED SOLUTION (light — the 09 pair. Every example ships with its solution.) */
 defineMaster({
   title: "10_WORKED_SOLUTION", background: { color: C.lightGround },
+  wells: { data: { x: M.l, y: bodyTopY, w: 4.55, h: 2.80 } },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
     { rect: { x: M.l, y: bodyTopY, w: 4.55, h: 2.80, fill: { color: C.accent } } },
@@ -430,6 +472,7 @@ defineMaster({
 /* 11 — GIVENS / EQUATION / ANSWER (light — any course) */
 defineMaster({
   title: "11_GIVENS_EQUATION_ANSWER", background: { color: C.lightGround },
+  wells: { setup: { x: M.l, y: bodyTopY, w: 5.10, h: 2.87 } },
   objects: [
     bgLight(), ...eyebrow(false), headline(false), subhead(false),
     { rect: { x: M.l, y: bodyTopY, w: 5.10, h: 2.87, fill: { color: C.accent } } },
@@ -437,7 +480,7 @@ defineMaster({
     { rect: { x: 6.10, y: bodyTopY, w: 6.48, h: 1.05, fill: { color: C.cardDark } } },
     { text: { text: "PROBLEM",
         options: { x: 6.32, y: 2.74, w: 2.0, h: 0.22, fontFace: F.body, fontSize: 9, bold: true,
-                   charSpacing: 1.4, color: C.accent, margin: 0, isTextBox: true } } },
+                   charSpacing: 1.4, color: LABEL_ON_DARK_CARD, margin: 0, isTextBox: true } } },
     { placeholder: {
         options: { name: "problem", type: "body", x: 6.32, y: 3.00, w: 6.04, h: 0.55,
                    fontFace: F.body, fontSize: T.body, color: C.textOnDark, margin: 0, isTextBox: true },
@@ -505,6 +548,8 @@ defineMaster({
 module.exports = pres;
 module.exports.PLACEHOLDERS = PLACEHOLDERS;
 module.exports.SLOTS = SLOTS;
+module.exports.WELLS = WELLS;
+module.exports.PIC_SLOTS = PIC_SLOTS;
 
 /* ================= DEMO DECK ================= */
 /* One slide per layout, so a build can be looked at rather than trusted. The content

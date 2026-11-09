@@ -111,6 +111,8 @@ every slide, matching the filename · **every worked example followed by a solut
 clear of the first bullet · rail card content vertically centred · headlines read correctly as
 grammar, not just spelling.
 
+Run `python3 scripts/audit_slide_geometry.py <deck>.pptx`. It must report zero problems.
+
 **Guided notes** — student copy and filled key generated from the same source so they cannot drift ·
 every section starts on a new page and ends with a RECALL block (a summary prompt plus a self-check;
 SHULL-CHG-0033) · blanks sized to the expected answer.

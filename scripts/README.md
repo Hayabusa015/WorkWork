@@ -55,6 +55,10 @@ that is where drift actually gets caught. `setup-environment.sh` is the SessionS
 builds the environment (fonts, Python toolchain) — idempotent, safe to re-run. All three are wired
 in `.claude/settings.json`.
 
+`.github/workflows/validate.yml` runs the same validators and `--check` generators, plus `npm test`,
+on every push and pull request. The Stop hook reports and never blocks; the workflow is what puts a
+red mark on a commit. A validator added to one list is added to the other.
+
 `build_handwriting_font.py` rebuilds ShullHand (`brand/fonts/ShullHand.ttf` and its alternates map) from the
 committed scan in `brand/fonts/source/` (SHULL-CHG-0044). Routine regeneration; the command is in
 `brand/fonts/README.md`.

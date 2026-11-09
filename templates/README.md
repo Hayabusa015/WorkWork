@@ -1,14 +1,24 @@
 # templates
 
-Build sources for generated artifacts — principally the twelve-layout slide template.
+Build sources for generated documents. Each family has its own folder and its own README; the
+detail lives there, not here.
 
-`templates/slide-template/src/` holds `tokens.js` and `build.js`. Change a token, run
-`node build.js`, and all twelve layouts follow. `build.js` selects its token module from
-`process.env.SHULL_TOKENS`, so a course palette variant supplies its own file rather than forking
-the build. **That indirection is the best engineering in the legacy system — preserve it.**
+| Folder | Builds | Read |
+|---|---|---|
+| `slide/` | Section decks (`.pptx`) on the twelve-layout masters | `slide/README.md` |
+| `worksheet/` | Worksheets and practice sets (`.docx`) with a separate key | `worksheet/README.md` |
+| `notes/` | Guided / Cornell notes, student copy and key from one spec | `notes/README.md` |
+| `lab/` | Lab handout and teacher prep-and-key (HTML to PDF) | `lab/README.md` |
+| `practice/` | Course activity prototypes | `practice/build_practice.py` |
+| `snow_day/` | Snow-day packets | `snow_day/build_snow_day_docx.py` |
 
-Generated from `brand/tokens.json`. Never hand-edit a token here.
+`_shull_docx.py`, `_shull_name.py` and `shull_name.cjs` are shared helpers: document furniture and
+the filename rule from `standards/NAMING.md`.
 
-*Status: both templates are migrated and on the token system. The lab template landed in Phase 9
-(SHULL-CHG-0010); the twelve-layout slide
-template has not been migrated yet.*
+Colours reach a template only through a file generated from `brand/tokens.json`
+(`slide/tokens.generated.js`, `lab/shull-lab-tokens.css`, and the builders' own token reads).
+**Never hand-edit a generated file or type a hex here.** Change the token and re-run the generator
+listed in `scripts/README.md`.
+
+One builder serves all three courses. A course that needs a different colour is a token change,
+never a fork of the builder.

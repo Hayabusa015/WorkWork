@@ -183,8 +183,16 @@ def build_worksheet(workdir):
     for spec in specs:
         spec_path = os.path.join(REPO, "templates/worksheet/specs", spec)
         docx = os.path.join(workdir, os.path.splitext(spec)[0] + ".docx")
-        run([python_exe(), os.path.join(REPO, "templates/worksheet/build_worksheet_docx.py"),
-             spec_path, docx])
+        try:
+            run([python_exe(), os.path.join(REPO, "templates/worksheet/build_worksheet_docx.py"),
+                 spec_path, docx])
+        except subprocess.CalledProcessError as e:
+            # One spec the builder refuses must not take the other previews with it.
+            # A missing tool fails every spec, and main() reports that as the family.
+            reason = (e.stderr or "").strip().splitlines()[-1:] or [str(e)]
+            SKIPPED.append(f"{spec}: {reason[0][:300]}")
+            print(f"  skipped {spec} — {reason[0][:300]}")
+            continue
         data = json.load(open(spec_path, encoding="utf-8"))
         items.append({
             "id": "worksheet-" + os.path.splitext(spec)[0],
@@ -194,6 +202,8 @@ def build_worksheet(workdir):
             "source": "templates/worksheet/specs/" + spec,
             "pdf": to_pdf(docx, workdir),
         })
+    if specs and not items:
+        raise RuntimeError("no worksheet spec built: " + SKIPPED[-1])
     return items
 
 
@@ -253,7 +263,7 @@ def build_practice(workdir):
              spec, "--out", out])
         # The builder names its own files; take the student copy, not the key.
         produced = sorted(f for f in os.listdir(out)
-                          if f.endswith(".docx") and not f.endswith("_Key.docx"))
+                          if f.endswith(".docx") and not f.endswith("Key.docx"))
         if not produced:
             continue
         items.append({
@@ -285,11 +295,21 @@ def build_slide(workdir):
     return items
 
 
+# Specs a builder refused in this run. Reported at the end; the family still builds.
+SKIPPED = []
+
 BUILDERS = {"worksheet": build_worksheet, "notes": build_notes, "lab": build_lab,
             "practice": build_practice, "slide": build_slide}
 
 
 def main(argv):
+    if "-h" in argv or "--help" in argv:
+        print(__doc__)
+        return 0
+    flags = [a for a in argv if a.startswith("-") and a != "--check"]
+    if flags:
+        print("unknown option: " + ", ".join(flags))
+        return 2
     check = "--check" in argv
     wanted = [a for a in argv if not a.startswith("-")] or [f["id"] for f in FAMILIES]
     unknown = [w for w in wanted if w not in BUILDERS]
@@ -343,6 +363,10 @@ def main(argv):
 
     built = sum(len(f.get("items", [])) for f in families)
     print(f"\nbuild_template_previews: {built} preview(s) across {len(families)} family/families")
+    if SKIPPED:
+        print(f"{len(SKIPPED)} spec(s) skipped — the builder refused them:")
+        for sk in SKIPPED:
+            print("  -", sk)
     if failures:
         print(f"{len(failures)} family/families unavailable:")
         for f in failures:
