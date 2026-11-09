@@ -24,9 +24,21 @@ LINE = "______________"
 
 
 def P(prompt, answer):
-    """A line to complete. The student copy prints the prompt with its writing line;
-    the key prints the answer in the line's place."""
-    return {"prompt": prompt, "answer": answer}
+    """A line to complete, with ONE place to write (audit 2026-11-09).
+
+    A short answer is written inline: each blank is sized to its share of the answer
+    and the prompt gets no ruled line under it. A long answer (a clue list, a sentence)
+    gets no inline blank: the label is printed and the student writes on the ruled
+    line under it. The key prints the full answer under the prompt either way."""
+    n = prompt.count(LINE)
+    if not n:
+        return {"prompt": prompt, "answer": answer, "lines": 1}
+    frag = (len(answer) - len(prompt.replace(LINE, ""))) / n
+    if frag <= 26:
+        blank = "_" * max(8, int(frag * 1.3) + 4)
+        return {"prompt": prompt.replace(LINE, blank), "answer": answer, "lines": 0}
+    head = prompt.replace(LINE, "").rstrip()
+    return {"prompt": head, "answer": answer, "lines": 2 if frag > 55 else 1}
 
 
 def T(headers, rows, widths=None, row_h=None):
@@ -102,6 +114,7 @@ s31 = {"code": "3.1", "title": "Minerals & Mineral ID",
     S(6, "Mohs Hardness", "Record: the definition and the field tools",
       lead=[P(f"Hardness measures resistance to {LINE}.",
                "Hardness measures resistance to scratching.")],
+      figure=FIG("geo_u03_s06_mohs"),
       table=T(["Field tool", "Hardness"], [
           ["Fingernail", "≈ 2.5"], ["Copper", "≈ 3.5"], ["Glass", "≈ 5.5"], ["Steel", "≈ 6.5"]],
           widths=[0.5, 0.5])),
@@ -163,7 +176,8 @@ s35 = {"code": "3.5", "title": "The Rock Cycle",
       notes=["*No single starting point. Any exposed rock can become sediment."]),
     S(14, "One Rock's Journey", "Record: the rock at each step",
       lead=[{"text": "Quartz grains can survive weathering and become part of a new rock."}],
-      figure=FIG("geo_u03_s14_journey")),
+      figure=FIG("geo_u03_s14_journey"),
+      notes=["*The quartz grains stay solid during the change to quartzite."]),
   ]},
   {"rows": [
     S(15, "Rock-Cycle Challenge", "Record: the starting and ending rock",
@@ -172,7 +186,8 @@ s35 = {"code": "3.5", "title": "The Rock Cycle",
     S(16, "Basalt → Schist", "Record: the route",
       lead=[P(f"Heat and pressure can change basalt while it stays {LINE}.",
                "Heat and pressure can change basalt while it stays solid.")],
-      figure=FIG("geo_u03_s16_basalt_schist")),
+      figure=FIG("geo_u03_s16_basalt_schist"),
+      notes=["*Melting is not part of this route."]),
     RECALL("Describe one path a rock can take through the rock cycle. Name each process.",
            "Granite weathers and erodes into sediment; the sand deposits and cements into "
            "sandstone; heat and pressure change it to quartzite without melting.",
@@ -309,7 +324,7 @@ s33 = {"code": "3.3", "title": "Sedimentary Rocks",
     S(35, "Rock B", "Record: what you see and how it holds together",
       lead=[{"text": "Use grain size and shape to support your answer."}],
       table=T(["Clue", "What you see"], [
-          ["What you see", "Rounded pebbles. Smaller sand grains between them."],
+          ["Grains", "Rounded pebbles. Smaller sand grains between them."],
           ["How it holds together", "The pieces are cemented into rock."]], widths=[0.32, 0.68])),
     S(36, "Rock B: Conglomerate", "Record: the ID and the key clues",
       lead=["*Rounded gravel-sized pieces are the key clue.",
@@ -360,7 +375,8 @@ s34 = {"code": "3.4", "title": "Metamorphic Rocks",
     S(42, "Metamorphic Grade", "Record: each rock in the sequence",
       lead=[P(f"Grade describes the {LINE} of metamorphism.",
                "Grade describes the intensity of metamorphism.")],
-      figure=FIG("geo_u03_s42_grade")),
+      figure=FIG("geo_u03_s42_grade"),
+      notes=["*Increasing grade → more change from heat and pressure."]),
     S(43, "Parent Rock → Metamorphic Rock", "Record: what each parent becomes",
       lead=[P(f"The parent rock is {LINE}.", "The parent rock is the rock you started with.")],
       table=T(["Parent rock", "Metamorphic rock"], [
@@ -399,7 +415,7 @@ s34 = {"code": "3.4", "title": "Metamorphic Rocks",
 
 # Page breaks, measured with block_height(): (section, slides that open each page).
 # Every block stays in slide order; only where the page turns is chosen here.
-BREAKS = {"3.1": [3, 5, 8], "3.5": [11, 13, 15], "3.2": [18, 21, 23, 25],
+BREAKS = {"3.1": [3, 5, 7, 9], "3.5": [11, 13, 15], "3.2": [18, 21, 23, 25],
           "3.3": [29, 31, 34, 37], "3.4": [39, 41, 44, 47]}
 
 

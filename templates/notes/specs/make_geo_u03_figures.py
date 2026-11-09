@@ -62,22 +62,22 @@ def wordbank(fig, y, w, lines, note=None):
 
 # ---------------------------------------------------------------- rock cycle
 def rock_cycle(key):
-    W, H = 6.2, 4.7
+    """Laid out as slide 13 is: Magma top left, Igneous top right, Sediment right,
+    Sedimentary bottom, Metamorphic left. Arrow words are the slide's."""
+    W, H = 6.2, 4.55
     g = Fig(W, H)
-    BW, BH = 1.45, 0.5
-    nodes = {"sed":  (3.1, 0.35, "SEDIMENT", True), "ign": (0.8, 1.65, "IGNEOUS ROCK", False),
-             "sdr":  (5.4, 1.65, "SEDIMENTARY ROCK", False),
-             "mag":  (0.8, 3.55, "MAGMA", True), "met": (5.4, 3.55, "METAMORPHIC ROCK", False)}
-    rect = {k: (x - BW / 2, y - BH / 2, x + BW / 2, y + BH / 2) for k, (x, y, *_ ) in nodes.items()}
-    T = lambda k: rect[k][1]; Bm = lambda k: rect[k][3]; L = lambda k: rect[k][0]; R = lambda k: rect[k][2]
-    edges = [((1.05, T("ign")), (2.55, Bm("sed")), "Weathering & erosion", .5),
-             ((3.75, Bm("sed")), (4.95, T("sdr")), "Compaction & cementation", .6),
-             ((5.4, Bm("sdr")), (5.4, T("met")), "Heat & pressure", .5),
-             ((L("met"), 3.55), (R("mag"), 3.55), "Melting", .5),
-             ((0.8, T("mag")), (0.8, Bm("ign")), "Cooling & hardening", .5),
-             ((R("ign"), 1.85), (L("met"), 3.45), "Heat & pressure", .5),
-             ((4.85, T("met")), (3.3, Bm("sed")), "Weathering & erosion", .45)]
-    LW, LH = 1.42, 0.32
+    BW, BH = 1.6, 0.5
+    nodes = {"mag": (1.0, 0.35, "MAGMA", True), "ign": (5.2, 0.35, "IGNEOUS ROCK", False),
+             "met": (0.9, 1.95, "METAMORPHIC ROCK", False), "sed": (5.3, 1.95, "SEDIMENT", True),
+             "sdr": (3.1, 3.5, "SEDIMENTARY ROCK", False)}
+    edges = [((1.8, 0.35), (4.4, 0.35), "Cooling", .5),
+             ((5.25, 0.6), (5.3, 1.7), "Weathering & erosion", .5),
+             ((5.1, 2.2), (3.9, 3.3), "Compaction & cementation", .5),
+             ((2.3, 3.35), (1.0, 2.2), "Heat & pressure", .5),
+             ((0.9, 1.7), (1.0, 0.6), "Melting", .5),
+             ((4.5, 0.6), (1.7, 1.75), "Heat & pressure", .5),
+             ((1.7, 1.95), (4.5, 1.95), "Weathering & erosion", .5)]
+    LW, LH = 1.7, 0.38
     labels = []
     for p0, p1, txt, t in edges:
         g.arrow(p0, p1)
@@ -86,42 +86,63 @@ def rock_cycle(key):
         g.box(cx, cy, LW, LH, txt if key else "", key, bold=False, pt=8.5, edge=HAIR, lw=0.6)
     for k, (x, y, name, printed) in nodes.items():
         g.box(x, y, BW, BH, name if (printed or key) else "", key and not printed, lw=1.0)
-    wordbank(g, 4.12, W, [["igneous rock", "sedimentary rock", "metamorphic rock", "weathering & erosion"],
-                          ["compaction & cementation", "heat & pressure", "melting", "cooling & hardening"]],
+    wordbank(g, 4.08, W, [["igneous rock", "sedimentary rock", "metamorphic rock", "cooling", "melting"],
+                          ["weathering & erosion", "compaction & cementation", "heat & pressure"]],
              "Terms may be used more than once.")
     return g
 
 # ---------------------------------------------------------------- Bowen's
 def bowen(key):
-    W, H = 6.2, 4.5
+    """Slide 23: temperature bar, the two series, the low-temperature minerals, and the
+    composition column, in the slide's words."""
+    W, H = 6.2, 4.55
     g = Fig(W, H)
-    # temperature axis
-    g.arrow((0.35, 0.35), (0.35, 3.45), LABEL, 1.0)
-    g.text(0.35, 0.18, "HIGH TEMP", 7.5, True, LABEL)
-    g.text(0.35, 3.62, "LOW TEMP", 7.5, True, LABEL)
-    g.text(0.62, 0.62, "first to\ncrystallize", 7.5, False, LABEL, anchor="lm")
-    g.text(0.62, 3.25, "last to\ncrystallize", 7.5, False, LABEL, anchor="lm")
-    g.text(2.15, 0.18, "DISCONTINUOUS SERIES", 7.5, True, LABEL)
-    g.text(4.75, 0.18, "CONTINUOUS SERIES", 7.5, True, LABEL)
-    BW, BH = 1.55, 0.36
-    disc = [("Olivine", 0.55), ("Pyroxene", 1.05), ("Amphibole", 1.55), ("Biotite mica", 2.05)]
+    g.text(0.38, 0.14, "HOTTER", 7.5, True, LABEL); g.text(0.38, 0.3, "~1200 °C", 7.5, False, LABEL)
+    g.arrow((0.38, 0.42), (0.38, 3.55), LABEL, 1.2)
+    g.text(0.38, 3.68, "COOLER", 7.5, True, LABEL); g.text(0.38, 3.84, "~650 °C", 7.5, False, LABEL)
+    g.text(1.75, 0.14, "DISCONTINUOUS", 7.5, True, LABEL)
+    g.text(1.75, 0.3, "Mineral type changes", 7, False, LABEL)
+    g.text(3.75, 0.14, "CONTINUOUS", 7.5, True, LABEL)
+    g.text(3.75, 0.3, "Plagioclase changes", 7, False, LABEL)
+    BH = 0.36
+    disc = [("Olivine", 0.65), ("Pyroxene", 1.12), ("Amphibole", 1.59), ("Biotite", 2.06)]
     for i, (m, y) in enumerate(disc):
-        g.box(2.15, y, BW, BH, m if key else "", key)
-        if i: g.arrow((2.15, disc[i - 1][1] + BH / 2), (2.15, y - BH / 2))
-    # continuous: one tall bar, Ca-rich top -> Na-rich bottom
-    g.box(4.75, 0.55, BW + 0.3, BH, "Ca-rich plagioclase" if key else "", key)
-    g.box(4.75, 2.05, BW + 0.3, BH, "Na-rich plagioclase" if key else "", key)
-    g.arrow((4.75, 0.55 + BH / 2), (4.75, 2.05 - BH / 2))
-    g.text(4.86, 1.3, "gradual change\nCa → Na", 7.5, False, LABEL, anchor="lm")
-    # join
-    jy = 2.62
-    g.arrow((2.15, 2.05 + BH / 2), (3.2, 2.67)); g.arrow((4.75, 2.05 + BH / 2), (3.7, 2.67))
-    low = [("Potassium feldspar", 2.85), ("Muscovite mica", 3.3), ("Quartz", 3.75)]
+        g.box(1.75, y, 1.3, BH, m if key else "", key)
+        if i: g.arrow((1.75, disc[i - 1][1] + BH / 2), (1.75, y - BH / 2))
+    g.box(3.75, 0.65, 1.6, 0.46, "Calcium-rich\nplagioclase" if key else "", key, pt=8.5)
+    g.box(3.75, 2.0, 1.6, 0.46, "Sodium-rich\nplagioclase" if key else "", key, pt=8.5)
+    g.arrow((3.75, 0.88), (3.75, 1.77))
+    low = [("Potassium feldspar", 2.92), ("Muscovite", 3.37), ("Quartz", 3.82)]
+    g.arrow((1.75, 2.06 + BH / 2), (2.45, 2.92 - BH / 2)); g.arrow((3.75, 2.23), (3.05, 2.92 - BH / 2))
     for i, (m, y) in enumerate(low):
-        g.box(3.45, y, 1.9, BH, m if key else "", key)
-        if i: g.arrow((3.45, low[i - 1][1] + BH / 2), (3.45, y - BH / 2))
-    wordbank(g, 4.15, W, [["olivine", "pyroxene", "amphibole", "biotite mica", "quartz"],
-                          ["Ca-rich plagioclase", "Na-rich plagioclase", "potassium feldspar", "muscovite mica"]])
+        g.box(2.75, y, 1.7, BH, m if key else "", key)
+        if i: g.arrow((2.75, low[i - 1][1] + BH / 2), (2.75, y - BH / 2))
+    comp = [("Ultramafic", 0.42, 1.05), ("Mafic", 1.05, 1.65), ("Intermediate", 1.65, 2.3),
+            ("Felsic", 2.3, 4.0)]
+    for name, y0, y1 in comp:
+        g.box(5.55, (y0 + y1) / 2, 1.15, y1 - y0, name if key else "", key, pt=8.5)
+    wordbank(g, 4.28, W, [["olivine", "pyroxene", "amphibole", "biotite", "muscovite", "quartz",
+                           "potassium feldspar"],
+                          ["calcium-rich plagioclase", "sodium-rich plagioclase", "ultramafic", "mafic",
+                           "intermediate", "felsic"]])
+    return g
+
+# ---------------------------------------------------------------- Mohs
+def mohs(key):
+    """Slide 6's table: hardness printed, mineral to write."""
+    mins = ["Talc", "Gypsum", "Calcite", "Fluorite", "Apatite",
+            "Orthoclase", "Quartz", "Topaz", "Corundum", "Diamond"]
+    W, H = 6.2, 2.05
+    g = Fig(W, H)
+    for half in range(2):
+        x0 = 0.02 + half * 3.14
+        g.box(x0 + 0.3, 0.17, 0.6, 0.3, "1–5" if half == 0 else "6–10", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
+        g.box(x0 + 1.8, 0.17, 2.4, 0.3, "Mineral", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
+        for i in range(5):
+            y = 0.5 + i * 0.34
+            n = half * 5 + i
+            g.box(x0 + 0.3, y, 0.6, 0.34, str(n + 1), bold=False, pt=9, edge=HAIR, lw=0.6)
+            g.box(x0 + 1.8, y, 2.4, 0.34, mins[n] if key else "", key, pt=9, edge=HAIR, lw=0.6)
     return g
 
 # ---------------------------------------------------------------- ID keys
@@ -261,7 +282,7 @@ CHAINS = {
         blank="name", caption="INCREASING GRADE"),
 }
 
-for name, fn in (("geo_u03_rock_cycle", rock_cycle), ("geo_u03_bowens", bowen),
+for name, fn in (("geo_u03_rock_cycle", rock_cycle), ("geo_u03_bowens", bowen), ("geo_u03_s06_mohs", mohs),
                  ("geo_u03_sed_id_key", sed), ("geo_u03_met_id_key", met)):
     for k in (False, True):
         fn(k).save(os.path.join(OUT, f"{name}{'_key' if k else ''}.png"))

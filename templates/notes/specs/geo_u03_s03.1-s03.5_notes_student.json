@@ -204,16 +204,20 @@
                   "text": "The outside color can change. Test the powder too."
                 },
                 {
-                  "prompt": "Hematite may look ______________. Its streak is ______________."
+                  "prompt": "Hematite may look _________________. Its streak is _________________.",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Luster = how ______________ reflects"
+                  "prompt": "Luster = how __________ reflects",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Metallic: ______________"
+                  "prompt": "Metallic: __________________________",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Nonmetallic: ______________"
+                  "prompt": "Nonmetallic: ___________________________________",
+                  "lines": 0
                 },
                 "*Describe the shine before you guess the mineral."
               ]
@@ -228,9 +232,14 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Hardness measures resistance to ______________."
+                  "prompt": "Hardness measures resistance to _________________.",
+                  "lines": 0
                 }
               ],
+              "figure": {
+                "image": "../assets/geo_u03_s06_mohs.png",
+                "keyImage": "../assets/geo_u03_s06_mohs_key.png"
+              },
               "table": {
                 "headers": [
                   "Field tool",
@@ -259,7 +268,11 @@
                   0.5
                 ]
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 07",
               "cueLabel": "SLIDE 07",
@@ -270,7 +283,8 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Cleavage breaks along ______________. Fracture breaks ______________."
+                  "prompt": "Cleavage breaks along ________________. Fracture breaks ________________.",
+                  "lines": 0
                 }
               ],
               "table": {
@@ -305,11 +319,7 @@
                   0.68
                 ]
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 08",
               "cueLabel": "SLIDE 08",
@@ -355,7 +365,11 @@
                   0.68
                 ]
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 09",
               "cueLabel": "SLIDE 09",
@@ -366,13 +380,16 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Mineral A = ______________"
+                  "prompt": "Mineral A = ____________________________",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Strong clues: ______________"
+                  "prompt": "Strong clues:",
+                  "lines": 1
                 },
                 {
-                  "prompt": "Supporting clues: ______________"
+                  "prompt": "Supporting clues:",
+                  "lines": 1
                 },
                 "*Color helps, but hardness and cleavage narrow the choices."
               ]
@@ -387,7 +404,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______",
+                  "lines": 1
                 },
                 {
                   "text": "At each station: observe color and luster, test streak and hardness, and look for cleavage or fracture. Record your observations on the lab handout."
@@ -462,10 +480,12 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "A rock is a natural solid, usually made of one or more ______________."
+                  "prompt": "A rock is a natural solid, usually made of one or more ______________.",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Minerals are the ______________. Some rocks also contain glass or organic material."
+                  "prompt": "Minerals are the __________________. Some rocks also contain glass or organic material.",
+                  "lines": 0
                 },
                 {
                   "label": "One way to make a rock: sediment becomes sandstone"
@@ -513,7 +533,10 @@
               "figure": {
                 "image": "../assets/geo_u03_s14_journey.png",
                 "keyImage": "../assets/geo_u03_s14_journey_key.png"
-              }
+              },
+              "notes": [
+                "*The quartz grains stay solid during the change to quartzite."
+              ]
             }
           ]
         },
@@ -529,7 +552,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Start: ______________      End: ______________"
+                  "prompt": "Start: ___________      End: ___________",
+                  "lines": 0
                 },
                 {
                   "text": "Name the process. Decide whether the rock needs to melt. The next slide gives the route."
@@ -546,13 +570,17 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Heat and pressure can change basalt while it stays ______________."
+                  "prompt": "Heat and pressure can change basalt while it stays __________.",
+                  "lines": 0
                 }
               ],
               "figure": {
                 "image": "../assets/geo_u03_s16_basalt_schist.png",
                 "keyImage": "../assets/geo_u03_s16_basalt_schist_key.png"
-              }
+              },
+              "notes": [
+                "*Melting is not part of this route."
+              ]
             },
             {
               "kind": "recall",
@@ -656,10 +684,12 @@
                   "text": "Same general composition. Different time to grow crystals."
                 },
                 {
-                  "prompt": "Slow cooling, large crystals: ______________"
+                  "prompt": "Slow cooling, large crystals: _____________",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Fast cooling, tiny crystals: ______________"
+                  "prompt": "Fast cooling, tiny crystals: ______________",
+                  "lines": 0
                 }
               ]
             }
@@ -800,13 +830,16 @@
               ],
               "notes": [
                 {
-                  "prompt": "Glassy: ______________"
+                  "prompt": "Glassy: ______________",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Holes, usually light: ______________"
+                  "prompt": "Holes, usually light: ___________",
+                  "lines": 0
                 },
                 {
-                  "prompt": "Holes, usually dark: ______________"
+                  "prompt": "Holes, usually dark: ___________",
+                  "lines": 0
                 }
               ],
               "table": {
@@ -887,7 +920,8 @@
               "lead": [
                 "*Large crystals tell us the rock cooled slowly underground.",
                 {
-                  "prompt": "Rock A = ______________"
+                  "prompt": "Rock A = _____________",
+                  "lines": 0
                 }
               ],
               "table": {
@@ -925,7 +959,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______",
+                  "lines": 1
                 },
                 {
                   "text": "At each station: describe the texture, estimate the composition, and use the ID chart to name the rock. Record your observations on the lab handout."
@@ -976,10 +1011,12 @@
               },
               "notes": [
                 {
-                  "prompt": "Compaction: ______________"
+                  "prompt": "Compaction:",
+                  "lines": 1
                 },
                 {
-                  "prompt": "Cementation: ______________"
+                  "prompt": "Cementation:",
+                  "lines": 1
                 }
               ]
             },
@@ -1167,7 +1204,8 @@
               },
               "notes": [
                 {
-                  "prompt": "Other clues: ______________, ______________, ______________, and ______________."
+                  "prompt": "Other clues: _______________, _______________, _______________, and _______________.",
+                  "lines": 0
                 }
               ]
             },
@@ -1191,7 +1229,7 @@
                 ],
                 "rows": [
                   [
-                    "What you see",
+                    "Grains",
                     ""
                   ],
                   [
@@ -1216,7 +1254,8 @@
               "lead": [
                 "*Rounded gravel-sized pieces are the key clue.",
                 {
-                  "prompt": "Rock B = ______________"
+                  "prompt": "Rock B = ___________________",
+                  "lines": 0
                 }
               ],
               "notes": [
@@ -1257,7 +1296,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______",
+                  "lines": 1
                 },
                 {
                   "text": "At each station: look for grain size and shape, check for layers or fossils, and use only the approved acid test. Record your observations on the lab handout."
@@ -1299,7 +1339,8 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Metamorphism changes an existing rock without ______________ it."
+                  "prompt": "Metamorphism changes an existing rock without _____________ it.",
+                  "lines": 0
                 }
               ],
               "figure": {
@@ -1320,7 +1361,8 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Pressure can help ______________ minerals line up as the rock changes."
+                  "prompt": "Pressure can help _________ minerals line up as the rock changes.",
+                  "lines": 0
                 }
               ],
               "figure": {
@@ -1329,10 +1371,12 @@
               },
               "notes": [
                 {
-                  "prompt": "Before: ______________"
+                  "prompt": "Before:",
+                  "lines": 1
                 },
                 {
-                  "prompt": "After directed pressure: ______________"
+                  "prompt": "After directed pressure:",
+                  "lines": 1
                 }
               ]
             }
@@ -1382,13 +1426,17 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "Grade describes the ______________ of metamorphism."
+                  "prompt": "Grade describes the _______________ of metamorphism.",
+                  "lines": 0
                 }
               ],
               "figure": {
                 "image": "../assets/geo_u03_s42_grade.png",
                 "keyImage": "../assets/geo_u03_s42_grade_key.png"
-              }
+              },
+              "notes": [
+                "*Increasing grade → more change from heat and pressure."
+              ]
             },
             {
               "title": "Slide 43",
@@ -1400,7 +1448,8 @@
               "extraNotes": false,
               "lead": [
                 {
-                  "prompt": "The parent rock is ______________."
+                  "prompt": "The parent rock is ____________________________________.",
+                  "lines": 0
                 }
               ],
               "table": {
@@ -1499,7 +1548,8 @@
               "lead": [
                 "*The mineral bands are the strongest clue.",
                 {
-                  "prompt": "Rock C = ______________"
+                  "prompt": "Rock C = ___________",
+                  "lines": 0
                 }
               ],
               "table": {
@@ -1537,7 +1587,8 @@
               "extraNotes": false,
               "notes": [
                 {
-                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______",
+                  "lines": 1
                 },
                 {
                   "text": "At each station: look for foliation, describe grains, sheen or bands, and match each rock to a possible parent. Record your observations on the lab handout."

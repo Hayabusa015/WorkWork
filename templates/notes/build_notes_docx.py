@@ -624,6 +624,8 @@ def render_notes(col, row, key, pal, base_dir):
     # the same order as the slide. "notes" follow the visual, as before.
     if row.get("lead"):
         render_lines(col, row["lead"], key, pal)
+        if any(row.get(k) for k in ("diagram", "figure", "table", "flowchart")):
+            col.gap(5)
     if row.get("diagram"):
         diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
         col.after_table()
