@@ -101,6 +101,28 @@ for (const slide of spec.slides) {
      at an arbitrary x/y would be a deck that can invent geometry, which is the one thing
      this split exists to prevent. The image is fitted inside the slot and centred, so a
      wrong aspect ratio letterboxes instead of stretching. */
+  /* An image slot the slide does not use (SHULL-CHG-0066 item 3). The master draws the
+     well, and a slide cannot delete a master's shape, so the well is painted over in the
+     slide's own ground. Nothing moves: the space stays empty. Added before any text so
+     it sits under everything else on the slide. */
+  for (const slotName of slide.unusedImages || []) {
+    const well = (pres.WELLS[slide.master] || {})[slotName];
+    if (!well) { problems.push(`slide ${n} (${slide.master}): no image slot "${slotName}" to leave unused`); continue; }
+    if (slide.images && slotName in slide.images) {
+      problems.push(`slide ${n}: image slot "${slotName}" is both filled and marked unused`); continue;
+    }
+    const pad = 0.03;   // the well's outline straddles its edge
+    for (const r of well.rects) {
+      s.addShape("rect", { x: Math.max(0, r.x - pad), y: Math.max(0, r.y - pad),
+                           w: r.w + 2 * pad, h: r.h + 2 * pad,
+                           fill: { color: well.color } });
+    }
+    for (const r of well.redraw) {
+      s.addShape("rect", { x: r.x, y: r.y, w: r.w, h: r.h, line: r.line });
+    }
+    delete fields[slotName];
+  }
+
   for (const [slotName, imgRel] of Object.entries(slide.images || {})) {
     const slot = (pres.SLOTS[slide.master] || {})[slotName];
     if (!slot) { problems.push(`slide ${n} (${slide.master}): no slot "${slotName}"`); continue; }

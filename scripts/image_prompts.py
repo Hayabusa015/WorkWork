@@ -56,6 +56,8 @@ def main():
                 continue
             if name in filled:
                 continue
+            if name in (sl.get("unusedImages") or []):
+                continue   # deliberately left empty; SHULL-CHG-0066 item 3
             f = sl.get("fields", {})
             subject = f.get("headline", "").replace("\n", " ")
             frame = f.get("subhead", "").replace("\n", " ")

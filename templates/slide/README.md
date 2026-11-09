@@ -62,6 +62,11 @@ The masters carry **empty image regions**, not photographs. The legacy masters e
 full-resolution PNGs, which is why the template was 20 MB and why every deck built from layout 01
 arrived carrying a picture of an atom. Same geometry, no payload — 402 KB.
 
+**A slot a slide does not use** is listed in that slide's `"unusedImages"` in the deck spec
+(for example `"unusedImages": ["aside"]`). The well and its frame are not drawn and the space stays
+empty; nothing re-flows. A slot is filled, marked unused, or still outstanding — `image_prompts.py`
+lists only the outstanding ones. SHULL-CHG-0066.
+
 Images come from the loop in `SHULL_Slide_System_v2.md` §5: Claude supplies a prompt per slide, the
 user generates and saves it, Claude places it. Anything a student *reads* as science — a diagram
 with a number, a label, or a formula — is built, never generated.
@@ -74,8 +79,8 @@ soffice --headless --convert-to pdf deck.pptx && pdffonts deck.pdf
 ```
 
 The audit reads the built `.pptx`, so it checks what shipped rather than what the source intended.
-It catches overlapping text, text off the slide, content below the type floor, and any text/ground
-pair under the contrast target — resolving each run against the fill actually behind it.
+It catches overlapping text, text off the slide, text running into a side margin, content below
+the type floor, and any text/ground pair under the contrast target — resolving each run against the fill actually behind it.
 
 `pdffonts` must show **Archivo, embedded, TrueType** and nothing else. Liberation or DejaVu in that
 list means the font stack silently substituted, which is the defect behind SHULL-CHG-0006: every QA

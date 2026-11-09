@@ -172,10 +172,18 @@ def ground_behind(box, fills):
     return found
 
 
-def text_runs(shapes):
-    """(shape, run) for every non-empty run, with the shape for its geometry."""
+def text_runs(shapes, layout=False):
+    """(shape, run) for every non-empty run, with the shape for its geometry.
+
+    On a layout, a placeholder's text is a prompt ("CONCEPT IMAGE  •  16:9"). It shows
+    in the editor and never on the slide, so it is not measured: a slide that uses the
+    placeholder carries its own copy, and that copy is. Fixed text a layout draws
+    (a "MUST WRITE" label) is not a placeholder and still is.
+    """
     for sh in shapes:
         if not sh.has_text_frame or not sh.text_frame.text.strip():
+            continue
+        if layout and sh.is_placeholder:
             continue
         if sh.left is None or sh.width is None:
             continue
@@ -210,8 +218,8 @@ def main():
         # Contrast: every run, against the fill actually behind it. Layout fills sit
         # under slide fills, so they are stacked in that order.
         fills = solid_fills(slide.slide_layout.shapes) + solid_fills(slide.shapes)
-        for shapes in (slide.slide_layout.shapes, slide.shapes):
-            for sh, run in text_runs(shapes):
+        for shapes, is_layout in ((slide.slide_layout.shapes, True), (slide.shapes, False)):
+            for sh, run in text_runs(shapes, layout=is_layout):
                 fg, bg = run_color(run), ground_behind(rect(sh), fills)
                 if not fg or not bg:
                     continue
@@ -228,6 +236,13 @@ def main():
         for b in bs:
             if b[2] < -0.01 or b[3] < -0.01 or b[4] > W + 0.01 or b[5] > H + 0.01:
                 errors.append(f"slide {i}: {b[0]!r} ({b[1]!r}) runs off the slide")
+            # Text stops at the content edge. A card that runs into the side margin takes
+            # its text with it, and overhangs the must-write bar and the footer code
+            # (SHULL-CHG-0066 item 2). Dark structural layouts are measured the same way.
+            elif b[2] < M["left"] - 0.02 or b[4] > W - M["right"] + 0.02:
+                errors.append(f"slide {i}: {b[0]!r} ({b[1]!r}) runs into the side margin "
+                              f"(text spans {b[2]:.2f} to {b[4]:.2f} in; content is "
+                              f"{M['left']:.2f} to {W - M['right']:.2f} in)")
 
         errors.extend(overflow_check(slide.shapes, fills, f"slide {i}"))
         # Student-facing type floor. Slide System v2 permits 10-12pt for eyebrows, card
