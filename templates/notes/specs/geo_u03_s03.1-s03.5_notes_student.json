@@ -1,0 +1,1588 @@
+{
+  "course": "geology",
+  "unit": 3,
+  "key": false,
+  "cover": {
+    "unitTargets": [
+      "S03.1  I can identify a mineral using its physical properties.",
+      "S03.5  I can trace how any rock becomes any other rock.",
+      "S03.2  I can classify igneous rocks by texture and composition.",
+      "S03.3  I can classify sedimentary rocks by grain size and origin.",
+      "S03.4  I can identify a metamorphic rock and its parent rock."
+    ],
+    "keyTerms": [
+      {
+        "code": "3.1",
+        "terms": [
+          "Mineral",
+          "streak",
+          "luster",
+          "hardness",
+          "cleavage",
+          "fracture"
+        ]
+      },
+      {
+        "code": "3.5",
+        "terms": [
+          "Rock",
+          "rock cycle",
+          "weathering",
+          "erosion",
+          "deposition"
+        ]
+      },
+      {
+        "code": "3.2",
+        "terms": [
+          "Intrusive",
+          "extrusive",
+          "texture",
+          "vesicles",
+          "felsic",
+          "mafic"
+        ]
+      },
+      {
+        "code": "3.3",
+        "terms": [
+          "Lithification",
+          "compaction",
+          "cementation",
+          "clastic",
+          "grain size"
+        ]
+      },
+      {
+        "code": "3.4",
+        "terms": [
+          "Metamorphism",
+          "foliated",
+          "non-foliated",
+          "grade",
+          "parent rock"
+        ]
+      }
+    ],
+    "howItWorks": [
+      "These notes follow the slides in order. Each block is one slide.",
+      "The SLIDE number on the left matches the number in the top corner of the slide on the board.",
+      "Write what the slide shows in the blanks, tables and flowcharts.",
+      "A gray rule down the left of a line means must-write. Copy it exactly.",
+      "Each section ends with a RECALL block. Close your notes before you write it."
+    ],
+    "sectionList": [
+      "S03.1   Minerals & Mineral ID  ·  slides 02–10",
+      "S03.5   The Rock Cycle  ·  slides 11–16",
+      "S03.2   Igneous Rocks  ·  slides 17–27",
+      "S03.3   Sedimentary Rocks  ·  slides 28–37",
+      "S03.4   Metamorphic Rocks  ·  slides 38–47"
+    ]
+  },
+  "sectionsContent": [
+    {
+      "code": "3.1",
+      "title": "Minerals & Mineral ID",
+      "learningTarget": "I can identify a mineral using its physical properties.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 03",
+              "cueLabel": "SLIDE 03",
+              "notesLabel": "WHAT IS A MINERAL",
+              "cues": [
+                "Record: the five characteristics"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*A mineral must meet all five characteristics."
+              ],
+              "table": {
+                "headers": [
+                  "On the slide",
+                  "Characteristic"
+                ],
+                "rows": [
+                  [
+                    "Forms in nature.",
+                    ""
+                  ],
+                  [
+                    "Forms through nonliving processes.",
+                    ""
+                  ],
+                  [
+                    "Has a solid form.",
+                    ""
+                  ],
+                  [
+                    "A specific recipe. Quartz: SiO₂",
+                    ""
+                  ],
+                  [
+                    "Atoms follow a repeating pattern.",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.55,
+                  0.45
+                ]
+              }
+            },
+            {
+              "title": "Slide 04",
+              "cueLabel": "SLIDE 04",
+              "notesLabel": "COMMON MINERALS",
+              "cues": [
+                "Record: each formula and its key clue"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*Use several properties together. Color alone is not enough."
+              ],
+              "table": {
+                "headers": [
+                  "Mineral",
+                  "Formula",
+                  "Key clue"
+                ],
+                "rows": [
+                  [
+                    "Quartz",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Halite",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Calcite",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Pyrite",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Galena",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Hematite",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.22,
+                  0.22,
+                  0.56
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 05",
+              "cueLabel": "SLIDE 05",
+              "notesLabel": "COLOR, STREAK, AND LUSTER",
+              "cues": [
+                "Record: streak and the two kinds of luster"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "text": "The outside color can change. Test the powder too."
+                },
+                {
+                  "prompt": "Hematite may look ______________. Its streak is ______________."
+                },
+                {
+                  "prompt": "Luster = how ______________ reflects"
+                },
+                {
+                  "prompt": "Metallic: ______________"
+                },
+                {
+                  "prompt": "Nonmetallic: ______________"
+                },
+                "*Describe the shine before you guess the mineral."
+              ]
+            },
+            {
+              "title": "Slide 06",
+              "cueLabel": "SLIDE 06",
+              "notesLabel": "MOHS HARDNESS",
+              "cues": [
+                "Record: the definition and the field tools"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Hardness measures resistance to ______________."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Field tool",
+                  "Hardness"
+                ],
+                "rows": [
+                  [
+                    "Fingernail",
+                    ""
+                  ],
+                  [
+                    "Copper",
+                    ""
+                  ],
+                  [
+                    "Glass",
+                    ""
+                  ],
+                  [
+                    "Steel",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.5,
+                  0.5
+                ]
+              }
+            },
+            {
+              "title": "Slide 07",
+              "cueLabel": "SLIDE 07",
+              "notesLabel": "CLEAVAGE, FRACTURE, AND SPECIAL TESTS",
+              "cues": [
+                "Record: how each sample breaks or reacts"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Cleavage breaks along ______________. Fracture breaks ______________."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Sample or test",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "Mica",
+                    ""
+                  ],
+                  [
+                    "Halite",
+                    ""
+                  ],
+                  [
+                    "Quartz",
+                    ""
+                  ],
+                  [
+                    "Magnetism",
+                    ""
+                  ],
+                  [
+                    "Acid reaction",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.32,
+                  0.68
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 08",
+              "cueLabel": "SLIDE 08",
+              "notesLabel": "MINERAL A",
+              "cues": [
+                "Record: the observations and test results"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Choose the best match. Use the test results as evidence."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "Result"
+                ],
+                "rows": [
+                  [
+                    "Color",
+                    ""
+                  ],
+                  [
+                    "Streak",
+                    ""
+                  ],
+                  [
+                    "Luster",
+                    ""
+                  ],
+                  [
+                    "Hardness test",
+                    ""
+                  ],
+                  [
+                    "Cleavage",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.32,
+                  0.68
+                ]
+              }
+            },
+            {
+              "title": "Slide 09",
+              "cueLabel": "SLIDE 09",
+              "notesLabel": "MINERAL A: ORTHOCLASE FELDSPAR",
+              "cues": [
+                "Record: the ID and the clues that support it"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Mineral A = ______________"
+                },
+                {
+                  "prompt": "Strong clues: ______________"
+                },
+                {
+                  "prompt": "Supporting clues: ______________"
+                },
+                "*Color helps, but hardness and cleavage narrow the choices."
+              ]
+            },
+            {
+              "title": "Slide 10",
+              "cueLabel": "SLIDE 10",
+              "notesLabel": "MINERAL LAB",
+              "cues": [
+                "Record: the lab routine"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                },
+                {
+                  "text": "At each station: observe color and luster, test streak and hardness, and look for cleavage or fracture. Record your observations on the lab handout."
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write."
+              ],
+              "prompt": "Explain how to identify a mineral. Use at least three properties.",
+              "lines": 3,
+              "selfCheck": [
+                "I can list the five characteristics of a mineral.",
+                "I can explain why streak is more useful than color.",
+                "I can use hardness and cleavage to identify a mineral."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.5",
+      "title": "The Rock Cycle",
+      "learningTarget": "I can trace how any rock becomes any other rock.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 11",
+              "cueLabel": "SLIDE 11",
+              "notesLabel": "ROCKS",
+              "cues": [
+                "Record: how each rock family forms"
+              ],
+              "extraNotes": false,
+              "table": {
+                "headers": [
+                  "Rock family",
+                  "How it forms"
+                ],
+                "rows": [
+                  [
+                    "Igneous",
+                    ""
+                  ],
+                  [
+                    "Sedimentary",
+                    ""
+                  ],
+                  [
+                    "Metamorphic",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.28,
+                  0.72
+                ]
+              }
+            },
+            {
+              "title": "Slide 12",
+              "cueLabel": "SLIDE 12",
+              "notesLabel": "WHAT IS A ROCK",
+              "cues": [
+                "Record: the definition and the sandstone steps"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "A rock is a natural solid, usually made of one or more ______________."
+                },
+                {
+                  "prompt": "Minerals are the ______________. Some rocks also contain glass or organic material."
+                },
+                {
+                  "label": "One way to make a rock: sediment becomes sandstone"
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s12_sandstone_chain.png",
+                "keyImage": "../assets/geo_u03_s12_sandstone_chain_key.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 13",
+              "cueLabel": "SLIDE 13",
+              "notesLabel": "THE ROCK CYCLE",
+              "cues": [
+                "Record: the three rock types",
+                "Record: the process on each arrow"
+              ],
+              "extraNotes": false,
+              "figure": {
+                "image": "../assets/geo_u03_rock_cycle.png",
+                "keyImage": "../assets/geo_u03_rock_cycle_key.png"
+              },
+              "notes": [
+                "*No single starting point. Any exposed rock can become sediment."
+              ]
+            },
+            {
+              "title": "Slide 14",
+              "cueLabel": "SLIDE 14",
+              "notesLabel": "ONE ROCK'S JOURNEY",
+              "cues": [
+                "Record: the rock at each step"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Quartz grains can survive weathering and become part of a new rock."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s14_journey.png",
+                "keyImage": "../assets/geo_u03_s14_journey_key.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 15",
+              "cueLabel": "SLIDE 15",
+              "notesLabel": "ROCK-CYCLE CHALLENGE",
+              "cues": [
+                "Record: the starting and ending rock"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Start: ______________      End: ______________"
+                },
+                {
+                  "text": "Name the process. Decide whether the rock needs to melt. The next slide gives the route."
+                }
+              ]
+            },
+            {
+              "title": "Slide 16",
+              "cueLabel": "SLIDE 16",
+              "notesLabel": "BASALT → SCHIST",
+              "cues": [
+                "Record: the route"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Heat and pressure can change basalt while it stays ______________."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s16_basalt_schist.png",
+                "keyImage": "../assets/geo_u03_s16_basalt_schist_key.png"
+              }
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write."
+              ],
+              "prompt": "Describe one path a rock can take through the rock cycle. Name each process.",
+              "lines": 3,
+              "selfCheck": [
+                "I can name the three rock families and how each forms.",
+                "I can label the rock cycle.",
+                "I can explain why metamorphism does not need melting."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.2",
+      "title": "Igneous Rocks",
+      "learningTarget": "I can classify igneous rocks by texture and composition.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 18",
+              "cueLabel": "SLIDE 18",
+              "notesLabel": "INTRUSIVE AND EXTRUSIVE",
+              "cues": [
+                "Record: where each cools and its crystal size"
+              ],
+              "extraNotes": false,
+              "flowchart": {
+                "root": "IGNEOUS ROCK",
+                "branches": [
+                  "INTRUSIVE",
+                  "EXTRUSIVE"
+                ],
+                "leaves": [
+                  "Cools inside Earth",
+                  "Larger crystals",
+                  "Cools at the surface",
+                  "Smaller crystals"
+                ]
+              },
+              "notes": [
+                "*Both form when melted rock cools and hardens."
+              ]
+            },
+            {
+              "title": "Slide 19",
+              "cueLabel": "SLIDE 19",
+              "notesLabel": "COOLING AND TEXTURE",
+              "cues": [
+                "Record: what each kind of cooling makes"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Texture describes crystal size and other visible features."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Cooling",
+                  "Result",
+                  "Why"
+                ],
+                "rows": [
+                  [
+                    "Slow cooling",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Fast cooling",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Very rapid cooling",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Trapped gas",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.26,
+                  0.24,
+                  0.5
+                ]
+              }
+            },
+            {
+              "title": "Slide 20",
+              "cueLabel": "SLIDE 20",
+              "notesLabel": "COOLING CHANGES CRYSTAL SIZE",
+              "cues": [
+                "Record: the rock each cooling rate makes"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "text": "Same general composition. Different time to grow crystals."
+                },
+                {
+                  "prompt": "Slow cooling, large crystals: ______________"
+                },
+                {
+                  "prompt": "Fast cooling, tiny crystals: ______________"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 21",
+              "cueLabel": "SLIDE 21",
+              "notesLabel": "IGNEOUS ROCK TEXTURES",
+              "cues": [
+                "Record: what each texture looks like"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Texture describes the size and arrangement of crystals."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Texture",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "Coarse",
+                    ""
+                  ],
+                  [
+                    "Fine",
+                    ""
+                  ],
+                  [
+                    "Glassy",
+                    ""
+                  ],
+                  [
+                    "Vesicular",
+                    ""
+                  ],
+                  [
+                    "Porphyritic",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.28,
+                  0.72
+                ]
+              }
+            },
+            {
+              "title": "Slide 22",
+              "cueLabel": "SLIDE 22",
+              "notesLabel": "IGNEOUS ROCK COMPOSITION",
+              "cues": [
+                "Record: the example, color and silica for each group"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*The minerals in a rock affect its color."
+              ],
+              "table": {
+                "headers": [
+                  "Group",
+                  "Example",
+                  "Color",
+                  "Silica"
+                ],
+                "rows": [
+                  [
+                    "Felsic",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Intermediate",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Mafic",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Ultramafic",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.21,
+                  0.19,
+                  0.28,
+                  0.32
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 23",
+              "cueLabel": "SLIDE 23",
+              "notesLabel": "BOWEN'S REACTION SERIES",
+              "cues": [
+                "Record: each mineral, in the order it forms"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*As magma cools, different minerals can form."
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_bowens.png",
+                "keyImage": "../assets/geo_u03_bowens_key.png"
+              }
+            },
+            {
+              "title": "Slide 24",
+              "cueLabel": "SLIDE 24",
+              "notesLabel": "IGNEOUS ROCK ID CHART",
+              "cues": [
+                "Record: the rock for each texture and composition"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Match crystal size with composition. Use the other textures too."
+                }
+              ],
+              "notes": [
+                {
+                  "prompt": "Glassy: ______________"
+                },
+                {
+                  "prompt": "Holes, usually light: ______________"
+                },
+                {
+                  "prompt": "Holes: ______________"
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Crystal size",
+                  "Felsic",
+                  "Intermediate",
+                  "Mafic"
+                ],
+                "rows": [
+                  [
+                    "Coarse",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Fine",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 25",
+              "cueLabel": "SLIDE 25",
+              "notesLabel": "ROCK A",
+              "cues": [
+                "Record: the texture and composition clues"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Describe the texture first. Then decide the composition."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "Texture",
+                    ""
+                  ],
+                  [
+                    "Composition clues",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ]
+              }
+            },
+            {
+              "title": "Slide 26",
+              "cueLabel": "SLIDE 26",
+              "notesLabel": "ROCK A: GRANITE",
+              "cues": [
+                "Record: the ID and what each clue means"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*Large crystals tell us the rock cooled slowly underground."
+              ],
+              "notes": [
+                {
+                  "prompt": "Rock A = ______________"
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What it tells us"
+                ],
+                "rows": [
+                  [
+                    "Coarse",
+                    ""
+                  ],
+                  [
+                    "Intrusive",
+                    ""
+                  ],
+                  [
+                    "Felsic",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ]
+              }
+            },
+            {
+              "title": "Slide 27",
+              "cueLabel": "SLIDE 27",
+              "notesLabel": "IGNEOUS STATIONS",
+              "cues": [
+                "Record: the lab routine"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                },
+                {
+                  "text": "At each station: describe the texture, estimate the composition, and use the ID chart to name the rock. Record your observations on the lab handout."
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write."
+              ],
+              "prompt": "Explain how texture and composition together identify an igneous rock.",
+              "lines": 3,
+              "selfCheck": [
+                "I can tell intrusive from extrusive rocks by crystal size.",
+                "I can name the felsic, intermediate and mafic rocks.",
+                "I can put Bowen's minerals in order."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Sedimentary Rocks",
+      "learningTarget": "I can classify sedimentary rocks by grain size and origin.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 29",
+              "cueLabel": "SLIDE 29",
+              "notesLabel": "HOW SEDIMENTARY ROCKS FORM",
+              "cues": [
+                "Record: the four steps and the two parts of lithification"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "For clastic rocks, loose pieces become solid rock."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s29_sed_forms.png",
+                "keyImage": "../assets/geo_u03_s29_sed_forms_key.png"
+              },
+              "notes": [
+                {
+                  "prompt": "Compaction: ______________"
+                },
+                {
+                  "prompt": "Cementation: ______________"
+                }
+              ]
+            },
+            {
+              "title": "Slide 30",
+              "cueLabel": "SLIDE 30",
+              "notesLabel": "SEDIMENT BECOMES ROCK",
+              "cues": [
+                "Record: what happens at each stage"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Burial packs the grains. Mineral cement helps hold them together."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s30_sediment_rock.png",
+                "keyImage": "../assets/geo_u03_s30_sediment_rock_key.png"
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 31",
+              "cueLabel": "SLIDE 31",
+              "notesLabel": "THREE TYPES OF SEDIMENTARY ROCK",
+              "cues": [
+                "Record: how each type forms, with an example"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*The type depends on where the material came from."
+              ],
+              "table": {
+                "headers": [
+                  "Type",
+                  "How it forms",
+                  "Example"
+                ],
+                "rows": [
+                  [
+                    "Clastic",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Chemical",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Organic / biological",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.24,
+                  0.42,
+                  0.34
+                ]
+              }
+            },
+            {
+              "title": "Slide 32",
+              "cueLabel": "SLIDE 32",
+              "notesLabel": "SEDIMENT GRAIN SIZE",
+              "cues": [
+                "Record: the size and the rock for each grain"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Look at the pieces that make up the rock."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Grain (what you see)",
+                  "Size",
+                  "Rock"
+                ],
+                "rows": [
+                  [
+                    "Clay: too small to see",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Silt: tiny, gritty particles",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Sand: grains are visible",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Gravel: pebbles or larger",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.38,
+                  0.3,
+                  0.32
+                ]
+              }
+            },
+            {
+              "title": "Slide 33",
+              "cueLabel": "SLIDE 33",
+              "notesLabel": "COMMON SEDIMENTARY ROCKS",
+              "cues": [
+                "Record: the clue for each rock"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Look at the grains, their shapes, and how they fit together."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Rock",
+                  "Clue"
+                ],
+                "rows": [
+                  [
+                    "Shale",
+                    ""
+                  ],
+                  [
+                    "Sandstone",
+                    ""
+                  ],
+                  [
+                    "Conglomerate",
+                    ""
+                  ],
+                  [
+                    "Breccia",
+                    ""
+                  ],
+                  [
+                    "Limestone",
+                    ""
+                  ],
+                  [
+                    "Coal",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.32,
+                  0.68
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 34",
+              "cueLabel": "SLIDE 34",
+              "notesLabel": "SEDIMENTARY ROCK ID",
+              "cues": [
+                "Record: the rock at the end of each path"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Start with visible grains. Confirm the ID with another clue."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_sed_id_key.png",
+                "keyImage": "../assets/geo_u03_sed_id_key_key.png"
+              },
+              "notes": [
+                {
+                  "prompt": "Other clues: ______________, ______________, ______________, and ______________."
+                }
+              ]
+            },
+            {
+              "title": "Slide 35",
+              "cueLabel": "SLIDE 35",
+              "notesLabel": "ROCK B",
+              "cues": [
+                "Record: what you see and how it holds together"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Use grain size and shape to support your answer."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "What you see",
+                    ""
+                  ],
+                  [
+                    "How it holds together",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.32,
+                  0.68
+                ]
+              }
+            },
+            {
+              "title": "Slide 36",
+              "cueLabel": "SLIDE 36",
+              "notesLabel": "ROCK B: CONGLOMERATE",
+              "cues": [
+                "Record: the ID and the key clues"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*Rounded gravel-sized pieces are the key clue."
+              ],
+              "notes": [
+                {
+                  "prompt": "Rock B = ______________"
+                },
+                "*Breccia has angular pieces."
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What it tells us"
+                ],
+                "rows": [
+                  [
+                    "Grain size",
+                    ""
+                  ],
+                  [
+                    "Shape",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 37",
+              "cueLabel": "SLIDE 37",
+              "notesLabel": "SEDIMENTARY STATIONS",
+              "cues": [
+                "Record: the lab routine"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                },
+                {
+                  "text": "At each station: look for grain size and shape, check for layers or fossils, and use only the approved acid test. Record your observations on the lab handout."
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write."
+              ],
+              "prompt": "Explain how grain size and grain shape help identify a sedimentary rock.",
+              "lines": 3,
+              "selfCheck": [
+                "I can put the steps of sedimentary rock formation in order.",
+                "I can name the three types of sedimentary rock.",
+                "I can tell conglomerate from breccia."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Metamorphic Rocks",
+      "learningTarget": "I can identify a metamorphic rock and its parent rock.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 39",
+              "cueLabel": "SLIDE 39",
+              "notesLabel": "HEAT AND PRESSURE CHANGE ROCK",
+              "cues": [
+                "Record: the two kinds of metamorphism"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Metamorphism changes an existing rock without ______________ it."
+                }
+              ],
+              "flowchart": {
+                "root": "METAMORPHISM",
+                "branches": [
+                  "CONTACT",
+                  "REGIONAL"
+                ],
+                "leaves": [
+                  "Nearby magma heats it",
+                  "Change is mostly local",
+                  "Heat + pressure, large area",
+                  "Often mountain building"
+                ]
+              },
+              "notes": [
+                "*The rock stays solid. If it melts and then cools, the new rock is igneous."
+              ]
+            },
+            {
+              "title": "Slide 40",
+              "cueLabel": "SLIDE 40",
+              "notesLabel": "HOW FOLIATION FORMS",
+              "cues": [
+                "Record: what pressure does to flat minerals"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Pressure can help ______________ minerals line up as the rock changes."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s40_foliation.png",
+                "keyImage": "../assets/geo_u03_s40_foliation_key.png"
+              },
+              "notes": [
+                {
+                  "prompt": "Before: ______________"
+                },
+                {
+                  "prompt": "After directed pressure: ______________"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 41",
+              "cueLabel": "SLIDE 41",
+              "notesLabel": "FOLIATED AND NON-FOLIATED",
+              "cues": [
+                "Record: what each looks like"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*Foliation is a pattern of aligned minerals or mineral bands."
+              ],
+              "table": {
+                "headers": [
+                  "Texture",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "Foliated",
+                    ""
+                  ],
+                  [
+                    "Non-foliated",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ]
+              }
+            },
+            {
+              "title": "Slide 42",
+              "cueLabel": "SLIDE 42",
+              "notesLabel": "METAMORPHIC GRADE",
+              "cues": [
+                "Record: each rock in the sequence"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "Grade describes the ______________ of metamorphism."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_s42_grade.png",
+                "keyImage": "../assets/geo_u03_s42_grade_key.png"
+              }
+            },
+            {
+              "title": "Slide 43",
+              "cueLabel": "SLIDE 43",
+              "notesLabel": "PARENT ROCK → METAMORPHIC ROCK",
+              "cues": [
+                "Record: what each parent becomes"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "prompt": "The parent rock is ______________."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Parent rock",
+                  "Metamorphic rock"
+                ],
+                "rows": [
+                  [
+                    "Limestone",
+                    ""
+                  ],
+                  [
+                    "Sandstone",
+                    ""
+                  ],
+                  [
+                    "Granite",
+                    ""
+                  ],
+                  [
+                    "Coal",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.5,
+                  0.5
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 44",
+              "cueLabel": "SLIDE 44",
+              "notesLabel": "METAMORPHIC ROCK ID",
+              "cues": [
+                "Record: the rock at the end of each path"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Use texture first. Then test the mineral clues."
+                }
+              ],
+              "figure": {
+                "image": "../assets/geo_u03_met_id_key.png",
+                "keyImage": "../assets/geo_u03_met_id_key_key.png"
+              }
+            },
+            {
+              "title": "Slide 45",
+              "cueLabel": "SLIDE 45",
+              "notesLabel": "ROCK C",
+              "cues": [
+                "Record: the pattern and texture"
+              ],
+              "extraNotes": false,
+              "lead": [
+                {
+                  "text": "Describe the pattern before naming the rock."
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What you see"
+                ],
+                "rows": [
+                  [
+                    "Pattern",
+                    ""
+                  ],
+                  [
+                    "Texture",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ]
+              }
+            },
+            {
+              "title": "Slide 46",
+              "cueLabel": "SLIDE 46",
+              "notesLabel": "ROCK C: GNEISS",
+              "cues": [
+                "Record: the ID, family and parent rocks"
+              ],
+              "extraNotes": false,
+              "lead": [
+                "*The mineral bands are the strongest clue."
+              ],
+              "notes": [
+                {
+                  "prompt": "Rock C = ______________"
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Clue",
+                  "What it tells us"
+                ],
+                "rows": [
+                  [
+                    "Rock family",
+                    ""
+                  ],
+                  [
+                    "Possible parent rocks",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.32,
+                  0.68
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 47",
+              "cueLabel": "SLIDE 47",
+              "notesLabel": "METAMORPHIC STATIONS",
+              "cues": [
+                "Record: the lab routine"
+              ],
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Lab routine: ______ → ______ → ______ → ______"
+                },
+                {
+                  "text": "At each station: look for foliation, describe grains, sheen or bands, and match each rock to a possible parent. Record your observations on the lab handout."
+                }
+              ]
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write."
+              ],
+              "prompt": "Explain how to identify a metamorphic rock and name a possible parent rock.",
+              "lines": 3,
+              "selfCheck": [
+                "I can tell contact from regional metamorphism.",
+                "I can put slate, phyllite, schist and gneiss in order of grade.",
+                "I can match a metamorphic rock to its parent rock."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

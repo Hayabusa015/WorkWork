@@ -35,7 +35,7 @@ OPENER = re.compile(r"^\s*(?:%s)\b" % "|".join(OPENERS), re.I)
 # Where the rule applies. The summary box, the "still fuzzy on" prompt and the
 # closing big-picture line are the student reflecting on their own notes, not
 # being quizzed on a slide, and are deliberately out of scope.
-FIELDS = ("cues", "notes")
+FIELDS = ("cues", "lead", "notes")
 
 
 def offences(spec):

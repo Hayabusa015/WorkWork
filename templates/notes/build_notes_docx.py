@@ -122,7 +122,7 @@ TRACK = 26                  # 0014's caps_track
 
 PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
 TAGGED = ("recall", "recap", "review")   # blocks that open with a tag
-CAPTURE = ("notes", "problem", "table", "flowchart", "diagram")
+CAPTURE = ("notes", "lead", "problem", "table", "flowchart", "diagram", "figure")
 
 
 class GreyPalette(Palette):
@@ -589,6 +589,28 @@ def render_problem(col, prob, key, pal):
         col.text(prob["answer"], BODY, line=BODY_LINE, bold=key, before=8)
 
 
+FIG_INSET_IN = 0.35
+
+
+def render_figure(col, fig, key, base_dir):
+    """A fill-in figure across the whole capture column: a rock cycle, a reaction
+    series, an ID key - anything too wide for `diagram`, which gives its figure 61% of
+    the column and the rest to numbered label lines. The student copy and the key are
+    two drawings of the same geometry, made by one script (`image` and `keyImage`);
+    the words a student writes are in the key's drawing only. Both paths are relative
+    to the spec, like `diagram`'s."""
+    path = os.path.join(base_dir, fig["keyImage"] if key and fig.get("keyImage")
+                        else fig["image"])
+    if not os.path.exists(path):
+        raise SystemExit(f"build_notes_docx: figure image not found: {path}")
+    # Measured off the LibreOffice render: wider than about col.w - 0.3 in and the
+    # cell clips the drawing's right edge rather than wrapping or shrinking it.
+    w = min(float(fig.get("widthIn", col.w - FIG_INSET_IN)), col.w - FIG_INSET_IN)
+    p = col.para()
+    _spacing(p, 2, 4)
+    p.add_run().add_picture(path, width=Inches(w))
+
+
 def render_notes(col, row, key, pal, base_dir):
     kind = row.get("kind", "notes")
     # The notes heading, in course colour with 0014's caps tracking (SHULL-CHG-0038).
@@ -598,10 +620,16 @@ def render_notes(col, row, key, pal, base_dir):
     if row.get("notesLabel") or heading != label_of(row, "cueLabel"):
         col.text(heading, LABEL, line=10.5, bold=True, after=6,
                  color=pal.type_accent, track=TRACK)
+    # "lead": the lines a slide shows ABOVE its table or figure, so the page reads in
+    # the same order as the slide. "notes" follow the visual, as before.
+    if row.get("lead"):
+        render_lines(col, row["lead"], key, pal)
     if row.get("diagram"):
         diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
         col.after_table()
         col.gap(4)
+    if row.get("figure"):
+        render_figure(col, row["figure"], key, base_dir)
     if row.get("table"):
         spec = dict(row["table"])
         fillin_table(col.cell, spec, pal, col.w, header_fill=pal.surface,
@@ -641,7 +669,12 @@ def render_notes(col, row, key, pal, base_dir):
             col.text(row["fuzzyLabel"], BODY, line=BODY_LINE, bold=True, before=8)
             col.line(height=22)
 
-    for n in row.get("notes", []):
+    render_lines(col, row.get("notes", []), key, pal)
+
+def render_lines(col, lines, key, pal):
+    """The notes side's lines: prompts with writing lines, statements, must-write
+    lines, labels, checks."""
+    for n in lines:
         if isinstance(n, dict):
             if "prompt" in n:
                 render_prompt(col, n["prompt"], n.get("answer") if key else None,
@@ -662,6 +695,7 @@ def render_notes(col, row, key, pal, base_dir):
             body = n.strip()
             render_prompt(col, body, None, 2 if body.rstrip().endswith("?") else 1,
                           key, pal)
+
 
 
 def check(col, text, pal):
