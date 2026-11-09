@@ -25,6 +25,13 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-09
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0067 | — | QA gate names the slide audit script | PROPOSED | `governance/proposals/SHULL-CHG-0067-qa-gate-names-the-audit-scripts.md` |
+| SHULL-CHG-0066 | — | Slide template: four fixes from the sample deck | PROPOSED | `governance/proposals/SHULL-CHG-0066-slide-template-four-fixes.md` |
+
 ## 2026-11-08
 
 | ID | Date | Change | Status | Record |
