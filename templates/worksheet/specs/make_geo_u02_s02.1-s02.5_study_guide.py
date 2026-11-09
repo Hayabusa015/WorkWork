@@ -8,11 +8,21 @@ Edit this file, not the JSON it writes. Build:
     python3 templates/worksheet/build_worksheet_docx.py     <STEM>_student.json
     python3 templates/worksheet/build_worksheet_key_docx.py <STEM>_key.json
 
-Content: Matt's twelve Big Ideas as he gave them (2026-11-09), and the Time Walk cells
-taken from the verified U2 fact sheet (2026-11-09), which traces each cell to the U2
-guided-notes spec. Edits allowed by the brief and made here only: word counts dropped,
-"Mya" written out, an unsupported cell printed empty, and "Tropics warm" restored to the
-Carboniferous climate cell (fact-sheet finding 7). Genus names are italic.
+Content: Matt asked for big ideas first ("CO2 causes temps to go ___ and O2 causes temps
+to ___", "periods end and begin with ___ (mass extinctions)"), then a compact Earth / Life /
+Climate / big-event summary per period (2026-11-09). The main session set the twelve Big
+Ideas' final wording from the verified U2 fact sheet (2026-11-09), which traces each fact
+to the U2 guided-notes spec. Three of Matt's examples were reworded for accuracy: CO2 (#5,
+sourced to the deck's Snowball Earth thaw slide, "Accumulated CO2 raises temperatures..."),
+O2 (#6, what the Carboniferous key says happened, since O2 is not a greenhouse gas) and
+mass extinctions (#10, which end eras; only 4 of 12 periods are described ending in one).
+Time Walk cells are the fact sheet's, with these edits only: word counts dropped, "Mya" and
+"~" written out, an unsupported cell printed empty, "Tropics warm" restored to the
+Carboniferous climate cell (fact-sheet finding 7), "falls" -> "declines" there (the spec's
+word, so it does not answer Big Idea #7). Genus names are italic.
+
+Blanks are chosen so no answer is printed anywhere else on the student page (audit
+2026-11-09, finding 2).
 
 The span itself (`coversSections`) is SHULL-CHG-0066; `proseOnly` on a study guide is that
 record's Q1, answer A.
@@ -25,22 +35,22 @@ STEM = "geo_u02_s02.1-s02.5_study_guide"
 # ---------------------------------------------------------------------- the content
 # Each Big Idea is written once with "___" where the blank goes, and its answer.
 BIG_IDEAS = [
-    ("The time scale, largest to smallest: eon → era → ___ → epoch.", "period"),
+    ("The time scale, largest to smallest: eon → era → period → ___.", "epoch"),
     ("Most fossils are found in ___ rock.", "sedimentary"),
     ("Oxygen built up in the air (the Great Oxidation Event, about 2.4 billion years ago) "
      "because ___ released it faster than rocks and iron could absorb it.", "photosynthesis"),
     ("Rising oxygen made ___, oxygen-using life possible.", "complex"),
     ("When volcanoes build up CO₂ in the air, temperatures go ___.", "up"),
-    ("In the Carboniferous, as CO₂ fell and O₂ rose above modern levels, southern "
+    ("In the Carboniferous, as CO₂ declined and O₂ rose above modern levels, southern "
      "Gondwana ___.", "glaciated"),
     ("When ice sheets grow, sea level ___.", "falls"),
-    ("Life began in the ___; plants, then animals, later moved onto land.", "sea"),
-    ("Pangaea was fully assembled by the Permian, then began ___ apart in the Late "
-     "Triassic, opening the Atlantic.", "rifting"),
+    ("In the Cambrian, all life lived in the ___; plants, then animals, later moved onto land.", "sea"),
+    ("Pangaea was fully assembled by the Permian, then began breaking apart in the Late "
+     "Triassic, opening the ___ Ocean.", "Atlantic"),
     ("The ends of the Paleozoic and Mesozoic Eras are each marked by a ___.",
      "mass extinction"),
-    ("After a mass extinction, the surviving groups ___ to fill the empty space.",
-     "diversify"),
+    ("After each of those die-offs, rebuilding ecosystems took ___ of years.",
+     "millions"),
     ("Since the Mesozoic greenhouse faded, Earth's climate has gradually ___.", "cooled"),
 ]
 
@@ -48,52 +58,52 @@ BIG_IDEAS = [
 # An empty string is a cell the source has nothing for; it prints empty.
 TIME_WALK = [
     ("Hadean", "Earth accretes; iron sinks to form the core", "", "",
-     "Earth forms, ~4.54 billion years ago", "core"),
+     "Earth forms, about 4.54 billion years ago", "core"),
     ("Archean", "Long-lived crust and oceans develop", "Microbial ecosystems develop", "", "",
      "Microbial"),
-    ("Proterozoic", "Supercontinent Rodinia assembles, ~1.1–0.9 billion years ago",
+    ("Proterozoic", "Supercontinent Rodinia assembles, about 1.1–0.9 billion years ago",
      "Oxygen rises; eukaryotes, then multicellular life, diversify",
-     "Snowball Earth: Sturtian, Marinoan glaciations (~720–635 million years ago)",
-     "Great Oxidation Event, ~2.4 billion years ago", "Oxidation"),
+     "Snowball Earth: Sturtian, Marinoan glaciations (about 720–635 million years ago)",
+     "Great Oxidation Event, about 2.4 billion years ago", "Rodinia"),
     ("Cambrian", "Shallow seas spread; sandstone, shale, limestone form",
      "Body plans diversify rapidly (trilobites); life entirely marine",
      "Greenhouse, high sea levels, less oxygen than today",
-     "Cambrian Explosion, ~539 million years ago", "Explosion"),
+     "Cambrian Explosion, about 539 million years ago", "Explosion"),
     ("Ordovician", "Shallow seas widespread; plate collisions start mountain building",
      "Reefs, jawless fishes flourish; early land plants appear",
      "Warm, then cooling, ice growth, sea level falls",
-     "Major extinctions follow late-Ordovician cooling", "plants"),
+     "Major extinctions follow late-Ordovician cooling", "falls"),
     ("Silurian", "Laurentia, Baltica converge in Caledonian mountain building",
      "Jawed fishes diversify; vascular plants, arthropods build land communities",
      "Warming after glaciation; sea levels recover", "", "Jawed"),
     ("Devonian", "Continental collisions continue; reefs thrive in warm seas",
      "Fishes diversify; forests, insects, early tetrapods spread on land",
      "Warm shallow seas, then late-Devonian crises",
-     "Late-Devonian extinctions hit hard", "forests"),
+     "Late-Devonian extinctions hit hard", "tetrapods"),
     ("Carboniferous", "Pangaea assembles; tropical wetland deposits later become coal",
      "Giant arthropods and amphibians dominate wet land habitats",
-     "Tropics warm; O₂ above modern, CO₂ falls; southern Gondwana glaciates",
-     "Amniotic egg: reproduction away from standing water", "coal"),
+     "Tropics warm; O₂ above modern, CO₂ declines; southern Gondwana glaciates",
+     "Amniotic egg: reproduction away from standing water", "glaciates"),
     ("Permian", "Pangaea fully assembled; one ocean, Panthalassa; dry interior",
      "Synapsids like <i>Dimetrodon</i> (mammal line), not dinosaurs",
      "Varies; ends with severe warming, ocean oxygen loss",
-     "End-Permian extinction, ~252 million years ago: Siberian Traps volcanism", "Pangaea"),
+     "End-Permian extinction, about 252 million years ago: Siberian Traps volcanism", "Panthalassa"),
     ("Triassic", "Pangaea largely intact; late-Triassic rifting starts breakup",
      "Ecosystems rebuild after end-Permian; reptiles diversify",
      "Hot, dry, strongly seasonal interiors",
-     "First dinosaurs appear, ~230 million years ago", "dinosaurs"),
+     "First dinosaurs appear, about 230 million years ago", "rifting"),
     ("Jurassic", "Pangaea splits; Atlantic and Gulf of Mexico open",
      "Giant sauropods, theropods rule land; marine reptiles, pterosaurs",
      "Greenhouse; shallow seas cover large areas",
-     "<i>Archaeopteryx</i>, feathered dinosaur near bird origins, ~150 million years ago",
+     "<i>Archaeopteryx</i>, feathered dinosaur near bird origins, about 150 million years ago",
      "Atlantic"),
     ("Cretaceous", "High sea levels flood continents; forests even in Antarctica",
      "Flowering plants spread; dinosaurs flourish; small mammals present",
      "Greenhouse conditions, high sea levels",
-     "K–Pg extinction, ~66 million years ago: asteroid impact", "asteroid"),
+     "K–Pg extinction, about 66 million years ago: asteroid impact", "asteroid"),
     ("Paleogene", "India collides with Asia; Alpine–Himalayan, Circum-Pacific belts begin",
      "Mammals diversify rapidly into space left by K–Pg",
-     "Gradual cooling as Mesozoic greenhouse fades", "", "Mammals"),
+     "Gradual cooling as Mesozoic greenhouse fades", "", "India"),
     ("Neogene", "Plate motion keeps building Himalaya and Andes",
      "Grasslands spread; grazing mammals diversify",
      "Cools further; drier in many regions", "", "Grasslands"),
@@ -151,7 +161,7 @@ def time_walk(key):
         assert len(hits) == 1 and len(pat.findall(cells[hits[0]])) == 1, (row[0], word)
         i = hits[0]
         col_in = TEXT_W_IN * WIDTHS[i] - CELL_PAD_IN
-        sub = fill(word) if key else blank(word, TABLE_PT, max_in=col_in)
+        sub = fill(word) if key else blank(word, TABLE_PT, max_in=col_in * 0.85)  # room for the punctuation after it
         cells[i] = pat.sub(lambda _m: sub, cells[i])
         rows.append(cells)
     return {"kind": "table", "label": "PART 2: TIME WALK", "size": TABLE_PT,

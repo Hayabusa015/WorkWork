@@ -33,17 +33,17 @@
           "size": 11,
           "points": 12,
           "items": [
-            "1.  The time scale, largest to smallest: eon → era → _____________ → epoch.",
+            "1.  The time scale, largest to smallest: eon → era → period → ___________.",
             "2.  Most fossils are found in _____________________ rock.",
             "3.  Oxygen built up in the air (the Great Oxidation Event, about 2.4 billion years ago) because __________________________ released it faster than rocks and iron could absorb it.",
             "4.  Rising oxygen made _______________, oxygen-using life possible.",
             "5.  When volcanoes build up CO₂ in the air, temperatures go _________.",
-            "6.  In the Carboniferous, as CO₂ fell and O₂ rose above modern levels, southern Gondwana __________________.",
+            "6.  In the Carboniferous, as CO₂ declined and O₂ rose above modern levels, southern Gondwana __________________.",
             "7.  When ice sheets grow, sea level ___________.",
-            "8.  Life began in the _________; plants, then animals, later moved onto land.",
-            "9.  Pangaea was fully assembled by the Permian, then began _______________ apart in the Late Triassic, opening the Atlantic.",
+            "8.  In the Cambrian, all life lived in the _________; plants, then animals, later moved onto land.",
+            "9.  Pangaea was fully assembled by the Permian, then began breaking apart in the Late Triassic, opening the ________________ Ocean.",
             "10.  The ends of the Paleozoic and Mesozoic Eras are each marked by a ___________________________.",
-            "11.  After a mass extinction, the surviving groups __________________ to fill the empty space.",
+            "11.  After each of those die-offs, rebuilding ecosystems took ________________ of years.",
             "12.  Since the Mesozoic greenhouse faded, Earth's climate has gradually _____________."
           ]
         },
@@ -73,7 +73,7 @@
               "Earth accretes; iron sinks to form the __________",
               "",
               "",
-              "Earth forms, ~4.54 billion years ago"
+              "Earth forms, about 4.54 billion years ago"
             ],
             [
               "Archean",
@@ -84,23 +84,23 @@
             ],
             [
               "Proterozoic",
-              "Supercontinent Rodinia assembles, ~1.1–0.9 billion years ago",
+              "Supercontinent _______________ assembles, about 1.1–0.9 billion years ago",
               "Oxygen rises; eukaryotes, then multicellular life, diversify",
-              "Snowball Earth: Sturtian, Marinoan glaciations (~720–635 million years ago)",
-              "Great ___________________ Event, ~2.4 billion years ago"
+              "Snowball Earth: Sturtian, Marinoan glaciations (about 720–635 million years ago)",
+              "Great Oxidation Event, about 2.4 billion years ago"
             ],
             [
               "Cambrian",
               "Shallow seas spread; sandstone, shale, limestone form",
               "Body plans diversify rapidly (trilobites); life entirely marine",
               "Greenhouse, high sea levels, less oxygen than today",
-              "Cambrian ___________________, ~539 million years ago"
+              "Cambrian __________________, about 539 million years ago"
             ],
             [
               "Ordovician",
               "Shallow seas widespread; plate collisions start mountain building",
-              "Reefs, jawless fishes flourish; early land ______________ appear",
-              "Warm, then cooling, ice growth, sea level falls",
+              "Reefs, jawless fishes flourish; early land plants appear",
+              "Warm, then cooling, ice growth, sea level ____________",
               "Major extinctions follow late-Ordovician cooling"
             ],
             [
@@ -113,49 +113,49 @@
             [
               "Devonian",
               "Continental collisions continue; reefs thrive in warm seas",
-              "Fishes diversify; _______________, insects, early tetrapods spread on land",
+              "Fishes diversify; forests, insects, early ___________________ spread on land",
               "Warm shallow seas, then late-Devonian crises",
               "Late-Devonian extinctions hit hard"
             ],
             [
               "Carboniferous",
-              "Pangaea assembles; tropical wetland deposits later become __________",
+              "Pangaea assembles; tropical wetland deposits later become coal",
               "Giant arthropods and amphibians dominate wet land habitats",
-              "Tropics warm; O₂ above modern, CO₂ falls; southern Gondwana glaciates",
+              "Tropics warm; O₂ above modern, CO₂ declines; southern Gondwana __________________",
               "Amniotic egg: reproduction away from standing water"
             ],
             [
               "Permian",
-              "_______________ fully assembled; one ocean, Panthalassa; dry interior",
+              "Pangaea fully assembled; one ocean, ___________________; dry interior",
               "Synapsids like <i>Dimetrodon</i> (mammal line), not dinosaurs",
               "Varies; ends with severe warming, ocean oxygen loss",
-              "End-Permian extinction, ~252 million years ago: Siberian Traps volcanism"
+              "End-Permian extinction, about 252 million years ago: Siberian Traps volcanism"
             ],
             [
               "Triassic",
-              "Pangaea largely intact; late-Triassic rifting starts breakup",
+              "Pangaea largely intact; late-Triassic _______________ starts breakup",
               "Ecosystems rebuild after end-Permian; reptiles diversify",
               "Hot, dry, strongly seasonal interiors",
-              "First ___________________ appear, ~230 million years ago"
+              "First dinosaurs appear, about 230 million years ago"
             ],
             [
               "Jurassic",
               "Pangaea splits; _________________ and Gulf of Mexico open",
               "Giant sauropods, theropods rule land; marine reptiles, pterosaurs",
               "Greenhouse; shallow seas cover large areas",
-              "<i>Archaeopteryx</i>, feathered dinosaur near bird origins, ~150 million years ago"
+              "<i>Archaeopteryx</i>, feathered dinosaur near bird origins, about 150 million years ago"
             ],
             [
               "Cretaceous",
               "High sea levels flood continents; forests even in Antarctica",
               "Flowering plants spread; dinosaurs flourish; small mammals present",
               "Greenhouse conditions, high sea levels",
-              "K–Pg extinction, ~66 million years ago: _________________ impact"
+              "K–Pg extinction, about 66 million years ago: _________________ impact"
             ],
             [
               "Paleogene",
-              "India collides with Asia; Alpine–Himalayan, Circum-Pacific belts begin",
-              "_______________ diversify rapidly into space left by K–Pg",
+              "____________ collides with Asia; Alpine–Himalayan, Circum-Pacific belts begin",
+              "Mammals diversify rapidly into space left by K–Pg",
               "Gradual cooling as Mesozoic greenhouse fades",
               ""
             ],
