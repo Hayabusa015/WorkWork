@@ -39,9 +39,6 @@ the duplicate must point at the authoritative source.
 | `config/drive.json` | Verified folder IDs, folder grammar, known filing defects |
 | `scripts/` | `measure_tokens.py`, `validate_agents.py`, `validate_schemas.py`, `validate_references.py`, and others |
 
-**Not yet built:** the weekly-review Routine itself (Phase 13 — deliberately deferred until the
-system has real usage to report on).
-
 ## The analysis behind it
 
 Read in this order:
@@ -76,7 +73,8 @@ Values live in [`brand/tokens.json`](brand/tokens.json) — the only place a hex
 - **CONFLICT-26** — the Gizmos rule vs. the built U1 materials that use one.
 - **Q-13** — whether to add a `99 Archive/` folder to the Drive content folders.
 
-## What has not happened
+## What has and has not happened
 
-No legacy skill has been modified. No Google Drive object has been created, renamed, moved, or
-deleted. No standard has been written as authoritative. All Drive access so far has been read-only.
+No legacy skill has been modified; they stay installed until retirement (see `CLAUDE.md`). Drive
+has been changed: every create, rename, move and trash is logged in `reports/drive-operations/`
+before it happens, and filed documents are listed in `reports/filing-queue.md`.
