@@ -21,8 +21,8 @@
 | **Affected Courses** | None. |
 | **Risk** | Low. |
 | **Recommendation** | Option B. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull in chat, 2026-11-09, verbatim: "approve all of 0066 and 0067 option B, leave wells empty". Option B. §3 question 2 was not answered separately; the approval covers the option B line as written. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
