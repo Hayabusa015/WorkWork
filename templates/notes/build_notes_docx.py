@@ -536,6 +536,13 @@ def render_cue(col, row, pal):
 
 
 def render_prompt(col, text, answer, lines, key, pal):
+    # An inline fill-in (no ruled line) shows its answer IN the line on the key, so the
+    # key page is the student page with the blanks written in - same height, same breaks.
+    if lines == 0:
+        # Inline blanks are written ON the line: give the handwriting a little air.
+        col.text(answer if answer else text, BODY, line=BODY_LINE, bold=bool(answer),
+                 before=3, after=3)
+        return
     col.text(text, BODY, line=BODY_LINE)
     if answer:
         col.text(answer, BODY, line=BODY_LINE, bold=True, before=4, after=8)

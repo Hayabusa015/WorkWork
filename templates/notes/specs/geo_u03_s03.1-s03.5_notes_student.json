@@ -128,7 +128,8 @@
                 "widths": [
                   0.55,
                   0.45
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -140,7 +141,7 @@
               ],
               "extraNotes": false,
               "lead": [
-                "*Use several properties together. Color alone is not enough."
+                "*Use several properties together. Color alone is not enough. Most have a defining characteristic."
               ],
               "table": {
                 "headers": [
@@ -184,13 +185,10 @@
                   0.22,
                   0.22,
                   0.56
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 05",
               "cueLabel": "SLIDE 05",
@@ -221,7 +219,11 @@
                 },
                 "*Describe the shine before you guess the mineral."
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 06",
               "cueLabel": "SLIDE 06",
@@ -240,39 +242,16 @@
                 "image": "../assets/geo_u03_s06_mohs.png",
                 "keyImage": "../assets/geo_u03_s06_mohs_key.png"
               },
-              "table": {
-                "headers": [
-                  "Field tool",
-                  "Hardness"
-                ],
-                "rows": [
-                  [
-                    "Fingernail",
-                    ""
-                  ],
-                  [
-                    "Copper",
-                    ""
-                  ],
-                  [
-                    "Glass",
-                    ""
-                  ],
-                  [
-                    "Steel",
-                    ""
-                  ]
-                ],
-                "widths": [
-                  0.5,
-                  0.5
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "rows": [
+              "notes": [
+                {
+                  "label": "Field tools"
+                },
+                {
+                  "prompt": "Fingernail ≈ ________    Copper ≈ ________    Glass ≈ ________    Steel ≈ ________",
+                  "lines": 0
+                }
+              ]
+            },
             {
               "title": "Slide 07",
               "cueLabel": "SLIDE 07",
@@ -317,7 +296,8 @@
                 "widths": [
                   0.32,
                   0.68
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -363,7 +343,8 @@
                 "widths": [
                   0.32,
                   0.68
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             }
           ]
@@ -467,7 +448,8 @@
                 "widths": [
                   0.28,
                   0.72
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -495,11 +477,7 @@
                 "image": "../assets/geo_u03_s12_sandstone_chain.png",
                 "keyImage": "../assets/geo_u03_s12_sandstone_chain_key.png"
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 13",
               "cueLabel": "SLIDE 13",
@@ -516,7 +494,11 @@
               "notes": [
                 "*No single starting point. Any exposed rock can become sediment."
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 14",
               "cueLabel": "SLIDE 14",
@@ -537,11 +519,7 @@
               "notes": [
                 "*The quartz grains stay solid during the change to quartzite."
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 15",
               "cueLabel": "SLIDE 15",
@@ -668,7 +646,8 @@
                   0.26,
                   0.24,
                   0.5
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -692,11 +671,7 @@
                   "lines": 0
                 }
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 21",
               "cueLabel": "SLIDE 21",
@@ -740,9 +715,14 @@
                 "widths": [
                   0.28,
                   0.72
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 22",
               "cueLabel": "SLIDE 22",
@@ -792,13 +772,10 @@
                   0.19,
                   0.28,
                   0.32
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 23",
               "cueLabel": "SLIDE 23",
@@ -812,7 +789,8 @@
               ],
               "figure": {
                 "image": "../assets/geo_u03_bowens.png",
-                "keyImage": "../assets/geo_u03_bowens_key.png"
+                "keyImage": "../assets/geo_u03_bowens_key.png",
+                "widthIn": 5.3
               }
             },
             {
@@ -868,7 +846,8 @@
                   0.25,
                   0.25,
                   0.25
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             }
           ]
@@ -906,7 +885,8 @@
                 "widths": [
                   0.3,
                   0.7
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -946,7 +926,8 @@
                 "widths": [
                   0.3,
                   0.7
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -1037,11 +1018,7 @@
                 "image": "../assets/geo_u03_s30_sediment_rock.png",
                 "keyImage": "../assets/geo_u03_s30_sediment_rock_key.png"
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 31",
               "cueLabel": "SLIDE 31",
@@ -1080,9 +1057,14 @@
                   0.24,
                   0.42,
                   0.34
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 32",
               "cueLabel": "SLIDE 32",
@@ -1128,7 +1110,8 @@
                   0.38,
                   0.3,
                   0.32
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -1178,13 +1161,10 @@
                 "widths": [
                   0.32,
                   0.68
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 34",
               "cueLabel": "SLIDE 34",
@@ -1208,7 +1188,11 @@
                   "lines": 0
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 35",
               "cueLabel": "SLIDE 35",
@@ -1240,7 +1224,8 @@
                 "widths": [
                   0.32,
                   0.68
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -1279,13 +1264,10 @@
                 "widths": [
                   0.3,
                   0.7
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 37",
               "cueLabel": "SLIDE 37",
@@ -1379,11 +1361,7 @@
                   "lines": 1
                 }
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 41",
               "cueLabel": "SLIDE 41",
@@ -1413,9 +1391,14 @@
                 "widths": [
                   0.3,
                   0.7
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 42",
               "cueLabel": "SLIDE 42",
@@ -1478,13 +1461,10 @@
                 "widths": [
                   0.5,
                   0.5
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 44",
               "cueLabel": "SLIDE 44",
@@ -1502,7 +1482,11 @@
                 "image": "../assets/geo_u03_met_id_key.png",
                 "keyImage": "../assets/geo_u03_met_id_key_key.png"
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 45",
               "cueLabel": "SLIDE 45",
@@ -1534,7 +1518,8 @@
                 "widths": [
                   0.3,
                   0.7
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
             },
             {
@@ -1570,13 +1555,10 @@
                 "widths": [
                   0.32,
                   0.68
-                ]
+                ],
+                "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 47",
               "cueLabel": "SLIDE 47",

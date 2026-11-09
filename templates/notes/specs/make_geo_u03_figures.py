@@ -64,20 +64,20 @@ def wordbank(fig, y, w, lines, note=None):
 def rock_cycle(key):
     """Laid out as slide 13 is: Magma top left, Igneous top right, Sediment right,
     Sedimentary bottom, Metamorphic left. Arrow words are the slide's."""
-    W, H = 6.2, 4.55
+    W, H = 6.2, 3.75
     g = Fig(W, H)
-    BW, BH = 1.6, 0.5
-    nodes = {"mag": (1.0, 0.35, "MAGMA", True), "ign": (5.2, 0.35, "IGNEOUS ROCK", False),
-             "met": (0.9, 1.95, "METAMORPHIC ROCK", False), "sed": (5.3, 1.95, "SEDIMENT", True),
-             "sdr": (3.1, 3.5, "SEDIMENTARY ROCK", False)}
-    edges = [((1.8, 0.35), (4.4, 0.35), "Cooling", .5),
-             ((5.25, 0.6), (5.3, 1.7), "Weathering & erosion", .5),
-             ((5.1, 2.2), (3.9, 3.3), "Compaction & cementation", .5),
-             ((2.3, 3.35), (1.0, 2.2), "Heat & pressure", .5),
-             ((0.9, 1.7), (1.0, 0.6), "Melting", .5),
-             ((4.5, 0.6), (1.7, 1.75), "Heat & pressure", .5),
-             ((1.7, 1.95), (4.5, 1.95), "Weathering & erosion", .5)]
-    LW, LH = 1.7, 0.38
+    BW, BH = 1.6, 0.44
+    nodes = {"mag": (1.0, 0.25, "MAGMA", True), "ign": (5.2, 0.25, "IGNEOUS ROCK", False),
+             "met": (0.9, 1.55, "METAMORPHIC ROCK", False), "sed": (5.3, 1.55, "SEDIMENT", True),
+             "sdr": (3.1, 2.8, "SEDIMENTARY ROCK", False)}
+    edges = [((1.8, 0.25), (4.4, 0.25), "Cooling", .5),
+             ((5.25, 0.47), (5.3, 1.33), "Weathering & erosion", .5),
+             ((5.1, 1.77), (3.9, 2.6), "Compaction & cementation", .5),
+             ((2.3, 2.62), (1.0, 1.77), "Heat & pressure", .5),
+             ((0.9, 1.33), (1.0, 0.47), "Melting", .5),
+             ((4.5, 0.47), (1.7, 1.38), "Heat & pressure", .5),
+             ((1.7, 1.55), (4.5, 1.55), "Weathering & erosion", .5)]
+    LW, LH = 1.7, 0.34
     labels = []
     for p0, p1, txt, t in edges:
         g.arrow(p0, p1)
@@ -86,7 +86,7 @@ def rock_cycle(key):
         g.box(cx, cy, LW, LH, txt if key else "", key, bold=False, pt=8.5, edge=HAIR, lw=0.6)
     for k, (x, y, name, printed) in nodes.items():
         g.box(x, y, BW, BH, name if (printed or key) else "", key and not printed, lw=1.0)
-    wordbank(g, 4.08, W, [["igneous rock", "sedimentary rock", "metamorphic rock", "cooling", "melting"],
+    wordbank(g, 3.3, W, [["igneous rock", "sedimentary rock", "metamorphic rock", "cooling", "melting"],
                           ["weathering & erosion", "compaction & cementation", "heat & pressure"]],
              "Terms may be used more than once.")
     return g
@@ -95,33 +95,33 @@ def rock_cycle(key):
 def bowen(key):
     """Slide 23: temperature bar, the two series, the low-temperature minerals, and the
     composition column, in the slide's words."""
-    W, H = 6.2, 4.55
+    W, H = 6.2, 3.85
     g = Fig(W, H)
     g.text(0.38, 0.14, "HOTTER", 7.5, True, LABEL); g.text(0.38, 0.3, "~1200 °C", 7.5, False, LABEL)
-    g.arrow((0.38, 0.42), (0.38, 3.55), LABEL, 1.2)
-    g.text(0.38, 3.68, "COOLER", 7.5, True, LABEL); g.text(0.38, 3.84, "~650 °C", 7.5, False, LABEL)
+    g.arrow((0.38, 0.42), (0.38, 2.95), LABEL, 1.2)
+    g.text(0.38, 3.07, "COOLER", 7.5, True, LABEL); g.text(0.38, 3.23, "~650 °C", 7.5, False, LABEL)
     g.text(1.75, 0.14, "DISCONTINUOUS", 7.5, True, LABEL)
     g.text(1.75, 0.3, "Mineral type changes", 7, False, LABEL)
     g.text(3.75, 0.14, "CONTINUOUS", 7.5, True, LABEL)
     g.text(3.75, 0.3, "Plagioclase changes", 7, False, LABEL)
-    BH = 0.36
-    disc = [("Olivine", 0.65), ("Pyroxene", 1.12), ("Amphibole", 1.59), ("Biotite", 2.06)]
+    BH = 0.3
+    disc = [("Olivine", 0.6), ("Pyroxene", 0.98), ("Amphibole", 1.36), ("Biotite", 1.74)]
     for i, (m, y) in enumerate(disc):
         g.box(1.75, y, 1.3, BH, m if key else "", key)
         if i: g.arrow((1.75, disc[i - 1][1] + BH / 2), (1.75, y - BH / 2))
-    g.box(3.75, 0.65, 1.6, 0.46, "Calcium-rich\nplagioclase" if key else "", key, pt=8.5)
-    g.box(3.75, 2.0, 1.6, 0.46, "Sodium-rich\nplagioclase" if key else "", key, pt=8.5)
-    g.arrow((3.75, 0.88), (3.75, 1.77))
-    low = [("Potassium feldspar", 2.92), ("Muscovite", 3.37), ("Quartz", 3.82)]
-    g.arrow((1.75, 2.06 + BH / 2), (2.45, 2.92 - BH / 2)); g.arrow((3.75, 2.23), (3.05, 2.92 - BH / 2))
+    g.box(3.75, 0.65, 1.6, 0.42, "Calcium-rich\nplagioclase" if key else "", key, pt=8.5)
+    g.box(3.75, 1.7, 1.6, 0.42, "Sodium-rich\nplagioclase" if key else "", key, pt=8.5)
+    g.arrow((3.75, 0.86), (3.75, 1.49))
+    low = [("Potassium feldspar", 2.4), ("Muscovite", 2.78), ("Quartz", 3.16)]
+    g.arrow((1.75, 1.74 + BH / 2), (2.45, 2.4 - BH / 2)); g.arrow((3.75, 1.91), (3.05, 2.4 - BH / 2))
     for i, (m, y) in enumerate(low):
         g.box(2.75, y, 1.7, BH, m if key else "", key)
         if i: g.arrow((2.75, low[i - 1][1] + BH / 2), (2.75, y - BH / 2))
-    comp = [("Ultramafic", 0.42, 1.05), ("Mafic", 1.05, 1.65), ("Intermediate", 1.65, 2.3),
-            ("Felsic", 2.3, 4.0)]
+    comp = [("Ultramafic", 0.42, 0.95), ("Mafic", 0.95, 1.45), ("Intermediate", 1.45, 1.95),
+            ("Felsic", 1.95, 3.31)]
     for name, y0, y1 in comp:
         g.box(5.55, (y0 + y1) / 2, 1.15, y1 - y0, name if key else "", key, pt=8.5)
-    wordbank(g, 4.28, W, [["olivine", "pyroxene", "amphibole", "biotite", "muscovite", "quartz",
+    wordbank(g, 3.58, W, [["olivine", "pyroxene", "amphibole", "biotite", "muscovite", "quartz",
                            "potassium feldspar"],
                           ["calcium-rich plagioclase", "sodium-rich plagioclase", "ultramafic", "mafic",
                            "intermediate", "felsic"]])
@@ -132,33 +132,33 @@ def mohs(key):
     """Slide 6's table: hardness printed, mineral to write."""
     mins = ["Talc", "Gypsum", "Calcite", "Fluorite", "Apatite",
             "Orthoclase", "Quartz", "Topaz", "Corundum", "Diamond"]
-    W, H = 6.2, 2.05
+    W, H = 6.2, 1.72
     g = Fig(W, H)
     for half in range(2):
         x0 = 0.02 + half * 3.14
-        g.box(x0 + 0.3, 0.17, 0.6, 0.3, "1–5" if half == 0 else "6–10", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
-        g.box(x0 + 1.8, 0.17, 2.4, 0.3, "Mineral", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
+        g.box(x0 + 0.3, 0.17, 0.6, 0.28, "1–5" if half == 0 else "6–10", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
+        g.box(x0 + 1.8, 0.17, 2.4, 0.28, "Mineral", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
         for i in range(5):
-            y = 0.5 + i * 0.34
+            y = 0.46 + i * 0.28
             n = half * 5 + i
-            g.box(x0 + 0.3, y, 0.6, 0.34, str(n + 1), bold=False, pt=9, edge=HAIR, lw=0.6)
-            g.box(x0 + 1.8, y, 2.4, 0.34, mins[n] if key else "", key, pt=9, edge=HAIR, lw=0.6)
+            g.box(x0 + 0.3, y, 0.6, 0.28, str(n + 1), bold=False, pt=9, edge=HAIR, lw=0.6)
+            g.box(x0 + 1.8, y, 2.4, 0.28, mins[n] if key else "", key, pt=9, edge=HAIR, lw=0.6)
     return g
 
 # ---------------------------------------------------------------- ID keys
 def id_key(root, yes, no, bank, key):
     rows = max(len(yes), len(no))
-    W, H = 6.2, 1.15 + rows * 0.55 + 0.45
+    W, H = 6.2, 1.1 + rows * 0.44 + 0.4
     g = Fig(W, H)
-    g.box(W / 2, 0.25, 2.0, 0.4, root)
+    g.box(W / 2, 0.22, 2.0, 0.36, root)
     for side, (cx, label, items) in enumerate(((1.55, "YES", yes), (4.65, "NO", no))):
-        g.arrow((W / 2 + (-0.6 if side == 0 else 0.6), 0.45), (cx, 0.72))
-        g.box(cx, 0.88, 0.7, 0.3, label, pt=8.5)
+        g.arrow((W / 2 + (-0.6 if side == 0 else 0.6), 0.4), (cx, 0.66))
+        g.box(cx, 0.8, 0.7, 0.28, label, pt=8.5)
         for i, (clue, ans) in enumerate(items):
-            y = 1.45 + i * 0.55
-            g.box(cx - 0.62, y, 1.66, 0.42, clue, bold=False, pt=8, edge=HAIR, lw=0.6)
+            y = 1.35 + i * 0.44
+            g.box(cx - 0.62, y, 1.66, 0.36, clue, bold=False, pt=8, edge=HAIR, lw=0.6)
             g.arrow((cx + 0.21, y), (cx + 0.43, y))
-            g.box(cx + 0.92, y, 0.98, 0.42, ans if key else "", key, pt=8.5)
+            g.box(cx + 0.92, y, 0.98, 0.36, ans if key else "", key, pt=8.5)
     wordbank(g, H - 0.2, W, [bank])
     return g
 
@@ -179,16 +179,16 @@ def branch2(root, branches, leaves, key):
     """One root, two branches, two leaves under each - the builder's flowchart shape,
     drawn wide enough to hold the slide's full wording. The student copy prints only
     the root, as the builder's flowchart does."""
-    W, H = 6.2, 2.15
+    W, H = 6.2, 1.8
     g = Fig(W, H)
-    g.box(W / 2, 0.22, 2.1, 0.38, root)
+    g.box(W / 2, 0.2, 2.1, 0.34, root)
     for b, cx in enumerate((1.55, 4.65)):
-        g.arrow((W / 2 + (-0.5 if b == 0 else 0.5), 0.41), (cx, 0.66))
-        g.box(cx, 0.85, 2.6, 0.38, branches[b] if key else "", key)
+        g.arrow((W / 2 + (-0.5 if b == 0 else 0.5), 0.37), (cx, 0.58))
+        g.box(cx, 0.75, 2.6, 0.34, branches[b] if key else "", key)
         for j in range(2):
-            y = 1.38 + j * 0.5
-            g.box(cx, y, 2.9, 0.42, leaves[2 * b + j] if key else "", key, bold=False, pt=8.5)
-        g.d.line([px(cx), px(1.04), px(cx), px(1.17)], fill=rgb(LABEL), width=3)
+            y = 1.17 + j * 0.4
+            g.box(cx, y, 2.9, 0.34, leaves[2 * b + j] if key else "", key, bold=False, pt=8.5)
+        g.d.line([px(cx), px(0.92), px(cx), px(1.0)], fill=rgb(LABEL), width=3)
     return g
 
 FLOWS = {
@@ -209,7 +209,7 @@ def chain(steps, blank, key, caption=None, desc_pt=7.5):
     W = 6.2
     gap = 0.26
     bw = (W - 0.04 - gap * (n - 1)) / n
-    nh, dh = 0.36, 0.62
+    nh, dh = 0.32, 0.52
     H = 0.06 + nh + dh + 0.06 + (0.3 if caption else 0)
     g = Fig(W, H)
     for i, (name, desc) in enumerate(steps):

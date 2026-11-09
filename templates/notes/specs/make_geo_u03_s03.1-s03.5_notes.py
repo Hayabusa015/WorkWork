@@ -41,7 +41,7 @@ def P(prompt, answer):
     return {"prompt": head, "answer": answer, "lines": 2 if frag > 55 else 1}
 
 
-def T(headers, rows, widths=None, row_h=None):
+def T(headers, rows, widths=None, row_h=0.27):
     """A fill-in table. rows: the first cell is printed in both copies; every later
     cell is the key's answer and is left blank on the student copy."""
     t = {"headers": headers, "rows": [[r[0]] + [""] * (len(r) - 1) for r in rows],
@@ -93,7 +93,7 @@ s31 = {"code": "3.1", "title": "Minerals & Mineral ID",
           ["A specific recipe. Quartz: SiO₂", "Definite composition"],
           ["Atoms follow a repeating pattern.", "Crystal structure"]], widths=[0.55, 0.45])),
     S(4, "Common Minerals", "Record: each formula and its key clue",
-      lead=["*Use several properties together. Color alone is not enough."],
+      lead=["*Use several properties together. Color alone is not enough. Most have a defining characteristic."],
       table=T(["Mineral", "Formula", "Key clue"], [
           ["Quartz", "SiO₂", "Hardness 7"],
           ["Halite", "NaCl", "Cubic cleavage"],
@@ -115,9 +115,9 @@ s31 = {"code": "3.1", "title": "Minerals & Mineral ID",
       lead=[P(f"Hardness measures resistance to {LINE}.",
                "Hardness measures resistance to scratching.")],
       figure=FIG("geo_u03_s06_mohs"),
-      table=T(["Field tool", "Hardness"], [
-          ["Fingernail", "≈ 2.5"], ["Copper", "≈ 3.5"], ["Glass", "≈ 5.5"], ["Steel", "≈ 6.5"]],
-          widths=[0.5, 0.5])),
+      notes=[{"label": "Field tools"},
+             P(f"Fingernail ≈ {LINE}    Copper ≈ {LINE}    Glass ≈ {LINE}    Steel ≈ {LINE}",
+               "Fingernail ≈ 2.5    Copper ≈ 3.5    Glass ≈ 5.5    Steel ≈ 6.5")]),
     S(7, "Cleavage, Fracture, and Special Tests", "Record: how each sample breaks or reacts",
       lead=[P(f"Cleavage breaks along {LINE}. Fracture breaks {LINE}.",
                "Cleavage breaks along flat planes. Fracture breaks unevenly.")],
@@ -239,7 +239,7 @@ s32 = {"code": "3.2", "title": "Igneous Rocks",
   {"rows": [
     S(23, "Bowen's Reaction Series", "Record: each mineral, in the order it forms",
       lead=["*As magma cools, different minerals can form."],
-      figure=FIG("geo_u03_bowens")),
+      figure=dict(FIG("geo_u03_bowens"), widthIn=5.3)),
   ]},
   {"rows": [
     S(24, "Igneous Rock ID Chart", "Record: the rock for each texture and composition",
@@ -415,8 +415,8 @@ s34 = {"code": "3.4", "title": "Metamorphic Rocks",
 
 # Page breaks, measured with block_height(): (section, slides that open each page).
 # Every block stays in slide order; only where the page turns is chosen here.
-BREAKS = {"3.1": [3, 5, 7, 9], "3.5": [11, 13, 15], "3.2": [18, 21, 23, 25],
-          "3.3": [29, 31, 34, 37], "3.4": [39, 41, 44, 47]}
+BREAKS = {"3.1": [3, 6, 9], "3.5": [11, 14], "3.2": [18, 22, 25],
+          "3.3": [29, 32, 35], "3.4": [39, 42, 45]}
 
 
 def slide_of(row):
