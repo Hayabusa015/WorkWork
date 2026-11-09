@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-09
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0066 | | One worksheet entry may cover a section span | PROPOSED | `governance/proposals/SHULL-CHG-0066-study-guide-unit-span.md` |
+
 ## 2026-11-08
 
 | ID | Date | Change | Status | Record |
