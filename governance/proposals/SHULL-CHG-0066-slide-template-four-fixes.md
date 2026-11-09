@@ -23,8 +23,8 @@
 | **Affected Courses** | Item 1: Chemistry today; the fix is course-independent. Items 2 and 3: all three. Item 4: Chemistry U01 S1.4 only. |
 | **Risk** | Low for items 1, 2 and 4. Medium for item 3, because it changes what a master draws. |
 | **Recommendation** | Approve items 1, 2 and 4. Decide item 3 after answering the question in §4. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by Matthew Shull in chat, 2026-11-09, verbatim: "approve all of 0066 and 0067 option B, leave wells empty". All four items approved. On §4 question 1: unused wells stay empty. §4 question 2 was not answered separately; the approval covers item 1 as proposed (neutral label). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
