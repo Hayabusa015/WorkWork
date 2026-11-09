@@ -35,6 +35,9 @@ from _shull_name import document_name, short_title   # noqa: E402
 # A project key is reference tables and grading notes, not worked questions. It draws them
 # with the handout's own blocks, so the key and the handout share one look.
 from build_worksheet_docx import table_block, notes_block   # noqa: E402
+# A unit span (SHULL-CHG-0066) is read by the student builder's own helpers, so the key's
+# header and the handout's header cannot disagree about what an entry covers.
+from build_worksheet_docx import span_codes, span_label, check_spans   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -114,6 +117,18 @@ def main():
     if bad:
         return refuse(f"section(s) {', '.join(bad)} are not in courses/{course}/DECISIONS.md.")
 
+    # Opt-in: only a spec that uses coversSections gets these checks, so no existing spec
+    # can be refused by them (SHULL-CHG-0066). The general sections / sectionsContent
+    # agreement check is not added here for every spec; that is a separate finding.
+    if any("coversSections" in sec for sec in sections):
+        err = check_spans(spec, course, sections)
+        if err:
+            return refuse(err)
+        declared = [c for sec in sections for c in span_codes(sec)]
+        if declared != list(spec["sections"]):
+            return refuse(f"sections {spec['sections']} but content for {declared}. "
+                          "The two lists are the same fact and must agree. SHULL-CHG-0066.")
+
     missing = []
     for sec in sections:
         for i, q in enumerate(sec.get("questions", []), start=1):
@@ -159,7 +174,7 @@ def main():
         para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()} · TEACHER KEY", 7.5,
              bold=True, color=pal.accent, caps_track=True, first=True)
         para(h, spec.get("key", {}).get("title", sec["title"]), 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
+        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
                   caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         pp = para(hr, kind.replace("_", " ").upper() + "  ·  ANSWER KEY",

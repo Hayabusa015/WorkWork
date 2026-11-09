@@ -22,7 +22,9 @@ The profile is enforced here, at build time. A rule that only lives in a documen
 not a mechanism.
 
 A packet holds one or more sections, each starting a new page - the shape of his own
-PHYS U01 practice sets, which run one section per page across the whole unit.
+PHYS U01 practice sets, which run one section per page across the whole unit. The one
+exception is opt-in: an entry with "coversSections" stands for a span of one unit's
+sections under a single header, for a unit study guide (SHULL-CHG-0066).
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
@@ -826,6 +828,62 @@ def refuse(msg, *more):
     return 1
 
 
+# ------------------------------------------------------------------ section spans
+# SHULL-CHG-0066. One entry may cover several sections of one unit ("coversSections"), so
+# a unit study guide gets one header, one Name / Date / Period / Score row and one page
+# flow instead of a page per section. Opt-in: an entry without the key takes none of
+# these paths and builds exactly as before. The key builder imports both helpers, so the
+# student copy and the key read a span the same way.
+
+def span_codes(sec):
+    """The section codes an entry stands for: its `coversSections`, or just its `code`."""
+    return list(sec.get("coversSections") or [sec["code"]])
+
+
+def span_label(sec):
+    """The header code: `S2.3` for one section, `S2.1-S2.5` for a span (the footer's form)."""
+    codes = span_codes(sec)
+    return f"S{codes[0]}" if len(codes) == 1 else f"S{codes[0]}-S{codes[-1]}"
+
+
+def check_spans(spec, course, sections):
+    """Validate every entry that sets `coversSections`. Returns an error string or None.
+
+    The `sections` / `sectionsContent` agreement itself stays in main(), reworded so a
+    span contributes its listed codes. That rule is one fact, kept."""
+    unit = int(spec["unit"])
+    def num(c):
+        a, b = str(c).split(".")
+        return (int(a), int(b))
+    for sec in sections:
+        if "coversSections" not in sec:
+            continue
+        codes = sec["coversSections"]
+        where = f"section {sec.get('code')}"
+        if not isinstance(codes, list) or len(codes) < 2:
+            return (f"{where}: coversSections must list at least two section codes, "
+                    f"got {codes!r}. One section needs no span. SHULL-CHG-0066.")
+        codes = [str(c) for c in codes]
+        if sec.get("code") != codes[0]:
+            return (f"{where}: an entry's code must equal the first code it covers "
+                    f"({codes[0]}). SHULL-CHG-0066.")
+        foreign = [c for c in codes if c.split(".")[0] != str(unit)]
+        if foreign:
+            return (f"{where}: coversSections lists {', '.join(foreign)}, which "
+                    f"{'is' if len(foreign) == 1 else 'are'} not in Unit {unit}. A span stays "
+                    "inside one unit. SHULL-CHG-0066.")
+        lo, hi = num(codes[0]), num(codes[-1])
+        between = sorted((c for c in known_sections(course)
+                          if c.split(".")[0] == str(unit) and lo <= num(c) <= hi), key=num)
+        skipped = [c for c in between if c not in codes]
+        if skipped:
+            return (f"{where}: the header prints S{codes[0]}-S{codes[-1]}, but "
+                    f"coversSections skips {', '.join(skipped)} "
+                    f"(courses/{course}/DECISIONS.md). A range may not quietly omit a "
+                    "section. SHULL-CHG-0066.")
+    return None
+
+
 def check_profile(spec, course, sec):
     """The course profile, enforced. Returns an error string or None."""
     qs = sec.get("questions", [])
@@ -943,10 +1001,16 @@ def main():
         return refuse(f"section(s) {', '.join(bad)} are not in "
                       f"courses/{course}/DECISIONS.md.",
                       "Nothing is built against a code not in the decisions file.")
-    declared = [s["code"] for s in sections]
+    err = check_spans(spec, course, sections)
+    if err:
+        return refuse(err)
+    # Each entry contributes its own code, or every code it covers (SHULL-CHG-0066).
+    declared = [c for s in sections for c in span_codes(s)]
     if declared != list(spec["sections"]):
         return refuse(f"sections {spec['sections']} but content for {declared}. "
-                      "The two lists are the same fact and must agree.")
+                      "The two lists are the same fact and must agree."
+                      + (" SHULL-CHG-0066." if any("coversSections" in x for x in sections)
+                         else ""))
 
     for sec in sections:
         err = check_profile(spec, course, sec)
@@ -986,7 +1050,7 @@ def main():
              + (f" · {sec['eyebrowNote']}" if sec.get("eyebrowNote") else ""), 7.5, bold=True,
              color=pal.accent, caps_track=True, first=True)
         para(h, title, 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
+        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
                   caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         pp = para(hr, kind_label.replace("_", " ").upper()
