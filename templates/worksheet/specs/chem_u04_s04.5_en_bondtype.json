@@ -11,15 +11,62 @@
       "code": "4.5",
       "title": "Electronegativity & Bond Type",
       "concept": {
-        "summary": "M = metal   ·   NM = nonmetal   ·   I = ionic   ·   PC = polar covalent   ·   NPC = nonpolar covalent",
-        "keyIdeas": [
-          "ΔEN = higher EN − lower EN, so ΔEN is never negative.",
-          "ΔEN under 0.40 is NPC. From 0.40 to 1.80 is PC. Over 1.80 is I."
-        ]
+        "summary": "M = metal   ·   NM = nonmetal   ·   ΔEN = higher EN − lower EN (never negative)",
+        "keyIdeas": []
       },
-      "directions": "Element 1 is the first element written in the formula. Mark it M or NM. Look up both EN values in the chart at the bottom, subtract, and write ΔEN as a subtraction, like 2.96 − 2.20 = 0.76. Then use ΔEN to name the bond. Cl₂, O₂ and N₂ are elements, not compounds. Check yourself: a metal with a nonmetal usually comes out I, and two nonmetals come out PC or NPC. Rows 21–23 are close calls: let ΔEN decide.",
+      "directions": "Fill in the organizer first. Then, for each formula: mark the first element M or NM, find ΔEN with the chart at the bottom (write the subtraction), and name the bond. Cl₂, O₂ and N₂ are elements. Rows 21–23 are close calls: let ΔEN decide.",
       "questions": [],
       "blocks": [
+        {
+          "kind": "table",
+          "role": "organizer",
+          "label": "BEFORE YOU START · FILL IN THE ORGANIZER",
+          "headers": [
+            "Bond type",
+            "First element",
+            "Second element",
+            "ΔEN",
+            "Electrons are…"
+          ],
+          "widths": [
+            0.29,
+            0.15,
+            0.15,
+            0.16,
+            0.25
+          ],
+          "rowHeightIn": 0.24,
+          "bodySize": 10,
+          "blankCols": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "rows": [
+            [
+              "Ionic (I)",
+              "M",
+              "NM",
+              "Over 1.80",
+              "Transferred"
+            ],
+            [
+              "Polar covalent (PC)",
+              "NM",
+              "NM",
+              "0.40 – 1.80",
+              "Shared unequally"
+            ],
+            [
+              "Nonpolar covalent (NPC)",
+              "NM",
+              "NM",
+              "Under 0.40",
+              "Shared equally"
+            ]
+          ]
+        },
         {
           "kind": "table",
           "points": 23,
@@ -37,7 +84,7 @@
             0.39,
             0.21
           ],
-          "rowHeightIn": 0.26,
+          "rowHeightIn": 0.24,
           "bodySize": 10,
           "blankCols": [
             2,
@@ -249,7 +296,7 @@
             0.0625
           ],
           "headerSize": 9,
-          "rowHeightIn": 0.22,
+          "rowHeightIn": 0.2,
           "rows": [
             [
               "2.20",
@@ -273,13 +320,12 @@
         }
       ],
       "keyNotes": [
-        "EN values are Pauling values to two decimals (CRC Handbook of Chemistry and Physics). H, C, N, O, F, Na and Cl match the values already used in the course. Cutoffs follow OpenStax Chemistry 2e, the same as the U4–U5 slides.",
-        "Rows 1–20 are clear: every ΔEN is at least 0.20 from a cutoff. Rows 21–23 are close calls added for discussion (Matt, 2026-11-10).",
-        "CH₄: 0.35 is just under 0.40, so NPC. A one-decimal chart (C 2.5, H 2.1) gives exactly 0.4, so have students use the sheet's two-decimal values.",
-        "HF: 1.78 is just under 1.80, so PC, even though F is the most electronegative element.",
-        "AlCl₃: Al is a metal, yet ΔEN is 1.55, so PC. It breaks the metal + nonmetal rule of thumb: ΔEN decides. That is why the check line says “usually”.",
-        "CO₂, CCl₄ and CF₄ have polar bonds but are nonpolar molecules because of their shape (5.4). This sheet asks about the bond only.",
-        "PH₃: H (2.20) is higher than P (2.19), so the subtraction is 2.20 − 2.19. NCl₃ catches students out: N and Cl are close (0.12), so the bond is NPC."
+        "EN values: Pauling, two decimals (CRC Handbook). Cutoffs: OpenStax Chemistry 2e, as in the U4–U5 slides.",
+        "Rows 1–20 are clear: every ΔEN is at least 0.20 from a cutoff. Rows 21–23 are close calls for discussion.",
+        "CH₄ 0.35 → NPC. A one-decimal chart gives exactly 0.4, so students should use the sheet's values.",
+        "HF 1.78 → PC, just under 1.80. AlCl₃: Al is a metal, but ΔEN 1.55 → PC. ΔEN decides, not the metal rule of thumb.",
+        "CO₂, CCl₄, CF₄: polar bonds, nonpolar molecules (5.4). This sheet asks about the bond.",
+        "PH₃: H (2.20) is higher than P (2.19). NCl₃ (0.12) catches students: N and Cl are close, so NPC."
       ]
     }
   ],
