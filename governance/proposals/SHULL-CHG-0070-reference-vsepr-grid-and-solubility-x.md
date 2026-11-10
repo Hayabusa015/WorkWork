@@ -21,9 +21,9 @@ course file into line with what the built sheets already do and with what the us
 | **Risk** | low — two list items in one course file; the built sheets already match the proposed text, so nothing is rebuilt. |
 | **Recommendation** | Approve. Both edits make the course file describe the sheets the user has already reviewed and kept. |
 | **Decision** | User, 2026-11-10, in chat, answering the VSEPR layout question and judgement calls 1–7 (call 1 being "keep X"): "keep all, use the grid" |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | 7204bf4 |
+| **Verified** | yes — DECISIONS items 3 and 9 checked against the built sheets Reference - VSEPR Shapes.pdf and Reference - Solubility.pdf by the main session. Secretary check: the edited items 3 and 9 and the new decision-log entry in `courses/chemistry/DECISIONS.md` match this record's Proposed Rule and drafted entry word for word. |
 
 ---
 

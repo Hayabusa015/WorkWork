@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0070 | 2026-11-10 | Reference packet: VSEPR grid, solubility X | PARTIAL | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
+| SHULL-CHG-0070 | 2026-11-10 | Reference packet: VSEPR grid, solubility X | CONFIRMED | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
 
 ## 2026-11-09
 
