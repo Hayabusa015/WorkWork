@@ -39,7 +39,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, fillin_table,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -344,6 +344,42 @@ def reflection_block(doc, block, pal):
         rule_lines(cc, int(block.get("linesEach", 2)), pal.ink)
     unpad_cell(c)
     return c
+
+
+def table_rows(block, key=False):
+    """The spec stores each row once, answers included. The student copy blanks the
+    columns named in `blankCols`; the key prints every cell. One source for both, so
+    the student sheet and its key cannot drift apart."""
+    if key:
+        return [list(r) for r in block["rows"]]
+    blank = set(block.get("blankCols", []))
+    return [["" if i in blank else v for i, v in enumerate(r)] for r in block["rows"]]
+
+
+def table_block(doc, block, pal, key=False):
+    """A fill-in table straight on the page: a row per item, a blank per answer.
+
+    For an identification drill (twenty formulas, four things to decide about each)
+    a card per item costs twenty cards and four pages; a table costs one. Drawn by
+    `fillin_table`, the primitive the guided notes already use, so there is one table
+    style in the system rather than two.
+    """
+    n = len(block["headers"])
+    bad = [i for i, r in enumerate(block["rows"], 1) if len(r) != n]
+    if bad:
+        raise SystemExit(f"table block: row(s) {bad} do not have {n} cells.")
+    if block.get("label"):
+        c = one_cell(doc)
+        label(c, block["label"], pal, first=True)
+    t = fillin_table(doc, {"headers": block["headers"],
+                           "rows": table_rows(block, key),
+                           "widths": block.get("widths"),
+                           "rowHeightIn": block.get("rowHeightIn", 0.34)},
+                     pal, TEXT_W_IN, header_fill=pal.surface, header_caps=False,
+                     header_size=float(block.get("headerSize", 7.5)),
+                     body_size=float(block.get("bodySize", 9.5)))
+    gap(doc, 4)
+    return t
 
 
 # ------------------------------------------------------------------------ questions
@@ -696,6 +732,8 @@ def main():
                 draw_block(one_cell(doc), block, pal, TEXT_W_IN - 0.3)
             elif kindb == "diagram":
                 diagram_block(one_cell(doc), block, pal, TEXT_W_IN - 0.3, HERE)
+            elif kindb == "table":
+                table_block(doc, block, pal)
             else:
                 return refuse(f"unknown block kind {kindb!r} in section {sec['code']}.")
 

@@ -32,6 +32,9 @@ from _shull_docx import (          # noqa: E402
 )
 
 from _shull_name import document_name, short_title   # noqa: E402
+# The key draws a table block with the student builder's own function, answers filled,
+# so the two copies are one structure and cannot drift.
+from build_worksheet_docx import table_block   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -167,6 +170,15 @@ def main():
         for i, q in enumerate(sec.get("questions", []), start=1):
             answer_block(doc, i, q, pal)
             gap(doc, 4)
+        for block in sec.get("blocks", []):
+            if block["kind"] == "table":
+                table_block(doc, block, pal, key=True)
+        notes = sec.get("keyNotes", [])
+        if notes:
+            gap(doc, 4)
+            para(doc, "TEACHER NOTES", 7.5, bold=True, color=pal.accent, caps_track=True)
+            for line in notes:
+                para(doc, "•  " + line, 9, color=pal.ink)
 
     running_footer(s, f"SHULL SCIENCE          {unit} · {span} · KEY", pal,
                    with_page_numbers=True)
