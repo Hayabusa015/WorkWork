@@ -17,60 +17,269 @@
           "ΔEN under 0.40 is NPC. From 0.40 to 1.80 is PC. Over 1.80 is I."
         ]
       },
-      "directions": "Element 1 is the first element written in the formula and Element 2 is the second. Mark each one M or NM. Look up both EN values in the chart at the bottom, subtract, and write ΔEN as a subtraction, like 2.96 − 2.20 = 0.76. Then use ΔEN to name the bond. Cl₂, O₂ and N₂ are elements, not compounds, so Element 1 and Element 2 are the same. Check yourself: a metal with a nonmetal should come out I, and two nonmetals should come out PC or NPC.",
+      "directions": "Element 1 is the first element written in the formula. Mark it M or NM. Look up both EN values in the chart at the bottom, subtract, and write ΔEN as a subtraction, like 2.96 − 2.20 = 0.76. Then use ΔEN to name the bond. Cl₂, O₂ and N₂ are elements, not compounds. Check yourself: a metal with a nonmetal usually comes out I, and two nonmetals come out PC or NPC. Rows 21–23 are close calls: let ΔEN decide.",
       "questions": [],
       "blocks": [
         {
           "kind": "table",
-          "points": 20,
-          "headers": ["#", "Formula", "Element 1: M or NM", "Element 2: M or NM", "ΔEN (show the subtraction)", "Bond type: I, PC or NPC"],
-          "widths": [0.047, 0.127, 0.153, 0.153, 0.327, 0.193],
-          "rowHeightIn": 0.29,
+          "points": 23,
+          "headers": [
+            "#",
+            "Formula",
+            "Element 1: M or NM",
+            "ΔEN (show the subtraction)",
+            "Bond type: I, PC or NPC"
+          ],
+          "widths": [
+            0.05,
+            0.15,
+            0.2,
+            0.39,
+            0.21
+          ],
+          "rowHeightIn": 0.26,
           "bodySize": 10,
-          "blankCols": [2, 3, 4, 5],
+          "blankCols": [
+            2,
+            3,
+            4
+          ],
           "rows": [
-            ["1",  "NaCl",  "M (Na)",  "NM (Cl)", "3.16 − 0.93 = 2.23", "I"],
-            ["2",  "H₂O",   "NM (H)",  "NM (O)",  "3.44 − 2.20 = 1.24", "PC"],
-            ["3",  "CCl₄",  "NM (C)",  "NM (Cl)", "3.16 − 2.55 = 0.61", "PC"],
-            ["4",  "Cl₂",   "NM (Cl)", "NM (Cl)", "3.16 − 3.16 = 0.00", "NPC"],
-            ["5",  "MgO",   "M (Mg)",  "NM (O)",  "3.44 − 1.31 = 2.13", "I"],
-            ["6",  "PH₃",   "NM (P)",  "NM (H)",  "2.20 − 2.19 = 0.01", "NPC"],
-            ["7",  "HCl",   "NM (H)",  "NM (Cl)", "3.16 − 2.20 = 0.96", "PC"],
-            ["8",  "CaF₂",  "M (Ca)",  "NM (F)",  "3.98 − 1.00 = 2.98", "I"],
-            ["9",  "KBr",   "M (K)",   "NM (Br)", "2.96 − 0.82 = 2.14", "I"],
-            ["10", "CS₂",   "NM (C)",  "NM (S)",  "2.58 − 2.55 = 0.03", "NPC"],
-            ["11", "NH₃",   "NM (N)",  "NM (H)",  "3.04 − 2.20 = 0.84", "PC"],
-            ["12", "O₂",    "NM (O)",  "NM (O)",  "3.44 − 3.44 = 0.00", "NPC"],
-            ["13", "LiF",   "M (Li)",  "NM (F)",  "3.98 − 0.98 = 3.00", "I"],
-            ["14", "CF₄",   "NM (C)",  "NM (F)",  "3.98 − 2.55 = 1.43", "PC"],
-            ["15", "NCl₃",  "NM (N)",  "NM (Cl)", "3.16 − 3.04 = 0.12", "NPC"],
-            ["16", "Na₂O",  "M (Na)",  "NM (O)",  "3.44 − 0.93 = 2.51", "I"],
-            ["17", "CO₂",   "NM (C)",  "NM (O)",  "3.44 − 2.55 = 0.89", "PC"],
-            ["18", "PCl₃",  "NM (P)",  "NM (Cl)", "3.16 − 2.19 = 0.97", "PC"],
-            ["19", "BaCl₂", "M (Ba)",  "NM (Cl)", "3.16 − 0.89 = 2.27", "I"],
-            ["20", "N₂",    "NM (N)",  "NM (N)",  "3.04 − 3.04 = 0.00", "NPC"]
+            [
+              "1",
+              "NaCl",
+              "M (Na)",
+              "3.16 − 0.93 = 2.23",
+              "I"
+            ],
+            [
+              "2",
+              "H₂O",
+              "NM (H)",
+              "3.44 − 2.20 = 1.24",
+              "PC"
+            ],
+            [
+              "3",
+              "CCl₄",
+              "NM (C)",
+              "3.16 − 2.55 = 0.61",
+              "PC"
+            ],
+            [
+              "4",
+              "Cl₂",
+              "NM (Cl)",
+              "3.16 − 3.16 = 0.00",
+              "NPC"
+            ],
+            [
+              "5",
+              "MgO",
+              "M (Mg)",
+              "3.44 − 1.31 = 2.13",
+              "I"
+            ],
+            [
+              "6",
+              "PH₃",
+              "NM (P)",
+              "2.20 − 2.19 = 0.01",
+              "NPC"
+            ],
+            [
+              "7",
+              "HCl",
+              "NM (H)",
+              "3.16 − 2.20 = 0.96",
+              "PC"
+            ],
+            [
+              "8",
+              "CaF₂",
+              "M (Ca)",
+              "3.98 − 1.00 = 2.98",
+              "I"
+            ],
+            [
+              "9",
+              "KBr",
+              "M (K)",
+              "2.96 − 0.82 = 2.14",
+              "I"
+            ],
+            [
+              "10",
+              "CS₂",
+              "NM (C)",
+              "2.58 − 2.55 = 0.03",
+              "NPC"
+            ],
+            [
+              "11",
+              "NH₃",
+              "NM (N)",
+              "3.04 − 2.20 = 0.84",
+              "PC"
+            ],
+            [
+              "12",
+              "O₂",
+              "NM (O)",
+              "3.44 − 3.44 = 0.00",
+              "NPC"
+            ],
+            [
+              "13",
+              "LiF",
+              "M (Li)",
+              "3.98 − 0.98 = 3.00",
+              "I"
+            ],
+            [
+              "14",
+              "CF₄",
+              "NM (C)",
+              "3.98 − 2.55 = 1.43",
+              "PC"
+            ],
+            [
+              "15",
+              "NCl₃",
+              "NM (N)",
+              "3.16 − 3.04 = 0.12",
+              "NPC"
+            ],
+            [
+              "16",
+              "Na₂O",
+              "M (Na)",
+              "3.44 − 0.93 = 2.51",
+              "I"
+            ],
+            [
+              "17",
+              "CO₂",
+              "NM (C)",
+              "3.44 − 2.55 = 0.89",
+              "PC"
+            ],
+            [
+              "18",
+              "PCl₃",
+              "NM (P)",
+              "3.16 − 2.19 = 0.97",
+              "PC"
+            ],
+            [
+              "19",
+              "BaCl₂",
+              "M (Ba)",
+              "3.16 − 0.89 = 2.27",
+              "I"
+            ],
+            [
+              "20",
+              "N₂",
+              "NM (N)",
+              "3.04 − 3.04 = 0.00",
+              "NPC"
+            ],
+            [
+              "21",
+              "CH₄",
+              "NM (C)",
+              "2.55 − 2.20 = 0.35",
+              "NPC"
+            ],
+            [
+              "22",
+              "HF",
+              "NM (H)",
+              "3.98 − 2.20 = 1.78",
+              "PC"
+            ],
+            [
+              "23",
+              "AlCl₃",
+              "M (Al)",
+              "3.16 − 1.61 = 1.55",
+              "PC"
+            ]
           ]
         },
         {
           "kind": "table",
           "role": "enReference",
           "label": "ELECTRONEGATIVITY (PAULING SCALE)",
-          "headers": ["H", "Li", "C", "N", "O", "F", "Na", "Mg", "P", "S", "Cl", "K", "Ca", "Br", "Ba"],
-          "widths": [0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0667, 0.0662],
+          "headers": [
+            "H",
+            "Li",
+            "C",
+            "N",
+            "O",
+            "F",
+            "Na",
+            "Mg",
+            "Al",
+            "P",
+            "S",
+            "Cl",
+            "K",
+            "Ca",
+            "Br",
+            "Ba"
+          ],
+          "widths": [
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625
+          ],
           "headerSize": 9,
           "rowHeightIn": 0.22,
           "rows": [
-            ["2.20", "0.98", "2.55", "3.04", "3.44", "3.98", "0.93", "1.31", "2.19", "2.58", "3.16", "0.82", "1.00", "2.96", "0.89"]
+            [
+              "2.20",
+              "0.98",
+              "2.55",
+              "3.04",
+              "3.44",
+              "3.98",
+              "0.93",
+              "1.31",
+              "1.61",
+              "2.19",
+              "2.58",
+              "3.16",
+              "0.82",
+              "1.00",
+              "2.96",
+              "0.89"
+            ]
           ]
         }
       ],
       "keyNotes": [
         "EN values are Pauling values to two decimals (CRC Handbook of Chemistry and Physics). H, C, N, O, F, Na and Cl match the values already used in the course. Cutoffs follow OpenStax Chemistry 2e, the same as the U4–U5 slides.",
-        "Every ΔEN is at least 0.20 from a cutoff, so a student working from a one-decimal chart still gets the same bond type on every row.",
-        "Element 2 is NM on every row. In a binary compound the metal is written first, and two metals bond metallically (4.4), which is outside I / PC / NPC.",
+        "Rows 1–20 are clear: every ΔEN is at least 0.20 from a cutoff. Rows 21–23 are close calls added for discussion (Matt, 2026-11-10).",
+        "CH₄: 0.35 is just under 0.40, so NPC. A one-decimal chart (C 2.5, H 2.1) gives exactly 0.4, so have students use the sheet's two-decimal values.",
+        "HF: 1.78 is just under 1.80, so PC, even though F is the most electronegative element.",
+        "AlCl₃: Al is a metal, yet ΔEN is 1.55, so PC. It breaks the metal + nonmetal rule of thumb: ΔEN decides. That is why the check line says “usually”.",
         "CO₂, CCl₄ and CF₄ have polar bonds but are nonpolar molecules because of their shape (5.4). This sheet asks about the bond only.",
-        "PH₃: H (2.20) is higher than P (2.19), so the subtraction is 2.20 − 2.19. NCl₃ catches students out: N and Cl are close (0.12), so the bond is NPC.",
-        "Left off on purpose: CH₄ (0.35) and HF (1.78) sit too close to a cutoff, and AlCl₃ (1.55) is a metal with a nonmetal but lands in the PC range."
+        "PH₃: H (2.20) is higher than P (2.19), so the subtraction is 2.20 − 2.19. NCl₃ catches students out: N and Cl are close (0.12), so the bond is NPC."
       ]
     }
   ],
