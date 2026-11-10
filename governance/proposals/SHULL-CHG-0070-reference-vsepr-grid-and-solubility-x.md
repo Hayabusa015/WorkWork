@@ -20,8 +20,8 @@ course file into line with what the built sheets already do and with what the us
 | **Affected Courses** | Chemistry. |
 | **Risk** | low — two list items in one course file; the built sheets already match the proposed text, so nothing is rebuilt. |
 | **Recommendation** | Approve. Both edits make the course file describe the sheets the user has already reviewed and kept. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | User, 2026-11-10, in chat, answering the VSEPR layout question and judgement calls 1–7 (call 1 being "keep X"): "keep all, use the grid" |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
