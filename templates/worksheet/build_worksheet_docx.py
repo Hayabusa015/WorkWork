@@ -28,7 +28,7 @@ sections under a single header, for a unit study guide (SHULL-CHG-0066).
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
-import json, os, sys
+import json, os, re, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
@@ -42,7 +42,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -320,6 +320,23 @@ def match_block(doc, block, pal):
     return c
 
 
+def inline_heading(cell, block, pal):
+    """A block's `heading` without `pageBreakBefore`: a section title drawn at the top of
+    the block's own non-splitting cell, so it moves with the block and can never end a
+    page alone. With `pageBreakBefore` the main loop draws it instead. Returns whether
+    it drew one. Opt-in: reflection and plan only."""
+    if not block.get("heading") or block.get("pageBreakBefore"):
+        return False
+    p = para(cell, block["heading"], 13, bold=True, color=pal.ink, first=True)
+    p.paragraph_format.space_after = Pt(4)
+    pPr = p._p.get_or_add_pPr()
+    b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
+    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18"); x.set(qn("w:space"), "2")
+    x.set(qn("w:color"), hexof(pal.display))
+    b.append(x); pPr.append(b)
+    return True
+
+
 def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
@@ -337,7 +354,8 @@ def reflection_block(doc, block, pal):
             # The heading goes INSIDE the first non-splitting row. Kept outside it, it
             # ended a page on its own with the question it introduces on the next one -
             # the same stranding the diagram block hit, one level up.
-            label(cc, block.get("label", "REFLECTION"), pal, first=True)
+            first = not inline_heading(cc, block, pal)
+            label(cc, block.get("label", "REFLECTION"), pal, first=first)
             p = cc.add_paragraph()
         else:
             p = cc.paragraphs[0]
@@ -627,9 +645,15 @@ def plan_block(doc, block, pal):
     and a plan is prose. A field with flex 0 is a label only (a circle-one choice)."""
     c = one_cell(doc, protect=True)
     cell_margins(c, top=0, bottom=0, left=0, right=0)
-    label(c, block["label"], pal, first=True)
+    first = not inline_heading(c, block, pal)
+    label(c, block["label"], pal, first=first)
+    # `"boldLabels": false` sets a label in regular weight, so a short prompt can carry its
+    # own <b> lead ("<b>Earth</b> what covered the land?"). Width is measured bold either
+    # way: an over-estimate costs a sliver of line, an under-estimate wraps the label.
+    bold_labels = block.get("boldLabels", True)
     for row in block["rows"]:
-        lab_ws = [round(text_width_in(k.replace("&nbsp;", " "), 9.5, bold=True) + 0.14, 2)
+        lab_ws = [round(text_width_in(re.sub(r"</?[bi]>", "", k).replace("&nbsp;", " "),
+                                      9.5, bold=True) + 0.14, 2)
                   for k, _ in row]
         free = TEXT_W_IN - sum(lab_ws) - 0.2 * (len(row) - 1)
         flex = sum(n for _, n in row) or 1
@@ -649,7 +673,7 @@ def plan_block(doc, block, pal):
             cell_margins(tc, top=0, bottom=20, left=0, right=0)
             tc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
             if kind == "lab":
-                rich(tc.paragraphs[0], k, 9.5, bold=True, color=pal.ink)
+                rich(tc.paragraphs[0], k, 9.5, bold=bold_labels, color=pal.ink)
             elif kind == "line":
                 borders(tc, pal.ink, sz=4, edges=("bottom",))
             tc.paragraphs[0].paragraph_format.space_after = Pt(0)
