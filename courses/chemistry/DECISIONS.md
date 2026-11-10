@@ -422,7 +422,7 @@ excluded: the electronegativity-difference bond-type scale, nuclear particle sym
 rules. Full list in "Reference packet contents".
 Supersedes: Reference packet contents (four-item list: periodic table, polyatomic ions, solubility
 rules, percent error).
-Status: CONFIRMED · SHULL-CHG-0058
+Status: CONFIRMED · SHULL-CHG-0068
 
 ### 2026-10-28 — Palette changed
 Chemistry's identity colours changed. Values live in `brand/tokens.json` `courses.chemistry`; the

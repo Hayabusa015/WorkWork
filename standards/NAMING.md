@@ -1,7 +1,7 @@
 # Naming
 
 **Authority:** SHULL-CHG-0024 (short, section-led names), SHULL-CHG-0041 (short topics),
-SHULL-CHG-0059 (course-level Reference names).
+SHULL-CHG-0069 (course-level Reference names).
 **Enforced by:** `scripts/validate_codes.py`
 **Folder names** are in `standards/DRIVE_ARCHITECTURE.md`; this file covers documents and images.
 
@@ -37,14 +37,14 @@ Course-level:   Reference - [Topic].pdf
 | `Type` | from the fixed list below, written with spaces |
 | `Version` | parallel-form letter (`A`, `B`, `C`), only when there is one |
 | `Key` | answer keys are **always separate files**; the word `Key` follows the type or version |
-| `Topic` / `Unit Title` | the **short title** (at most 20 characters) from the "Short titles" table in the course `DECISIONS.md`. **No row, no topic**: the name is `1.3 Lab.pdf`. Never shorten a title automatically, and never use the full title. A course-level topic is a row whose code is `REF`; a course-level name always has a topic, so with no `REF` row there is no course-level name (SHULL-CHG-0059). |
+| `Topic` / `Unit Title` | the **short title** (at most 20 characters) from the "Short titles" table in the course `DECISIONS.md`. **No row, no topic**: the name is `1.3 Lab.pdf`. Never shorten a title automatically, and never use the full title. A course-level topic is a row whose code is `REF`; a course-level name always has a topic, so with no `REF` row there is no course-level name (SHULL-CHG-0069). |
 | separator | space, hyphen, space. A name never contains `: / \ * ? " < > |`. They are illegal on Windows and in synced folders, so they are dropped from a topic. |
 
 A **descriptor** (`Longhand`, `Day 2`, `Extended`) follows the short title when it tells two files
 apart. One that repeats the short title is dropped.
 
 A document that covers **more than one section** is unit-level. A document that covers one is
-section-level. A document that spans **the whole year** is course-level (SHULL-CHG-0059).
+section-level. A document that spans **the whole year** is course-level (SHULL-CHG-0069).
 Course-level is used only then, and only for type `Reference`: it has no version and no key, and
 it is always a PDF. A document that spans several units but not the year is still unit-level. As
 with every other name, the course is not in it; the folder path (`[Course]/Reference/`,

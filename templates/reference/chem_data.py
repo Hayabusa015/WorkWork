@@ -1,4 +1,4 @@
-"""Chemistry reference packet data (SHULL-CHG-0058). Every value here goes through
+"""Chemistry reference packet data (SHULL-CHG-0068). Every value here goes through
 verify-content before the packet ships. Sources are noted per table."""
 
 # Z, symbol, name, average atomic mass (2 decimals; [n] = mass number of the longest-lived
@@ -37,7 +37,7 @@ ELEMENTS = [
 ]
 
 # Pauling electronegativity, from Wikipedia "Electronegativities of the elements (data page)",
-# read 2026-11-06. Shown to 2 decimals. Noble gases left blank (user decision, SHULL-CHG-0058).
+# read 2026-11-06. Shown to 2 decimals. Noble gases left blank (user decision, SHULL-CHG-0068).
 # Elements with no tabulated value (Pm, Eu, Yb, Z >= 104) are blank. Fr is given there as
 # ">0.79"; Pauling's 0.7 is used.
 EN = {"H":2.20,"Li":0.98,"Be":1.57,"B":2.04,"C":2.55,"N":3.04,"O":3.44,"F":3.98,
@@ -71,7 +71,7 @@ def position(z):
         if base + 17 <= z <= base + 31: return z - base - 13, period
     raise ValueError(z)
 
-# 37 polyatomic ions, grouped by charge; True = memorize (the 15). SHULL-CHG-0058.
+# 37 polyatomic ions, grouped by charge; True = memorize (the 15). SHULL-CHG-0068.
 # Formula markup: digits after a letter or ")" are subscripts; ^ starts the charge.
 POLYATOMIC = [
  ("1+", [("ammonium","NH4^+",True),("hydronium","H3O^+",True)]),
@@ -92,7 +92,7 @@ POLYATOMIC = [
          ("borate","BO3^3-",False)]),
 ]
 
-# Metals with more than one common charge, then fixed-charge exceptions. SHULL-CHG-0058.
+# Metals with more than one common charge, then fixed-charge exceptions. SHULL-CHG-0068.
 MULTI_CHARGE = [
  ("Copper", [("Cu^+","copper(I)"),("Cu^2+","copper(II)")]),
  ("Iron", [("Fe^2+","iron(II)"),("Fe^3+","iron(III)")]),

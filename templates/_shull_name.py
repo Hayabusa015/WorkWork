@@ -7,7 +7,7 @@ the same examples by their tests.
     1.2 Practice Set - Balancing.docx                  one section, short title
     1.2 Quiz A Key - Balancing.docx                    version letter, key
     Unit 1 Guided Notes - 1D Motion.docx               more than one section
-    Reference - Polyatomic Ions.pdf                    course-level, whole year (SHULL-CHG-0059)
+    Reference - Polyatomic Ions.pdf                    course-level, whole year (SHULL-CHG-0069)
 """
 import os, re
 
@@ -47,7 +47,7 @@ def short_title(course, key):
 
 def reference_titles(course):
     """The course-level topics: every row coded REF in the Short titles table of
-    courses/<course>/DECISIONS.md (SHULL-CHG-0059). Empty if there are none."""
+    courses/<course>/DECISIONS.md (SHULL-CHG-0069). Empty if there are none."""
     path = os.path.join(REPO, "courses", course, "DECISIONS.md")
     try:
         text = open(path).read()
@@ -64,7 +64,7 @@ def document_name(type_, sections, unit, topic=None, unit_title=None,
                   version=None, key=False, ext="docx", descriptor=None, scope=None):
     """`type_` may use underscores ("Practice_Set"); the name uses spaces.
     scope="course" is a whole-year document: Reference only, no code and no course word, because
-    the folder ([Course]/Reference/) carries the course (SHULL-CHG-0059, SHULL-CHG-0024)."""
+    the folder ([Course]/Reference/) carries the course (SHULL-CHG-0069, SHULL-CHG-0024)."""
     if scope == "course":
         if str(type_) != "Reference":
             raise ValueError(f"course-level names are for Reference only, not {type_!r}")

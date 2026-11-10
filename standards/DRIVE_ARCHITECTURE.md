@@ -12,8 +12,8 @@ is unchanged. See
 the system creates no content folders. The user adds them himself, and the folders named below are
 the ones it recognises when present. See
 `governance/proposals/SHULL-CHG-0035-drive-unit-folders.md`.
-**Amended by SHULL-CHG-0059**: a second course-level folder, `Reference`, for whole-year Reference
-documents. See `governance/proposals/SHULL-CHG-0059-course-wide-reference-filename.md`.
+**Amended by SHULL-CHG-0069**: a second course-level folder, `Reference`, for whole-year Reference
+documents. See `governance/proposals/SHULL-CHG-0069-course-wide-reference-filename.md`.
 **Folder IDs and operational notes:** `config/drive.json`. This file does not repeat them.
 **Google Drive is the canonical location for finished teaching documents.** The repository is
 canonical for the system. Claude Projects are working context, never storage.
@@ -30,7 +30,7 @@ SHULL Science/
 │   └── Image Library/
 │       ├── Chemistry/  Physics/  Geology/  Shared/
 └── [Course]/                        Chemistry · Physics · Geology
-    ├── Reference/                   course level; whole-year Reference documents (SHULL-CHG-0059)
+    ├── Reference/                   course level; whole-year Reference documents (SHULL-CHG-0069)
     ├── Snow Day/                    course level; snow-day assignments and keys (SHULL-CHG-0057)
     └── Unit ## - Unit Name/
         ├── Guided Notes/                  if the user made it
@@ -67,7 +67,7 @@ that must exist.
     filed in `[Course]/Snow Day/`, a sibling of the Unit folders. The user created it in all three
     courses on 2026-11-05. Match it case-insensitively; if a course lacks one, ask before creating
     it, as with any folder outside §2 rule 3.
-  - `Reference` (SHULL-CHG-0059). A whole-year Reference document (course-level name,
+  - `Reference` (SHULL-CHG-0069). A whole-year Reference document (course-level name,
     `standards/NAMING.md` §2) belongs to no unit or section, so it is filed in
     `[Course]/Reference/`, a sibling of the Unit folders. Match it case-insensitively. The system
     does not create it (SHULL-CHG-0035): before filing, the Librarian confirms it exists in that
@@ -88,7 +88,7 @@ parent given in the Level column.
 | Presentations | Unit | Decks built on the slide template, plus exported PDFs. Same reasoning as Guided Notes. |
 | Quiz | Unit | Quizzes, unit tests, exit tickets, bell ringers, A–D versions, keys. Formerly `Tests-Quizizz` at the Section level; renamed and moved up by **SHULL-CHG-0030** for the same reason as Guided Notes and Presentations. |
 | Labs-Case Studies-Projects | Section | Lab handouts, case studies, project instructions, rubrics |
-| Reference | Course | Whole-year Reference documents, named at course level (`Reference - [Topic].pdf`, `standards/NAMING.md` §2): each sheet and the combined print packet. Section-scope `Reference` files stay loose in their Section (row below). **SHULL-CHG-0059.** |
+| Reference | Course | Whole-year Reference documents, named at course level (`Reference - [Topic].pdf`, `standards/NAMING.md` §2): each sheet and the combined print packet. Section-scope `Reference` files stay loose in their Section (row below). **SHULL-CHG-0069.** |
 | *(no folder — loose in Section)* | Section | Homework: practice sets, worksheets, take-home work, keys. Filed directly in `Section ##.# - Section Name/`, not in a subfolder. **SHULL-CHG-0030.** |
 | *(no folder — loose in Section)* | Section | Activities and any other file for a single section with no matching folder, including `Reference` and `Organizer` files (SHULL-CHG-0035). |
 | *(no folder — loose in Unit)* | Unit | Unit reviews, study guides, homework or files spanning several sections, and unit-scope files with no matching folder (SHULL-CHG-0035). |

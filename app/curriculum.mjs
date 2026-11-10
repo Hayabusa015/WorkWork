@@ -153,7 +153,7 @@ const {documentName: buildName, shortTitle: buildShortTitle, referenceTitles: bu
 /** The short title for a section code ("1.3") or unit ("U1"), from a course's decisions text. */
 export const shortTitle = (decisionsText, key) => buildShortTitle(decisionsText, key);
 
-/** The course-level Reference topics (REF rows) from a course's decisions text. SHULL-CHG-0059. */
+/** The course-level Reference topics (REF rows) from a course's decisions text. SHULL-CHG-0069. */
 export const referenceTitles = (decisionsText) => buildReferenceTitles(decisionsText);
 
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};

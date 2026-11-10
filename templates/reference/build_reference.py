@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Chemistry reference packet (SHULL-CHG-0058) as HTML, one file per sheet.
+"""Build the Chemistry reference packet (SHULL-CHG-0068) as HTML, one file per sheet.
 
     python3 templates/reference/build_reference.py <out_dir>
     node templates/reference/render.cjs <out_dir>          # HTML -> PDF, then the Full Packet

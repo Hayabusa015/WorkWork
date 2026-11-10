@@ -1,16 +1,18 @@
-# SHULL-CHG-0058 — Chemistry reference packet becomes a 12-sheet packet
+# SHULL-CHG-0068 — Chemistry reference packet becomes a 12-sheet packet
+
+> **Renumbered 2026-11-10 from SHULL-CHG-0058.** This record was written on branch `ccr-eb4ada9c-82lvgm` as 0058, but another session pushed a different SHULL-CHG-0058 to `origin/main` first. Under `governance/CHANGE_CONTROL.md` §2 ("A record that cannot be pushed is not allocated") the main-line record keeps the number, and this one takes the next free ID on `origin/main`. Commit messages on this branch dated 2026-11-06 refer to it as SHULL-CHG-0058; they mean this record. Content, decision and approval are unchanged.
 
 **Path A — a course change.** Only `courses/chemistry/DECISIONS.md` is affected. No standard or skill
 is edited by this record. It edits two parts of that file: "Reference packet contents" and the
 "Short titles" table. (The filename form and the `Chemistry/Reference/` folder are the separate Path B
-change SHULL-CHG-0059.)
+change SHULL-CHG-0069.)
 
 **Amended 2026-11-06** to state exactly the changes the main session offered to resolve this
 record's open points. See "Resolved".
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0058 |
+| **Change ID** | SHULL-CHG-0068 |
 | **Date** | 2026-11-06 |
 | **Source** | User. Contents and exclusions as specified by the user; the naming-procedure exclusion is the user's decision of 2026-11-05 (see Proposed Rule, sheet 7). |
 | **Current Rule** | `courses/chemistry/DECISIONS.md`, "## Reference packet contents", verbatim — see "Current Rule (verbatim)" below. |
@@ -21,7 +23,7 @@ record's open points. See "Resolved".
 | **Affected Skills** | `build-document` (builds the packet against this list), `verify-content` (checks a built packet against this list). Neither skill file is edited: neither currently states packet contents (a search of `.claude/skills/` for "reference packet", "polyatomic", "solubility" finds nothing), so there is no stale copy to report. |
 | **Affected Courses** | Chemistry. |
 | **Risk** | low |
-| **Recommendation** | Approve as amended. It replaces a short list with a complete one inside one course file; nothing else reads the old list. The packet can be named and filed only once SHULL-CHG-0059 is implemented. |
+| **Recommendation** | Approve as amended. It replaces a short list with a complete one inside one course file; nothing else reads the old list. The packet can be named and filed only once SHULL-CHG-0069 is implemented. |
 | **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
 | **Status** | **IMPLEMENTED** |
 | **Implemented By** | 59858c0 |
@@ -115,7 +117,7 @@ internally consistent.
 
 In `courses/chemistry/DECISIONS.md` § "Short titles", append these rows to the table, after the
 last existing row (`| 2.3 | Electron Configs |`). The code `REF` marks a course-level Reference
-topic (SHULL-CHG-0059). Each is at most 20 characters; the sheet titles above stay as the on-page
+topic (SHULL-CHG-0069). Each is at most 20 characters; the sheet titles above stay as the on-page
 titles.
 
 ```markdown
@@ -171,7 +173,7 @@ excluded: the electronegativity-difference bond-type scale, nuclear particle sym
 rules. Full list in "Reference packet contents".
 Supersedes: Reference packet contents (four-item list: periodic table, polyatomic ions, solubility
 rules, percent error).
-Status: CONFIRMED · SHULL-CHG-0058
+Status: CONFIRMED · SHULL-CHG-0068
 ```
 
 ## Resolved
@@ -187,7 +189,7 @@ reply referred to them as "with your changes". The user's decision itself is rec
 
 ## Still open
 
-1. **Filing and naming depend on SHULL-CHG-0059.** The course-level name (`Reference - [Topic].pdf`)
+1. **Filing and naming depend on SHULL-CHG-0069.** The course-level name (`Reference - [Topic].pdf`)
    and the `Chemistry/Reference/` folder are defined there. This record does not depend on 0059
    to be applied, but the packet cannot be named or filed until 0059 is implemented, including its
    builder change, and until the Librarian has confirmed `Chemistry/Reference/` exists.

@@ -110,7 +110,7 @@ test('the filename follows the NAMING grammar: short, section-led, no course pre
     'Unit 8 Test - Stoichiometry Part 1.docx');
 });
 
-test('a whole-year Reference is named at course level, with no code and no course word (SHULL-CHG-0059)', () => {
+test('a whole-year Reference is named at course level, with no code and no course word (SHULL-CHG-0069)', () => {
   const text = `## Short titles\n\n| Code | Short title |\n|---|---|\n| U1 | Matter & Atoms |\n| REF | Polyatomic Ions |\n| REF | Multi-Charge Metals |\n| REF | Full Packet |\n\n## Decision log\n`;
   assert.deepEqual(referenceTitles(text), ['Polyatomic Ions', 'Multi-Charge Metals', 'Full Packet']);
   assert.equal(documentName({type: 'Reference', scope: 'course', topic: 'Polyatomic Ions'}), 'Reference - Polyatomic Ions.pdf');

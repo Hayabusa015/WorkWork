@@ -6,7 +6,7 @@
  *   1.2 Practice Set - Balancing Equations.docx
  *   1.2 Quiz A Key - Balancing Equations.docx
  *   Unit 1 Guided Notes - Motion in One Dimension.docx      (more than one section)
- *   Reference - Polyatomic Ions.pdf                         (course-level: the whole year, SHULL-CHG-0059)
+ *   Reference - Polyatomic Ions.pdf                         (course-level: the whole year, SHULL-CHG-0069)
  */
 function clean(text) {
   return String(text).replace(/[\\/:*?"<>|]/g, "").replace(/\s{2,}/g, " ").replace(/^[ .]+|[ .]+$/g, "");
@@ -27,7 +27,7 @@ function shortTitle(decisionsText, key) {
   return undefined;
 }
 
-/* The course-level topics: every row coded REF in the Short titles table (SHULL-CHG-0059). */
+/* The course-level topics: every row coded REF in the Short titles table (SHULL-CHG-0069). */
 function referenceTitles(decisionsText) {
   const m = decisionsText.match(/^## Short titles\s*$([\s\S]*?)(?=^## )/m);
   if (!m) return [];
@@ -38,7 +38,7 @@ function referenceTitles(decisionsText) {
 function documentName({ type, sections, unit, topic, unitTitle, version, key = false, extension = "docx", descriptor, scope }) {
   if (scope === "course") {
     // Course-level: a whole-year document. Reference only, PDF, no version or key, no code and no
-    // course word: the folder ([Course]/Reference/) carries the course (SHULL-CHG-0059, -0024).
+    // course word: the folder ([Course]/Reference/) carries the course (SHULL-CHG-0069, -0024).
     if (String(type) !== "Reference") throw new Error(`course-level names are for Reference only, not "${type}"`);
     if (version || key) throw new Error("a course-level Reference takes no version or key");
     const t = topic ? clean(topic) : "";

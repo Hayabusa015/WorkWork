@@ -1,4 +1,6 @@
-# SHULL-CHG-0059 — A course-level filename form for whole-year documents
+# SHULL-CHG-0069 — A course-level filename form for whole-year documents
+
+> **Renumbered 2026-11-10 from SHULL-CHG-0059.** This record was written on branch `ccr-eb4ada9c-82lvgm` as 0059, but another session pushed a different SHULL-CHG-0059 to `origin/main` first. Under `governance/CHANGE_CONTROL.md` §2 ("A record that cannot be pushed is not allocated") the main-line record keeps the number, and this one takes the next free ID on `origin/main`. Commit messages on this branch dated 2026-11-06 refer to it as SHULL-CHG-0059; they mean this record. Content, decision and approval are unchanged.
 
 **Path B — a standards change.** This record covers **two** standards edits: `standards/NAMING.md`
 (the filename grammar) and `standards/DRIVE_ARCHITECTURE.md` (the course-level `Reference` folder).
@@ -10,16 +12,16 @@ record's open points. See "Resolved".
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0059 |
+| **Change ID** | SHULL-CHG-0069 |
 | **Date** | 2026-11-06 |
-| **Source** | User. Raised by the Chemistry reference packet (SHULL-CHG-0058), a whole-year document. |
+| **Source** | User. Raised by the Chemistry reference packet (SHULL-CHG-0068), a whole-year document. |
 | **Current Rule** | `standards/NAMING.md` §2 "The grammar", and `standards/DRIVE_ARCHITECTURE.md` §1 (the tree, the `Snow Day` grammar bullet, "What goes where"), verbatim. See "Current Rule (verbatim)" below. Every name starts with a section code (`S.S`) or `Unit X`; `Snow Day` is the one course-level folder. |
 | **Proposed Rule** | A course-level filename form `Reference - [Topic].pdf`, with no course word in the name, used **only** when a document spans the whole year and **only** for type `Reference`. Course-level topics come from `REF` rows in the course `DECISIONS.md` "Short titles" table, at most 20 characters. Course-level Reference files are filed in a user-made `[Course]/Reference/` folder, recognised the way `Snow Day` is. Exact text under "Proposed Rule (verbatim)". |
 | **Supersedes** | Nothing is removed. Extends `standards/NAMING.md` §2 (the grammar block, the parts table, the scope rule, the worked examples) and the §2 Authority line. Amends `standards/DRIVE_ARCHITECTURE.md` §1: the tree, the grammar bullet "**`Snow Day` is the one course-level folder** (SHULL-CHG-0057)" (which is no longer true once `Reference` is added), and the "What goes where" table; plus an "Amended by" line in its header. No conflict with SHULL-CHG-0024: the name carries no course word, so "the folder path carries the course" still holds. |
 | **Reason** | A whole-year course packet has neither a section nor a unit, so under the current grammar it cannot be named, and under the current Drive architecture it has nowhere to be filed. |
 | **Affected Agents** | Librarian (names and files the document; confirms `[Course]/Reference/` exists before filing). |
 | **Affected Skills** | Any skill that names a built file through the builders; `build-document` in particular. No skill text is edited by this record. |
-| **Affected Courses** | Chemistry, Physics, Geology (the form is available to all three; Chemistry is the first user, SHULL-CHG-0058). |
+| **Affected Courses** | Chemistry, Physics, Geology (the form is available to all three; Chemistry is the first user, SHULL-CHG-0068). |
 | **Risk** | medium — two standards files, both filename builders, and a new course-level folder. |
 | **Recommendation** | Approve as amended. |
 | **Decision** | User, 2026-11-06, in chat: "approve 0058 and 0059 with your changes" |
@@ -84,7 +86,7 @@ with
 
 ```markdown
 **Authority:** SHULL-CHG-0024 (short, section-led names), SHULL-CHG-0041 (short topics),
-SHULL-CHG-0059 (course-level Reference names).
+SHULL-CHG-0069 (course-level Reference names).
 ```
 
 **1b.** §2, the grammar block. Replace
@@ -111,7 +113,7 @@ Course-level:   Reference - [Topic].pdf
 with
 
 ```markdown
-| `Topic` / `Unit Title` | the **short title** (at most 20 characters) from the "Short titles" table in the course `DECISIONS.md`. **No row, no topic**: the name is `1.3 Lab.pdf`. Never shorten a title automatically, and never use the full title. A course-level topic is a row whose code is `REF`; a course-level name always has a topic, so with no `REF` row there is no course-level name (SHULL-CHG-0059). |
+| `Topic` / `Unit Title` | the **short title** (at most 20 characters) from the "Short titles" table in the course `DECISIONS.md`. **No row, no topic**: the name is `1.3 Lab.pdf`. Never shorten a title automatically, and never use the full title. A course-level topic is a row whose code is `REF`; a course-level name always has a topic, so with no `REF` row there is no course-level name (SHULL-CHG-0069). |
 ```
 
 **1d.** §2, the scope rule. Replace
@@ -125,7 +127,7 @@ with
 
 ```markdown
 A document that covers **more than one section** is unit-level. A document that covers one is
-section-level. A document that spans **the whole year** is course-level (SHULL-CHG-0059).
+section-level. A document that spans **the whole year** is course-level (SHULL-CHG-0069).
 Course-level is used only then, and only for type `Reference`: it has no version and no key, and
 it is always a PDF. A document that spans several units but not the year is still unit-level. As
 with every other name, the course is not in it; the folder path (`[Course]/Reference/`,
@@ -169,8 +171,8 @@ builder and test work below is done.
 before `**Folder IDs and operational notes:**`, insert
 
 ```markdown
-**Amended by SHULL-CHG-0059**: a second course-level folder, `Reference`, for whole-year Reference
-documents. See `governance/proposals/SHULL-CHG-0059-course-wide-reference-filename.md`.
+**Amended by SHULL-CHG-0069**: a second course-level folder, `Reference`, for whole-year Reference
+documents. See `governance/proposals/SHULL-CHG-0069-course-wide-reference-filename.md`.
 ```
 
 **2b.** §1 tree. Replace
@@ -183,7 +185,7 @@ documents. See `governance/proposals/SHULL-CHG-0059-course-wide-reference-filena
 with
 
 ```
-    ├── Reference/                   course level; whole-year Reference documents (SHULL-CHG-0059)
+    ├── Reference/                   course level; whole-year Reference documents (SHULL-CHG-0069)
     ├── Snow Day/                    course level; snow-day assignments and keys (SHULL-CHG-0057)
     └── Unit ## - Unit Name/
 ```
@@ -205,7 +207,7 @@ with
     filed in `[Course]/Snow Day/`, a sibling of the Unit folders. The user created it in all three
     courses on 2026-11-05. Match it case-insensitively; if a course lacks one, ask before creating
     it, as with any folder outside §2 rule 3.
-  - `Reference` (SHULL-CHG-0059). A whole-year Reference document (course-level name,
+  - `Reference` (SHULL-CHG-0069). A whole-year Reference document (course-level name,
     `standards/NAMING.md` §2) belongs to no unit or section, so it is filed in
     `[Course]/Reference/`, a sibling of the Unit folders. Match it case-insensitively. The system
     does not create it (SHULL-CHG-0035): before filing, the Librarian confirms it exists in that
@@ -216,7 +218,7 @@ with
 `*(no folder — loose in Section)*` row, insert
 
 ```markdown
-| Reference | Course | Whole-year Reference documents, named at course level (`Reference - [Topic].pdf`, `standards/NAMING.md` §2): each sheet and the combined print packet. Section-scope `Reference` files stay loose in their Section (row below). **SHULL-CHG-0059.** |
+| Reference | Course | Whole-year Reference documents, named at course level (`Reference - [Topic].pdf`, `standards/NAMING.md` §2): each sheet and the combined print packet. Section-scope `Reference` files stay loose in their Section (row below). **SHULL-CHG-0069.** |
 ```
 
 The Snow Day folder has no row in this table today; this record does not add one.
