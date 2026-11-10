@@ -1,0 +1,892 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "key": false,
+  "cover": {
+    "sections": [
+      {
+        "code": "3.1",
+        "difficulty": 3
+      },
+      {
+        "code": "3.2",
+        "difficulty": 6
+      },
+      {
+        "code": "3.3",
+        "difficulty": 5
+      },
+      {
+        "code": "3.4",
+        "difficulty": 6
+      },
+      {
+        "code": "3.5",
+        "difficulty": 7
+      },
+      {
+        "code": "3.6",
+        "difficulty": 8
+      }
+    ],
+    "difficultyNote": "Estimated difficulty: 1 = introductory; 10 = highly challenging.",
+    "equationToolbox": {
+      "label": "Equation toolbox",
+      "columns": [
+        {
+          "heading": "Newton’s laws",
+          "lines": [
+            "Fg = mg",
+            "Fnet = ma",
+            {
+              "lhs": "a",
+              "num": "Fnet",
+              "den": "m"
+            },
+            "FN − mg = ma  (up is positive)"
+          ]
+        },
+        {
+          "heading": "Components",
+          "lines": [
+            "Fx = F cos θ",
+            "Fy = F sin θ",
+            "Fnet = √(Fx² + Fy²)",
+            "θ = tan⁻¹(Fy/Fx)"
+          ]
+        },
+        {
+          "heading": "Ramps and friction",
+          "lines": [
+            "Fg,parallel = mg sin θ",
+            "Fg,perp = FN = mg cos θ",
+            "fs,max = μsFN",
+            "fk ≈ μkFN"
+          ]
+        }
+      ],
+      "notes": [
+        "g = 9.8 m/s² on Earth.   1 N = 1 kg·m/s².   μ has no units.   Frictionless ramp: a = g sin θ."
+      ]
+    },
+    "keyTerms": [
+      {
+        "code": "3.1",
+        "terms": [
+          "Force",
+          "newton (N)",
+          "mass",
+          "weight",
+          "equilibrium",
+          "net force"
+        ]
+      },
+      {
+        "code": "3.2",
+        "terms": [
+          "Free-body diagram",
+          "normal force",
+          "tension",
+          "resultant",
+          "components"
+        ]
+      },
+      {
+        "code": "3.3",
+        "terms": [
+          "Incline",
+          "Fg,parallel",
+          "Fg,perp"
+        ]
+      },
+      {
+        "code": "3.4",
+        "terms": [
+          "Acceleration",
+          "apparent weight"
+        ]
+      },
+      {
+        "code": "3.5",
+        "terms": [
+          "Static friction",
+          "kinetic friction",
+          "coefficient of friction (μ)"
+        ]
+      },
+      {
+        "code": "3.6",
+        "terms": [
+          "Ideal string",
+          "pulley",
+          "Atwood machine"
+        ]
+      }
+    ],
+    "howToUse": "The left column names what to record and the slide it comes from. Fill each blank while that slide is up. A gray rule down the left of a line marks a must-write line. In each work box, state your positive direction and carry units to the answer."
+  },
+  "sectionsContent": [
+    {
+      "code": "3.1",
+      "title": "Newton’s Laws",
+      "learningTarget": "I can state Newton’s three laws and use Fg = mg to find an object’s weight.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Force · Mass and Weight",
+              "cues": [
+                "Slides 3–4",
+                "Common mix-up: mass (kg) and weight (N) are different quantities."
+              ],
+              "notes": [
+                {
+                  "text": "A force is a ______ or a ______: a _________, with size and ____________, in ______________.",
+                  "after": 5
+                },
+                {
+                  "text": "**Mass:** how much _________, in _________________. Stays the same when you travel.   **Weight:** the force of __________, in ______________. Changes when gravity changes.",
+                  "after": 5
+                },
+                {
+                  "text": "10 kg on Earth: Fg = 10(9.8) = ______ down.   10 kg on the Moon: Fg = 10(1.6) = ______ down.",
+                  "after": 5
+                },
+                "*Weight: Fg = _____. On Earth, g = ___________."
+              ],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Weight on Earth and the Moon",
+              "cues": [
+                "Slide 5",
+                "Same mass, different gravity"
+              ],
+              "problem": {
+                "given": [
+                  "m = 60 kg;   Earth: g = 9.8 m/s²;   Moon: g = 1.6 m/s².     **Find:** weight in each location."
+                ],
+                "answer": "Earth: Fg = _____________      Moon: Fg = ____________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "title": "Newton’s Three Laws",
+              "cues": [
+                "Slides 6–8",
+                "Common mix-up: a moving object does not need a net force to keep moving. A moving puck keeps going with Fnet = 0."
+              ],
+              "notes": [
+                "*1st law: an object at rest stays at ______, and an object in motion keeps a constant ___________, unless a ______________________ acts on it.",
+                {
+                  "text": "Equilibrium: forces balance, Fnet = _____. At rest, or constant speed in a ________________.",
+                  "after": 5
+                },
+                "*2nd law: Fnet = _____, so a = ___________. Fnet is the _____ of all forces.",
+                {
+                  "text": "Same mass: more net force, ______ acceleration. Same force, twice the mass: ______ the acceleration.",
+                  "after": 5
+                },
+                "*3rd law: for every action, there is an ________ and ___________ reaction.",
+                {
+                  "text": "The pair acts on _____ objects, so third-law forces do not _________ on one object’s FBD.",
+                  "after": 5
+                }
+              ],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "State Newton’s three laws in your own words, and write the equation for weight.",
+              "selfCheck": [
+                "I can tell mass (kg) from weight (N) and find weight with Fg = mg.",
+                "I can state all three laws and explain equilibrium."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.2",
+      "title": "Free-Body Diagrams",
+      "learningTarget": "I can draw a free-body diagram and find the net force on an object, including forces at an angle.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Free-Body Diagrams · Normal Force",
+              "cues": [
+                "Slides 10–11",
+                "Common mix-up: FN does not always equal weight. That needs the level-surface conditions above."
+              ],
+              "notes": [
+                {
+                  "text": "Draw the object as a _____ or _____. Add one labeled ________ for each force. Longer arrows mean _________ forces. Keep _________ arrows separate.",
+                  "after": 5
+                },
+                {
+                  "text": "Fg: gravity pulls ______.   FN: surface pushes ________________.   T: rope pulls _________________.",
+                  "after": 5
+                },
+                "*Show only the forces that act on the ________________.",
+                {
+                  "text": "Normal means ________________. The normal force is a surface’s ______ on an object. It points straight out from the surface: on a floor, _____; on a ramp, _________.",
+                  "after": 5
+                },
+                "*On a level surface with no other vertical forces or acceleration: FN = _____."
+              ]
+            },
+            {
+              "kind": "example",
+              "title": "Balanced Forces: Book and Lamp",
+              "cues": [
+                "Slide 12",
+                "Two FBDs: book and lamp"
+              ],
+              "problem": {
+                "given": [
+                  "2 kg book at rest on a table;   1.5 kg lamp at rest on a rope;   g = 9.8 m/s²."
+                ],
+                "find": "the free-body diagram of each, and the upward force on each.",
+                "answer": "Book: FN = ____________      Lamp: T = ____________",
+                "workHeightIn": 1.6
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Net Force in One Dimension",
+              "cues": [
+                "Slide 13"
+              ],
+              "problem": {
+                "given": [
+                  "crate;   30 N right;   10 N left.   Positive: right.     **Find:** Fnet, with its direction."
+                ],
+                "answer": "Fnet = _____________________",
+                "statement": "Choose a positive direction, then add forces with ________. Add horizontal and vertical forces _____________."
+              },
+              "notes": [],
+              "extraNotes": false
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Resultant Force and Direction",
+              "cues": [
+                "Slide 15"
+              ],
+              "problem": {
+                "given": [
+                  "40 N right (+x) and 30 N up, perpendicular.     **Find:** the size and direction of the resultant."
+                ],
+                "answer": "Fnet = ______  at  θ = _________________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Breaking a Force into Components",
+              "cues": [
+                "Slide 16"
+              ],
+              "problem": {
+                "given": [
+                  "F = 100 N pulling 30° above the horizontal.     **Find:** the horizontal and vertical components."
+                ],
+                "answer": "Fx = _____________________      Fy = ____________",
+                "statement": "Horizontal: Fx = __________      Vertical: Fy = __________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Two Angled Forces: Tugboats",
+              "cues": [
+                "Slide 18",
+                "Check the quadrant before reporting an angle"
+              ],
+              "problem": {
+                "given": [
+                  "top view;   500 N at 30° above +x;   400 N at 45° above −x.   Positive: +x right, +y up the page."
+                ],
+                "find": "the net force on the barge and its direction.",
+                "answer": "Fnet ≈ ________  at  θ ≈ _______________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "Explain how to find the net force on an object from its free-body diagram, including a force at an angle.",
+              "selfCheck": [
+                "I can draw an FBD with one labeled arrow per force.",
+                "I can add forces with signs and split an angled force into components."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Forces on an Incline",
+      "learningTarget": "I can split an object’s weight into parts along and into a ramp and find the normal force.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Gravity on a Ramp · Normal Force on an Incline",
+              "cues": [
+                "Slides 20–21",
+                "Common mix-up: on a ramp FN is mg cos θ, less than the weight."
+              ],
+              "notes": [
+                {
+                  "text": "Use one axis ________ the ramp and one ________________ to it.",
+                  "after": 5
+                },
+                "*Fg,parallel = ___________ down the slope.   Fg,perp = ___________ into the surface.",
+                "*FN = ___________  (no extra perpendicular force and no perpendicular acceleration)",
+                {
+                  "text": "Steeper ramp, ______ support.  15° slope: FN ≈ _________.  60° slope: FN = _________.",
+                  "after": 5
+                }
+              ],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Incline Example: A 5 kg Block",
+              "cues": [
+                "Slide 22"
+              ],
+              "problem": {
+                "given": [
+                  "m = 5 kg;   frictionless 30° ramp;   g = 9.8 m/s².     **Find:** FBD, Fg,parallel, Fg,perp, and FN."
+                ],
+                "answer": "Fg,parallel = _________ down the ramp    Fg,perp = _________ into the ramp    FN = _________ out",
+                "workHeightIn": 1.6
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Incline Example: A Push Up the Ramp",
+              "cues": [
+                "Slide 23"
+              ],
+              "problem": {
+                "given": [
+                  "m = 12 kg;   frictionless 25° ramp;   30 N push uphill.   Positive: downhill."
+                ],
+                "find": "Fg,parallel and Fnet.",
+                "answer": "Fg,parallel = __________________      Fnet = ________________________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "Explain how to split the weight on a ramp, and how FN changes as it gets steeper.",
+              "selfCheck": [
+                "I can write Fg,parallel = mg sin θ and Fg,perp = mg cos θ.",
+                "I can find FN and the net force along a ramp."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Net Force and Acceleration",
+      "learningTarget": "I can use Fnet = ma to find acceleration, including on a ramp and in an elevator.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Calculating Acceleration",
+              "cues": [
+                "Slide 25"
+              ],
+              "problem": {
+                "given": [
+                  "m = 4 kg;   Fnet = 12 N to the right.     **Find:** the acceleration."
+                ],
+                "answer": "a = _________________",
+                "statement": "1 N = ____________. Acceleration points in the direction of the ____________."
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "A Car Accelerates",
+              "cues": [
+                "Slide 26"
+              ],
+              "problem": {
+                "given": [
+                  "m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward.     **Find:** Fnet and a."
+                ],
+                "answer": "Fnet = _________________      a = ____________________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "A Sled Pulled at an Angle",
+              "cues": [
+                "Slide 28",
+                "FN here is less than mg"
+              ],
+              "problem": {
+                "given": [
+                  "m = 20 kg;   60 N pull at 35° above horizontal;   ignore friction.   Positive: +x (right) and up."
+                ],
+                "find": "the acceleration and the normal force.",
+                "answer": "a = __________________      FN ≈ ___________"
+              },
+              "notes": [],
+              "extraNotes": false
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Acceleration Down a Frictionless Ramp",
+              "cues": [
+                "Slide 29"
+              ],
+              "problem": {
+                "given": [
+                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** the acceleration."
+                ],
+                "answer": "a = ______________________",
+                "statement": "Without friction, a = __________. The acceleration does not depend on the block’s ______."
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "title": "Elevators and Apparent Weight",
+              "cues": [
+                "Slide 30",
+                "Common mix-up: FN equals mg only when a = 0."
+              ],
+              "notes": [
+                {
+                  "text": "A scale reads the upward _______________, FN. That is your __________________.",
+                  "after": 5
+                },
+                "*Choose up as positive:   FN − _____ = _____",
+                {
+                  "text": "Rest or constant velocity: a = _____, so FN = _____. The scale reads your usual weight.",
+                  "after": 5
+                },
+                "*The scale reading changes with _______________, not simply with motion up or down."
+              ]
+            },
+            {
+              "kind": "example",
+              "title": "Elevator Accelerating Up",
+              "cues": [
+                "Slide 31"
+              ],
+              "problem": {
+                "given": [
+                  "m = 70 kg;   a = 2.0 m/s² upward.   Positive: up.     **Find:** the scale reading."
+                ],
+                "answer": "FN = ________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "Explain the steps from a free-body diagram to an acceleration, and why a scale reads differently in an accelerating elevator.",
+              "selfCheck": [
+                "I can find a from Fnet = ma, with units and direction.",
+                "I can find a scale reading with FN − mg = ma."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.5",
+      "title": "Friction",
+      "learningTarget": "I can tell static from kinetic friction and find friction, net force and acceleration on level ground and on a ramp.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Static and Kinetic Friction · Comparing Coefficients",
+              "cues": [
+                "Slides 34–35",
+                "Table values are approximate (OpenStax)"
+              ],
+              "notes": [
+                {
+                  "text": "Friction opposes __________, or the tendency to slide, between surfaces.",
+                  "after": 5
+                },
+                "*Static (not sliding): fs adjusts to match the needed force. Maximum: fs,max = ______",
+                "*Kinetic (sliding): fk ≈ ______. Usually __________ than maximum static.",
+                {
+                  "text": "At rest with a 20 N push: fs = ______, opposite the push. Keep sliding: use _____. μ has no ________.",
+                  "after": 5
+                },
+                {
+                  "text": "Same normal force: higher μk means ______ sliding friction. Shoes on ice: μk = ______. Synovial joints: μk = ________. Your knee slides with less friction than shoes on ice.",
+                  "after": 5
+                }
+              ]
+            },
+            {
+              "kind": "example",
+              "title": "Friction at Constant Velocity",
+              "cues": [
+                "Slide 36"
+              ],
+              "problem": {
+                "given": [
+                  "m = 40 kg;   level floor;   constant velocity;   120 N horizontal push.     **Find:** FN, fk, and μk."
+                ],
+                "answer": "FN = ___________     fk = ___________________________     μk ≈ ______"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Static or Sliding: The 25 kg Box",
+              "cues": [
+                "Slide 37"
+              ],
+              "problem": {
+                "given": [
+                  "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N."
+                ],
+                "find": "whether the box moves for each push, and the acceleration for 110 N.",
+                "answer": "90 N: ________________      110 N: _________, a = ____________ in the push direction",
+                "workHeightIn": 1.6
+              },
+              "notes": [],
+              "extraNotes": false
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Angled Pull with Friction",
+              "cues": [
+                "Slide 38"
+              ],
+              "problem": {
+                "given": [
+                  "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (direction of the pull)."
+                ],
+                "find": "the normal force, the friction, and the acceleration.",
+                "answer": "FN = ________     fk = __________     a = __________________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "title": "Friction on an Incline",
+              "cues": [
+                "Slide 39"
+              ],
+              "notes": [
+                {
+                  "text": "For a block sliding down a ramp, friction points ______________.",
+                  "after": 5
+                },
+                "*FN = ___________     fs,max = ______     fk ≈ ______",
+                "*It starts sliding down if ___________ > ______.",
+                {
+                  "text": "Friction ___________ if sliding reverses.",
+                  "after": 5
+                }
+              ],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Sliding Down the Ramp: The 10 kg Block",
+              "cues": [
+                "Slide 40"
+              ],
+              "problem": {
+                "given": [
+                  "m = 10 kg, starts at rest;   35° ramp;   μs = 0.50;   μk = 0.40.   Positive: downhill."
+                ],
+                "find": "whether the block slides, and its acceleration.",
+                "answer": "Slides: _____      a = ______________________",
+                "workHeightIn": 1.6
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "Explain how to decide whether an object at rest will start to slide, and how to find its acceleration once it does.",
+              "selfCheck": [
+                "I can tell static from kinetic friction and use fs,max = μsFN.",
+                "I can find friction and acceleration on level ground and on a ramp."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.6",
+      "title": "Connected Objects",
+      "learningTarget": "I can find tension and acceleration for objects joined by cables, ropes and pulleys.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Streetlight Cable Tension",
+              "cues": [
+                "Slide 42"
+              ],
+              "problem": {
+                "given": [
+                  "20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
+                  "ignore cable mass.   Positive: right and up."
+                ],
+                "find": "the tension in each support cable.",
+                "answer": "FTL = _________      FTR ≈ ________",
+                "workHeightIn": 1.8
+              },
+              "notes": [
+                "*The steeper cable carries more __________."
+              ],
+              "extraNotes": false
+            },
+            {
+              "title": "Ideal Strings and Pulleys",
+              "cues": [
+                "Slide 43"
+              ],
+              "notes": [
+                {
+                  "text": "Ideal: a massless, taut rope that does not __________, and a massless, _______________ pulley.",
+                  "after": 5
+                },
+                "*Fixed-pulley systems: the rope has the same __________, T. Both objects have the same acceleration ______.",
+                {
+                  "text": "Find a using the _______________. Then use _____________ to find T. Draw a separate _____________________ for each object.",
+                  "after": 5
+                }
+              ]
+            },
+            {
+              "kind": "example",
+              "title": "Atwood Machine",
+              "cues": [
+                "Slide 44"
+              ],
+              "problem": {
+                "given": [
+                  "m1 = 5 kg, m2 = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
+                ],
+                "answer": "a = ____________      T = _________"
+              },
+              "notes": [],
+              "extraNotes": false
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "A Block on a Frictionless Table",
+              "cues": [
+                "Slide 45",
+                "Hanging mass accelerates down; table block, toward the pulley"
+              ],
+              "problem": {
+                "given": [
+                  "m1 = 4 kg on the table;   m2 = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
+                ],
+                "answer": "a = ____________      T ≈ _________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "The Same System with Friction",
+              "cues": [
+                "Slide 46"
+              ],
+              "problem": {
+                "given": [
+                  "m1 = 4 kg on the table, μk = 0.20;   m2 = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
+                ],
+                "answer": "fk = _________      a = ____________      T = _________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "example",
+              "title": "Challenge: Incline and Pulley",
+              "cues": [
+                "Slide 47"
+              ],
+              "problem": {
+                "given": [
+                  "m1 = 6 kg on a frictionless 30° ramp;   m2 = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
+                ],
+                "find": "a and T.",
+                "answer": "a = ____________      T ≈ _________"
+              },
+              "notes": [],
+              "extraNotes": false
+            },
+            {
+              "kind": "recall",
+              "title": "Section summary",
+              "cues": [
+                "Close your notes before you write.",
+                "Use the checklist to find what still needs practice."
+              ],
+              "lines": 2,
+              "prompt": "Explain the two-step method for objects joined by a rope over a pulley.",
+              "selfCheck": [
+                "I can solve a cable-tension problem with Fnet,x = 0 and Fnet,y = 0.",
+                "I can find a and T for an Atwood machine and a table-and-pulley system."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "conceptReview": {
+    "title": "Unit 3 / Concept Review",
+    "subtitle": "Connect the ideas, check common mix-ups, and explain the physics in your own words.",
+    "sections": [
+      {
+        "code": "3.1",
+        "heading": "Newton’s laws",
+        "paragraphs": [
+          [
+            "Mass (kg) never changes; weight, Fg = mg (N), depends on g. Fnet = 0 means constant velocity; otherwise Fnet = ma."
+          ]
+        ],
+        "watchOut": "A moving object does not need a net force to keep moving."
+      },
+      {
+        "code": "3.2",
+        "heading": "Free-body diagrams",
+        "paragraphs": [
+          [
+            "One object, one labeled arrow per force. Add with signs; split an angled force into Fx = F cos θ and Fy = F sin θ."
+          ]
+        ],
+        "watchOut": "Third-law pairs act on two objects, so they never cancel on one FBD."
+      },
+      {
+        "code": "3.3",
+        "heading": "Forces on an incline",
+        "paragraphs": [
+          [
+            "Tilt the axes: Fg,parallel = mg sin θ down the slope, Fg,perp = mg cos θ into the ramp, and FN = mg cos θ."
+          ]
+        ],
+        "watchOut": "Normal force does not always equal weight. A steeper ramp gives a smaller FN."
+      },
+      {
+        "code": "3.4",
+        "heading": "Net force and acceleration",
+        "paragraphs": [
+          [
+            "a = Fnet / m, in the direction of Fnet. Frictionless ramp: a = g sin θ. Elevator, up positive: FN − mg = ma."
+          ]
+        ],
+        "watchOut": "The scale reads FN, which changes with acceleration, not with moving up or down."
+      },
+      {
+        "code": "3.5",
+        "heading": "Friction",
+        "paragraphs": [
+          [
+            "Static friction matches the need, up to fs,max = μsFN. Sliding friction, fk ≈ μkFN, is usually smaller."
+          ]
+        ],
+        "watchOut": "Find FN first. An angled pull or a ramp changes it."
+      },
+      {
+        "code": "3.6",
+        "heading": "Connected objects",
+        "paragraphs": [
+          [
+            "Ideal rope: one tension T, one size of a. Find a from the whole system, then T from one object’s Fnet = ma."
+          ]
+        ],
+        "watchOut": "Draw a separate FBD for each object."
+      }
+    ],
+    "quickRecall": [
+      "State the condition for equilibrium.",
+      "Write the weight components for a block on a ramp.",
+      "Explain why a scale reads more in an elevator accelerating up."
+    ]
+  }
+}
