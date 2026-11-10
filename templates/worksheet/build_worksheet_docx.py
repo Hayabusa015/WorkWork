@@ -333,7 +333,13 @@ def inline_heading(cell, block, pal):
     b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
     x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18"); x.set(qn("w:space"), "2")
     x.set(qn("w:color"), hexof(pal.display))
-    b.append(x); pPr.append(b)
+    b.append(x)
+    # pBdr precedes spacing in CT_PPr; appended after it, Word can reject the file.
+    sp = pPr.find(qn("w:spacing"))
+    if sp is not None:
+        sp.addprevious(b)
+    else:
+        pPr.append(b)
     return True
 
 

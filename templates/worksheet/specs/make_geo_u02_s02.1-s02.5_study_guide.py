@@ -23,182 +23,210 @@ CO2 line is Matt's own example ("CO2 causes temps to go ___"), sourced to slide 
 S2.5's greenhouse-gas warming. O2 is not a greenhouse gas, so it has no temperature line.
 Only 4 of 12 periods are described ending in extinctions, so A says eras, not periods.
 
+Audit 2026-11-10 (auditor, blocking 1 + should-fix): no label or prompt prints another
+prompt's answer (the eons are "oldest / middle / youngest", not named); the Ordovician
+gets a BIG FOCUS row (major extinctions); two-part prompts get a second line; dating
+(S2.1) joins Section A; the key bolds the minimum full-credit answer.
+
 The span itself (`coversSections`) is SHULL-CHG-0066; `proseOnly` on a study guide is that
 record's Q1, answer A.
 """
-import json, os
+import json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STEM = "geo_u02_s02.1-s02.5_study_guide"
 
 # ---------------------------------------------------------------------- the content
-# Section A: one written line each. (prompt, answer)
-BIG_IDEAS = [
-    ("List the four units of geologic time, from largest to smallest.",
-     "Eon, era, period, epoch."),
-    ("In what kind of rock are most fossils found? Why there?",
-     "Sedimentary rock: layers of sediment bury and preserve the remains."),
-    ("What made oxygen build up in the air (the Great Oxidation Event)?",
-     "Photosynthesis released oxygen faster than rocks and iron could absorb it "
-     "(about 2.4 billion years ago)."),
-    ("When volcanoes add CO₂ and other greenhouse gases to the air, what happens to "
-     "temperatures?", "They go up: Earth warms."),
-    ("When ice sheets grow, what happens to sea level?",
-     "It falls. When the climate warms again, sea level recovers."),
-    ("What kind of event ends both the Paleozoic Era and the Mesozoic Era?",
-     "A mass extinction (end-Permian, about 252 million years ago; K–Pg, about 66 "
-     "million years ago)."),
-    ("Since the age of the dinosaurs, has Earth's climate warmed or cooled?",
-     "Cooled, gradually, as the Mesozoic greenhouse faded, ending in repeated ice ages."),
-]
-
-# Section B, and each period: (label, answer). An empty label is a second line for the
-# row above it. "BIG FOCUS" rows are the period's headline event.
+# Every row is (prompt, answer). The prompt is a bold lead and a short question, written on
+# one line beside its write-on rule. In the answer, <b>bold</b> is the minimum full-credit
+# answer and the rest is detail for the teacher. A row of ("", None) is a second line for
+# the row above it. No prompt may print another prompt's answer (audit 2026-11-10).
 FOCUS = "<b>BIG FOCUS</b>&nbsp; "
 
-PRECAMBRIAN = [
-    ("<b>Eons</b>&nbsp; Name the three, oldest to youngest:", "Hadean, Archean, Proterozoic."),
-    ("<b>Time</b>&nbsp; About how much of Earth's history does it cover?",
-     "About 88%."),
-    ("<b>Hadean</b>&nbsp; What was happening to the young Earth?",
-     "Earth forms (about 4.54 billion years ago); dense iron sinks to form the core."),
-    ("<b>Archean</b>&nbsp; What formed on the surface? What lived there?",
-     "Long-lasting crust and oceans; microbes (microbial ecosystems)."),
-    ("<b>Proterozoic</b>&nbsp; How did the air change? Why did it matter for life?",
-     "Oxygen rose (Great Oxidation Event). That made complex, oxygen-using life possible: "
-     "eukaryotes, then multicellular life."),
-    ("", None),
-    (FOCUS + "What was Snowball Earth, and when did it happen?",
-     "Ice spread over nearly all of Earth, even near the equator: the Sturtian and "
-     "Marinoan glaciations, about 720–635 million years ago (Proterozoic)."),
-    ("<b>The thaw</b>&nbsp; What ended Snowball Earth?",
-     "Volcanoes kept releasing CO₂. It built up until Earth warmed enough to melt the ice."),
+
+def lead(word):
+    return f"<b>{word}</b>&nbsp; "
+
+
+MORE = ("", None)
+
+BIG_IDEAS = [
+    (lead("Time scale") + "Its four units, largest to smallest:",
+     "<b>Eon, era, period, epoch.</b>"),
+    (lead("Fossils") + "What kind of rock holds most of them?",
+     "<b>Sedimentary rock</b>: layers of sediment bury and preserve remains."),
+    (lead("Dating") + "What method finds the age of very old rock?",
+     "<b>Radiometric dating</b> (uranium-lead, potassium-argon). Carbon-14 dates organic "
+     "material younger than about 50,000 years."),
+    (lead("CO₂") + "When it builds up in the air, what happens to temperatures?",
+     "<b>They go up</b>: Earth warms."),
+    (lead("Ice") + "When ice sheets grow, what happens to sea level?",
+     "<b>It falls</b>; it recovers when the climate warms again."),
+    (lead("Era endings") + "What kind of event ends the Paleozoic and the Mesozoic?",
+     "<b>A mass extinction</b> (end-Permian, about 252 million years ago; K–Pg, about 66 "
+     "million years ago)."),
+    (lead("Climate trend") + "How has Earth's climate changed since the dinosaurs?",
+     "<b>It has cooled</b>, gradually, as the Mesozoic greenhouse faded, ending in repeated "
+     "ice ages."),
 ]
 
-SNOW = next(i for i, (lab, _) in enumerate(PRECAMBRIAN) if "Snowball" in lab)
+PRECAMBRIAN = [
+    (lead("Eons") + "Name the three, oldest to youngest:",
+     "<b>Hadean, Archean, Proterozoic.</b>"),
+    (lead("Time") + "About what share of Earth's history is the Precambrian?",
+     "<b>About 88%.</b>"),
+    (lead("Oldest eon") + "What sank to form Earth's core?",
+     "<b>Dense iron</b>, as the young Earth formed (about 4.54 billion years ago) and "
+     "separated into layers."),
+    (lead("Middle eon") + "What formed on the surface? What lived there?",
+     "<b>Crust and oceans; microbes.</b>"),
+    (lead("Youngest eon") + "How did the air change? What caused it?",
+     "<b>Oxygen rose</b> (the Great Oxidation Event, about 2.4 billion years ago), because "
+     "<b>photosynthesis</b> released it faster than rocks and iron could absorb it."),
+    MORE,
+    (lead("Oxygen") + "Why did that change matter for life?",
+     "It made <b>complex, oxygen-using life</b> possible: eukaryotes, then multicellular "
+     "life."),
+]
 
-E, L, C = "<b>Earth</b>&nbsp; ", "<b>Life</b>&nbsp; ", "<b>Climate</b>&nbsp; "
+SNOWBALL = [
+    (FOCUS + "What was Snowball Earth? About when was it?",
+     "<b>Ice reached low latitudes, near the equator</b>: the Sturtian and Marinoan "
+     "glaciations, <b>about 720–635 million years ago</b> (Proterozoic)."),
+    MORE,
+    (lead("The thaw") + "What ended Snowball Earth?",
+     "<b>Volcanoes kept releasing CO₂</b>; it built up until Earth warmed enough to melt "
+     "the ice."),
+]
 
-# Era: (heading, [(period, [(label, answer), ...]), ...])
+E, L, C = lead("Earth"), lead("Life"), lead("Climate")
+
+# Era: (heading, [(period, [(prompt, answer), ...]), ...])
 ERAS = [
     ("C  ·  The Paleozoic Era  (about 539 to 252 million years ago)", [
         ("CAMBRIAN PERIOD", [
             (E + "What covered the edges of the continents?",
-             "Shallow seas; their sand, mud and lime became sandstone, shale and limestone."),
-            (L + "Where did all life live?", "Only in the sea: life was entirely marine."),
-            (C + "Warm or cold? Sea level high or low?",
-             "Greenhouse (warm), high sea levels, less oxygen than today."),
+             "<b>Shallow seas</b>; their sand, mud and lime became sandstone, shale and "
+             "limestone."),
+            (L + "Where did all life live?", "<b>Only in the sea.</b>"),
+            (C + "What were temperatures and sea level like?",
+             "<b>Warm (greenhouse), with high sea levels</b>; less oxygen than today."),
             (FOCUS + "What was the Cambrian Explosion?",
-             "Animal body plans diversified rapidly (trilobites, mollusks, sponges), starting "
-             "about 539 million years ago, over tens of millions of years."),
+             "<b>Animal life diversified rapidly</b> into many body plans (trilobites, "
+             "mollusks, sponges), starting about 539 million years ago."),
         ]),
         ("ORDOVICIAN PERIOD", [
-            (E + "What covered large areas of the continents?",
-             "Shallow seas; plate collisions started new mountain building."),
+            (E + "What did plate collisions begin to build?",
+             "<b>Mountains</b>; shallow seas still covered large areas."),
             (L + "What thrived in the sea? What first reached land?",
-             "Reefs and jawless fishes; early land plants."),
-            (C + "How did it change by the end of the period?",
-             "It cooled; ice grew and sea level fell. Major extinctions followed."),
+             "<b>Reefs and jawless fishes; early land plants.</b>"),
+            (C + "How did it change late in the period?",
+             "<b>It cooled</b>; ice grew and sea level fell."),
+            (FOCUS + "What happened to life at the end of the period?",
+             "<b>Major extinctions</b>, after the late-Ordovician cooling."),
         ]),
         ("SILURIAN PERIOD", [
             (E + "Which two landmasses collided?",
-             "Laurentia and Baltica (Caledonian mountain building)."),
-            (L + "What new fish appeared? What grew on land?",
-             "Jawed fishes; small vascular plants and land arthropods built the first land "
-             "communities."),
-            (C + "What happened after the Ordovician ice age?",
-             "It warmed, and sea levels recovered."),
+             "<b>Laurentia and Baltica</b> (Caledonian mountain building)."),
+            (L + "What new kind of fish appeared?",
+             "<b>Jawed fishes</b>; small vascular plants and land arthropods built the first "
+             "land communities."),
+            (C + "How did temperature and sea level change?",
+             "<b>It warmed, and sea levels recovered.</b>"),
         ]),
         ("DEVONIAN PERIOD", [
-            (E + "Where did reefs thrive?",
-             "In warm, shallow seas; continental collisions continued."),
+            (E + "What kept happening between the continents?",
+             "<b>Collisions continued</b>; reefs thrived in warm, shallow seas."),
             (L + "What spread across the land?",
-             "Forests, insects and early tetrapods (four-limbed animals)."),
-            (C + "What were the seas like? How did it end?",
-             "Warm and shallow, until late-Devonian crises; extinctions hit hard."),
+             "<b>Forests, insects and early tetrapods</b> (four-limbed animals)."),
+            (C + "What were the seas like?",
+             "<b>Warm and shallow</b>, until late-Devonian crises; extinctions hit hard."),
             (FOCUS + "Why is it called the \"Age of Fishes\"?",
-             "Fish diversified hugely: armored placoderms, early sharks, lobe-finned fish."),
+             "<b>Fish diversified hugely</b>: placoderms, early cartilaginous fish (shark "
+             "relatives), lobe-finned fish."),
         ]),
         ("CARBONIFEROUS PERIOD", [
             (E + "Which supercontinent was forming?",
-             "Pangaea, through major collisions (the Appalachians kept growing)."),
+             "<b>Pangaea</b>, through major collisions (the Appalachians kept growing)."),
             (L + "What giant animals lived on land?",
-             "Giant arthropods (<i>Meganeura</i>, <i>Arthropleura</i>) and amphibians; the "
-             "amniotic egg let reptiles reproduce away from water."),
+             "<b>Giant arthropods</b> (<i>Meganeura</i>, <i>Arthropleura</i>) "
+             "<b>and amphibians.</b>"),
             (C + "What happened to oxygen and CO₂?",
-             "Oxygen rose above modern levels as CO₂ fell; the tropics stayed warm while "
-             "southern Gondwana glaciated."),
+             "<b>Oxygen rose above modern levels as CO₂ fell</b>; the tropics stayed warm "
+             "while southern Gondwana glaciated."),
             (FOCUS + "What is the Carboniferous famous for?",
-             "Coal: thick plant material buried in tropical swamps (wetlands) later became "
-             "coal."),
+             "<b>Coal</b>: thick plant material buried in tropical swamps later became coal."),
         ]),
         ("PERMIAN PERIOD", [
-            (E + "What did the continents form? What surrounded it?",
-             "Pangaea, fully assembled; one ocean, Panthalassa; a dry interior."),
-            (L + "Was <i>Dimetrodon</i> a dinosaur?",
-             "No. It was a synapsid, on the mammal line."),
-            (C + "What happened by the end of the period?",
-             "Severe warming and widespread ocean oxygen loss."),
-            (FOCUS + "What caused the end-Permian extinction?",
-             "Siberian Traps volcanism released greenhouse gases: warming and ocean oxygen "
-             "loss. Most marine species died, about 252 million years ago."),
+            (E + "What supercontinent was complete? What ocean surrounded it?",
+             "<b>Pangaea; Panthalassa.</b>"),
+            (L + "What kind of animal was <i>Dimetrodon</i>?",
+             "<b>A synapsid</b>, on the mammal line; not a dinosaur."),
+            (C + "What happened to the oceans by the end?",
+             "<b>They warmed and lost oxygen.</b>"),
+            (FOCUS + "What ended the Permian?",
+             "<b>Siberian Traps volcanism</b>: greenhouse gases drove warming and ocean oxygen "
+             "loss; most marine species died, about 252 million years ago."),
         ]),
     ]),
     ("D  ·  The Mesozoic Era  (about 252 to 66 million years ago)", [
         ("TRIASSIC PERIOD", [
             (E + "What began to happen to Pangaea?",
-             "Late-Triassic rifting began to break it apart."),
-            (L + "What had to happen after the Permian die-off?",
-             "Ecosystems rebuilt, over millions of years; reptiles diversified."),
-            (C + "What were the inland areas like?", "Hot, dry and strongly seasonal."),
+             "<b>It began rifting apart</b> (late Triassic)."),
+            (L + "What did ecosystems have to do early in the period?",
+             "<b>Rebuild</b>, after the end-Permian crisis; reptiles diversified."),
+            (C + "What were the inland areas like?", "<b>Hot, dry and strongly seasonal.</b>"),
             (FOCUS + "What new animal group appeared?",
-             "The first dinosaurs, about 230 million years ago (not yet dominant)."),
+             "<b>Dinosaurs</b>, about 230 million years ago (not yet dominant)."),
         ]),
         ("JURASSIC PERIOD", [
             (E + "What new ocean opened?",
-             "The Atlantic (and the Gulf of Mexico), as Pangaea split apart."),
+             "<b>The Atlantic</b> (and the Gulf of Mexico), as Pangaea split apart."),
             (L + "Which dinosaurs ruled the land?",
-             "Giant sauropods (<i>Diplodocus</i>, <i>Brachiosaurus</i>) and theropods "
-             "(<i>Allosaurus</i>); marine reptiles in the sea, pterosaurs in the air."),
-            (C + "Greenhouse or icehouse?", "Greenhouse; shallow seas covered large areas."),
+             "<b>Giant sauropods</b> (<i>Diplodocus</i>, <i>Brachiosaurus</i>) <b>and "
+             "theropods</b> (<i>Allosaurus</i>)."),
+            (C + "What was the world's climate like?",
+             "<b>Greenhouse (warm)</b>; shallow seas covered large areas."),
             (FOCUS + "Why is <i>Archaeopteryx</i> important?",
-             "A feathered dinosaur near the origin of birds, about 150 million years ago."),
+             "<b>A feathered dinosaur near the origin of birds</b>, about 150 million years "
+             "ago."),
         ]),
         ("CRETACEOUS PERIOD", [
-            (E + "What flooded the continents?",
-             "High seas; Antarctica even had forests."),
+            (E + "What grew even in Antarctica?",
+             "<b>Forests</b>; high seas flooded broad areas of the continents."),
             (L + "What new kind of plant spread?",
-             "Flowering plants; dinosaurs flourished, and small mammals were present."),
-            (C + "What were conditions like for most of the period?",
-             "Greenhouse, with high sea levels."),
-            (FOCUS + "What ended the Cretaceous? What died?",
-             "A 10 km asteroid hit near the Yucatán (Chicxulub), about 66 million years "
-             "ago; about 75% of species died, including all non-bird dinosaurs."),
+             "<b>Flowering plants</b>; dinosaurs flourished, and small mammals were present."),
+            (C + "What were sea levels like?", "<b>High</b>, under greenhouse conditions."),
+            (FOCUS + "What ended the Cretaceous?",
+             "<b>An asteroid impact</b>: a roughly 10 km asteroid hit near the Yucatán "
+             "(Chicxulub), about 66 million years ago; about 75% of species died, including "
+             "all non-bird dinosaurs."),
         ]),
     ]),
     ("E  ·  The Cenozoic Era  (about 66 million years ago to today)", [
         ("PALEOGENE PERIOD", [
             (E + "What landmass crashed into Asia?",
-             "India, which began building the Himalaya."),
-            (L + "Who took over the space the dinosaurs left?",
-             "Mammals, which diversified rapidly."),
+             "<b>India</b>, beginning the Himalaya."),
+            (L + "Which animal group diversified rapidly?",
+             "<b>Mammals</b>, into the space left after the K–Pg extinction."),
             (C + "Which way did temperatures go?",
-             "Gradual cooling, as the Mesozoic greenhouse faded."),
+             "<b>Gradual cooling</b>, as the Mesozoic greenhouse faded."),
         ]),
         ("NEOGENE PERIOD", [
-            (E + "Which mountains kept growing?", "The Himalaya and the Andes."),
-            (L + "What spread across the land? Who ate it?",
-             "Grasslands; grazing mammals diversified with them."),
-            (C + "Warmer or cooler? Wetter or drier?", "Cooler and drier."),
+            (E + "Which mountains kept growing?", "<b>The Himalaya and the Andes.</b>"),
+            (L + "What spread across the land?", "<b>Grasslands</b>, with grazing mammals."),
+            (C + "What happened to rainfall in many regions?",
+             "<b>It got drier</b> (and cooler)."),
         ]),
         ("QUATERNARY PERIOD", [
             (E + "What advanced and retreated over the land?",
-             "Continental ice sheets, several kilometers thick."),
-            (L + "Which species evolved?", "Humans (modern mammals and birds diversified)."),
-            (C + "What paces the ice-age cycles?",
-             "Milankovitch cycles: changes in Earth's orbit and tilt."),
+             "<b>Ice sheets</b>, several kilometers thick."),
+            (L + "What does the Quaternary have to do with us?",
+             "<b>Humans evolved</b>, during its glacial cycles."),
+            (C + "What paces its cycles of cold and warm?",
+             "<b>Milankovitch cycles</b>: changes in Earth's orbit and tilt."),
             (FOCUS + "What is the Holocene?",
-             "The warm interglacial we live in now (the last 11,700 years)."),
+             "<b>The warm interglacial we live in now</b> (the last 11,700 years)."),
         ]),
     ]),
 ]
@@ -217,54 +245,55 @@ def answered(items):
     return sum(1 for _, a in items if a is not None)
 
 
+def plan(label, items, **extra):
+    return {"kind": "plan", "label": label, "boldLabels": False,
+            "points": answered(items), "rows": rows(items), **extra}
+
+
 def student_blocks():
-    out = [{
-        "kind": "reflection", "heading": "A  ·  Big Ideas of the Unit",
-        "label": "ANSWER IN A SHORT SENTENCE", "linesEach": 1,
-        "points": len(BIG_IDEAS), "prompts": [p for p, _ in BIG_IDEAS],
-    }, {
-        "kind": "plan", "heading": "B  ·  The Precambrian", "gapBefore": 8,
-        "label": "THE FIRST 88%: HADEAN, ARCHEAN, PROTEROZOIC", "boldLabels": False,
-        "points": answered(PRECAMBRIAN[:SNOW]), "rows": rows(PRECAMBRIAN[:SNOW]),
-    }, {
-        # Its own block, so the eons can finish page 1 without dragging Snowball Earth.
-        "kind": "plan", "label": "SNOWBALL EARTH", "boldLabels": False, "gapBefore": 6,
-        "points": answered(PRECAMBRIAN[SNOW:]), "rows": rows(PRECAMBRIAN[SNOW:]),
-    }]
+    out = [
+        plan("BIG IDEAS", BIG_IDEAS, heading="A  ·  Big Ideas of the Unit"),
+        plan("EARTH'S EARLIEST HISTORY", PRECAMBRIAN, heading="B  ·  The Precambrian",
+             gapBefore=10),
+        plan("SNOWBALL EARTH", SNOWBALL, gapBefore=6),
+    ]
     for heading, periods in ERAS:
         for k, (period, items) in enumerate(periods):
-            b = {"kind": "plan", "label": period, "boldLabels": False,
-                 "points": answered(items), "rows": rows(items), "gapBefore": 6}
-            if k == 0:
-                b["heading"], b["gapBefore"] = heading, 10
-            out.append(b)
+            out.append(plan(period, items, **({"heading": heading, "gapBefore": 10} if k == 0
+                                              else {"gapBefore": 6})))
     return out
 
 
-def strip(s):
-    return s.replace("&nbsp;", " ").replace(FOCUS.replace("&nbsp;", " "), "").strip()
+def plain(prompt):
+    p = re.sub(r"^<b>(.*?)</b>&nbsp; ", r"\1: ", prompt.replace(FOCUS, "Big focus: "))
+    return re.sub(r"</?b>", "", p).replace("&nbsp;", " ")
+
+
+def qa(items, numbered=False):
+    got = [(p, a) for p, a in items if a is not None]
+    return [(f"{n}.  " if numbered else "") + f"{plain(p)}  →  {a}"
+            for n, (p, a) in enumerate(got, 1)]
 
 
 def key_blocks():
-    a = [f"{n}.  {p}  <b>{ans}</b>" for n, (p, ans) in enumerate(BIG_IDEAS, 1)]
-    b = [f"{strip(lab)}  <b>{ans}</b>" for lab, ans in PRECAMBRIAN if ans is not None]
     table_rows = []
     for heading, periods in ERAS:
         table_rows.append({"group": heading.split("·", 1)[1].split("(")[0].strip().upper()})
         for period, items in periods:
             got = {}
             for lab, ans in items:
-                tag = ("FOCUS" if lab.startswith(FOCUS) else
-                       "EARTH" if lab.startswith(E) else
-                       "LIFE" if lab.startswith(L) else "CLIMATE")
+                tag = next(t for t, pre in (("FOCUS", FOCUS), ("EARTH", E), ("LIFE", L),
+                                            ("CLIMATE", C)) if lab.startswith(pre))
                 got[tag] = ans
-            table_rows.append([period.replace(" PERIOD", "").title(), got.get("EARTH", ""),
-                               got.get("LIFE", ""), got.get("CLIMATE", ""),
-                               got.get("FOCUS", "")])
+            table_rows.append([period.replace(" PERIOD", "").title()]
+                              + [got.get(t, "") for t in ("EARTH", "LIFE", "CLIMATE", "FOCUS")])
     return [
-        {"kind": "notes", "label": "A  ·  BIG IDEAS", "bullets": False, "items": a},
-        {"kind": "notes", "label": "B  ·  THE PRECAMBRIAN", "bullets": False, "items": b,
-         "gapBefore": 6},
+        {"kind": "notes", "label": "A  ·  BIG IDEAS", "bullets": False,
+         "items": qa(BIG_IDEAS, numbered=True)},
+        {"kind": "notes", "label": "B  ·  THE PRECAMBRIAN", "bullets": False,
+         "items": qa(PRECAMBRIAN) + qa(SNOWBALL), "gapBefore": 6},
+        {"kind": "notes", "bullets": False, "gapBefore": 4,
+         "items": ["<b>Bold</b> is the minimum full-credit answer; the rest is detail."]},
         {"kind": "table", "label": "C–E  ·  PERIOD BY PERIOD", "size": 8.5, "gapBefore": 6,
          "headers": ["PERIOD", "EARTH", "LIFE", "CLIMATE", "BIG FOCUS"],
          "widths": [0.13, 0.21, 0.23, 0.20, 0.23], "rows": table_rows},
@@ -288,7 +317,7 @@ def spec(key):
             "coversSections": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "title": TITLE,
             "proseOnly": True,
-            "pagesPerSection": 3,   # measured; Matt's ceiling is 4
+            "pagesPerSection": 2 if key else 3,   # measured; Matt's ceiling is 4
             "directions": DIRECTIONS,
             "blocks": student_blocks(),
         }],

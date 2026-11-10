@@ -132,17 +132,18 @@ exactly as before. Spec text in these blocks may carry `<b>`, `<i>` (genus and s
   `bullets`.
 - **`plan`** — labelled write-on lines. `rows` is a list of lines, each a list of `[label, flex]`
   fields; flex `0` is a label with no line (a circle-one choice). Ruled lines, because a plan is
-  prose. `"boldLabels": false` sets labels in regular weight so each can carry its own `<b>`
-  lead: a short written prompt on one line (`<b>Earth</b>&nbsp; What covered the land?`). An
-  empty label is a second line for the row above it. First use: the U2 study guide.
+  prose. An empty label is a full-width second line for the row above it. `"boldLabels":
+  false` sets labels in regular weight so each can carry its own `<b>` lead: a short written
+  prompt on one line (`<b>Earth</b>&nbsp; What covered the land?`). First use: the U2 study
+  guide.
 - **`rubric`** — draws the spec's top-level `rubric.rows` (`part`, `points`, `levels`, `full`,
   `partial`, `none`) with full level descriptors, a score box per row, and a TOTAL. Its points
   count toward the header's SCORE total, which stays summed, never typed.
 
 Any block may carry **`gapBefore`** (points of space above it) and **`pageBreakBefore`** with a
 **`heading`** (the page's title). On a `reflection` or `plan` block, a `heading` without
-`pageBreakBefore` is a section title drawn inside the block's own non-splitting cell, so the
-title moves with its first lines and never ends a page alone.
+`pageBreakBefore` is a 13pt section title (the page title is 15pt) drawn inside the block's
+own non-splitting cell, so the title moves with its first lines and never ends a page alone.
 
 ### Section and spec options
 
