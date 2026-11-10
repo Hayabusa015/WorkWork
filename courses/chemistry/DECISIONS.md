@@ -190,8 +190,10 @@ titles below are the on-page titles. Molecular shapes are drawn as SVG.
      22.4 L.
    - Unit conversions, including metric prefixes; a dimensional-analysis setup template.
 2. **Significant Figure Rules** — counting rules, plus the ×/÷ and +/− rounding rules.
-3. **VSEPR Geometry** — up to 6 electron domains. Columns: domains, bonding vs lone pairs,
-   electron geometry, molecular geometry, bond angle, drawn shape.
+3. **VSEPR Geometry** — a grid on one landscape page. Rows are 2–6 electron domains, each row
+   labelled with its electron geometry; columns are 0–3 lone pairs. Each cell shows the drawn
+   shape, molecular geometry, bonding and lone-pair counts, bond angle and AXE notation.
+   Combinations that do not exist are hatched.
 4. **Periodic Table** — atomic number, symbol, name, average atomic mass to 2 decimals.
 5. **Electronegativity Table** — Pauling values to 2 decimals; noble gases blank.
 6. **Polyatomic Ions** — 37 ions grouped by charge (1+, 2+, 1−, 2−, 3−). In each group the
@@ -211,9 +213,11 @@ titles below are the on-page titles. Molecular shapes are drawn as SVG.
    test-usable packet does not answer naming items.
 8. **Metals with Multiple Charges** — Cu, Fe, Pb, Sn, Hg, Co, Ni, Cr, Mn, Au; plus Ag+, Zn2+ and
    Cd2+ shown as fixed-charge exceptions.
-9. **Solubility Grid** — cations × anions (polyatomic anions included). Each cell is soluble,
-   slightly soluble, or insoluble, marked by letter so it reads in greyscale. Plus a five-line
-   rules summary.
+9. **Solubility Grid** — cations × anions (polyatomic anions included). Each cell is S (soluble,
+   >1 g/100 mL), SS (slightly soluble, 0.1–1 g/100 mL), I (insoluble, <0.1 g/100 mL), or X (the
+   ions react with each other or with water instead of forming the compound — e.g. Al2(CO3)3,
+   Fe2S3, Group 2 sulfides, FeI3, CuI2), marked by letter so it reads in greyscale. Plus a rules
+   summary: five rules and one line explaining X.
 10. **Activity Series** — metals and halogens.
 11. **Strong Acids & Bases** — list.
 12. **Specific Heats** — common substances.
@@ -411,6 +415,16 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Full Packet |
 
 ## Decision log
+
+### 2026-11-10 — Reference packet: VSEPR grid, solubility X mark
+Sheet 3 (VSEPR Geometry) is a grid on one landscape page: rows 2–6 electron domains labelled with
+electron geometry, columns 0–3 lone pairs, impossible combinations hatched; same information as
+before. Sheet 9 (Solubility Grid) marks each cell S, SS, I, or X, where X means the ions react with
+each other or with water instead of forming the compound; the rules summary gains one line
+explaining X. Found by verify-content 2026-11-10; every other judgement call on that review was
+kept as built. Full text in "Reference packet contents".
+Supersedes: Reference packet contents, items 3 and 9 (SHULL-CHG-0068).
+Status: CONFIRMED · SHULL-CHG-0070
 
 ### 2026-11-06 — Reference packet: twelve sheets
 The Week-2 reference packet is twelve sheets: Equations & Constants, Significant Figure Rules,
