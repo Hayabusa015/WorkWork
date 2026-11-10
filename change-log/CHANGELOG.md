@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-10
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0070 | | Reference packet: VSEPR grid, solubility X | PROPOSED | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
+
 ## 2026-11-09
 
 | ID | Date | Change | Status | Record |
