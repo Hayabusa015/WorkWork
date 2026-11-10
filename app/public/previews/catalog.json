@@ -12,6 +12,18 @@
       "pages": 2,
       "items": [
         {
+          "id": "worksheet-chem_u01_s01.5_massnumbers",
+          "title": "Average Atomic Mass",
+          "course": "chemistry",
+          "spec": "chem_u01_s01.5_massnumbers.json",
+          "source": "templates/worksheet/specs/chem_u01_s01.5_massnumbers.json",
+          "images": [
+            "worksheet-chem_u01_s01.5_massnumbers-1.png",
+            "worksheet-chem_u01_s01.5_massnumbers-2.png"
+          ],
+          "total": 2
+        },
+        {
           "id": "worksheet-chem_u07_s07.4",
           "title": "Mole Conversions",
           "course": "chemistry",
@@ -32,6 +44,18 @@
           "images": [
             "worksheet-geo_u01_s01.4-1.png",
             "worksheet-geo_u01_s01.4-2.png"
+          ],
+          "total": 2
+        },
+        {
+          "id": "worksheet-geo_u02_s02.3_dinosaur_poster",
+          "title": "Dinosaur Poster or Slide",
+          "course": "geology",
+          "spec": "geo_u02_s02.3_dinosaur_poster.json",
+          "source": "templates/worksheet/specs/geo_u02_s02.3_dinosaur_poster.json",
+          "images": [
+            "worksheet-geo_u02_s02.3_dinosaur_poster-1.png",
+            "worksheet-geo_u02_s02.3_dinosaur_poster-2.png"
           ],
           "total": 2
         },
@@ -71,6 +95,30 @@
       "pages": 2,
       "items": [
         {
+          "id": "notes-chem_u01_s01.1-s01.5_notes_key",
+          "title": "Unit 1 \u2014 Matter & Changes +2 more",
+          "course": "chemistry",
+          "spec": "chem_u01_s01.1-s01.5_notes_key.json",
+          "source": "templates/notes/specs/chem_u01_s01.1-s01.5_notes_key.json",
+          "images": [
+            "notes-chem_u01_s01.1-s01.5_notes_key-1.png",
+            "notes-chem_u01_s01.1-s01.5_notes_key-2.png"
+          ],
+          "total": 8
+        },
+        {
+          "id": "notes-chem_u01_s01.1-s01.5_notes_student",
+          "title": "Unit 1 \u2014 Matter & Changes +2 more",
+          "course": "chemistry",
+          "spec": "chem_u01_s01.1-s01.5_notes_student.json",
+          "source": "templates/notes/specs/chem_u01_s01.1-s01.5_notes_student.json",
+          "images": [
+            "notes-chem_u01_s01.1-s01.5_notes_student-1.png",
+            "notes-chem_u01_s01.1-s01.5_notes_student-2.png"
+          ],
+          "total": 8
+        },
+        {
           "id": "notes-geo_u01_s01.2-s01.4",
           "title": "Unit 1 \u2014 The Big Bang & Origins +2 more",
           "course": "geology",
@@ -80,7 +128,7 @@
             "notes-geo_u01_s01.2-s01.4-1.png",
             "notes-geo_u01_s01.2-s01.4-2.png"
           ],
-          "total": 5
+          "total": 9
         },
         {
           "id": "notes-phys_u01_s01.1-s01.4",
@@ -92,7 +140,7 @@
             "notes-phys_u01_s01.1-s01.4-1.png",
             "notes-phys_u01_s01.1-s01.4-2.png"
           ],
-          "total": 7
+          "total": 9
         }
       ],
       "status": "built"

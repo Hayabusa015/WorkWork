@@ -73,6 +73,9 @@ Geology specimen photographs for identification are **shot, never generated**.
 stop and ask Matt. Verify the SMILES with `verify-content` first; the `--name` label is not checked
 by the script. SHULL-CHG-0042.
 
+**A slot the slide will not use** goes in that slide's `"unusedImages"` in the deck spec, so no
+empty well prints. How: `templates/slide/README.md`, Images.
+
 ## Animation
 
 Subtle, purposeful, professional. **Never animate because the software permits it.**

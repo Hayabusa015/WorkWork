@@ -25,6 +25,26 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-09
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0067 | 2026-11-09 | QA gate names the slide audit script | CONFIRMED | `governance/proposals/SHULL-CHG-0067-qa-gate-names-the-audit-scripts.md` |
+| SHULL-CHG-0066 | 2026-11-09 | Slide template: four fixes from the sample deck | CONFIRMED | `governance/proposals/SHULL-CHG-0066-slide-template-four-fixes.md` |
+
+## 2026-11-08
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0065 | 2026-11-08 | Weekly sweep fire time and legacy retirement condition | APPROVED | `governance/proposals/SHULL-CHG-0065-dst-cron-recheck-and-legacy-retirement.md` |
+| SHULL-CHG-0064 | 2026-11-08 | Finish four APPROVED records stuck short of IMPLEMENTED | APPROVED | `governance/proposals/SHULL-CHG-0064-approved-records-still-open.md` |
+| SHULL-CHG-0063 | 2026-11-08 | Evidence and questions for open course questions | APPROVED | `governance/proposals/SHULL-CHG-0063-open-question-evidence-and-pacing-checks.md` |
+| SHULL-CHG-0062 | 2026-11-08 | Physics tier labels and question-count ramp | APPROVED | `governance/proposals/SHULL-CHG-0062-physics-student-page-tier-label-pattern.md` |
+| SHULL-CHG-0061 | 2026-11-08 | Stop listing retired Chemistry 1.4 as live | APPROVED | `governance/proposals/SHULL-CHG-0061-chem-retired-1.4-still-listed.md` |
+| SHULL-CHG-0060 | 2026-11-08 | Remove stale Drive-state prose from decisions files | APPROVED | `governance/proposals/SHULL-CHG-0060-stale-drive-state-prose-in-decisions.md` |
+| SHULL-CHG-0059 | 2026-11-08 | Remove the answer leak from Physics S1.1 student notes | APPROVED | `governance/proposals/SHULL-CHG-0059-physics-s1.1-answer-leak.md` |
+| SHULL-CHG-0058 | 2026-11-08 | Geology U1 section-code offset becomes open question 7 | APPROVED | `governance/proposals/SHULL-CHG-0058-geology-u1-numbering-offset.md` |
+
 ## 2026-11-06
 
 `PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.

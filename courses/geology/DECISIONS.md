@@ -1,7 +1,7 @@
 # GEOLOGY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-08
+**Last updated:** 2026-11-08
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -244,6 +244,12 @@ the standard grammar.
 6. **U7–U10 content expansions** were Ohio-standards-based drafts. The section *titles* are now
    CONFIRMED by the roadmap; the bullet-level content beneath them remains PROVISIONAL until
    reviewed.
+7. **Built U1 section codes (S1.2 Big Bang Theory, S1.3 Nebular Theory, S1.4 The Sun) do not
+   match the roadmap map (1.1-1.5). Which is correct?** (SHULL-CHG-0058)
+   - Red Shift Gizmo: a named exception, or replaced? (See open question 2.)
+   - Whether phases exist in Geology at all.
+
+   *Blocks: all further Geology U1 builds until answered (CLAUDE.md §3).*
 
 ---
 
@@ -258,6 +264,15 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | U2 | Geologic Time |
 
 ## Decision log
+
+### 2026-11-08 — U1 section-code offset raised as open question 7
+The built U1 material (notes spec `templates/notes/specs/geo_u01_s01.2-s01.4.json` and the filed
+Red Shift Gizmo worksheet) carries S1.2 Big Bang Theory, S1.3 Nebular Theory, S1.4 The Sun, which
+does not match the U1 map in this file. Added as open question 7, with the Red Shift Gizmo and
+phases as sub-items. Nothing is renumbered and neither source is declared correct. No further
+Geology U1 builds until Matt answers.
+Supersedes: None (adds an open question; decides nothing).
+Status: OPEN · SHULL-CHG-0058
 
 ### 2026-09-08 — Section numbering confirmed
 Geology has section numbers. The full map is 10 units, 54 sections, sourced from the
