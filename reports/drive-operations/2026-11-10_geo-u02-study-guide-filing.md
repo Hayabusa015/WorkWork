@@ -28,10 +28,10 @@ Each file: (1) gws create in Upload Inbox (1ZDu0cSY2GKMspyboYQUH4t460p1_FYFy), n
 
 | # | Local file (scratchpad out/u2sg11/) | Final name | Object ID | Status |
 |---|---|---|---|---|
-| 1 | Unit 2 Study Guide - Geologic Time.docx | same | (pending) | pending |
-| 2 | Unit 2 Study Guide - Geologic Time.pdf | same | (pending) | pending |
-| 3 | Unit 2 Study Guide Key - Geologic Time.docx | same | (pending) | pending |
-| 4 | Unit 2 Study Guide Key - Geologic Time.pdf | same | (pending) | pending |
+| 1 | Unit 2 Study Guide - Geologic Time.docx | same | 1XSHnpSdNjBpZ6YmWkNsjVwzp5Wifcy2K | done, verified |
+| 2 | Unit 2 Study Guide - Geologic Time.pdf | same | 1k5gRrX-DmSB34bqQedbIYZ3pM4jxD8o5 | done, verified |
+| 3 | Unit 2 Study Guide Key - Geologic Time.docx | same | 1gQonvFJNk8PsKL-LdSadRRFvLCV2JWgp | done, verified |
+| 4 | Unit 2 Study Guide Key - Geologic Time.pdf | same | 1dikvQb1BPnHP2-4kNbU9vEcqJojqWSg5 | done, verified |
 
 Rollback: `update_file` parentId back to the Upload Inbox, or trash with user approval.
 
@@ -46,4 +46,26 @@ Confirmed by metadata lookup 2026-11-10: application/pdf, 43135 bytes, owner msh
 
 ## Results
 
-(pending)
+- First gws attempt with absolute scratchpad paths was rejected by gws ("outside the current
+  directory"); nothing was created. Re-run from inside the output directory with relative paths.
+- gws uploads: all four returned native MIME types (docx as
+  `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, PDFs as
+  `application/pdf`). No Google Docs conversion.
+- `update_file`: all four reparented from the Upload Inbox to 1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C,
+  IDs kept, titles unchanged.
+- Independent verification: `search_files parentId = '1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C'` lists all
+  four with the exact names. Drive sizes match the local files (41131, 117026, 41695, 85811 bytes).
+- Upload Inbox after filing: empty.
+- Trash of 1L2ZBoLoYvSI47R28YlFYAmEPPimzGdLN: **NOT PERFORMED.** No trash tool is available to the
+  Librarian in this session (the Drive connector exposes no trash operation and `update_file` has no
+  trashed field). gws is `drive.file`-scoped and cannot touch this user-created file, and Bash is
+  granted for uploads only. The old file remains in Unit 02 / Homework, untouched. It needs the user
+  to trash it by hand, or a session with a trash tool. No permanent delete was attempted.
+
+## Trash, completed by the main session (2026-11-10)
+
+The main session independently re-verified all four new files in 1yB-RasB1BOXgMmsKK77v6v2cKC9qu-_C
+(parentId search: names, sizes, types match), logged the trash in
+`approved-trash/2026-11-10_geo-u02-old-study-guide.txt`, then moved
+1L2ZBoLoYvSI47R28YlFYAmEPPimzGdLN to the trash with the Drive connector's `trash_file`. Metadata
+afterwards: `trashed: true`, parent unchanged. Recoverable; no permanent delete.
