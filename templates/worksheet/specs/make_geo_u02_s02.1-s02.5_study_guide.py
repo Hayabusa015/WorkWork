@@ -15,12 +15,12 @@ Life / Climate prompt, plus a BIG FOCUS line where the period has one ("the carb
 ... the swampy earth that turned into coal, or the Cambria explosion"). No fill-in-the-
 blank: "just have them write it, small short prompt."
 
-Content: every answer is the U2 guided-notes key (verified fact sheet, 2026-11-09), with
-two exceptions, both taught on the September deck the notes follow. Snowball Earth's
-reach to low latitudes and its volcanic-CO2 thaw are deck slides 15-16 (the notes key
-gives only the names and dates). Devonian "Age of Fishes" is deck slide 24. Section A's
-CO2 line is Matt's own example ("CO2 causes temps to go ___"), sourced to slide 16 and
-S2.5's greenhouse-gas warming. O2 is not a greenhouse gas, so it has no temperature line.
+Content: every answer is in the U2 guided-notes key (verified fact sheet, 2026-11-09), so
+a student can answer each prompt from the notes (Matt, 2026-11-10). One exception, kept at
+Matt's word: Devonian "Age of Fishes" is deck slide 24; the fish it names are in the notes.
+Snowball Earth asks only what the notes hold (the two glaciations and their dates);
+Section A's warming line is S2.5's "greenhouse gases... driving global warming", because
+the notes never name CO2 as one. O2 is not a greenhouse gas, so it has no temperature line.
 Only 4 of 12 periods are described ending in extinctions, so A says eras, not periods.
 
 Audit 2026-11-10 (auditor, blocking 1 + should-fix): no label or prompt prints another
@@ -58,8 +58,8 @@ BIG_IDEAS = [
     (lead("Dating") + "What method finds the age of very old rock?",
      "<b>Radiometric dating</b> (uranium-lead, potassium-argon). Carbon-14 dates organic "
      "material younger than about 50,000 years."),
-    (lead("CO₂") + "When it builds up in the air, what happens to temperatures?",
-     "<b>They go up</b>: Earth warms."),
+    (lead("Greenhouse gases") + "When volcanoes release them, what happens to global "
+     "temperatures?", "<b>They go up</b>: global warming (as at the end of the Permian)."),
     (lead("Ice") + "When ice sheets grow, what happens to sea level?",
      "<b>It falls</b>; it recovers when the climate warms again."),
     (lead("Era endings") + "What kind of event ends the Paleozoic and the Mesozoic?",
@@ -90,13 +90,12 @@ PRECAMBRIAN = [
 ]
 
 SNOWBALL = [
-    (FOCUS + "What was Snowball Earth? About when was it?",
-     "<b>Ice reached low latitudes, near the equator</b>: the Sturtian and Marinoan "
-     "glaciations, <b>about 720–635 million years ago</b> (Proterozoic)."),
+    (lead("Supercontinent") + "What supercontinent formed in the Proterozoic? About when?",
+     "<b>Rodinia</b>, roughly <b>1.1–0.9 billion years ago</b>."),
+    (FOCUS + "Snowball Earth: what were its two glaciations? About when?",
+     "<b>The Sturtian and Marinoan glaciations</b>, roughly <b>720–635 million years "
+     "ago</b>."),
     MORE,
-    (lead("The thaw") + "What ended Snowball Earth?",
-     "<b>Volcanoes kept releasing CO₂</b>; it built up until Earth warmed enough to melt "
-     "the ice."),
 ]
 
 E, L, C = lead("Earth"), lead("Life"), lead("Climate")

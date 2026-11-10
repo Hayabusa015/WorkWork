@@ -52,7 +52,7 @@
             ],
             [
               [
-                "4.&nbsp; <b>CO₂</b>&nbsp; When it builds up in the air, what happens to temperatures?",
+                "4.&nbsp; <b>Greenhouse gases</b>&nbsp; When volcanoes release them, what happens to global temperatures?",
                 1
               ]
             ],
@@ -126,19 +126,19 @@
             ],
             [
               [
-                "<b>BIG FOCUS</b>&nbsp; What was Snowball Earth? About when was it?",
+                "<b>Supercontinent</b>&nbsp; What supercontinent formed in the Proterozoic? About when?",
+                1
+              ]
+            ],
+            [
+              [
+                "<b>BIG FOCUS</b>&nbsp; Snowball Earth: what were its two glaciations? About when?",
                 1
               ]
             ],
             [
               [
                 "",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>The thaw</b>&nbsp; What ended Snowball Earth?",
                 1
               ]
             ]
@@ -275,7 +275,7 @@
           "1.  Time scale: Its four units, largest to smallest:  →  <b>Eon, era, period, epoch.</b>",
           "2.  Fossils: What kind of rock holds most of them?  →  <b>Sedimentary rock</b>: layers of sediment bury and preserve remains.",
           "3.  Dating: What method finds the age of very old rock?  →  <b>Radiometric dating</b> (uranium-lead, potassium-argon). Carbon-14 dates organic material younger than about 50,000 years.",
-          "4.  CO₂: When it builds up in the air, what happens to temperatures?  →  <b>They go up</b>: Earth warms.",
+          "4.  Greenhouse gases: When volcanoes release them, what happens to global temperatures?  →  <b>They go up</b>: global warming (as at the end of the Permian).",
           "5.  Ice: When ice sheets grow, what happens to sea level?  →  <b>It falls</b>; it recovers when the climate warms again.",
           "6.  Era endings: What kind of event ends the Paleozoic and the Mesozoic?  →  <b>A mass extinction</b> (end-Permian, about 252 million years ago; K–Pg, about 66 million years ago).",
           "7.  Climate trend: How has Earth's climate changed since the dinosaurs?  →  <b>It has cooled</b>, gradually, as the Mesozoic greenhouse faded, ending in repeated ice ages."
@@ -292,8 +292,8 @@
           "Middle eon: What formed on the surface? What lived there?  →  <b>Crust and oceans; microbes.</b>",
           "Youngest eon: How did the air change? What caused it?  →  <b>Oxygen rose</b> (the Great Oxidation Event, about 2.4 billion years ago), because <b>photosynthesis</b> released it faster than rocks and iron could absorb it.",
           "Oxygen: Why did that change matter for life?  →  It made <b>complex, oxygen-using life</b> possible: eukaryotes, then multicellular life.",
-          "Big focus: What was Snowball Earth? About when was it?  →  <b>Ice reached low latitudes, near the equator</b>: the Sturtian and Marinoan glaciations, <b>about 720–635 million years ago</b> (Proterozoic).",
-          "The thaw: What ended Snowball Earth?  →  <b>Volcanoes kept releasing CO₂</b>; it built up until Earth warmed enough to melt the ice."
+          "Supercontinent: What supercontinent formed in the Proterozoic? About when?  →  <b>Rodinia</b>, roughly <b>1.1–0.9 billion years ago</b>.",
+          "Big focus: Snowball Earth: what were its two glaciations? About when?  →  <b>The Sturtian and Marinoan glaciations</b>, roughly <b>720–635 million years ago</b>."
         ],
         "gapBefore": 6
       },
