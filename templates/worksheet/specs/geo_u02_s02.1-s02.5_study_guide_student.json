@@ -23,65 +23,64 @@
       ],
       "title": "Unit 2 Study Guide",
       "proseOnly": true,
-      "pagesPerSection": 3,
+      "pagesPerSection": 2,
       "directions": "Answer each prompt in a few words or a short sentence. Use your guided notes if you get stuck.",
       "blocks": [
         {
           "kind": "plan",
-          "label": "BIG IDEAS",
+          "label": "A  ·  BIG IDEAS",
           "boldLabels": false,
           "points": 7,
           "rows": [
             [
               [
-                "<b>Time scale</b>&nbsp; Its four units, largest to smallest:",
+                "1.&nbsp; <b>Time scale</b>&nbsp; Its four units, largest to smallest:",
                 1
               ]
             ],
             [
               [
-                "<b>Fossils</b>&nbsp; What kind of rock holds most of them?",
+                "2.&nbsp; <b>Fossils</b>&nbsp; What kind of rock holds most of them?",
                 1
               ]
             ],
             [
               [
-                "<b>Dating</b>&nbsp; What method finds the age of very old rock?",
+                "3.&nbsp; <b>Dating</b>&nbsp; What method finds the age of very old rock?",
                 1
               ]
             ],
             [
               [
-                "<b>CO₂</b>&nbsp; When it builds up in the air, what happens to temperatures?",
+                "4.&nbsp; <b>CO₂</b>&nbsp; When it builds up in the air, what happens to temperatures?",
                 1
               ]
             ],
             [
               [
-                "<b>Ice</b>&nbsp; When ice sheets grow, what happens to sea level?",
+                "5.&nbsp; <b>Ice</b>&nbsp; When ice sheets grow, what happens to sea level?",
                 1
               ]
             ],
             [
               [
-                "<b>Era endings</b>&nbsp; What kind of event ends the Paleozoic and the Mesozoic?",
+                "6.&nbsp; <b>Era endings</b>&nbsp; What kind of event ends the Paleozoic and the Mesozoic?",
                 1
               ]
             ],
             [
               [
-                "<b>Climate trend</b>&nbsp; How has Earth's climate changed since the dinosaurs?",
+                "7.&nbsp; <b>Climate trend</b>&nbsp; How has Earth's climate changed since the dinosaurs?",
                 1
               ]
             ]
-          ],
-          "heading": "A  ·  Big Ideas of the Unit"
+          ]
         },
         {
           "kind": "plan",
-          "label": "EARTH'S EARLIEST HISTORY",
+          "label": "B  ·  THE PRECAMBRIAN",
           "boldLabels": false,
-          "points": 6,
+          "points": 8,
           "rows": [
             [
               [
@@ -124,17 +123,7 @@
                 "<b>Oxygen</b>&nbsp; Why did that change matter for life?",
                 1
               ]
-            ]
-          ],
-          "heading": "B  ·  The Precambrian",
-          "gapBefore": 10
-        },
-        {
-          "kind": "plan",
-          "label": "SNOWBALL EARTH",
-          "boldLabels": false,
-          "points": 2,
-          "rows": [
+            ],
             [
               [
                 "<b>BIG FOCUS</b>&nbsp; What was Snowball Earth? About when was it?",
@@ -154,388 +143,124 @@
               ]
             ]
           ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "CAMBRIAN PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What covered the edges of the continents?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; Where did all life live?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What were temperatures and sea level like?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What was the Cambrian Explosion?",
-                1
-              ]
-            ]
-          ],
-          "heading": "C  ·  The Paleozoic Era  (about 539 to 252 million years ago)",
           "gapBefore": 10
         },
         {
-          "kind": "plan",
-          "label": "ORDOVICIAN PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What did plate collisions begin to build?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What thrived in the sea? What first reached land?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; How did it change late in the period?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What happened to life at the end of the period?",
-                1
-              ]
-            ]
+          "kind": "table",
+          "label": "C–E  ·  PERIOD BY PERIOD",
+          "size": 8.5,
+          "gapBefore": 10,
+          "headers": [
+            "PERIOD",
+            "EARTH",
+            "LIFE",
+            "CLIMATE",
+            "BIG FOCUS"
           ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "SILURIAN PERIOD",
-          "boldLabels": false,
-          "points": 3,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; Which two landmasses collided?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What new kind of fish appeared?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; How did temperature and sea level change?",
-                1
-              ]
-            ]
+          "widths": [
+            0.12,
+            0.22,
+            0.22,
+            0.22,
+            0.22
           ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "DEVONIAN PERIOD",
-          "boldLabels": false,
-          "points": 4,
+          "minRowHeightIn": 0.82,
+          "points": 45,
           "rows": [
+            {
+              "group": "THE PALEOZOIC ERA  (ABOUT 539 TO 252 MILLION YEARS AGO)"
+            },
             [
-              [
-                "<b>Earth</b>&nbsp; What kept happening between the continents?",
-                1
-              ]
+              "Cambrian",
+              "<i>What covered the edges of the continents?</i>",
+              "<i>Where did all life live?</i>",
+              "<i>What were temperatures and sea level like?</i>",
+              "<i>What was the Cambrian Explosion?</i>"
             ],
             [
-              [
-                "<b>Life</b>&nbsp; What spread across the land?",
-                1
-              ]
+              "Ordovician",
+              "<i>What did plate collisions begin to build?</i>",
+              "<i>What thrived in the sea? What first reached land?</i>",
+              "<i>How did it change late in the period?</i>",
+              "<i>What happened to life at the end of the period?</i>"
             ],
             [
-              [
-                "<b>Climate</b>&nbsp; What were the seas like?",
-                1
-              ]
+              "Silurian",
+              "<i>Which two landmasses collided?</i>",
+              "<i>What new kind of fish appeared?</i>",
+              "<i>How did temperature and sea level change?</i>",
+              "—"
             ],
             [
-              [
-                "<b>BIG FOCUS</b>&nbsp; Why is it called the \"Age of Fishes\"?",
-                1
-              ]
+              "Devonian",
+              "<i>What kept happening between the continents?</i>",
+              "<i>What spread across the land?</i>",
+              "<i>What were the seas like?</i>",
+              "<i>Why is it called the \"Age of Fishes\"?</i>"
+            ],
+            [
+              "Carboniferous",
+              "<i>Which supercontinent was forming?</i>",
+              "<i>What giant animals lived on land?</i>",
+              "<i>What happened to oxygen and CO₂?</i>",
+              "<i>What is the Carboniferous famous for?</i>"
+            ],
+            [
+              "Permian",
+              "<i>What supercontinent was complete? What ocean surrounded it?</i>",
+              "<i>What kind of animal was </i>Dimetrodon<i>?</i>",
+              "<i>What happened to the oceans by the end?</i>",
+              "<i>What ended the Permian?</i>"
+            ],
+            {
+              "group": "THE MESOZOIC ERA  (ABOUT 252 TO 66 MILLION YEARS AGO)"
+            },
+            [
+              "Triassic",
+              "<i>What began to happen to Pangaea?</i>",
+              "<i>What did ecosystems have to do early in the period?</i>",
+              "<i>What were the inland areas like?</i>",
+              "<i>What new animal group appeared?</i>"
+            ],
+            [
+              "Jurassic",
+              "<i>What new ocean opened?</i>",
+              "<i>Which dinosaurs ruled the land?</i>",
+              "<i>What was the world's climate like?</i>",
+              "<i>Why is </i>Archaeopteryx<i> important?</i>"
+            ],
+            [
+              "Cretaceous",
+              "<i>What grew even in Antarctica?</i>",
+              "<i>What new kind of plant spread?</i>",
+              "<i>What were sea levels like?</i>",
+              "<i>What ended the Cretaceous?</i>"
+            ],
+            {
+              "group": "THE CENOZOIC ERA  (ABOUT 66 MILLION YEARS AGO TO TODAY)"
+            },
+            [
+              "Paleogene",
+              "<i>What landmass crashed into Asia?</i>",
+              "<i>Which animal group diversified rapidly?</i>",
+              "<i>Which way did temperatures go?</i>",
+              "—"
+            ],
+            [
+              "Neogene",
+              "<i>Which mountains kept growing?</i>",
+              "<i>What spread across the land?</i>",
+              "<i>What happened to rainfall in many regions?</i>",
+              "—"
+            ],
+            [
+              "Quaternary",
+              "<i>What advanced and retreated over the land?</i>",
+              "<i>What does the Quaternary have to do with us?</i>",
+              "<i>What paces its cycles of cold and warm?</i>",
+              "<i>What is the Holocene?</i>"
             ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "CARBONIFEROUS PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; Which supercontinent was forming?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What giant animals lived on land?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What happened to oxygen and CO₂?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What is the Carboniferous famous for?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "PERMIAN PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What supercontinent was complete? What ocean surrounded it?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What kind of animal was <i>Dimetrodon</i>?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What happened to the oceans by the end?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What ended the Permian?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "TRIASSIC PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What began to happen to Pangaea?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What did ecosystems have to do early in the period?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What were the inland areas like?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What new animal group appeared?",
-                1
-              ]
-            ]
-          ],
-          "heading": "D  ·  The Mesozoic Era  (about 252 to 66 million years ago)",
-          "gapBefore": 10
-        },
-        {
-          "kind": "plan",
-          "label": "JURASSIC PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What new ocean opened?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; Which dinosaurs ruled the land?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What was the world's climate like?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; Why is <i>Archaeopteryx</i> important?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "CRETACEOUS PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What grew even in Antarctica?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What new kind of plant spread?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What were sea levels like?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What ended the Cretaceous?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "PALEOGENE PERIOD",
-          "boldLabels": false,
-          "points": 3,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What landmass crashed into Asia?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; Which animal group diversified rapidly?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; Which way did temperatures go?",
-                1
-              ]
-            ]
-          ],
-          "heading": "E  ·  The Cenozoic Era  (about 66 million years ago to today)",
-          "gapBefore": 10
-        },
-        {
-          "kind": "plan",
-          "label": "NEOGENE PERIOD",
-          "boldLabels": false,
-          "points": 3,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; Which mountains kept growing?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What spread across the land?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What happened to rainfall in many regions?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
-        },
-        {
-          "kind": "plan",
-          "label": "QUATERNARY PERIOD",
-          "boldLabels": false,
-          "points": 4,
-          "rows": [
-            [
-              [
-                "<b>Earth</b>&nbsp; What advanced and retreated over the land?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Life</b>&nbsp; What does the Quaternary have to do with us?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>Climate</b>&nbsp; What paces its cycles of cold and warm?",
-                1
-              ]
-            ],
-            [
-              [
-                "<b>BIG FOCUS</b>&nbsp; What is the Holocene?",
-                1
-              ]
-            ]
-          ],
-          "gapBefore": 6
+          ]
         }
       ]
     }

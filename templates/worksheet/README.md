@@ -126,6 +126,8 @@ exactly as before. Spec text in these blocks may carry `<b>`, `<i>` (genus and s
 - **`table`** — a reference table: `headers`, `widths` (fractions of the page), `rows`. A row may
   be `{"group": "..."}` to open a labelled group. The first column is bold unless
   `"boldFirst": false`. Optional `label`, `lead` and `size`. The header row repeats on a new page.
+  `minRowHeightIn` floors every data row's height, for a table students write in (a short
+  prompt in each cell, the room under it for the answer).
 - **`notes`** — a `label` and bulleted `items`, or plain lines with `"bullets": false`.
 - **`formats`** — two (or more) ways to do the same task, side by side: a `note` above the boxes,
   then `boxes`, each with a `title`, a `share` of the width, and `lines`, or a `lead` plus

@@ -237,6 +237,11 @@ DIRECTIONS = ("Answer each prompt in a few words or a short sentence. Use your g
 
 
 # ---------------------------------------------------------------------- the layout
+# Matt's layout (2026-11-10): the student copy looks like the key - A and B as short
+# numbered prompts, then one period table - with a short prompt in each cell and room under
+# it to write, instead of an answer.
+WIDTHS = [0.12, 0.22, 0.22, 0.22, 0.22]
+ROW_IN = 0.82            # room to write under a two-line prompt; 2 pages total
 def rows(items):
     return [[[lab, 1]] for lab, _ in items]
 
@@ -250,18 +255,60 @@ def plan(label, items, **extra):
             "points": answered(items), "rows": rows(items), **extra}
 
 
-def student_blocks():
-    out = [
-        plan("BIG IDEAS", BIG_IDEAS, heading="A  ·  Big Ideas of the Unit"),
-        plan("EARTH'S EARLIEST HISTORY", PRECAMBRIAN, heading="B  ·  The Precambrian",
-             gapBefore=10),
-        plan("SNOWBALL EARTH", SNOWBALL, gapBefore=6),
-    ]
+COLS = ("EARTH", "LIFE", "CLIMATE", "FOCUS")
+HEADERS = ["PERIOD", "EARTH", "LIFE", "CLIMATE", "BIG FOCUS"]
+NO_FOCUS = "—"          # a period with no headline event
+
+
+def tag(prompt):
+    return next(t for t, pre in (("FOCUS", FOCUS), ("EARTH", E), ("LIFE", L), ("CLIMATE", C))
+                if prompt.startswith(pre))
+
+
+def period_rows(cell):
+    """The period table, once for both copies: `cell(prompt, answer)` fills a cell."""
+    out = []
     for heading, periods in ERAS:
-        for k, (period, items) in enumerate(periods):
-            out.append(plan(period, items, **({"heading": heading, "gapBefore": 10} if k == 0
-                                              else {"gapBefore": 6})))
+        out.append({"group": heading.split("·", 1)[1].strip().upper()})
+        for period, items in periods:
+            got = {tag(p): (p, a) for p, a in items}
+            out.append([period.replace(" PERIOD", "").title()]
+                       + [cell(*got[t]) if t in got else NO_FOCUS for t in COLS])
     return out
+
+
+def bare(prompt):
+    """The prompt without its Earth / Life / Climate / BIG FOCUS lead: the column says it."""
+    for pre in (FOCUS, E, L, C):
+        if prompt.startswith(pre):
+            return prompt[len(pre):]
+    return prompt
+
+
+def upright(text):
+    """A genus name inside an italic prompt sets upright, so it still stands apart."""
+    return text.replace("<i>", "\0").replace("</i>", "<i>").replace("\0", "</i>")
+
+
+def numbered(items):
+    out, n = [], 0
+    for p, a in items:
+        if a is not None:
+            n += 1
+            p = f"{n}.&nbsp; {p}"
+        out.append((p, a))
+    return out
+
+
+def student_blocks():
+    cells = sum(len(items) for _, periods in ERAS for _, items in periods)
+    return [
+        plan("A  ·  BIG IDEAS", numbered(BIG_IDEAS)),
+        plan("B  ·  THE PRECAMBRIAN", PRECAMBRIAN + SNOWBALL, gapBefore=10),
+        {"kind": "table", "label": "C–E  ·  PERIOD BY PERIOD", "size": 8.5, "gapBefore": 10,
+         "headers": HEADERS, "widths": WIDTHS, "minRowHeightIn": ROW_IN, "points": cells,
+         "rows": period_rows(lambda p, a: f"<i>{upright(bare(p))}</i>")},
+    ]
 
 
 def plain(prompt):
@@ -276,17 +323,6 @@ def qa(items, numbered=False):
 
 
 def key_blocks():
-    table_rows = []
-    for heading, periods in ERAS:
-        table_rows.append({"group": heading.split("·", 1)[1].split("(")[0].strip().upper()})
-        for period, items in periods:
-            got = {}
-            for lab, ans in items:
-                tag = next(t for t, pre in (("FOCUS", FOCUS), ("EARTH", E), ("LIFE", L),
-                                            ("CLIMATE", C)) if lab.startswith(pre))
-                got[tag] = ans
-            table_rows.append([period.replace(" PERIOD", "").title()]
-                              + [got.get(t, "") for t in ("EARTH", "LIFE", "CLIMATE", "FOCUS")])
     return [
         {"kind": "notes", "label": "A  ·  BIG IDEAS", "bullets": False,
          "items": qa(BIG_IDEAS, numbered=True)},
@@ -295,8 +331,7 @@ def key_blocks():
         {"kind": "notes", "bullets": False, "gapBefore": 4,
          "items": ["<b>Bold</b> is the minimum full-credit answer; the rest is detail."]},
         {"kind": "table", "label": "C–E  ·  PERIOD BY PERIOD", "size": 8.5, "gapBefore": 6,
-         "headers": ["PERIOD", "EARTH", "LIFE", "CLIMATE", "BIG FOCUS"],
-         "widths": [0.13, 0.21, 0.23, 0.20, 0.23], "rows": table_rows},
+         "headers": HEADERS, "widths": WIDTHS, "rows": period_rows(lambda p, a: a)},
     ]
 
 
@@ -317,7 +352,7 @@ def spec(key):
             "coversSections": ["2.1", "2.2", "2.3", "2.4", "2.5"],
             "title": TITLE,
             "proseOnly": True,
-            "pagesPerSection": 2 if key else 3,   # measured; Matt's ceiling is 4
+            "pagesPerSection": 2,   # measured, both copies; Matt's ceiling is 4
             "directions": DIRECTIONS,
             "blocks": student_blocks(),
         }],

@@ -562,9 +562,12 @@ def table_block(doc, block, pal, width=TEXT_W_IN):
         borders(hc, pal.ink, sz=8, edges=("bottom",))
         cell_margins(hc, top=20, bottom=30, left=60, right=60)
         para(hc, h, 8, bold=True, color=pal.label, caps_track=True, first=True)
+    # `minRowHeightIn` floors every data row's height: a table students write in. Opt-in;
+    # rows still grow with their text.
+    floor = block.get("minRowHeightIn")
     for ri, row in enumerate(rows, 1):
         tr = t.rows[ri]
-        no_split(tr)
+        no_split(tr, None if isinstance(row, dict) else floor)
         if isinstance(row, dict):
             merged = tr.cells[0].merge(tr.cells[-1])
             borders(merged, pal.display, sz=8, edges=("top",))
