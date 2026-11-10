@@ -43,6 +43,14 @@ def F(text, key):
                   text)
 
 
+NBSP = "\u00a0"
+
+
+def nb(eq):
+    """An equation that must not break across lines: its spaces become no-break spaces."""
+    return eq.replace(" ", NBSP)
+
+
 RECALL_CUES = ["Close your notes before you write.",
                "Use the checklist to find what still needs practice."]
 
@@ -84,7 +92,13 @@ def build(key, board):
             row["extraNotes"] = False
         return row
 
-    def rc(prompt, answer, checks, lines=2):
+    def qr(q, a):                               # quick recall: the key adds the answer
+        return {"q": q, "a": a} if key else {"q": q}
+
+    def board_cue(n):
+        return [f"Slide {n}: worked on the board."] if n in board else []
+
+    def rc(prompt, answer, checks, lines=3):
         r = {"kind": "recall", "title": "Section summary", "cues": RECALL_CUES,
              "lines": lines, "prompt": prompt, "selfCheck": checks}
         if key:
@@ -126,10 +140,10 @@ def build(key, board):
         ], cues=["Common mix-up: a moving object does not need a net force to keep moving. "
                  "A moving puck keeps going with Fnet = 0."], extra=False),
         rc("State Newton’s three laws in your own words, and write the equation for weight.",
-           "1st: no net force, no change in velocity. 2nd: Fnet = ma. 3rd: forces come in "
-           "equal, opposite pairs on two objects. Weight: Fg = mg.",
+           f"1st: Fnet = 0, no change in velocity. 2nd: {nb('Fnet = ma')}. 3rd: equal, "
+           f"opposite pairs. {nb('Fg = mg')}.",
            ["I can tell mass (kg) from weight (N) and find weight with Fg = mg.",
-            "I can state all three laws and explain equilibrium."]),
+            "I can state all three laws and explain equilibrium."], lines=2),
     ]
 
     # ------------------------------------------------------------------ 3.2
@@ -146,7 +160,7 @@ def build(key, board):
             must("On a level surface with no other vertical forces or acceleration: "
                  "FN = {Fg}."),
         ], cues=["Common mix-up: FN does not always equal weight. That needs the level-surface "
-                 "conditions above."]),
+                 "conditions below."]),
         ex(12, "Balanced Forces: Book and Lamp",
            ["2 kg book at rest on a table;   1.5 kg lamp at rest on a rope;   "
             "g = 9.8 m/s²."],
@@ -162,6 +176,7 @@ def build(key, board):
            "Fnet = {20 N to the right}",
            ["Right: +30 N     Left: −10 N", "Fnet = 30 − 10 = 20 N",
             "20 N to the right"],
+           cues=board_cue(14),
            statement="Choose a positive direction, then add forces with {signs}. Add "
                      "horizontal and vertical forces {separately}."),
         ex(14, "Equilibrium: The Missing Force",
@@ -181,9 +196,9 @@ def build(key, board):
         ex(16, "Breaking a Force into Components",
            ["F = 100 N pulling 30° above the horizontal."],
            "the horizontal and vertical components.",
-           "Fx = {86.6 N horizontal}      Fy = {50.0 N up}",
-           [f"Fx = F cos {T} = 100 cos 30° = 86.6 N",
-            f"Fy = F sin {T} = 100 sin 30° = 50.0 N",
+           "Fx = {86.6 N horizontal, toward the pull}      Fy = {50.0 N up}",
+           [f"Fx = F cos {T} = 100 cos 30° = 86.6 N horizontal, toward the pull",
+            f"Fy = F sin {T} = 100 sin 30° = 50.0 N up",
             "Check: √(86.6² + 50.0²) ≈ 100 N"],
            statement=f"Horizontal: Fx = {{F cos {T}}}      Vertical: Fy = {{F sin {T}}}"),
         ex(17, "One Angled Force and One Straight Force",
@@ -194,19 +209,19 @@ def build(key, board):
            ["Fx = 80 cos 40° − 30 = 31.3 N", "Fy = 80 sin 40° = 51.4 N",
             "Fnet = √(31.3² + 51.4²) ≈ 60 N", f"{T} = tan⁻¹(51.4/31.3) ≈ 59°"]),
         ex(18, "Two Angled Forces: Tugboats",
-           ["top view;   500 N at 30° above +x;   400 N at 45° above −x.   "
+           ["top view;  500 N at 30° above +x;  400 N at 45° above −x.  "
             "Positive: +x right, +y up the page."],
            "the net force on the barge and its direction.",
            f"Fnet ≈ {{554 N}}  at  {T} ≈ {{74° above +x}}",
            ["Fx = 500 cos 30° − 400 cos 45° = 150 N",
             "Fy = 500 sin 30° + 400 sin 45° = 533 N",
             "Fnet = √(150² + 533²) ≈ 554 N", f"{T} = tan⁻¹(533/150) ≈ 74°"],
-           cues=["Check the quadrant before reporting an angle"]),
-        rc("Explain how to find the net force on an object from its free-body diagram, "
-           "including a force at an angle.",
-           "Draw one arrow per force on the object. Choose a positive direction. Split angled "
-           "forces into Fx = F cos θ and Fy = F sin θ, add each direction with signs, then "
-           "combine with √(Fx² + Fy²) and θ = tan⁻¹(Fy/Fx).",
+           cues=["Check the quadrant before reporting an angle"] + board_cue(17)),
+        rc("Summarize how to find the net force from a free-body diagram, including a force "
+           "at an angle.",
+           f"One arrow per force; choose a positive direction. Split angled forces with "
+           f"{nb('Fx = F cos θ')} and {nb('Fy = F sin θ')}, add each direction with signs, "
+           f"then combine with {nb('√(Fx² + Fy²)')}.",
            ["I can draw an FBD with one labeled arrow per force.",
             "I can add forces with signs and split an angled force into components."]),
     ]
@@ -239,11 +254,12 @@ def build(key, board):
            "Fg,parallel = {49.7 N downhill}      Fnet = {19.7 N down the ramp}",
            ["Fg,parallel = 12(9.8) sin 25° = 49.7 N downhill",
             "Fnet = 49.7 − 30 = 19.7 N", "19.7 N down the ramp"]),
-        rc("Explain how to split the weight on a ramp, and how FN changes as it gets steeper.",
-           "Tilt the axes. Fg,parallel = mg sin θ down the slope; Fg,perp = mg cos θ into the "
-           "ramp; FN = mg cos θ. A steeper ramp gives a smaller FN.",
+        rc("Describe how to split the weight on a ramp, and how FN changes as the ramp gets "
+           "steeper.",
+           f"{nb('Fg,parallel = mg sin θ')}, {nb('Fg,perp = mg cos θ')}, "
+           f"{nb('FN = mg cos θ')}. Steeper ramp: smaller FN.",
            [f"I can write Fg,parallel = mg sin {T} and Fg,perp = mg cos {T}.",
-            "I can find FN and the net force along a ramp."]),
+            "I can find FN and the net force along a ramp."], lines=2),
     ]
 
     # ------------------------------------------------------------------ 3.4
@@ -260,7 +276,7 @@ def build(key, board):
            "Fnet and a.",
            "Fnet = {3300 N forward}      a = {2.2 m/s² forward}",
            ["Fnet = 4500 − 1200 = 3300 N forward", "a = Fnet / m = 3300 / 1500",
-            "a = 2.2 m/s² forward"]),
+            "a = 2.2 m/s² forward"], cues=board_cue(27)),
         ex(27, "From a Diagram to Acceleration",
            ["10 kg cart;   50 N push right;   20 N opposing force left.   Positive: right."],
            "Fnet and a.",
@@ -290,23 +306,24 @@ def build(key, board):
               "weight."),
             must("The scale reading changes with {acceleration}, not simply with motion up or "
                  "down."),
-        ], cues=["Common mix-up: FN equals mg only when a = 0."]),
+        ], cues=["In an elevator, FN equals mg only when a = 0."]),
         ex(31, "Elevator Accelerating Up",
            ["m = 70 kg;   a = 2.0 m/s² upward.   Positive: up."],
            "the scale reading.",
-           "FN = {826 N}",
+           "FN = {826 N up}",
            ["Weight: mg = 70(9.8) = 686 N", "FN − mg = ma", "FN = 686 + 70(2.0)",
-            "FN = 826 N (up)"]),
+            "FN = 826 N up"], cues=board_cue(32)),
         ex(32, "Elevator Accelerating Down",
            ["m = 70 kg;   a = 2.0 m/s² downward.   Positive: up, so a = −2.0 m/s²."],
            "the scale reading.",
-           "FN = {546 N}",
+           "FN = {546 N up}",
            ["Up is positive: a = −2.0 m/s²", "FN − mg = ma", "FN = 686 + 70(−2.0)",
-            "FN = 546 N (up)"]),
-        rc("Explain the steps from a free-body diagram to an acceleration, and why a scale "
-           "reads differently in an accelerating elevator.",
-           "Choose a positive direction, add the forces to get Fnet, then a = Fnet / m in the "
-           "direction of Fnet. The scale reads FN, and FN − mg = ma, so FN changes when a ≠ 0.",
+            "FN = 546 N up"]),
+        rc("List the steps from a free-body diagram to an acceleration. Add how a scale "
+           "reading changes in an accelerating elevator.",
+           f"Choose a positive direction, add the forces to get Fnet, then {nb('a = Fnet / m')} "
+           f"in the direction of Fnet. The scale reads FN; {nb('FN − mg = ma')}, so FN changes "
+           "when a ≠ 0.",
            ["I can find a from Fnet = ma, with units and direction.",
             "I can find a scale reading with FN − mg = ma."]),
     ]
@@ -333,7 +350,7 @@ def build(key, board):
             "μk = fk / FN = 120 / 392 ≈ 0.31 (no units)"]),
         ex(37, "Static or Sliding: The 25 kg Box",
            ["m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and "
-            "110 N."],
+            "110 N.   Positive: the push direction."],
            "whether the box moves for each push, and the acceleration for 110 N.",
            "90 N: {stays at rest}      110 N: {slides}, a = {1.46 m/s²} in the push direction",
            ["FN = 25(9.8) = 245 N;   fs,max = 0.40(245) = 98 N",
@@ -342,11 +359,11 @@ def build(key, board):
             "Fnet = 110 − 73.5 = 36.5 N;   a = 36.5 / 25 = 1.46 m/s²"], height=1.6),
         ex(38, "Angled Pull with Friction",
            ["m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   "
-            "Positive: +x (direction of the pull)."],
-           "the normal force, the friction, and the acceleration.",
-           "FN = {219 N}     fk = {54.75 N}     a = {2.51 m/s² in +x}",
-           ["FN = mg − F sin 30° = 294 − 75 = 219 N",
-            "fk = 0.25(219) = 54.75 N", "Fnet = 150 cos 30° − 54.75 = 75.15 N",
+            "Positive: +x (horizontal, toward the pull) and up."],
+           "FN, fk, and a.",
+           "FN = {219 N} up    fk = {54.75 N} opposite the motion    a = {2.51 m/s² in +x}",
+           ["FN = mg − F sin 30° = 294 − 75 = 219 N up",
+            "fk = 0.25(219) = 54.75 N, opposite the motion", "Fnet = 150 cos 30° − 54.75 = 75.15 N",
             "a = 75.15 / 30 = 2.51 m/s² in +x"]),
         notes(39, "Friction on an Incline", [
             t("For a block sliding down a ramp, friction points {up the ramp}."),
@@ -355,18 +372,17 @@ def build(key, board):
             t("Friction {reverses} if sliding reverses."),
         ], extra=False),
         ex(40, "Sliding Down the Ramp: The 10 kg Block",
-           ["m = 10 kg, starts at rest;   35° ramp;   μs = 0.50;   μk = 0.40.   "
-            "Positive: downhill."],
-           "whether the block slides, and its acceleration.",
+           ["m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill."],
+           "if it slides, and a.",
            "Slides: {yes}      a = {2.41 m/s² downhill}",
            ["Fg,parallel = 10(9.8) sin 35° = 56.2 N;   FN = 10(9.8) cos 35° = 80.3 N",
             "fs,max = 0.50(80.3) = 40.1 N.   56.2 > 40.1, so it slides.",
             "fk = 0.40(80.3) = 32.1 N",
             "a = (56.2 − 32.1)/10 = 2.41 m/s² downhill"], height=1.6),
-        rc("Explain how to decide whether an object at rest will start to slide, and how to "
-           "find its acceleration once it does.",
-           "Compare the push (or mg sin θ on a ramp) with fs,max = μsFN. If it is larger, the "
-           "object slides: use fk = μkFN, find Fnet, then a = Fnet / m.",
+        rc("Explain how to decide whether an object at rest starts to slide, and how to find "
+           "its acceleration once it does.",
+           f"Compare the push (or {nb('mg sin θ')} on a ramp) with {nb('fs,max = μsFN')}. If it "
+           f"is larger, it slides: use {nb('fk = μkFN')}, find Fnet, then {nb('a = Fnet / m')}.",
            ["I can tell static from kinetic friction and use fs,max = μsFN.",
             "I can find friction and acceleration on level ground and on a ramp."]),
     ]
@@ -377,12 +393,12 @@ def build(key, board):
            ["20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
             "ignore cable mass.   Positive: right and up."],
            "the tension in each support cable.",
-           "FTL = {98.0 N}      FTR ≈ {170 N}",
+           "FTL = {98.0 N}    FTR ≈ {170 N}    each {along its cable, toward its support}",
            ["At rest: Fnet,x = 0, Fnet,y = 0;   Fdown = mg = 20(9.8) = 196 N",
             "Horizontal: FTR cos 60° = FTL cos 30°, so FTL = 0.577FTR",
             "Vertical: FTL sin 30° + FTR sin 60° = 196",
             "(0.577FTR)(0.5) + 0.866FTR = 196",
-            "FTR ≈ 170 N     FTL = 98.0 N"],
+            "FTR ≈ 170 N     FTL = 98.0 N, each along its cable, toward its support"],
            notes=["*The steeper cable carries more {tension}."], height=1.8),
         notes(43, "Ideal Strings and Pulleys", [
             t("Ideal: a massless, taut rope that does not {stretch}, and a massless, "
@@ -393,40 +409,41 @@ def build(key, board):
               "separate {free-body diagram} for each object."),
         ]),
         ex(44, "Atwood Machine",
-           ["m1 = 5 kg, m2 = 3 kg, both hanging.   Positive: the motion (5 kg down, "
+           ["m₁ = 5 kg, m₂ = 3 kg, both hanging.   Positive: the motion (5 kg down, "
             "3 kg up)."],
            "a and T.",
-           "a = {2.45 m/s²}      T = {36.8 N}",
-           ["Fnet = (5 − 3)(9.8) = 19.6 N", "Whole system: a = 19.6 / (5 + 3) = 2.45 m/s²",
+           "a = {2.45 m/s²} (5 kg down, 3 kg up)      T = {36.8 N}",
+           ["Fnet = (5 − 3)(9.8) = 19.6 N", "Whole system: a = 19.6 / (5 + 3) = 2.45 m/s² (5 kg down, 3 kg up)",
             "Use the 3 kg mass: T − 3g = 3a", "T = 3(9.8 + 2.45) = 36.8 N"]),
         ex(45, "A Block on a Frictionless Table",
-           ["m1 = 4 kg on the table;   m2 = 2 kg hanging.   Positive: the motion."],
+           ["m₁ = 4 kg on the table;   m₂ = 2 kg hanging.   Positive: the motion."],
            "a and T.",
-           "a = {3.27 m/s²}      T ≈ {13.1 N}",
-           ["Driving force: Fnet = m2g = 2(9.8) = 19.6 N",
-            "Whole system: a = 19.6 / (4 + 2) = 3.27 m/s²",
-            "Table block: T = m1a = 4(3.27) ≈ 13.1 N"],
+           "a = {3.27 m/s²} (2 kg down, 4 kg toward the pulley)      T ≈ {13.1 N}",
+           ["Driving force: Fnet = m₂g = 2(9.8) = 19.6 N",
+            "Whole system: a = 19.6 / (4 + 2) = 3.27 m/s² (2 kg down, 4 kg toward the pulley)",
+            "Table block: T = m₁a = 4(3.27) ≈ 13.1 N"],
            cues=["Hanging mass accelerates down; table block, toward the pulley"]),
         ex(46, "The Same System with Friction",
-           ["m1 = 4 kg on the table, μk = 0.20;   m2 = 2 kg hanging.   Positive: the motion."],
+           ["m₁ = 4 kg on the table, μk = 0.20;   m₂ = 2 kg hanging.   Positive: the motion."],
            "fk, a, and T.",
-           "fk = {7.84 N}      a = {1.96 m/s²}      T = {15.7 N}",
-           ["fk = μkm1g = 0.20(4)(9.8) = 7.84 N",
-            "Whole system: a = (19.6 − 7.84) / 6 = 1.96 m/s²",
-            "Table block: T − fk = m1a", "T = 4(1.96) + 7.84 = 15.7 N"]),
+           "fk = {7.84 N} away from the pulley    a = {1.96 m/s²} (2 kg down, 4 kg toward the pulley)    "
+           + nb("T = {15.7 N}"),
+           ["fk = μkm₁g = 0.20(4)(9.8) = 7.84 N, away from the pulley",
+            "Whole system: a = (19.6 − 7.84) / 6 = 1.96 m/s² (2 kg down, 4 kg toward the pulley)",
+            "Table block: T − fk = m₁a", "T = 4(1.96) + 7.84 = 15.7 N"]),
         ex(47, "Challenge: Incline and Pulley",
-           ["m1 = 6 kg on a frictionless 30° ramp;   m2 = 5 kg hanging.   Positive: the "
+           ["m₁ = 6 kg on a frictionless 30° ramp;   m₂ = 5 kg hanging.   Positive: the "
             "motion (5 kg down, 6 kg up the ramp)."],
            "a and T.",
-           "a = {1.78 m/s²}      T ≈ {40.1 N}",
+           "a = {1.78 m/s²} (5 kg down, 6 kg up the ramp)      T ≈ {40.1 N}",
            ["Hanging: 5(9.8) = 49.0 N;   along ramp: 6(9.8) sin 30° = 29.4 N",
-            "Whole system: a = (49.0 − 29.4) / (5 + 6) = 1.78 m/s²",
+            "Whole system: a = (49.0 − 29.4) / (5 + 6) = 1.78 m/s² (5 kg down, 6 kg up the ramp)",
             "Hanging mass: 5g − T = 5a", "T = 5(9.8 − 1.78) ≈ 40.1 N"]),
-        rc("Explain the two-step method for objects joined by a rope over a pulley.",
-           "Treat the whole system: a = (net driving force) / (total mass). Then write "
-           "Fnet = ma for one object to find T. The tension is the same along an ideal rope.",
+        rc("Write the two-step method for objects joined by a rope over a pulley.",
+           f"Whole system: a = driving force / total mass. Then {nb('Fnet = ma')} on one "
+           "object gives T.",
            ["I can solve a cable-tension problem with Fnet,x = 0 and Fnet,y = 0.",
-            "I can find a and T for an Atwood machine and a table-and-pulley system."]),
+            "I can find a and T for an Atwood machine and a table-and-pulley system."], lines=2),
     ]
 
     secs = [
@@ -479,7 +496,8 @@ def build(key, board):
                      "lines": [f"Fx = F cos {T}", f"Fy = F sin {T}",
                                "Fnet = √(Fx² + Fy²)", f"{T} = tan⁻¹(Fy/Fx)"]},
                     {"heading": "Ramps and friction",
-                     "lines": [f"Fg,parallel = mg sin {T}", f"Fg,perp = FN = mg cos {T}",
+                     "lines": [f"Fg,parallel = mg sin {T}", f"Fg,perp = mg cos {T}",
+                               f"FN = mg cos {T}  (ramp, no other perpendicular force)",
                                "fs,max = μsFN", "fk ≈ μkFN"]},
                 ],
                 "notes": ["g = 9.8 m/s² on Earth.   1 N = 1 kg·m/s².   μ has no units.   "
@@ -508,8 +526,8 @@ def build(key, board):
                         "your own words.",
             "sections": [
                 {"code": "3.1", "heading": "Newton’s laws",
-                 "paragraphs": [["Mass (kg) never changes; weight, Fg = mg (N), depends on g. "
-                                 "Fnet = 0 means constant velocity; otherwise Fnet = ma."]],
+                 "paragraphs": [["Mass (kg) stays the same from place to place; weight, Fg = mg (N), "
+                                 "depends on g. Fnet = 0: constant velocity."]],
                  "watchOut": "A moving object does not need a net force to keep moving."},
                 {"code": "3.2", "heading": "Free-body diagrams",
                  "paragraphs": [["One object, one labeled arrow per force. Add with signs; "
@@ -517,8 +535,8 @@ def build(key, board):
                  "watchOut": "Third-law pairs act on two objects, so they never cancel on "
                              "one FBD."},
                 {"code": "3.3", "heading": "Forces on an incline",
-                 "paragraphs": [["Tilt the axes: Fg,parallel = mg sin θ down the slope, "
-                                 "Fg,perp = mg cos θ into the ramp, and FN = mg cos θ."]],
+                 "paragraphs": [["Tilt the axes: Fg,parallel = mg sin θ, Fg,perp = mg cos θ. "
+                                 "FN = mg cos θ (ramp, no other perpendicular force)."]],
                  "watchOut": "Normal force does not always equal weight. A steeper ramp gives "
                              "a smaller FN."},
                 {"code": "3.4", "heading": "Net force and acceleration",
@@ -535,9 +553,13 @@ def build(key, board):
                                  "whole system, then T from one object’s Fnet = ma."]],
                  "watchOut": "Draw a separate FBD for each object."},
             ],
-            "quickRecall": ["State the condition for equilibrium.",
-                            "Write the weight components for a block on a ramp.",
-                            "Explain why a scale reads more in an elevator accelerating up."],
+            "quickRecall": [
+                qr("State the condition for equilibrium.", "Fnet = 0: forces balance."),
+                qr("Write the weight components for a block on a ramp.",
+                   "Fg,parallel = mg sin θ; Fg,perp = mg cos θ."),
+                qr("Explain why a scale reads more in an elevator accelerating up.",
+                   "Up positive: FN − mg = ma with a > 0, so FN > mg."),
+            ],
         },
     }
     return spec
@@ -564,7 +586,7 @@ def strip_private(node):
 
 def shape(n):
     if isinstance(n, dict):
-        return {k: shape(v) for k, v in n.items() if k not in ("answer", "solution", "key")}
+        return {k: shape(v) for k, v in n.items() if k not in ("answer", "solution", "key", "a")}
     if isinstance(n, list):
         return [shape(x) if not isinstance(x, str) else "s" for x in n]
     return type(n).__name__

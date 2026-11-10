@@ -59,7 +59,8 @@
           "heading": "Ramps and friction",
           "lines": [
             "Fg,parallel = mg sin θ",
-            "Fg,perp = FN = mg cos θ",
+            "Fg,perp = mg cos θ",
+            "FN = mg cos θ  (ramp, no other perpendicular force)",
             "fs,max = μsFN",
             "fk ≈ μkFN"
           ]
@@ -226,7 +227,7 @@
               "title": "Free-Body Diagrams · Normal Force",
               "cues": [
                 "Slides 10–11",
-                "Common mix-up: FN does not always equal weight. That needs the level-surface conditions above."
+                "Common mix-up: FN does not always equal weight. That needs the level-surface conditions below."
               ],
               "notes": [
                 {
@@ -267,7 +268,8 @@
               "kind": "example",
               "title": "Net Force in One Dimension",
               "cues": [
-                "Slide 13"
+                "Slide 13",
+                "Slide 14: worked on the board."
               ],
               "problem": {
                 "given": [
@@ -308,7 +310,7 @@
                 "given": [
                   "F = 100 N pulling 30° above the horizontal.     **Find:** the horizontal and vertical components."
                 ],
-                "answer": "Fx = _____________________      Fy = ____________",
+                "answer": "Fx = _______________________________________      Fy = ____________",
                 "statement": "Horizontal: Fx = __________      Vertical: Fy = __________"
               },
               "notes": [],
@@ -319,11 +321,12 @@
               "title": "Two Angled Forces: Tugboats",
               "cues": [
                 "Slide 18",
-                "Check the quadrant before reporting an angle"
+                "Check the quadrant before reporting an angle",
+                "Slide 17: worked on the board."
               ],
               "problem": {
                 "given": [
-                  "top view;   500 N at 30° above +x;   400 N at 45° above −x.   Positive: +x right, +y up the page."
+                  "top view;  500 N at 30° above +x;  400 N at 45° above −x.  Positive: +x right, +y up the page."
                 ],
                 "find": "the net force on the barge and its direction.",
                 "answer": "Fnet ≈ ________  at  θ ≈ _______________"
@@ -338,8 +341,8 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
-              "prompt": "Explain how to find the net force on an object from its free-body diagram, including a force at an angle.",
+              "lines": 3,
+              "prompt": "Summarize how to find the net force from a free-body diagram, including a force at an angle.",
               "selfCheck": [
                 "I can draw an FBD with one labeled arrow per force.",
                 "I can add forces with signs and split an angled force into components."
@@ -416,7 +419,7 @@
                 "Use the checklist to find what still needs practice."
               ],
               "lines": 2,
-              "prompt": "Explain how to split the weight on a ramp, and how FN changes as it gets steeper.",
+              "prompt": "Describe how to split the weight on a ramp, and how FN changes as the ramp gets steeper.",
               "selfCheck": [
                 "I can write Fg,parallel = mg sin θ and Fg,perp = mg cos θ.",
                 "I can find FN and the net force along a ramp."
@@ -453,7 +456,8 @@
               "kind": "example",
               "title": "A Car Accelerates",
               "cues": [
-                "Slide 26"
+                "Slide 26",
+                "Slide 27: worked on the board."
               ],
               "problem": {
                 "given": [
@@ -505,7 +509,7 @@
               "title": "Elevators and Apparent Weight",
               "cues": [
                 "Slide 30",
-                "Common mix-up: FN equals mg only when a = 0."
+                "In an elevator, FN equals mg only when a = 0."
               ],
               "notes": [
                 {
@@ -524,13 +528,14 @@
               "kind": "example",
               "title": "Elevator Accelerating Up",
               "cues": [
-                "Slide 31"
+                "Slide 31",
+                "Slide 32: worked on the board."
               ],
               "problem": {
                 "given": [
                   "m = 70 kg;   a = 2.0 m/s² upward.   Positive: up.     **Find:** the scale reading."
                 ],
-                "answer": "FN = ________"
+                "answer": "FN = ___________"
               },
               "notes": [],
               "extraNotes": false
@@ -542,8 +547,8 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
-              "prompt": "Explain the steps from a free-body diagram to an acceleration, and why a scale reads differently in an accelerating elevator.",
+              "lines": 3,
+              "prompt": "List the steps from a free-body diagram to an acceleration. Add how a scale reading changes in an accelerating elevator.",
               "selfCheck": [
                 "I can find a from Fnet = ma, with units and direction.",
                 "I can find a scale reading with FN − mg = ma."
@@ -606,7 +611,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N."
+                  "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N.   Positive: the push direction."
                 ],
                 "find": "whether the box moves for each push, and the acceleration for 110 N.",
                 "answer": "90 N: ________________      110 N: _________, a = ____________ in the push direction",
@@ -627,10 +632,10 @@
               ],
               "problem": {
                 "given": [
-                  "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (direction of the pull)."
+                  "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (horizontal, toward the pull) and up."
                 ],
-                "find": "the normal force, the friction, and the acceleration.",
-                "answer": "FN = ________     fk = __________     a = __________________"
+                "find": "FN, fk, and a.",
+                "answer": "FN = ________ up    fk = __________ opposite the motion    a = __________________"
               },
               "notes": [],
               "extraNotes": false
@@ -662,9 +667,8 @@
               ],
               "problem": {
                 "given": [
-                  "m = 10 kg, starts at rest;   35° ramp;   μs = 0.50;   μk = 0.40.   Positive: downhill."
+                  "m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill.     **Find:** if it slides, and a."
                 ],
-                "find": "whether the block slides, and its acceleration.",
                 "answer": "Slides: _____      a = ______________________",
                 "workHeightIn": 1.6
               },
@@ -678,8 +682,8 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
-              "prompt": "Explain how to decide whether an object at rest will start to slide, and how to find its acceleration once it does.",
+              "lines": 3,
+              "prompt": "Explain how to decide whether an object at rest starts to slide, and how to find its acceleration once it does.",
               "selfCheck": [
                 "I can tell static from kinetic friction and use fs,max = μsFN.",
                 "I can find friction and acceleration on level ground and on a ramp."
@@ -708,7 +712,7 @@
                   "ignore cable mass.   Positive: right and up."
                 ],
                 "find": "the tension in each support cable.",
-                "answer": "FTL = _________      FTR ≈ ________",
+                "answer": "FTL = _________    FTR ≈ ________    each ________________________________________",
                 "workHeightIn": 1.8
               },
               "notes": [
@@ -741,9 +745,9 @@
               ],
               "problem": {
                 "given": [
-                  "m1 = 5 kg, m2 = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
+                  "m₁ = 5 kg, m₂ = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
                 ],
-                "answer": "a = ____________      T = _________"
+                "answer": "a = ____________ (5 kg down, 3 kg up)      T = _________"
               },
               "notes": [],
               "extraNotes": false
@@ -761,9 +765,9 @@
               ],
               "problem": {
                 "given": [
-                  "m1 = 4 kg on the table;   m2 = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
+                  "m₁ = 4 kg on the table;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
                 ],
-                "answer": "a = ____________      T ≈ _________"
+                "answer": "a = ____________ (2 kg down, 4 kg toward the pulley)      T ≈ _________"
               },
               "notes": [],
               "extraNotes": false
@@ -776,9 +780,9 @@
               ],
               "problem": {
                 "given": [
-                  "m1 = 4 kg on the table, μk = 0.20;   m2 = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
+                  "m₁ = 4 kg on the table, μk = 0.20;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
                 ],
-                "answer": "fk = _________      a = ____________      T = _________"
+                "answer": "fk = _________ away from the pulley    a = ____________ (2 kg down, 4 kg toward the pulley)    T = _________"
               },
               "notes": [],
               "extraNotes": false
@@ -791,10 +795,10 @@
               ],
               "problem": {
                 "given": [
-                  "m1 = 6 kg on a frictionless 30° ramp;   m2 = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
+                  "m₁ = 6 kg on a frictionless 30° ramp;   m₂ = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
                 ],
                 "find": "a and T.",
-                "answer": "a = ____________      T ≈ _________"
+                "answer": "a = ____________ (5 kg down, 6 kg up the ramp)      T ≈ _________"
               },
               "notes": [],
               "extraNotes": false
@@ -807,7 +811,7 @@
                 "Use the checklist to find what still needs practice."
               ],
               "lines": 2,
-              "prompt": "Explain the two-step method for objects joined by a rope over a pulley.",
+              "prompt": "Write the two-step method for objects joined by a rope over a pulley.",
               "selfCheck": [
                 "I can solve a cable-tension problem with Fnet,x = 0 and Fnet,y = 0.",
                 "I can find a and T for an Atwood machine and a table-and-pulley system."
@@ -827,7 +831,7 @@
         "heading": "Newton’s laws",
         "paragraphs": [
           [
-            "Mass (kg) never changes; weight, Fg = mg (N), depends on g. Fnet = 0 means constant velocity; otherwise Fnet = ma."
+            "Mass (kg) stays the same from place to place; weight, Fg = mg (N), depends on g. Fnet = 0: constant velocity."
           ]
         ],
         "watchOut": "A moving object does not need a net force to keep moving."
@@ -847,7 +851,7 @@
         "heading": "Forces on an incline",
         "paragraphs": [
           [
-            "Tilt the axes: Fg,parallel = mg sin θ down the slope, Fg,perp = mg cos θ into the ramp, and FN = mg cos θ."
+            "Tilt the axes: Fg,parallel = mg sin θ, Fg,perp = mg cos θ. FN = mg cos θ (ramp, no other perpendicular force)."
           ]
         ],
         "watchOut": "Normal force does not always equal weight. A steeper ramp gives a smaller FN."
@@ -884,9 +888,15 @@
       }
     ],
     "quickRecall": [
-      "State the condition for equilibrium.",
-      "Write the weight components for a block on a ramp.",
-      "Explain why a scale reads more in an elevator accelerating up."
+      {
+        "q": "State the condition for equilibrium."
+      },
+      {
+        "q": "Write the weight components for a block on a ramp."
+      },
+      {
+        "q": "Explain why a scale reads more in an elevator accelerating up."
+      }
     ]
   }
 }
