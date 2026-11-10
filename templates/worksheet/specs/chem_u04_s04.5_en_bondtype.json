@@ -14,7 +14,7 @@
         "summary": "M = metal   ·   NM = nonmetal   ·   ΔEN = higher EN − lower EN (never negative)",
         "keyIdeas": []
       },
-      "directions": "Fill in the organizer first. Then, for each formula: mark the first element M or NM, find ΔEN with the chart at the bottom (write the subtraction), and name the bond. Cl₂, O₂ and N₂ are elements. Rows 21–23 are close calls: let ΔEN decide.",
+      "directions": "Fill in the organizer first. Then, for each formula: mark the first element M or NM, find ΔEN with your EN reference sheet (write the subtraction), and name the bond. Cl₂, O₂ and N₂ are elements. Rows 21–23 are close calls: let ΔEN decide.",
       "questions": [],
       "blocks": [
         {
@@ -84,7 +84,7 @@
             0.39,
             0.21
           ],
-          "rowHeightIn": 0.24,
+          "rowHeightIn": 0.26,
           "bodySize": 10,
           "blankCols": [
             2,
@@ -254,75 +254,12 @@
               "PC"
             ]
           ]
-        },
-        {
-          "kind": "table",
-          "role": "enReference",
-          "label": "ELECTRONEGATIVITY (PAULING SCALE)",
-          "headers": [
-            "H",
-            "Li",
-            "C",
-            "N",
-            "O",
-            "F",
-            "Na",
-            "Mg",
-            "Al",
-            "P",
-            "S",
-            "Cl",
-            "K",
-            "Ca",
-            "Br",
-            "Ba"
-          ],
-          "widths": [
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625,
-            0.0625
-          ],
-          "headerSize": 9,
-          "rowHeightIn": 0.2,
-          "rows": [
-            [
-              "2.20",
-              "0.98",
-              "2.55",
-              "3.04",
-              "3.44",
-              "3.98",
-              "0.93",
-              "1.31",
-              "1.61",
-              "2.19",
-              "2.58",
-              "3.16",
-              "0.82",
-              "1.00",
-              "2.96",
-              "0.89"
-            ]
-          ]
         }
       ],
       "keyNotes": [
-        "EN values: Pauling, two decimals (CRC Handbook). Cutoffs: OpenStax Chemistry 2e, as in the U4–U5 slides.",
+        "EN values in the key: Pauling, two decimals (CRC Handbook): H 2.20, Li 0.98, C 2.55, N 3.04, O 3.44, F 3.98, Na 0.93, Mg 1.31, Al 1.61, P 2.19, S 2.58, Cl 3.16, K 0.82, Ca 1.00, Br 2.96, Ba 0.89. Cutoffs: OpenStax Chemistry 2e.",
         "Rows 1–20 are clear: every ΔEN is at least 0.20 from a cutoff. Rows 21–23 are close calls for discussion.",
-        "CH₄ 0.35 → NPC. A one-decimal chart gives exactly 0.4, so students should use the sheet's values.",
+        "CH₄ 0.35 → NPC with two-decimal values. A one-decimal reference sheet (C 2.5, H 2.1) gives exactly 0.4 → PC; accept either with reasoning, or discuss.",
         "HF 1.78 → PC, just under 1.80. AlCl₃: Al is a metal, but ΔEN 1.55 → PC. ΔEN decides, not the metal rule of thumb.",
         "CO₂, CCl₄, CF₄: polar bonds, nonpolar molecules (5.4). This sheet asks about the bond.",
         "PH₃: H (2.20) is higher than P (2.19). NCl₃ (0.12) catches students: N and Cl are close, so NPC."
