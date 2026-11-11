@@ -19,6 +19,11 @@ templates that happened to be filed in the same folder.
 Each question in the spec must carry a "solution" field: the full worked steps and final
 answer, independent of any "selfCheck" bracket. A question with no "solution" is refused -
 a key that silently skips a question is worse than no key.
+
+A question may carry "keyImage" (SHULL-CHG-0071): a drawn scene, such as a free-body diagram,
+placed in its answer box, with any "steps" drawn below it. The schema lives once, in the
+scripts/key_solution.py docstring. If the scene cannot model the item, the typed "solution"
+prints instead and the build says so; a force arrow labelled as motion refuses the build.
 """
 import json, os, sys, tempfile
 from docx import Document
@@ -83,13 +88,23 @@ def answer_block(doc, n, q, pal):
         p.runs[0].italic = True
 
     gap(c, 2)
-    if q.get("steps"):
+    if q.get("steps") or q.get("keyImage"):
         # Handwritten worked solution in the key-handwriting face (standards/ANSWER_KEYS.md):
-        # the steps, any scene sketch and the boxed answer are drawn, so no typed copy follows.
-        from key_solution import solution_image
-        png, _ = solution_image(q, os.path.join(_TMP, f"q{n}.png"), width_in=HAND_W_IN)
-        c.add_paragraph().add_run().add_picture(png, width=Inches(HAND_W_IN))
-        return c
+        # the key image, the steps, any scene sketch and the boxed answer are drawn, so no
+        # typed copy follows. A key image the scene cannot model falls back to the typed
+        # solution below (SHULL-CHG-0071) - the drawing is the answer, so it is never just
+        # omitted.
+        from key_solution import solution_image, SceneUnsupported
+        try:
+            png, _ = solution_image(q, os.path.join(_TMP, f"q{n}.png"), width_in=HAND_W_IN)
+        except SceneUnsupported as e:
+            if not q.get("keyImage"):
+                raise
+            print(f"build_worksheet_key_docx: Q{n} key image not drawn ({e}); "
+                  "printing the typed solution instead.", file=sys.stderr)
+        else:
+            c.add_paragraph().add_run().add_picture(png, width=Inches(HAND_W_IN))
+            return c
     for line in str(q["solution"]).split("\n"):
         if line.strip():
             para(c, line.strip(), 10, color=pal.ink)
@@ -167,8 +182,12 @@ def main():
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
         gap(doc, 6)
+        from key_solution import MotionArrowError
         for i, q in enumerate(sec.get("questions", []), start=1):
-            answer_block(doc, i, q, pal)
+            try:
+                answer_block(doc, i, q, pal)
+            except MotionArrowError as e:
+                return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)
 
         for block in spec.get("key", {}).get("blocks", []) if si == 0 else []:

@@ -17,8 +17,39 @@ builder embeds the PNG; a question without "steps" keeps its typed solution.
 
 Math rows are pencil, written answers ("say") pen, notes and vectors arrow, final answers and the
 unknown box. Division is only ever a {"frac": [...]} item. A unit's own slash (m/s) stays inline.
+
+Key images (SHULL-CHG-0071). An item may instead (or also) carry "keyImage": a scene object,
+{"scene": "<name>", ...}, drawn by SCENES[name]. "sketch" takes the same object. With "steps" the
+steps are drawn below the image; without them the image stands alone. The typed "solution" stays
+mandatory: it is what verify-content checks the drawing against, and it is what the key prints if
+a scene raises SceneUnsupported. The "linear" scene's fields are read in linear_scene() below.
+
+The "fbd" scene: a free-body diagram. Object as a box or a dot, one arrow per force, each arrow
+starting at the object, labelled from the spec, its length scaled to "mag" (relative; the largest
+force in the item gets the full arrow). Lines, the object and labels are pencil; force arrows
+are vectors and keep the arrow ink (standards/ANSWER_KEYS.md §2, §6).
+
+    "keyImage": {"scene": "fbd",
+      "panels": [                                  # one per object, drawn side by side, one scale
+        {"caption": "Block",                       # optional, written under the panel
+         "object": "box",                          # "box" (default) or "dot"
+         "name": "block",                          # optional, written inside the box
+         "tiltDeg": 0,                             # box rotation, e.g. 25 on a 25 degree ramp
+         "surface": false,                         # dashed line along the box's base (ramp, floor)
+         "forces": [
+           {"label": "F_{N}", "dir": "up", "mag": 1.0},
+           {"label": "F_{g}", "dir": 270, "mag": 1.0, "offset": 0.0}
+         ]}
+      ]}
+
+"dir" is "up" / "down" / "left" / "right" or degrees counter-clockwise from the +x axis (right).
+"offset" (-0.45 to 0.45, a fraction of the box side) slides an arrow's tail sideways so two
+parallel arrows do not sit on top of each other. A single-object diagram may give "forces" (and
+the other panel keys) at the top level instead of "panels". A force labelled or named as motion,
+velocity, speed or acceleration is refused (MotionArrowError): an FBD has no arrow for motion
+(courses/physics/DECISIONS.md, free-body diagrams).
 """
-import os, sys
+import math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from key_ink import Page
 
@@ -166,17 +197,158 @@ def linear_scene(P, x0, y0, width, sc):
     return y
 
 
-SCENES = {"linear": linear_scene}
+class SceneUnsupported(Exception):
+    """The scene cannot model this item. The key prints the typed solution instead
+    (standards/ANSWER_KEYS.md §6.3 as amended by SHULL-CHG-0071): no sketch beats a wrong one."""
+
+
+class MotionArrowError(ValueError):
+    """An FBD force labelled as motion. Refused outright, never quietly dropped."""
+
+
+_DIRS = {"right": 0.0, "up": 90.0, "left": 180.0, "down": 270.0}
+# Whole-word names for motion. "v" and "a" alone are velocity and acceleration; F_{app} is not.
+_MOTION = re.compile(r"^\s*(v|a|ma|v_\{?\w*\}?|a_\{?\w*\}?)\s*$|\b(motion|velocity|speed|accel\w*|moving)\b",
+                     re.I)
+
+
+def fbd_forces(sc):
+    """Panels of an fbd scene, each with its forces checked. Raises MotionArrowError or
+    SceneUnsupported; returns the panel list."""
+    panels = sc.get("panels") or [sc]
+    if not panels or any(not p.get("forces") for p in panels):
+        raise SceneUnsupported("fbd scene with a panel that has no forces")
+    for p in panels:
+        if p.get("object", "box") not in ("box", "dot"):
+            raise SceneUnsupported(f"fbd object {p.get('object')!r}: only box or dot")
+        for f in p["forces"]:
+            for field in (f.get("label", ""), f.get("name", "")):
+                if field and _MOTION.search(str(field)):
+                    raise MotionArrowError(
+                        f"fbd force {field!r} names motion. A free-body diagram has no arrow for "
+                        "motion: one arrow per force (courses/physics/DECISIONS.md).")
+            if not f.get("label"):
+                raise SceneUnsupported("fbd force with no label")
+            d = f.get("dir")
+            if isinstance(d, str):
+                if d not in _DIRS:
+                    raise SceneUnsupported(f"fbd direction {d!r}")
+            elif not isinstance(d, (int, float)):
+                raise SceneUnsupported(f"fbd direction {d!r}")
+            if not isinstance(f.get("mag"), (int, float)) or f["mag"] <= 0:
+                raise SceneUnsupported(f"fbd force {f['label']!r} needs a positive mag")
+    return panels
+
+
+def _deg(d):
+    return _DIRS[d] if isinstance(d, str) else float(d)
+
+
+def fbd_scene(P, x0, y0, width, sc):
+    """A free-body diagram, one panel per object, every panel on one magnitude scale.
+
+    Geometry is laid out first around a centre at y = 0, then the whole row is moved down so
+    its tallest arrow or label clears the top - the image is only as tall as the diagram."""
+    panels = fbd_forces(sc)
+    fs = 30                                       # label size
+    half = 34                                     # half the box side, logical px
+    big = max(f["mag"] for p in panels for f in p["forces"])
+    full = float(sc.get("arrowPx", 118))          # the largest force's arrow beyond the object
+    unit = full / big
+    pw = width / len(panels)
+    lay, ys = [], [-half - 10, half + 10]
+    for i, p in enumerate(panels):
+        cx = x0 + pw * i + pw / 2
+        tilt = math.radians(float(p.get("tiltDeg", 0)))
+        ct, st_ = math.cos(tilt), math.sin(tilt)
+        dot = p.get("object", "box") == "dot"
+        arrows = []
+        for f in p["forces"]:
+            ang = math.radians(_deg(f["dir"]))
+            dx, dy = math.cos(ang), -math.sin(ang)          # screen y runs down
+            off = float(f.get("offset", 0)) * 2 * half
+            px, py = -dy * off, dx * off                    # sideways shift, perpendicular to the arrow
+            if dot:
+                t = 7
+            else:
+                # Where the ray from the centre leaves the (rotated) box: the arrow starts there.
+                lx, ly = dx * ct - dy * st_, dx * st_ + dy * ct
+                lpx, lpy = px * ct - py * st_, px * st_ + py * ct
+                ts = [(half - lpx) / lx if lx > 1e-9 else (-half - lpx) / lx if lx < -1e-9 else 1e9,
+                      (half - lpy) / ly if ly > 1e-9 else (-half - lpy) / ly if ly < -1e-9 else 1e9]
+                t = min(ts)
+            sx, sy = px + dx * t, py + dy * t
+            L = f["mag"] * unit
+            ex, ey = sx + dx * L, sy + dy * L
+            lab = str(f["label"])
+            w, h = P.width(lab, fs), fs * 1.15
+            if abs(dx) < 0.2:                        # vertical arrow: label beside the head,
+                side = 1 if px >= 0 else -1          # on the side the arrow was shifted to
+                gx, gy = ex + side * (w / 2 + 14), ey + dy * 6
+            else:
+                gx = ex + dx * (12 + abs(dx) * w / 2 + abs(dy) * h / 2)
+                gy = ey + dy * (12 + abs(dy) * h / 2 + abs(dx) * w / 2)
+            arrows.append((sx, sy, ex, ey, lab, gx - w / 2, gy - h / 2))
+            ys += [ey, gy - h / 2 - 4, gy + h / 2 + 4]
+        lay.append((p, cx, ct, st_, dot, arrows))
+    cy = y0 + 8 - min(ys)
+    bottom = cy + max(ys)
+    cap_y = bottom + 10
+    sk = P.sketch()
+    P.arrows_drawn = getattr(P, "arrows_drawn", 0)
+    P.labels_drawn = getattr(P, "labels_drawn", [])
+    for p, cx, ct, st_, dot, arrows in lay:
+        # Local box coordinates (y down) to the page, rotated counter-clockwise by the tilt.
+        rot = lambda lx, ly: (cx + lx * ct + ly * st_, cy - lx * st_ + ly * ct)
+        if dot:
+            sk.circle(cx, cy, 7, w=2.4, alpha=200)
+            sk.circle(cx, cy, 3, w=3.0, alpha=220)
+        else:
+            corners = [rot(-half, -half), rot(half, -half), rot(half, half), rot(-half, half)]
+            for a, b in zip(corners, corners[1:] + corners[:1]):
+                sk.seg(a, b, w=2.0, alpha=170)
+            if p.get("surface"):
+                sk.dashed(rot(-half - 70, half + 3), rot(half + 70, half + 3), n=22)
+        for sx, sy, ex, ey, lab, lx, ly in arrows:
+            sk.vector((cx + sx, cy + sy), (cx + ex, cy + ey))
+            P.arrows_drawn += 1
+        if p.get("name") and not dot:
+            nw = P.width(p["name"], 18)
+            P.text(cx - nw / 2, cy - 13, p["name"], 18, "pencil", jitter=0.3)
+    sk.commit()
+    for p, cx, ct, st_, dot, arrows in lay:     # labels over the strokes, never under them
+        for sx, sy, ex, ey, lab, lx, ly in arrows:
+            P.text(cx + lx, cy + ly, lab, fs, "pencil")
+            P.labels_drawn.append(lab)
+        if p.get("caption"):
+            cw = P.width(p["caption"], 22)
+            P.text(cx - cw / 2, cap_y, p["caption"], 22, "pencil")
+    return cap_y + (34 if any(p.get("caption") for p in panels) else 0)
+
+
+SCENES = {"linear": linear_scene, "fbd": fbd_scene}
+
+
+def scene_of(q):
+    """The scene object an item asks for: keyImage, or the older sketch field."""
+    return q.get("keyImage") or q.get("sketch")
 
 
 def solution_image(q, out_png, width_in=7.2, size=27):
+    """Draw an item's scene (keyImage or sketch) and/or its steps. Raises SceneUnsupported if the
+    scene cannot model the item, and MotionArrowError for an FBD with a motion arrow."""
+    sc = scene_of(q)
+    if sc is not None and sc.get("scene", "linear") not in SCENES:
+        raise SceneUnsupported(f"no scene named {sc.get('scene')!r}")
+    if sc is None and not q.get("steps"):
+        raise SceneUnsupported("nothing to draw: no keyImage, sketch or steps")
     W = int(width_in * LOGICAL_PER_IN)
     P = Page(W, 3200, seed=hash(q.get("prompt", "")) % 1000)
     y = 8
-    if q.get("sketch"):
-        sc = q["sketch"]
+    if sc is not None:
         y = SCENES[sc.get("scene", "linear")](P, 10, y, W - 20, sc) + 16
-    y = draw_steps(P, 14, y, q["steps"], W - 28, size)
+    if q.get("steps"):
+        y = draw_steps(P, 14, y, q["steps"], W - 28, size)
     P.crop(y + 10)
     P.save(png=out_png)
     return out_png, (y + 10) / LOGICAL_PER_IN      # height in inches
