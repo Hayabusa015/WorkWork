@@ -14,6 +14,7 @@
       "concept": {
         "summary": "Count on the central atom only. A single, double or triple bond each counts as one bonding pair.",
         "keyIdeas": [
+          "Reminder: extra electrons form lone pairs; not enough means extra bonds.",
           "Electron groups = bonding pairs + lone pairs. Use your PhET sheet or the Common Molecular Shapes table (slide 19) to name the shape and give the bond angle."
         ]
       },
@@ -27,7 +28,7 @@
             "#",
             "Compound",
             "Valence electrons (add them up)",
-            "Lewis structure (reminder: extra electrons form lone pairs; not enough means extra bonds)",
+            "Lewis structure",
             "Bonding pairs",
             "Lone pairs",
             "Shape name",
