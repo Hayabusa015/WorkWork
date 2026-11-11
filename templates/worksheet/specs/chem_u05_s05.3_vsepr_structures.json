@@ -1,0 +1,183 @@
+{
+  "course": "chemistry",
+  "unit": 5,
+  "sections": [
+    "5.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "40",
+  "pagesPerSection": 2,
+  "sectionsContent": [
+    {
+      "code": "5.3",
+      "title": "VSEPR Molecular Structures",
+      "concept": {
+        "summary": "Reminder: extra electrons form lone pairs. Not enough electrons means extra bonds (double or triple).",
+        "keyIdeas": [
+          "Count bonding pairs and lone pairs on the CENTRAL atom only. A double or triple bond counts as ONE bonding pair when you name the shape.",
+          "Domains = bonding pairs + lone pairs. Use your VSEPR reference to name the shape and give the bond angle."
+        ]
+      },
+      "directions": "For each compound: add up the valence electrons (show the addition), draw the Lewis structure with every lone pair, then count the bonding pairs and lone pairs on the central atom and name the shape and bond angle. Number 1 is the simplest; they get harder.",
+      "questions": [],
+      "blocks": [
+        {
+          "kind": "table",
+          "points": 10,
+          "headers": [
+            "#",
+            "Compound",
+            "Valence electrons (add them up)",
+            "Lewis structure · extra electrons → lone pairs; not enough → extra bonds",
+            "Bonding pairs",
+            "Lone pairs",
+            "Shape name",
+            "Bond angle(s)"
+          ],
+          "widths": [
+            0.04,
+            0.09,
+            0.15,
+            0.3,
+            0.08,
+            0.07,
+            0.13,
+            0.14
+          ],
+          "rowHeightIn": 1.32,
+          "bodySize": 10,
+          "blankCols": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "rows": [
+            [
+              "1",
+              "CH₄",
+              "4 + 4(1) = 8",
+              "",
+              "4",
+              "0",
+              "Tetrahedral",
+              "109.5°"
+            ],
+            [
+              "2",
+              "NH₃",
+              "5 + 3(1) = 8",
+              "",
+              "3",
+              "1",
+              "Trigonal pyramidal",
+              "less than 109.5° (about 107°)"
+            ],
+            [
+              "3",
+              "H₂O",
+              "6 + 2(1) = 8",
+              "",
+              "2",
+              "2",
+              "Bent",
+              "less than 109.5° (about 104.5°)"
+            ],
+            [
+              "4",
+              "CO₂",
+              "4 + 2(6) = 16",
+              "",
+              "2",
+              "0",
+              "Linear",
+              "180°"
+            ],
+            [
+              "5",
+              "CH₂O",
+              "4 + 2(1) + 6 = 12",
+              "",
+              "3",
+              "0",
+              "Trigonal planar",
+              "120°"
+            ],
+            [
+              "6",
+              "HCN",
+              "1 + 4 + 5 = 10",
+              "",
+              "2",
+              "0",
+              "Linear",
+              "180°"
+            ],
+            [
+              "7",
+              "PCl₃",
+              "5 + 3(7) = 26",
+              "",
+              "3",
+              "1",
+              "Trigonal pyramidal",
+              "less than 109.5°"
+            ],
+            [
+              "8",
+              "OF₂",
+              "6 + 2(7) = 20",
+              "",
+              "2",
+              "2",
+              "Bent",
+              "less than 109.5°"
+            ],
+            [
+              "9",
+              "SO₂",
+              "6 + 2(6) = 18",
+              "",
+              "2",
+              "1",
+              "Bent",
+              "less than 120°"
+            ],
+            [
+              "10",
+              "PCl₅",
+              "5 + 5(7) = 40",
+              "",
+              "5",
+              "0",
+              "Trigonal bipyramidal",
+              "90°, 120°, 180°"
+            ]
+          ],
+          "imageCol": 3,
+          "keyImages": {
+            "0": "assets/chem_u05_s05.3_vsepr/lewis_CH4.png",
+            "1": "assets/chem_u05_s05.3_vsepr/lewis_NH3.png",
+            "2": "assets/chem_u05_s05.3_vsepr/lewis_H2O.png",
+            "3": "assets/chem_u05_s05.3_vsepr/lewis_CO2.png",
+            "4": "assets/chem_u05_s05.3_vsepr/lewis_CH2O.png",
+            "5": "assets/chem_u05_s05.3_vsepr/lewis_HCN.png",
+            "6": "assets/chem_u05_s05.3_vsepr/lewis_PCl3.png",
+            "7": "assets/chem_u05_s05.3_vsepr/lewis_OF2.png",
+            "8": "assets/chem_u05_s05.3_vsepr/lewis_SO2.png",
+            "9": "assets/chem_u05_s05.3_vsepr/lewis_PCl5.png"
+          }
+        }
+      ],
+      "keyNotes": [
+        "Bonding pairs = bonds to the central atom, a double or triple bond counted once (domains). Lone pairs = on the central atom only.",
+        "Octet exception: PCl₅. P holds 10 electrons (5 bonds), so P exceeds the octet; period 3 atoms can.",
+        "Double and triple bonds: CO₂ (two C=O), CH₂O (C=O), HCN (C≡N), SO₂ (one S=O, the octet-rule structure).",
+        "Repeated shapes on purpose: linear (CO₂ vs HCN), trigonal pyramidal (NH₃ vs PCl₃), bent (H₂O and OF₂ from 4 domains; SO₂ from 3 domains).",
+        "Angles with lone pairs are given as “less than”; accept the familiar values (NH₃ 107°, H₂O 104.5°)."
+      ]
+    }
+  ]
+}
