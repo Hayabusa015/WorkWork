@@ -18,8 +18,10 @@
    "eyebrowNote": "PROBLEM SET 1",
    "layout": "grid",
    "columns": 3,
-   "squareIn": 2.05,
+   "squareIn": 1.95,
    "gridPromptPt": 9,
+   "gridRowGapPt": 8,
+   "compactTop": true,
    "equationColumns": 2,
    "equationStyle": "inline",
    "priorKnowledge": {
@@ -31,23 +33,23 @@
    "equations": [
     {
      "note": "gravity (weight)",
-     "plain": "Fg"
+     "plain": "F_{g}"
     },
     {
      "note": "normal force",
-     "plain": "FN"
+     "plain": "F_{N}"
     },
     {
      "note": "applied force",
-     "plain": "Fapp"
+     "plain": "F_{app}"
     },
     {
      "note": "friction",
-     "plain": "f    (fs static, fk kinetic)"
+     "plain": "f    (f_{s} static, f_{k} kinetic)"
     },
     {
      "note": "tension",
-     "plain": "T    (two ropes: TL, TR)"
+     "plain": "T    (two ropes: T_{L}, T_{R})"
     },
     {
      "note": "air resistance",
@@ -55,7 +57,7 @@
     },
     {
      "note": "push of one object on another",
-     "plain": "F book on table"
+     "plain": "F_{book on table}"
     },
     {
      "note": "friction acts",

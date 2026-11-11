@@ -26,7 +26,7 @@ PHYS U01 practice sets, which run one section per page across the whole unit.
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
-import json, os, sys
+import json, os, re, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
@@ -859,7 +859,11 @@ def label_bank(doc, entries, pal, label_text, cols=2):
             r = run(p, eq["note"].upper() + "   ", 7.5, bold=True, color=pal.accent)
             el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
             r._element.get_or_add_rPr().append(el)
-        run(p, eq.get("plain", ""), 10, bold=True, color=pal.ink)
+        for k, part in enumerate(re.split(r"_\{([^}]*)\}", eq.get("plain", ""))):
+            if part:
+                r = run(p, part, 10, bold=True, color=pal.ink)
+                if k % 2:
+                    r.font.subscript = True
     return c
 
 
@@ -873,7 +877,8 @@ def grid_opts(spec, sec):
     square = float(get("squareIn", 2.2))
     gutter = round((TEXT_W_IN - cols * square) / (cols - 1), 3) if cols > 1 else 0
     return {"columns": cols, "square": square, "gutter": gutter,
-            "promptPt": float(get("gridPromptPt", 9.5))}
+            "promptPt": float(get("gridPromptPt", 9.5)),
+            "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
 
 
 def grid_check(questions, g):
@@ -984,7 +989,7 @@ def render_grid(doc, questions, pal, g):
     """
     for gi, row in enumerate(grid_rows(questions, g["columns"])):
         if gi:
-            gap(doc, GRID_ROW_GAP_PT)
+            gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 2)
         for ri in range(2):
             h = g["square"] if ri == 1 else None
@@ -1248,7 +1253,10 @@ def main():
         total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
                  + sum(rubric_total(spec) if b["kind"] == "rubric" else int(b.get("points", 0))
                        for b in sec.get("blocks", [])))
-        gap(doc, 5)
+        # "compactTop": true (opt-in) tightens the gaps and the recall box's padding above
+        # the questions, for a sheet whose page budget is set by its drawing squares.
+        compact = sec.get("compactTop", spec.get("compactTop", False))
+        gap(doc, 3 if compact else 5)
         id_row(("NAME", "DATE", "PERIOD", "SCORE"), [3.05, 1.75, 1.10, 1.60], total)
 
         # ---- What this is about, before anything is asked of them.
@@ -1267,9 +1275,10 @@ def main():
 
         pk = sec.get("priorKnowledge", spec.get("priorKnowledge"))
         if pk:
-            gap(doc, 4)
+            gap(doc, 3 if compact else 4)
             c = one_cell(doc); borders(c, pal.hair, sz=4)
-            cell_margins(c, top=70, bottom=70, left=130, right=130)
+            pad = 35 if compact else 70
+            cell_margins(c, top=pad, bottom=pad, left=130, right=130)
             label(c, pk.get("label", "BEFORE YOU START — YOU ALREADY KNOW THIS"),
                   pal, first=True)
             for x in pk["items"]:
@@ -1296,7 +1305,7 @@ def main():
             label(c, sec.get("directionsLabel", "DIRECTIONS"), pal, first=True)
             para(c, sec["directions"], 9.5)
 
-        gap(doc, 4)
+        gap(doc, 2 if compact else 4)
         g = grid_opts(spec, sec)
         if g:
             err = grid_check(sec.get("questions", []), g)

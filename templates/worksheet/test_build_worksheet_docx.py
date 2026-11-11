@@ -143,6 +143,34 @@ class Grid(Builder):
         self.assertIn("motion", r.stderr)
 
 
+class Spacing(Builder):
+    @staticmethod
+    def gaps(doc):
+        """Exact-line gap paragraphs, in twentieths of a point, in document order."""
+        out = []
+        for sp in doc.element.body.iter(qn("w:spacing")):
+            if sp.get(qn("w:lineRule")) == "exact" and sp.getparent().getparent().getparent() \
+                    is doc.element.body:
+                out.append(int(sp.get(qn("w:line"))))
+        return out
+
+    def test_compact_top_tightens_gaps_and_recall_padding(self):
+        s = grid_spec(priorKnowledge={"items": ["One thing."]}, directions="Do it.")
+        r, doc = self.build(s)
+        r2, tight = self.build(dict(s, compactTop=True))
+        self.assertEqual(r2.returncode, 0, r2.stderr)
+        self.assertLess(sum(self.gaps(tight)), sum(self.gaps(doc)))
+        self.assertIn('<w:top w:w="35"', tight.element.body.xml)
+        self.assertNotIn('<w:top w:w="35"', doc.element.body.xml)
+
+    def test_grid_row_gap_is_settable(self):
+        r, doc = self.build(grid_spec(gridRowGapPt=4))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn(80, self.gaps(doc))                   # 4 pt between the two rows
+        r, doc = self.build(grid_spec())
+        self.assertIn(200, self.gaps(doc))                  # default 10 pt
+
+
 class DrawBlockOptOuts(Builder):
     """Five questions, one single drawing panel each."""
     DRAW = {"panels": 1, "across": 1, "label": "DRAW"}
@@ -183,6 +211,30 @@ class LabelBank(Builder):
         ts = [[t.text for t in p.iter(qn("w:t"))] for p in doc.element.body.iter(qn("w:p"))]
         self.assertIn(["GRAVITY   ", "Fg"], ts)
         self.assertNotIn(["gravity"], ts)               # the bar's name-over-symbol form
+
+    def test_inline_bank_sets_marked_subscripts_as_subscript_runs(self):
+        s = grid_spec(equationStyle="inline")
+        s["sectionsContent"][0]["equations"] = [
+            {"note": "gravity", "plain": "F_{g}"},
+            {"note": "friction", "plain": "f    (f_{s} static, f_{k} kinetic)"}]
+        r, doc = self.build(s)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        runs = [(t.text, r_.find(qn("w:rPr")).find(qn("w:vertAlign")) is not None)
+                for p in doc.element.body.iter(qn("w:p")) for r_ in p.iter(qn("w:r"))
+                for t in r_.iter(qn("w:t"))]
+        self.assertIn(("F", False), runs)
+        self.assertIn(("g", True), runs)
+        self.assertIn(("s", True), runs)
+        self.assertIn((" static, f", False), runs)
+        self.assertNotIn("_{", doc.element.body.xml)
+        sub = [v.get(qn("w:val")) for v in doc.element.body.iter(qn("w:vertAlign"))]
+        self.assertEqual(sub, ["subscript"] * 3)
+
+    def test_plain_bar_leaves_underscore_markup_alone(self):
+        s = grid_spec()
+        s["sectionsContent"][0]["equations"] = [{"note": "gravity", "plain": "F_{g}"}]
+        r, doc = self.build(s)
+        self.assertIn("F_{g}", doc.element.body.xml)   # only the inline bank parses it
 
     def test_equation_columns_sets_bar_width(self):
         r, doc = self.build(grid_spec(equationColumns=3))

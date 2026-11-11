@@ -43,7 +43,7 @@ from build_worksheet_docx import table_block, notes_block   # noqa: E402
 # The opt-in grid layout ("layout": "grid") is the student sheet's; the key draws the same
 # grid so a teacher grades square against square.
 from build_worksheet_docx import (   # noqa: E402
-    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, GRID_PROMPT_GAP_TW, GRID_ROW_GAP_PT,
+    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, GRID_PROMPT_GAP_TW,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -172,10 +172,18 @@ def grid_note(n, q, width_in):
     """The item's steps as a short handwritten note under its square(s), or None."""
     if not q.get("steps"):
         return None
-    from key_solution import solution_image
+    from key_solution import draw_steps, Page, LOGICAL_PER_IN
     png = os.path.join(_TMP, f"g{n}_note.png")
-    solution_image({"prompt": q["prompt"], "steps": q["steps"]}, png,
-                   width_in=width_in / KEY_NOTE_SCALE)
+    W = int(width_in / KEY_NOTE_SCALE * LOGICAL_PER_IN)
+    # The steps wrap to the note's width, on a canvas a little wider: the handwriting face
+    # can run a few px past its measured width, and a canvas cut at the wrap width clips
+    # the last letter of a full line. The spare width is cropped off as white.
+    pad = 40
+    P = Page(W + pad, 1600, seed=hash(q.get("prompt", "")) % 1000)
+    y = draw_steps(P, 14, 8, q["steps"], W - 28, 27)
+    P.crop(y + 10)
+    P.save(png=png)
+    _crop_to_ink(png, pad=12)
     return png
 
 
@@ -204,7 +212,7 @@ def render_key_grid(doc, questions, pal, g):
     scale = min([1.0] + fits)
     for gi, row in enumerate(grid_rows(questions, g["columns"])):
         if gi:
-            gap(doc, GRID_ROW_GAP_PT)
+            gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 3)
         _pin_row(t, 0); _pin_row(t, 1, S); _pin_row(t, 2)
         for n, q, col, span in row:
@@ -243,7 +251,10 @@ def render_key_grid(doc, questions, pal, g):
                 continue
             png = grid_note(n, q, width)
             if png:
-                note.paragraphs[0].add_run().add_picture(png, width=Inches(width))
+                from PIL import Image
+                with Image.open(png) as im:      # cropped to ink, so set by scale, not width
+                    w_in = im.width / KEY_PX_PER_IN * KEY_NOTE_SCALE
+                note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
         from _shull_docx import unpad_cell
         unpad_cell(outer)
     return scale
