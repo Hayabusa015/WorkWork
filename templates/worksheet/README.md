@@ -176,7 +176,7 @@ docstring (SHULL-CHG-0071).
 
 A section (or the whole spec) may set `"layout": "grid"` to set draw-only questions as a grid of
 squares instead of one card per question: `columns` (default 3), `squareIn` (side, default 2.2;
-the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in)
+the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in),
 `gridPromptPt` (default 9.5) and `gridRowGapPt` (default 10). An item takes one square per `draw.panels`, each captioned from
 `draw.captions` inside its top; items flow left to right in order. A grid item carries a prompt and
 squares only: `math`, `answerLines`, `parts`, `diagram`, `given` and `need` are refused. The key
@@ -186,7 +186,8 @@ drawing size for the whole key) with the item's `steps` handwritten underneath.
 The equation bar takes `"equationColumns"` (default 2), and `"equationStyle": "inline"` sets a
 short label bank one entry per line, name then symbol; in that bank `_{...}` in a symbol is set as a
 subscript run (`"F_{g}"`). `"compactTop": true` tightens the gaps and the recall box's padding
-above the questions. A spec without these keys builds exactly as before.
+above the questions. A spec without these keys builds exactly as before. Record:
+SHULL-CHG-0071, section 10.
 
 ## Vertical space
 

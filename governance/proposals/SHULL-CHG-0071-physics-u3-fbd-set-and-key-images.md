@@ -33,8 +33,8 @@
 | **Recommendation** | Approve A, B and C as written. Matt has already made each choice in chat. These approvals cover only this record. Approving it does not approve SHULL-CHG-0068 or SHULL-CHG-0070. |
 | **Decision** | Approved by the user in chat, 2026-11-11, choosing from four offered options: Key drawings: "Add image support (Recommended)"; Structure: "One set of 12 (Recommended)"; Scenarios: "Everyday objects (Recommended)"; File name: "Practice Set - Free-Body Diagrams (Recommended)". Approves Parts A, B and C. Footer default: no section code (U03 only). Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | `f9d9f41` (branch `claude/focused-mendel-cefeca`): code, tests and the deliverable build script. Documentation (`standards/ANSWER_KEYS.md` header, §1 and §6.3; `templates/worksheet/README.md` pointer; `change-log/CHANGELOG.md` row; this record) written by the Secretary on 2026-11-11, to be committed by the main session. **SHA of that commit: pending, add it here.** |
-| **Verified** | **Partially, pending QA.** Done: (1) `scripts/test_key_solution.py` and `templates/worksheet/test_build_worksheet_key_docx.py` pass; (2) regression: existing committed keys rebuild byte-identical with `PYTHONHASHSEED=0`; (3) deliverable built: `output/physics/u03/Unit 3 Practice Set - Free-Body Diagrams` (.docx/.pdf) and its Key. As reported by the implementing session; not re-run by the Secretary, which has no shell. Outstanding: page-by-page visual inspection of the rendered FBD key (`standards/ANSWER_KEYS.md` §9), `scripts/audit_fonts.py --key` on it, and the main session's documentation commit. See section 9 for follow-ups. |
+| **Implemented By** | `f9d9f41` (branch `claude/focused-mendel-cefeca`): code, tests and the deliverable build script. Documentation (`standards/ANSWER_KEYS.md` header, §1 and §6.3; `templates/worksheet/README.md` pointer; `change-log/CHANGELOG.md` row; this record) written by the Secretary on 2026-11-11, to be committed by the main session. **SHA of that commit: pending, add it here.** Later grid-layout commits on the same branch: see section 10. |
+| **Verified** | **Partially, pending QA.** Done: (1) `scripts/test_key_solution.py` and `templates/worksheet/test_build_worksheet_key_docx.py` pass; (2) regression: existing committed keys rebuild byte-identical with `PYTHONHASHSEED=0`; (3) deliverable built: `output/physics/u03/Unit 3 Practice Set - Free-Body Diagrams` (.docx/.pdf) and its Key. As reported by the implementing session; not re-run by the Secretary, which has no shell. Outstanding: page-by-page visual inspection of the rendered FBD key (`standards/ANSWER_KEYS.md` §9), `scripts/audit_fonts.py --key` on it, and the main session's documentation commit. See section 9 for follow-ups, and section 10 for the 2026-11-11 amendment (2-page grid layout, its checks, and its open items). |
 
 ---
 
@@ -246,3 +246,80 @@ Each needs its own record if Matt wants it. None is part of this change.
 | F2 | The Physics no-work-area check does not refuse `draw` panels. It refuses only `math` and `answerLines`. (Already noted in section 3.) | `build_worksheet_docx.py` `check_profile()` | A decision from Matt on whether a `draw` panel on Physics should be refused, then a builder change. |
 | F3 | The key builder seeds handwriting jitter from `hash(prompt)`. Python salts string hashes per process, so a build is reproducible only with a fixed `PYTHONHASHSEED`. The byte-identical regression check in `Verified` depended on `PYTHONHASHSEED=0`. | `templates/worksheet/build_worksheet_key_docx.py` / `scripts/key_solution.py` | A stable seed (for example a digest of the prompt) in place of `hash()`. Would change every key's rendered jitter once. |
 | F4 | A `ResourceWarning` for a file left open. | `scripts/key_ink.py` | Close the file (a `with` block). Low risk. |
+
+## 10. Amendment, 2026-11-11: two-page grid layout for the same deliverable
+
+Recorded here rather than in a new record because these changes serve the same file pair. This
+section is an audit record of work already committed. **It is not an approval and it widens no
+approval** (see 10.4).
+
+### 10.1 Source (verbatim)
+
+Matt, in chat, 2026-11-11, after seeing the first build:
+
+> "na make it 2 pages, move the problems around so they are square boxes and you can move them
+> around in, you do not need that much room to draw these, 2, maybe even 3 boxes acrossed a row to
+> draw the FBD's"
+
+### 10.2 What changed
+
+All of it is opt-in. A spec that does not name the new keys builds as before (10.3). The keys'
+schema is documented once, in `templates/worksheet/README.md` ("Opt-in: a grid of square drawing
+boxes"). It is not restated here.
+
+| File | Change |
+|---|---|
+| `templates/worksheet/build_worksheet_docx.py` | `"layout": "grid"`, with `columns`, `squareIn`, `gridPromptPt` and `gridRowGapPt`. |
+| `templates/worksheet/build_worksheet_docx.py` | `draw_block` options `"numbered": false` and `"captionStrip": false`, on a `draw` block or a question's own `draw`. **These close follow-up F1** (section 9), and also the caption-strip item labelled F9 by the implementing session. F9 does not appear in section 9 of this record. |
+| `templates/worksheet/build_worksheet_docx.py` | An inline label bank: `"equationStyle": "inline"` and `"equationColumns"`. In that bank `_{...}` sets a subscript run. |
+| `templates/worksheet/build_worksheet_docx.py` | `"compactTop": true`. |
+| `templates/_shull_docx.py` | `equation_bar(cols=2)`. |
+| `templates/worksheet/build_worksheet_key_docx.py` | `render_key_grid`, which draws the key in the same grid. Also a fix so that grid notes no longer clip. |
+| `templates/worksheet/test_build_worksheet_docx.py` | New student-builder tests (17). |
+
+**Commits.** These are on branch `claude/focused-mendel-cefeca`. The latest is titled "U3 FBD
+practice set: page-1 slack and subscripted label bank". **SHA: pending, add it here.** This
+Secretary session has no git tool, so it could not read the SHA.
+
+### 10.3 Verification, as reported by the implementing session
+
+The Secretary has not re-run any of this. It has no shell.
+
+| Check | Result |
+|---|---|
+| Regression: existing specs rebuild identical, member by member, under `PYTHONHASHSEED=0` | 22 builds compared, all identical |
+| `templates/worksheet/test_build_worksheet_docx.py` | 17 tests, pass |
+| `templates/worksheet/test_build_worksheet_key_docx.py` | 8/8 |
+| `scripts/test_key_solution.py` | 8/8 |
+| Page count | Student copy 2 pages, key 3 pages |
+
+**The page budget is met.** `standards/QA_GATE.md` §2: "Practice set is exactly 2 pages." The
+student copy is 2 pages. The key is not a practice set, so "whatever was specified" applies to it.
+The page-budget concern no longer applies.
+
+Still outstanding from the `Verified` field: the page-by-page visual inspection of the key
+(`standards/ANSWER_KEYS.md` §9), `scripts/audit_fonts.py --key`, and the documentation commit.
+The `change-log/CHANGELOG.md` row for 0071 stays **PARTIAL** until the deliverable is filed.
+
+### 10.4 Scope of approval: marked, not resolved
+
+Part A (section 2) approved the `keyImage` field and the `fbd` scene. It did not cover a grid
+layout, the `draw_block` options, the inline label bank, `compactTop`, or `equation_bar(cols=2)`.
+These are **shared-builder capabilities, available to all three courses**. Under the test in
+CLAUDE.md §2, that makes them Path B. Section 9 said F1 "needs its own record".
+
+Matt's words in 10.1 are a direct instruction about this deliverable (precedence 1). They are not
+a `Decision:` on a builder change under CHANGE_CONTROL §4.1. **No one has recorded a decision on
+the 10.2 builder capabilities as standing features.** The main session should ask Matt whether to
+keep them as standing, opt-in builder features. If he says yes, the main session records that
+under §4.1, either here or in a new record. Until then, this amendment is a record of what was
+built. It is not authority to build more against these keys.
+
+### 10.5 Open items
+
+| # | Item | Rule involved | Who decides |
+|---|---|---|---|
+| A1 | **Label-bank subscripts render at about 6 pt on a student page.** This is below the print floor. | `brand/tokens.json` `typography.floors.printBody` = 8 pt, status **INHERITED** (not LOCKED). `brand/SHULL_DESIGN_SYSTEM.md`: "no student-page text below this except the running footer." | **Matt.** The options are to raise the subscript size, to approve a one-time exception for this file pair, or to amend the floor (which needs its own record). Not resolved here. |
+| A2 | `scripts/key_solution.solution_image` may have the same handwriting edge-clipping risk on full-width lines that the grid-notes fix addressed in `render_key_grid`. | `standards/ANSWER_KEYS.md` §9 (visual inspection) | Check needed, by the designer or auditor. Not yet checked. |
+| A3 | Drive destination: `Unit 03` or `Section 03.2`. | `standards/DRIVE_ARCHITECTURE.md`. Section 6 of this record puts no section code on the page and declares `3.2` internally. | **Matt.** Pending. The CHANGELOG row stays PARTIAL until filing. |
+| A4 | 10.4: should the grid, `draw_block` options, inline bank and `compactTop` stay as standing builder features? | CHANGE_CONTROL §1 Path B, §4.1 | **Matt**, recorded by the main session. |
