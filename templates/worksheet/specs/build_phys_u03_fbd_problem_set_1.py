@@ -19,20 +19,35 @@ import build_worksheet_key_docx as k
 sys.argv = ["build_worksheet_key_docx.py", SPEC, key]
 assert k.main() == 0
 
+# Any section code: "S3.2", "3.2", "U03 / S3.2", "U03 · S3.7" - in any visible text run.
+CODE = re.compile(r"(?:\s*[/·]\s*)?\bS?3\.\d+\b")
+
+def visible_text(xml):
+    return " ".join(re.findall(r"<w:t(?: [^>]*)?>([^<]*)</w:t>", xml))
+
 def strip_code(path):
     tmp = path + ".tmp"
+    left = []
     with zipfile.ZipFile(path) as zi, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zo:
         for it in zi.infolist():
             data = zi.read(it.filename)
             if it.filename.startswith("word/") and it.filename.endswith(".xml"):
                 t = data.decode("utf-8")
-                n0 = t.count("S3.2")
-                t = t.replace("U03 / S3.2", "U03").replace("U03 · S3.2", "U03")
-                if n0:
-                    print(f"  {os.path.basename(path)} {it.filename}: removed {n0 - t.count('S3.2')} of {n0} code(s)")
+                n = 0
+                def fix(m):
+                    nonlocal n
+                    new, k = CODE.subn("", m.group(2))
+                    n += k
+                    return m.group(1) + new + m.group(3)
+                t = re.sub(r"(<w:t(?: [^>]*)?>)([^<]*)(</w:t>)", fix, t)
+                if n:
+                    print(f"  {os.path.basename(path)} {it.filename}: removed {n} code(s)")
+                left += [(it.filename, x) for x in CODE.findall(visible_text(t))]
                 data = t.encode("utf-8")
             zo.writestr(it, data)
     shutil.move(tmp, path)
+    assert not left, f"section codes remain in {os.path.basename(path)}: {left}"
+    print(f"  {os.path.basename(path)}: no section code remains")
 
 for p in (stu, key):
     strip_code(p)
