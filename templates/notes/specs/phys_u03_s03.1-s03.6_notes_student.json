@@ -125,7 +125,7 @@
         ]
       }
     ],
-    "howToUse": "The left column names the slide each block comes from. While that slide is up, write each idea in your own words on the lines under its prompt. In each work box, state your positive direction and carry units to the answer."
+    "howToUse": "The left column names the slide each block comes from. While that slide is up, write each idea in your own words on the lines under its prompt. In each work box, state your positive direction, and box your final answer with units and direction."
   },
   "sectionsContent": [
     {
@@ -167,8 +167,7 @@
               "problem": {
                 "given": [
                   "m = 60 kg;   Earth: g = 9.8 m/s²;   Moon: g = 1.6 m/s².     **Find:** weight in each location."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -262,7 +261,6 @@
                   "2 kg book at rest on a table;   1.5 kg lamp at rest on a rope;   g = 9.8 m/s²."
                 ],
                 "find": "the free-body diagram of each, and the upward force on each.",
-                "answer": "**Answer:**",
                 "workHeightIn": 1.6
               },
               "notes": [],
@@ -278,8 +276,7 @@
               "problem": {
                 "given": [
                   "crate;  30 N right;  10 N left.  Positive: right.     **Find:** ∑F and its direction; write the method first."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -297,8 +294,7 @@
               "problem": {
                 "given": [
                   "40 N right (+x) and 30 N up, perpendicular.     **Find:** the size and direction of the resultant."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -312,8 +308,7 @@
               "problem": {
                 "given": [
                   "F = 100 N pulling 30° above the horizontal.     **Find:** Fx and Fy, from the component equations."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -330,8 +325,7 @@
                 "given": [
                   "top view;  500 N at 30° above +x;  400 N at 45° above −x.  Positive: +x right, +y up the page."
                 ],
-                "find": "the net force on the barge and its direction.",
-                "answer": "**Answer:**"
+                "find": "the net force on the barge and its direction."
               },
               "notes": [],
               "extraNotes": false
@@ -388,8 +382,7 @@
               "problem": {
                 "given": [
                   "m = 5 kg;   frictionless 30° ramp;   g = 9.8 m/s².     **Find:** FBD, Fg,parallel, Fg,perp, and FN."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -403,8 +396,7 @@
               "problem": {
                 "given": [
                   "m = 12 kg;  frictionless 25° ramp;  30 N push uphill.  Positive: downhill.     **Find:** Fg,parallel and ∑F."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -443,8 +435,7 @@
               "problem": {
                 "given": [
                   "m = 4 kg;   ∑F = 12 N to the right.     **Find:** a, and 1 N in base units."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -459,8 +450,7 @@
               "problem": {
                 "given": [
                   "m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward.     **Find:** ∑F and a."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -476,8 +466,7 @@
                 "given": [
                   "m = 20 kg;   60 N pull at 35° above horizontal;   ignore friction.   Positive: +x (right) and up."
                 ],
-                "find": "the acceleration and the normal force.",
-                "answer": "**Answer:**"
+                "find": "the acceleration and the normal force."
               },
               "notes": [],
               "extraNotes": false
@@ -495,8 +484,7 @@
               "problem": {
                 "given": [
                   "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** a, showing why mass cancels."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -533,8 +521,7 @@
               "problem": {
                 "given": [
                   "m = 70 kg;   a = 2.0 m/s² upward.   Positive: up.     **Find:** the scale reading."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -594,8 +581,7 @@
               "problem": {
                 "given": [
                   "m = 40 kg;   level floor;   constant velocity;   120 N horizontal push.     **Find:** FN, fk, and μk."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -611,7 +597,6 @@
                   "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N.   Positive: the push direction."
                 ],
                 "find": "whether the box moves for each push, and the acceleration for 110 N.",
-                "answer": "**Answer:**",
                 "workHeightIn": 1.6
               },
               "notes": [],
@@ -631,8 +616,7 @@
                 "given": [
                   "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (horizontal, toward the pull) and up."
                 ],
-                "find": "FN, fk, and a.",
-                "answer": "**Answer:**"
+                "find": "FN, fk, and a."
               },
               "notes": [],
               "extraNotes": false
@@ -664,7 +648,6 @@
                 "given": [
                   "m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill.     **Find:** if it slides, and a."
                 ],
-                "answer": "**Answer:**",
                 "workHeightIn": 1.6
               },
               "notes": [],
@@ -707,7 +690,6 @@
                   "ignore cable mass.   Positive: right and up."
                 ],
                 "find": "the tension in each support cable, and which carries more.",
-                "answer": "**Answer:**",
                 "workHeightIn": 1.8
               },
               "notes": [],
@@ -738,8 +720,7 @@
               "problem": {
                 "given": [
                   "m₁ = 5 kg, m₂ = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -758,8 +739,7 @@
               "problem": {
                 "given": [
                   "m₁ = 4 kg on the table;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -773,8 +753,7 @@
               "problem": {
                 "given": [
                   "m₁ = 4 kg on the table, μk = 0.20;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
-                ],
-                "answer": "**Answer:**"
+                ]
               },
               "notes": [],
               "extraNotes": false
@@ -789,8 +768,7 @@
                 "given": [
                   "m₁ = 6 kg on a frictionless 30° ramp;   m₂ = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
                 ],
-                "find": "a and T.",
-                "answer": "**Answer:**"
+                "find": "a and T."
               },
               "notes": [],
               "extraNotes": false

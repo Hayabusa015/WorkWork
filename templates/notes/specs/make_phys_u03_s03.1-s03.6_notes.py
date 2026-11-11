@@ -76,9 +76,11 @@ def build(key, board):
             prob = {"given": [given[0] + "     **Find:** " + find]}
         else:
             prob = {"given": given, "find": find}
-        # Student: an "Answer:" label with open space beside it. Key: the full answer.
-        prob["answer"] = "**Answer:**  " + F(answer, True).replace("**", "") if key \
-            else "**Answer:**"
+        # Student: no answer line - the builder prints `answer` as plain text with no rule,
+        # and typed underscores are banned (SHULL-CHG-0069). Students box the final answer
+        # inside the work box (cover instruction). Key: the full answer under the box.
+        if key:
+            prob["answer"] = "**Answer:**  " + F(answer, True).replace("**", "")
         if height > 1.4:
             prob["workHeightIn"] = height
         if key:
@@ -516,8 +518,8 @@ def build(key, board):
             ],
             "howToUse": "The left column names the slide each block comes from. While that "
                         "slide is up, write each idea in your own words on the lines under "
-                        "its prompt. In each work box, state your positive direction and "
-                        "carry units to the answer.",
+                        "its prompt. In each work box, state your positive direction, and box "
+                        "your final answer with units and direction.",
         },
         "sectionsContent": sections,
         "conceptReview": {
