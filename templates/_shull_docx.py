@@ -452,20 +452,22 @@ def stacked_frac(cell, num, den, ink_hex, rule_hex, size=10.5):
     return t
 
 
-def equation_bar(doc, equations, pal, label, width=7.5):
+def equation_bar(doc, equations, pal, label, width=7.5, cols=2):
     """The equations students may reference, at the top of the page.
 
     His rule: on any Physics or Chemistry sheet with math, the equations go at the top
     so students know what they are allowed to reach for. Two across, no box around the
     block - the only rules on it are the fraction bars, which are the point of it.
+    `cols` sets more across, for a short-entry list such as a label bank; the default
+    is the two-across bar.
     """
     c = one_cell(doc, width)
     para(c, label, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
-    cols = 2
-    half = round(width / 2 - 0.13, 2)
+    cols = int(cols)
+    half = round(width / cols - 0.13, 2)
     rows = (len(equations) + cols - 1) // cols
     t = c.add_table(rows=rows, cols=cols)
-    fix_widths(t, [half, half])
+    fix_widths(t, [half] * cols)
     tight_cells(t, top=30, bottom=40, left=0, right=60)
     for i, eq in enumerate(equations):
         cell = t.rows[i // cols].cells[i % cols]

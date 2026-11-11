@@ -229,29 +229,40 @@ def slots_block(doc, block, pal):
 
 def draw_block(cell, block, pal, width):
     """Blank panels to draw in, captioned underneath. The lighter cousin of `cards` -
-    used when there is nothing to cut, only something to show."""
+    used when there is nothing to cut, only something to show.
+
+    Two opt-outs, both defaulting to the old look so existing specs build unchanged:
+    `"numbered": false` drops the panel number printed in each box (it reads as a stray
+    "1" in a single panel under a numbered question), and `"captionStrip": false` drops
+    the ruled caption strip under each panel when there is nothing to caption.
+    """
     n = int(block.get("panels", 4))
     across = int(block.get("across", 4))
     col_w = round(width / across, 3)
     panel_h = float(block.get("panelHeightIn", 1.7))
+    numbered = block.get("numbered", True)
+    strip = block.get("captionStrip", True)
+    step = 2 if strip else 1
     label(cell, block.get("label", "DRAW IT"), pal)
     if block.get("instruction"):
         para(cell, block["instruction"], 9.5)
     captions = block.get("captions") or []
     rows = (n + across - 1) // across
-    t = cell.add_table(rows=rows * 2, cols=across)
+    t = cell.add_table(rows=rows * step, cols=across)
     fix_widths(t, [col_w] * across)
     for i in range(n):
         r, c = divmod(i, across)
-        panel = t.rows[r * 2].cells[c]
+        panel = t.rows[r * step].cells[c]
         borders(panel, pal.ink, sz=4)
-        no_split(t.rows[r * 2], panel_h)
-        # Just the number. No box, no square, no circle. SHULL-CHG-0015.
-        para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
-        under = t.rows[r * 2 + 1].cells[c]
-        borders(under, pal.hair, sz=4, edges=("bottom",))
-        cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
-        para(under, cap, 8, color=pal.label, first=True)
+        no_split(t.rows[r * step], panel_h)
+        if numbered:
+            # Just the number. No box, no square, no circle. SHULL-CHG-0015.
+            para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
+        if strip:
+            under = t.rows[r * step + 1].cells[c]
+            borders(under, pal.hair, sz=4, edges=("bottom",))
+            cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
+            para(under, cap, 8, color=pal.label, first=True)
     return t
 
 
