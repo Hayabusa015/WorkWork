@@ -21,9 +21,9 @@
 | **Risk** | **Low.** Visual only; no content, naming, filing or ink change. Two real risks, both caught by the verification plan (§7): a long-text cell that reads worse centred (§4 candidates), and a layout table (cards, Cornell columns) centred by mistake if the implementation reaches too far (§2a, definition; §4 Q1). One revertible commit per layer. |
 | **Recommendation** | Approve §2a as written, with **no exceptions** (his "consistent in all documents"). Two points to put to him before or with approval, one at a time: **Q1** the definition of "table" that keeps layout grids out (§4); **Q2** whether any §4 candidate is an exception. If he says nothing on Q2, the default is no exceptions. Rule applies to documents built from approval forward; finished files on Drive are not rebuilt ("from here on out"). |
 | **Decision** | Approved by the user, 2026-11-11: "note what i did with centering in the tables. i need this to be consistant in all documents from here on out, make it a rule and approve thew change in the repo" |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Two commits, both citing SHULL-CHG-0071 (§5). **(1) Rule, Secretary, 2026-11-11:** `brand/SHULL_DESIGN_SYSTEM.md` §11 Documents, new `### Tables` subsection after the "Dense tabular content uses real tables" bullet, §2a text verbatim. Q1 resolved as the §2a definition (visible fill-in grids only; layout grids excluded), stated in the rule's second paragraph. Q2: no exceptions, so "There are no exceptions." stands. Commit SHA: `38052ca`. **(2) Code, main session, separate commit:** `templates/_shull_docx.py` `fillin_table`, `templates/practice/build_practice.py` question tables, `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`, `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html` (§5 items 2–8). Commit SHA: `8488f8e`. |
+| **Verified** | 2026-11-11, main session. All 8 validators OK (validate_profiles: 15 refusals fire, 2 allowances hold, 4 real specs build). Rebuilt 4.5 practice, 5.3 Practice Set, 5.3 Activity (student + key) and three notes packets (chem U4-U5, chem U1, geo U1): python-docx check, 0 of 770 grid cells not centred horizontally and vertically. 5.3 key rendered and inspected against the user's screenshot: matches. Branch `claude/bold-edison-rclt4e` (left-justified table rule) confirmed not merged into main and has no PR. |
 
 ---
 
