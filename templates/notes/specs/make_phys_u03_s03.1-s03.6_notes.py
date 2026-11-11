@@ -502,8 +502,6 @@ def build(key, board):
         "unit": 3,
         "key": key,
         "cover": {
-            "sections": [{"code": c, "difficulty": d} for c, d in DIFFICULTY],
-            "difficultyNote": "Estimated difficulty: 1 = introductory; 10 = highly challenging.",
             "equationToolbox": {
                 "label": "Equation toolbox",
                 "columns": [
@@ -519,7 +517,7 @@ def build(key, board):
                                f"FN = mg cos {T}  (ramp, no other perpendicular force)",
                                "fs,max = μsFN", "fk ≈ μkFN"]},
                 ],
-                "notes": ["∑F means net force (the slides write Fnet).",
+                "notes": ["∑F = net force (sum of all forces).",
                           "g = 9.8 m/s² on Earth.   1 N = 1 kg·m/s².   μ has no units.   "
                           f"Frictionless ramp: a = g sin {T}."],
             },
@@ -578,8 +576,6 @@ def build(key, board):
     }
     return spec
 
-
-DIFFICULTY = [("3.1", 3), ("3.2", 6), ("3.3", 5), ("3.4", 6), ("3.5", 7), ("3.6", 8)]
 
 # Blocks per page, after board examples are removed (False) or with all examples (True).
 BREAKS = {

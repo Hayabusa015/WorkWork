@@ -3,33 +3,6 @@
   "unit": 3,
   "key": true,
   "cover": {
-    "sections": [
-      {
-        "code": "3.1",
-        "difficulty": 3
-      },
-      {
-        "code": "3.2",
-        "difficulty": 6
-      },
-      {
-        "code": "3.3",
-        "difficulty": 5
-      },
-      {
-        "code": "3.4",
-        "difficulty": 6
-      },
-      {
-        "code": "3.5",
-        "difficulty": 7
-      },
-      {
-        "code": "3.6",
-        "difficulty": 8
-      }
-    ],
-    "difficultyNote": "Estimated difficulty: 1 = introductory; 10 = highly challenging.",
     "equationToolbox": {
       "label": "Equation toolbox",
       "columns": [
@@ -67,7 +40,7 @@
         }
       ],
       "notes": [
-        "∑F means net force (the slides write Fnet).",
+        "∑F = net force (sum of all forces).",
         "g = 9.8 m/s² on Earth.   1 N = 1 kg·m/s².   μ has no units.   Frictionless ramp: a = g sin θ."
       ]
     },

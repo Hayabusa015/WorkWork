@@ -1,5 +1,5 @@
 {
- "$comment": "One-time exceptions for this file pair only, SHULL-CHG-0071 Part B: 12 items in one list, no equations (the label bank fills the equation bar), drawing boxes, no graph item, everyday objects. Not a precedent. Build with the one-time ramp and footer override, not by running the builder directly; the checked-in builder refuses this spec as designed.",
+ "$comment": "One-time exceptions for this file pair only, SHULL-CHG-0071 Part B: 12 items in one list, no equations (the label bank fills the equation bar), drawing boxes (a grid of squares, 3 across), no graph item, everyday objects. Not a precedent. Build with the one-time ramp and footer override, not by running the builder directly; the checked-in builder refuses this spec as designed.",
  "course": "physics",
  "unit": 3,
  "sections": [
@@ -7,7 +7,7 @@
  ],
  "docType": "Practice_Set",
  "equationLabel": "FORCE LABEL BANK",
- "pagesPerSection": 5,
+ "pagesPerSection": 2,
  "key": {
   "title": "Free-Body Diagrams"
  },
@@ -16,6 +16,10 @@
    "code": "3.2",
    "title": "Free-Body Diagrams",
    "eyebrowNote": "PROBLEM SET 1",
+   "layout": "grid",
+   "columns": 3,
+   "squareIn": 2.2,
+   "equationColumns": 4,
    "priorKnowledge": {
     "items": [
      "Newton's first law: an object at rest, or moving at a constant speed in a straight line, has balanced forces.",
@@ -63,10 +67,7 @@
      "points": 1,
      "prompt": "A box of books sits at rest on a level floor. Draw the free-body diagram for the box.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fg down, FN up, equal length.",
      "keyImage": {
@@ -100,10 +101,7 @@
      "points": 1,
      "prompt": "A crate on smooth, frictionless ice is pushed horizontally to the right and speeds up. Ignore air resistance. Draw the free-body diagram for the crate.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fapp right; FN up and Fg down, equal length; no friction.",
      "keyImage": {
@@ -142,10 +140,7 @@
      "points": 1,
      "prompt": "A dresser is pushed horizontally to the right across a rough wooden floor at a constant speed. Ignore air resistance. Draw the free-body diagram for the dresser.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fapp right and fk left, equal length; FN up and Fg down, equal length.",
      "keyImage": {
@@ -189,10 +184,7 @@
      "points": 1,
      "prompt": "A hockey puck slides to the right across rough ice and slows to a stop. Nothing is pushing it. Ignore air resistance. Draw the free-body diagram for the puck while it is still sliding.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "fk left (opposite the sliding); FN up and Fg down, equal length; no forward force.",
      "keyImage": {
@@ -231,10 +223,7 @@
      "points": 1,
      "prompt": "A framed picture hangs freely, not touching the wall, from two ropes. One rope pulls up and to the left and the other pulls up and to the right, each at 50° above the horizontal. Draw the free-body diagram for the picture.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Two tension arrows along the ropes, TL up-left and TR up-right at 50° above the horizontal, equal; Fg down.",
      "keyImage": {
@@ -273,10 +262,7 @@
      "points": 1,
      "prompt": "A person stands on a bathroom scale in an elevator. The elevator is moving up and speeding up. Draw the free-body diagram for the person.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "FN up (from the scale), larger than Fg down.",
      "keyImage": {
@@ -310,10 +296,7 @@
      "points": 1,
      "prompt": "A skydiver falls toward the ground and is still speeding up. Air resistance acts on her. Draw the free-body diagram for the skydiver.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fg down, drag up, Fg larger than drag.",
      "keyImage": {
@@ -348,10 +331,7 @@
      "points": 1,
      "prompt": "A sled is pulled to the right across rough snow at a constant speed. The rope pulls at 30° above the horizontal. Ignore air resistance. Draw the free-body diagram for the sled.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "T up and right at 30° above the horizontal; fk left; FN up, smaller than Fg down.",
      "keyImage": {
@@ -395,10 +375,7 @@
      "points": 1,
      "prompt": "A toolbox sits at rest on a rough ramp tilted 25° above the horizontal. Draw the free-body diagram for the toolbox.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fg straight down; FN perpendicular to the ramp; fs up along the ramp.",
      "keyImage": {
@@ -439,10 +416,7 @@
      "points": 1,
      "prompt": "A wooden block slides down a rough ramp tilted 25° above the horizontal and speeds up as it goes. Ignore air resistance. Draw the free-body diagram for the block.",
      "draw": {
-      "panels": 1,
-      "across": 1,
-      "panelHeightIn": 2.1,
-      "label": "DRAW THE FREE-BODY DIAGRAM"
+      "panels": 1
      },
      "solution": "Fg straight down; FN perpendicular to the ramp; fk up along the ramp, small (the block speeds up).",
      "keyImage": {
@@ -484,12 +458,9 @@
      "prompt": "A book rests on a table, and the table stands on a level floor. Nothing is moving. Draw two separate free-body diagrams: one for the book and one for the table.",
      "draw": {
       "panels": 2,
-      "across": 2,
-      "panelHeightIn": 2.5,
-      "label": "DRAW TWO SEPARATE FREE-BODY DIAGRAMS",
       "captions": [
-       "BOOK",
-       "TABLE"
+       "Book",
+       "Table"
       ]
      },
      "solution": "Book: FN up from the table and Fg down, equal. Table: FN up from the floor; Fg (the table's weight) down; F book on table (the book pushing down) down; FN equals Fg plus F book on table.",
@@ -549,12 +520,9 @@
      "prompt": "A block on a frictionless table is tied to a string. The string runs over a pulley at the right edge of the table to a hanging mass, and the mass falls and speeds up. Ignore the mass of the string and the pulley, and ignore air resistance. Draw two separate free-body diagrams: one for the block and one for the hanging mass.",
      "draw": {
       "panels": 2,
-      "across": 2,
-      "panelHeightIn": 2.5,
-      "label": "DRAW TWO SEPARATE FREE-BODY DIAGRAMS",
       "captions": [
-       "BLOCK",
-       "HANGING MASS"
+       "Block",
+       "Hanging mass"
       ]
      },
      "solution": "Block: T right; FN up and Fg down, equal; no friction. Hanging mass: T up, Fg down, Fg larger than T.",
