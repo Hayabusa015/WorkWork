@@ -20,8 +20,8 @@
 | **Affected Courses** | **All three: Chemistry, Physics, Geology.** It changes all three courses, so it is a design rule (CLAUDE.md §2, Path B). No `courses/*/DECISIONS.md` edit. |
 | **Risk** | **Low.** Visual only; no content, naming, filing or ink change. Two real risks, both caught by the verification plan (§7): a long-text cell that reads worse centred (§4 candidates), and a layout table (cards, Cornell columns) centred by mistake if the implementation reaches too far (§2a, definition; §4 Q1). One revertible commit per layer. |
 | **Recommendation** | Approve §2a as written, with **no exceptions** (his "consistent in all documents"). Two points to put to him before or with approval, one at a time: **Q1** the definition of "table" that keeps layout grids out (§4); **Q2** whether any §4 candidate is an exception. If he says nothing on Q2, the default is no exceptions. Rule applies to documents built from approval forward; finished files on Drive are not rebuilt ("from here on out"). |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-11: "note what i did with centering in the tables. i need this to be consistant in all documents from here on out, make it a rule and approve thew change in the repo" |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
