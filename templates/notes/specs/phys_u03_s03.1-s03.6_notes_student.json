@@ -51,8 +51,8 @@
           "lines": [
             "Fx = F cos θ",
             "Fy = F sin θ",
-            "∑F = √(Fx² + Fy²)",
-            "θ = tan⁻¹(Fy/Fx)"
+            "∑F = √((∑Fx)² + (∑Fy)²)",
+            "θ = tan⁻¹(∑Fy/∑Fx)"
           ]
         },
         {
@@ -86,7 +86,7 @@
       {
         "code": "3.2",
         "terms": [
-          "Free-body diagram",
+          "Free-body diagram (FBD)",
           "normal force",
           "tension",
           "resultant",
@@ -113,7 +113,7 @@
         "terms": [
           "Static friction",
           "kinetic friction",
-          "coefficient of friction (μ)"
+          "coefficient of friction (μ)"
         ]
       },
       {
@@ -125,7 +125,7 @@
         ]
       }
     ],
-    "howToUse": "The left column names the slide each block comes from. While that slide is up, write each idea in your own words on the lines under its prompt. In each work box, state your positive direction, and box your final answer with units and direction."
+    "howToUse": "The left column names the slide each block comes from. While that slide is up, write each idea in your own words on the lines under its prompt. In each work box, use the positive direction given, or choose and state one, and box your final answer with units and direction."
   },
   "sectionsContent": [
     {
@@ -139,7 +139,7 @@
               "title": "Force · Mass and Weight",
               "cues": [
                 "Slides 3–4",
-                "Common mix-up: mass (kg) and weight (N) are different quantities."
+                "Common mix-up: using mass and weight as if they were the same thing."
               ],
               "notes": [
                 {
@@ -148,7 +148,7 @@
                 },
                 {
                   "prompt": "Mass vs. weight: meaning and units",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "Weight: equation, g on Earth, and the 10 kg example",
@@ -166,7 +166,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 60 kg;   Earth: g = 9.8 m/s²;   Moon: g = 1.6 m/s².     **Find:** weight in each location."
+                  "m = 60 kg;  Earth: g = 9.8 m/s²;  Moon: g = 1.6 m/s².   **Find:** weight in each location."
                 ]
               },
               "notes": [],
@@ -180,16 +180,16 @@
               "title": "Newton’s Three Laws",
               "cues": [
                 "Slides 6–8",
-                "Common mix-up: a moving object does not need a net force to keep moving. A moving puck keeps going with ∑F = 0."
+                "Common mix-up: thinking motion needs a net force. Watch the puck on slide 6."
               ],
               "notes": [
                 {
                   "prompt": "Newton’s 1st law",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "Equilibrium: condition and the two possibilities",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "Newton’s 2nd law: equation and meaning",
@@ -197,7 +197,7 @@
                 },
                 {
                   "prompt": "Newton’s 3rd law, and why the pair does not cancel",
-                  "lines": 2
+                  "lines": 3
                 }
               ],
               "extraNotes": false
@@ -210,7 +210,7 @@
                 "Use the checklist to find what still needs practice."
               ],
               "lines": 2,
-              "prompt": "State Newton’s three laws in your own words, and write the equation for weight.",
+              "prompt": "State Newton’s three laws in your own words, the condition for equilibrium, and the equation for weight.",
               "selfCheck": [
                 "I can tell mass (kg) from weight (N) and find weight with Fg = mg.",
                 "I can state all three laws and explain equilibrium."
@@ -231,12 +231,12 @@
               "title": "Free-Body Diagrams · Normal Force",
               "cues": [
                 "Slides 10–11",
-                "Common mix-up: FN does not always equal weight. That needs the level-surface conditions below."
+                "Common mix-up: assuming FN always equals the weight."
               ],
               "notes": [
                 {
                   "prompt": "Drawing an FBD: the rules",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "Common forces: Fg, FN, T",
@@ -244,7 +244,7 @@
                 },
                 {
                   "prompt": "Normal force: direction, and when FN = Fg",
-                  "lines": 2
+                  "lines": 4
                 }
               ],
               "extraNotes": false
@@ -258,7 +258,7 @@
               ],
               "problem": {
                 "given": [
-                  "2 kg book at rest on a table;   1.5 kg lamp at rest on a rope;   g = 9.8 m/s²."
+                  "2 kg book at rest on a table;  1.5 kg lamp at rest on a rope;  g = 9.8 m/s²."
                 ],
                 "find": "the free-body diagram of each, and the upward force on each.",
                 "workHeightIn": 1.6
@@ -275,7 +275,7 @@
               ],
               "problem": {
                 "given": [
-                  "crate;  30 N right;  10 N left.  Positive: right.     **Find:** ∑F and its direction; write the method first."
+                  "crate;  30 N right;  10 N left.  Positive: right.   **Find:** ∑F and its direction; write the method first."
                 ]
               },
               "notes": [],
@@ -293,7 +293,7 @@
               ],
               "problem": {
                 "given": [
-                  "40 N right (+x) and 30 N up, perpendicular.     **Find:** the size and direction of the resultant."
+                  "40 N right (+x) and 30 N up, perpendicular.   **Find:** the size and direction of the resultant."
                 ]
               },
               "notes": [],
@@ -307,7 +307,7 @@
               ],
               "problem": {
                 "given": [
-                  "F = 100 N pulling 30° above the horizontal.     **Find:** Fx and Fy, from the component equations."
+                  "F = 100 N pulling 30° above the horizontal.   **Find:** Fx and Fy, from the component equations."
                 ]
               },
               "notes": [],
@@ -359,16 +359,16 @@
               "title": "Gravity on a Ramp · Normal Force on an Incline",
               "cues": [
                 "Slides 20–21",
-                "Common mix-up: on a ramp FN is mg cos θ, less than the weight."
+                "Common mix-up: assuming FN equals the weight on a ramp."
               ],
               "notes": [
                 {
                   "prompt": "Ramp axes and the weight components",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "FN on a ramp: equation, condition, steepness",
-                  "lines": 2
+                  "lines": 3
                 }
               ],
               "extraNotes": false
@@ -381,7 +381,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 5 kg;   frictionless 30° ramp;   g = 9.8 m/s².     **Find:** FBD, Fg,parallel, Fg,perp, and FN."
+                  "m = 5 kg;  frictionless 30° ramp;  g = 9.8 m/s².   **Find:** FBD, Fg,parallel, Fg,perp, and FN."
                 ]
               },
               "notes": [],
@@ -395,7 +395,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 12 kg;  frictionless 25° ramp;  30 N push uphill.  Positive: downhill.     **Find:** Fg,parallel and ∑F."
+                  "m = 12 kg;  frictionless 25° ramp;  30 N push uphill.  Positive: downhill.   **Find:** Fg,parallel and ∑F."
                 ]
               },
               "notes": [],
@@ -434,7 +434,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** a, and 1 N in base units."
+                  "m = 4 kg;  ∑F = 12 N to the right.   **Find:** a, and 1 N in base units."
                 ]
               },
               "notes": [],
@@ -449,7 +449,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward.     **Find:** ∑F and a."
+                  "m = 1500 kg;  4500 N forward;  1200 N drag (backward).  Positive: forward.   **Find:** ∑F and a."
                 ]
               },
               "notes": [],
@@ -464,7 +464,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 20 kg;   60 N pull at 35° above horizontal;   ignore friction.   Positive: +x (right) and up."
+                  "m = 20 kg;  60 N pull at 35° above horizontal;  ignore friction.  Positive: +x (right) and up."
                 ],
                 "find": "the acceleration and the normal force."
               },
@@ -483,7 +483,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** a, showing why mass cancels."
+                  "m = 8 kg;  frictionless 20° ramp.  Positive: downhill.   **Find:** a, showing why mass cancels."
                 ]
               },
               "notes": [],
@@ -493,7 +493,7 @@
               "title": "Elevators and Apparent Weight",
               "cues": [
                 "Slide 30",
-                "In an elevator, FN equals mg only when a = 0."
+                "Common mix-up: assuming the scale always reads mg."
               ],
               "notes": [
                 {
@@ -520,7 +520,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 70 kg;   a = 2.0 m/s² upward.   Positive: up.     **Find:** the scale reading."
+                  "m = 70 kg;  a = 2.0 m/s² upward.  Positive: up.   **Find:** the scale reading."
                 ]
               },
               "notes": [],
@@ -568,7 +568,7 @@
                 },
                 {
                   "prompt": "μ: units, and what a higher value means",
-                  "lines": 2
+                  "lines": 3
                 }
               ]
             },
@@ -580,7 +580,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 40 kg;   level floor;   constant velocity;   120 N horizontal push.     **Find:** FN, fk, and μk."
+                  "m = 40 kg;  level floor;  constant velocity;  120 N horizontal push.   **Find:** FN, fk, and μk."
                 ]
               },
               "notes": [],
@@ -594,7 +594,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N.   Positive: the push direction."
+                  "m = 25 kg, starts at rest;  μs = 0.40;  μk = 0.30;  pushes of 90 N and 110 N.  Positive: the push direction."
                 ],
                 "find": "whether the box moves for each push, and the acceleration for 110 N.",
                 "workHeightIn": 1.6
@@ -614,9 +614,9 @@
               ],
               "problem": {
                 "given": [
-                  "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (horizontal, toward the pull) and up."
+                  "m = 30 kg, sliding;  150 N rope at 30° above horizontal;  μk = 0.25.  Positive: +x (horizontal, toward the pull) and up."
                 ],
-                "find": "FN, fk, and a."
+                "find": "FN, fk, and a."
               },
               "notes": [],
               "extraNotes": false
@@ -629,7 +629,7 @@
               "notes": [
                 {
                   "prompt": "Friction on a ramp: direction and equations",
-                  "lines": 2
+                  "lines": 3
                 },
                 {
                   "prompt": "Condition to start sliding down",
@@ -646,7 +646,7 @@
               ],
               "problem": {
                 "given": [
-                  "m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill.     **Find:** if it slides, and a."
+                  "m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill.   **Find:** if it slides, and a."
                 ],
                 "workHeightIn": 1.6
               },
@@ -686,8 +686,8 @@
               ],
               "problem": {
                 "given": [
-                  "20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
-                  "ignore cable mass.   Positive: right and up."
+                  "20 kg streetlight at rest;  left cable 30° above horizontal;  right cable 60°;",
+                  "ignore cable mass.  Positive: right and up."
                 ],
                 "find": "the tension in each support cable, and which carries more.",
                 "workHeightIn": 1.8
@@ -707,7 +707,7 @@
                 },
                 {
                   "prompt": "Fixed-pulley rules and the method",
-                  "lines": 2
+                  "lines": 3
                 }
               ]
             },
@@ -719,7 +719,7 @@
               ],
               "problem": {
                 "given": [
-                  "m₁ = 5 kg, m₂ = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
+                  "m₁ = 5 kg, m₂ = 3 kg, both hanging.  Positive: the motion (5 kg down, 3 kg up).   **Find:** a and T."
                 ]
               },
               "notes": [],
@@ -738,7 +738,7 @@
               ],
               "problem": {
                 "given": [
-                  "m₁ = 4 kg on the table;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
+                  "m₁ = 4 kg on the table;  m₂ = 2 kg hanging.  Positive: the motion.   **Find:** a and T."
                 ]
               },
               "notes": [],
@@ -752,7 +752,7 @@
               ],
               "problem": {
                 "given": [
-                  "m₁ = 4 kg on the table, μk = 0.20;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
+                  "m₁ = 4 kg on the table, μk = 0.20;  m₂ = 2 kg hanging.  Positive: the motion.   **Find:** fk, a, and T."
                 ]
               },
               "notes": [],
@@ -766,9 +766,9 @@
               ],
               "problem": {
                 "given": [
-                  "m₁ = 6 kg on a frictionless 30° ramp;   m₂ = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
+                  "m₁ = 6 kg on a frictionless 30° ramp;  m₂ = 5 kg hanging.  Positive: the motion (5 kg down, 6 kg up the ramp)."
                 ],
-                "find": "a and T."
+                "find": "a and T."
               },
               "notes": [],
               "extraNotes": false
@@ -855,17 +855,6 @@
           ]
         ],
         "watchOut": "Draw a separate FBD for each object."
-      }
-    ],
-    "quickRecall": [
-      {
-        "q": "State the condition for equilibrium."
-      },
-      {
-        "q": "Write the weight components for a block on a ramp."
-      },
-      {
-        "q": "Explain why a scale reads more in an elevator accelerating up."
       }
     ]
   }
