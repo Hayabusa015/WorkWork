@@ -6,7 +6,7 @@
   ],
   "docType": "Practice_Set",
   "timeTargetMin": "30",
-  "pagesPerSection": 1,
+  "pagesPerSection": 2,
   "sectionsContent": [
     {
       "code": "5.3",
@@ -18,35 +18,79 @@
           "Domains = bonding pairs + lone pairs. Electron geometry counts every domain; molecular geometry names only where the atoms are."
         ]
       },
-      "directions": "Open PhET Molecule Shapes (phet.colorado.edu) and choose Model. Check Show Lone Pairs, Show Bond Angles, Electron Geometry and Molecule Geometry. For each row, add single bonds to match the bonding pairs, then add lone pairs until the total matches the domains. Record the lone pairs, both shape names and the bond angle(s). Press Remove All before the next row.",
+      "directions": "Open PhET Molecule Shapes (phet.colorado.edu) and choose Model. Check Show Lone Pairs, Show Bond Angles, Electron Geometry and Molecule Geometry. For each row, add single bonds to match the bonding pairs, then add lone pairs until the total matches the domains. Record the lone pairs, both shape names and the bond angle(s), then sketch the shape the way PhET shows it: a line for a bond in the page, a solid wedge for a bond toward you, a dashed wedge for one away, and an oval with two dots for each lone pair. Press Remove All before the next row.",
       "questions": [],
       "blocks": [
         {
           "kind": "table",
-          "points": 13,
+          "role": "example",
+          "label": "EXAMPLE · A FINISHED ROW",
           "headers": [
             "Domains",
             "Bonding pairs",
             "Lone pairs",
             "Electron geometry",
             "Molecular geometry",
-            "Bond angle(s)"
+            "Bond angle(s)",
+            "Sketch"
           ],
           "widths": [
-            0.1,
-            0.11,
-            0.1,
-            0.22,
-            0.22,
-            0.25
+            0.08,
+            0.09,
+            0.08,
+            0.17,
+            0.17,
+            0.17,
+            0.24
           ],
-          "rowHeightIn": 0.47,
+          "rowHeightIn": 1.0,
+          "bodySize": 10,
+          "blankCols": [],
+          "rows": [
+            [
+              "4",
+              "4",
+              "0",
+              "Tetrahedral",
+              "Tetrahedral",
+              "109.5°",
+              ""
+            ]
+          ],
+          "imageCol": 6,
+          "images": {
+            "0": "assets/chem_u05_s05.3/shape_4_4_0.png"
+          }
+        },
+        {
+          "kind": "table",
+          "points": 12,
+          "headers": [
+            "Domains",
+            "Bonding pairs",
+            "Lone pairs",
+            "Electron geometry",
+            "Molecular geometry",
+            "Bond angle(s)",
+            "Sketch"
+          ],
+          "widths": [
+            0.08,
+            0.09,
+            0.08,
+            0.17,
+            0.17,
+            0.17,
+            0.24
+          ],
+          "rowHeightIn": 1.0,
           "bodySize": 10,
           "blankCols": [
             2,
             3,
             4,
-            5
+            5,
+            6
           ],
           "rows": [
             [
@@ -55,7 +99,8 @@
               "0",
               "Linear",
               "Linear",
-              "180°"
+              "180°",
+              ""
             ],
             [
               "3",
@@ -63,7 +108,8 @@
               "0",
               "Trigonal planar",
               "Trigonal planar",
-              "120°"
+              "120°",
+              ""
             ],
             [
               "3",
@@ -71,15 +117,8 @@
               "1",
               "Trigonal planar",
               "Bent",
-              "less than 120°"
-            ],
-            [
-              "4",
-              "4",
-              "0",
-              "Tetrahedral",
-              "Tetrahedral",
-              "109.5°"
+              "less than 120°",
+              ""
             ],
             [
               "4",
@@ -87,7 +126,8 @@
               "1",
               "Tetrahedral",
               "Trigonal pyramidal",
-              "less than 109.5° (about 107°)"
+              "less than 109.5° (about 107°)",
+              ""
             ],
             [
               "4",
@@ -95,7 +135,8 @@
               "2",
               "Tetrahedral",
               "Bent",
-              "less than 109.5° (about 104.5°)"
+              "less than 109.5° (about 104.5°)",
+              ""
             ],
             [
               "5",
@@ -103,7 +144,8 @@
               "0",
               "Trigonal bipyramidal",
               "Trigonal bipyramidal",
-              "90°, 120°, 180°"
+              "90°, 120°, 180°",
+              ""
             ],
             [
               "5",
@@ -111,7 +153,8 @@
               "1",
               "Trigonal bipyramidal",
               "Seesaw",
-              "less than 90° and less than 120°"
+              "less than 90° and less than 120°",
+              ""
             ],
             [
               "5",
@@ -119,7 +162,8 @@
               "2",
               "Trigonal bipyramidal",
               "T-shaped",
-              "less than 90°"
+              "less than 90°",
+              ""
             ],
             [
               "5",
@@ -127,7 +171,8 @@
               "3",
               "Trigonal bipyramidal",
               "Linear",
-              "180°"
+              "180°",
+              ""
             ],
             [
               "6",
@@ -135,7 +180,8 @@
               "0",
               "Octahedral",
               "Octahedral",
-              "90°, 180°"
+              "90°, 180°",
+              ""
             ],
             [
               "6",
@@ -143,7 +189,8 @@
               "1",
               "Octahedral",
               "Square pyramidal",
-              "less than 90°"
+              "less than 90°",
+              ""
             ],
             [
               "6",
@@ -151,16 +198,34 @@
               "2",
               "Octahedral",
               "Square planar",
-              "90°, 180°"
+              "90°, 180°",
+              ""
             ]
-          ]
+          ],
+          "imageCol": 6,
+          "keyImages": {
+            "0": "assets/chem_u05_s05.3/shape_2_2_0.png",
+            "1": "assets/chem_u05_s05.3/shape_3_3_0.png",
+            "2": "assets/chem_u05_s05.3/shape_3_2_1.png",
+            "3": "assets/chem_u05_s05.3/shape_4_3_1.png",
+            "4": "assets/chem_u05_s05.3/shape_4_2_2.png",
+            "5": "assets/chem_u05_s05.3/shape_5_5_0.png",
+            "6": "assets/chem_u05_s05.3/shape_5_4_1.png",
+            "7": "assets/chem_u05_s05.3/shape_5_3_2.png",
+            "8": "assets/chem_u05_s05.3/shape_5_2_3.png",
+            "9": "assets/chem_u05_s05.3/shape_6_6_0.png",
+            "10": "assets/chem_u05_s05.3/shape_6_5_1.png",
+            "11": "assets/chem_u05_s05.3/shape_6_4_2.png"
+          }
         }
       ],
       "keyNotes": [
+        "Row 4/4/0 (tetrahedral) is the worked example at the top, so the table has 12 rows; score out of 12.",
         "Lone pairs = domains − bonding pairs. The electron geometry depends only on the number of domains.",
         "Angles are textbook values. With lone pairs, PhET's Model screen shows angles a little smaller than ideal (lone pairs repel more), so accept close values marked “less than”.",
         "Rows with 2 bonding pairs come out Bent (3 or 4 domains) or Linear (5 domains): good for discussion.",
-        "Shape names match PhET's own labels (e.g. Seesaw, T-shaped, Square pyramidal)."
+        "Shape names match PhET's own labels (e.g. Seesaw, T-shaped, Square pyramidal).",
+        "Sketches: any drawing with the right number of atoms and lone pairs in the right arrangement earns the point; wedges and dashes are a bonus, not required."
       ]
     }
   ]

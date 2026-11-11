@@ -378,6 +378,32 @@ def table_block(doc, block, pal, key=False):
                      pal, TEXT_W_IN, header_fill=pal.surface, header_caps=False,
                      header_size=float(block.get("headerSize", 7.5)),
                      body_size=float(block.get("bodySize", 9.5)))
+    # The header row repeats if the table runs onto a second page, so every page says which
+    # column is which.
+    from docx.oxml import OxmlElement as _Ox
+    from docx.oxml.ns import qn as _qn
+    _trPr = t.rows[0]._tr.get_or_add_trPr()
+    if _trPr.find(_qn("w:tblHeader")) is None:
+        _trPr.append(_Ox("w:tblHeader"))
+    # Opt-in picture cells: "images" (both copies) and "keyImages" (key only) map a row
+    # index (0-based, as a string) to a PNG path relative to templates/worksheet/. The
+    # picture goes in column "imageCol", sized to the cell.
+    pics = dict(block.get("images", {}))
+    if key:
+        pics.update(block.get("keyImages", {}))
+    if pics:
+        col = int(block["imageCol"])
+        widths = block.get("widths") or [1 / n] * n
+        cell_w = TEXT_W_IN * widths[col] - 0.12
+        for r, rel in pics.items():
+            path = os.path.join(HERE, rel)
+            if not os.path.exists(path):
+                raise SystemExit(f"table block: image not found: {path}")
+            c = t.rows[int(r) + 1].cells[col]
+            p = c.paragraphs[0]
+            p.text = ""
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run().add_picture(path, width=Inches(cell_w))
     gap(doc, 4)
     return t
 
