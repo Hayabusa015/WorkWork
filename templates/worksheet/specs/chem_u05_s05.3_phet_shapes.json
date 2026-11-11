@@ -4,13 +4,13 @@
   "sections": [
     "5.3"
   ],
-  "docType": "Practice_Set",
+  "docType": "Activity",
   "timeTargetMin": "30",
   "pagesPerSection": 2,
   "sectionsContent": [
     {
       "code": "5.3",
-      "title": "Electron & Molecular Geometry (PhET)",
+      "title": "Molecular Geometry with PhET",
       "concept": {
         "summary": "Domain (electron group): any region of electrons around the central atom.",
         "keyIdeas": [
@@ -18,7 +18,7 @@
           "Domains = bonding pairs + lone pairs. Electron geometry counts every domain; molecular geometry names only where the atoms are."
         ]
       },
-      "directions": "Open PhET Molecule Shapes (phet.colorado.edu) and choose Model. Check Show Lone Pairs, Show Bond Angles, Electron Geometry and Molecule Geometry. For each row, add single bonds to match the bonding pairs, then add lone pairs until the total matches the domains. Record the lone pairs, both shape names and the bond angle(s), then sketch the shape the way PhET shows it: a line for a bond in the page, a solid wedge for a bond toward you, a dashed wedge for one away, and an oval with two dots for each lone pair. Press Remove All before the next row.",
+      "directions": "Open PhET Molecule Shapes (phet.colorado.edu) and choose Model. Check Show Lone Pairs, Show Bond Angles, Electron Geometry and Molecule Geometry. For each row, add single bonds to match the bonding pairs, then add lone pairs until the total matches the domains. Record the lone pairs, both shape names and the bond angle(s), then sketch the shape the way PhET shows it: a line for a bond in the page, a solid wedge for a bond toward you and a dashed wedge for one away if you can, and an oval with two dots for each lone pair. Press Remove All before the next row.",
       "questions": [],
       "blocks": [
         {
