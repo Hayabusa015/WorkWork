@@ -25,8 +25,8 @@
 | **Affected Courses** | Physics only (Path A content, recorded as a proposal because the decisions file is only changed against an approval). |
 | **Risk** | Low for the rule itself. Medium knock-on: the U3 deck and the U3 notes specs print `Fnet` throughout (section 4). |
 | **Recommendation** | Approve. Matt asked for it directly, and it fits the Vectors rule already in force. Answer the questions in section 5 when approving. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-11: "yes", answering "Make ∑F the standing Physics notation? Should your slides switch to ∑F too?" Approves the notation rule and switching the U3 deck to ∑F. Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 

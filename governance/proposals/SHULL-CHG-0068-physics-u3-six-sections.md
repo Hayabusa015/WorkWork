@@ -25,8 +25,8 @@
 | **Affected Courses** | Physics only (Path A content, recorded here because Matt asked for a proposal before the decisions file changes). |
 | **Risk** | Medium. Changing the code list renumbers 3.4 to 3.7, and Drive already holds seven U3 section folders (see section 3). Leaving it unchanged is also medium risk, because the guided notes being built now already use the six-section codes. |
 | **Recommendation** | Approve. Matt has already chosen the deck's numbering for the built material, and the decisions file should match what gets printed. Answer the two questions in section 5 when approving. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-11, answering the open questions on this record: "Friction doesnt but id like to add it before we do the math for it." Read by the main session as: approve the six-section U3 list; 3.5 Friction is not an FBD section (FBD cross-reference reads 3.2, 3.3, 3.4); friction may appear in FBD practice before the 3.5 friction calculations. Earlier, 2026-11-10, he chose "Follow the deck" for the U3 numbering. Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
