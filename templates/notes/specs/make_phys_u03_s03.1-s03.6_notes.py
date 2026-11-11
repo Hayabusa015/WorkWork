@@ -177,14 +177,12 @@ def build(key, board):
             "Lamp: T = Fg = 1.5(9.8) = 14.7 N up"],
            cues=["Two FBDs: book and lamp"], height=1.6),
         ex(13, "Net Force in One Dimension",
-           ["crate;   30 N right;   10 N left.   Positive: right."],
-           "∑F, with its direction.",
+           ["crate;  30 N right;  10 N left.  Positive: right."],
+           "∑F and its direction; write the method first.",
            "∑F = {20 N to the right}",
-           ["Right: +30 N     Left: −10 N", "∑F = 30 − 10 = 20 N",
-            "20 N to the right"],
-           cues=board_cue(14),
-           notes=[("Net force: the method",
-                   "Pick + direction; add with signs; x and y apart.")]),
+           ["Method: choose a positive direction, add forces with signs, x and y separately.",
+            "Right: +30 N     Left: −10 N", "∑F = 30 − 10 = 20 N", "20 N to the right"],
+           cues=board_cue(14)),
         ex(14, "Equilibrium: The Missing Force",
            ["crate;   50 N right;   20 N left;   40 N up;   40 N down.   "
             "Positive: right and up."],
@@ -201,12 +199,11 @@ def build(key, board):
             f"{T} = tan⁻¹(30/40) = 36.9°", "50 N, 36.9° above +x"]),
         ex(16, "Breaking a Force into Components",
            ["F = 100 N pulling 30° above the horizontal."],
-           "the horizontal and vertical components.",
+           "Fx and Fy, from the component equations.",
            "Fx = {86.6 N horizontal, toward the pull}      Fy = {50.0 N up}",
            [f"Fx = F cos {T} = 100 cos 30° = 86.6 N horizontal, toward the pull",
             f"Fy = F sin {T} = 100 sin 30° = 50.0 N up",
-            "Check: √(86.6² + 50.0²) ≈ 100 N"],
-           notes=[("Components of an angled force", f"Fx = F cos {T};   Fy = F sin {T}")]),
+            "Check: √(86.6² + 50.0²) ≈ 100 N"]),
         ex(17, "One Angled Force and One Straight Force",
            ["top view;   80 N at 40° above +x;   30 N left.   Positive: +x right, "
             "+y up the page."],
@@ -229,8 +226,7 @@ def build(key, board):
            f"{nb('Fx = F cos θ')} and {nb('Fy = F sin θ')}, add each direction with signs, "
            f"then combine with {nb('√(Fx² + Fy²)')}.",
            ["I can draw an FBD with one labeled arrow per force.",
-            "I can add forces with signs and split an angled force into components."],
-           lines=2),
+            "I can add forces with signs and split an angled force into components."]),
     ]
 
     # ------------------------------------------------------------------ 3.3
@@ -272,11 +268,10 @@ def build(key, board):
     s34 = [
         ex(25, "Calculating Acceleration",
            ["m = 4 kg;   ∑F = 12 N to the right."],
-           "the acceleration.",
+           "a, and 1 N in base units.",
            "a = {3.0 m/s² right}",
-           ["∑F = ma, so a = ∑F / m", "a = 12 N / 4 kg", "a = 3.0 m/s² right"],
-           notes=[("1 N in base units; direction of a",
-                   "1 N = 1 kg·m/s². a points in the direction of ∑F.")]),
+           ["∑F = ma, so a = ∑F / m", "a = 12 N / 4 kg", "a = 3.0 m/s² right",
+            "1 N = 1 kg·m/s². a points in the direction of ∑F."]),
         ex(26, "A Car Accelerates",
            ["m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward."],
            "∑F and a.",
@@ -299,12 +294,11 @@ def build(key, board):
            cues=["FN here is less than mg"]),
         ex(29, "Acceleration Down a Frictionless Ramp",
            ["m = 8 kg;   frictionless 20° ramp.   Positive: downhill."],
-           "the acceleration.",
+           "a, showing why mass cancels.",
            "a = {3.35 m/s² downhill}",
            [f"∑F = mg sin {T}", f"ma = mg sin {T}",
-            f"Mass cancels: a = g sin {T} = 9.8 sin 20°", "a = 3.35 m/s² downhill"],
-           notes=[("Frictionless ramp: acceleration",
-                   f"a = g sin {T}; it does not depend on mass.")]),
+            f"Mass cancels: a = g sin {T} = 9.8 sin 20°", "a = 3.35 m/s² downhill",
+            "Without friction, a does not depend on mass."]),
         notes(30, "Elevators and Apparent Weight", [
             P("Apparent weight: what a scale reads", "The upward normal force, FN."),
             P("Elevator equation (up positive) and the a = 0 case",
@@ -330,7 +324,7 @@ def build(key, board):
            f"in the direction of ∑F. The scale reads FN; {nb('FN − mg = ma')}, so FN changes "
            "when a ≠ 0.",
            ["I can find a from ∑F = ma, with units and direction.",
-            "I can find a scale reading with FN − mg = ma."], lines=2),
+            "I can find a scale reading with FN − mg = ma."]),
     ]
 
     # ------------------------------------------------------------------ 3.5
@@ -397,14 +391,15 @@ def build(key, board):
         ex(42, "Streetlight Cable Tension",
            ["20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
             "ignore cable mass.   Positive: right and up."],
-           "the tension in each support cable.",
-           "FTL = {98.0 N}    FTR ≈ {170 N}    each {along its cable, toward its support}",
+           "the tension in each support cable, and which carries more.",
+           "FTL = {98.0 N}    FTR ≈ {170 N}    each {along its cable, toward its support}; "
+           "the steeper cable carries more",
            ["At rest: ∑Fx = 0, ∑Fy = 0;   Fdown = mg = 20(9.8) = 196 N",
             "Horizontal: FTR cos 60° = FTL cos 30°, so FTL = 0.577FTR",
             "Vertical: FTL sin 30° + FTR sin 60° = 196",
             "(0.577FTR)(0.5) + 0.866FTR = 196",
-            "FTR ≈ 170 N     FTL = 98.0 N, each along its cable, toward its support"],
-           notes=[("Cable with more tension", "The steeper cable.")], height=1.8),
+            "FTR ≈ 170 N     FTL = 98.0 N, each along its cable, toward its support",
+            "The steeper cable carries more tension."], height=1.8),
         notes(43, "Ideal Strings and Pulleys", [
             P("Ideal string and pulley",
               "Massless, taut rope that does not stretch; massless, frictionless pulley."),

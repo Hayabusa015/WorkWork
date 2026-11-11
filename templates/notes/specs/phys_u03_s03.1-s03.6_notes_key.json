@@ -299,22 +299,17 @@
               ],
               "problem": {
                 "given": [
-                  "crate;   30 N right;   10 N left.   Positive: right.     **Find:** ∑F, with its direction."
+                  "crate;  30 N right;  10 N left.  Positive: right.     **Find:** ∑F and its direction; write the method first."
                 ],
                 "answer": "**Answer:**  ∑F = 20 N to the right",
                 "solution": [
+                  "Method: choose a positive direction, add forces with signs, x and y separately.",
                   "Right: +30 N     Left: −10 N",
                   "∑F = 30 − 10 = 20 N",
                   "20 N to the right"
                 ]
               },
-              "notes": [
-                {
-                  "prompt": "Net force: the method",
-                  "lines": 1,
-                  "answer": "Pick + direction; add with signs; x and y apart."
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             }
           ]
@@ -349,7 +344,7 @@
               ],
               "problem": {
                 "given": [
-                  "F = 100 N pulling 30° above the horizontal.     **Find:** the horizontal and vertical components."
+                  "F = 100 N pulling 30° above the horizontal.     **Find:** Fx and Fy, from the component equations."
                 ],
                 "answer": "**Answer:**  Fx = 86.6 N horizontal, toward the pull      Fy = 50.0 N up",
                 "solution": [
@@ -358,13 +353,7 @@
                   "Check: √(86.6² + 50.0²) ≈ 100 N"
                 ]
               },
-              "notes": [
-                {
-                  "prompt": "Components of an angled force",
-                  "lines": 1,
-                  "answer": "Fx = F cos θ;   Fy = F sin θ"
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -398,7 +387,7 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
+              "lines": 3,
               "prompt": "Summarize how to find the net force from a free-body diagram, including a force at an angle.",
               "selfCheck": [
                 "I can draw an FBD with one labeled arrow per force.",
@@ -513,22 +502,17 @@
               ],
               "problem": {
                 "given": [
-                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** the acceleration."
+                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** a, and 1 N in base units."
                 ],
                 "answer": "**Answer:**  a = 3.0 m/s² right",
                 "solution": [
                   "∑F = ma, so a = ∑F / m",
                   "a = 12 N / 4 kg",
-                  "a = 3.0 m/s² right"
+                  "a = 3.0 m/s² right",
+                  "1 N = 1 kg·m/s². a points in the direction of ∑F."
                 ]
               },
-              "notes": [
-                {
-                  "prompt": "1 N in base units; direction of a",
-                  "lines": 1,
-                  "answer": "1 N = 1 kg·m/s². a points in the direction of ∑F."
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -587,23 +571,18 @@
               ],
               "problem": {
                 "given": [
-                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** the acceleration."
+                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** a, showing why mass cancels."
                 ],
                 "answer": "**Answer:**  a = 3.35 m/s² downhill",
                 "solution": [
                   "∑F = mg sin θ",
                   "ma = mg sin θ",
                   "Mass cancels: a = g sin θ = 9.8 sin 20°",
-                  "a = 3.35 m/s² downhill"
+                  "a = 3.35 m/s² downhill",
+                  "Without friction, a does not depend on mass."
                 ]
               },
-              "notes": [
-                {
-                  "prompt": "Frictionless ramp: acceleration",
-                  "lines": 1,
-                  "answer": "a = g sin θ; it does not depend on mass."
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -660,7 +639,7 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
+              "lines": 3,
               "prompt": "List the steps from a free-body diagram to an acceleration. Add how a scale reading changes in an accelerating elevator.",
               "selfCheck": [
                 "I can find a from ∑F = ma, with units and direction.",
@@ -850,24 +829,19 @@
                   "20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
                   "ignore cable mass.   Positive: right and up."
                 ],
-                "find": "the tension in each support cable.",
-                "answer": "**Answer:**  FTL = 98.0 N    FTR ≈ 170 N    each along its cable, toward its support",
+                "find": "the tension in each support cable, and which carries more.",
+                "answer": "**Answer:**  FTL = 98.0 N    FTR ≈ 170 N    each along its cable, toward its support; the steeper cable carries more",
                 "workHeightIn": 1.8,
                 "solution": [
                   "At rest: ∑Fx = 0, ∑Fy = 0;   Fdown = mg = 20(9.8) = 196 N",
                   "Horizontal: FTR cos 60° = FTL cos 30°, so FTL = 0.577FTR",
                   "Vertical: FTL sin 30° + FTR sin 60° = 196",
                   "(0.577FTR)(0.5) + 0.866FTR = 196",
-                  "FTR ≈ 170 N     FTL = 98.0 N, each along its cable, toward its support"
+                  "FTR ≈ 170 N     FTL = 98.0 N, each along its cable, toward its support",
+                  "The steeper cable carries more tension."
                 ]
               },
-              "notes": [
-                {
-                  "prompt": "Cable with more tension",
-                  "lines": 1,
-                  "answer": "The steeper cable."
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {

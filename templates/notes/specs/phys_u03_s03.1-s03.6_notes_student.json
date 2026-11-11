@@ -277,16 +277,11 @@
               ],
               "problem": {
                 "given": [
-                  "crate;   30 N right;   10 N left.   Positive: right.     **Find:** ∑F, with its direction."
+                  "crate;  30 N right;  10 N left.  Positive: right.     **Find:** ∑F and its direction; write the method first."
                 ],
                 "answer": "**Answer:**"
               },
-              "notes": [
-                {
-                  "prompt": "Net force: the method",
-                  "lines": 1
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             }
           ]
@@ -316,16 +311,11 @@
               ],
               "problem": {
                 "given": [
-                  "F = 100 N pulling 30° above the horizontal.     **Find:** the horizontal and vertical components."
+                  "F = 100 N pulling 30° above the horizontal.     **Find:** Fx and Fy, from the component equations."
                 ],
                 "answer": "**Answer:**"
               },
-              "notes": [
-                {
-                  "prompt": "Components of an angled force",
-                  "lines": 1
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -353,7 +343,7 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
+              "lines": 3,
               "prompt": "Summarize how to find the net force from a free-body diagram, including a force at an angle.",
               "selfCheck": [
                 "I can draw an FBD with one labeled arrow per force.",
@@ -452,16 +442,11 @@
               ],
               "problem": {
                 "given": [
-                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** the acceleration."
+                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** a, and 1 N in base units."
                 ],
                 "answer": "**Answer:**"
               },
-              "notes": [
-                {
-                  "prompt": "1 N in base units; direction of a",
-                  "lines": 1
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -509,16 +494,11 @@
               ],
               "problem": {
                 "given": [
-                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** the acceleration."
+                  "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** a, showing why mass cancels."
                 ],
                 "answer": "**Answer:**"
               },
-              "notes": [
-                {
-                  "prompt": "Frictionless ramp: acceleration",
-                  "lines": 1
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
@@ -566,7 +546,7 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 2,
+              "lines": 3,
               "prompt": "List the steps from a free-body diagram to an acceleration. Add how a scale reading changes in an accelerating elevator.",
               "selfCheck": [
                 "I can find a from ∑F = ma, with units and direction.",
@@ -726,16 +706,11 @@
                   "20 kg streetlight at rest;   left cable 30° above horizontal;   right cable 60°;",
                   "ignore cable mass.   Positive: right and up."
                 ],
-                "find": "the tension in each support cable.",
+                "find": "the tension in each support cable, and which carries more.",
                 "answer": "**Answer:**",
                 "workHeightIn": 1.8
               },
-              "notes": [
-                {
-                  "prompt": "Cable with more tension",
-                  "lines": 1
-                }
-              ],
+              "notes": [],
               "extraNotes": false
             },
             {
