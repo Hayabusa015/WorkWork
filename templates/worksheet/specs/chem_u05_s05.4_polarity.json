@@ -1,0 +1,168 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.4"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.4",
+   "title": "Molecular Polarity",
+   "concept": {
+    "summary": "ΔEN = higher EN − lower EN. Under 0.40: nonpolar. 0.40 to 1.80: polar. Over 1.80: ionic.",
+    "keyIdeas": [
+     "Polar bonds in a symmetric shape cancel, so the molecule is nonpolar.",
+     "Lone pairs on the central atom usually make a molecule asymmetric."
+    ]
+   },
+   "directions": "For each molecule, name the shape. Find ΔEN for each bond listed and show the subtraction, then mark it PC or NPC. Then decide whether the whole molecule is polar or nonpolar. We will do number 1 together.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 10,
+     "headers": [
+      "#",
+      "Molecule",
+      "Shape",
+      "Bond(s)",
+      "ΔEN (show the subtraction)",
+      "Bond polarity: PC or NPC",
+      "Molecular polarity: Polar or Nonpolar"
+     ],
+     "widths": [
+      0.04,
+      0.11,
+      0.16,
+      0.1,
+      0.29,
+      0.13,
+      0.17
+     ],
+     "rowHeightIn": 0.8,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      4,
+      5,
+      6
+     ],
+     "rows": [
+      [
+       "1",
+       "CO₂ (example)",
+       "Linear",
+       "C=O",
+       "3.44 − 2.55 = 0.89",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "2",
+       "H₂O",
+       "Bent",
+       "O–H",
+       "3.44 − 2.20 = 1.24",
+       "PC",
+       "Polar"
+      ],
+      [
+       "3",
+       "CH₄",
+       "Tetrahedral",
+       "C–H",
+       "2.55 − 2.20 = 0.35",
+       "NPC",
+       "Nonpolar"
+      ],
+      [
+       "4",
+       "NH₃",
+       "Trigonal pyramidal",
+       "N–H",
+       "3.04 − 2.20 = 0.84",
+       "PC",
+       "Polar"
+      ],
+      [
+       "5",
+       "CCl₄",
+       "Tetrahedral",
+       "C–Cl",
+       "3.16 − 2.55 = 0.61",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "6",
+       "CHCl₃",
+       "Tetrahedral",
+       "C–H\nC–Cl",
+       "C–H: 2.55 − 2.20 = 0.35\nC–Cl: 3.16 − 2.55 = 0.61",
+       "C–H: NPC\nC–Cl: PC",
+       "Polar"
+      ],
+      [
+       "7",
+       "BCl₃",
+       "Trigonal planar",
+       "B–Cl",
+       "3.16 − 2.04 = 1.12",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "8",
+       "SO₂",
+       "Bent",
+       "S–O",
+       "3.44 − 2.58 = 0.86",
+       "PC",
+       "Polar"
+      ],
+      [
+       "9",
+       "PCl₅",
+       "Trigonal bipyramidal",
+       "P–Cl",
+       "3.16 − 2.19 = 0.97",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "10",
+       "PCl₃",
+       "Trigonal pyramidal",
+       "P–Cl",
+       "3.16 − 2.19 = 0.97",
+       "PC",
+       "Polar"
+      ],
+      [
+       "11",
+       "HCN",
+       "Linear",
+       "H–C\nC≡N",
+       "H–C: 2.55 − 2.20 = 0.35\nC≡N: 3.04 − 2.55 = 0.49",
+       "H–C: NPC\nC≡N: PC",
+       "Polar"
+      ]
+     ]
+    }
+   ],
+   "keyNotes": [
+    "Number 1 (CO₂) is the example you complete with the class (slide 23). It is blank on the student copy and not scored; the 10 points are rows 2–11, 1 point per molecule.",
+    "EN values (Pauling, as on the slides and the 4.5 sheet): H 2.20, B 2.04, C 2.55, N 3.04, O 3.44, P 2.19, S 2.58, Cl 3.16.",
+    "CH₄: C–H is 0.35, under 0.40, so nonpolar covalent (slide 9 lists C–H as nonpolar). Nonpolar bonds make a nonpolar molecule.",
+    "CCl₄ and CHCl₃ share a shape. In CHCl₃ the C–H pull is weaker than the C–Cl pulls, so they do not cancel: polar. Rows 6 and 11 have two bond types; both lines are needed for the point.",
+    "BCl₃: B has only 6 electrons (3 bonds, no lone pairs), like BF₃ on slide 24. Three equal pulls 120° apart cancel.",
+    "SO₂ is bent because of the lone pair on S, so unlike CO₂ it is polar.",
+    "PCl₅ and PCl₃ have the same bond (0.97). PCl₅'s axial pair and equatorial trio each cancel: nonpolar. PCl₃'s lone pair makes it a pyramid: polar.",
+    "HCN is linear but the two ends are different, so the pulls do not cancel: polar. Linear does not always mean nonpolar."
+   ]
+  }
+ ]
+}
