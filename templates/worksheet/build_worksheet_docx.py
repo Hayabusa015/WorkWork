@@ -834,6 +834,33 @@ def render_questions(doc, questions, pal, course, base_dir):
 # spec that does not ask for it builds exactly as before.
 
 GRID_GUTTER_MIN_IN = 0.12
+GRID_ROW_GAP_PT = 10           # between one row's squares and the next row's prompts
+GRID_PROMPT_GAP_TW = 230        # a prompt stops this far short of the next one (twips)
+
+
+def label_bank(doc, entries, pal, label_text, cols=2):
+    """A bank of labels to write from, compact: each entry on one run-in line, its name in
+    tracked caps then the symbol in bold ink, `cols` across. The opt-in alternative to
+    the equation bar for a list of short labels ("equationStyle": "inline"), which the
+    bar's name-over-symbol layout spreads over twice the height."""
+    c = one_cell(doc)
+    para(c, label_text, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+    cols = int(cols)
+    w = round(TEXT_W_IN / cols - 0.13, 2)
+    rows = (len(entries) + cols - 1) // cols
+    t = c.add_table(rows=rows, cols=cols)
+    fix_widths(t, [w] * cols)
+    for i, eq in enumerate(entries):
+        cell = t.rows[i % rows].cells[i // rows]     # down each column, then across
+        cell_margins(cell, top=10, bottom=20, left=0, right=60)
+        p = cell.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        if eq.get("note"):
+            r = run(p, eq["note"].upper() + "   ", 7.5, bold=True, color=pal.accent)
+            el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+            r._element.get_or_add_rPr().append(el)
+        run(p, eq.get("plain", ""), 10, bold=True, color=pal.ink)
+    return c
 
 
 def grid_opts(spec, sec):
@@ -897,36 +924,25 @@ def grid_widths(g):
     return w
 
 
-def grid_cell(t, row, col, span):
-    """The table cell for an item starting at grid column `col` and `span` squares wide,
-    merged across the gutters between its squares."""
-    a = t.rows[row].cells[col * 2]
-    if span > 1:
-        a = a.merge(t.rows[row].cells[(col + span - 1) * 2])
-    return a
-
-
-def grid_head(cell, n, q, pal, width, tier_colour_of=None, prompt_pt=9.5,
-              prompt_color=None, italic=False):
-    """Number and tier on one line (right tab, as on a card), then the prompt."""
-    cell_margins(cell, top=0, bottom=50, left=0, right=0)
+def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False, right=0):
+    """The item number, run in at the start of the prompt. The tier tag goes in the top
+    corner of the item's first square (`square`), so it costs the prompt no line."""
+    cell_margins(cell, top=0, bottom=40, left=0, right=right)
     p = cell.paragraphs[0]
-    p.paragraph_format.space_after = Pt(1)
-    p.paragraph_format.tab_stops.add_tab_stop(Inches(width), WD_TAB_ALIGNMENT.RIGHT)
-    run(p, f"{n}.", 10.5, bold=True, color=pal.ink)
-    if q.get("tier"):
-        colour = tier_colour_of(q["tier"]) if tier_colour_of else tier_colour(q["tier"], pal)
-        run(p, "\t", TIER_PT)
-        run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
-        r = run(p, q["tier"].upper(), TIER_PT, bold=True, color=colour)
-        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
-        r._element.get_or_add_rPr().append(el)
-    pp = para(cell, q["prompt"].replace("**", "") if italic else q["prompt"], prompt_pt,
-              color=prompt_color or pal.ink)
-    if italic:
-        for r in pp.runs:
-            r.italic = True
-    return pp
+    p.paragraph_format.space_after = Pt(0)
+    run(p, f"{n}.  ", 10.5, bold=True, color=pal.ink)
+    r = run(p, q["prompt"].replace("**", "") if italic else q["prompt"], prompt_pt,
+            color=prompt_color or pal.ink, italic=italic)
+    return p
+
+
+def tier_tag(p, tier, pal, colour=None):
+    """The tier word, as on a card: a bullet and the tracked caps tag, label grey."""
+    colour = colour or tier_colour(tier, pal)
+    run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
+    r = run(p, tier.upper(), TIER_PT, bold=True, color=colour)
+    el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+    r._element.get_or_add_rPr().append(el)
 
 
 def grid_table(doc, g, nrows):
@@ -939,13 +955,24 @@ def grid_table(doc, g, nrows):
     return outer, t
 
 
-def square(cell, pal, caption=None):
+def square(cell, pal, side, caption=None, tier=None):
     """One square drawing box: the ink border on the cell itself, the row pinned to the
-    square's side. A caption, where an item has two objects, sits inside the top."""
+    square's side. A caption (an item with two objects) sits inside the top left, the
+    tier tag inside the top right of the item's first square."""
     borders(cell, pal.ink, sz=4)
-    cell_margins(cell, top=50, bottom=0, left=80, right=60)
+    cell_margins(cell, top=50, bottom=0, left=80, right=70)
+    if not (caption or tier):
+        return
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(side - 0.11), WD_TAB_ALIGNMENT.RIGHT)
     if caption:
-        label(cell, caption, pal, size=7.5, first=True)
+        r = run(p, caption, 7.5, bold=True, color=pal.accent)
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+        r._element.get_or_add_rPr().append(el)
+    if tier:
+        run(p, "\t", TIER_PT)
+        tier_tag(p, tier, pal)
 
 
 def render_grid(doc, questions, pal, g):
@@ -957,7 +984,7 @@ def render_grid(doc, questions, pal, g):
     """
     for gi, row in enumerate(grid_rows(questions, g["columns"])):
         if gi:
-            gap(doc, 6)
+            gap(doc, GRID_ROW_GAP_PT)
         outer, t = grid_table(doc, g, 2)
         for ri in range(2):
             h = g["square"] if ri == 1 else None
@@ -968,14 +995,21 @@ def render_grid(doc, questions, pal, g):
                 e.set(qn("w:val"), str(int(h * 1440))); e.set(qn("w:hRule"), "exact")
                 trPr.append(e)
         for n, q, col, span in row:
-            width = g["square"] * span + g["gutter"] * (span - 1)
-            head = grid_cell(t, 0, col, span)
+            # The prompt may run on across the gutter to its right, stopping short of the
+            # next prompt: a narrow column sets a long scenario two lines taller.
+            last = col + span == g["columns"]
+            head = t.rows[0].cells[col * 2]
+            end = (col + span - 1) * 2 + (0 if last else 1)
+            if end > col * 2:
+                head = head.merge(t.rows[0].cells[end])
             head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-            grid_head(head, n, q, pal, width, prompt_pt=g["promptPt"])
+            grid_head(head, n, q, pal, prompt_pt=g["promptPt"],
+                      right=0 if last else GRID_PROMPT_GAP_TW)
             caps = (q.get("draw") or {}).get("captions") or []
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
-                square(sq, pal, caps[k] if span > 1 and k < len(caps) else None)
+                square(sq, pal, g["square"], caps[k] if span > 1 and k < len(caps) else None,
+                       q.get("tier") if k == 0 else None)
         unpad_cell(outer)
 
 
@@ -1244,7 +1278,11 @@ def main():
         eqs = sec.get("equations", spec.get("equations")) or []
         if eqs:
             gap(doc, 2)
-            if spec.get("equationColumns", sec.get("equationColumns")):
+            if sec.get("equationStyle", spec.get("equationStyle")) == "inline":
+                label_bank(doc, eqs, pal,
+                           spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
+                           cols=sec.get("equationColumns", spec.get("equationColumns", 2)))
+            elif spec.get("equationColumns", sec.get("equationColumns")):
                 equation_bar(doc, eqs, pal,
                              spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
                              cols=sec.get("equationColumns", spec.get("equationColumns")))

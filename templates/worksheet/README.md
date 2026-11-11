@@ -99,7 +99,9 @@ equation you would use" reads like a physics problem and has no number in it.
 - **`match`** — terms with a blank on the left, lettered descriptions on the right. The spec
   supplies the descriptions already shuffled, because a builder that shuffled them would produce a
   different sheet on every build and no answer key would survive one.
-- **`draw`** — blank captioned panels, when there is nothing to cut.
+- **`draw`** — blank captioned panels, when there is nothing to cut. `"numbered": false` drops
+  the panel number and `"captionStrip": false` drops the ruled strip under each panel; both
+  default to the old look. The same keys work on a question's own `draw`.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.
 
@@ -169,6 +171,21 @@ PROVISIONAL labels belong there and never on the student page.
 A question may carry `keyImage` (a drawn scene such as an `fbd` free-body diagram) in its key
 answer box: rule in `standards/ANSWER_KEYS.md` §1 and §6.3, schema in the `scripts/key_solution.py`
 docstring (SHULL-CHG-0071).
+
+### Opt-in: a grid of square drawing boxes
+
+A section (or the whole spec) may set `"layout": "grid"` to set draw-only questions as a grid of
+squares instead of one card per question: `columns` (default 3), `squareIn` (side, default 2.2;
+the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in)
+and `gridPromptPt` (default 9.5). An item takes one square per `draw.panels`, each captioned from
+`draw.captions` inside its top; items flow left to right in order. A grid item carries a prompt and
+squares only: `math`, `answerLines`, `parts`, `diagram`, `given` and `need` are refused. The key
+builder draws the same grid, each `fbd` panel in its own square (one magnitude scale per item, one
+drawing size for the whole key) with the item's `steps` handwritten underneath.
+
+The equation bar takes `"equationColumns"` (default 2), and `"equationStyle": "inline"` sets a
+short label bank one entry per line, name then symbol. A spec without these keys builds exactly as
+before.
 
 ## Vertical space
 

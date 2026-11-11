@@ -18,8 +18,10 @@
    "eyebrowNote": "PROBLEM SET 1",
    "layout": "grid",
    "columns": 3,
-   "squareIn": 2.2,
-   "equationColumns": 4,
+   "squareIn": 2.05,
+   "gridPromptPt": 9,
+   "equationColumns": 2,
+   "equationStyle": "inline",
    "priorKnowledge": {
     "items": [
      "Newton's first law: an object at rest, or moving at a constant speed in a straight line, has balanced forces.",
