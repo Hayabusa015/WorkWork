@@ -62,7 +62,10 @@ horizontal rule separates it from the next block. It has no outer box and no cel
   line under a cue.** Recall happens in the RECALL block and on the concept review page.
 - **Capture side (6.22 in):** the **notes heading** in tracked bold caps in the same colour, then
   prompts with a writing line, fill-in tables, the flowchart, worked examples and must-write
-  lines.
+  lines. **No inline underscore blanks** (`brand/SHULL_DESIGN_SYSTEM.md` §11, SHULL-CHG-0069): a
+  prompt is a cue naming what to record, and the student writes on the ruled lines under it. A
+  sentence with `_____` in place of a word is not a prompt. Fill-in tables and the worked
+  problem's `Answer:` line stay.
 - **Where the two labels come from.** An old spec names both, `cueLabel` and `notesLabel`, and each
   is printed as written. A paged spec's block has a `title` and at most a `notesLabel`. The title,
   in caps, becomes the cue label. The notes heading is printed only when the spec gives a
@@ -184,7 +187,7 @@ type to fit, and never shrink the work box.
     // Optional, SHULL-CHG-0038. Derived from the spec when absent - see "The cover prints only
     // what the spec holds".
     "kicker": "GUIDED NOTES  ·  PHASE 01  ·  3 SECTIONS",
-    "fields": "NAME  ____   DATE  ____   PERIOD  ____",
+    "fields": "NAME  ____   DATE  ____   PERIOD  ____",   // header fields, not recall items: not SHULL-CHG-0069 blanks
     "unitTargets": ["I can …"],
     "howItWorks": ["…", "…"],                    // takes precedence over howToUse
     "sectionList": ["S01.1   Title"]            // replaces the derived list; drops difficulty
@@ -208,7 +211,7 @@ type to fit, and never shrink the work box.
          "flowchart": {"root": "MATTER", "branches": ["…", "…"],   // labels are content: the
                        "leaves": ["…", "…", "…", "…"]},            // student copy prints only the root
          "problem": {"statement": "…", "given": ["line 1", "line 2"], "find": "…",
-                     "workHeightIn": 1.4, "answer": "… = _____",
+                     "workHeightIn": 1.4, "answer": "Answer:",   // key: "Answer: …"; never inline underscores
                      "solution": ["key only: lines written inside the work box"]},
          "diagram": {},                                  // Geology figure-to-label, unchanged
          "noWorkBox": true,                              // explicit opt-out, see below

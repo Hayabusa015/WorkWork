@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-11
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0069 | 2026-11-11 | Guided notes: no inline underscore blanks | PARTIAL | `governance/proposals/SHULL-CHG-0069-notes-no-inline-blanks.md` |
+
 ## 2026-11-09
 
 | ID | Date | Change | Status | Record |

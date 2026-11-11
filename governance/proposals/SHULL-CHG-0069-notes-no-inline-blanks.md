@@ -1,12 +1,5 @@
 # SHULL-CHG-0069 — Guided notes: no inline fill-in blanks (prompt + open lines)
 
-> **Change ID is provisional.** Taken as the next integer after `SHULL-CHG-0068`, the highest ID in
-> the local `governance/proposals/` on 2026-11-11 (no 0069 or higher exists locally). The Secretary
-> session that wrote this record has no git tool. It could not `git fetch origin main` and cannot
-> push or commit. Under `governance/CHANGE_CONTROL.md` §2 this ID is **not allocated** until someone
-> checks it against a freshly fetched `origin/main` and pushes the record there. If `SHULL-CHG-0069`
-> already exists on `origin/main`, renumber this file before pushing it.
->
 > **No conflict with a LOCKED rule found.** The rules this replaces are labelled INHERITED (blank
 > sizing, `docs/LEGACY_SKILL_AND_DESIGN_AUDIT.md` line 255) or come from an IMPLEMENTED record
 > (SHULL-CHG-0023's model line). The Physics scaffolding index it touches is an open question
@@ -14,16 +7,16 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0069 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0069 |
 | **Date** | 2026-11-11 |
 | **Source** | User. Said by Matt on 2026-11-11 while reviewing the Physics U3 guided notes; relayed to the Secretary by the main session. |
 | **Current Rule** | See section 2. In short, five places assume inline blanks: `brand/SHULL_DESIGN_SYSTEM.md` §11 line 275; `.claude/skills/build-document/SKILL.md` line 128; `standards/QA_GATE.md` line 118; SHULL-CHG-0023's model notes line; and `templates/notes/recall.py` `ruled_lines()` lines 80-90. |
 | **Proposed Rule** | See section 3. |
-| **Supersedes** | `brand/SHULL_DESIGN_SYSTEM.md` §11, first bullet (line 275-276). `.claude/skills/build-document/SKILL.md` "Guided notes" paragraph, sentence at line 128-129. `standards/QA_GATE.md` "Guided notes" line 118 ("blanks sized to the expected answer"). `templates/notes/recall.py` `ruled_lines()` docstring and the one-line case for inline blanks (lines 86-87, 90). SHULL-CHG-0023 "Proposed Rule" table, last row (line 60), as a model only; the recall rule itself stands. |
+| **Supersedes** | `brand/SHULL_DESIGN_SYSTEM.md` §11, first bullet (line 275-276). `.claude/skills/build-document/SKILL.md` "Guided notes" paragraph, sentence at line 128-129. `standards/QA_GATE.md` "Guided notes" line 118 ("blanks sized to the expected answer"). `templates/notes/recall.py` `ruled_lines()` docstring and the one-line case for inline blanks (lines 86-87, 90): superseded in rule now, changed in code only by the follow-up in section 8. SHULL-CHG-0023 "Proposed Rule" table, last row (line 60), as a model only; the recall rule itself stands. |
 | **Reason** | Matt, 2026-11-11: "I just really dont like fill in the blanks" and then "I thought we made this rule in my repo a while ago". No such rule exists (main session's search, checked here: section 2). The current rules do the opposite and assume inline blanks. Offered three alternatives, he chose **"Prompt + open lines"**. This is the same pattern as SHULL-CHG-0023: a preference he believes was recorded, never written down, so the opposite keeps returning. Related but not the same: SHULL-CHG-0032 (line 105) quotes him: "Don't just needlessly add more boxes to fill in... reduce length of notes". |
 | **Affected Agents** | Designer (writes notes specs), Auditor (QA gate check), Librarian (none, no filename or Drive change). |
 | **Affected Skills** | `build-document` (guided notes paragraph). |
-| **Affected Courses** | Open question 1. As said, Physics (he was reviewing Physics U3). If it applies to all three, it is a standard (CLAUDE.md §2 test). |
+| **Affected Courses** | All three: Chemistry, Physics, Geology. It is a standard (Path B, CLAUDE.md §2 test), per Matt's answer to question 1: "all three courses". `courses/physics/DECISIONS.md` open question 4 (notes-scaffolding index, CONFLICT-20) is affected, because "heavy" scaffolding can no longer mean inline blanks, but it **stays open**. This record does not answer it and does not edit that file. |
 | **Risk** | Medium. Rule text is a few lines, but it changes the layout of every guided-notes packet, adds page length (open lines take more room than an inline blank), and puts the three existing U1 packets out of compliance (section 5). Interacts with the "reduce length of notes" instruction in SHULL-CHG-0032. |
 | **Recommendation** | Approve, after Matt answers the two questions in section 6. Answer 1 decides whether this is Path B (standard, all three courses) or a Physics-only course decision. Answer 2 decides how much of the renderer changes. |
 | **Decision** | Approved by the user in chat, 2026-11-11, answering the two open questions: "all three courses, only underscores count". Recorded by the main session (§4.1). |
@@ -65,21 +58,42 @@ Note: rows a and b restate the same fact in two authoritative-looking places. Th
 noted, not fixed here (CLAUDE.md §1). On implementation, the skill should point at the standard
 rather than restate it.
 
-## 3. Proposed Rule (verbatim, not adopted)
+## 3. Proposed Rule (verbatim, as approved and narrowed to Matt's answers)
 
-> **Guided-notes packets use no inline fill-in blanks.** Each recall item is a cue naming what to
-> record (SHULL-CHG-0023) plus ruled writing lines sized to the answer. The student writes the
-> slide's idea in their own hand on those lines. The filled key prints the full statement in the
-> same lines. Worked examples keep `Given:` / `Find:` and the open work box (never ruled lines), and
-> end with an `Answer:` line instead of inline blanks.
+> **Guided-notes packets use no inline underscore blanks.** This holds in all three courses. Each
+> recall item is a cue naming what to record (SHULL-CHG-0023) plus ruled writing lines sized to the
+> expected answer. The student writes the slide's idea in their own hand on those lines. The filled
+> key prints the full statement in the same lines. No run of underscores stands in for a word inside
+> a sentence. Worked examples keep `Given:` / `Find:` and the open work box (never ruled lines), and
+> end with an `Answer:` line. **Fill-in tables and ruled answer lines stay allowed.**
 
-Header fields (`NAME ____  DATE ____  PERIOD ____`, `templates/notes/README.md` line 187) are not
+Narrowing, from Matt's answer to question 2, "only underscores count": only inline underscore blanks
+in guided notes are banned. `fillin_table` cells and the worked example's `Answer:` line with a
+ruled line are not blanks under this rule. The principle that write space is sized to the expected
+answer is kept.
+
+Header fields (`NAME ____  DATE ____  PERIOD ____`, `templates/notes/README.md` cover schema) are not
 recall items and are not affected.
 
-Scope of "blank" (inline underscores only, or also example answer lines and `fillin_table` cells)
-is open question 2. The wording above will be adjusted to his answer before approval.
+## 4. Files a change would touch
 
-## 4. Files a change would touch (listed, not edited)
+Implementation (2026-11-11) is documentation only. The **Done** column says which rows were edited.
+Code and specs are left alone because a Physics U3 build is running against them; they are the
+follow-up in section 8.
+
+| File | Done | 
+|---|---|
+| `brand/SHULL_DESIGN_SYSTEM.md` §11 | Yes. New rule bullet; sizing bullet kept, reworded from "blanks" to "write space". |
+| `standards/QA_GATE.md` Guided notes | Yes. States the rule and points at the design system §11. |
+| `.claude/skills/build-document/SKILL.md` Guided notes | Yes. Restated sentence replaced by a pointer to the design system §11. |
+| `templates/notes/README.md` | Yes. Capture-side prose states the rule; worked-problem `answer` example is now `"Answer:"`; header `fields` example annotated as not a recall item. |
+| `change-log/CHANGELOG.md` | Yes. Row added. |
+| `templates/notes/recall.py`, `scripts/validate_notes.py` | No. Follow-up, section 8. |
+| `templates/notes/build_notes_docx.py`, `templates/_shull_docx.py` | No. Question 2 says tables stay, so `fillin_table` needs no change. The `Answer:` ruled line is part of the follow-up. |
+| `templates/notes/specs/*` | No. Going forward only, section 5. |
+| `courses/physics/DECISIONS.md` | No. Open question 4 is affected but stays open. |
+
+Original scoping table, kept as written:
 
 | File | Location | Change |
 |---|---|---|
@@ -106,10 +120,13 @@ Counted as lines with a run of four or more underscores in the spec files, 2026-
 | Geology U1 | `templates/notes/specs/geo_u01_s01.2-s01.4.json` | 13 |
 | Physics U3 (in progress) | `templates/notes/specs/phys_u03_s03.1-s03.6_notes_student.json` (+ `make_phys_u03_s03.1-s03.6_notes.py`) | 62 |
 
-Counts include header fields, so they overstate recall blanks slightly. Rebuilding the printed copies
-in Drive is a separate task once the rule is approved; Drive objects are not touched by this record.
-Whether to retrofit U1 packets or apply going forward only is Matt's call (it may be folded into
-question 1 or asked after).
+Counts include header fields, so they overstate recall blanks slightly. Drive objects are not touched
+by this record.
+
+**Status of these packets (2026-11-11):** the Chemistry, Physics and Geology U1 packets are
+**non-compliant**. The rule applies **going forward only; no retrofit.** They are not rebuilt and
+their specs are not edited. Physics U3 was being built when the rule was implemented; whether its
+spec complies is for that build to check against the design system, not for this record.
 
 ## 6. Questions for Matt
 
@@ -121,10 +138,29 @@ question 1 or asked after).
    answer line and fill-in tables (`fillin_table`)? His chosen option already keeps an `Answer:` line
    for examples, so the open part is mainly the tables.
 
+**Answered 2026-11-11:** "all three courses, only underscores count". So question 1 is all three
+courses (a standard), and question 2 is inline underscores only.
+
 ## 7. What this does not do
 
-- It does not edit any file in `brand/`, `standards/`, `courses/`, `.claude/skills/`, or `templates/`.
+- It does not edit `courses/` or any code or spec under `templates/` or `scripts/`.
 - It does not resolve CONFLICT-20 (Physics notes-scaffolding index).
 - It does not rebuild any packet or touch Drive.
-- It does not add a `change-log/CHANGELOG.md` row (PENDING records are not indexed there, as with
-  SHULL-CHG-0068).
+- It does not edit SHULL-CHG-0023. Its model notes line is superseded as a model here; the record
+  itself is history and stays as written.
+
+## 8. Follow-up: code enforcement (not done, not approved as code yet)
+
+The rule is documentation only until this lands. Run it **after** the Physics U3 build finishes,
+because that build runs against these files.
+
+- `templates/notes/recall.py`: add an underscore check that refuses a notes line containing a run
+  of underscores, the same way the recall check refuses questions (SHULL-CHG-0023, mechanism not
+  documentation). Header `fields` are exempt. Remove the inline-blank case from `ruled_lines()` and
+  its docstring.
+- `scripts/validate_notes.py`: picks up the new refusal from `recall.py`; no separate rule.
+- `templates/notes/build_notes_docx.py`: draw the worked problem's `Answer:` line as a ruled line,
+  so a spec never needs underscores to get one.
+
+This is code, not a rule change, so it needs no new record if it does only what this section says.
+Anything beyond it gets its own record.
