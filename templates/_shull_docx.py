@@ -583,6 +583,9 @@ def fillin_table(cell, spec, pal, inner_w, *, header_fill=None, header_caps=True
             shade(c, header_fill)
         para(c, h, header_size, bold=True, color=pal.accent, caps_track=header_caps,
              first=True)
+        # SHULL-CHG-0071: every table cell is centred, horizontally and vertically.
+        c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+        c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     row_h = float(spec.get("rowHeightIn", 0.34))
     for ri, vals in enumerate(rows):
@@ -598,6 +601,7 @@ def fillin_table(cell, spec, pal, inner_w, *, header_fill=None, header_caps=True
             else:
                 filled = bool(str(val).strip())
                 para(c, val, body_size, bold=filled, color=pal.ink, first=True)
+            c.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER   # SHULL-CHG-0071
     return t
 
 

@@ -205,22 +205,24 @@
   .tbl td {
     border-bottom: 0.6pt solid var(--rule-hairline);
     padding: 3.2pt 2pt; font-size: 9.1pt; line-height: 1.25;
+    text-align: center; vertical-align: middle;   /* SHULL-CHG-0071 */
   }
   .tbl td.note {
     font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
-    color: var(--warn); text-align: right; border-bottom: none;
+    color: var(--warn); text-align: center; border-bottom: none;   /* SHULL-CHG-0071 */
   }
 
   /* ---------- Reference data table (e.g. accepted densities) ---------- */
   table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
   table.data th {
     font-family: var(--display); font-weight: 600; font-size: 6.6pt;
-    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    letter-spacing: 0.16em; color: var(--ink); text-align: center; vertical-align: middle;   /* SHULL-CHG-0071 */
     padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
   }
   table.data td {
     padding: 3.6pt 4pt; font-size: 9.8pt;
     border-bottom: 0.6pt solid var(--rule-hairline);
+    text-align: center; vertical-align: middle;   /* SHULL-CHG-0071 */
   }
   .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
 

@@ -340,6 +340,9 @@ def question(doc,s,q,assets,checks=True):
                 border(cell,blend(INK,WHITE,.45),sz=5)
                 margins(cell,55,55,90,90)
                 para(cell,txt,9.5,i==0,first=True,after=0)
+                # SHULL-CHG-0071: every table cell is centred, horizontally and vertically.
+                cell.vertical_alignment=WD_ALIGN_VERTICAL.CENTER
+                cell.paragraphs[0].alignment=WD_ALIGN_PARAGRAPH.CENTER
             if i==0:tbl.rows[i]._tr.get_or_add_trPr().append(OxmlElement("w:tblHeader"))
     if q.get("check") and checks:
         para(c,"["+q["check"]+"]",8.5,color=MUTED,after=3)
