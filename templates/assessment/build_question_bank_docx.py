@@ -15,7 +15,8 @@ descriptor, title, directions, and `groups`, one per section:
     {"code": "2.1", "title": "...", "target": "...", "items": [
         {"stem": "...", "options": ["...", "...", "...", "..."], "answer": "B",
          "why": "...", "wrong": {"A": "...", "C": "...", "D": "..."}, "source": "..."}]}
-Text may carry <b>, <i> and &nbsp; (rich() in _shull_docx).
+Optional: pointsEach (default 1) and standards (default "not requested"), printed on the
+key. Text may carry <b>, <i> and &nbsp; (rich() in _shull_docx).
 
 The builder refuses an item without exactly four options, an answer letter outside A-D,
 two identical options, a missing `why`, or a `wrong` note missing for any distractor. It
@@ -35,6 +36,7 @@ from _shull_docx import (          # noqa: E402
 
 TEXT_W_IN = 7.50
 GUTTER_IN = 0.30
+NUM_IN = 0.40                    # the item number's hanging indent
 LETTERS = "ABCD"
 BANNED = re.compile(r"\b(all|none) of the above\b", re.I)
 
@@ -108,17 +110,18 @@ def item_cell(cell, n, it, pal):
     cell_margins(cell, top=40, bottom=80, left=0, right=0)
     p = cell.paragraphs[0]
     p.paragraph_format.space_after = Pt(3)
-    p.paragraph_format.left_indent = Inches(0.30)
-    p.paragraph_format.first_line_indent = Inches(-0.30)
-    p.paragraph_format.tab_stops.add_tab_stop(Inches(0.30))
+    # Room for a three-digit number at 10pt bold: "116." is about 0.32in.
+    p.paragraph_format.left_indent = Inches(NUM_IN)
+    p.paragraph_format.first_line_indent = Inches(-NUM_IN)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(NUM_IN))
     run(p, f"{n}.\t", 10, bold=True, color=pal.ink)
     rich(p, it["stem"], 10, color=pal.ink)
     for L, opt in zip(LETTERS, it["options"]):
         q = cell.add_paragraph()
         q.paragraph_format.space_after = Pt(1.5)
-        q.paragraph_format.left_indent = Inches(0.58)
+        q.paragraph_format.left_indent = Inches(NUM_IN + 0.28)
         q.paragraph_format.first_line_indent = Inches(-0.28)
-        q.paragraph_format.tab_stops.add_tab_stop(Inches(0.58))
+        q.paragraph_format.tab_stops.add_tab_stop(Inches(NUM_IN + 0.28))
         run(q, f"{L}\t", 9.5, bold=True, color=pal.accent)
         rich(q, opt, 9.5, color=pal.ink)
 
@@ -146,8 +149,13 @@ def glance(doc, spec, pal, across=10):
     flat = [(g["code"], it["answer"]) for g in spec["groups"] for it in g["items"]]
     gap(doc, 6)
     t = doc.add_table(rows=1, cols=1); fix_widths(t, [TEXT_W_IN])
-    para(t.rows[0].cells[0], "ANSWERS AT A GLANCE", 7.5, bold=True, color=pal.accent,
-         caps_track=True, first=True)
+    c = t.rows[0].cells[0]
+    para(c, "ANSWERS AT A GLANCE", 7.5, bold=True, color=pal.accent, caps_track=True,
+         first=True)
+    # build-assessment: each key item carries a point value and a standard code. Both are
+    # spec facts, stated once here for the whole bank.
+    para(c, f"{spec.get('pointsEach', 1)} point each.  Standards: "
+         + spec.get("standards", "not requested"), 8.5, color=pal.ink)
     w = TEXT_W_IN / across
     for r in range(0, len(flat), across):
         t = doc.add_table(rows=1, cols=across)

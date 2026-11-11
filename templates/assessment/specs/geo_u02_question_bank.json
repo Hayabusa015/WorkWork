@@ -14,6 +14,8 @@
   "title": "Unit 2 Question Bank",
   "source": "U2 guided-notes keys (verified fact sheet, 2026-11-09); U2 study guide",
   "directions": "Choose the best answer for each question.",
+  "pointsEach": 1,
+  "standards": "not requested (Ohio Physical Geology alignment can be added)",
   "groups": [
     {
       "code": "2.1",
@@ -57,17 +59,17 @@
         {
           "stem": "Why are bones, teeth and shells fossilized more often than soft body parts?",
           "options": [
-            "Soft parts cannot be buried by sediment",
-            "They are durable, so they last long enough to be buried",
-            "Animals with shells lived longer",
-            "Soft parts turn into rock too quickly"
+            "Soft parts cannot be buried",
+            "They are hard and durable",
+            "Animals with hard parts lived longer",
+            "Soft parts are too small to see"
           ],
           "answer": "B",
-          "why": "Durable tissues are more likely to survive.",
+          "why": "Durable tissues are more likely to survive long enough to be buried.",
           "wrong": {
             "A": "Anything can be buried; soft parts rot first.",
             "C": "Lifespan is not the reason; durability is.",
-            "D": "Soft parts usually decay before they fossilize."
+            "D": "Size is not the reason; soft parts usually rot before burial."
           },
           "source": "S2.1 Fossils: body fossil"
         },
@@ -160,7 +162,7 @@
           "stem": "Sediment fills a mold and hardens into a 3-D copy of the shell. This copy is a...",
           "options": [
             "mold",
-            "body fossil of the original shell",
+            "trace fossil",
             "carbon film",
             "cast"
           ],
@@ -168,7 +170,7 @@
           "why": "A cast is sediment or minerals filling a mold, making a 3-D replica.",
           "wrong": {
             "A": "The mold is the hollow space; the filling is the cast.",
-            "B": "The original shell dissolved; this is a replica.",
+            "B": "A cast copies the shape of the body; it does not record an activity.",
             "C": "A carbon film is flat, not a 3-D copy."
           },
           "source": "S2.1 How fossils form: mold vs. cast"
@@ -176,15 +178,15 @@
         {
           "stem": "Petrified wood can show which fossil processes?",
           "options": [
-            "Carbonization only",
-            "Molds and casts only",
-            "Trace fossilization",
+            "Carbonization and trace fossilization",
+            "Molding and casting only",
+            "Trace fossilization only",
             "Permineralization and replacement"
           ],
           "answer": "D",
           "why": "The notes: petrified wood can show both processes.",
           "wrong": {
-            "A": "Carbonization makes a flat film, not petrified wood.",
+            "A": "Carbonization makes a flat film, and wood is a body part, not a trace.",
             "B": "Petrified wood keeps the wood's structure in minerals.",
             "C": "Wood is part of the organism, so it is a body fossil."
           },
@@ -228,9 +230,9 @@
           "stem": "Radiometric dating finds a mineral's age by measuring...",
           "options": [
             "a radioactive parent isotope and its decay products",
-            "how thick the rock layers are",
-            "how many fossils the rock contains",
-            "how deep the rock is buried"
+            "how thick the rock layers above it are",
+            "how many fossils are found in the same rock",
+            "how deep the rock is buried below the surface"
           ],
           "answer": "A",
           "why": "Definition from the notes.",
@@ -252,7 +254,7 @@
           "answer": "A",
           "why": "Definition from the notes.",
           "wrong": {
-            "B": "A half-life is a decay rate, not half an age.",
+            "B": "A half-life is the time for half the parent atoms to decay, not half the rock's age.",
             "C": "That would be the whole sample; a half-life is half.",
             "D": "Half-life describes atoms decaying, not layers forming."
           },
@@ -591,13 +593,13 @@
         {
           "stem": "What caused the Great Oxidation Event?",
           "options": [
-            "Volcanoes released large amounts of oxygen",
-            "Photosynthesis released oxygen faster than rocks and iron could absorb it",
-            "An asteroid impact released oxygen",
-            "The oceans froze and gave off oxygen"
+            "Volcanoes released huge amounts of oxygen into the air",
+            "Photosynthesis made oxygen faster than rocks could absorb it",
+            "An asteroid impact released oxygen from deep rock",
+            "The oceans froze and gave off oxygen as they iced over"
           ],
           "answer": "B",
-          "why": "Cause, from the notes.",
+          "why": "Photosynthesis released oxygen faster than rocks and iron could absorb it.",
           "wrong": {
             "A": "The oxygen came from photosynthesis.",
             "C": "No impact is involved; that is the K–Pg story.",
@@ -751,7 +753,7 @@
         {
           "stem": "How long did the Cambrian Explosion take?",
           "options": [
-            "One day",
+            "A single year",
             "Tens of millions of years",
             "A few hundred years",
             "Billions of years"
@@ -759,7 +761,7 @@
           "answer": "B",
           "why": "Must-write: tens of millions of years, not overnight.",
           "wrong": {
-            "A": "\"Explosion\" means fast for geology, not overnight.",
+            "A": "\"Explosion\" means fast for geology, not one year.",
             "C": "Far too short.",
             "D": "Far too long."
           },
@@ -768,13 +770,13 @@
         {
           "stem": "Why is the Burgess Shale important?",
           "options": [
-            "It preserves soft-bodied animals that ordinary fossilization loses",
+            "It preserves soft-bodied animals",
             "It is the oldest rock on Earth",
             "It holds the first dinosaur eggs",
             "It is where most coal formed"
           ],
           "answer": "A",
-          "why": "Must-write line.",
+          "why": "Must-write: it preserves soft-bodied animals that ordinary fossilization loses.",
           "wrong": {
             "B": "It is Cambrian, about half a billion years old.",
             "C": "Dinosaurs come much later.",
@@ -785,22 +787,22 @@
         {
           "stem": "What was the Cambrian climate like?",
           "options": [
-            "Greenhouse, with high sea levels and less oxygen than today",
-            "An ice age, with low sea levels",
-            "Cold and dry, with more oxygen than today",
-            "Hot, with deserts covering most land"
+            "Warm greenhouse with high sea levels",
+            "An ice age with low sea levels",
+            "Cold and dry with more oxygen than today",
+            "Hot desert covering most of the land"
           ],
           "answer": "A",
-          "why": "Cambrian Climate, from the notes.",
+          "why": "Greenhouse, high sea levels, less oxygen than today.",
           "wrong": {
             "B": "That describes the late Ordovician.",
-            "C": "Oxygen was lower than today.",
+            "C": "It was warm, and oxygen was lower than today.",
             "D": "Shallow seas spread widely."
           },
           "source": "S2.3 Cambrian: Climate"
         },
         {
-          "stem": "Cambrian shallow seas left sand, mud and lime that became which rocks?",
+          "stem": "Sand, mud and carbonate sediments in Cambrian shallow seas became which rocks?",
           "options": [
             "Granite, basalt and obsidian",
             "Marble, slate and gneiss",
@@ -939,9 +941,9 @@
           "stem": "What did small vascular plants and land arthropods build in the Silurian?",
           "options": [
             "The first land communities and soils",
-            "The first coral reefs",
-            "Thick coal deposits",
-            "Grasslands"
+            "The first coral reefs in the sea",
+            "Thick coal deposits in swamps",
+            "The first grasslands on land"
           ],
           "answer": "A",
           "why": "Silurian Life, from the notes.",
@@ -955,9 +957,9 @@
         {
           "stem": "What happened to sea levels in the Silurian?",
           "options": [
-            "They recovered as Earth warmed after the Ordovician glaciation",
+            "They recovered as Earth warmed",
             "They fell as ice sheets grew",
-            "They dropped to the lowest ever",
+            "They dropped to their lowest level ever",
             "They stayed frozen in Snowball Earth"
           ],
           "answer": "A",
@@ -1008,8 +1010,8 @@
           "options": [
             "With an asteroid impact",
             "With Siberian Traps volcanism",
-            "With late-Devonian extinctions that hit hard",
-            "With Snowball Earth"
+            "With major extinctions",
+            "With a Snowball Earth glaciation"
           ],
           "answer": "C",
           "why": "Late-Devonian extinctions hit hard.",
@@ -1040,9 +1042,9 @@
         {
           "stem": "Thick coal deposits come from which Carboniferous environment?",
           "options": [
-            "Volcanic ash layers",
-            "Tropical wetlands that buried thick plant material",
-            "Dinosaur graveyards",
+            "Thick volcanic ash layers",
+            "Tropical wetlands full of plants",
+            "Buried dinosaur graveyards",
             "Dried-up salty seas"
           ],
           "answer": "B",
@@ -1074,10 +1076,10 @@
         {
           "stem": "Why was the amniotic egg a major step?",
           "options": [
-            "It let fish breathe air",
+            "It let fish breathe air on land",
             "It made dinosaurs warm-blooded",
-            "It let plants make seeds",
-            "It let animals reproduce away from standing water"
+            "It let plants make their first seeds",
+            "Eggs could be laid away from water"
           ],
           "answer": "D",
           "why": "Must-write: the amniotic egg let vertebrates reproduce away from standing water.",
@@ -1091,17 +1093,17 @@
         {
           "stem": "What happened to atmospheric oxygen in the Carboniferous?",
           "options": [
-            "It fell close to zero",
+            "It fell to almost zero",
             "It stayed the same as today",
-            "It rose above modern levels as CO₂ declined",
-            "It dropped as CO₂ rose"
+            "It rose above modern levels",
+            "It dropped below modern levels"
           ],
           "answer": "C",
-          "why": "Carboniferous Climate, from the notes.",
+          "why": "Oxygen rose above modern levels as CO₂ declined.",
           "wrong": {
             "A": "It rose above modern levels.",
             "B": "It rose above today's levels.",
-            "D": "CO₂ declined while oxygen rose."
+            "D": "It rose, while CO₂ declined."
           },
           "source": "S2.3 Carboniferous: Climate"
         },
@@ -1142,17 +1144,17 @@
         {
           "stem": "<i>Dimetrodon</i> looked like a reptile. What was it really?",
           "options": [
-            "A synapsid, on the mammal line",
-            "A dinosaur",
-            "A pterosaur",
-            "A jawless fish"
+            "A synapsid (mammal line)",
+            "A meat-eating dinosaur",
+            "A flying pterosaur",
+            "A giant amphibian"
           ],
           "answer": "A",
-          "why": "Must-write: a synapsid, not a dinosaur.",
+          "why": "Must-write: a synapsid, the mammal lineage, not a dinosaur.",
           "wrong": {
             "B": "The most common mix-up; dinosaurs appear later, in the Triassic.",
             "C": "Pterosaurs are Mesozoic flying reptiles.",
-            "D": "It lived on land."
+            "D": "Amphibians mattered in the Permian, but <i>Dimetrodon</i> was a synapsid."
           },
           "source": "S2.3 Permian: must-write"
         },
@@ -1176,10 +1178,10 @@
         {
           "stem": "What set up a crisis at the end of the Permian?",
           "options": [
-            "A sudden ice age",
-            "Too much oxygen in the oceans",
-            "Severe warming and widespread ocean oxygen loss",
-            "The spread of grasslands"
+            "A sudden ice age that froze the seas",
+            "Too much oxygen building up in the oceans",
+            "Severe warming and ocean oxygen loss",
+            "Grasslands spreading over Pangaea"
           ],
           "answer": "C",
           "why": "Permian Climate, from the notes.",
@@ -1213,14 +1215,14 @@
             "No, they appeared in the Triassic but were not yet dominant",
             "Yes, they ruled from the moment they appeared",
             "No, because they lived only in the sea",
-            "Yes, because mammals had already died out"
+            "Yes, because they were the only animals on land"
           ],
           "answer": "A",
           "why": "Must-write: not yet the dominant land animals.",
           "wrong": {
             "B": "They were not yet dominant in the Triassic.",
             "C": "Dinosaurs lived on land.",
-            "D": "Mammals were present and survived."
+            "D": "Other reptiles, amphibians and insects lived on land too."
           },
           "source": "S2.3 Triassic: must-write"
         },
@@ -1312,10 +1314,10 @@
         {
           "stem": "Pterosaurs were...",
           "options": [
-            "flying dinosaurs",
-            "early birds",
+            "flying dinosaurs, like birds",
+            "the earliest true birds",
             "flying reptiles, not dinosaurs",
-            "giant insects"
+            "giant flying insects"
           ],
           "answer": "C",
           "why": "Pterosaurs: flying reptiles, not dinosaurs (must-write).",
@@ -1329,10 +1331,10 @@
         {
           "stem": "Ichthyosaurs were...",
           "options": [
-            "swimming dinosaurs",
+            "swimming dinosaurs of the seas",
             "marine reptiles, not dinosaurs",
-            "giant fish",
-            "early whales"
+            "giant sharks and other fish",
+            "early whales, which are mammals"
           ],
           "answer": "B",
           "why": "Must-write: ichthyosaurs are reptiles, not dinosaurs.",
@@ -1346,13 +1348,13 @@
         {
           "stem": "Why is <i>Archaeopteryx</i> important?",
           "options": [
-            "It is the first dinosaur",
-            "It is a pterosaur",
-            "It is a feathered dinosaur near the origin of birds",
-            "It survived the K–Pg extinction"
+            "The very first dinosaur ever",
+            "A pterosaur, a flying reptile",
+            "A feathered dinosaur near bird origins",
+            "A dinosaur that survived the K–Pg"
           ],
           "answer": "C",
-          "why": "About 150 million years ago, near the origin of birds.",
+          "why": "A feathered dinosaur near the origin of birds, about 150 million years ago.",
           "wrong": {
             "A": "Dinosaurs appear about 230 million years ago.",
             "B": "Pterosaurs are not dinosaurs; <i>Archaeopteryx</i> is.",
@@ -1365,11 +1367,11 @@
           "options": [
             "Ice age, with low sea levels",
             "Cool and dry, with grasslands",
-            "Greenhouse, with shallow seas covering large areas",
+            "Greenhouse, with wide shallow seas",
             "Frozen, as in Snowball Earth"
           ],
           "answer": "C",
-          "why": "Jurassic Climate, from the notes.",
+          "why": "Greenhouse; shallow seas cover large areas.",
           "wrong": {
             "A": "That describes the late Ordovician.",
             "B": "That is the Neogene.",
@@ -1415,15 +1417,15 @@
           "stem": "What were Cretaceous sea levels like?",
           "options": [
             "Low, because of huge ice sheets",
-            "Frozen solid",
-            "The same as today",
-            "High, flooding broad areas of the continents"
+            "Low, because the seas dried up",
+            "About the same as today",
+            "High, flooding the continents"
           ],
           "answer": "D",
-          "why": "Cretaceous Earth and Climate, from the notes.",
+          "why": "High sea levels flood broad continental areas.",
           "wrong": {
             "A": "The Cretaceous was a greenhouse.",
-            "B": "The seas were warm.",
+            "B": "Sea levels were high.",
             "C": "They were much higher."
           },
           "source": "S2.3 Cretaceous: Earth"
@@ -1517,12 +1519,12 @@
           "stem": "What did the climate do in the Paleogene?",
           "options": [
             "It warmed into a new greenhouse",
-            "It cooled gradually as the Mesozoic greenhouse faded",
+            "It cooled gradually over time",
             "It froze into Snowball Earth",
             "It stayed the same as the Cretaceous"
           ],
           "answer": "B",
-          "why": "Paleogene Climate, from the notes.",
+          "why": "Climate cools gradually as the Mesozoic greenhouse fades.",
           "wrong": {
             "A": "It cooled.",
             "C": "That was in the Proterozoic.",
@@ -1587,7 +1589,7 @@
             "Volcanic eruptions",
             "Asteroid impacts",
             "Milankovitch orbital cycles",
-            "The supercontinent cycle"
+            "Plate collisions"
           ],
           "answer": "C",
           "why": "Paced by Milankovitch orbital cycles.",
@@ -1601,7 +1603,7 @@
         {
           "stem": "What is the Holocene?",
           "options": [
-            "The current ice age",
+            "The last glacial period",
             "The period when dinosaurs lived",
             "Another name for the Pleistocene",
             "The current interglacial"
@@ -1609,7 +1611,7 @@
           "answer": "D",
           "why": "Must-write: we now live in the Holocene, the current interglacial.",
           "wrong": {
-            "A": "It is the warm interglacial between glacial times.",
+            "A": "The Holocene is the warm interglacial after it.",
             "B": "Dinosaurs lived in the Mesozoic.",
             "C": "The Pleistocene ended 11,700 years ago."
           },
@@ -1618,8 +1620,8 @@
         {
           "stem": "The Pleistocene ran from...",
           "options": [
-            "252 to 66 million years ago",
-            "720 to 635 million years ago",
+            "252 million to 66 million years ago",
+            "720 million to 635 million years ago",
             "2.58 million years ago to 11,700 years ago",
             "11,700 years ago to today"
           ],
@@ -1657,19 +1659,19 @@
       "target": "I can trace how supercontinents assembled and broke apart across Earth's history.",
       "items": [
         {
-          "stem": "Which supercontinent formed <b>first</b>?",
+          "stem": "Rodinia and Pangaea are the two supercontinents in this unit. Which is true?",
           "options": [
-            "Pangaea",
-            "Panthalassa",
-            "Rodinia",
-            "Tethys"
+            "Pangaea formed first, in the Proterozoic",
+            "They formed at the same time",
+            "Rodinia formed first, in the Proterozoic",
+            "Rodinia formed after Pangaea broke apart"
           ],
           "answer": "C",
           "why": "Rodinia assembled roughly 1.1–0.9 billion years ago; Pangaea in the Permian.",
           "wrong": {
             "A": "Pangaea assembled in the Permian, much later.",
-            "B": "Panthalassa is an ocean, not a supercontinent.",
-            "D": "The Tethys is a sea."
+            "B": "Rodinia came hundreds of millions of years earlier.",
+            "D": "Pangaea broke apart from the Late Triassic on, long after Rodinia."
           },
           "source": "S2.4 Supercontinents: Rodinia"
         },
@@ -1744,13 +1746,13 @@
         {
           "stem": "On a paleo-map, the white outlines show...",
           "options": [
-            "where the ice sheets were",
-            "where modern continental regions sit on the ancient map",
-            "where fossils were found",
-            "the edges of ancient oceans"
+            "where the ice sheets were at the time",
+            "where today's continents sit on the old map",
+            "where fossils of the period were found",
+            "the edges of the ancient oceans"
           ],
           "answer": "B",
-          "why": "From the notes.",
+          "why": "White outlines show where modern continental regions sit on the ancient map.",
           "wrong": {
             "A": "The outlines are modern continents.",
             "C": "They show modern regions on the old map.",
@@ -1922,15 +1924,15 @@
           "stem": "What caused the K–Pg extinction?",
           "options": [
             "Siberian Traps volcanism",
-            "A sudden ice age",
-            "An asteroid about 10 km wide hit near the Yucatán Peninsula",
+            "A sudden ice age froze the planet",
+            "An asteroid hit near the Yucatán",
             "Mammals outcompeting the dinosaurs"
           ],
           "answer": "C",
           "why": "A roughly 10 km asteroid struck near today's Yucatán Peninsula (Chicxulub).",
           "wrong": {
             "A": "That is the end-Permian.",
-            "B": "Not the cause named in the notes.",
+            "B": "The cause was an impact, not an ice age.",
             "D": "Mammals diversified after the extinction, not before."
           },
           "source": "S2.5 K–Pg: impact"
