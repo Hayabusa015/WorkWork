@@ -241,6 +241,14 @@ filename. Never shorten a title automatically; add a row when the user approves 
 
 ## Decision log
 
+### 2026-11-11 — θ and other math symbols stay as symbols
+Offered "allow a backup font for math symbols, or spell it out as 'theta'", Matt answered "na leave
+as symbol". Physics documents keep θ, ⁻ and similar symbols Archivo lacks. Those glyphs set in the
+brand fallback face named by `typography.mathFallback` in `brand/tokens.json` (PROVISIONAL), which
+holds the face, scope and glyph set. The audit check for it is pending (see the record).
+Supersedes: `brand/SHULL_DESIGN_SYSTEM.md` §4 "Never substitute a font outside this stack", for this glyph set in Physics only.
+Status: PARTIAL · SHULL-CHG-0072
+
 ### 2026-11-11 — Net force is written ∑F
 Matt asked for the sum symbol in front of forces "to emphasize its the sum of", and answered "yes"
 to making ∑F the standing Physics notation and to switching the U3 deck to it. The rule is the

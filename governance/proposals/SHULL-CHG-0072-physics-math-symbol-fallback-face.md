@@ -1,13 +1,5 @@
 # SHULL-CHG-0072 — Physics: one named fallback face for Greek letters and math symbols Archivo lacks
 
-> **Change ID is provisional.** Taken as the next integer after `SHULL-CHG-0071`, the highest ID in
-> the local `governance/proposals/` on 2026-11-11. No file anywhere in the working tree mentions
-> `SHULL-CHG-0072`. The Secretary session that wrote this record has no git tool. It could not
-> `git fetch origin main` and cannot push. Under `governance/CHANGE_CONTROL.md` §2 this ID is **not
-> allocated** until someone checks it against a freshly fetched `origin/main` and pushes the record
-> there. If `SHULL-CHG-0072` already exists on `origin/main`, renumber this file before pushing it.
-> `change-log/CHANGELOG.md` has no row for it yet, for the same reason.
->
 > **CONFLICT with a LOCKED rule. Marked, not resolved.** The rule this would relax rests on
 > `brand/tokens.json` `typography.primary` (Trade Gothic Next) and `typography.fallback` (Archivo),
 > both `"status": "LOCKED"`. The prose rule in `brand/SHULL_DESIGN_SYSTEM.md` §4 carries no label of
@@ -20,7 +12,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0072 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0072. The main session reports the ID was checked free against a fetched `origin/main` before the push of `37df80e` (branch `claude/focused-mendel-cefeca`). The Secretary could not re-check this. |
 | **Date** | 2026-11-11 |
 | **Source** | User. Found while building the Physics U3 guided notes, 2026-11-11. `scripts/audit_fonts.py` FAILs the rendered notes because θ and ⁻ set in Inter. Matt was offered "allow a backup font for math symbols, or spell it out as 'theta'" and answered, verbatim, 2026-11-11: "na leave as symbol". |
 | **Current Rule** | `brand/SHULL_DESIGN_SYSTEM.md` §4, lines 143-153: "typography.stack Trade Gothic Next → Archivo → Liberation Sans ... **Never substitute a font outside this stack.** Never a novelty "school" font. Never a convenient one. One exception: `typography.keyHandwriting`, on teacher answer keys only, approved in SHULL-CHG-0043 by Matt, 2026-10-16." Tokens: `brand/tokens.json` lines 399-409, `typography.primary` and `typography.fallback`, both `"status": "LOCKED"` (source SHULL-CHG-0006). Enforcement: `standards/QA_GATE.md` §1, lines 26-29: "`pdffonts` on the output should show Archivo or Archivo Narrow. If it shows DejaVu or Liberation, the font substitution did not take". `scripts/audit_fonts.py` line 21: `ALLOWED = ("Archivo",)`. |
@@ -34,8 +26,8 @@
 | **Recommendation** | Approve, with the face committed to the repository as part of the change (section 4, item 1). Without that, the render depends on whatever the container happens to have. |
 | **Decision** | Approved by the user in chat, 2026-11-11: "na leave as symbol", answering the two options offered: "allow a backup font for math symbols" or "spell it out as theta". Read by the main session as choosing the backup-font option, the only symbol-keeping option offered. Overrides the LOCKED Archivo-only stack for this narrow glyph set by direct user instruction (CLAUDE.md precedence 1). Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Implemented By** | Partial. Decision recorded in `37df80e` (branch `claude/focused-mendel-cefeca`). Documentation and token written by the Secretary on 2026-11-11, not committed: `brand/tokens.json` `typography.mathFallback`, `brand/SHULL_DESIGN_SYSTEM.md` §4, `standards/QA_GATE.md` §1, `courses/physics/DECISIONS.md` decision log, `change-log/CHANGELOG.md` row, this record. The main session commits them. **SHA of that commit: pending, add it here.** Code follow-ups are pending (section 7). |
+| **Verified** | No. Edits checked by reading the changed files only. The Secretary has no shell, so no token validator or JSON parse was run. Nothing can be verified end to end until the section 7 follow-ups land. |
 
 ---
 
@@ -137,3 +129,25 @@ because it is what the renderer now falls back to for these glyphs.
 - It does not edit `brand/`, `standards/`, `scripts/audit_fonts.py` or any font file.
 - It does not change any built document, template or spec.
 - It does not decide the LOCKED conflict. Matt does.
+
+(Section 6 describes the record as proposed. Implementation is in the `Implemented By` field and section 7.)
+
+## 7. Implementation status
+
+**Done (uncommitted, 2026-11-11):** token 2.1, brand prose 2.2, QA gate pointer 2.3, Physics
+decision-log entry, CHANGELOG row (PARTIAL).
+
+The QA gate line says `--physics` "will enforce" the token, marked pending, rather than "enforces"
+as 2.3 words it. The flag does not exist yet, so the present tense would be untrue. When P1 lands,
+change "will enforce it (pending, SHULL-CHG-0072)" to "enforces it".
+
+**Pending code follow-ups (not started):**
+
+| # | Follow-up | Where | Settles |
+|---|---|---|---|
+| P1 | Add a `--physics` flag to `scripts/audit_fonts.py`. It reads `typography.mathFallback` (family and ranges) from `brand/tokens.json` and checks each glyph: it allows a span in that face only if every character falls inside the token's ranges and is absent from Archivo. Add the tests listed in 2.4. | `scripts/audit_fonts.py` and its tests | 2.4 |
+| P2 | Commit the Inter font files (`Inter-Regular.ttf`, plus Bold if a bold θ is needed) with `OFL-Inter.txt` and a sha256 line in `brand/fonts/README.md`. Have the SessionStart hook install it like Archivo. | `brand/fonts/` | 4.1 |
+| P3 | Check with fontTools whether `PatrickHand-Regular.ttf` carries θ (U+03B8) and ⁻ (U+207B). If it lacks either, a handwritten θ on a key falls to a third face, and that needs its own decision. | `brand/fonts/` | 4.3 |
+
+Still open and not assigned: 4.2 (Trade Gothic Next coverage on Matt's machine) and 4.4 (re-run the
+audit on the rendered U3 notes and paste the character list into `Verified:`).

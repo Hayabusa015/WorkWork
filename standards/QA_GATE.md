@@ -29,6 +29,8 @@ do not ship on the assumption it looks right.
 > system until 2026-09-08.
 >
 > Key files may also carry the key-handwriting face (`typography.keyHandwriting`), per `standards/ANSWER_KEYS.md` §9; `scripts/audit_fonts.py --key` enforces it.
+>
+> Physics files may also carry `typography.mathFallback` for the glyphs it names; `scripts/audit_fonts.py --physics` will enforce it (pending, SHULL-CHG-0072).
 
 ## 2. Page budget
 

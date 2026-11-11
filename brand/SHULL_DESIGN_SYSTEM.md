@@ -152,6 +152,8 @@ one.
 
 One exception: `typography.keyHandwriting`, on teacher answer keys only, approved in SHULL-CHG-0043 by Matt, 2026-10-16.
 
+A second exception: `typography.mathFallback`, per glyph, in Physics documents only, approved in SHULL-CHG-0072 by Matt, 2026-11-11.
+
 `brand/fonts/trade-gothic-next.conf` maps the brand name to Archivo inside the build container, so a
 document that correctly names Trade Gothic Next renders as Archivo during QA rather than silently
 becoming DejaVu Sans. Without that mapping, **the QA render and the classroom copy are different
