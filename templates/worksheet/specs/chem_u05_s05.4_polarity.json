@@ -14,8 +14,8 @@
    "concept": {
     "summary": "ΔEN = higher EN − lower EN. Under 0.40: nonpolar. 0.40 to 1.80: polar. Over 1.80: ionic.",
     "keyIdeas": [
-     "Polar bonds in a symmetric shape cancel, so the molecule is nonpolar.",
-     "Lone pairs on the central atom usually make a molecule asymmetric."
+     "Symmetric: same outer atoms, spread evenly. Polar bonds in a symmetric shape cancel, so the molecule is nonpolar.",
+     "Asymmetric: different outer atoms, or lone pairs on the central atom. The pulls don't cancel, so the molecule is polar."
     ]
    },
    "directions": "For each molecule, name the shape. Find ΔEN for each bond listed and show the subtraction, then mark it PC or NPC. Then decide whether the whole molecule is polar or nonpolar. We will do number 1 together.",
@@ -161,7 +161,8 @@
     "BCl₃: B has only 6 electrons (3 bonds, no lone pairs), like BF₃ on slide 24. Three equal pulls 120° apart cancel.",
     "SO₂ is bent because of the lone pair on S, so unlike CO₂ it is polar.",
     "PCl₅ and PCl₃ have the same bond (0.97). PCl₅'s axial pair and equatorial trio each cancel: nonpolar. PCl₃'s lone pair makes it a pyramid: polar.",
-    "HCN is linear but the two ends are different, so the pulls do not cancel: polar. Linear does not always mean nonpolar."
+    "HCN is linear but the two ends are different, so the pulls do not cancel: polar. Linear does not always mean nonpolar.",
+    "If a student asks: a few molecules with bonds just under 0.40 are still slightly polar in real life (H₂S 0.38, PH₃ 0.01), because a lone pair on one side makes the charge lopsided. The rule on this sheet holds for every molecule here; the cutoffs are guidelines (slide 11)."
    ]
   }
  ]
