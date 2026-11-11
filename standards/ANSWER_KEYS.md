@@ -1,10 +1,11 @@
 # Answer Keys — the handwritten look
 
 **Authority:** SHULL-CHG-0043 (Stage 2: Items C, D, H), SHULL-CHG-0044 Item F (name the token,
-never a font), SHULL-CHG-0045 Item A (§3, what counts as a common mistake).
-**Drawn by:** `scripts/key_solution.py` and `scripts/key_ink.py`. The `"steps"` and `"sketch"` spec
-schema is documented **once**, in the docstring of `scripts/key_solution.py`. This file does not
-restate it.
+never a font), SHULL-CHG-0045 Item A (§3, what counts as a common mistake), SHULL-CHG-0071
+(§1 and §6.3, drawn key images).
+**Drawn by:** `scripts/key_solution.py` and `scripts/key_ink.py`. The `"steps"`, `"sketch"` and
+`"keyImage"` spec schema, and the shape of each scene (including `fbd`), is documented **once**, in
+the docstring of `scripts/key_solution.py`. This file does not restate it.
 **Face and inks:** the key-handwriting face (`typography.keyHandwriting`) and the `keyInk` colour
 tokens, all in `brand/tokens.json`. No font name and no hex value is written here.
 
@@ -17,8 +18,11 @@ This is the whole rule. Skills point here and restate none of it.
 **Teacher answer keys only** — the separate `Key` file (`standards/NAMING.md` §2). Student pages are
 never handwritten and are unchanged: they stay in the brand face.
 
-A question opts in by carrying `"steps"` in its spec. **A question without `"steps"` keeps its typed
-solution until it is given steps.** That is a complete, valid key; nothing blocks on the look.
+A question opts in by carrying `"steps"`, or a `"keyImage"` (SHULL-CHG-0071), in its spec. A
+`"keyImage"` is a drawn scene, such as a free-body diagram from the `fbd` scene, placed in that
+question's answer box; it may stand alone or sit above steps. **A question with neither keeps its
+typed solution until it is given one.** That is a complete, valid key; nothing blocks on the look.
+The typed `"solution"` stays mandatory on every question, including one with a `"keyImage"`.
 
 ## 2. Who writes what
 
@@ -75,6 +79,9 @@ beside the worked solution.
 3. **No sketch is better than a wrong one.** Where the scene builder would misrepresent the story —
    vertical or inclined motion, a multi-phase problem, anything its templates do not model — the
    sketch is **omitted**. The worked solution still carries the key.
+   **Where the drawing is the answer** (a `"keyImage"`, e.g. a free-body diagram), it is not simply
+   omitted: if the scene cannot model the item, the key prints that item's typed `"solution"` in
+   place of the image (SHULL-CHG-0071). A wrong drawing is still never printed.
 4. Physics only, for now. Chemistry story problems and any student-page sketch are out of scope.
 
 ## 7. Legibility beats authenticity

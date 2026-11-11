@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0071 | 2026-11-11 | Key images (`fbd` scene) and Physics U3 FBD set | PARTIAL | `governance/proposals/SHULL-CHG-0071-physics-u3-fbd-set-and-key-images.md` |
 | SHULL-CHG-0069 | 2026-11-11 | Guided notes: no inline underscore blanks | PARTIAL | `governance/proposals/SHULL-CHG-0069-notes-no-inline-blanks.md` |
 
 ## 2026-11-09

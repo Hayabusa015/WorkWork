@@ -33,8 +33,8 @@
 | **Recommendation** | Approve A, B and C as written. Matt has already made each choice in chat. These approvals cover only this record. Approving it does not approve SHULL-CHG-0068 or SHULL-CHG-0070. |
 | **Decision** | Approved by the user in chat, 2026-11-11, choosing from four offered options: Key drawings: "Add image support (Recommended)"; Structure: "One set of 12 (Recommended)"; Scenarios: "Everyday objects (Recommended)"; File name: "Practice Set - Free-Body Diagrams (Recommended)". Approves Parts A, B and C. Footer default: no section code (U03 only). Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Implemented By** | `f9d9f41` (branch `claude/focused-mendel-cefeca`): code, tests and the deliverable build script. Documentation (`standards/ANSWER_KEYS.md` header, §1 and §6.3; `templates/worksheet/README.md` pointer; `change-log/CHANGELOG.md` row; this record) written by the Secretary on 2026-11-11, to be committed by the main session. **SHA of that commit: pending, add it here.** |
+| **Verified** | **Partially, pending QA.** Done: (1) `scripts/test_key_solution.py` and `templates/worksheet/test_build_worksheet_key_docx.py` pass; (2) regression: existing committed keys rebuild byte-identical with `PYTHONHASHSEED=0`; (3) deliverable built: `output/physics/u03/Unit 3 Practice Set - Free-Body Diagrams` (.docx/.pdf) and its Key. As reported by the implementing session; not re-run by the Secretary, which has no shell. Outstanding: page-by-page visual inspection of the rendered FBD key (`standards/ANSWER_KEYS.md` §9), `scripts/audit_fonts.py --key` on it, and the main session's documentation commit. See section 9 for follow-ups. |
 
 ---
 
@@ -233,3 +233,16 @@ disappears.
 - It does not change `courses/physics/DECISIONS.md`, `standards/NAMING.md`, or the 2/2/1/1 ramp.
 - It does not approve or depend on SHULL-CHG-0068 or SHULL-CHG-0070.
 - It does not propose closing the `draw` gap in the no-work-area check (section 3 note).
+
+(Section 8 describes the record as proposed. Implementation is in the `Implemented By` field.)
+
+## 9. Follow-ups found during implementation (recorded, not acted on)
+
+Each needs its own record if Matt wants it. None is part of this change.
+
+| # | Finding | Where | What a fix would need |
+|---|---|---|---|
+| F1 | `draw_block()` always prints a panel number ("1", "2") in each drawing box. The FBD set cannot suppress it. | `templates/worksheet/build_worksheet_docx.py` `draw_block()` | A spec field to suppress the number. That is a builder change, so a Path B record. |
+| F2 | The Physics no-work-area check does not refuse `draw` panels. It refuses only `math` and `answerLines`. (Already noted in section 3.) | `build_worksheet_docx.py` `check_profile()` | A decision from Matt on whether a `draw` panel on Physics should be refused, then a builder change. |
+| F3 | The key builder seeds handwriting jitter from `hash(prompt)`. Python salts string hashes per process, so a build is reproducible only with a fixed `PYTHONHASHSEED`. The byte-identical regression check in `Verified` depended on `PYTHONHASHSEED=0`. | `templates/worksheet/build_worksheet_key_docx.py` / `scripts/key_solution.py` | A stable seed (for example a digest of the prompt) in place of `hash()`. Would change every key's rendered jitter once. |
+| F4 | A `ResourceWarning` for a file left open. | `scripts/key_ink.py` | Close the file (a `with` block). Low risk. |

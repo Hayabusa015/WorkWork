@@ -166,6 +166,10 @@ section title on the key, and `key.blocks` (kinds `table` and `notes`, as above)
 key's reference tables and grading notes, after any worked questions. A key is teacher-only, so
 PROVISIONAL labels belong there and never on the student page.
 
+A question may carry `keyImage` (a drawn scene such as an `fbd` free-body diagram) in its key
+answer box: rule in `standards/ANSWER_KEYS.md` §1 and §6.3, schema in the `scripts/key_solution.py`
+docstring (SHULL-CHG-0071).
+
 ## Vertical space
 
 Use `gap(doc, pt)`, never `doc.add_paragraph()` with a `space_after`. The second is not a gap of
