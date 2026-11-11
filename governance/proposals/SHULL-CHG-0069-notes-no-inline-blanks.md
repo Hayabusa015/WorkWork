@@ -26,8 +26,8 @@
 | **Affected Courses** | Open question 1. As said, Physics (he was reviewing Physics U3). If it applies to all three, it is a standard (CLAUDE.md §2 test). |
 | **Risk** | Medium. Rule text is a few lines, but it changes the layout of every guided-notes packet, adds page length (open lines take more room than an inline blank), and puts the three existing U1 packets out of compliance (section 5). Interacts with the "reduce length of notes" instruction in SHULL-CHG-0032. |
 | **Recommendation** | Approve, after Matt answers the two questions in section 6. Answer 1 decides whether this is Path B (standard, all three courses) or a Physics-only course decision. Answer 2 decides how much of the renderer changes. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-11, answering the two open questions: "all three courses, only underscores count". Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
