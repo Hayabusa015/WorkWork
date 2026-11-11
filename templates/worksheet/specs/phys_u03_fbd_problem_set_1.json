@@ -18,9 +18,8 @@
    "eyebrowNote": "PROBLEM SET 1",
    "priorKnowledge": {
     "items": [
-     "Newton's first law (3.1): an object at rest, or moving at a constant speed in a straight line, has balanced forces.",
-     "If an object is speeding up or slowing down, the forces are not balanced. The longer arrows point the way it is speeding up.",
-     "Friction acts along the surface and opposes sliding. The normal force pushes straight out from the surface."
+     "Newton's first law: an object at rest, or moving at a constant speed in a straight line, has balanced forces.",
+     "If an object is speeding up or slowing down, the forces are not balanced. The larger forces point the way it is speeding up, or opposite the way it moves if it is slowing down."
     ]
    },
    "equations": [
@@ -42,18 +41,22 @@
     },
     {
      "note": "tension",
-     "plain": "T"
+     "plain": "T    (two ropes: TL, TR)"
     },
     {
      "note": "air resistance",
      "plain": "drag"
     },
     {
-     "note": "push of one object on another (item 11)",
-     "plain": "Fbook"
+     "note": "push of one object on another",
+     "plain": "F book on table"
+    },
+    {
+     "note": "friction acts",
+     "plain": "along the surface, opposite the sliding (or the tendency to slide)"
     }
    ],
-   "directions": "Draw the object as a box. Draw one arrow for each force, starting at the box, pointing the way the force acts. Label each arrow from the bank. Make longer arrows for larger forces when you can tell. Do not draw an arrow for motion.",
+   "directions": "Draw the object as a box. Draw one arrow for each force, starting at the box, pointing the way the force acts. Label each arrow from the bank. Make longer arrows for larger forces when you can tell. Do not draw an arrow for motion. Write subscripts small, as in F with a small g.",
    "questions": [
     {
      "tier": "warm-up",
@@ -87,7 +90,7 @@
      },
      "steps": [
       {
-       "say": "Normal force equals weight here only because nothing else pushes up or down.",
+       "say": "Normal force equals weight here only because nothing else pushes up or down and the box is not speeding up or slowing down vertically.",
        "ink": "arrow"
       }
      ]
@@ -95,7 +98,7 @@
     {
      "tier": "warm-up",
      "points": 1,
-     "prompt": "A crate on smooth, frictionless ice is pushed to the right and speeds up. Ignore air resistance. Draw the free-body diagram for the crate.",
+     "prompt": "A crate on smooth, frictionless ice is pushed horizontally to the right and speeds up. Ignore air resistance. Draw the free-body diagram for the crate.",
      "draw": {
       "panels": 1,
       "across": 1,
@@ -137,7 +140,7 @@
     {
      "tier": "warm-up",
      "points": 1,
-     "prompt": "A dresser is pushed to the right across a rough wooden floor at a constant speed. Ignore air resistance. Draw the free-body diagram for the dresser.",
+     "prompt": "A dresser is pushed horizontally to the right across a rough wooden floor at a constant speed. Ignore air resistance. Draw the free-body diagram for the dresser.",
      "draw": {
       "panels": 1,
       "across": 1,
@@ -176,7 +179,7 @@
      },
      "steps": [
       {
-       "say": "Constant speed means the push and the friction are equal. The push is not bigger.",
+       "say": "Constant speed means the push and the friction are equal. The push is not larger.",
        "ink": "arrow"
       }
      ]
@@ -226,14 +229,14 @@
     {
      "tier": "practice",
      "points": 1,
-     "prompt": "A framed picture hangs at rest from two ropes. One rope pulls up and to the left and the other pulls up and to the right, each at 50° above the horizontal. Draw the free-body diagram for the picture.",
+     "prompt": "A framed picture hangs freely, not touching the wall, from two ropes. One rope pulls up and to the left and the other pulls up and to the right, each at 50° above the horizontal. Draw the free-body diagram for the picture.",
      "draw": {
       "panels": 1,
       "across": 1,
       "panelHeightIn": 2.1,
       "label": "DRAW THE FREE-BODY DIAGRAM"
      },
-     "solution": "Two tension arrows along the ropes, up-left and up-right at 50° above the horizontal, equal length; Fg down.",
+     "solution": "Two tension arrows along the ropes, TL up-left and TR up-right at 50° above the horizontal, equal; Fg down.",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -260,7 +263,7 @@
      },
      "steps": [
       {
-       "say": "Two T arrows, one along each rope, both the same length.",
+       "say": "Two T arrows, one along each rope, both the same size.",
        "ink": "arrow"
       }
      ]
@@ -275,7 +278,7 @@
       "panelHeightIn": 2.1,
       "label": "DRAW THE FREE-BODY DIAGRAM"
      },
-     "solution": "FN up (from the scale), longer than Fg down.",
+     "solution": "FN up (from the scale), larger than Fg down.",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -297,7 +300,7 @@
      },
      "steps": [
       {
-       "say": "Speeding up while going up, so the normal force is longer than the weight.",
+       "say": "Speeding up while going up, so the normal force is larger than the weight.",
        "ink": "arrow"
       }
      ]
@@ -312,7 +315,7 @@
       "panelHeightIn": 2.1,
       "label": "DRAW THE FREE-BODY DIAGRAM"
      },
-     "solution": "Fg down, drag up, Fg longer than drag.",
+     "solution": "Fg down, drag up, Fg larger than drag.",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -335,7 +338,7 @@
      },
      "steps": [
       {
-       "say": "Still speeding up, so drag is shorter than gravity.",
+       "say": "Still speeding up, so drag is smaller than gravity.",
        "ink": "arrow"
       }
      ]
@@ -350,7 +353,7 @@
       "panelHeightIn": 2.1,
       "label": "DRAW THE FREE-BODY DIAGRAM"
      },
-     "solution": "T up and right at 30° above the horizontal; fk left; FN up, shorter than Fg down.",
+     "solution": "T up and right at 30° above the horizontal; fk left; FN up, smaller than Fg down.",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -441,7 +444,7 @@
       "panelHeightIn": 2.1,
       "label": "DRAW THE FREE-BODY DIAGRAM"
      },
-     "solution": "Fg straight down; FN perpendicular to the ramp; fk up along the ramp, short (the block speeds up).",
+     "solution": "Fg straight down; FN perpendicular to the ramp; fk up along the ramp, small (the block speeds up).",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -489,9 +492,10 @@
        "TABLE"
       ]
      },
-     "solution": "Book: FN up from the table and Fg down, equal length. Table: FN up from the floor; Fg (the table's weight) down; Fbook (the book pushing down) down; FN equals Fg plus Fbook.",
+     "solution": "Book: FN up from the table and Fg down, equal. Table: FN up from the floor; Fg (the table's weight) down; F book on table (the book pushing down) down; FN equals Fg plus F book on table.",
      "keyImage": {
       "scene": "fbd",
+      "arrowPx": 150,
       "panels": [
        {
         "caption": "Book",
@@ -520,13 +524,13 @@
           "label": "F_{g}",
           "dir": "down",
           "mag": 1,
-          "offset": -0.25
+          "offset": -0.45
          },
          {
-          "label": "F_{book}",
+          "label": "F_{book on table}",
           "dir": "down",
           "mag": 0.5,
-          "offset": 0.25
+          "offset": 0.45
          }
         ]
        }
@@ -534,7 +538,7 @@
      },
      "steps": [
       {
-       "say": "The book's weight is not drawn on the table. The table feels the book's push, Fbook.",
+       "say": "The book's weight is not drawn on the table. The table feels the book's push, F book on table. F book on table equals the book's weight only because the book is at rest.",
        "ink": "arrow"
       }
      ]
@@ -542,7 +546,7 @@
     {
      "tier": "multi-topic",
      "points": 2,
-     "prompt": "A block on a frictionless table is tied to a string. The string runs over a pulley at the right edge of the table to a hanging weight, and the weight falls and speeds up. Ignore the mass of the string and the pulley, and ignore air resistance. Draw two separate free-body diagrams: one for the block and one for the hanging weight.",
+     "prompt": "A block on a frictionless table is tied to a string. The string runs over a pulley at the right edge of the table to a hanging mass, and the mass falls and speeds up. Ignore the mass of the string and the pulley, and ignore air resistance. Draw two separate free-body diagrams: one for the block and one for the hanging mass.",
      "draw": {
       "panels": 2,
       "across": 2,
@@ -550,10 +554,10 @@
       "label": "DRAW TWO SEPARATE FREE-BODY DIAGRAMS",
       "captions": [
        "BLOCK",
-       "HANGING WEIGHT"
+       "HANGING MASS"
       ]
      },
-     "solution": "Block: T right; FN up and Fg down, equal length; no friction. Hanging weight: T up, Fg down, Fg longer than T.",
+     "solution": "Block: T right; FN up and Fg down, equal; no friction. Hanging mass: T up, Fg down, Fg larger than T.",
      "keyImage": {
       "scene": "fbd",
       "panels": [
@@ -578,7 +582,7 @@
         ]
        },
        {
-        "caption": "Hanging weight",
+        "caption": "Hanging mass",
         "forces": [
          {
           "label": "T",
@@ -596,7 +600,7 @@
      },
      "steps": [
       {
-       "say": "Gravity on the weight is longer than the tension, because the weight speeds up downward.",
+       "say": "Gravity on the hanging mass is larger than the tension, because the mass speeds up downward. Grade T < Fg on the hanging mass and equal T on both. Don't compare arrow lengths across the two panels.",
        "ink": "arrow"
       }
      ]
