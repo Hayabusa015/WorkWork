@@ -1,19 +1,12 @@
 # SHULL-CHG-0068 — Physics U3 section list: adopt the deck's six sections
 
-> **Change ID is provisional.** Taken as the next integer after `SHULL-CHG-0067`, the highest ID in
-> the local `governance/proposals/` and `change-log/CHANGELOG.md` on 2026-11-10. The Secretary
-> session that wrote this record has no git tool. It could not `git fetch origin main` and cannot
-> push. Under `governance/CHANGE_CONTROL.md` §2 this ID is **not allocated** until someone checks it
-> against a freshly fetched `origin/main` and pushes the record there. If `SHULL-CHG-0068` already
-> exists on `origin/main`, renumber this file before pushing it.
->
 > **No conflict with a LOCKED rule.** The Physics curriculum map is labelled CONFIRMED, not LOCKED.
 > It does replace a confirmed map that was taken from a cited source (`SHULL_Physics_Unit_Map_1.pdf`).
 > See section 4.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0068 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0068 |
 | **Date** | 2026-11-10 |
 | **Source** | User. Found by the main session on 2026-11-10 while building the Physics Unit 3 guided notes. |
 | **Current Rule** | `courses/physics/DECISIONS.md`, "Curriculum map — CONFIRMED", lines 34-37: "**U3 · Forces and Motion** — 7 sections / `3.1` Newton's Laws · `3.2` Free Body Diagrams · `3.3` Inclined Plane FBDs · `3.4` F = ma Calculations · `3.5` Net Force & Acceleration from FBDs · `3.6` Frictional Forces · `3.7` Multi-Body Systems (Atwood Machines)". This is also counted in line 11 ("Units 0–10, 48 sections") and line 70 ("7+4+3 = 14 · ... **total 48.**"). Cross-referenced at line 109-110: "This matters most across `3.2`, `3.3`, and `3.5` — three consecutive FBD sections." |
@@ -27,8 +20,8 @@
 | **Recommendation** | Approve. Matt has already chosen the deck's numbering for the built material, and the decisions file should match what gets printed. Answer the two questions in section 5 when approving. |
 | **Decision** | Approved by the user in chat, 2026-11-11, answering the open questions on this record: "Friction doesnt but id like to add it before we do the math for it." Read by the main session as: approve the six-section U3 list; 3.5 Friction is not an FBD section (FBD cross-reference reads 3.2, 3.3, 3.4); friction may appear in FBD practice before the 3.5 friction calculations. Earlier, 2026-11-10, he chose "Follow the deck" for the U3 numbering. Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Implemented By** | `courses/physics/DECISIONS.md` and `change-log/CHANGELOG.md` edited by the Secretary on 2026-11-11, to be committed by the main session with this Change ID in the message. **SHA of that commit: pending, add it here.** Then set Status to IMPLEMENTED. |
+| **Verified** | **Partially, pending commit.** The Secretary re-read each edited passage against section 2 and the Decision: the U3 list (6 sections, titles as in section 1), the map heading (47), the section-count line (6+4+3 = 13, total 47, with the provenance sentence from section 2 item 3), the FBD cross-reference (`3.2`, `3.3`, `3.4`, with 3.5 named as not an FBD section and the friction-in-FBD-practice note), and a dated decision-log entry at the top of the log. Arithmetic checked: 11 + 13 + 11 + 12 = 47. A grep found no remaining use of `3.7` or the old U3 titles outside the historical folders (section 7, F5). Not done: confirming the diff in git (the Secretary has no git tool). See section 7. |
 
 ---
 
@@ -96,3 +89,23 @@ of this record, because the decision he made today covered the guided notes, not
 - It does not edit `courses/physics/DECISIONS.md`.
 - It does not rename, move or trash any Drive folder.
 - It does not touch the guided notes being built.
+
+(Section 6 describes the record as proposed. Implementation is in the `Implemented By` field.)
+
+## 7. Implementation notes and follow-ups (recorded, not acted on)
+
+Applied 2026-11-11 against the APPROVED Decision recorded at commit `ecd988c` (branch
+`claude/focused-mendel-cefeca`). Question 2 was answered by the Decision: 3.5 Friction is not an FBD
+section, so the cross-reference reads `3.2`, `3.3`, `3.4`, and friction may appear in FBD practice
+before the 3.5 calculations. The Change ID was checked free against a fetched `origin/main` and
+pushed in the branch's first commit (reported by the main session; the Secretary has no git tool).
+
+| # | Follow-up | Where | What it needs |
+|---|---|---|---|
+| F1 | Drive holds seven U3 section folders. `03.7` maps to no section. Folder names `03.3`–`03.6` carry the old titles. | Drive, `Physics/Unit 03 - Forces and Motion/`. IDs per section 3. | Its own record, and a Drive operation pre-logged in `reports/drive-operations/` (CHANGE_CONTROL §7). Not acted on. |
+| F2 | Open question 1 cites "Atwood machines, inclined-plane FBDs". | `courses/physics/DECISIONS.md`, Open questions 1 | Left unedited, as section 3 says. Still true: the built U3 notes specs teach the Atwood machine under `3.6` (`templates/notes/specs/make_phys_u03_s03.1-s03.6_notes.py` lines 428 and 535). |
+| F3 | Open question 2 cites "inclined-plane FBDs at `3.3`". | `courses/physics/DECISIONS.md`, Open questions 2 | Left unedited, as section 3 says. The code is still valid. The title is now "Forces on an Incline". |
+| F4 | The map's `Source:` line still names `SHULL_Physics_Unit_Map_1.pdf` as the source of the whole map. | `courses/physics/DECISIONS.md`, Curriculum map, `Source:` line | Not in section 2, so not edited. The section-count line now says U3 follows Matt's deck. A one-line qualifier on the `Source:` line would need its own approval. |
+| F5 | Code that may still use the old U3 codes or titles (`3.7`, "Inclined Plane FBDs", "Multi-Body Systems"). | `templates/`, `.claude/skills/`, builders | A grep on 2026-11-11 (excluding `legacy/`, `docs/`, `reports/`, `governance/`; `.claude/` searched separately) found no `"3.7"`, `S03.7`, "Inclined Plane FBDs" or "Multi-Body Systems". The builders read section codes from this file, so any spec declaring `3.7` would now be refused. |
+| F6 | The U3 notes generator docstring says "SHULL-CHG-0068 pending for DECISIONS.md". | `templates/notes/specs/make_phys_u03_s03.1-s03.6_notes.py` line 12 | Stale once this commit lands. A one-word fix by whoever next edits that file. Templates were out of scope here. |
+| F7 | `courses/README.md` line 18 restates the Physics count: "11 units, 48 sections". Now stale (47). It is a duplicate of a fact owned by `courses/physics/DECISIONS.md`. | `courses/README.md` | Not in section 2, so not edited. The fix under CLAUDE.md §1 is to point at the decisions file, not to restate 47. Needs its own approval. (Historical reports under `reports/` and older records that say 48 are history and stay.) |

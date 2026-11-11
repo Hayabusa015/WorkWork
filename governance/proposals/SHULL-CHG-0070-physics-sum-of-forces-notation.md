@@ -1,19 +1,11 @@
 # SHULL-CHG-0070 — Physics notation: write net force as ∑F, not Fnet
 
-> **Change ID is provisional.** Taken as the next integer after `SHULL-CHG-0069`, the highest ID in
-> the local `governance/proposals/` on 2026-11-11. `SHULL-CHG-0069` (no inline blanks) was being
-> written by another Secretary run at the same time. The session that wrote this record has no git
-> tool. It could not `git fetch origin main` and cannot push. Under `governance/CHANGE_CONTROL.md` §2
-> this ID is **not allocated** until someone checks it against a freshly fetched `origin/main` and
-> pushes the record there. If `SHULL-CHG-0070` already exists on `origin/main`, renumber this file
-> before pushing it.
->
 > **No conflict with a LOCKED rule.** No existing rule in `courses/physics/DECISIONS.md`, a standard
 > or a Physics spec fixes net-force notation (see section 3). This adds a rule. It does not replace one.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0070 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0070 |
 | **Date** | 2026-11-11 |
 | **Source** | User. Matt, in conversation, 2026-11-11, about the Physics U3 guided notes, verbatim: "Also in front of forces. Can we use the sum of symbol, I want to emphasize its the sum of". He attached an image of "∑F = ma". |
 | **Current Rule** | None. `courses/physics/DECISIONS.md` has no notation rule for net force. The nearest rules are "Physics-specific build rules — CONFIRMED as discipline standards", **Vectors** (lines 105-106): "Any vector quantity gets a direction, always. Magnitude alone is an incomplete answer for displacement, velocity, acceleration, force, momentum, and field strength." and **Free-body diagrams** (lines 108-110). Neither names a symbol. In practice, built material uses `Fnet` (section 3). |
@@ -27,8 +19,8 @@
 | **Recommendation** | Approve. Matt asked for it directly, and it fits the Vectors rule already in force. Answer the questions in section 5 when approving. |
 | **Decision** | Approved by the user in chat, 2026-11-11: "yes", answering "Make ∑F the standing Physics notation? Should your slides switch to ∑F too?" Approves the notation rule and switching the U3 deck to ∑F. Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Implemented By** | Rule: `courses/physics/DECISIONS.md` ("Net force notation", after **Vectors**, plus a dated decision-log entry) and `change-log/CHANGELOG.md`, edited by the Secretary on 2026-11-11, to be committed by the main session with this Change ID in the message. **SHA of that commit: pending, add it here.** The approved switch of the U3 deck from `Fnet` to `∑F` is **not** done (section 7). |
+| **Verified** | **Partially.** (1) The rule text in `DECISIONS.md` matches section 2 verbatim. (2) Font coverage, checked with fontTools in the implementing session and reported to the Secretary (not re-run by the Secretary, which has no shell): U+2211 is present in Archivo and in `brand/fonts/PatrickHand-Regular.ttf`, and absent from `brand/fonts/ShullHand.ttf`; U+03A3 is absent from Archivo. So ∑ sets in Archivo on a student page, and on a key it falls back per glyph from ShullHand to Patrick Hand under SHULL-CHG-0044, which `audit_fonts.py --key` admits. (3) Question 3 answered in practice by the built U3 notes (section 7). Outstanding: the commit SHA, and the U3 deck switch. |
 
 ---
 
@@ -87,3 +79,26 @@ this ID.
 - It does not edit `courses/physics/DECISIONS.md`.
 - It does not edit the U3 deck, the U3 notes specs or the 4.1 practice spec.
 - It does not change any font file.
+
+(Section 6 describes the record as proposed. Implementation is in the `Implemented By` field.)
+
+## 7. Implementation notes and follow-ups (recorded, not acted on)
+
+Applied 2026-11-11 against the APPROVED Decision recorded at commit `ecd988c` (branch
+`claude/focused-mendel-cefeca`). The Change ID was checked free against a fetched `origin/main` and
+pushed in commit `4f00ce2` (reported by the main session; the Secretary has no git tool).
+
+**Questions in section 5, as they stand.**
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Approve ∑F for all Physics material | Yes ("yes", Decision field). Rule added. |
+| 2 | Switch the U3 deck | Yes ("yes", Decision field). Approved but **not done**: out of the Secretary's scope for this task (F1). |
+| 3 | 2-D magnitude form | Answered in practice by the built U3 guided notes, which use **∑F = √((∑Fx)² + (∑Fy)²)** (`templates/notes/specs/make_phys_u03_s03.1-s03.6_notes.py` line 516; both U3 notes JSON specs, line 54). Matt did not choose between the two forms himself. The form is recorded in the decision-log entry as what the notes print. It is not written into the rule paragraph, because section 2 did not propose it. |
+
+| # | Follow-up | Where | What it needs |
+|---|---|---|---|
+| F1 | U3 deck still prints `Fnet`. Matt approved switching it. | "SHULL Physics Unit 03 - Forces and Motion.pptx" | A deck edit by the Designer, then the slide audits. No further approval needed. Not acted on here. When the deck is switched, the guided-notes line "∑F means net force (the slides write Fnet)." becomes stale (`templates/notes/specs/make_phys_u03_s03.1-s03.6_notes.py` line 522, and line 70 of both U3 notes JSON specs) and should be removed in the same pass. |
+| F2 | `templates/practice/specs/physics.json` (4.1) still uses `Fnet = m a`. | Lines 21 and 90 | Already-built material stays as built under no-retrofit. Change it the next time 4.1 practice is rebuilt. |
+| F3 | Keys: ∑ is not in ShullHand v0.2 and falls back to Patrick Hand. | `brand/fonts/README.md` "Known limits" already says "No sigma". | Nothing now. Check ∑ legibility on the first real key that carries it (`standards/ANSWER_KEYS.md` §7, §9). |
+| F4 | An Auditor check for stray `Fnet` or U+03A3 on Physics pages. | `scripts/` | Optional. Its own record if Matt wants it. |

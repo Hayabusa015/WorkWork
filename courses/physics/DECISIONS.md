@@ -1,14 +1,14 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-14
+**Last updated:** 2026-11-11
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
 
 ---
 
-## Curriculum map — CONFIRMED (Units 0–10, 48 sections)
+## Curriculum map — CONFIRMED (Units 0–10, 47 sections)
 
 Source: `SHULL_Physics_Unit_Map_1.pdf`, Matt's course reference sheet. Same `U#/S#.#` grammar as
 Chemistry. **This is the only authoritative copy — never build against a code not listed here.**
@@ -31,10 +31,9 @@ Chemistry. **This is the only authoritative copy — never build against a code 
 
 ### Phase 2 — Forces & Energy (U3–U5)
 
-**U3 · Forces and Motion** — 7 sections
-`3.1` Newton's Laws · `3.2` Free Body Diagrams · `3.3` Inclined Plane FBDs · `3.4` F = ma
-Calculations · `3.5` Net Force & Acceleration from FBDs · `3.6` Frictional Forces ·
-`3.7` Multi-Body Systems (Atwood Machines)
+**U3 · Forces and Motion** — 6 sections
+`3.1` Newton's Laws · `3.2` Free-Body Diagrams · `3.3` Forces on an Incline ·
+`3.4` Net Force and Acceleration · `3.5` Friction · `3.6` Connected Objects
 
 **U4 · Work, Energy & Power** — 4 sections
 `4.1` Work & Power · `4.2` Kinetic Energy & Work-Energy Theorem · `4.3` Potential Energy
@@ -67,8 +66,8 @@ Fields · `9.6` EM Induction & Applications
 `10.1` Nuclear Structure & Stability · `10.2` Radioactive Decay · `10.3` Half-Life ·
 `10.4` Mass-Energy Equivalence · `10.5` Fission & Fusion · `10.6` Applications, Risks & Benefits
 
-**Section count:** 4+4+3 = 11 · 7+4+3 = 14 · 3+5+3 = 11 · 6+6 = 12 · **total 48.** Matches the map
-header.
+**Section count:** 4+4+3 = 11 · 6+4+3 = 13 · 3+5+3 = 11 · 6+6 = 12 · **total 47.** U3 follows Matt's
+deck, not the map PDF (SHULL-CHG-0068).
 
 ### What the map itself establishes
 
@@ -105,9 +104,16 @@ the course settles.
 **Vectors.** Any vector quantity gets a direction, always. Magnitude alone is an incomplete answer
 for displacement, velocity, acceleration, force, momentum, and field strength.
 
+**Net force notation.** Net force is written **∑F**, never `Fnet`. Newton's 2nd law is
+**∑F = ma**. Components are **∑Fx** and **∑Fy**, with x and y as subscripts. Equilibrium is
+∑F = 0, or ∑Fx = 0 and ∑Fy = 0. Typeset the symbol as **U+2211 N-ARY SUMMATION (∑)**, which
+Archivo carries. Do not use U+03A3 GREEK CAPITAL LETTER SIGMA (Σ), which Archivo lacks and which
+would fall back to another face. (SHULL-CHG-0070)
+
 **Free-body diagrams.** Object as a dot or box · one labelled arrow per force · arrows scaled to
-relative magnitude · **no arrow for "motion."** This matters most across `3.2`, `3.3`, and `3.5` —
-three consecutive FBD sections.
+relative magnitude · **no arrow for "motion."** This matters most across `3.2`, `3.3`, and `3.4` —
+three consecutive FBD sections. `3.5` Friction is not an FBD section, but friction may appear as a
+force in FBD practice before the `3.5` friction calculations, per Matt (SHULL-CHG-0068).
 
 **Graph interpretation is a first-class skill, not a garnish.** Students read slope and area as
 physical quantities: v-t slope is acceleration, v-t area is displacement, F-x area is work. **Build
@@ -234,6 +240,29 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.4 | Free Fall |
 
 ## Decision log
+
+### 2026-11-11 — Net force is written ∑F
+Matt asked for the sum symbol in front of forces "to emphasize its the sum of", and answered "yes"
+to making ∑F the standing Physics notation and to switching the U3 deck to it. The rule is the
+**Net force notation** paragraph under "Physics-specific build rules". Material already built with
+`Fnet` stays as built under the no-retrofit policy, except the U3 deck, which Matt asked to switch
+(a separate edit, not part of this entry). The U3 guided notes write the magnitude of a 2-D net
+force as ∑F = √((∑Fx)² + (∑Fy)²).
+Supersedes: No written rule. Replaces the unwritten `Fnet` convention in built Physics material.
+Status: CONFIRMED · SHULL-CHG-0070
+
+### 2026-11-11 — U3 has six sections, following Matt's deck
+U3 now reads `3.1` Newton's Laws · `3.2` Free-Body Diagrams · `3.3` Forces on an Incline ·
+`3.4` Net Force and Acceleration · `3.5` Friction · `3.6` Connected Objects, matching Matt's deck
+"SHULL Physics Unit 03 - Forces and Motion". The old `3.4` F = ma Calculations folds into `3.4`, and
+the old `3.7` no longer exists. The course total is 47 sections. The FBD sections are `3.2`, `3.3`
+and `3.4`. `3.5` Friction is not one, but Matt said "id like to add it before we do the math for
+it", so friction may appear in FBD practice ahead of `3.5`. Drive still holds seven U3 section
+folders (03.1–03.7) under the old titles. Renaming or trashing them needs its own record and a
+pre-logged Drive operation.
+Supersedes: The U3 entry of the curriculum map (7 sections, from `SHULL_Physics_Unit_Map_1.pdf`), the
+48-section totals, and the FBD cross-reference to `3.2`, `3.3`, `3.5`.
+Status: CONFIRMED · SHULL-CHG-0068
 
 ### 2026-09-14 — First Physics lab built: Section 1.3 (Position-Velocity-Acceleration Graphing)
 Matt asked for a new Physics lab on Section 1.3, confirmed above in the curriculum map — no new code
