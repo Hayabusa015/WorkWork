@@ -37,10 +37,10 @@
           "heading": "Newton’s laws",
           "lines": [
             "Fg = mg",
-            "Fnet = ma",
+            "∑F = ma",
             {
               "lhs": "a",
-              "num": "Fnet",
+              "num": "∑F",
               "den": "m"
             },
             "FN − mg = ma  (up is positive)"
@@ -51,7 +51,7 @@
           "lines": [
             "Fx = F cos θ",
             "Fy = F sin θ",
-            "Fnet = √(Fx² + Fy²)",
+            "∑F = √(Fx² + Fy²)",
             "θ = tan⁻¹(Fy/Fx)"
           ]
         },
@@ -67,6 +67,7 @@
         }
       ],
       "notes": [
+        "∑F means net force (the slides write Fnet).",
         "g = 9.8 m/s² on Earth.   1 N = 1 kg·m/s².   μ has no units.   Frictionless ramp: a = g sin θ."
       ]
     },
@@ -124,7 +125,7 @@
         ]
       }
     ],
-    "howToUse": "The left column names what to record and the slide it comes from. Fill each blank while that slide is up. A gray rule down the left of a line marks a must-write line. In each work box, state your positive direction and carry units to the answer."
+    "howToUse": "The left column names the slide each block comes from. While that slide is up, write each idea in your own words on the lines under its prompt. In each work box, state your positive direction and carry units to the answer."
   },
   "sectionsContent": [
     {
@@ -142,18 +143,20 @@
               ],
               "notes": [
                 {
-                  "text": "A force is a **push** or a **pull**: a **vector**, with size and **direction**, in **newtons (N)**.",
-                  "after": 5
+                  "prompt": "Force: definition and unit",
+                  "lines": 2,
+                  "answer": "A force is a push or a pull. It is a vector, with a size and a direction, measured in newtons (N)."
                 },
                 {
-                  "text": "**Mass:** how much **matter**, in **kilograms (kg)**. Stays the same when you travel.   **Weight:** the force of **gravity**, in **newtons (N)**. Changes when gravity changes.",
-                  "after": 5
+                  "prompt": "Mass vs. weight: meaning and units",
+                  "lines": 2,
+                  "answer": "Mass: how much matter, in kg; stays the same when you travel. Weight: the force of gravity, in N; changes when gravity changes."
                 },
                 {
-                  "text": "10 kg on Earth: Fg = 10(9.8) = **98 N** down.   10 kg on the Moon: Fg = 10(1.6) = **16 N** down.",
-                  "after": 5
-                },
-                "*Weight: Fg = **mg**. On Earth, g = **9.8 m/s²**."
+                  "prompt": "Weight: equation, g on Earth, and the 10 kg example",
+                  "lines": 2,
+                  "answer": "Fg = mg, with g = 9.8 m/s² on Earth. 10 kg: 98 N down on Earth, 16 N down on the Moon."
+                }
               ],
               "extraNotes": false
             },
@@ -168,7 +171,7 @@
                 "given": [
                   "m = 60 kg;   Earth: g = 9.8 m/s²;   Moon: g = 1.6 m/s².     **Find:** weight in each location."
                 ],
-                "answer": "Earth: Fg = **588 N down**      Moon: Fg = **96 N down**",
+                "answer": "**Answer:**  Earth: Fg = 588 N down      Moon: Fg = 96 N down",
                 "solution": [
                   "Fg = mg",
                   "Earth: Fg = 60(9.8) = 588 N down",
@@ -178,28 +181,37 @@
               },
               "notes": [],
               "extraNotes": false
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Newton’s Three Laws",
               "cues": [
                 "Slides 6–8",
-                "Common mix-up: a moving object does not need a net force to keep moving. A moving puck keeps going with Fnet = 0."
+                "Common mix-up: a moving object does not need a net force to keep moving. A moving puck keeps going with ∑F = 0."
               ],
               "notes": [
-                "*1st law: an object at rest stays at **rest**, and an object in motion keeps a constant **velocity**, unless a **net external force** acts on it.",
                 {
-                  "text": "Equilibrium: forces balance, Fnet = **0**. At rest, or constant speed in a **straight line**.",
-                  "after": 5
+                  "prompt": "Newton’s 1st law",
+                  "lines": 2,
+                  "answer": "An object at rest stays at rest, and an object in motion keeps a constant velocity, unless a net external force acts on it."
                 },
-                "*2nd law: Fnet = **ma**, so a = **Fnet / m**. Fnet is the **sum** of all forces.",
                 {
-                  "text": "Same mass: more net force, **more** acceleration. Same force, twice the mass: **half** the acceleration.",
-                  "after": 5
+                  "prompt": "Equilibrium: condition and the two possibilities",
+                  "lines": 2,
+                  "answer": "Forces balance, ∑F = 0. The object stays at rest, or moves at constant speed in a straight line."
                 },
-                "*3rd law: for every action, there is an **equal** and **opposite** reaction.",
                 {
-                  "text": "The pair acts on **two** objects, so third-law forces do not **cancel** on one object’s FBD.",
-                  "after": 5
+                  "prompt": "Newton’s 2nd law: equation and meaning",
+                  "lines": 3,
+                  "answer": "∑F = ma, so a = ∑F / m. Net force, ∑F, is the sum of all forces acting on the object. Same mass: more net force, more acceleration. Same force, twice the mass: half the acceleration."
+                },
+                {
+                  "prompt": "Newton’s 3rd law, and why the pair does not cancel",
+                  "lines": 2,
+                  "answer": "For every action, there is an equal and opposite reaction. The pair acts on two objects, so it does not cancel on one object’s FBD."
                 }
               ],
               "extraNotes": false
@@ -217,7 +229,7 @@
                 "I can tell mass (kg) from weight (N) and find weight with Fg = mg.",
                 "I can state all three laws and explain equilibrium."
               ],
-              "answer": "1st: Fnet = 0, no change in velocity. 2nd: Fnet = ma. 3rd: equal, opposite pairs. Fg = mg."
+              "answer": "1st: ∑F = 0, no change in velocity. 2nd: ∑F = ma. 3rd: equal, opposite pairs. Fg = mg."
             }
           ]
         }
@@ -238,20 +250,22 @@
               ],
               "notes": [
                 {
-                  "text": "Draw the object as a **box** or **dot**. Add one labeled **arrow** for each force. Longer arrows mean **larger** forces. Keep **motion** arrows separate.",
-                  "after": 5
+                  "prompt": "Drawing an FBD: the rules",
+                  "lines": 2,
+                  "answer": "Box or dot; one labeled arrow per force; longer arrow = larger force; no motion arrows; only forces on the chosen object."
                 },
                 {
-                  "text": "Fg: gravity pulls **down**.   FN: surface pushes **perpendicular**.   T: rope pulls **along the rope**.",
-                  "after": 5
+                  "prompt": "Common forces: Fg, FN, T",
+                  "lines": 2,
+                  "answer": "Fg: gravity pulls down. FN: surface pushes perpendicular. T: rope pulls along the rope."
                 },
-                "*Show only the forces that act on the **chosen object**.",
                 {
-                  "text": "Normal means **perpendicular**. The normal force is a surface’s **push** on an object. It points straight out from the surface: on a floor, **up**; on a ramp, **tilted**.",
-                  "after": 5
-                },
-                "*On a level surface with no other vertical forces or acceleration: FN = **Fg**."
-              ]
+                  "prompt": "Normal force: direction, and when FN = Fg",
+                  "lines": 2,
+                  "answer": "Perpendicular push from the surface: up on a floor, tilted on a ramp. FN = Fg only on a level surface, no other vertical forces, no acceleration."
+                }
+              ],
+              "extraNotes": false
             },
             {
               "kind": "example",
@@ -265,7 +279,7 @@
                   "2 kg book at rest on a table;   1.5 kg lamp at rest on a rope;   g = 9.8 m/s²."
                 ],
                 "find": "the free-body diagram of each, and the upward force on each.",
-                "answer": "Book: FN = **19.6 N up**      Lamp: T = **14.7 N up**",
+                "answer": "**Answer:**  Book: FN = 19.6 N up      Lamp: T = 14.7 N up",
                 "workHeightIn": 1.6,
                 "solution": [
                   "Book FBD: FN up, Fg down, equal arrows.   Lamp FBD: T up, Fg down, equal arrows.",
@@ -285,17 +299,22 @@
               ],
               "problem": {
                 "given": [
-                  "crate;   30 N right;   10 N left.   Positive: right.     **Find:** Fnet, with its direction."
+                  "crate;   30 N right;   10 N left.   Positive: right.     **Find:** ∑F, with its direction."
                 ],
-                "answer": "Fnet = **20 N to the right**",
-                "statement": "Choose a positive direction, then add forces with **signs**. Add horizontal and vertical forces **separately**.",
+                "answer": "**Answer:**  ∑F = 20 N to the right",
                 "solution": [
                   "Right: +30 N     Left: −10 N",
-                  "Fnet = 30 − 10 = 20 N",
+                  "∑F = 30 − 10 = 20 N",
                   "20 N to the right"
                 ]
               },
-              "notes": [],
+              "notes": [
+                {
+                  "prompt": "Net force: the method",
+                  "lines": 1,
+                  "answer": "Pick + direction; add with signs; x and y apart."
+                }
+              ],
               "extraNotes": false
             }
           ]
@@ -312,9 +331,9 @@
                 "given": [
                   "40 N right (+x) and 30 N up, perpendicular.     **Find:** the size and direction of the resultant."
                 ],
-                "answer": "Fnet = **50 N**  at  θ = **36.9° above +x**",
+                "answer": "**Answer:**  ∑F = 50 N  at  θ = 36.9° above +x",
                 "solution": [
-                  "Fnet = √(40² + 30²) = 50 N",
+                  "∑F = √(40² + 30²) = 50 N",
                   "θ = tan⁻¹(30/40) = 36.9°",
                   "50 N, 36.9° above +x"
                 ]
@@ -332,15 +351,20 @@
                 "given": [
                   "F = 100 N pulling 30° above the horizontal.     **Find:** the horizontal and vertical components."
                 ],
-                "answer": "Fx = **86.6 N horizontal, toward the pull**      Fy = **50.0 N up**",
-                "statement": "Horizontal: Fx = **F cos θ**      Vertical: Fy = **F sin θ**",
+                "answer": "**Answer:**  Fx = 86.6 N horizontal, toward the pull      Fy = 50.0 N up",
                 "solution": [
                   "Fx = F cos θ = 100 cos 30° = 86.6 N horizontal, toward the pull",
                   "Fy = F sin θ = 100 sin 30° = 50.0 N up",
                   "Check: √(86.6² + 50.0²) ≈ 100 N"
                 ]
               },
-              "notes": [],
+              "notes": [
+                {
+                  "prompt": "Components of an angled force",
+                  "lines": 1,
+                  "answer": "Fx = F cos θ;   Fy = F sin θ"
+                }
+              ],
               "extraNotes": false
             },
             {
@@ -356,11 +380,11 @@
                   "top view;  500 N at 30° above +x;  400 N at 45° above −x.  Positive: +x right, +y up the page."
                 ],
                 "find": "the net force on the barge and its direction.",
-                "answer": "Fnet ≈ **554 N**  at  θ ≈ **74° above +x**",
+                "answer": "**Answer:**  ∑F ≈ 554 N  at  θ ≈ 74° above +x",
                 "solution": [
                   "Fx = 500 cos 30° − 400 cos 45° = 150 N",
                   "Fy = 500 sin 30° + 400 sin 45° = 533 N",
-                  "Fnet = √(150² + 533²) ≈ 554 N",
+                  "∑F = √(150² + 533²) ≈ 554 N",
                   "θ = tan⁻¹(533/150) ≈ 74°"
                 ]
               },
@@ -374,7 +398,7 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 3,
+              "lines": 2,
               "prompt": "Summarize how to find the net force from a free-body diagram, including a force at an angle.",
               "selfCheck": [
                 "I can draw an FBD with one labeled arrow per force.",
@@ -401,14 +425,14 @@
               ],
               "notes": [
                 {
-                  "text": "Use one axis **along** the ramp and one **perpendicular** to it.",
-                  "after": 5
+                  "prompt": "Ramp axes and the weight components",
+                  "lines": 2,
+                  "answer": "One axis along the ramp, one perpendicular. Fg,parallel = mg sin θ down the slope; Fg,perp = mg cos θ into the surface."
                 },
-                "*Fg,parallel = **mg sin θ** down the slope.   Fg,perp = **mg cos θ** into the surface.",
-                "*FN = **mg cos θ**  (no extra perpendicular force and no perpendicular acceleration)",
                 {
-                  "text": "Steeper ramp, **less** support.  15° slope: FN ≈ **0.97mg**.  60° slope: FN = **0.50mg**.",
-                  "after": 5
+                  "prompt": "FN on a ramp: equation, condition, steepness",
+                  "lines": 2,
+                  "answer": "FN = mg cos θ (no extra perpendicular force or acceleration). Steeper ramp, less support: 15°: 0.97mg; 60°: 0.50mg."
                 }
               ],
               "extraNotes": false
@@ -423,8 +447,7 @@
                 "given": [
                   "m = 5 kg;   frictionless 30° ramp;   g = 9.8 m/s².     **Find:** FBD, Fg,parallel, Fg,perp, and FN."
                 ],
-                "answer": "Fg,parallel = **24.5 N** down the ramp    Fg,perp = **42.4 N** into the ramp    FN = **42.4 N** out",
-                "workHeightIn": 1.6,
+                "answer": "**Answer:**  Fg,parallel = 24.5 N down the ramp    Fg,perp = 42.4 N into the ramp    FN = 42.4 N out",
                 "solution": [
                   "FBD: Fg down, FN perpendicular out of the ramp; Fg split into Fg,parallel and Fg,perp.",
                   "Fg = mg = 5(9.8) = 49 N",
@@ -444,13 +467,12 @@
               ],
               "problem": {
                 "given": [
-                  "m = 12 kg;   frictionless 25° ramp;   30 N push uphill.   Positive: downhill."
+                  "m = 12 kg;  frictionless 25° ramp;  30 N push uphill.  Positive: downhill.     **Find:** Fg,parallel and ∑F."
                 ],
-                "find": "Fg,parallel and Fnet.",
-                "answer": "Fg,parallel = **49.7 N downhill**      Fnet = **19.7 N down the ramp**",
+                "answer": "**Answer:**  Fg,parallel = 49.7 N downhill      ∑F = 19.7 N down the ramp",
                 "solution": [
                   "Fg,parallel = 12(9.8) sin 25° = 49.7 N downhill",
-                  "Fnet = 49.7 − 30 = 19.7 N",
+                  "∑F = 49.7 − 30 = 19.7 N",
                   "19.7 N down the ramp"
                 ]
               },
@@ -479,7 +501,7 @@
     {
       "code": "3.4",
       "title": "Net Force and Acceleration",
-      "learningTarget": "I can use Fnet = ma to find acceleration, including on a ramp and in an elevator.",
+      "learningTarget": "I can use ∑F = ma to find acceleration, including on a ramp and in an elevator.",
       "pages": [
         {
           "rows": [
@@ -491,17 +513,22 @@
               ],
               "problem": {
                 "given": [
-                  "m = 4 kg;   Fnet = 12 N to the right.     **Find:** the acceleration."
+                  "m = 4 kg;   ∑F = 12 N to the right.     **Find:** the acceleration."
                 ],
-                "answer": "a = **3.0 m/s² right**",
-                "statement": "1 N = **1 kg·m/s²**. Acceleration points in the direction of the **net force**.",
+                "answer": "**Answer:**  a = 3.0 m/s² right",
                 "solution": [
-                  "Fnet = ma, so a = Fnet / m",
+                  "∑F = ma, so a = ∑F / m",
                   "a = 12 N / 4 kg",
                   "a = 3.0 m/s² right"
                 ]
               },
-              "notes": [],
+              "notes": [
+                {
+                  "prompt": "1 N in base units; direction of a",
+                  "lines": 1,
+                  "answer": "1 N = 1 kg·m/s². a points in the direction of ∑F."
+                }
+              ],
               "extraNotes": false
             },
             {
@@ -513,12 +540,12 @@
               ],
               "problem": {
                 "given": [
-                  "m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward.     **Find:** Fnet and a."
+                  "m = 1500 kg;   4500 N forward;   1200 N drag (backward).   Positive: forward.     **Find:** ∑F and a."
                 ],
-                "answer": "Fnet = **3300 N forward**      a = **2.2 m/s² forward**",
+                "answer": "**Answer:**  ∑F = 3300 N forward      a = 2.2 m/s² forward",
                 "solution": [
-                  "Fnet = 4500 − 1200 = 3300 N forward",
-                  "a = Fnet / m = 3300 / 1500",
+                  "∑F = 4500 − 1200 = 3300 N forward",
+                  "a = ∑F / m = 3300 / 1500",
                   "a = 2.2 m/s² forward"
                 ]
               },
@@ -537,7 +564,7 @@
                   "m = 20 kg;   60 N pull at 35° above horizontal;   ignore friction.   Positive: +x (right) and up."
                 ],
                 "find": "the acceleration and the normal force.",
-                "answer": "a = **2.46 m/s² right**      FN ≈ **162 N up**",
+                "answer": "**Answer:**  a = 2.46 m/s² right      FN ≈ 162 N up",
                 "solution": [
                   "Fx = 60 cos 35° = 49.1 N",
                   "a = Fx / m = 49.1 / 20 = 2.46 m/s² right",
@@ -562,16 +589,21 @@
                 "given": [
                   "m = 8 kg;   frictionless 20° ramp.   Positive: downhill.     **Find:** the acceleration."
                 ],
-                "answer": "a = **3.35 m/s² downhill**",
-                "statement": "Without friction, a = **g sin θ**. The acceleration does not depend on the block’s **mass**.",
+                "answer": "**Answer:**  a = 3.35 m/s² downhill",
                 "solution": [
-                  "Fnet = mg sin θ",
+                  "∑F = mg sin θ",
                   "ma = mg sin θ",
                   "Mass cancels: a = g sin θ = 9.8 sin 20°",
                   "a = 3.35 m/s² downhill"
                 ]
               },
-              "notes": [],
+              "notes": [
+                {
+                  "prompt": "Frictionless ramp: acceleration",
+                  "lines": 1,
+                  "answer": "a = g sin θ; it does not depend on mass."
+                }
+              ],
               "extraNotes": false
             },
             {
@@ -582,16 +614,22 @@
               ],
               "notes": [
                 {
-                  "text": "A scale reads the upward **normal force**, FN. That is your **apparent weight**.",
-                  "after": 5
+                  "prompt": "Apparent weight: what a scale reads",
+                  "lines": 1,
+                  "answer": "The upward normal force, FN."
                 },
-                "*Choose up as positive:   FN − **mg** = **ma**",
                 {
-                  "text": "Rest or constant velocity: a = **0**, so FN = **mg**. The scale reads your usual weight.",
-                  "after": 5
+                  "prompt": "Elevator equation (up positive) and the a = 0 case",
+                  "lines": 2,
+                  "answer": "FN − mg = ma. At rest or constant velocity, a = 0, so FN = mg."
                 },
-                "*The scale reading changes with **acceleration**, not simply with motion up or down."
-              ]
+                {
+                  "prompt": "Scale reading: what changes it",
+                  "lines": 1,
+                  "answer": "Acceleration, not simply moving up or down."
+                }
+              ],
+              "extraNotes": false
             },
             {
               "kind": "example",
@@ -604,7 +642,7 @@
                 "given": [
                   "m = 70 kg;   a = 2.0 m/s² upward.   Positive: up.     **Find:** the scale reading."
                 ],
-                "answer": "FN = **826 N up**",
+                "answer": "**Answer:**  FN = 826 N up",
                 "solution": [
                   "Weight: mg = 70(9.8) = 686 N",
                   "FN − mg = ma",
@@ -622,13 +660,13 @@
                 "Close your notes before you write.",
                 "Use the checklist to find what still needs practice."
               ],
-              "lines": 3,
+              "lines": 2,
               "prompt": "List the steps from a free-body diagram to an acceleration. Add how a scale reading changes in an accelerating elevator.",
               "selfCheck": [
-                "I can find a from Fnet = ma, with units and direction.",
+                "I can find a from ∑F = ma, with units and direction.",
                 "I can find a scale reading with FN − mg = ma."
               ],
-              "answer": "Choose a positive direction, add the forces to get Fnet, then a = Fnet / m in the direction of Fnet. The scale reads FN; FN − mg = ma, so FN changes when a ≠ 0."
+              "answer": "Choose a positive direction, add the forces to get ∑F, then a = ∑F / m in the direction of ∑F. The scale reads FN; FN − mg = ma, so FN changes when a ≠ 0."
             }
           ]
         }
@@ -649,18 +687,19 @@
               ],
               "notes": [
                 {
-                  "text": "Friction opposes **sliding**, or the tendency to slide, between surfaces.",
-                  "after": 5
-                },
-                "*Static (not sliding): fs adjusts to match the needed force. Maximum: fs,max = **μsFN**",
-                "*Kinetic (sliding): fk ≈ **μkFN**. Usually **smaller** than maximum static.",
-                {
-                  "text": "At rest with a 20 N push: fs = **20 N**, opposite the push. Keep sliding: use **μk**. μ has no **units**.",
-                  "after": 5
+                  "prompt": "Friction: definition",
+                  "lines": 1,
+                  "answer": "Opposes sliding, or the tendency to slide, between surfaces."
                 },
                 {
-                  "text": "Same normal force: higher μk means **more** sliding friction. Shoes on ice: μk = **0.05**. Synovial joints: μk = **0.015**. Your knee slides with less friction than shoes on ice.",
-                  "after": 5
+                  "prompt": "Static vs. kinetic friction: equations",
+                  "lines": 3,
+                  "answer": "Static (not sliding): fs matches the needed force, up to fs,max = μsFN; at rest with a 20 N push, fs = 20 N opposite the push. Kinetic (sliding): fk ≈ μkFN, usually smaller."
+                },
+                {
+                  "prompt": "μ: units, and what a higher value means",
+                  "lines": 2,
+                  "answer": "No units. At the same FN, higher μk means more sliding friction (shoes on ice 0.05; knee joint 0.015)."
                 }
               ]
             },
@@ -674,7 +713,7 @@
                 "given": [
                   "m = 40 kg;   level floor;   constant velocity;   120 N horizontal push.     **Find:** FN, fk, and μk."
                 ],
-                "answer": "FN = **392 N up**     fk = **120 N opposite the push**     μk ≈ **0.31**",
+                "answer": "**Answer:**  FN = 392 N up     fk = 120 N opposite the push     μk ≈ 0.31",
                 "solution": [
                   "Vertical balance: FN = mg = 40(9.8) = 392 N up",
                   "Constant velocity: a = 0, so fk = 120 N, opposite the push",
@@ -695,13 +734,13 @@
                   "m = 25 kg, starts at rest;   μs = 0.40;   μk = 0.30;   pushes of 90 N and 110 N.   Positive: the push direction."
                 ],
                 "find": "whether the box moves for each push, and the acceleration for 110 N.",
-                "answer": "90 N: **stays at rest**      110 N: **slides**, a = **1.46 m/s²** in the push direction",
+                "answer": "**Answer:**  90 N: stays at rest      110 N: slides, a = 1.46 m/s² in the push direction",
                 "workHeightIn": 1.6,
                 "solution": [
                   "FN = 25(9.8) = 245 N;   fs,max = 0.40(245) = 98 N",
                   "90 N < 98 N: static friction is 90 N. The box stays at rest.",
                   "110 N > 98 N: the box slides. fk = 0.30(245) = 73.5 N",
-                  "Fnet = 110 − 73.5 = 36.5 N;   a = 36.5 / 25 = 1.46 m/s²"
+                  "∑F = 110 − 73.5 = 36.5 N;   a = 36.5 / 25 = 1.46 m/s²"
                 ]
               },
               "notes": [],
@@ -722,11 +761,11 @@
                   "m = 30 kg, sliding;   150 N rope at 30° above horizontal;   μk = 0.25.   Positive: +x (horizontal, toward the pull) and up."
                 ],
                 "find": "FN, fk, and a.",
-                "answer": "FN = **219 N** up    fk = **54.75 N** opposite the motion    a = **2.51 m/s² in +x**",
+                "answer": "**Answer:**  FN = 219 N up    fk = 54.75 N opposite the motion    a = 2.51 m/s² in +x",
                 "solution": [
                   "FN = mg − F sin 30° = 294 − 75 = 219 N up",
                   "fk = 0.25(219) = 54.75 N, opposite the motion",
-                  "Fnet = 150 cos 30° − 54.75 = 75.15 N",
+                  "∑F = 150 cos 30° − 54.75 = 75.15 N",
                   "a = 75.15 / 30 = 2.51 m/s² in +x"
                 ]
               },
@@ -740,14 +779,14 @@
               ],
               "notes": [
                 {
-                  "text": "For a block sliding down a ramp, friction points **up the ramp**.",
-                  "after": 5
+                  "prompt": "Friction on a ramp: direction and equations",
+                  "lines": 2,
+                  "answer": "Up the ramp for a block sliding down. FN = mg cos θ; fs,max = μsFN; fk ≈ μkFN. Reverses if sliding reverses."
                 },
-                "*FN = **mg cos θ**     fs,max = **μsFN**     fk ≈ **μkFN**",
-                "*It starts sliding down if **mg sin θ** > **μsFN**.",
                 {
-                  "text": "Friction **reverses** if sliding reverses.",
-                  "after": 5
+                  "prompt": "Condition to start sliding down",
+                  "lines": 1,
+                  "answer": "mg sin θ > μsFN"
                 }
               ],
               "extraNotes": false
@@ -762,7 +801,7 @@
                 "given": [
                   "m = 10 kg, at rest;  35° ramp;  μs = 0.50;  μk = 0.40.  Positive: downhill.     **Find:** if it slides, and a."
                 ],
-                "answer": "Slides: **yes**      a = **2.41 m/s² downhill**",
+                "answer": "**Answer:**  Slides: yes      a = 2.41 m/s² downhill",
                 "workHeightIn": 1.6,
                 "solution": [
                   "Fg,parallel = 10(9.8) sin 35° = 56.2 N;   FN = 10(9.8) cos 35° = 80.3 N",
@@ -787,7 +826,7 @@
                 "I can tell static from kinetic friction and use fs,max = μsFN.",
                 "I can find friction and acceleration on level ground and on a ramp."
               ],
-              "answer": "Compare the push (or mg sin θ on a ramp) with fs,max = μsFN. If it is larger, it slides: use fk = μkFN, find Fnet, then a = Fnet / m."
+              "answer": "Compare the push (or mg sin θ on a ramp) with fs,max = μsFN. If it is larger, it slides: use fk = μkFN, find ∑F, then a = ∑F / m."
             }
           ]
         }
@@ -812,10 +851,10 @@
                   "ignore cable mass.   Positive: right and up."
                 ],
                 "find": "the tension in each support cable.",
-                "answer": "FTL = **98.0 N**    FTR ≈ **170 N**    each **along its cable, toward its support**",
+                "answer": "**Answer:**  FTL = 98.0 N    FTR ≈ 170 N    each along its cable, toward its support",
                 "workHeightIn": 1.8,
                 "solution": [
-                  "At rest: Fnet,x = 0, Fnet,y = 0;   Fdown = mg = 20(9.8) = 196 N",
+                  "At rest: ∑Fx = 0, ∑Fy = 0;   Fdown = mg = 20(9.8) = 196 N",
                   "Horizontal: FTR cos 60° = FTL cos 30°, so FTL = 0.577FTR",
                   "Vertical: FTL sin 30° + FTR sin 60° = 196",
                   "(0.577FTR)(0.5) + 0.866FTR = 196",
@@ -823,7 +862,11 @@
                 ]
               },
               "notes": [
-                "*The steeper cable carries more **tension**."
+                {
+                  "prompt": "Cable with more tension",
+                  "lines": 1,
+                  "answer": "The steeper cable."
+                }
               ],
               "extraNotes": false
             },
@@ -834,13 +877,14 @@
               ],
               "notes": [
                 {
-                  "text": "Ideal: a massless, taut rope that does not **stretch**, and a massless, **frictionless** pulley.",
-                  "after": 5
+                  "prompt": "Ideal string and pulley",
+                  "lines": 2,
+                  "answer": "Massless, taut rope that does not stretch; massless, frictionless pulley."
                 },
-                "*Fixed-pulley systems: the rope has the same **tension**, T. Both objects have the same acceleration **size**.",
                 {
-                  "text": "Find a using the **whole system**. Then use **one object** to find T. Draw a separate **free-body diagram** for each object.",
-                  "after": 5
+                  "prompt": "Fixed-pulley rules and the method",
+                  "lines": 2,
+                  "answer": "Same tension T and same size of a for both objects. Find a from the whole system, then T from one object. Separate FBD for each object."
                 }
               ]
             },
@@ -854,9 +898,9 @@
                 "given": [
                   "m₁ = 5 kg, m₂ = 3 kg, both hanging.   Positive: the motion (5 kg down, 3 kg up).     **Find:** a and T."
                 ],
-                "answer": "a = **2.45 m/s²** (5 kg down, 3 kg up)      T = **36.8 N**",
+                "answer": "**Answer:**  a = 2.45 m/s² (5 kg down, 3 kg up)      T = 36.8 N",
                 "solution": [
-                  "Fnet = (5 − 3)(9.8) = 19.6 N",
+                  "∑F = (5 − 3)(9.8) = 19.6 N",
                   "Whole system: a = 19.6 / (5 + 3) = 2.45 m/s² (5 kg down, 3 kg up)",
                   "Use the 3 kg mass: T − 3g = 3a",
                   "T = 3(9.8 + 2.45) = 36.8 N"
@@ -880,9 +924,9 @@
                 "given": [
                   "m₁ = 4 kg on the table;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** a and T."
                 ],
-                "answer": "a = **3.27 m/s²** (2 kg down, 4 kg toward the pulley)      T ≈ **13.1 N**",
+                "answer": "**Answer:**  a = 3.27 m/s² (2 kg down, 4 kg toward the pulley)      T ≈ 13.1 N",
                 "solution": [
-                  "Driving force: Fnet = m₂g = 2(9.8) = 19.6 N",
+                  "Driving force: ∑F = m₂g = 2(9.8) = 19.6 N",
                   "Whole system: a = 19.6 / (4 + 2) = 3.27 m/s² (2 kg down, 4 kg toward the pulley)",
                   "Table block: T = m₁a = 4(3.27) ≈ 13.1 N"
                 ]
@@ -900,7 +944,7 @@
                 "given": [
                   "m₁ = 4 kg on the table, μk = 0.20;   m₂ = 2 kg hanging.   Positive: the motion.     **Find:** fk, a, and T."
                 ],
-                "answer": "fk = **7.84 N** away from the pulley    a = **1.96 m/s²** (2 kg down, 4 kg toward the pulley)    T = **15.7 N**",
+                "answer": "**Answer:**  fk = 7.84 N away from the pulley    a = 1.96 m/s² (2 kg down, 4 kg toward the pulley)    T = 15.7 N",
                 "solution": [
                   "fk = μkm₁g = 0.20(4)(9.8) = 7.84 N, away from the pulley",
                   "Whole system: a = (19.6 − 7.84) / 6 = 1.96 m/s² (2 kg down, 4 kg toward the pulley)",
@@ -922,7 +966,7 @@
                   "m₁ = 6 kg on a frictionless 30° ramp;   m₂ = 5 kg hanging.   Positive: the motion (5 kg down, 6 kg up the ramp)."
                 ],
                 "find": "a and T.",
-                "answer": "a = **1.78 m/s²** (5 kg down, 6 kg up the ramp)      T ≈ **40.1 N**",
+                "answer": "**Answer:**  a = 1.78 m/s² (5 kg down, 6 kg up the ramp)      T ≈ 40.1 N",
                 "solution": [
                   "Hanging: 5(9.8) = 49.0 N;   along ramp: 6(9.8) sin 30° = 29.4 N",
                   "Whole system: a = (49.0 − 29.4) / (5 + 6) = 1.78 m/s² (5 kg down, 6 kg up the ramp)",
@@ -943,10 +987,10 @@
               "lines": 2,
               "prompt": "Write the two-step method for objects joined by a rope over a pulley.",
               "selfCheck": [
-                "I can solve a cable-tension problem with Fnet,x = 0 and Fnet,y = 0.",
+                "I can solve a cable-tension problem with ∑Fx = 0 and ∑Fy = 0.",
                 "I can find a and T for an Atwood machine and a table-and-pulley system."
               ],
-              "answer": "Whole system: a = driving force / total mass. Then Fnet = ma on one object gives T."
+              "answer": "Whole system: a = driving force / total mass. Then ∑F = ma on one object gives T."
             }
           ]
         }
@@ -962,7 +1006,7 @@
         "heading": "Newton’s laws",
         "paragraphs": [
           [
-            "Mass (kg) stays the same from place to place; weight, Fg = mg (N), depends on g. Fnet = 0: constant velocity."
+            "Mass (kg) stays the same from place to place; weight, Fg = mg (N), depends on g. ∑F = 0: constant velocity."
           ]
         ],
         "watchOut": "A moving object does not need a net force to keep moving."
@@ -992,7 +1036,7 @@
         "heading": "Net force and acceleration",
         "paragraphs": [
           [
-            "a = Fnet / m, in the direction of Fnet. Frictionless ramp: a = g sin θ. Elevator, up positive: FN − mg = ma."
+            "a = ∑F / m, in the direction of ∑F. Frictionless ramp: a = g sin θ. Elevator, up positive: FN − mg = ma."
           ]
         ],
         "watchOut": "The scale reads FN, which changes with acceleration, not with moving up or down."
@@ -1012,7 +1056,7 @@
         "heading": "Connected objects",
         "paragraphs": [
           [
-            "Ideal rope: one tension T, one size of a. Find a from the whole system, then T from one object’s Fnet = ma."
+            "Ideal rope: one tension T, one size of a. Find a from the whole system, then T from one object’s ∑F = ma."
           ]
         ],
         "watchOut": "Draw a separate FBD for each object."
@@ -1021,7 +1065,7 @@
     "quickRecall": [
       {
         "q": "State the condition for equilibrium.",
-        "a": "Fnet = 0: forces balance."
+        "a": "∑F = 0: forces balance."
       },
       {
         "q": "Write the weight components for a block on a ramp.",
