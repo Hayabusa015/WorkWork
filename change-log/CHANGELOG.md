@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-11
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0071 | 2026-11-11 | Every table cell is centred horizontally and vertically, in every document | PENDING | `governance/proposals/SHULL-CHG-0071-table-cells-centered.md` |
+
 ## 2026-11-05
 
 | ID | Date | Change | Status | Record |
