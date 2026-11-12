@@ -239,6 +239,43 @@
   }
 
   .pagebreak { page-break-before: always; }
+
+  /* ---------- Added for this lab (2026-11-12 pulley rewrite) ---------- */
+  /* Figure slot beside the materials list. Outline only. The <img> alt text is the
+     placeholder: if gdx-for.png is missing, the box prints with the caption and alt text. */
+  .figslot { float: right; width: 1.3in; margin: 2pt 0 4pt 12pt; }
+  .figslot .box {
+    width: 1.3in; height: 0.95in; border: 0.6pt solid var(--rule-hairline);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7pt; color: var(--label); text-align: center;
+  }
+  .figslot img { width: 100%; height: 100%; object-fit: contain; }
+  .clear { clear: both; }
+
+  /* Two formula callouts side by side */
+  .fpair { display: flex; gap: 14pt; }
+  .fpair .formula { flex: 1 1 0; }
+
+  /* Background laws: numbered by hand so the number reads as part of the law */
+  .law { margin: 7pt 0 3pt 0; }
+  .law .n { font-family: var(--display); font-weight: bold; color: var(--accent); margin-right: 4pt; }
+
+  /* Example data tables (Matt's request, 2026-11-12): headings plus 1–2 example rows */
+  .extbl { margin: 8pt 0 4pt 0; page-break-inside: avoid; }
+  .extbl .caprow { display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; }
+  .extbl .cap { font-family: var(--display); font-weight: 600; font-size: 6.8pt;
+    letter-spacing: 0.16em; color: var(--ink); }
+  .extbl .exnote { font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); }
+  .extbl table { width: 100%; border-collapse: collapse; }
+  .extbl th { font-family: var(--display); font-weight: 600; font-size: 7.6pt; text-align: left;
+    padding: 3pt 4pt; border-bottom: 0.9pt solid var(--ink); vertical-align: bottom; line-height: 1.2; }
+  .extbl td { padding: 2.8pt 4pt; font-size: 9.4pt; border-bottom: 0.6pt solid var(--rule-hairline);
+    font-style: italic; color: var(--label); }
+  .extbl .after { font-size: 9pt; margin-top: 3pt; }
+  .look { font-size: 9.8pt; border-left: 1.2pt solid var(--rule-hairline); padding: 1pt 0 1pt 8pt; margin: 4pt 0 6pt 0; }
+  .look b { font-family: var(--display); font-weight: 600; font-size: 7pt; letter-spacing: 0.14em; }
 </style>
 </head>
 
@@ -253,7 +290,7 @@
 <div class="masthead">
   <div class="eyebrow">UNIT 3 — FORCES AND MOTION · SECTION 1</div>
   <div class="titlerow">
-    <h1>Newton’s Laws: <span class="accent">Measured</span> with a Sensor Cart</h1>
+    <h1>Newton’s Laws with a <span class="accent">Pulley</span> Cart</h1>
     <div class="chip">U3 / S3.1</div>
   </div>
 </div>
@@ -269,295 +306,241 @@
 
 <h2>GOALS</h2>
 <ul class="dot">
-  <li>Measure the acceleration of a coasting cart on a level track and report it as a mean with an uncertainty.</li>
-  <li>Measure the small force it takes to tow the cart at constant velocity, and connect it to friction.</li>
-  <li>Graph force against acceleration and read the cart’s mass from the slope, then check it against the balance.</li>
-  <li>Measure both forces in one interaction at the same instant, with two force sensors hooked directly together, and compare them.</li>
-  </ul>
-
-<h2>PURPOSE</h2>
-<p class="lead">You are going to test all three of Newton’s laws with numbers instead of taking them
-on faith. Day 1 is the first and second laws. Day 2 is the third law, with two force sensors hooked directly together.</p>
-
-<h2>BACKGROUND</h2>
-<p><b>Net force, not force.</b> Newton’s laws are about the <b>net force</b> ∑F, the sum of every
-force on the object with signs included. A moving object does not need a force to keep moving, only
-to <i>change</i> its velocity. <b>In Parts A and B, positive is the direction you push or pull the cart. In Part C, positive is toward the person holding the
-separate sensor.</b></p>
-
-<div class="formula">
-  <div class="fname">NEWTON’S FIRST LAW</div>
-  <div class="fx">if ∑F = 0, then a = 0 &nbsp;·&nbsp; velocity stays constant, including at zero</div>
-</div>
-
-<p><b>Mass is the slope.</b> The cart records the pull on its force sensor and its own acceleration at the
-same moment. On a graph of force (y) against acceleration (x), the points fall on a line whose slope is the mass.</p>
-
-<div class="formula">
-  <div class="fname">NEWTON’S SECOND LAW · AND THE SLOPE OF A FORCE–ACCELERATION GRAPH</div>
-  <div class="fx">∑F = ma &nbsp;·&nbsp; N = kg·m/s² &nbsp;&nbsp;&nbsp; slope = ΔF ÷ Δa = mass &nbsp;·&nbsp; units: N ÷ (m/s²) = kg</div>
-</div>
-
-<p><b>Forces come in pairs.</b> When A pulls on B, B pulls on A with a force of the same size in the
-opposite direction. The two forces act on <i>different</i> objects, so they never cancel. On Day 2 they
-show up as mirror-image curves: equal size at every instant, opposite sign.</p>
-
-<div class="formula">
-  <div class="fname">NEWTON’S THIRD LAW</div>
-  <div class="fx">F<sub>A on B</sub> = −F<sub>B on A</sub></div>
-</div>
-
-<div class="formula">
-  <div class="fname">MEAN AND UNCERTAINTY (HALF THE RANGE)</div>
-  <div class="fx">value = mean ± ( largest − smallest ) ÷ 2</div>
-</div>
-<div class="formula">
-  <div class="fname">PERCENT ERROR</div>
-  <div class="fx">percent error = ( | experimental − accepted | ÷ accepted ) × 100</div>
-</div>
-<div class="formula">
-  <div class="fname">PERCENT DIFFERENCE — WHEN THERE IS NO ACCEPTED VALUE</div>
-  <div class="fx">percent difference = ( | A − B | ÷ [ ( A + B ) ÷ 2 ] ) × 100</div>
-</div>
-
-
-<div class="pagebreak"></div>
-<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · SAFETY &amp; PRE-LAB</div>
-
-<h2 class="warn">SAFETY</h2>
-<ul class="dot">
-  <li>No chemicals, glassware or heat are used in this lab. Follow the room’s standing eye-protection rule.</li>
-  <li>A cart that rolls off the end of the track falls to the floor. Put an end stop on <b>both</b>
-      ends of the track before the first run, and catch the cart by hand before it reaches the stop.</li>
-  <li>Fingers get pinched between a bumper and the front of a force sensor. In Part C, hold each
-      sensor by its body, never by its front face, and keep fingers out of the gap.</li>
-  <li>A hanging mass can drop when the string slips or the cart reaches the pulley. If you do the
-      extension, keep hands and feet out from under the mass and stop the cart before the mass
-      reaches the floor.</li>
-  <li>Pull smoothly and gently. A hard yank makes the cart outrun your hand and slam into the end
-      stop. Nothing in this lab needs a big force.</li>
+  <li>Show that once nothing is pulling the cart, it keeps rolling at almost the same velocity (first law).</li>
+  <li>Measure how the cart’s acceleration changes with the pull and with the cart’s mass, and find the cart’s mass from a graph (second law).</li>
+  <li>Measure both forces in one pull, at the same moment, and compare them (third law).</li>
 </ul>
 
-<h2>PRE-LAB — DUE AT THE START OF DAY 1</h2>
-<p class="lead">Answer all of these in your lab notebook, numbered 1 through 9, before you walk in. Do
-not write on this handout. You will not be allowed to start the lab without the pre-lab finished,
-because most of these are the parts people get wrong when they wing it.</p>
+<h2>PURPOSE</h2>
+<p class="lead">You use one setup the whole lab: a cart on a level track, pulled by a string that runs
+over a pulley to a hanging mass. Day 1 is Parts A and B. Day 2 is Part C and the post-lab.</p>
 
+<h2>BACKGROUND</h2>
+<p>A force is a push or a pull. The <b>net force</b>, ∑F, is all the forces on an object added
+together, counting their directions. Newton’s laws are about the net force. In this lab the falling
+mass pulls the string, and the string pulls the cart.</p>
+
+<p class="law"><span class="n">1</span><b>Newton’s first law.</b> An object keeps doing what it is
+doing (staying still, or moving at a steady speed in a straight line) unless a net force acts on it.</p>
+<div class="formula">
+  <div class="fname">NEWTON’S FIRST LAW</div>
+  <div class="fx">if ∑F = 0, then a = 0 &nbsp;·&nbsp; the velocity stays the same</div>
+</div>
+<p><b>Part A tests it.</b> While the mass falls, it pulls the cart and the cart speeds up. When the
+mass hits the floor, the string goes slack. Now nothing pulls the cart forward, so the net force on it
+is about zero. The first law says the cart should keep its velocity, and it does: the
+velocity–time graph rises, then goes flat. It is not perfectly flat, because a little friction in the
+wheels still pushes backward and slows the cart slightly.</p>
+
+<p class="law"><span class="n">2</span><b>Newton’s second law.</b> A net force makes an object
+accelerate. More force gives more acceleration. More mass gives less acceleration for the same force.</p>
+<div class="fpair">
+  <div class="formula">
+    <div class="fname">NEWTON’S SECOND LAW</div>
+    <div class="fx">∑F = ma &nbsp;·&nbsp; N = kg × m/s²</div>
+  </div>
+  <div class="formula">
+    <div class="fname">SLOPE OF A FORCE–ACCELERATION GRAPH</div>
+    <div class="fx">slope = ΔF ÷ Δa = mass &nbsp;·&nbsp; N ÷ (m/s²) = kg</div>
+  </div>
+</div>
+<p><b>Part B tests it.</b> The cart’s force sensor reads the pull of the string, F, and the cart
+measures its own acceleration, a. A heavier hanging mass pulls harder, so the cart speeds up faster. On
+a graph of F (y-axis) against a (x-axis) the points make a straight line, and the slope is the cart’s
+mass. Add a mass bar to the cart and the same pull gives less acceleration, so the line gets steeper.
+The line will not pass exactly through zero, because a small part of the pull only cancels friction.</p>
+
+<p class="law"><span class="n">3</span><b>Newton’s third law.</b> Forces come in pairs. If object A
+pulls on object B, then B pulls back on A with a force of the same size in the opposite direction.</p>
+<div class="formula">
+  <div class="fname">NEWTON’S THIRD LAW</div>
+  <div class="fx">F<sub>A on B</sub> = −F<sub>B on A</sub> &nbsp;·&nbsp; same size, opposite direction</div>
+</div>
+<p><b>Part C tests it.</b> You hook a second force sensor, the GDX-FOR, between the cart and the
+string. The GDX-FOR pulls on the cart, and the cart pulls back on the GDX-FOR. Each sensor reads the pull
+on itself, so the two readings should be the same size at every moment, whether the cart is held still
+or moving. While the cart is held still, both should equal the weight of the hanging mass,
+<b>W = mg</b> (weight), with g = 9.8 m/s².</p>
+
+<div class="fpair">
+  <div class="formula">
+    <div class="fname">PERCENT ERROR — PART B</div>
+    <div class="fx">( | experimental − accepted | ÷ accepted ) × 100</div>
+  </div>
+  <div class="formula">
+    <div class="fname">PERCENT DIFFERENCE — PART C</div>
+    <div class="fx">( | A − B | ÷ [ ( A + B ) ÷ 2 ] ) × 100</div>
+  </div>
+</div>
+
+
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PRE-LAB &amp; SETUP</div>
+
+<h2>PRE-LAB — DUE AT THE START OF DAY 1</h2>
+<p class="lead">Answer these in your lab notebook before you walk in. Also copy the headings of
+Tables 1–3 (last page) into your notebook, with room for the rows you will need. Do not write on this
+handout.</p>
 <ol class="q">
-  <li>A cart rolls along a level track at a constant 0.40 m/s. What is the net force ∑F on it? Explain
-      using Newton’s first law, and say why “the push from earlier is still acting” is wrong.</li>
-  <li>On a graph of force (y-axis, N) against acceleration (x-axis, m/s²), what physical quantity is
-      the slope? Show how the units N ÷ (m/s²) reduce to kg.</li>
-  <li>Your hand sensor pulls directly on the cart’s hook with +2.0 N. What force does the cart exert on your sensor,
-      with sign? If the two forces are equal and opposite, why doesn’t the cart just sit still?</li>
-  <li>Read Part A, step 3. What do you do to the force sensor before every run, and what must not
-      be pulling on the hook while you do it?</li>
-  <li>Read Part A. Which region of the velocity–time graph do you fit a line to, and which region do
-      you leave out?</li>
-  <li>Read Part B. What is the accepted value you compare the slope to, and how do you get it once a
-      mass bar is on the cart?</li>
-  <li>Read Part C, step 2. Why do both sensors report a pull with the same sign before you reverse one,
-      and what signs should they show after?</li>
-  <li>Safety: where do the end stops go, and how do you hold the sensors during the Part C bumper
-      push? Say exactly where your fingers go.</li>
-  <li>Set up your 3 data tables in your notebook. Copy them exactly as shown, in ink, leaving enough
-      room to write in each blank. Units go in the row labels. Do not plan to add them later.</li>
+  <li>State each of Newton’s three laws (from the background) in your lab notebook.</li>
+  <li>Your pulley is 0.95 m above the floor. Use the string-length estimate in Setup step 3 to find
+      how long your string should be, loop to loop.</li>
+  <li>Sketch the velocity–time graph you expect in Part A, from the moment you let go until you catch
+      the cart. Label the point where the string goes slack.</li>
 </ol>
 
-<div class="tables">
-  <div class="tbl">
-    <div class="cap">TABLE 1 · PART A — FIRST LAW</div>
-    <table>
-      <tr><td>Cart mass, balance (kg)</td></tr>
-      <tr><td>Push trials 1–3: slope of v–t, a (m/s²)</td></tr>
-      <tr><td>Mean a ± uncertainty (m/s²)</td></tr>
-      <tr><td>Tow trials 1–3: mean force (N)</td></tr>
-      <tr><td>Tow trials 1–3: mean a (m/s²)</td></tr>
-      <tr><td>Mean tow force ± uncertainty (N)</td></tr>
-    </table>
-  </div>
-  <div class="tbl">
-    <div class="cap">TABLE 2 · PART B — SECOND LAW</div>
-    <table>
-      <tr><td>Cart alone: F–a slope (kg)</td></tr>
-      <tr><td>Cart alone: F–a intercept (N)</td></tr>
-      <tr><td>Cart + bar mass, balance (kg)</td></tr>
-      <tr><td>Cart + bar: F–a slope (kg)</td></tr>
-      <tr><td>Cart + bar: F–a intercept (N)</td></tr>
-      <tr><td>Percent error, each run (%)</td></tr>
-    </table>
-  </div>
-  <div class="tbl">
-    <div class="cap">TABLE 3 · PART C — THIRD LAW</div>
-    <table>
-      <tr><td>Trials C1–C3: peak F on cart (N)</td></tr>
-      <tr><td>Trials C1–C3: peak F on hand sensor (N)</td></tr>
-      <tr><td>Percent difference, each trial (%)</td></tr>
-      <tr><td>C1 stretch: mean F on cart (N)</td></tr>
-      <tr><td>C1 stretch: mean a (m/s²)</td></tr>
-      <tr><td>m·a for the stretch (N)</td></tr>
-    </table>
-  </div>
+<h2>MATERIALS — PER GROUP</h2>
+<div class="figslot">
+  <div class="box"><img src="gdx-for.png" alt="Photo of the GDX-FOR"></div>
+  <div class="figcap">Go Direct Force and Acceleration Sensor</div>
 </div>
-
-<div class="rule-note">
-  If you write a number wrong during the lab, draw one line through it and write the correct
-  value beside it. Never scribble it out and never erase. I need to see what you originally
-  recorded.
-</div>
-
-
-<div class="pagebreak"></div>
-<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PROCEDURE</div>
-
-<h2>MATERIALS</h2>
-<p><b>Per group:</b> Go Direct Sensor Cart · Dynamics Track with an end stop on each end ·
-device with Graphical Analysis · balance · one cart mass bar · string, about 40 cm ·
-<b>Day 2 only:</b> one Go Direct force sensor with its hook and bumper (no string) ·
-<b>Extension only:</b> track pulley and hanging masses</p>
+<ul class="dot">
+  <li>Go Direct Sensor Cart and one cart mass bar</li>
+  <li>Dynamics Track with an end stop, and a pulley that clamps to the track end</li>
+  <li>String, about 1.5 m, plus scissors and a meter stick</li>
+  <li>Mass hanger and slotted masses, and a folded towel for the floor</li>
+  <li>Balance, and a device with Graphical Analysis</li>
+  <li><b>Day 2:</b> Go Direct Force and Acceleration Sensor (GDX-FOR), pictured</li>
+</ul>
+<div class="clear"></div>
 
 <h2>PROCEDURE</h2>
 
-<h3>Part A — First Law: No Net Force, No Acceleration <span class="flag">DAY 1 · ABOUT 20 MIN</span></h3>
+<h3>Setup <span class="flag">DAY 1 · ABOUT 10 MIN</span></h3>
 <ol class="proc">
-  <li>Set the track on the bench with an end stop on each end. Level it.
-    <ul>
-      <li>Set the cart at rest in the middle. If it starts to roll, shim the low end with folded
-          paper until it stays put.</li>
-      <li>Give a gentle push each way and compare how fast it slows. If one direction slows faster,
-          the track tilts. Shim and check again.</li>
-    </ul>
+  <li>Clamp the pulley to one end of the track, so it sits just past the edge of the bench. Put the end
+      stop on the other end.</li>
+  <li>Level the track. Set the cart at rest in the middle. If it starts to roll, slide folded paper
+      under the low end until it stays put.</li>
+  <li>Measure the height of the top of the pulley above the floor. Cut a piece of string and tie a
+      small loop at each end, so the string is this long from loop to loop:
+    <div class="formula">
+      <div class="fname">STRING-LENGTH ESTIMATE</div>
+      <div class="fx">string length ≈ pulley height above the floor + 40 cm</div>
+    </div>
+    When the mass lands, about 40 cm of string is still lying along the track, so the cart has 40 cm
+    to coast before it reaches the pulley.
   </li>
-  <li>Mass the cart on the balance and record every digit it shows, in kg. Turn the cart on and connect it to
-      Graphical Analysis. Display velocity, acceleration and force against time. Use the acceleration the cart calculates
-      from its wheel, not the accelerometer, in every part. The wheel measures motion along the track;
-      the accelerometer also picks up any tilt.</li>
-  <li>With nothing pulling on the hook, zero the force sensor. Do this before every run, in every part.</li>
-  <li>Push trials, three times:
-    <ul>
-      <li>Start data collection. Give the cart one short push and let go. Let it coast for about
-          2 s, then catch it before the end stop.</li>
-      <li>On the v–t graph, select only the stretch after your hand left the cart. Leave out the
-          push and the catch. Apply a linear fit and record the slope as a, with its sign.</li>
-    </ul>
-  </li>
-  <li>Tow trials, three times:
-    <ul>
-      <li>Tie the string to the force sensor hook. Zero the sensor with the string hanging slack.</li>
-      <li>Start data collection and tow the cart by the string, level with the track, at a slow,
-          steady pace for about 1 m.</li>
-      <li>Select the stretch where velocity is flat. Record the mean force and the mean acceleration
-          for that stretch.</li>
-    </ul>
-  </li>
+  <li>Hook one loop on the cart’s force-sensor hook, with the hook end of the cart facing the pulley.
+      Run the string over the pulley and hang the mass hanger from the other loop.</li>
+  <li>Check the length. Roll the cart toward the pulley until the hanger touches the floor. The cart
+      should be at least 40 cm from the pulley. If it is closer, retie one loop to shorten the string.</li>
+  <li>Raise or lower the pulley until the string runs level, from the hook straight to the top of the pulley.</li>
+  <li>Lay the folded towel on the floor under the hanger, so the mass does not bounce when it lands.</li>
+  <li>Mass the cart on the balance and record it in kg. Turn on the cart, connect it to Graphical
+      Analysis, and show velocity, acceleration and force against time. Use the acceleration the cart
+      measures with its wheel, in every part.</li>
 </ol>
+<p><b>Before every run:</b> lift the hanger so the string is slack, and zero the force sensor. Start
+each run with the cart about 1 m from the pulley, held still. Let go without pushing, and catch the cart
+before it reaches the pulley.</p>
 
-<h3>Part B — Second Law: Mass from a Graph <span class="flag">DAY 1 · ABOUT 20 MIN</span></h3>
+
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PROCEDURE</div>
+
+<h3>Part A — First Law: the String Goes Slack <span class="flag">DAY 1 · ABOUT 10 MIN</span></h3>
 <ol class="proc">
-  <li>Keep the string on the hook. Positive is the direction you pull. Zero the force sensor.</li>
-  <li>Start data collection. Pull the cart along the track for about 1–1.5 s, starting gentle
-      and getting firmer, then ease off before the end stop. Keep the string level. Catch the cart.</li>
-  <li>Make a graph of force against acceleration, with acceleration on the x-axis. Select only the
-      stretch where the cart is moving in the + direction, and leave out the catch. Apply a linear fit.
-      Record the slope (kg) and the intercept (N).
-    <ul>
-      <li>If the slope comes out negative, the force and acceleration signs disagree. Check the sign
-          convention with me before you take more data.</li>
-    </ul>
-  </li>
-  <li>Add one mass bar. Mass the cart and bar together on the balance and record it.
-      Repeat steps 1–3. The slope should go up by about the mass you added.</li>
-  <li><i>Extension, if I give you a pulley:</i> replace your hand with a string over the pulley to a
-      small hanging mass. The force sensor still reads the string tension and the cart still reads a,
-      so each run adds a point to your F–a graph.</li>
+  <li>Put 20 g on the string (hanger included). Zero the sensor, then hold the cart at the start.</li>
+  <li>Start data collection and let go of the cart.</li>
+  <li>Watch the mass land and the cart keep rolling. Catch the cart before the pulley, then stop data collection.</li>
+  <li>On the velocity–time graph, find the flat part: after the mass lands and before your catch.
+      Fit a straight line to that part only. Record the velocity at its start and its end, and the slope.</li>
+  <li>Repeat for 3 trials in total.</li>
 </ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;The graph climbs while the mass falls, then goes almost
+flat the moment the string goes slack. The slope of the flat part should be close to zero.</p>
 
-<h3>Part C — Third Law: Two Sensors, One Interaction <span class="flag">DAY 2 · ABOUT 20 MIN</span></h3>
+<h3>Part B — Second Law: Change the Hanging Mass <span class="flag">DAY 1 · ABOUT 25 MIN</span></h3>
 <ol class="proc">
-  <li>Connect the cart and the separate force sensor to Graphical Analysis so they record together.
-      With nothing pulling on either hook, zero both sensors.</li>
-  <li>Set the sign convention. Positive is toward the person holding the separate sensor.
-    <ul>
-      <li>Hook the separate sensor’s hook directly onto the cart’s hook. No string: a string puts a
-          third object between the two sensors.</li>
-      <li>Give one gentle test tug. Both sensors will read a pull with the <b>same</b> sign. That is
-          expected: each one measures the force on its own hook along its own axis, and the two face
-          each other.</li>
-      <li>Reverse the sign of the separate sensor (I will show you how), or plan to multiply its force
-          column by −1. Now both readings are in track coordinates: a pull reads <b>positive</b> on the
-          cart and <b>negative</b> on the separate sensor.</li>
-    </ul>
-  </li>
-  <li>Trial C1, steady pull. Start data collection and pull the cart toward you by the hand sensor,
-      speeding it up gently to a slow speed over about 0.5 m, then ease off so the catch is gentle.</li>
-  <li>Trial C2, tugs. Start data collection and give the cart four or five gentle tugs, easing off
-      between them.</li>
-  <li>For each trial, show both force readings on the same graph. Record the peak force on each
-      sensor, with sign. Sketch the two curves in your notebook with labeled axes, and check whether
-      they mirror each other at every instant, not just at the peak.</li>
-  <li>Trial C3, bumper push. Swap the hook on the separate sensor for its bumper. Zero both sensors. Keep the sign reversal.
-      Press the bumper against the cart’s force sensor and push the cart a short way along the track.
-      Catch it before the end stop. Record both peaks.</li>
-  <li>Go back to Trial C1. Select a stretch where the cart is speeding up steadily. Record the mean
-      force on the cart and the mean acceleration for that stretch.</li>
-  <li>Use the rest of the period for the post-lab analysis.</li>
+  <li>Put 20 g on the string. Zero the sensor, hold the cart at the start, start data collection, and let go. Catch the cart.</li>
+  <li>Find the speeding-up stretch: the part where the mass is still falling and the force reading is
+      steady. Leave out the moment you let go and everything after the string goes slack.</li>
+  <li>For that stretch, record the average force F and the average acceleration a. Write both as
+      positive numbers.</li>
+  <li>Repeat steps 1–3 with 40, 60 and 80 g.</li>
+  <li>Put the mass bar on the cart. Mass the cart and bar together and record it. Repeat steps 1–3 with 40, 60 and 80 g.</li>
+  <li>Make a graph of F (y-axis) against a (x-axis) with both sets of points. Fit a straight line to
+      each set and record each slope. The slope is the mass, in kg.</li>
 </ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;More hanging mass gives a bigger F and a bigger a. With
+the bar on, the same F gives a smaller a, so that line is steeper.</p>
 
-<h2>DATA TABLES</h2>
-<p>You built these in your pre-lab. Have them open before you start data collection. Fill them in
-<b>as you take each run</b>, not at the end of the period from memory. Record every value with
-units and a sign. Graphs you sketch go right
-below the table they belong to.</p>
-
-<h2 class="warn">DISPOSAL AND CLEANUP — LAST FIVE MINUTES, BOTH DAYS</h2>
+<h3>Part C — Third Law: Two Sensors, One Pull <span class="flag">DAY 2 · ABOUT 20 MIN</span></h3>
 <ol class="proc">
-  <li>Untie the string, unhook the sensors, take the mass bar off, and return them to the tray. Nothing goes in the trash.</li>
-  <li>Turn off the cart and the separate force sensor and return them where you got them.</li>
-  <li>Leave the track flat on the bench with both end stops on. Pulley and hanging masses go back in
-      their box.</li>
-  <li><b>Wash all glassware with the Alconox solution in the blue spray bottle.</b> Spray inside,
-      scrub with a brush, and rinse thoroughly — soap left in a beaker changes the next
-      measurement made in it.</li>
-  <li>Rinse with distilled water and invert everything on the rack to dry.</li>
-  <li>Wipe your bench, push in your stool, and wash your hands. <b>Goggles come off last</b>, once
-      the whole room is finished — not once you are.</li>
+  <li>Take the mass bar off. Unhook the string from the cart.</li>
+  <li>Hook the GDX-FOR’s hook onto the cart’s force-sensor hook. Attach the string’s loop to the back
+      end of the GDX-FOR.</li>
+  <li>Check that the cart’s hook, the GDX-FOR and the string make one straight, level line toward the pulley.</li>
+  <li>Connect the GDX-FOR to the same device as the cart, so both record together. Lift the hanger
+      and zero both sensors.</li>
+  <li>Put 50 g on the string. Hold the cart still and start data collection. Keep holding for 2 s,
+      then let go. Catch the cart before the pulley.</li>
+  <li>Show both force readings on the same graph. Record each sensor’s average reading while the
+      cart was held, then while it was speeding up.</li>
+  <li>Repeat steps 5–6 with 100 g.</li>
 </ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;The two force curves lie on top of each other, held or moving.
+Both sensors read a pull, and that is correct: each one measures the pull on itself, and the two pulls
+point in opposite directions because the sensors face each other. Compare the sizes.
+<i>Extra:</i> the GDX-FOR also measures acceleration. Check that it matches the cart’s while they move together.</p>
+<p>Use the rest of Day 2 for the post-lab.</p>
 
 
 <div class="pagebreak"></div>
-<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · POST-LAB</div>
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · DATA &amp; POST-LAB</div>
+
+<h2>DATA TABLES</h2>
+<p>Copy the headings into your notebook before Day 1. The filled rows show what a finished row looks
+like. Fill in your own rows <b>as you take each run</b>, with units, not from memory at the end.</p>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 1 · PART A — FIRST LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Trial</th><th>Hanging mass (g)</th><th>Velocity at start of flat part (m/s)</th><th>Velocity at end of flat part (m/s)</th><th>Slope of flat part (m/s²)</th></tr>
+    <tr><td>1</td><td>20</td><td>0.81</td><td>0.78</td><td>−0.094</td></tr>
+    <tr><td>2</td><td>20</td><td>0.83</td><td>0.79</td><td>−0.108</td></tr>
+  </table>
+  <p class="after">Above the table, record the cart mass from the balance. <i>Example:</i> cart mass = 0.282 kg.</p>
+</div>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 2 · PART B — SECOND LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Run</th><th>Cart setup</th><th>Hanging mass (g)</th><th>Force F (N)</th><th>Acceleration a (m/s²)</th></tr>
+    <tr><td>1</td><td>cart only</td><td>20</td><td>0.18</td><td>0.53</td></tr>
+    <tr><td>2</td><td>cart only</td><td>40</td><td>0.33</td><td>1.06</td></tr>
+  </table>
+  <p class="after">Below the table, for cart only and for cart + bar: mass from the balance (kg), slope of the F–a line (kg), and percent error.</p>
+</div>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 3 · PART C — THIRD LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Run</th><th>Hanging mass (g)</th><th>Cart held or moving</th><th>Cart sensor reading (N)</th><th>GDX-FOR reading (N)</th><th>Percent difference (%)</th></tr>
+    <tr><td>1</td><td>50</td><td>held</td><td>0.49</td><td>0.48</td><td>2.1</td></tr>
+    <tr><td>2</td><td>50</td><td>moving</td><td>0.30</td><td>0.29</td><td>3.4</td></tr>
+  </table>
+</div>
+
+<div class="rule-note">
+  If you write a number wrong, draw one line through it and write the correct value beside it. Never
+  scribble it out and never erase.
+</div>
 
 <h2>POST-LAB ANALYSIS</h2>
-<p class="lead">Answer these in your lab notebook, numbered 1 through 9. Show every calculation with
-units and signs. An answer with no work and no units earns partial credit at best.</p>
-
+<p class="lead">Answer these in your lab notebook. Show every calculation with units.</p>
 <ol class="q">
-  <li>Report the coasting cart’s acceleration as mean ± uncertainty. Is it consistent with zero?
-      It will not be exactly zero. Name the force responsible and say which direction it points.
-      <span class="ref">PART A</span></li>
-  <li>Multiply the cart’s mass by the size of its mean coasting acceleration. Compare it with
-      your mean tow force. Use Newton’s first and second laws to explain why the two should be close. If
-      your tow reading was lost in the sensor’s noise, say so, and say which value is the better friction. <span class="ref">PART A</span></li>
-  <li>Calculate percent error for each F–a slope. The accepted value is the balance mass for that
-      run. <span class="ref">PART B</span></li>
-  <li>How much did the slope go up when you added the bar, and how does that compare with the
-      bar’s mass? Your fit line probably did not pass through the origin. Explain what the intercept
-      represents, and compare it with your friction value from Part A. <span class="ref">PART B · PART A</span></li>
-  <li>Calculate percent difference between the two peak forces for each trial. Use the size of
-      each force and leave the signs out of this calculation. Then explain what the opposite signs
-      and the mirror-image curves tell you, and why these two forces do not cancel. <span class="ref">PART C</span></li>
-  <li>For the C1 stretch, calculate m·a for the cart. Compare it with ∑F = F − f, where F is the mean
-      force on the cart and f is your friction value from Part A. Explain why you have to subtract f.
-      <span class="ref">PART C · PART A</span></li>
-  <li>A group forgot to zero the force sensor in Part B, and it read +0.15 N with nothing on the
-      hook. Does that change the slope of their F–a graph, the intercept, or both? Explain what
-      happens to their mass and their percent error. <span class="ref">ERROR ANALYSIS</span></li>
-  <li>Suppose the track was not level and the cart coasted slightly downhill in Part A. What would
-      that do to the sign and size of the push-trial slope? Name the step that was meant to catch it.
-      <span class="ref">ERROR ANALYSIS</span></li>
-  <li>In Section 1.3 you learned that the slope of a v–t graph is acceleration. Point to the place
-      in this lab where you used that, and say what quantity you would get from the <i>area</i>
-      under the same graph. <span class="ref">U1 / S1.3</span></li>
+  <li>Explain how Part A showed Newton’s first law. Use your velocity–time graph: what was the net
+      force on the cart during the flat part, and what did its velocity do? Why was the flat part not
+      perfectly flat? <span class="ref">PART A</span></li>
+  <li>Explain how Part B showed Newton’s second law. Use your F–a graph: what happened to a as F went
+      up, and what happened to the line when you added the mass bar? <span class="ref">PART B</span></li>
+  <li>Calculate the percent error of each slope. The accepted value is the balance mass: the cart
+      alone for the first line, the cart and bar together for the second. Name one specific thing in
+      the setup that could cause the difference. <span class="ref">PART B</span></li>
+  <li>Explain how Part C showed Newton’s third law. Use your two force readings: how did their sizes
+      compare, and which way did each force point? <span class="ref">PART C</span></li>
+  <li>Calculate the percent difference between the cart sensor and the GDX-FOR for each run in
+      Table 3. <span class="ref">PART C</span></li>
 </ol>
 
 </body>
