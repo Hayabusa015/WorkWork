@@ -2,6 +2,7 @@
   "course": "geology",
   "unit": 3,
   "key": true,
+  "stretchHeadroomIn": 0.85,
   "cover": {
     "unitTargets": [
       "S03.1  I can identify a mineral using its physical properties.",
@@ -188,7 +189,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 05",
               "cueLabel": "SLIDE 05",
@@ -223,11 +228,7 @@
                 },
                 "*Describe the shine before you guess the mineral."
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 06",
               "cueLabel": "SLIDE 06",
@@ -306,7 +307,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 08",
               "cueLabel": "SLIDE 08",
@@ -353,11 +358,7 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 09",
               "cueLabel": "SLIDE 09",
@@ -403,7 +404,11 @@
                   "text": "At each station: observe color and luster, test streak and hardness, and look for cleavage or fracture. Record your observations on the lab handout."
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "recall",
               "title": "Section summary",
@@ -491,7 +496,12 @@
                 "image": "../assets/geo_u03_s12_sandstone_chain.png",
                 "keyImage": "../assets/geo_u03_s12_sandstone_chain_key.png"
               }
-            },
+            }
+          ],
+          "joinPrevious": true
+        },
+        {
+          "rows": [
             {
               "title": "Slide 13",
               "cueLabel": "SLIDE 13",
@@ -508,11 +518,7 @@
               "notes": [
                 "*No single starting point. Any exposed rock can become sediment."
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 14",
               "cueLabel": "SLIDE 14",
@@ -552,7 +558,11 @@
                   "text": "Name the process. Decide whether the rock needs to melt. The next slide gives the route."
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 16",
               "cueLabel": "SLIDE 16",
@@ -617,7 +627,12 @@
               "notes": [
                 "*Both form when melted rock cools and hardens."
               ]
-            },
+            }
+          ],
+          "joinPrevious": true
+        },
+        {
+          "rows": [
             {
               "title": "Slide 19",
               "cueLabel": "SLIDE 19",
@@ -737,11 +752,7 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 22",
               "cueLabel": "SLIDE 22",
@@ -794,7 +805,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 23",
               "cueLabel": "SLIDE 23",
@@ -1191,7 +1206,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 34",
               "cueLabel": "SLIDE 34",
@@ -1216,11 +1235,7 @@
                   "lines": 0
                 }
               ]
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 35",
               "cueLabel": "SLIDE 35",
@@ -1296,7 +1311,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 37",
               "cueLabel": "SLIDE 37",
@@ -1364,7 +1383,12 @@
               "notes": [
                 "*The rock stays solid. If it melts and then cools, the new rock is igneous."
               ]
-            },
+            }
+          ],
+          "joinPrevious": true
+        },
+        {
+          "rows": [
             {
               "title": "Slide 40",
               "cueLabel": "SLIDE 40",
@@ -1429,11 +1453,7 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 42",
               "cueLabel": "SLIDE 42",
@@ -1456,7 +1476,11 @@
               "notes": [
                 "*Increasing grade → more change from heat and pressure."
               ]
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 43",
               "cueLabel": "SLIDE 43",
@@ -1519,11 +1543,7 @@
                 "image": "../assets/geo_u03_met_id_key.png",
                 "keyImage": "../assets/geo_u03_met_id_key_key.png"
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 45",
               "cueLabel": "SLIDE 45",
@@ -1558,7 +1578,11 @@
                 ],
                 "rowHeightIn": 0.27
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "title": "Slide 46",
               "cueLabel": "SLIDE 46",

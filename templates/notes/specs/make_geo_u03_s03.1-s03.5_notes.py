@@ -413,14 +413,23 @@ s34 = {"code": "3.4", "title": "Metamorphic Rocks",
   ]},
 ]}
 
-# Page breaks, measured with block_height(): (section, slides that open each page).
-# Every block stays in slide order; only where the page turns is chosen here.
-BREAKS = {"3.1": [3, 6, 9], "3.5": [11, 14], "3.2": [18, 22, 25],
-          "3.3": [29, 32, 35], "3.4": [39, 42, 45]}
+# Page layout, measured with block_height(). Every block stays in slide order; only
+# where the sheet turns is chosen here. "R" is the section's RECALL block.
+# Pages are packed to about 8.6 in of the 9.64 in body, and stretch stops short of the
+# foot ("stretchHeadroomIn"): Word and Google Docs lay these pages out taller than
+# LibreOffice does, and a page filled to the last point there spilled its final block
+# onto a sheet of its own (Matt's screenshots, 2026-11-12). A short section ending
+# shares its sheet with the next section's opening ("joinPrevious").
+LAYOUT = {"3.1": [[3, 4], [5, 6, 7], [8, 9, 10], ["R"]],
+          "3.5": [[11, 12], [13, 14, 15], [16, "R"]],
+          "3.2": [[18], [19, 20, 21, 22], [23, 24], [25, 26, 27, "R"]],
+          "3.3": [[29, 30, 31], [32, 33], [34, 35, 36], [37, "R"]],
+          "3.4": [[39], [40, 41, 42], [43, 44, 45], [46, 47, "R"]]}
+JOIN = {"3.5", "3.2", "3.4"}
 
 
 def slide_of(row):
-    return int(row["title"].split()[1]) if row["title"].startswith("Slide") else 999
+    return int(row["title"].split()[1]) if row["title"].startswith("Slide") else "R"
 
 
 for sec in (s31, s35, s32, s33, s34):
@@ -430,17 +439,19 @@ for sec in (s31, s35, s32, s33, s34):
             if "after" in r:          # a must-write that belongs under a flowchart
                 r.setdefault("notes", []).extend(r.pop("after"))
             rows.append(r)
-    pages, starts = [], BREAKS[sec["code"]]
-    for r in rows:
-        if slide_of(r) in starts and not any(slide_of(x) == slide_of(r) for p in pages for x in p):
-            pages.append([])
-        pages[-1].append(r)
-    sec["pages"] = [{"rows": p} for p in pages]
+    by = {slide_of(r): r for r in rows}
+    assert len(by) == len(rows), sec["code"] + ": two blocks share a slide number"
+    layout = LAYOUT[sec["code"]]
+    assert [k for pg in layout for k in pg] == [slide_of(r) for r in rows], sec["code"]
+    sec["pages"] = [{"rows": [by[k] for k in pg]} for pg in layout]
+    if sec["code"] in JOIN:
+        sec["pages"][0]["joinPrevious"] = True
 
 spec = {
     "course": "geology",
     "unit": 3,
     "key": False,
+    "stretchHeadroomIn": 0.85,
     "cover": {
         "unitTargets": [
             "S03.1  I can identify a mineral using its physical properties.",
