@@ -91,7 +91,7 @@
         ]
       }
     ],
-    "howToUse": "Quiz yourself with the left-column questions. Gray side rules mark must-write notes (highlighted blocks in the slides). Show your reasoning and units in each work box."
+    "howToUse": "The left column names what to record; write it on the right while the slide is up. Gray side rules mark must-write notes (highlighted blocks in the slides). Show your reasoning and units in each work box."
   },
   "sectionsContent": [
     {
@@ -105,8 +105,8 @@
             {
               "title": "Vocabulary",
               "cues": [
-                "How do pure substances and mixtures differ?",
-                "Which term means evenly mixed throughout?"
+                "Definitions: matter, pure substance, mixture",
+                "Solution = homogeneous mixture"
               ],
               "notes": [
                 {
@@ -124,8 +124,8 @@
             {
               "title": "The matter flowchart",
               "cues": [
-                "What two questions help classify a sample?",
-                "Where does the chart split into element vs. compound?"
+                "The matter flowchart, top to bottom",
+                "Pure substance splits: element vs. compound"
               ],
               "notesLabel": "COPY THE FLOWCHART",
               "flowchart": {
@@ -146,8 +146,8 @@
             {
               "title": "Element, compound, molecule",
               "cues": [
-                "Why is O₂ not a compound?",
-                "What makes something a molecule?"
+                "Definitions: element, compound, molecule",
+                "O₂: a molecule, not a compound"
               ],
               "notes": [
                 {
@@ -170,8 +170,8 @@
             {
               "title": "Homogeneous vs. heterogeneous",
               "cues": [
-                "Which mixture is a solution?",
-                "What test tells the two apart?"
+                "Definitions: homogeneous, heterogeneous",
+                "The scoop test"
               ],
               "notes": [
                 {
@@ -189,7 +189,7 @@
             {
               "title": "Classify six samples",
               "cues": [
-                "What’s the first question you ask about any sample?"
+                "Classification and reasoning for all six samples"
               ],
               "noWorkBox": true,
               "table": {
@@ -269,8 +269,8 @@
             {
               "title": "Subatomic particles",
               "cues": [
-                "Which particles live in the nucleus?",
-                "Which particle has almost no mass?"
+                "Charge, mass, and location of each particle",
+                "Nucleus: protons and neutrons"
               ],
               "table": {
                 "headers": [
@@ -314,8 +314,8 @@
             {
               "title": "Atomic & mass numbers",
               "cues": [
-                "How do you find neutrons from A and Z?",
-                "When does electrons ≠ Z?"
+                "Particle counts from Z and A",
+                "Electrons in an ion: adjust for charge"
               ],
               "notes": [
                 {
@@ -336,7 +336,7 @@
               "kind": "example",
               "title": "Neutral iron-56",
               "cues": [
-                "What do you read straight off the periodic table?"
+                "Z and A from the symbol; neutral-atom counts"
               ],
               "problem": {
                 "given": "Iron-56; A = 56; Z = 26; neutral atom.",
@@ -354,7 +354,8 @@
               "kind": "example",
               "title": "Calcium ion, 2+",
               "cues": [
-                "Why does an ion have a different number of electrons than protons?"
+                "Particle counts for a 2+ ion",
+                "2+ means two electrons lost"
               ],
               "problem": {
                 "given": "Calcium ion; A = 40; Z = 20; charge = 2+.",
@@ -417,8 +418,8 @@
             {
               "title": "Isotopes",
               "cues": [
-                "What is the same in Cl-35 and Cl-37? What differs?",
-                "Which isotope is more common?"
+                "Cl-35 vs. Cl-37: protons, neutrons, abundance",
+                "Isotopes: same protons, different neutrons"
               ],
               "table": {
                 "headers": [
@@ -463,8 +464,8 @@
             {
               "title": "The calculation",
               "cues": [
-                "Why a weighted average, not a plain average?",
-                "What must happen to a percent first?"
+                "Weighted average: mass × abundance, then add",
+                "Percent → decimal first"
               ],
               "notes": [
                 {
@@ -482,7 +483,8 @@
               "kind": "example",
               "title": "Chlorine example",
               "cues": [
-                "What’s the first step before you touch the calculator?"
+                "Step 1: percent → decimal",
+                "Weight each isotope, then add"
               ],
               "problem": {
                 "given": [
@@ -503,8 +505,8 @@
               "kind": "example",
               "title": "Your turn: copper",
               "cues": [
-                "Predict: closer to 63 or 65?",
-                "Which isotope’s abundance does the pulling, and why?"
+                "Same steps as chlorine",
+                "Check: closer to the more abundant isotope"
               ],
               "problem": {
                 "given": [

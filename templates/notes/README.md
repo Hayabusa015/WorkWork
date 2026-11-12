@@ -57,7 +57,7 @@ A packet is a set of **designed pages. Each designed page is one sheet of paper.
 horizontal rule separates it from the next block. It has no outer box and no cell borders.
 
 - **Cue side (1.28 in, SHULL-CHG-0018):** the **cue label** in bold caps in the course's text-safe
-  colour, then the cue questions in small grey type. RECALL / RECAP / REVIEW blocks put their tag
+  colour, then the cues in small grey type. RECALL / RECAP / REVIEW blocks put their tag
   above the label. **No block number** (`01`, `02`): SHULL-CHG-0038 dropped it (choice d). **No
   line under a cue.** Recall happens in the RECALL block and on the concept review page.
 - **Capture side (6.22 in):** the **notes heading** in tracked bold caps in the same colour, then

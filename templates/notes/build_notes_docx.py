@@ -1412,7 +1412,7 @@ def validate(spec, course):
     # Guided notes are strictly recall: the cue column names what to record, it does
     # not ask for it. recall.py carries the rule and both renderers check it.
     if recall.check(spec, "build_notes_docx"):
-        return 1
+        return False
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.

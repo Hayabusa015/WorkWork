@@ -38,6 +38,18 @@ OPENER = re.compile(r"^\s*(?:%s)\b" % "|".join(OPENERS), re.I)
 FIELDS = ("cues", "notes")
 
 
+def rows(section):
+    """Every row of a section, whichever schema it is written in.
+
+    A legacy spec keeps its rows on the section; a paged spec (SHULL-CHG-0033) keeps
+    them under section["pages"][i]["rows"]. Walking only the first is how every paged
+    packet went unchecked, so this walks both.
+    """
+    yield from section.get("rows", []) or []
+    for page in section.get("pages", []) or []:
+        yield from page.get("rows", []) or []
+
+
 def offences(spec):
     """Every question in a notes spec's cue column or notes lines.
 
@@ -47,10 +59,18 @@ def offences(spec):
     found = []
     for section in spec.get("sectionsContent", []):
         code = section.get("code", "?")
-        for row in section.get("rows", []):
+        for row in rows(section):
             for field in FIELDS:
-                for entry in row.get(field, []) or []:
-                    text = entry if isinstance(entry, str) else entry.get("text", "")
+                entries = row.get(field) or []
+                if isinstance(entries, (str, dict)):
+                    entries = [entries]
+                for entry in entries:
+                    if isinstance(entry, str):
+                        text = entry
+                    else:
+                        # A notes line is a string, a {"text": ...} line, or a
+                        # {"prompt": ..., "answer": ...} writing line.
+                        text = entry.get("text") or entry.get("prompt") or ""
                     # A must-write line is marked with a leading *; the mark is
                     # not part of the sentence.
                     body = str(text).lstrip("*").strip()
