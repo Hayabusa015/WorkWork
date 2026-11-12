@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3.1 Lab Key - Newton’s Laws</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB TEACHER PREP + KEY (MASTER)  v1.0
+=====================================================================
+ Ships as its OWN FILE, always. Never staple teacher content onto the
+ student handout.
+
+ Filename:  SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor]_Key.html
+ Same folder as the student lab:
+   [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ Fill every [[ TOKEN ]]. Render with:  python3 build_lab.py yourfile.html
+=====================================================================
+-->
+
+<link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<style>
+  @page {
+    size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
+    @bottom-left { content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode)
+                            " · TEACHER COPY";
+                   font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                   color: var(--footer); margin-bottom: 0.14in; }
+    @bottom-right { content: "PAGE " counter(page) " OF " counter(pages) " · DO NOT DISTRIBUTE";
+                    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+                    color: var(--footer); margin-bottom: 0.14in; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--body); font-size: 10.2pt;
+         line-height: 1.40; color: var(--ink); }
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  .meta { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code { string-set: unitcode content(); }
+
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow { font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--warn); margin-bottom: 3pt; }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 { font-family: var(--display); font-weight: bold; font-size: 16pt;
+    line-height: 1.12; flex: 1 1 auto; }
+  .chip { flex: 0 0 auto; margin-left: 12pt; font-family: var(--display); font-weight: 600;
+    font-size: 8pt; letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--warn-rule); border-radius: 9pt; padding: 2.5pt 9pt; white-space: nowrap; }
+
+  h2 { font-family: var(--display); font-weight: 600; font-size: 8.6pt; letter-spacing: 0.20em;
+    color: var(--ink); border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt;
+    margin: 12pt 0 5pt 0; }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 9.6pt; margin: 8pt 0 3pt 0; }
+  p { margin-bottom: 4.5pt; }
+
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3pt; }
+  /* Drawn, not typed - see the master template. U+25AA is not in Archivo. */
+  ul.dot li::before { content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent); }
+
+  table.grid { width: 100%; border-collapse: collapse; margin-top: 5pt; }
+  table.grid th { font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; text-align: left; padding: 0 5pt 3pt 5pt;
+    border-bottom: 1.2pt solid var(--accent); }
+  table.grid td { padding: 3.6pt 5pt; font-size: 9.7pt; vertical-align: top;
+    border-bottom: 0.6pt solid var(--rule-hairline); }
+
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li { counter-increment: q; position: relative; padding-left: 20pt;
+    margin-bottom: 6pt; page-break-inside: avoid; }
+  /* Just the number. No box. SHULL-CHG-0015. */
+  ol.q > li::before { content: counter(q); position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt; color: var(--warn);
+    width: 13pt; text-align: right; }
+  .ans { color: var(--warn); }
+  .pagebreak { page-break-before: always; }
+
+  /* Added for this key: worked calculations. ANSWER_KEYS.md §5 - every division is stacked.
+     Outline only, no fills. */
+  .calc { border-left: 2.5pt solid var(--warn-rule); padding: 3pt 0 3pt 9pt; margin: 3pt 0 6pt 0; }
+  .calc > div { margin-bottom: 3.5pt; color: var(--ink); }
+  .frac { display: inline-block; vertical-align: middle; text-align: center;
+          font-size: 9pt; line-height: 1.15; margin: 0 1.5pt; }
+  .frac > span { display: block; padding: 0 2pt; }
+  .frac > span:first-child { border-bottom: 0.7pt solid var(--ink); }
+  .calc .box { display: inline-block; border: 0.9pt solid var(--warn-rule); padding: 1pt 5pt; }
+</style>
+</head>
+
+<body class="phys">
+<div class="meta">
+  <span class="m-course">PHYSICS</span>
+  <span class="m-code">U3 / S3.1</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">TEACHER PREP + KEY · UNIT 3 · SECTION 1 · NOT FOR STUDENTS</div>
+  <div class="titlerow">
+    <h1>Newton’s Laws: Measured with a Sensor Cart</h1>
+    <div class="chip">U3 / S3.1</div>
+  </div>
+</div>
+
+<h2>PREP — BEFORE DAY 1 AND DAY 2</h2>
+<table class="grid">
+  <tr><th>WHEN</th><th>TASK</th><th>DETAIL</th></tr>
+  <tr><td>Days before</td><td>Charge and test</td>
+      <td>Charge the 5 sensor carts in use plus the 3 spares, and the 5 separate Go Direct force sensors.
+      Connect each cart to a student device once. Number carts and sensors 1–5 so groups don’t grab
+      a neighbour’s cart in the connection list.</td></tr>
+  <tr><td>Days before</td><td>Check the signs</td>
+      <td>On one cart, pull the hook and push the cart forward. Note which sign the force reading gives
+      for a pull and which sign the acceleration gives. If they disagree, Part B slopes come out
+      negative. Decide in advance how you will flip one sign. <b>Check this in the software yourself;
+      the handout does not name a menu path.</b></td></tr>
+  <tr><td>Before Day 1</td><td>Tracks and trays</td>
+      <td>5 tracks flat on benches, an end stop on each end. Tray per group: cart, one mass bar, 40 cm of
+      string. Balances where every group can reach one.</td></tr>
+  <tr><td>Before Day 2</td><td>Second sensor</td>
+      <td>Add one force sensor per group with its hook and bumper, plus 10 cm of string. Run the
+      Part C test tug once on your own pair, so you know which sensor needs its sign reversed and how.</td></tr>
+</table>
+
+<h3>Materials — total for 5 groups</h3>
+<p>Go Direct Sensor Cart × 5 in use (8 working, 3 spare) · Dynamics Track × 5 · end stops × 10 ·
+cart mass bar × 5 · Go Direct force sensor × 5 (Day 2) · string, 40 cm × 5 and 10 cm × 5 ·
+balance, at least 1 · student devices with Graphical Analysis × 5 · track pulley and hanging masses for
+the extension, as many as you have</p>
+
+<h2>TIMING — TWO 50-MINUTE PERIODS</h2>
+<table class="grid">
+  <tr><th>MIN</th><th>PHASE</th><th>WATCH FOR</th></tr>
+  <tr><td style="white-space:nowrap">D1 0–5</td><td>Pre-lab check, trays out, connect carts</td><td>Groups connected to the wrong cart number.</td></tr>
+  <tr><td style="white-space:nowrap">D1 5–25</td><td>Part A: level, 3 push trials, 3 tow trials</td><td>Fit region that includes the push spike. Sensor not zeroed before the tow.</td></tr>
+  <tr><td style="white-space:nowrap">D1 25–45</td><td>Part B: cart alone, then cart + bar</td><td>Negative slope, which means a sign mismatch. Yanks that hit the end stop.</td></tr>
+  <tr><td style="white-space:nowrap">D1 45–50</td><td>Cleanup</td><td>Strings off, carts off, mass bars back.</td></tr>
+  <tr><td style="white-space:nowrap">D2 0–5</td><td>Connect both sensors, zero both, test tug</td><td>Both sensors reading the same sign. Fix it before any data.</td></tr>
+  <tr><td style="white-space:nowrap">D2 5–25</td><td>Part C: trials C1–C3 and the C1 stretch</td><td>Fingers on the bumper face during C3.</td></tr>
+  <tr><td style="white-space:nowrap">D2 25–45</td><td>Post-lab analysis in notebooks</td><td>Signs and units on every answer.</td></tr>
+  <tr><td style="white-space:nowrap">D2 45–50</td><td>Cleanup</td><td></td></tr>
+</table>
+<p>All five groups run Part C at once with their own cart and force sensor. There is no rotation and
+no waiting on Day 2.</p>
+
+<h2 class="warn">FAILURE POINTS</h2>
+<ul class="dot">
+  <li><b>Force sensor not zeroed.</b> Zero with nothing on the hook before every run. A leftover offset
+      shifts the Part B intercept and wrecks the Part A tow force, which is only a few hundredths of a newton.</li>
+  <li><b>Track not level.</b> A tilt adds a slope component of gravity that swamps friction in Part A.
+      Check that a cart at rest stays put before Part A starts.</li>
+  <li><b>Sign convention.</b> If the cart software reports a pull and a forward acceleration with
+      opposite signs, the F–a slope is negative. In Part C, two identical sensors hooked face to face
+      read the <i>same</i> sign until one is reversed. Reversing one puts both in track coordinates,
+      and then the minus sign is the “opposite.”</li>
+  <li><b>Fit region.</b> In Part A students fit across the push and the catch, and the slope is
+      meaningless. Only the coasting stretch counts.</li>
+  <li><b>String at an angle.</b> A string pulled up and away puts part of the pull vertical. Keep it level with the track.</li>
+  <li><b>Force sensor range.</b> Some Vernier force sensors have a ±10 N / ±50 N range switch.
+      <b>Unconfirmed for your Go Direct force sensors. Check yours.</b> If there is one, ±10 N is the
+      better setting here, since nothing in this lab is near 10 N.</li>
+</ul>
+
+<h3>Alternatives and backups</h3>
+<p><b>Two sensor carts colliding.</b> With 8 working carts and 5 in use, the 3 spares make one extra
+pair. Two carts meeting bumper to bumper on one track give the same mirror-image force graphs, and both
+carts have accelerometers, so m<sub>1</sub>a<sub>1</sub> ≈ m<sub>2</sub>a<sub>2</sub> can be checked.
+Good as a demo or for a group that finishes early. <b>A separate force sensor standing in for a cart.</b>
+A force sensor mounted on a plain cart can stand in for one sensor cart’s force reading, but that cart has
+no accelerometer, so the m·a check only works for the sensor cart.</p>
+
+<h2>EXPECTED RESULTS — SAMPLE DATA</h2>
+<p>These numbers are <b>plausible sample data, not real measurements</b>. Replace the cart mass with your
+own balance reading. A good group gets F–a slopes within about 5% of the balance mass and peak-force
+differences of a few percent. A sloppy-but-passing group gets slopes within about 15% and still sees
+mirror-image graphs.</p>
+<table class="grid">
+  <tr><th>QUANTITY</th><th>ACCEPTED</th><th>SAMPLE</th><th>TYPICAL RANGE</th></tr>
+  <tr><td>Coasting a, level track</td><td>0 if no friction</td><td>−0.096 ± 0.008 m/s²</td><td>small, negative</td></tr>
+  <tr><td>Tow force at constant v</td><td>none</td><td>0.034 ± 0.004 N</td><td>a few hundredths of a newton</td></tr>
+  <tr><td>F–a slope, cart alone</td><td>0.305 kg (sample balance)</td><td>0.318 kg · 4.3%</td><td>within 15%</td></tr>
+  <tr><td>F–a slope, cart + bar</td><td>0.802 kg (sample balance)</td><td>0.781 kg · 2.6%</td><td>within 15%</td></tr>
+  <tr><td>Peak-force percent difference</td><td>0%</td><td>2.8% · 3.0% · 3.3%</td><td>under about 10%</td></tr>
+</table>
+
+<h2>SAFETY + DISPOSAL</h2>
+<ul class="dot">
+  <li>No chemicals and no glassware are used, so no SDS applies. The safety bullets cover mechanical
+      hazards only: carts rolling off the track end, pinched fingers at the bumper, and a falling hanging mass.
+      <b>Not yet checked against district policy. Matt to confirm before copying.</b></li>
+  <li><b>Alconox block: kept verbatim, items 4–6, per the locked template rule. It does not fit this
+      lab.</b> There is no glassware and no goggles are called for, so items 4–6 tell students to do things
+      that don’t exist. The S1.3 exception that dropped it is recorded as not a precedent, so dropping it
+      here needs Matt’s own decision and its own record. If he says drop it, delete items 4–6 on the handout.</li>
+</ul>
+
+<div class="pagebreak"></div>
+
+<h2>WORKED SAMPLE ANALYSIS — SAMPLE DATA, NOT REAL MEASUREMENTS</h2>
+<p>Positive is the direction of the push or pull in every part. Sample cart balance mass 0.305 kg.
+Sample mass bar 0.497 kg, so cart + bar is 0.802 kg.</p>
+
+<h3>Part A — first law</h3>
+<p>Push-trial slopes: −0.089, −0.104, −0.096 m/s². Tow forces: 0.031, 0.038, 0.033 N. Tow-stretch
+accelerations: +0.004, −0.006, +0.002 m/s².</p>
+<div class="calc">
+  <div>mean a = <span class="frac"><span>−0.089 + (−0.104) + (−0.096)</span><span>3</span></span> = <span class="frac"><span>−0.289 m/s²</span><span>3</span></span> = −0.0963 m/s²</div>
+  <div>uncertainty = <span class="frac"><span>−0.089 − (−0.104)</span><span>2</span></span> = <span class="frac"><span>0.015 m/s²</span><span>2</span></span> = 0.0075 m/s²</div>
+  <div class="box">a = −0.096 ± 0.008 m/s²</div>
+  <div>mean tow force = <span class="frac"><span>0.031 + 0.038 + 0.033</span><span>3</span></span> = <span class="frac"><span>0.102 N</span><span>3</span></span> = 0.034 N; &nbsp; uncertainty = <span class="frac"><span>0.038 − 0.031</span><span>2</span></span> = 0.0035 N</div>
+  <div class="box">F<sub>tow</sub> = 0.034 ± 0.004 N, with a = 0.000 ± 0.005 m/s² during the tow</div>
+</div>
+
+<h3>Part B — second law</h3>
+<div class="calc">
+  <div>Cart alone: slope 0.318 kg, intercept +0.041 N. &nbsp; percent error = <span class="frac"><span>| 0.318 kg − 0.305 kg |</span><span>0.305 kg</span></span> × 100 = <span class="frac"><span>0.013 kg</span><span>0.305 kg</span></span> × 100 = <b>4.3%</b></div>
+  <div>Cart + bar: slope 0.781 kg, intercept +0.046 N. &nbsp; percent error = <span class="frac"><span>| 0.781 kg − 0.802 kg |</span><span>0.802 kg</span></span> × 100 = <span class="frac"><span>0.021 kg</span><span>0.802 kg</span></span> × 100 = <b>2.6%</b></div>
+  <div>Slope rise = 0.781 kg − 0.318 kg = 0.463 kg, against 0.497 kg added: &nbsp; <span class="frac"><span>| 0.463 − 0.497 |</span><span>0.497</span></span> × 100 = 6.8% low</div>
+</div>
+
+<h3>Part C — third law</h3>
+<div class="calc">
+  <div>C1 pull: +1.84 N on cart, −1.79 N on hand sensor. Use the sizes. &nbsp; average = <span class="frac"><span>1.84 N + 1.79 N</span><span>2</span></span> = 1.815 N</div>
+  <div>percent difference = <span class="frac"><span>| 1.84 N − 1.79 N |</span><span>1.815 N</span></span> × 100 = <span class="frac"><span>0.05 N</span><span>1.815 N</span></span> × 100 = <b>2.8%</b></div>
+  <div>C2 tugs: +2.31 N and −2.38 N. &nbsp; <span class="frac"><span>0.07 N</span><span>2.345 N</span></span> × 100 = <b>3.0%</b> &nbsp;&nbsp; C3 push: −1.47 N and +1.52 N. &nbsp; <span class="frac"><span>0.05 N</span><span>1.495 N</span></span> × 100 = <b>3.3%</b></div>
+  <div>C1 stretch: mean F on cart +0.52 N, mean a +1.58 m/s².</div>
+  <div>m·a = (0.305 kg)(1.58 m/s²) = 0.482 N &nbsp;&nbsp; ∑F = F − F<sub>tow</sub> = 0.52 N − 0.034 N = 0.486 N</div>
+  <div>average = <span class="frac"><span>0.482 N + 0.486 N</span><span>2</span></span> = 0.484 N &nbsp;&nbsp; percent difference = <span class="frac"><span>| 0.482 N − 0.486 N |</span><span>0.484 N</span></span> × 100 = <b>0.8%</b></div>
+</div>
+
+<h2>PRE-LAB KEY</h2>
+<ol class="q">
+  <li>Net force on a cart at a constant 0.40 m/s. <span class="ans">∑F = 0. Constant velocity means
+      a = 0, and the first law says that only happens when the net force is zero. The push stopped acting
+      the moment the hand left. No credit for “a small forward force keeps it going.”</span></li>
+  <li>Slope of F against a. <span class="ans">Mass. Units of slope: <span class="frac"><span>N</span><span>m/s²</span></span> = <span class="frac"><span>kg·m/s²</span><span>m/s²</span></span> = kg.</span></li>
+  <li>Force of cart on sensor when the sensor pulls with +2.0 N. <span class="ans">−2.0 N, the same size,
+      pointing back toward the cart. The two forces act on different objects. Only the +2.0 N acts on the
+      cart, so the cart accelerates. Partial credit for −2.0 N with no reason.</span></li>
+  <li>Part A, step 3. <span class="ans">Zero it, with nothing touching the hook. For the tow, the string hangs slack.</span></li>
+  <li>Region of v–t to fit. <span class="ans">Only the coasting stretch after the hand leaves the cart. Leave out the push and the catch.</span></li>
+  <li>Accepted value in Part B. <span class="ans">The balance mass. With a bar on, mass the cart and bar together on the balance. Do not add a stamped value.</span></li>
+  <li>Part C, step 2. <span class="ans">Cart sensor positive, hand sensor negative. If both show the same sign, stop and get the teacher.</span></li>
+  <li>Safety. <span class="ans">End stops on both ends of the track. Hold each sensor by its body, with fingers off the front face and out of the gap.</span></li>
+  <li>Data tables drawn. <span class="ans">Full credit = 3 tables drawn in ink, with units in the row labels.</span></li>
+</ol>
+
+<h2>POST-LAB KEY — FROM THE SAMPLE DATA</h2>
+<ol class="q">
+  <li>Coasting a with uncertainty. <span class="ans">−0.096 ± 0.008 m/s². Tiny next to the 1–2 m/s² of
+      Part B, so close to zero, but the range −0.104 to −0.088 does not include zero. Rolling friction points
+      opposite the motion, which is the negative direction. “Human error” earns nothing.</span></li>
+  <li>m|a| against tow force. <span class="ans">(0.305 kg)(0.096 m/s²) = 0.029 N, against 0.034 N. While
+      coasting, friction is the only horizontal force, so friction = m|a| (second law). While towing at
+      constant velocity a = 0, so ∑F = 0 and the tow force equals friction (first law). Both measure the same
+      friction. Agreement within about 0.005 N is good for forces this small.</span></li>
+  <li>Percent error for each slope. <span class="ans">4.3% and 2.6%. Full work under Part B of the worked sample analysis, page 3. Units carried in every step.</span></li>
+  <li>Slope rise and intercept. <span class="ans">Up 0.463 kg against 0.497 kg added, 6.8% low. The intercept
+      (+0.041 N, +0.046 N) is the force reading at a = 0, which is the force that only balances friction. It
+      matches the Part A tow force of about 0.03 N. The mass changed, so the slope changed.</span></li>
+  <li>Percent difference of peaks; signs. <span class="ans">2.8%, 3.0%, 3.3%. The opposite signs mean opposite
+      directions. The forces don’t cancel because one acts on the cart and the other acts on the hand sensor.
+      Forces cancel only when they act on the same object.</span></li>
+  <li>m·a against F − F<sub>tow</sub>. <span class="ans">0.482 N against 0.486 N, 0.8% apart. The force sensor
+      reads only the pull. Friction also acts on the cart, opposite the motion, so ∑F = pull − friction.
+      Common wrong answer: comparing m·a with 0.52 N directly. Partial credit if the friction reason is given.</span></li>
+  <li>Unzeroed sensor reading +0.15 N. <span class="ans">Every force reads 0.15 N high, so the intercept rises by
+      0.15 N and the slope does not change. Their mass and percent error are unaffected. Common wrong answer:
+      “the mass comes out too big.” No credit without the slope-against-intercept reason.</span></li>
+  <li>Track tilted downhill. <span class="ans">Gravity now has a component along the motion. The slope becomes
+      less negative, zero, or even positive, and it hides friction. Part A step 1, the level check with the
+      cart at rest.</span></li>
+  <li>Connection to 1.3. <span class="ans">Part A step 4: the linear-fit slope of v–t is the acceleration. The
+      area under v–t is displacement, in metres.</span></li>
+</ol>
+
+<h2>GRADING</h2>
+<p>No point split for Physics labs is set yet. Physics gradebook weights are still an open question, so
+Matt sets this. The carbonless copy is graded individually.</p>
+
+<h2>MISSED LAB</h2>
+<p>If the setup is already torn down, the student completes a Missed Lab Analysis rather than re-running
+the lab. Give them one group’s Tables 1–3 from the same period, plus a printout or screenshot of that
+group’s F–a graph and one Part C force overlay. They answer post-lab questions 1–8 from that data and question 9 from their 1.3 notes.</p>
+
+</body>
+
+</html>

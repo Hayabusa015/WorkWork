@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3.1 Lab - Newton’s Laws</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB DOCUMENT TEMPLATE (MASTER)  v1.0
+ Works for CHEMISTRY · PHYSICS · GEOLOGY
+=====================================================================
+
+ HOW TO USE
+ 1. Copy this file. Rename it using the doc-code grammar:
+       SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor].html
+ 2. On the <body> tag, set the course class:  chem  |  phys  |  geo
+ 3. Replace every [[ BRACKETED TOKEN ]]. Search for "[[" to find them all.
+ 4. Delete any block you do not need. Blocks are marked "BLOCK:" in comments.
+ 5. Render:  python3 build_lab.py yourfile.html
+ 6. File the PDF in:  [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ RULES BAKED IN — DO NOT OVERRIDE
+ · Ink-friendly. Outline and rule treatments only. No solid fills, no
+   shaded banners, no colored table headers.
+ · No write-lines, no answer spaces, no fillable data tables on the
+   handout. The lab notebook is the write-on surface. The pre-lab
+   instructs students to draw their own tables.
+ · Print palette is the same for all three courses. The per-course
+   accent palettes (courses.* in brand/tokens.json) are PROJECTION
+   ONLY and never touch a printed page.
+ · Margins are the confirmed SHULL print standard and are locked.
+=====================================================================
+-->
+
+<link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<style>
+  /* ---------- Locked SHULL print margins ---------- */
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+
+    @top-right {
+      content: string(runhead);
+      font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+      letter-spacing: 0.30em; color: var(--footer);
+      margin-top: 0.16in;
+    }
+    @bottom-left {
+      content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: string(footright);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  @page :first { @top-right { content: ""; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    font-size: 10.3pt;
+    line-height: 1.40;
+    color: var(--ink);
+  }
+
+  /* Brand values come from shull-lab-tokens.css, generated from brand/tokens.json.
+     Never hand-type a hex here. See SHULL-CHG-0008 for the colour-as-type rule. */
+
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  b, strong { font-weight: bold; }
+
+  /* string-set carriers — set once, used by every running head/footer */
+  .meta, .runhead { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code   { string-set: unitcode content(); }
+  .m-fright { string-set: footright content(); }
+
+  /* Any section can set the running header for the pages that follow */
+  .runhead { string-set: runhead content(); }
+
+  /* ---------- Masthead (page 1 only) ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 {
+    font-family: var(--display); font-weight: bold; font-size: 17pt;
+    line-height: 1.12; letter-spacing: -0.005em; flex: 1 1 auto;
+  }
+  .masthead h1 .accent { color: var(--accent); }   /* ONE accent word max */
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--accent); border-radius: 9pt;
+    padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  /* ---------- Name / Date / Period / Group ---------- */
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; }
+  .id-row .per  { flex: 1; }
+  .id-group { margin: 6pt 1pt 11pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 8.6pt;
+    letter-spacing: 0.20em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent);
+    padding-bottom: 2.5pt; margin: 13pt 0 6pt 0;
+  }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 {
+    font-family: var(--display); font-weight: 600; font-size: 10.2pt;
+    color: var(--ink); margin: 10pt 0 4pt 0;
+  }
+  h3 .flag {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--warn);
+    border: 0.8pt solid var(--warn-rule); border-radius: 7pt;
+    padding: 1.5pt 6pt; margin-left: 7pt; vertical-align: 1.5pt;
+  }
+
+  p { margin-bottom: 5pt; }
+  p.lead { margin-bottom: 7pt; }
+
+  /* ---------- Bulleted lists (goals, safety, materials) ---------- */
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3.5pt; }
+  /* Drawn, not typed. U+25AA is absent from Archivo, so a literal square bullet
+     dropped the whole run to the last-resort fallback and pulled Liberation Sans into
+     every lab PDF. A box needs no glyph and no font. */
+  ul.dot li::before {
+    content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent);
+  }
+
+  /* ---------- Numbered question lists (pre-lab, post-lab) ---------- */
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li {
+    counter-increment: q; position: relative;
+    padding-left: 20pt; margin-bottom: 7pt;
+    page-break-inside: avoid;
+  }
+  /* Just the number. No box. SHULL-CHG-0015 — the user's standing rule for every
+     numbered list in every format. Right-aligned so 9 and 10 line up. */
+  ol.q > li::before {
+    content: counter(q);
+    position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt;
+    color: var(--accent);
+    width: 13pt; text-align: right;
+  }
+  .ref {
+    font-family: var(--display); font-weight: 600; font-size: 6.4pt;
+    letter-spacing: 0.16em; color: var(--accent); white-space: nowrap;
+    margin-left: 5pt;
+  }
+
+  /* ---------- Numbered procedure ---------- */
+  ol.proc { margin: 3pt 0 4pt 17pt; }
+  ol.proc > li { margin-bottom: 4.5pt; page-break-inside: avoid; }
+  ol.proc ul { list-style: none; margin: 3pt 0 1pt 0; }
+  ol.proc ul li {
+    padding-left: 11pt; position: relative; margin-bottom: 2.5pt;
+    font-size: 9.9pt;
+  }
+  ol.proc ul li::before {
+    content: "–"; position: absolute; left: 1pt; color: var(--accent);
+  }
+
+  /* ---------- Formula callout (outline only) ---------- */
+  .formula {
+    border-left: 2.5pt solid var(--accent);
+    padding: 5pt 0 5pt 10pt; margin: 6pt 0 7pt 0;
+  }
+  .formula .fname {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2.5pt;
+  }
+  .formula .fx { font-family: var(--display); font-size: 10.6pt; font-weight: 500; }
+
+  /* ---------- Data-table skeletons students copy into the notebook ---- */
+  .tables { display: flex; gap: 10pt; margin-top: 7pt; align-items: flex-start; }
+  .tbl { flex: 1 1 0; page-break-inside: avoid; }
+  .tbl .cap {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; margin-bottom: 0;
+  }
+  .tbl table { width: 100%; border-collapse: collapse; }
+  .tbl td {
+    border-bottom: 0.6pt solid var(--rule-hairline);
+    padding: 3.2pt 2pt; font-size: 9.1pt; line-height: 1.25;
+  }
+  .tbl td.note {
+    font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); text-align: right; border-bottom: none;
+  }
+
+  /* ---------- Reference data table (e.g. accepted densities) ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
+  table.data th {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
+  }
+  table.data td {
+    padding: 3.6pt 4pt; font-size: 9.8pt;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+  }
+  .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
+
+  /* ---------- Two-column figure/table row ---------- */
+  .split { display: flex; gap: 14pt; align-items: flex-start; }
+  .split .wide { flex: 3 1 0; } .split .narrow { flex: 1 1 0; padding-top: 8pt; }
+  .figcap {
+    font-size: 8pt; color: var(--label); text-align: center;
+    margin-top: 4pt; line-height: 1.3;
+  }
+
+  /* ---------- Inline emphasis rule (the "read this" line) ---------- */
+  .rule-note {
+    border-top: 0.8pt solid var(--rule-hairline); border-bottom: 0.8pt solid var(--rule-hairline);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.9pt;
+  }
+
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+
+<body class="phys">
+
+<div class="meta">
+  <span class="m-course">PHYSICS</span>
+  <span class="m-code">U3 / S3.1</span>
+  <span class="m-fright">NEWTON’S LAWS LAB · CARBONLESS COPY GRADED INDIVIDUALLY</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">UNIT 3 — FORCES AND MOTION · SECTION 1</div>
+  <div class="titlerow">
+    <h1>Newton’s Laws: <span class="accent">Measured</span> with a Sensor Cart</h1>
+    <div class="chip">U3 / S3.1</div>
+  </div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>
+  <div class="date"><div class="f">&nbsp;</div><div class="lbl">DATE</div></div>
+  <div class="per"><div class="f">&nbsp;</div><div class="lbl">PERIOD</div></div>
+</div>
+<div class="id-group">
+  <div class="f">&nbsp;</div><div class="lbl">GROUP MEMBERS</div>
+</div>
+
+<h2>GOALS</h2>
+<ul class="dot">
+  <li>Measure the acceleration of a coasting cart on a level track and report it as a mean with an uncertainty.</li>
+  <li>Measure the small force it takes to tow the cart at constant velocity, and connect it to friction.</li>
+  <li>Graph force against acceleration and read the cart’s mass from the slope, then check it against the balance.</li>
+  <li>Measure both forces in an interaction at the same instant with two force sensors and compare them. Record every value as you take it, with units and a sign.</li>
+  </ul>
+
+<h2>PURPOSE</h2>
+<p class="lead">You are going to test all three of Newton’s laws with numbers instead of taking them
+on faith. Day 1 is the first and second laws. Day 2 is the third law, with two force sensors pulling on each other.</p>
+
+<h2>BACKGROUND</h2>
+<p><b>Net force, not force.</b> Newton’s laws are about the <b>net force</b> ∑F, the sum of every
+force on the object with signs included. A moving object does not need a force to keep moving, only
+to <i>change</i> its velocity. <b>In every part, positive
+is the direction you push or pull the cart.</b> A force or acceleration with no sign is incomplete.</p>
+
+<div class="formula">
+  <div class="fname">NEWTON’S FIRST LAW</div>
+  <div class="fx">if ∑F = 0, then a = 0 &nbsp;·&nbsp; velocity stays constant, including at zero</div>
+</div>
+
+<p><b>Mass is the slope.</b> The cart records the pull on its force sensor and its own acceleration at the
+same moment. On a graph of force (y) against acceleration (x), the points fall on a line whose slope is the mass.</p>
+
+<div class="formula">
+  <div class="fname">NEWTON’S SECOND LAW · AND THE SLOPE OF A FORCE–ACCELERATION GRAPH</div>
+  <div class="fx">∑F = ma &nbsp;·&nbsp; N = kg·m/s² &nbsp;&nbsp;&nbsp; slope = ΔF ÷ Δa = m &nbsp;·&nbsp; N ÷ (m/s²) = kg</div>
+</div>
+
+<p><b>Forces come in pairs.</b> When A pulls on B, B pulls on A with a force of the same size in the
+opposite direction. The two forces act on <i>different</i> objects, so they never cancel. On Day 2 a
+plus on one sensor and a minus on the other is what “opposite” looks like in data.</p>
+
+<div class="formula">
+  <div class="fname">NEWTON’S THIRD LAW</div>
+  <div class="fx">F<sub>A on B</sub> = −F<sub>B on A</sub></div>
+</div>
+
+<div class="formula">
+  <div class="fname">MEAN AND UNCERTAINTY (HALF THE RANGE)</div>
+  <div class="fx">value = mean ± ( largest − smallest ) ÷ 2</div>
+</div>
+<div class="formula">
+  <div class="fname">PERCENT ERROR</div>
+  <div class="fx">percent error = ( | experimental − accepted | ÷ accepted ) × 100</div>
+</div>
+<div class="formula">
+  <div class="fname">PERCENT DIFFERENCE — WHEN THERE IS NO ACCEPTED VALUE</div>
+  <div class="fx">percent difference = ( | A − B | ÷ [ ( A + B ) ÷ 2 ] ) × 100</div>
+</div>
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · SAFETY &amp; PRE-LAB</div>
+
+<h2 class="warn">SAFETY</h2>
+<ul class="dot">
+  <li>A cart that rolls off the end of the track falls to the floor. Put an end stop on <b>both</b>
+      ends of the track before the first run, and catch the cart by hand before it reaches the stop.</li>
+  <li>Fingers get pinched between a bumper and the front of a force sensor. In Part C, hold each
+      sensor by its body, never by its front face, and keep fingers out of the gap.</li>
+  <li>A hanging mass can drop when the string slips or the cart reaches the pulley. If you do the
+      extension, keep hands and feet out from under the mass and stop the cart before the mass
+      reaches the floor.</li>
+  <li>Pull smoothly and gently. A hard yank makes the cart outrun your hand and slam into the end
+      stop. Nothing in this lab needs a big force.</li>
+  <li>Keep strings off the floor and out of walkways when you are not using them.</li>
+</ul>
+
+<h2>PRE-LAB — DUE AT THE START OF DAY 1</h2>
+<p class="lead">Answer all of these in your lab notebook, numbered 1 through 9, before you walk in. Do
+not write on this handout. You will not be allowed to start the lab without the pre-lab finished,
+because most of these are the parts people get wrong when they wing it.</p>
+
+<ol class="q">
+  <li>A cart rolls along a level track at a constant 0.40 m/s. What is the net force ∑F on it? Explain
+      using Newton’s first law, and say why “the push from earlier is still acting” is wrong.</li>
+  <li>On a graph of force (y-axis, N) against acceleration (x-axis, m/s²), what physical quantity is
+      the slope? Show how the units N ÷ (m/s²) reduce to kg.</li>
+  <li>Your hand sensor pulls the cart with +2.0 N. What force does the cart exert on your sensor,
+      with sign? If the two forces are equal and opposite, why doesn’t the cart just sit still?</li>
+  <li>Read Part A, step 3. What do you do to the force sensor before every run, and what must be
+      touching the hook while you do it?</li>
+  <li>Read Part A. Which region of the velocity–time graph do you fit a line to, and which region do
+      you leave out?</li>
+  <li>Read Part B. What is the accepted value you compare the slope to, and how do you get it once a
+      mass bar is on the cart?</li>
+  <li>Read Part C, step 2. After the test tug, what signs should the two sensors show, and what do
+      you do if both show the same sign?</li>
+  <li>Safety: where do the end stops go, and how do you hold the sensors during the Part C bumper
+      push? Say exactly where your fingers go.</li>
+  <li>Set up your 3 data tables in your notebook. Copy them exactly as shown, in ink, leaving enough
+      room to write in each blank. Units go in the row labels. Do not plan to add them later.</li>
+</ol>
+
+<div class="tables">
+  <div class="tbl">
+    <div class="cap">TABLE 1 · PART A — FIRST LAW</div>
+    <table>
+      <tr><td>Cart mass, balance (kg)</td></tr>
+      <tr><td>Push trials 1–3: slope of v–t, a (m/s²)</td></tr>
+      <tr><td>Mean a ± uncertainty (m/s²)</td></tr>
+      <tr><td>Tow trials 1–3: mean force (N)</td></tr>
+      <tr><td>Tow trials 1–3: mean a (m/s²)</td></tr>
+      <tr><td>Mean tow force ± uncertainty (N)</td></tr>
+    </table>
+  </div>
+  <div class="tbl">
+    <div class="cap">TABLE 2 · PART B — SECOND LAW</div>
+    <table>
+      <tr><td>Cart alone: F–a slope (kg)</td></tr>
+      <tr><td>Cart alone: F–a intercept (N)</td></tr>
+      <tr><td>Cart + bar mass, balance (kg)</td></tr>
+      <tr><td>Cart + bar: F–a slope (kg)</td></tr>
+      <tr><td>Cart + bar: F–a intercept (N)</td></tr>
+      <tr><td>Percent error, each run (%)</td></tr>
+    </table>
+  </div>
+  <div class="tbl">
+    <div class="cap">TABLE 3 · PART C — THIRD LAW</div>
+    <table>
+      <tr><td>Trials C1–C3: peak F on cart (N)</td></tr>
+      <tr><td>Trials C1–C3: peak F on hand sensor (N)</td></tr>
+      <tr><td>Percent difference, each trial (%)</td></tr>
+      <tr><td>C1 stretch: mean F on cart (N)</td></tr>
+      <tr><td>C1 stretch: mean a (m/s²)</td></tr>
+      <tr><td>m·a for the stretch (N)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="rule-note">
+  If you write a number wrong during the lab, draw one line through it and write the correct
+  value beside it. Never scribble it out and never erase. I need to see what you originally
+  recorded.
+</div>
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PROCEDURE</div>
+
+<h2>MATERIALS</h2>
+<p><b>Per group:</b> Go Direct Sensor Cart · Dynamics Track with an end stop on each end ·
+device with Graphical Analysis · balance · one cart mass bar · string, about 40 cm ·
+<b>Day 2 only:</b> one Go Direct force sensor with its hook and bumper ·
+<b>Extension only:</b> track pulley and hanging masses</p>
+
+<h2>PROCEDURE</h2>
+
+<h3>Part A — First Law: No Net Force, No Acceleration <span class="flag">DAY 1 · ABOUT 20 MIN</span></h3>
+<ol class="proc">
+  <li>Set the track on the bench with an end stop on each end. Level it.
+    <ul>
+      <li>Set the cart at rest in the middle. If it starts to roll, shim the low end with folded
+          paper until it stays put.</li>
+    </ul>
+  </li>
+  <li>Mass the cart on the balance and record it to 0.001 kg. Turn the cart on and connect it to
+      Graphical Analysis. Display velocity, acceleration and force against time.</li>
+  <li>With nothing touching the hook, zero the force sensor. Do this before every run, in every part.</li>
+  <li>Push trials, three times:
+    <ul>
+      <li>Start data collection. Give the cart one short push and let go. Let it coast for about
+          2 s, then catch it before the end stop.</li>
+      <li>On the v–t graph, select only the stretch after your hand left the cart. Leave out the
+          push and the catch. Apply a linear fit and record the slope as a, with its sign.</li>
+    </ul>
+  </li>
+  <li>Tow trials, three times:
+    <ul>
+      <li>Tie the string to the force sensor hook. Zero the sensor with the string hanging slack.</li>
+      <li>Start data collection and tow the cart by the string, level with the track, at a slow,
+          steady pace for about 1 m.</li>
+      <li>Select the stretch where velocity is flat. Record the mean force and the mean acceleration
+          for that stretch.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Part B — Second Law: Mass from a Graph <span class="flag">DAY 1 · ABOUT 20 MIN</span></h3>
+<ol class="proc">
+  <li>Keep the string on the hook. Positive is the direction you pull. Zero the force sensor.</li>
+  <li>Start data collection. Pull the cart along the track with a series of gentle-to-firm pulls,
+      each a little harder than the last, for about 3 s. Keep the string level. Catch the cart before
+      the end stop.</li>
+  <li>Make a graph of force against acceleration, with acceleration on the x-axis. Apply a linear
+      fit. Record the slope (kg) and the intercept (N).
+    <ul>
+      <li>If the slope comes out negative, the force and acceleration signs disagree. Check the sign
+          convention with me before you take more data.</li>
+    </ul>
+  </li>
+  <li>Add one mass bar. Mass the cart and bar together on the balance and record it to 0.001 kg.
+      Repeat steps 1–3. The slope should go up by about the mass you added.</li>
+  <li><i>Extension, if I give you a pulley:</i> replace your hand with a string over the pulley to a
+      small hanging mass. The force sensor still reads the string tension and the cart still reads a,
+      so each run adds a point to your F–a graph.</li>
+</ol>
+
+<h3>Part C — Third Law: Two Sensors, One Interaction <span class="flag">DAY 2 · ABOUT 20 MIN</span></h3>
+<ol class="proc">
+  <li>Connect the cart and the separate force sensor to Graphical Analysis so they record together.
+      With nothing touching either hook, zero both sensors.</li>
+  <li>Set the sign convention. Positive is toward the person holding the separate sensor, which is
+      the direction of the pull.
+    <ul>
+      <li>Hook the two sensors together with about 10 cm of string. Give one gentle test tug. The
+          cart’s sensor should read <b>positive</b> (the force on the cart points toward you). Your
+          hand sensor should read <b>negative</b> (the force on it points back toward the cart).</li>
+      <li>If both read the same sign, stop and get me. One sensor’s sign has to be reversed before
+          you go on.</li>
+    </ul>
+  </li>
+  <li>Trial C1, steady pull. Start data collection and pull the cart toward you along the track by
+      the hand sensor, speeding it up smoothly for about 1 m. Catch the cart before the end stop.</li>
+  <li>Trial C2, tugs. Start data collection and give the cart four or five gentle tugs, letting the
+      string go slack between them.</li>
+  <li>For each trial, show both force readings on the same graph. Record the peak force on each
+      sensor, with sign, and sketch the two curves in your notebook with labeled axes.</li>
+  <li>Trial C3, bumper push. Swap the hook on the separate sensor for its bumper. Zero both sensors.
+      Press the bumper against the cart’s force sensor and push the cart a short way along the track.
+      Catch it before the end stop. Record both peaks.</li>
+  <li>Go back to Trial C1. Select a stretch where the cart is speeding up steadily. Record the mean
+      force on the cart and the mean acceleration for that stretch.</li>
+  <li>Use the rest of the period for the post-lab analysis.</li>
+</ol>
+
+<h2>DATA TABLES</h2>
+<p>You built these in your pre-lab. Have them open before you start data collection. Fill them in
+<b>as you take each run</b>, not at the end of the period from memory. Graphs you sketch go right
+below the table they belong to.</p>
+
+<h2 class="warn">DISPOSAL AND CLEANUP — LAST FIVE MINUTES, BOTH DAYS</h2>
+<ol class="proc">
+  <li>Untie the string, take the mass bar off, and return both to the tray. Nothing goes in the trash.</li>
+  <li>Turn off the cart and the separate force sensor and return them where you got them.</li>
+  <li>Leave the track flat on the bench with both end stops on. Pulley and hanging masses go back in
+      their box.</li>
+  <li><b>Wash all glassware with the Alconox solution in the blue spray bottle.</b> Spray inside,
+      scrub with a brush, and rinse thoroughly — soap left in a beaker changes the next
+      measurement made in it.</li>
+  <li>Rinse with distilled water and invert everything on the rack to dry.</li>
+  <li>Wipe your bench, push in your stool, and wash your hands. <b>Goggles come off last</b>, once
+      the whole room is finished — not once you are.</li>
+</ol>
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · POST-LAB</div>
+
+<h2>POST-LAB ANALYSIS</h2>
+<p class="lead">Answer these in your lab notebook, numbered 1 through 9. Show every calculation with
+units and signs. An answer with no work and no units earns partial credit at best.</p>
+
+<ol class="q">
+  <li>Report the coasting cart’s acceleration as mean ± uncertainty. Is it consistent with zero?
+      It will not be exactly zero. Name the force responsible and say which direction it points.
+      <span class="ref">PART A</span></li>
+  <li>Multiply the cart’s mass by the size of its mean coasting acceleration. Compare that number
+      with your mean tow force. Use Newton’s first and second laws to explain why the two should be
+      close. <span class="ref">PART A</span></li>
+  <li>Calculate percent error for each F–a slope. The accepted value is the balance mass for that
+      run. <span class="ref">PART B</span></li>
+  <li>How much did the slope go up when you added the bar, and how does that compare with the
+      bar’s mass? Your fit line probably did not pass through the origin. Using Part A, explain what
+      the intercept represents. <span class="ref">PART B · PART A</span></li>
+  <li>Calculate percent difference between the two peak forces for each trial. Use the size of
+      each force and leave the signs out of this calculation. Then explain what the opposite signs
+      tell you, and why these two forces do not cancel. <span class="ref">PART C</span></li>
+  <li>For the C1 stretch, calculate m·a for the cart. Compare it with the mean force on the cart
+      minus your Part A tow force. Explain why you have to subtract the tow force.
+      <span class="ref">PART C · PART A</span></li>
+  <li>A group forgot to zero the force sensor in Part B, and it read +0.15 N with nothing on the
+      hook. Does that change the slope of their F–a graph, the intercept, or both? Explain what
+      happens to their mass and their percent error. <span class="ref">ERROR ANALYSIS</span></li>
+  <li>Suppose the track was not level and the cart coasted slightly downhill in Part A. What would
+      that do to the sign and size of the push-trial slope? Name the step that was meant to catch it.
+      <span class="ref">ERROR ANALYSIS</span></li>
+  <li>In Section 1.3 you learned that the slope of a v–t graph is acceleration. Point to the place
+      in this lab where you used that, and say what quantity you would get from the <i>area</i>
+      under the same graph. <span class="ref">U1 / S1.3</span></li>
+</ol>
+
+</body>
+
+</html>
