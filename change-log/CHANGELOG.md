@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-12
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0073 | 2026-11-12 | Physics 3.1 short title, lab exceptions, inventory | PARTIAL | `governance/proposals/SHULL-CHG-0073-physics-3.1-short-title-and-lab-exceptions.md` |
+
 ## 2026-11-11
 
 | ID | Date | Change | Status | Record |

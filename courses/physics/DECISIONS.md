@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-11-11
+**Last updated:** 2026-11-12
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -202,7 +202,8 @@ numeric answer support · Modified/Challenge differentiation.
    should be located and filed.
 6. **`SHULL_Physics_Pacing_Guide_20262027.pdf`** is referenced in the librarian's absorptions table
    and has not been supplied. Needed before build order can be set against the MP deadlines.
-7. **Lab equipment inventory** and realistic lab frequency.
+7. **Realistic lab frequency.** The equipment inventory is recorded (2026-11-12 decision-log
+   entry, SHULL-CHG-0073). How often a lab can run is still open.
 8. **Does Physics use the same five-tab binder system?**
 
 ---
@@ -238,8 +239,54 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.2 | Acceleration |
 | 1.3 | Motion Graphs |
 | 1.4 | Free Fall |
+| 3.1 | Newton's Laws |
 
 ## Decision log
+
+### 2026-11-12 — Lab equipment inventory
+Confirmed by Matt in chat: 10 Vernier Go Direct Sensor Carts, 2 of them broken · 5 lab groups ·
+5 Go Direct Force and Acceleration Sensors (GDX-FOR), the separate force sensors · mass bars · a
+pulley with hanging masses · spring bumpers · a balance. Counts for mass bars, hanging masses,
+bumpers and balances were not given. Partly answers Open question 7. Lab frequency is still open.
+Supersedes: Open question 7, for the inventory half only.
+Status: CONFIRMED · SHULL-CHG-0073
+
+### 2026-11-12 — One-time lab-template exceptions: "3.1 Lab - Newton's Laws"
+Matt asked for four departures from the lab template (`templates/lab/README.md`,
+`.claude/skills/build-lab/SKILL.md`) for this one lab, by direct instruction:
+
+1. **No Safety section.** Matt: "Remove safety section, its just carts." The README section order
+   lists Safety for every Chemistry and Physics lab.
+2. **No Disposal and Cleanup section, Alconox items 4–6 included.** Matt: "remove disposal, nothing
+   is disposed of." The README and the skill call items 4–6 standing boilerplate, kept verbatim on
+   every lab.
+3. **The data-table section shows a filled EXAMPLE table.** It shows the column headings with units
+   and 1–2 sample rows, labelled "Example – your numbers will differ", instead of a blank skeleton.
+   Matt: "can you create a better example of the data and what the table should actually look like
+   in their lab notebook." The table is still for copying into the notebook. It is not a space to
+   write in, and the ink rule is unchanged.
+4. **Reduced pre-lab and simplified post-lab.** The pre-lab has a few questions, including "State
+   each of Newton's three laws". The post-lab has one question per law, the percent calculations,
+   and one short error-source question. Matt: "Reduce reduce the amount of prelab questions to just
+   whats important" and "i want this simple and straightforward." This replaces the template's
+   question mix for the pre-lab (2–3 conceptual · 3–4 procedural · 1 safety/disposal · 1 table
+   set-up) and the post-lab (2–3 what-happened · calculation with percent error · 2 error analysis ·
+   1 connection). The error-source question keeps the **Labs** rule above ("a **specific** named
+   source of error"), so no exception to that rule is taken.
+
+The teacher key states each omission as deliberate, as the S1.3 key did for the Alconox block.
+
+**Scope, stated plainly:**
+1. Scoped to this one lab: `3.1 Lab - Newton's Laws.html`/`.pdf` and its `3.1 Lab Key - Newton's
+   Laws` files.
+2. **Not a precedent** for future Physics or Chemistry labs. A future lab needing any of these
+   exceptions needs its own explicit request and its own record. It may not cite this one.
+3. The shared lab template files (`templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+   `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`, `templates/lab/build_lab.py`), the
+   `build-lab` skill and the README are **not** modified.
+
+Supersedes: None.
+Status: CONFIRMED · SHULL-CHG-0073 — Path A (course-specific; shared lab template untouched).
 
 ### 2026-11-11 — θ and other math symbols stay as symbols
 Offered "allow a backup font for math symbols, or spell it out as 'theta'", Matt answered "na leave

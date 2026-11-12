@@ -10,10 +10,14 @@
 > Matt gave the instructions himself (CLAUDE.md precedence 1), but only Matt can confirm the scope.
 > Section 3 lists two places where his instructions meet a **CONFIRMED Physics course rule**. They
 > are open questions for him, and this record does not settle them.
+>
+> **Resolved by the Decision (`d54b28e`).** Departure 1: the post-lab keeps one short error-source
+> question, so no exception to the Physics **Labs** rule is taken. Departure 2: covered by Matt's
+> direct request for the example table. The text above is kept as written when proposed.
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0073. The highest ID in the local `governance/proposals/` is SHULL-CHG-0072, and no 0073 or higher appears anywhere else in the repository outside `legacy/` (`scripts/validate_schemas.py` uses 0099 only as a test fixture). **Not checked against a fetched `origin/main`.** The Secretary has no shell. Per `governance/CHANGE_CONTROL.md` §2, this ID is not allocated until the main session has fetched, re-checked and pushed it. |
+| **Change ID** | SHULL-CHG-0073. The main session reports the ID was checked free against a freshly fetched `origin/main` before the push of `d54b28e` (branch `claude/focused-mendel-cefeca`). The Secretary confirmed from `.git` refs that `d54b28e` is the branch head and was pushed, but could not re-run the ID check. |
 | **Date** | 2026-11-12 |
 | **Source** | User. Matt, in chat on 2026-11-12, while building the Physics 3.1 lab. His words are quoted verbatim in sections 1, 2 and 4. |
 | **Current Rule** | (1) `courses/physics/DECISIONS.md`, "Short titles": no row for `3.1`. `standards/NAMING.md` line 38: "**No row, no topic**: the name is `1.3 Lab.pdf`." (2) Lab template rules, quoted verbatim in section 2.2. (3) `courses/physics/DECISIONS.md`, Open questions, item 7: "**Lab equipment inventory** and realistic lab frequency." |
@@ -27,8 +31,8 @@
 | **Recommendation** | Approve part 1 and part 3 as written. Approve part 2 once Matt has answered the two questions in section 3. Where his chat instructions already cover a point, the record follows them. |
 | **Decision** | Approved by the user in chat. Short title, 2026-11-12: "yes use Newton's Laws as the short title". Lab exceptions A-D by his direct instructions of 2026-11-12, quoted in this record ("Remove safety section, its just carts", "remove disposal, nothing is disposed of", "create a better example of the data and what the table should actually look like in their lab notebook", "Reduce reduce the amount of prelab questions to just whats important", "i want this simple and straightforward"). Equipment inventory as he confirmed it in chat 2026-11-12. Departure 1 (error-source item): the main session keeps one short error-source question in the post-lab, so no exception to the Physics Labs rule is taken. Recorded by the main session (§4.1). |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
-| **Verified** | — |
+| **Implemented By** | Decision recorded in `d54b28e` (branch `claude/focused-mendel-cefeca`). The Secretary wrote the edits on 2026-11-12 and did not commit them: `courses/physics/DECISIONS.md` (the `3.1` short-title row, two 2026-11-12 decision-log entries, Open question 7 reworded, "Last updated" date), a `change-log/CHANGELOG.md` row, and this record. The main session commits them. **SHA of that commit: pending, add it here.** |
+| **Verified** | Partly. The Secretary checked by reading and searching the changed files. The `3.1` row uses a straight ASCII apostrophe (U+0027), and no U+2019 appears in `courses/physics/DECISIONS.md`. Both entries sit at the top of the log, above the 2026-11-11 entries. No validator was run, because the Secretary has no shell. Still to check: run the repository validators, and confirm the commit diff touches only the three files listed. Templates and outputs were not touched. |
 
 ---
 
