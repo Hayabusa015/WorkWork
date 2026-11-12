@@ -867,13 +867,17 @@ def footer(section, ctx):
 # ---------------------------------------------------------------------------------
 # Pages.
 
-def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
+def fit_page(ctx, label, head_tbl, blocks_tbl, parts, carry=0.0, stretch_ok=True):
     """Share a page's spare height out across its blocks, evenly: every block is
     raised to a common floor, so the page fills to its foot and no block is left
-    short while another is stretched. Returns the predicted overflow (0 if it fits)."""
+    short while another is stretched. Returns the predicted overflow (0 if it fits).
+
+    `carry` is the height already used on this sheet by an earlier section that the
+    page joins ("joinPrevious"); a sheet shared by two sections is not stretched,
+    because the first part was laid out before the second was known."""
     pin_all(blocks_tbl._tbl)
     avail = BODY_H_PT - SAFETY_PT - 2  # the 1 pt page-break paragraph and the one after a head
-    used = estimate_height(blocks_tbl._tbl, TEXT_W_IN)
+    used = carry + estimate_height(blocks_tbl._tbl, TEXT_W_IN)
     if head_tbl is not None:
         pin_all(head_tbl._tbl)
         used += estimate_height(head_tbl._tbl, TEXT_W_IN)
@@ -883,8 +887,15 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
         naturals.append(estimate_height(tbl, TEXT_W_IN) + extra)
     slack = avail - used
     ctx["report"].append((label, round(used / 72, 2), round(avail / 72, 2)))
+    ctx["_used"] = used
     if slack < 0:
         return -slack
+    if not stretch_ok:
+        return 0.0
+    # A spec may hold back headroom ("stretchHeadroomIn"): Word lays a page out a
+    # little taller than this prediction, and a page stretched to the last point
+    # spills its final block onto a sheet of its own there.
+    slack = max(0.0, slack - ctx.get("headroom_pt", 0.0))
     # Water-fill: find the level L with sum(max(n, L)) - sum(n) == slack.
     stretch = [n for (_, _, st), n in zip(parts, naturals) if st]
     if not stretch:
@@ -904,18 +915,29 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
     return 0.0
 
 
-def content_page(doc, ctx, sec, page):
+def content_page(doc, ctx, sec, page, join_next=False):
     """One sheet of a section. Its first sheet opens with the section title bar and
     learning target (SHULL-CHG-0038); a continuation sheet starts straight on its
-    blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn."""
-    break_before(doc)
+    blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn.
+
+    A section's first page may set "joinPrevious": it then starts under the previous
+    section's last blocks on the same sheet, opened by its own title bar, instead of
+    on a new sheet. Used to keep a short section ending from wasting a sheet."""
+    join = bool(page.get("joinPrevious")) and page["_n"] == 1
+    carry = ctx.get("_used", 0.0) + 14 if join else 0.0
+    if join:
+        sp = doc.add_paragraph()
+        pin(sp, 14)
+    else:
+        break_before(doc)
     head = None
     if page["_n"] == 1:
         head = section_bar(doc, ctx, sec["title"], bar_code(sec["code"]),
                            sec.get("learningTarget"))
     t = table(doc, [CUE_W_IN, NOTES_W_IN], rows=0)
     parts = render_blocks(t, page["rows"], ctx)
-    over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}", head, t, parts)
+    over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}" + (" (joined)" if join else ""),
+                    head, t, parts, carry=carry, stretch_ok=not (join or join_next))
     if over:
         ctx["overfull"].append(f"{sec_label(sec['code'])} page {page['_n']}: "
                                f"predicted {over / 72:.2f} in too tall")
@@ -1605,10 +1627,16 @@ def main():
         for m in ctx["derived"]:
             print("   " + m, file=sys.stderr)
     cover_page(doc, spec, ctx)
+    ctx["headroom_pt"] = float(spec.get("stretchHeadroomIn", 0)) * 72
+    seq = [(sec, page) for sec in spec["sectionsContent"] for page in sec["pages"]]
     for sec in spec["sectionsContent"]:
         for pi, page in enumerate(sec["pages"], 1):
             page["_n"] = pi
-            content_page(doc, ctx, sec, page)
+    for i, (sec, page) in enumerate(seq):
+        nxt = seq[i + 1][1] if i + 1 < len(seq) else {}
+        content_page(doc, ctx, sec, page,
+                     join_next=bool(nxt.get("joinPrevious")) and nxt.get("_n") == 1)
+        if not (page.get("joinPrevious") and page["_n"] == 1):
             designed += 1
 
     if spec.get("conceptReview"):
