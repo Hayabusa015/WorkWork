@@ -22,11 +22,13 @@ The profile is enforced here, at build time. A rule that only lives in a documen
 not a mechanism.
 
 A packet holds one or more sections, each starting a new page - the shape of his own
-PHYS U01 practice sets, which run one section per page across the whole unit.
+PHYS U01 practice sets, which run one section per page across the whole unit. The one
+exception is opt-in: an entry with "coversSections" stands for a span of one unit's
+sections under a single header, for a unit study guide (SHULL-CHG-0066).
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
-import json, os, sys
+import json, os, re, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
@@ -40,7 +42,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -406,6 +408,29 @@ def reference_block(doc, block, pal):
     return c
 
 
+def inline_heading(cell, block, pal):
+    """A block's `heading` without `pageBreakBefore`: a section title drawn at the top of
+    the block's own non-splitting cell, so it moves with the block and can never end a
+    page alone. With `pageBreakBefore` the main loop draws it instead. Returns whether
+    it drew one. Opt-in: reflection and plan only."""
+    if not block.get("heading") or block.get("pageBreakBefore"):
+        return False
+    p = para(cell, block["heading"], 13, bold=True, color=pal.ink, first=True)
+    p.paragraph_format.space_after = Pt(4)
+    pPr = p._p.get_or_add_pPr()
+    b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
+    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18"); x.set(qn("w:space"), "2")
+    x.set(qn("w:color"), hexof(pal.display))
+    b.append(x)
+    # pBdr precedes spacing in CT_PPr; appended after it, Word can reject the file.
+    sp = pPr.find(qn("w:spacing"))
+    if sp is not None:
+        sp.addprevious(b)
+    else:
+        pPr.append(b)
+    return True
+
+
 def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
@@ -423,7 +448,8 @@ def reflection_block(doc, block, pal):
             # The heading goes INSIDE the first non-splitting row. Kept outside it, it
             # ended a page on its own with the question it introduces on the next one -
             # the same stranding the diagram block hit, one level up.
-            label(cc, block.get("label", "REFLECTION"), pal, first=True)
+            first = not inline_heading(cc, block, pal)
+            label(cc, block.get("label", "REFLECTION"), pal, first=first)
             p = cc.add_paragraph()
         else:
             p = cc.paragraphs[0]
@@ -624,9 +650,12 @@ def table_block(doc, block, pal, width=TEXT_W_IN):
         borders(hc, pal.ink, sz=8, edges=("bottom",))
         cell_margins(hc, top=20, bottom=30, left=60, right=60)
         para(hc, h, 8, bold=True, color=pal.label, caps_track=True, first=True)
+    # `minRowHeightIn` floors every data row's height: a table students write in. Opt-in;
+    # rows still grow with their text.
+    floor = block.get("minRowHeightIn")
     for ri, row in enumerate(rows, 1):
         tr = t.rows[ri]
-        no_split(tr)
+        no_split(tr, None if isinstance(row, dict) else floor)
         if isinstance(row, dict):
             merged = tr.cells[0].merge(tr.cells[-1])
             borders(merged, pal.display, sz=8, edges=("top",))
@@ -713,9 +742,15 @@ def plan_block(doc, block, pal):
     and a plan is prose. A field with flex 0 is a label only (a circle-one choice)."""
     c = one_cell(doc, protect=True)
     cell_margins(c, top=0, bottom=0, left=0, right=0)
-    label(c, block["label"], pal, first=True)
+    first = not inline_heading(c, block, pal)
+    label(c, block["label"], pal, first=first)
+    # `"boldLabels": false` sets a label in regular weight, so a short prompt can carry its
+    # own <b> lead ("<b>Earth</b> what covered the land?"). Width is measured bold either
+    # way: an over-estimate costs a sliver of line, an under-estimate wraps the label.
+    bold_labels = block.get("boldLabels", True)
     for row in block["rows"]:
-        lab_ws = [round(text_width_in(k.replace("&nbsp;", " "), 9.5, bold=True) + 0.14, 2)
+        lab_ws = [round(text_width_in(re.sub(r"</?[bi]>", "", k).replace("&nbsp;", " "),
+                                      9.5, bold=True) + 0.14, 2)
                   for k, _ in row]
         free = TEXT_W_IN - sum(lab_ws) - 0.2 * (len(row) - 1)
         flex = sum(n for _, n in row) or 1
@@ -735,7 +770,7 @@ def plan_block(doc, block, pal):
             cell_margins(tc, top=0, bottom=20, left=0, right=0)
             tc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
             if kind == "lab":
-                rich(tc.paragraphs[0], k, 9.5, bold=True, color=pal.ink)
+                rich(tc.paragraphs[0], k, 9.5, bold=bold_labels, color=pal.ink)
             elif kind == "line":
                 borders(tc, pal.ink, sz=4, edges=("bottom",))
             tc.paragraphs[0].paragraph_format.space_after = Pt(0)
@@ -914,6 +949,62 @@ def refuse(msg, *more):
     return 1
 
 
+# ------------------------------------------------------------------ section spans
+# SHULL-CHG-0066. One entry may cover several sections of one unit ("coversSections"), so
+# a unit study guide gets one header, one Name / Date / Period / Score row and one page
+# flow instead of a page per section. Opt-in: an entry without the key takes none of
+# these paths and builds exactly as before. The key builder imports both helpers, so the
+# student copy and the key read a span the same way.
+
+def span_codes(sec):
+    """The section codes an entry stands for: its `coversSections`, or just its `code`."""
+    return list(sec.get("coversSections") or [sec["code"]])
+
+
+def span_label(sec):
+    """The header code: `S2.3` for one section, `S2.1-S2.5` for a span (the footer's form)."""
+    codes = span_codes(sec)
+    return f"S{codes[0]}" if len(codes) == 1 else f"S{codes[0]}-S{codes[-1]}"
+
+
+def check_spans(spec, course, sections):
+    """Validate every entry that sets `coversSections`. Returns an error string or None.
+
+    The `sections` / `sectionsContent` agreement itself stays in main(), reworded so a
+    span contributes its listed codes. That rule is one fact, kept."""
+    unit = int(spec["unit"])
+    def num(c):
+        a, b = str(c).split(".")
+        return (int(a), int(b))
+    for sec in sections:
+        if "coversSections" not in sec:
+            continue
+        codes = sec["coversSections"]
+        where = f"section {sec.get('code')}"
+        if not isinstance(codes, list) or len(codes) < 2:
+            return (f"{where}: coversSections must list at least two section codes, "
+                    f"got {codes!r}. One section needs no span. SHULL-CHG-0066.")
+        codes = [str(c) for c in codes]
+        if sec.get("code") != codes[0]:
+            return (f"{where}: an entry's code must equal the first code it covers "
+                    f"({codes[0]}). SHULL-CHG-0066.")
+        foreign = [c for c in codes if c.split(".")[0] != str(unit)]
+        if foreign:
+            return (f"{where}: coversSections lists {', '.join(foreign)}, which "
+                    f"{'is' if len(foreign) == 1 else 'are'} not in Unit {unit}. A span stays "
+                    "inside one unit. SHULL-CHG-0066.")
+        lo, hi = num(codes[0]), num(codes[-1])
+        between = sorted((c for c in known_sections(course)
+                          if c.split(".")[0] == str(unit) and lo <= num(c) <= hi), key=num)
+        skipped = [c for c in between if c not in codes]
+        if skipped:
+            return (f"{where}: the header prints S{codes[0]}-S{codes[-1]}, but "
+                    f"coversSections skips {', '.join(skipped)} "
+                    f"(courses/{course}/DECISIONS.md). A range may not quietly omit a "
+                    "section. SHULL-CHG-0066.")
+    return None
+
+
 def check_profile(spec, course, sec):
     """The course profile, enforced. Returns an error string or None."""
     qs = sec.get("questions", [])
@@ -1031,10 +1122,16 @@ def main():
         return refuse(f"section(s) {', '.join(bad)} are not in "
                       f"courses/{course}/DECISIONS.md.",
                       "Nothing is built against a code not in the decisions file.")
-    declared = [s["code"] for s in sections]
+    err = check_spans(spec, course, sections)
+    if err:
+        return refuse(err)
+    # Each entry contributes its own code, or every code it covers (SHULL-CHG-0066).
+    declared = [c for s in sections for c in span_codes(s)]
     if declared != list(spec["sections"]):
         return refuse(f"sections {spec['sections']} but content for {declared}. "
-                      "The two lists are the same fact and must agree.")
+                      "The two lists are the same fact and must agree."
+                      + (" SHULL-CHG-0066." if any("coversSections" in x for x in sections)
+                         else ""))
 
     for sec in sections:
         err = check_profile(spec, course, sec)
@@ -1074,7 +1171,7 @@ def main():
              + (f" · {sec['eyebrowNote']}" if sec.get("eyebrowNote") else ""), 7.5, bold=True,
              color=pal.accent, caps_track=True, first=True)
         para(h, title, 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
+        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
                   caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         pp = para(hr, kind_label.replace("_", " ").upper()
