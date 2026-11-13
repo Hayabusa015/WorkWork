@@ -1,0 +1,330 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.5",
+  "sectionTitle": "Atomic & Electron Spectra",
+  "note": "Builds on 2.1 (energy levels, drops). Per Matt: wavelengths are shown in nm and in scientific notation (meters); energies and calculations are removed. Students reason from a pre-built table of wavelengths and colors. No flame-line wavelengths on student slides (PROVISIONAL). Flame test science only, no procedure. All figures hand-built by scripts/build_diagram_u02_s02.5_spectra.py.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "05",
+        "headline": "2.5\nAtomic &\nElectron\nSpectra",
+        "subhead": "Explain how atoms make colored light, and use it to identify elements."
+      },
+      "imageSubjects": {
+        "section": "a hydrogen gas discharge tube glowing in a dark lab"
+      },
+      "notes": "Opens 2.5; builds on 2.1 energy levels. Goal: students leave able to say how an atom makes colored light. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen gas discharge tube glowing in a dark lab."
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Where Does Color\nCome From?",
+        "subhead": "Fireworks, neon signs, a flame on a lab burner. Different colors, one question.",
+        "keyq": "What inside an atom decides the color of the light it gives off?"
+      },
+      "imageSubjects": {
+        "concept": "a firework burst beside a glowing neon sign, shot at night"
+      },
+      "notes": "Hook. Take two or three answers, do not correct yet; the answer is the section. IMAGE SLOT EMPTY, photo to shoot or generate: a firework burst beside a glowing neon sign, shot at night."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words to Start",
+        "subhead": "Write these first. The rest of the section uses them.",
+        "k1_l": "PHOTON",
+        "k1_b": "A single packet of light energy.",
+        "k2_l": "WAVELENGTH",
+        "k2_b": "The distance between two wave crests, measured in nm.",
+        "k3_l": "SPECTRUM",
+        "k3_b": "Light spread out by wavelength.",
+        "mustwrite": "A photon is one packet of light. Its energy is set by its wavelength."
+      },
+      "imageSubjects": {
+        "aside": "a glass prism splitting white light on a dark bench"
+      },
+      "notes": "Frequency is defined on slide 5 (waves per second). Misconception to catch: 'longer wavelength means more energy'. It is the opposite. IMAGE SLOT EMPTY, photo to shoot or generate: a glass prism splitting white light on a dark bench."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "The Visible Spectrum",
+        "subhead": "Visible light runs from about 400 nm to 700 nm (4.00 × 10^{−7} m to 7.00 × 10^{−7} m).",
+        "a1_l": "UNITS",
+        "a1_b": "One nm is one billionth of a meter: 1 × 10^{−9} m.",
+        "a2_l": "VIOLET END",
+        "a2_b": "Shortest wavelength, most energy.",
+        "a3_l": "RED END",
+        "a3_b": "Longest wavelength, least energy."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_visible_spectrum.png"
+      },
+      "notes": "Ranges: violet 400-450, blue 450-495, green 495-570, yellow 570-590, orange 590-620, red 620-700 nm (approximate). The arrows under the bar show the rule: shorter wavelength, more energy; longer wavelength, less energy. Per Matt, the range is shown in nm and in scientific notation (meters): 400 nm is 4.00 × 10^-7 m, 700 nm is 7.00 × 10^-7 m."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Wavelength Sets the Energy",
+        "subhead": "Shorter wavelength means higher frequency (more waves per second) and more energy per photon.",
+        "c1_l": "LONG WAVELENGTH",
+        "c1_b": "Red light.\nLow frequency.\nLow energy per photon.",
+        "c2_l": "SHORT WAVELENGTH",
+        "c2_b": "Violet light.\nHigh frequency.\nHigh energy per photon.",
+        "mustwrite": "Shorter wavelength means more energy. A violet photon beats a red one."
+      },
+      "imageSubjects": {
+        "concept": "a red and a violet laser pointer beam crossing in haze"
+      },
+      "notes": "Defines frequency here: how many waves pass per second. Short wavelength, high frequency, high energy. State the rule in words only: more energy released means shorter wavelength and bluer light. No numbers needed. IMAGE SLOT EMPTY, photo to shoot or generate: a red and a violet laser pointer beam crossing in haze."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Hot Solid or Hot Gas",
+        "subhead": "What is glowing decides what the spectrum looks like.",
+        "c1_l": "HOT SOLID",
+        "c1_b": "A glowing filament.\n\nGives every color, no gaps.",
+        "c2_l": "HOT GAS",
+        "c2_b": "Excited atoms in a tube.\n\nGive a few separate lines.",
+        "mustwrite": "A hot solid gives a continuous spectrum. A hot gas gives a line spectrum."
+      },
+      "imageSubjects": {
+        "concept": "an incandescent bulb filament beside a lit neon tube"
+      },
+      "notes": "Hot solid gives all colors; hot gas gives separate lines. LED and fluorescence are out of scope. IMAGE SLOT EMPTY, photo to shoot or generate: an incandescent bulb filament beside a lit neon tube."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Three Kinds of Spectra",
+        "subhead": "Same range of colors, three different patterns.",
+        "a1_l": "CONTINUOUS",
+        "a1_b": "Every color, no gaps. Made by a hot solid.",
+        "a2_l": "EMISSION",
+        "a2_b": "Bright lines on black. Made by a hot gas.",
+        "a3_l": "ABSORPTION",
+        "a3_b": "Dark lines at the same places as emission lines."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_spectra_types.png"
+      },
+      "notes": "Absorption lines sit at the same wavelengths as the element's emission lines. Absorption in starlight reveals composition."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Hydrogen's Visible Emission Spectrum",
+        "subhead": "Four lines, from the energy levels.",
+        "a1_l": "THE FOUR LINES",
+        "a1_b": "656, 486, 434, and 410 nm. Red to violet.",
+        "a2_l": "WHERE THEY END",
+        "a2_b": "Every one is a drop that ends at n = 2.",
+        "a3_l": "MORE LINES",
+        "a3_b": "More are in ultraviolet (UV) and infrared (IR)."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_hydrogen_emission_lines.png"
+      },
+      "notes": "Lines are 656, 486, 434, 410 nm, all ending at n = 2. Hydrogen has more lines in the UV (2 to 1 is about 122 nm) and IR (4 to 3 is about 1876 nm). Misconception: 'hydrogen has only four lines'."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Which Drop Makes Which Line",
+        "subhead": "Each line is one electron dropping to n = 2.",
+        "a1_l": "EXCITED STATE",
+        "a1_b": "Heat or electricity lifts an electron up a level.",
+        "a2_l": "EMISSION",
+        "a2_b": "The drop releases energy as one photon.",
+        "a3_l": "BIGGER DROP",
+        "a3_b": "More energy, shorter wavelength, bluer light."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_energy_transitions.png"
+      },
+      "notes": "Each line is one drop to n = 2. Electrons drop to lower levels; they do not fall into the nucleus. The levels are drawn to scale from the 1/n^2 pattern, so students can SEE that 6 to 2 is the longest arrow and 3 to 2 the shortest. Bigger drop, more energy, shorter wavelength, bluer light. Wavelengths in meters (scientific notation, per Matt) are on the table slide: 6.56, 4.86, 4.34, 4.10 × 10^-7 m."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Four Drops to n = 2",
+        "subhead": "A pre-built table in nm and meters. Match each drop to its color.",
+        "a1_l": "SMALLEST DROP",
+        "a1_b": "3 to 2: the longest wavelength, red.",
+        "a2_l": "BIGGEST DROP",
+        "a2_b": "6 to 2: the shortest wavelength, violet.",
+        "a3_l": "THE PATTERN",
+        "a3_b": "Bigger drop, shorter wavelength, bluer light."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_balmer_table.png"
+      },
+      "notes": "Pre-built table, read-only. 3 to 2: 656 nm (6.56 × 10^-7 m), red; 4 to 2: 486 nm (4.86 × 10^-7 m), blue-green; 5 to 2: 434 nm (4.34 × 10^-7 m), blue-violet; 6 to 2: 410 nm (4.10 × 10^-7 m), violet. Scientific notation shown per Matt. Students match drop to color by comparing drop size on the previous slide's figure; no calculation."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Match the Drop to the Line",
+        "subhead": "Use the table. Give a reason, not just an answer.",
+        "problem": "(a) Which drop made the red line? Why is it the smallest? (b) Which made the violet line?",
+        "g1_l": "GIVEN",
+        "g1_b": "The table of four drops\nRed line: 656 nm\nViolet line: 410 nm",
+        "g2_l": "NEED",
+        "g2_b": "(a) A drop and a reason\n(b) A drop",
+        "work": "",
+        "mustwrite": "Bigger drop means shorter wavelength and bluer light."
+      },
+      "imageSubjects": {
+        "aside": "a hydrogen discharge tube glowing pink-magenta"
+      },
+      "notes": "The energy and wavelength calculations were removed on Matt's instruction; wavelengths stay in nm and scientific notation per Matt. Students reason from the table instead. OPTIONAL Example 2 (not on a slide): the 486 nm blue-green line is a bigger or smaller drop than the red line? Answer: bigger (4 to 2 versus 3 to 2), because 486 nm is a shorter wavelength than 656 nm; but smaller than the 5 to 2 drop, which makes the 434 nm line. IMAGE SLOT EMPTY, photo to shoot or generate: a hydrogen discharge tube glowing pink-magenta."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Match the Drop, Worked",
+        "subhead": "Read the color, then compare the size of the drop.",
+        "f1_l": "SETUP",
+        "f1_b": "Bigger drop:\nmore energy,\nshorter wavelength,\nbluer light.",
+        "work": "(a) Red: 3 to 2\nThe smallest drop.\n(b) Violet: 6 to 2\nThe biggest drop.",
+        "mustwrite": "Red is the smallest drop, 3 to 2. Violet is the biggest, 6 to 2."
+      },
+      "imageSubjects": {
+        "data": "a notebook page with the table of four drops and pencil marks beside each color"
+      },
+      "notes": "Answers. (a) Red, 656 nm, the 3 to 2 drop. It is the smallest of the four (one step down from n = 3 to n = 2), so it releases the least energy, gives the longest wavelength, and looks red. (b) Violet, 410 nm, the 6 to 2 drop: the biggest drop of the four, the most energy, the shortest wavelength. IMAGE SLOT EMPTY, photo to shoot or generate: a notebook page with the table of four drops and pencil marks beside each color."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Every Element Has Its Own Lines",
+        "subhead": "Only certain energy drops exist, so only certain lines appear.",
+        "c1_l": "UNIQUE LEVELS",
+        "c1_b": "Each element has its own energy levels.\n\nSo its drops, and its lines, are its own.",
+        "c2_l": "A FINGERPRINT",
+        "c2_b": "Line positions identify an element.\n\nHelium was first found in sunlight, 1868.",
+        "mustwrite": "Each element has a unique line spectrum because its energy levels are unique."
+      },
+      "imageSubjects": {
+        "concept": "line spectra of several gas discharge tubes side by side, photographed through a spectroscope"
+      },
+      "notes": "Helium was first detected in the Sun's spectrum, 1868 (Janssen/Lockyer observations). Line positions identify an element. IMAGE SLOT EMPTY, photo to shoot or generate: line spectra of several gas discharge tubes side by side, photographed through a spectroscope."
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "FLAME TESTS",
+        "headline": "Same Idea,\nIn a Flame",
+        "subhead": "Metal ions in a flame emit light too. The color helps you identify the metal."
+      },
+      "imageSubjects": {
+        "divider": "a lab burner flame with a wire loop of metal salt, shot in a darkened room"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. Divider into flame tests. Flame photos are still to be shot. IMAGE SLOT EMPTY, photo to shoot or generate: a lab burner flame with a wire loop of metal salt, shot in a darkened room."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "How a Flame Test Makes Color",
+        "subhead": "The color is not the metal burning. It is electrons dropping levels.",
+        "c1_l": "IN THE FLAME",
+        "c1_b": "Heat lifts electrons in the metal ion to higher levels.",
+        "c2_l": "AS THEY DROP",
+        "c2_b": "They release photons of visible light. The color helps identify the metal.",
+        "mustwrite": "The color of the emitted light helps identify the metal ion."
+      },
+      "imageSubjects": {
+        "concept": "a flame test photograph, a bright lilac flame from a wire loop"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. PROVISIONAL: Ca, Sr, Ba and Cu flame colors come largely from molecular emitters (such as CaOH, SrOH, BaOH, CuCl), not single atomic lines; the electron-drop explanation is a valid HS simplification. Flame photos still to be shot. Color claims checked against textbook convention only. The color suggests the ion; it does not prove it. IMAGE SLOT EMPTY, photo to shoot or generate: a flame test photograph, a bright lilac flame from a wire loop."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Flame Test Colors, Part 1",
+        "subhead": "Compare the color you see to the table.",
+        "a1_l": "READ THE TABLE",
+        "a1_b": "Each metal ion has a typical flame color.",
+        "a2_l": "A COMMON CONTAMINANT",
+        "a2_b": "A little Na^{+} can turn a flame yellow.",
+        "a3_l": "NOT ONE WAVELENGTH",
+        "a3_b": "A flame color is a mix, not one exact line."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_flame_colors_1.png"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. PROVISIONAL: colors are textbook convention only; swatches are illustrations, not photographs, and flame photos are still to be shot. Do not state a color is one exact wavelength. K lilac is often masked by sodium; the cobalt-glass technique is lab procedure and is not in scope."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Flame Test Colors, Part 2",
+        "subhead": "Some of these colors look a lot alike.",
+        "a1_l": "LOOK-ALIKES",
+        "a1_b": "Sr^{2+} red and Ca^{2+} orange-red are easy to confuse.",
+        "a2_l": "NO COLOR",
+        "a2_b": "Many elements give no flame color we can see.",
+        "a3_l": "ONE TEST IS NOT ENOUGH",
+        "a3_b": "It narrows the options. It does not prove the ion."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.5_flame_colors_2.png"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. PROVISIONAL: textbook colors only, Ca, Sr, Ba, Cu largely molecular emitters; photos still to be shot. Many elements give no visible flame color."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Identify the Metals",
+        "subhead": "Use the flame color tables. Copy the reasoning.",
+        "problem": "One salt burns lilac with a trace of yellow. Another burns orange-red. Which metals?",
+        "g1_l": "GIVEN",
+        "g1_b": "Salt A: lilac, with some yellow\nSalt B: orange-red",
+        "g2_l": "NEED",
+        "g2_b": "The metal ion behind each color",
+        "work": "",
+        "mustwrite": "Write the metal ion for each color, not just the color."
+      },
+      "imageSubjects": {
+        "aside": "two wire loops of metal salt in a flame, one lilac and one orange-red, shot side by side"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. Textbook colors only; photos still to be shot. Intended answer: K+ (lilac) with a Na+ yellow trace; Ca2+ orange-red. IMAGE SLOT EMPTY, photo to shoot or generate: two wire loops of metal salt in a flame, one lilac and one orange-red, shot side by side."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Two Unknowns, Identified",
+        "subhead": "Sodium is a common contaminant.",
+        "f1_l": "SETUP",
+        "f1_b": "Match each color\nto the table.\nNa^{+} gives yellow.",
+        "work": "Salt A: K^{+} (lilac)\nYellow trace: Na^{+}\nSalt B: Ca^{2+} (orange-red)\nSr^{2+} looks similar",
+        "mustwrite": "Flame colors can look alike, so a flame test alone does not prove the ion."
+      },
+      "imageSubjects": {
+        "data": "a notebook page with a flame color table and pencil check marks"
+      },
+      "notes": "PROVISIONAL (flame section): flame tests are not a confirmed U2 lab (DECISIONS.md open question 4), so this is science only, no procedure. Ca2+ is the likely answer for orange-red, but Sr2+ looks similar, so a flame test alone cannot settle it. Textbook colors only; photos still to be shot. IMAGE SLOT EMPTY, photo to shoot or generate: a notebook page with a flame color table and pencil check marks."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Answer in your notes, in full sentences.",
+        "k1_l": "ENERGY",
+        "k1_b": "Which has more energy, a red photon or a blue photon? Why?",
+        "k2_l": "WHY DIFFERENT",
+        "k2_b": "Why does each element have its own line spectrum?",
+        "k3_l": "FLAME TEST",
+        "k3_b": "A flame is lilac. Which ion is it likely to be? Explain the color with electrons.",
+        "mustwrite": "Use the words photon and energy level."
+      },
+      "imageSubjects": {
+        "aside": "a student's notebook with a half-finished answer"
+      },
+      "notes": "Formative check. OPTIONAL extra item 3 (replaces a calculation item): a hydrogen line looks blue-violet at 434 nm. Is it the 4 to 2 drop or the 5 to 2 drop? Answer: 5 to 2. The 4 to 2 drop makes the 486 nm blue-green line; 434 nm is a shorter wavelength, so it is the bigger drop. Answers to the three on-slide items: blue (shorter wavelength, more energy); each element has unique energy levels so unique photon energies; lilac suggests K+ (heat lifts electrons, they drop, photons of visible light). IMAGE SLOT EMPTY, photo to shoot or generate: a student's notebook with a half-finished answer."
+    }
+  ]
+}

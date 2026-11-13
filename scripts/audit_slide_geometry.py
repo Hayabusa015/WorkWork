@@ -115,11 +115,17 @@ def overflow_check(shapes, fills, label):
         box_w = box[2] - box[0]
         total_lines, size = 0, None
         for para in sh.text_frame.paragraphs:
-            for run in para.runs:
-                if not run.text.strip():
-                    continue
-                size = run.font.size.pt if run.font.size else 18
-                total_lines += wrapped_lines(run.text, size, bool(run.font.bold), box_w)
+            # Wrap the paragraph as one string. A paragraph with superscript/subscript
+            # runs (build_deck.js ^{ } and _{ } markup) is several runs but one flow of
+            # text; wrapping each run alone counted every run as at least one line.
+            runs = [r for r in para.runs if r.text]
+            text = "".join(r.text for r in runs)
+            if not text.strip():
+                continue
+            sized = [r for r in runs if r.font.size]
+            size = max((r.font.size.pt for r in sized), default=18)
+            bold = any(r.font.bold for r in runs)
+            total_lines += wrapped_lines(text, size, bool(bold), box_w)
         if not size or not total_lines:
             continue
 
