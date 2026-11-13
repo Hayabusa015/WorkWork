@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-10
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0070 | 2026-11-10 | Reference packet: VSEPR grid, solubility X | CONFIRMED | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
+
 ## 2026-11-09
 
 | ID | Date | Change | Status | Record |
@@ -45,6 +51,15 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0060 | 2026-11-08 | Remove stale Drive-state prose from decisions files | APPROVED | `governance/proposals/SHULL-CHG-0060-stale-drive-state-prose-in-decisions.md` |
 | SHULL-CHG-0059 | 2026-11-08 | Remove the answer leak from Physics S1.1 student notes | APPROVED | `governance/proposals/SHULL-CHG-0059-physics-s1.1-answer-leak.md` |
 | SHULL-CHG-0058 | 2026-11-08 | Geology U1 section-code offset becomes open question 7 | APPROVED | `governance/proposals/SHULL-CHG-0058-geology-u1-numbering-offset.md` |
+
+## 2026-11-06
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0069 | 2026-11-06 | Course-level filename form for whole-year documents | CONFIRMED | `governance/proposals/SHULL-CHG-0069-course-wide-reference-filename.md` |
+| SHULL-CHG-0068 | 2026-11-06 | Chemistry reference packet becomes twelve sheets | CONFIRMED | `governance/proposals/SHULL-CHG-0068-chemistry-reference-packet.md` |
 
 ## 2026-11-05
 

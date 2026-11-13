@@ -6,6 +6,7 @@
  *   1.2 Practice Set - Balancing Equations.docx
  *   1.2 Quiz A Key - Balancing Equations.docx
  *   Unit 1 Guided Notes - Motion in One Dimension.docx      (more than one section)
+ *   Reference - Polyatomic Ions.pdf                         (course-level: the whole year, SHULL-CHG-0069)
  */
 function clean(text) {
   return String(text).replace(/[\\/:*?"<>|]/g, "").replace(/\s{2,}/g, " ").replace(/^[ .]+|[ .]+$/g, "");
@@ -26,7 +27,25 @@ function shortTitle(decisionsText, key) {
   return undefined;
 }
 
-function documentName({ type, sections, unit, topic, unitTitle, version, key = false, extension = "docx", descriptor }) {
+/* The course-level topics: every row coded REF in the Short titles table (SHULL-CHG-0069). */
+function referenceTitles(decisionsText) {
+  const m = decisionsText.match(/^## Short titles\s*$([\s\S]*?)(?=^## )/m);
+  if (!m) return [];
+  return [...m[1].matchAll(/^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$/gm)]
+    .filter((r) => r[1].trim().toUpperCase() === "REF").map((r) => clean(r[2])).filter(Boolean);
+}
+
+function documentName({ type, sections, unit, topic, unitTitle, version, key = false, extension = "docx", descriptor, scope }) {
+  if (scope === "course") {
+    // Course-level: a whole-year document. Reference only, PDF, no version or key, no code and no
+    // course word: the folder ([Course]/Reference/) carries the course (SHULL-CHG-0069, -0024).
+    if (String(type) !== "Reference") throw new Error(`course-level names are for Reference only, not "${type}"`);
+    if (version || key) throw new Error("a course-level Reference takes no version or key");
+    const t = topic ? clean(topic) : "";
+    if (!t) throw new Error("a course-level name always has a topic: a REF row in the course Short titles table");
+    if (t.length > MAX_TOPIC) throw new Error(`topic "${t}" is ${t.length} characters; the limit is ${MAX_TOPIC}. Use the short title from the course decisions file.`);
+    return `Reference - ${t}.pdf`;
+  }
   let label = String(type).replace(/_/g, " ");
   if (version) label += ` ${version}`;
   if (key) label += " Key";
@@ -45,4 +64,4 @@ function documentName({ type, sections, unit, topic, unitTitle, version, key = f
   return `${name}.${extension}`;
 }
 
-module.exports = { documentName, shortTitle, clean, MAX_TOPIC };
+module.exports = { documentName, shortTitle, referenceTitles, clean, MAX_TOPIC };
