@@ -1,0 +1,493 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "35–45",
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Projectile Motion, Part 1: Horizontal Launch",
+      "directions": "Work in your notebook. Up is positive, so the vertical acceleration is −9.8 m/s². Ignore air resistance and round to two significant figures.",
+      "questions": [
+        {
+          "points": 2,
+          "prompt": "Mario kicks a Koopa shell off the edge of a 45 m cliff. It slides off moving horizontally at 12 m/s, and friction on the ledge is negligible. The Koopa inside was not consulted. Find the time the shell takes to reach the ground and how far from the base of the cliff it lands.",
+          "selfCheck": "[  3.0 s  ·  36 m  ]",
+          "solution": "Fall time from Δy = v_iy t + 1/2 a t^2 with v_iy = 0: 3.03 s. Δx = v_ix t = 36.4 m.",
+          "finalAnswer": "t = 3.0 s (3.03 s)   x = 36 m (36.4 m)",
+          "steps": [
+            {
+              "row": [
+                "Δy = −45 m     v_{iy} = 0     v_{x} = 12 m/s     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "−45 = 0 + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "−45 = −4.9 t^2"
+              ]
+            },
+            {
+              "mistake": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "45",
+                    "9.8"
+                  ]
+                },
+                "= 4.59 s^{2}"
+              ],
+              "note": "the ½ is in the equation, so divide by 4.9"
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "−45",
+                    "−4.9"
+                  ]
+                },
+                "= 9.18 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √(9.18) = 3.03 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "3.0 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (12)(3.03) = 36.4 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "36 m"
+            }
+          ]
+        },
+        {
+          "points": 2,
+          "prompt": "Patrick Star runs straight off the end of a pier at 3.5 m/s because he thought he saw a jellyfish. He hits the water 0.80 s later. Find the height of the pier above the water and how far out from the pier he lands.",
+          "selfCheck": "[  3.1 m  ·  2.8 m  ]",
+          "solution": "Height from Δy = 1/2 a t^2 = −3.136 m. Δx = v_ix t = 2.80 m.",
+          "finalAnswer": "height = 3.1 m (3.136 m)   x = 2.8 m",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 3.5 m/s     v_{iy} = 0     t = 0.80 s     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "mistake": [
+                "Δy = (3.5)(0.80) = 2.8 m"
+              ],
+              "note": "3.5 m/s is horizontal; v_{iy} is 0"
+            },
+            {
+              "row": [
+                "Δy = 0 + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.80)^{2} = −3.136 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "3.1 m"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (3.5)(0.80) = 2.80 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "2.8 m"
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "prompt": "Buzz Lightyear leaps horizontally off the top of a bookshelf at 2.0 m/s and lands 1.2 m from its base. Woody calls it falling with style. Find Buzz's time in the air and the height of the bookshelf.",
+          "selfCheck": "[  0.60 s  ·  1.8 m  ]",
+          "solution": "t = Δx / v_x = 0.60 s; Δy = 1/2 a t^2 = −1.764 m.",
+          "finalAnswer": "t = 0.60 s (0.60 s)   height = 1.8 m (1.764 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 2.0 m/s     Δx = 1.2 m     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "Δx",
+                    "v_{x}"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "1.2",
+                    "2.0"
+                  ]
+                },
+                "= 0.60 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "0.60 s"
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = 0 + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(0.60)^{2} = −1.76 m"
+              ]
+            },
+            {
+              "answer": [
+                "height ="
+              ],
+              "value": "1.8 m"
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "prompt": "Sonic runs straight off a 22 m ledge and lands 61 m from its base without slowing down to think about it. Find Sonic's time in the air and his launch speed.",
+          "selfCheck": "[  2.1 s  ·  29 m/s  ]",
+          "solution": "Fall time 2.12 s from Δy = 1/2 a t^2; v_ix = Δx / t = 28.8 m/s.",
+          "finalAnswer": "t = 2.1 s (2.12 s)   v_ix = 29 m/s (28.8 m/s)",
+          "steps": [
+            {
+              "row": [
+                "Δy = −22 m     Δx = 61 m     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "−22 = 0 + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "−22 = −4.9 t^2"
+              ]
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "−22",
+                    "−4.9"
+                  ]
+                },
+                "= 4.49 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √(4.49) = 2.12 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.1 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "61",
+                    "2.12"
+                  ]
+                },
+                "= 28.8 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "29 m/s"
+            }
+          ]
+        },
+        {
+          "points": 4,
+          "prompt": "Wile E. Coyote runs straight off a cliff at 7.5 m/s, aiming for a ledge across the canyon. The ledge is 5.0 m away horizontally and 2.0 m lower than his cliff. He did not measure first.",
+          "parts": [
+            "(a) Find the time he takes to drop 2.0 m.",
+            "(b) Find how far he moves horizontally in that time. Does he reach the ledge?",
+            "(c) Find the minimum launch speed he needed to reach the ledge."
+          ],
+          "solution": "(a) 0.639 s (b) 4.79 m, short (c) 7.83 m/s",
+          "finalAnswer": "(a) 0.64 s   (b) 4.8 m, short of the ledge   (c) 7.8 m/s",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 7.5 m/s     v_{iy} = 0     a_{y} = −9.8 m/s^{2}"
+              ]
+            },
+            {
+              "label": "(a) Time to drop 2.0 m"
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "−2.0 = −4.9 t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t^{2} =",
+                {
+                  "frac": [
+                    "−2.0",
+                    "−4.9"
+                  ]
+                },
+                "= 0.408 s^{2}"
+              ]
+            },
+            {
+              "row": [
+                "t = √(0.408) = 0.639 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "0.64 s"
+            },
+            {
+              "label": "(b) How far he gets"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (7.5)(0.639) = 4.79 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "4.8 m"
+            },
+            {
+              "say": "4.8 m is less than 5.0 m, so he falls short.",
+              "ink": "pen"
+            },
+            {
+              "label": "(c) Speed needed to cover 5.0 m in that time"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "5.0",
+                    "0.639"
+                  ]
+                },
+                "= 7.83 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "7.8 m/s"
+            }
+          ]
+        }
+      ],
+      "equationGroups": [
+        {
+          "label": "Vertical (y)",
+          "note": "the kinematic equations, y only",
+          "eqs": [
+            "v_{fy} = v_{iy} + a_{y} t",
+            "Δy = v_{iy} t + [1|2] a_{y} t^2",
+            "v_{fy}^2 = v_{iy}^2 + 2 a_{y} Δy",
+            "Δy = [1|2](v_{iy} + v_{fy}) t",
+            "a_{y} = −9.8 m/s^2"
+          ],
+          "columns": 2,
+          "col": "L"
+        },
+        {
+          "label": "Horizontal (x)",
+          "note": "no acceleration, so only this one",
+          "eqs": [
+            "v_{x} = [Δx|t]"
+          ],
+          "columns": 1,
+          "col": "R"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 1
+}

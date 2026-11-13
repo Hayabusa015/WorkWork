@@ -81,6 +81,13 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 | SHULL-CHG-0048 | 2026-10-22 | scripts/README.md documented 12 of 32 scripts; now documents all of them | CONFIRMED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
 | SHULL-CHG-0047 | 2026-10-22 | Three READMEs still said "Status: not yet written" for files long since written | CONFIRMED | `governance/proposals/SHULL-CHG-0047-not-yet-written-readmes.md` |
 | SHULL-CHG-0046 | 2026-10-22 | Phase 13 status stale in CLAUDE.md and the implementation plan (4th occurrence) | CONFIRMED | `governance/proposals/SHULL-CHG-0046-phase-13-status-stale.md` |
+## 2026-10-21
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0046 | 2026-10-21 | Teacher keys list every equivalent form of a direction answer | IMPLEMENTED | `governance/proposals/SHULL-CHG-0046-equivalent-directions-on-keys.md` |
 
 ## 2026-10-16
 

@@ -1,0 +1,390 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "40–50",
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Projectile Motion, Part 3: Full Projectile Motion",
+      "directions": "Work in your notebook. Up is positive, the launch point is the origin, and the vertical acceleration is −9.8 m/s². Ignore air resistance and round to two significant figures.",
+      "questions": [
+        {
+          "points": 2,
+          "prompt": "Captain Jack Sparrow's crew fires a cannonball at 22 m/s, 25° above the horizontal, from a clifftop fort 18 m above the sea. Jack insists he was aiming at that rock. Find the time the cannonball takes to hit the water and how far from the base of the cliff it lands.",
+          "selfCheck": "[  3.1 s  ·  62 m  ]",
+          "solution": "Quadratic root 3.087 s; range 61.6 m.",
+          "finalAnswer": "t = 3.1 s (3.087 s)   x = 62 m (61.6 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 22 cos 25° = 19.94 m/s     v_{iy} = 22 sin 25° = 9.298 m/s"
+              ]
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "mistake": [
+                "+18 = 9.298 t − 4.9 t^{2}"
+              ],
+              "note": "the water is below the launch, so Δy is negative"
+            },
+            {
+              "row": [
+                "−18 = (9.298) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} − 9.298 t − 18 = 0"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "9.298 ± √((9.298)^{2} + 4(4.9)(18))",
+                    "2(4.9)"
+                  ]
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "9.298 ± √439.2",
+                    "9.8"
+                  ]
+                },
+                "= 3.09 s  or  −1.19 s"
+              ]
+            },
+            {
+              "say": "The negative time is before the launch, so it is thrown out.",
+              "ink": "pen"
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "3.1 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (19.94)(3.087) = 61.6 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "62 m"
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "prompt": "Michelangelo tosses a pizza box at 14 m/s, 60° above the horizontal, up onto a rooftop 6.0 m above his hand. It lands on the roof on its way down. Leonardo suggested the stairs. Find the time until the box lands on the roof and the horizontal distance it travels.",
+          "selfCheck": "[  1.8 s  ·  13 m  ]",
+          "solution": "Later root 1.790 s; Δx 12.5 m.",
+          "finalAnswer": "t = 1.8 s (1.79 s, the later root)   x = 13 m (12.5 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 14 cos 60° = 7.00 m/s     v_{iy} = 14 sin 60° = 12.124 m/s"
+              ]
+            },
+            {
+              "row": [
+                "Δy = v_{iy} t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y} t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "+6.0 = (12.124) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} − 12.124 t + 6.0 = 0"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "12.124 ± √((12.124)^{2} − 4(4.9)(6.0))",
+                    "2(4.9)"
+                  ]
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "12.124 ± √29.4",
+                    "9.8"
+                  ]
+                },
+                "= 1.79 s  or  0.68 s"
+              ]
+            },
+            {
+              "mistake": [
+                "t = 0.68 s"
+              ],
+              "note": "that is on the way up; the box lands on the way down"
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "1.8 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (7.0)(1.790) = 12.5 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "13 m"
+            }
+          ]
+        },
+        {
+          "points": 4,
+          "prompt": "Shrek and Donkey borrow a trebuchet and fling a giant onion at 28 m/s, 40° above the horizontal, from the top of a 15 m castle wall. It lands on the level field below. Ogres have layers, and so does this problem.",
+          "parts": [
+            "(a) Find the onion's maximum height above the field.",
+            "(b) Find its time in the air.",
+            "(c) Find how far from the base of the wall it lands."
+          ],
+          "solution": "(a) 31.5 m (b) 4.373 s (c) 93.8 m",
+          "finalAnswer": "(a) 32 m above the field (31.5 m)   (b) 4.4 s (4.37 s)   (c) 94 m (93.8 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = 28 cos 40° = 21.45 m/s     v_{iy} = 28 sin 40° = 18.00 m/s"
+              ]
+            },
+            {
+              "label": "(a) Maximum height"
+            },
+            {
+              "row": [
+                "v_{fy}^{2} = v_{iy}^{2} + 2 a_{y} Δy"
+              ],
+              "note": "at the top v_{fy} = 0"
+            },
+            {
+              "row": [
+                "0 = (18.00)^{2} + 2(−9.8) Δy"
+              ]
+            },
+            {
+              "row": [
+                "Δy =",
+                {
+                  "frac": [
+                    "−(18.00)^{2}",
+                    "2(−9.8)"
+                  ]
+                },
+                "= 16.53 m"
+              ]
+            },
+            {
+              "mistake": [
+                "y_{max} = 16.5 m"
+              ],
+              "note": "that is above the wall, not the field"
+            },
+            {
+              "row": [
+                "y_{max} = 16.53 + 15 = 31.5 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "32 m"
+            },
+            {
+              "label": "(b) Time in the air"
+            },
+            {
+              "row": [
+                "−15 = (18.00) t + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8) t^{2}"
+              ]
+            },
+            {
+              "row": [
+                "4.9 t^{2} − 18.00 t − 15 = 0"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "18.00 ± √((18.00)^{2} + 4(4.9)(15))",
+                    "2(4.9)"
+                  ]
+                }
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "18.00 ± √617.9",
+                    "9.8"
+                  ]
+                },
+                "= 4.37 s  or  −0.70 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "4.4 s"
+            },
+            {
+              "label": "(c) Range"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (21.45)(4.373) = 93.8 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "94 m"
+            }
+          ]
+        }
+      ],
+      "equationGroups": [
+        {
+          "label": "Vertical (y)",
+          "note": "the kinematic equations, y only",
+          "eqs": [
+            "v_{fy} = v_{iy} + a_{y} t",
+            "Δy = v_{iy} t + [1|2] a_{y} t^2",
+            "v_{fy}^2 = v_{iy}^2 + 2 a_{y} Δy",
+            "Δy = [1|2](v_{iy} + v_{fy}) t",
+            "a_{y} = −9.8 m/s^2"
+          ],
+          "columns": 2,
+          "col": "L"
+        },
+        {
+          "label": "If t² shows up",
+          "note": "quadratic formula",
+          "eqs": [
+            "t = [−b ± √(b^2 − 4ac)|2a]"
+          ],
+          "columns": 1,
+          "col": "L"
+        },
+        {
+          "label": "Horizontal (x)",
+          "note": "no acceleration, so only this one",
+          "eqs": [
+            "v_{x} = [Δx|t]"
+          ],
+          "columns": 1,
+          "col": "R"
+        },
+        {
+          "label": "Launch velocity",
+          "eqs": [
+            "v_{x} = v_i cos θ",
+            "v_{iy} = v_i sin θ",
+            "v_i = √(v_{x}^2 + v_{iy}^2)",
+            "tan θ = [v_{iy}|v_{x}]"
+          ],
+          "columns": 2,
+          "col": "R"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 1
+}
