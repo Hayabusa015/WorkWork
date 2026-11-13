@@ -61,6 +61,12 @@ caution and danger.
 
 - **The score total is summed from the questions, never typed.** A header reading `/ 20` over
   questions adding to 18 is one fact stored twice.
+- **`blankScore` (spec- or section-level) prints a blank line instead of a total.** For a sheet
+  with no established point value — nothing in the source, no confirmed grading rule for that
+  activity shape — the total is not invented and printed on a student page. CLAUDE.md section 4:
+  never present an invented fact as settled on a student page. `/ N` becomes `/ ________`, the
+  same way NAME and DATE are blank lines rather than guesses. First used on the Fossil ID activity
+  (U2/S2.3), flagged blocking by an independent audit.
 - **The concept block comes before anything is asked.** A student who has been away reads what the
   sheet is about before question 1, not after it.
 - **Prior knowledge is the recall block** — the friction reminder before a friction problem. It
@@ -102,6 +108,16 @@ equation you would use" reads like a physics problem and has no number in it.
 - **`draw`** — blank captioned panels, when there is nothing to cut.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.
+- **`table`** — an open, multi-column data chart, one row per specimen or station: a rotation
+  chart the way `sort` is the one-page cousin of the cut-and-glue timeline. The first column is a
+  pre-printed row label (a specimen number), not another blank — the chart tells the student which
+  row is next. Added for the Fossil ID activity (U2/S2.3); the same shape fits a future U3
+  rock/mineral specimen-ID chart. Counts toward Geology's visual-block requirement.
+- **`reference`** — a definitions/key list a data-chart column points back to ("see key"): term in
+  the course accent colour, plain-ink definition below it. An item can carry a `flag`, rendered as
+  a caution-coloured teacher note under its definition — for a source definition reproduced
+  verbatim because reformatting is not fact-checking, with the accuracy question surfaced rather
+  than silently corrected or silently dropped.
 
 ### Project blocks
 
