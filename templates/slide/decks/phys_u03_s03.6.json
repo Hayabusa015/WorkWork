@@ -1,0 +1,117 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.6",
+  "sectionTitle": "Frictional Forces",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "06",
+        "headline": "3.6\nFrictional Forces",
+        "subhead": "Find friction from the normal force, and decide whether an object slides."
+      },
+      "imageSubjects": {
+        "section": "a heavy wooden crate on a rough concrete floor, scuff marks behind it"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Friction",
+        "subhead": "Friction acts along the surface and opposes sliding.",
+        "k1_l": "DIRECTION",
+        "k1_b": "Along the surface,\nagainst the sliding\n(or the would-be sliding).",
+        "k2_l": "STATIC",
+        "k2_b": "Holds a resting object.\nMatches the push, up to\nfs,max = μs N.",
+        "k3_l": "KINETIC",
+        "k3_b": "Acts while sliding.\nfk = μk N, constant.\nUsually less than fs,max.",
+        "mustwrite": "Friction = μN. It depends on the normal force, not directly on the weight."
+      },
+      "images": {
+        "aside": "../assets/phys_u03/s36_friction_aside.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Constant Velocity",
+        "subhead": "Constant velocity means Fnet = 0, so friction equals the push.",
+        "problem": "A 40 kg box is pushed across the floor at constant velocity with 120 N. Find μk.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 40 kg\npush = 120 N\nconstant velocity",
+        "q2_l": "EQUATION",
+        "q2_b": "fk = push\nμk = fk/N",
+        "answer": "μk = 120 N / 392 N = 0.31"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_constant_v.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Will It Move?",
+        "subhead": "Compare the push with the maximum static friction first.",
+        "problem": "A 25 kg box is pushed with 90 N. Does it move? If the push rises to 110 N, find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 25 kg\nμs = 0.40, μk = 0.30",
+        "q2_l": "EQUATION",
+        "q2_b": "fs,max = μs N\nfk = μk N",
+        "answer": "90 N: no motion  ·  110 N: a = 1.5 m/s²"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_static.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Pulling at an Angle with Friction",
+        "subhead": "The upward part of the pull lowers N, and lowers friction.",
+        "problem": "A 30 kg crate is pulled with 150 N at 30° above horizontal. μk = 0.25. Find N and a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 30 kg, μk = 0.25\n150 N at 30°",
+        "q2_l": "EQUATION",
+        "q2_b": "N = mg − F sin(angle)\nFnet = F cos(angle) − μk N",
+        "answer": "N = 219 N  ·  a = 2.5 m/s²"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_angle_pull.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Friction on an Incline",
+        "subhead": "Same tilted axes as 3.3, plus one more force along the slope.",
+        "a1_l": "FRICTION'S DIRECTION",
+        "a1_b": "Up the slope, against the sliding.",
+        "a2_l": "NORMAL FORCE",
+        "a2_b": "N = mg cos(angle), the same as in 3.3.",
+        "a3_l": "THE TEST",
+        "a3_b": "Slides only if mg sin(angle) > μs N."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s36_incline_fbd.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Does the Block Slide?",
+        "subhead": "Run the test first. Use down the slope as positive.",
+        "problem": "A 10 kg block rests on a 35° incline. μs = 0.50, μk = 0.40. Does it slide? If so, find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 10 kg, angle = 35°\nμs = 0.50, μk = 0.40",
+        "q2_l": "EQUATION",
+        "q2_b": "test: mg sin vs μs N\nFnet = mg sin − μk N",
+        "answer": "Slides (56.2 N > 40.1 N)  ·  a = 2.4 m/s²"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_incline_problem.png"
+      }
+    }
+  ]
+}
