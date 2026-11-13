@@ -17,6 +17,7 @@
 | `find_session_files.py` | — read-only; lists documents created this session, for `reconcile-session-files` |
 | `publish_standards.py` | — publishes `standards/` and `brand/` to Drive `_Brand/Standards/`, one direction only |
 | `desk_export.py` | — read-only; exports `governance/proposals/*.md` as a JSON batch for the Secretary's Desk dashboard's `proposals` collection. The records are authoritative; this only reads them. |
+| `branch_ledger.py` | — read-only; exports every remote branch (merged into `origin/main` or not), every Change ID carried by more than one record, and each validator's result, as one JSON document for the WorkWork Ledger dashboard. Notes on what a branch holds live in `reports/branch-ledger-notes.json`. Git is authoritative; this only reads it. |
 
 | Generator | Writes | From |
 |---|---|---|
