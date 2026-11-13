@@ -1,0 +1,278 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "sections": [
+    "3.4",
+    "3.4",
+    "3.3",
+    "3.6"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "40",
+  "pagesPerSection": 1,
+  "note": "Homework requested by Matt 2026-11-06: define each trend, 5 pick-the-highest/lowest questions each, tips, ions + an example on radius, noble gases on electronegativity, family names worked in. Melting point maps to 3.6 (same mapping as the U3 guided notes). Charges use ^{...} with U+2212. Reference values: IE first ionization energy kJ/mol; EN Pauling; radii pm (atomic: metallic for metals, covalent for nonmetals; ionic: Shannon CN6); melting points CRC, degrees C.",
+  "sectionsContent": [
+    {
+      "code": "3.4",
+      "title": "Ionization Energy",
+      "conceptLabel": "TIP",
+      "concept": {
+        "summary": "Ionization energy goes up toward the top right of the table. It goes down as you move down a group and up as you move across a period. The noble gases have the highest value in each period.",
+        "keyIdeas": []
+      },
+      "directions": "Circle your answer. On the line, give the reason: name the trend and say why. A periodic table is allowed.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Define ionization energy.",
+          "answerLines": 2,
+          "solution": "The energy needed to remove one electron from an atom (a neutral gas atom, for first ionization energy). Accept 'energy to pull an electron off an atom'. Do not accept 'how strongly an atom pulls on shared electrons' (that is electronegativity).",
+          "finalAnswer": "energy needed to remove an electron from an atom"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Which alkali metal has the LOWEST ionization energy?      Li      Na      K",
+          "answerLines": 1,
+          "solution": "K. All three are in group 1; ionization energy decreases down a group because the outer electron is in a higher energy level, farther from the nucleus and more shielded.\nValues (kJ/mol): Li 520, Na 496, K 419.\n1 point answer, 1 point reason.",
+          "finalAnswer": "K; IE decreases down a group (outer electron farther out)"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the HIGHEST ionization energy?      Na      Mg      P      Cl",
+          "answerLines": 1,
+          "solution": "Cl. All four are in period 3; ionization energy increases across a period because more protons pull on the same energy level.\nValues (kJ/mol): Na 496, Mg 738, P 1,012, Cl 1,251.",
+          "finalAnswer": "Cl; IE increases across a period (more protons)"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the HIGHEST ionization energy?      Li      C      F      Ne",
+          "answerLines": 1,
+          "solution": "Ne. All four are in period 2. IE increases across the period, and the noble gas at the end has a full outer level and the most protons, so it holds its electrons tightest.\nValues (kJ/mol): Li 520, C 1,086, F 1,681, Ne 2,081.\nCommon error: choosing F because it is 'the most reactive nonmetal'.",
+          "finalAnswer": "Ne; IE increases across a period, noble gas highest"
+        },
+        {
+          "tier": "challenge",
+          "points": 2,
+          "prompt": "Which has the HIGHEST ionization energy?      K      Na      Mg",
+          "answerLines": 1,
+          "solution": "Mg. Na is above K (up a group raises IE), and Mg is to the right of Na (across a period raises IE). Mg is both higher and farther right than K.\nValues (kJ/mol): K 419, Na 496, Mg 738.\nGrading: 1 point Mg, 1 point for using both trends (up a group and across a period).",
+          "finalAnswer": "Mg; up a group and right across a period both raise IE"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 3,
+          "prompt": "Which loses an electron most easily?      Na      Al      Si      Cl\nIs it a metal, a nonmetal or a metalloid? Give your reason.",
+          "answerLines": 2,
+          "solution": "Na. It has the lowest ionization energy of the four (period 3, farthest left). Na is a metal; metals have low ionization energies and lose electrons to form positive ions.\nValues (kJ/mol): Na 496, Al 578, Si 787, Cl 1,251.\nGrading: 1 point Na, 1 point metal, 1 point for linking low IE to losing electrons.",
+          "finalAnswer": "Na; metal; lowest IE, so it loses an electron most easily"
+        }
+      ]
+    },
+    {
+      "code": "3.4",
+      "title": "Electronegativity",
+      "conceptLabel": "TIP",
+      "concept": {
+        "summary": "Electronegativity also goes up toward the top right. Fluorine is the highest of all, at 4.0. Leave the noble gases out of this trend: they almost never bond, so most tables give helium, neon and argon no value at all.",
+        "keyIdeas": []
+      },
+      "directions": "Circle your answer. On the line, give the reason: name the trend and say why. A periodic table is allowed.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Define electronegativity.",
+          "answerLines": 2,
+          "solution": "How strongly an atom pulls on the electrons it shares with another atom in a bond. Accept any wording that includes pulling on shared or bonding electrons. Do not accept 'energy to remove an electron' (ionization energy).",
+          "finalAnswer": "an atom's pull on shared electrons in a bond"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Which halogen has the HIGHEST electronegativity?      F      Cl      Br      I",
+          "answerLines": 1,
+          "solution": "F. All four are in group 17; electronegativity decreases down a group because the shared electrons sit farther from the nucleus.\nValues (Pauling): F 3.98, Cl 3.16, Br 2.96, I 2.66.",
+          "finalAnswer": "F; EN decreases down a group"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the HIGHEST electronegativity?      Li      C      N      O",
+          "answerLines": 1,
+          "solution": "O. All four are in period 2; electronegativity increases across a period because more protons pull on the same energy level.\nValues (Pauling): Li 0.98, C 2.55, N 3.04, O 3.44.",
+          "finalAnswer": "O; EN increases across a period"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the HIGHEST electronegativity?      N      O      F      Ne",
+          "answerLines": 1,
+          "solution": "F. EN increases across period 2 up to fluorine. Neon is a noble gas: it does not form bonds, so it has no electronegativity value and is left out of the trend.\nValues (Pauling): N 3.04, O 3.44, F 3.98, Ne none.\nCommon error: choosing Ne because it is farthest right. Use this to point back to the tip.",
+          "finalAnswer": "F; noble gases (Ne) have no EN value"
+        },
+        {
+          "tier": "challenge",
+          "points": 2,
+          "prompt": "Which has the HIGHEST electronegativity?      S      Cl      Ar      Br",
+          "answerLines": 1,
+          "solution": "Cl. Ar is a noble gas with no electronegativity value, so it is out. Cl is right of S (across a period raises EN) and above Br (down a group lowers EN).\nValues (Pauling): S 2.58, Cl 3.16, Br 2.96, Ar none.\nGrading: 1 point Cl, 1 point for ruling out Ar or for using both trends.",
+          "finalAnswer": "Cl; Ar has no EN value, Cl is right of S and above Br"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 3,
+          "prompt": "Which has the LOWEST electronegativity?      Cs      Na      Mg      Cl\nWhich family is it in?",
+          "answerLines": 2,
+          "solution": "Cs, an alkali metal (group 1). It is the farthest down and the farthest left of the four, and EN falls going down and going left.\nValues (Pauling): Cs 0.79, Na 0.93, Mg 1.31, Cl 3.16.\nGrading: 1 point Cs, 1 point alkali metals, 1 point reason.",
+          "finalAnswer": "Cs; alkali metals; farthest down and left"
+        }
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Atomic & Ionic Radius",
+      "conceptLabel": "TIP",
+      "concept": {
+        "summary": "Atoms get bigger going down a group and smaller going across a period. A positive ion is smaller than its atom. A negative ion is larger than its atom. When ions have the same number of electrons, the one with more protons is smaller.",
+        "keyIdeas": []
+      },
+      "priorKnowledge": {
+        "label": "EXAMPLE — ATOM OR ION, WHICH IS BIGGER?",
+        "items": [
+          "Na or Na^{+}?  Na^{+} is smaller (102 pm vs 186 pm). Sodium lost its one outer electron, and with it the whole third energy level.",
+          "Cl or Cl^{−}?  Cl^{−} is larger (181 pm vs 99 pm). Same 17 protons, one extra electron. The electrons push on each other and spread out."
+        ]
+      },
+      "directions": "Circle your answer. On the line, give the reason: name the trend and say why. A periodic table is allowed.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Define atomic radius.",
+          "answerLines": 2,
+          "solution": "The size of an atom: the distance from the nucleus to the outer edge of the electron cloud (measured as half the distance between the nuclei of two bonded atoms of the same element). Accept 'distance from the nucleus to the outermost electrons'.",
+          "finalAnswer": "distance from the nucleus to the outer electrons"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Which alkali metal has the LARGEST atomic radius?      Li      Na      K",
+          "answerLines": 1,
+          "solution": "K. Radius increases down a group because each period adds an energy level.\nValues (pm, metallic): Li 152, Na 186, K 227.",
+          "finalAnswer": "K; radius increases down a group (more energy levels)"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which has the SMALLEST atomic radius?      Na      Mg      Si      Cl",
+          "answerLines": 1,
+          "solution": "Cl. All four are in period 3; radius decreases across a period because more protons pull the same energy levels in tighter.\nValues (pm): Na 186, Mg 160, Si 117, Cl 99 (textbook values vary by source; the order does not).",
+          "finalAnswer": "Cl; radius decreases across a period (more protons)"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which is the SMALLEST?      K      Ca      Ca^{2+}",
+          "answerLines": 1,
+          "solution": "Ca^{2+}. A positive ion is smaller than its atom: calcium lost its two outer electrons and the whole fourth energy level. Ca is also smaller than K (across a period), but the ion is smaller still.\nValues (pm): K 227, Ca 197, Ca^{2+} 100.",
+          "finalAnswer": "Ca^{2+}; a positive ion is smaller than its atom"
+        },
+        {
+          "tier": "challenge",
+          "points": 2,
+          "prompt": "These ions all have 10 electrons. Which is the LARGEST?      O^{2−}      F^{−}      Na^{+}      Mg^{2+}",
+          "answerLines": 1,
+          "solution": "O^{2−}. All four have the same 10 electrons; O^{2−} has the fewest protons (8), so it pulls those electrons in the least.\nProtons: O 8, F 9, Na 11, Mg 12.\nValues (pm, ionic): O^{2−} 140, F^{−} 133, Na^{+} 102, Mg^{2+} 72.\nGrading: 1 point O^{2−}, 1 point for fewest protons with the same electrons.",
+          "finalAnswer": "O^{2−}; same electrons, fewest protons"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 3,
+          "prompt": "Which halogen has the LARGEST atomic radius?      F      Cl      Br      I\nUse your answer to explain which of the four has the lowest ionization energy.",
+          "answerLines": 2,
+          "solution": "I has the largest radius (radius increases down a group). Its outer electrons are the farthest from the nucleus and the most shielded, so they are the easiest to remove: I also has the lowest ionization energy.\nValues: radius (pm, covalent) F 71, Cl 99, Br 114, I 133; IE (kJ/mol) F 1,681, Cl 1,251, Br 1,140, I 1,008.\nGrading: 1 point I, 1 point lowest IE is I, 1 point for linking larger size to an outer electron that is easier to remove.",
+          "finalAnswer": "I; largest atom, outer electrons farthest out, so lowest IE"
+        }
+      ]
+    },
+    {
+      "code": "3.6",
+      "title": "Melting Point",
+      "conceptLabel": "TIP",
+      "concept": {
+        "summary": "Melting point has no single rule for the whole table. Learn it family by family: going down group 1 it falls, going down groups 17 and 18 it rises, and across period 3 it peaks at silicon in the middle.",
+        "keyIdeas": []
+      },
+      "directions": "Circle your answer. On the line, give the reason: name the pattern you used. A periodic table is allowed.",
+      "questions": [
+        {
+          "tier": "warm-up",
+          "points": 1,
+          "prompt": "Define melting point.",
+          "answerLines": 2,
+          "solution": "The temperature at which a solid turns into a liquid. Accept 'the temperature where a substance melts'.",
+          "finalAnswer": "the temperature at which a solid becomes a liquid"
+        },
+        {
+          "tier": "warm-up",
+          "points": 2,
+          "prompt": "Which alkali metal has the LOWEST melting point?      Li      Na      K",
+          "answerLines": 1,
+          "solution": "K. Melting point falls going down group 1: the atoms get larger and the outer electron is held more loosely, so the metal holds together less strongly.\nValues (°C): Li 181, Na 98, K 64. (Rb 39, Cs 28 continue the pattern.)",
+          "finalAnswer": "K; melting point falls down group 1"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which halogen has the HIGHEST melting point?      F      Cl      Br      I",
+          "answerLines": 1,
+          "solution": "I. Melting point rises going down group 17: the molecules (F2, Cl2, Br2, I2) get larger and attract each other more strongly. At room temperature F and Cl are gases, Br a liquid, I a solid.\nValues (°C): F2 −220, Cl2 −102, Br2 −7, I2 114.",
+          "finalAnswer": "I; melting point rises down group 17"
+        },
+        {
+          "tier": "practice",
+          "points": 2,
+          "prompt": "Which noble gas has the HIGHEST melting point?      He      Ne      Ar      Kr",
+          "answerLines": 1,
+          "solution": "Kr. Melting point rises going down group 18: larger atoms attract each other more strongly.\nValues (°C): Ne −249, Ar −189, Kr −157. Helium does not freeze at normal pressure at all (it needs about 25 times atmospheric pressure, and then melts near −272 °C), so it is the lowest.",
+          "finalAnswer": "Kr; melting point rises down group 18"
+        },
+        {
+          "tier": "challenge",
+          "points": 2,
+          "prompt": "Which has the HIGHEST melting point?      Na      Mg      Si      Cl",
+          "answerLines": 1,
+          "solution": "Si. Across period 3, melting point climbs to a peak at group 14 (silicon), then drops sharply for the nonmetals on the right. Each silicon atom is bonded to four others in one giant network.\nValues (°C): Na 98, Mg 650, Si 1,414, Cl −102.\nGrading: 1 point Si, 1 point for 'peaks in the middle / group 14'.",
+          "finalAnswer": "Si; across period 3 melting point peaks at group 14"
+        },
+        {
+          "tier": "challenge",
+          "points": 2,
+          "prompt": "Melting point falls down group 1 but rises down group 17. Which has the LOWEST melting point?      Li      Cs      F      I",
+          "answerLines": 1,
+          "solution": "F. Of the halogens, fluorine is at the top, so it has the lowest melting point in group 17, and it is a gas at room temperature. Li and Cs are metals, both solid at room temperature.\nValues (°C): Li 181, Cs 28, F2 −220, I2 114.\nCommon error: choosing Cs because it is lowest in group 1.\nGrading: 1 point F, 1 point for using the group 17 pattern (top of the halogens).",
+          "finalAnswer": "F; top of group 17, where melting point is lowest"
+        },
+        {
+          "tier": "multi-topic",
+          "points": 3,
+          "prompt": "Name the family and give one element from it.",
+          "parts": [
+            "a.  Group 1   ______________________________",
+            "b.  Group 2   ______________________________",
+            "c.  Groups 3–12   ______________________________",
+            "d.  Group 17   ______________________________",
+            "e.  Group 18   ______________________________",
+            "f.  Along the staircase line   ______________________________"
+          ],
+          "solution": "a.  Alkali metals (Li, Na, K, Rb, Cs; not H)\nb.  Alkaline earth metals (Be, Mg, Ca, Sr, Ba)\nc.  Transition metals (for example Fe, Cu, Zn)\nd.  Halogens (F, Cl, Br, I)\ne.  Noble gases (He, Ne, Ar, Kr, Xe)\nf.  Metalloids (B, Si, Ge, As, Sb, Te)\nGrading: 1/2 point each part, family name and a correct element both required. Hydrogen is not an alkali metal; do not accept H for a.",
+          "finalAnswer": "a. alkali metals  b. alkaline earth metals  c. transition metals  d. halogens  e. noble gases  f. metalloids"
+        }
+      ]
+    }
+  ]
+}

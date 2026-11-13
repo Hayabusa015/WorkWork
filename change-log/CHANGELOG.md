@@ -63,6 +63,11 @@ supersedes it, exactly as the decision logs work.
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0054 | 2026-10-23 | Guided notes follow the slides: every block names its slide | CONFIRMED | `governance/proposals/SHULL-CHG-0054-notes-follow-slides.md` |
+## 2026-10-26
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | 2026-10-26 | Chemistry U3: quiz replaces unit test; 3.5 dropped | CONFIRMED | `governance/proposals/SHULL-CHG-0054-chem-u3-short-unit.md` |
 
 ## 2026-10-22
 
