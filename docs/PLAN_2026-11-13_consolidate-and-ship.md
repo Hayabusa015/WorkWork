@@ -1,5 +1,6 @@
 # Execution plan — consolidate SHULL OS and ship documents (2026-11-13)
 
+**Decisions are in §10; the legacy-skill work is §11.**
 **Written for:** an executing Claude session with no memory of the review that produced this.
 **Owner:** Matt. **Repository:** `Hayabusa015/WorkWork`.
 **Read first:** `CLAUDE.md`. Its rules override anything here that seems to conflict.
@@ -26,8 +27,8 @@ validators, CI, and `legacy/`.
 
 ## 2. Rules for the executing session
 
-1. Work on the branch your session assigns. Do not push to `main`. Do not open a pull request
-   unless Matt asks.
+1. Work on the branch your session assigns. Do not push to `main`. Open the pull requests named
+   in §10 row 4 and no others. Do not merge them; Matt merges.
 2. You may not edit `brand/`, `standards/`, `governance/` (other than adding new proposal files)
    or `courses/`. Phases 3 and 4 produce **PENDING proposals only**.
 3. Delete nothing beyond the files named in Phase 1. Do not touch Drive in Phases 0–4.
@@ -170,7 +171,6 @@ options and your recommendation, so Matt can answer them in one message.
 
 | Item | Where it is recorded |
 |---|---|
-| Legacy skill retirement: schedule it now or restate the condition (question 2 of SHULL-CHG-0065) | `governance/proposals/SHULL-CHG-0065-dst-cron-recheck-and-legacy-retirement.md` |
 | First real upload through the Upload Inbox not yet checked | `docs/TODO_DESKTOP_2026-10-15.md` |
 | Duplicate Physics practice-set filename; group D files with no unit or section; three duplicates in the `pdf` staging folder | `docs/TODO_DESKTOP_2026-10-15.md` |
 | CONFLICT-24, Chemistry grading framing | `courses/chemistry/DECISIONS.md` |
@@ -178,9 +178,9 @@ options and your recommendation, so Matt can answer them in one message.
 
 ## 9. Phase 6 — the proof: ship one full unit
 
-Start only after Matt has answered §10 and Phases 0–2 are merged.
+Start only after Phases 0–2 are merged.
 
-1. Matt names the course and unit.
+1. The course is Chemistry (§10). Ask Matt for the unit number.
 2. Run the unit plan. Show the table. Get a yes.
 3. For rows with no spec, write the spec from the course decisions file and Matt's source
    material. Anything not given is asked for or marked PROVISIONAL in teacher notes only.
@@ -195,11 +195,34 @@ If the numbers are not clearly better, say so; that result decides what gets cut
 **Freeze:** until this phase is done, no new agents, skills, standards, dashboards or app
 features. Bug fixes that block a build are allowed.
 
-## 10. Decisions Matt should give before sending this
+## 10. Decisions — answered by Matt, 2026-11-13
 
-| # | Decision | Default if unanswered |
+| # | Decision | Answer |
 |---|---|---|
-| 1 | Park the desktop app and remove Vercel (Phase 1)? | Stop before Phase 1 and ask |
-| 2 | Which course and unit is the proof unit (Phase 6)? | Stop before Phase 6 and ask |
-| 3 | Legacy skills: retire after the proof unit ships, or now? | Leave installed |
-| 4 | Should Phases 0–2 arrive as one pull request or stay on a branch? | Branch only |
+| 1 | Park the desktop app and remove Vercel (Phase 1)? | **Yes.** Verbatim: "Lets park the app and remove vercel" |
+| 2 | Proof unit (Phase 6)? | **Chemistry.** Verbatim: "I guess lets do chemistry". The unit number is not yet given: ask Matt before Phase 6. Do not pick one. |
+| 3 | Legacy skills? | **Retire them.** Verbatim: "Legacy skills, retire them". See §11. |
+| 4 | Delivery of Phases 0–2? | Matt asked for a recommendation. Recommended and adopted unless he says otherwise: **one pull request for Phases 0–2**, so CI runs on it and the work reaches `main` in one reviewed step. The two proposals (Phases 3 and 4) go in a second pull request so their IDs become real on `main`. |
+
+## 11. Legacy skill retirement
+
+Matt's answer in §10 row 3 answers question 2 of SHULL-CHG-0065. Claude cannot uninstall an
+installed skill; only Matt can, in the Claude app.
+
+1. Record the decision in
+   `governance/proposals/SHULL-CHG-0065-dst-cron-recheck-and-legacy-retirement.md`, verbatim and
+   dated, following `governance/CHANGE_CONTROL.md` §4. Change nothing else in that record.
+2. Any edit this requires in `CLAUDE.md`, `README.md` or the implementation plan (they say the
+   legacy skills stay installed) goes through the Secretary against SHULL-CHG-0065.
+3. Give Matt the uninstall list. The ten snapshotted in `legacy/skills/` are: `anti-ai`,
+   `shull-chemistry-guidelines`, `shull-course-librarian`, `shull-geology-guidelines`,
+   `shull-guided-notes-builder`, `shull-physics-guidelines`, `shull-slide-deck-builder`,
+   `shull-student`, `shull-studio`, `test-quiz-generator`. Confirm the list against what the
+   record says before sending it.
+4. Before Matt uninstalls, tell him plainly: the repository's skills only load in a Claude Code
+   session on this repository. A Claude Project or phone chat that relied on a legacy skill will
+   lose it. Read `docs/MOBILE_AND_PROJECT_WORKFLOW.md` and say what, if anything, stops working.
+5. `legacy/` stays as it is. It is the snapshot, not the installed copy.
+
+**Done when:** the decision is recorded, Matt has the list and the warning, and Matt confirms the
+uninstall. Do not report the skills as retired until he confirms.
