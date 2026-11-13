@@ -19,6 +19,11 @@ templates that happened to be filed in the same folder.
 Each question in the spec must carry a "solution" field: the full worked steps and final
 answer, independent of any "selfCheck" bracket. A question with no "solution" is refused -
 a key that silently skips a question is worse than no key.
+
+A question may carry "keyImage" (SHULL-CHG-0071): a drawn scene, such as a free-body diagram,
+placed in its answer box, with any "steps" drawn below it. The schema lives once, in the
+scripts/key_solution.py docstring. If the scene cannot model the item, the typed "solution"
+prints instead and the build says so; a force arrow labelled as motion refuses the build.
 """
 import json, os, sys, tempfile
 from docx import Document
@@ -38,6 +43,11 @@ from build_worksheet_docx import table_block, notes_block   # noqa: E402
 # A unit span (SHULL-CHG-0066) is read by the student builder's own helpers, so the key's
 # header and the handout's header cannot disagree about what an entry covers.
 from build_worksheet_docx import span_codes, span_label, check_spans   # noqa: E402
+# The opt-in grid layout ("layout": "grid") is the student sheet's; the key draws the same
+# grid so a teacher grades square against square.
+from build_worksheet_docx import (   # noqa: E402
+    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, GRID_PROMPT_GAP_TW,
+)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -86,13 +96,23 @@ def answer_block(doc, n, q, pal):
         p.runs[0].italic = True
 
     gap(c, 2)
-    if q.get("steps"):
+    if q.get("steps") or q.get("keyImage"):
         # Handwritten worked solution in the key-handwriting face (standards/ANSWER_KEYS.md):
-        # the steps, any scene sketch and the boxed answer are drawn, so no typed copy follows.
-        from key_solution import solution_image
-        png, _ = solution_image(q, os.path.join(_TMP, f"q{n}.png"), width_in=HAND_W_IN)
-        c.add_paragraph().add_run().add_picture(png, width=Inches(HAND_W_IN))
-        return c
+        # the key image, the steps, any scene sketch and the boxed answer are drawn, so no
+        # typed copy follows. A key image the scene cannot model falls back to the typed
+        # solution below (SHULL-CHG-0071) - the drawing is the answer, so it is never just
+        # omitted.
+        from key_solution import solution_image, SceneUnsupported
+        try:
+            png, _ = solution_image(q, os.path.join(_TMP, f"q{n}.png"), width_in=HAND_W_IN)
+        except SceneUnsupported as e:
+            if not q.get("keyImage"):
+                raise
+            print(f"build_worksheet_key_docx: Q{n} key image not drawn ({e}); "
+                  "printing the typed solution instead.", file=sys.stderr)
+        else:
+            c.add_paragraph().add_run().add_picture(png, width=Inches(HAND_W_IN))
+            return c
     for line in str(q["solution"]).split("\n"):
         if line.strip():
             para(c, line.strip(), 10, color=pal.ink)
@@ -100,6 +120,147 @@ def answer_block(doc, n, q, pal):
     if q.get("finalAnswer"):
         para(c, "ANSWER:  " + str(q["finalAnswer"]), 10, bold=True, color=pal.accent)
     return c
+
+
+# ---------------------------------------------------------------- grid layout key
+
+KEY_DRAW_W_IN = 3.4         # FBD panels are drawn this wide, cropped to their ink, then fitted
+KEY_PX_PER_IN = 300         # key_solution saves at 300 dpi
+KEY_NOTE_SCALE = 0.75       # the note's handwriting is set at this fraction of full key size
+
+
+def _crop_to_ink(png, pad=10):
+    """Crop a key PNG to its ink plus `pad` px; return its size in inches at 300 dpi."""
+    from PIL import Image, ImageChops
+    im = Image.open(png).convert("RGB")
+    bg = Image.new("RGB", im.size, im.getpixel((0, 0)))
+    box = ImageChops.difference(im, bg).convert("L").point(lambda v: 255 if v > 24 else 0).getbbox()
+    if box:
+        box = (max(0, box[0] - pad), max(0, box[1] - pad),
+               min(im.width, box[2] + pad), min(im.height, box[3] + pad))
+        im = im.crop(box)
+    im.save(png)
+    return im.width / KEY_PX_PER_IN, im.height / KEY_PX_PER_IN
+
+
+def grid_panels(n, q):
+    """Each object of an item's FBD drawn on its own, at one magnitude scale across the
+    item, so a two-object item's arrows still compare (one panel per square). Returns
+    [(png, w_in, h_in)], or None if the scene cannot model the item."""
+    from key_solution import solution_image, SceneUnsupported, fbd_forces
+    sc = q.get("keyImage")
+    if not sc or sc.get("scene") != "fbd":
+        return None
+    try:
+        panels = fbd_forces(sc)
+    except SceneUnsupported as e:
+        print(f"build_worksheet_key_docx: Q{n} key image not drawn ({e}); "
+              "printing the typed solution instead.", file=sys.stderr)
+        return None
+    big = max(f["mag"] for p in panels for f in p["forces"])
+    full = float(sc.get("arrowPx", 118))
+    out = []
+    for k, p in enumerate(panels):
+        one = {key: v for key, v in p.items() if key != "caption"}
+        one["scene"] = "fbd"
+        one["arrowPx"] = full * max(f["mag"] for f in p["forces"]) / big
+        png = os.path.join(_TMP, f"g{n}_{k}.png")
+        solution_image({"prompt": q["prompt"] + (f" [{k}]" if k else ""), "keyImage": one},
+                       png, width_in=KEY_DRAW_W_IN)
+        out.append((png,) + _crop_to_ink(png))
+    return out
+
+
+def grid_note(n, q, width_in):
+    """The item's steps as a short handwritten note under its square(s), or None."""
+    if not q.get("steps"):
+        return None
+    from key_solution import draw_steps, Page, LOGICAL_PER_IN
+    png = os.path.join(_TMP, f"g{n}_note.png")
+    W = int(width_in / KEY_NOTE_SCALE * LOGICAL_PER_IN)
+    # The steps wrap to the note's width, on a canvas a little wider: the handwriting face
+    # can run a few px past its measured width, and a canvas cut at the wrap width clips
+    # the last letter of a full line. The spare width is cropped off as white.
+    pad = 40
+    P = Page(W + pad, 1600, seed=hash(q.get("prompt", "")) % 1000)
+    y = draw_steps(P, 14, 8, q["steps"], W - 28, 27)
+    P.crop(y + 10)
+    P.save(png=png)
+    _crop_to_ink(png, pad=12)
+    return png
+
+
+def _pin_row(t, ri, height_in=None):
+    from docx.oxml.ns import qn
+    from docx.oxml import OxmlElement
+    trPr = t.rows[ri]._tr.get_or_add_trPr()
+    trPr.append(OxmlElement("w:cantSplit"))
+    if height_in:
+        e = OxmlElement("w:trHeight")
+        e.set(qn("w:val"), str(int(height_in * 1440))); e.set(qn("w:hRule"), "exact")
+        trPr.append(e)
+
+
+def render_key_grid(doc, questions, pal, g):
+    """The student grid, answered: each square carries its drawn FBD, one magnitude scale
+    per item, and the item's note is written under its square(s). Every drawing on the
+    key is set at one size, the largest that lets the biggest diagram fit its square."""
+    from docx.shared import Pt
+    from docx.enum.table import WD_ALIGN_VERTICAL
+    S = g["square"]
+    avail_w = S - 0.20
+    avail_h = S - 0.30                     # the tier / caption line sits inside the top
+    drawn = {n: grid_panels(n, q) for n, q in enumerate(questions, 1)}
+    fits = [min(avail_w / w, avail_h / h) for ps in drawn.values() if ps for _, w, h in ps]
+    scale = min([1.0] + fits)
+    for gi, row in enumerate(grid_rows(questions, g["columns"])):
+        if gi:
+            gap(doc, g["rowGapPt"])
+        outer, t = grid_table(doc, g, 3)
+        _pin_row(t, 0); _pin_row(t, 1, S); _pin_row(t, 2)
+        for n, q, col, span in row:
+            last = col + span == g["columns"]
+            end = (col + span - 1) * 2 + (0 if last else 1)
+            right = 0 if last else GRID_PROMPT_GAP_TW
+            head = t.rows[0].cells[col * 2]
+            note = t.rows[2].cells[col * 2]
+            if end > col * 2:
+                head = head.merge(t.rows[0].cells[end])
+                note = note.merge(t.rows[2].cells[end])
+            head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+            # The prompt restated small and grey, as on the card key.
+            grid_head(head, n, q, pal, prompt_pt=8.5, prompt_color=pal.label,
+                      italic=True, right=right)
+            caps = [p.get("caption") for p in (q.get("keyImage") or {}).get("panels", [])] \
+                or (q.get("draw") or {}).get("captions") or []
+            ps = drawn.get(n)
+            for k in range(span):
+                sq = t.rows[1].cells[(col + k) * 2]
+                square(sq, pal, S, caps[k] if span > 1 and k < len(caps) else None,
+                       q.get("tier") if k == 0 else None)
+                if ps and k < len(ps):
+                    png, w, h = ps[k]
+                    pp = sq.add_paragraph()
+                    pp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    pp.paragraph_format.space_after = Pt(0)
+                    pp.paragraph_format.space_before = Pt(max(0, (avail_h - h * scale) / 2 * 72))
+                    pp.add_run().add_picture(png, width=Inches(w * scale))
+            cell_margins(note, top=30, bottom=0, left=0, right=right)
+            width = S * span + g["gutter"] * (span - 1) + (0 if last else g["gutter"]) \
+                - right / 1440
+            if not ps:
+                # The drawing is the answer; with no drawing the typed solution goes here.
+                para(note, str(q["solution"]), 9, color=pal.ink, first=True)
+                continue
+            png = grid_note(n, q, width)
+            if png:
+                from PIL import Image
+                with Image.open(png) as im:      # cropped to ink, so set by scale, not width
+                    w_in = im.width / KEY_PX_PER_IN * KEY_NOTE_SCALE
+                note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
+        from _shull_docx import unpad_cell
+        unpad_cell(outer)
+    return scale
 
 
 def main():
@@ -182,8 +343,23 @@ def main():
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
         gap(doc, 6)
-        for i, q in enumerate(sec.get("questions", []), start=1):
-            answer_block(doc, i, q, pal)
+        from key_solution import MotionArrowError
+        g = grid_opts(spec, sec)
+        if g:
+            err = grid_check(sec.get("questions", []), g)
+            if err:
+                return refuse(f"section {sec['code']}: {err}")
+            try:
+                scale = render_key_grid(doc, sec.get("questions", []), pal, g)
+            except MotionArrowError as e:
+                return refuse(f"{sec['code']}: {e}")
+            print(f"build_worksheet_key_docx: grid key drawings at {scale:.2f} of full size",
+                  file=sys.stderr)
+        for i, q in enumerate([] if g else sec.get("questions", []), start=1):
+            try:
+                answer_block(doc, i, q, pal)
+            except MotionArrowError as e:
+                return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)
 
         for block in spec.get("key", {}).get("blocks", []) if si == 0 else []:

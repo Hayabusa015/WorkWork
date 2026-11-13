@@ -231,29 +231,40 @@ def slots_block(doc, block, pal):
 
 def draw_block(cell, block, pal, width):
     """Blank panels to draw in, captioned underneath. The lighter cousin of `cards` -
-    used when there is nothing to cut, only something to show."""
+    used when there is nothing to cut, only something to show.
+
+    Two opt-outs, both defaulting to the old look so existing specs build unchanged:
+    `"numbered": false` drops the panel number printed in each box (it reads as a stray
+    "1" in a single panel under a numbered question), and `"captionStrip": false` drops
+    the ruled caption strip under each panel when there is nothing to caption.
+    """
     n = int(block.get("panels", 4))
     across = int(block.get("across", 4))
     col_w = round(width / across, 3)
     panel_h = float(block.get("panelHeightIn", 1.7))
+    numbered = block.get("numbered", True)
+    strip = block.get("captionStrip", True)
+    step = 2 if strip else 1
     label(cell, block.get("label", "DRAW IT"), pal)
     if block.get("instruction"):
         para(cell, block["instruction"], 9.5)
     captions = block.get("captions") or []
     rows = (n + across - 1) // across
-    t = cell.add_table(rows=rows * 2, cols=across)
+    t = cell.add_table(rows=rows * step, cols=across)
     fix_widths(t, [col_w] * across)
     for i in range(n):
         r, c = divmod(i, across)
-        panel = t.rows[r * 2].cells[c]
+        panel = t.rows[r * step].cells[c]
         borders(panel, pal.ink, sz=4)
-        no_split(t.rows[r * 2], panel_h)
-        # Just the number. No box, no square, no circle. SHULL-CHG-0015.
-        para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
-        under = t.rows[r * 2 + 1].cells[c]
-        borders(under, pal.hair, sz=4, edges=("bottom",))
-        cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
-        para(under, cap, 8, color=pal.label, first=True)
+        no_split(t.rows[r * step], panel_h)
+        if numbered:
+            # Just the number. No box, no square, no circle. SHULL-CHG-0015.
+            para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
+        if strip:
+            under = t.rows[r * step + 1].cells[c]
+            borders(under, pal.hair, sz=4, edges=("bottom",))
+            cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
+            para(under, cap, 8, color=pal.label, first=True)
     return t
 
 
@@ -940,6 +951,196 @@ def render_questions(doc, questions, pal, course, base_dir):
         gap(doc, 3)
 
 
+# --------------------------------------------------------------------- grid layout
+# Opt-in, per section or per spec: "layout": "grid". Short draw-only items set in a grid
+# of square drawing boxes, `columns` across, instead of one full-width card per item. A
+# spec that does not ask for it builds exactly as before.
+
+GRID_GUTTER_MIN_IN = 0.12
+GRID_ROW_GAP_PT = 10           # between one row's squares and the next row's prompts
+GRID_PROMPT_GAP_TW = 230        # a prompt stops this far short of the next one (twips)
+
+
+def label_bank(doc, entries, pal, label_text, cols=2):
+    """A bank of labels to write from, compact: each entry on one run-in line, its name in
+    tracked caps then the symbol in bold ink, `cols` across. The opt-in alternative to
+    the equation bar for a list of short labels ("equationStyle": "inline"), which the
+    bar's name-over-symbol layout spreads over twice the height."""
+    c = one_cell(doc)
+    para(c, label_text, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+    cols = int(cols)
+    w = round(TEXT_W_IN / cols - 0.13, 2)
+    rows = (len(entries) + cols - 1) // cols
+    t = c.add_table(rows=rows, cols=cols)
+    fix_widths(t, [w] * cols)
+    for i, eq in enumerate(entries):
+        cell = t.rows[i % rows].cells[i // rows]     # down each column, then across
+        cell_margins(cell, top=10, bottom=20, left=0, right=60)
+        p = cell.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        if eq.get("note"):
+            r = run(p, eq["note"].upper() + "   ", 7.5, bold=True, color=pal.accent)
+            el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+            r._element.get_or_add_rPr().append(el)
+        for k, part in enumerate(re.split(r"_\{([^}]*)\}", eq.get("plain", ""))):
+            if part:
+                r = run(p, part, 10, bold=True, color=pal.ink)
+                if k % 2:
+                    r.font.subscript = True
+    return c
+
+
+def grid_opts(spec, sec):
+    """The grid settings for a section, or None when the section is not a grid.
+    A section's own value wins over the spec's."""
+    get = lambda k, d=None: sec.get(k, spec.get(k, d))
+    if get("layout", "cards") != "grid":
+        return None
+    cols = int(get("columns", 3))
+    square = float(get("squareIn", 2.2))
+    gutter = round((TEXT_W_IN - cols * square) / (cols - 1), 3) if cols > 1 else 0
+    return {"columns": cols, "square": square, "gutter": gutter,
+            "promptPt": float(get("gridPromptPt", 9.5)),
+            "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
+
+
+def grid_check(questions, g):
+    """Why these questions cannot be set as this grid, or None."""
+    if g["columns"] < 1 or g["square"] <= 0:
+        return "grid needs columns >= 1 and squareIn > 0."
+    if g["columns"] > 1 and g["gutter"] < GRID_GUTTER_MIN_IN:
+        return (f"{g['columns']} squares of {g['square']} in leave a {g['gutter']} in gutter "
+                f"on a {TEXT_W_IN} in page. Use smaller squares or fewer columns.")
+    for k, q in enumerate(questions, 1):
+        extra = [f for f in ("math", "answerLines", "parts", "diagram", "given", "need")
+                 if q.get(f)]
+        if extra:
+            return (f"question {k}: a grid cell holds a prompt and drawing squares only, "
+                    f"not {extra}.")
+        if grid_span(q) > g["columns"]:
+            return (f"question {k} needs {grid_span(q)} squares; the grid has "
+                    f"{g['columns']} columns.")
+    return None
+
+
+def grid_span(q):
+    """Squares an item takes: one per drawing panel (a two-object item takes two)."""
+    return max(1, int((q.get("draw") or {}).get("panels", 1)))
+
+
+def grid_rows(questions, columns):
+    """Items flowed left to right, in order. An item that does not fit the rest of a row
+    starts the next one. Returns rows of (number, question, first column, span)."""
+    rows, cur, col = [], [], 0
+    for n, q in enumerate(questions, 1):
+        span = grid_span(q)
+        if col + span > columns:
+            rows.append(cur); cur, col = [], 0
+        cur.append((n, q, col, span))
+        col += span
+    if cur:
+        rows.append(cur)
+    return rows
+
+
+def grid_widths(g):
+    w = []
+    for i in range(g["columns"]):
+        w.append(g["square"])
+        if i < g["columns"] - 1:
+            w.append(g["gutter"])
+    return w
+
+
+def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False, right=0):
+    """The item number, run in at the start of the prompt. The tier tag goes in the top
+    corner of the item's first square (`square`), so it costs the prompt no line."""
+    cell_margins(cell, top=0, bottom=40, left=0, right=right)
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    run(p, f"{n}.  ", 10.5, bold=True, color=pal.ink)
+    r = run(p, q["prompt"].replace("**", "") if italic else q["prompt"], prompt_pt,
+            color=prompt_color or pal.ink, italic=italic)
+    return p
+
+
+def tier_tag(p, tier, pal, colour=None):
+    """The tier word, as on a card: a bullet and the tracked caps tag, label grey."""
+    colour = colour or tier_colour(tier, pal)
+    run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
+    r = run(p, tier.upper(), TIER_PT, bold=True, color=colour)
+    el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+    r._element.get_or_add_rPr().append(el)
+
+
+def grid_table(doc, g, nrows):
+    """One grid row's table, inside a cantSplit cell so the prompts never part from their
+    squares at a page break."""
+    outer = one_cell(doc, protect=True)
+    cell_margins(outer, top=0, bottom=0, left=0, right=0)
+    t = outer.add_table(rows=nrows, cols=g["columns"] * 2 - 1)
+    fix_widths(t, grid_widths(g))
+    return outer, t
+
+
+def square(cell, pal, side, caption=None, tier=None):
+    """One square drawing box: the ink border on the cell itself, the row pinned to the
+    square's side. A caption (an item with two objects) sits inside the top left, the
+    tier tag inside the top right of the item's first square."""
+    borders(cell, pal.ink, sz=4)
+    cell_margins(cell, top=50, bottom=0, left=80, right=70)
+    if not (caption or tier):
+        return
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(side - 0.11), WD_TAB_ALIGNMENT.RIGHT)
+    if caption:
+        r = run(p, caption, 7.5, bold=True, color=pal.accent)
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+        r._element.get_or_add_rPr().append(el)
+    if tier:
+        run(p, "\t", TIER_PT)
+        tier_tag(p, tier, pal)
+
+
+def render_grid(doc, questions, pal, g):
+    """Draw-only items as a grid of square boxes, `columns` across.
+
+    Each grid row is two table rows: the prompts, top-aligned, then the squares, so every
+    square in a row lines up whatever the length of the prompt above it. A two-object
+    item takes two adjacent squares under one prompt, each captioned inside its top.
+    """
+    for gi, row in enumerate(grid_rows(questions, g["columns"])):
+        if gi:
+            gap(doc, g["rowGapPt"])
+        outer, t = grid_table(doc, g, 2)
+        for ri in range(2):
+            h = g["square"] if ri == 1 else None
+            trPr = t.rows[ri]._tr.get_or_add_trPr()
+            trPr.append(OxmlElement("w:cantSplit"))
+            if h:
+                e = OxmlElement("w:trHeight")
+                e.set(qn("w:val"), str(int(h * 1440))); e.set(qn("w:hRule"), "exact")
+                trPr.append(e)
+        for n, q, col, span in row:
+            # The prompt may run on across the gutter to its right, stopping short of the
+            # next prompt: a narrow column sets a long scenario two lines taller.
+            last = col + span == g["columns"]
+            head = t.rows[0].cells[col * 2]
+            end = (col + span - 1) * 2 + (0 if last else 1)
+            if end > col * 2:
+                head = head.merge(t.rows[0].cells[end])
+            head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+            grid_head(head, n, q, pal, prompt_pt=g["promptPt"],
+                      right=0 if last else GRID_PROMPT_GAP_TW)
+            caps = (q.get("draw") or {}).get("captions") or []
+            for k in range(span):
+                sq = t.rows[1].cells[(col + k) * 2]
+                square(sq, pal, g["square"], caps[k] if span > 1 and k < len(caps) else None,
+                       q.get("tier") if k == 0 else None)
+        unpad_cell(outer)
+
+
 # ------------------------------------------------------------------------- profiles
 
 def refuse(msg, *more):
@@ -1240,7 +1441,10 @@ def main():
         total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
                  + sum(rubric_total(spec) if b["kind"] == "rubric" else int(b.get("points", 0))
                        for b in sec.get("blocks", [])))
-        gap(doc, 5)
+        # "compactTop": true (opt-in) tightens the gaps and the recall box's padding above
+        # the questions, for a sheet whose page budget is set by its drawing squares.
+        compact = sec.get("compactTop", spec.get("compactTop", False))
+        gap(doc, 3 if compact else 5)
         id_row(("NAME", "DATE", "PERIOD", "SCORE"), [3.05, 1.75, 1.10, 1.60], total,
                blank_score=bool(spec.get("blankScore") or sec.get("blankScore")))
 
@@ -1272,9 +1476,10 @@ def main():
 
         pk = sec.get("priorKnowledge", spec.get("priorKnowledge"))
         if pk:
-            gap(doc, 4)
+            gap(doc, 3 if compact else 4)
             c = one_cell(doc); borders(c, pal.hair, sz=4)
-            cell_margins(c, top=70, bottom=70, left=130, right=130)
+            pad = 35 if compact else 70
+            cell_margins(c, top=pad, bottom=pad, left=130, right=130)
             label(c, pk.get("label", "BEFORE YOU START — YOU ALREADY KNOW THIS"),
                   pal, first=True)
             for x in pk["items"]:
@@ -1283,8 +1488,17 @@ def main():
         eqs = sec.get("equations", spec.get("equations")) or []
         if eqs:
             gap(doc, 2)
-            equation_bar(doc, eqs, pal,
-                         spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
+            if sec.get("equationStyle", spec.get("equationStyle")) == "inline":
+                label_bank(doc, eqs, pal,
+                           spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
+                           cols=sec.get("equationColumns", spec.get("equationColumns", 2)))
+            elif spec.get("equationColumns", sec.get("equationColumns")):
+                equation_bar(doc, eqs, pal,
+                             spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
+                             cols=sec.get("equationColumns", spec.get("equationColumns")))
+            else:
+                equation_bar(doc, eqs, pal,
+                             spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
 
         if sec.get("directions"):
             gap(doc, 2)
@@ -1292,8 +1506,15 @@ def main():
             label(c, sec.get("directionsLabel", "DIRECTIONS"), pal, first=True)
             para(c, sec["directions"], 9.5)
 
-        gap(doc, 4)
-        render_questions(doc, sec.get("questions", []), pal, course, HERE)
+        gap(doc, 2 if compact else 4)
+        g = grid_opts(spec, sec)
+        if g:
+            err = grid_check(sec.get("questions", []), g)
+            if err:
+                return refuse(f"section {sec['code']}: {err}")
+            render_grid(doc, sec.get("questions", []), pal, g)
+        else:
+            render_questions(doc, sec.get("questions", []), pal, course, HERE)
 
         for bi, block in enumerate(sec.get("blocks", [])):
             kindb = block["kind"]

@@ -29,6 +29,8 @@ do not ship on the assumption it looks right.
 > system until 2026-09-08.
 >
 > Key files may also carry the key-handwriting face (`typography.keyHandwriting`), per `standards/ANSWER_KEYS.md` §9; `scripts/audit_fonts.py --key` enforces it.
+>
+> Physics files may also carry `typography.mathFallback` for the glyphs it names; `scripts/audit_fonts.py --physics` will enforce it (pending, SHULL-CHG-0072).
 
 ## 2. Page budget
 
@@ -127,7 +129,9 @@ Run `python3 scripts/audit_slide_geometry.py <deck>.pptx`. It must report zero p
 
 **Guided notes** — student copy and filled key generated from the same source so they cannot drift ·
 every section starts on a new page and ends with a RECALL block (a summary prompt plus a self-check;
-SHULL-CHG-0033) · blanks sized to the expected answer.
+SHULL-CHG-0033) · no inline underscore blanks; each recall item is a cue plus ruled writing lines
+sized to the expected answer; fill-in tables and ruled answer lines are allowed
+(`brand/SHULL_DESIGN_SYSTEM.md` §11, SHULL-CHG-0069).
 
 **Assessments** — every item maps to a learning target · distractors are real misconceptions ·
 exactly one unambiguously best answer · parallel versions carry identical blueprints, standards

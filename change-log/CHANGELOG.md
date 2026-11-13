@@ -30,6 +30,21 @@ supersedes it, exactly as the decision logs work.
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0070 | 2026-11-10 | Reference packet: VSEPR grid, solubility X | CONFIRMED | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
+## 2026-11-12
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0073 | 2026-11-12 | Physics 3.1 short title, lab exceptions, inventory | PARTIAL | `governance/proposals/SHULL-CHG-0073-physics-3.1-short-title-and-lab-exceptions.md` |
+
+## 2026-11-11
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0072 | 2026-11-11 | Physics fallback face for math symbols | PARTIAL | `governance/proposals/SHULL-CHG-0072-physics-math-symbol-fallback-face.md` |
+| SHULL-CHG-0071 | 2026-11-11 | Key images (`fbd` scene) and Physics U3 FBD set | PARTIAL | `governance/proposals/SHULL-CHG-0071-physics-u3-fbd-set-and-key-images.md` |
+| SHULL-CHG-0070 | 2026-11-11 | Physics net force written as sum notation | PARTIAL | `governance/proposals/SHULL-CHG-0070-physics-sum-of-forces-notation.md` |
+| SHULL-CHG-0069 | 2026-11-11 | Guided notes: no inline underscore blanks | PARTIAL | `governance/proposals/SHULL-CHG-0069-notes-no-inline-blanks.md` |
+| SHULL-CHG-0068 | 2026-11-11 | Physics U3 follows the deck's six sections | PARTIAL | `governance/proposals/SHULL-CHG-0068-physics-u3-six-sections.md` |
 
 ## 2026-11-09
 

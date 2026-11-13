@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3.1 Lab - Newton’s Laws</title>
+
+<!--
+=====================================================================
+ SHULL SCIENCE · LAB DOCUMENT TEMPLATE (MASTER)  v1.0
+ Works for CHEMISTRY · PHYSICS · GEOLOGY
+=====================================================================
+
+ HOW TO USE
+ 1. Copy this file. Rename it using the doc-code grammar:
+       SHULL_[CHEM|PHYS|GEO]_Lab_U##_S##.#_[Descriptor].html
+ 2. On the <body> tag, set the course class:  chem  |  phys  |  geo
+ 3. Replace every [[ BRACKETED TOKEN ]]. Search for "[[" to find them all.
+ 4. Delete any block you do not need. Blocks are marked "BLOCK:" in comments.
+ 5. Render:  python3 build_lab.py yourfile.html
+ 6. File the PDF in:  [Course]/Unit ## - .../Section ##.# - .../Labs-Case Studies-Projects/
+
+ RULES BAKED IN — DO NOT OVERRIDE
+ · Ink-friendly. Outline and rule treatments only. No solid fills, no
+   shaded banners, no colored table headers.
+ · No write-lines, no answer spaces, no fillable data tables on the
+   handout. The lab notebook is the write-on surface. The pre-lab
+   instructs students to draw their own tables.
+ · Print palette is the same for all three courses. The per-course
+   accent palettes (courses.* in brand/tokens.json) are PROJECTION
+   ONLY and never touch a printed page.
+ · Margins are the confirmed SHULL print standard and are locked.
+=====================================================================
+-->
+
+<link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<style>
+  /* ---------- Locked SHULL print margins ---------- */
+  @page {
+    size: letter;
+    margin: 0.30in 0.35in 0.45in 0.35in;
+
+    @top-right {
+      content: string(runhead);
+      font-family: var(--display); font-weight: 600; font-size: 6.2pt;
+      letter-spacing: 0.30em; color: var(--footer);
+      margin-top: 0.16in;
+    }
+    @bottom-left {
+      content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+    @bottom-right {
+      content: string(footright);
+      font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
+      color: var(--footer); margin-bottom: 0.14in;
+    }
+  }
+  @page :first { @top-right { content: ""; } }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body);
+    font-size: 10.3pt;
+    line-height: 1.40;
+    color: var(--ink);
+  }
+
+  /* Brand values come from shull-lab-tokens.css, generated from brand/tokens.json.
+     Never hand-type a hex here. See SHULL-CHG-0008 for the colour-as-type rule. */
+
+  sub { font-size: 7pt; vertical-align: -0.15em; }
+  sup { font-size: 7pt; vertical-align: 0.4em; }
+  b, strong { font-weight: bold; }
+
+  /* string-set carriers — set once, used by every running head/footer */
+  .meta, .runhead { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
+  .m-course { string-set: coursename content(); }
+  .m-code   { string-set: unitcode content(); }
+  .m-fright { string-set: footright content(); }
+
+  /* Any section can set the running header for the pages that follow */
+  .runhead { string-set: runhead content(); }
+
+  /* ---------- Masthead (page 1 only) ---------- */
+  .masthead { border-bottom: 2pt solid var(--ink); padding-bottom: 7pt; }
+  .masthead .eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 7.2pt;
+    letter-spacing: 0.22em; color: var(--accent); margin-bottom: 3pt;
+  }
+  .masthead .titlerow { display: flex; align-items: flex-end; }
+  .masthead h1 {
+    font-family: var(--display); font-weight: bold; font-size: 17pt;
+    line-height: 1.12; letter-spacing: -0.005em; flex: 1 1 auto;
+  }
+  .masthead h1 .accent { color: var(--accent); }   /* ONE accent word max */
+  .chip {
+    flex: 0 0 auto; margin-left: 12pt;
+    font-family: var(--display); font-weight: 600; font-size: 8pt;
+    letter-spacing: 0.10em; color: var(--ink);
+    border: 1.1pt solid var(--accent); border-radius: 9pt;
+    padding: 2.5pt 9pt; white-space: nowrap;
+  }
+
+  /* ---------- Name / Date / Period / Group ---------- */
+  .id-row { display: flex; gap: 16pt; margin: 9pt 1pt 4pt 1pt; }
+  .id-row .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+  .lbl {
+    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.18em;
+    color: var(--label); margin-top: 2.5pt;
+  }
+  .id-row .name { flex: 3; } .id-row .date { flex: 1.3; }
+  .id-row .per  { flex: 1; }
+  .id-group { margin: 6pt 1pt 11pt 1pt; }
+  .id-group .f { border-bottom: 0.9pt solid var(--ink); padding-bottom: 2pt; }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 8.6pt;
+    letter-spacing: 0.20em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent);
+    padding-bottom: 2.5pt; margin: 13pt 0 6pt 0;
+  }
+  h2.warn { color: var(--warn); border-bottom-color: var(--warn-rule); }
+  h3 {
+    font-family: var(--display); font-weight: 600; font-size: 10.2pt;
+    color: var(--ink); margin: 10pt 0 4pt 0;
+  }
+  h3 .flag {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--warn);
+    border: 0.8pt solid var(--warn-rule); border-radius: 7pt;
+    padding: 1.5pt 6pt; margin-left: 7pt; vertical-align: 1.5pt;
+  }
+
+  p { margin-bottom: 5pt; }
+  p.lead { margin-bottom: 7pt; }
+
+  /* ---------- Bulleted lists (goals, safety, materials) ---------- */
+  ul.dot { list-style: none; margin: 2pt 0 4pt 0; }
+  ul.dot li { padding-left: 11pt; position: relative; margin-bottom: 3.5pt; }
+  /* Drawn, not typed. U+25AA is absent from Archivo, so a literal square bullet
+     dropped the whole run to the last-resort fallback and pulled Liberation Sans into
+     every lab PDF. A box needs no glyph and no font. */
+  ul.dot li::before {
+    content: ""; position: absolute; left: 0; top: 3.4pt;
+    width: 3.4pt; height: 3.4pt; background: var(--accent);
+  }
+
+  /* ---------- Numbered question lists (pre-lab, post-lab) ---------- */
+  ol.q { list-style: none; counter-reset: q; margin-top: 4pt; }
+  ol.q > li {
+    counter-increment: q; position: relative;
+    padding-left: 20pt; margin-bottom: 7pt;
+    page-break-inside: avoid;
+  }
+  /* Just the number. No box. SHULL-CHG-0015 — the user's standing rule for every
+     numbered list in every format. Right-aligned so 9 and 10 line up. */
+  ol.q > li::before {
+    content: counter(q);
+    position: absolute; left: 0; top: 0.5pt;
+    font-family: var(--display); font-weight: bold; font-size: 9pt;
+    color: var(--accent);
+    width: 13pt; text-align: right;
+  }
+  .ref {
+    font-family: var(--display); font-weight: 600; font-size: 6.4pt;
+    letter-spacing: 0.16em; color: var(--accent); white-space: nowrap;
+    margin-left: 5pt;
+  }
+
+  /* ---------- Numbered procedure ---------- */
+  ol.proc { margin: 3pt 0 4pt 17pt; }
+  ol.proc > li { margin-bottom: 4.5pt; page-break-inside: avoid; }
+  ol.proc ul { list-style: none; margin: 3pt 0 1pt 0; }
+  ol.proc ul li {
+    padding-left: 11pt; position: relative; margin-bottom: 2.5pt;
+    font-size: 9.9pt;
+  }
+  ol.proc ul li::before {
+    content: "–"; position: absolute; left: 1pt; color: var(--accent);
+  }
+
+  /* ---------- Formula callout (outline only) ---------- */
+  .formula {
+    border-left: 2.5pt solid var(--accent);
+    padding: 5pt 0 5pt 10pt; margin: 6pt 0 7pt 0;
+  }
+  .formula .fname {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--accent); margin-bottom: 2.5pt;
+  }
+  .formula .fx { font-family: var(--display); font-size: 10.6pt; font-weight: 500; }
+
+  /* ---------- Data-table skeletons students copy into the notebook ---- */
+  .tables { display: flex; gap: 10pt; margin-top: 7pt; align-items: flex-start; }
+  .tbl { flex: 1 1 0; page-break-inside: avoid; }
+  .tbl .cap {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink);
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; margin-bottom: 0;
+  }
+  .tbl table { width: 100%; border-collapse: collapse; }
+  .tbl td {
+    border-bottom: 0.6pt solid var(--rule-hairline);
+    padding: 3.2pt 2pt; font-size: 9.1pt; line-height: 1.25;
+  }
+  .tbl td.note {
+    font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); text-align: right; border-bottom: none;
+  }
+
+  /* ---------- Reference data table (e.g. accepted densities) ---------- */
+  table.data { width: 100%; border-collapse: collapse; margin-top: 6pt; }
+  table.data th {
+    font-family: var(--display); font-weight: 600; font-size: 6.6pt;
+    letter-spacing: 0.16em; color: var(--ink); text-align: left;
+    padding: 0 4pt 3pt 4pt; border-bottom: 1.2pt solid var(--accent);
+  }
+  table.data td {
+    padding: 3.6pt 4pt; font-size: 9.8pt;
+    border-bottom: 0.6pt solid var(--rule-hairline);
+  }
+  .caption { font-size: 8.2pt; color: var(--label); margin-top: 3.5pt; line-height: 1.3; }
+
+  /* ---------- Two-column figure/table row ---------- */
+  .split { display: flex; gap: 14pt; align-items: flex-start; }
+  .split .wide { flex: 3 1 0; } .split .narrow { flex: 1 1 0; padding-top: 8pt; }
+  .figcap {
+    font-size: 8pt; color: var(--label); text-align: center;
+    margin-top: 4pt; line-height: 1.3;
+  }
+
+  /* ---------- Inline emphasis rule (the "read this" line) ---------- */
+  .rule-note {
+    border-top: 0.8pt solid var(--rule-hairline); border-bottom: 0.8pt solid var(--rule-hairline);
+    padding: 5pt 0; margin: 8pt 0; font-size: 9.9pt;
+  }
+
+  .pagebreak { page-break-before: always; }
+
+  /* ---------- Added for this lab (2026-11-12 pulley rewrite) ---------- */
+  /* Figure slot beside the materials list. Outline only. The <img> alt text is the
+     placeholder: if gdx-for.png is missing, the box prints with the caption and alt text. */
+  .figslot { float: right; width: 1.3in; margin: 2pt 0 4pt 12pt; }
+  .figslot .box {
+    width: 1.3in; height: 0.95in; border: 0.6pt solid var(--rule-hairline);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7pt; color: var(--label); text-align: center;
+  }
+  .figslot img { width: 100%; height: 100%; object-fit: contain; }
+  .clear { clear: both; }
+
+  /* Two formula callouts side by side */
+  .fpair { display: flex; gap: 14pt; }
+  .fpair .formula { flex: 1 1 0; }
+
+  /* Background laws: numbered by hand so the number reads as part of the law */
+  .law { margin: 7pt 0 3pt 0; }
+  .law .n { font-family: var(--display); font-weight: bold; color: var(--accent); margin-right: 4pt; }
+
+  /* Example data tables (Matt's request, 2026-11-12): headings plus 1–2 example rows */
+  .extbl { margin: 8pt 0 4pt 0; page-break-inside: avoid; }
+  .extbl .caprow { display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1pt solid var(--accent); padding-bottom: 2.5pt; }
+  .extbl .cap { font-family: var(--display); font-weight: 600; font-size: 6.8pt;
+    letter-spacing: 0.16em; color: var(--ink); }
+  .extbl .exnote { font-family: var(--display); font-size: 6.4pt; letter-spacing: 0.12em;
+    color: var(--warn); }
+  .extbl table { width: 100%; border-collapse: collapse; }
+  .extbl th { font-family: var(--display); font-weight: 600; font-size: 7.6pt; text-align: left;
+    padding: 3pt 4pt; border-bottom: 0.9pt solid var(--ink); vertical-align: bottom; line-height: 1.2; }
+  .extbl td { padding: 2.8pt 4pt; font-size: 9.4pt; border-bottom: 0.6pt solid var(--rule-hairline);
+    font-style: italic; color: var(--label); }
+  .extbl .after { font-size: 9pt; margin-top: 3pt; }
+  .look { font-size: 9.8pt; border-left: 1.2pt solid var(--rule-hairline); padding: 1pt 0 1pt 8pt; margin: 4pt 0 6pt 0; }
+  .look b { font-family: var(--display); font-weight: 600; font-size: 7pt; letter-spacing: 0.14em; }
+</style>
+</head>
+
+<body class="phys">
+
+<div class="meta">
+  <span class="m-course">PHYSICS</span>
+  <span class="m-code">U3 / S3.1</span>
+  <span class="m-fright">NEWTON’S LAWS LAB · CARBONLESS COPY GRADED INDIVIDUALLY</span>
+</div>
+
+<div class="masthead">
+  <div class="eyebrow">UNIT 3 — FORCES AND MOTION · SECTION 1</div>
+  <div class="titlerow">
+    <h1>Newton’s Laws with a <span class="accent">Pulley</span> Cart</h1>
+    <div class="chip">U3 / S3.1</div>
+  </div>
+</div>
+
+<div class="id-row">
+  <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>
+  <div class="date"><div class="f">&nbsp;</div><div class="lbl">DATE</div></div>
+  <div class="per"><div class="f">&nbsp;</div><div class="lbl">PERIOD</div></div>
+</div>
+<div class="id-group">
+  <div class="f">&nbsp;</div><div class="lbl">GROUP MEMBERS</div>
+</div>
+
+<h2>GOALS</h2>
+<ul class="dot">
+  <li>Show that once nothing is pulling the cart, it keeps rolling at almost the same velocity (first law).</li>
+  <li>Measure how the cart’s acceleration changes with the pull and with the cart’s mass, and find the cart’s mass from a graph (second law).</li>
+  <li>Measure both forces in one pull, at the same moment, and compare them (third law).</li>
+</ul>
+
+<h2>PURPOSE</h2>
+<p class="lead">You use one setup the whole lab: a cart on a level track, pulled by a string that runs
+over a pulley to a hanging mass. Day 1 is Parts A and B. Day 2 is Part C and the post-lab.</p>
+
+<h2>BACKGROUND</h2>
+<p>A force is a push or a pull. The <b>net force</b>, ∑F, is all the forces on an object added
+together, counting their directions. Newton’s laws are about the net force. In this lab the falling
+mass pulls the string, and the string pulls the cart.</p>
+
+<p class="law"><span class="n">1</span><b>Newton’s first law.</b> An object keeps doing what it is
+doing (staying still, or moving at a steady speed in a straight line) unless a net force acts on it.</p>
+<div class="formula">
+  <div class="fname">NEWTON’S FIRST LAW</div>
+  <div class="fx">if ∑F = 0, then a = 0 &nbsp;·&nbsp; the velocity stays the same</div>
+</div>
+<p><b>Part A tests it.</b> While the mass falls, it pulls the cart and the cart speeds up. When the
+mass hits the floor, the string goes slack. Now nothing pulls the cart forward, so the net force on it
+is about zero. The first law says the cart should keep its velocity, and it does: the
+velocity–time graph rises, then goes flat. It is not perfectly flat, because a little friction in the
+wheels still pushes backward and slows the cart slightly.</p>
+
+<p class="law"><span class="n">2</span><b>Newton’s second law.</b> A net force makes an object
+accelerate. More force gives more acceleration. More mass gives less acceleration for the same force.</p>
+<div class="fpair">
+  <div class="formula">
+    <div class="fname">NEWTON’S SECOND LAW</div>
+    <div class="fx">∑F = ma &nbsp;·&nbsp; N = kg × m/s²</div>
+  </div>
+  <div class="formula">
+    <div class="fname">SLOPE OF A FORCE–ACCELERATION GRAPH</div>
+    <div class="fx">slope = ΔF ÷ Δa = mass &nbsp;·&nbsp; N ÷ (m/s²) = kg</div>
+  </div>
+</div>
+<p><b>Part B tests it.</b> The cart’s force sensor reads the pull of the string, F, and the cart
+measures its own acceleration, a. A heavier hanging mass pulls harder, so the cart speeds up faster. On
+a graph of F (y-axis) against a (x-axis) the points make a straight line, and the slope is the cart’s
+mass. Add a mass bar to the cart and the same pull gives less acceleration, so the line gets steeper.
+The line will not pass exactly through zero, because a small part of the pull only cancels friction.</p>
+
+<p class="law"><span class="n">3</span><b>Newton’s third law.</b> Forces come in pairs. If object A
+pulls on object B, then B pulls back on A with a force of the same size in the opposite direction.</p>
+<div class="formula">
+  <div class="fname">NEWTON’S THIRD LAW</div>
+  <div class="fx">F<sub>A on B</sub> = −F<sub>B on A</sub> &nbsp;·&nbsp; same size, opposite direction</div>
+</div>
+<p><b>Part C tests it.</b> You hook a second force sensor, the GDX-FOR, between the cart and the
+string. The GDX-FOR pulls on the cart, and the cart pulls back on the GDX-FOR. Each sensor reads the pull
+on its own hook. By the third law, those two pulls are the same size at every moment, whether the cart is
+held still or moving. While the cart is held still, both should equal the weight of the hanging mass,
+<b>W = mg</b> (weight), with g = 9.8 m/s².</p>
+
+<div class="fpair">
+  <div class="formula">
+    <div class="fname">PERCENT ERROR — PART B</div>
+    <div class="fx">( | experimental − accepted | ÷ accepted ) × 100</div>
+  </div>
+  <div class="formula">
+    <div class="fname">PERCENT DIFFERENCE — PART C</div>
+    <div class="fx">( | A − B | ÷ [ ( A + B ) ÷ 2 ] ) × 100</div>
+  </div>
+</div>
+
+
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PRE-LAB &amp; SETUP</div>
+
+<h2>PRE-LAB — DUE AT THE START OF DAY 1</h2>
+<p class="lead">Answer these in your lab notebook before you walk in. Also copy the headings of
+Tables 1–3 (last page) into your notebook, with room for the rows you will need. Do not write on this
+handout.</p>
+<ol class="q">
+  <li>State each of Newton’s three laws (from the background) in your lab notebook.</li>
+  <li>Your pulley is 0.95 m above the floor. Use the string-length estimate in Setup step 3 to find
+      how long your string should be, loop to loop.</li>
+  <li>Sketch the velocity–time graph you expect in Part A, from the moment you let go until you catch
+      the cart. Label the point where the string goes slack.</li>
+</ol>
+
+<h2>MATERIALS — PER GROUP</h2>
+<div class="figslot">
+  <div class="box"><img src="gdx-for.png" alt="Go Direct Force and Acceleration Sensor"></div>
+  <div class="figcap">Go Direct Force and Acceleration Sensor</div>
+</div>
+<ul class="dot">
+  <li>Go Direct Sensor Cart and one cart mass bar</li>
+  <li>Dynamics Track with an end stop, and a pulley that clamps to the track end</li>
+  <li>String, about 1.5 m, plus scissors and a meter stick</li>
+  <li>Mass hanger and slotted masses, and a folded towel for the floor</li>
+  <li>Balance, and a device with Graphical Analysis</li>
+  <li><b>Day 2:</b> Go Direct Force and Acceleration Sensor (GDX-FOR), pictured</li>
+</ul>
+<div class="clear"></div>
+
+<h2>PROCEDURE</h2>
+
+<h3>Setup <span class="flag">DAY 1 · ABOUT 10 MIN</span></h3>
+<ol class="proc">
+  <li>Clamp the pulley to one end of the track, so it sits just past the edge of the bench. Put the end
+      stop on the other end.</li>
+  <li>Level the track. Set the cart at rest in the middle. If it starts to roll, slide folded paper
+      under the low end until it stays put.</li>
+  <li>Measure the height of the top of the pulley above the floor. Cut a piece of string and tie a
+      small loop at each end, so the string is this long from loop to loop:
+    <div class="formula">
+      <div class="fname">STRING-LENGTH ESTIMATE</div>
+      <div class="fx">string length ≈ pulley height above the floor + 40 cm</div>
+    </div>
+    When the mass lands, about 40 cm of string still runs from the cart to the pulley, so the cart has
+    40 cm to coast before it reaches the pulley.
+  </li>
+  <li>Hook one loop on the cart’s force-sensor hook, with the hook end of the cart facing the pulley.
+      Run the string over the pulley and hang the mass hanger from the other loop.</li>
+  <li>Check the length. Roll the cart toward the pulley until the hanger touches the floor. The cart
+      should be at least 40 cm from the pulley. If it is closer, retie one loop to shorten the string.</li>
+  <li>Raise or lower the pulley until the string runs level, from the hook straight to the top of the pulley.</li>
+  <li>Lay the folded towel on the floor under the hanger, so the mass does not bounce when it lands.</li>
+  <li>Mass the cart on the balance and record it in kg. Turn on the cart, connect it to Graphical
+      Analysis, and show velocity, acceleration and force against time. Use the acceleration the cart
+      measures with its wheel for every recorded value of a.</li>
+</ol>
+<p><b>Before every run:</b> lift the hanger so the string is slack, and zero the force sensor. Start
+each run with the cart about 1 m from the pulley, held still. Let go without pushing, and catch the cart
+before it reaches the pulley.</p>
+
+
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · PROCEDURE</div>
+
+<h3>Part A — First Law: the String Goes Slack <span class="flag">DAY 1 · ABOUT 10 MIN</span></h3>
+<ol class="proc">
+  <li>Take toward the pulley as positive. Put 20 g on the string (hanger included). Zero the sensor, then hold the cart at the start.</li>
+  <li>Start data collection and let go of the cart.</li>
+  <li>Watch the mass land and the cart keep rolling. Catch the cart before the pulley, then stop data collection.</li>
+  <li>On the velocity–time graph, find the flat part: after the mass lands and before your catch.
+      Fit a straight line to that part only. Record the velocity at its start and its end, and the slope.</li>
+  <li>Repeat for 3 trials in total.</li>
+</ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;The graph climbs while the mass falls, then goes almost
+flat the moment the string goes slack. The slope of the flat part should be close to zero, and slightly
+negative, because friction slows the cart.</p>
+
+<h3>Part B — Second Law: Change the Hanging Mass <span class="flag">DAY 1 · ABOUT 25 MIN</span></h3>
+<ol class="proc">
+  <li>Take toward the pulley as positive. Put 20 g on the string. Zero the sensor, hold the cart at the start, start data collection, and let go. Catch the cart.</li>
+  <li>Find the speeding-up stretch: the part where the mass is still falling and the force reading is
+      steady. Leave out the moment you let go and everything after the string goes slack.</li>
+  <li>For that stretch, record the average force F and the average acceleration a. Both point
+      toward the pulley, so both are positive.</li>
+  <li>Repeat steps 1–3 with 40, 60 and 80 g.</li>
+  <li>Put the mass bar on the cart. Mass the cart and bar together and record it. Repeat steps 1–3 with 40, 60 and 80 g.</li>
+  <li>Make a graph of F (y-axis) against a (x-axis) with both sets of points. Fit a straight line to
+      each set and record each slope. The slope is the mass, in kg.</li>
+</ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;More hanging mass gives a bigger F and a bigger a. With
+the bar on, the same F gives a smaller a, so that line is steeper.</p>
+
+<h3>Part C — Third Law: Two Sensors, One Pull <span class="flag">DAY 2 · ABOUT 20 MIN</span></h3>
+<ol class="proc">
+  <li>Take the mass bar off. Unhook the string from the cart.</li>
+  <li>Hook the GDX-FOR’s hook onto the cart’s force-sensor hook. Attach the string’s loop to the back
+      end of the GDX-FOR.</li>
+  <li>Check that the cart’s hook, the GDX-FOR and the string make one straight, level line toward the pulley.</li>
+  <li>Connect the GDX-FOR to the same device as the cart, so both record together. Lift the hanger
+      and zero both sensors.</li>
+  <li>Put 50 g on the string. Hold the cart still by the cart body, not the GDX-FOR or the string.
+      Start data collection, keep holding for 2 s, then let go. Catch the cart before the pulley.</li>
+  <li>Show both force readings on the same graph. Record each sensor’s average reading while the
+      cart was held, then while it was speeding up.</li>
+  <li>Repeat steps 5–6 with 100 g.</li>
+</ol>
+<p class="look"><b>WHAT TO LOOK FOR</b> &nbsp;The two force curves lie on top of each other, held or moving.
+The GDX-FOR pulls the cart toward the pulley. The cart pulls the GDX-FOR back, away from the pulley. Both
+read positive because each sensor shows a pull on its own hook as positive.</p>
+<p>Use the rest of Day 2 for the post-lab.</p>
+
+
+<div class="pagebreak"></div>
+<div class="runhead">U3 / S3.1 · NEWTON’S LAWS LAB · DATA &amp; POST-LAB</div>
+
+<h2>DATA TABLES</h2>
+<p>Copy the headings into your notebook before Day 1. The filled rows show what a finished row looks
+like. Fill in your own rows <b>as you take each run</b>, with units, not from memory at the end.</p>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 1 · PART A — FIRST LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Trial</th><th>Hanging mass (g)</th><th>Velocity at start of flat part (m/s)</th><th>Velocity at end of flat part (m/s)</th><th>Slope of flat part (m/s²)</th></tr>
+    <tr><td>1</td><td>20</td><td>0.81</td><td>0.78</td><td>−0.094</td></tr>
+    <tr><td>2</td><td>20</td><td>0.83</td><td>0.79</td><td>−0.108</td></tr>
+  </table>
+  <p class="after">Above the table, record the cart mass from the balance. <i>Example:</i> cart mass = 0.282 kg.</p>
+</div>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 2 · PART B — SECOND LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Run</th><th>Cart setup</th><th>Hanging mass (g)</th><th>Force F (N)</th><th>Acceleration a (m/s²)</th></tr>
+    <tr><td>1</td><td>cart only</td><td>20</td><td>0.18</td><td>0.53</td></tr>
+    <tr><td>2</td><td>cart only</td><td>40</td><td>0.33</td><td>1.06</td></tr>
+  </table>
+  <p class="after">Below the table, for cart only and for cart + bar: mass from the balance (kg), slope of the F–a line (kg), and percent error.</p>
+</div>
+
+<div class="extbl">
+  <div class="caprow"><span class="cap">TABLE 3 · PART C — THIRD LAW</span><span class="exnote">EXAMPLE – YOUR NUMBERS WILL DIFFER</span></div>
+  <table>
+    <tr><th>Run</th><th>Hanging mass (g)</th><th>Cart held or moving</th><th>Cart sensor reading (N)</th><th>GDX-FOR reading (N)</th><th>Percent difference (%)</th></tr>
+    <tr><td>1</td><td>50</td><td>held</td><td>0.49</td><td>0.48</td><td>2.1</td></tr>
+    <tr><td>2</td><td>50</td><td>moving</td><td>0.27</td><td>0.26</td><td>3.8</td></tr>
+  </table>
+</div>
+
+<div class="rule-note">
+  If you write a number wrong, draw one line through it and write the correct value beside it. Never
+  scribble it out and never erase.
+</div>
+
+<h2>POST-LAB ANALYSIS</h2>
+<p class="lead">Answer these in your lab notebook. Show every calculation with units.</p>
+<ol class="q">
+  <li>Explain how Part A showed Newton’s first law. Use your velocity–time graph: what was the net
+      force on the cart during the flat part, and what did its velocity do? Why was the flat part not
+      perfectly flat? <span class="ref">PART A</span></li>
+  <li>Explain how Part B showed Newton’s second law. Use your F–a graph: what happened to a as F went
+      up, and what happened to the line when you added the mass bar? <span class="ref">PART B</span></li>
+  <li>Calculate the percent error of each slope. The accepted value is the balance mass: the cart
+      alone for the first line, the cart and bar together for the second. <span class="ref">PART B</span></li>
+  <li>Name one thing in your setup that made your Part B mass differ from the balance mass, and say
+      which way it pushed your result. <span class="ref">PART B</span></li>
+  <li>Explain how Part C showed Newton’s third law. Use your two force readings: how did their sizes
+      compare, and which way did each force point? <span class="ref">PART C</span></li>
+  <li>Calculate the percent difference between the cart sensor and the GDX-FOR for each run in
+      Table 3. <span class="ref">PART C</span></li>
+</ol>
+
+</body>
+
+</html>

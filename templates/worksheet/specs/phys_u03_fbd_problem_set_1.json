@@ -1,0 +1,583 @@
+{
+ "$comment": "One-time exceptions for this file pair only, SHULL-CHG-0071 Part B: 12 items in one list, no equations (the label bank fills the equation bar), drawing boxes (a grid of squares, 3 across), no graph item, everyday objects. Not a precedent. Build with the one-time ramp and footer override, not by running the builder directly; the checked-in builder refuses this spec as designed.",
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.2"
+ ],
+ "docType": "Practice_Set",
+ "equationLabel": "FORCE LABEL BANK",
+ "pagesPerSection": 2,
+ "key": {
+  "title": "Free-Body Diagrams"
+ },
+ "sectionsContent": [
+  {
+   "code": "3.2",
+   "title": "Free-Body Diagrams",
+   "eyebrowNote": "PROBLEM SET 1",
+   "layout": "grid",
+   "columns": 3,
+   "squareIn": 1.95,
+   "gridPromptPt": 9,
+   "gridRowGapPt": 8,
+   "compactTop": true,
+   "equationColumns": 2,
+   "equationStyle": "inline",
+   "priorKnowledge": {
+    "items": [
+     "Newton's first law: an object at rest, or moving at a constant speed in a straight line, has balanced forces.",
+     "If an object is speeding up or slowing down, the forces are not balanced. The larger forces point the way it is speeding up, or opposite the way it moves if it is slowing down."
+    ]
+   },
+   "equations": [
+    {
+     "note": "gravity (weight)",
+     "plain": "F_{g}"
+    },
+    {
+     "note": "normal force",
+     "plain": "F_{N}"
+    },
+    {
+     "note": "applied force",
+     "plain": "F_{app}"
+    },
+    {
+     "note": "friction",
+     "plain": "f    (f_{s} static, f_{k} kinetic)"
+    },
+    {
+     "note": "tension",
+     "plain": "T    (two ropes: T_{L}, T_{R})"
+    },
+    {
+     "note": "air resistance",
+     "plain": "drag"
+    },
+    {
+     "note": "push of one object on another",
+     "plain": "F_{book on table}"
+    },
+    {
+     "note": "friction acts",
+     "plain": "along the surface, opposite the sliding (or the tendency to slide)"
+    }
+   ],
+   "directions": "Draw the object as a box. Draw one arrow for each force, starting at the box, pointing the way the force acts. Label each arrow from the bank. Make longer arrows for larger forces when you can tell. Do not draw an arrow for motion. Write subscripts small, as in F with a small g.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 1,
+     "prompt": "A box of books sits at rest on a level floor. Draw the free-body diagram for the box.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fg down, FN up, equal length.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Normal force equals weight here only because nothing else pushes up or down and the box is not speeding up or slowing down vertically.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 1,
+     "prompt": "A crate on smooth, frictionless ice is pushed horizontally to the right and speeds up. Ignore air resistance. Draw the free-body diagram for the crate.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fapp right; FN up and Fg down, equal length; no friction.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{app}",
+          "dir": "right",
+          "mag": 0.6
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Fapp is the only sideways force. No friction arrow and no arrow for motion.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 1,
+     "prompt": "A dresser is pushed horizontally to the right across a rough wooden floor at a constant speed. Ignore air resistance. Draw the free-body diagram for the dresser.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fapp right and fk left, equal length; FN up and Fg down, equal length.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{app}",
+          "dir": "right",
+          "mag": 0.45
+         },
+         {
+          "label": "f_{k}",
+          "dir": "left",
+          "mag": 0.45
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Constant speed means the push and the friction are equal. The push is not larger.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 1,
+     "prompt": "A hockey puck slides to the right across rough ice and slows to a stop. Nothing is pushing it. Ignore air resistance. Draw the free-body diagram for the puck while it is still sliding.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "fk left (opposite the sliding); FN up and Fg down, equal length; no forward force.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "f_{k}",
+          "dir": "left",
+          "mag": 0.3
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "No forward force. Nothing pushes the puck once it is sliding.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 1,
+     "prompt": "A framed picture hangs freely, not touching the wall, from two ropes. One rope pulls up and to the left and the other pulls up and to the right, each at 50° above the horizontal. Draw the free-body diagram for the picture.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Two tension arrows along the ropes, TL up-left and TR up-right at 50° above the horizontal, equal; Fg down.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "T_{L}",
+          "dir": 130,
+          "mag": 0.653
+         },
+         {
+          "label": "T_{R}",
+          "dir": 50,
+          "mag": 0.653
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Two T arrows, one along each rope, both the same size.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 1,
+     "prompt": "A person stands on a bathroom scale in an elevator. The elevator is moving up and speeding up. Draw the free-body diagram for the person.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "FN up (from the scale), larger than Fg down.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1.4
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Speeding up while going up, so the normal force is larger than the weight.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 1,
+     "prompt": "A skydiver falls toward the ground and is still speeding up. Air resistance acts on her. Draw the free-body diagram for the skydiver.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fg down, drag up, Fg larger than drag.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "drag",
+          "dir": "up",
+          "mag": 0.55
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ],
+        "object": "box"
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Still speeding up, so drag is smaller than gravity.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 1,
+     "prompt": "A sled is pulled to the right across rough snow at a constant speed. The rope pulls at 30° above the horizontal. Ignore air resistance. Draw the free-body diagram for the sled.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "T up and right at 30° above the horizontal; fk left; FN up, smaller than Fg down.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "T",
+          "dir": 30,
+          "mag": 0.5
+         },
+         {
+          "label": "f_{k}",
+          "dir": "left",
+          "mag": 0.433
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 0.75
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "The rope lifts a little, so the normal force is less than the weight.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 1,
+     "prompt": "A toolbox sits at rest on a rough ramp tilted 25° above the horizontal. Draw the free-body diagram for the toolbox.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fg straight down; FN perpendicular to the ramp; fs up along the ramp.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 115,
+          "mag": 0.906
+         },
+         {
+          "label": "f_{s}",
+          "dir": 25,
+          "mag": 0.423
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ],
+        "tiltDeg": 25,
+        "surface": true
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Normal force is perpendicular to the ramp. Gravity points straight down, not into the ramp.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 1,
+     "prompt": "A wooden block slides down a rough ramp tilted 25° above the horizontal and speeds up as it goes. Ignore air resistance. Draw the free-body diagram for the block.",
+     "draw": {
+      "panels": 1
+     },
+     "solution": "Fg straight down; FN perpendicular to the ramp; fk up along the ramp, small (the block speeds up).",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 115,
+          "mag": 0.906
+         },
+         {
+          "label": "f_{k}",
+          "dir": 25,
+          "mag": 0.25
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ],
+        "tiltDeg": 25,
+        "surface": true
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Friction points up the ramp, opposite the sliding.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 2,
+     "prompt": "A book rests on a table, and the table stands on a level floor. Nothing is moving. Draw two separate free-body diagrams: one for the book and one for the table.",
+     "draw": {
+      "panels": 2,
+      "captions": [
+       "Book",
+       "Table"
+      ]
+     },
+     "solution": "Book: FN up from the table and Fg down, equal. Table: FN up from the floor; Fg (the table's weight) down; F book on table (the book pushing down) down; FN equals Fg plus F book on table.",
+     "keyImage": {
+      "scene": "fbd",
+      "arrowPx": 150,
+      "panels": [
+       {
+        "caption": "Book",
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 0.5
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 0.5
+         }
+        ]
+       },
+       {
+        "caption": "Table",
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1.5
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1,
+          "offset": -0.45
+         },
+         {
+          "label": "F_{book on table}",
+          "dir": "down",
+          "mag": 0.5,
+          "offset": 0.45
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "The book's weight is not drawn on the table. The table feels the book's push, F book on table. F book on table equals the book's weight only because the book is at rest.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 2,
+     "prompt": "A block on a frictionless table is tied to a string. The string runs over a pulley at the right edge of the table to a hanging mass, and the mass falls and speeds up. Ignore the mass of the string and the pulley, and ignore air resistance. Draw two separate free-body diagrams: one for the block and one for the hanging mass.",
+     "draw": {
+      "panels": 2,
+      "captions": [
+       "Block",
+       "Hanging mass"
+      ]
+     },
+     "solution": "Block: T right; FN up and Fg down, equal; no friction. Hanging mass: T up, Fg down, Fg larger than T.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "caption": "Block",
+        "forces": [
+         {
+          "label": "T",
+          "dir": "right",
+          "mag": 0.375
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 1
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 1
+         }
+        ]
+       },
+       {
+        "caption": "Hanging mass",
+        "forces": [
+         {
+          "label": "T",
+          "dir": "up",
+          "mag": 0.375
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 0.6
+         }
+        ]
+       }
+      ]
+     },
+     "steps": [
+      {
+       "say": "Gravity on the hanging mass is larger than the tension, because the mass speeds up downward. Grade T < Fg on the hanging mass and equal T on both. Don't compare arrow lengths across the two panels.",
+       "ink": "arrow"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
