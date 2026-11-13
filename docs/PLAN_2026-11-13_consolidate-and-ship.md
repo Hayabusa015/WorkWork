@@ -7,23 +7,28 @@
 
 ## 1. Why this plan exists
 
-A review on 2026-11-13 found the system has had far more work put into it than documents taken
-out of it.
+**Correction, 2026-11-13.** The first review read `main` only and concluded the system had
+produced almost nothing. That was wrong. A second look at every remote branch found the real
+work, and a different problem.
 
 | Measure | Finding on 2026-11-13 |
 |---|---|
-| Effort | 200 commits since early September; 67 change proposals |
-| Rules and docs | About 70,000 words |
-| Output visible in the repository | 18 document specs, 1 slide deck, 1 task report, 1 filing-queue row |
-| Cost of one document | The Geology Dinosaur Poster took about 12 commits over 9 days |
+| `main` | 200 commits; last change 2026-11-09; 18 document specs; change records up to SHULL-CHG-0067 |
+| Branches with commits not on `main` | 27, holding roughly 365 commits (not checked for work that reached `main` another way) |
+| Work that exists only on branches | Chemistry Units 2, 3, 4 and 5; Physics Units 2 and 3; Geology Units 2 and 3; the Chemistry reference packet; question banks and tests; an `assessment` and an `activity` template family |
+| Rule changes that exist only on branches | Change records up to at least SHULL-CHG-0071, with edits to `brand/`, `standards/`, the builders and `config/drive.json` |
 | Desktop app | No feature work since 2026-09-20; only the worksheet builder is wired to its build button |
-| Health | 37 of 37 app tests pass; 7 of 8 validators pass (see Phase 0) |
+| Health of `main` | 37 of 37 app tests pass; 7 of 8 validators pass (see Phase 0) |
 
-**Goal:** one runtime (Claude Code), one command that reaches every builder, less ceremony per
-document, and a full unit shipped through the system as the proof.
+**The real defect:** the repository's one rule is that a fact lives in one place, and `main` is
+supposed to be that place. It is not. Every session branches from a stale `main`, so each one
+starts without the others' builder fixes, standards changes and Change IDs. Change IDs are
+allocated from `origin/main`, so sessions on separate branches can take the same number.
 
-**What stays untouched:** the builders in `templates/`, the course `DECISIONS.md` files, the
-validators, CI, and `legacy/`.
+**Goal:** get everything onto `main` and keep it there; one runtime (Claude Code); one command
+that reaches every builder; less ceremony per document.
+
+**What stays untouched:** the course `DECISIONS.md` files, the validators, CI, and `legacy/`.
 
 ## 2. Rules for the executing session
 
@@ -31,7 +36,8 @@ validators, CI, and `legacy/`.
    in §10 row 4 and no others. Do not merge them; Matt merges.
 2. You may not edit `brand/`, `standards/`, `governance/` (other than adding new proposal files)
    or `courses/`. Phases 3 and 4 produce **PENDING proposals only**.
-3. Delete nothing beyond the files named in Phase 1. Do not touch Drive in Phases 0–4.
+3. Delete nothing beyond the files named in Phase 1. Delete no branch. Do not touch Drive in
+   Phases 0–4.
 4. One commit per phase at minimum, each with a plain message. Run the checks in §3 before every
    commit; do not commit on a new failure.
 5. Never invent a unit title, section code, date or policy. If a code is not in the course
@@ -63,6 +69,45 @@ you document a file, create it in the same commit.
 3. Record the baseline results in your final report.
 
 **Done when:** all checks pass, or each failure has a stated cause.
+
+## 4b. Phase 0b — bring the branches home (do this before anything else changes)
+
+Phases 1 and 2 edit the builders and scripts. Doing that on a stale `main` would add a 28th
+divergent copy. So the branches come first.
+
+**Step 1 — inventory, report only.** `git fetch origin`, then for every remote branch with commits
+not on `main`, one table row: branch, last commit date, commits ahead, what it holds (documents,
+builder changes, rule changes, Change IDs), whether its content already reached `main` another
+way (compare trees, not just history), and whether it merges cleanly. Flag:
+
+- every Change ID that appears on more than one branch with different content;
+- every file changed on more than one branch (the builders and `templates/_shull_docx.py` will be);
+- branches that look abandoned or superseded.
+
+Show Matt the table. **Merge nothing until he says yes.**
+
+**Step 2 — ask which sessions are still live.** Matt has at least one other session open on
+Chemistry Units 4 and 5 (`claude/funny-heisenberg-vu0q4r`). Do not rewrite, rebase or delete any
+branch. A live branch is merged into `main` like the others and the live session then updates
+from `main`; Matt decides the timing.
+
+**Step 3 — merge, oldest first.** One pull request per branch, or per small group Matt agrees to.
+Resolve conflicts by reading both sides; where two branches changed the same rule or builder
+behaviour differently, stop and ask rather than choosing. Rule-file conflicts (`brand/`,
+`standards/`, `governance/`, `courses/`) are resolved only in favour of an APPROVED or IMPLEMENTED
+change record; if the records themselves disagree, ask. Run §3 after each merge. Matt merges.
+
+**Step 4 — renumber only if Matt approves.** If two different records share a Change ID, propose
+which keeps the number; do not renumber on your own.
+
+**Step 5 — prevent the recurrence.** Propose (as a PENDING record, with the two in §7) a rule
+that a session's work reaches `main` by pull request before the session ends, and that the
+SessionStart setup warns when the branch is behind `origin/main`.
+
+Never delete a branch. List the ones that are fully merged and let Matt delete them.
+
+**Done when:** every branch is either merged, or listed with the reason it is not; `main` passes
+§3; the table in the final report shows no unexplained branch.
 
 ## 5. Phase 1 — one runtime
 
@@ -96,6 +141,9 @@ Today each builder has its own calling convention:
 | Lab | `templates/lab/build_lab.py` | HTML source, optional page count |
 | Snow day | `templates/snow_day/build_snow_day_docx.py` | spec, output directory |
 | Slides | `templates/slide/build_deck.js` | `SHULL_COURSE` env, spec, optional output file |
+
+There are more families on the branches than this table shows (`assessment`, `activity`); after
+Phase 0b, list what is actually in `templates/` and cover all of it.
 
 Read each builder and the matching skill in `.claude/skills/` before designing anything. Spec
 filenames are not consistent across families, so identify a spec by the course, unit and section
@@ -178,9 +226,9 @@ options and your recommendation, so Matt can answer them in one message.
 
 ## 9. Phase 6 — the proof: ship one full unit
 
-Start only after Phases 0–2 are merged.
+Start only after Phases 0–2 are merged, including Phase 0b.
 
-1. The unit is Chemistry Unit 4 (§10).
+1. Ask Matt for the unit (§10 row 2). It must be one no other session is working on.
 2. Run the unit plan. Show the table. Get a yes.
 3. For rows with no spec, write the spec from the course decisions file and Matt's source
    material. Anything not given is asked for or marked PROVISIONAL in teacher notes only.
@@ -189,7 +237,8 @@ Start only after Phases 0–2 are merged.
 6. File through the existing queue (`reports/filing-queue.md`) after Matt approves each row.
 
 **Done when:** every document in the unit is verified in Drive, and the final report states the
-time and commits per document next to the Dinosaur Poster baseline (about 12 commits, 9 days).
+time and commits per document next to a baseline taken from the branch history of a comparable
+unit built before this plan (measure it; do not assume one).
 If the numbers are not clearly better, say so; that result decides what gets cut next.
 
 **Freeze:** until this phase is done, no new agents, skills, standards, dashboards or app
@@ -200,9 +249,9 @@ features. Bug fixes that block a build are allowed.
 | # | Decision | Answer |
 |---|---|---|
 | 1 | Park the desktop app and remove Vercel (Phase 1)? | **Yes.** Verbatim: "Lets park the app and remove vercel" |
-| 2 | Proof unit (Phase 6)? | **Chemistry Unit 4.** Verbatim: "I guess lets do chemistry", then "Let's do unit 4". Confirmed present in `courses/chemistry/DECISIONS.md` on 2026-11-13 with six sections; read the titles and codes from that file, not from here. No Chemistry Unit 4 spec exists in `templates/*/specs/` yet, so every document needs a spec written. Labs past Unit 0 are an open question in that file: a Unit 4 lab is a draft until Matt confirms the lab. |
+| 2 | Proof unit (Phase 6)? | **Open again.** Matt first said Chemistry Unit 4, then on 2026-11-13: "I have files in the drive I have been working on unit 4 and 5 in tandem in another session." That work is on `claude/funny-heisenberg-vu0q4r` (combined deck, guided notes, and practice sets filed to Drive). Do not build or rebuild anything for Chemistry Units 4 or 5. After Phase 0b, ask Matt which unit is next and unbuilt. |
 | 3 | Legacy skills? | **Retire them.** Verbatim: "Legacy skills, retire them". See §11. |
-| 4 | Delivery of Phases 0–2? | Matt asked for a recommendation. Recommended and adopted unless he says otherwise: **one pull request for Phases 0–2**, so CI runs on it and the work reaches `main` in one reviewed step. The two proposals (Phases 3 and 4) go in a second pull request so their IDs become real on `main`. |
+| 4 | Delivery of Phases 0–2? | Matt asked for a recommendation. Recommended and adopted unless he says otherwise: **pull requests as Phase 0b describes for the branches, then one pull request for Phases 1–2**, so CI runs on it and the work reaches `main` in one reviewed step. The two proposals (Phases 3 and 4) go in a second pull request so their IDs become real on `main`. |
 
 ## 11. Legacy skill retirement
 
