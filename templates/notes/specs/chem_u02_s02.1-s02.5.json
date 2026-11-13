@@ -1,0 +1,1267 @@
+{
+ "course": "chemistry",
+ "unit": 2,
+ "sections": [
+  "2.1",
+  "2.2",
+  "2.3",
+  "2.4",
+  "2.5"
+ ],
+ "kicker": "GUIDED NOTES · UNIT 2",
+ "fields": "NAME  ______________________________________   DATE  ______________   PERIOD  _______",
+ "unitTargets": [
+  "I can describe energy levels, sublevels and orbitals and how many electrons each holds.",
+  "I can write electron configurations and orbital diagrams using Aufbau, Pauli and Hund.",
+  "I can count valence electrons and predict the ion an atom forms.",
+  "I can connect electron energy-level drops to the light atoms give off."
+ ],
+ "keyTerms": [
+  "Energy level, quantized, ground state, excited state",
+  "Sublevel, orbital, Aufbau, Pauli, Hund",
+  "Valence electron, cation, anion, isoelectronic",
+  "Photon, emission, absorption, spectrum, flame test"
+ ],
+ "howItWorks": [
+  "Write what is on the board in the space on the right. Fill in the tables as we go.",
+  "Every row carries its slide number. Use it to ask me to go back to that slide."
+ ],
+ "glance": [
+  {
+   "code": "START",
+   "title": "Bohr's Model",
+   "slides": "03–04",
+   "record": "Energy levels, quantized, ground and excited states"
+  },
+  {
+   "code": "S02.2",
+   "title": "Energy Levels, Sublevels & Orbitals",
+   "slides": "06–11",
+   "record": "Sublevels, orbitals, electron capacity, blocks"
+  },
+  {
+   "code": "S02.3",
+   "title": "Electron Configurations",
+   "slides": "12–28",
+   "record": "Aufbau, Pauli, Hund, shorthand, Cr and Cu"
+  },
+  {
+   "code": "S02.4",
+   "title": "Electron Stability & Valence Electrons",
+   "slides": "29–37",
+   "record": "Valence electrons, ion charges, isoelectronic"
+  },
+  {
+   "code": "S02.5",
+   "title": "Atomic & Electron Spectra",
+   "slides": "38–48",
+   "record": "Absorption, emission, hydrogen lines, flame tests"
+  }
+ ],
+ "opener": {
+  "title": "Bohr's Model",
+  "slidesRange": "Slides 03–04",
+  "rows": [
+   {
+    "slides": "03",
+    "cueLabel": "BOHR MODEL",
+    "cues": [
+     "Definition — quantized"
+    ],
+    "notesLabel": "BOHR'S HYDROGEN ATOM",
+    "notes": [
+     "*Electrons stay in set energy levels, labeled {{n}}.",
+     "*Quantized means {{set amounts}}."
+    ],
+    "space": {
+     "lines": 2,
+     "key": [
+      "Today's model: orbitals show where electrons are likely to be (probability), not fixed circular paths.",
+      "An electron cannot stay halfway between levels."
+     ]
+    }
+   },
+   {
+    "slides": "04",
+    "cueLabel": "HYDROGEN LEVELS",
+    "cues": [],
+    "notesLabel": "HYDROGEN ENERGY LEVELS",
+    "notes": [],
+    "table": {
+     "headers": [
+      "Term",
+      "What it means"
+     ],
+     "rows": [
+      [
+       "Ground state",
+       "{{Lowest energy level; for hydrogen n = 1}}"
+      ],
+      [
+       "Excited state",
+       "{{Electron has gained energy and moved above n = 1}}"
+      ],
+      [
+       "Ionization",
+       "{{Electron gains enough energy to leave the atom}}"
+      ]
+     ],
+     "widths": [
+      1.5,
+      4.16
+     ]
+    },
+    "sketch": {
+     "label": "SKETCH — HYDROGEN ENERGY LEVELS",
+     "heightIn": 1.7,
+     "key": "n = 1 to 4 as lines, closer together as n rises; ionization limit at the top"
+    }
+   }
+  ]
+ },
+ "sectionsContent": [
+  {
+   "code": "U02 / S02.2",
+   "title": "Energy Levels, Sublevels & Orbitals",
+   "slidesRange": "Slides 06–11",
+   "learningTarget": "I can state how many sublevels, orbitals and electrons each energy level holds.",
+   "rows": [
+    {
+     "slides": "06",
+     "cueLabel": "ORGANIZATION",
+     "cues": [
+      "Chain, level to electron"
+     ],
+     "notesLabel": "ELECTRON ORGANIZATION",
+     "notes": [
+      "*Level → {{sublevel}} → {{orbital}} → {{electrons}}"
+     ]
+    },
+    {
+     "slides": "07",
+     "cueLabel": "ORBITAL",
+     "cues": [
+      "Definition — orbital"
+     ],
+     "notesLabel": "WHERE ARE THE ELECTRONS",
+     "notes": [
+      "*An orbital is a region where an electron is {{likely}} to be.",
+      "Each orbital holds up to {{2}} electrons."
+     ]
+    },
+    {
+     "slides": "08",
+     "cueLabel": "LEVELS AND SUBLEVELS",
+     "cues": [],
+     "notesLabel": "LEVELS CONTAIN SUBLEVELS",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Level",
+       "Available sublevels",
+       "Number of sublevels"
+      ],
+      "rows": [
+       [
+        "n = 1",
+        "{{1s}}",
+        "{{1}}"
+       ],
+       [
+        "n = 2",
+        "{{2s, 2p}}",
+        "{{2}}"
+       ],
+       [
+        "n = 3",
+        "{{3s, 3p, 3d}}",
+        "{{3}}"
+       ],
+       [
+        "n = 4",
+        "{{4s, 4p, 4d, 4f}}",
+        "{{4}}"
+       ]
+      ],
+      "widths": [
+       1.2,
+       2.86,
+       1.6
+      ]
+     }
+    },
+    {
+     "slides": "09",
+     "cueLabel": "ELECTRON CAPACITY",
+     "cues": [
+      "Whole-level formulas"
+     ],
+     "notesLabel": "HOW MANY ELECTRONS FIT",
+     "notes": [
+      "A whole level has {{n²}} orbitals and holds up to {{2n²}} electrons."
+     ],
+     "table": {
+      "headers": [
+       "Sublevel",
+       "Orbitals",
+       "Maximum electrons"
+      ],
+      "rows": [
+       [
+        "s",
+        "{{1}}",
+        "{{2}}"
+       ],
+       [
+        "p",
+        "{{3}}",
+        "{{6}}"
+       ],
+       [
+        "d",
+        "{{5}}",
+        "{{10}}"
+       ],
+       [
+        "f",
+        "{{7}}",
+        "{{14}}"
+       ]
+      ],
+      "widths": [
+       1.5,
+       1.8,
+       2.36
+      ]
+     }
+    },
+    {
+     "slides": "10",
+     "cueLabel": "PERIODIC TABLE BLOCKS",
+     "cues": [],
+     "notesLabel": "BLOCKS ON THE PERIODIC TABLE",
+     "notes": [],
+     "space": {
+      "lines": 2,
+      "key": [
+       "He is 1s² but sits in group 18.",
+       "In K and Ca, 4s fills before 3d."
+      ]
+     },
+     "table": {
+      "headers": [
+       "Block",
+       "Width in columns"
+      ],
+      "rows": [
+       [
+        "s block",
+        "{{2}}"
+       ],
+       [
+        "p block",
+        "{{6}}"
+       ],
+       [
+        "d block",
+        "{{10}}"
+       ],
+       [
+        "f block",
+        "{{14}}"
+       ]
+      ],
+      "widths": [
+       2.0,
+       3.66
+      ]
+     }
+    },
+    {
+     "slides": "11",
+     "cueLabel": "WORKED CHECKS",
+     "cues": [
+      "Worked examples"
+     ],
+     "notesLabel": "COUNTING FROM THE BOARD",
+     "notes": [],
+     "space": {
+      "lines": 4,
+      "key": [
+       "n = 3 sublevels: 3s, 3p, 3d",
+       "4f holds 14 electrons (7 orbitals × 2)",
+       "n = 4 has 16 orbitals (n² = 4²)",
+       "n = 3: 9 orbitals, up to 18 electrons"
+      ]
+     }
+    }
+   ],
+   "summary": {
+    "lines": 3,
+    "key": [
+     "A level holds sublevels, a sublevel holds orbitals, an orbital holds up to 2 electrons.",
+     "Capacities: s 2, p 6, d 10, f 14.",
+     "A level n holds up to 2n² electrons."
+    ]
+   }
+  },
+  {
+   "code": "U02 / S02.3",
+   "title": "Electron Configurations",
+   "slidesRange": "Slides 12–28",
+   "learningTarget": "I can write longhand and noble-gas configurations and draw orbital diagrams using Aufbau, Pauli and Hund.",
+   "rows": [
+    {
+     "slides": "12",
+     "cueLabel": "CONFIGURATION",
+     "cues": [
+      "Definition — configuration"
+     ],
+     "notesLabel": "FILLING ORBITALS",
+     "notes": [
+      "*An electron configuration shows {{where the electrons go}}.",
+      "The three rules: {{Aufbau}}, {{Pauli}}, {{Hund}}."
+     ]
+    },
+    {
+     "slides": "13",
+     "cueLabel": "READING THE CODE",
+     "cues": [],
+     "notesLabel": "READING AN ELECTRON CONFIGURATION",
+     "notes": [
+      "For a neutral atom, the raised numbers add to the {{atomic number}}."
+     ],
+     "table": {
+      "headers": [
+       "Part of 2p⁴",
+       "What it tells you"
+      ],
+      "rows": [
+       [
+        "2",
+        "{{Energy level}}"
+       ],
+       [
+        "p",
+        "{{Sublevel type}}"
+       ],
+       [
+        "4",
+        "{{Number of electrons}}"
+       ]
+      ],
+      "widths": [
+       1.6,
+       4.06
+      ]
+     }
+    },
+    {
+     "slides": "14",
+     "cueLabel": "AUFBAU",
+     "cues": [
+      "Definition — Aufbau"
+     ],
+     "notesLabel": "AUFBAU PRINCIPLE",
+     "notes": [
+      "*Aufbau: fill the {{lowest}}-energy sublevel first."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "1s 2s 2p 3s 3p 4s 3d 4p 5s …",
+       "Maximum: s 2, p 6, d 10, f 14"
+      ]
+     }
+    },
+    {
+     "slides": "15",
+     "cueLabel": "PAULI",
+     "cues": [
+      "Definition — Pauli"
+     ],
+     "notesLabel": "PAULI RULE",
+     "notes": [
+      "*Pauli: {{2}} electrons per orbital, with {{opposite}} spins."
+     ],
+     "orbitals": {
+      "label": "HELIUM",
+      "rows": [
+       {
+        "name": "Allowed",
+        "boxes": 1,
+        "fill": [
+         "↑↓"
+        ]
+       },
+       {
+        "name": "Not allowed",
+        "boxes": 1,
+        "fill": [
+         "↑↑"
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "slides": "16",
+     "cueLabel": "HUND",
+     "cues": [
+      "Definition — Hund"
+     ],
+     "notesLabel": "HUND'S RULE",
+     "notes": [
+      "*Hund: one electron in {{each}} box before pairing."
+     ],
+     "orbitals": {
+      "label": "2p BOXES",
+      "rows": [
+       {
+        "name": "C  2p",
+        "boxes": 3,
+        "fill": [
+         "↑",
+         "↑",
+         ""
+        ]
+       },
+       {
+        "name": "N  2p",
+        "boxes": 3,
+        "fill": [
+         "↑",
+         "↑",
+         "↑"
+        ]
+       },
+       {
+        "name": "O  2p",
+        "boxes": 3,
+        "fill": [
+         "↑↓",
+         "↑",
+         "↑"
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "slides": "17–18",
+     "cueLabel": "OXYGEN",
+     "cues": [
+      "Example"
+     ],
+     "notesLabel": "EXAMPLE — OXYGEN, ATOMIC NUMBER 8",
+     "notes": [],
+     "space": {
+      "lines": 2,
+      "key": [
+       "1s² 2s² 2p⁴",
+       "2 unpaired electrons"
+      ]
+     },
+     "orbitals": {
+      "label": "ORBITAL DIAGRAM",
+      "rows": [
+       {
+        "name": "1s",
+        "boxes": 1,
+        "fill": [
+         "↑↓"
+        ]
+       },
+       {
+        "name": "2s",
+        "boxes": 1,
+        "fill": [
+         "↑↓"
+        ]
+       },
+       {
+        "name": "2p",
+        "boxes": 3,
+        "fill": [
+         "↑↓",
+         "↑",
+         "↑"
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "slides": "19",
+     "cueLabel": "ARGON",
+     "cues": [
+      "Example"
+     ],
+     "notesLabel": "ARGON: THE FULL CONFIGURATION",
+     "notes": [],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Ar, 18 electrons: 1s² 2s² 2p⁶ 3s² 3p⁶",
+       "Raised numbers add to 18."
+      ]
+     }
+    },
+    {
+     "slides": "20",
+     "cueLabel": "NOBLE-GAS SHORTHAND",
+     "cues": [
+      "Steps — shorthand"
+     ],
+     "notesLabel": "SHORTHAND [NOBLE GAS CONFIGURATION]",
+     "notes": [
+      "*Replace the matching inner electrons with {{[Ar]}}."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Germanium, 32 electrons: [Ar] 4s² 3d¹⁰ 4p²",
+       "[Ar] covers 18; keep the other 14."
+      ]
+     }
+    },
+    {
+     "slides": "22–23",
+     "cueLabel": "IRON",
+     "cues": [
+      "Example"
+     ],
+     "notesLabel": "EXAMPLE — IRON, ATOMIC NUMBER 26",
+     "notes": [],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Fe: [Ar] 4s² 3d⁶",
+       "4 unpaired electrons"
+      ]
+     },
+     "orbitals": {
+      "label": "4s AND 3d",
+      "rows": [
+       {
+        "name": "4s",
+        "boxes": 1,
+        "fill": [
+         "↑↓"
+        ]
+       },
+       {
+        "name": "3d",
+        "boxes": 5,
+        "fill": [
+         "↑↓",
+         "↑",
+         "↑",
+         "↑",
+         "↑"
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "slides": "24–25",
+     "cueLabel": "BROMINE AND NICKEL",
+     "cues": [],
+     "notesLabel": "EXAMPLES — SHORTHAND",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Atom",
+       "Electrons",
+       "Shorthand configuration"
+      ],
+      "rows": [
+       [
+        "Bromine, Br",
+        "35",
+        "{{[Ar] 4s² 3d¹⁰ 4p⁵}}"
+       ],
+       [
+        "Nickel, Ni",
+        "28",
+        "{{[Ar] 4s² 3d⁸}}"
+       ]
+      ],
+      "widths": [
+       1.7,
+       1.2,
+       2.76
+      ]
+     }
+    },
+    {
+     "slides": "26",
+     "cueLabel": "CR AND CU",
+     "cues": [],
+     "notesLabel": "WATCH OUT FOR CHROMIUM AND COPPER",
+     "notes": [
+      "4s and 3d energies are {{close}}, so the actual arrangement has {{less}} total energy."
+     ],
+     "table": {
+      "headers": [
+       "Atom",
+       "Simple prediction",
+       "Actual arrangement"
+      ],
+      "rows": [
+       [
+        "Cr",
+        "[Ar] 4s² 3d⁴",
+        "{{[Ar] 4s¹ 3d⁵}}"
+       ],
+       [
+        "Cu",
+        "[Ar] 4s² 3d⁹",
+        "{{[Ar] 4s¹ 3d¹⁰}}"
+       ]
+      ],
+      "widths": [
+       0.9,
+       2.3,
+       2.46
+      ]
+     }
+    },
+    {
+     "slides": "27",
+     "cueLabel": "CONFIGURATION CHECK",
+     "cues": [],
+     "notesLabel": "CHECKS FROM THE BOARD",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Atom",
+       "Write",
+       "Configuration"
+      ],
+      "rows": [
+       [
+        "P, 15",
+        "longhand",
+        "{{1s² 2s² 2p⁶ 3s² 3p³}}"
+       ],
+       [
+        "S, 16",
+        "shorthand",
+        "{{[Ne] 3s² 3p⁴}}"
+       ],
+       [
+        "K, corrected",
+        "shorthand",
+        "{{[Ar] 4s¹}}"
+       ]
+      ],
+      "widths": [
+       1.5,
+       1.3,
+       2.86
+      ]
+     }
+    },
+    {
+     "slides": "28",
+     "cueLabel": "DIAGRAM ERRORS",
+     "cues": [],
+     "notesLabel": "SPOT THE ORBITAL-DIAGRAM ERRORS",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Diagram",
+       "Rule broken",
+       "Fix"
+      ],
+      "rows": [
+       [
+        "Nitrogen 2p³",
+        "{{Hund's}}",
+        "{{One up arrow in each box}}"
+       ],
+       [
+        "Neon 2s²",
+        "{{Pauli's}}",
+        "{{One up arrow, one down arrow}}"
+       ]
+      ],
+      "widths": [
+       1.6,
+       1.4,
+       2.66
+      ]
+     }
+    }
+   ],
+   "summary": {
+    "lines": 3,
+    "key": [
+     "Aufbau: lowest energy first. Pauli: 2 per orbital, opposite spins. Hund: one in each box before pairing.",
+     "Noble-gas shorthand replaces the inner electrons with the matching noble gas.",
+     "Cr and Cu move one electron from 4s into 3d."
+    ]
+   }
+  },
+  {
+   "code": "U02 / S02.4",
+   "title": "Electron Stability & Valence Electrons",
+   "slidesRange": "Slides 29–37",
+   "learningTarget": "I can count valence electrons and predict the ion an atom forms.",
+   "rows": [
+    {
+     "slides": "30",
+     "cueLabel": "VALENCE ELECTRONS",
+     "cues": [
+      "Definition — valence electrons"
+     ],
+     "notesLabel": "VALENCE ELECTRONS",
+     "notes": [
+      "*Valence electrons are the {{outer}} electrons."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Chlorine [Ne] 3s² 3p⁵: 10 inner, 7 outer (n = 3).",
+       "Noble gases: full outer level, usually 8; helium has 2."
+      ]
+     }
+    },
+    {
+     "slides": "31",
+     "cueLabel": "GROUPS AND VALENCE",
+     "cues": [],
+     "notesLabel": "USE THE GROUP TO COUNT OUTER ELECTRONS",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Group",
+       "1",
+       "2",
+       "13",
+       "14",
+       "15",
+       "16",
+       "17",
+       "18"
+      ],
+      "rows": [
+       [
+        "Valence e^−^",
+        "{{1}}",
+        "{{2}}",
+        "{{3}}",
+        "{{4}}",
+        "{{5}}",
+        "{{6}}",
+        "{{7}}",
+        "{{8*}}"
+       ]
+      ],
+      "widths": [
+       1.3,
+       0.54,
+       0.54,
+       0.54,
+       0.54,
+       0.54,
+       0.54,
+       0.54,
+       0.58
+      ]
+     }
+    },
+    {
+     "slides": "32",
+     "cueLabel": "IONS",
+     "cues": [
+      "Cation and anion",
+      "Electron count in an ion"
+     ],
+     "notesLabel": "COUNTING ELECTRONS IN IONS",
+     "notes": [
+      "Cation: {{loses}} electrons, charge {{positive}}. Anion: {{gains}} electrons, charge {{negative}}.",
+      "*Electrons = atomic number − {{charge}}."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Na → Na^+^ + e^−^: 10 electrons, [Ne] arrangement.",
+       "Cl + e^−^ → Cl^−^: 18 electrons, [Ar] arrangement."
+      ]
+     }
+    },
+    {
+     "slides": "33",
+     "cueLabel": "COMMON CHARGES",
+     "cues": [],
+     "notesLabel": "COMMON ION CHARGES",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Group",
+       "1",
+       "2",
+       "13",
+       "15",
+       "16",
+       "17"
+      ],
+      "rows": [
+       [
+        "Common charge",
+        "{{1+}}",
+        "{{2+}}",
+        "{{3+}}",
+        "{{3−}}",
+        "{{2−}}",
+        "{{1−}}"
+       ]
+      ],
+      "widths": [
+       1.4,
+       0.7,
+       0.7,
+       0.7,
+       0.7,
+       0.7,
+       0.76
+      ]
+     }
+    },
+    {
+     "slides": "34–35",
+     "cueLabel": "PREDICT THE ION",
+     "cues": [],
+     "notesLabel": "PREDICT THE ION",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Atom",
+       "Group",
+       "Valence e^−^",
+       "Change",
+       "Ion",
+       "Noble gas"
+      ],
+      "rows": [
+       [
+        "Mg",
+        "2",
+        "{{2}}",
+        "{{Lose 2}}",
+        "{{Mg^2+^}}",
+        "{{Ne}}"
+       ],
+       [
+        "Al",
+        "13",
+        "{{3}}",
+        "{{Lose 3}}",
+        "{{Al^3+^}}",
+        "{{Ne}}"
+       ],
+       [
+        "S",
+        "16",
+        "{{6}}",
+        "{{Gain 2}}",
+        "{{S^2−^}}",
+        "{{Ar}}"
+       ],
+       [
+        "Br",
+        "17",
+        "{{7}}",
+        "{{Gain 1}}",
+        "{{Br^−^}}",
+        "{{Kr}}"
+       ]
+      ],
+      "widths": [
+       0.7,
+       0.8,
+       1.06,
+       1.2,
+       1.0,
+       0.9
+      ]
+     }
+    },
+    {
+     "slides": "36",
+     "cueLabel": "TRANSITION-METAL IONS",
+     "cues": [],
+     "notesLabel": "TRANSITION-METAL IONS",
+     "notes": [
+      "The {{4s}} electrons leave before the {{3d}} electrons."
+     ],
+     "table": {
+      "headers": [
+       "Neutral atom",
+       "Ion",
+       "Ion configuration"
+      ],
+      "rows": [
+       [
+        "Fe: [Ar] 4s² 3d⁶",
+        "Fe^2+^ / Fe^3+^",
+        "{{[Ar] 3d⁶}} / {{[Ar] 3d⁵}}"
+       ],
+       [
+        "Cu: [Ar] 4s¹ 3d¹⁰",
+        "Cu^+^ / Cu^2+^",
+        "{{[Ar] 3d¹⁰}} / {{[Ar] 3d⁹}}"
+       ],
+       [
+        "Zn: [Ar] 4s² 3d¹⁰",
+        "Zn^2+^",
+        "{{[Ar] 3d¹⁰}}"
+       ]
+      ],
+      "widths": [
+       2.0,
+       1.5,
+       2.16
+      ]
+     }
+    },
+    {
+     "slides": "37",
+     "cueLabel": "ISOELECTRONIC",
+     "cues": [
+      "Definition — isoelectronic"
+     ],
+     "notesLabel": "DIFFERENT ATOMS, SAME ELECTRON COUNT",
+     "notes": [
+      "*Isoelectronic means the same {{electron count}} and arrangement."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "O^2−^, F^−^, Ne, Na^+^, Mg^2+^: 10 electrons, 1s² 2s² 2p⁶.",
+       "Different protons, so different elements."
+      ]
+     }
+    }
+   ],
+   "summary": {
+    "lines": 3,
+    "key": [
+     "Valence electrons are the outer electrons; groups 13–18 have group number − 10.",
+     "Atoms gain or lose electrons to match a noble gas.",
+     "Transition metals lose 4s electrons before 3d."
+    ]
+   }
+  },
+  {
+   "code": "U02 / S02.5",
+   "title": "Atomic & Electron Spectra",
+   "slidesRange": "Slides 38–48",
+   "learningTarget": "I can connect electron drops to the colors of light atoms give off.",
+   "rows": [
+    {
+     "slides": "39",
+     "cueLabel": "ABSORPTION AND EMISSION",
+     "cues": [
+      "Definition — photon"
+     ],
+     "notesLabel": "ABSORPTION AND EMISSION",
+     "notes": [
+      "*A photon is a packet of {{light energy}}; its energy equals the {{gap}} between levels."
+     ],
+     "table": {
+      "headers": [
+       "Process",
+       "What the electron does"
+      ],
+      "rows": [
+       [
+        "Absorption",
+        "{{Takes in a photon and moves up}}"
+       ],
+       [
+        "Emission",
+        "{{Drops to a lower level and gives off a photon}}"
+       ]
+      ],
+      "widths": [
+       1.6,
+       4.06
+      ]
+     }
+    },
+    {
+     "slides": "40",
+     "cueLabel": "LARGEST ENERGY DROP",
+     "cues": [
+      "Example"
+     ],
+     "notesLabel": "WHICH DROP RELEASES THE MOST ENERGY",
+     "notes": [],
+     "space": {
+      "lines": 2,
+      "key": [
+       "A: 4 → 2   B: 3 → 2   C: 2 → 1",
+       "C, 2 → 1, is the largest gap."
+      ]
+     }
+    },
+    {
+     "slides": "41",
+     "cueLabel": "WAVELENGTH AND ENERGY",
+     "cues": [],
+     "notesLabel": "WAVELENGTH AND PHOTON ENERGY",
+     "notes": [
+      "Shorter wavelength means {{more}} energy. Visible light is about {{400–700}} nm."
+     ],
+     "table": {
+      "headers": [
+       "Color",
+       "Wavelength",
+       "Energy"
+      ],
+      "rows": [
+       [
+        "Violet",
+        "{{Shorter}}",
+        "{{Higher}}"
+       ],
+       [
+        "Red",
+        "{{Longer}}",
+        "{{Lower}}"
+       ]
+      ],
+      "widths": [
+       1.6,
+       2.03,
+       2.03
+      ]
+     }
+    },
+    {
+     "slides": "42",
+     "cueLabel": "THREE SPECTRA",
+     "cues": [],
+     "notesLabel": "THREE KINDS OF SPECTRA",
+     "notes": [],
+     "table": {
+      "headers": [
+       "Spectrum",
+       "How it looks"
+      ],
+      "rows": [
+       [
+        "Continuous",
+        "{{All colors, no gaps}}"
+       ],
+       [
+        "Emission",
+        "{{Bright lines on dark}}"
+       ],
+       [
+        "Absorption",
+        "{{Dark lines in a continuous spectrum}}"
+       ]
+      ],
+      "widths": [
+       1.6,
+       4.06
+      ]
+     }
+    },
+    {
+     "slides": "43",
+     "cueLabel": "IDENTIFYING AN ELEMENT",
+     "cues": [
+      "Steps — light from an atom"
+     ],
+     "notesLabel": "LIGHT CAN IDENTIFY AN ELEMENT",
+     "notes": [
+      "*Only certain energy {{gaps}} exist, so only certain {{colors}} appear."
+     ],
+     "space": {
+      "lines": 2,
+      "key": [
+       "Add energy: an electron moves up. Give off light: it drops and releases a photon.",
+       "Look at the lines: the pattern shows which element made the light."
+      ]
+     }
+    },
+    {
+     "slides": "44",
+     "cueLabel": "HYDROGEN LINES",
+     "cues": [],
+     "notesLabel": "HYDROGEN'S VISIBLE LINES",
+     "notes": [
+      "All four drops end at n = {{2}}."
+     ],
+     "table": {
+      "headers": [
+       "Electron drop",
+       "Wavelength",
+       "Color"
+      ],
+      "rows": [
+       [
+        "n = 3 → 2",
+        "{{656 nm}}",
+        "{{Red}}"
+       ],
+       [
+        "n = 4 → 2",
+        "{{486 nm}}",
+        "{{Blue-green}}"
+       ],
+       [
+        "n = 5 → 2",
+        "{{434 nm}}",
+        "{{Blue-violet}}"
+       ],
+       [
+        "n = 6 → 2",
+        "{{410 nm}}",
+        "{{Violet}}"
+       ]
+      ],
+      "widths": [
+       1.9,
+       1.8,
+       1.96
+      ]
+     }
+    },
+    {
+     "slides": "45–46",
+     "cueLabel": "FLAME TESTS",
+     "cues": [],
+     "notesLabel": "FLAME-TEST COLORS",
+     "notes": [
+      "A flame color is a {{clue}}, not proof."
+     ],
+     "table": {
+      "headers": [
+       "Sample ion",
+       "Typical flame color"
+      ],
+      "rows": [
+       [
+        "Li^+^",
+        "{{Crimson red}}"
+       ],
+       [
+        "Na^+^",
+        "{{Yellow}}"
+       ],
+       [
+        "K^+^",
+        "{{Lilac}}"
+       ],
+       [
+        "Cu^2+^",
+        "{{Blue-green}}"
+       ],
+       [
+        "Ca^2+^",
+        "{{Orange-red}}"
+       ],
+       [
+        "Sr^2+^",
+        "{{Red}}"
+       ],
+       [
+        "Ba^2+^",
+        "{{Pale green}}"
+       ]
+      ],
+      "widths": [
+       2.0,
+       3.66
+      ]
+     }
+    },
+    {
+     "slides": "47–48",
+     "cueLabel": "UNIT 2 CLOSING CHECK",
+     "cues": [
+      "Answers from the board"
+     ],
+     "notesLabel": "UNIT 2 CHECK — RECORD THE ANSWERS",
+     "notes": [],
+     "space": {
+      "lines": 5,
+      "key": [
+       "Hydrogen emits only certain wavelengths because only specific energy gaps are allowed.",
+       "A d sublevel holds 10 electrons in 5 orbitals.",
+       "S: [Ne] 3s² 3p⁴, 2 unpaired electrons.",
+       "Fe → Fe^3+^: the two 4s electrons leave first, then one 3d: [Ar] 3d⁵.",
+       "410 nm has more energy than 656 nm because its wavelength is shorter."
+      ]
+     }
+    }
+   ],
+   "summary": {
+    "lines": 3,
+    "key": [
+     "An electron that absorbs energy moves up; one that drops gives off a photon.",
+     "The photon's energy equals the gap between levels; shorter wavelength means higher energy.",
+     "Each element's lines are a fingerprint because only certain gaps exist."
+    ]
+   }
+  }
+ ],
+ "review": {
+  "banner": "UNIT 2 REVIEW — WRITE FROM MEMORY, THEN CHECK YOUR NOTES",
+  "rows": [
+   [
+    "START",
+    "Quantized; ground state",
+    "Energy comes in set amounts; ground state of hydrogen is n = 1."
+   ],
+   [
+    "S02.2",
+    "Capacity",
+    "s 2, p 6, d 10, f 14; level n holds up to 2n² electrons."
+   ],
+   [
+    "S02.3",
+    "Three rules",
+    "Aufbau, Pauli, Hund."
+   ],
+   [
+    "S02.3",
+    "Exceptions",
+    "Cr: [Ar] 4s¹ 3d⁵. Cu: [Ar] 4s¹ 3d¹⁰."
+   ],
+   [
+    "S02.4",
+    "Valence electrons",
+    "Outer electrons; group 16 has 6."
+   ],
+   [
+    "S02.4",
+    "Common charges",
+    "1+, 2+, 3+ for groups 1, 2, 13; 3−, 2−, 1− for groups 15, 16, 17."
+   ],
+   [
+    "S02.4",
+    "Transition-metal ions",
+    "4s electrons leave before 3d."
+   ],
+   [
+    "S02.5",
+    "Absorption and emission",
+    "Absorb: up. Emit: drop and give off a photon."
+   ],
+   [
+    "S02.5",
+    "Hydrogen lines",
+    "656 red, 486 blue-green, 434 blue-violet, 410 violet."
+   ]
+  ],
+  "fuzzyLabel": "STILL FUZZY ON"
+ }
+}
