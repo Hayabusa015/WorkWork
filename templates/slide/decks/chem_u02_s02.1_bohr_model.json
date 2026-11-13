@@ -1,0 +1,365 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.1",
+  "sectionTitle": "The Bohr Model",
+  "note": "Built from reports/u2-content-briefs.md S2.1, then reworked 2026-10-04 on Matt's instruction: no scientific notation, no joules and no numeric energy calculations anywhere in S2.1 (he asked why it would be needed; the course sequencing rule delays heavy math). The three worked examples are qualitative: ground or excited and absorbing, ranking three drops from the diagram, and ionization. Level figures keep the 1/n^2 spacing but print no energy values. 50-minute period; 20 content slides, last two are the formative check (5 items). Brief flag F1 (scientific notation vs the sequencing rule) is closed: the calculations were removed on Matt's instruction. Nothing PROVISIONAL is on a student slide. The optional Bohr-radius slide (brief slide 17) is not built. No learning-target slide: the 20-content-slide cap is full, so targets sit in slide 1 notes. Figures carry no alt text: build_deck.js has no alt-text mechanism and this deck does not edit it.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "2.1",
+        "headline": "The Bohr Model",
+        "subhead": "Describe hydrogen's energy levels, and explain emission and absorption as an electron changing level."
+      },
+      "imageSubjects": {
+        "section": "a hydrogen gas discharge tube glowing pink-magenta on a dark bench, lit only by its own light"
+      },
+      "notes": "Targets: describe Bohr's hydrogen model; explain that energy levels are quantized (stairs, not a ramp); tell ground state from excited state; explain absorption (electron up) and emission (electron down, photon out); compare drops by size without calculating; describe ionization as the electron leaving; state the model's limits. Hook is the next slide. Calculations removed on Matt's instruction (brief flag F1, scientific notation vs the sequencing rule, no longer applies). Numbers deliberately omitted per Matt; see S2.5 for wavelengths in nm. Image prompt (empty slot): a hydrogen gas discharge tube glowing pink-magenta on a dark bench, lit only by its own light."
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Why Only a Few Colors?",
+        "subhead": "Heat hydrogen gas and it glows. A prism spreads that glow into a few thin lines of color, not a rainbow.",
+        "keyq": "Why does hydrogen give only a few colors of light?"
+      },
+      "imageSubjects": {
+        "concept": "a glowing hydrogen discharge tube photographed close, with a prism-split smear of four thin colored lines beside it"
+      },
+      "notes": "Pose the question and leave it open; it is answered across slides 5 to 12 and checked on slide 20. Do not name quantization yet. Image prompt (empty slot): a glowing hydrogen discharge tube photographed close, with a prism-split smear of four thin colored lines beside it."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write the first one down. The other two come back on later slides.",
+        "k1_l": "ENERGY LEVEL",
+        "k1_b": "One allowed energy for the electron.\nLabeled n = 1, 2, 3, and up.",
+        "k2_l": "QUANTIZED",
+        "k2_b": "Only certain values are allowed.\nNothing in between.",
+        "k3_l": "PHOTON",
+        "k3_b": "A packet of light.\nIts energy sets its color.",
+        "mustwrite": "Energy level: one allowed energy for the electron, labeled n."
+      },
+      "imageSubjects": {
+        "aside": "a glass prism on a lab bench splitting a narrow white beam"
+      },
+      "notes": "Vocabulary first so later slides can use it. Students write only the energy-level line. Image prompt (empty slot): a glass prism on a lab bench splitting a narrow white beam."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Why Bohr Needed a New Model",
+        "subhead": "Rutherford put the electrons outside a dense nucleus. That left a problem.",
+        "c1_l": "WHAT WAS KNOWN",
+        "c1_b": "Thomson: electrons inside positive material.\n\nRutherford, 1911: a dense nucleus, electrons outside it.",
+        "c2_l": "THE PROBLEM",
+        "c2_b": "A charge moving in a circle should give off energy and spiral into the nucleus.\n\nAtoms do not collapse.",
+        "mustwrite": "Bohr proposed a new model of the hydrogen atom in 1913."
+      },
+      "imageSubjects": {
+        "concept": "a chalkboard with a hand-drawn nucleus and one looping electron path, chalk dust on the ledge"
+      },
+      "notes": "Thomson, then Rutherford 1911, then the problem: a classical orbiting charge should radiate and spiral in. Bohr, 1913. Image prompt (empty slot): a chalkboard with a hand-drawn nucleus and one looping electron path, chalk dust on the ledge."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Bohr's Three Ideas",
+        "subhead": "He kept the nucleus and put rules on the electron.",
+        "k1_l": "FIXED ORBITS",
+        "k1_b": "The electron moves in a circular orbit.\nEach orbit has one fixed energy.",
+        "k2_l": "NO RADIATION",
+        "k2_b": "In an allowed orbit, the electron does not give off energy.",
+        "k3_l": "PHOTON JUMPS",
+        "k3_b": "It changes orbit only by absorbing or emitting a photon.",
+        "mustwrite": "The photon's energy equals the energy difference between the two orbits."
+      },
+      "imageSubjects": {
+        "aside": "a hand-drawn set of concentric circles in a pocket notebook, pencil beside it"
+      },
+      "notes": "Three rules: fixed orbits, no radiation in an orbit, photon jumps. The photon energy equals the difference between the two levels. Image prompt (empty slot): a hand-drawn set of concentric circles in a pocket notebook, pencil beside it."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Bohr's Hydrogen Atom",
+        "subhead": "One proton, one electron, orbits at fixed distances.",
+        "a1_l": "THE NUCLEUS",
+        "a1_b": "One proton, drawn as the dot in the center.",
+        "a2_l": "THE ORBITS",
+        "a2_b": "n = 1, 2, 3 and up. Farther out is higher energy.",
+        "a3_l": "THE ELECTRON",
+        "a3_b": "One electron, in one orbit at a time. Here: n = 1."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_bohr_hydrogen.png"
+      },
+      "notes": "Diagram: one proton, one electron, here at n = 1. Orbits drawn at 1 : 4 : 9 spacing. This is the model's picture, not reality; slide 19 returns to that."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Quantized Means Steps, Not a Ramp",
+        "subhead": "You can stand on a stair. You cannot stand between two stairs.",
+        "c1_l": "STAIRS",
+        "c1_b": "Only certain heights.\n\nAn electron's energy works like this.",
+        "c2_l": "A RAMP",
+        "c2_b": "Any height at all.\n\nElectrons do not behave this way.",
+        "mustwrite": "Quantized: only certain energy values are allowed. Nothing in between."
+      },
+      "imageSubjects": {
+        "concept": "a wooden staircase beside a smooth ramp of the same height, side-lit"
+      },
+      "notes": "Stairs versus ramp. Stress that no energy exists between levels. Image prompt (empty slot): a wooden staircase beside a smooth ramp of the same height, side-lit."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Levels Get Whole-Number Labels",
+        "subhead": "Each level gets a number, n. A higher n means more energy.",
+        "a1_l": "LEVEL NUMBER, n",
+        "a1_b": "Whole numbers only: 1, 2, 3 ... Never 1.5.",
+        "a2_l": "HIGHER n",
+        "a2_b": "n = 1 is the lowest level. Each step up means more energy.",
+        "a3_l": "HYDROGEN ONLY",
+        "a3_b": "This picture works for hydrogen. It fails for atoms with 2 or more electrons."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_level_numbers.png"
+      },
+      "notes": "Level numbers: n is a whole number; there is no level between n = 1 and n = 2. Higher n is higher energy, drawn higher on the page. Spacing is to scale in shape: the gaps shrink as n rises. No equation and no energy values on purpose (Matt's instruction). Hydrogen only."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Hydrogen's Energy Levels",
+        "subhead": "Drawn to scale in spacing. Watch what happens to the gaps.",
+        "a1_l": "LOWEST ENERGY",
+        "a1_b": "n = 1 is the lowest level, at the bottom.",
+        "a2_l": "THE GAPS SHRINK",
+        "a2_b": "The levels crowd together as n gets larger.",
+        "a3_l": "THE TOP",
+        "a3_b": "n = ∞ is the top. The electron has left the atom."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_energy_levels.png"
+      },
+      "notes": "Gaps between levels shrink as n rises: the biggest gap is n = 1 to n = 2. No energy values printed on purpose (Matt's instruction). Misconception: that the levels are evenly spaced. Higher on the page means more energy. n = ∞ marks the electron leaving the atom."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Ground State and Excited States",
+        "subhead": "Hydrogen's electron has one lowest level and many higher ones.",
+        "c1_l": "GROUND STATE",
+        "c1_b": "n = 1.\nThe lowest energy level.\n\nWhere the electron normally sits.",
+        "c2_l": "EXCITED STATE",
+        "c2_b": "Any level above n = 1.\n\nShort-lived. The electron falls back down.",
+        "mustwrite": "Ground state: n = 1. Excited state: any higher n."
+      },
+      "imageSubjects": {
+        "concept": "two hydrogen discharge tubes side by side, one dark and one glowing"
+      },
+      "notes": "Ground state is n = 1. Excited states are any higher n and are short-lived. Image prompt (empty slot): two hydrogen discharge tubes side by side, one dark and one glowing."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Absorption: The Electron Goes Up",
+        "subhead": "The atom takes in energy from a photon.",
+        "a1_l": "AN EXACT MATCH",
+        "a1_b": "Photon energy must match the gap between the two levels exactly.",
+        "a2_l": "THE WRONG ENERGY",
+        "a2_b": "The photon passes through. Nothing happens.",
+        "a3_l": "THE RESULT",
+        "a3_b": "The electron moves up. The atom gains energy."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_absorption.png"
+      },
+      "notes": "Absorption: the electron rises only if the photon energy matches the gap between the two levels exactly. Wrong-energy photons pass through. Misconception: that any photon will do."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Emission: The Electron Drops",
+        "subhead": "The atom gives energy out as a photon.",
+        "a1_l": "THE DROP",
+        "a1_b": "The electron falls from a higher level to a lower one.",
+        "a2_l": "THE PHOTON",
+        "a2_b": "Its energy equals the gap the electron just crossed.",
+        "a3_l": "A BIGGER DROP",
+        "a3_b": "A bigger drop gives a higher-energy photon."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.1_emission.png"
+      },
+      "notes": "Emission: the electron drops and a photon leaves carrying the energy the atom loses. A bigger drop is a higher-energy photon. Misconception: emission means the electron goes up. It drops. Colors and wavelengths are S2.5, not here."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Ground or Excited?",
+        "subhead": "We do this one together. Write the reasoning, not just the answer.",
+        "problem": "A hydrogen electron is in n = 3. Is it in the ground state? What must happen to move it to n = 5?",
+        "g1_l": "GIVEN",
+        "g1_b": "Hydrogen\nElectron in n = 3\nTarget level: n = 5",
+        "g2_l": "NEED",
+        "g2_b": "Ground state or excited?\nWhat moves it up?",
+        "work": "",
+        "mustwrite": "To move up, the electron absorbs a photon of exactly the right energy."
+      },
+      "imageSubjects": {
+        "aside": "a pencil resting beside a lab notebook open to a hand-drawn ladder of energy levels"
+      },
+      "notes": "Worked together, after slides 10 and 11 (ground state, absorption). Answer: not the ground state, because the ground state is n = 1 and n = 3 is higher, so the electron is excited. To reach n = 5 it must absorb energy, a photon that matches the gap from n = 3 to n = 5 exactly. A photon that is too small or too large passes through. Students write the reasoning in the work area. Image prompt (empty slot): a pencil resting beside a lab notebook open to a hand-drawn ladder of energy levels."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Ground or Excited, Worked",
+        "subhead": "Find the level, then say which way the energy goes.",
+        "f1_l": "IDEAS",
+        "f1_b": "Ground state: n = 1 only.\nAny higher n: excited.\nUp needs energy in.",
+        "work": "n = 3 is above n = 1\nSo: excited state\nTo reach n = 5:\nabsorb a matching photon",
+        "mustwrite": "n = 3 is above n = 1, so the electron is excited, not in the ground state."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_ground_excited.png"
+      },
+      "notes": "Check against the earlier slides: ground state is n = 1; absorption moves the electron up and needs an exact energy match. The figure is not to scale (at true scale n = 3, 4 and 5 are too close to draw an arrow). No numbers needed."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Ranking Three Drops",
+        "subhead": "Look back at the level diagram on slide 9. A longer drop is a bigger drop.",
+        "problem": "Rank drops A, B and C from least to most energy released. Which gives the highest-energy light?",
+        "g1_l": "GIVEN",
+        "g1_b": "A: n = 4 to n = 2\nB: n = 3 to n = 2\nC: n = 2 to n = 1",
+        "g2_l": "NEED",
+        "g2_b": "Order, least to most\nThe highest-energy light",
+        "work": "",
+        "mustwrite": "A bigger vertical drop on the diagram means more energy released."
+      },
+      "imageSubjects": {
+        "aside": "a camera-flash bulb mid-discharge in a dark room"
+      },
+      "notes": "Worked together. Leave the energy-levels slide (slide 9) up or flip back to it: the ranking uses the vertical gaps on that diagram, no formula. Answer: B (3 to 2) least, then A (4 to 2), then C (2 to 1) most. The highest-energy light comes from C. Save the colour idea for the solution slide: more energy means a shorter wavelength, which is bluer, and C is really ultraviolet, beyond violet; B is red and A is blue-green. S2.5 gives the wavelengths in nm. Image prompt (empty slot): a camera-flash bulb mid-discharge in a dark room."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Ranking Three Drops, Worked",
+        "subhead": "Longer arrow, more energy, bluer light.",
+        "f1_l": "RULES",
+        "f1_b": "Bigger drop,\nmore energy released.\nMore energy, bluer light.",
+        "work": "Least: B (3 to 2)\nThen: A (4 to 2)\nMost: C (2 to 1)\nHighest: C (ultraviolet)",
+        "mustwrite": "More energy released means a shorter wavelength, which is bluer light."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_drops_ranked.png"
+      },
+      "notes": "Read the arrows: C is longest, then A, then B. The figure is to scale in spacing, so arrow length is the ranking. Bluer means shorter wavelength and higher energy, stated qualitatively; no wavelengths here (S2.5). Highest-energy light is C, and C is ultraviolet in fact: say so if a student asks."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Removing the Electron",
+        "subhead": "Ionization means the electron leaves the atom.",
+        "problem": "Hydrogen's electron absorbs enough energy to escape. Which level does it reach? What is the atom afterward?",
+        "g1_l": "GIVEN",
+        "g1_b": "Hydrogen, ground state\nElectron starts in n = 1",
+        "g2_l": "NEED",
+        "g2_b": "The level it reaches\nWhat the atom becomes",
+        "work": "",
+        "mustwrite": "Ionization: the electron leaves the atom, which becomes a positive ion."
+      },
+      "imageSubjects": {
+        "aside": "a spark gap between two electrodes in a dark lab"
+      },
+      "notes": "Worked together. Answer: the electron climbs to the top of the diagram, n = ∞, which means it is no longer in the atom. Hydrogen is left with its proton and no electron: a positive ion (an atom with more protons than electrons). Qualitative only; no energy value. Extension: in an atom with more electrons the outermost electron is the one that leaves first (S2.4 and U3 develop this). Image prompt (empty slot): a spark gap between two electrodes in a dark lab."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Ionization, Worked",
+        "subhead": "The electron climbs to the top of the diagram and leaves.",
+        "f1_l": "IDEAS",
+        "f1_b": "Energy in lifts the electron.\nNo level is above n = ∞.\nIn bigger atoms, the\noutermost electron leaves first.",
+        "work": "Start: n = 1\nEnergy in: it goes up\nEnd: n = ∞, it leaves\nAtom: a positive ion",
+        "mustwrite": "Ionization takes energy in. Hydrogen ends as a positive ion with no electron."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.1_ionization.png"
+      },
+      "notes": "Positive ion: the atom lost an electron, so it has more protons than electrons. Hydrogen with its one electron gone is just a proton. Energy goes in, so this is absorption, like slide 11, but the electron does not stop at a level. Outermost-electron-first is an extension for atoms with more electrons; do not push it for hydrogen."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Where the Bohr Model Stops Working",
+        "subhead": "It was a real step forward. It is no longer the accepted model.",
+        "k1_l": "HYDROGEN ONLY",
+        "k1_b": "Correct energies for hydrogen. Wrong for He, Li, and every atom with 2 or more electrons.",
+        "k2_l": "THE PICTURE",
+        "k2_b": "Electrons are not particles on circular tracks. The electron-cloud model replaces the orbits.",
+        "k3_l": "WHAT SURVIVES",
+        "k3_b": "Quantized energy levels.\nA level change means a photon in or out.",
+        "mustwrite": "Keep this: energy is quantized, and a change of level means a photon in or out."
+      },
+      "imageSubjects": {
+        "aside": "a worn textbook diagram of concentric orbits with a pencil strike through it"
+      },
+      "notes": "Limits: correct for hydrogen only, not for atoms with 2 or more electrons. Electrons are not particles on tracks; the electron-cloud model (S2.2) replaces the orbits. Keep: quantized levels, photon in or out. Image prompt (empty slot): a worn textbook diagram of concentric orbits with a pencil strike through it."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Quick Check: Items 1 to 3",
+        "subhead": "Work these on your own paper, then we compare.",
+        "k1_l": "CHECK 1",
+        "k1_b": "Explain why hydrogen emits light at only certain colors. Use the word quantized.",
+        "k2_l": "CHECK 2",
+        "k2_b": "A hydrogen electron drops from n = 2 to n = 1. Is a photon absorbed or emitted? Does the atom gain or lose energy?",
+        "k3_l": "CHECK 3",
+        "k3_b": "A photon has too little energy to lift an electron from n = 1 to n = 2. What happens to the photon?",
+        "mustwrite": "Answer in full sentences. Name the levels and say up or down."
+      },
+      "imageSubjects": {
+        "aside": "a student's notebook page with an answer crossed out and rewritten"
+      },
+      "notes": "Check answers. 1: Electron energy is quantized, so only certain gaps between levels exist and only certain photon energies, hence certain colors. 2: Emitted. The electron drops, a photon leaves, and the atom loses energy. 3: Nothing: the photon passes through. No level lies between n = 1 and n = 2, so the electron can only absorb a photon that matches the gap exactly. Image prompt (empty slot): a student's notebook page with an answer crossed out and rewritten."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Quick Check: Items 4 and 5",
+        "subhead": "Same as before. Your own paper first.",
+        "c1_l": "CHECK 4",
+        "c1_b": "Which drop releases more energy, n = 3 to n = 2 or n = 2 to n = 1? How do you know?",
+        "c2_l": "CHECK 5",
+        "c2_b": "Give one reason the Bohr model is no longer the accepted model of the atom.",
+        "mustwrite": "Down releases energy as a photon. Up absorbs energy."
+      },
+      "imageSubjects": {
+        "concept": "a stack of graded quiz papers with a red pen on top"
+      },
+      "notes": "Check answers. 4: n = 2 to n = 1 releases more, because the gap between n = 1 and n = 2 is much bigger than the gap between n = 2 and n = 3 (the levels crowd together as n rises). 5: any one of: works only for hydrogen; cannot handle atoms with 2 or more electrons; electrons are not particles in circular orbits. Image prompt (empty slot): a stack of graded quiz papers with a red pen on top."
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "LOOKING AHEAD",
+        "headline": "Where This Goes\nNext",
+        "subhead": "Bohr's model works for hydrogen, not for atoms with 2 or more electrons. Next: what replaced it, and what an orbital is."
+      },
+      "imageSubjects": {
+        "divider": "a long laboratory bench receding into shadow, one lamp lit at the far end"
+      },
+      "notes": "Bridge to S2.2 and the electron-cloud model. Do not say Bohr explains multi-electron spectra, intensities, or bonding. Image prompt (empty slot): a long laboratory bench receding into shadow, one lamp lit at the far end."
+    }
+  ]
+}

@@ -51,7 +51,7 @@ import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
-    FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
+    T, FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
     diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
     schema_order, estimate_height, text_width_in,
@@ -90,6 +90,10 @@ MAX_STRETCH_PT = 90
 # SHULL-CHG-0016: a problem to solve gets a bordered box to solve it in. hRule
 # "atLeast", so it grows with the work and never shrinks below this.
 WORK_BOX_MIN_IN = 1.4
+# What a teacher key adds to the student page is set in keyInk.pen (standards/ANSWER_KEYS.md,
+# SHULL-CHG-0043: written answers on a key), so a key printed in colour shows at a glance which
+# writing is the answer. Teacher keys only; the student copy never uses it.
+KEY_INK = T["keyInk"]["pen"]["hex"]
 WORK_LABEL = "WORK / show your reasoning and units"
 
 # Rules, in eighths of a point (what w:sz counts). The page is open: no outer box and
@@ -122,7 +126,7 @@ TRACK = 26                  # 0014's caps_track
 
 PROBLEM_WORDS = ("EXAMPLE", "PRACTICE", "PROBLEM", "SOLVE", "CALCULATE", "YOUR TURN")
 TAGGED = ("recall", "recap", "review")   # blocks that open with a tag
-CAPTURE = ("notes", "problem", "table", "flowchart", "diagram")
+CAPTURE = ("notes", "lead", "problem", "table", "flowchart", "diagram", "figure")
 
 
 class GreyPalette(Palette):
@@ -529,13 +533,38 @@ def render_cue(col, row, pal):
     if kind in TAGGED:
         chip(col, kind.upper(), pal)
         col.gap(6)
+    slides = row.get("_slideLabel")
     col.text(label_of(row, "cueLabel"), LABEL, line=10.5, bold=True,
-             color=pal.type_accent, after=6)
+             color=pal.type_accent, after=3 if slides else 6)
+    if slides:          # SHULL-CHG-0054: the slide(s) this block is written from
+        col.text(slides, CUE, line=10.5, bold=True, color=pal.ink, after=6)
     for q in row.get("cues", []):
         col.text(q, CUE, line=10.5, color=pal.label, after=5)
 
 
-def render_prompt(col, text, answer, lines, key, pal):
+INLINE_LINE, INLINE_AFTER = 22, 4     # an inline prompt row: tall enough to write in by hand
+
+
+def render_prompt(col, text, answer, lines, key, pal, inline=False):
+    if inline:
+        # One ruled row: the label, then the writing space on the same line. The key prints
+        # the answer, bold, on that row. Half the height of a label over a writing line;
+        # a spec opts in per prompt ("inline": true) for a condensed packet.
+        p = col.para()
+        write(p, text + ":   ", BODY, line=INLINE_LINE, color=pal.label)
+        if answer:
+            for seg, b in segments(answer):
+                _run(p, seg, BODY, bold=True, color=pal.ink)
+        _bottom_rule(p, pal.hair, W_LINE, 1)
+        col.gap(INLINE_AFTER)
+        return
+    # An inline fill-in (no ruled line) shows its answer IN the line on the key, so the
+    # key page is the student page with the blanks written in - same height, same breaks.
+    if lines == 0:
+        # Inline blanks are written ON the line: give the handwriting a little air.
+        col.text(answer if answer else text, BODY, line=BODY_LINE, bold=bool(answer),
+                 before=3, after=3)
+        return
     col.text(text, BODY, line=BODY_LINE)
     if answer:
         col.text(answer, BODY, line=BODY_LINE, bold=True, before=4, after=8)
@@ -582,11 +611,33 @@ def render_problem(col, prob, key, pal):
     mar(inner, 3, 3, 6, 6)
     if key:
         for s in prob.get("solution", []):
-            write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=pal.ink,
+            write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=KEY_INK,
                   before=2)
     col.after_table()
     if prob.get("answer"):
         col.text(prob["answer"], BODY, line=BODY_LINE, bold=key, before=8)
+
+
+FIG_INSET_IN = 0.35
+
+
+def render_figure(col, fig, key, base_dir):
+    """A fill-in figure across the whole capture column: a rock cycle, a reaction
+    series, an ID key - anything too wide for `diagram`, which gives its figure 61% of
+    the column and the rest to numbered label lines. The student copy and the key are
+    two drawings of the same geometry, made by one script (`image` and `keyImage`);
+    the words a student writes are in the key's drawing only. Both paths are relative
+    to the spec, like `diagram`'s."""
+    path = os.path.join(base_dir, fig["keyImage"] if key and fig.get("keyImage")
+                        else fig["image"])
+    if not os.path.exists(path):
+        raise SystemExit(f"build_notes_docx: figure image not found: {path}")
+    # Measured off the LibreOffice render: wider than about col.w - 0.3 in and the
+    # cell clips the drawing's right edge rather than wrapping or shrinking it.
+    w = min(float(fig.get("widthIn", col.w - FIG_INSET_IN)), col.w - FIG_INSET_IN)
+    p = col.para()
+    _spacing(p, 2, 4)
+    p.add_run().add_picture(path, width=Inches(w))
 
 
 def render_notes(col, row, key, pal, base_dir):
@@ -598,10 +649,18 @@ def render_notes(col, row, key, pal, base_dir):
     if row.get("notesLabel") or heading != label_of(row, "cueLabel"):
         col.text(heading, LABEL, line=10.5, bold=True, after=6,
                  color=pal.type_accent, track=TRACK)
+    # "lead": the lines a slide shows ABOVE its table or figure, so the page reads in
+    # the same order as the slide. "notes" follow the visual, as before.
+    if row.get("lead"):
+        render_lines(col, row["lead"], key, pal)
+        if any(row.get(k) for k in ("diagram", "figure", "table", "flowchart")):
+            col.gap(5)
     if row.get("diagram"):
         diagram_block(col.cell, row["diagram"], pal, col.w, base_dir)
         col.after_table()
         col.gap(4)
+    if row.get("figure"):
+        render_figure(col, row["figure"], key, base_dir)
     if row.get("table"):
         spec = dict(row["table"])
         fillin_table(col.cell, spec, pal, col.w, header_fill=pal.surface,
@@ -641,11 +700,21 @@ def render_notes(col, row, key, pal, base_dir):
             col.text(row["fuzzyLabel"], BODY, line=BODY_LINE, bold=True, before=8)
             col.line(height=22)
 
-    for n in row.get("notes", []):
+    render_lines(col, row.get("notes", []), key, pal)
+
+def render_lines(col, lines, key, pal):
+    """The notes side's lines: prompts with writing lines, statements, must-write
+    lines, labels, checks."""
+    for n in lines:
         if isinstance(n, dict):
-            if "prompt" in n:
+            if "prompt" in n and n.get("fill"):
+                # SHULL-CHG-0054: the slide's own sentence with its key words blanked.
+                # The key prints the finished sentence in the same place.
+                col.text(n["answer"] if key and n.get("answer") else n["prompt"], BODY,
+                         line=BODY_LINE, bold=bool(key and n.get("answer")), after=7)
+            elif "prompt" in n:
                 render_prompt(col, n["prompt"], n.get("answer") if key else None,
-                              int(n.get("lines", 1)), key, pal)
+                              int(n.get("lines", 1)), key, pal, inline=bool(n.get("inline")))
             elif "text" in n:
                 col.text(n["text"], BODY, line=BODY_LINE + 1, after=n.get("after", 3))
             elif "check" in n:
@@ -662,6 +731,7 @@ def render_notes(col, row, key, pal, base_dir):
             body = n.strip()
             render_prompt(col, body, None, 2 if body.rstrip().endswith("?") else 1,
                           key, pal)
+
 
 
 def check(col, text, pal):
@@ -824,13 +894,17 @@ def footer(section, ctx):
 # ---------------------------------------------------------------------------------
 # Pages.
 
-def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
+def fit_page(ctx, label, head_tbl, blocks_tbl, parts, carry=0.0, stretch_ok=True):
     """Share a page's spare height out across its blocks, evenly: every block is
     raised to a common floor, so the page fills to its foot and no block is left
-    short while another is stretched. Returns the predicted overflow (0 if it fits)."""
+    short while another is stretched. Returns the predicted overflow (0 if it fits).
+
+    `carry` is the height already used on this sheet by an earlier section that the
+    page joins ("joinPrevious"); a sheet shared by two sections is not stretched,
+    because the first part was laid out before the second was known."""
     pin_all(blocks_tbl._tbl)
     avail = BODY_H_PT - SAFETY_PT - 2  # the 1 pt page-break paragraph and the one after a head
-    used = estimate_height(blocks_tbl._tbl, TEXT_W_IN)
+    used = carry + estimate_height(blocks_tbl._tbl, TEXT_W_IN)
     if head_tbl is not None:
         pin_all(head_tbl._tbl)
         used += estimate_height(head_tbl._tbl, TEXT_W_IN)
@@ -840,8 +914,15 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
         naturals.append(estimate_height(tbl, TEXT_W_IN) + extra)
     slack = avail - used
     ctx["report"].append((label, round(used / 72, 2), round(avail / 72, 2)))
+    ctx["_used"] = used
     if slack < 0:
         return -slack
+    if not stretch_ok:
+        return 0.0
+    # A spec may hold back headroom ("stretchHeadroomIn"): Word lays a page out a
+    # little taller than this prediction, and a page stretched to the last point
+    # spills its final block onto a sheet of its own there.
+    slack = max(0.0, slack - ctx.get("headroom_pt", 0.0))
     # Water-fill: find the level L with sum(max(n, L)) - sum(n) == slack.
     stretch = [n for (_, _, st), n in zip(parts, naturals) if st]
     if not stretch:
@@ -861,18 +942,29 @@ def fit_page(ctx, label, head_tbl, blocks_tbl, parts):
     return 0.0
 
 
-def content_page(doc, ctx, sec, page):
+def content_page(doc, ctx, sec, page, join_next=False):
     """One sheet of a section. Its first sheet opens with the section title bar and
     learning target (SHULL-CHG-0038); a continuation sheet starts straight on its
-    blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn."""
-    break_before(doc)
+    blocks. A page's own `subtitle`, which 0025's per-page head printed, is not drawn.
+
+    A section's first page may set "joinPrevious": it then starts under the previous
+    section's last blocks on the same sheet, opened by its own title bar, instead of
+    on a new sheet. Used to keep a short section ending from wasting a sheet."""
+    join = bool(page.get("joinPrevious")) and page["_n"] == 1
+    carry = ctx.get("_used", 0.0) + 14 if join else 0.0
+    if join:
+        sp = doc.add_paragraph()
+        pin(sp, 14)
+    else:
+        break_before(doc)
     head = None
     if page["_n"] == 1:
         head = section_bar(doc, ctx, sec["title"], bar_code(sec["code"]),
                            sec.get("learningTarget"))
     t = table(doc, [CUE_W_IN, NOTES_W_IN], rows=0)
     parts = render_blocks(t, page["rows"], ctx)
-    over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}", head, t, parts)
+    over = fit_page(ctx, f"{sec_label(sec['code'])} p{page['_n']}" + (" (joined)" if join else ""),
+                    head, t, parts, carry=carry, stretch_ok=not (join or join_next))
     if over:
         ctx["overfull"].append(f"{sec_label(sec['code'])} page {page['_n']}: "
                                f"predicted {over / 72:.2f} in too tall")
@@ -1227,6 +1319,9 @@ def _legacy_row(r):
         # label is dropped: the block title already names the example.
         prob = {k: p[k] for k in ("statement", "given", "workHeightIn", "answer",
                                   "solution") if p.get(k)}
+        # An explicit workLabel survives, including "" for a box with no caption.
+        if "workLabel" in p:
+            prob["workLabel"] = p["workLabel"]
         if p.get("need"):
             prob["find"] = p["need"]
         row["problem"] = prob
@@ -1319,6 +1414,7 @@ def normalize_legacy(spec, ctx):
                      # key answer to size the writing room to, and the third line is
                      # what pushed a RECALL block onto a sheet of its own.
                      "lines": 2,
+                     **({"answer": sec["summaryAnswer"]} if sec.get("summaryAnswer") else {}),
                      "selfCheck": sec.get("selfCheck", [])})
         close = spec.get("close")
         if si == len(secs) - 1 and close:
@@ -1390,6 +1486,56 @@ def all_rows(spec):
                 yield sec, row
 
 
+def slide_span(row):
+    """A row's `slides` as (first, last), or None. `12` is one slide; `[13, 14]` a run."""
+    v = row.get("slides")
+    if v is None:
+        return None
+    a, b = (v, v) if isinstance(v, int) else (v[0], v[-1])
+    return (int(a), int(b))
+
+
+def check_slides(spec):
+    """SHULL-CHG-0054. A packet that names its deck (`deck`) is written from it: every
+    block students fill says which slide(s), blocks follow slide order, and the blocks
+    written from one slide sit on one page - a slide is never split by a page turn.
+    Sets each row's printed label. Returns a list of problems."""
+    deck = spec.get("deck")
+    problems, prev = [], None
+    for sec in spec["sectionsContent"]:
+        for pi, page in enumerate(sec.get("pages", [])):
+            for row in page["rows"]:
+                kind = row.get("kind", "notes")
+                where = f"{sec_label(sec['code'])} · {row.get('title')}"
+                span = slide_span(row)
+                if span:
+                    a, b = span
+                    row["_slideLabel"] = f"SLIDE {a}" if a == b else f"SLIDES {a}\u2013{b}"
+                elif deck and kind == "recall":
+                    row["_slideLabel"] = "NO SLIDE \u00b7 CLOSE YOUR NOTES"
+                elif deck and kind in TAGGED:
+                    row["_slideLabel"] = "NO SLIDE"
+                if not deck or kind in TAGGED:
+                    continue
+                if not span:
+                    problems.append(f'{where}: no "slides" - which slide is this written from?')
+                    continue
+                if span[0] > span[1] or span[0] < 1:
+                    problems.append(f"{where}: slides {span} is not a run of slide numbers")
+                    continue
+                here = (id(sec), pi)
+                if prev:
+                    pspan, pwhere, phere = prev
+                    if span[0] < pspan[0]:
+                        problems.append(f"{where}: slide {span[0]} comes before {pwhere}'s "
+                                        f"slide {pspan[0]} - blocks follow slide order")
+                    elif span[0] <= pspan[1] and here != phere:
+                        problems.append(f"{where}: shares slide {span[0]} with {pwhere}, on "
+                                        f"another page - one slide is never split by a page turn")
+                prev = (span, where, here)
+    return problems
+
+
 def validate(spec, course):
     valid = known_sections(course)
     codes = [sec_num(s) for s in spec.get("sections", [])]
@@ -1411,8 +1557,18 @@ def validate(spec, course):
 
     # Guided notes are strictly recall: the cue column names what to record, it does
     # not ask for it. recall.py carries the rule and both renderers check it.
+    # validate() answers True/False. This returned 1 once, which main() read as a pass,
+    # so a packet with questions in it built anyway.
     if recall.check(spec, "build_notes_docx"):
-        return 1
+        return False
+
+    bad_slides = check_slides(spec)
+    if bad_slides:
+        print(f"build_notes_docx: slide check failed against {spec.get('deck')}:", file=sys.stderr)
+        for m in bad_slides:
+            print("   " + m, file=sys.stderr)
+        print("\nThe notes and the deck are one object. SHULL-CHG-0054.", file=sys.stderr)
+        return False
 
     # "Anytime problems need solved in guided notes leave a box for them to do it."
     # A rule that only lives in a document is not a mechanism, so this refuses to build.
@@ -1562,10 +1718,16 @@ def main():
         for m in ctx["derived"]:
             print("   " + m, file=sys.stderr)
     cover_page(doc, spec, ctx)
+    ctx["headroom_pt"] = float(spec.get("stretchHeadroomIn", 0)) * 72
+    seq = [(sec, page) for sec in spec["sectionsContent"] for page in sec["pages"]]
     for sec in spec["sectionsContent"]:
         for pi, page in enumerate(sec["pages"], 1):
             page["_n"] = pi
-            content_page(doc, ctx, sec, page)
+    for i, (sec, page) in enumerate(seq):
+        nxt = seq[i + 1][1] if i + 1 < len(seq) else {}
+        content_page(doc, ctx, sec, page,
+                     join_next=bool(nxt.get("joinPrevious")) and nxt.get("_n") == 1)
+        if not (page.get("joinPrevious") and page["_n"] == 1):
             designed += 1
 
     if spec.get("conceptReview"):

@@ -21,7 +21,7 @@ They are enforced at build time. Each refusal names the rule and the change reco
 | Prior-knowledge block | optional | **required** | optional |
 | Ramp | order enforced, counts free | **2 / 2 / 1 / 1**, enforced | not a question ladder |
 | Visual work | diagrams and charts to complete | — | **required**: diagram, draw, cards, slots, sort, match or outline |
-| Page budget | 4 for eight boxed questions | 1 per section | **1** normally; 2 for a cut-and-glue |
+| Page budget | 4 for eight boxed questions | 1 per section | **1** normally; 2 for a cut-and-glue; a spanned study guide declares its own (SHULL-CHG-0066) |
 
 **Physics carries no work areas at all.** Students work in their Hayden-McNeil carbonless lab
 notebooks, so a work box or a ruled answer line on a Physics sheet is a refusal, not a warning.
@@ -34,7 +34,8 @@ ones are `sort` and `match`: one page, ten minutes, no scissors, and the same le
 cut-out for most sequencing and vocabulary work. Cut-and-glue earns its two pages and its scissors
 sometimes; it should not be what every sheet turns into. SHULL-CHG-0022.
 
-A sheet that genuinely is a reading response sets `"proseOnly": true` and is allowed through.
+A sheet that genuinely is a reading response, or a study guide, sets `"proseOnly": true` and is
+allowed through (study guides: SHULL-CHG-0066).
 
 Two demos are in `specs/` for exactly this reason: `geo_u01_s01.4` is the two-page cut-and-glue,
 `geo_u04_s04.1` is a one-page label-match-order sheet.
@@ -42,7 +43,8 @@ Two demos are in `specs/` for exactly this reason: `geo_u01_s01.4` is the two-pa
 ## The page shape
 
 Header → Name / Date / Period / **Score** → REMEMBER → BEFORE YOU START → equations →
-directions → question cards → close. Each section starts a new page.
+directions → question cards → close. Each section starts a new page, unless one entry covers a
+span (`coversSections`, SHULL-CHG-0066).
 
 The layout follows his `Master_Physics` reference, with the two changes he asked for. **No work
 space on a Physics sheet** — the notebooks are where problems get worked. And **no solid header
@@ -61,6 +63,12 @@ caution and danger.
 
 - **The score total is summed from the questions, never typed.** A header reading `/ 20` over
   questions adding to 18 is one fact stored twice.
+- **`blankScore` (spec- or section-level) prints a blank line instead of a total.** For a sheet
+  with no established point value — nothing in the source, no confirmed grading rule for that
+  activity shape — the total is not invented and printed on a student page. CLAUDE.md section 4:
+  never present an invented fact as settled on a student page. `/ N` becomes `/ ________`, the
+  same way NAME and DATE are blank lines rather than guesses. First used on the Fossil ID activity
+  (U2/S2.3), flagged blocking by an independent audit.
 - **The concept block comes before anything is asked.** A student who has been away reads what the
   sheet is about before question 1, not after it.
 - **Prior knowledge is the recall block** — the friction reminder before a friction problem. It
@@ -99,9 +107,21 @@ equation you would use" reads like a physics problem and has no number in it.
 - **`match`** — terms with a blank on the left, lettered descriptions on the right. The spec
   supplies the descriptions already shuffled, because a builder that shuffled them would produce a
   different sheet on every build and no answer key would survive one.
-- **`draw`** — blank captioned panels, when there is nothing to cut.
+- **`draw`** — blank captioned panels, when there is nothing to cut. `"numbered": false` drops
+  the panel number and `"captionStrip": false` drops the ruled strip under each panel; both
+  default to the old look. The same keys work on a question's own `draw`.
 - **`diagram`** — a figure with numbered label lines beside it.
 - **`reflection`** — italic prompts with ruled lines, the written close on a Geology sheet.
+- **`table`** — an open, multi-column data chart, one row per specimen or station: a rotation
+  chart the way `sort` is the one-page cousin of the cut-and-glue timeline. The first column is a
+  pre-printed row label (a specimen number), not another blank — the chart tells the student which
+  row is next. Added for the Fossil ID activity (U2/S2.3); the same shape fits a future U3
+  rock/mineral specimen-ID chart. Counts toward Geology's visual-block requirement.
+- **`reference`** — a definitions/key list a data-chart column points back to ("see key"): term in
+  the course accent colour, plain-ink definition below it. An item can carry a `flag`, rendered as
+  a caution-coloured teacher note under its definition — for a source definition reproduced
+  verbatim because reformatting is not fact-checking, with the accuracy question surfaced rather
+  than silently corrected or silently dropped.
 
 ### Project blocks
 
@@ -124,19 +144,26 @@ exactly as before. Spec text in these blocks may carry `<b>`, `<i>` (genus and s
 - **`table`** — a reference table: `headers`, `widths` (fractions of the page), `rows`. A row may
   be `{"group": "..."}` to open a labelled group. The first column is bold unless
   `"boldFirst": false`. Optional `label`, `lead` and `size`. The header row repeats on a new page.
+  `minRowHeightIn` floors every data row's height, for a table students write in (a short
+  prompt in each cell, the room under it for the answer).
 - **`notes`** — a `label` and bulleted `items`, or plain lines with `"bullets": false`.
 - **`formats`** — two (or more) ways to do the same task, side by side: a `note` above the boxes,
   then `boxes`, each with a `title`, a `share` of the width, and `lines`, or a `lead` plus
   `bullets`.
 - **`plan`** — labelled write-on lines. `rows` is a list of lines, each a list of `[label, flex]`
   fields; flex `0` is a label with no line (a circle-one choice). Ruled lines, because a plan is
-  prose.
+  prose. An empty label is a full-width second line for the row above it. `"boldLabels":
+  false` sets labels in regular weight so each can carry its own `<b>` lead: a short written
+  prompt on one line (`<b>Earth</b>&nbsp; What covered the land?`). First use: the U2 study
+  guide.
 - **`rubric`** — draws the spec's top-level `rubric.rows` (`part`, `points`, `levels`, `full`,
   `partial`, `none`) with full level descriptors, a score box per row, and a TOTAL. Its points
   count toward the header's SCORE total, which stays summed, never typed.
 
 Any block may carry **`gapBefore`** (points of space above it) and **`pageBreakBefore`** with a
-**`heading`** (the page's title).
+**`heading`** (the page's title). On a `reflection` or `plan` block, a `heading` without
+`pageBreakBefore` is a 13pt section title (the page title is 15pt) drawn inside the block's
+own non-splitting cell, so the title moves with its first lines and never ends a page alone.
 
 ### Section and spec options
 
@@ -144,6 +171,13 @@ Any block may carry **`gapBefore`** (points of space above it) and **`pageBreakB
 - **`directionsLabel`** — renames the DIRECTIONS label ("THE JOB").
 - **`concept`** is optional. A project handout has no recall block; its job line is the
   directions.
+- **`coversSections`** — a list of codes, such as `["2.1", "2.2", "2.3", "2.4", "2.5"]`, that lets
+  one entry cover a span of one unit's sections: one header (`U02 / S2.1-S2.5`), one Name / Date /
+  Period / Score row, one continuous page flow. For a unit study guide. Opt-in: an entry without
+  it builds exactly as before. Both builders refuse a span unless the entry's `code` is its first
+  listed code, every code is in `unit`, and no section of the unit between the first and last code
+  is skipped. A page breaks only where a block sets `pageBreakBefore`. The entry declares its own
+  `pagesPerSection`. First use: `specs/make_geo_u02_s02.1-s02.5_study_guide.py`. SHULL-CHG-0066.
 
 ### The grading sheet: `--rubric-sheet`
 
@@ -166,6 +200,27 @@ section title on the key, and `key.blocks` (kinds `table` and `notes`, as above)
 key's reference tables and grading notes, after any worked questions. A key is teacher-only, so
 PROVISIONAL labels belong there and never on the student page.
 
+A question may carry `keyImage` (a drawn scene such as an `fbd` free-body diagram) in its key
+answer box: rule in `standards/ANSWER_KEYS.md` §1 and §6.3, schema in the `scripts/key_solution.py`
+docstring (SHULL-CHG-0071).
+
+### Opt-in: a grid of square drawing boxes
+
+A section (or the whole spec) may set `"layout": "grid"` to set draw-only questions as a grid of
+squares instead of one card per question: `columns` (default 3), `squareIn` (side, default 2.2;
+the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in),
+`gridPromptPt` (default 9.5) and `gridRowGapPt` (default 10). An item takes one square per `draw.panels`, each captioned from
+`draw.captions` inside its top; items flow left to right in order. A grid item carries a prompt and
+squares only: `math`, `answerLines`, `parts`, `diagram`, `given` and `need` are refused. The key
+builder draws the same grid, each `fbd` panel in its own square (one magnitude scale per item, one
+drawing size for the whole key) with the item's `steps` handwritten underneath.
+
+The equation bar takes `"equationColumns"` (default 2), and `"equationStyle": "inline"` sets a
+short label bank one entry per line, name then symbol; in that bank `_{...}` in a symbol is set as a
+subscript run (`"F_{g}"`). `"compactTop": true` tightens the gaps and the recall box's padding
+above the questions. A spec without these keys builds exactly as before. Record:
+SHULL-CHG-0071, section 10.
+
 ## Vertical space
 
 Use `gap(doc, pt)`, never `doc.add_paragraph()` with a `space_after`. The second is not a gap of
@@ -177,7 +232,8 @@ it was diagnosed; the content all went back once the spacers were the size they 
 ## Rules the builder enforces rather than trusts
 
 1. The section code exists in that course's `DECISIONS.md`.
-2. `sections` and `sectionsContent` name the same sections — they are one fact.
+2. `sections` and `sectionsContent` name the same sections — they are one fact. Each entry
+   contributes its `code`, or every code in its `coversSections` (SHULL-CHG-0066).
 3. The course profile above.
 4. The ramp: difficulty never goes backwards, and the multi-topic problem is last.
 5. Every question stays whole across a page break. So does every card, slot and close block.

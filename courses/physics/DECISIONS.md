@@ -1,14 +1,14 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-09-14
+**Last updated:** 2026-11-12
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
 
 ---
 
-## Curriculum map — CONFIRMED (Units 0–10, 48 sections)
+## Curriculum map — CONFIRMED (Units 0–10, 47 sections)
 
 Source: `SHULL_Physics_Unit_Map_1.pdf`, Matt's course reference sheet. Same `U#/S#.#` grammar as
 Chemistry. **This is the only authoritative copy — never build against a code not listed here.**
@@ -31,10 +31,9 @@ Chemistry. **This is the only authoritative copy — never build against a code 
 
 ### Phase 2 — Forces & Energy (U3–U5)
 
-**U3 · Forces and Motion** — 7 sections
-`3.1` Newton's Laws · `3.2` Free Body Diagrams · `3.3` Inclined Plane FBDs · `3.4` F = ma
-Calculations · `3.5` Net Force & Acceleration from FBDs · `3.6` Frictional Forces ·
-`3.7` Multi-Body Systems (Atwood Machines)
+**U3 · Forces and Motion** — 6 sections
+`3.1` Newton's Laws · `3.2` Free-Body Diagrams · `3.3` Forces on an Incline ·
+`3.4` Net Force and Acceleration · `3.5` Friction · `3.6` Connected Objects
 
 **U4 · Work, Energy & Power** — 4 sections
 `4.1` Work & Power · `4.2` Kinetic Energy & Work-Energy Theorem · `4.3` Potential Energy
@@ -67,8 +66,8 @@ Fields · `9.6` EM Induction & Applications
 `10.1` Nuclear Structure & Stability · `10.2` Radioactive Decay · `10.3` Half-Life ·
 `10.4` Mass-Energy Equivalence · `10.5` Fission & Fusion · `10.6` Applications, Risks & Benefits
 
-**Section count:** 4+4+3 = 11 · 7+4+3 = 14 · 3+5+3 = 11 · 6+6 = 12 · **total 48.** Matches the map
-header.
+**Section count:** 4+4+3 = 11 · 6+4+3 = 13 · 3+5+3 = 11 · 6+6 = 12 · **total 47.** U3 follows Matt's
+deck, not the map PDF (SHULL-CHG-0068).
 
 ### What the map itself establishes
 
@@ -105,9 +104,16 @@ the course settles.
 **Vectors.** Any vector quantity gets a direction, always. Magnitude alone is an incomplete answer
 for displacement, velocity, acceleration, force, momentum, and field strength.
 
+**Net force notation.** Net force is written **∑F**, never `Fnet`. Newton's 2nd law is
+**∑F = ma**. Components are **∑Fx** and **∑Fy**, with x and y as subscripts. Equilibrium is
+∑F = 0, or ∑Fx = 0 and ∑Fy = 0. Typeset the symbol as **U+2211 N-ARY SUMMATION (∑)**, which
+Archivo carries. Do not use U+03A3 GREEK CAPITAL LETTER SIGMA (Σ), which Archivo lacks and which
+would fall back to another face. (SHULL-CHG-0070)
+
 **Free-body diagrams.** Object as a dot or box · one labelled arrow per force · arrows scaled to
-relative magnitude · **no arrow for "motion."** This matters most across `3.2`, `3.3`, and `3.5` —
-three consecutive FBD sections.
+relative magnitude · **no arrow for "motion."** This matters most across `3.2`, `3.3`, and `3.4` —
+three consecutive FBD sections. `3.5` Friction is not an FBD section, but friction may appear as a
+force in FBD practice before the `3.5` friction calculations, per Matt (SHULL-CHG-0068).
 
 **Graph interpretation is a first-class skill, not a garnish.** Students read slope and area as
 physical quantities: v-t slope is acceleration, v-t area is displacement, F-x area is work. **Build
@@ -141,6 +147,28 @@ answer space. Students set up their own tables in the notebook as a pre-lab step
 
 **Flag this any time a request tries to reuse the Chemistry practice-set template unmodified for
 Physics.**
+
+---
+
+## Tests — CONFIRMED
+
+> **Physics problem-solving tests — in-class, graded, work shown on the page — are capped at 2 pages
+> maximum, across all parallel versions.**
+
+This is a different document class from the Worksheets rule above: problem-solving tests carry work
+boxes and are meant to be worked *on* the page, unlike homework worksheets, practice sets, and study
+guides, which carry no work area and stay under the no-work-area rule.
+
+The rule applies specifically to the numeric/graph problem-solving test format confirmed by the Unit
+1 Day-2 test: multiple parallel versions (A/B/C), math problems plus a graph-sketch problem, a work
+box and a 0–5 per-problem grading rubric for each, and a boxed FINAL ANSWER line.
+
+**No confirmed Day 1/Day 2 test structure exists for Physics.** Chemistry runs a locked two-day
+Day 1 conceptual / Day 2 computational structure (`courses/chemistry/DECISIONS.md`), and Geology
+explicitly does not carry it over. Nothing in this file or in any Physics skill establishes a
+matching two-day architecture for Physics — "Day 2" here describes the one test built, not a
+confirmed course-wide structure. Do not assume the Chemistry split applies; ask Matt if a Physics
+test architecture question comes up.
 
 ---
 
@@ -196,7 +224,8 @@ numeric answer support · Modified/Challenge differentiation.
    should be located and filed.
 6. **`SHULL_Physics_Pacing_Guide_20262027.pdf`** is referenced in the librarian's absorptions table
    and has not been supplied. Needed before build order can be set against the MP deadlines.
-7. **Lab equipment inventory** and realistic lab frequency.
+7. **Realistic lab frequency.** The equipment inventory is recorded (2026-11-12 decision-log
+   entry, SHULL-CHG-0073). How often a lab can run is still open.
 8. **Does Physics use the same five-tab binder system?**
 
 ---
@@ -232,9 +261,109 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.2 | Acceleration |
 | 1.3 | Motion Graphs |
 | 1.4 | Free Fall |
+| 3.1 | Newton's Laws |
 
 ## Decision log
 
+### 2026-11-12 — Lab equipment inventory
+Confirmed by Matt in chat: 10 Vernier Go Direct Sensor Carts, 2 of them broken · 5 lab groups ·
+5 Go Direct Force and Acceleration Sensors (GDX-FOR), the separate force sensors · mass bars · a
+pulley with hanging masses · spring bumpers · a balance. Counts for mass bars, hanging masses,
+bumpers and balances were not given. Partly answers Open question 7. Lab frequency is still open.
+Supersedes: Open question 7, for the inventory half only.
+Status: CONFIRMED · SHULL-CHG-0073
+
+### 2026-11-12 — One-time lab-template exceptions: "3.1 Lab - Newton's Laws"
+Matt asked for four departures from the lab template (`templates/lab/README.md`,
+`.claude/skills/build-lab/SKILL.md`) for this one lab, by direct instruction:
+
+1. **No Safety section.** Matt: "Remove safety section, its just carts." The README section order
+   lists Safety for every Chemistry and Physics lab.
+2. **No Disposal and Cleanup section, Alconox items 4–6 included.** Matt: "remove disposal, nothing
+   is disposed of." The README and the skill call items 4–6 standing boilerplate, kept verbatim on
+   every lab.
+3. **The data-table section shows a filled EXAMPLE table.** It shows the column headings with units
+   and 1–2 sample rows, labelled "Example – your numbers will differ", instead of a blank skeleton.
+   Matt: "can you create a better example of the data and what the table should actually look like
+   in their lab notebook." The table is still for copying into the notebook. It is not a space to
+   write in, and the ink rule is unchanged.
+4. **Reduced pre-lab and simplified post-lab.** The pre-lab has a few questions, including "State
+   each of Newton's three laws". The post-lab has one question per law, the percent calculations,
+   and one short error-source question. Matt: "Reduce reduce the amount of prelab questions to just
+   whats important" and "i want this simple and straightforward." This replaces the template's
+   question mix for the pre-lab (2–3 conceptual · 3–4 procedural · 1 safety/disposal · 1 table
+   set-up) and the post-lab (2–3 what-happened · calculation with percent error · 2 error analysis ·
+   1 connection). The error-source question keeps the **Labs** rule above ("a **specific** named
+   source of error"), so no exception to that rule is taken.
+
+The teacher key states each omission as deliberate, as the S1.3 key did for the Alconox block.
+
+**Scope, stated plainly:**
+1. Scoped to this one lab: `3.1 Lab - Newton's Laws.html`/`.pdf` and its `3.1 Lab Key - Newton's
+   Laws` files.
+2. **Not a precedent** for future Physics or Chemistry labs. A future lab needing any of these
+   exceptions needs its own explicit request and its own record. It may not cite this one.
+3. The shared lab template files (`templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`,
+   `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html`, `templates/lab/build_lab.py`), the
+   `build-lab` skill and the README are **not** modified.
+
+Supersedes: None.
+Status: CONFIRMED · SHULL-CHG-0073 — Path A (course-specific; shared lab template untouched).
+
+### 2026-11-11 — θ and other math symbols stay as symbols
+Offered "allow a backup font for math symbols, or spell it out as 'theta'", Matt answered "na leave
+as symbol". Physics documents keep θ, ⁻ and similar symbols Archivo lacks. Those glyphs set in the
+brand fallback face named by `typography.mathFallback` in `brand/tokens.json` (PROVISIONAL), which
+holds the face, scope and glyph set. The audit check for it is pending (see the record).
+Supersedes: `brand/SHULL_DESIGN_SYSTEM.md` §4 "Never substitute a font outside this stack", for this glyph set in Physics only.
+Status: PARTIAL · SHULL-CHG-0072
+
+### 2026-11-11 — Net force is written ∑F
+Matt asked for the sum symbol in front of forces "to emphasize its the sum of", and answered "yes"
+to making ∑F the standing Physics notation and to switching the U3 deck to it. The rule is the
+**Net force notation** paragraph under "Physics-specific build rules". Material already built with
+`Fnet` stays as built under the no-retrofit policy, except the U3 deck, which Matt asked to switch
+(a separate edit, not part of this entry). The U3 guided notes write the magnitude of a 2-D net
+force as ∑F = √((∑Fx)² + (∑Fy)²).
+Supersedes: No written rule. Replaces the unwritten `Fnet` convention in built Physics material.
+Status: CONFIRMED · SHULL-CHG-0070
+
+### 2026-11-11 — U3 has six sections, following Matt's deck
+U3 now reads `3.1` Newton's Laws · `3.2` Free-Body Diagrams · `3.3` Forces on an Incline ·
+`3.4` Net Force and Acceleration · `3.5` Friction · `3.6` Connected Objects, matching Matt's deck
+"SHULL Physics Unit 03 - Forces and Motion". The old `3.4` F = ma Calculations folds into `3.4`, and
+the old `3.7` no longer exists. The course total is 47 sections. The FBD sections are `3.2`, `3.3`
+and `3.4`. `3.5` Friction is not one, but Matt said "id like to add it before we do the math for
+it", so friction may appear in FBD practice ahead of `3.5`. Drive still holds seven U3 section
+folders (03.1–03.7) under the old titles. Renaming or trashing them needs its own record and a
+pre-logged Drive operation.
+Supersedes: The U3 entry of the curriculum map (7 sections, from `SHULL_Physics_Unit_Map_1.pdf`), the
+48-section totals, and the FBD cross-reference to `3.2`, `3.3`, `3.5`.
+Status: CONFIRMED · SHULL-CHG-0068
+
+### 2026-10-21 — Value of g: 9.8 m/s² (two significant figures), Unit 2 onward
+Physics uses **g = 9.8 m/s²** in Unit 2 onward. Because 9.8 has two significant figures, answers that
+depend on g are reported to two significant figures. Sign convention for projectile motion: up is
+positive, so g = −9.8 m/s². Matt, in answer to whether the projectile-motion sets should use 9.8 or
+9.81: "use 9.8 for g". The earlier U1 sheet (`phys_u01_s01.1-s01.4`) used 9.81 and is **not**
+retroactively changed.
+Supersedes: None — the U1 sheet's 9.81 stands as built; no prior entry in this file stated a value of g.
+Status: CONFIRMED — Path A (course-specific; no `governance/proposals/` record filed).
+
+### 2026-09-24 — Problem-solving test page cap
+Physics problem-solving tests (in-class, graded, work shown on the page) are capped at 2 pages
+maximum, all versions. Prompted by the Unit 1 Day-2 problem-solving test: 3 parallel versions
+(A/B/C), 5 math problems plus 1 graph-sketch problem each, work boxes, a per-problem 0–5 rubric, and
+a boxed FINAL ANSWER line. It first built at 3 pages; Matt asked it condensed to 2 (the two easiest
+problems paired side by side, work-box heights and margins tightened), it now holds at 2 pages
+across all three versions, and Matt asked that the 2-page cap become a standing rule rather than a
+one-off for this document. Does not apply to homework worksheets, practice sets, or study guides —
+those stay under the no-work-area Worksheets rule above. No prior Physics test-page rule exists to
+supersede; this is a new rule. No confirmed Day 1/Day 2 test structure exists for Physics — see the
+Tests section note above; do not assume Chemistry's two-day split carries over.
+Decided by: Matthew Shull, in conversation, 2026-09-24.
+Status: CONFIRMED · SHULL-CHG-0024
+Implemented by: commit 8f1b93d
 ### 2026-09-14 — First Physics lab built: Section 1.3 (Position-Velocity-Acceleration Graphing)
 Matt asked for a new Physics lab on Section 1.3, confirmed above in the curriculum map — no new code
 confirmation was needed. This is the **first Physics lab built in this system**, built from the

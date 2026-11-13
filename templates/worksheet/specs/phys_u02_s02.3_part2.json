@@ -1,0 +1,887 @@
+{
+  "course": "physics",
+  "unit": 2,
+  "sections": [
+    "2.3"
+  ],
+  "docType": "Practice_Set",
+  "timeTargetMin": "30–40",
+  "sectionsContent": [
+    {
+      "code": "2.3",
+      "title": "Projectile Motion, Part 2: Angled Launch, Level Ground",
+      "directions": "Work in your notebook. Up is positive, so the vertical acceleration is −9.8 m/s². Every launch here lands at its starting height. Ignore air resistance and round to two significant figures.",
+      "questions": [
+        {
+          "points": 2,
+          "prompt": "Red, the Angry Bird, leaves the slingshot at 24 m/s, 30° above the horizontal, and lands at the same height he started from. The pigs are not impressed. Find the horizontal and vertical components of his launch velocity, his time in the air, and his range.",
+          "selfCheck": "[  21 m/s  ·  12 m/s  ·  2.4 s  ·  51 m  ]",
+          "solution": "Components 20.78, 12.00 m/s. t = 2.449 s. Range 50.9 m.",
+          "finalAnswer": "v_ix = 21 m/s (20.78 m/s)   v_iy = 12 m/s   t = 2.4 s (2.449 s)   range = 51 m",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = v_{i} cos θ = 24 cos 30° = 20.78 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{x} ="
+              ],
+              "value": "21 m/s"
+            },
+            {
+              "row": [
+                "v_{iy} = v_{i} sin θ = 24 sin 30° = 12.00 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{iy} ="
+              ],
+              "value": "12 m/s"
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−12.00 = 12.00 + (−9.8) t"
+              ]
+            },
+            {
+              "mistake": [
+                "t =",
+                {
+                  "frac": [
+                    "2(24)",
+                    "9.8"
+                  ]
+                },
+                "= 4.9 s"
+              ],
+              "note": "use v_{iy}, not the launch speed"
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−24.00",
+                    "−9.8"
+                  ]
+                },
+                "= 2.449 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.4 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (20.78)(2.449) = 50.9 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "51 m"
+            }
+          ]
+        },
+        {
+          "points": 2,
+          "prompt": "Lionel Messi chips a ball at 19 m/s, 40° above the level pitch, and it lands back on the pitch. The goalkeeper is still deciding which way to dive. Find the ball's time in the air, its range, and its maximum height.",
+          "selfCheck": "[  2.5 s  ·  36 m  ·  7.6 m  ]",
+          "solution": "t 2.492 s, range 36.3 m, max height 7.61 m.",
+          "finalAnswer": "t = 2.5 s (2.492 s)   range = 36 m (36.3 m)   y_max = 7.6 m (7.61 m)",
+          "steps": [
+            {
+              "row": [
+                "v_{x} = v_{i} cos θ = 19 cos 40° = 14.55 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{iy} = v_{i} sin θ = 19 sin 40° = 12.21 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−12.21 = 12.21 + (−9.8) t"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−24.43",
+                    "−9.8"
+                  ]
+                },
+                "= 2.492 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.5 s"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (14.55)(2.492) = 36.3 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "36 m"
+            },
+            {
+              "row": [
+                "y_{max} = v_{iy}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (12.21)(",
+                {
+                  "frac": [
+                    "2.492",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(",
+                {
+                  "frac": [
+                    "2.492",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (12.21)(1.246) + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.246)^{2} = 7.61 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "7.6 m"
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "prompt": "Mr. Incredible throws a car across a level parking lot at 55° above the horizontal. It lands 4.3 s later. The insurance paperwork will take longer. Find the car's launch speed, its range, and its maximum height.",
+          "selfCheck": "[  26 m/s  ·  63 m  ·  23 m  ]",
+          "solution": "v_iy 21.07 m/s, v_i 25.72 m/s, range 63.4 m, max height 22.65 m.",
+          "finalAnswer": "v = 26 m/s (25.72 m/s)   range = 63 m (63.4 m)   y_max = 23 m (22.65 m)",
+          "steps": [
+            {
+              "row": [
+                "θ = 55°     t = 4.3 s"
+              ]
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−v_{iy} = v_{iy} + (−9.8)(4.3)"
+              ]
+            },
+            {
+              "row": [
+                "2 v_{iy} = 42.14"
+              ]
+            },
+            {
+              "row": [
+                "v_{iy} = 21.07 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{i} =",
+                {
+                  "frac": [
+                    "v_{iy}",
+                    "sin θ"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "21.07",
+                    "sin 55°"
+                  ]
+                },
+                "= 25.72 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{i} ="
+              ],
+              "value": "26 m/s"
+            },
+            {
+              "row": [
+                "v_{x} = v_{i} cos θ = (25.72) cos 55° = 14.75 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (14.75)(4.3) = 63.4 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "63 m"
+            },
+            {
+              "mistake": [
+                "t = 4.3 s, so Δy = 0"
+              ],
+              "note": "that is the landing; the top is at half the time"
+            },
+            {
+              "row": [
+                "y_{max} = v_{iy}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (21.07)(",
+                {
+                  "frac": [
+                    "4.3",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(",
+                {
+                  "frac": [
+                    "4.3",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (21.07)(2.15) + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(2.15)^{2} = 22.65 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "23 m"
+            }
+          ]
+        },
+        {
+          "points": 4,
+          "prompt": "Princess Peach and Princess Daisy tee off on a level fairway. Both hit the ball at 28 m/s, Peach at 25° and Daisy at 65° above the horizontal. Each one insists her shot was better.",
+          "parts": [
+            "(a) Find each ball's time in the air.",
+            "(b) Find each ball's range.",
+            "(c) Find each ball's maximum height."
+          ],
+          "selfCheck": "[  2.4 s, 5.2 s  ·  61 m, 61 m  ·  7.1 m, 33 m  ]",
+          "solution": "Peach 2.41, 61.28, 7.14; Daisy 5.18, 61.28, 32.86",
+          "finalAnswer": "(a) Peach 2.4 s, Daisy 5.2 s   (b) both 61 m   (c) Peach 7.1 m, Daisy 33 m",
+          "steps": [
+            {
+              "label": "Peach, 25°"
+            },
+            {
+              "row": [
+                "v_{x} = v_{i} cos θ = 28 cos 25° = 25.38 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{iy} = v_{i} sin θ = 28 sin 25° = 11.83 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−11.83 = 11.83 + (−9.8) t"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−23.67",
+                    "−9.8"
+                  ]
+                },
+                "= 2.415 s"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (25.38)(2.415) = 61.3 m"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = v_{iy}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11.83)(",
+                {
+                  "frac": [
+                    "2.415",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(",
+                {
+                  "frac": [
+                    "2.415",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11.83)(1.207) + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.207)^{2} = 7.14 m"
+              ]
+            },
+            {
+              "answer": [
+                "Peach ="
+              ],
+              "value": "2.4 s, 61 m, 7.1 m"
+            },
+            {
+              "label": "Daisy, 65°"
+            },
+            {
+              "row": [
+                "v_{x} = v_{i} cos θ = 28 cos 65° = 11.83 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{iy} = v_{i} sin θ = 28 sin 65° = 25.38 m/s"
+              ]
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−25.38 = 25.38 + (−9.8) t"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−50.75",
+                    "−9.8"
+                  ]
+                },
+                "= 5.179 s"
+              ]
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (11.83)(5.179) = 61.3 m"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = v_{iy}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (25.38)(",
+                {
+                  "frac": [
+                    "5.179",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(",
+                {
+                  "frac": [
+                    "5.179",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (25.38)(2.589) + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(2.589)^{2} = 32.86 m"
+              ]
+            },
+            {
+              "answer": [
+                "Daisy ="
+              ],
+              "value": "5.2 s, 61 m, 33 m"
+            },
+            {
+              "say": "Same range: 25° + 65° = 90°, so the components trade places. Daisy's ball goes higher and stays up longer.",
+              "ink": "pen"
+            }
+          ]
+        },
+        {
+          "points": 5,
+          "prompt": "The Hulk leaps across a level parking lot. S.H.I.E.L.D. radar clocks his takeoff velocity at 15 m/s horizontally and 11 m/s upward. Nobody asks him to slow down.",
+          "parts": [
+            "(a) Find his launch speed and launch angle above the horizontal.",
+            "(b) Find his time in the air.",
+            "(c) Find how far he travels horizontally.",
+            "(d) Find his maximum height."
+          ],
+          "solution": "(a) 18.6 m/s at 36.3° (b) 2.245 s (c) 33.7 m (d) 6.17 m",
+          "finalAnswer": "(a) 19 m/s at 36° above horizontal   (b) 2.2 s   (c) 34 m   (d) 6.2 m",
+          "steps": [
+            {
+              "label": "(a) Launch speed and angle"
+            },
+            {
+              "row": [
+                "v_{i} = √(v_{x}^{2} + v_{iy}^{2}) = √(15^{2} + 11^{2}) = √346 = 18.6 m/s"
+              ]
+            },
+            {
+              "answer": [
+                "v_{i} ="
+              ],
+              "value": "19 m/s"
+            },
+            {
+              "row": [
+                "θ = tan^{−1}",
+                {
+                  "frac": [
+                    "v_{iy}",
+                    "v_{x}"
+                  ]
+                },
+                "=",
+                {
+                  "frac": [
+                    "11",
+                    "15"
+                  ]
+                },
+                "= 36.3°"
+              ]
+            },
+            {
+              "answer": [
+                "θ ="
+              ],
+              "value": "36° above horizontal"
+            },
+            {
+              "row": [
+                "same direction:  36°  =  −324°  =  54° from straight up"
+              ]
+            },
+            {
+              "label": "(b) Time in the air"
+            },
+            {
+              "row": [
+                "v_{fy} = v_{iy} + a_{y} t"
+              ],
+              "note": "level ground: v_{fy} = −v_{iy}"
+            },
+            {
+              "row": [
+                "−11 = 11 + (−9.8) t"
+              ]
+            },
+            {
+              "row": [
+                "t =",
+                {
+                  "frac": [
+                    "−22",
+                    "−9.8"
+                  ]
+                },
+                "= 2.245 s"
+              ]
+            },
+            {
+              "answer": [
+                "t ="
+              ],
+              "value": "2.2 s"
+            },
+            {
+              "label": "(c) Range"
+            },
+            {
+              "row": [
+                "v_{x} =",
+                {
+                  "frac": [
+                    "Δx",
+                    "t"
+                  ]
+                },
+                "so  Δx = v_{x} t = (15)(2.245) = 33.7 m"
+              ]
+            },
+            {
+              "answer": [
+                "Δx ="
+              ],
+              "value": "34 m"
+            },
+            {
+              "label": "(d) Maximum height"
+            },
+            {
+              "row": [
+                "y_{max} = v_{iy}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                " a_{y}(",
+                {
+                  "frac": [
+                    "t",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11.00)(",
+                {
+                  "frac": [
+                    "2.245",
+                    "2"
+                  ]
+                },
+                ") + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(",
+                {
+                  "frac": [
+                    "2.245",
+                    "2"
+                  ]
+                },
+                ")^{2}"
+              ]
+            },
+            {
+              "row": [
+                "y_{max} = (11.00)(1.122) + ",
+                {
+                  "frac": [
+                    "1",
+                    "2"
+                  ]
+                },
+                "(−9.8)(1.122)^{2} = 6.17 m"
+              ]
+            },
+            {
+              "answer": [
+                "y_{max} ="
+              ],
+              "value": "6.2 m"
+            }
+          ]
+        }
+      ],
+      "equationGroups": [
+        {
+          "label": "Vertical (y)",
+          "note": "the kinematic equations, y only",
+          "eqs": [
+            "v_{fy} = v_{iy} + a_{y} t",
+            "Δy = v_{iy} t + [1|2] a_{y} t^2",
+            "v_{fy}^2 = v_{iy}^2 + 2 a_{y} Δy",
+            "Δy = [1|2](v_{iy} + v_{fy}) t",
+            "a_{y} = −9.8 m/s^2"
+          ],
+          "columns": 2,
+          "col": "L"
+        },
+        {
+          "label": "Level ground only",
+          "note": "the top is at half the time",
+          "eqs": [
+            "y_{max} = v_{iy}([t|2]) + [1|2] a_{y}([t|2])^2"
+          ],
+          "columns": 1,
+          "col": "L"
+        },
+        {
+          "label": "Horizontal (x)",
+          "note": "no acceleration, so only this one",
+          "eqs": [
+            "v_{x} = [Δx|t]"
+          ],
+          "columns": 1,
+          "col": "R"
+        },
+        {
+          "label": "Launch velocity",
+          "eqs": [
+            "v_{x} = v_i cos θ",
+            "v_{iy} = v_i sin θ",
+            "v_i = √(v_{x}^2 + v_{iy}^2)",
+            "tan θ = [v_{iy}|v_{x}]"
+          ],
+          "columns": 2,
+          "col": "R"
+        }
+      ]
+    }
+  ],
+  "pagesPerSection": 1
+}

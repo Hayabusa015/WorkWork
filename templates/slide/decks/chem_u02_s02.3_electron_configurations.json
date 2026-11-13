@@ -1,0 +1,500 @@
+{
+  "course": "chemistry",
+  "unit": 2,
+  "section": "2.3",
+  "sectionTitle": "Electron Configurations",
+  "note": "Follows 2.2 (levels, sublevels, orbitals) and sets up 2.4 (valence electrons, ions). Notation convention (PROVISIONAL until Matt confirms): filling order, e.g. [Ar] 4s^{2} 3d^{6}, written with true superscript runs ^{...}. Required through Kr (Z = 36), PROVISIONAL scope. Cr and Cu are the only exceptions taught. Every configuration and orbital diagram on these slides, and every configuration in the speaker notes, is checked by scripts/build_diagram_u02_s02.3_configurations.py. 50-minute period; the last 5 minutes are cleanup/reset.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "2.3\nElectron\nConfigurations",
+        "subhead": "Write configurations and orbital diagrams through krypton, and catch mistakes in them."
+      },
+      "imageSubjects": {
+        "section": "a long row of numbered wooden mail slots in a dim hallway, a few holding envelopes"
+      },
+      "notes": "PROVISIONAL scope: required through Kr (Z = 36), per the content brief; Matt to confirm. Period 5 and beyond (Mo, Ag, Au) are not taught on these slides and are not checked in the build script. PROVISIONAL notation: configurations are written in filling order, e.g. [Ar] 4s^2 3d^6, not energy order. Image prompt (section slot): a long row of numbered wooden mail slots in a dim hallway, a few holding envelopes."
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Where Are Oxygen's Electrons?",
+        "subhead": "The periodic table gives you the count: 8. Today you write where each one sits.",
+        "keyq": "Oxygen has 8 electrons. Do all 8 have the same energy?"
+      },
+      "imageSubjects": {
+        "concept": "an apartment building at dusk with a few lit windows on different floors"
+      },
+      "notes": "Hook. Ask: do all 8 electrons have the same energy? Let them guess; the slides answer it (no). Z = 8 comes from the periodic table. Image prompt (concept slot): an apartment building at dusk with a few lit windows on different floors."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Reading an Electron Configuration",
+        "subhead": "Take 2p^{4} apart one piece at a time.",
+        "k1_l": "ENERGY LEVEL",
+        "k1_b": "2p^{4}\n\nThe big number in front is the level: 2.",
+        "k2_l": "SUBLEVEL",
+        "k2_b": "2p^{4}\n\nThe letter is the sublevel: p.",
+        "k3_l": "ELECTRONS",
+        "k3_b": "2p^{4}\n\nThe raised number is the electron count: 4.",
+        "mustwrite": "A configuration lists where the electrons sit. Ground state means the lowest-energy arrangement."
+      },
+      "imageSubjects": {
+        "aside": "a printed periodic table with oxygen's cell circled in pencil"
+      },
+      "notes": "Say it aloud: two-p-four. Level 2, p sublevel, 4 electrons. Ground state = lowest-energy arrangement; every configuration today is a ground state unless the slide says otherwise. Image prompt (aside slot): a printed periodic table with oxygen's cell circled in pencil."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "The Order Electrons Fill In",
+        "subhead": "Read each arrow from top right to bottom left, then start the next arrow.",
+        "a1_l": "AUFBAU PRINCIPLE",
+        "a1_b": "The lowest-energy open orbital fills first.",
+        "a2_l": "THE ORDER",
+        "a2_b": "1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p",
+        "a3_l": "HEAVY BOXES",
+        "a3_b": "4s fills before 3d, in K and Ca."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_aufbau_order.png"
+      },
+      "notes": "Walk each arrow top right to bottom left. We need the order through 5p: 1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p. Say it as: 4s fills before 3d in neutral K and Ca. Do not say 4s is always lower than 3d (once 3d holds electrons it sits lower; that is S2.4, ions)."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Pauli: Two per Orbital, Opposite Spins",
+        "subhead": "Up and down arrows are spin labels, not electrons orbiting opposite ways.",
+        "a1_l": "PAULI EXCLUSION PRINCIPLE",
+        "a1_b": "One orbital holds at most 2 electrons.",
+        "a2_l": "THE SPINS",
+        "a2_b": "If there are two, their spins are opposite.",
+        "a3_l": "COMMON MIX-UP",
+        "a3_b": "Two per orbital, not two per sublevel."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_pauli.png"
+      },
+      "notes": "Spin up and down are labels, not literal rotation. Common mix-up: two per orbital, not two per sublevel (a p sublevel has 3 orbitals and holds 6)."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Hund's Rule: Singles Before Pairs",
+        "subhead": "Equal-energy orbitals, like the three 2p boxes, each get one electron first.",
+        "a1_l": "HUND'S RULE",
+        "a1_b": "Singles first, all pointing the same way.",
+        "a2_l": "NITROGEN",
+        "a2_b": "Its 2p^{3} is three single electrons: 3 unpaired.",
+        "a3_l": "THE TERM",
+        "a3_b": "Equal-energy orbitals are called degenerate."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_hund.png"
+      },
+      "notes": "Figure: N in 2p. Correct = three singles, spins parallel. Wrong = one pair, one single, one empty box. Equal-energy orbitals are called degenerate. Electrons spread out first because sharing an orbital costs repulsion."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Reading an Orbital Diagram",
+        "subhead": "One box per orbital. Nitrogen has 7 electrons, so 7 arrows.",
+        "a1_l": "BOXES",
+        "a1_b": "1s and 2s have 1 box each. 2p has 3.",
+        "a2_l": "ARROWS",
+        "a2_b": "Draw the up arrow first in every box.",
+        "a3_l": "THE LABEL UNDER EACH GROUP",
+        "a3_b": "The raised number counts the arrows."
+      },
+      "notes": "N has 7 electrons so 7 arrows: 2 + 2 + 3. Convention: draw the up arrow first in every box, and the label's raised number counts the arrows."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Filling Oxygen's 2p Boxes",
+        "subhead": "Four electrons, three boxes. Watch the order of the arrows.",
+        "a1_l": "THE BOXES",
+        "a1_b": "The 2p sublevel has 3 boxes. Oxygen puts 4 electrons in them.",
+        "a2_l": "HUND'S RULE",
+        "a2_b": "One up arrow in each box first.",
+        "a3_l": "PAULI EXCLUSION PRINCIPLE",
+        "a3_b": "The fourth arrow pairs up, pointing the opposite way."
+      },
+      "notes": "Click build (see scripts/add_click_builds.py): the three 2p boxes fly in, then one arrow per click: up, up, up (Hund: singles first), then down in box 1 (Pauli: a pair has opposite spins). Result: 2p^4 with one pair and two singles, so 2 unpaired electrons. Have students draw each arrow in their notes at the same click. Same filling as the oxygen example later in this deck."
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "Writing a Configuration",
+        "subhead": "The same four steps, for every element.",
+        "s1_l": "Find Z",
+        "s1_b": "Atomic number is the electron count.",
+        "s2_l": "Fill in order",
+        "s2_b": "Follow the chart, lowest first.",
+        "s3_l": "Respect the caps",
+        "s3_b": "s holds 2, p 6, d 10, f 14.",
+        "s4_l": "Add it up",
+        "s4_b": "The raised numbers must total Z."
+      },
+      "imageSubjects": {
+        "band": "a periodic table wall chart photographed at a shallow angle"
+      },
+      "notes": "Four steps, every element. Caps: s 2, p 6, d 10, f 14. Always check that the sum equals Z. Image prompt (band slot): a periodic table wall chart photographed at a shallow angle."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Oxygen",
+        "subhead": "Copy the setup, not just the answer.",
+        "problem": "Write the full configuration and the orbital diagram for oxygen.",
+        "g1_l": "GIVEN",
+        "g1_b": "Oxygen, Z = 8\nNeutral atom",
+        "g2_l": "NEED",
+        "g2_b": "Full configuration\nOrbital diagram\nUnpaired electrons",
+        "work": "",
+        "mustwrite": "Always check that the raised numbers add up to Z."
+      },
+      "imageSubjects": {
+        "aside": "a small cylinder of oxygen gas with a regulator, on a lab cart"
+      },
+      "notes": "Students copy the setup; the work area stays empty on purpose and is filled live on the board. Answer on the next slide: 1s^2 2s^2 2p^4, 2 unpaired. Image prompt (aside slot): a small cylinder of oxygen gas with a regulator, on a lab cart."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Oxygen, Worked",
+        "subhead": "Order first. Then singles before pairs in the 2p boxes.",
+        "f1_l": "SETUP",
+        "f1_b": "Z = 8 electrons\nFill 1s, then 2s, then 2p",
+        "work": "1s^{2} 2s^{2} 2p^{4}\n2 + 2 + 4 = 8\nUnpaired: 2",
+        "mustwrite": "Oxygen is 1s^{2} 2s^{2} 2p^{4}, with 2 unpaired electrons."
+      },
+      "notes": "Oxygen: 1s^2 2s^2 2p^4, 2 + 2 + 4 = 8. The 2p boxes hold one pair and two singles, so 2 unpaired."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Iron",
+        "subhead": "Configuration, orbital diagram, and the unpaired count.",
+        "problem": "Write the configuration for iron and draw its 4s and 3d orbital diagram. How many unpaired electrons?",
+        "g1_l": "GIVEN",
+        "g1_b": "Iron, Z = 26\nNeutral atom",
+        "g2_l": "NEED",
+        "g2_b": "Full configuration\nOrbital diagram\nUnpaired electrons",
+        "work": "",
+        "mustwrite": "Fill 4s before 3d. We write 4s ahead of 3d."
+      },
+      "imageSubjects": {
+        "aside": "a rusted iron nail on a white bench"
+      },
+      "notes": "Second orbital-diagram example, after oxygen. Students copy the setup, then work it; answer on the next slide. Fe, Z = 26. Fill 4s before 3d, and we write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Only the 4s and 3d boxes are drawn; the first 18 electrons (through 3p) are just counted. The next slide counts them as 'the first 18 electrons'; the noble-gas shorthand has not been taught yet at this point, so do not name it and let the shorthand slides do that. Image prompt (aside slot): a rusted iron nail on a white bench."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Iron, Worked",
+        "subhead": "The first 18 fill through 3p. Then 4s, then 3d.",
+        "f1_l": "FULL CONFIGURATION",
+        "f1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}",
+        "work": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6}\n4s^{2} 3d^{6}\n2+2+6+2+6+2+6 = 26\nUnpaired: 4",
+        "mustwrite": "Fe ends 4s^{2} 3d^{6}: one pair and 4 singles in the 3d boxes."
+      },
+      "notes": "Fe: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^6, 2+2+6+2+6+2+6 = 26. The diagram draws only 4s and 3d; the first 18 electrons (through 3p) are counted, not drawn, so its sum reads first 18 + 2 + 6 = 26. The 3d boxes hold one pair and four singles, so 4 unpaired. The 4s pair is drawn first, then the 3d boxes (Hund: one up arrow in each box, then pair). No [Ar] appears on this slide: the noble-gas shorthand is taught two slides later (slide 15), so say 'the first 18 electrons' here."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Longhand: N, Cl, and Ca",
+        "subhead": "Calcium stops at 4s^{2}. The 3d sublevel stays empty until scandium.",
+        "k1_l": "NITROGEN, Z = 7",
+        "k1_b": "1s^{2} 2s^{2} 2p^{3}\n\nSum: 2+2+3 = 7\nUnpaired: 3",
+        "k2_l": "CHLORINE, Z = 17",
+        "k2_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nSum: 2+2+6+2+5 = 17\nUnpaired: 1",
+        "k3_l": "CALCIUM, Z = 20",
+        "k3_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{6} 4s^{2}\n\nSum: 2+2+6+2+6+2 = 20\nUnpaired: 0",
+        "mustwrite": "The raised numbers add up to the atomic number, every time."
+      },
+      "imageSubjects": {
+        "aside": "period 3 of a periodic table wall chart, lit from the side"
+      },
+      "notes": "N: 1s^2 2s^2 2p^3, 3 unpaired. Cl: 1s^2 2s^2 2p^6 3s^2 3p^5, 1 unpaired. Ca: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2, 0 unpaired. 3d stays empty until scandium. Image prompt (aside slot): period 3 of a periodic table wall chart, lit from the side."
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Noble-Gas Shorthand",
+        "subhead": "Replace the filled inner core with a noble gas in brackets.",
+        "c1_l": "LONGHAND: Cl",
+        "c1_b": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{5}\n\nAll 17 electrons written out.",
+        "c2_l": "SHORTHAND: Cl",
+        "c2_b": "[Ne] 3s^{2} 3p^{5}\n\n[Ne] stands for the first 10: 1s^{2} 2s^{2} 2p^{6}.",
+        "mustwrite": "Use the previous period's noble gas. Cl is in period 3, so its core is [Ne], not [Ar]."
+      },
+      "imageSubjects": {
+        "concept": "a neon sign tube glowing orange-red in a dark window"
+      },
+      "notes": "COMMON ERROR (brief): using the noble gas of the same period, or the element's own. Cl is period 3, so the core is [Ne], not [Ar]; the core is the previous period's noble gas. Shorthand: [Ne] 3s^2 3p^5, which equals the longhand 1s^2 2s^2 2p^6 3s^2 3p^5. Next slide: the same idea for germanium (the longhand first, then the noble gas before it in brackets); in the animated deck that slide is built one click at a time, in the static deck it shows the finished line. Image prompt (concept slot): a neon sign tube glowing orange-red in a dark window."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Shorthand: Germanium",
+        "subhead": "Write it long first. Then swap the argon part for [Ar].",
+        "a1_l": "STEP 1: LONGHAND",
+        "a1_b": "All 32 electrons, in filling order.",
+        "a2_l": "STEP 2: THE SUBSTITUTE",
+        "a2_b": "[Ar] is a placeholder for argon's 18 electrons.",
+        "a3_l": "STEP 3: FINISH",
+        "a3_b": "Then write what is left, the usual way."
+      },
+      "notes": "Shorthand build for germanium (Z = 32), on text boxes, one per segment. The CLICK BUILD line at the end says exactly what each click does. Teach it in this order: write the longhand first; find the noble gas that comes BEFORE germanium and highlight those electrons; put that noble gas in brackets; finish the line. Longhand: 1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^10 4p^2, 2+2+6+2+6+2+10+2 = 32. The first five segments total 18 and are exactly argon's configuration, so [Ar] is a placeholder, a substitution like writing one symbol for a long repeated expression in math. Shorthand: [Ar] 4s^2 3d^10 4p^2, 18 + 2 + 10 + 2 = 32, with 2 unpaired electrons (the two 4p singles). Common error (brief): using the noble gas of the element's own period. Krypton ends germanium's period and comes AFTER it (Z = 36 > 32), so [Kr] would claim 36 electrons; the next slide shows the table strip. [Ar] sits against the remaining segments, in the space the highlighted block occupied, so the line reads [Ar] 4s^2 3d^10 4p^2 after click 3; click 4 writes the finished line as the answer to copy. Cl stays on the previous slide as the static example. A static export or print of this slide shows every shape at once (the highlight, the replaced segments and [Ar] overlap); for a handout use the --preview export of scripts/add_click_builds.py."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Why [Ar] and Not [Kr]?",
+        "subhead": "Germanium is in period 4. Its core is the noble gas that ends period 3.",
+        "a1_l": "ARGON, Z = 18",
+        "a1_b": "Ends period 3. It comes BEFORE germanium.",
+        "a2_l": "GERMANIUM, Z = 32",
+        "a2_b": "Period 4, group 14. Use the previous period's noble gas.",
+        "a3_l": "KRYPTON, Z = 36",
+        "a3_b": "Ends period 4. It comes AFTER germanium, so it is the wrong core."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_ge_noble_gas_strip.png"
+      },
+      "notes": "Table strip, periods 3 and 4 (groups 1-2, 3-12 as spans, then 13-18). Argon (Z = 18) is the last element of period 3: the noble gas BEFORE germanium. Germanium (Z = 32) is period 4, group 14. Krypton (Z = 36) ends period 4: it comes AFTER germanium, so it cannot be a core for a 32-electron atom. Rule restated: the core is the previous period's noble gas. Positions are asserted from the atomic numbers in scripts/build_diagram_u02_s02.3_configurations.py. The marks use a tick, a cross and words as well as colour. Alt text on the picture describes the strip."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Aluminum",
+        "subhead": "Notation only. No diagram this time.",
+        "problem": "Write the longhand configuration and the noble-gas shorthand for aluminum.",
+        "g1_l": "GIVEN",
+        "g1_b": "Aluminum, Z = 13\nNeutral atom",
+        "g2_l": "NEED",
+        "g2_b": "Longhand\nShorthand\nElectron sum",
+        "work": "",
+        "mustwrite": "Aluminum is period 3, so its core is [Ne]."
+      },
+      "imageSubjects": {
+        "aside": "a roll of aluminum foil partly unrolled on a white bench"
+      },
+      "notes": "Notation-only example: no orbital diagram. Students copy the setup, then work it. Answer on the next slide: Al, Z = 13, 1s^2 2s^2 2p^6 3s^2 3p^1, 2+2+6+2+1 = 13; shorthand [Ne] 3s^2 3p^1, 10+2+1 = 13. Common error: [Ar] as the core. Argon (Z = 18) is bigger than aluminum's 13 electrons, so it cannot be a core. The core is the noble gas that ends the previous period (neon, period 2). Image prompt (aside slot): a roll of aluminum foil partly unrolled on a white bench."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Aluminum, Worked",
+        "subhead": "Longhand first. Then swap the first 10 for [Ne].",
+        "f1_l": "SETUP",
+        "f1_b": "Z = 13 electrons\nCore: [Ne] ends period 2",
+        "work": "1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{1}\n[Ne] 3s^{2} 3p^{1}\n10 + 2 + 1 = 13",
+        "mustwrite": "Al is [Ne] 3s^{2} 3p^{1}, the same 13 electrons as the longhand."
+      },
+      "notes": "Al: longhand 1s^2 2s^2 2p^6 3s^2 3p^1, 2+2+6+2+1 = 13. Shorthand [Ne] 3s^2 3p^1: [Ne] stands for the first 10 (1s^2 2s^2 2p^6), then 10+2+1 = 13. Notation only; no diagram is drawn. If students use [Ar] as the core, have them add it: 18 + 2 + 1 = 21, not 13. Image prompt (data slot): the aluminum square of a periodic table wall chart, photographed close and slightly off-axis.",
+      "imageSubjects": {
+        "data": "the aluminum square of a periodic table wall chart, photographed close and slightly off-axis"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Bromine and Nickel",
+        "subhead": "Notation only. Two elements, one core.",
+        "problem": "Write the noble-gas shorthand for each element.",
+        "g1_l": "(a) BROMINE",
+        "g1_b": "Br, Z = 35\nNeutral atom",
+        "g2_l": "(b) NICKEL",
+        "g2_b": "Ni, Z = 28\nNeutral atom",
+        "work": "",
+        "mustwrite": "Both are period 4, so the core is [Ar], never [Kr]."
+      },
+      "imageSubjects": {
+        "aside": "a nickel-plated metal bar and a sealed amber ampoule of bromine on a white tray"
+      },
+      "notes": "Notation-only example: no orbital diagram. Answers on the next slide. (a) Br, Z = 35: [Ar] 4s^2 3d^10 4p^5, 18+2+10+5 = 35. (b) Ni, Z = 28: [Ar] 4s^2 3d^8, 18+2+8 = 28. Common error: [Kr] because krypton is 'close' (Kr is Z = 36, one more than bromine, so [Kr] would already hold 36 electrons). Both are period 4, so the core is the noble gas that ends period 3, argon. Nickel follows the rules; the only exceptions taught are Cr and Cu. Image prompt (aside slot): a nickel-plated metal bar and a sealed amber ampoule of bromine on a white tray."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Bromine and Nickel, Worked",
+        "subhead": "Same [Ar] core. Then 4s, 3d, and 4p as needed.",
+        "f1_l": "CORE AND COUNT",
+        "f1_b": "Both are period 4\nCore: [Ar] = 18 electrons",
+        "work": "(a) [Ar] 4s^{2} 3d^{10} 4p^{5}\n18 + 2 + 10 + 5 = 35\n(b) [Ar] 4s^{2} 3d^{8}\n18 + 2 + 8 = 28",
+        "mustwrite": "Br is [Ar] 4s^{2} 3d^{10} 4p^{5}. Ni is [Ar] 4s^{2} 3d^{8}."
+      },
+      "notes": "(a) Br, Z = 35: [Ar] 4s^2 3d^10 4p^5, 18+2+10+5 = 35. (b) Ni, Z = 28: [Ar] 4s^2 3d^8, 18+2+8 = 28. Notation only; no diagram is drawn. Fill 4s before 3d, and write 4s ahead of 3d (filling-order notation, PROVISIONAL convention). Ni is not an exception. A student who writes [Kr] for either one has counted 36 electrons before writing anything else. Image prompt (data slot): the period 4 row of a periodic table wall chart, photographed close and slightly off-axis.",
+      "imageSubjects": {
+        "data": "the period 4 row of a periodic table wall chart, photographed close and slightly off-axis"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Exception: Copper",
+        "subhead": "The rules predict 4s^{2} 3d^{9}. Compare it with the real atom.",
+        "a1_l": "COMPARE",
+        "a1_b": "Predicted versus actual: which sublevel loses an electron, and which gains one?",
+        "a2_l": "ONE OF TWO",
+        "a2_b": "Copper and chromium are the only exceptions we learn.",
+        "a3_l": "LOOKING AHEAD (S2.4)",
+        "a3_b": "4s empties first in ions: Cu^{+} is [Ar] 3d^{10}, Cu^{2+} is [Ar] 3d^{9}."
+      },
+      "notes": "Copper click build (the CLICK BUILD line at the end gives the clicks). Boxes for 4s and 3d only; the [Ar] core (18 electrons) is not drawn. Click 1: the atom as the rules predict, [Ar] 4s^2 3d^9 (4s before 3d; 18 + 2 + 9 = 29). Click 2: one 4s arrow leaves. Click 3: a 3d down arrow arrives in the fifth box. End: [Ar] 4s^1 3d^10, 18 + 1 + 10 = 29, one unpaired electron (the 4s). Same electron count before and after: an electron MOVES, none is gained. Say 'measured ground state', not 'textbook error'. The arrows are bookkeeping for the end state; the diagram does not track one electron's journey. Forward pointer to S2.4: the 4s^1 electron leaves first, so Cu^+ = [Ar] 3d^10 and Cu^2+ = [Ar] 3d^9 (both checked by the figure script). The reason follows on the Why slide. Do not extend this to Ag or Au: not taught, not checked (look it up)."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Exception: Chromium",
+        "subhead": "Same move. The rules predict 4s^{2} 3d^{4}.",
+        "a1_l": "COMPARE",
+        "a1_b": "Count the arrows in 3d, predicted versus actual.",
+        "a2_l": "THE TOTAL",
+        "a2_b": "Cr still has 24 electrons. [Ar] is 18, so 6 are drawn.",
+        "a3_l": "UNPAIRED ELECTRONS",
+        "a3_b": "Count them at the end. Is it more than iron's 4?"
+      },
+      "notes": "Chromium click build. Click 1: predicted [Ar] 4s^2 3d^4 (18 + 2 + 4 = 24): four up arrows in 3d and one empty box. Click 2: one 4s arrow leaves. Click 3: an up arrow arrives in the fifth 3d box. End: [Ar] 4s^1 3d^5, 18 + 1 + 5 = 24; every box in 4s and 3d holds exactly one up arrow, all spins parallel (Hund), so 6 unpaired electrons, more than iron's 4. The arrows are bookkeeping for the end state: the arrow that leaves 4s is the down one and the arrow that arrives in 3d is an up one, so do not present it as one electron keeping its spin; the point is the final arrangement. Answer to the unpaired question: 6. Same teaching label as Cu: measured ground state. Mo (same group, one period down) is an exception too, and W is not; not taught, not checked here."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Why Cr and Cu Break the Pattern",
+        "subhead": "A simplified reason, and where it stops working.",
+        "k1_l": "THE ENERGIES ARE CLOSE",
+        "k1_b": "4s and 3d are almost the same energy, so a small change can tip the balance.",
+        "k2_l": "THE PAYOFF",
+        "k2_b": "One 4s electron moves. 3d becomes completely full (Cu) or half full with parallel spins (Cr).",
+        "k3_l": "THE RESULT",
+        "k3_b": "That lowers the atom's total energy slightly, so the real atom does it.",
+        "mustwrite": "A simplification, not a rule: it misses other exceptions. Learn Cr and Cu; look the rest up."
+      },
+      "imageSubjects": {
+        "aside": "a coil of copper wire beside a chromium-plated tap on a lab bench"
+      },
+      "notes": "STUDENT LEVEL (simplified; say so out loud): 4s and 3d are very close in energy here. Moving one 4s electron gives a completely filled 3d (Cu) or a half-filled 3d with all five spins parallel (Cr). That lowers the atom's total energy slightly, so the real atom does that. This explains Cr and Cu; it does not predict every exception, and in this course students learn Cr and Cu and look the rest up. Do NOT say that half-full and full are always more stable. TEACHER LEVEL: the near-degeneracy of 4s and 3d is what lets a small energy change decide the arrangement. Textbook accounts cite exchange stabilization (same-spin electrons in different orbitals lower the energy; Cr has six parallel spins) and reduced electron-electron repulsion. PROVISIONAL: the textbook story is simpler than the real energy accounting, which needs electron-correlation calculations; that is why the heuristic fails. COUNTEREXAMPLES (checked against a secondary dataset, the mendeleev PyPI package, for Cr, Cu, Nb, Mo, W, Ag and Au; NIST was not reachable from here; still PROVISIONAL until Matt or a source confirms. The script itself checks only that the electron totals are 41 and 74): Nb is [Kr] 5s^1 4d^4, an exception that is not half-full or full; W is the regular [Xe] 6s^2 4f^14 5d^4 although Cr and Mo, in the same group, are exceptions. So the heuristic is not a predictor. Mo, Ag and Au (one period down) are not taught and not checked here. Forward pointer to S2.4: the 4s^1 electron leaves first, so Cu^+ = [Ar] 3d^10 and Cu^2+ = [Ar] 3d^9. Image prompt (aside slot): a coil of copper wire beside a chromium-plated tap on a lab bench."
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "Checking a Configuration",
+        "subhead": "Run these four checks in order.",
+        "s1_l": "Count",
+        "s1_b": "Do the raised numbers add up to Z?",
+        "s2_l": "Caps and order",
+        "s2_b": "Max 2, 6, 10, 14. Aufbau order.",
+        "s3_l": "Hund and Pauli",
+        "s3_b": "Singles first. Pairs have opposite spins.",
+        "s4_l": "Core, Cr, Cu",
+        "s4_b": "Previous noble gas? Is it Cr or Cu?"
+      },
+      "imageSubjects": {
+        "band": "a teacher's red pen resting on a page of student work"
+      },
+      "notes": "Run the four checks in order: count, caps and order, Hund and Pauli, then core / Cr / Cu. Stop at the first failure. Image prompt (band slot): a teacher's red pen resting on a page of student work."
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Example: Spot the Mistake",
+        "subhead": "Each was written as a ground state.",
+        "problem": "Each of these is wrong. Name the rule or fact it breaks.",
+        "g1_l": "GIVEN (a), (b)",
+        "g1_b": "(a) O: 1s^{2} 2s^{2} 2p^{6}\n(b) K: [Ar] 3d^{1}",
+        "g2_l": "GIVEN (c), (d)",
+        "g2_b": "(c) Ca: [Ne] 4s^{2}\n(d) Cr: [Ar] 4s^{2} 3d^{4}",
+        "work": "",
+        "mustwrite": "Add the electrons first. If the total is not Z, stop there."
+      },
+      "imageSubjects": {
+        "aside": "a page of student work with a few lines circled in red pen"
+      },
+      "notes": "Answers on the next slide. Each was written as a ground state. (a) O: 1s^2 2s^2 2p^6 is 10 electrons, O has 8. (b) K: [Ar] 3d^1 puts 3d before 4s. (c) Ca: [Ne] 4s^2 is 12 electrons, wrong core. (d) Cr: [Ar] 4s^2 3d^4 obeys the rules but is not the real ground state. Revisit the Chromium exception slide if students are unsure. Image prompt (aside slot): a page of student work with a few lines circled in red pen."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Spot the Mistake, Worked",
+        "subhead": "Four problems, four different checks. Each fix is on the right.",
+        "f1_l": "WHAT IS WRONG",
+        "f1_b": "(a) Count: 10, not 8\n(b) Aufbau: 4s first\n(c) Core: needs [Ar]\n(d) Real Cr differs",
+        "work": "Corrected:\n(a) 1s^{2} 2s^{2} 2p^{4}\n(b) [Ar] 4s^{1}\n(c) [Ar] 4s^{2}\n(d) [Ar] 4s^{1} 3d^{5}",
+        "mustwrite": "Cr follows the rules on paper, but the measured ground state is [Ar] 4s^{1} 3d^{5}."
+      },
+      "imageSubjects": {
+        "data": "a pencil resting on a page of crossed-out electron counts"
+      },
+      "notes": "Corrected: (a) O 1s^2 2s^2 2p^4. (b) K [Ar] 4s^1. (c) Ca [Ar] 4s^2. (d) Cr [Ar] 4s^1 3d^5. (d) is the Chromium exception slide: predicted [Ar] 4s^2 3d^4, actual [Ar] 4s^1 3d^5. Teach 'rules-consistent' versus 'observed': (d) passes every rule on paper and is still not the real atom. Image prompt (data slot): a pencil resting on a page of crossed-out electron counts."
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Example: Spot the Mistake, Diagrams",
+        "subhead": "Two orbital diagrams. Each breaks a different rule.",
+        "a1_l": "(E) NITROGEN, Z = 7",
+        "a1_b": "Only the three 2p boxes are drawn.",
+        "a2_l": "(F) NEON, Z = 10",
+        "a2_b": "Only the 2s box is drawn.",
+        "a3_l": "YOUR JOB",
+        "a3_b": "Name the broken rule. Redraw it correctly."
+      },
+      "images": {
+        "diagram": "../assets/chem_u02_s2.3_spot_diagrams.png"
+      },
+      "notes": "Orbital-diagram errors (brief items c, d), labelled (e) and (f) here. (e) N 2p drawn up, down, up: three singles but not parallel. (f) Ne 2s drawn up, up in one box: Pauli. Ask which rule each breaks and what the fix looks like."
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Spot the Mistake, Diagrams, Worked",
+        "subhead": "One Hund error and one Pauli error. The fixes are drawn at left.",
+        "f1_l": "WHAT IS WRONG",
+        "f1_b": "(e) Hund: spins differ\n(f) Pauli: same spin",
+        "work": "Fixed:\n(e) 2p: up, up, up\n(f) 2s: up, down",
+        "mustwrite": "Hund: singles first, all spins the same. Pauli: two in one orbital must be opposite."
+      },
+      "images": {
+        "data": "../assets/chem_u02_s2.3_spot_diagrams_fixed.png"
+      },
+      "notes": "(e) Hund: unpaired electrons need parallel spins. Correct N 2p: up, up, up. (f) Pauli: two electrons in one orbital must have opposite spins. Correct Ne 2s: up, down. The brief's other Hund error (pair, single, empty) is the WRONG row on the Hund slide earlier in this deck."
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Check Yourself",
+        "subhead": "Work all three in your notes before we compare.",
+        "k1_l": "PHOSPHORUS, Z = 15",
+        "k1_b": "Write the longhand configuration.",
+        "k2_l": "SULFUR, Z = 16",
+        "k2_b": "Write the shorthand and sketch the 3p boxes.",
+        "k3_l": "COPPER, Z = 29",
+        "k3_b": "Write the actual shorthand. Say why it is an exception.",
+        "mustwrite": "Show the electron sum for each one. If it is not Z, find the error."
+      },
+      "imageSubjects": {
+        "aside": "a pencil and a blank sheet of lined paper on a lab bench"
+      },
+      "notes": "Answers (re-derived). P, Z = 15: 1s^2 2s^2 2p^6 3s^2 3p^3, 2+2+6+2+3 = 15, 3 unpaired. S, Z = 16: [Ne] 3s^2 3p^4, 10+2+4 = 16; 3p boxes: one pair and two singles, 2 unpaired. Cu, Z = 29: [Ar] 4s^1 3d^10, 18+1+10 = 29. Exception: go back to the Copper exception slide ('Exception: Copper', a click build in the animated deck): the rules predict [Ar] 4s^2 3d^9, one 4s electron moves into 3d, and the filled 3d lowers the atom's total energy slightly. That is the simplified reason from the Why slide (4s and 3d are close in energy); it does not predict every exception, so do not accept 'full is always more stable'. Image prompt (aside slot): a pencil and a blank sheet of lined paper on a lab bench."
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "LOOKING AHEAD",
+        "headline": "Where This\nGoes Next",
+        "subhead": "Next: valence electrons, and the configurations of ions."
+      },
+      "imageSubjects": {
+        "divider": "an empty lab stool at a long bench, window light across the floor"
+      },
+      "notes": "Looking ahead: next is valence electrons and ion configurations (S2.4). Image prompt (divider slot): an empty lab stool at a long bench, window light across the floor."
+    }
+  ]
+}

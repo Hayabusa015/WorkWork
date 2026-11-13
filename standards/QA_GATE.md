@@ -29,6 +29,8 @@ do not ship on the assumption it looks right.
 > system until 2026-09-08.
 >
 > Key files may also carry the key-handwriting face (`typography.keyHandwriting`), per `standards/ANSWER_KEYS.md` §9; `scripts/audit_fonts.py --key` enforces it.
+>
+> Physics files may also carry `typography.mathFallback` for the glyphs it names; `scripts/audit_fonts.py --physics` will enforce it (pending, SHULL-CHG-0072).
 
 ## 2. Page budget
 
@@ -101,6 +103,18 @@ If the document has answers, the key is its own file ending `_Key`.
 Including in **each** parallel version. A/B/C/D versions are not shuffles — re-solve each one from
 scratch. Ugly or unrealistic answers mean changing the numbers, not shipping them.
 
+## 10. Density and adjacency
+
+- Body prose does not exceed roughly 80 characters per line. If a text column runs edge-to-edge on
+  a wide page or slide, narrow it or split it.
+- Every diagram, image, or table sits next to the text that explains it — never separated by a
+  column break or a page the student has to flip past.
+- Only one color is doing highlight/emphasis work on a given page or slide, and it means the same
+  thing everywhere it appears in that document (this generalizes the existing slide rule in §12 of
+  `brand/SHULL_DESIGN_SYSTEM.md` to print documents).
+- Nothing on the page exists only to fill space. Anything that doesn't pass the §6 decoration test
+  in `brand/SHULL_DESIGN_SYSTEM.md` gets cut, not shrunk. SHULL-CHG-0023.
+
 ---
 
 ## Deliverable-specific additions
@@ -115,7 +129,9 @@ Run `python3 scripts/audit_slide_geometry.py <deck>.pptx`. It must report zero p
 
 **Guided notes** — student copy and filled key generated from the same source so they cannot drift ·
 every section starts on a new page and ends with a RECALL block (a summary prompt plus a self-check;
-SHULL-CHG-0033) · blanks sized to the expected answer.
+SHULL-CHG-0033) · no inline underscore blanks; each recall item is a cue plus ruled writing lines
+sized to the expected answer; fill-in tables and ruled answer lines are allowed
+(`brand/SHULL_DESIGN_SYSTEM.md` §11, SHULL-CHG-0069).
 
 **Assessments** — every item maps to a learning target · distractors are real misconceptions ·
 exactly one unambiguously best answer · parallel versions carry identical blueprints, standards

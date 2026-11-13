@@ -1,0 +1,82 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.4",
+  "sectionTitle": "F = ma Calculations",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "04",
+        "headline": "3.4\nF = ma Calculations",
+        "subhead": "Use Newton's second law to connect net force, mass, and acceleration."
+      },
+      "imageSubjects": {
+        "section": "a lab cart on a track with a hanging mass at the far end"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Newton's Second Law: Fnet = ma",
+        "subhead": "The acceleration is in the direction of the net force.",
+        "f1_l": "FORMULA",
+        "f1_b": "Fnet = ma\n1 N = 1 kg·m/s²\na = Fnet/m",
+        "work": "a = 12 N / 4.0 kg\n= 3.0 m/s²\nto the right",
+        "mustwrite": "Fnet = ma. Use the net force, never a single force."
+      },
+      "images": {
+        "data": "../assets/phys_u03/s34_cart_example.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Two Opposing Forces",
+        "subhead": "Use forward as positive.",
+        "problem": "A 1500 kg car has 4500 N of engine force forward and 1200 N of drag. Find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 1500 kg\n4500 N forward\n1200 N backward",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = 4500 − 1200\na = Fnet/m",
+        "answer": "a = 2.2 m/s² forward"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s34_car_problem.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Reading an F vs. a Graph",
+        "subhead": "Plot net force against acceleration for one object.",
+        "a1_l": "AXES",
+        "a1_b": "Net force on y, acceleration on x.",
+        "a2_l": "SLOPE",
+        "a2_b": "rise/run = ΔF/Δa = m, in kilograms.",
+        "a3_l": "THROUGH THE ORIGIN",
+        "a3_b": "Zero net force gives zero acceleration."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s34_graph_concept.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Mass from a Graph",
+        "subhead": "Use two points far apart on the line.",
+        "problem": "The graph shows net force against acceleration for one cart. Find the cart's mass.",
+        "q1_l": "GIVEN",
+        "q1_b": "Read two points\noff the line",
+        "q2_l": "EQUATION",
+        "q2_b": "m = slope = ΔF/Δa",
+        "answer": "m = 8.0 N / 3.2 m/s² = 2.5 kg"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s34_graph_problem.png"
+      }
+    }
+  ]
+}

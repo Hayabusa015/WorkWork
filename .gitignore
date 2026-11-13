@@ -7,3 +7,13 @@ installer/*.zip
 .vercel/
 
 credentials.json
+# Built slide decks are the finished deliverable -- Drive is canonical for
+# those (CLAUDE.md), the repo only tracks the JSON source specs that
+# generate them (templates/slide/decks/*.json).
+templates/slide/*.pptx
+templates/slide/*.pdf
+
+# Same for built worksheets/practice sets and their answer keys -- only the
+# JSON specs (templates/worksheet/specs/*.json) and image assets are source.
+templates/worksheet/*.docx
+templates/worksheet/*.pdf

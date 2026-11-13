@@ -106,6 +106,13 @@ not a section that was always three.
 blank it fills. **Locate the section deck first.** If it does not exist, build it first or say the
 notes are provisional.
 
+**Write the notes from the deck, slide by slide** (SHULL-CHG-0054). Give the spec its `"deck"` and
+every block its `"slides"`; title each block with its slide's headline, word for word; keep slide
+order; keep one slide's blocks on one page; and make each fill-in the slide's own sentence with the
+key words blanked. The build enforces what it can see. The four rules and the spec fields:
+`templates/notes/README.md`, "The notes and the deck are one object". Then mark the deck's
+must-write blocks with the block each one fills: `templates/slide/README.md`.
+
 Set the scaffolding level and **state the choice in one line** so it can be overridden. The ladder
 comes down across the year; the per-course index is in each decisions file.
 
@@ -125,8 +132,8 @@ label type in `primaryDeep`, never a fill. Every section ends with a **RECALL bl
 self-check). The packet closes on a **Concept Review** page. Cue questions carry no writing line.
 Worked problems use `Given:` / `Find:` and an open bordered work box, at least 1.4 in tall — **never
 ruled lines.** Build with `--verify` so a spilled page fails the build. Layout, schema, and why:
-`templates/notes/README.md`. Blanks are sized to the expected answer; a one-word blank and a
-full-sentence blank must not look identical. Leave a margin note where a common misconception
+`templates/notes/README.md`. Write space and the no-inline-blanks rule: `brand/SHULL_DESIGN_SYSTEM.md`
+§11 (SHULL-CHG-0069). Leave a margin note where a common misconception
 lives, named plainly.
 
 **Always two files** — student copy and filled key — generated from the same source so they cannot

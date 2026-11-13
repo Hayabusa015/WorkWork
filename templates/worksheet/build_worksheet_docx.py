@@ -22,11 +22,13 @@ The profile is enforced here, at build time. A rule that only lives in a documen
 not a mechanism.
 
 A packet holds one or more sections, each starting a new page - the shape of his own
-PHYS U01 practice sets, which run one section per page across the whole unit.
+PHYS U01 practice sets, which run one section per page across the whole unit. The one
+exception is opt-in: an entry with "coversSections" stands for a span of one unit's
+sections under a single header, for a unit study guide (SHULL-CHG-0066).
 
 Colour comes from brand/tokens.json. No hex is typed in this file.
 """
-import json, os, sys
+import json, os, re, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
@@ -40,7 +42,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, debullet, known_sections, unit_title,
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
-    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich,
+    text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -229,29 +231,40 @@ def slots_block(doc, block, pal):
 
 def draw_block(cell, block, pal, width):
     """Blank panels to draw in, captioned underneath. The lighter cousin of `cards` -
-    used when there is nothing to cut, only something to show."""
+    used when there is nothing to cut, only something to show.
+
+    Two opt-outs, both defaulting to the old look so existing specs build unchanged:
+    `"numbered": false` drops the panel number printed in each box (it reads as a stray
+    "1" in a single panel under a numbered question), and `"captionStrip": false` drops
+    the ruled caption strip under each panel when there is nothing to caption.
+    """
     n = int(block.get("panels", 4))
     across = int(block.get("across", 4))
     col_w = round(width / across, 3)
     panel_h = float(block.get("panelHeightIn", 1.7))
+    numbered = block.get("numbered", True)
+    strip = block.get("captionStrip", True)
+    step = 2 if strip else 1
     label(cell, block.get("label", "DRAW IT"), pal)
     if block.get("instruction"):
         para(cell, block["instruction"], 9.5)
     captions = block.get("captions") or []
     rows = (n + across - 1) // across
-    t = cell.add_table(rows=rows * 2, cols=across)
+    t = cell.add_table(rows=rows * step, cols=across)
     fix_widths(t, [col_w] * across)
     for i in range(n):
         r, c = divmod(i, across)
-        panel = t.rows[r * 2].cells[c]
+        panel = t.rows[r * step].cells[c]
         borders(panel, pal.ink, sz=4)
-        no_split(t.rows[r * 2], panel_h)
-        # Just the number. No box, no square, no circle. SHULL-CHG-0015.
-        para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
-        under = t.rows[r * 2 + 1].cells[c]
-        borders(under, pal.hair, sz=4, edges=("bottom",))
-        cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
-        para(under, cap, 8, color=pal.label, first=True)
+        no_split(t.rows[r * step], panel_h)
+        if numbered:
+            # Just the number. No box, no square, no circle. SHULL-CHG-0015.
+            para(panel, str(i + 1), 9, bold=True, color=pal.ink, first=True)
+        if strip:
+            under = t.rows[r * step + 1].cells[c]
+            borders(under, pal.hair, sz=4, edges=("bottom",))
+            cap = captions[i] if i < len(captions) else block.get("captionPrompt", "")
+            para(under, cap, 8, color=pal.label, first=True)
     return t
 
 
@@ -318,6 +331,117 @@ def match_block(doc, block, pal):
     return c
 
 
+def chart_block(doc, block, pal):
+    """An open, multi-column data chart - one row per specimen or station.
+
+    Cards, slots, sort and match all assume a small fixed set of items. A
+    station-rotation chart is a different shape: many rows, several short answers per
+    row, one row per specimen the student rotates to. Geology's fossil-ID activity is
+    the first of these; a future rock/mineral specimen-ID chart in U3 is the same
+    shape again, which is why this is a block kind and not a one-off table drawn
+    straight into a spec.
+
+    Hairline borders on every cell - a real table, per SHULL_DESIGN_SYSTEM section 8
+    ("table rows use hairline borders, never alternating solid shading"), not a card
+    grid standing in for tabular data. The first column is a pre-printed row label (a
+    specimen number) rather than another blank: a rotation chart tells the student
+    which row is next, it does not ask them to number their own rows.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "DATA CHART"), pal, first=True)
+    if block.get("instruction"):
+        para(c, block["instruction"], 9.5)
+    cols = block["columns"]
+    rows = block.get("rowLabels") or [str(i + 1) for i in range(int(block.get("rows", 0)))]
+    ncols = len(cols)
+    total_w = TEXT_W_IN - 0.30
+    label_w = float(block.get("labelColIn", 0.50))
+    rest_w = round((total_w - label_w) / (ncols - 1), 3)
+    widths = [label_w] + [rest_w] * (ncols - 1)
+
+    t = c.add_table(rows=len(rows) + 1, cols=ncols)
+    fix_widths(t, widths)
+    no_split(t.rows[0])
+    for cc, col in zip(t.rows[0].cells, cols):
+        borders(cc, pal.ink, sz=6)
+        cell_margins(cc, top=45, bottom=45, left=60, right=60)
+        head = col if isinstance(col, str) else col["head"]
+        sub = None if isinstance(col, str) else col.get("sub")
+        para(cc, head, 7, bold=True, color=pal.accent, first=True)
+        if sub:
+            para(cc, sub, 6, color=pal.label)
+
+    row_h = float(block.get("rowHeightIn", 0.42))
+    for r, rl in enumerate(rows, 1):
+        no_split(t.rows[r], row_h)
+        for ci, cc in enumerate(t.rows[r].cells):
+            borders(cc, pal.hair, sz=4)
+            cell_margins(cc, top=35, bottom=35, left=60, right=60)
+            if ci == 0:
+                p = para(cc, str(rl), 9.5, bold=True, color=pal.ink, first=True)
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            else:
+                para(cc, "", 9.5, first=True)
+    unpad_cell(c)
+    return c
+
+
+def reference_block(doc, block, pal):
+    """A definitions/key reference list - the "see key" material a data-chart column
+    points back to (fossil types here; a mineral streak/hardness/cleavage glossary
+    reads the same way in U3). Term in the course accent colour, definition in body
+    ink.
+
+    An optional `flag` on an item renders a caution-coloured teacher note under its
+    definition. A source definition that is internally muddled is reproduced verbatim
+    - reformatting is not the same task as fact-checking - and the flag is how that
+    gets in front of the teacher instead of silently disappearing.
+    """
+    c = one_cell(doc)
+    borders(c, pal.hair, sz=4)
+    cell_margins(c, top=45, bottom=45, left=130, right=130)
+    label(c, block.get("label", "REFERENCE"), pal, first=True)
+    if block.get("instruction"):
+        para(c, block["instruction"], 9.5)
+    for item in block["items"]:
+        p = c.add_paragraph()
+        p.paragraph_format.space_after = Pt(5)
+        run(p, item["term"] + ":  ", 9.5, bold=True, color=pal.accent)
+        run(p, item["definition"], 9.5, color=pal.ink)
+        if item.get("flag"):
+            fp = c.add_paragraph()
+            fp.paragraph_format.space_after = Pt(6)
+            run(fp, "TEACHER NOTE — " + item["flag"], 8, italic=True,
+                color=T["semantic"]["caution"]["deep"])
+    unpad_cell(c)
+    return c
+
+
+def inline_heading(cell, block, pal):
+    """A block's `heading` without `pageBreakBefore`: a section title drawn at the top of
+    the block's own non-splitting cell, so it moves with the block and can never end a
+    page alone. With `pageBreakBefore` the main loop draws it instead. Returns whether
+    it drew one. Opt-in: reflection and plan only."""
+    if not block.get("heading") or block.get("pageBreakBefore"):
+        return False
+    p = para(cell, block["heading"], 13, bold=True, color=pal.ink, first=True)
+    p.paragraph_format.space_after = Pt(4)
+    pPr = p._p.get_or_add_pPr()
+    b = OxmlElement("w:pBdr"); x = OxmlElement("w:bottom")
+    x.set(qn("w:val"), "single"); x.set(qn("w:sz"), "18"); x.set(qn("w:space"), "2")
+    x.set(qn("w:color"), hexof(pal.display))
+    b.append(x)
+    # pBdr precedes spacing in CT_PPr; appended after it, Word can reject the file.
+    sp = pPr.find(qn("w:spacing"))
+    if sp is not None:
+        sp.addprevious(b)
+    else:
+        pPr.append(b)
+    return True
+
+
 def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
@@ -335,7 +459,8 @@ def reflection_block(doc, block, pal):
             # The heading goes INSIDE the first non-splitting row. Kept outside it, it
             # ended a page on its own with the question it introduces on the next one -
             # the same stranding the diagram block hit, one level up.
-            label(cc, block.get("label", "REFLECTION"), pal, first=True)
+            first = not inline_heading(cc, block, pal)
+            label(cc, block.get("label", "REFLECTION"), pal, first=first)
             p = cc.add_paragraph()
         else:
             p = cc.paragraphs[0]
@@ -536,9 +661,12 @@ def table_block(doc, block, pal, width=TEXT_W_IN):
         borders(hc, pal.ink, sz=8, edges=("bottom",))
         cell_margins(hc, top=20, bottom=30, left=60, right=60)
         para(hc, h, 8, bold=True, color=pal.label, caps_track=True, first=True)
+    # `minRowHeightIn` floors every data row's height: a table students write in. Opt-in;
+    # rows still grow with their text.
+    floor = block.get("minRowHeightIn")
     for ri, row in enumerate(rows, 1):
         tr = t.rows[ri]
-        no_split(tr)
+        no_split(tr, None if isinstance(row, dict) else floor)
         if isinstance(row, dict):
             merged = tr.cells[0].merge(tr.cells[-1])
             borders(merged, pal.display, sz=8, edges=("top",))
@@ -625,9 +753,15 @@ def plan_block(doc, block, pal):
     and a plan is prose. A field with flex 0 is a label only (a circle-one choice)."""
     c = one_cell(doc, protect=True)
     cell_margins(c, top=0, bottom=0, left=0, right=0)
-    label(c, block["label"], pal, first=True)
+    first = not inline_heading(c, block, pal)
+    label(c, block["label"], pal, first=first)
+    # `"boldLabels": false` sets a label in regular weight, so a short prompt can carry its
+    # own <b> lead ("<b>Earth</b> what covered the land?"). Width is measured bold either
+    # way: an over-estimate costs a sliver of line, an under-estimate wraps the label.
+    bold_labels = block.get("boldLabels", True)
     for row in block["rows"]:
-        lab_ws = [round(text_width_in(k.replace("&nbsp;", " "), 9.5, bold=True) + 0.14, 2)
+        lab_ws = [round(text_width_in(re.sub(r"</?[bi]>", "", k).replace("&nbsp;", " "),
+                                      9.5, bold=True) + 0.14, 2)
                   for k, _ in row]
         free = TEXT_W_IN - sum(lab_ws) - 0.2 * (len(row) - 1)
         flex = sum(n for _, n in row) or 1
@@ -647,7 +781,7 @@ def plan_block(doc, block, pal):
             cell_margins(tc, top=0, bottom=20, left=0, right=0)
             tc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
             if kind == "lab":
-                rich(tc.paragraphs[0], k, 9.5, bold=True, color=pal.ink)
+                rich(tc.paragraphs[0], k, 9.5, bold=bold_labels, color=pal.ink)
             elif kind == "line":
                 borders(tc, pal.ink, sz=4, edges=("bottom",))
             tc.paragraphs[0].paragraph_format.space_after = Pt(0)
@@ -817,6 +951,196 @@ def render_questions(doc, questions, pal, course, base_dir):
         gap(doc, 3)
 
 
+# --------------------------------------------------------------------- grid layout
+# Opt-in, per section or per spec: "layout": "grid". Short draw-only items set in a grid
+# of square drawing boxes, `columns` across, instead of one full-width card per item. A
+# spec that does not ask for it builds exactly as before.
+
+GRID_GUTTER_MIN_IN = 0.12
+GRID_ROW_GAP_PT = 10           # between one row's squares and the next row's prompts
+GRID_PROMPT_GAP_TW = 230        # a prompt stops this far short of the next one (twips)
+
+
+def label_bank(doc, entries, pal, label_text, cols=2):
+    """A bank of labels to write from, compact: each entry on one run-in line, its name in
+    tracked caps then the symbol in bold ink, `cols` across. The opt-in alternative to
+    the equation bar for a list of short labels ("equationStyle": "inline"), which the
+    bar's name-over-symbol layout spreads over twice the height."""
+    c = one_cell(doc)
+    para(c, label_text, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
+    cols = int(cols)
+    w = round(TEXT_W_IN / cols - 0.13, 2)
+    rows = (len(entries) + cols - 1) // cols
+    t = c.add_table(rows=rows, cols=cols)
+    fix_widths(t, [w] * cols)
+    for i, eq in enumerate(entries):
+        cell = t.rows[i % rows].cells[i // rows]     # down each column, then across
+        cell_margins(cell, top=10, bottom=20, left=0, right=60)
+        p = cell.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        if eq.get("note"):
+            r = run(p, eq["note"].upper() + "   ", 7.5, bold=True, color=pal.accent)
+            el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+            r._element.get_or_add_rPr().append(el)
+        for k, part in enumerate(re.split(r"_\{([^}]*)\}", eq.get("plain", ""))):
+            if part:
+                r = run(p, part, 10, bold=True, color=pal.ink)
+                if k % 2:
+                    r.font.subscript = True
+    return c
+
+
+def grid_opts(spec, sec):
+    """The grid settings for a section, or None when the section is not a grid.
+    A section's own value wins over the spec's."""
+    get = lambda k, d=None: sec.get(k, spec.get(k, d))
+    if get("layout", "cards") != "grid":
+        return None
+    cols = int(get("columns", 3))
+    square = float(get("squareIn", 2.2))
+    gutter = round((TEXT_W_IN - cols * square) / (cols - 1), 3) if cols > 1 else 0
+    return {"columns": cols, "square": square, "gutter": gutter,
+            "promptPt": float(get("gridPromptPt", 9.5)),
+            "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
+
+
+def grid_check(questions, g):
+    """Why these questions cannot be set as this grid, or None."""
+    if g["columns"] < 1 or g["square"] <= 0:
+        return "grid needs columns >= 1 and squareIn > 0."
+    if g["columns"] > 1 and g["gutter"] < GRID_GUTTER_MIN_IN:
+        return (f"{g['columns']} squares of {g['square']} in leave a {g['gutter']} in gutter "
+                f"on a {TEXT_W_IN} in page. Use smaller squares or fewer columns.")
+    for k, q in enumerate(questions, 1):
+        extra = [f for f in ("math", "answerLines", "parts", "diagram", "given", "need")
+                 if q.get(f)]
+        if extra:
+            return (f"question {k}: a grid cell holds a prompt and drawing squares only, "
+                    f"not {extra}.")
+        if grid_span(q) > g["columns"]:
+            return (f"question {k} needs {grid_span(q)} squares; the grid has "
+                    f"{g['columns']} columns.")
+    return None
+
+
+def grid_span(q):
+    """Squares an item takes: one per drawing panel (a two-object item takes two)."""
+    return max(1, int((q.get("draw") or {}).get("panels", 1)))
+
+
+def grid_rows(questions, columns):
+    """Items flowed left to right, in order. An item that does not fit the rest of a row
+    starts the next one. Returns rows of (number, question, first column, span)."""
+    rows, cur, col = [], [], 0
+    for n, q in enumerate(questions, 1):
+        span = grid_span(q)
+        if col + span > columns:
+            rows.append(cur); cur, col = [], 0
+        cur.append((n, q, col, span))
+        col += span
+    if cur:
+        rows.append(cur)
+    return rows
+
+
+def grid_widths(g):
+    w = []
+    for i in range(g["columns"]):
+        w.append(g["square"])
+        if i < g["columns"] - 1:
+            w.append(g["gutter"])
+    return w
+
+
+def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False, right=0):
+    """The item number, run in at the start of the prompt. The tier tag goes in the top
+    corner of the item's first square (`square`), so it costs the prompt no line."""
+    cell_margins(cell, top=0, bottom=40, left=0, right=right)
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    run(p, f"{n}.  ", 10.5, bold=True, color=pal.ink)
+    r = run(p, q["prompt"].replace("**", "") if italic else q["prompt"], prompt_pt,
+            color=prompt_color or pal.ink, italic=italic)
+    return p
+
+
+def tier_tag(p, tier, pal, colour=None):
+    """The tier word, as on a card: a bullet and the tracked caps tag, label grey."""
+    colour = colour or tier_colour(tier, pal)
+    run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
+    r = run(p, tier.upper(), TIER_PT, bold=True, color=colour)
+    el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+    r._element.get_or_add_rPr().append(el)
+
+
+def grid_table(doc, g, nrows):
+    """One grid row's table, inside a cantSplit cell so the prompts never part from their
+    squares at a page break."""
+    outer = one_cell(doc, protect=True)
+    cell_margins(outer, top=0, bottom=0, left=0, right=0)
+    t = outer.add_table(rows=nrows, cols=g["columns"] * 2 - 1)
+    fix_widths(t, grid_widths(g))
+    return outer, t
+
+
+def square(cell, pal, side, caption=None, tier=None):
+    """One square drawing box: the ink border on the cell itself, the row pinned to the
+    square's side. A caption (an item with two objects) sits inside the top left, the
+    tier tag inside the top right of the item's first square."""
+    borders(cell, pal.ink, sz=4)
+    cell_margins(cell, top=50, bottom=0, left=80, right=70)
+    if not (caption or tier):
+        return
+    p = cell.paragraphs[0]
+    p.paragraph_format.space_after = Pt(0)
+    p.paragraph_format.tab_stops.add_tab_stop(Inches(side - 0.11), WD_TAB_ALIGNMENT.RIGHT)
+    if caption:
+        r = run(p, caption, 7.5, bold=True, color=pal.accent)
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
+        r._element.get_or_add_rPr().append(el)
+    if tier:
+        run(p, "\t", TIER_PT)
+        tier_tag(p, tier, pal)
+
+
+def render_grid(doc, questions, pal, g):
+    """Draw-only items as a grid of square boxes, `columns` across.
+
+    Each grid row is two table rows: the prompts, top-aligned, then the squares, so every
+    square in a row lines up whatever the length of the prompt above it. A two-object
+    item takes two adjacent squares under one prompt, each captioned inside its top.
+    """
+    for gi, row in enumerate(grid_rows(questions, g["columns"])):
+        if gi:
+            gap(doc, g["rowGapPt"])
+        outer, t = grid_table(doc, g, 2)
+        for ri in range(2):
+            h = g["square"] if ri == 1 else None
+            trPr = t.rows[ri]._tr.get_or_add_trPr()
+            trPr.append(OxmlElement("w:cantSplit"))
+            if h:
+                e = OxmlElement("w:trHeight")
+                e.set(qn("w:val"), str(int(h * 1440))); e.set(qn("w:hRule"), "exact")
+                trPr.append(e)
+        for n, q, col, span in row:
+            # The prompt may run on across the gutter to its right, stopping short of the
+            # next prompt: a narrow column sets a long scenario two lines taller.
+            last = col + span == g["columns"]
+            head = t.rows[0].cells[col * 2]
+            end = (col + span - 1) * 2 + (0 if last else 1)
+            if end > col * 2:
+                head = head.merge(t.rows[0].cells[end])
+            head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+            grid_head(head, n, q, pal, prompt_pt=g["promptPt"],
+                      right=0 if last else GRID_PROMPT_GAP_TW)
+            caps = (q.get("draw") or {}).get("captions") or []
+            for k in range(span):
+                sq = t.rows[1].cells[(col + k) * 2]
+                square(sq, pal, g["square"], caps[k] if span > 1 and k < len(caps) else None,
+                       q.get("tier") if k == 0 else None)
+        unpad_cell(outer)
+
+
 # ------------------------------------------------------------------------- profiles
 
 def refuse(msg, *more):
@@ -824,6 +1148,62 @@ def refuse(msg, *more):
     for m in more:
         print("   " + m, file=sys.stderr)
     return 1
+
+
+# ------------------------------------------------------------------ section spans
+# SHULL-CHG-0066. One entry may cover several sections of one unit ("coversSections"), so
+# a unit study guide gets one header, one Name / Date / Period / Score row and one page
+# flow instead of a page per section. Opt-in: an entry without the key takes none of
+# these paths and builds exactly as before. The key builder imports both helpers, so the
+# student copy and the key read a span the same way.
+
+def span_codes(sec):
+    """The section codes an entry stands for: its `coversSections`, or just its `code`."""
+    return list(sec.get("coversSections") or [sec["code"]])
+
+
+def span_label(sec):
+    """The header code: `S2.3` for one section, `S2.1-S2.5` for a span (the footer's form)."""
+    codes = span_codes(sec)
+    return f"S{codes[0]}" if len(codes) == 1 else f"S{codes[0]}-S{codes[-1]}"
+
+
+def check_spans(spec, course, sections):
+    """Validate every entry that sets `coversSections`. Returns an error string or None.
+
+    The `sections` / `sectionsContent` agreement itself stays in main(), reworded so a
+    span contributes its listed codes. That rule is one fact, kept."""
+    unit = int(spec["unit"])
+    def num(c):
+        a, b = str(c).split(".")
+        return (int(a), int(b))
+    for sec in sections:
+        if "coversSections" not in sec:
+            continue
+        codes = sec["coversSections"]
+        where = f"section {sec.get('code')}"
+        if not isinstance(codes, list) or len(codes) < 2:
+            return (f"{where}: coversSections must list at least two section codes, "
+                    f"got {codes!r}. One section needs no span. SHULL-CHG-0066.")
+        codes = [str(c) for c in codes]
+        if sec.get("code") != codes[0]:
+            return (f"{where}: an entry's code must equal the first code it covers "
+                    f"({codes[0]}). SHULL-CHG-0066.")
+        foreign = [c for c in codes if c.split(".")[0] != str(unit)]
+        if foreign:
+            return (f"{where}: coversSections lists {', '.join(foreign)}, which "
+                    f"{'is' if len(foreign) == 1 else 'are'} not in Unit {unit}. A span stays "
+                    "inside one unit. SHULL-CHG-0066.")
+        lo, hi = num(codes[0]), num(codes[-1])
+        between = sorted((c for c in known_sections(course)
+                          if c.split(".")[0] == str(unit) and lo <= num(c) <= hi), key=num)
+        skipped = [c for c in between if c not in codes]
+        if skipped:
+            return (f"{where}: the header prints S{codes[0]}-S{codes[-1]}, but "
+                    f"coversSections skips {', '.join(skipped)} "
+                    f"(courses/{course}/DECISIONS.md). A range may not quietly omit a "
+                    "section. SHULL-CHG-0066.")
+    return None
 
 
 def check_profile(spec, course, sec):
@@ -835,7 +1215,7 @@ def check_profile(spec, course, sec):
     work_qs = [q for q in qs if q.get("math") or q.get("answerLines")]
     visual = ([q for q in qs if q.get("diagram") or q.get("draw")]
               + [b for b in blocks if b["kind"] in
-                 ("cards", "slots", "draw", "diagram", "sort", "match", "outline")])
+                 ("cards", "slots", "draw", "diagram", "sort", "match", "outline", "table")])
     where = f"section {sec['code']}"
 
     if course == "geology":
@@ -943,10 +1323,16 @@ def main():
         return refuse(f"section(s) {', '.join(bad)} are not in "
                       f"courses/{course}/DECISIONS.md.",
                       "Nothing is built against a code not in the decisions file.")
-    declared = [s["code"] for s in sections]
+    err = check_spans(spec, course, sections)
+    if err:
+        return refuse(err)
+    # Each entry contributes its own code, or every code it covers (SHULL-CHG-0066).
+    declared = [c for s in sections for c in span_codes(s)]
     if declared != list(spec["sections"]):
         return refuse(f"sections {spec['sections']} but content for {declared}. "
-                      "The two lists are the same fact and must agree.")
+                      "The two lists are the same fact and must agree."
+                      + (" SHULL-CHG-0066." if any("coversSections" in x for x in sections)
+                         else ""))
 
     for sec in sections:
         err = check_profile(spec, course, sec)
@@ -986,7 +1372,7 @@ def main():
              + (f" · {sec['eyebrowNote']}" if sec.get("eyebrowNote") else ""), 7.5, bold=True,
              color=pal.accent, caps_track=True, first=True)
         para(h, title, 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
+        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
                   caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         pp = para(hr, kind_label.replace("_", " ").upper()
@@ -995,7 +1381,7 @@ def main():
                   6.5, color=pal.label, caps_track=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
-    def id_row(labels, widths, total):
+    def id_row(labels, widths, total, blank_score=False):
         t = doc.add_table(rows=1, cols=len(labels))
         fix_widths(t, widths)
         for cc, lab in zip(t.rows[0].cells, labels):
@@ -1007,7 +1393,10 @@ def main():
                 p.paragraph_format.tab_stops.add_tab_stop(
                     Inches(widths[-1] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
                 run(p, "\t", 9)
-                run(p, f"/  {total}", 10, bold=True, color=pal.ink)
+                # `blankScore`: the sheet has no established point value, so the total
+                # is not invented on a student page; it prints as a blank to fill in.
+                run(p, "/  ________" if blank_score else f"/  {total}", 10,
+                    bold=True, color=pal.ink)
 
     if sheet_mode:
         # ---- The grading sheet: the same rubric rows, drawn as the teacher's sheet.
@@ -1052,8 +1441,24 @@ def main():
         total = (sum(int(q.get("points", 1)) for q in sec.get("questions", []))
                  + sum(rubric_total(spec) if b["kind"] == "rubric" else int(b.get("points", 0))
                        for b in sec.get("blocks", [])))
-        gap(doc, 5)
-        id_row(("NAME", "DATE", "PERIOD", "SCORE"), [3.05, 1.75, 1.10, 1.60], total)
+        # "compactTop": true (opt-in) tightens the gaps and the recall box's padding above
+        # the questions, for a sheet whose page budget is set by its drawing squares.
+        compact = sec.get("compactTop", spec.get("compactTop", False))
+        gap(doc, 3 if compact else 5)
+        id_row(("NAME", "DATE", "PERIOD", "SCORE"), [3.05, 1.75, 1.10, 1.60], total,
+               blank_score=bool(spec.get("blankScore") or sec.get("blankScore")))
+
+        # ---- Group members, for a partner or station-group activity. Optional and
+        # off by default - most sheets are individual work and carry no such line.
+        if spec.get("groupMembers") or sec.get("groupMembers"):
+            gap(doc, 3)
+            t = doc.add_table(rows=1, cols=1)
+            fix_widths(t, [TEXT_W_IN])
+            cc = t.rows[0].cells[0]
+            borders(cc, pal.ink, sz=4, edges=("bottom",))
+            cell_margins(cc, top=0, bottom=40, left=0, right=0)
+            para(cc, "GROUP MEMBERS", 6.5, bold=True, color=pal.label,
+                 caps_track=True, first=True)
 
         # ---- What this is about, before anything is asked of them.
         # A project handout has no concept to recall; its job line is the directions.
@@ -1071,9 +1476,10 @@ def main():
 
         pk = sec.get("priorKnowledge", spec.get("priorKnowledge"))
         if pk:
-            gap(doc, 4)
+            gap(doc, 3 if compact else 4)
             c = one_cell(doc); borders(c, pal.hair, sz=4)
-            cell_margins(c, top=70, bottom=70, left=130, right=130)
+            pad = 35 if compact else 70
+            cell_margins(c, top=pad, bottom=pad, left=130, right=130)
             label(c, pk.get("label", "BEFORE YOU START — YOU ALREADY KNOW THIS"),
                   pal, first=True)
             for x in pk["items"]:
@@ -1082,8 +1488,17 @@ def main():
         eqs = sec.get("equations", spec.get("equations")) or []
         if eqs:
             gap(doc, 2)
-            equation_bar(doc, eqs, pal,
-                         spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
+            if sec.get("equationStyle", spec.get("equationStyle")) == "inline":
+                label_bank(doc, eqs, pal,
+                           spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
+                           cols=sec.get("equationColumns", spec.get("equationColumns", 2)))
+            elif spec.get("equationColumns", sec.get("equationColumns")):
+                equation_bar(doc, eqs, pal,
+                             spec.get("equationLabel", "EQUATIONS YOU MAY USE"),
+                             cols=sec.get("equationColumns", spec.get("equationColumns")))
+            else:
+                equation_bar(doc, eqs, pal,
+                             spec.get("equationLabel", "EQUATIONS YOU MAY USE"))
 
         if sec.get("directions"):
             gap(doc, 2)
@@ -1091,8 +1506,15 @@ def main():
             label(c, sec.get("directionsLabel", "DIRECTIONS"), pal, first=True)
             para(c, sec["directions"], 9.5)
 
-        gap(doc, 4)
-        render_questions(doc, sec.get("questions", []), pal, course, HERE)
+        gap(doc, 2 if compact else 4)
+        g = grid_opts(spec, sec)
+        if g:
+            err = grid_check(sec.get("questions", []), g)
+            if err:
+                return refuse(f"section {sec['code']}: {err}")
+            render_grid(doc, sec.get("questions", []), pal, g)
+        else:
+            render_questions(doc, sec.get("questions", []), pal, course, HERE)
 
         for bi, block in enumerate(sec.get("blocks", [])):
             kindb = block["kind"]
@@ -1126,7 +1548,11 @@ def main():
             elif kindb == "list":
                 list_block(doc, block, pal)
             elif kindb == "table":
-                table_block(doc, block, pal)
+                # Two shapes share the kind: a reference table gives `headers`; a
+                # station data chart (rows to fill in) gives `columns`.
+                (chart_block if "columns" in block else table_block)(doc, block, pal)
+            elif kindb == "reference":
+                reference_block(doc, block, pal)
             elif kindb == "notes":
                 notes_block(doc, block, pal)
             elif kindb == "formats":

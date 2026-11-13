@@ -46,6 +46,15 @@ is empty on purpose — it gets filled live on the board.
 ## The rules the layouts encode
 
 - **One must-write bar per slide, never two.** Two write-this cues means students copy neither.
+- **The bar says where it goes in the notes** (SHULL-CHG-0054). On a slide spec, `"notes": "Two
+  Numbers Tell You Everything"` hangs a tab under the bar reading *✎ IN YOUR NOTES: Two Numbers
+  Tell You Everything*. That is the title of the notes block it fills, which is this slide's
+  headline. `"notes": false` marks a slide with nothing new to write, such as a solution slide:
+  the bar's label reads *CHECK ONLY* and the tab *CHECK YOUR WORK · nothing new to write*. A deck
+  spec with a `"notesPacket"` must say one or the other on every slide with a bar, or the build
+  refuses. Only 03, 07, 09 and 10 have a bar, so a slide students write from uses one of them.
+  The tab is a single 16pt line, right-aligned, in the 0.28 in the masters leave above the footer
+  (`SLOTS[master].notestab`). The notes half of the rule: `templates/notes/README.md`.
 - **Dark grounds are structural** — 01, 02, 04, 12. Content slides are light. 06 is the single
   deliberate exception.
 - **Reserve, don't layer.** A block reserves its height and text flows in what remains. Placing
@@ -71,6 +80,16 @@ Images come from the loop in `SHULL_Slide_System_v2.md` §5: Claude supplies a p
 user generates and saves it, Claude places it. Anything a student *reads* as science — a diagram
 with a number, a label, or a formula — is built, never generated.
 
+## Spec markup and notes
+
+Optional, backwards-compatible; documented at the top of `build_deck.js`.
+
+- `^{...}` is a superscript run and `_{...}` a subscript run inside any field: `Mg^{2+}`, `10^{-19} J`, `3d^{5}`, `H_{2}O`. No nesting.
+- The run is a baseline-shift attribute at the placeholder's own size, font and colour. No Unicode superscript glyphs.
+- Line caps and the 110-char must-write check count the text with markup stripped.
+- `"notes": "..."` on a slide object writes that slide's speaker notes. Absent means no notes part.
+- `scripts/audit_slide_geometry.py` over-counts lines on marked-up text (it counts each run as a line). Visually check the raster.
+
 ## QA
 
 ```bash
@@ -88,3 +107,43 @@ render would be inspecting a different document than the one that ships.
 
 **Neither check replaces looking at the raster.** Both open findings in the change record were found
 mechanically; the two box collisions in finding 7 were found by eye first.
+
+## Click builds
+
+`build_deck.js` (pptxgenjs) cannot write animations. Orbital diagrams that must be built one click
+at a time (boxes fly in, then one electron arrow per click in Hund and Pauli order, or one arrow
+leaving or arriving per click for an ion) are added by a **post-processor**, never by the masters or
+the deck builder:
+
+```bash
+cd templates/slide
+SHULL_COURSE=chemistry node build_deck.js decks/<spec>.json /tmp/<deck>.pptx      # 1. static deck
+python3 ../../scripts/add_click_builds.py /tmp/<deck>.pptx decks/<spec>.builds.json \
+        ../../deliverables/<unit>/<final>.pptx                                  # 2. animated deliverable
+```
+
+Rules for the two files:
+
+- The build slide must leave its slot **empty**: omit that slide's `images` entry in `<spec>.json`
+  (the post-processor also deletes any picture inside the slot). The PNG figure script can keep
+  drawing the static figure for print.
+- `<spec>.builds.json` lists one object per build slide: 1-based `slide`, the `layout` name (asserted),
+  the `region` (a slot name; coordinates come from `build.js` `SLOTS`, never typed), `title`,
+  `sublevels` (`label`, `boxes`, `electrons`, Aufbau order), optional `z` and `core`, `start`
+  (`empty` fills by clicks, `filled` flies the atom in whole), `captions` (`hund`, `pauli`), and for
+  ions `steps` (`{"remove": n}` or `{"add": n}` with an optional `caption`). The script's docstring is
+  the field reference.
+- Arrow order, caps, Aufbau order, Pauli, Hund and electron totals (against Z, using the S2.3 checker's
+  ground-state table) are computed and asserted by the script. A spec that cannot be filled legally fails
+  the run. Ions remove valence-first (highest n, then highest l: 4s before 3d).
+- The script appends `CLICK BUILD: N clicks: ...` to each changed slide's teacher notes, so the count in
+  the notes is the count in the file.
+- Verify: `python3 scripts/add_click_builds.py deck.pptx spec.builds.json out.pptx --preview K [--slide N]`
+  writes a static copy showing the state after K clicks, for rasterising intermediate states.
+  Then run the geometry audit and `pdffonts` as above. The animation was checked by script and by
+  LibreOffice import; it has not been played in PowerPoint, Keynote or Google Slides.
+- **Print / PDF / handout:** the animated deck shows every build state at once in any non-slideshow view.
+  For those, run step 2 again with `--static` (`... builds.json out_Static.pptx --static`): no animation, each
+  build slide shows only its final state (docstring: "Static final-state mode"). Name it with the descriptor
+  `_Static` after the section code, e.g. `SHULL_CHEM_Slides_U02_S02.3_Static.pptx`.
+- A rebuild from `build_deck.js` drops the animation. Always re-run step 2 after step 1.

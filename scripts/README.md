@@ -30,6 +30,7 @@
 | `repack_pptx.py` | Recompresses a `.pptx` — pptxgenjs writes its zip almost uncompressed | the `.pptx` itself |
 | `image_prompts.py` | Lists every unfilled image slot in a deck spec, with a prompt for each | a deck spec |
 | `key_solution.py` | One question's worked solution in the key-handwriting face (SHULL-CHG-0043 Stage 2) | a solution spec; used by key builders, never run on its own |
+| `build_app_icon.py` | `build/icon.ico` — the Windows app and installer icon | `build/icon-source.png` |
 
 All of these write build artifacts. Never hand-edit one; re-run the script. `build_app_css.py --check`
 fails when the generated theme has drifted from the tokens, and is the reason

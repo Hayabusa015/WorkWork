@@ -25,12 +25,35 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-10
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0070 | 2026-11-10 | Reference packet: VSEPR grid, solubility X | CONFIRMED | `governance/proposals/SHULL-CHG-0070-reference-vsepr-grid-and-solubility-x.md` |
+## 2026-11-12
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0073 | 2026-11-12 | Physics 3.1 short title, lab exceptions, inventory | PARTIAL | `governance/proposals/SHULL-CHG-0073-physics-3.1-short-title-and-lab-exceptions.md` |
+
+## 2026-11-11
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0072 | 2026-11-11 | Physics fallback face for math symbols | PARTIAL | `governance/proposals/SHULL-CHG-0072-physics-math-symbol-fallback-face.md` |
+| SHULL-CHG-0071 | 2026-11-11 | Key images (`fbd` scene) and Physics U3 FBD set | PARTIAL | `governance/proposals/SHULL-CHG-0071-physics-u3-fbd-set-and-key-images.md` |
+| SHULL-CHG-0070 | 2026-11-11 | Physics net force written as sum notation | PARTIAL | `governance/proposals/SHULL-CHG-0070-physics-sum-of-forces-notation.md` |
+| SHULL-CHG-0069 | 2026-11-11 | Guided notes: no inline underscore blanks | PARTIAL | `governance/proposals/SHULL-CHG-0069-notes-no-inline-blanks.md` |
+| SHULL-CHG-0068 | 2026-11-11 | Physics U3 follows the deck's six sections | PARTIAL | `governance/proposals/SHULL-CHG-0068-physics-u3-six-sections.md` |
+
 ## 2026-11-09
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0068 | — | Print documents: six format fixes | PROPOSED | `governance/proposals/SHULL-CHG-0068-print-document-format-fixes.md` |
 | SHULL-CHG-0067 | 2026-11-09 | QA gate names the slide audit script | CONFIRMED | `governance/proposals/SHULL-CHG-0067-qa-gate-names-the-audit-scripts.md` |
 | SHULL-CHG-0066 | 2026-11-09 | Slide template: four fixes from the sample deck | CONFIRMED | `governance/proposals/SHULL-CHG-0066-slide-template-four-fixes.md` |
+| SHULL-CHG-0066 | 2026-11-09 | One worksheet entry may cover a section span | APPROVED | `governance/proposals/SHULL-CHG-0066-study-guide-unit-span.md` |
 
 ## 2026-11-08
 
@@ -45,6 +68,15 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0059 | 2026-11-08 | Remove the answer leak from Physics S1.1 student notes | APPROVED | `governance/proposals/SHULL-CHG-0059-physics-s1.1-answer-leak.md` |
 | SHULL-CHG-0058 | 2026-11-08 | Geology U1 section-code offset becomes open question 7 | APPROVED | `governance/proposals/SHULL-CHG-0058-geology-u1-numbering-offset.md` |
 
+## 2026-11-06
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0069 | 2026-11-06 | Course-level filename form for whole-year documents | CONFIRMED | `governance/proposals/SHULL-CHG-0069-course-wide-reference-filename.md` |
+| SHULL-CHG-0068 | 2026-11-06 | Chemistry reference packet becomes twelve sheets | CONFIRMED | `governance/proposals/SHULL-CHG-0068-chemistry-reference-packet.md` |
+
 ## 2026-11-05
 
 | ID | Date | Change | Status | Record |
@@ -58,6 +90,16 @@ supersedes it, exactly as the decision logs work.
 |---|---|---|---|---|
 | SHULL-CHG-0055 | 2026-10-28 | Worksheet tier tags set in the muted label grey | CONFIRMED | `governance/proposals/SHULL-CHG-0055-worksheet-tier-tags-grey.md` |
 | SHULL-CHG-0054 | 2026-10-28 | Chemistry palette: Lab Lime + Aqua becomes Kinetic Orange | PARTIAL | `governance/proposals/SHULL-CHG-0054-chemistry-kinetic-orange.md` |
+## 2026-10-23
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | 2026-10-23 | Guided notes follow the slides: every block names its slide | CONFIRMED | `governance/proposals/SHULL-CHG-0054-notes-follow-slides.md` |
+## 2026-10-26
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0054 | 2026-10-26 | Chemistry U3: quiz replaces unit test; 3.5 dropped | CONFIRMED | `governance/proposals/SHULL-CHG-0054-chem-u3-short-unit.md` |
 
 ## 2026-10-22
 
@@ -76,6 +118,13 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 | SHULL-CHG-0048 | 2026-10-22 | scripts/README.md documented 12 of 32 scripts; now documents all of them | CONFIRMED | `governance/proposals/SHULL-CHG-0048-scripts-readme-undocumented.md` |
 | SHULL-CHG-0047 | 2026-10-22 | Three READMEs still said "Status: not yet written" for files long since written | CONFIRMED | `governance/proposals/SHULL-CHG-0047-not-yet-written-readmes.md` |
 | SHULL-CHG-0046 | 2026-10-22 | Phase 13 status stale in CLAUDE.md and the implementation plan (4th occurrence) | CONFIRMED | `governance/proposals/SHULL-CHG-0046-phase-13-status-stale.md` |
+## 2026-10-21
+
+`PENDING` in a record is `PROPOSED` here. The Date column stays empty until the user approves.
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0046 | 2026-10-21 | Teacher keys list every equivalent form of a direction answer | IMPLEMENTED | `governance/proposals/SHULL-CHG-0046-equivalent-directions-on-keys.md` |
 
 ## 2026-10-16
 
@@ -98,11 +147,17 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 | SHULL-CHG-0027 | 2026-10-15 | Filing gate: file to Drive only after user approval | CONFIRMED | `governance/proposals/SHULL-CHG-0027-filing-gate.md` |
 | SHULL-CHG-0026 | 2026-10-15 | gws uploads built files to an Upload Inbox; connector files them | CONFIRMED | `governance/proposals/SHULL-CHG-0026-gws-upload-inbox.md` |
 | SHULL-CHG-0025 | 2026-10-15 | Humanize skill and structural prose tells | CONFIRMED | `governance/proposals/SHULL-CHG-0025-humanize-skill.md` |
+## 2026-09-22
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-09-22 | Classroom builds enter at the Overseer | PARTIAL | `governance/proposals/SHULL-CHG-0024-overseer-routes-classroom-builds.md` |
 
 ## 2026-09-20
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-09-20 | SHULL OS gains its own identity colour | CONFIRMED | `governance/proposals/SHULL-CHG-0024-app-identity-colour.md` |
 | SHULL-CHG-0023 | 2026-09-20 | Guided notes are strictly recall; no questions | CONFIRMED | `governance/proposals/SHULL-CHG-0023-notes-are-recall.md` |
 
 ## 2026-09-23
@@ -123,6 +178,7 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 |---|---|---|---|---|
 | SHULL-CHG-0030 | 2026-09-16 | Tests-Quizizz renamed Quiz, moves to Unit level; Homework folder removed, filed loose in Section | IMPLEMENTED | `governance/proposals/SHULL-CHG-0030-quiz-unit-level-no-homework-folder.md` |
 | SHULL-CHG-0029 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0029-unit-level-guided-notes-presentations.md` |
+| SHULL-CHG-0023 | 2026-09-16 | Cognitive-load research made checkable: text/diagram adjacency, line-length, decoration rationale, new QA_GATE check | CONFIRMED | `governance/proposals/SHULL-CHG-0023-cognitive-load-visual-design.md` |
 
 ## 2026-09-09 · 2026-09-08
 

@@ -1,0 +1,754 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.1",
+  "sectionTitle": "Forces and Motion (Unit 3, all sections)",
+  "note": "Unit-level deck: sections 3.1-3.7 combined at Matt's request. 'section' is 3.1 only to satisfy the build's code check; every slide carries its own section footer.",
+  "slides": [
+    {
+      "master": "01_UNIT_TITLE",
+      "fields": {
+        "headline": "Unit 3\nForces and Motion",
+        "subhead": "Newton's laws, free body diagrams, inclines, F = ma, friction, and pulleys.",
+        "code": "U03"
+      },
+      "imageSubjects": {
+        "hero": "a loaded freight cart on a ramp with a rope and pulley, dramatic side light"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "3.1\nNewton's Laws",
+        "subhead": "Measure forces in newtons, separate mass from weight, and use Newton's three laws.",
+        "code": "U03 • S03.1"
+      },
+      "imageSubjects": {
+        "section": "a cast-iron weight hanging from a spring scale against a dark wall"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "What Is a Force?",
+        "subhead": "Every force you draw this unit has two parts: a size and a direction.",
+        "a1_l": "PUSH OR PULL",
+        "a1_b": "A force is a push or a pull on an object.",
+        "a2_l": "NEWTONS (N)",
+        "a2_b": "1 N is about the weight of a small apple.",
+        "a3_l": "ALWAYS A DIRECTION",
+        "a3_b": "Force is a vector: a size plus a direction.",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s31_force.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Mass vs. Weight",
+        "subhead": "They are not the same quantity, and they do not use the same unit.",
+        "c1_l": "MASS",
+        "c1_b": "Amount of matter, in kg.\nThe same everywhere.",
+        "c2_l": "WEIGHT",
+        "c2_b": "Pull of gravity, in N.\nW = mg, g = 9.8 m/s²\nChanges with location.",
+        "mustwrite": "Weight is a force: W = mg, in newtons. Mass is in kilograms.",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_mass_weight.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Weight on Earth and on the Moon",
+        "subhead": "On the Moon, g = 1.6 m/s².",
+        "problem": "A 60 kg student stands on Earth, then on the Moon. Find the weight in each place.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 60 kg\ng Earth = 9.8 m/s²\ng Moon = 1.6 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "W = mg",
+        "answer": "Earth: 588 N down  ·  Moon: 96 N down",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s31_weight_problem.png"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Newton's First Law",
+        "subhead": "An object keeps its velocity unless a net force acts on it. Fnet = 0 is equilibrium: at rest or at constant velocity.",
+        "keyq": "A puck slides at constant speed. Net force? Zero.",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_puck.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Newton's Second Law",
+        "subhead": "A net force makes an object accelerate. We put numbers on it in 3.4.",
+        "c1_l": "MORE FORCE",
+        "c1_b": "Same mass, bigger push.\nMore acceleration.",
+        "c2_l": "MORE MASS",
+        "c2_b": "Same push, bigger mass.\nLess acceleration.",
+        "mustwrite": "A net force causes acceleration. No net force, no acceleration.",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_second_law.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Newton's Third Law",
+        "subhead": "For every force, the other object pushes back equally, in the opposite direction.",
+        "c1_l": "A THIRD-LAW PAIR",
+        "c1_b": "Book pushes on table.\nTable pushes on book.\nTwo different objects.",
+        "c2_l": "BALANCED, NOT A PAIR",
+        "c2_b": "W and N both act\non the book.\nSame object: not a pair.",
+        "mustwrite": "Action-reaction pairs act on different objects, so they never cancel.",
+        "code": "U03 • S03.1"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_third_law.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "02",
+        "headline": "3.2\nFree Body Diagrams",
+        "subhead": "Draw free body diagrams, find the net force, and break angled forces into components.",
+        "code": "U03 • S03.2"
+      },
+      "imageSubjects": {
+        "section": "a tug-of-war rope pulled taut across a gym floor"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Drawing a Free Body Diagram",
+        "subhead": "One arrow per force, never one for motion. Friction waits until 3.6.",
+        "a1_l": "THE RULES",
+        "a1_b": "A box or dot, one labeled arrow per force, to scale.",
+        "a2_l": "FORCE TYPES",
+        "a2_b": "Weight W, normal N, applied F_app, tension T.",
+        "a3_l": "TENSION",
+        "a3_b": "A rope only pulls, along the rope, away from the object.",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s32_rules.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Draw the FBDs",
+        "subhead": "Both objects are at rest, so the forces on each one balance.",
+        "problem": "Draw and label FBDs: a 2.0 kg book on a table, and a 1.5 kg lamp hanging from a cord.",
+        "q1_l": "GIVEN",
+        "q1_b": "Book: m = 2.0 kg\nLamp: m = 1.5 kg\nBoth at rest",
+        "q2_l": "EQUATION",
+        "q2_b": "W = mg\nAt rest: Fnet = 0",
+        "answer": "Book: N = W = 19.6 N  ·  Lamp: T = W = 14.7 N",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_draw_problem.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Net Force in One Dimension",
+        "subhead": "Add the forces along each axis, with signs.",
+        "c1_l": "SIGN CONVENTION",
+        "c1_b": "Right and up are +.\nLeft and down are −.\nState it every time.",
+        "c2_l": "ADD BY AXIS",
+        "c2_b": "Fnet,x: the horizontals.\nFnet,y: the verticals.\nNever mix the two.",
+        "mustwrite": "Net force is the sum of every force, with signs: Fnet = F1 + F2 + ...",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s32_net1d.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Net Force and Equilibrium",
+        "subhead": "Use +x right and +y up.",
+        "problem": "Find the net force on the crate, then the one force that would put it in equilibrium.",
+        "q1_l": "GIVEN",
+        "q1_b": "50 N right, 20 N left\n40 N up, 40 N down",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet,x = 50 − 20\nFnet,y = 40 − 40",
+        "answer": "Fnet = 30 N right  ·  Balancing force: 30 N left",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_crate_problem.png"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Resultant and Angle",
+        "subhead": "When Fnet,x and Fnet,y are both nonzero, combine them into one force.",
+        "f1_l": "FORMULA",
+        "f1_b": "F = √(Fx² + Fy²)\nangle = tan inverse (Fy/Fx)\nmeasured from +x",
+        "work": "F = √(40² + 30²)\n= 50 N\nangle = 37° above +x",
+        "mustwrite": "A resultant needs a size and a direction. State both, every time.",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "data": "../assets/phys_u03/s32_resultant.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Forces at Angles",
+        "subhead": "Break an angled force into the part along x and the part along y.",
+        "a1_l": "X-COMPONENT",
+        "a1_b": "Fx = F cos(angle) = 100 cos 30° = 87 N",
+        "a2_l": "Y-COMPONENT",
+        "a2_b": "Fy = F sin(angle) = 100 sin 30° = 50 N",
+        "a3_l": "CHECK",
+        "a3_b": "√(87² + 50²) = 100 N. The parts rebuild the force.",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s32_components.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "One Angled Force, One Straight",
+        "subhead": "Seen from above, on frictionless ice. Use +x right.",
+        "problem": "Two ropes pull a crate: 80 N at 40° above +x, and 30 N toward −x. Find the net force.",
+        "q1_l": "GIVEN",
+        "q1_b": "80 N at 40°\n30 N toward −x",
+        "q2_l": "EQUATION",
+        "q2_b": "Fx = F cos(angle)\nFy = F sin(angle)",
+        "answer": "Fnet = 60 N at 59° above +x",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_two_force_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Two Angled Forces",
+        "subhead": "Seen from above. Angles are measured from the x-axis.",
+        "problem": "Two tugboats pull a barge: 500 N at 30° above +x, 400 N at 45° above −x. Find Fnet.",
+        "q1_l": "GIVEN",
+        "q1_b": "500 N at 30° (+x)\n400 N at 45° (−x)",
+        "q2_l": "EQUATION",
+        "q2_b": "Sum Fx, sum Fy, then\nF = √(Fx² + Fy²)",
+        "answer": "Fnet = 554 N at 74° above +x",
+        "code": "U03 • S03.2"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s32_two_angled_problem.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "03",
+        "headline": "3.3\nInclined Plane FBDs",
+        "subhead": "Tilt the axes and split the weight into parts along and into the slope.",
+        "code": "U03 • S03.3"
+      },
+      "imageSubjects": {
+        "section": "a wooden ramp leaning against a loading dock in low light"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Tilt the Axes on a Slope",
+        "subhead": "The angle between W and the tilted y-axis equals the ramp angle.",
+        "a1_l": "TILT THE AXES",
+        "a1_b": "x along the slope, y perpendicular to the slope.",
+        "a2_l": "ALONG THE SLOPE",
+        "a2_b": "mg sin(angle), pointing down the slope.",
+        "a3_l": "INTO THE SLOPE",
+        "a3_b": "mg cos(angle), pressing into the surface.",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s33_components.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Normal Force Is Not the Weight",
+        "subhead": "The steeper the ramp, the less the surface pushes back.",
+        "c1_l": "NEARLY FLAT",
+        "c1_b": "N gets close to mg.\nAlmost nothing pulls\nthe block along.",
+        "c2_l": "NEARLY VERTICAL",
+        "c2_b": "N gets close to 0.\nThe pull along the\nslope nears mg.",
+        "mustwrite": "On an incline, N = mg cos(angle), not mg.",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s33_angle_extremes.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a 30° Ramp",
+        "subhead": "Frictionless. Tilt your axes before you calculate anything.",
+        "problem": "A 5.0 kg block sits on a 30° ramp. Draw its FBD. Find both weight components and N.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 5.0 kg\nangle = 30°\nW = 49 N",
+        "q2_l": "EQUATION",
+        "q2_b": "along: mg sin(angle)\ninto: mg cos(angle)",
+        "answer": "Along: 24.5 N  ·  Into: 42.4 N  ·  N = 42.4 N",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s33_block_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Net Force Along the Slope",
+        "subhead": "Frictionless. The push is parallel to the ramp.",
+        "problem": "A worker pushes a 12 kg crate up a 25° ramp with 30 N. Find the net force along the ramp.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 12 kg, angle = 25°\npush = 30 N up the ramp",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = mg sin(angle) − 30",
+        "answer": "Fnet = 19.7 N down the ramp",
+        "code": "U03 • S03.3"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s33_push_problem.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "04",
+        "headline": "3.4\nF = ma Calculations",
+        "subhead": "Use Newton's second law to connect net force, mass, and acceleration.",
+        "code": "U03 • S03.4"
+      },
+      "imageSubjects": {
+        "section": "a lab cart on a track with a hanging mass at the far end"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Newton's Second Law: Fnet = ma",
+        "subhead": "The acceleration is in the direction of the net force.",
+        "f1_l": "FORMULA",
+        "f1_b": "Fnet = ma\n1 N = 1 kg·m/s²\na = Fnet/m",
+        "work": "a = 12 N / 4.0 kg\n= 3.0 m/s²\nto the right",
+        "mustwrite": "Fnet = ma. Use the net force, never a single force.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "data": "../assets/phys_u03/s34_cart_example.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Two Opposing Forces",
+        "subhead": "Use forward as positive.",
+        "problem": "A 1500 kg car has 4500 N of engine force forward and 1200 N of drag. Find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 1500 kg\n4500 N forward\n1200 N backward",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = 4500 − 1200\na = Fnet/m",
+        "answer": "a = 2.2 m/s² forward",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s34_car_problem.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Reading an F vs. a Graph",
+        "subhead": "Plot net force against acceleration for one object.",
+        "a1_l": "AXES",
+        "a1_b": "Net force on y, acceleration on x.",
+        "a2_l": "SLOPE",
+        "a2_b": "rise/run = ΔF/Δa = m, in kilograms.",
+        "a3_l": "THROUGH THE ORIGIN",
+        "a3_b": "Zero net force gives zero acceleration.",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s34_graph_concept.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Mass from a Graph",
+        "subhead": "Use two points far apart on the line.",
+        "problem": "The graph shows net force against acceleration for one cart. Find the cart's mass.",
+        "q1_l": "GIVEN",
+        "q1_b": "Read two points\noff the line",
+        "q2_l": "EQUATION",
+        "q2_b": "m = slope = ΔF/Δa",
+        "answer": "m = 8.0 N / 3.2 m/s² = 2.5 kg",
+        "code": "U03 • S03.4"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s34_graph_problem.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "05",
+        "headline": "3.5\nNet Force & Acceleration",
+        "subhead": "Go from a free body diagram to a net force to an acceleration.",
+        "code": "U03 • S03.5"
+      },
+      "imageSubjects": {
+        "section": "an elevator shaft seen from below, cables catching the light"
+      }
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "From FBD to Acceleration",
+        "subhead": "Example: a 10 kg cart is pulled 50 N right and 20 N left.",
+        "s1_l": "Draw",
+        "s1_b": "FBD, every force labeled.",
+        "s2_l": "Axes",
+        "s2_b": "Pick + and write it down.",
+        "s3_l": "Sum",
+        "s3_b": "Fnet = 50 − 20 = 30 N",
+        "s4_l": "Solve",
+        "s4_b": "a = 30/10 = 3.0 m/s²",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "band": "../assets/phys_u03/s35_chain.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Pulling at an Angle",
+        "subhead": "Frictionless ice. Only the horizontal part of the pull speeds it up.",
+        "problem": "A 20 kg sled is pulled with 60 N at 35° above horizontal. Find a and the normal force.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 20 kg\n60 N at 35°",
+        "q2_l": "EQUATION",
+        "q2_b": "a = F cos(angle)/m\nN = mg − F sin(angle)",
+        "answer": "a = 2.5 m/s² right  ·  N = 162 N",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_sled_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Sliding Down a Frictionless Ramp",
+        "subhead": "Use down the slope as positive.",
+        "problem": "An 8.0 kg box slides down a frictionless 20° ramp. Find its acceleration.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 8.0 kg\nangle = 20°",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = mg sin(angle)\na = g sin(angle)",
+        "answer": "a = 3.4 m/s² down the ramp",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_incline_problem.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Elevators and Apparent Weight",
+        "subhead": "A bathroom scale measures how hard it pushes up on you.",
+        "c1_l": "WHAT THE SCALE READS",
+        "c1_b": "The normal force N,\nnot your weight.",
+        "c2_l": "AT REST OR CONSTANT v",
+        "c2_b": "Fnet = 0, so N = mg.\nThe scale reads your\ntrue weight.",
+        "mustwrite": "Accelerating elevator: N − mg = ma, with up as positive.",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s35_elevator_concept.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Elevator Speeding Up, Going Up",
+        "subhead": "Use up as positive. True weight: 686 N.",
+        "problem": "A 70 kg person stands on a scale in an elevator accelerating up at 2.0 m/s². Find the reading.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 70 kg\na = +2.0 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "N − mg = ma\nN = m(g + a)",
+        "answer": "Scale reads 826 N, more than 686 N",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_elevator_up.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Elevator Accelerating Down",
+        "subhead": "Use up as positive, so the acceleration is negative.",
+        "problem": "The same 70 kg person rides an elevator accelerating down at 2.0 m/s². Find the reading.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 70 kg\na = −2.0 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "N − mg = ma\nN = m(g − 2.0)",
+        "answer": "Scale reads 546 N, less than 686 N",
+        "code": "U03 • S03.5"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_elevator_down.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "06",
+        "headline": "3.6\nFrictional Forces",
+        "subhead": "Find friction from the normal force, and decide whether an object slides.",
+        "code": "U03 • S03.6"
+      },
+      "imageSubjects": {
+        "section": "a heavy wooden crate on a rough concrete floor, scuff marks behind it"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Friction",
+        "subhead": "Friction acts along the surface and opposes sliding.",
+        "k1_l": "DIRECTION",
+        "k1_b": "Along the surface,\nagainst the sliding\n(or the would-be sliding).",
+        "k2_l": "STATIC",
+        "k2_b": "Holds a resting object.\nMatches the push, up to\nfs,max = μs N.",
+        "k3_l": "KINETIC",
+        "k3_b": "Acts while sliding.\nfk = μk N, constant.\nUsually less than fs,max.",
+        "mustwrite": "Friction = μN. It depends on the normal force, not directly on the weight.",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "aside": "../assets/phys_u03/s36_friction_aside.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Constant Velocity",
+        "subhead": "Constant velocity means Fnet = 0, so friction equals the push.",
+        "problem": "A 40 kg box is pushed across the floor at constant velocity with 120 N. Find μk.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 40 kg\npush = 120 N\nconstant velocity",
+        "q2_l": "EQUATION",
+        "q2_b": "fk = push\nμk = fk/N",
+        "answer": "μk = 120 N / 392 N = 0.31",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_constant_v.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Will It Move?",
+        "subhead": "Compare the push with the maximum static friction first.",
+        "problem": "A 25 kg box is pushed with 90 N. Does it move? If the push rises to 110 N, find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 25 kg\nμs = 0.40, μk = 0.30",
+        "q2_l": "EQUATION",
+        "q2_b": "fs,max = μs N\nfk = μk N",
+        "answer": "90 N: no motion  ·  110 N: a = 1.5 m/s²",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_static.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Pulling at an Angle with Friction",
+        "subhead": "The upward part of the pull lowers N, and lowers friction.",
+        "problem": "A 30 kg crate is pulled with 150 N at 30° above horizontal. μk = 0.25. Find N and a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 30 kg, μk = 0.25\n150 N at 30°",
+        "q2_l": "EQUATION",
+        "q2_b": "N = mg − F sin(angle)\nFnet = F cos(angle) − μk N",
+        "answer": "N = 219 N  ·  a = 2.5 m/s²",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_angle_pull.png"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Friction on an Incline",
+        "subhead": "Same tilted axes as 3.3, plus one more force along the slope.",
+        "a1_l": "FRICTION'S DIRECTION",
+        "a1_b": "Up the slope, against the sliding.",
+        "a2_l": "NORMAL FORCE",
+        "a2_b": "N = mg cos(angle), the same as in 3.3.",
+        "a3_l": "THE TEST",
+        "a3_b": "Slides only if mg sin(angle) > μs N.",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s36_incline_fbd.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Does the Block Slide?",
+        "subhead": "Run the test first. Use down the slope as positive.",
+        "problem": "A 10 kg block rests on a 35° incline. μs = 0.50, μk = 0.40. Does it slide? If so, find a.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 10 kg, angle = 35°\nμs = 0.50, μk = 0.40",
+        "q2_l": "EQUATION",
+        "q2_b": "test: mg sin vs μs N\nFnet = mg sin − μk N",
+        "answer": "Slides (56.2 N > 40.1 N)  ·  a = 2.4 m/s²",
+        "code": "U03 • S03.6"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s36_incline_problem.png"
+      }
+    },
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "07",
+        "headline": "3.7\nMulti-Body Systems",
+        "subhead": "Solve pulley systems as one object for a, then one mass alone for tension.",
+        "code": "U03 • S03.7"
+      },
+      "imageSubjects": {
+        "section": "a steel pulley wheel and rope hanging in a workshop"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Ideal Strings and Pulleys",
+        "subhead": "Massless string, frictionless pulley: the string just changes direction.",
+        "c1_l": "WHAT IS THE SAME",
+        "c1_b": "One tension T all\nalong the string.\nOne size of a for all.",
+        "c2_l": "TWO WAYS TO SOLVE",
+        "c2_b": "System: a = Fnet/total m.\nThen one mass alone\nfor T.",
+        "mustwrite": "Solve the whole system for a first, then one mass alone for T.",
+        "code": "U03 • S03.7"
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s37_ideal.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Atwood Machine",
+        "subhead": "The heavier mass goes down. Use its direction as positive.",
+        "problem": "A 5.0 kg mass and a 3.0 kg mass hang over a pulley. Find a and the string tension.",
+        "q1_l": "GIVEN",
+        "q1_b": "m1 = 5.0 kg\nm2 = 3.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "a = (m1 − m2)g/(m1 + m2)\nT = m2(g + a)",
+        "answer": "a = 2.45 m/s²  ·  T = 36.8 N",
+        "code": "U03 • S03.7"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_atwood_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a Table",
+        "subhead": "Frictionless table. Only the hanging weight drives the system.",
+        "problem": "A 4.0 kg block on a table is tied over a pulley to a 2.0 kg hanging mass. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 4.0 kg\nhanging 2.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "a = m2 g/(m1 + m2)\nT = m1 a",
+        "answer": "a = 3.27 m/s²  ·  T = 13.1 N",
+        "code": "U03 • S03.7"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_table_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Block on a Table, with Friction",
+        "subhead": "Same setup, now μk = 0.20 between block and table.",
+        "problem": "Repeat the table problem with μk = 0.20. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 4.0 kg, μk = 0.20\nhanging 2.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = m2 g − μk m1 g\nT = m1 a + fk",
+        "answer": "a = 1.96 m/s²  ·  T = 15.7 N",
+        "code": "U03 • S03.7"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_table_friction.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Challenge: Incline and Pulley",
+        "subhead": "Frictionless incline. Decide which way it moves first.",
+        "problem": "A 6.0 kg block on a 30° incline is tied over a pulley to a 5.0 kg hanging mass. Find a and T.",
+        "q1_l": "GIVEN",
+        "q1_b": "block 6.0 kg, 30°\nhanging 5.0 kg",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = m2 g − m1 g sin(angle)\nT = m2(g − a)",
+        "answer": "a = 1.78 m/s²  ·  T = 40.1 N",
+        "code": "U03 • S03.7"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s37_incline_pulley.png"
+      }
+    }
+  ]
+}

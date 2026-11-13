@@ -1,0 +1,244 @@
+<title>Operation Periodic Table</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Archivo+Narrow:wght@400;600&display=swap">
+<style>
+/* Layout: a lab bench. The 5-column table board on the left, the card tray on the right;
+   stacked on narrow screens. Cards are the printed cards, same letters, same numbers. */
+:root{
+  --bg:#F4F6EF; --panel:#FFFFFF; --ink:#14161B; --muted:#55604F; --line:#C8CDC2;
+  --accent:#4D730E; --accent-hi:#A3E635; --blank:#E4E8DC; --good:#1F7A3A; --bad:#B42318;
+  --shadow:0 8px 22px rgba(20,22,27,.18);
+  --display:"Archivo",system-ui,sans-serif; --narrow:"Archivo Narrow","Archivo",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14161B; --panel:#1E2227; --ink:#EEF1E8; --muted:#AEB7A6; --line:#3A4048;
+  --accent:#A3E635; --accent-hi:#A3E635; --blank:#262B31; --good:#4ADE80; --bad:#F87171;
+  --shadow:0 8px 22px rgba(0,0,0,.5); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#14161B; --panel:#1E2227; --ink:#EEF1E8; --muted:#AEB7A6; --line:#3A4048;
+  --accent:#A3E635; --accent-hi:#A3E635; --blank:#262B31; --good:#4ADE80; --bad:#F87171;
+  --shadow:0 8px 22px rgba(0,0,0,.5); color-scheme:dark }
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px}
+header{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:end;justify-content:space-between;margin-bottom:12px}
+h1{font-size:clamp(20px,2.4vw,28px);margin:0;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin-top:2px}
+.controls{display:flex;flex-wrap:wrap;gap:8px}
+button{font:600 13px var(--display);color:var(--ink);background:var(--panel);border:1.5px solid var(--line);
+  border-radius:8px;padding:7px 12px;cursor:pointer}
+button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent-hi)}
+button:focus-visible,.card:focus-visible{outline:3px solid var(--accent-hi);outline-offset:2px}
+.status{font:600 13px var(--display);color:var(--muted);min-height:18px}
+main{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:1100px){main{grid-template-columns:minmax(0,1fr)}}
+.boardwrap{overflow-x:auto;min-width:0}
+.board{display:grid;grid-template-columns:28px repeat(5,var(--cw));gap:6px;--cw:132px;--ch:122px}
+.colhead{font:600 11px var(--narrow);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  text-align:center;align-self:end;padding-bottom:2px}
+.colhead b{display:block;font:800 15px var(--display);color:var(--accent);letter-spacing:0;text-transform:none;min-height:18px}
+.rowhead{font:700 13px var(--display);color:var(--muted);align-self:center;text-align:center}
+.cell{height:var(--ch);border:2px dashed var(--line);border-radius:10px;display:flex;align-items:stretch;justify-content:stretch;background:var(--panel)}
+.cell.over{border-color:var(--accent);border-style:solid;background:color-mix(in srgb,var(--accent-hi) 18%,var(--panel))}
+.cell.blank{border:2px solid transparent;background:var(--blank);color:var(--muted);font:600 12px var(--narrow);
+  align-items:center;justify-content:center}
+.tray{background:var(--panel);border:1.5px solid var(--line);border-radius:12px;padding:10px;min-width:0}
+.tray h2{font:700 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.traygrid{display:flex;flex-wrap:wrap;gap:8px;min-height:140px}
+.tray.over{border-color:var(--accent)}
+.card{width:var(--cw,132px);height:var(--ch,122px);box-sizing:border-box;background:var(--panel);border:1.5px solid var(--ink);
+  border-radius:9px;padding:5px 7px;cursor:grab;user-select:none;touch-action:none;display:flex;flex-direction:column;gap:2px;
+  font-family:var(--narrow);position:relative}
+.traygrid .card{--cw:132px;--ch:122px}
+.cell .card{width:100%;height:100%}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.card .code{font:800 26px/1 var(--display);color:var(--accent)}
+.card .app{font-size:10.5px;font-style:italic;color:var(--muted);text-align:right;line-height:1.1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;column-gap:6px;row-gap:0;font-size:11.5px;line-height:1.25}
+.card dt{color:var(--muted)} .card dd{margin:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .reveal{display:none;font:800 15px/1.2 var(--display);background:var(--accent-hi);color:#14161B;border-radius:5px;padding:0 6px;white-space:nowrap}
+body.revealed .card .reveal{display:inline-block}
+body.revealed .card .app{display:none}
+.card.mystery{border-style:dashed;border-color:var(--accent)}
+.card.mystery .clue{font-size:11.5px;line-height:1.25;color:var(--ink)}
+.card.good{box-shadow:0 0 0 3px var(--good)} .card.bad{box-shadow:0 0 0 3px var(--bad)}
+.card.dragging{position:fixed;z-index:50;box-shadow:var(--shadow);cursor:grabbing;transform:rotate(-2deg);pointer-events:none}
+.legend{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.45;max-width:70ch}
+@media (prefers-reduced-motion:reduce){.card.dragging{transform:none}}
+</style>
+
+<header>
+  <div>
+    <h1>Operation Periodic Table</h1>
+    <div class="sub">Drag each card onto the table. Gray squares hold no element.</div>
+  </div>
+  <div class="controls">
+    <button id="btn-labels" aria-pressed="false">Show groups and periods</button>
+    <button id="btn-ions" aria-pressed="false">Show ions</button>
+    <button id="btn-check">Check placements</button>
+    <button id="btn-reveal" aria-pressed="false">Reveal elements</button>
+    <button id="btn-solve">Place all correctly</button>
+    <button id="btn-reset">Reset</button>
+  </div>
+</header>
+<div class="status" id="status" role="status"></div>
+<main>
+  <div class="boardwrap"><div class="board" id="board"></div></div>
+  <section class="tray" id="tray" aria-label="Card tray">
+    <h2>Cards</h2>
+    <div class="traygrid" id="traygrid"></div>
+    <p class="legend">Same cards as the printed activity. Letters are code names, not element symbols.
+      Radius in pm, ionization energy in kJ/mol, melting point in °C.</p>
+  </section>
+</main>
+
+<script>
+const DATA = __DATA__;
+const board = document.getElementById("board"), traygrid = document.getElementById("traygrid"),
+      tray = document.getElementById("tray"), statusEl = document.getElementById("status");
+const COLS = DATA.cols, ROWS = DATA.rows, M = DATA.missing;
+const cardsAll = DATA.cards.concat([{code:"?", mystery:true, group:M.group, period:M.period, symbol:M.symbol, element:M.element}]);
+const above = DATA.cards.find(c => c.group === M.group && c.period === M.period - 1);
+const below = DATA.cards.find(c => c.group === M.group && c.period === M.period + 1);
+const fmt = v => typeof v === "number" ? String(v).replace("-", "−") : v;
+
+// grid squares that hold no element
+const used = new Set(cardsAll.map(c => `${ROWS.indexOf(c.period)},${COLS.indexOf(c.group)}`));
+
+function buildBoard(){
+  board.innerHTML = "";
+  board.appendChild(Object.assign(document.createElement("div"), {}));
+  COLS.forEach((g, i) => {
+    const h = document.createElement("div"); h.className = "colhead";
+    h.innerHTML = `<span class="glabel"></span>ion formed<b data-ion="${i}"></b>`;
+    board.appendChild(h);
+  });
+  ROWS.forEach((p, r) => {
+    const rh = document.createElement("div"); rh.className = "rowhead"; rh.dataset.period = p; board.appendChild(rh);
+    COLS.forEach((g, c) => {
+      const cell = document.createElement("div");
+      cell.className = "cell"; cell.dataset.r = r; cell.dataset.c = c;
+      if (!used.has(`${r},${c}`)) { cell.classList.add("blank"); cell.textContent = "no element"; }
+      board.appendChild(cell);
+    });
+  });
+}
+
+function makeCard(c){
+  const el = document.createElement("div");
+  el.className = "card"; el.tabIndex = 0; el.dataset.code = c.code;
+  el.setAttribute("aria-label", c.mystery ? "Mystery element card" : `Card ${c.code}`);
+  if (c.mystery){
+    el.classList.add("mystery");
+    el.innerHTML = `<div class="top"><span class="code">?</span><span class="app">missing element</span><span class="reveal" title="${M.element}">${M.symbol}</span></div>
+      <div class="clue">Group ${M.group}. Directly below ${above.code}, directly above ${below.code}.</div>`;
+  } else {
+    el.innerHTML = `<div class="top"><span class="code">${c.code}</span><span class="app">${c.appearance}</span><span class="reveal" title="${c.element}">${c.symbol}</span></div>
+      <dl><dt>Ion</dt><dd>${c.ion}</dd><dt>Radius</dt><dd>${c.radius} pm</dd>
+      <dt>Ion. energy</dt><dd>${c.ie}</dd><dt>Electroneg.</dt><dd>${c.en}</dd>
+      <dt>Melting pt</dt><dd>${fmt(c.mp)}</dd></dl>`;
+    el.title = `${c.code}: ${c.appearance}. Melting point ${fmt(c.mp)}`;
+  }
+  el._data = c;
+  el.addEventListener("pointerdown", startDrag);
+  return el;
+}
+
+let drag = null;
+function startDrag(e){
+  if (e.button !== undefined && e.button !== 0) return;
+  const el = e.currentTarget, r = el.getBoundingClientRect();
+  clearMarks();
+  drag = {el, dx: e.clientX - r.left, dy: e.clientY - r.top, from: el.parentElement, w: r.width, h: r.height};
+  el.style.width = r.width + "px"; el.style.height = r.height + "px";
+  el.classList.add("dragging");
+  document.body.appendChild(el);
+  move(e);
+  window.addEventListener("pointermove", move);
+  window.addEventListener("pointerup", drop, {once:true});
+  window.addEventListener("pointercancel", drop, {once:true});
+  e.preventDefault();
+}
+function targetAt(x, y){
+  const t = document.elementFromPoint(x, y);
+  if (!t) return null;
+  const cell = t.closest(".cell:not(.blank)"); if (cell) return cell;
+  if (t.closest("#tray")) return traygrid;
+  return null;
+}
+let overEl = null;
+function move(e){
+  if (!drag) return;
+  drag.el.style.left = (e.clientX - drag.dx) + "px"; drag.el.style.top = (e.clientY - drag.dy) + "px";
+  const t = targetAt(e.clientX, e.clientY);
+  const hl = t === traygrid ? tray : t;
+  if (overEl !== hl){ overEl && overEl.classList.remove("over"); overEl = hl; overEl && overEl.classList.add("over"); }
+}
+function drop(e){
+  window.removeEventListener("pointermove", move);
+  if (!drag) return;
+  const {el} = drag;
+  let t = targetAt(e.clientX, e.clientY) || drag.from;
+  overEl && overEl.classList.remove("over"); overEl = null;
+  el.classList.remove("dragging"); el.style.left = el.style.top = el.style.width = el.style.height = "";
+  if (t.classList && t.classList.contains("cell")){
+    const occupant = t.querySelector(".card");
+    if (occupant) traygrid.appendChild(occupant);
+  }
+  t.appendChild(el);
+  drag = null;
+  updateStatus();
+}
+
+function clearMarks(){ document.querySelectorAll(".card.good,.card.bad").forEach(c => c.classList.remove("good","bad")); }
+function placed(){ return [...board.querySelectorAll(".cell .card")]; }
+function isRight(card){
+  const cell = card.parentElement, c = card._data;
+  return ROWS[+cell.dataset.r] === c.period && COLS[+cell.dataset.c] === c.group;
+}
+function updateStatus(msg){
+  statusEl.textContent = msg || `${placed().length} of ${cardsAll.length} cards on the table.`;
+}
+
+document.getElementById("btn-check").addEventListener("click", () => {
+  clearMarks();
+  const p = placed(); let right = 0;
+  p.forEach(c => { const ok = isRight(c); c.classList.add(ok ? "good" : "bad"); right += ok; });
+  updateStatus(`${right} of ${p.length} placed cards are in the right square (${cardsAll.length} cards in all).`);
+});
+document.getElementById("btn-reveal").addEventListener("click", e => {
+  const on = document.body.classList.toggle("revealed"); e.currentTarget.setAttribute("aria-pressed", on);
+});
+document.getElementById("btn-labels").addEventListener("click", e => {
+  const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+  e.currentTarget.setAttribute("aria-pressed", on);
+  document.querySelectorAll(".glabel").forEach((s, i) => s.textContent = on ? `Group ${COLS[i]} · ` : "");
+  document.querySelectorAll(".rowhead").forEach(h => h.textContent = on ? h.dataset.period : "");
+});
+document.getElementById("btn-ions").addEventListener("click", e => {
+  const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+  e.currentTarget.setAttribute("aria-pressed", on);
+  document.querySelectorAll("[data-ion]").forEach(b => b.textContent = on ? DATA.ions[+b.dataset.ion] : "");
+});
+document.getElementById("btn-solve").addEventListener("click", () => {
+  clearMarks();
+  document.querySelectorAll(".card").forEach(card => {
+    const c = card._data;
+    const cell = board.querySelector(`.cell[data-r="${ROWS.indexOf(c.period)}"][data-c="${COLS.indexOf(c.group)}"]`);
+    cell.appendChild(card);
+  });
+  updateStatus("Every card is in its real square.");
+});
+document.getElementById("btn-reset").addEventListener("click", reset);
+
+function reset(){
+  clearMarks();
+  traygrid.innerHTML = "";
+  cardsAll.forEach(c => traygrid.appendChild(makeCard(c)));
+  buildBoard();
+  document.body.classList.remove("revealed");
+  ["btn-reveal","btn-labels","btn-ions"].forEach(id => document.getElementById(id).setAttribute("aria-pressed","false"));
+  updateStatus();
+}
+reset();
+</script>

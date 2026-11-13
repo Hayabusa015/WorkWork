@@ -16,6 +16,13 @@
  * correct already — the same choice templates/_shull_docx.py made.
  */
 
+/* Git checks out CRLF on Windows, and the desktop app IS Windows. Node does not
+   translate line endings the way Python's text mode does, so a regex written
+   against \n silently stops matching on the machine the app actually runs on.
+   Every entry point here normalises first. app/design.test.mjs runs the whole
+   module against CRLF text so this cannot come back quietly. */
+const lf = text => String(text).replace(/\r\n?/g, '\n');
+
 // The unit heading, in all three shapes. Group 1 is the unit number, group 2
 // the title, groups 3/4 the declared section count in either notation.
 const UNIT_HEADINGS = [
@@ -68,7 +75,7 @@ function sections(body, unit) {
  * silently short section list is how a teacher builds against the wrong code.
  */
 export function parseCurriculum(text, course) {
-  const region = mapRegion(text);
+  const region = mapRegion(lf(text));
   const lines = region.split(/\r?\n/);
   const units = [];
   let open = null, body = [];
@@ -106,7 +113,8 @@ export function parseCurriculum(text, course) {
  * (templates/_shull_docx.py `known_sections`). The picker is cross-checked
  * against this: the app must never offer a code a builder would refuse.
  */
-export function knownSections(text) {
+export function knownSections(rawText) {
+  const text = lf(rawText);
   const end = text.indexOf('## Course sequencing rules');
   const scope = end > 0 ? text.slice(0, end) : text;
   return new Set(scope.match(/(?<![\d.])\d{1,2}\.\d(?![\d])/g) || []);
@@ -138,7 +146,7 @@ export function curriculum(text, course) {
  * The fixed list is a standard, and a standard lives in exactly one place.
  */
 export function documentTypes(namingText) {
-  const m = namingText.match(/\*\*Types:\*\*([\s\S]*?)\n\n/);
+  const m = lf(namingText).match(/\*\*Types:\*\*([\s\S]*?)\n\n/);
   if (!m) return [];
   return [...m[1].matchAll(/`([A-Za-z_]+)`/g)].map(x => x[1]);
 }
@@ -148,13 +156,16 @@ export function documentTypes(namingText) {
  * helper the repository builders use so the app cannot drift from them.
  */
 import {createRequire} from 'node:module';
-const {documentName: buildName, shortTitle: buildShortTitle} = createRequire(import.meta.url)('../templates/shull_name.cjs');
+const {documentName: buildName, shortTitle: buildShortTitle, referenceTitles: buildReferenceTitles} = createRequire(import.meta.url)('../templates/shull_name.cjs');
 
 /** The short title for a section code ("1.3") or unit ("U1"), from a course's decisions text. */
 export const shortTitle = (decisionsText, key) => buildShortTitle(decisionsText, key);
 
+/** The course-level Reference topics (REF rows) from a course's decisions text. SHULL-CHG-0069. */
+export const referenceTitles = (decisionsText) => buildReferenceTitles(decisionsText);
+
 export const COURSE_CODE = {chemistry: 'CHEM', physics: 'PHYS', geology: 'GEO'};
 
-export function documentName({type, unit, sections: codes, topic, unitTitle, version, key, extension = 'docx', descriptor}) {
-  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor});
+export function documentName({type, unit, sections: codes = [], topic, unitTitle, version, key, extension = 'docx', descriptor, scope}) {
+  return buildName({type, sections: codes, unit, topic, unitTitle, version, key, extension, descriptor, scope});
 }

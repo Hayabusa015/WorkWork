@@ -1,0 +1,258 @@
+{
+  "course": "chemistry",
+  "unit": 3,
+  "key": false,
+  "cover": {
+    "keyTerms": [
+      {
+        "code": "3.6",
+        "terms": [
+          "Period",
+          "group",
+          "shielding",
+          "metallic character",
+          "melting point",
+          "boiling point"
+        ]
+      },
+      {
+        "code": "3.4",
+        "terms": [
+          "Ionization energy",
+          "successive ionization energy",
+          "valence electron",
+          "electronegativity"
+        ]
+      },
+      {
+        "code": "3.3",
+        "terms": [
+          "Atomic radius",
+          "picometer (pm)",
+          "ion"
+        ]
+      }
+    ],
+    "howToUse": "Fill in each blank while its slide is up. Record the important items, not every word. The last line of each block is the slide's example."
+  },
+  "sectionsContent": [
+    {
+      "code": "3.4",
+      "title": "Why Trends Change, Ionization Energy & Electronegativity",
+      "learningTarget": "I can explain why trends change and describe the ionization energy and electronegativity trends.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Why trends change",
+              "cues": [
+                "Slide 2 · S3.6"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Period / group",
+                  "inline": true
+                },
+                {
+                  "prompt": "Across a row",
+                  "inline": true
+                },
+                {
+                  "prompt": "Down a group",
+                  "inline": true
+                },
+                {
+                  "prompt": "Shielding",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: Li vs. F; Li vs. Na",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Ionization energy",
+              "cues": [
+                "Slide 3 · S3.4"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Definition (units)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Trend",
+                  "inline": true
+                },
+                {
+                  "prompt": "Why",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: Ca vs. Br, higher IE",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Successive ionization energy",
+              "cues": [
+                "Slide 4 · S3.4"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "A large jump shows",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: Al 578, 1,817, 2,745, 11,577 — valence electrons",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: Mg 738, 1,451, 7,733, 10,543 — valence electrons",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Electro-negativity",
+              "cues": [
+                "Slide 5 · S3.4"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Definition (units)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Trend",
+                  "inline": true
+                },
+                {
+                  "prompt": "Why",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: rank S, O, F",
+                  "inline": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3.3",
+      "title": "Atomic Radius, Ion Size, Melting & Boiling Points",
+      "learningTarget": "I can describe the atomic radius trend, compare an ion to its atom, and summarize the periodic trends.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Atomic radius",
+              "cues": [
+                "Slide 6 · S3.3"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Definition (units)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Trend",
+                  "inline": true
+                },
+                {
+                  "prompt": "Why",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: Ca vs. Br, larger atom",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Ion size",
+              "cues": [
+                "Slide 7 · S3.3"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Magnesium ion vs. atom",
+                  "inline": true
+                },
+                {
+                  "prompt": "Why",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Melting and boiling points",
+              "cues": [
+                "Slide 8 · S3.6"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Definitions (units)",
+                  "inline": true
+                },
+                {
+                  "prompt": "Trend",
+                  "inline": true
+                },
+                {
+                  "prompt": "Why",
+                  "inline": true
+                },
+                {
+                  "prompt": "Example: group 17, highest MP and BP",
+                  "inline": true
+                }
+              ]
+            },
+            {
+              "title": "Trend summary",
+              "cues": [
+                "Slide 9 · S3.6"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Toward the top right",
+                  "inline": true
+                },
+                {
+                  "prompt": "Toward the bottom left",
+                  "inline": true
+                },
+                {
+                  "prompt": "Metallic character",
+                  "inline": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

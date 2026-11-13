@@ -81,6 +81,18 @@ def known_sections(course):
     return set(re.findall(r"(?<![\d.])\d{1,2}\.\d(?![\d])", text[:end] if end > 0 else text))
 
 
+def section_span(sections):
+    """The `S##.#` or `S##.#-S##.#` span for a filename, zero-padded per NAMING.md
+    (SHULL-CHG-0007). Three builders each formatted this inline, unpadded - `S7.4`
+    instead of `S07.4` - which is the exact fact-lives-twice defect this file exists
+    to prevent, and which the naming standard's own worked examples never show.
+    """
+    def pad(sec):
+        u, s = str(sec).split(".")
+        return f"S{int(u):02d}.{s}"
+    return f"{pad(sections[0])}-{pad(sections[-1])}" if len(sections) > 1 else pad(sections[0])
+
+
 def unit_title(course, unit):
     """The unit's name, read from that course's DECISIONS.md.
 
@@ -186,14 +198,38 @@ def check_item(cell, text, pal, size=9):
     return p
 
 
+SUP = re.compile(r"\^\{([^}]*)\}")
+
+
+def pieces(text):
+    """Split `^{...}` superscript markup out of a string: [(text, is_superscript), ...].
+
+    Ion charges are the reason: written on the baseline, O2- reads as O2 with a minus
+    (superoxide), and Archivo has no U+207A/U+207B superscript glyphs to fall back on.
+    A spec writes O^{2−}; the run is set superscript, so the ordinary glyphs are raised.
+    """
+    out, at = [], 0
+    for m in SUP.finditer(str(text)):
+        if m.start() > at:
+            out.append((text[at:m.start()], False))
+        out.append((m.group(1), True))
+        at = m.end()
+    if at < len(str(text)) or not out:
+        out.append((str(text)[at:], False))
+    return out
+
+
 def run(paragraph, text, size, *, bold=False, color=None, italic=False):
-    r = paragraph.add_run(text)
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = bold
-    r.italic = italic
-    if color:
-        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    r = None
+    for piece, sup in pieces(text):
+        r = paragraph.add_run(piece)
+        r.font.name = FONT
+        r.font.size = Pt(size)
+        r.bold = bold
+        r.italic = italic
+        r.font.superscript = sup or None
+        if color:
+            r.font.color.rgb = RGBColor.from_string(hexof(color))
     return r
 
 
@@ -201,12 +237,7 @@ def para(cell, text, size, *, bold=False, color=None, spacing=0.14, caps_track=F
     p = cell.paragraphs[0] if first else cell.add_paragraph()
     p.paragraph_format.space_after = Pt(2)
     p.paragraph_format.space_before = Pt(0)
-    r = p.add_run(text)
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = bold
-    if color:
-        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    r = run(p, text, size, bold=bold, color=color)
     if caps_track:
         # True is the standard label tracking; an int is a looser or tighter one, for
         # a label that has to read as quieter than the headings around it. Tracking is
@@ -260,6 +291,30 @@ def fix_widths(table, widths):
             cell.width = Inches(w)
     for col, w in zip(table.columns, widths):
         col.width = Inches(w)
+
+
+def page_break(doc):
+    """Start a new page without spending a line to do it.
+
+    A normal paragraph carrying a page break is full body height, so when a section
+    ends flush with the bottom of its page that paragraph does not fit - it moves to
+    the next page, and only then breaks, leaving a blank page carrying nothing but the
+    footer. Pinning the line to 1pt exact makes the break paragraph effectively
+    dimensionless, so it always fits where it is written.
+    """
+    from docx.enum.text import WD_BREAK
+    p = doc.add_paragraph()
+    pf = p.paragraph_format
+    pf.space_before = Pt(0); pf.space_after = Pt(0)
+    pPr = p._p.get_or_add_pPr()
+    sp = OxmlElement("w:spacing")
+    sp.set(qn("w:before"), "0"); sp.set(qn("w:after"), "0")
+    sp.set(qn("w:line"), "20"); sp.set(qn("w:lineRule"), "exact")
+    pPr.append(sp)
+    r = p.add_run()
+    r.font.size = Pt(1)
+    r.add_break(WD_BREAK.PAGE)
+    return p
 
 
 def gap(doc, pt=6):
@@ -452,20 +507,22 @@ def stacked_frac(cell, num, den, ink_hex, rule_hex, size=10.5):
     return t
 
 
-def equation_bar(doc, equations, pal, label, width=7.5):
+def equation_bar(doc, equations, pal, label, width=7.5, cols=2):
     """The equations students may reference, at the top of the page.
 
     His rule: on any Physics or Chemistry sheet with math, the equations go at the top
     so students know what they are allowed to reach for. Two across, no box around the
     block - the only rules on it are the fraction bars, which are the point of it.
+    `cols` sets more across, for a short-entry list such as a label bank; the default
+    is the two-across bar.
     """
     c = one_cell(doc, width)
     para(c, label, 7.5, bold=True, color=pal.accent, caps_track=True, first=True)
-    cols = 2
-    half = round(width / 2 - 0.13, 2)
+    cols = int(cols)
+    half = round(width / cols - 0.13, 2)
     rows = (len(equations) + cols - 1) // cols
     t = c.add_table(rows=rows, cols=cols)
-    fix_widths(t, [half, half])
+    fix_widths(t, [half] * cols)
     tight_cells(t, top=30, bottom=40, left=0, right=60)
     for i, eq in enumerate(equations):
         cell = t.rows[i // cols].cells[i % cols]
@@ -522,6 +579,12 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
     if label:
         para(inner, label, label_size, bold=label_bold, color=label_color or pal.accent,
              caps_track=label_caps, first=True)
+    elif not (watermark or corner):
+        # No label, watermark or corner note: collapse the cell's default empty paragraph so
+        # the open box starts at its top edge instead of a blank line down.
+        p0 = inner.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(0); p0.paragraph_format.space_after = Pt(0)
+        p0.paragraph_format.line_spacing = Pt(1)
     used = 0.0                       # points already taken inside the box, top down
     if label:
         used += label_size * 1.25

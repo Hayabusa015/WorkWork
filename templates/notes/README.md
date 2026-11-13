@@ -36,6 +36,32 @@ the thing to record** ("Definition — singularity", "The three pieces of eviden
 for it. `recall.py` carries the rule and the renderers refuse a cue or notes line with a question
 mark or an interrogative opener. Record: `governance/proposals/SHULL-CHG-0023-notes-are-recall.md`.
 
+**The notes and the deck are one object** (SHULL-CHG-0054). A student looks at the slide and
+knows which block it fills, and looks at a block and knows which slide to watch. A packet written
+from a deck says so with a top-level `"deck"`, and from then on the build holds it to four rules:
+
+1. **Every block names its slide(s).** `"slides": 12` or `"slides": [13, 14]` prints `SLIDE 12` /
+   `SLIDES 13–14` under the cue label. A RECALL block prints `NO SLIDE · CLOSE YOUR NOTES`; a RECAP
+   or REVIEW block prints `NO SLIDE` unless it gives its slide. A block students fill with no
+   `slides` is refused.
+2. **A block's title is its slide's headline, word for word**, and blocks follow slide order. The
+   build refuses a block whose first slide comes before the block above it, and refuses two blocks
+   written from the same slide on different pages: **one slide is never split by a page turn.**
+   Two blocks from one slide (Part A and Part B of a worked example) share the title and differ by
+   `notesLabel`.
+3. **The deck's must-write blocks say which notes block they fill**, and appear only on slides that
+   have something to write. A slide with nothing new to write (a solution slide) says *check your
+   work* instead. That half lives in the slide template: `templates/slide/README.md`.
+4. **A fill-in is the slide's own sentence with its key words blanked.** In a generator,
+   `F("Matter: anything that has {mass} and takes up {space}.")` writes
+   `{"prompt": "…has _______ and takes up ________.", "answer": "…has mass and takes up space.",
+   "lines": 0, "fill": true}`: the student copy shows the blanks, sized to the word, and the key
+   prints the finished sentence in the same place. A must-write line (`*…`) copies the slide's
+   block word for word.
+
+The headline match in rule 2 is checked by eye against the deck: the build has the slide numbers
+but not the slide text. The Chemistry U1 generator is the worked example of all four.
+
 **Option B is the old layout and reads only the old flat schema** (rows directly under each section).
 It has no work box, equation toolbox, cover, or concept review page. It refuses a spec that uses
 `problem`, `equations` or `diagram` rather than dropping them. Do not use it for a paged spec.
@@ -57,12 +83,15 @@ A packet is a set of **designed pages. Each designed page is one sheet of paper.
 horizontal rule separates it from the next block. It has no outer box and no cell borders.
 
 - **Cue side (1.28 in, SHULL-CHG-0018):** the **cue label** in bold caps in the course's text-safe
-  colour, then the cue questions in small grey type. RECALL / RECAP / REVIEW blocks put their tag
+  colour, then the cues in small grey type. RECALL / RECAP / REVIEW blocks put their tag
   above the label. **No block number** (`01`, `02`): SHULL-CHG-0038 dropped it (choice d). **No
   line under a cue.** Recall happens in the RECALL block and on the concept review page.
 - **Capture side (6.22 in):** the **notes heading** in tracked bold caps in the same colour, then
   prompts with a writing line, fill-in tables, the flowchart, worked examples and must-write
-  lines.
+  lines. **No inline underscore blanks** (`brand/SHULL_DESIGN_SYSTEM.md` §11, SHULL-CHG-0069): a
+  prompt is a cue naming what to record, and the student writes on the ruled lines under it. A
+  sentence with `_____` in place of a word is not a prompt. Fill-in tables and the worked
+  problem's `Answer:` line stay.
 - **Where the two labels come from.** An old spec names both, `cueLabel` and `notesLabel`, and each
   is printed as written. A paged spec's block has a `title` and at most a `notesLabel`. The title,
   in caps, becomes the cue label. The notes heading is printed only when the spec gives a
@@ -168,6 +197,8 @@ type to fit, and never shrink the work box.
   "course": "chemistry",               // chemistry | physics | geology
   "unit": 1,                           // the unit title is read from DECISIONS.md
   "key": false,                        // true = teacher key: answers shown, flowchart filled
+  "deck": "Unit 1 - ….pptx",           // optional; the deck this packet is written from. Turns on
+                                       // the slide rules (SHULL-CHG-0054)
   "cover": {
     "image": {"path": "../assets/x.png", "widthIn": 1.95},   // optional; relative to the spec
     "sections": [{"code": "1.1", "blurb": "…", "difficulty": 1}],   // difficulty 1–10, course content
@@ -184,7 +215,7 @@ type to fit, and never shrink the work box.
     // Optional, SHULL-CHG-0038. Derived from the spec when absent - see "The cover prints only
     // what the spec holds".
     "kicker": "GUIDED NOTES  ·  PHASE 01  ·  3 SECTIONS",
-    "fields": "NAME  ____   DATE  ____   PERIOD  ____",
+    "fields": "NAME  ____   DATE  ____   PERIOD  ____",   // header fields, not recall items: not SHULL-CHG-0069 blanks
     "unitTargets": ["I can …"],
     "howItWorks": ["…", "…"],                    // takes precedence over howToUse
     "sectionList": ["S01.1   Title"]            // replaces the derived list; drops difficulty
@@ -194,7 +225,8 @@ type to fit, and never shrink the work box.
     "pages": [{
       "subtitle": "…",                             // not printed since SHULL-CHG-0038
       "rows": [
-        {"title": "Vocabulary", "cues": ["…?"],
+        {"title": "Four Terms You'll Use All Unit", "cues": ["All four definitions."],
+         "slides": 4,                                 // or [13, 14]; required when "deck" is set
          "cueLabel": "BASICS",                        // optional; default: title in caps
          "notesLabel": "COPY THE FLOWCHART",          // optional; default: title in caps. Printed as written
          "notes": [
@@ -208,7 +240,7 @@ type to fit, and never shrink the work box.
          "flowchart": {"root": "MATTER", "branches": ["…", "…"],   // labels are content: the
                        "leaves": ["…", "…", "…", "…"]},            // student copy prints only the root
          "problem": {"statement": "…", "given": ["line 1", "line 2"], "find": "…",
-                     "workHeightIn": 1.4, "answer": "… = _____",
+                     "workHeightIn": 1.4, "answer": "Answer:",   // key: "Answer: …"; never inline underscores
                      "solution": ["key only: lines written inside the work box"]},
          "diagram": {},                                  // Geology figure-to-label, unchanged
          "noWorkBox": true,                              // explicit opt-out, see below

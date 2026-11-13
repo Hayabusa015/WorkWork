@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {curriculum, parseCurriculum, documentTypes, documentName, shortTitle} from './curriculum.mjs';
+import {curriculum, parseCurriculum, documentTypes, documentName, shortTitle, referenceTitles} from './curriculum.mjs';
 import {checkScope} from './agents.mjs';
 
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
@@ -72,6 +72,25 @@ test('the roadmap commentary is not read as curriculum', () => {
   }
 });
 
+test('the parsers survive a Windows checkout', () => {
+  // Git checks out CRLF on Windows and the desktop app IS Windows, so every
+  // parser here must give the same answer either way. It did not: documentTypes
+  // matched on \n\n, which CRLF cannot contain, so a Windows install showed an
+  // empty document-type list and refused every design request as an unknown
+  // type. Caught by the first CI run on a Windows runner, not by this container.
+  const crlf = text => text.replace(/\n/g, '\r\n');
+
+  const naming = fs.readFileSync(path.join(repo, 'standards', 'NAMING.md'), 'utf8');
+  assert.deepEqual(documentTypes(crlf(naming)), documentTypes(naming));
+  assert.ok(documentTypes(crlf(naming)).length >= 10);
+
+  for (const course of COURSES) {
+    const text = decisions(course);
+    assert.deepEqual(curriculum(crlf(text), course), curriculum(text, course),
+      `${course} parses differently from a Windows checkout`);
+  }
+});
+
 test('document types come from standards/NAMING.md, not from the app', () => {
   const naming = fs.readFileSync(path.join(repo, 'standards', 'NAMING.md'), 'utf8');
   const types = documentTypes(naming);
@@ -108,6 +127,17 @@ test('the filename follows the NAMING grammar: short, section-led, no course pre
     '10.2 Slides.pptx');
   assert.equal(documentName({type: 'Test', unit: 8, sections: ['8.1', '8.2'], unitTitle: 'Stoichiometry: Part 1'}),
     'Unit 8 Test - Stoichiometry Part 1.docx');
+});
+
+test('a whole-year Reference is named at course level, with no code and no course word (SHULL-CHG-0069)', () => {
+  const text = `## Short titles\n\n| Code | Short title |\n|---|---|\n| U1 | Matter & Atoms |\n| REF | Polyatomic Ions |\n| REF | Multi-Charge Metals |\n| REF | Full Packet |\n\n## Decision log\n`;
+  assert.deepEqual(referenceTitles(text), ['Polyatomic Ions', 'Multi-Charge Metals', 'Full Packet']);
+  assert.equal(documentName({type: 'Reference', scope: 'course', topic: 'Polyatomic Ions'}), 'Reference - Polyatomic Ions.pdf');
+  assert.equal(documentName({type: 'Reference', scope: 'course', topic: 'Multi-Charge Metals'}), 'Reference - Multi-Charge Metals.pdf');
+  assert.equal(documentName({type: 'Reference', scope: 'course', topic: 'Full Packet'}), 'Reference - Full Packet.pdf');
+  assert.throws(() => documentName({type: 'Organizer', scope: 'course', topic: 'Naming'}), /Reference only/);
+  assert.throws(() => documentName({type: 'Reference', scope: 'course'}), /always has a topic/);
+  assert.throws(() => documentName({type: 'Reference', scope: 'course', topic: 'Metals with Multiple Charges'}), /limit is 20/);
 });
 
 test('the curriculum endpoint serves each course and refuses anything else', async () => {

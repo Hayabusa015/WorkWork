@@ -1,0 +1,108 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.1",
+  "sectionTitle": "Newton's Laws",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "3.1\nNewton's Laws",
+        "subhead": "Measure forces in newtons, separate mass from weight, and use Newton's three laws."
+      },
+      "imageSubjects": {
+        "section": "a cast-iron weight hanging from a spring scale against a dark wall"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "What Is a Force?",
+        "subhead": "Every force you draw this unit has two parts: a size and a direction.",
+        "a1_l": "PUSH OR PULL",
+        "a1_b": "A force is a push or a pull on an object.",
+        "a2_l": "NEWTONS (N)",
+        "a2_b": "1 N is about the weight of a small apple.",
+        "a3_l": "ALWAYS A DIRECTION",
+        "a3_b": "Force is a vector: a size plus a direction."
+      },
+      "images": {
+        "diagram": "../assets/phys_u03/s31_force.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Mass vs. Weight",
+        "subhead": "They are not the same quantity, and they do not use the same unit.",
+        "c1_l": "MASS",
+        "c1_b": "Amount of matter, in kg.\nThe same everywhere.",
+        "c2_l": "WEIGHT",
+        "c2_b": "Pull of gravity, in N.\nW = mg, g = 9.8 m/s²\nChanges with location.",
+        "mustwrite": "Weight is a force: W = mg, in newtons. Mass is in kilograms."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_mass_weight.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Weight on Earth and on the Moon",
+        "subhead": "On the Moon, g = 1.6 m/s².",
+        "problem": "A 60 kg student stands on Earth, then on the Moon. Find the weight in each place.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 60 kg\ng Earth = 9.8 m/s²\ng Moon = 1.6 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "W = mg",
+        "answer": "Earth: 588 N down  ·  Moon: 96 N down"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s31_weight_problem.png"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "Newton's First Law",
+        "subhead": "An object keeps its velocity unless a net force acts on it. Fnet = 0 is equilibrium: at rest or at constant velocity.",
+        "keyq": "A puck slides at constant speed. Net force? Zero."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_puck.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Newton's Second Law",
+        "subhead": "A net force makes an object accelerate. We put numbers on it in 3.4.",
+        "c1_l": "MORE FORCE",
+        "c1_b": "Same mass, bigger push.\nMore acceleration.",
+        "c2_l": "MORE MASS",
+        "c2_b": "Same push, bigger mass.\nLess acceleration.",
+        "mustwrite": "A net force causes acceleration. No net force, no acceleration."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_second_law.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Newton's Third Law",
+        "subhead": "For every force, the other object pushes back equally, in the opposite direction.",
+        "c1_l": "A THIRD-LAW PAIR",
+        "c1_b": "Book pushes on table.\nTable pushes on book.\nTwo different objects.",
+        "c2_l": "BALANCED, NOT A PAIR",
+        "c2_b": "W and N both act\non the book.\nSame object: not a pair.",
+        "mustwrite": "Action-reaction pairs act on different objects, so they never cancel."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s31_third_law.png"
+      }
+    }
+  ]
+}

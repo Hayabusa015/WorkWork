@@ -1,0 +1,117 @@
+{
+  "course": "physics",
+  "unit": 3,
+  "section": "3.5",
+  "sectionTitle": "Net Force & Acceleration",
+  "note": "Outline approved by Matt 2026-11-04. Problem slides show problem, diagram and final answer together; full worked steps are in the Unit 3 slide solutions key.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "05",
+        "headline": "3.5\nNet Force & Acceleration",
+        "subhead": "Go from a free body diagram to a net force to an acceleration."
+      },
+      "imageSubjects": {
+        "section": "an elevator shaft seen from below, cables catching the light"
+      }
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "From FBD to Acceleration",
+        "subhead": "Example: a 10 kg cart is pulled 50 N right and 20 N left.",
+        "s1_l": "Draw",
+        "s1_b": "FBD, every force labeled.",
+        "s2_l": "Axes",
+        "s2_b": "Pick + and write it down.",
+        "s3_l": "Sum",
+        "s3_b": "Fnet = 50 − 20 = 30 N",
+        "s4_l": "Solve",
+        "s4_b": "a = 30/10 = 3.0 m/s²"
+      },
+      "images": {
+        "band": "../assets/phys_u03/s35_chain.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Pulling at an Angle",
+        "subhead": "Frictionless ice. Only the horizontal part of the pull speeds it up.",
+        "problem": "A 20 kg sled is pulled with 60 N at 35° above horizontal. Find a and the normal force.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 20 kg\n60 N at 35°",
+        "q2_l": "EQUATION",
+        "q2_b": "a = F cos(angle)/m\nN = mg − F sin(angle)",
+        "answer": "a = 2.5 m/s² right  ·  N = 162 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_sled_problem.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Sliding Down a Frictionless Ramp",
+        "subhead": "Use down the slope as positive.",
+        "problem": "An 8.0 kg box slides down a frictionless 20° ramp. Find its acceleration.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 8.0 kg\nangle = 20°",
+        "q2_l": "EQUATION",
+        "q2_b": "Fnet = mg sin(angle)\na = g sin(angle)",
+        "answer": "a = 3.4 m/s² down the ramp"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_incline_problem.png"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Elevators and Apparent Weight",
+        "subhead": "A bathroom scale measures how hard it pushes up on you.",
+        "c1_l": "WHAT THE SCALE READS",
+        "c1_b": "The normal force N,\nnot your weight.",
+        "c2_l": "AT REST OR CONSTANT v",
+        "c2_b": "Fnet = 0, so N = mg.\nThe scale reads your\ntrue weight.",
+        "mustwrite": "Accelerating elevator: N − mg = ma, with up as positive."
+      },
+      "images": {
+        "concept": "../assets/phys_u03/s35_elevator_concept.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Elevator Speeding Up, Going Up",
+        "subhead": "Use up as positive. True weight: 686 N.",
+        "problem": "A 70 kg person stands on a scale in an elevator accelerating up at 2.0 m/s². Find the reading.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 70 kg\na = +2.0 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "N − mg = ma\nN = m(g + a)",
+        "answer": "Scale reads 826 N, more than 686 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_elevator_up.png"
+      }
+    },
+    {
+      "master": "11_GIVENS_EQUATION_ANSWER",
+      "fields": {
+        "headline": "Elevator Accelerating Down",
+        "subhead": "Use up as positive, so the acceleration is negative.",
+        "problem": "The same 70 kg person rides an elevator accelerating down at 2.0 m/s². Find the reading.",
+        "q1_l": "GIVEN",
+        "q1_b": "m = 70 kg\na = −2.0 m/s²",
+        "q2_l": "EQUATION",
+        "q2_b": "N − mg = ma\nN = m(g − 2.0)",
+        "answer": "Scale reads 546 N, less than 686 N"
+      },
+      "images": {
+        "setup": "../assets/phys_u03/s35_elevator_down.png"
+      }
+    }
+  ]
+}

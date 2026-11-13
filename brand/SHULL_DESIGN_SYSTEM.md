@@ -152,6 +152,8 @@ one.
 
 One exception: `typography.keyHandwriting`, on teacher answer keys only, approved in SHULL-CHG-0043 by Matt, 2026-10-16.
 
+A second exception: `typography.mathFallback`, per glyph, in Physics documents only, approved in SHULL-CHG-0072 by Matt, 2026-11-11.
+
 `brand/fonts/trade-gothic-next.conf` maps the brand name to Archivo inside the build container, so a
 document that correctly names Trade Gothic Next renders as Archivo during QA rather than silently
 becoming DejaVu Sans. Without that mapping, **the QA render and the classroom copy are different
@@ -178,6 +180,15 @@ Both extremes fail:
 | Too sparse | Too dense |
 |---|---|
 | "beautiful but useless" | "textbook page pasted onto a slide" |
+
+**Two rules follow from why clutter fails, not just that it looks bad:**
+
+- **A diagram, image, or table sits adjacent to the text that explains it** — same box, same
+  column, never separated by a page turn or a gap the reader has to search across. (Separating them
+  forces a reader to hold one in memory while hunting for the other — the split-attention effect,
+  and it measurably hurts comprehension.)
+- **Body prose targets 50–75 characters per line, never exceeding ~80.** A column that runs
+  edge-to-edge on a wide page or slide gets narrowed or split, not left wide. SHULL-CHG-0023.
 
 ---
 
@@ -272,9 +283,12 @@ Teacher-only information never appears on the student version.
 
 **Ruled lines are for prose. Open boxes are for math.** This holds in notes and practice sets alike.
 
-- Blanks are sized to the expected answer. A one-word blank and a full-sentence blank must not look
-  identical.
-- Answer blanks that are clearly too small for the expected response are a defect.
+- **Guided notes use no inline fill-in blanks** (SHULL-CHG-0069, all three courses). Each recall
+  item is a cue naming what to record, plus ruled writing lines sized to the expected answer. No
+  run of underscores stands in for a word inside a sentence. Fill-in tables and ruled answer lines
+  (`Answer:` followed by a ruled line, as on a worked example) are still allowed.
+- Write space is sized to the expected answer. A one-word answer and a full-sentence answer must
+  not get the same room; too few lines for the expected response is a defect.
 - Dense tabular content uses real tables, never card or flexbox grids.
 - Running footer with an auto-generated page count.
 - Every answer-bearing document has a **separate** key file.

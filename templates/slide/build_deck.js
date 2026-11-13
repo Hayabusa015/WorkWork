@@ -2,6 +2,15 @@
  *
  *   SHULL_COURSE=chemistry node build_deck.js decks/chem_u01_s01.4.json out.pptx
  *
+ * Optional spec features (both backwards-compatible; absent = no change):
+ *   Run markup inside any field string:  ^{...} superscript run,  _{...} subscript run.
+ *     "Mg^{2+}"  "10^{-19} J"  "3d^{5}"  "H_{2}O"  - the run keeps the placeholder's size,
+ *     font and colour (a baseline-shift attribute only). Use the true minus U+2212 in a
+ *     superscript only after confirming Archivo carries it. A string with no markup is
+ *     passed through untouched. Line caps and the 110-char must-write check count the
+ *     text with markup stripped. No nesting; an unclosed "^{" is an error.
+ *   Teacher notes:  "notes": "text" on a slide object -> that slide's speaker notes.
+ *
  * The masters come from build.js; this file only places content into them. That split
  * is the point: a deck can never introduce geometry or colour of its own, because it
  * has no way to. Everything it can set is a placeholder the master already declared.
@@ -78,8 +87,50 @@ const FOOTER_CODE = `${UNIT} • ${SECT}`;
    Slide System v2: over the cap you split the slide, you never shrink type to fit. */
 const CAPS = K.lineCaps;
 
+/* The tab under a must-write bar: which notes block this slide fills (SHULL-CHG-0054).
+   One run at the 16pt floor, sized to its text and right-aligned to the bar. Every bar
+   leaves at least 0.28 in above the footer, which is what one 16pt line needs. */
+const TAB_PT = 16;
+const tabText = (title, write) => write ? `\u270E  IN YOUR NOTES:  ${title}` : `CHECK YOUR WORK  \u00B7  ${title}`;
+const tabWidth = (text) => 0.13 * text.length + 0.4;
+function notesTab(s, slot, title, write) {
+  const text = tabText(title, write);
+  const w = tabWidth(text);
+  s.addText(text, { x: slot.x + slot.w - w, y: slot.y, w, h: slot.h, fontFace: K.fonts.body,
+    fontSize: TAB_PT, bold: true, color: write ? K.ground.parchment : K.ground.graphite,
+    align: "center", valign: "middle", margin: 0,
+    fill: { color: write ? K.ground.asphalt : K.ground.parchment } });
+}
+
 const problems = [];
 let n = 0;
+
+/* ^{..} / _{..} markup. Returns null when the string has none, so plain text takes
+   exactly the path it always did. Otherwise returns pptxgenjs text runs; "\n" becomes
+   breakLine on the preceding run, matching how pptxgenjs treats it in a plain string. */
+const MARK = /([\^_])\{([^{}]*)\}/g;
+const hasMarkup = (t) => { MARK.lastIndex = 0; return MARK.test(t); };
+const stripMarkup = (t) => t.replace(MARK, "$2");
+function toRuns(text) {
+  const runs = [];
+  const lines = text.split("\n");
+  lines.forEach((line, li) => {
+    let last = 0, m;
+    const push = (t, o) => { if (t) runs.push({ text: t, options: o || {} }); };
+    MARK.lastIndex = 0;
+    while ((m = MARK.exec(line))) {
+      push(line.slice(last, m.index));
+      push(m[2], m[1] === "^" ? { superscript: true } : { subscript: true });
+      last = m.index + m[0].length;
+    }
+    push(line.slice(last));
+    if (li < lines.length - 1) {
+      if (!runs.length) runs.push({ text: "", options: {} });
+      runs[runs.length - 1].options.breakLine = true;
+    }
+  });
+  return runs;
+}
 
 for (const slide of spec.slides) {
   n += 1;
@@ -123,7 +174,11 @@ for (const slide of spec.slides) {
     delete fields[slotName];
   }
 
-  for (const [slotName, imgRel] of Object.entries(slide.images || {})) {
+  /* `reveal` stacks a second image of the same size over a slot, so a click can show the
+     answer after the class predicts: same slot, same fit, so it lands exactly on top. */
+  const placements = Object.entries(slide.images || {}).map(([k, v]) => [k, v, "img"])
+    .concat(Object.entries(slide.reveal || {}).map(([k, v]) => [k, v, "reveal"]));
+  for (const [slotName, imgRel, kind] of placements) {
     const slot = (pres.SLOTS[slide.master] || {})[slotName];
     if (!slot) { problems.push(`slide ${n} (${slide.master}): no slot "${slotName}"`); continue; }
     const imgPath = path.resolve(path.dirname(specPath), imgRel);
@@ -135,8 +190,32 @@ for (const slide of spec.slides) {
       const fw = dim.w * scale, fh = dim.h * scale;
       x += (w - fw) / 2; y += (h - fh) / 2; w = fw; h = fh;
     }
-    s.addImage({ path: imgPath, x, y, w, h });
+    s.addImage({ path: imgPath, x, y, w, h, objectName: `${kind}:${slotName}`,
+      altText: slide.alt && slide.alt[slotName] ? slide.alt[slotName] : path.basename(imgPath) });
     delete fields[slotName];   // the slot's prompt text is replaced by the image
+  }
+
+  /* SHULL-CHG-0054: a must-write bar means "this goes in your notes", and it says where.
+     `notes` names the notes block the slide fills (its title, which is this slide's
+     headline). `notes: false` marks a slide with nothing new to write - a solution slide -
+     and its bar reads CHECK ONLY. A spec that names its notes packet (`notesPacket`)
+     must say one or the other on every slide that has a bar. */
+  const hasBar = declared.includes("mustwrite");
+  if (hasBar && !("mwlabel" in fields)) fields.mwlabel = slide.notes === false ? "CHECK ONLY" : "MUST WRITE";
+  if (typeof slide.notes === "string") {
+    if (!hasBar) {
+      problems.push(`slide ${n} (${slide.master}): "notes" needs a must-write bar, and this layout has none. ` +
+                    "Students write from a slide with a bar: use 03, 07, 09 or 10.");
+    } else if (tabWidth(tabText(slide.notes, true)) > pres.SLOTS[slide.master].notestab.w) {
+      problems.push(`slide ${n}: notes tab "${slide.notes}" is wider than the must-write bar`);
+    } else {
+      notesTab(s, pres.SLOTS[slide.master].notestab, slide.notes, true);
+    }
+  } else if (slide.notes === false && hasBar) {
+    notesTab(s, pres.SLOTS[slide.master].notestab, "nothing new to write", false);
+  } else if (spec.notesPacket && hasBar) {
+    problems.push(`slide ${n} (${slide.master}): it has a must-write bar, so say which notes block it fills ` +
+                  `("notes": "<block title>") or that it has nothing to write ("notes": false)`);
   }
 
   for (const [ph, txt] of Object.entries(fields)) {
@@ -145,18 +224,35 @@ for (const slide of spec.slides) {
       problems.push(`slide ${n} (${slide.master}): no placeholder "${ph}" — declared: ${declared.join(", ")}`);
       continue;
     }
-    s.addText(String(txt), { placeholder: ph });
+    const str = String(txt);
+    if (/[\^_]\{/.test(str.replace(MARK, ""))) { problems.push(`slide ${n}: field ${ph}: unbalanced ^{ or _{ markup`); continue; }
+    s.addText(hasMarkup(str) ? toRuns(str) : str, { placeholder: ph, objectName: `ph:${ph}` });
   }
+
+  /* Builds: click groups, in order. Each name is a placeholder ("a2_b") or an image
+     ("img:diagram", "reveal:diagram"). Everything not named is on the slide from the start.
+     The timing XML is written by scripts/add_slide_builds.py after the file exists. */
+  const named = new Set(Object.keys(fields).map(k => `ph:${k}`)
+    .concat(Object.keys(slide.images || {}).map(k => `img:${k}`))
+    .concat(Object.keys(slide.reveal || {}).map(k => `reveal:${k}`)));
+  for (const group of slide.builds || []) {
+    for (const nm of group) {
+      const full = nm.includes(":") ? nm : `ph:${nm}`;
+      if (!named.has(full)) problems.push(`slide ${n}: build names "${nm}", which is not on the slide`);
+    }
+  }
+  if (slide.notes) s.addNotes(String(slide.notes));
 
   // Cap check. A card body of five lines is a slide that should have been two slides.
   const bodyKeys = Object.keys(fields).filter(k => /_b$/.test(k) || k === "mustwrite" || k === "subhead");
   for (const k of bodyKeys) {
-    const lines = String(fields[k] || "").split("\n").filter(l => l.trim()).length;
+    const lines = stripMarkup(String(fields[k] || "")).split("\n").filter(l => l.trim()).length;
     const cap = k === "mustwrite" ? 2 : 4;
     if (lines > cap) problems.push(`slide ${n} (${slide.master}) field ${k}: ${lines} lines, cap ${cap}`);
   }
-  if (fields.mustwrite && String(fields.mustwrite).length > 110) {
-    problems.push(`slide ${n}: must-write is ${String(fields.mustwrite).length} chars — it has to fit one bar`);
+  const mwLen = fields.mustwrite ? stripMarkup(String(fields.mustwrite)).length : 0;
+  if (mwLen > 110) {
+    problems.push(`slide ${n}: must-write is ${mwLen} chars — it has to fit one bar`);
   }
 }
 
@@ -177,4 +273,16 @@ pres.writeFile({ fileName: OUT }).then(f => {
     { encoding: "utf8" });
   if (r.status === 0) process.stdout.write(r.stdout);
   else console.error("repack skipped:", (r.stderr || "").trim());
+  if (spec.slides.some(sl => (sl.builds || []).length)) {
+    // Placeholders ignore objectName, so the post-processor finds them by their layout
+    // index instead; it needs each master's placeholder names in declared order to do that.
+    const phMap = path.join(require("os").tmpdir(), `shull_ph_${process.pid}.json`);
+    fs.writeFileSync(phMap, JSON.stringify(spec.slides.map(sl => pres.PLACEHOLDERS[sl.master])));
+    const b = require("child_process").spawnSync(
+      "python3", [path.join(__dirname, "..", "..", "scripts", "add_slide_builds.py"), f, specPath, phMap],
+      { encoding: "utf8" });
+    fs.unlinkSync(phMap);
+    if (b.status === 0) process.stdout.write(b.stdout);
+    else { console.error("add_slide_builds failed:", (b.stderr || "").trim()); process.exitCode = 1; }
+  }
 });

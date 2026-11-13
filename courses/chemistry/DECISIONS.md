@@ -32,10 +32,10 @@ See the 2026-09-23 decision-log entry.
 2.1 The Bohr Model · 2.2 Energy Levels, Sublevels & Orbitals · 2.3 Electron Configurations ·
 2.4 Electron Stability & Valence Electrons · 2.5 Atomic & Electron Spectra
 
-**U3 The Periodic Table** (7 sections)
+**U3 The Periodic Table** (7 section codes, 6 taught) — *3.5 is dropped; see the log*
 3.1 Organization, Families & Groups · 3.2 Metals, Nonmetals & Metalloids · 3.3 Atomic & Ionic
-Radius · 3.4 Ionization Energy & Electronegativity · 3.5 Additional Periodic Trends · 3.6
-Explaining Periodic Trends · 3.7 Ion Formation
+Radius · 3.4 Ionization Energy & Electronegativity · 3.5 Additional Periodic Trends — DROPPED,
+code retired, never reused · 3.6 Explaining Periodic Trends · 3.7 Ion Formation
 
 ### Phase 2 — Bonding Logic (U4–U7)
 
@@ -153,6 +153,9 @@ rigor, strong distractors from real misconceptions.
 work and units required. Covers the current unit only — never insert an earlier-unit
 calculation just to make it cumulative.
 
+**Exception — U3 only:** U3 ends with one quiz in the Quizzes shape above, not a unit test. Every
+other unit keeps the two-day test. See the 2026-10-26 decision-log entry.
+
 Brief durable-skill recall may appear on quizzes and the conceptual test; the computational
 test stays focused on the current unit. No curve. No retakes. Study guides align to concepts
 and skills but never duplicate test questions.
@@ -170,12 +173,60 @@ and skills but never duplicate test questions.
 
 ## Reference packet contents
 
-Given to students around Week 2, usable throughout the year including on tests:
+Given to students around Week 2, usable throughout the year including on tests. Twelve sheets, in
+this order. Each sheet is its own PDF, and all twelve are also combined into one
+`Reference - Full Packet.pdf` for printing. Filed in `Chemistry/Reference/` and named at course
+level (`standards/NAMING.md` §2); each file's topic is its `REF` row in "Short titles". The sheet
+titles below are the on-page titles. Molecular shapes are drawn as SVG.
 
-- Periodic table
-- Polyatomic ions, with an indication of which ones must be memorized
-- Solubility rules
-- Percent-error formula/reference
+1. **Equations & Constants**
+   - *Measurement:* density, percent error, percent composition, average atomic mass.
+   - *Mole:* n = m/M; particles = n × N_A.
+   - *Gases:* Boyle, Charles, Gay-Lussac, combined, Avogadro, ideal gas, Dalton partial pressures.
+   - *Solutions:* molarity; dilution M1V1 = M2V2.
+   - *Thermochemistry:* q = mcΔT.
+   - *Acid/base:* pH, pOH, pH + pOH = 14, titration.
+   - *Light:* c = λν, E = hν.
+   - *Nuclear:* half-life.
+   - *Constants:* N_A; R in L·atm, L·kPa and L·mmHg units; c; h; specific heat of water;
+     pressure equivalents (atm, mmHg, kPa); K = °C + 273. STP = 0 °C and 1 atm; molar volume
+     22.4 L.
+   - Unit conversions, including metric prefixes; a dimensional-analysis setup template.
+2. **Significant Figure Rules** — counting rules, plus the ×/÷ and +/− rounding rules.
+3. **VSEPR Geometry** — a grid on one landscape page. Rows are 2–6 electron domains, each row
+   labelled with its electron geometry; columns are 0–3 lone pairs. Each cell shows the drawn
+   shape, molecular geometry, bonding and lone-pair counts, bond angle and AXE notation.
+   Combinations that do not exist are hatched.
+4. **Periodic Table** — atomic number, symbol, name, average atomic mass to 2 decimals.
+5. **Electronegativity Table** — Pauling values to 2 decimals; noble gases blank.
+6. **Polyatomic Ions** — 37 ions grouped by charge (1+, 2+, 1−, 2−, 3−). In each group the
+   ions students must memorize come first, marked ★ and set in bold.
+   - *Memorize (15):* ammonium NH4+, hydronium H3O+, acetate C2H3O2−, hydrogen carbonate HCO3−,
+     chlorate ClO3−, cyanide CN−, hydroxide OH−, nitrate NO3−, nitrite NO2−, permanganate MnO4−,
+     carbonate CO3 2−, chromate CrO4 2−, sulfate SO4 2−, sulfite SO3 2−, phosphate PO4 3−.
+   - *Reference only, unstarred (22):* mercury(I) Hg2 2+; perchlorate ClO4−, chlorite ClO2−,
+     hypochlorite ClO−, bromate BrO3−, iodate IO3−, periodate IO4−, hydrogen sulfate HSO4−,
+     hydrogen sulfite HSO3−, hydrogen sulfide HS−, dihydrogen phosphate H2PO4−, thiocyanate SCN−,
+     cyanate OCN−; dichromate Cr2O7 2−, hydrogen phosphate HPO4 2−, oxalate C2O4 2−, peroxide
+     O2 2−, thiosulfate S2O3 2−, silicate SiO3 2−; phosphite PO3 3−, arsenate AsO4 3−,
+     borate BO3 3−.
+7. **Naming Toolkit** — Roman numerals I–VIII; covalent prefixes mono–deca; the seven diatomic
+   elements (H, N, O, F, Cl, Br, I). **No naming procedure or rules** for ionic, covalent, or
+   acid names: the procedure stays in the Unit 6 materials (possibly a U6 organizer), so the
+   test-usable packet does not answer naming items.
+8. **Metals with Multiple Charges** — Cu, Fe, Pb, Sn, Hg, Co, Ni, Cr, Mn, Au; plus Ag+, Zn2+ and
+   Cd2+ shown as fixed-charge exceptions.
+9. **Solubility Grid** — cations × anions (polyatomic anions included). Each cell is S (soluble,
+   >1 g/100 mL), SS (slightly soluble, 0.1–1 g/100 mL), I (insoluble, <0.1 g/100 mL), or X (the
+   ions react with each other or with water instead of forming the compound — e.g. Al2(CO3)3,
+   Fe2S3, Group 2 sulfides, FeI3, CuI2), marked by letter so it reads in greyscale. Plus a rules
+   summary: five rules and one line explaining X.
+10. **Activity Series** — metals and halogens.
+11. **Strong Acids & Bases** — list.
+12. **Specific Heats** — common substances.
+
+**Deliberately excluded** (user decision): the electronegativity-difference bond-type scale,
+nuclear particle symbols, acid naming rules.
 
 Do not test pure recall of anything in the packet unless the learning target explicitly
 requires memorization.
@@ -352,14 +403,58 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 1.4 | Isotopes |
 | 1.5 | Average Atomic Mass |
 | 2.3 | Electron Configs |
+| REF | Equations |
+| REF | Sig Figs |
+| REF | VSEPR Shapes |
+| REF | Periodic Table |
+| REF | Electronegativity |
+| REF | Polyatomic Ions |
+| REF | Naming Toolkit |
+| REF | Multi-Charge Metals |
+| REF | Solubility |
+| REF | Activity Series |
+| REF | Strong Acids & Bases |
+| REF | Specific Heats |
+| REF | Full Packet |
 
 ## Decision log
+
+### 2026-11-10 — Reference packet: VSEPR grid, solubility X mark
+Sheet 3 (VSEPR Geometry) is a grid on one landscape page: rows 2–6 electron domains labelled with
+electron geometry, columns 0–3 lone pairs, impossible combinations hatched; same information as
+before. Sheet 9 (Solubility Grid) marks each cell S, SS, I, or X, where X means the ions react with
+each other or with water instead of forming the compound; the rules summary gains one line
+explaining X. Found by verify-content 2026-11-10; every other judgement call on that review was
+kept as built. Full text in "Reference packet contents".
+Supersedes: Reference packet contents, items 3 and 9 (SHULL-CHG-0068).
+Status: CONFIRMED · SHULL-CHG-0070
+
+### 2026-11-06 — Reference packet: twelve sheets
+The Week-2 reference packet is twelve sheets: Equations & Constants, Significant Figure Rules,
+VSEPR Geometry, Periodic Table, Electronegativity Table, Polyatomic Ions (37, the 15 to memorize
+starred and bold), Naming Toolkit, Metals with Multiple Charges, Solubility Grid, Activity Series,
+Strong Acids & Bases, Specific Heats. The naming procedure is left out on purpose and stays in
+Unit 6 materials (user, 2026-11-05), so the packet does not answer naming items on a test. Also
+excluded: the electronegativity-difference bond-type scale, nuclear particle symbols, acid naming
+rules. Full list in "Reference packet contents".
+Supersedes: Reference packet contents (four-item list: periodic table, polyatomic ions, solubility
+rules, percent error).
+Status: CONFIRMED · SHULL-CHG-0068
 
 ### 2026-10-28 — Palette changed
 Chemistry's identity colours changed. Values live in `brand/tokens.json` `courses.chemistry`; the
 retired palette is preserved in `brand/palette-archive/chem-lab-lime.md`. Finished documents on
 Drive stay as built until rebuilt.
 Supersedes: 2026-09-07 — Palette (this log).
+### 2026-10-26 — U3: a quiz replaces the unit test; 3.5 Additional Periodic Trends dropped
+U3 The Periodic Table ends with a single quiz in the standard quiz shape (Assessment shape →
+Quizzes) instead of the two-day unit test. This is a U3-only exception; every other unit keeps the
+two-day test. Section 3.5 Additional Periodic Trends is dropped. The code 3.5 is retired and never
+reused; 3.6 Explaining Periodic Trends and 3.7 Ion Formation keep their codes, so nothing is
+renumbered. Decided by Matt 2026-10-26 while planning a short U3 ("Quiz replaces the test, drop
+3.5, build all of it"), in answer to whether the quiz replaces the U3 test and what 3.5 contains.
+Supersedes: Assessment shape, "Unit tests — two days", as applied to U3; Curriculum map, U3 line,
+"3.5 Additional Periodic Trends" as a taught section.
 Status: CONFIRMED · SHULL-CHG-0054
 
 ### 2026-09-23 — U1: 1.4 Isotopes folded into 1.3 Atomic Structure
