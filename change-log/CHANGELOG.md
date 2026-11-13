@@ -103,6 +103,7 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0024 | 2026-09-20 | SHULL OS gains its own identity colour | CONFIRMED | `governance/proposals/SHULL-CHG-0024-app-identity-colour.md` |
 | SHULL-CHG-0023 | 2026-09-20 | Guided notes are strictly recall; no questions | CONFIRMED | `governance/proposals/SHULL-CHG-0023-notes-are-recall.md` |
 
 ## 2026-09-23

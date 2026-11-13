@@ -150,6 +150,7 @@ res.writeHead(200,{'content-type':file[3]==='pdf'?'application/pdf':'application
 const preview=p.match(/^\/previews\/([\w.-]+\.png)$/);
 if(preview){const target=path.join(previewDir,preview[1]);if(!target.startsWith(previewDir+path.sep)||!fs.existsSync(target))return send(404,{});res.writeHead(200,{'content-type':'image/png','cache-control':'no-cache'});return fs.createReadStream(target).pipe(res);}
 if(p==='/icon.svg'){res.writeHead(200,{'content-type':'image/svg+xml','cache-control':'no-cache'});return res.end(fs.readFileSync(path.join(root,'public/icon.svg')));}
+if(p==='/badge.png'){res.writeHead(200,{'content-type':'image/png','cache-control':'no-cache'});return res.end(fs.readFileSync(path.join(root,'public/badge.png')));}
 const staticFiles={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/tokens.generated.css':'tokens.generated.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
 }catch(e){send(400,{error:e.message});}};
 const server=http.createServer(handler);

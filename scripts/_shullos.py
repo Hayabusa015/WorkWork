@@ -6,8 +6,14 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Never scanned. legacy/ is a verbatim snapshot; docs/ and governance/ are analysis and
 # change records that legitimately quote superseded values; palette-archive exists to
 # hold retired hexes.
+#
+# desktop/vendor/ and dist/ are third-party runtimes and build output that happen to
+# sit inside the working tree - a bundled Python, a packaged Electron app. They are no
+# more ours than node_modules is. Pillow alone carries every CSS colour name as a raw
+# hex, so without this the token validator refuses a tree that is perfectly correct.
 EXCLUDED_DIRS = {
-    ".git", "node_modules", "legacy", "docs", "reports",
+    ".git", "node_modules", "legacy", "docs", "reports", "dist",
+    os.path.join("desktop", "vendor"),
     os.path.join("brand", "palette-archive"),
     os.path.join("governance", "proposals"),
     os.path.join("standards", "superseded"),

@@ -24,6 +24,8 @@
   --t-geo:           #16B8A6;
   --t-geo-2:         #E85D24;
 
+  --t-signal:        #00C84C;   /* Signal Green — the app's own */
+
   --t-danger:        #DC2626;
   --t-caution:       #F59E0B;
   --t-success:       #22C55E;
@@ -47,10 +49,10 @@
   --text-dim:    color-mix(in oklab, var(--t-muted-on-dark) 72%, var(--t-asphalt));
 
   /* ---- Accent: the workspace's own identity. ---- */
-  --accent:       var(--t-geo);
-  --accent-bright:color-mix(in oklab, var(--t-geo) 72%, white);
-  --accent-deep:  color-mix(in oklab, var(--t-geo) 55%, var(--t-asphalt));
-  --accent-ink:   color-mix(in oklab, var(--t-asphalt) 82%, var(--t-geo));
+  --accent:       var(--t-signal);
+  --accent-bright:color-mix(in oklab, var(--t-signal) 72%, white);
+  --accent-deep:  color-mix(in oklab, var(--t-signal) 55%, var(--t-asphalt));
+  --accent-ink:   color-mix(in oklab, var(--t-asphalt) 88%, var(--t-signal));
 
   /* ---- Course identity. Used for the course a document belongs to, never
      as decoration. ---- */
