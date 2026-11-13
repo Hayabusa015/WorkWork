@@ -180,7 +180,7 @@ options and your recommendation, so Matt can answer them in one message.
 
 Start only after Phases 0–2 are merged.
 
-1. The course is Chemistry (§10). Ask Matt for the unit number.
+1. The unit is Chemistry Unit 4 (§10).
 2. Run the unit plan. Show the table. Get a yes.
 3. For rows with no spec, write the spec from the course decisions file and Matt's source
    material. Anything not given is asked for or marked PROVISIONAL in teacher notes only.
@@ -200,7 +200,7 @@ features. Bug fixes that block a build are allowed.
 | # | Decision | Answer |
 |---|---|---|
 | 1 | Park the desktop app and remove Vercel (Phase 1)? | **Yes.** Verbatim: "Lets park the app and remove vercel" |
-| 2 | Proof unit (Phase 6)? | **Chemistry.** Verbatim: "I guess lets do chemistry". The unit number is not yet given: ask Matt before Phase 6. Do not pick one. |
+| 2 | Proof unit (Phase 6)? | **Chemistry Unit 4.** Verbatim: "I guess lets do chemistry", then "Let's do unit 4". Confirmed present in `courses/chemistry/DECISIONS.md` on 2026-11-13 with six sections; read the titles and codes from that file, not from here. No Chemistry Unit 4 spec exists in `templates/*/specs/` yet, so every document needs a spec written. Labs past Unit 0 are an open question in that file: a Unit 4 lab is a draft until Matt confirms the lab. |
 | 3 | Legacy skills? | **Retire them.** Verbatim: "Legacy skills, retire them". See §11. |
 | 4 | Delivery of Phases 0–2? | Matt asked for a recommendation. Recommended and adopted unless he says otherwise: **one pull request for Phases 0–2**, so CI runs on it and the work reaches `main` in one reviewed step. The two proposals (Phases 3 and 4) go in a second pull request so their IDs become real on `main`. |
 
