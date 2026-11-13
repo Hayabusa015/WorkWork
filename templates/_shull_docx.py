@@ -577,6 +577,12 @@ def work_box(cell, label, pal, height_in=1.4, width=5.06, watermark=None, *,
     if label:
         para(inner, label, label_size, bold=label_bold, color=label_color or pal.accent,
              caps_track=label_caps, first=True)
+    elif not (watermark or corner):
+        # No label, watermark or corner note: collapse the cell's default empty paragraph so
+        # the open box starts at its top edge instead of a blank line down.
+        p0 = inner.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(0); p0.paragraph_format.space_after = Pt(0)
+        p0.paragraph_format.line_spacing = Pt(1)
     used = 0.0                       # points already taken inside the box, top down
     if label:
         used += label_size * 1.25

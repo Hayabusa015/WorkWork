@@ -51,7 +51,7 @@ import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
-    FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
+    T, FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
     diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
     schema_order, estimate_height, text_width_in,
@@ -90,6 +90,10 @@ MAX_STRETCH_PT = 90
 # SHULL-CHG-0016: a problem to solve gets a bordered box to solve it in. hRule
 # "atLeast", so it grows with the work and never shrinks below this.
 WORK_BOX_MIN_IN = 1.4
+# What a teacher key adds to the student page is set in keyInk.pen (standards/ANSWER_KEYS.md,
+# SHULL-CHG-0043: written answers on a key), so a key printed in colour shows at a glance which
+# writing is the answer. Teacher keys only; the student copy never uses it.
+KEY_INK = T["keyInk"]["pen"]["hex"]
 WORK_LABEL = "WORK / show your reasoning and units"
 
 # Rules, in eighths of a point (what w:sz counts). The page is open: no outer box and
@@ -600,7 +604,7 @@ def render_problem(col, prob, key, pal):
     mar(inner, 3, 3, 6, 6)
     if key:
         for s in prob.get("solution", []):
-            write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=pal.ink,
+            write(inner.add_paragraph(), s, BODY, line=BODY_LINE, color=KEY_INK,
                   before=2)
     col.after_table()
     if prob.get("answer"):
@@ -1250,6 +1254,9 @@ def _legacy_row(r):
         # label is dropped: the block title already names the example.
         prob = {k: p[k] for k in ("statement", "given", "workHeightIn", "answer",
                                   "solution") if p.get(k)}
+        # An explicit workLabel survives, including "" for a box with no caption.
+        if "workLabel" in p:
+            prob["workLabel"] = p["workLabel"]
         if p.get("need"):
             prob["find"] = p["need"]
         row["problem"] = prob
@@ -1342,6 +1349,7 @@ def normalize_legacy(spec, ctx):
                      # key answer to size the writing room to, and the third line is
                      # what pushed a RECALL block onto a sheet of its own.
                      "lines": 2,
+                     **({"answer": sec["summaryAnswer"]} if sec.get("summaryAnswer") else {}),
                      "selfCheck": sec.get("selfCheck", [])})
         close = spec.get("close")
         if si == len(secs) - 1 and close:
