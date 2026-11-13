@@ -6,7 +6,7 @@
 | `VOICE.md` | How Mr. Shull writes to his own students |
 | `NAMING.md` | `[S.S] [Type] - [Topic]` or `Unit [X] [Type] - [Unit Title]`; the course is the folder |
 | `DRIVE_ARCHITECTURE.md` | The Drive tree, folder grammar, and routing rules |
-| `QA_GATE.md` | The nine checks every deliverable passes before it ships |
+| `QA_GATE.md` | The ten checks every deliverable passes before it ships |
 | `ANSWER_KEYS.md` | The handwritten look on teacher answer keys: inks, steps, stacked division, physics sketches, legibility (SHULL-CHG-0043) |
 
 Skills point at these. Standards do not restate each other.

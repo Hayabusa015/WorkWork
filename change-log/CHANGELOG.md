@@ -123,6 +123,7 @@ separately rows here, to avoid listing the same fact twice under two statuses.
 |---|---|---|---|---|
 | SHULL-CHG-0030 | 2026-09-16 | Tests-Quizizz renamed Quiz, moves to Unit level; Homework folder removed, filed loose in Section | IMPLEMENTED | `governance/proposals/SHULL-CHG-0030-quiz-unit-level-no-homework-folder.md` |
 | SHULL-CHG-0029 | 2026-09-16 | Guided Notes and Presentations move from Section to Unit level | IMPLEMENTED | `governance/proposals/SHULL-CHG-0029-unit-level-guided-notes-presentations.md` |
+| SHULL-CHG-0023 | 2026-09-16 | Cognitive-load research made checkable: text/diagram adjacency, line-length, decoration rationale, new QA_GATE check | CONFIRMED | `governance/proposals/SHULL-CHG-0023-cognitive-load-visual-design.md` |
 
 ## 2026-09-09 · 2026-09-08
 
