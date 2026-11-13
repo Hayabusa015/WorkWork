@@ -1,0 +1,190 @@
+{
+  "course": "chemistry",
+  "unit": 14,
+  "section": "14.1",
+  "sectionTitle": "Properties & Definitions",
+  "note": "Opens U14. Teaches observable properties, then Arrhenius, then Brønsted-Lowry and conjugate pairs. Deliberately does NOT teach pH - that is 14.3 - and does not teach strong vs weak, which is 14.2. Sets both up. 50-minute period; last 5 minutes are cleanup/reset.",
+  "slides": [
+    {
+      "master": "02_SECTION_TITLE",
+      "fields": {
+        "number": "01",
+        "headline": "14.1\nProperties & Definitions",
+        "subhead": "Identify an acid or a base from what it does, then from what it is - and say which definition you are using."
+      },
+      "imageSubjects": {
+        "section": "a pH strip turning red beside a beaker of clear liquid on a dark bench"
+      }
+    },
+    {
+      "master": "06_CONCEPT_IMAGE",
+      "fields": {
+        "headline": "One Is In Your Lunch. One Burns Skin.",
+        "subhead": "Lemon juice and drain cleaner sit at opposite ends of the same scale. Before we can measure it, we have to be able to name it.",
+        "keyq": "What does a lemon have in common with battery acid?"
+      },
+      "imageSubjects": {
+        "concept": "a cut lemon and a bottle of drain cleaner side by side on dark slate"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Three Words You Need First",
+        "subhead": "Write these before we go further. Everything after this slide uses them.",
+        "k1_l": "ACID",
+        "k1_b": "A substance that gives away a hydrogen ion, H+.",
+        "k2_l": "BASE",
+        "k2_b": "A substance that takes a hydrogen ion, or supplies OH-.",
+        "k3_l": "INDICATOR",
+        "k3_b": "A dye that changes colour depending on which one it is in.",
+        "mustwrite": "An acid donates H+. A base accepts H+. Everything else in this unit builds on those two sentences."
+      },
+      "imageSubjects": {
+        "aside": "litmus paper strips, one red and one blue, on a worn lab bench"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "What They Do, Before What They Are",
+        "subhead": "You can identify both in the lab without knowing a single formula. These are observable properties.",
+        "c1_l": "ACIDS",
+        "c1_b": "Taste sour - in food, never in lab.\nTurn blue litmus red.\nReact with Zn and Mg to release H₂ gas.\nConduct electricity in water.",
+        "c2_l": "BASES",
+        "c2_b": "Taste bitter - in food, never in lab.\nFeel slippery or soapy.\nTurn red litmus blue.\nConduct electricity in water.",
+        "mustwrite": "Both conduct electricity in water. That is your first clue that both are releasing ions."
+      },
+      "imageSubjects": {
+        "concept": "zinc granules fizzing in a test tube of clear acid"
+      }
+    },
+    {
+      "master": "08_DIAGRAM_ANNOTATION",
+      "fields": {
+        "headline": "Arrhenius: What Happens In Water",
+        "subhead": "The first definition, and the one that matches the lab bench. Both of these split apart the moment they hit water.",
+        "a1_l": "THE ACID",
+        "a1_b": "HCl → H+ + Cl-\nThe H+ is what makes it an acid.",
+        "a2_l": "THE BASE",
+        "a2_b": "NaOH → Na+ + OH-\nThe OH- is what makes it a base.",
+        "a3_l": "THE LIMIT",
+        "a3_b": "This definition only works in water - and it cannot explain NH₃, which has no OH- in it at all."
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Two Definitions, One Is Bigger",
+        "subhead": "Arrhenius is not wrong. Brønsted-Lowry just covers more ground - including every case Arrhenius already handled.",
+        "c1_l": "ARRHENIUS (1884)",
+        "c1_b": "Acid: produces H+ in water.\nBase: produces OH- in water.\n\nSimple. Matches the bench.\nOnly works in water.",
+        "c2_l": "BRØNSTED-LOWRY (1923)",
+        "c2_b": "Acid: donates a proton, H+.\nBase: accepts a proton, H+.\n\nNo water required.\nExplains NH₃ as a base.",
+        "mustwrite": "Every Arrhenius acid is also a Brønsted-Lowry acid. The reverse is not true."
+      },
+      "imageSubjects": {
+        "concept": "two nested circles drawn in chalk on slate, the outer one larger"
+      }
+    },
+    {
+      "master": "05_PROCESS_TIMELINE",
+      "fields": {
+        "headline": "Finding the Acid and the Base in Any Equation",
+        "subhead": "Four steps. Works on every Brønsted-Lowry problem you will see this unit.",
+        "s1_l": "FIND THE H+",
+        "s1_b": "Which reactant lost a hydrogen?",
+        "s2_l": "THAT ONE DONATED",
+        "s2_b": "The one that lost it is the acid.",
+        "s3_l": "FIND THE CATCHER",
+        "s3_b": "Which one gained it? That is the base.",
+        "s4_l": "PAIR THEM UP",
+        "s4_b": "A reactant and its product differ by one H+."
+      },
+      "imageSubjects": {
+        "band": "a chalk arrow drawn across a dark slate board"
+      }
+    },
+    {
+      "master": "07_COMPARISON_CARDS",
+      "fields": {
+        "headline": "Conjugate Pairs Differ By Exactly One H+",
+        "subhead": "Not two. Not a whole molecule. One hydrogen ion, every time.",
+        "k1_l": "HCl / Cl-",
+        "k1_b": "HCl donates its H+. What is left behind is Cl-, its conjugate base.",
+        "k2_l": "NH₄+ / NH₃",
+        "k2_b": "NH₄+ donates an H+ and becomes NH₃, its conjugate base.",
+        "k3_l": "H₂O / OH-",
+        "k3_b": "Water can donate an H+ and become OH- - or accept one and become H₃O+.",
+        "mustwrite": "Water shows up on both lists. A substance that can act as either is called amphoteric."
+      },
+      "imageSubjects": {
+        "aside": "a single water droplet on dark glass"
+      }
+    },
+    {
+      "master": "09_EXAMPLE_PROBLEM",
+      "fields": {
+        "headline": "Label Every Part",
+        "subhead": "Use the four steps. Work it with me on the board before you write anything down.",
+        "problem": "NH₃ + H₂O ↔ NH₄+ + OH-\n\nLabel the acid, the base, and both conjugate pairs.",
+        "g1_l": "GIVEN",
+        "g1_b": "A reversible reaction with four species.",
+        "g2_l": "NEED",
+        "g2_b": "Acid, base, and the two conjugate pairs.",
+        "work": "",
+        "mustwrite": "Ask which species lost a hydrogen. That is always the first question."
+      },
+      "imageSubjects": {
+        "aside": "an open notebook with a blank ruled page"
+      }
+    },
+    {
+      "master": "10_WORKED_SOLUTION",
+      "fields": {
+        "headline": "Worked Through",
+        "subhead": "Water is the acid here. That surprises people - it is why the definition matters more than the name.",
+        "f1_l": "THE RULE",
+        "f1_b": "Acid donates H+. Base accepts H+.",
+        "work": "H₂O → OH-  lost a hydrogen, so water is the acid.\nNH₃ → NH₄+  gained it, so ammonia is the base.\nPairs:  H₂O / OH-   and   NH₃ / NH₄+",
+        "mustwrite": "The same substance can be an acid in one reaction and a base in another. Read the reaction, not the name."
+      },
+      "imageSubjects": {
+        "data": "a completed problem in pencil on graph paper"
+      }
+    },
+    {
+      "master": "04_DIVIDER",
+      "fields": {
+        "eyebrow": "BEFORE YOU LEAVE",
+        "headline": "The Ones You Will Actually Meet",
+        "subhead": "You will see these six all unit. Learn them now and 14.2 gets easier."
+      },
+      "imageSubjects": {
+        "divider": "a row of amber reagent bottles on a dark shelf"
+      }
+    },
+    {
+      "master": "03_GROUPED_CONCEPT",
+      "fields": {
+        "headline": "Six Names Worth Knowing",
+        "subhead": "Three of each. You do not need to memorise how strong they are yet - that is next class.",
+        "c1_l": "ACIDS",
+        "c1_b": "HCl - hydrochloric, in your stomach.\nH₂SO₄ - sulfuric, in car batteries.\nCH₃COOH - acetic, in vinegar.",
+        "c2_l": "BASES",
+        "c2_b": "NaOH - sodium hydroxide, drain cleaner.\nKOH - potassium hydroxide, in soap.\nNH₃ - ammonia, in glass cleaner.",
+        "mustwrite": "Goggles go on before any acid comes off the shelf. No exceptions, no matter how dilute it looks."
+      },
+      "imageSubjects": {
+        "concept": "safety goggles resting on a closed chemistry textbook"
+      }
+    },
+    {
+      "master": "12_DECK_INDEX",
+      "fields": {
+        "headline": "14.1 At A Glance",
+        "subhead": "Reference copy. Delete this slide before class."
+      }
+    }
+  ]
+}
