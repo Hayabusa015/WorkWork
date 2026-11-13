@@ -72,6 +72,22 @@ you document a file, create it in the same commit.
 
 ## 4b. Phase 0b — bring the branches home (do this before anything else changes)
 
+> **Status, 2026-11-13: done for 26 of 27 branches**, by the session that wrote this plan, at
+> Matt's instruction ("Merge where there are no conflicts, if there is a conflict see if we can
+> fix it"). Each merge commit says what was kept and what was not. Still open:
+>
+> - `claude/funny-heisenberg-vu0q4r` (Chemistry Units 4 and 5, live) is **not merged**. It
+>   conflicts in `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, both worksheet builders
+>   and the notes builder. Merge `main` into it from inside that session, where its own documents
+>   can be rebuilt and checked.
+> - Eight Change IDs now belong to more than one record (0023, 0024, 0046, 0054, 0066, 0068, 0069,
+>   0070). Renumbering is Matt's decision.
+> - Four validators fail on the consolidated tree (`validate_layers`, `validate_codes`,
+>   `validate_tokens`, `validate_notes`). Each failure is in work that came from a branch and had
+>   never been checked against the others.
+>
+> The remaining steps below apply to that last branch and to any new one.
+
 Phases 1 and 2 edit the builders and scripts. Doing that on a stale `main` would add a 28th
 divergent copy. So the branches come first.
 
