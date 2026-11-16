@@ -20,6 +20,7 @@
    "columns": 3,
    "squareIn": 2.35,
    "boxHeightIn": 2.0,
+   "tierTags": false,
    "gridPromptPt": 9,
    "gridRowGapPt": 8,
    "compactTop": true,

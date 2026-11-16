@@ -229,7 +229,7 @@ def render_key_grid(doc, questions, pal, g):
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
                 square(sq, pal, S, caps[k] if span > 1 and k < len(caps) else None,
-                       q.get("tier") if k == 0 else None)
+                       q.get("tier") if k == 0 and g["tierTags"] else None)
                 if ps and k < len(ps):
                     png, w, h = ps[k]
                     pp = sq.add_paragraph()

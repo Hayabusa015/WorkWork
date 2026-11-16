@@ -119,6 +119,19 @@ class Grid(Builder):
                     col += span
             self.assertEqual(spans, [1, 1, 1, 1, 3])     # item 5 spans its two boxes
 
+    def test_tier_tags_false_keeps_tiers_out_of_the_boxes(self):
+        tags = (">WARM-UP<", ">PRACTICE<", ">CHALLENGE<", ">MULTI-TOPIC<")
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(grid_spec(), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue(all(t in doc.element.body.xml for t in tags))   # default prints them
+            r, doc = self.build(grid_spec(tierTags=False), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)   # tiers still in the data: ramp passes
+            x = doc.element.body.xml
+            self.assertFalse(any(t in x for t in tags), builder)
+            self.assertNotIn("•  ", x)
+            self.assertIn(">Book<", x)                    # captions still print
+
     def test_box_height_can_differ_from_width(self):
         r, doc = self.build(grid_spec(squareIn=2.35, boxHeightIn=2.0))
         self.assertEqual(r.returncode, 0, r.stderr)

@@ -179,7 +179,8 @@ squares instead of one card per question: `columns` (default 3), `squareIn` (sid
 the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in),
 `gridPromptPt` (default 9.5) and `gridRowGapPt` (default 10). An item takes one square per `draw.panels`, each captioned from
 `draw.captions` inside its top; items flow left to right in order. `boxHeightIn` (default
-`squareIn`) lets a box run shorter than it is wide. A prompt sits exactly over its own box or
+`squareIn`) lets a box run shorter than it is wide. `"tierTags": false` leaves the tier tag out of the
+boxes (the tiers stay in the spec for the ramp check). A prompt sits exactly over its own box or
 boxes: same left edge, same right edge, never in the gutter beside it; prompts share a row's top
 and the boxes share theirs. A grid item carries a prompt and
 squares only: `math`, `answerLines`, `parts`, `diagram`, `given` and `need` are refused. The key

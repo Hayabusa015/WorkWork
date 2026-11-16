@@ -879,6 +879,9 @@ def grid_opts(spec, sec):
     # is wide when true squares at the column width will not fit the page budget.
     return {"columns": cols, "square": square, "gutter": gutter,
             "height": float(get("boxHeightIn", square)),
+            # "tierTags": false keeps the tier out of the boxes; the tiers stay in the spec,
+            # where the ramp check reads them.
+            "tierTags": bool(get("tierTags", True)),
             "promptPt": float(get("gridPromptPt", 9.5)),
             "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
 
@@ -1022,7 +1025,7 @@ def render_grid(doc, questions, pal, g):
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
                 square(sq, pal, g["square"], caps[k] if span > 1 and k < len(caps) else None,
-                       q.get("tier") if k == 0 else None)
+                       q.get("tier") if k == 0 and g["tierTags"] else None)
         unpad_cell(outer)
 
 
