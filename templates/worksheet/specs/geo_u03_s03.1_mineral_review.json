@@ -1,0 +1,302 @@
+{
+  "course": "geology",
+  "unit": 3,
+  "sections": [
+    "3.1"
+  ],
+  "docType": "Worksheet",
+  "timeTargetMin": "20",
+  "pagesPerSection": 1,
+  "sectionsContent": [
+    {
+      "code": "3.1",
+      "title": "Mineral Review: Get Ready for the Lab",
+      "concept": {
+        "summary": "Tomorrow you test real minerals. Today you practice the thinking. Use your guided notes (slides 03–07) for every answer.",
+        "keyIdeas": [
+          "Hardness is a scratch test: the harder material scratches the softer one, never the other way around."
+        ]
+      },
+      "blocks": [
+        {
+          "kind": "plan",
+          "label": "WHAT MAKES A MINERAL · FIND ALL FIVE IN YOUR NOTES",
+          "rows": [
+            [
+              [
+                "1.",
+                1
+              ],
+              [
+                "2.",
+                1
+              ]
+            ],
+            [
+              [
+                "3.",
+                1
+              ],
+              [
+                "4.",
+                1
+              ]
+            ],
+            [
+              [
+                "5.",
+                1
+              ]
+            ]
+          ],
+          "points": 5
+        },
+        {
+          "kind": "plan",
+          "label": "THE FIELD TOOLS · WRITE THE HARDNESS OF EACH",
+          "gapBefore": 6,
+          "rows": [
+            [
+              [
+                "Fingernail ≈",
+                1
+              ],
+              [
+                "Copper penny ≈",
+                1
+              ]
+            ],
+            [
+              [
+                "Glass plate ≈",
+                1
+              ],
+              [
+                "Steel nail ≈",
+                1
+              ]
+            ]
+          ],
+          "points": 4
+        },
+        {
+          "kind": "plan",
+          "label": "HARDNESS DETECTIVE · GIVE THE RANGE, NOT AN EXACT NUMBER",
+          "gapBefore": 6,
+          "rows": [
+            [
+              [
+                "1.&nbsp; My fingernail scratches it.&nbsp; Range:",
+                1
+              ]
+            ],
+            [
+              [
+                "2.&nbsp; My fingernail cannot scratch it, but a penny can.&nbsp; Range:",
+                1
+              ]
+            ],
+            [
+              [
+                "3.&nbsp; A penny cannot scratch it, and it cannot scratch glass.&nbsp; Range:",
+                1
+              ]
+            ],
+            [
+              [
+                "4.&nbsp; It scratches glass, but the steel nail scratches it.&nbsp; Range:",
+                1
+              ]
+            ],
+            [
+              [
+                "5.&nbsp; It scratches glass, and the steel nail cannot scratch it.&nbsp; Range:",
+                1
+              ],
+              [
+                "A mineral it could be:",
+                1
+              ]
+            ]
+          ],
+          "points": 6
+        },
+        {
+          "kind": "diagram",
+          "label": "CRYSTAL SHAPES YOU MIGHT SEE · NAME THE SHAPE AND A MINERAL",
+          "gapBefore": 6,
+          "heightIn": 1.55,
+          "labelSlots": 4,
+          "image": "../notes/assets/geo_u03_crystal_shapes.png",
+          "caption": "Word bank: cube (halite) · hexagonal prism (quartz) · octahedron (fluorite) · rhombohedron (calcite)",
+          "points": 4
+        },
+        {
+          "kind": "reflection",
+          "linesEach": 3,
+          "gapBefore": 6,
+          "prompts": [
+            "In your own words, what is cleavage? How is it different from fracture?"
+          ],
+          "points": 2
+        }
+      ]
+    }
+  ],
+  "key": {
+    "title": "Mineral Review: Answer Key",
+    "blocks": [
+      {
+        "kind": "table",
+        "label": "WHAT MAKES A MINERAL",
+        "headers": [
+          "#",
+          "Characteristic"
+        ],
+        "widths": [
+          0.1,
+          0.9
+        ],
+        "boldFirst": false,
+        "rows": [
+          [
+            "1",
+            "Naturally occurring"
+          ],
+          [
+            "2",
+            "Inorganic"
+          ],
+          [
+            "3",
+            "Solid"
+          ],
+          [
+            "4",
+            "Definite chemical composition"
+          ],
+          [
+            "5",
+            "Orderly crystal structure"
+          ]
+        ]
+      },
+      {
+        "kind": "table",
+        "label": "THE FIELD TOOLS",
+        "headers": [
+          "Tool",
+          "Hardness"
+        ],
+        "widths": [
+          0.5,
+          0.5
+        ],
+        "rows": [
+          [
+            "Fingernail",
+            "≈ 2.5"
+          ],
+          [
+            "Copper penny",
+            "≈ 3.5"
+          ],
+          [
+            "Glass plate",
+            "≈ 5.5"
+          ],
+          [
+            "Steel nail",
+            "≈ 6.5"
+          ]
+        ]
+      },
+      {
+        "kind": "table",
+        "label": "HARDNESS DETECTIVE",
+        "headers": [
+          "#",
+          "Range",
+          "Why"
+        ],
+        "widths": [
+          0.06,
+          0.24,
+          0.7
+        ],
+        "boldFirst": false,
+        "rows": [
+          [
+            "1",
+            "Less than 2.5",
+            "Softer than a fingernail. Talc (1) or gypsum (2)."
+          ],
+          [
+            "2",
+            "2.5 to 3.5",
+            "Harder than a fingernail, softer than copper. Calcite (3)."
+          ],
+          [
+            "3",
+            "3.5 to 5.5",
+            "Harder than copper, softer than glass. Fluorite (4) or apatite (5)."
+          ],
+          [
+            "4",
+            "5.5 to 6.5",
+            "Harder than glass, softer than steel. Orthoclase (6)."
+          ],
+          [
+            "5",
+            "Greater than 6.5",
+            "Harder than steel. Quartz (7), topaz (8), corundum (9) or diamond (10)."
+          ]
+        ]
+      },
+      {
+        "kind": "table",
+        "label": "CRYSTAL SHAPES",
+        "headers": [
+          "#",
+          "Shape",
+          "Example mineral"
+        ],
+        "widths": [
+          0.06,
+          0.44,
+          0.5
+        ],
+        "boldFirst": false,
+        "rows": [
+          [
+            "1",
+            "Cube",
+            "Halite (also pyrite, galena)"
+          ],
+          [
+            "2",
+            "Hexagonal prism",
+            "Quartz"
+          ],
+          [
+            "3",
+            "Octahedron",
+            "Fluorite (also magnetite)"
+          ],
+          [
+            "4",
+            "Rhombohedron",
+            "Calcite"
+          ]
+        ]
+      },
+      {
+        "kind": "notes",
+        "label": "REFLECTION · MODEL ANSWERS",
+        "items": [
+          "Cleavage: the mineral breaks along flat, smooth planes, like mica peeling into sheets or halite breaking into cubes. Fracture: it breaks unevenly or in curved, shell-like surfaces, like quartz."
+        ]
+      }
+    ]
+  }
+}
