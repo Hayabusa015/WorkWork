@@ -6,7 +6,7 @@
   ],
   "docType": "Worksheet",
   "timeTargetMin": "20",
-  "pagesPerSection": 1,
+  "pagesPerSection": 2,
   "sectionsContent": [
     {
       "code": "3.1",
@@ -139,6 +139,26 @@
             "In your own words, what is cleavage? How is it different from fracture?"
           ],
           "points": 2
+        },
+        {
+          "kind": "diagram",
+          "pageBreakBefore": true,
+          "heading": "Cleavage or Fracture?",
+          "label": "LOOK AT HOW EACH SAMPLE BROKE · WRITE CLEAVAGE OR FRACTURE",
+          "heightIn": 3.3,
+          "labelSlots": 6,
+          "points": 6,
+          "image": "../notes/assets/geo_u03_cleavage_or_fracture.png",
+          "caption": "Cleavage = breaks along flat planes (sheets, cubes, blocks). Fracture = breaks unevenly or in curved, shell-like surfaces."
+        },
+        {
+          "kind": "reflection",
+          "linesEach": 3,
+          "points": 2,
+          "label": "EXPLAIN",
+          "prompts": [
+            "Pick one sample you marked CLEAVAGE and one you marked FRACTURE. What did you see in each drawing that told you?"
+          ]
         }
       ]
     }
@@ -291,10 +311,66 @@
         ]
       },
       {
+        "kind": "table",
+        "label": "CLEAVAGE OR FRACTURE",
+        "headers": [
+          "#",
+          "Mineral",
+          "Answer",
+          "What shows it"
+        ],
+        "widths": [
+          0.06,
+          0.24,
+          0.18,
+          0.52
+        ],
+        "boldFirst": false,
+        "rows": [
+          [
+            "1",
+            "Quartz",
+            "Fracture",
+            "Curved, shell-like (conchoidal) surface"
+          ],
+          [
+            "2",
+            "Muscovite mica",
+            "Cleavage",
+            "Peels into thin, flat sheets (one direction)"
+          ],
+          [
+            "3",
+            "Halite",
+            "Cleavage",
+            "Breaks into cubes; flat steps at right angles"
+          ],
+          [
+            "4",
+            "Olivine",
+            "Fracture",
+            "Rough, uneven break with no flat planes"
+          ],
+          [
+            "5",
+            "Calcite",
+            "Cleavage",
+            "Breaks into slanted blocks (rhombs) along flat planes"
+          ],
+          [
+            "6",
+            "Garnet",
+            "Fracture",
+            "Uneven break, no flat planes"
+          ]
+        ]
+      },
+      {
         "kind": "notes",
         "label": "REFLECTION · MODEL ANSWERS",
         "items": [
-          "Cleavage: the mineral breaks along flat, smooth planes, like mica peeling into sheets or halite breaking into cubes. Fracture: it breaks unevenly or in curved, shell-like surfaces, like quartz."
+          "Cleavage: the mineral breaks along flat, smooth planes, like mica peeling into sheets or halite breaking into cubes. Fracture: it breaks unevenly or in curved, shell-like surfaces, like quartz.",
+          "Explain: any pair is fine if it names the evidence, e.g. mica's flat stacked sheets (cleavage) and quartz's curved shell-shaped surface (fracture)."
         ]
       }
     ]
