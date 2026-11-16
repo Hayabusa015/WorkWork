@@ -92,6 +92,42 @@ class Grid(Builder):
         self.assertEqual(sum(1 for c in cols if abs(c - side) <= 1), 3 * 2)   # 2 grid rows
         self.assertEqual(sum(1 for c in cols if abs(c - gutter) <= 1), 2 * 2)
 
+    def test_prompts_sit_exactly_over_their_boxes(self):
+        """Each prompt cell starts on its box's grid column and ends on its last box's:
+        one column for a single box, box-gutter-box for a two-box item, never a gutter
+        beside it (Matt, 2026-11-16)."""
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(grid_spec(), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            grids = [t for t in doc.element.body.iter(qn("w:tbl"))
+                     if len(t.find(qn("w:tblGrid"))) == 5]
+            self.assertEqual(len(grids), 2)
+            spans = []
+            for t in grids:
+                head, boxes = t.findall(qn("w:tr"))[:2]
+                col = 0
+                for tc in head.findall(qn("w:tc")):
+                    gs = tc.find(qn("w:tcPr")).find(qn("w:gridSpan"))
+                    span = int(gs.get(qn("w:val"))) if gs is not None else 1
+                    if "".join(x.text or "" for x in tc.iter(qn("w:t"))).strip():
+                        self.assertEqual(col % 2, 0, "a prompt starts in a gutter")
+                        self.assertEqual(span % 2, 1, "a prompt ends in a gutter")
+                        mar = tc.find(qn("w:tcPr")).find(qn("w:tcMar"))
+                        self.assertEqual(mar.find(qn("w:left")).get(qn("w:w")), "0")
+                        self.assertEqual(mar.find(qn("w:right")).get(qn("w:w")), "0")
+                        spans.append(span)
+                    col += span
+            self.assertEqual(spans, [1, 1, 1, 1, 3])     # item 5 spans its two boxes
+
+    def test_box_height_can_differ_from_width(self):
+        r, doc = self.build(grid_spec(squareIn=2.35, boxHeightIn=2.0))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        heights = [h for h in trheights(doc) if h[1] == "exact"]
+        self.assertEqual(len(heights), 2)
+        self.assertTrue(all(abs(int(h) - 2.0 * 1440) <= 1 for h, _ in heights), heights)
+        cols = [int(c.get(qn("w:w"))) for c in doc.element.body.iter(qn("w:gridCol"))]
+        self.assertEqual(sum(1 for c in cols if abs(c - 2.35 * 1440) <= 1), 6)
+
     def test_grid_text_has_numbers_tiers_and_captions(self):
         r, doc = self.build(grid_spec())
         text = doc.element.body.xml

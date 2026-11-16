@@ -43,7 +43,7 @@ from build_worksheet_docx import table_block, notes_block   # noqa: E402
 # The opt-in grid layout ("layout": "grid") is the student sheet's; the key draws the same
 # grid so a teacher grades square against square.
 from build_worksheet_docx import (   # noqa: E402
-    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, GRID_PROMPT_GAP_TW,
+    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, grid_prompt_cell,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -204,9 +204,9 @@ def render_key_grid(doc, questions, pal, g):
     key is set at one size, the largest that lets the biggest diagram fit its square."""
     from docx.shared import Pt
     from docx.enum.table import WD_ALIGN_VERTICAL
-    S = g["square"]
+    S, H = g["square"], g["height"]
     avail_w = S - 0.20
-    avail_h = S - 0.30                     # the tier / caption line sits inside the top
+    avail_h = H - 0.30                     # the tier / caption line sits inside the top
     drawn = {n: grid_panels(n, q) for n, q in enumerate(questions, 1)}
     fits = [min(avail_w / w, avail_h / h) for ps in drawn.values() if ps for _, w, h in ps]
     scale = min([1.0] + fits)
@@ -214,20 +214,15 @@ def render_key_grid(doc, questions, pal, g):
         if gi:
             gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 3)
-        _pin_row(t, 0); _pin_row(t, 1, S); _pin_row(t, 2)
+        _pin_row(t, 0); _pin_row(t, 1, H); _pin_row(t, 2)
         for n, q, col, span in row:
-            last = col + span == g["columns"]
-            end = (col + span - 1) * 2 + (0 if last else 1)
-            right = 0 if last else GRID_PROMPT_GAP_TW
-            head = t.rows[0].cells[col * 2]
-            note = t.rows[2].cells[col * 2]
-            if end > col * 2:
-                head = head.merge(t.rows[0].cells[end])
-                note = note.merge(t.rows[2].cells[end])
+            # Prompt and note sit exactly over and under their own boxes, as on the sheet.
+            head = grid_prompt_cell(t, 0, col, span)
+            note = grid_prompt_cell(t, 2, col, span)
             head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
             # The prompt restated small and grey, as on the card key.
             grid_head(head, n, q, pal, prompt_pt=8.5, prompt_color=pal.label,
-                      italic=True, right=right)
+                      italic=True)
             caps = [p.get("caption") for p in (q.get("keyImage") or {}).get("panels", [])] \
                 or (q.get("draw") or {}).get("captions") or []
             ps = drawn.get(n)
@@ -242,9 +237,8 @@ def render_key_grid(doc, questions, pal, g):
                     pp.paragraph_format.space_after = Pt(0)
                     pp.paragraph_format.space_before = Pt(max(0, (avail_h - h * scale) / 2 * 72))
                     pp.add_run().add_picture(png, width=Inches(w * scale))
-            cell_margins(note, top=30, bottom=0, left=0, right=right)
-            width = S * span + g["gutter"] * (span - 1) + (0 if last else g["gutter"]) \
-                - right / 1440
+            cell_margins(note, top=30, bottom=0, left=0, right=0)
+            width = S * span + g["gutter"] * (span - 1)
             if not ps:
                 # The drawing is the answer; with no drawing the typed solution goes here.
                 para(note, str(q["solution"]), 9, color=pal.ink, first=True)
@@ -254,7 +248,12 @@ def render_key_grid(doc, questions, pal, g):
                 from PIL import Image
                 with Image.open(png) as im:      # cropped to ink, so set by scale, not width
                     w_in = im.width / KEY_PX_PER_IN * KEY_NOTE_SCALE
-                note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
+                pic = note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
+                # python-docx writes the inline picture with no wrap distances, and
+                # LibreOffice then insets it about 0.13 in: the note would start right of
+                # its box's edge and a full-width note would clip at the right.
+                for k in ("distT", "distB", "distL", "distR"):
+                    pic._inline.set(k, "0")
         from _shull_docx import unpad_cell
         unpad_cell(outer)
     return scale

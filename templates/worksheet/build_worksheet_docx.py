@@ -835,7 +835,6 @@ def render_questions(doc, questions, pal, course, base_dir):
 
 GRID_GUTTER_MIN_IN = 0.12
 GRID_ROW_GAP_PT = 10           # between one row's squares and the next row's prompts
-GRID_PROMPT_GAP_TW = 230        # a prompt stops this far short of the next one (twips)
 
 
 def label_bank(doc, entries, pal, label_text, cols=2):
@@ -876,15 +875,18 @@ def grid_opts(spec, sec):
     cols = int(get("columns", 3))
     square = float(get("squareIn", 2.2))
     gutter = round((TEXT_W_IN - cols * square) / (cols - 1), 3) if cols > 1 else 0
+    # `squareIn` is the box width; `boxHeightIn` lets a box run a little shorter than it
+    # is wide when true squares at the column width will not fit the page budget.
     return {"columns": cols, "square": square, "gutter": gutter,
+            "height": float(get("boxHeightIn", square)),
             "promptPt": float(get("gridPromptPt", 9.5)),
             "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
 
 
 def grid_check(questions, g):
     """Why these questions cannot be set as this grid, or None."""
-    if g["columns"] < 1 or g["square"] <= 0:
-        return "grid needs columns >= 1 and squareIn > 0."
+    if g["columns"] < 1 or g["square"] <= 0 or g["height"] <= 0:
+        return "grid needs columns >= 1, squareIn > 0 and boxHeightIn > 0."
     if g["columns"] > 1 and g["gutter"] < GRID_GUTTER_MIN_IN:
         return (f"{g['columns']} squares of {g['square']} in leave a {g['gutter']} in gutter "
                 f"on a {TEXT_W_IN} in page. Use smaller squares or fewer columns.")
@@ -929,10 +931,11 @@ def grid_widths(g):
     return w
 
 
-def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False, right=0):
+def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False):
     """The item number, run in at the start of the prompt. The tier tag goes in the top
-    corner of the item's first square (`square`), so it costs the prompt no line."""
-    cell_margins(cell, top=0, bottom=40, left=0, right=right)
+    corner of the item's first square (`square`), so it costs the prompt no line. No side
+    margins: the text's edges are the box's edges."""
+    cell_margins(cell, top=0, bottom=40, left=0, right=0)
     p = cell.paragraphs[0]
     p.paragraph_format.space_after = Pt(0)
     run(p, f"{n}.  ", 10.5, bold=True, color=pal.ink)
@@ -948,6 +951,16 @@ def tier_tag(p, tier, pal, colour=None):
     r = run(p, tier.upper(), TIER_PT, bold=True, color=colour)
     el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
     r._element.get_or_add_rPr().append(el)
+
+
+def grid_prompt_cell(t, row, col, span):
+    """The cell an item's prompt (or note) goes in: exactly over its own box or boxes,
+    merged across the gutter between two boxes and never into the gutter beside them, so
+    every column of words and boxes shares one left and one right edge (Matt, 2026-11-16)."""
+    c = t.rows[row].cells[col * 2]
+    if span > 1:
+        c = c.merge(t.rows[row].cells[(col + span - 1) * 2])
+    return c
 
 
 def grid_table(doc, g, nrows):
@@ -992,7 +1005,7 @@ def render_grid(doc, questions, pal, g):
             gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 2)
         for ri in range(2):
-            h = g["square"] if ri == 1 else None
+            h = g["height"] if ri == 1 else None
             trPr = t.rows[ri]._tr.get_or_add_trPr()
             trPr.append(OxmlElement("w:cantSplit"))
             if h:
@@ -1000,16 +1013,11 @@ def render_grid(doc, questions, pal, g):
                 e.set(qn("w:val"), str(int(h * 1440))); e.set(qn("w:hRule"), "exact")
                 trPr.append(e)
         for n, q, col, span in row:
-            # The prompt may run on across the gutter to its right, stopping short of the
-            # next prompt: a narrow column sets a long scenario two lines taller.
-            last = col + span == g["columns"]
-            head = t.rows[0].cells[col * 2]
-            end = (col + span - 1) * 2 + (0 if last else 1)
-            if end > col * 2:
-                head = head.merge(t.rows[0].cells[end])
+            # Prompts share the row's top; the boxes sit in their own table row below,
+            # so a short prompt leaves space above the box, never moves it.
+            head = grid_prompt_cell(t, 0, col, span)
             head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-            grid_head(head, n, q, pal, prompt_pt=g["promptPt"],
-                      right=0 if last else GRID_PROMPT_GAP_TW)
+            grid_head(head, n, q, pal, prompt_pt=g["promptPt"])
             caps = (q.get("draw") or {}).get("captions") or []
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
