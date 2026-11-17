@@ -353,7 +353,11 @@ def table_rows(block, key=False):
     if key:
         return [list(r) for r in block["rows"]]
     blank = set(block.get("blankCols", []))
-    return [["" if i in blank else v for i, v in enumerate(r)] for r in block["rows"]]
+    # Opt-in "studentFill": text printed on the STUDENT copy in a blanked column, such as
+    # the choices to circle ("Hydrogen bonding / Dipole–dipole / London dispersion"),
+    # while the key prints the row's own answer there. Absent, a blanked cell stays empty.
+    fill = {int(k): v for k, v in block.get("studentFill", {}).items()}
+    return [[fill.get(i, "") if i in blank else v for i, v in enumerate(r)] for r in block["rows"]]
 
 
 def table_block(doc, block, pal, key=False):

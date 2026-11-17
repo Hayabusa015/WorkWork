@@ -172,6 +172,10 @@ def main():
             gap(doc, 4)
         for block in sec.get("blocks", []):
             if block["kind"] == "table":
+                # Same opt-in as the student builder: a block can start its own page, so a
+                # second table never leaves its label and header stranded at a page foot.
+                if block.get("pageBreakBefore"):
+                    page_break(doc)
                 table_block(doc, block, pal, key=True)
         notes = sec.get("keyNotes", [])
         if notes:

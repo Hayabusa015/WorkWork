@@ -1,0 +1,193 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.5"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "25",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.5",
+   "title": "Intermolecular Forces",
+   "conceptLabel": "OPTIONAL — WORTH 1 POINT ON YOUR UNIT 5 TEST",
+   "concept": {
+    "summary": "Complete this and turn it in at test time to add 1 point to your Unit 5 test score. Polarity decides the IMFs.",
+    "keyIdeas": [
+     "Hydrogen bonding: H on N, O, or F pulled to another N, O, or F. Strongest of the three IMFs.",
+     "Dipole–dipole: polar molecules only.",
+     "London dispersion: every molecule. The only IMF in nonpolar ones."
+    ]
+   },
+   "directions": "Part A: each polar bond already has a dipole arrow pointing toward the δ− atom. Use the arrows and the shape to decide polar or nonpolar, then circle every IMF the molecule has. Part B: draw the shape and add a dipole arrow beside each polar bond (cross at the δ+ end), then do the same. London dispersion is in every molecule, so circle it every time. EN: H 2.20 · C 2.55 · F 3.98 · Si 1.90 · S 2.58 · Cl 3.16.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 5,
+     "widths": [
+      0.05,
+      0.13,
+      0.29,
+      0.16,
+      0.37
+     ],
+     "rowHeightIn": 1.2,
+     "bodySize": 10,
+     "blankCols": [
+      3,
+      4
+     ],
+     "imageCol": 2,
+     "studentFill": {
+      "4": "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+     },
+     "label": "PART A · STRUCTURE GIVEN",
+     "headers": [
+      "#",
+      "Molecule",
+      "Structure",
+      "Polar or Nonpolar",
+      "IMFs present (circle all)"
+     ],
+     "rows": [
+      [
+       "1",
+       "CF₄",
+       "",
+       "Nonpolar",
+       "London dispersion"
+      ],
+      [
+       "2",
+       "CH₃OH",
+       "",
+       "Polar",
+       "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+      ],
+      [
+       "3",
+       "CH₃Cl",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ],
+      [
+       "4",
+       "I₂",
+       "",
+       "Nonpolar",
+       "London dispersion"
+      ],
+      [
+       "5",
+       "CH₃NH₂",
+       "",
+       "Polar",
+       "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+      ]
+     ],
+     "images": {
+      "0": "assets/chem_u05_s05.5_imf/imf_CF4_student.png",
+      "1": "assets/chem_u05_s05.5_imf/imf_CH3OH_student.png",
+      "2": "assets/chem_u05_s05.5_imf/imf_CH3Cl_student.png",
+      "3": "assets/chem_u05_s05.5_imf/imf_I2_student.png",
+      "4": "assets/chem_u05_s05.5_imf/imf_CH3NH2_student.png"
+     },
+     "keyImages": {
+      "0": "assets/chem_u05_s05.5_imf/imf_CF4.png",
+      "1": "assets/chem_u05_s05.5_imf/imf_CH3OH.png",
+      "2": "assets/chem_u05_s05.5_imf/imf_CH3Cl.png",
+      "3": "assets/chem_u05_s05.5_imf/imf_I2.png",
+      "4": "assets/chem_u05_s05.5_imf/imf_CH3NH2.png"
+     }
+    },
+    {
+     "kind": "table",
+     "points": 5,
+     "widths": [
+      0.05,
+      0.13,
+      0.29,
+      0.16,
+      0.37
+     ],
+     "rowHeightIn": 1.38,
+     "bodySize": 10,
+     "blankCols": [
+      3,
+      4
+     ],
+     "imageCol": 2,
+     "studentFill": {
+      "4": "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+     },
+     "label": "PART B · YOU DRAW IT (shape + dipole arrows)",
+     "headers": [
+      "#",
+      "Molecule",
+      "Drawing: shape with dipole arrows",
+      "Polar or Nonpolar",
+      "IMFs present (circle all)"
+     ],
+     "rows": [
+      [
+       "6",
+       "SiCl₄",
+       "",
+       "Nonpolar",
+       "London dispersion"
+      ],
+      [
+       "7",
+       "HCl",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ],
+      [
+       "8",
+       "HF",
+       "",
+       "Polar",
+       "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+      ],
+      [
+       "9",
+       "CH₃F",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ],
+      [
+       "10",
+       "SF₂",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_s05.5_imf/imf_SiCl4.png",
+      "1": "assets/chem_u05_s05.5_imf/imf_HCl.png",
+      "2": "assets/chem_u05_s05.5_imf/imf_HF.png",
+      "3": "assets/chem_u05_s05.5_imf/imf_CH3F.png",
+      "4": "assets/chem_u05_s05.5_imf/imf_SF2.png"
+     },
+     "pageBreakBefore": true,
+     "heading": "Intermolecular Forces · Part B"
+    }
+   ],
+   "keyNotes": [
+    "1 point per row, 10 total. The point needs the right polarity and exactly the right IMFs circled. London dispersion is circled on every row.",
+    "Hydrogen bonding needs H bonded to N, O or F: CH₃OH (O–H), CH₃NH₂ (N–H), HF. CH₃Cl and CH₃F are the traps: they have H, but the H is on C, so dipole–dipole + London dispersion only.",
+    "CF₄ and SiCl₄: polar bonds (1.43 and 1.26) in a symmetric tetrahedron cancel, so nonpolar. CF₄ vs CH₃F: same shape, but one different atom makes CH₃F polar.",
+    "I₂: no polar bonds at all, London dispersion only. Slide 35: more electrons, stronger LDF, so I₂ is a solid.",
+    "HF: ΔEN 3.98 − 2.20 = 1.78, polar covalent, just under 1.80 (same call as the 4.5 sheet).",
+    "SF₂: S has 2 bonds and 2 lone pairs, so bent like OF₂ and H₂O; the pulls do not cancel. S–F 1.40.",
+    "Drawings follow the 5.4 sheet: outer lone pairs may be left off; an arrow on each polar bond (C–H 0.35 gets none); polar molecules get a long net arrow, nonpolar ones net = 0. Accept any clear arrow placement that points the right way."
+   ]
+  }
+ ]
+}
