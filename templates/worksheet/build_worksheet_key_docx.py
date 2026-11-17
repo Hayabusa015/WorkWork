@@ -34,7 +34,7 @@ from _shull_docx import (          # noqa: E402
 from _shull_name import document_name, short_title   # noqa: E402
 # The key draws a table block with the student builder's own function, answers filled,
 # so the two copies are one structure and cannot drift.
-from build_worksheet_docx import table_block   # noqa: E402
+from build_worksheet_docx import table_block, mc_key_rows, fillin_table, TEXT_W_IN   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEXT_W_IN = 7.50
@@ -159,10 +159,10 @@ def main():
         para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()} · TEACHER KEY", 7.5,
              bold=True, color=pal.accent, caps_track=True, first=True)
         para(h, sec["title"], 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
-                  caps_track=True, first=True)
+        pp = para(hr, sec.get("chip", f"{unit} / S{sec['code']}"), 11, bold=True,
+                  color=pal.accent, caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        pp = para(hr, kind.replace("_", " ").upper() + "  ·  ANSWER KEY",
+        pp = para(hr, spec.get("docLabel", kind.replace("_", " ").upper()) + "  ·  ANSWER KEY",
                   6.5, color=pal.label, caps_track=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
@@ -177,6 +177,11 @@ def main():
                 if block.get("pageBreakBefore"):
                     page_break(doc)
                 table_block(doc, block, pal, key=True)
+            elif block["kind"] == "mc":
+                fillin_table(doc, {"headers": ["#", "Answer", "Why the other options are wrong"],
+                                   "rows": mc_key_rows(block), "widths": [0.06, 0.34, 0.60],
+                                   "rowHeightIn": 0.3}, pal, TEXT_W_IN, header_fill=pal.surface,
+                             header_caps=False, header_size=7.5, body_size=9)
         notes = sec.get("keyNotes", [])
         if notes:
             gap(doc, 4)

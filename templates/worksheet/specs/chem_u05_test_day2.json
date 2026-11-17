@@ -1,0 +1,215 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Test",
+ "docLabel": "UNIT TEST · DAY 2",
+ "timeTargetMin": "45",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.5",
+   "title": "Unit 5 Test · Day 2: Drawing, Polarity & IMFs",
+   "conceptLabel": "REFERENCE",
+   "concept": {
+    "summary": "Electronegativity (EN):  H 2.20 · C 2.55 · N 3.04 · O 3.44 · F 3.98 · Si 1.90"
+   },
+   "directions": "Complete Chart 1 for each molecule, then use your drawings to complete Chart 2. Show your work: write the addition for valence electrons and the subtraction for each ΔEN. Mark each bond PC (polar covalent) or NPC (nonpolar covalent). In Chart 2, draw an arrow beside each polar bond pointing toward the δ− atom, then circle every IMF the molecule has.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 30,
+     "label": "CHART 1 · STRUCTURE (5 points per row)",
+     "headers": [
+      "#",
+      "Molecule",
+      "Valence e⁻ (show the addition) · 1",
+      "Lewis structure, every lone pair · 2",
+      "Bonding pairs / lone pairs on center · 1",
+      "Shape name · 1"
+     ],
+     "widths": [
+      0.04,
+      0.1,
+      0.17,
+      0.35,
+      0.14,
+      0.2
+     ],
+     "rowHeightIn": 1.15,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5
+     ],
+     "imageCol": 3,
+     "rows": [
+      [
+       "1",
+       "SiH₄",
+       "4 + 4(1) = 8",
+       "",
+       "4 / 0",
+       "Tetrahedral"
+      ],
+      [
+       "2",
+       "CO₂",
+       "4 + 2(6) = 16",
+       "",
+       "2 / 0",
+       "Linear"
+      ],
+      [
+       "3",
+       "CH₃F",
+       "4 + 3(1) + 7 = 14",
+       "",
+       "4 / 0",
+       "Tetrahedral"
+      ],
+      [
+       "4",
+       "NH₃",
+       "5 + 3(1) = 8",
+       "",
+       "3 / 1",
+       "Trigonal pyramidal"
+      ],
+      [
+       "5",
+       "OF₂",
+       "6 + 2(7) = 20",
+       "",
+       "2 / 2",
+       "Bent"
+      ],
+      [
+       "6",
+       "CH₂O",
+       "4 + 2(1) + 6 = 12",
+       "",
+       "3 / 0",
+       "Trigonal planar"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_test/lewis_SiH4.png",
+      "1": "assets/chem_u05_test/lewis_CO2.png",
+      "2": "assets/chem_u05_test/lewis_CH3F.png",
+      "3": "assets/chem_u05_test/lewis_NH3.png",
+      "4": "assets/chem_u05_test/lewis_OF2.png",
+      "5": "assets/chem_u05_test/lewis_CH2O.png"
+     },
+     "imageMaxIn": 1.85
+    },
+    {
+     "kind": "table",
+     "points": 30,
+     "label": "CHART 2 · POLARITY & IMFs (5 points per row)",
+     "pageBreakBefore": true,
+     "heading": "Unit 5 Test · Day 2: Chart 2",
+     "headers": [
+      "#",
+      "Molecule",
+      "ΔEN of each bond (show the subtraction), PC or NPC · 1",
+      "Shape sketch with dipole arrows · 1",
+      "Polar or Nonpolar · 1",
+      "IMFs present (circle all) · 2"
+     ],
+     "widths": [
+      0.04,
+      0.1,
+      0.27,
+      0.26,
+      0.12,
+      0.21
+     ],
+     "rowHeightIn": 1.25,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5
+     ],
+     "imageCol": 3,
+     "rows": [
+      [
+       "1",
+       "SiH₄",
+       "Si–H\n2.20 − 1.90 = 0.30\nNPC",
+       "",
+       "Nonpolar",
+       "London dispersion"
+      ],
+      [
+       "2",
+       "CO₂",
+       "C=O\n3.44 − 2.55 = 0.89\nPC",
+       "",
+       "Nonpolar",
+       "London dispersion"
+      ],
+      [
+       "3",
+       "CH₃F",
+       "C–H 2.55 − 2.20 = 0.35 NPC\nC–F 3.98 − 2.55 = 1.43 PC",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ],
+      [
+       "4",
+       "NH₃",
+       "N–H\n3.04 − 2.20 = 0.84\nPC",
+       "",
+       "Polar",
+       "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+      ],
+      [
+       "5",
+       "OF₂",
+       "O–F\n3.98 − 3.44 = 0.54\nPC",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ],
+      [
+       "6",
+       "CH₂O",
+       "C=O 3.44 − 2.55 = 0.89 PC\nC–H 2.55 − 2.20 = 0.35 NPC",
+       "",
+       "Polar",
+       "Dipole–dipole\nLondon dispersion"
+      ]
+     ],
+     "studentFill": {
+      "5": "Hydrogen bonding\nDipole–dipole\nLondon dispersion"
+     },
+     "keyImages": {
+      "0": "assets/chem_u05_test/polar_SiH4.png",
+      "1": "assets/chem_u05_test/polar_CO2.png",
+      "2": "assets/chem_u05_test/polar_CH3F.png",
+      "3": "assets/chem_u05_test/polar_NH3.png",
+      "4": "assets/chem_u05_test/polar_OF2.png",
+      "5": "assets/chem_u05_test/polar_CH2O.png"
+     },
+     "imageMaxIn": 1.85
+    }
+   ],
+   "keyNotes": [
+    "Chart 1 (5 per row): valence e⁻ with the addition 1; Lewis structure 2 (1 for the right bonds, double bonds included; 1 for every lone pair with the total matching); bonding/lone pairs on the center 1; shape name 1.",
+    "Chart 2 (5 per row): ΔEN with PC/NPC for every bond 1; sketch 1 (an arrow on every polar bond toward δ−, none on NPC bonds); polarity 1; IMFs 2 (exact set 2, one missing or extra 1). London dispersion on every row.",
+    "SiH₄: H is more electronegative, so the subtraction runs H − Si; 0.30 is under 0.40, nonpolar bonds. CO₂ and CH₂O need the CHECK step (C=O); a double bond is one group, so 2 / 0 and 3 / 0.",
+    "Hydrogen-bonding traps: CH₃F and CH₂O have H on C. Only NH₃ hydrogen bonds. For OF₂ and CH₂O, score the bond arrows and the polarity call; be lenient on the net arrow's exact direction."
+   ]
+  }
+ ]
+}

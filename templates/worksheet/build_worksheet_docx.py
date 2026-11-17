@@ -399,6 +399,10 @@ def table_block(doc, block, pal, key=False):
         col = int(block["imageCol"])
         widths = block.get("widths") or [1 / n] * n
         cell_w = TEXT_W_IN * widths[col] - 0.12
+        # Opt-in "imageMaxIn": cap the picture width so a wide column does not make a
+        # picture taller than its row (the row would grow and push the table to a new page).
+        if block.get("imageMaxIn"):
+            cell_w = min(cell_w, float(block["imageMaxIn"]))
         for r, rel in pics.items():
             path = os.path.join(HERE, rel)
             if not os.path.exists(path):
@@ -410,6 +414,33 @@ def table_block(doc, block, pal, key=False):
             p.add_run().add_picture(path, width=Inches(cell_w))
     gap(doc, 4)
     return t
+
+
+def mc_block(doc, block, pal):
+    """Multiple choice: a numbered stem and four lettered options per item, each item in
+    one cell that does not split across a page. Students circle the letter. The answers
+    live in the same spec; the key builder prints them as a table (`mc_key_rows`)."""
+    start = int(block.get("start", 1))
+    for i, item in enumerate(block["items"], start=start):
+        if len(item["options"]) != 4 or item["answer"] not in "ABCD":
+            raise SystemExit(f"mc block: item {i} needs 4 options and an answer A-D.")
+        c = one_cell(doc, protect=True)
+        cell_margins(c, top=40, bottom=60, left=60, right=60)
+        para(c, f"{i}.  {item['stem']}", 10, bold=True, color=pal.ink, first=True)
+        for letter, opt in zip("ABCD", item["options"]):
+            para(c, f"      {letter}.   {opt}", 10, color=pal.ink)
+        gap(doc, 3)
+
+
+def mc_key_rows(block):
+    """One row per item for the key: number, the answer, and why each other option is
+    wrong. One source with the student copy, so the two cannot drift."""
+    start = int(block.get("start", 1))
+    rows = []
+    for i, item in enumerate(block["items"], start=start):
+        k = "ABCD".index(item["answer"])
+        rows.append([str(i), f"{item['answer']}. {item['options'][k]}", item.get("why", "")])
+    return rows
 
 
 # ------------------------------------------------------------------------ questions
@@ -670,10 +701,12 @@ def main():
         para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()}", 7.5, bold=True,
              color=pal.accent, caps_track=True, first=True)
         para(h, sec["title"], 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
-                  caps_track=True, first=True)
+        # Opt-in "chip" / "docLabel": a unit test spans several sections, so its chip
+        # reads "U05 / S5.1–S5.5" and its label "UNIT TEST · DAY 1".
+        pp = para(hr, sec.get("chip", f"{unit} / S{sec['code']}"), 11, bold=True,
+                  color=pal.accent, caps_track=True, first=True)
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        pp = para(hr, kind.replace("_", " ").upper()
+        pp = para(hr, spec.get("docLabel", kind.replace("_", " ").upper())
                   + (f"  ·  ~{spec['timeTargetMin']} MIN"
                      if spec.get("timeTargetMin") else ""),
                   6.5, color=pal.label, caps_track=True)
@@ -764,6 +797,8 @@ def main():
                 diagram_block(one_cell(doc), block, pal, TEXT_W_IN - 0.3, HERE)
             elif kindb == "table":
                 table_block(doc, block, pal)
+            elif kindb == "mc":
+                mc_block(doc, block, pal)
             else:
                 return refuse(f"unknown block kind {kindb!r} in section {sec['code']}.")
 
