@@ -70,7 +70,7 @@ def page_break(doc):
     r._element.append(br)
 
 
-def answer_block(doc, n, q, pal):
+def answer_block(doc, n, q, pal, tier_tags=True):
     """One question's key entry: number + tier, the prompt restated small, the full
     worked solution, and the final answer set apart so it can be read at a glance
     while grading - never just the bracket the student sheet withholds."""
@@ -83,7 +83,7 @@ def answer_block(doc, n, q, pal):
 
     head = c.paragraphs[0]
     r = run(head, f"{n}.  ", 11, bold=True, color=pal.ink)
-    if q.get("tier"):
+    if q.get("tier") and tier_tags:          # "tierTags": false hides it, as on the handout
         run(head, q["tier"].upper(), 7, bold=True, color=pal.accent)
 
     p = para(c, q["prompt"].replace("**", ""), 9, color=pal.label)   # the key restates; bold is the handout's job
@@ -341,7 +341,8 @@ def main():
                   file=sys.stderr)
         for i, q in enumerate([] if g else sec.get("questions", []), start=1):
             try:
-                answer_block(doc, i, q, pal)
+                answer_block(doc, i, q, pal,
+                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))))
             except MotionArrowError as e:
                 return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)

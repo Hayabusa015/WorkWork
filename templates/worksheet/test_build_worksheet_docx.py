@@ -132,6 +132,26 @@ class Grid(Builder):
             self.assertNotIn("•  ", x)
             self.assertIn(">Book<", x)                    # captions still print
 
+    def test_tier_tags_false_on_standard_cards(self):
+        """The same opt-in for the default card layout: no tag on the handout or the key,
+        tiers still in the data (the ramp check passes), default unchanged."""
+        tags = (">WARM-UP<", ">PRACTICE<", ">CHALLENGE<", ">MULTI-TOPIC<")
+        base = cards_spec({"panels": 1})
+        for q in base["sectionsContent"][0]["questions"]:
+            q["keyImage"] = copy.deepcopy(FBD)
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(base, builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue(all(t in doc.element.body.xml for t in tags), builder)
+            for where in ("spec", "section"):
+                s = copy.deepcopy(base)
+                (s if where == "spec" else s["sectionsContent"][0])["tierTags"] = False
+                r, doc = self.build(s, builder)
+                self.assertEqual(r.returncode, 0, r.stderr)
+                x = doc.element.body.xml
+                self.assertFalse(any(t in x for t in tags), (builder, where))
+                self.assertIn(">1.<", x.replace(" ", "")) if builder == BUILDER else None
+
     def test_box_height_can_differ_from_width(self):
         r, doc = self.build(grid_spec(squareIn=2.35, boxHeightIn=2.0))
         self.assertEqual(r.returncode, 0, r.stderr)

@@ -34,6 +34,25 @@ class FbdScene(unittest.TestCase):
         self.assertEqual(P.arrows_drawn, 3)
         self.assertEqual(P.labels_drawn, ["T", "F_{g}", "T"])
 
+    def test_label_pad_moves_labels_out_and_defaults_unchanged(self):
+        import copy, hashlib
+        def run(sc):
+            P = Page(1080, 1200, seed=1)
+            spots = []
+            orig = P.text
+            def text(x, y, s, *a, **k):
+                spots.append((s, round(x, 1), round(y, 1)))
+                return orig(x, y, s, *a, **k)
+            P.text = text
+            ks.fbd_scene(P, 10, 8, 1060, sc)
+            return dict((s, (x, y)) for s, x, y in spots)
+        base = run(FBD)
+        same = run(dict(copy.deepcopy(FBD), labelPad=12))
+        self.assertEqual(base, same)                       # the default is 12
+        far = run(dict(copy.deepcopy(FBD), labelPad=30))
+        self.assertGreater(far["F_{app}"][0], base["F_{app}"][0])   # right arrow: label further right
+        self.assertLess(far["F_{N}"][1], base["F_{N}"][1] + 1e-6)   # vertical labels move sideways only
+
     def test_motion_arrow_refused(self):
         for bad in ({"label": "v", "dir": "right", "mag": 1},
                     {"label": "motion", "dir": "right", "mag": 1},

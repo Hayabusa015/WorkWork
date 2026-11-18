@@ -738,7 +738,7 @@ def rubric_block(doc, block, pal, spec, sheet=False):
 
 # ------------------------------------------------------------------------ questions
 
-def question_card(cell, q, n, pal, course, base_dir, width):
+def question_card(cell, q, n, pal, course, base_dir, width, tier_tags=True):
     """One question, in its own bordered card.
 
     From his Master_Physics layout: a card per question, the number top left and the
@@ -756,7 +756,9 @@ def question_card(cell, q, n, pal, course, base_dir, width):
     # Just the number. No box, no square, no circle. SHULL-CHG-0015 - his own sheets
     # set these in solid squares, which is the withdrawn number box and a fill besides.
     run(p, f"{n}.", 10.5, bold=True, color=pal.ink)
-    if q.get("tier"):
+    # "tierTags": false (opt-in, section or spec) leaves the tag off the card. The tier stays in
+    # the spec, where the ramp check reads it. The default prints it, as before.
+    if q.get("tier") and tier_tags:
         colour = tier_colour(q["tier"], pal)
         run(p, "\t", TIER_PT)
         run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
@@ -796,7 +798,7 @@ def question_card(cell, q, n, pal, course, base_dir, width):
     return cell
 
 
-def render_questions(doc, questions, pal, course, base_dir):
+def render_questions(doc, questions, pal, course, base_dir, tier_tags=True):
     """Cards down the page, two across where both questions are short.
 
     His layout pairs the two warm-ups on one row and gives the longer questions the
@@ -814,8 +816,8 @@ def render_questions(doc, questions, pal, course, base_dir):
             t = doc.add_table(rows=1, cols=3)
             fix_widths(t, [half, gutter, half])
             no_split(t.rows[0])
-            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, half)
-            question_card(t.rows[0].cells[2], nxt, i + 2, pal, course, base_dir, half)
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, half, tier_tags)
+            question_card(t.rows[0].cells[2], nxt, i + 2, pal, course, base_dir, half, tier_tags)
             i += 2
         else:
             t = doc.add_table(rows=1, cols=1)
@@ -823,7 +825,7 @@ def render_questions(doc, questions, pal, course, base_dir):
             # A question stays whole. Split across a page break, the parts and the work
             # box land on the next sheet with no number above them.
             no_split(t.rows[0])
-            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, TEXT_W_IN)
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, TEXT_W_IN, tier_tags)
             i += 1
         gap(doc, 3)
 
@@ -1324,7 +1326,8 @@ def main():
                 return refuse(f"section {sec['code']}: {err}")
             render_grid(doc, sec.get("questions", []), pal, g)
         else:
-            render_questions(doc, sec.get("questions", []), pal, course, HERE)
+            render_questions(doc, sec.get("questions", []), pal, course, HERE,
+                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))))
 
         for bi, block in enumerate(sec.get("blocks", [])):
             kindb = block["kind"]
