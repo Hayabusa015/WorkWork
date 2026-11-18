@@ -1,0 +1,1435 @@
+{
+ "$comment": "Physics U3 S3.2 net-force practice set: three parts, each 2/2/1/1 (the standard ramp), everyday objects at Matt's request (conflicts with the character-scenario convention; reported, not resolved). No graph-reading item (conflicts with the Physics graph rule; reported). Build with build_phys_u03_s03.2_net_force.py, which collapses the repeated footer span S3.2-S3.2 to S3.2.",
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.2",
+  "3.2",
+  "3.2"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "40–50",
+ "equationLabel": "EQUATIONS YOU MAY USE",
+ "pagesPerSection": 1,
+ "equationStyle": "inline",
+ "equationColumns": 2,
+ "sectionsContent": [
+  {
+   "code": "3.2",
+   "title": "Net Force in One Dimension",
+   "eyebrowNote": "NET FORCE · PART 1",
+   "priorKnowledge": {
+    "items": [
+     "A free-body diagram shows the object as a box with one labelled arrow per force, pointing the way the force acts. There is no arrow for motion (S3.2).",
+     "Balanced forces add to zero: an object at rest stays at rest (S3.1). Weight is mg, with g = 9.8 m/s² (S3.1)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "net force",
+     "plain": "∑F = F_{1} + F_{2} + F_{3} + …"
+    },
+    {
+     "note": "signs",
+     "plain": "with the + direction: +    against it: −"
+    },
+    {
+     "note": "weight",
+     "plain": "F_{g} = mg     g = 9.8 m/s²"
+    },
+    {
+     "note": "balanced",
+     "plain": "∑F = 0"
+    }
+   ],
+   "directions": "Work each problem in your notebook. Draw a free-body diagram, then find the net force. Each problem names the positive direction. Add the forces with their signs, and give ∑F with a unit and a direction. Weight and the normal force balance in every problem on this page, so the net force comes from the sideways forces.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  45 N  ]",
+     "prompt": "Two movers slide a couch across the living room toward the front door. One pushes with 140 N and the other with 110 N, both toward the door. Friction from the carpet is 205 N. Take toward the door as positive. Find the net force on the couch.",
+     "solution": "+ = toward the door. ∑F = 140 + 110 − 205 = 45 N. ∑F = 45 N toward the door.",
+     "finalAnswer": "45 N toward the door",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "140 N",
+          "dir": "right",
+          "mag": 140,
+          "offset": -0.4
+         },
+         {
+          "label": "110 N",
+          "dir": "right",
+          "mag": 110,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 205 N",
+          "dir": "left",
+          "mag": 205
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 205
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 205
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "+ = toward the door"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 140 N + 110 N − 205 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "45 N toward the door"
+      },
+      {
+       "say": "F_{N} and F_{g} balance. Their size is not given, so they are drawn equal.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  20 N  ]",
+     "prompt": "In a tug-of-war, two students on the red team pull the rope to the left with 410 N and 385 N. Two students on the blue team pull to the right with 420 N and 395 N. Ignore the rope's weight. Take right as positive. Find the net force on the rope.",
+     "solution": "+ = right. ∑F = 420 + 395 − 410 − 385 = +20 N. ∑F = 20 N to the right, toward the blue team.",
+     "finalAnswer": "20 N to the right (toward the blue team)",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "420 N",
+          "dir": "right",
+          "mag": 420,
+          "offset": -0.4
+         },
+         {
+          "label": "395 N",
+          "dir": "right",
+          "mag": 395,
+          "offset": 0.4
+         },
+         {
+          "label": "410 N",
+          "dir": "left",
+          "mag": 410,
+          "offset": -0.4
+         },
+         {
+          "label": "385 N",
+          "dir": "left",
+          "mag": 385,
+          "offset": 0.4
+         }
+        ],
+        "name": "rope"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "+ = right"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 420 + 395 − 410 − 385"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "+20 N = 20 N right (blue team)"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  410 N  ]",
+     "prompt": "Your car stalls a block from the gas station. Two friends push it toward the station with 345 N and 310 N. Rolling friction on the tires is 185 N, and a headwind pushes back on the car with 60 N. Take toward the station as positive. Find the net force on the car.",
+     "solution": "+ = toward the station. ∑F = 345 + 310 − 185 − 60 = 410 N. ∑F = 410 N toward the station.",
+     "finalAnswer": "410 N toward the station",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "345 N",
+          "dir": "right",
+          "mag": 345,
+          "offset": -0.4
+         },
+         {
+          "label": "310 N",
+          "dir": "right",
+          "mag": 310,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 185 N",
+          "dir": "left",
+          "mag": 185,
+          "offset": -0.4
+         },
+         {
+          "label": "wind 60 N",
+          "dir": "left",
+          "mag": 60,
+          "offset": 0.4
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 345
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 345
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "+ = toward the station"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 345 + 310 − 185 − 60"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "410 N toward the station"
+      },
+      {
+       "say": "Both friction and the wind point back, so both are negative. F_{N} and F_{g} are not to scale: a car's weight is far larger.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  0 N  ]",
+     "prompt": "A dresser sits in the middle of a bedroom. Dad pushes it toward the window with 260 N. His son, on the other side, pushes it toward the door with 95 N. Friction from the floor is 165 N, toward the door. Take toward the window as positive. Find the net force on the dresser. Does the dresser start moving?",
+     "solution": "+ = toward the window. ∑F = 260 − 95 − 165 = 0 N. The forces are balanced, so the dresser stays at rest. It does not start moving.",
+     "finalAnswer": "0 N; the dresser does not start moving",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "260 N",
+          "dir": "right",
+          "mag": 260
+         },
+         {
+          "label": "95 N",
+          "dir": "left",
+          "mag": 95,
+          "offset": -0.4
+         },
+         {
+          "label": "f = 165 N",
+          "dir": "left",
+          "mag": 165,
+          "offset": 0.4
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 260
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 260
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "+ = toward the window"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 260 − 95 − 165"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "0 N"
+      },
+      {
+       "say": "Balanced forces: it stays at rest. It does not start moving.",
+       "ink": "pen"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  −8.0 N  ]",
+     "prompt": "Two kids pull a loaded wagon down the sidewalk, one with 36.0 N and one with 28.5 N, both forward. Friction on the wheels is 22.5 N. Near the street, their dad grabs the back of the wagon and pulls backward with 50.0 N. Take forward as positive.",
+     "parts": [
+      "a.  Find the net force on the wagon.",
+      "b.  The wagon is still rolling forward at this moment. Explain how it can roll forward while the net force points backward."
+     ],
+     "solution": "a. + = forward. ∑F = 36.0 + 28.5 − 22.5 − 50.0 = −8.0 N. ∑F = 8.0 N backward.\nb. Net force changes the motion; it does not have to point the way the object moves. A backward net force on a wagon rolling forward slows it down. It keeps rolling forward until it stops.",
+     "finalAnswer": "a. 8.0 N backward (−8.0 N). b. A backward net force slows the wagon; it does not have to point the way it moves.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "36.0 N",
+          "dir": "right",
+          "mag": 36.0,
+          "offset": -0.4
+         },
+         {
+          "label": "28.5 N",
+          "dir": "right",
+          "mag": 28.5,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 22.5 N",
+          "dir": "left",
+          "mag": 22.5,
+          "offset": -0.4
+         },
+         {
+          "label": "dad 50.0 N",
+          "dir": "left",
+          "mag": 50.0,
+          "offset": 0.4
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 50.0
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 50.0
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "+ = forward"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 36.0 + 28.5 − 22.5 − 50.0"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "−8.0 N = 8.0 N backward"
+      },
+      {
+       "say": "b. Net force changes motion. A backward net force on a wagon rolling forward slows it down. It rolls forward until it stops.",
+       "ink": "pen"
+      },
+      {
+       "say": "Misconception to watch for: a moving object must have a net force pointing the way it moves.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "Two students push a 42.0 kg crate of lab supplies down the hallway. One pushes with 185 N and the other with 160 N, both forward. Friction from the floor is 290 N. Take forward and up as positive.",
+     "parts": [
+      "a.  Find the crate's weight and the normal force on it.",
+      "b.  Find the net vertical force and the net horizontal force. State the net force on the crate with its direction."
+     ],
+     "solution": "a. Fg = mg = 42.0 × 9.8 = 412 N down (411.6 N). The crate does not lift or sink, so FN = 412 N up.\nb. Vertical: ∑Fy = 412 − 412 = 0 N. Horizontal: ∑Fx = 185 + 160 − 290 = 55 N forward. ∑F = 55 N forward.",
+     "finalAnswer": "Fg = 412 N down, FN = 412 N up; vertical 0 N; ∑F = 55 N forward",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "185 N",
+          "dir": "right",
+          "mag": 185,
+          "offset": -0.4
+         },
+         {
+          "label": "160 N",
+          "dir": "right",
+          "mag": 160,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 290 N",
+          "dir": "left",
+          "mag": 290
+         },
+         {
+          "label": "F_{N} = 412 N",
+          "dir": "up",
+          "mag": 411.6
+         },
+         {
+          "label": "F_{g} = 412 N",
+          "dir": "down",
+          "mag": 411.6
+         }
+        ]
+       }
+      ],
+      "arrowPx": 110
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = mg = (42.0 kg)(9.8 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "F_{g} ="
+       ],
+       "value": "412 N down"
+      },
+      {
+       "row": [
+        "no vertical motion, so F_{N} = F_{g}"
+       ]
+      },
+      {
+       "answer": [
+        "F_{N} ="
+       ],
+       "value": "412 N up"
+      },
+      {
+       "row": [
+        "∑F_{y} = 412 − 412 = 0 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 185 + 160 − 290"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "55 N forward"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.2",
+   "title": "One Angled Force",
+   "eyebrowNote": "NET FORCE · PART 2",
+   "priorKnowledge": {
+    "items": [
+     "A vector splits into an x-component and a y-component that add back up to it (S2.1).",
+     "In a right triangle, cos θ is adjacent over hypotenuse and sin θ is opposite over hypotenuse. Set your calculator to degrees (S2.1)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "x-component",
+     "plain": "F_{x} = F cos θ"
+    },
+    {
+     "note": "y-component",
+     "plain": "F_{y} = F sin θ"
+    },
+    {
+     "note": "net horizontal force",
+     "plain": "∑F_{x} = F_{x} − f"
+    },
+    {
+     "note": "weight",
+     "plain": "F_{g} = mg     g = 9.8 m/s²"
+    }
+   ],
+   "directions": "Work each problem in your notebook. Draw a free-body diagram, with the angled force drawn at its angle, then find the net force. +x points the way the object moves and +y points up. Angles are measured from +x, as θ above or below +x. Find the x- and y-components first. Each object stays on the ground, so its vertical forces balance and the net force is the net horizontal force.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  25.7 N  ·  30.6 N  ]",
+     "prompt": "You pull a rolling suitcase through the airport at a steady speed with 40.0 N along the handle, 50.0° above +x. Find the x- and y-components of your pull.",
+     "solution": "Fx = 40.0 cos 50.0° = 25.7 N (+x). Fy = 40.0 sin 50.0° = 30.6 N (up).",
+     "finalAnswer": "Fx = 25.7 N, Fy = 30.6 N up",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "40.0 N",
+          "dir": 50,
+          "mag": 40.0
+         },
+         {
+          "label": "f",
+          "dir": "left",
+          "mag": 25.7
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 29.4,
+          "offset": -0.35
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 60.0
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{x} = F cos θ = 40.0 cos 50.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{x} ="
+       ],
+       "value": "25.7 N"
+      },
+      {
+       "row": [
+        "F_{y} = F sin θ = 40.0 sin 50.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{y} ="
+       ],
+       "value": "30.6 N up"
+      },
+      {
+       "say": "Weight is not given. F_{N} is drawn shorter than F_{g} because the pull lifts a little.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  102 N  ·  −71.7 N  ]",
+     "prompt": "A neighbor pushes a lawnmower across the grass at a steady speed with 125 N straight down the handle, 35.0° below +x. Find the x- and y-components of the push. Which way does the y-component point?",
+     "solution": "Fx = 125 cos 35.0° = 102 N (+x). Fy = −125 sin 35.0° = −71.7 N. The y-component points down, into the ground.",
+     "finalAnswer": "Fx = 102 N, Fy = −71.7 N (down)",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "125 N",
+          "dir": -35,
+          "mag": 125
+         },
+         {
+          "label": "f",
+          "dir": "left",
+          "mag": 102
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 272
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 200
+         }
+        ]
+       }
+      ],
+      "arrowPx": 95
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{x} = 125 cos 35.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{x} ="
+       ],
+       "value": "102 N"
+      },
+      {
+       "row": [
+        "F_{y} = −125 sin 35.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{y} ="
+       ],
+       "value": "−71.7 N, down"
+      },
+      {
+       "say": "Below +x, so F_{y} is negative. Pushing down makes F_{N} larger than F_{g}. Weight is not given.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  15.6 N  ]",
+     "prompt": "A kid pulls a wagon of toys by its handle with 55.0 N at 30.0° above +x. Friction on the wheels is 32.0 N. Find the components of the pull, then the net force on the wagon with its direction.",
+     "solution": "Fx = 55.0 cos 30.0° = 47.6 N. Fy = 55.0 sin 30.0° = 27.5 N up. ∑Fx = 47.6 − 32.0 = 15.6 N. ∑F = 15.6 N in the +x direction.",
+     "finalAnswer": "15.6 N in the +x direction",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "55.0 N",
+          "dir": 30,
+          "mag": 55.0
+         },
+         {
+          "label": "f = 32.0 N",
+          "dir": "left",
+          "mag": 32.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 52.5,
+          "offset": -0.35
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 80.0
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{x} = 55.0 cos 30.0° = 47.6 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 55.0 sin 30.0° = 27.5 N up"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 47.6 − 32.0"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "15.6 N in the +x direction"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  7.8 N  ]",
+     "prompt": "A parent pushes a stroller with 65.0 N along the handle, 40.0° below +x. Rolling friction is 42.0 N. Find the components of the push, then the net force on the stroller with its direction.",
+     "solution": "Fx = 65.0 cos 40.0° = 49.8 N. Fy = −65.0 sin 40.0° = −41.8 N (down). ∑Fx = 49.8 − 42.0 = 7.8 N. ∑F = 7.8 N in the +x direction.",
+     "finalAnswer": "7.8 N in the +x direction",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "65.0 N",
+          "dir": -40,
+          "mag": 65.0
+         },
+         {
+          "label": "f = 42.0 N",
+          "dir": "left",
+          "mag": 42.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 121.8
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 80.0
+         }
+        ]
+       }
+      ],
+      "arrowPx": 95
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{x} = 65.0 cos 40.0° = 49.8 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = −65.0 sin 40.0° = −41.8 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 49.8 − 42.0"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "7.8 N in the +x direction"
+      },
+      {
+       "say": "Only F_{x} moves the stroller forward. F_{y} pushes it into the ground.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  3.0 N  ·  25.0 N  ]",
+     "prompt": "Maya drags a rolling cooler to the beach. She pulls 50.0 N on the handle at 60.0° above +x, and friction is 22.0 N. Her friend tells her to lower the handle to 20.0° above +x and pull just as hard.",
+     "parts": [
+      "a.  Find the net force on the cooler for each angle.",
+      "b.  Which angle gives the larger net force? Use the components to say where the rest of her 50.0 N goes."
+     ],
+     "solution": "a. 60.0°: Fx = 50.0 cos 60.0° = 25.0 N; ∑Fx = 25.0 − 22.0 = 3.0 N (+x). 20.0°: Fx = 50.0 cos 20.0° = 47.0 N; ∑Fx = 47.0 − 22.0 = 25.0 N (+x).\nb. 20.0° gives the larger net force. At 60.0° most of the pull is vertical (Fy = 43.3 N), which lifts on the cooler instead of moving it forward. At 20.0°, Fy is only 17.1 N.",
+     "finalAnswer": "60.0°: 3.0 N (+x); 20.0°: 25.0 N (+x). The lower handle wins.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "caption": "handle at 60°",
+        "forces": [
+         {
+          "label": "50.0 N",
+          "dir": 60,
+          "mag": 50.0
+         },
+         {
+          "label": "f = 22.0 N",
+          "dir": "left",
+          "mag": 22.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 36.7,
+          "offset": -0.35
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 80.0
+         }
+        ]
+       },
+       {
+        "caption": "handle at 20°",
+        "forces": [
+         {
+          "label": "50.0 N",
+          "dir": 20,
+          "mag": 50.0
+         },
+         {
+          "label": "f = 22.0 N",
+          "dir": "left",
+          "mag": 22.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 62.9,
+          "offset": -0.35
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 80.0
+         }
+        ]
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "60.0°:  F_{x} = 50.0 cos 60.0° = 25.0 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "25.0 − 22.0 = 3.0 N, +x"
+      },
+      {
+       "row": [
+        "20.0°:  F_{x} = 50.0 cos 20.0° = 47.0 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "47.0 − 22.0 = 25.0 N, +x"
+      },
+      {
+       "say": "b. 20.0° wins. At 60.0° most of the pull is vertical (F_{y} = 43.3 N) and lifts the cooler. At 20.0°, F_{y} is only 17.1 N.",
+       "ink": "pen"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "A 15.0 kg wagon of firewood is pulled across a level driveway with 90.0 N along the handle, 35.0° above +x. Friction is 50.0 N.",
+     "parts": [
+      "a.  Find the wagon's weight and the vertical component of the pull.",
+      "b.  Find the normal force on the wagon. Is it equal to the weight?",
+      "c.  Find the net force on the wagon with its direction."
+     ],
+     "solution": "a. Fg = 15.0 × 9.8 = 147 N down. Fy = 90.0 sin 35.0° = 51.6 N up.\nb. Vertical forces balance: FN + Fy = Fg, so FN = 147 − 51.6 = 95.4 N up. It is less than the weight, because the handle lifts part of the load.\nc. Fx = 90.0 cos 35.0° = 73.7 N. ∑Fx = 73.7 − 50.0 = 23.7 N. ∑F = 23.7 N in the +x direction.",
+     "finalAnswer": "Fg = 147 N, Fy = 51.6 N; FN = 95.4 N (less than Fg); ∑F = 23.7 N in the +x direction",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "90.0 N",
+          "dir": 35,
+          "mag": 90.0
+         },
+         {
+          "label": "f = 50.0 N",
+          "dir": "left",
+          "mag": 50.0
+         },
+         {
+          "label": "F_{N} = 95.4 N",
+          "dir": "up",
+          "mag": 95.4,
+          "offset": -0.35
+         },
+         {
+          "label": "F_{g} = 147 N",
+          "dir": "down",
+          "mag": 147
+         }
+        ]
+       }
+      ],
+      "arrowPx": 100
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = (15.0 kg)(9.8 m/s^{2}) = 147 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 90.0 sin 35.0° = 51.6 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} + F_{y} = F_{g}"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} = 147 − 51.6"
+       ]
+      },
+      {
+       "answer": [
+        "F_{N} ="
+       ],
+       "value": "95.4 N up, less than F_{g}"
+      },
+      {
+       "row": [
+        "F_{x} = 90.0 cos 35.0° = 73.7 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 73.7 − 50.0"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "23.7 N in the +x direction"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3.2",
+   "title": "Two or More Angled Forces",
+   "eyebrowNote": "NET FORCE · PART 3",
+   "priorKnowledge": {
+    "items": [
+     "Add vectors by adding their x-components and their y-components separately (S2.2).",
+     "Your calculator's tan⁻¹ only gives angles between −90° and 90°. Sketch the sums to see which quadrant the net force points into (S2.2)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "components",
+     "plain": "F_{x} = F cos θ     F_{y} = F sin θ"
+    },
+    {
+     "note": "add each axis",
+     "plain": "∑F_{x} = F_{1x} + F_{2x} + …"
+    },
+    {
+     "note": "magnitude",
+     "plain": "∑F = √((∑F_{x})² + (∑F_{y})²)"
+    },
+    {
+     "note": "direction",
+     "plain": "θ = tan⁻¹(∑F_{y} / ∑F_{x})"
+    }
+   ],
+   "directions": "Work each problem in your notebook. Draw a free-body diagram, then find the net force. Every problem is a top view: +x points right and +y points up the page. Weight and the normal force point into and out of the page and cancel, so leave them off. Add the x-components and the y-components, then find the size of ∑F and its angle. Give the angle above or below +x (or −x).",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  87.3 N  ·  23.6°  ]",
+     "prompt": "Two cousins pull a sled across a frozen pond. One pulls 80.0 N along +x. The other pulls 35.0 N along +y. Find the net force on the sled.",
+     "solution": "∑Fx = 80.0 N, ∑Fy = 35.0 N. ∑F = √(80.0² + 35.0²) = 87.3 N. θ = tan⁻¹(35.0/80.0) = 23.6°. ∑F = 87.3 N at 23.6° above +x.",
+     "finalAnswer": "87.3 N at 23.6° above +x",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "80.0 N",
+          "dir": "right",
+          "mag": 80.0
+         },
+         {
+          "label": "35.0 N",
+          "dir": "up",
+          "mag": 35.0
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = 80.0 N     ∑F_{y} = 35.0 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "80.0^{2} + 35.0^{2}"
+        },
+        "= 87.3 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "35.0",
+          "80.0"
+         ]
+        },
+        ") = 23.6°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "87.3 N at 23.6° above +x"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  95.4 N  ·  21.2°  ]",
+     "prompt": "Two kids drag an inflatable raft down the beach to the water. One pulls 60.0 N along +x. The other pulls 45.0 N at 50.0° above +x. Find the net force on the raft.",
+     "solution": "∑Fx = 60.0 + 45.0 cos 50.0° = 60.0 + 28.9 = 88.9 N. ∑Fy = 45.0 sin 50.0° = 34.5 N. ∑F = √(88.9² + 34.5²) = 95.4 N. θ = tan⁻¹(34.5/88.9) = 21.2°. ∑F = 95.4 N at 21.2° above +x.",
+     "finalAnswer": "95.4 N at 21.2° above +x",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "60.0 N",
+          "dir": "right",
+          "mag": 60.0
+         },
+         {
+          "label": "45.0 N",
+          "dir": 50,
+          "mag": 45.0
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = 60.0 + 45.0 cos 50.0° = 88.9 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 45.0 sin 50.0° = 34.5 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "88.9^{2} + 34.5^{2}"
+        },
+        "= 95.4 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "34.5",
+          "88.9"
+         ]
+        },
+        ") = 21.2°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "95.4 N at 21.2° above +x"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  835 N  ·  11.0°  ]",
+     "prompt": "A car is stuck in a snowbank. Two friends pull on it with tow straps: 525 N at 35.0° above +x and 415 N at 20.0° below +x. Find the net force the two straps exert on the car.",
+     "solution": "x: 525 cos 35.0° = 430 N; 415 cos 20.0° = 390 N; ∑Fx = 820 N. y: 525 sin 35.0° = 301 N; −415 sin 20.0° = −142 N; ∑Fy = 159 N. ∑F = √(820² + 159²) = 835 N. θ = tan⁻¹(159/820) = 11.0°. ∑F = 835 N at 11.0° above +x.",
+     "finalAnswer": "835 N at 11.0° above +x",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "525 N",
+          "dir": 35,
+          "mag": 525
+         },
+         {
+          "label": "415 N",
+          "dir": -20,
+          "mag": 415
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = 525 cos 35.0° + 415 cos 20.0° = 430 + 390 = 820 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 525 sin 35.0° − 415 sin 20.0° = 301 − 142 = 159 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "820^{2} + 159^{2}"
+        },
+        "= 835 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "159",
+          "820"
+         ]
+        },
+        ") = 11.0°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "835 N at 11.0° above +x"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  204 N  ·  64.5°  ]",
+     "prompt": "Two friends pull a kayak across the sand. Jordan pulls 155 N at 40.0° above −x. Ava pulls 90.0 N at 70.0° above +x. Find the net force on the kayak. Check the quadrant before you give the angle.",
+     "solution": "Jordan: x = −155 cos 40.0° = −118.7 N, y = 155 sin 40.0° = 99.6 N. Ava: x = 90.0 cos 70.0° = 30.8 N, y = 90.0 sin 70.0° = 84.6 N. ∑Fx = −88.0 N, ∑Fy = 184.2 N. ∑F = √(88.0² + 184.2²) = 204 N. θ = tan⁻¹(184.2/88.0) = 64.5°. ∑Fx is negative and ∑Fy positive, so the net force is in the upper left: 204 N at 64.5° above −x.",
+     "finalAnswer": "204 N at 64.5° above −x",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "155 N",
+          "dir": 140,
+          "mag": 155
+         },
+         {
+          "label": "90.0 N",
+          "dir": 70,
+          "mag": 90.0
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = −155 cos 40.0° + 90.0 cos 70.0° = −118.7 + 30.8 = −88.0 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 155 sin 40.0° + 90.0 sin 70.0° = 99.6 + 84.6 = 184.2 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "88.0^{2} + 184.2^{2}"
+        },
+        "= 204 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "184.2",
+          "88.0"
+         ]
+        },
+        ") = 64.5°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "204 N at 64.5° above −x"
+      },
+      {
+       "say": "x negative, y positive: upper left, so the angle is measured from −x.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  139 N  ·  170 N  ]",
+     "prompt": "Two movers drag a heavy box across a warehouse floor with two straps. Each pulls 85.0 N, one at 35.0° above +x and one at 35.0° below +x.",
+     "parts": [
+      "a.  Find the net force the straps exert on the box.",
+      "b.  Find the net force if both movers pulled straight along +x.",
+      "c.  Do the two angled pulls give more or less net force than pulling straight? Use the components to explain why."
+     ],
+     "solution": "a. ∑Fx = 2 × 85.0 cos 35.0° = 139 N. ∑Fy = 85.0 sin 35.0° − 85.0 sin 35.0° = 0. ∑F = 139 N along +x.\nb. 85.0 + 85.0 = 170 N along +x.\nc. Less. Only the x-components move the box forward. The y-components (48.8 N each) point opposite ways and cancel, so that part of each pull does nothing to move the box.",
+     "finalAnswer": "a. 139 N along +x. b. 170 N along +x. c. Less; the y-components cancel.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "85.0 N",
+          "dir": 35,
+          "mag": 85.0
+         },
+         {
+          "label": "85.0 N",
+          "dir": -35,
+          "mag": 85.0
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = 85.0 cos 35.0° + 85.0 cos 35.0° = 69.6 + 69.6"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 85.0 sin 35.0° − 85.0 sin 35.0° = 0"
+       ]
+      },
+      {
+       "answer": [
+        "a.  ∑F ="
+       ],
+       "value": "139 N along +x"
+      },
+      {
+       "answer": [
+        "b.  ∑F = 85.0 + 85.0 ="
+       ],
+       "value": "170 N along +x"
+      },
+      {
+       "say": "c. Less. Only the x-components move the box. The y-components (48.8 N each) cancel each other.",
+       "ink": "pen"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "Sam is walking two dogs when both spot a squirrel. Max pulls his leash with 80.0 N at 30.0° above +x. Bella pulls hers with 75.0 N at 55.0° below +x. Sam plants his feet and does not move.",
+     "parts": [
+      "a.  Find the net force the two leashes exert on Sam.",
+      "b.  Sam stays at rest. Find the force the ground must exert on his shoes, with its direction."
+     ],
+     "solution": "a. ∑Fx = 80.0 cos 30.0° + 75.0 cos 55.0° = 69.3 + 43.0 = 112.3 N. ∑Fy = 80.0 sin 30.0° − 75.0 sin 55.0° = 40.0 − 61.4 = −21.4 N. ∑F = √(112.3² + 21.4²) = 114 N. θ = tan⁻¹(21.4/112.3) = 10.8°, below +x because ∑Fy is negative. Leashes: 114 N at 10.8° below +x.\nb. Sam is at rest, so all the forces on him add to zero (S3.1). The ground's friction on his shoes is equal and opposite: 114 N at 10.8° above −x.",
+     "finalAnswer": "a. 114 N at 10.8° below +x. b. 114 N at 10.8° above −x.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "80.0 N",
+          "dir": 30,
+          "mag": 80.0
+         },
+         {
+          "label": "75.0 N",
+          "dir": -55,
+          "mag": 75.0
+         },
+         {
+          "label": "ground 114 N",
+          "dir": 169.2,
+          "mag": 114.3
+         }
+        ],
+        "object": "dot"
+       }
+      ],
+      "arrowPx": 85
+     },
+     "steps": [
+      {
+       "row": [
+        "∑F_{x} = 80.0 cos 30.0° + 75.0 cos 55.0° = 69.3 + 43.0 = 112.3 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 80.0 sin 30.0° − 75.0 sin 55.0° = 40.0 − 61.4 = −21.4 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "112.3^{2} + 21.4^{2}"
+        },
+        "= 114 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "21.4",
+          "112.3"
+         ]
+        },
+        ") = 10.8°"
+       ]
+      },
+      {
+       "answer": [
+        "a.  leashes:"
+       ],
+       "value": "114 N at 10.8° below +x"
+      },
+      {
+       "answer": [
+        "b.  ground:"
+       ],
+       "value": "114 N at 10.8° above −x"
+      },
+      {
+       "say": "At rest, so the forces on Sam add to zero. The ground's force is equal and opposite to the leashes' net force.",
+       "ink": "arrow"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
