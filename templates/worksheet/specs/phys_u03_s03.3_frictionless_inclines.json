@@ -1,0 +1,600 @@
+{
+ "$comment": "Physics 3.3 practice set, Frictionless Inclines: 7 problems, Matt's net-force-set style. Tier tags hidden (tierTags: false). One-time build override: RAMP['physics'] = 2/3/1/1 in memory for 7 items. No graph item and everyday scenarios: rule conflicts reported, not resolved. Problem 7 uses ∑F = ma (3.4), labelled in the prompt.",
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.3"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30–40",
+ "equationLabel": "EQUATIONS YOU MAY USE",
+ "pagesPerSection": 2,
+ "equationStyle": "inline",
+ "equationColumns": 2,
+ "tierTags": false,
+ "sectionsContent": [
+  {
+   "code": "3.3",
+   "title": "Frictionless Inclines",
+   "compactTop": true,
+   "priorKnowledge": {
+    "items": [
+     "Weight is Fg = mg, with g = 9.8 m/s² (S3.1). A free-body diagram has one labelled arrow per force and no arrow for motion (S3.2).",
+     "A force splits into two perpendicular parts with sin and cos (S2.1). On a ramp, tilt your axes: one along the ramp, one perpendicular to it (S3.3)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "weight",
+     "plain": "F_{g} = mg     g = 9.8 m/s²"
+    },
+    {
+     "note": "down the ramp",
+     "plain": "F_{g,parallel} = mg sin θ"
+    },
+    {
+     "note": "into the ramp",
+     "plain": "F_{g,perp} = mg cos θ"
+    },
+    {
+     "note": "normal force",
+     "plain": "F_{N} = mg cos θ"
+    },
+    {
+     "note": "net force",
+     "plain": "∑F = F_{1} + F_{2} + …  (along the ramp)"
+    },
+    {
+     "note": "problem 7",
+     "plain": "∑F = ma"
+    }
+   ],
+   "directions": "Draw a free-body diagram for each problem, then answer in your notebook. Every ramp is frictionless. Give each force a unit and a direction, such as down the ramp or perpendicular to the ramp.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  31.4 N  ·  10.7 N  ·  29.5 N  ]",
+     "prompt": "Ty sets his 3.20 kg skateboard on a smooth ramp tilted 20.0° above the horizontal and lets go. Find the skateboard's weight, the part of that weight pulling it down the ramp, and the part pressing it into the ramp.",
+     "solution": "Fg = mg = 3.20 × 9.8 = 31.4 N down. Fg,parallel = 31.36 sin 20.0° = 10.7 N down the ramp. Fg,perp = 31.36 cos 20.0° = 29.5 N into the ramp.",
+     "finalAnswer": "Fg = 31.4 N down; Fg,parallel = 10.7 N down the ramp; Fg,perp = 29.5 N into the ramp",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 110,
+          "mag": 29.47
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 31.36
+         }
+        ],
+        "tiltDeg": 20,
+        "surface": true
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = mg = (3.20 kg)(9.8 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "F_{g} ="
+       ],
+       "value": "31.4 N down"
+      },
+      {
+       "row": [
+        "F_{g,parallel} = mg sin θ = (31.36 N) sin 20.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{g,parallel} ="
+       ],
+       "value": "10.7 N down the ramp"
+      },
+      {
+       "row": [
+        "F_{g,perp} = mg cos θ = (31.36 N) cos 20.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{g,perp} ="
+       ],
+       "value": "29.5 N into the ramp"
+      },
+      {
+       "say": "Only two forces act: F_{g} and F_{N}. The parallel and perpendicular parts are pieces of F_{g}, not extra arrows.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  101 N  ·  144 N  ]",
+     "prompt": "An 18.0 kg box of books sits on the rollers of a loading ramp tilted 35.0° above the horizontal. The rollers make the ramp frictionless. Find the force pulling the box down the ramp and the normal force on the box.",
+     "solution": "Fg = 18.0 × 9.8 = 176.4 N. Fg,parallel = 176.4 sin 35.0° = 101 N down the ramp. FN = mg cos θ = 176.4 cos 35.0° = 144 N, perpendicular to the ramp, away from its surface.",
+     "finalAnswer": "Fg,parallel = 101 N down the ramp; FN = 144 N perpendicular to the ramp",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 125,
+          "mag": 144.5
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 176.4
+         }
+        ],
+        "tiltDeg": 35,
+        "surface": true
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = (18.0 kg)(9.8 m/s^{2}) = 176.4 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{g,parallel} = (176.4 N) sin 35.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{g,parallel} ="
+       ],
+       "value": "101 N down the ramp"
+      },
+      {
+       "row": [
+        "F_{N} = mg cos θ = (176.4 N) cos 35.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{N} ="
+       ],
+       "value": "144 N perpendicular to the ramp"
+      },
+      {
+       "say": "F_{N} = mg cos θ only because nothing else pushes into or pulls away from the ramp.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  15.0°: 0.634 N  ·  2.37 N     50.0°: 1.88 N  ·  1.57 N  ]",
+     "prompt": "Mia props up a board with books to make a ramp for her brother's 0.250 kg toy car. First the board is tilted 15.0° above the horizontal. Then she adds books until it is tilted 50.0°.",
+     "parts": [
+      "a.  At each angle, find the force pulling the car down the ramp and the normal force on it.",
+      "b.  Which force grows as the ramp gets steeper, and which one shrinks?"
+     ],
+     "solution": "Fg = 0.250 × 9.8 = 2.45 N.\na. 15.0°: Fg,parallel = 2.45 sin 15.0° = 0.634 N down the ramp; FN = 2.45 cos 15.0° = 2.37 N perpendicular to the ramp. 50.0°: Fg,parallel = 2.45 sin 50.0° = 1.88 N down the ramp; FN = 2.45 cos 50.0° = 1.57 N perpendicular to the ramp.\nb. The pull down the ramp grows (sin θ grows); the normal force shrinks (cos θ shrinks).",
+     "finalAnswer": "15.0°: 0.634 N down the ramp, FN 2.37 N. 50.0°: 1.88 N down the ramp, FN 1.57 N. The down-ramp pull grows; FN shrinks.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 105,
+          "mag": 2.367
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 2.45
+         }
+        ],
+        "tiltDeg": 15,
+        "surface": true,
+        "caption": "15.0°"
+       },
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 140,
+          "mag": 1.575
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 2.45
+         }
+        ],
+        "tiltDeg": 50,
+        "surface": true,
+        "caption": "50.0°"
+       }
+      ],
+      "arrowPx": 110,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = (0.250 kg)(9.8 m/s^{2}) = 2.45 N"
+       ]
+      },
+      {
+       "row": [
+        "15.0°:  F_{g,parallel} = (2.45 N) sin 15.0° = 0.634 N down the ramp"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} = (2.45 N) cos 15.0° = 2.37 N"
+       ]
+      },
+      {
+       "row": [
+        "50.0°:  F_{g,parallel} = (2.45 N) sin 50.0° = 1.88 N down the ramp"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} = (2.45 N) cos 50.0° = 1.57 N"
+       ]
+      },
+      {
+       "say": "b. The pull down the ramp grows and the normal force shrinks. A steeper ramp holds up less of the weight.",
+       "ink": "pen"
+      },
+      {
+       "say": "F_{g} is the same 2.45 N at both angles. Only how it splits changes.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  13.7 N  ]",
+     "prompt": "Lena is pushing her little brother up the driveway in a wagon. The driveway is steep, tilted 20.0° above the horizontal, and the wagon plus her brother come to 22.0 kg. She pushes with 60.0 N parallel to the driveway. Ignore friction.",
+     "parts": [
+      "a.  Find the net force on the wagon along the driveway, with its direction.",
+      "b.  Is her push enough to keep the wagon from rolling back down?"
+     ],
+     "solution": "Down the driveway is positive. Fg,parallel = 22.0 × 9.8 × sin 20.0° = 73.7 N down the driveway. ∑F = 73.7 − 60.0 = 13.7 N down the driveway.\nb. No. The net force points down the driveway, so the wagon speeds up rolling back unless she pushes with 73.7 N.",
+     "finalAnswer": "a. 13.7 N down the driveway. b. No; it would take 73.7 N.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{app} = 60.0 N",
+          "dir": 20,
+          "mag": 60.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": 110,
+          "mag": 202.6
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 215.6
+         }
+        ],
+        "tiltDeg": 20,
+        "surface": true
+       }
+      ],
+      "arrowPx": 150,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "down the driveway = +"
+       ]
+      },
+      {
+       "row": [
+        "F_{g,parallel} = (22.0 kg)(9.8 m/s^{2}) sin 20.0° = 73.7 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 73.7 N − 60.0 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "13.7 N down the driveway"
+      },
+      {
+       "say": "b. No. It would take 73.7 N up the driveway to balance.",
+       "ink": "pen"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  81.2 N  ]",
+     "prompt": "On an icy sledding hill tilted 15.0° above the horizontal, Dad holds the rope so the sled won't slide while his daughter climbs on. Sled and daughter have a mass of 32.0 kg, and the rope runs parallel to the hill. Treat the ice as frictionless. How hard does Dad have to pull to hold the sled still?",
+     "solution": "At rest, so ∑F along the hill = 0. T = Fg,parallel = 32.0 × 9.8 × sin 15.0° = 81.2 N up the hill.",
+     "finalAnswer": "81.2 N up the hill, parallel to it",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "T",
+          "dir": 15,
+          "mag": 81.17
+         },
+         {
+          "label": "F_{N}",
+          "dir": 105,
+          "mag": 302.9
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 313.6
+         }
+        ],
+        "tiltDeg": 15,
+        "surface": true
+       }
+      ],
+      "arrowPx": 170,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "at rest:  ∑F along the hill = 0"
+       ]
+      },
+      {
+       "row": [
+        "T = F_{g,parallel} = mg sin θ"
+       ]
+      },
+      {
+       "row": [
+        "T = (32.0 kg)(9.8 m/s^{2}) sin 15.0°"
+       ]
+      },
+      {
+       "answer": [
+        "T ="
+       ],
+       "value": "81.2 N up the hill"
+      },
+      {
+       "say": "The same pull would let the sled slide down at a constant speed. ∑F = 0 either way.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  197 N  ·  606 N  ·  58 N  ]",
+     "prompt": "Two movers roll a 65.0 kg refrigerator on a hand truck up the ramp into their truck. The ramp is tilted 18.0° above the horizontal, and they push parallel to it. Ignore friction.",
+     "parts": [
+      "a.  What push moves the fridge up the ramp at a constant speed?",
+      "b.  What is the normal force from the ramp?",
+      "c.  If they push with 255 N instead, what is the net force on the fridge?"
+     ],
+     "solution": "Fg = 65.0 × 9.8 = 637 N.\na. Constant speed: ∑F = 0, so Fapp = 637 sin 18.0° = 197 N up the ramp.\nb. FN = 637 cos 18.0° = 606 N perpendicular to the ramp.\nc. Up the ramp positive: ∑F = 255 − 196.8 = 58 N up the ramp. The fridge speeds up.",
+     "finalAnswer": "a. 197 N up the ramp. b. 606 N perpendicular to the ramp. c. 58 N up the ramp.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{app}",
+          "dir": 18,
+          "mag": 196.8
+         },
+         {
+          "label": "F_{N}",
+          "dir": 108,
+          "mag": 605.8
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 637.0
+         }
+        ],
+        "tiltDeg": 18,
+        "surface": true
+       }
+      ],
+      "arrowPx": 160,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "F_{g} = (65.0 kg)(9.8 m/s^{2}) = 637 N"
+       ]
+      },
+      {
+       "row": [
+        "a.  constant speed:  ∑F = 0, so F_{app} = mg sin θ"
+       ]
+      },
+      {
+       "row": [
+        "F_{app} = (637 N) sin 18.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{app} ="
+       ],
+       "value": "197 N up the ramp"
+      },
+      {
+       "row": [
+        "b.  F_{N} = (637 N) cos 18.0°"
+       ]
+      },
+      {
+       "answer": [
+        "F_{N} ="
+       ],
+       "value": "606 N perpendicular to the ramp"
+      },
+      {
+       "row": [
+        "c.  up the ramp = +:  ∑F = 255 N − 196.8 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "58 N up the ramp"
+      },
+      {
+       "say": "Constant speed is ∑F = 0, the same as holding it still. A moving object does not need a net force.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "Jayden, 28.0 kg, starts down a playground slide tilted 30.0° above the horizontal. Treat the slide as frictionless. (This one uses ∑F = ma.)",
+     "parts": [
+      "a.  Find the net force on Jayden and his acceleration down the slide.",
+      "b.  His dad, with three times Jayden's mass, tries the same slide. Does he speed up faster, slower, or at the same rate? Use your work to explain."
+     ],
+     "solution": "a. Down the slide positive. ∑F = Fg,parallel = 28.0 × 9.8 × sin 30.0° = 137 N down the slide (FN cancels Fg,perp). a = ∑F/m = 137.2/28.0 = 4.90 m/s² down the slide.\nb. The same rate. ma = mg sin θ, so the mass cancels: a = g sin θ = 9.8 sin 30.0° = 4.90 m/s² for anyone on a frictionless slide.",
+     "finalAnswer": "a. ∑F = 137 N down the slide; a = 4.90 m/s² down the slide. b. Same rate: a = g sin θ does not depend on mass.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 120,
+          "mag": 237.6
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 274.4
+         }
+        ],
+        "tiltDeg": 30,
+        "surface": true
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "down the slide = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = F_{g,parallel} = (28.0 kg)(9.8 m/s^{2}) sin 30.0°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "137 N down the slide"
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "∑F",
+          "m"
+         ]
+        },
+        "=",
+        {
+         "frac": [
+          "137.2 N",
+          "28.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "4.90 m/s^{2} down the slide"
+      },
+      {
+       "row": [
+        "b.  ma = mg sin θ, so a = g sin θ"
+       ]
+      },
+      {
+       "row": [
+        "a = (9.8 m/s^{2}) sin 30.0° = 4.90 m/s^{2}"
+       ]
+      },
+      {
+       "say": "Same rate. The mass cancels, so Dad speeds up exactly as fast as Jayden.",
+       "ink": "pen"
+      },
+      {
+       "say": "Misconception to watch for: heavier objects go faster.",
+       "ink": "arrow"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
