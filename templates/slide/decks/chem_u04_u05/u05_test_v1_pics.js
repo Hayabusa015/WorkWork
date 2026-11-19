@@ -54,6 +54,15 @@ const PICS = {
   guide_CO2:  { mol: MOL.CO2, u: 0.62, fs: 18 },
   guide_CF4:  { mol: cross("C", ["F", "F", "F", "F"], true), u: 0.42, fs: 15 },
   guide_CH2O: { mol: MOL.CH2O, u: 0.5, fs: 18, dy: 0.12 },
+  /* study-guide symmetry check: shape given, students decide polar or nonpolar */
+  sym_CCl4:  { mol: cross("C", ["Cl", "Cl", "Cl", "Cl"], true), u: 0.42, fs: 15 },
+  sym_BBr3:  { mol: { atoms: { B: ["B", 0, 0], A: ["Br", ...at(-90)], C: ["Br", ...at(150)], D: ["Br", ...at(30)] },
+                      bonds: [["B", "A", 1], ["B", "C", 1], ["B", "D", 1]], pairs: [...outer3("A", -90), ...outer3("C", 150), ...outer3("D", 30)] }, u: 0.45, fs: 15, dy: 0.1 },
+  sym_C2H2:  { mol: { atoms: { H1: ["H", -1.5, 0], C1: ["C", -0.5, 0], C2: ["C", 0.5, 0], H2: ["H", 1.5, 0] }, bonds: [["H1", "C1", 1], ["C1", "C2", 3], ["C2", "H2", 1]], pairs: [] }, u: 0.5, fs: 18 },
+  sym_PCl3:  { mol: pyramid("P", "Cl"), u: 0.5, fs: 16, dy: -0.12 },
+  sym_CHCl3: { mol: cross("C", ["H", "Cl", "Cl", "Cl"], true), u: 0.42, fs: 15 },
+  sym_NOCl:  { mol: { atoms: { N: ["N", 0, 0], A: ["O", ...at(142.25)], B: ["Cl", ...at(37.75)] },
+                      bonds: [["N", "A", 2], ["N", "B", 1]], pairs: [["N", -90], ["A", 142.25 + 55], ["A", 142.25 - 55], ...outer3("B", 37.75)] }, u: 0.6, fs: 16, dy: -0.1 },
 };
 const names = [];
 for (const [n, m] of Object.entries(PICS)) {
