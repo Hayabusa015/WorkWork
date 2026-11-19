@@ -410,7 +410,10 @@ def table_block(doc, block, pal, key=False):
             path = os.path.join(HERE, rel)
             if not os.path.exists(path):
                 raise SystemExit(f"table block: image not found: {path}")
-            c = t.rows[int(r) + 1].cells[col]
+            # Opt-in "row,col" key: a picture in a column other than imageCol, so a
+            # table can hold two items per row (a compact two-across layout).
+            rr, cc_ = (r.split(",") + [None])[:2] if "," in str(r) else (r, None)
+            c = t.rows[int(rr) + 1].cells[int(cc_) if cc_ is not None else col]
             p = c.paragraphs[0]
             p.text = ""
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER

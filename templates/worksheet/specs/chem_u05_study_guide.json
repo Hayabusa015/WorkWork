@@ -6,7 +6,7 @@
  ],
  "docType": "Study_Guide",
  "docLabel": "STUDY GUIDE",
- "pagesPerSection": 3,
+ "pagesPerSection": 2,
  "sectionsContent": [
   {
    "code": "5.1",
@@ -82,105 +82,45 @@
     },
     {
      "kind": "table",
-     "label": "12 · COMPLETE THE SHAPE TABLE",
+     "label": "12 · SYMMETRY CHECK · THE SHAPE IS GIVEN. CIRCLE ONE.",
      "headers": [
-      "Electron groups",
-      "Lone pairs on center",
-      "Shape name",
-      "Bond angle"
-     ],
-     "widths": [
-      0.2,
-      0.2,
-      0.35,
-      0.25
-     ],
-     "rowHeightIn": 0.24,
-     "bodySize": 10,
-     "blankCols": [
-      2,
-      3
-     ],
-     "rows": [
-      [
-       "2",
-       "0",
-       "Linear",
-       "180°"
-      ],
-      [
-       "3",
-       "0",
-       "Trigonal planar",
-       "120°"
-      ],
-      [
-       "3",
-       "1",
-       "Bent",
-       "less than 120°"
-      ],
-      [
-       "4",
-       "0",
-       "Tetrahedral",
-       "109.5°"
-      ],
-      [
-       "4",
-       "1",
-       "Trigonal pyramidal",
-       "about 107°"
-      ],
-      [
-       "4",
-       "2",
-       "Bent",
-       "about 104.5°"
-      ],
-      [
-       "5",
-       "0",
-       "Trigonal bipyramidal",
-       "90° and 120°"
-      ]
-     ],
-     "pageBreakBefore": true,
-     "heading": "Shapes & Symmetry"
-    },
-    {
-     "kind": "table",
-     "label": "13 · SYMMETRY CHECK · THE SHAPE IS GIVEN. CIRCLE ONE.",
-     "headers": [
+      "#",
+      "Molecule",
+      "Shape",
+      "Circle one",
       "#",
       "Molecule",
       "Shape",
       "Circle one"
      ],
      "widths": [
-      0.06,
-      0.16,
-      0.4,
-      0.38
+      0.04,
+      0.08,
+      0.19,
+      0.19,
+      0.04,
+      0.08,
+      0.19,
+      0.19
      ],
      "rowHeightIn": 0.8,
-     "bodySize": 10,
+     "bodySize": 9.5,
      "blankCols": [
-      3
+      3,
+      7
      ],
      "imageCol": 2,
      "imageMaxIn": 1.3,
      "studentFill": {
-      "3": "Polar (asymmetrical)\nNonpolar (symmetrical)"
+      "3": "Polar (asymmetrical)\nNonpolar (symmetrical)",
+      "7": "Polar (asymmetrical)\nNonpolar (symmetrical)"
      },
      "rows": [
       [
        "1",
        "CCl₄",
        "",
-       "Nonpolar (symmetrical)"
-      ],
-      [
+       "Nonpolar (symmetrical)",
        "2",
        "PCl₃",
        "",
@@ -190,9 +130,7 @@
        "3",
        "C₂H₂",
        "",
-       "Nonpolar (symmetrical)"
-      ],
-      [
+       "Nonpolar (symmetrical)",
        "4",
        "CHCl₃",
        "",
@@ -202,9 +140,7 @@
        "5",
        "BBr₃",
        "",
-       "Nonpolar (symmetrical)"
-      ],
-      [
+       "Nonpolar (symmetrical)",
        "6",
        "NOCl",
        "",
@@ -212,13 +148,15 @@
       ]
      ],
      "images": {
-      "0": "assets/chem_u05_test_v1/sym_CCl4.png",
-      "1": "assets/chem_u05_test_v1/sym_PCl3.png",
-      "2": "assets/chem_u05_test_v1/sym_C2H2.png",
-      "3": "assets/chem_u05_test_v1/sym_CHCl3.png",
-      "4": "assets/chem_u05_test_v1/sym_BBr3.png",
-      "5": "assets/chem_u05_test_v1/sym_NOCl.png"
-     }
+      "0,2": "assets/chem_u05_test_v1/sym_CCl4.png",
+      "0,6": "assets/chem_u05_test_v1/sym_PCl3.png",
+      "1,2": "assets/chem_u05_test_v1/sym_C2H2.png",
+      "1,6": "assets/chem_u05_test_v1/sym_CHCl3.png",
+      "2,2": "assets/chem_u05_test_v1/sym_BBr3.png",
+      "2,6": "assets/chem_u05_test_v1/sym_NOCl.png"
+     },
+     "pageBreakBefore": true,
+     "heading": "Symmetry & Practice Test"
     },
     {
      "kind": "table",
@@ -244,7 +182,7 @@
       0.09,
       0.11
      ],
-     "rowHeightIn": 1.45,
+     "rowHeightIn": 1.35,
      "bodySize": 10,
      "blankCols": [
       2,
@@ -303,15 +241,11 @@
       "1": "assets/chem_u05_test_v1/guide_OF2.png",
       "2": "assets/chem_u05_test_v1/guide_CO2.png",
       "3": "assets/chem_u05_test_v1/guide_CH2O.png"
-     },
-     "pageBreakBefore": true,
-     "heading": "Practice Test"
+     }
     }
    ],
    "keyNotes": [
-    "None of these compounds (CF₄, OF₂, CO₂, CH₂O, CCl₄, PCl₃, C₂H₂, CHCl₃, BBr₃, NOCl) appears on any version of the test.",
-    "Symmetry check: CCl₄, BBr₃ and C₂H₂ have identical outer atoms spread evenly, so the pulls cancel. PCl₃ (lone pair on P), CHCl₃ (one different atom) and NOCl (lone pair, two different atoms) are lopsided.",
-    "Back chart: same columns and scoring as the written test (7 per compound)."
+    "No compound on this guide appears on any version of the test. Symmetry check: CCl₄, BBr₃, C₂H₂ are even, so the pulls cancel; PCl₃ (lone pair), CHCl₃ (one different atom) and NOCl are lopsided. Back chart: scored like the test, 7 per compound."
    ]
   }
  ]
