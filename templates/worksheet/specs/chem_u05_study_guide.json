@@ -1,0 +1,243 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Study_Guide",
+ "docLabel": "STUDY GUIDE",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.4",
+   "title": "Unit 5 Study Guide: Molecular Structure & Polarity",
+   "conceptLabel": "HOW TO USE THIS",
+   "concept": {
+    "summary": "Work each section, then check it against your notes. Anything you miss tells you what to practise before the test. The back is a practice version of the written test. EN: H 2.20 · C 2.55 · O 3.44 · F 3.98."
+   },
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "reflection",
+     "label": "S4.5–S4.6 · BOND TYPES",
+     "start": 1,
+     "linesEach": 1,
+     "prompts": [
+      "What is electronegativity (EN)?",
+      "Give the ΔEN range for each bond type: nonpolar covalent, polar covalent, ionic.",
+      "What happens to the electrons in an ionic bond? In a covalent bond?"
+     ],
+     "answers": [
+      "How strongly an atom pulls on shared electrons.",
+      "Nonpolar covalent: under 0.40. Polar covalent: 0.40 to 1.80. Ionic: over 1.80.",
+      "Ionic: electrons are transferred (metal + nonmetal). Covalent: electrons are shared (two nonmetals), equally if nonpolar, unequally if polar."
+     ]
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.1 · LEWIS STRUCTURES",
+     "start": 4,
+     "linesEach": 1,
+     "prompts": [
+      "List the four steps for drawing a Lewis structure.",
+      "The center atom has fewer than 8 electrons and none are left to place. What do you do?",
+      "Name the octet-rule exceptions from class."
+     ],
+     "answers": [
+      "Count all valence e⁻. Skeleton: center atom, single bonds. Fill: lone pairs on outer atoms (leftovers on the center). Check: center short? Make a double bond.",
+      "Turn a lone pair on an outer atom into a second (or third) bond with the center: a double or triple bond.",
+      "Boron is stable with 6 and beryllium with 4. Atoms in period 3 and below can hold more than 8 (phosphorus can make 5 bonds and hold 10)."
+     ]
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.2–S5.3 · VSEPR & SHAPES",
+     "start": 7,
+     "linesEach": 1,
+     "prompts": [
+      "What does VSEPR stand for, and what is its main idea?",
+      "Why do lone pairs make bond angles smaller?"
+     ],
+     "answers": [
+      "Valence Shell Electron Pair Repulsion: electron groups around the center push as far apart as they can.",
+      "Lone pairs repel more strongly than bonding pairs, so they push the bonds closer together."
+     ]
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.4 · POLARITY",
+     "start": 9,
+     "linesEach": 1,
+     "prompts": [
+      "What is the difference between bond polarity and molecular polarity?",
+      "How can a molecule with polar bonds still be nonpolar?",
+      "Why do lone pairs on the central atom usually make a molecule polar?"
+     ],
+     "answers": [
+      "Bond polarity is one bond, set by ΔEN. Molecular polarity is the whole molecule, set by the bond polarity AND the shape.",
+      "When the polar bonds are arranged symmetrically (evenly around the center), their pulls cancel.",
+      "They make the shape lopsided (asymmetric), so the bond pulls do not cancel."
+     ]
+    },
+    {
+     "kind": "table",
+     "label": "12 · COMPLETE THE SHAPE TABLE",
+     "headers": [
+      "Electron groups",
+      "Lone pairs on center",
+      "Shape name",
+      "Bond angle"
+     ],
+     "widths": [
+      0.2,
+      0.2,
+      0.35,
+      0.25
+     ],
+     "rowHeightIn": 0.24,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3
+     ],
+     "rows": [
+      [
+       "2",
+       "0",
+       "Linear",
+       "180°"
+      ],
+      [
+       "3",
+       "0",
+       "Trigonal planar",
+       "120°"
+      ],
+      [
+       "3",
+       "1",
+       "Bent",
+       "less than 120°"
+      ],
+      [
+       "4",
+       "0",
+       "Tetrahedral",
+       "109.5°"
+      ],
+      [
+       "4",
+       "1",
+       "Trigonal pyramidal",
+       "about 107°"
+      ],
+      [
+       "4",
+       "2",
+       "Bent",
+       "about 104.5°"
+      ],
+      [
+       "5",
+       "0",
+       "Trigonal bipyramidal",
+       "90° and 120°"
+      ]
+     ],
+     "pageBreakBefore": true,
+     "heading": "Shapes & Practice Test"
+    },
+    {
+     "kind": "table",
+     "points": 28,
+     "label": "PRACTICE TEST · THE SAME CHART YOU WILL SEE ON THE TEST",
+     "headers": [
+      "#",
+      "Compound",
+      "Total valence e⁻ (show the addition) · 1",
+      "Lewis structure, every lone pair · 2",
+      "Shape name · 1",
+      "ΔEN of each bond (show the subtraction) · 1",
+      "Bond polarity (PC or NPC) · 1",
+      "Molecular polarity · 1"
+     ],
+     "widths": [
+      0.04,
+      0.09,
+      0.12,
+      0.25,
+      0.12,
+      0.18,
+      0.09,
+      0.11
+     ],
+     "rowHeightIn": 1.45,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "imageCol": 3,
+     "imageMaxIn": 1.85,
+     "rows": [
+      [
+       "1",
+       "CF₄",
+       "4 + 4(7) = 32",
+       "",
+       "Tetrahedral",
+       "C–F\n3.98 − 2.55 = 1.43",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "2",
+       "OF₂",
+       "6 + 2(7) = 20",
+       "",
+       "Bent",
+       "O–F\n3.98 − 3.44 = 0.54",
+       "PC",
+       "Polar"
+      ],
+      [
+       "3",
+       "CO₂",
+       "4 + 2(6) = 16",
+       "",
+       "Linear",
+       "C=O\n3.44 − 2.55 = 0.89",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "4",
+       "CH₂O",
+       "4 + 2(1) + 6 = 12",
+       "",
+       "Trigonal planar",
+       "C=O\n3.44 − 2.55 = 0.89\nC–H\n2.55 − 2.20 = 0.35",
+       "PC\nNPC",
+       "Polar"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_test_v1/guide_CF4.png",
+      "1": "assets/chem_u05_test_v1/guide_OF2.png",
+      "2": "assets/chem_u05_test_v1/guide_CO2.png",
+      "3": "assets/chem_u05_test_v1/guide_CH2O.png"
+     }
+    }
+   ],
+   "keyNotes": [
+    "None of these compounds (CF₄, OF₂, CO₂, CH₂O) appears on any version of the test.",
+    "Back chart: same columns and scoring as the written test (7 per compound)."
+   ]
+  }
+ ]
+}

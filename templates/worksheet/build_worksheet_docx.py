@@ -321,7 +321,10 @@ def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
     c = one_cell(doc)
-    for i, q in enumerate(block["prompts"], 1):
+    # Opt-in "start": number on from an earlier block, so a study guide split into
+    # labelled sections reads 1-15 straight through instead of restarting at 1.
+    start = int(block.get("start", 1))
+    for i, q in enumerate(block["prompts"], start):
         # A prompt and the lines it is answered on are one thing. Left to flow, the
         # question ended a page and its answer lines started the next one - the student
         # turns over to two rules belonging to nothing.
@@ -330,7 +333,7 @@ def reflection_block(doc, block, pal):
         no_split(t.rows[0])
         cc = t.rows[0].cells[0]
         cell_margins(cc, top=0, bottom=0, left=0, right=0)
-        if i == 1:
+        if i == start:
             # The heading goes INSIDE the first non-splitting row. Kept outside it, it
             # ended a page on its own with the question it introduces on the next one -
             # the same stranding the diagram block hit, one level up.

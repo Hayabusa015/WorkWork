@@ -177,6 +177,15 @@ def main():
                 if block.get("pageBreakBefore"):
                     page_break(doc)
                 table_block(doc, block, pal, key=True)
+            elif block["kind"] == "reflection":
+                # Prompts with their answers, numbered as on the student copy.
+                gap(doc, 4)
+                para(doc, block.get("label", "REFLECTION"), 7.5, bold=True, color=pal.accent,
+                     caps_track=True)
+                for i, (q, a) in enumerate(zip(block["prompts"], block.get("answers", [])),
+                                           int(block.get("start", 1))):
+                    para(doc, f"{i}. {q}", 9.5, bold=True, color=pal.ink)
+                    para(doc, a, 9.5, color=pal.accent)
             elif block["kind"] == "mc":
                 fillin_table(doc, {"headers": ["#", "Answer", "Why the other options are wrong"],
                                    "rows": mc_key_rows(block), "widths": [0.06, 0.34, 0.60],
