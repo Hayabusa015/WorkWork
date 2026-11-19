@@ -30,6 +30,7 @@ import json, os, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT
+from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -733,11 +734,21 @@ def main():
             cell_margins(cc, top=0, bottom=40, left=0, right=120)
             p = para(cc, lab, 6.5, bold=True, color=pal.label, caps_track=True,
                      first=True)
+            # Opt-in "scorePoints" overrides the summed total (a study guide's practice
+            # chart is not graded the way the test is); opt-in "scoreInline" sets the
+            # total right after the label instead of at the cell's right edge, and sits
+            # every label on the rule so SCORE lines up with the rest.
+            if spec.get("scoreInline"):
+                cc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
             if lab == "SCORE":
-                p.paragraph_format.tab_stops.add_tab_stop(
-                    Inches(widths[3] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
-                run(p, "\t", 9)
-                run(p, f"/  {total}", 10, bold=True, color=pal.ink)
+                shown = spec.get("scorePoints", total)
+                if spec.get("scoreInline"):
+                    run(p, f"    /  {shown}", 10, bold=True, color=pal.ink)
+                else:
+                    p.paragraph_format.tab_stops.add_tab_stop(
+                        Inches(widths[3] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
+                    run(p, "\t", 9)
+                    run(p, f"/  {shown}", 10, bold=True, color=pal.ink)
 
         # ---- What this is about, before anything is asked of them.
         gap(doc, 5)

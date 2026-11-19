@@ -295,5 +295,7 @@
     "No compound on this guide appears on any version of the test. Symmetry check: CCl₄, BBr₃, C₂H₂ are even, so the pulls cancel; PCl₃ (lone pair), CHCl₃ (one different atom) and NOCl are lopsided. Back chart: scored like the test, 7 per compound."
    ]
   }
- ]
+ ],
+ "scorePoints": 10,
+ "scoreInline": true
 }
