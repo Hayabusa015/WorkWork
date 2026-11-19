@@ -22,23 +22,62 @@
      "kind": "reflection",
      "label": "S4.5–S4.6 · BOND TYPES",
      "start": 1,
-     "linesEach": 1,
+     "linesEach": 2,
      "prompts": [
-      "What is electronegativity (EN)?",
-      "Give the ΔEN range for each bond type: nonpolar covalent, polar covalent, ionic.",
-      "What happens to the electrons in an ionic bond? In a covalent bond?"
+      "What is electronegativity (EN)?"
      ],
      "answers": [
-      "How strongly an atom pulls on shared electrons.",
-      "Nonpolar covalent: under 0.40. Polar covalent: 0.40 to 1.80. Ionic: over 1.80.",
-      "Ionic: electrons are transferred (metal + nonmetal). Covalent: electrons are shared (two nonmetals), equally if nonpolar, unequally if polar."
+      "How strongly an atom pulls on shared electrons."
+     ]
+    },
+    {
+     "kind": "table",
+     "label": "2 · COMPLETE THE BOND TYPE TABLE",
+     "headers": [
+      "Bond type",
+      "ΔEN range",
+      "What the electrons do",
+      "Charges on the atoms"
+     ],
+     "widths": [
+      0.22,
+      0.2,
+      0.29,
+      0.29
+     ],
+     "rowHeightIn": 0.5,
+     "bodySize": 10,
+     "blankCols": [
+      1,
+      2,
+      3
+     ],
+     "rows": [
+      [
+       "Nonpolar covalent",
+       "Under 0.40",
+       "Shared equally",
+       "None"
+      ],
+      [
+       "Polar covalent",
+       "0.40 to 1.80",
+       "Shared unequally",
+       "Partial charges (δ+ and δ−)"
+      ],
+      [
+       "Ionic",
+       "Over 1.80",
+       "Transferred",
+       "Full charges (+ and − ions)"
+      ]
      ]
     },
     {
      "kind": "reflection",
      "label": "S5.1 · LEWIS STRUCTURES",
-     "start": 4,
-     "linesEach": 1,
+     "start": 3,
+     "linesEach": 2,
      "prompts": [
       "How do you find an element's number of valence electrons from the periodic table? How many does chlorine have?",
       "Which atom goes in the center of a Lewis structure? Why is H never the center?",
@@ -57,8 +96,8 @@
     {
      "kind": "reflection",
      "label": "S5.2–S5.3 · VSEPR & SHAPES",
-     "start": 9,
-     "linesEach": 1,
+     "start": 8,
+     "linesEach": 2,
      "prompts": [
       "What does VSEPR stand for, and what is its main idea?",
       "Why do lone pairs make bond angles smaller?",
@@ -68,13 +107,15 @@
       "Valence Shell Electron Pair Repulsion: electron groups around the center push as far apart as they can.",
       "Lone pairs repel more strongly than bonding pairs, so they push the bonds closer together.",
       "Electron geometry: tetrahedral (4 groups). Molecular shape: trigonal pyramidal. The shape is named only by where the atoms are; the lone pair takes up space but is not part of the name."
-     ]
+     ],
+     "pageBreakBefore": true,
+     "heading": "Shapes, Polarity & Symmetry"
     },
     {
      "kind": "reflection",
      "label": "S5.4 · POLARITY",
-     "start": 12,
-     "linesEach": 2,
+     "start": 11,
+     "linesEach": 1,
      "prompts": [
       "What is the difference between bond polarity and molecular polarity?",
       "How can a molecule with polar bonds still be nonpolar?",
@@ -84,13 +125,11 @@
       "Bond polarity is one bond, set by ΔEN. Molecular polarity is the whole molecule, set by the bond polarity AND the shape.",
       "When the polar bonds are arranged symmetrically (evenly around the center), their pulls cancel.",
       "They make the shape lopsided (asymmetric), so the bond pulls do not cancel."
-     ],
-     "pageBreakBefore": true,
-     "heading": "Polarity & Symmetry"
+     ]
     },
     {
      "kind": "table",
-     "label": "15 · SYMMETRY CHECK · THE SHAPE IS GIVEN. CIRCLE ONE.",
+     "label": "14 · SYMMETRY CHECK · THE SHAPE IS GIVEN. CIRCLE ONE.",
      "headers": [
       "#",
       "Molecule",
@@ -111,14 +150,14 @@
       0.19,
       0.19
      ],
-     "rowHeightIn": 0.95,
+     "rowHeightIn": 1.25,
      "bodySize": 9.5,
      "blankCols": [
       3,
       7
      ],
      "imageCol": 2,
-     "imageMaxIn": 1.45,
+     "imageMaxIn": 1.6,
      "studentFill": {
       "3": "Polar (asymmetrical)\nNonpolar (symmetrical)",
       "7": "Polar (asymmetrical)\nNonpolar (symmetrical)"
@@ -188,7 +227,7 @@
       0.09,
       0.11
      ],
-     "rowHeightIn": 1.6,
+     "rowHeightIn": 1.95,
      "bodySize": 10,
      "blankCols": [
       2,
