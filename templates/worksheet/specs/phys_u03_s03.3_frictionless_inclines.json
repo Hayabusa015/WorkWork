@@ -12,6 +12,9 @@
  "equationStyle": "inline",
  "equationColumns": 2,
  "tierTags": false,
+ "keyLayout": "side",
+ "keyFbdIn": 2.6,
+ "keyStepScale": 0.85,
  "sectionsContent": [
   {
    "code": "3.3",

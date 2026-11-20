@@ -113,6 +113,7 @@ spec = {
  "course": "physics", "unit": 3, "sections": ["3.3"], "docType": "Practice_Set",
  "timeTargetMin": "30–40", "equationLabel": "EQUATIONS YOU MAY USE", "pagesPerSection": 1,
  "equationStyle": "inline", "equationColumns": 2, "tierTags": False,
+ "keyLayout": "side", "keyFbdIn": 2.6, "keyStepScale": 0.85,
  "sectionsContent": [{
   "code": "3.3", "title": "Frictionless Inclines", "compactTop": True,
   "priorKnowledge": {"items": [
