@@ -52,6 +52,43 @@ class KeyBuilder(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(self.pictures(self.answer_cells(doc)[0]), 1)
 
+    def test_side_layout_sets_drawing_beside_steps(self):
+        """"keyLayout": "side" (opt-in): an item with keyImage and steps becomes a two-column
+        row, drawing left and steps right, both pictures with zero wrap distances so
+        LibreOffice does not inset and clip them. Items without both keep their old shape."""
+        both = {"prompt": "Draw it.", "solution": "x", "keyImage": FBD,
+                "steps": [{"answer": ["F_{N} ="], "value": "9.8 N up"}]}
+        only_img = {"prompt": "Draw it.", "solution": "y", "keyImage": FBD}
+        only_steps = {"prompt": "Solve.", "solution": "z", "steps": [{"answer": ["x ="], "value": "1"}]}
+        s = spec([both, only_img, only_steps])
+        s["keyLayout"], s["keyFbdIn"], s["keyStepScale"] = "side", 2.4, 0.85
+        r, doc = self.build(s)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        c1, c2, c3 = self.answer_cells(doc)
+        self.assertEqual(self.pictures(c1), 2)
+        inner = c1._tc.xpath(".//w:tbl")
+        self.assertEqual(len(inner), 1)
+        self.assertEqual(len(inner[0].xpath("./w:tr/w:tc")), 3)          # drawing, gutter, steps
+        ext = [int(e.get("cx")) / 914400 for e in c1._tc.xpath(".//wp:extent")]
+        self.assertLessEqual(ext[0], 2.4 + 1e-6)                          # drawing fits its column
+        self.assertAlmostEqual(ext[1], 7.2 - 2.4 - 0.12, places=3)        # steps fill the rest
+        for il in c1._tc.xpath(".//wp:inline"):
+            self.assertEqual([il.get(k) for k in ("distT", "distB", "distL", "distR")], ["0"] * 4)
+        self.assertEqual(self.pictures(c2), 1)                            # unchanged shapes
+        self.assertEqual(self.pictures(c3), 1)
+        self.assertEqual(c2._tc.xpath(".//w:tbl"), [])
+        # the default (no keyLayout) keeps the stacked single picture
+        r, doc = self.build(spec([both]))
+        self.assertEqual(self.pictures(self.answer_cells(doc)[0]), 1)
+
+    def test_side_layout_unmodelled_scene_falls_back_to_typed_solution(self):
+        q = {"prompt": "Draw it.", "solution": "Typed fallback.", "steps": [{"say": "s"}],
+             "keyImage": {"scene": "fbd", "panels": [{"forces": []}]}}
+        s = spec([q]); s["keyLayout"] = "side"
+        r, doc = self.build(s)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("Typed fallback.", self.answer_cells(doc)[0].text)
+
     def test_steps_behave_as_before(self):
         r, doc = self.build(spec([{"prompt": "Solve.", "solution": "x",
                                    "steps": [{"answer": ["x ="], "value": "1"}]}]))
