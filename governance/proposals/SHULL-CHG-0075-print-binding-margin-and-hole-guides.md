@@ -1,12 +1,13 @@
 # SHULL-CHG-0075 — Print: mirror binding margin and three-hole guides, all courses
 
-> **Change ID is provisional.** It is the next integer after `SHULL-CHG-0074`, the highest ID in the
-> local `governance/proposals/` on 2026-11-20. The Secretary session that wrote this record has no
-> git tool. It could not `git fetch origin main` and cannot push. Under
-> `governance/CHANGE_CONTROL.md` §2 this ID is **not allocated** until someone checks it against a
-> freshly fetched `origin/main` and pushes the record there. If `SHULL-CHG-0075` already exists on
-> `origin/main`, renumber this file before pushing it. `change-log/CHANGELOG.md` has no row for it
-> yet.
+> **Implementation status: PARTIAL.** The documentation and token side is applied (uncommitted at
+> the time of writing): `brand/tokens.json` (`print.binding`, `print.holeGuides`),
+> `brand/SHULL_DESIGN_SYSTEM.md` §8, `standards/QA_GATE.md` §2, the `build-lab` and
+> `build-document` skills, `templates/lab/README.md`, and the CHANGELOG row. The builders (section
+> 3), the hole-zone audit, and the test punch (section 5) are still to do. **The section 7 questions
+> are answered by the main-session defaults in `Decision:`.** Where those defaults differ from
+> section 2, the Decision wins. The guide weight is hairline (`0.25pt`), not the 0.75 pt in
+> section 2.1/2.2.
 >
 > **Path B (build and brand change), all three courses.** It touches `brand/`, `standards/`, two
 > skills, and every print builder. No course `DECISIONS.md` is changed.
@@ -26,7 +27,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0075 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0075 |
 | **Date** | 2026-11-20 |
 | **Source** | User. Matt's request in chat on 2026-11-20, his answers to two offered questions, and his amendment "well, just make it a slight push.", all quoted verbatim in section 1 as relayed to the Secretary by the main session. The dimensions in section 2 are the main session's translation of "a slight push" (0.60 in inside, +0.25 in on the token value). Matt has not seen the numbers. |
 | **Current Rule** | (1) `brand/tokens.json` lines 477-483, `print.margins`: `"top": "0.30in", "left": "0.35in", "right": "0.35in", "bottom": "0.45in", "status": "PROVISIONAL"`. (2) `.claude/skills/build-lab/SKILL.md` line 33: "**Margins are locked.** Never adjust them to fix a page count; reduce body size or line-height." `templates/lab/README.md` lines 81-82: "**Margins.** Per `brand/tokens.json` → `print.margins`. **Don't touch them to fix a page-count problem**". (3) `standards/QA_GATE.md` lines 39-40: "If over, fix **in this order**: reduce `@page` margins → reduce base font size → tighten line-height → reduce block bottom margins." Restated in `.claude/skills/build-document/SKILL.md` line 150. (4) No rule for binding, duplex or punch holes anywhere in `brand/`, `standards/` or the skills. A grep for "binding", "hole" and "punch" finds none. (5) `brand/SHULL_DESIGN_SYSTEM.md` §8 "Print discipline — a hard rule" (lines 223-249) sets scope ("worksheets, practice sets, guided and Cornell notes, labs, study guides, reference sheets") but says nothing about margins. |
@@ -323,5 +324,4 @@ the tokens and at this record, and drop the word "locked" in favour of the rule 
 - It does not unify the six existing margin copies (section 4, table B).
 - It does not decide whether the lab "lock" or the token's PROVISIONAL label was right.
 - It does not touch slides or `slideGeometry`.
-- It does not add a `change-log/CHANGELOG.md` row. The main session adds that when it commits this
-  record.
+- (Superseded at implementation: the `change-log/CHANGELOG.md` row was added as PARTIAL.)

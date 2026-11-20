@@ -30,7 +30,9 @@ structure is the standard.
   `standards/ANSWER_KEYS.md` (SHULL-CHG-0043).
 - **The Alconox block** — disposal items 4–6 — is standing boilerplate. **Keep it verbatim.** Only
   items 1–3 change per lab.
-- **Margins are locked.** Never adjust them to fix a page count; reduce body size or line-height.
+- **Margins come from `brand/tokens.json` (`print.margins`, `print.binding`).** Never adjust them
+  to fix a page count; reduce body size or line-height. The binding side is in
+  `brand/SHULL_DESIGN_SYSTEM.md` §8.
 - **Every formula appears with its name.**
 - **Molecular structures come from `scripts/build_diagram_molecule.py`**, from a SMILES string
   verified by `verify-content`. Never hand-drawn, generated, or pasted. SHULL-CHG-0042.

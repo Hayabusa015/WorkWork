@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-20
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0075 | 2026-11-20 | Print: mirror binding margin and hole guides | PARTIAL | `governance/proposals/SHULL-CHG-0075-print-binding-margin-and-hole-guides.md` |
+
 ## 2026-11-12
 
 | ID | Date | Change | Status | Record |

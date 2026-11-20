@@ -148,4 +148,5 @@ regions** — these have to survive scissors and glue in a 50-minute period.
 ## Page budget
 
 If over: `@page` margins → base font size → line-height → block margins. **In that order. Never
-shrink a single question to fit.**
+shrink a single question to fit.** The inside (binding) margin is exempt; see
+`standards/QA_GATE.md` §2.

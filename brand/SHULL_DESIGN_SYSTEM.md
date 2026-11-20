@@ -240,6 +240,11 @@ study guides, reference sheets. Digital-only deliverables are exempt.
 - Chips and border-tab labels stay outlined or light-fill. Solid fill is reserved for slides and
   digital-only use.
 - Minimum weights: `print.weights.boxBorder`, `print.weights.writingLine`.
+- **Binding side.** Every printed page has a mirror margin for three-hole punching: the inside
+  margin is `print.binding.inside`, on the left of odd pages and the right of even pages. This
+  applies to single-sided prints and answer keys too. Three hole guides (`print.holeGuides`) are
+  drawn on the binding side. They are outline only, in `ground.ruleHairline`. Nothing else enters
+  the inside margin, and it never shrinks to fit a page budget. SHULL-CHG-0075.
 - Full-colour variants are preserved on request — **never shipped as the default print file.**
 
 Ink is a real cost, and this rule is stronger than "white is the default background." It survives at
