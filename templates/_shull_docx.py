@@ -20,7 +20,7 @@ from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
-from docx.oxml import OxmlElement
+from docx.oxml import OxmlElement, parse_xml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -31,6 +31,15 @@ G = T["ground"]
 FONT = T["typography"]["stack"].split(",")[0].strip().strip('"')
 FLOOR = T["typography"]["floors"]["printBody"]["pt"]
 FOOTER_FLOOR = T["typography"]["floors"]["printFooter"]["pt"]
+
+import sys as _sys
+_sys.path.insert(0, HERE)
+from _shull_print import BINDING, PAGE_W_IN, PAGE_H_IN, text_block_in, guides  # noqa: E402
+
+# The outside margin of a worksheet or key (SHULL-CHG-0075 left the outside, top and
+# bottom as they were). The inside is BINDING.inside_in, read from tokens.
+OUTSIDE_IN = 0.5
+TEXT_W_IN = text_block_in(OUTSIDE_IN)     # 7.40 at a 0.60 in inside margin
 
 BULLETS = "•·▸►‣-–— "
 
@@ -346,7 +355,7 @@ def tight_cells(t, top=0, bottom=0, left=40, right=40):
             cell_margins(c, top, bottom, left, right)
 
 
-def one_cell(doc, width=7.5, protect=False):
+def one_cell(doc, width=TEXT_W_IN, protect=False):
     """`protect=True` holds the whole block together across a page break (cantSplit) -
     for a box like the section summary, where one orphaned line stranded on an
     otherwise-blank page is worse than the whole box moving down as a unit."""
@@ -452,7 +461,7 @@ def stacked_frac(cell, num, den, ink_hex, rule_hex, size=10.5):
     return t
 
 
-def equation_bar(doc, equations, pal, label, width=7.5, cols=2):
+def equation_bar(doc, equations, pal, label, width=TEXT_W_IN, cols=2):
     """The equations students may reference, at the top of the page.
 
     His rule: on any Physics or Chemistry sheet with math, the equations go at the top
@@ -666,16 +675,242 @@ def diagram_block(cell, dgm, pal, inner_w, base_dir=HERE):
     return cell
 
 
-def page_setup(doc, margin_lr=0.5, margin_tb=0.44, base_pt=10):
+def page_setup(doc, outside=OUTSIDE_IN, margin_tb=0.44, base_pt=10, margin_lr=None):
+    """Letter, mirrored. `outside` is the margin away from the binding; the inside is
+    `print.binding.inside` and is not a parameter, because it never shrinks to fit
+    (SHULL-CHG-0075). Call `apply_binding(doc)` immediately before `doc.save()`.
+
+    `margin_lr` is for a document that is never printed (snow-day work, done on a
+    Chromebook): equal left and right margins, no binding side."""
     st = doc.styles["Normal"]
     st.font.name = FONT
     st.font.size = Pt(base_pt)
     st.element.rPr.rFonts.set(qn("w:eastAsia"), FONT)
     s = doc.sections[0]
-    s.page_width, s.page_height = Inches(8.5), Inches(11)
-    s.left_margin = s.right_margin = Inches(margin_lr)
+    s.page_width, s.page_height = Inches(PAGE_W_IN), Inches(PAGE_H_IN)
+    if margin_lr is None:
+        set_mirror_margins(s, outside)
+    else:
+        s.left_margin = s.right_margin = Inches(margin_lr)
     s.top_margin = s.bottom_margin = Inches(margin_tb)
     return s
+
+
+# ---------------------------------------------------------------------------------
+# Binding side (SHULL-CHG-0075). With w:mirrorMargins on, w:pgMar/@w:left is the
+# INSIDE margin and @w:right the outside, in Word and in LibreOffice alike, so a section
+# sets left = inside once and both readers flip it on even pages. The hole guides are
+# three anchored ellipses positioned from the page edge; an absolute offset is not
+# mirrored, so the odd footer carries a left-hand set and the even footer a right-hand
+# set. They are anchored in the FOOTER, not the header: every builder already has a
+# footer, and a new non-empty header makes LibreOffice reserve header space and push the
+# body down (the notes builder measured that, lines 1552-1555).
+
+EMU_IN = 914400
+
+# w:settings children in schema order, as far as the two we insert need.
+_SETTINGS_ORDER = ("writeProtection", "view", "zoom", "removePersonalInformation",
+                   "removeDateAndTime", "doNotDisplayPageBoundaries",
+                   "displayBackgroundShape", "printPostScriptOverText",
+                   "printFractionalCharacterWidth", "printFormsData",
+                   "embedTrueTypeFonts", "embedSystemFonts", "saveSubsetFonts",
+                   "saveFormsData", "mirrorMargins", "alignBordersAndEdges",
+                   "bordersDoNotSurroundHeader", "bordersDoNotSurroundFooter",
+                   "gutterAtTop", "hideSpellingErrors", "hideGrammaticalErrors",
+                   "activeWritingStyle", "proofState", "formsDesign", "attachedTemplate",
+                   "linkStyles", "stylePaneFormatFilter", "stylePaneSortMethod",
+                   "documentType", "mailMerge", "revisionView", "trackRevisions",
+                   "doNotTrackMoves", "doNotTrackFormatting", "documentProtection",
+                   "autoFormatOverride", "styleLockTheme", "styleLockQFSet",
+                   "defaultTabStop", "autoHyphenation", "consecutiveHyphenLimit",
+                   "hyphenationZone", "doNotHyphenateCaps", "showEnvelope",
+                   "summaryLength", "clickAndTypeStyle", "defaultTableStyle",
+                   "evenAndOddHeaders")
+
+
+def _settings_flag(settings_el, name):
+    if settings_el.find(qn(f"w:{name}")) is not None:
+        return
+    rank = _SETTINGS_ORDER.index(name)
+    later = {qn(f"w:{n}") for n in _SETTINGS_ORDER[rank + 1:]}
+    el = OxmlElement(f"w:{name}")
+    for i, kid in enumerate(settings_el):
+        if kid.tag in later:
+            settings_el.insert(i, el)
+            return
+    # Nothing later in our list: place it before the first child we do not know to be
+    # earlier, which keeps it ahead of the tail elements (compat, rsids, ...).
+    earlier = {qn(f"w:{n}") for n in _SETTINGS_ORDER[:rank]}
+    for i, kid in enumerate(settings_el):
+        if kid.tag not in earlier:
+            settings_el.insert(i, el)
+            return
+    settings_el.append(el)
+
+
+def set_mirror_margins(section, outside):
+    """Left = inside (binding), right = outside; mirrored on even pages by the reader."""
+    section.left_margin = Inches(BINDING.inside_in)
+    section.right_margin = Inches(outside)
+    section.gutter = Inches(0)
+
+
+_GUIDE_XML = (
+    '<w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
+    'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+    'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+    'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+    '<w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+    'relativeHeight="{z}" behindDoc="1" locked="1" layoutInCell="0" allowOverlap="1">'
+    '<wp:simplePos x="0" y="0"/>'
+    '<wp:positionH relativeFrom="page"><wp:posOffset>{x}</wp:posOffset></wp:positionH>'
+    '<wp:positionV relativeFrom="page"><wp:posOffset>{y}</wp:posOffset></wp:positionV>'
+    '<wp:extent cx="{d}" cy="{d}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+    '<wp:docPr id="{id}" name="SHULL hole guide {n}" descr="Three-hole punch guide"/>'
+    '<wp:cNvGraphicFramePr/>'
+    '<a:graphic><a:graphicData '
+    'uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+    '<wps:wsp><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+    '<a:ext cx="{d}" cy="{d}"/></a:xfrm><a:prstGeom prst="ellipse"><a:avLst/></a:prstGeom>'
+    '<a:noFill/><a:ln w="{w}"><a:solidFill><a:srgbClr val="{hex}"/></a:solidFill></a:ln>'
+    '</wps:spPr><wps:bodyPr/></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing>'
+    '</w:r>')
+GUIDE_NAME = "SHULL hole guide"
+
+
+def _add_guides(hf, page_no, id_base):
+    """Anchor the three guides for an odd (page_no=1) or even (2) page into a header or
+    footer's first paragraph. Behind text, no wrap, from the page edge."""
+    r = BINDING.radius_in
+    d = int(round(BINDING.diameter_in * EMU_IN))
+    w = int(round(BINDING.stroke_pt * 12700))
+    p = hf.paragraphs[0] if hf.paragraphs else hf.add_paragraph()
+    for n, (cx, cy) in enumerate(guides(page_no), 1):
+        p._p.append(parse_xml(_GUIDE_XML.format(
+            x=int(round((cx - r) * EMU_IN)), y=int(round((cy - r) * EMU_IN)), d=d, w=w,
+            hex=hexof(BINDING.stroke_hex), id=id_base + n, n=n, z=251650000 + n)))
+
+
+def _copy_story(src, dst):
+    """Replace dst header/footer content with a copy of src's, relationships included,
+    so the even-page footer says exactly what the odd one says."""
+    import copy
+    s_el, d_el = src._element, dst._element
+    for kid in list(d_el):
+        d_el.remove(kid)
+    s_part, d_part = src.part, dst.part
+    for kid in s_el:
+        new = copy.deepcopy(kid)
+        for el in new.iter():
+            for k, v in list(el.attrib.items()):
+                if k.startswith("{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"):
+                    rel = s_part.rels[v]
+                    el.set(k, d_part.relate_to(rel.target_ref, rel.reltype, is_external=True)
+                           if rel.is_external else d_part.relate_to(rel.target_part, rel.reltype))
+        d_el.append(new)
+
+
+_TABLE_DEFAULT_CELL_MAR_TW = 108   # Word's and LibreOffice's default left cell margin
+
+
+def _tw(el, default=0):
+    if el is None:
+        return default
+    w = el.get(qn("w:w"))
+    return int(w) if w is not None else default
+
+
+def align_tables(doc):
+    """Put every body table's left border on the text margin, not left of it.
+
+    Both readers set a table so its first cell's TEXT lines up with the margin, which
+    hangs the table's border out into the margin by the table's default left cell
+    margin (0.075 in unless the table sets its own) plus half the border's width. With
+    a 0.50 in plain margin nobody noticed; with a binding margin that hang is content in
+    the hole zone, and the worksheet name rule ran straight through the top guide. A
+    table that already sets w:tblInd is left alone, since its builder placed it.
+    """
+    body = doc.element.body
+    for tbl in body.iterchildren(qn("w:tbl")):
+        tblPr = tbl.tblPr
+        if tblPr.find(qn("w:tblInd")) is not None:
+            continue
+        mar = tblPr.find(qn("w:tblCellMar"))
+        left = _TABLE_DEFAULT_CELL_MAR_TW
+        if mar is not None:
+            e = mar.find(qn("w:left"))
+            if e is None:
+                e = mar.find(qn("w:start"))
+            left = _tw(e, left)
+        border = 0
+        for tc in tbl.iter(qn("w:tc")):
+            b = tc.find(qn("w:tcPr") + "/" + qn("w:tcBorders") + "/" + qn("w:left"))
+            if b is not None and b.get(qn("w:val")) not in (None, "nil", "none"):
+                border = max(border, int(b.get(qn("w:sz"), "0")))
+            break  # the first cell sets the table's left edge
+        tb = tblPr.find(qn("w:tblBorders") + "/" + qn("w:left"))
+        if tb is not None and tb.get(qn("w:val")) not in (None, "nil", "none"):
+            border = max(border, int(tb.get(qn("w:sz"), "0")))
+        half = int(round(border / 8 * 20 / 2))             # sz is eighths of a point
+        ind_tw = left + half
+        if ind_tw <= 0:
+            continue
+        el = OxmlElement("w:tblInd")
+        el.set(qn("w:w"), str(ind_tw)); el.set(qn("w:type"), "dxa")
+        tblPr.append(el)
+        _sort_children(tblPr, _TBLPR_ORDER)
+        if half:
+            # The half-border shift would push the right edge past the text margin, into
+            # the hole zone of an even page; the last column gives it back.
+            cols = tbl.findall(qn("w:tblGrid") + "/" + qn("w:gridCol"))
+            if cols:
+                cols[-1].set(qn("w:w"), str(int(cols[-1].get(qn("w:w"))) - half))
+            for tr in tbl.iterchildren(qn("w:tr")):
+                tcs = tr.findall(qn("w:tc"))
+                w = tcs[-1].find(qn("w:tcPr") + "/" + qn("w:tcW")) if tcs else None
+                if w is not None and w.get(qn("w:type")) == "dxa":
+                    w.set(qn("w:w"), str(int(w.get(qn("w:w"))) - half))
+            tw = tblPr.find(qn("w:tblW"))
+            if tw is not None and tw.get(qn("w:type")) == "dxa":
+                tw.set(qn("w:w"), str(int(tw.get(qn("w:w"))) - half))
+
+
+def apply_binding(doc):
+    """Mirror margins and hole guides on every section. Call once, after the footer is
+    written and immediately before `doc.save()`.
+
+    Pulls every body table's border onto the text margin (`align_tables`), turns on
+    w:mirrorMargins and w:evenAndOddHeaders, copies each section's footer (and
+    header, if it has content) to the even-page story so even pages keep their running
+    footer, and anchors the guides: left side in the odd and first-page footers, right
+    side in the even footer. A section whose margins were set without
+    `set_mirror_margins` keeps its outside (right) value and has its left set to inside.
+    """
+    st = doc.settings.element
+    if BINDING.mirror:
+        _settings_flag(st, "mirrorMargins")
+    _settings_flag(st, "evenAndOddHeaders")
+    align_tables(doc)
+    id_base = 90000
+    for s in doc.sections:
+        if BINDING.mirror:
+            s.left_margin = Inches(BINDING.inside_in)
+        for kind in ("header", "footer"):
+            odd = getattr(s, kind)
+            if odd.is_linked_to_previous and kind == "header":
+                continue
+            has_content = bool("".join(p.text for p in odd.paragraphs).strip()) or \
+                odd._element.find(".//" + qn("w:drawing")) is not None or \
+                odd._element.find(".//" + qn("w:fldSimple")) is not None or \
+                odd._element.find(".//" + qn("w:fldChar")) is not None
+            if kind == "header" and not has_content:
+                continue
+            _copy_story(odd, getattr(s, "even_page_" + kind))
+        _add_guides(s.footer, 1, id_base); id_base += 10
+        _add_guides(s.even_page_footer, 2, id_base); id_base += 10
+        if s.different_first_page_header_footer:
+            _add_guides(s.first_page_footer, 1, id_base); id_base += 10
+    return doc
 
 
 def running_footer(section, text, pal, with_page_numbers=False):

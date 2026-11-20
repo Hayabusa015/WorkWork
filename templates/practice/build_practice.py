@@ -16,6 +16,8 @@ from copy import deepcopy
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from _shull_name import document_name, short_title  # noqa: E402
+from _shull_print import text_block_in  # noqa: E402
+from _shull_docx import set_mirror_margins, apply_binding  # noqa: E402
 
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
@@ -38,9 +40,10 @@ WHITE = TOKENS["ground"]["white"]["hex"].lstrip("#")
 FONT = TOKENS["typography"]["fallback"]["family"]
 CODE = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
 PAGE_W = 8.5
-LEFT = float(TOKENS["print"]["margins"]["left"].removesuffix("in"))
-RIGHT = float(TOKENS["print"]["margins"]["right"].removesuffix("in"))
-WIDTH = PAGE_W - LEFT - RIGHT
+# Mirrored (SHULL-CHG-0075): the token's right margin is the outside; the inside is
+# print.binding.inside. The text block is what is left between them.
+OUTSIDE = float(TOKENS["print"]["margins"]["right"].removesuffix("in"))
+WIDTH = text_block_in(OUTSIDE)
 CARD_W, CARD_H, SLOT_W, SLOT_H = 3.65, 1.85, 3.75, 1.95
 
 def validate_spec(s):
@@ -165,7 +168,7 @@ def make_doc(s, key=False):
     sec.page_width = Inches(PAGE_W); sec.page_height = Inches(11)
     sec.top_margin = Inches(0.50)
     sec.bottom_margin = Inches(float(TOKENS["print"]["margins"]["bottom"].removesuffix("in")))
-    sec.left_margin = Inches(LEFT); sec.right_margin = Inches(RIGHT)
+    set_mirror_margins(sec, OUTSIDE)
     sec.header_distance = Inches(0.18); sec.footer_distance = Inches(0.19)
     normal = doc.styles["Normal"]
     normal.font.name = FONT; normal.font.size = Pt(10.5)
@@ -434,8 +437,8 @@ def build(s,out,checks=True):
     sec=f'{float(s["section"]):.1f}';topic=short_title(s["course"],sec)
     student=out/document_name(kind,[sec],s["unit"],topic=topic)
     key=out/document_name(kind,[sec],s["unit"],topic=topic,key=True)
-    build_student(s,assets,checks).save(student)
-    build_key(s).save(key)
+    apply_binding(build_student(s,assets,checks)).save(student)
+    apply_binding(build_key(s)).save(key)
     save_dotx(student,out/(f'SHULL_{CODE[s["course"]]}_Worksheet_TEMPLATE.dotx'))
     return student,key
 

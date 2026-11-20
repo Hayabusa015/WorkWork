@@ -34,6 +34,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run,
     fix_widths, no_split, page_setup, running_footer, cell_margins, gap, trim_tail,
+    TEXT_W_IN, apply_binding,
 )
 
 from _shull_name import document_name, short_title   # noqa: E402
@@ -47,8 +48,12 @@ from build_worksheet_docx import (   # noqa: E402
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TEXT_W_IN = 7.50
-HAND_W_IN = 7.20            # handwritten solution image width; fits the 7.50 in card less its margins
+# TEXT_W_IN comes from _shull_docx (page less binding and outside margins, SHULL-CHG-0075).
+CARD_PAD_TW = 130           # the answer card's left and right cell margins, in twips
+# The handwritten solution image is 7.20 in by design; it may never be wider than the card's
+# inner width (TEXT_W_IN less both cell margins), or the renderer shrinks it and clips the
+# drawing. At the 7.40 in binding-era line the inner width is 7.22 in, so 7.20 still fits.
+HAND_W_IN = min(7.20, int((TEXT_W_IN - 2 * CARD_PAD_TW / 1440) * 100) / 100)
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), "scripts"))
 _TMP = tempfile.mkdtemp(prefix="shull_key_")
 
@@ -129,7 +134,7 @@ def answer_block(doc, n, q, pal, tier_tags=True, side=None):
     no_split(t.rows[0])          # a question's key entry stays whole across a page break,
     c = t.rows[0].cells[0]       # same rule the student handout's cards follow.
     borders(c, pal.hair, sz=4)
-    cell_margins(c, top=70, bottom=70, left=130, right=130)
+    cell_margins(c, top=70, bottom=70, left=CARD_PAD_TW, right=CARD_PAD_TW)
 
     head = c.paragraphs[0]
     r = run(head, f"{n}.  ", 11, bold=True, color=pal.ink)
@@ -361,7 +366,7 @@ def main():
             page_break(doc)
 
         t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.55, 1.95])
+        fix_widths(t, [round(TEXT_W_IN - 1.95, 3), 1.95])   # the code column keeps its width
         h, hr = t.rows[0].cells
         for cc in (h, hr):
             borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
@@ -413,6 +418,7 @@ def main():
     running_footer(s, f"SHULL SCIENCE          {unit} · {span} · KEY", pal,
                    with_page_numbers=True)
     trim_tail(doc)
+    apply_binding(doc)
     doc.save(out)
     nq = sum(len(x.get("questions", [])) for x in sections)
     print(f"wrote {out}  —  {code} {unit} {span} KEY, "

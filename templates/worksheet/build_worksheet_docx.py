@@ -41,12 +41,14 @@ from _shull_docx import (          # noqa: E402
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
     text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich,
+    TEXT_W_IN, apply_binding,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 
-TEXT_W_IN = 7.50
+# TEXT_W_IN comes from _shull_docx: the page less the binding (inside) margin and the
+# outside margin, SHULL-CHG-0075. It is 7.40 in, not the 7.50 it was.
 NUM_W_IN = 0.30                                  # the question number's own column
 BODY_W_IN = TEXT_W_IN - NUM_W_IN
 
@@ -1189,7 +1191,7 @@ def main():
         # the code on the right. Only the slab goes, replaced by a heavy accent bar on
         # the left edge, which is the one place a solid mark earns its ink.
         t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.55, 1.95])
+        fix_widths(t, [round(TEXT_W_IN - 1.95, 3), 1.95])   # the code column keeps its width
         h, hr = t.rows[0].cells
         for cc in (h, hr):
             borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
@@ -1210,6 +1212,13 @@ def main():
         pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
     def id_row(labels, widths, total):
+        # Widths written for the old 7.50 in line lose the overflow from their widest
+        # field, so the row stays on the text block (SHULL-CHG-0075 narrowed it).
+        widths = list(widths)
+        over = round(sum(widths) - TEXT_W_IN, 4)
+        if over > 0:
+            i = widths.index(max(widths))
+            widths[i] = round(widths[i] - over, 3)
         t = doc.add_table(rows=1, cols=len(labels))
         fix_widths(t, widths)
         for cc, lab in zip(t.rows[0].cells, labels):
@@ -1391,6 +1400,7 @@ def main():
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal,
                    with_page_numbers=True)
     trim_tail(doc)
+    apply_binding(doc)
     doc.save(out)
     nq = sum(len(x.get("questions", [])) for x in sections)
     print(f"wrote {out}  —  {code} {unit} {span}, "

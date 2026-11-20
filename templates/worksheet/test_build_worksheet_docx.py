@@ -11,6 +11,8 @@ from docx import Document
 from docx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
+from _shull_docx import TEXT_W_IN   # the binding-era text block (SHULL-CHG-0075), not 7.5
 BUILDER = os.path.join(HERE, "build_worksheet_docx.py")
 KEY_BUILDER = os.path.join(HERE, "build_worksheet_key_docx.py")
 FBD = {"scene": "fbd", "forces": [{"label": "F_{N}", "dir": "up", "mag": 1},
@@ -88,7 +90,7 @@ class Grid(Builder):
     def test_grid_columns_are_square_wide(self):
         r, doc = self.build(grid_spec())
         cols = [int(c.get(qn("w:w"))) for c in doc.element.body.iter(qn("w:gridCol"))]
-        side, gutter = 2.05 * 1440, (7.5 - 3 * 2.05) / 2 * 1440
+        side, gutter = 2.05 * 1440, (TEXT_W_IN - 3 * 2.05) / 2 * 1440
         self.assertEqual(sum(1 for c in cols if abs(c - side) <= 1), 3 * 2)   # 2 grid rows
         self.assertEqual(sum(1 for c in cols if abs(c - gutter) <= 1), 2 * 2)
 
@@ -308,7 +310,7 @@ class LabelBank(Builder):
     def test_equation_columns_sets_bar_width(self):
         r, doc = self.build(grid_spec(equationColumns=3))
         self.assertEqual(r.returncode, 0, r.stderr)
-        w = round(7.5 / 3 - 0.13, 2) * 1440
+        w = round(TEXT_W_IN / 3 - 0.13, 2) * 1440
         cols = [int(c.get(qn("w:w"))) for c in doc.element.body.iter(qn("w:gridCol"))]
         self.assertEqual(sum(1 for c in cols if abs(c - w) <= 1), 3)
 

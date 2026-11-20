@@ -86,6 +86,10 @@ def build_section(s):
 </div>"""
 
 
+# Top, outside, bottom of the Option B packet, inches. The inside is print.binding.inside.
+OPTION_B_MARGINS_IN = (0.50, 0.50, 0.55)
+
+
 def main():
     spec = json.load(open(sys.argv[1] if len(sys.argv) > 1
                           else os.path.join(HERE, "specs", "geo_u01_s01.2-s01.4.json")))
@@ -155,6 +159,11 @@ def main():
     doc = doc.replace("<body", f'<body class="{CLASS[course]}"', 1) \
         if "<body" in doc else f'<body class="{CLASS[course]}">' + doc
 
+    # SHULL-CHG-0075: margins mirrored, inside from tokens, hole guides drawn. The top,
+    # outside and bottom are this template's own (they were its @page margin).
+    sys.path.insert(0, os.path.dirname(HERE))
+    from _shull_print import inject_page_css
+    doc = inject_page_css(doc, *OPTION_B_MARGINS_IN)
     import weasyprint
     weasyprint.HTML(string=doc, base_url=HERE).write_pdf(out)
     print(f"wrote {out}  —  {code} {unit} {span}")

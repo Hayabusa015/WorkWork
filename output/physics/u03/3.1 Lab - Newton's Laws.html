@@ -28,16 +28,21 @@
  · Print palette is the same for all three courses. The per-course
    accent palettes (courses.* in brand/tokens.json) are PROJECTION
    ONLY and never touch a printed page.
- · Margins are the confirmed SHULL print standard and are locked.
+ · Margins come from brand/tokens.json (print.margins, print.binding),
+   mirrored for three-hole punching, with hole guides on the binding
+   side (SHULL-CHG-0075). build_lab.py adds them at render time; this
+   file sets none. Never adjust a margin to fix a page count.
 =====================================================================
 -->
 
 <link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
 <style>
-  /* ---------- Locked SHULL print margins ---------- */
+  /* ---------- Page ----------
+     No margin here. build_lab.py sets all four, mirrored, from brand/tokens.json
+     (print.margins, print.binding.inside) and draws the hole guides
+     (print.holeGuides). See SHULL-CHG-0075 and brand/SHULL_DESIGN_SYSTEM.md §8. */
   @page {
     size: letter;
-    margin: 0.30in 0.35in 0.45in 0.35in;
 
     @top-right {
       content: string(runhead);
@@ -62,7 +67,7 @@
 
   body {
     font-family: var(--body);
-    font-size: 10.3pt;
+    font-size: 10.1pt;   /* 10.3 before SHULL-CHG-0075: the 0.60 in binding margin narrowed the line and pushed the lab to 5 pages */
     line-height: 1.40;
     color: var(--ink);
   }
