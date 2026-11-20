@@ -70,7 +70,57 @@ def page_break(doc):
     r._element.append(br)
 
 
-def answer_block(doc, n, q, pal, tier_tags=True):
+def side_opts(spec, sec):
+    """Opt-in compact key: "keyLayout": "side" (section or spec) sets each item's FBD beside its
+    handwritten steps instead of above them. "keyFbdIn" is the drawing column (default 2.6 in);
+    "keyStepScale" (default 1.0) sets the steps slightly smaller than full key size. None when
+    the spec does not ask for it, and then nothing changes."""
+    get = lambda k, d=None: sec.get(k, spec.get(k, d))
+    if get("keyLayout", "stacked") != "side":
+        return None
+    return {"fbd_in": float(get("keyFbdIn", 2.6)), "scale": float(get("keyStepScale", 1.0))}
+
+
+SIDE_GUTTER_IN = 0.12
+SIDE_INNER_IN = HAND_W_IN    # the same width the stacked key gives its full image; a row as wide as
+                             # the card's inner width gets shrunk by the renderer and clips the drawing
+
+
+def side_by_side(c, n, q, side):
+    """Draw the item's scene and its steps as two images in a two-column row. The scene keeps
+    its own magnitude scale (one image per item), cropped to its ink and fitted to the column;
+    the steps are drawn on a canvas `scale` times wider than their column, then fitted, so the
+    handwriting comes out at `scale` of full key size. Returns False if the scene cannot be drawn."""
+    from key_solution import solution_image, SceneUnsupported
+    scene_q = {k: v for k, v in q.items() if k != "steps"}
+    steps_q = {k: v for k, v in q.items() if k not in ("keyImage", "sketch")}
+    fbd_png = os.path.join(_TMP, f"q{n}_fbd.png")
+    try:
+        solution_image(scene_q, fbd_png, width_in=HAND_W_IN)     # full canvas, then cropped
+    except SceneUnsupported:
+        return False
+    fw, fh = _crop_to_ink(fbd_png)
+    steps_w = SIDE_INNER_IN - side["fbd_in"] - SIDE_GUTTER_IN
+    steps_png = os.path.join(_TMP, f"q{n}_steps.png")
+    solution_image(steps_q, steps_png, width_in=steps_w / side["scale"])
+    t = c.add_table(rows=1, cols=3)
+    fix_widths(t, [side["fbd_in"], SIDE_GUTTER_IN, steps_w])
+    for cell in t.rows[0].cells:
+        cell_margins(cell, top=0, bottom=0, left=0, right=0)
+    from docx.enum.table import WD_ALIGN_VERTICAL
+    lc, _, rc = t.rows[0].cells
+    lc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    lp = lc.paragraphs[0]
+    lp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pics = [lp.add_run().add_picture(fbd_png, width=Inches(min(fw, side["fbd_in"]))),
+            rc.paragraphs[0].add_run().add_picture(steps_png, width=Inches(steps_w))]
+    for pic in pics:                 # zero wrap distances, or LibreOffice insets each picture
+        for k in ("distT", "distB", "distL", "distR"):     # ~0.13 in and clips its right edge
+            pic._inline.set(k, "0")  # (same fix as the grid key's notes)
+    return True
+
+
+def answer_block(doc, n, q, pal, tier_tags=True, side=None):
     """One question's key entry: number + tier, the prompt restated small, the full
     worked solution, and the final answer set apart so it can be read at a glance
     while grading - never just the bracket the student sheet withholds."""
@@ -93,6 +143,8 @@ def answer_block(doc, n, q, pal, tier_tags=True):
         p.runs[0].italic = True
 
     gap(c, 2)
+    if side and q.get("keyImage") and q.get("steps") and side_by_side(c, n, q, side):
+        return c
     if q.get("steps") or q.get("keyImage"):
         # Handwritten worked solution in the key-handwriting face (standards/ANSWER_KEYS.md):
         # the key image, the steps, any scene sketch and the boxed answer are drawn, so no
@@ -342,7 +394,8 @@ def main():
         for i, q in enumerate([] if g else sec.get("questions", []), start=1):
             try:
                 answer_block(doc, i, q, pal,
-                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))))
+                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))),
+                             side=side_opts(spec, sec))
             except MotionArrowError as e:
                 return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)

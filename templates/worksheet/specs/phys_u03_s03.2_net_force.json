@@ -12,6 +12,9 @@
  "equationStyle": "inline",
  "equationColumns": 2,
  "tierTags": false,
+ "keyLayout": "side",
+ "keyFbdIn": 2.6,
+ "keyStepScale": 0.85,
  "sectionsContent": [
   {
    "code": "3.2",
@@ -226,7 +229,7 @@
         ]
        }
       ],
-      "arrowPx": 210,
+      "arrowPx": 150,
       "labelPad": 24
      },
      "steps": [
@@ -305,7 +308,12 @@
       },
       {
        "row": [
-        "Leo:  F_{x} = 45.0 N cos 50.0° = 28.9 N     F_{y} = 45.0 N sin 50.0° = 34.5 N"
+        "Leo:  F_{x} = 45.0 N cos 50.0° = 28.9 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 45.0 N sin 50.0° = 34.5 N"
        ]
       },
       {
@@ -410,7 +418,12 @@
       },
       {
        "row": [
-        "Jordan:  F_{x} = −155 N cos 40.0° = −118.7 N     F_{y} = 155 N sin 40.0° = 99.6 N"
+        "Jordan:  F_{x} = −155 N cos 40.0° = −118.7 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 155 N sin 40.0° = 99.6 N"
        ]
       },
       {
@@ -602,12 +615,22 @@
       },
       {
        "row": [
-        "Max:  F_{x} = 80.0 N cos 30.0° = 69.3 N     F_{y} = 80.0 N sin 30.0° = 40.0 N"
+        "Max:  F_{x} = 80.0 N cos 30.0° = 69.3 N"
        ]
       },
       {
        "row": [
-        "Bella:  F_{x} = 75.0 N cos 55.0° = 43.0 N     F_{y} = −75.0 N sin 55.0° = −61.4 N"
+        "F_{y} = 80.0 N sin 30.0° = 40.0 N"
+       ]
+      },
+      {
+       "row": [
+        "Bella:  F_{x} = 75.0 N cos 55.0° = 43.0 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = −75.0 N sin 55.0° = −61.4 N"
        ]
       },
       {
