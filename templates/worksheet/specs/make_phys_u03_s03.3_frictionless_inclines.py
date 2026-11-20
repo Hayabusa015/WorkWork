@@ -13,7 +13,6 @@ W, p, n = inc(0.250, 50.0); near(p, 1.88, 0.002); near(n, 1.57, 0.0035); assert 
 W, p, n = inc(22.0, 20.0); near(W, 215.6); near(p, 73.7, 0.001); near(p - 60.0, 13.7, 0.004); near(n, 202.6, 0.001)
 W, p, n = inc(32.0, 15.0); near(W, 313.6); near(p, 81.2, 0.001)
 W, p, n = inc(65.0, 18.0); near(W, 637); near(p, 197, 0.002); near(n, 606, 0.001); assert round(255 - p) == 58
-W, p, n = inc(28.0, 30.0); near(W, 274.4); near(p, 137, 0.002); near(p/28.0, 4.90); near(g*sin(radians(30)), 4.90)
 
 def F(label, d, mag, off=0.0):
     f = {"label": label, "dir": d, "mag": mag}
@@ -73,7 +72,7 @@ qs = [
   "prompt": "Lena is pushing her little brother up the driveway in a wagon. The driveway is steep, tilted 20.0° above the horizontal, and the wagon plus her brother come to 22.0 kg. She pushes with 60.0 N parallel to the driveway. Ignore friction.",
   "parts": ["a.  Find the net force on the wagon along the driveway, with its direction.",
             "b.  Is her push enough to keep the wagon from rolling back down?"],
-  "solution": "Down the driveway is positive. Fg,parallel = 22.0 × 9.8 × sin 20.0° = 73.7 N down the driveway. ∑F = 73.7 − 60.0 = 13.7 N down the driveway.\nb. No. The net force points down the driveway, so the wagon speeds up rolling back unless she pushes with 73.7 N.",
+  "solution": "Down the driveway is positive. Fg,parallel = 22.0 × 9.8 × sin 20.0° = 73.7 N down the driveway. ∑F = 73.7 − 60.0 = 13.7 N down the driveway.\nb. No. The forces are not balanced: the net force points down the driveway. It would take 73.7 N up the driveway to balance.",
   "finalAnswer": "a. 13.7 N down the driveway. b. No; it would take 73.7 N.",
   "keyImage": fbd(ramp(20, F("F_{app} = 60.0 N", UP(20), 60.0), F("F_{N}", PERP(20), 202.6), F("F_{g}", "down", 215.6)),
                   arrowPx=150),
@@ -81,7 +80,7 @@ qs = [
             R("F_{g,parallel} = (22.0 kg)(9.8 m/s^{2}) sin 20.0° = 73.7 N"),
             R("∑F = 73.7 N − 60.0 N"), A("∑F =", "13.7 N down the driveway"),
             SAY("b. No. It would take 73.7 N up the driveway to balance.")]},
- {"tier": "practice", "points": 3, "calculation": True, "selfCheck": "[  81.2 N  ]",
+ {"tier": "challenge", "points": 4, "calculation": True, "selfCheck": "[  81.2 N  ]",
   "prompt": "On an icy sledding hill tilted 15.0° above the horizontal, Dad holds the rope so the sled won't slide while his daughter climbs on. Sled and daughter have a mass of 32.0 kg, and the rope runs parallel to the hill. Treat the ice as frictionless. How hard does Dad have to pull to hold the sled still?",
   "solution": "At rest, so ∑F along the hill = 0. T = Fg,parallel = 32.0 × 9.8 × sin 15.0° = 81.2 N up the hill.",
   "finalAnswer": "81.2 N up the hill, parallel to it",
@@ -89,12 +88,12 @@ qs = [
   "steps": [R("at rest:  ∑F along the hill = 0"), R("T = F_{g,parallel} = mg sin θ"),
             R("T = (32.0 kg)(9.8 m/s^{2}) sin 15.0°"), A("T =", "81.2 N up the hill"),
             NOTE("The same pull would let the sled slide down at a constant speed. ∑F = 0 either way.")]},
- {"tier": "challenge", "points": 4, "calculation": True, "selfCheck": "[  197 N  ·  606 N  ·  58 N  ]",
+ {"tier": "multi-topic", "points": 5, "calculation": True,
   "prompt": "Two movers roll a 65.0 kg refrigerator on a hand truck up the ramp into their truck. The ramp is tilted 18.0° above the horizontal, and they push parallel to it. Ignore friction.",
   "parts": ["a.  What push moves the fridge up the ramp at a constant speed?",
             "b.  What is the normal force from the ramp?",
             "c.  If they push with 255 N instead, what is the net force on the fridge?"],
-  "solution": "Fg = 65.0 × 9.8 = 637 N.\na. Constant speed: ∑F = 0, so Fapp = 637 sin 18.0° = 197 N up the ramp.\nb. FN = 637 cos 18.0° = 606 N perpendicular to the ramp.\nc. Up the ramp positive: ∑F = 255 − 196.8 = 58 N up the ramp. The fridge speeds up.",
+  "solution": "Fg = 65.0 × 9.8 = 637 N.\na. Constant speed: ∑F = 0, so Fapp = 637 sin 18.0° = 197 N up the ramp.\nb. FN = 637 cos 18.0° = 606 N perpendicular to the ramp.\nc. Up the ramp positive: ∑F = 255 − 196.8 = 58 N up the ramp.",
   "finalAnswer": "a. 197 N up the ramp. b. 606 N perpendicular to the ramp. c. 58 N up the ramp.",
   "keyImage": fbd(ramp(18, F("F_{app}", UP(18), 196.8), F("F_{N}", PERP(18), 605.8), F("F_{g}", "down", 637.0)), arrowPx=160),
   "steps": [R("F_{g} = (65.0 kg)(9.8 m/s^{2}) = 637 N"),
@@ -103,19 +102,6 @@ qs = [
             R("b.  F_{N} = (637 N) cos 18.0°"), A("F_{N} =", "606 N perpendicular to the ramp"),
             R("c.  up the ramp = +:  ∑F = 255 N − 196.8 N"), A("∑F =", "58 N up the ramp"),
             NOTE("Constant speed is ∑F = 0, the same as holding it still. A moving object does not need a net force.")]},
- {"tier": "multi-topic", "points": 5, "calculation": True,
-  "prompt": "Jayden, 28.0 kg, starts down a playground slide tilted 30.0° above the horizontal. Treat the slide as frictionless. (This one uses ∑F = ma.)",
-  "parts": ["a.  Find the net force on Jayden and his acceleration down the slide.",
-            "b.  His dad, with three times Jayden's mass, tries the same slide. Does he speed up faster, slower, or at the same rate? Use your work to explain."],
-  "solution": "a. Down the slide positive. ∑F = Fg,parallel = 28.0 × 9.8 × sin 30.0° = 137 N down the slide (FN cancels Fg,perp). a = ∑F/m = 137.2/28.0 = 4.90 m/s² down the slide.\nb. The same rate. ma = mg sin θ, so the mass cancels: a = g sin θ = 9.8 sin 30.0° = 4.90 m/s² for anyone on a frictionless slide.",
-  "finalAnswer": "a. ∑F = 137 N down the slide; a = 4.90 m/s² down the slide. b. Same rate: a = g sin θ does not depend on mass.",
-  "keyImage": fbd(ramp(30, F("F_{N}", PERP(30), 237.6), F("F_{g}", "down", 274.4))),
-  "steps": [R("down the slide = +"),
-            R("∑F = F_{g,parallel} = (28.0 kg)(9.8 m/s^{2}) sin 30.0°"), A("∑F =", "137 N down the slide"),
-            R("a =", frac("∑F", "m"), "=", frac("137.2 N", "28.0 kg")), A("a =", "4.90 m/s^{2} down the slide"),
-            R("b.  ma = mg sin θ, so a = g sin θ"), R("a = (9.8 m/s^{2}) sin 30.0° = 4.90 m/s^{2}"),
-            SAY("Same rate. The mass cancels, so Dad speeds up exactly as fast as Jayden."),
-            NOTE("Misconception to watch for: heavier objects go faster.")]},
 ]
 for q in qs:
     q["prompt"] = re.sub(r"(\d) (N|kg)\b", "\\1\u00a0\\2", q["prompt"])
@@ -123,23 +109,22 @@ for q in qs:
         q["parts"] = [re.sub(r"(\d) (N|kg)\b", "\\1\u00a0\\2", x) for x in q["parts"]]
 assert all("selfCheck" in q for q in qs[:-1]) and "selfCheck" not in qs[-1]
 spec = {
- "$comment": "Physics 3.3 practice set, Frictionless Inclines: 7 problems, Matt's net-force-set style. Tier tags hidden (tierTags: false). One-time build override: RAMP['physics'] = 2/3/1/1 in memory for 7 items. No graph item and everyday scenarios: rule conflicts reported, not resolved. Problem 7 uses ∑F = ma (3.4), labelled in the prompt.",
+ "$comment": "Physics 3.3 practice set, Frictionless Inclines: 6 problems, Matt's net-force-set style, standard 2/2/1/1 ramp. Tier tags hidden (tierTags: false). No graph item and everyday scenarios: rule conflicts reported, not resolved. No ∑F = ma: Matt removed the acceleration problem (not before 3.4).",
  "course": "physics", "unit": 3, "sections": ["3.3"], "docType": "Practice_Set",
- "timeTargetMin": "30–40", "equationLabel": "EQUATIONS YOU MAY USE", "pagesPerSection": 2,
+ "timeTargetMin": "30–40", "equationLabel": "EQUATIONS YOU MAY USE", "pagesPerSection": 1,
  "equationStyle": "inline", "equationColumns": 2, "tierTags": False,
  "sectionsContent": [{
   "code": "3.3", "title": "Frictionless Inclines", "compactTop": True,
   "priorKnowledge": {"items": [
-    "Weight is Fg = mg, with g = 9.8 m/s² (S3.1). A free-body diagram has one labelled arrow per force and no arrow for motion (S3.2).",
-    "A force splits into two perpendicular parts with sin and cos (S2.1). On a ramp, tilt your axes: one along the ramp, one perpendicular to it (S3.3)."]},
+    "Weight is Fg = mg, with g = 9.8 m/s² (S3.1). A free-body diagram has one labelled arrow per force (S3.2).",
+    "Split a force with sin and cos (S2.1). On a ramp, tilt your axes along and perpendicular to the ramp (S3.3)."]},
   "equations": [
     {"note": "weight", "plain": "F_{g} = mg     g = 9.8 m/s²"},
     {"note": "down the ramp", "plain": "F_{g,parallel} = mg sin θ"},
     {"note": "into the ramp", "plain": "F_{g,perp} = mg cos θ"},
     {"note": "normal force", "plain": "F_{N} = mg cos θ"},
-    {"note": "net force", "plain": "∑F = F_{1} + F_{2} + …  (along the ramp)"},
-    {"note": "problem 7", "plain": "∑F = ma"}],
-  "directions": "Draw a free-body diagram for each problem, then answer in your notebook. Every ramp is frictionless. Give each force a unit and a direction, such as down the ramp or perpendicular to the ramp.",
+    {"note": "net force", "plain": "∑F = F_{1} + F_{2} + …  (along the ramp)"}],
+  "directions": "Draw a free-body diagram for each problem, then answer in your notebook. Every ramp is frictionless. Give each force a unit and a direction, like down the ramp.",
   "questions": qs}]}
 json.dump(spec, open(OUT, "w"), ensure_ascii=False, indent=1)
 print("wrote", OUT, len(qs), "questions,", sum(q["points"] for q in qs), "points")
