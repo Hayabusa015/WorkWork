@@ -1,0 +1,119 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Test",
+ "docLabel": "UNIT TEST · WRITTEN · VERSION C",
+ "timeTargetMin": "25",
+ "pagesPerSection": 1,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.4",
+   "title": "Unit 5 Test · Written · Version C",
+   "conceptLabel": "REFERENCE",
+   "concept": {
+    "summary": "Electronegativity (EN):  C 2.55 · O 3.44 · P 2.19 · S 2.58 · Cl 3.16 · Ge 2.01 · I 2.66"
+   },
+   "directions": "For each compound: add up the valence electrons and show the addition. Draw the Lewis structure with every lone pair. Name the shape. Find ΔEN for each different bond (higher EN − lower EN), then mark each bond PC (polar covalent) or NPC (nonpolar covalent). Then decide if the whole molecule is polar or nonpolar.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 28,
+     "label": "DRAW AND DECIDE (7 points per compound)",
+     "headers": [
+      "#",
+      "Compound",
+      "Total valence e⁻ (show the addition) · 1",
+      "Lewis structure, every lone pair · 2",
+      "Shape name · 1",
+      "ΔEN of each bond (show the subtraction) · 1",
+      "Bond polarity (PC or NPC) · 1",
+      "Molecular polarity · 1"
+     ],
+     "widths": [
+      0.04,
+      0.09,
+      0.12,
+      0.25,
+      0.12,
+      0.18,
+      0.09,
+      0.11
+     ],
+     "rowHeightIn": 1.6,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "imageCol": 3,
+     "imageMaxIn": 1.85,
+     "rows": [
+      [
+       "1",
+       "GeCl₄",
+       "4 + 4(7) = 32",
+       "",
+       "Tetrahedral",
+       "Ge–Cl\n3.16 − 2.01 = 1.15",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "2",
+       "PI₃",
+       "5 + 3(7) = 26",
+       "",
+       "Trigonal pyramidal",
+       "P–I\n2.66 − 2.19 = 0.47",
+       "PC",
+       "Polar"
+      ],
+      [
+       "3",
+       "OCS",
+       "6 + 4 + 6 = 16",
+       "",
+       "Linear",
+       "C=O\n3.44 − 2.55 = 0.89\nC=S\n2.58 − 2.55 = 0.03",
+       "PC\nNPC",
+       "Polar"
+      ],
+      [
+       "4",
+       "CSCl₂",
+       "4 + 6 + 2(7) = 24",
+       "",
+       "Trigonal planar",
+       "C=S\n2.58 − 2.55 = 0.03\nC–Cl\n3.16 − 2.55 = 0.61",
+       "NPC\nPC",
+       "Polar"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_test_v1/test_GeCl4.png",
+      "1": "assets/chem_u05_test_v1/test_PI3.png",
+      "2": "assets/chem_u05_test_v1/test_OCS.png",
+      "3": "assets/chem_u05_test_v1/test_CSCl2.png"
+     }
+    }
+   ],
+   "keyNotes": [
+    "7 points per compound, 28 total: valence e⁻ with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
+    "Slots: easy nonpolar (GeCl₄), lone pair on the center (PI₃), double bonds (OCS), three elements with carbon (CSCl₂).",
+    "Ge is in group 14 (4 valence e⁻), like C and Si. GeCl₄: polar bonds, symmetric, so nonpolar.",
+    "OCS: C in the center, O=C=S like CO₂. Linear, but the two ends pull differently (0.89 vs 0.03), so polar. Accept O–C≡S as a drawing (every atom still has 8); the shape and polarity are the same.",
+    "CSCl₂: put the double bond on S; Cl forms only one bond. If a student puts it on Cl, take off the drawing point only.",
+    "Accept the subtraction written either way round if the difference is right."
+   ]
+  }
+ ]
+}
