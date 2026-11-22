@@ -50,3 +50,19 @@ It is not yet confirmed whether that hit is a U3 section reference.
    course decision and is not guessed here.
 2. Should the SHULL-CHG-0068 F5 verification note be annotated as invalidated by the 11-13 merge?
    That record is APPROVED; this sweep does not edit it.
+
+## Researcher corroboration (2026-W47)
+
+The Researcher reported the same finding independently (`reports/2026-W47/researcher.md` row 1). It adds:
+
+- **The combined deck dodges the code check.** `templates/slide/decks/phys_u03_combined.py` declares
+  `"section": "3.1"` "only to satisfy the build's code check" (its own note, line 22). Meanwhile every
+  slide prints its own footer through `setdefault("code", f"U03 • S03.{n}")` (line 19), including
+  `U03 • S03.7`. This settles the open item above: the hit in `phys_u03_combined.py` is a U3 section
+  reference.
+- **The approved ∑F switch would rebuild from these specs.** SHULL-CHG-0070 F1 (switch the U3 deck to
+  ∑F, approved, not done) would print the dead codes if it ran before this record is resolved. Do the
+  remap in the same pass as F1.
+- **Correct SHULL-CHG-0068 F5.** Its "no 3.7 found" grep result is wrong.
+- **Optional, separate proposal:** have `validate_codes.py` / `build_deck.js` also check per-slide
+  `code` footers, not only the top-level `section`.

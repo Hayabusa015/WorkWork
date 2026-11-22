@@ -41,3 +41,23 @@ SHULL-CHG-0073), as §2 requires. Per §2, these IDs are not real until they are
 1. Which option? If 2 or 3: confirm the tie-break (earliest dated record keeps the number).
 2. The allocation rule did not prevent these. Should §2 also require a check for an existing file with
    the same ID immediately before push? That would be a separate governance change.
+
+## Researcher corroboration (2026-W47)
+
+The Researcher reported the same recurrence independently (`reports/2026-W47/researcher.md` row 7). It
+adds:
+
+- **Inferred cause: branch merges.** Parallel feature branches each allocated correctly from a fresh
+  `origin/main`, then all landed together in the 26-branch consolidation merge (`ccr-bdef5882`). The
+  §2 rule assumes a record reaches `main` before the next session allocates. Branch work defeats that
+  assumption.
+- **Proposed duplicate-ID validator.** No script in `scripts/` checks proposal filenames for
+  duplicates. A validator would fail when two `governance/proposals/SHULL-CHG-NNNN-*` files share
+  NNNN, making this a mechanism rather than documentation. It would need its own approval, and it
+  would fail on the existing duplicates until an option above is chosen (or the existing set is
+  allow-listed).
+- **Amend the allocation rule for parallel branch work.** Two candidate approaches: reserve the ID by
+  pushing a stub record to `main` first, or renumber at merge time. That is a governance change and is
+  not adopted here.
+- For renumbering, the Researcher recommends option 2 or 3 above, following the SHULL-CHG-0052
+  precedent (supersede, don't rewrite). The choice stays with Matt.

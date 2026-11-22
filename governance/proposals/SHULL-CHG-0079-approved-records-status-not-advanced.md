@@ -65,3 +65,20 @@ SHULL-CHG-0062, -0063, -0064, -0065. (0065 has its own follow-ups in SHULL-CHG-0
 
 1. For D: finish SHULL-CHG-0034 and -0038 now, or defer them? This repeats SHULL-CHG-0064's
    unanswered question 1.
+
+## Researcher corroboration (2026-W47)
+
+The Researcher reported the same aging independently (`reports/2026-W47/researcher.md` row 8). It
+adds these specifics for part B, confirmed by grep on 2026-11-22:
+
+- **SHULL-CHG-0061's chosen fix ("Mark it 'retired'") is not applied.** `courses/chemistry/DECISIONS.md`
+  Short titles (line 403) still reads `| 1.4 | Isotopes |`, with no "retired".
+- **SHULL-CHG-0060 (remove stale Drive-state prose) is not applied.**
+  - `courses/physics/DECISIONS.md` "Drive status" (line 235) still says `Physics/` holds "**1 of 11**"
+    unit folders. That contradicts the same file's 2026-11-11 log: "Drive still holds seven U3
+    section folders".
+  - `courses/geology/DECISIONS.md` (line 229) still says "`Geology/` is an empty placeholder".
+- **Inferred cause (Researcher):** SHAs are not written back after commits. The Secretary has no git
+  tool in these sessions, and the main session is not backfilling. Suggested: a one-line step in the
+  commit procedure, "write the SHA back into the record", owned by the main session. That would be a
+  governance change needing its own approval.

@@ -26,3 +26,9 @@
 
 1. Apply the same pointer treatment to the Chemistry row on line 17, which also restates counts
    owned by its decisions file? Not checked for staleness this run.
+
+## Researcher corroboration (2026-W47)
+
+The Researcher independently reported the F7 half (`reports/2026-W47/researcher.md` row 11): `courses/README.md`
+line 18 says "11 units, 48 sections"; Physics has had 47 since SHULL-CHG-0068. Same fix: point at
+`courses/physics/DECISIONS.md`. Nothing new to add.
