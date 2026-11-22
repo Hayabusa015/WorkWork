@@ -67,6 +67,13 @@ const PICS = {
   test_CSCl2: { mol: { atoms: { C: ["C", 0, 0], S: ["S", 0, -1], A: ["Cl", ...at(150)], B: ["Cl", ...at(30)] },
                        bonds: [["C", "S", 2], ["C", "A", 1], ["C", "B", 1]],
                        pairs: [["S", -135], ["S", -45], ...outer3("A", 150), ...outer3("B", 30)] }, u: 0.46, fs: 16, dy: 0.12 },
+  /* written test challenge row: lone pair on the center AND a double bond */
+  test_SeO2:  { mol: { atoms: { X: ["Se", 0, 0], A: ["O", ...at(150)], B: ["O", ...at(30)] },
+                       bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
+  test_SO2:   { mol: { atoms: { X: ["S", 0, 0], A: ["O", ...at(150)], B: ["O", ...at(30)] },
+                       bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
+  test_NOF:   { mol: { atoms: { X: ["N", 0, 0], A: ["O", ...at(150)], B: ["F", ...at(30)] },
+                       bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
   /* study-guide symmetry check: shape given, students decide polar or nonpolar */
   sym_CCl4:  { mol: cross("C", ["Cl", "Cl", "Cl", "Cl"], true), u: 0.42, fs: 15 },
   sym_BBr3:  { mol: { atoms: { B: ["B", 0, 0], A: ["Br", ...at(-90)], C: ["Br", ...at(150)], D: ["Br", ...at(30)] },

@@ -15,7 +15,7 @@
    "title": "Unit 5 Test · Written · Version A",
    "conceptLabel": "REFERENCE",
    "concept": {
-    "summary": "Electronegativity (EN):  C 2.55 · O 3.44 · F 3.98 · Si 1.90 · P 2.19 · S 2.58 · Cl 3.16 · Br 2.96"
+    "summary": "Electronegativity (EN):  C 2.55 · O 3.44 · F 3.98 · P 2.19 · S 2.58 · Se 2.55 · Br 2.96"
    },
    "directions": "For each compound: add up the valence electrons and show the addition. Draw the Lewis structure with every lone pair. Name the shape. Find ΔEN for each different bond (higher EN − lower EN), then mark each bond PC (polar covalent) or NPC (nonpolar covalent). Then decide if the whole molecule is polar or nonpolar.",
    "questions": [],
@@ -59,16 +59,6 @@
      "rows": [
       [
        "1",
-       "SiCl₄",
-       "4 + 4(7) = 32",
-       "",
-       "Tetrahedral",
-       "Si–Cl\n3.16 − 1.90 = 1.26",
-       "PC",
-       "Nonpolar"
-      ],
-      [
-       "2",
        "PBr₃",
        "5 + 3(7) = 26",
        "",
@@ -78,7 +68,7 @@
        "Polar"
       ],
       [
-       "3",
+       "2",
        "CS₂",
        "4 + 2(6) = 16",
        "",
@@ -88,7 +78,7 @@
        "Nonpolar"
       ],
       [
-       "4",
+       "3",
        "COF₂",
        "4 + 6 + 2(7) = 24",
        "",
@@ -96,22 +86,32 @@
        "C=O\n3.44 − 2.55 = 0.89\nC–F\n3.98 − 2.55 = 1.43",
        "PC\nPC",
        "Polar"
+      ],
+      [
+       "4",
+       "SeO₂",
+       "6 + 2(6) = 18",
+       "",
+       "Bent",
+       "Se=O, Se–O\n3.44 − 2.55 = 0.89",
+       "PC",
+       "Polar"
       ]
      ],
      "keyImages": {
-      "0": "assets/chem_u05_test_v1/test_SiCl4.png",
-      "1": "assets/chem_u05_test_v1/test_PBr3.png",
-      "2": "assets/chem_u05_test_v1/test_CS2.png",
-      "3": "assets/chem_u05_test_v1/test_COF2.png"
+      "0": "assets/chem_u05_test_v1/test_PBr3.png",
+      "1": "assets/chem_u05_test_v1/test_CS2.png",
+      "2": "assets/chem_u05_test_v1/test_COF2.png",
+      "3": "assets/chem_u05_test_v1/test_SeO2.png"
      }
     }
    ],
    "keyNotes": [
     "7 points per compound, 28 total: valence e⁻ with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
-    "Slots: easy nonpolar (SiCl₄), lone pair on the center (PBr₃), double bonds (CS₂), three different elements (COF₂).",
-    "CS₂: double bonds from the CHECK step; C=S is 0.03, so NPC and a nonpolar molecule. SiCl₄: polar bonds, symmetric, so nonpolar. COF₂: C=O and C–F pull unequally, so polar.",
-    "Accept the subtraction written either way round if the difference is right.",
-    "COF₂: put the double bond on O. F forms only one bond. If a student puts the double bond on F, the shape and polarity still come out right; take off the drawing point only."
+    "Slots: lone pair on the center (PBr₃), double bonds and nonpolar (CS₂), three elements with carbon (COF₂), challenge (SeO₂).",
+    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. SeO₂: Se is in group 16 (6 valence e⁻), directly below S. Se is period 4, so accept O=Se=O as well; the shape is still bent (1 lone pair) and polar.",
+    "COF₂: put the double bond on O; F forms only one bond. If on F, take off the drawing point only.",
+    "Accept the subtraction written either way round if the difference is right."
    ]
   }
  ]
