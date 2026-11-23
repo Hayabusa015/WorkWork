@@ -18,7 +18,7 @@ for n in range(1, 8):
     for s in spec["slides"]:
         s["fields"].setdefault("code", f"U03 • S03.{n}")
         slides.append(s)
-out = {"course": "physics", "unit": 3, "section": "3.1", "sectionTitle": "Forces and Motion (Unit 3, all sections)",
+out = {"course": "physics", "unit": 3, "section": "3.1", "sectionTitle": "Unit 3, all sections",
        "note": "Unit-level deck: sections 3.1-3.7 combined at Matt's request. 'section' is 3.1 only to satisfy the "
                "build's code check; every slide carries its own section footer.", "slides": slides}
 json.dump(out, open(os.path.join(HERE, "phys_u03_all.json"), "w"), indent=2, ensure_ascii=False)

@@ -97,7 +97,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the IE trend",
                   "answer": "More nuclear pull = harder. More distance and shielding = easier.",
                   "inline": true
                 },
@@ -152,7 +152,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the electronegativity trend",
                   "answer": "More nuclear pull attracts shared electrons; distance and shielding weaken it.",
                   "inline": true
                 },
@@ -193,7 +193,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the radius trend",
                   "answer": "Down: another energy level. Across: more protons pull inward.",
                   "inline": true
                 },
@@ -218,7 +218,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason the ion is smaller",
                   "answer": "Outer level gone; still 12 protons.",
                   "inline": true
                 }
@@ -243,7 +243,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Cause of a higher MP or BP",
                   "answer": "Stronger attractions need more energy to overcome.",
                   "inline": true
                 },
