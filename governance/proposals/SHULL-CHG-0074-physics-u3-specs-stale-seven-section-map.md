@@ -19,8 +19,8 @@
 | **Affected Courses** | Physics. |
 | **Risk** | High. A student-facing deck could print a non-existent section code and title. |
 | **Recommendation** | Matt chooses retire or remap (open question 1). Until then, do not build from any `phys_u03` deck or the slide-solutions spec. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-23, answering the main session's question "Approve 0074 too, and if so, what happens to the 3.7 material?" with the option "Approve: retire 3.7" (remove the 3.7 deck spec and the 3.7 slide-solution entries from the repo; they stay in git history). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
