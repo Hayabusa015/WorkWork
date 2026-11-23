@@ -154,3 +154,16 @@ mutation that was not logged cannot be rolled back.
 
 A Drive move done by copy-and-trash changes the file ID, so its rollback is imperfect. That is why
 `standards/DRIVE_ARCHITECTURE.md` blocks moves until test T-3 passes.
+
+### Desktop decision recorder
+
+The Repository tab can submit a decision through the desktop recorder using the repository
+owner’s GitHub CLI credentials. It is an additional
+recorder for the two fields and change-log entry in §4. It checks the full record
+filename and reviewed Git blob before committing. A changed record requires a
+fresh review. The recorded wording includes Matt's selected option or condition.
+
+Approve & request implementation also gives the Secretary the implementation
+request. Request implementation on an already approved record retains the
+original decision. Reject and Defer never request implementation. The desktop
+records a decision only. The Secretary owns implementation and verification.

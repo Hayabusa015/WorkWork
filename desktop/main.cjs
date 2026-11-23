@@ -1,4 +1,4 @@
-const {app,BrowserWindow,session,dialog,Menu,shell,ipcMain}=require('electron');
+const {app,BrowserWindow,session,dialog,Menu,shell,ipcMain,Notification}=require('electron');
 const path=require('node:path');
 const fs=require('node:fs');
 const {pathToFileURL}=require('node:url');
@@ -72,6 +72,13 @@ else {
     if(office)process.env.SHULL_SOFFICE=office;
     ipcMain.handle('workspace:open',()=>shell.openPath(data));
     const serverModule=await import(pathToFileURL(path.join(repo,'app','server.mjs')).href);
+    ipcMain.handle('repository:select',async()=>{
+      const result=await dialog.showOpenDialog(window,{title:'Choose your WorkWork checkout',properties:['openDirectory']});
+      return result.canceled ? null : serverModule.repoDesk.select(result.filePaths[0]);
+    });
+    ipcMain.on('repository:notify',(_event,message)=>{
+      if(typeof message==='string' && Notification.isSupported()) new Notification({title:'WorkWork',body:message.slice(0,200)}).show();
+    });
     backend=await serverModule.startServer(0);
     const origin=`http://127.0.0.1:${backend.address().port}`;
     session.defaultSession.webRequest.onBeforeSendHeaders({urls:[origin+'/*']},(details,callback)=>{
@@ -83,6 +90,7 @@ else {
     window.webContents.on('will-navigate',(event,url)=>{if(new URL(url).origin!==origin)event.preventDefault();});
     window.webContents.setWindowOpenHandler(({url})=>{
       if(new URL(url).origin===origin)return {action:'allow',overrideBrowserWindowOptions:{webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true}}};
+      if(new URL(url).origin==='https://github.com' && new URL(url).pathname.startsWith('/Hayabusa015/WorkWork/'))void shell.openExternal(url);
       if(/^https:\/\/(console\.anthropic\.com|platform\.claude\.com)(\/|$)/.test(url))void shell.openExternal(url);
       return {action:'deny'};
     });

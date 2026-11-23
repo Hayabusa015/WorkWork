@@ -1618,3 +1618,9 @@ iframe {
   .row { flex-wrap: wrap; }
   .pipeline-count { position: static; display: block; margin-bottom: 8px; }
 }
+
+#repository-panel details { padding: .85rem 0; border-block-end: 1px solid currentColor; }
+#repository-panel summary { cursor: pointer; font-weight: 600; overflow-wrap: anywhere; }
+#repository-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+#repository-panel label { display: grid; gap: .4rem; margin-block: 1rem; }
+#repository-panel details p { max-width: 82ch; }

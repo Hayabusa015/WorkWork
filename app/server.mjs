@@ -1,3 +1,4 @@
+import {repositoryDesk} from './repository.mjs';
 import http from 'node:http';
 import {recordCharge,balanceSummary,estimateWorkflow,usageCost} from './billing.mjs';
 import {deliverSuggestion,addSuggestionFocus,handToLibrarian} from './suggestions.mjs';
@@ -13,6 +14,7 @@ import {resolveDataDirectory} from './runtime.mjs';
 const exec=promisify(execFile), root=path.dirname(fileURLToPath(import.meta.url)), repo=path.dirname(root);
 process.env.PYTHONUTF8='1';
 const data=process.env.SHULL_DATA_DIR||resolveDataDirectory({appDirectory:root});fs.mkdirSync(data,{recursive:true});
+export const repoDesk = repositoryDesk(repo, data);
 const dbfile=path.join(data,'state.json');
 let db=fs.existsSync(dbfile)?JSON.parse(fs.readFileSync(dbfile,'utf8')):{focus:[],runs:[]};
 db.suggestions??=[];
@@ -72,6 +74,13 @@ run.status=run.audit?.status==='failed'?'Audit needs attention':'Needs teacher r
 export function validateSpec(spec){if(!spec||!['chemistry','physics','geology'].includes(spec.course)||!Array.isArray(spec.sectionsContent))throw Error('Invalid worksheet specification');const scan=v=>{if(typeof v==='string'&&(/(?:file:|https?:|\.\.[/\\])/.test(v)))throw Error('External paths and URLs are not accepted in worksheet specifications');if(v&&typeof v==='object')for(const [k,x]of Object.entries(v)){if(/^(image|src|path|file|imagePath)$/i.test(k)&&x)throw Error('Image file references are not supported yet');scan(x);}};scan(spec);return spec;}
 async function body(req){let b='';for await(const chunk of req){b+=chunk;if(b.length>200000)throw Error('Request too large');}return JSON.parse(b||'{}');}
 export const handler=async(req,res)=>{const send=(code,obj)=>{res.writeHead(code,{'content-type':'application/json','cache-control':'no-store'});res.end(JSON.stringify(obj));};try{if(process.env.SHULL_DESKTOP_TOKEN&&req.headers['x-shull-desktop']!==process.env.SHULL_DESKTOP_TOKEN)return send(403,{error:'Desktop session required'});if(!process.env.VERCEL&&req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`)return send(403,{error:'Invalid host'});if(!process.env.VERCEL&&req.method!=='GET'&&req.headers.origin!==origin&&req.headers.origin!==`http://localhost:${port}`)return send(403,{error:'Invalid origin'});const url=new URL(req.url,origin),p=url.pathname;
+if(p.startsWith('/api/repository/')){
+  if(process.env.VERCEL)return send(404,{error:'Open Repository in the local SHULL OS app.'});
+  if(p==='/api/repository/sync'&&req.method==='GET')return send(200,await repoDesk.sync());
+  if(p==='/api/repository/local'&&req.method==='GET')return send(200,await repoDesk.local());
+  if(p==='/api/repository/decision'&&req.method==='POST')return send(202,await repoDesk.decide(await body(req)));
+  return send(404,{error:'Unknown repository request'});
+}
 if(p==='/interface.js'){res.writeHead(200,{'content-type':'text/javascript'});return res.end(fs.readFileSync(path.join(root,'public/interface.js')));}
 if(p==='/api/maintenance'&&req.method==='POST'){if(!key||!model)throw Error('Connect your Anthropic key and select a model first');if(db.runs.some(r=>['Drafting','Building','Agent review'].includes(r.status)))throw Error('Wait for the current workflow to finish');const run={id:randomUUID(),kind:'maintenance',course:'system',title:'Repository health review',model,created:new Date().toISOString(),status:'Agent review',agents:[]};db.runs.unshift(run);save();send(202,{id:run.id});void maintenance(run);return;}
 
@@ -151,7 +160,7 @@ const preview=p.match(/^\/previews\/([\w.-]+\.png)$/);
 if(preview){const target=path.join(previewDir,preview[1]);if(!target.startsWith(previewDir+path.sep)||!fs.existsSync(target))return send(404,{});res.writeHead(200,{'content-type':'image/png','cache-control':'no-cache'});return fs.createReadStream(target).pipe(res);}
 if(p==='/icon.svg'){res.writeHead(200,{'content-type':'image/svg+xml','cache-control':'no-cache'});return res.end(fs.readFileSync(path.join(root,'public/icon.svg')));}
 if(p==='/badge.png'){res.writeHead(200,{'content-type':'image/png','cache-control':'no-cache'});return res.end(fs.readFileSync(path.join(root,'public/badge.png')));}
-const staticFiles={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/tokens.generated.css':'tokens.generated.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
+const staticFiles={'/repository.js':'repository.js','/':'index.html','/app.js':'app.js','/style.css':'style.css','/tokens.generated.css':'tokens.generated.css'};if(staticFiles[p]){res.writeHead(200,{'content-type':p.endsWith('.js')?'text/javascript':p.endsWith('.css')?'text/css':'text/html','content-security-policy':"default-src 'self'; style-src 'self'; script-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'"});return res.end(fs.readFileSync(path.join(root,'public',staticFiles[p])));}send(404,{error:'Not found'});
 }catch(e){send(400,{error:e.message});}};
 const server=http.createServer(handler);
 export function startServer(requestedPort=port){return new Promise((resolve,reject)=>{server.once('error',reject);server.listen(requestedPort,'127.0.0.1',()=>{server.removeListener('error',reject);port=server.address().port;origin=`http://127.0.0.1:${port}`;resolve(server);});});}

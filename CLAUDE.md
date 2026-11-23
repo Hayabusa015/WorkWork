@@ -111,3 +111,9 @@ own. If a document claims otherwise, it is wrong.
   Repository, tooling and governance work is out of scope. Building first and auditing afterwards
   is not the workflow, and a builder never audits its own build. Scope and reasoning:
   `governance/proposals/SHULL-CHG-0024-overseer-routes-classroom-builds.md`.
+
+When the SessionStart hook lists a desktop implementation request, route it
+to the Secretary under the desktop recorder in `governance/CHANGE_CONTROL.md`.
+Handle it as a separately authorized implementation task, after any report-only
+sweep. Fetch and recheck the exact record first. If blocked, report the reason
+and record it under Verified so Matt sees it on the Repository tab.
