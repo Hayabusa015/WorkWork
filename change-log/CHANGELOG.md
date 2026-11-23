@@ -29,6 +29,9 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0076 | 2026-11-23 | Four validators fixed; CI baseline green | CONFIRMED | `governance/proposals/SHULL-CHG-0076-main-ci-red-four-validators.md` |
+| SHULL-CHG-0075 | 2026-11-23 | Chem U3 notes cues made recall-only | CONFIRMED | `governance/proposals/SHULL-CHG-0075-chem-u3-notes-recall-violations.md` |
+| SHULL-CHG-0074 | 2026-11-23 | Physics 3.7 deck and solutions retired | PARTIAL | `governance/proposals/SHULL-CHG-0074-physics-u3-specs-stale-seven-section-map.md` |
 | SHULL-CHG-0078 | 2026-11-23 | Keep duplicate IDs; validator blocks new reuse | CONFIRMED | `governance/proposals/SHULL-CHG-0078-change-id-collisions-after-allocation-rule.md` |
 | SHULL-CHG-0077 | 2026-11-23 | Desk documents keyed on record filename | CONFIRMED | `governance/proposals/SHULL-CHG-0077-desk-export-keys-collide.md` |
 
