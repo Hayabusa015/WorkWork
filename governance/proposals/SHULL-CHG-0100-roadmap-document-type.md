@@ -18,6 +18,6 @@
 | **Risk** | Low. One naming collision to note: the Chemistry course-level front-of-binder guide is also called a "Roadmap" in `courses/chemistry/DECISIONS.md` ("Matthew's front-of-binder Chemistry Roadmap"). The filenames cannot collide: that one is course-level, a Unit Roadmap always starts `Unit N`. |
 | **Recommendation** | Approve. Builder: `templates/unit-roadmap/`. |
 | **Decision** | Approved by the user in chat, 2026-11-23: "Unit Roadmap", answering "For the Unit Launch page in WorkWork, which filename type should it use?" (offered: Organizer, or a new 'Unit Launch' type). Names the type `Roadmap`; the page is the Unit Roadmap. Recorded by the main session (§4.1). |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `7b9b325` (`standards/NAMING.md` §2 Types list + definition). Builder `templates/unit-roadmap/` in `ca3005b`. Applied by the main session in the 2026-11-23 cloud session; the Secretary agent was not available there as a sub-agent. Review before merging to main. |
+| **Verified** | Yes. `templates/_shull_name.py` produces `Unit 6 Roadmap.pdf`; the U6 page built at one page, `audit_print_ink` 5.10% toner with no fill, `audit_fonts` Archivo only, `validate_tokens` clean for the new folder, `validate_references` OK. |

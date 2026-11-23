@@ -19,9 +19,9 @@
 | **Risk** | Low in the repository. Medium on Drive: if `Section 06.x` folders already exist under the old titles, the Librarian must rename them before anything is filed. Not checked; this session has no Drive access. |
 | **Recommendation** | Approve. |
 | **Decision** | Approved by the user in chat, 2026-11-23: "Yes, update it (Recommended)", answering "WorkWork's chemistry decisions file still lists the old 6 Unit 6 sections. OK to update it to your 4 sections (6.1 Covalent, 6.2 Polyatomic, 6.3 Ionic w/ Transition Metals, 6.4 Acids)?" Recorded by the main session (§4.1). |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `9acfddc` (curriculum map U6 line + decision-log entry). Applied by the main session in the 2026-11-23 cloud session; the Secretary agent was not available there as a sub-agent. Review before merging to main. |
+| **Verified** | Yes. `scripts/validate_codes.py` before and after: Chemistry 90 → 88 valid section codes (6.5, 6.6 retired), no new warnings. `templates/unit-roadmap/build_unit_roadmap.py` reads exactly 6.1–6.4 from the file. Drive folders not checked (no Drive access). |
 
 ## Open question (not part of this record)
 
