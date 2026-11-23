@@ -23,8 +23,22 @@ from _shull_name import document_name, short_title  # noqa: E402
 SKIP = re.compile(r"RETIRED|DROPPED|FOLDED", re.I)
 
 
+TAG = re.compile(r"\s*`([A-Z]+)`")
+
+
+def split_tags(title):
+    """'Spontaneity `EXT`' -> ('Spontaneity', ['EXT']). A backticked word in the curriculum map
+    is a marker (EXT = extension/bonus section), never part of the printed title."""
+    return TAG.sub("", title).strip(), TAG.findall(title)
+
+
+def tag_html(tags):
+    return "".join(f' <span class="tag">{html.escape(t)}</span>' for t in tags)
+
+
 def unit_from_decisions(course, unit):
-    """(phase name, unit title, [(code, title)] of taught sections) from the curriculum map."""
+    """(phase name, unit title, [(code, title, tags)] of taught sections) from the curriculum map.
+    tags is a list such as ['EXT']; the title never carries the backticks."""
     text = (REPO / "courses" / course / "DECISIONS.md").read_text()
     phase = None
     lines = text.splitlines()
@@ -45,7 +59,8 @@ def unit_from_decisions(course, unit):
         for part in " ".join(body).split(" · "):
             m2 = re.match(rf"^({unit}\.\d+)\s+(.+)$", part.strip())
             if m2 and not SKIP.search(part):
-                sections.append((m2.group(1), m2.group(2).strip()))
+                stitle, tags = split_tags(m2.group(2))
+                sections.append((m2.group(1), stitle, tags))
         return phase, title, sections
     raise SystemExit(f"U{unit} is not in courses/{course}/DECISIONS.md. Never build against a code "
                      "that is not there (CLAUDE.md §3).")
@@ -64,27 +79,52 @@ def render(spec):
     course, unit = spec["course"], int(spec["unit"])
     phase, title, sections = unit_from_decisions(course, unit)
 
-    have, want = set(spec["sections"]), {c for c, _ in sections}
+    have, want = set(spec["sections"]), {c for c, _, _ in sections}
     if have != want:
         raise SystemExit(f"spec and DECISIONS.md disagree on U{unit} sections: "
                          f"missing from spec {sorted(want - have)}, not in DECISIONS {sorted(have - want)}")
 
+    # Standards are optional. A spec with none (no "standards" on any section, or null) prints no
+    # standards column, key or legend. A spec with any must carry them on every section, plus the
+    # key, label and source.
+    has_std = any(spec["sections"][c].get("standards") for c in want)
+    if has_std:
+        bare = sorted(c for c in want if not spec["sections"][c].get("standards"))
+        if bare or not spec.get("standards_key"):
+            raise SystemExit(f"U{unit}: standards are all or nothing; sections without standards {bare}, "
+                             f"standards_key {'present' if spec.get('standards_key') else 'missing'}")
+
     words = title.split()
     head = " ".join(words[:-1]) + (" " if len(words) > 1 else "")
     rows = []
-    for code, stitle in sections:
+    for code, stitle, tags in sections:
         s = spec["sections"][code]
         ican = "".join(f"<li>{md(t)}</li>" for t in s["ican"])
-        stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"]["main"]) + \
-               "".join(f'<span class="std sup">{html.escape(c)}</span>' for c in s["standards"].get("support", []))
-        rows.append(f'<tr><td><span class="num">{code}</span><div class="sname">{html.escape(stitle)}</div>'
+        std_td = ""
+        if has_std:
+            stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"]["main"]) + \
+                   "".join(f'<span class="std sup">{html.escape(c)}</span>' for c in s["standards"].get("support", []))
+            std_td = f"<td>{stds}</td>"
+        rows.append(f'<tr><td><span class="num">{code}</span><div class="sname">{html.escape(stitle)}{tag_html(tags)}</div>'
                     f'<div class="focus">{md(s.get("focus", ""))}</div></td>'
-                    f'<td><ul class="ican">{ican}</ul></td><td>{stds}</td></tr>')
-    key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
+                    f'<td><ul class="ican">{ican}</ul></td>{std_td}</tr>')
     prior = "".join(f"<li>{md(p)}</li>" for p in spec["builds_on"])
     measured = "".join(f"<li>{md(m)}</li>" for m in spec["measured"])
     codes = f"U{unit} / S{sections[0][0]}–{sections[-1][0]}" if len(sections) > 1 else f"U{unit} / S{sections[0][0]}"
     course_word = course.title()
+    if has_std:
+        key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
+        cols = '<col style="width:22%"><col style="width:57%"><col style="width:21%">'
+        std_th = f'<th>{html.escape(spec["standards_label"])}</th>'
+        keyblock = (f'<div class="keyblock"><div class="label">{html.escape(spec["standards_source"])}</div>\n'
+                    f'<div class="key">{key}</div>\n'
+                    '<p class="legend"><span class="std main">Bold box</span> main standard · '
+                    '<span class="std sup">Dashed box</span> supporting standard</p></div>\n')
+        bottom_cls = "bottom"
+    else:
+        cols = '<col style="width:28%"><col style="width:72%">'
+        std_th = keyblock = ""
+        bottom_cls = "bottom nostd"
 
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Unit {unit} Roadmap</title>
@@ -100,13 +140,10 @@ def render(spec):
 <div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div></header>
 <section class="intro"><div class="idea"><div class="label">Big Idea</div><p>{md(spec["big_idea"])}</p></div>
 <div class="prior"><div class="label">Builds On</div><ul>{prior}</ul></div></section>
-<table class="sec"><colgroup><col style="width:22%"><col style="width:57%"><col style="width:21%"></colgroup>
-<thead><tr><th>Section</th><th>I Can… (Learning Targets)</th><th>{html.escape(spec["standards_label"])}</th></tr></thead>
+<table class="sec"><colgroup>{cols}</colgroup>
+<thead><tr><th>Section</th><th>I Can… (Learning Targets)</th>{std_th}</tr></thead>
 <tbody>{"".join(rows)}</tbody></table>
-<section class="bottom"><div class="keyblock"><div class="label">{html.escape(spec["standards_source"])}</div>
-<div class="key">{key}</div>
-<p class="legend"><span class="std main">Bold box</span> main standard · <span class="std sup">Dashed box</span> supporting standard</p></div>
-<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
+<section class="{bottom_cls}">{keyblock}<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
 </body></html>''', course, unit, title
 
 

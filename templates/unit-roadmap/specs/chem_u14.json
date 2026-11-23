@@ -1,0 +1,62 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 14,
+  "grades": "Grades 10–12",
+  "big_idea": "Acids and bases are defined by what they do with hydrogen ions. Students describe them with the **Arrhenius and Brønsted–Lowry** definitions, measure them on the **pH** scale, and use neutralization and titration to find an unknown concentration.",
+  "builds_on": [
+    "U6 · S6.4 Naming Acids & Formulas",
+    "U12 · S12.5 Molarity",
+    "Reference packet: strong acids & bases, equations"
+  ],
+  "sections": {
+    "14.1": {
+      "focus": "Arrhenius & Brønsted–Lowry",
+      "ican": [
+        "I can **describe** the properties of acids and bases.",
+        "I can **identify** acids, bases, and conjugate pairs using both definitions."
+      ]
+    },
+    "14.2": {
+      "focus": "Complete vs. partial ionization",
+      "ican": [
+        "I can **explain** the difference between strong and weak acids and bases.",
+        "I can **tell** the difference between a strong acid and a concentrated one."
+      ]
+    },
+    "14.3": {
+      "focus": "The pH scale",
+      "ican": [
+        "I can **calculate** pH, pOH, [H^{+}], and [OH^{−}] from any one of them.",
+        "I can **explain** that each pH unit is a tenfold change in [H^{+}]."
+      ]
+    },
+    "14.4": {
+      "focus": "Acid + base → salt + water",
+      "ican": [
+        "I can **write** a balanced neutralization equation and **name** the salt formed.",
+        "I can **explain** what happens to H^{+} and OH^{−} ions during neutralization."
+      ]
+    },
+    "14.5": {
+      "focus": "Moles of acid and base",
+      "ican": [
+        "I can **use** a balanced neutralization equation to relate moles of acid and base.",
+        "I can **calculate** the volume or concentration needed to neutralize a solution."
+      ]
+    },
+    "14.6": {
+      "focus": "Finding an unknown concentration",
+      "ican": [
+        "I can **explain** how an indicator shows the endpoint of a titration.",
+        "I can **calculate** an unknown concentration from titration data."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

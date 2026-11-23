@@ -1,0 +1,62 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 15,
+  "grades": "Grades 10–12",
+  "big_idea": "Chemical reactions rearrange electrons. Nuclear reactions change the nucleus itself and can turn one element into another. Students explain why some nuclei are unstable, write nuclear equations, use **half-life** to track decay, and weigh the benefits and risks of nuclear technology.",
+  "builds_on": [
+    "U1 · S1.3 Atomic Structure (isotopes)",
+    "U8 · S8.2 Balancing Equations",
+    "Reference packet: half-life equation"
+  ],
+  "sections": {
+    "15.1": {
+      "focus": "Why some nuclei break down",
+      "ican": [
+        "I can **explain** how the ratio of neutrons to protons affects nuclear stability.",
+        "I can **describe** radioactivity as an unstable nucleus giving off particles or energy."
+      ]
+    },
+    "15.2": {
+      "focus": "Alpha, beta & gamma",
+      "ican": [
+        "I can **compare** alpha, beta, and gamma radiation by charge, mass, and penetrating power.",
+        "I can **identify** what material stops each type of radiation."
+      ]
+    },
+    "15.3": {
+      "focus": "Conserving mass number & charge",
+      "ican": [
+        "I can **balance** a nuclear equation by conserving mass number and atomic number.",
+        "I can **identify** the missing particle in a nuclear equation."
+      ]
+    },
+    "15.4": {
+      "focus": "Fraction remaining over time",
+      "ican": [
+        "I can **calculate** how much of a sample is left after a number of half-lives.",
+        "I can **read** a decay graph to find a half-life."
+      ]
+    },
+    "15.5": {
+      "focus": "Splitting and joining nuclei",
+      "ican": [
+        "I can **compare** fission and fusion and **explain** where the energy comes from.",
+        "I can **describe** how a chain reaction is controlled in a nuclear power plant."
+      ]
+    },
+    "15.6": {
+      "focus": "Medicine, energy, dating & safety",
+      "ican": [
+        "I can **describe** uses of radioisotopes in medicine, energy, and dating.",
+        "I can **weigh** the benefits and risks of a nuclear technology using evidence."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

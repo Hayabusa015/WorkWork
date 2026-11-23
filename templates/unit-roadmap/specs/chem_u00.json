@@ -1,0 +1,51 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 0,
+  "grades": "Grades 10–12",
+  "big_idea": "Chemistry is learned at the lab bench as much as at the desk. Before any real chemistry, students learn to name and handle the **equipment**, follow the **safety** rules that protect everyone in the room, and record observations precise enough that someone else could check them.",
+  "builds_on": [
+    "Middle-school science",
+    "No chemistry background expected"
+  ],
+  "sections": {
+    "0.1": {
+      "focus": "Common glassware & tools",
+      "ican": [
+        "I can **identify** common lab equipment by name.",
+        "I can **choose** the right tool to measure, heat, or hold a sample.",
+        "I can **tell** which glassware measures volume accurately and which only holds or estimates it."
+      ]
+    },
+    "0.2": {
+      "focus": "Rules, goggles & emergency equipment",
+      "ican": [
+        "I can **follow** the lab safety rules and explain the reason behind each one.",
+        "I can **locate** the safety equipment in our room and say when each is used.",
+        "I can **say what to do** if there is a spill, broken glass, or a chemical splash."
+      ]
+    },
+    "0.3": {
+      "focus": "Measuring & recording with units",
+      "ican": [
+        "I can **measure** mass, volume, and temperature and record each value with its unit.",
+        "I can **read** a graduated cylinder at the bottom of the meniscus.",
+        "I can **organize** measurements in a labeled data table."
+      ]
+    },
+    "0.4": {
+      "focus": "Observations vs. inferences",
+      "ican": [
+        "I can **tell** an observation from an inference.",
+        "I can **write** specific qualitative and quantitative observations.",
+        "I can **use** observations to identify an unknown by comparing it with known substances."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 2,
+  "grades": "Grades 10–12",
+  "big_idea": "An atom's electrons decide how it behaves. Students move from Bohr's orbits to **energy levels, sublevels and orbitals**, write where every electron goes, and connect electrons dropping between levels to the light atoms give off.",
+  "builds_on": [
+    "U1 · S1.2 History of the Atomic Model",
+    "U1 · S1.3 Atomic Structure",
+    "Reference packet: periodic table"
+  ],
+  "sections": {
+    "2.1": {
+      "focus": "Electrons in fixed energy levels",
+      "ican": [
+        "I can **describe** the Bohr model and what it added to Rutherford's model.",
+        "I can **draw** Bohr diagrams for the first 20 elements.",
+        "I can **explain** why the Bohr model works for hydrogen but not for larger atoms."
+      ]
+    },
+    "2.2": {
+      "focus": "Where electrons can be found",
+      "ican": [
+        "I can **describe** the difference between an energy level, a sublevel, and an orbital.",
+        "I can **state** how many orbitals the s, p, d, and f sublevels have and how many electrons each holds.",
+        "I can **find** how many electrons an energy level can hold."
+      ]
+    },
+    "2.3": {
+      "focus": "Aufbau, Pauli & Hund",
+      "ican": [
+        "I can **write** longhand and noble-gas electron configurations.",
+        "I can **draw** orbital diagrams using the Aufbau principle, the Pauli exclusion principle, and Hund's rule.",
+        "I can **use** the s, p, d, and f blocks of the periodic table to find the filling order."
+      ]
+    },
+    "2.4": {
+      "focus": "Valence electrons, the octet & ions",
+      "ican": [
+        "I can **count** valence electrons from a configuration or from the periodic table.",
+        "I can **explain** why the noble gases are stable and unreactive.",
+        "I can **predict** the ion a main-group atom forms to reach a stable octet."
+      ]
+    },
+    "2.5": {
+      "focus": "Light, energy & line spectra",
+      "ican": [
+        "I can **explain** how electrons moving between energy levels absorb or give off light.",
+        "I can **rank** colors of light by wavelength, frequency, and energy.",
+        "I can **identify** an element by matching its line spectrum to known spectra."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

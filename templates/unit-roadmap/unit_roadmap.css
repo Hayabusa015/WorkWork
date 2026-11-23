@@ -52,3 +52,13 @@ table.sec tr:last-child td { border-bottom: 1.5px solid var(--ink); }
 .assess li { list-style: none; font-size: 8.4pt; margin-bottom: 2px; padding-left: 11px; position: relative; }
 .assess li::before { content: ""; position: absolute; left: 0; top: .45em; width: 5px; height: 5px; border: 1px solid var(--structure); }
 .note { margin-top: 10px; font-size: 7.6pt; color: var(--label); border-top: 1px solid var(--rule-hairline); padding-top: 4px; }
+
+/* Curriculum-map marker such as EXT (extension/bonus section): a small outline tag, never backticks. */
+.tag { display: inline-block; font-family: var(--body); font-size: 8pt; font-weight: 700; letter-spacing: .08em;
+  line-height: 1.2; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 0 3px;
+  vertical-align: 1px; white-space: nowrap; }
+
+/* A spec with no standards: no key block, so the measured box spans the page in two columns. */
+.bottom.nostd .box { flex: 1; }
+.bottom.nostd .assess { display: flex; flex-wrap: wrap; column-gap: 22px; }
+.bottom.nostd .assess li { width: calc(50% - 11px); }

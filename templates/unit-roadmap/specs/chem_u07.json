@@ -1,0 +1,69 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 7,
+  "grades": "Grades 10–12",
+  "big_idea": "Atoms are far too small to count one at a time, so chemists count them in moles. Students use **molar mass** as the bridge between grams, moles, and particles, then use mass data to work out a compound's **formula**.",
+  "builds_on": [
+    "U1 · S1.5 Average Atomic Mass",
+    "U6 · Writing chemical formulas",
+    "Reference packet: periodic table, equations"
+  ],
+  "sections": {
+    "7.1": {
+      "focus": "Scientific notation & unit conversions",
+      "ican": [
+        "I can **write** and **calculate** with numbers in scientific notation.",
+        "I can **set up** a unit conversion so the units cancel."
+      ]
+    },
+    "7.2": {
+      "focus": "Counting particles in moles",
+      "ican": [
+        "I can **explain** that one mole is 6.02 × 10^{23} particles.",
+        "I can **convert** between moles and numbers of atoms, molecules, or formula units."
+      ]
+    },
+    "7.3": {
+      "focus": "Grams per mole from the periodic table",
+      "ican": [
+        "I can **calculate** the molar mass of an element or compound.",
+        "I can **connect** an element's average atomic mass to its molar mass in g/mol."
+      ]
+    },
+    "7.4": {
+      "focus": "Grams ↔ moles ↔ particles",
+      "ican": [
+        "I can **convert** between mass, moles, and particles, including two-step problems.",
+        "I can **check** whether an answer is reasonable from its size and units."
+      ]
+    },
+    "7.5": {
+      "focus": "Mass percent of each element",
+      "ican": [
+        "I can **calculate** the percent by mass of each element from a compound's formula.",
+        "I can **calculate** percent composition from lab mass data."
+      ]
+    },
+    "7.6": {
+      "focus": "Simplest whole-number ratio",
+      "ican": [
+        "I can **find** an empirical formula from percent composition or mass data.",
+        "I can **explain** why an empirical formula shows the lowest ratio of atoms, not the actual molecule."
+      ]
+    },
+    "7.7": {
+      "focus": "From empirical to actual formula",
+      "ican": [
+        "I can **find** a molecular formula from the empirical formula and the molar mass.",
+        "I can **tell** whether a formula is empirical, molecular, or both."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

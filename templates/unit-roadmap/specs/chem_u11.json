@@ -1,0 +1,62 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 11,
+  "grades": "Grades 10–12",
+  "big_idea": "Gas particles are far apart and always moving, and that one model explains how gases behave. Students relate **pressure, volume, temperature** and amount, and use the gas laws to predict what a gas does when one of them changes.",
+  "builds_on": [
+    "U5 · S5.5 Intermolecular Forces",
+    "U7 · S7.4 Mole Conversions",
+    "Reference packet: gas laws, constants"
+  ],
+  "sections": {
+    "11.1": {
+      "focus": "The particle model of a gas",
+      "ican": [
+        "I can **state** the main assumptions of kinetic molecular theory.",
+        "I can **use** the theory to explain gas pressure and how temperature affects particle speed."
+      ]
+    },
+    "11.2": {
+      "focus": "Pressure units & Kelvin temperature",
+      "ican": [
+        "I can **convert** between pressure units: atm, mmHg, and kPa.",
+        "I can **convert** Celsius to Kelvin and **explain** why gas laws need Kelvin."
+      ]
+    },
+    "11.3": {
+      "focus": "Two variables at a time",
+      "ican": [
+        "I can **use** Boyle's, Charles's, and Gay-Lussac's laws to find a changed variable.",
+        "I can **identify** each law as a direct or inverse relationship from a graph or data table."
+      ]
+    },
+    "11.4": {
+      "focus": "P, V & T change together",
+      "ican": [
+        "I can **use** the combined gas law when pressure, volume, and temperature all change.",
+        "I can **show** how each simple gas law comes from the combined law."
+      ]
+    },
+    "11.5": {
+      "focus": "Moles, volume & STP",
+      "ican": [
+        "I can **use** Avogadro's law to relate gas volume to moles.",
+        "I can **use** molar volume (22.4 L at STP) to convert between liters and moles."
+      ]
+    },
+    "11.6": {
+      "focus": "PV = nRT",
+      "ican": [
+        "I can **solve** for any variable in the ideal gas law, choosing R to match the units.",
+        "I can **explain** why real gases stray from ideal behavior at high pressure and low temperature."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

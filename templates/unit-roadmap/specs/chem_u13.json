@@ -1,0 +1,60 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "course": "chemistry",
+  "unit": 13,
+  "grades": "Grades 10–12",
+  "big_idea": "Reactions happen when particles collide hard enough and in the right orientation. Students explain what speeds reactions up, then study reversible reactions that reach **equilibrium** and predict how a system at equilibrium responds when it is disturbed.",
+  "builds_on": [
+    "U9 · S9.3 Enthalpy",
+    "U11 · S11.1 Kinetic Molecular Theory",
+    "U8 · S8.2 Balancing Equations"
+  ],
+  "sections": {
+    "13.1": {
+      "focus": "Collisions, energy & orientation",
+      "ican": [
+        "I can **explain** that particles must collide with enough energy and the right orientation to react.",
+        "I can **read** an energy diagram to find the activation energy.",
+        "I can **explain** why most collisions do not lead to a reaction."
+      ]
+    },
+    "13.2": {
+      "focus": "Temperature, concentration, surface area & catalysts",
+      "ican": [
+        "I can **predict** how temperature, concentration, surface area, and a catalyst change reaction rate.",
+        "I can **explain** each of those effects with collision theory.",
+        "I can **interpret** reaction-rate data from a graph or table."
+      ]
+    },
+    "13.3": {
+      "focus": "Reversible reactions & dynamic balance",
+      "ican": [
+        "I can **explain** that at equilibrium the forward and reverse rates are equal and the reaction has not stopped.",
+        "I can **explain** why equal rates do not mean equal amounts of reactants and products.",
+        "I can **recognize** equilibrium on a graph of concentration over time."
+      ]
+    },
+    "13.4": {
+      "focus": "Concentration, temperature & pressure",
+      "ican": [
+        "I can **predict** which way an equilibrium shifts when a reactant or product is added or removed.",
+        "I can **predict** the shift caused by a temperature change, using ΔH.",
+        "I can **predict** the shift caused by a pressure change in a gas equilibrium."
+      ]
+    },
+    "13.5": {
+      "focus": "Equilibrium in real systems",
+      "ican": [
+        "I can **state** Le Châtelier's principle in my own words.",
+        "I can **apply** it to a real system, such as making ammonia or carrying oxygen in blood.",
+        "I can **explain** why a catalyst does not shift an equilibrium."
+      ]
+    }
+  },
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}
