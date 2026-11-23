@@ -39,7 +39,7 @@
     "14.3": {
       "focus": "The pH scale",
       "ican": [
-        "I can **calculate** pH, pOH, [H^{+}], and [OH^{−}] from any one of them.",
+        "I can **calculate** pH, pOH, [H^{+}], and [OH^{−}].",
         "I can **explain** that each pH unit is a tenfold change in [H^{+}]."
       ],
       "standards": {
@@ -80,7 +80,7 @@
     "14.6": {
       "focus": "Unknown concentration",
       "ican": [
-        "I can **explain** how an indicator shows the endpoint of a titration.",
+        "I can **explain** how an indicator shows the endpoint.",
         "I can **calculate** an unknown concentration from titration data."
       ],
       "standards": {

@@ -15,7 +15,7 @@
       "ican": [
         "I can **classify** matter as an element, compound, or mixture, and a mixture as homogeneous or heterogeneous.",
         "I can **tell** physical from chemical change using evidence.",
-        "I can **explain** how a mixture can be separated by physical means."
+        "I can **explain** how mixtures are separated physically."
       ],
       "standards": {
         "main": [],
@@ -27,7 +27,7 @@
     "1.2": {
       "focus": "Evidence changes models",
       "ican": [
-        "I can **describe** the models of Dalton, Thomson, and Rutherford.",
+        "I can **compare** atomic models from Dalton to Rutherford.",
         "I can **explain** what cathode rays and gold foil revealed.",
         "I can **explain** why scientists replace a model when new evidence does not fit it."
       ],
@@ -39,7 +39,7 @@
       }
     },
     "1.3": {
-      "focus": "Protons, neutrons, electrons & isotopes",
+      "focus": "Protons, neutrons & isotopes",
       "ican": [
         "I can **find** the protons, neutrons, and electrons in an atom or ion from its symbol and mass number.",
         "I can **explain** what makes two atoms isotopes.",
@@ -59,7 +59,7 @@
       "ican": [
         "I can **explain** why average atomic mass is a weighted average, not a simple one.",
         "I can **calculate** average atomic mass from isotope data.",
-        "I can **use** average atomic mass to predict the common isotope."
+        "I can **predict** the most common isotope."
       ],
       "standards": {
         "main": [

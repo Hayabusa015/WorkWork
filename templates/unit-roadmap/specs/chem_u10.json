@@ -29,7 +29,7 @@
       "ican": [
         "I can **convert** moles of one substance to moles of another.",
         "I can **set up** stoichiometry problems so the units cancel.",
-        "I can **report** answers with units and correct significant figures."
+        "I can **report** answers with units and correct sig figs."
       ],
       "standards": {
         "main": [
@@ -43,7 +43,7 @@
       "ican": [
         "I can **solve** grams → moles → moles → grams problems.",
         "I can **solve** problems that start or end with particles.",
-        "I can **check** whether an answer is reasonable from the mole ratio."
+        "I can **check** an answer against the mole ratio."
       ],
       "standards": {
         "main": [
@@ -58,7 +58,7 @@
       "focus": "Which reactant runs out first",
       "ican": [
         "I can **identify** the limiting and excess reactants.",
-        "I can **calculate** the amount of product the limiting reactant makes.",
+        "I can **calculate** how much product can form.",
         "I can **calculate** how much excess reactant is left over."
       ],
       "standards": {
@@ -72,8 +72,8 @@
       "focus": "Expected vs. actual product",
       "ican": [
         "I can **calculate** the theoretical yield of a reaction.",
-        "I can **calculate** percent yield from actual and theoretical yield.",
-        "I can **explain** specific reasons a lab's percent yield is below 100%."
+        "I can **calculate** percent yield from lab data.",
+        "I can **explain** specific reasons yield is below 100%."
       ],
       "standards": {
         "main": [

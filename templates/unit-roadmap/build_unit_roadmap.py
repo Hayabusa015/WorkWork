@@ -22,6 +22,10 @@ from _shull_name import document_name, short_title  # noqa: E402
 
 SKIP = re.compile(r"RETIRED|DROPPED|FOLDED", re.I)
 ABBR = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
+# Body class = course colours. Chemistry roadmaps use the blue pairing: courses/chemistry/DECISIONS.md
+# "Course brand exceptions" table (Unit Roadmap U0–U15 → Blue, SHULL-CHG-0108). The values live in
+# templates/lab/shull-lab-tokens.css (body.chem.pair-blue); change the pairing there or in that table.
+BODY = {"chemistry": "chem pair-blue", "physics": "phys", "geology": "geo"}
 STRETCH_MAX = 30  # px added to one row at most; past that the rest stays at the foot of the page
 
 
@@ -137,7 +141,7 @@ def render(spec):
 <link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
 <link rel="stylesheet" href="../../../templates/_shull_header.css">
 <link rel="stylesheet" href="../../../templates/unit-roadmap/unit_roadmap.css">
-</head><body class="{ {"chemistry": "chem", "physics": "phys", "geology": "geo"}[course] }">
+</head><body class="{BODY[course]}">
 <span class="code-string">SHULL · {ABBR[course]} · U{unit} Unit Roadmap · {codes}</span>
 <header class="sh-head"><div class="sh-left">
 <div class="sh-kick"><span class="sh-chip">U{unit}</span><span class="sh-course"></span> · Unit Roadmap{(" · " + html.escape(phase)) if phase else ""}</div>

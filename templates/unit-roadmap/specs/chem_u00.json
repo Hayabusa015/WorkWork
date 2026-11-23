@@ -13,7 +13,7 @@
       "focus": "Common glassware & tools",
       "ican": [
         "I can **identify** common lab equipment by name.",
-        "I can **choose** the right tool to measure, heat, or hold a sample.",
+        "I can **choose** the right tool for measuring or heating.",
         "I can **tell** which glassware measures volume accurately and which only estimates it."
       ],
       "standards": {
@@ -39,7 +39,7 @@
       "focus": "Measuring with units",
       "ican": [
         "I can **measure** mass, volume, and temperature and record each value with its unit.",
-        "I can **read** a graduated cylinder at the bottom of the meniscus.",
+        "I can **read** a graduated cylinder at the meniscus.",
         "I can **organize** measurements in a labeled data table."
       ],
       "standards": {
