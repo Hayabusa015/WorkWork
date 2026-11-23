@@ -28,8 +28,8 @@
 | **Risk** | **Medium.** The token itself is low risk. The design-rule amendment, the grey-level near-misses and the restatements that need to change make it medium. See §3. |
 | **Recommendation** | Approve, after Matt answers the one question in §5 (confirm the shade). The approval covers the token, the §2b wording, the §2c course text and the §2d generator line. The roadmap builder switch and the rebuild of the 16 roadmaps are a separate classroom job routed through the Overseer (§6). They are **not bundled**. |
 | **Decision** | Approved by the user, 2026-11-23: "B, go with the dark blue" (answering option B: Ice Blue for rules and borders plus a new dark blue for accent text, shade picked by the main session and stated in chat as #066679) |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | SHA pending (the main session commits). Secretary edits: `brand/tokens.json` (token entry without `measured`, `version` 1.2.0, `updated` 2026-11-23), `brand/SHULL_DESIGN_SYSTEM.md` §3, `courses/chemistry/DECISIONS.md` (Course brand exceptions and log entry). The main session runs `measure_tokens.py` and `build_lab_css.py` and makes the four outside edits (§2e). |
 | **Verified** | |
 
 ---

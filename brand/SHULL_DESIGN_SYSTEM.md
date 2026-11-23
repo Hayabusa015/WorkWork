@@ -105,12 +105,18 @@ Every course primary and secondary was selected for a **dark** ground. When whit
 background, four of the six stopped clearing WCAG as text on white and the other two reached
 large-text-only. None passes body text. So:
 
-> **On a light ground, coloured type uses the course's `primaryDeep`.
+> **On a light ground, coloured type uses the course's text-safe deep token: `primaryDeep`, or
+> `secondaryDeep` where the course has one and its `DECISIONS.md` says which documents use it.
 > On a dark ground, coloured type uses `primary` or `secondary`.
 > Neither is ever used as type on the other.**
 
 The display colours are unchanged for every non-type use: fills, highlight blocks, rules, chips, tag
 pills, borders, dividers, and dark-ground accents.
+
+A course with a `secondaryDeep` has a second print pairing: `secondary` for rules, borders and
+outline boxes, and `secondaryDeep` for coloured type. A document uses one pairing throughout and
+never mixes the two. Which documents use the second pairing is a course decision, recorded under
+"Course brand exceptions" in that course's `DECISIONS.md`. SHULL-CHG-0108.
 
 Consult `measured.onWhiteVerdict` and `measured.onAsphaltVerdict` in `tokens.json` before using any
 colour as type. Those fields are computed, not asserted. See SHULL-CHG-0008.

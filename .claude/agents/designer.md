@@ -18,7 +18,7 @@ You build the artifact. You apply the system; you do not invent one.
 
 ## The rules most often broken
 
-- **Colour as type:** on a light ground use the course `primaryDeep`; on a dark ground use `primary`
+- **Colour as type:** on a light ground use the course's text-safe deep token (`primaryDeep`, or `secondaryDeep` on a document type the course's `DECISIONS.md` lists for its second pairing); on a dark ground use `primary`
   or `secondary`. Check `measured.onWhiteVerdict` in `tokens.json` before colouring any text.
   Four of the six display colours **fail** as type on white.
 - **Geology:** Terra Teal and Rust Orange are six grey levels apart. Any categorical use of both

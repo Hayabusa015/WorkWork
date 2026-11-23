@@ -31,7 +31,7 @@ Run `standards/QA_GATE.md` in full.
 - **Render it and look at it.** Then check `pdffonts`: Archivo or Archivo Narrow. DejaVu or
   Liberation means the render used different metrics than the classroom copy will.
 - **Clipped text** at any box, column, or slide edge.
-- **Coloured type on white** using a display colour instead of `primaryDeep`.
+- **Coloured type on white** using a display colour instead of the course's text-safe deep token (`primaryDeep` or `secondaryDeep`), or mixing a course's two pairings on one document.
 - **Grayscale** — would a photocopy still distinguish the categories?
 - **Ink** — any solid fill larger than a small tag, chip, or icon on a print document.
 - **Codes** agreeing across document, filename, and folder path.

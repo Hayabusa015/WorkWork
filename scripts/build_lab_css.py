@@ -63,6 +63,7 @@ css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_lab_css.py - DO N
 }}
 
 body.chem {{ --accent: {c['chemistry']['primaryDeep']['hex']}; --accent-display: {c['chemistry']['primary']['hex']}; --course-name: "Chemistry"; }}
+body.chem.pair-blue {{ --accent: {c['chemistry']['secondaryDeep']['hex']}; --accent-display: {c['chemistry']['secondary']['hex']}; }}
 body.phys {{ --accent: {c['physics']['primaryDeep']['hex']};   --accent-display: {c['physics']['primary']['hex']}; --course-name: "Physics"; }}
 body.geo  {{ --accent: {c['geology']['primaryDeep']['hex']};   --accent-display: {c['geology']['primary']['hex']}; --course-name: "Geology"; }}
 body.neutral {{ --course-name: "Science"; }}
@@ -70,7 +71,10 @@ body.neutral {{ --course-name: "Science"; }}
 /* The rule that makes this safe on paper: --accent is the text-safe deep
    variant and is the ONLY course colour permitted as type on a light ground.
    --accent-display is a fill, rule or marker. Never body text on white.
-   See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008. */
+   See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008.
+   body.chem.pair-blue switches Chemistry to its blue pairing (secondaryDeep as
+   type, secondary as rule). See courses/chemistry/DECISIONS.md, Course brand
+   exceptions (SHULL-CHG-0108). */
 """
 for out in OUTS:
     os.makedirs(os.path.dirname(out), exist_ok=True)

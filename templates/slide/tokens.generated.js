@@ -5,7 +5,7 @@
    whole system is built to prevent. */
 
 module.exports = {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "ground": {
     "white": "FFFFFF",
     "parchment": "EDF0E5",

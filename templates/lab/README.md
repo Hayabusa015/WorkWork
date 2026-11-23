@@ -36,7 +36,7 @@ Structure, wording, blocks, and the locked rules are **untouched**. Only brand v
 | "the print palette is identical for all three courses" | **False now.** The `<body>` course class drives a real accent. |
 
 The `<body class="chem\|phys\|geo">` hook was described in v1.0 as changing "nothing visual today."
-**It now does.** Setting it switches `--accent` to that course's `primaryDeep`.
+**It now does.** Setting it switches `--accent` to that course's `primaryDeep`. `chem pair-blue` switches to Chemistry's blue pairing (SHULL-CHG-0108).
 
 ### Known exception
 
@@ -93,7 +93,7 @@ makes students draw their own tables — the table skeletons on page 2 exist to 
 
 **Colour** — *corrected from the original, which is superseded.* Values come from
 `brand/tokens.json`. White is the ground. Course identity colours apply across all media, not
-projection only. **Coloured type on a light ground uses the course `primaryDeep`** — the display
+projection only. **Coloured type on a light ground uses the course's text-safe deep token** — the display
 colours fail as text on white. The original README's base-palette paragraph and its "Physics
 Kinetic" reference are archived in `brand/palette-archive/`.
 

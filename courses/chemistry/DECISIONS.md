@@ -362,8 +362,23 @@ PROVISIONAL until validated against real classroom pace.
 
 ## Course brand exceptions
 
-**None.** Chemistry's identity colours are `courses.chemistry` in `brand/tokens.json`, inside the
-shared system (SHULL-CHG-0054). This file does not restate them.
+**One: a blue print pairing.** Chemistry's identity colours are `courses.chemistry` in
+`brand/tokens.json`, inside the shared system (SHULL-CHG-0054). This file does not restate them.
+Chemistry has two print pairings (`brand/SHULL_DESIGN_SYSTEM.md` §3):
+
+- **Orange (default):** `primary` for rules, borders and outline boxes; `primaryDeep` for accent
+  text.
+- **Blue:** `secondary` (Ice Blue) for rules, borders and outline boxes; `secondaryDeep` (Ice Blue
+  Deep) for accent text: the headline accent word, kicker, labels and chips.
+
+A document uses one pairing throughout. Every document type not listed below uses orange.
+
+| Document type | Pairing | Since |
+|---|---|---|
+| Unit Roadmap (U0–U15) | Blue | SHULL-CHG-0108 |
+
+Adding a document type to this table is a course decision (a dated log entry). It needs no brand
+change. Energy Orange is not retired.
 
 *Superseded 2026-09-07: this section previously named the base SHULL palette, which is now
 archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
@@ -419,6 +434,15 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-23 — Blue print pairing for Unit Roadmaps
+Chemistry gains a second print pairing: Ice Blue for rules, borders and outline boxes, and Ice Blue
+Deep (a new PROVISIONAL token, `courses.chemistry.secondaryDeep`) for accent text. It is used in
+place of the orange pairing on the document types listed under "Course brand exceptions". The first
+is the Unit Roadmaps, U0–U15. Energy Orange is unchanged and stays the default. Decided by Matt
+2026-11-23 ("B, go with the dark blue").
+Supersedes: "Course brand exceptions" (None), SHULL-CHG-0054.
+Status: CONFIRMED · SHULL-CHG-0108
 
 ### 2026-11-23 — Course Outline filed as a Reference
 A one-page Chemistry Course Outline sits at the front of the class binder. It lists all 16 units by
