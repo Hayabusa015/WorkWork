@@ -27,8 +27,8 @@
 | **Affected Courses** | **Chemistry only.** Physics and Geology have no `secondaryDeep` and are unchanged. The design-system wording becomes general, but it changes nothing for a course without the token. |
 | **Risk** | **Medium.** The token itself is low risk. The design-rule amendment, the grey-level near-misses and the restatements that need to change make it medium. See §3. |
 | **Recommendation** | Approve, after Matt answers the one question in §5 (confirm the shade). The approval covers the token, the §2b wording, the §2c course text and the §2d generator line. The roadmap builder switch and the rebuild of the 16 roadmaps are a separate classroom job routed through the Overseer (§6). They are **not bundled**. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-23: "B, go with the dark blue" (answering option B: Ice Blue for rules and borders plus a new dark blue for accent text, shade picked by the main session and stated in chat as #066679) |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
