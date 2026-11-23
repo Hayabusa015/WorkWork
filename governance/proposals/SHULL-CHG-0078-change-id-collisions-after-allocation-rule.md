@@ -20,8 +20,8 @@ Repeat of: SHULL-CHG-0052
 | **Affected Courses** | None directly. |
 | **Risk** | Medium. Approvals and commits can be attributed to the wrong record. |
 | **Recommendation** | None made. The options differ in how much history they rewrite in references, and that trade-off is Matt's. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Option 1, chosen by the user in chat, 2026-11-23: "option 1 plus the validator", answering the main session's question naming options 1–3 and the duplicate-ID validator (open question 2 and the Researcher's proposed validator). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
