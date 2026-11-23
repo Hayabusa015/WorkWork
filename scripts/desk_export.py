@@ -4,6 +4,10 @@
 The records are authoritative; this only reads them. Output is a JSON list of
 {id, data} objects, one per record, for an ArtifactData batch into the desk's
 `proposals` collection. Run: python3 scripts/desk_export.py [out.json]
+
+Each document is keyed on the record's filename stem, not the bare Change ID,
+because some Change IDs name more than one record (SHULL-CHG-0077). The bare ID
+is kept in `change_id`; `seq` is its integer.
 """
 import json, re, sys
 from pathlib import Path
@@ -37,6 +41,21 @@ def table(body):
     return rows
 
 
+def plain(body):
+    """Read the older `Field:   value` record format, with indented continuation lines."""
+    rows, key = {}, None
+    for line in body.splitlines():
+        m = re.match(r"^([A-Z][A-Za-z ]{1,30}):\s*(.*)$", line)
+        if m:
+            key = m.group(1).strip().lower()
+            rows.setdefault(key, m.group(2).strip())
+        elif key and line.startswith((" ", "\t")) and line.strip():
+            rows[key] = (rows[key] + " " + line.strip()).strip()
+        elif not line.strip():
+            key = None
+    return rows
+
+
 def status_of(raw):
     up = strip_md(raw).upper()
     for s in STATUSES:
@@ -46,7 +65,7 @@ def status_of(raw):
 
 
 def trail(body, key):
-    m = re.search(rf"^{key}:\s*(.+)$", body, re.M)
+    m = re.search(rf"^{key}:[ \t]*(\S.*)$", body, re.M)
     return m.group(1).strip() if m else ""
 
 
@@ -66,16 +85,19 @@ def export():
     for f in sorted(PROPOSALS.glob("SHULL-CHG-*.md")):
         text = f.read_text(encoding="utf-8")
         fm, body = frontmatter(text)
-        rows = table(body)
+        rows = table(body) or plain(body)
         cid = f.name[:14]
+        stem = f.stem
         h1 = re.search(r"^#\s+SHULL-CHG-\d+\s*[—-]\s*(.+)$", body, re.M)
         raw_status = fm.get("status") or rows.get("status") or trail(body, "Status")
         decision = fm.get("decided_by") and f"Approved by {fm['decided_by']}" or ""
         decision = strip_md(rows.get("decision") or trail(body, "Decision") or decision)
-        docs.append({"id": cid, "data": {
-            "id": cid,
+        slug = stem[15:].replace("-", " ").capitalize() if len(stem) > 15 else cid
+        docs.append({"id": stem, "data": {
+            "id": stem,
+            "change_id": cid,
             "seq": int(cid[-4:]),
-            "title": strip_md(fm.get("title") or (h1.group(1) if h1 else cid)),
+            "title": strip_md(fm.get("title") or (h1.group(1) if h1 else rows.get("title") or slug)),
             "status": status_of(raw_status),
             "date": strip_md(fm.get("opened") or rows.get("date") or ""),
             "risk": strip_md(rows.get("risk") or "")[:120],
