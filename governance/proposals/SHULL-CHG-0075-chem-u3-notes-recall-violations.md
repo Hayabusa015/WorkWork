@@ -17,8 +17,8 @@
 | **Affected Courses** | Chemistry. |
 | **Risk** | Medium. Student-facing notes contradict a standing rule. If they are already filed to Drive, those copies are also affected (Drive not checked this run). |
 | **Recommendation** | Fix through the Overseer. Matt may prefer an exception. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "yes approve 0076 and 0075, fix them". |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 

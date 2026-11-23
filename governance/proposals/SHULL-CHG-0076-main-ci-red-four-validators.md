@@ -19,8 +19,8 @@
 | **Affected Courses** | Chemistry (A, B, C), Physics (B, D), Geology (B, D). |
 | **Risk** | Medium. A and D loosen checks; a loose regex can let real defects through. |
 | **Recommendation** | A and D as proposed. B: read from tokens. C: Matt's choice (open question 2). |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "yes approve 0076 and 0075, fix them". |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
