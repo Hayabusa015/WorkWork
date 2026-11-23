@@ -90,7 +90,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the IE trend",
                   "inline": true
                 },
                 {
@@ -138,7 +138,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the electronegativity trend",
                   "inline": true
                 },
                 {
@@ -175,7 +175,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason for the radius trend",
                   "inline": true
                 },
                 {
@@ -197,7 +197,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Reason the ion is smaller",
                   "inline": true
                 }
               ]
@@ -219,7 +219,7 @@
                   "inline": true
                 },
                 {
-                  "prompt": "Why",
+                  "prompt": "Cause of a higher MP or BP",
                   "inline": true
                 },
                 {

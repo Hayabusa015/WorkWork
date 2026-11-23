@@ -75,7 +75,7 @@ spec = {
         block("Ionization energy", "Slide 3 · S3.4", [
           P("Definition (units)", "Energy to remove an electron from a gas atom (kJ/mol)."),
           P("Trend", "Increases across a row → and up a column ↑."),
-          P("Why", "More nuclear pull = harder. More distance and shielding = easier."),
+          P("Reason for the IE trend", "More nuclear pull = harder. More distance and shielding = easier."),
           P("Example: Ca vs. Br, higher IE", "Br. Same period; 15 more protons."),
         ]),
         block("Successive ionization energy", "Slide 4 · S3.4", [
@@ -86,7 +86,7 @@ spec = {
         block("Electro-negativity", "Slide 5 · S3.4", [
           P("Definition (units)", "Pull on shared electrons in a bond (no units)."),
           P("Trend", "Increases across → and up ↑. F highest; noble gases excluded."),
-          P("Why", "More nuclear pull attracts shared electrons; distance and shielding weaken it."),
+          P("Reason for the electronegativity trend", "More nuclear pull attracts shared electrons; distance and shielding weaken it."),
           P("Example: rank S, O, F", "S < O < F"),
         ]),
       ]}],
@@ -99,17 +99,17 @@ spec = {
         block("Atomic radius", "Slide 6 · S3.3", [
           P("Definition (units)", "The size of an atom (pm)."),
           P("Trend", "Increases down a column ↓ and to the left across a row ←."),
-          P("Why", "Down: another energy level. Across: more protons pull inward."),
+          P("Reason for the radius trend", "Down: another energy level. Across: more protons pull inward."),
           P("Example: Ca vs. Br, larger atom", "Ca. Same period; Br has more protons."),
         ]),
         block("Ion size", "Slide 7 · S3.3", [
           P("Magnesium ion vs. atom", "Ion is smaller: 12 → 10 electrons."),
-          P("Why", "Outer level gone; still 12 protons."),
+          P("Reason the ion is smaller", "Outer level gone; still 12 protons."),
         ]),
         block("Melting and boiling points", "Slide 8 · S3.6", [
           P("Definitions (units)", "Melting: solid → liquid. Boiling: liquid → gas. °C."),
           P("Trend", "No single trend. Group 1: both fall. Group 17: both rise."),
-          P("Why", "Stronger attractions need more energy to overcome."),
+          P("Cause of a higher MP or BP", "Stronger attractions need more energy to overcome."),
           P("Example: group 17, highest MP and BP", "Iodine, I₂ (113.7 °C, 184.4 °C)"),
         ]),
         block("Trend summary", "Slide 9 · S3.6", [

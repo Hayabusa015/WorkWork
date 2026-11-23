@@ -57,6 +57,12 @@ neither fetched `origin/main` first and one session's push silently failed witho
 collision was caught only because a later sweep happened to notice the mismatch — this rule is what
 stops that being luck.
 
+**Some IDs already name more than one record, and they stay that way** (SHULL-CHG-0078, option 1:
+nothing renamed or renumbered). Wherever an ID is shared, cite the record by its file path, not the
+bare ID. `scripts/validate_change_ids.py` fails on any new reuse of a number; the existing duplicates
+are allow-listed by filename inside that script, which is the only place the list lives. Adding to
+that allow-list is a governance change and needs its own APPROVED record.
+
 ### Three fields that are not decoration
 
 - **`Supersedes:`** — carried over from the legacy model, where it was described as "what makes

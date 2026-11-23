@@ -44,7 +44,7 @@ jobs:
         run: |
           fail=0
           for v in validate_layers validate_codes validate_tokens validate_agents \
-                   validate_schemas validate_references validate_profiles validate_notes; do
+                   validate_schemas validate_references validate_profiles validate_notes validate_change_ids; do
             echo "::group::$v"
             python scripts/$v.py || fail=1
             echo "::endgroup::"

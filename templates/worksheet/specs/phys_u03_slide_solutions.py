@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write the PHYS U03 slide-solutions key spec: full worked steps for the 20 problem slides
-in the 3.1-3.7 decks (templates/slide/decks/phys_u03_specs.py).
+in the 3.1-3.6 decks (3.7 retired by SHULL-CHG-0074) (templates/slide/decks/phys_u03_specs.py).
 
 The slides carry each final answer; this key carries the steps, for Matt's class prep.
 Handwritten per standards/ANSWER_KEYS.md: math in pencil, stacked fractions, one algebra
@@ -160,39 +160,6 @@ SECTIONS = [
         R("f_{k} = (0.40)(80.3 N) = 32.1 N"),
         R("Fnet = 56.2 N − 32.1 N = 24.1 N"),
         R("a =", F("24.1 N", "10 kg")), ANS("a =", "2.4 m/s^{2} down the slope"),
-    ]),
-]),
-("3.7", "Multi-Body Systems", [
-    q("A 5.0 kg mass and a 3.0 kg mass hang over a pulley (Atwood machine). Find a and the string tension.",
-      "a = 2.45 m/s²; T = 36.8 N", [
-        R("system: Fnet = (5.0 − 3.0)(9.8) = 19.6 N"),
-        R("a =", F("19.6 N", "8.0 kg")), ANS("a =", "2.45 m/s^{2}"),
-        R("3.0 kg alone (moves up): T − m_{2}g = m_{2}a"),
-        R("T = m_{2}(g + a) = (3.0)(9.8 + 2.45)", note="add m_{2}g to both sides"),
-        ANS("T =", "36.8 N"),
-    ]),
-    q("A 4.0 kg block on a frictionless table is tied over a pulley to a 2.0 kg hanging mass. Find a and T.",
-      "a = 3.27 m/s²; T = 13.1 N", [
-        R("only the hanging weight drives it: Fnet = (2.0)(9.8) = 19.6 N"),
-        R("a =", F("19.6 N", "6.0 kg")), ANS("a =", "3.27 m/s^{2}"),
-        R("block alone: T = m_{1}a = (4.0)(3.27)"), ANS("T =", "13.1 N"),
-    ]),
-    q("Repeat the table problem with μk = 0.20 between the 4.0 kg block and the table. Find a and T.",
-      "a = 1.96 m/s²; T = 15.7 N", [
-        R("f_{k} = (0.20)(4.0)(9.8) = 7.84 N"),
-        R("Fnet = 19.6 N − 7.84 N = 11.76 N"),
-        R("a =", F("11.76 N", "6.0 kg")), ANS("a =", "1.96 m/s^{2}"),
-        R("block alone: T − f_{k} = m_{1}a"), R("T = (4.0)(1.96) + 7.84", note="add f_{k} to both sides"),
-        ANS("T =", "15.7 N"),
-    ]),
-    q("A 6.0 kg block on a frictionless 30° incline is tied over a pulley to a 5.0 kg hanging mass. Find a and T.",
-      "a = 1.78 m/s²; T = 40.1 N", [
-        R("hanging pull: (5.0)(9.8) = 49.0 N"),
-        R("block's pull down the slope: (6.0)(9.8) sin 30° = 29.4 N"),
-        SAY("49.0 N > 29.4 N, so the hanging mass goes down and the block goes up the slope."),
-        R("a =", F("49.0 N − 29.4 N", "11.0 kg")), ANS("a =", "1.78 m/s^{2}"),
-        R("hanging mass alone: m_{2}g − T = m_{2}a"),
-        R("T = m_{2}(g − a) = (5.0)(9.8 − 1.78)"), ANS("T =", "40.1 N"),
     ]),
 ]),
 ]

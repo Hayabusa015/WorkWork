@@ -19,10 +19,10 @@
 | **Affected Courses** | Physics. |
 | **Risk** | High. A student-facing deck could print a non-existent section code and title. |
 | **Recommendation** | Matt chooses retire or remap (open question 1). Until then, do not build from any `phys_u03` deck or the slide-solutions spec. |
-| **Decision** | |
-| **Status** | **PENDING** |
-| **Implemented By** | |
-| **Verified** | |
+| **Decision** | Approved by the user, 2026-11-23, answering the main session's question "Approve 0074 too, and if so, what happens to the 3.7 material?" with the option "Approve: retire 3.7" (remove the 3.7 deck spec and the 3.7 slide-solution entries from the repo; they stay in git history). |
+| **Status** | **PARTIALLY IMPLEMENTED** |
+| **Implemented By** | Commit 5921ae2 (2026-11-23): `templates/slide/decks/phys_u03_s03.7.json` removed; the 3.7 block removed from `templates/slide/decks/phys_u03_specs.py` and `templates/worksheet/specs/phys_u03_slide_solutions.py`; `templates/worksheet/specs/phys_u03_slide_solutions.json` regenerated. Both generators reproduced their committed JSON byte-for-byte before the change. |
+| **Verified** | Partly. `validate_codes` OK, 2026-11-23. Still open (pre-existing, found by the Auditor): (1) the combined unit deck `templates/slide/decks/phys_u03_all.json` still carries slides footed "U03 • S03.7" (around lines 661-713), and its note says 3.1-3.7; (2) `templates/slide/decks/phys_u03_combined.py` still loops `range(1, 8)` and can no longer run, because `phys_u03_s03.7.json` is gone; (3) the remaining U3 section specs still use the old section titles (for example 3.3 "Inclined Plane FBDs", 3.6 "Frictional Forces"), not the six-section map in `courses/physics/DECISIONS.md`. Any change to the unit deck is a classroom deliverable and routes through the Overseer. |
 
 Drive was not checked this run (no connector). The seven old U3 Drive folders (03.1–03.7) are a
 separate item already noted on SHULL-CHG-0068.

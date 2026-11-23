@@ -13,17 +13,17 @@ Repeat of: SHULL-CHG-0052
 | **Source** | Janitor finding, weekly sweep 2026-11-22 (`reports/2026-W47/janitor.md` row 8) |
 | **Current Rule** | `governance/CHANGE_CONTROL.md` §2 "Allocating a new Change ID" (added f5e3502, 2026-10-22): "Before writing a new record, `git fetch origin main` and take the next integer after the highest `SHULL-CHG-NNNN` that exists in `governance/proposals/` **on that freshly-fetched `origin/main`**". |
 | **Proposed Rule** | Matt picks one of the options below. Under every option, until it is done: new references cite the record file path, not the bare ID. |
-| **Supersedes** | Nothing until an option is chosen. Option 2 or 3 would supersede the record IDs it renames. |
+| **Supersedes** | Nothing until an option is chosen. Option 2 or 3 would supersede the record IDs it renames. Option 1 chosen: nothing superseded; no record renamed. |
 | **Reason** | Five collisions were allocated after the rule existed: 0054 ×3 (10-23, 10-26, 10-28), 0066 ×2 (11-09, 11-09), 0068 ×3 (11-09, 11-10, 11-10), 0069 ×2 (11-10, 11-11), 0070 ×2 (11-10, 11-11). The 0046 pair straddles the rule (10-21, 10-22) and is acknowledged in CHANGELOG. 0023 ×4 and 0024 ×5 predate the rule. The 2026-11-10 renumber 0058/0059 → 0068/0069 (d0c5392) collided again with records on other branches. CHANGELOG separates records by path; bare-ID commit subjects do not (f716dcf and 7204bf4 are both "SHULL-CHG-0070"). Three colliders are Path A course records, but they carry Change IDs, so the rule applies to them. |
 | **Affected Agents** | Secretary, main session, Janitor and Researcher (all allocate or cite IDs). |
 | **Affected Skills** | weekly-system-review. |
 | **Affected Courses** | None directly. |
 | **Risk** | Medium. Approvals and commits can be attributed to the wrong record. |
 | **Recommendation** | None made. The options differ in how much history they rewrite in references, and that trade-off is Matt's. |
-| **Decision** | |
-| **Status** | **PENDING** |
-| **Implemented By** | |
-| **Verified** | |
+| **Decision** | Option 1, chosen by the user in chat, 2026-11-23: "option 1 plus the validator", answering the main session's question naming options 1–3 and the duplicate-ID validator (open question 2 and the Researcher's proposed validator). |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `scripts/validate_change_ids.py` (commit d98ffa3; wired into `scripts/hook-validate.sh`, `.github/workflows/validate.yml`, and the `scripts/README.md` table). It fails when two files in `governance/proposals/` share a `SHULL-CHG-NNNN` number; the 23 records sharing eight IDs on 2026-11-23 are allow-listed by exact filename inside the script. Plus the new paragraph in `governance/CHANGE_CONTROL.md` §2 "Allocating a new Change ID". No record renamed or renumbered. |
+| **Verified** | 2026-11-23: passes on the 103 current records; fails (exit 1) when a test file duplicated 0098 and when a third 0070 file was added; fails when an allow-listed file was moved away; `validate_references.py` still OK. Test files removed. |
 
 This sweep's main session fetched `origin/main` before allocating 0074–0089 (highest found:
 SHULL-CHG-0073), as §2 requires. Per §2, these IDs are not real until they are pushed to `origin/main`.
@@ -39,8 +39,11 @@ SHULL-CHG-0073), as §2 requires. Per §2, these IDs are not real until they are
 ## Open question
 
 1. Which option? If 2 or 3: confirm the tie-break (earliest dated record keeps the number).
+   *Answered 2026-11-23: option 1, no renumbering, so no tie-break is needed.*
 2. The allocation rule did not prevent these. Should §2 also require a check for an existing file with
    the same ID immediately before push? That would be a separate governance change.
+   *Answered 2026-11-23: by the duplicate-ID validator (`scripts/validate_change_ids.py`) rather than
+   a pre-push check.*
 
 ## Researcher corroboration (2026-W47)
 

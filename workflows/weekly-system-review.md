@@ -53,7 +53,8 @@ mirrors `governance/proposals/*.md` for the user to review and sign off from a b
 reading raw markdown. Git remains authoritative; the dashboard is a synced view plus a decision
 inbox, never a second copy of the truth:
 
-- **`proposals` collection** — one document per Change ID, re-synced from the `.md` files whenever
+- **`proposals` collection** — one document per record file, keyed on the filename stem (some
+  Change IDs name more than one record; SHULL-CHG-0077), re-synced from the `.md` files whenever
   a session runs this workflow. Read-only from the page's side.
 - **`decisions` collection** — written by the user clicking Approve / Reject / Defer on a PENDING
   item. This is new state, not a duplicate: it is the intake for a human decision that doesn't exist
@@ -64,7 +65,9 @@ of this workflow must, after updating `governance/proposals/`:
 
 1. Push the current state of every proposal into the `proposals` collection (`ArtifactData`
    `action: "batch"`, `set` per changed/new document) so the dashboard reflects reality. Build
-   the proposals documents with `python3 scripts/desk_export.py`.
+   the proposals documents with `python3 scripts/desk_export.py`. Delete any `proposals` document whose
+   key no longer matches a record file, and set `meta/sync` (`synced_at`, `records`) in the same
+   pass: the page's "last synced" line reads only that document.
 2. Query the `decisions` collection for `applied: false` documents. Each one is recorded by the
    main session as set out in `governance/CHANGE_CONTROL.md` section 4 item 1 (desk-click path and
    its safeguards; not restated here) — `approved` moves the record to APPROVED (implement only if

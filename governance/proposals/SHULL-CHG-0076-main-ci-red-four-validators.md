@@ -19,10 +19,10 @@
 | **Affected Courses** | Chemistry (A, B, C), Physics (B, D), Geology (B, D). |
 | **Risk** | Medium. A and D loosen checks; a loose regex can let real defects through. |
 | **Recommendation** | A and D as proposed. B: read from tokens. C: Matt's choice (open question 2). |
-| **Decision** | |
-| **Status** | **PENDING** |
-| **Implemented By** | |
-| **Verified** | |
+| **Decision** | Approved by the user in chat, 2026-11-23: "yes approve 0076 and 0075, fix them". Open choices answered by the user the same day, choosing these options in the main session's question: part C "Remove it (Recommended)"; part D "No, use 'Unit N, all sections' (Recommended)"; part B "Named exception (Recommended)". |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Commit ef106b4 (2026-11-23). A: `scripts/validate_codes.py` accepts `REF` as a non-section short-title key. B: `scripts/validate_tokens.py` gets a `NAMED_EXCEPTION` set for `templates/activity/web/operation_periodic_table_demo.template.html`, `templates/reference/build_reference.py` and `templates/reference/vsepr_geometry.py` (colours with no token); `templates/notes/specs/make_geo_u03_figures.py` and `templates/test/figure_vectors.py` now read colours from `brand/tokens.json` (figures rebuilt byte-identical). C: `output/chem-u02/shull-lab-tokens.css` removed. The two flame-test lab HTML snapshots in `output/chem-u02/` linked to it; their rendered PDFs are unaffected; a rebuild should come from the lab template. D: `scripts/validate_layers.py` matches whole words and blanks out section titles that contain a unit title. Beyond the record's wording, stated plainly: it counts a one-word unit title only where it is a label (a heading, a title/unit JSON field, or beside U5 / Unit 5), so the prose "Volcanoes released…" no longer trips it; tested that "## U5 Volcanoes" and "Geologic Time unit" are still flagged. Commit 6829f2f (2026-11-23), D: `phys_u02_unit.json` and `phys_u03_all.json` `sectionTitle` = "Unit 2, all sections" / "Unit 3, all sections" (and the literal in `phys_u03_combined.py`); no builder reads `sectionTitle`, so slides are unaffected. |
+| **Verified** | Yes, 2026-11-23, Auditor run on the working tree: `validate_layers`, `validate_codes`, `validate_tokens`, `validate_agents`, `validate_schemas`, `validate_references`, `validate_profiles`, `validate_notes`, `validate_change_ids` all exit 0; `measure_tokens`, `build_slide_tokens`, `build_app_css` `--check` all exit 0. Open observation, not fixed: the cover headline fields still read "Unit 3\nForces and Motion" and "Unit 2\nMotion in Two Dimensions". `validate_layers` misses them only because of the literal "\n" before the title. |
 
 ## Validator results (2026-11-22, from the Janitor's run)
 
@@ -53,5 +53,9 @@ The Secretary did not re-run these validators.
 ## Open question
 
 1. Part D: may a deck's `sectionTitle` name the unit, or must it name the section?
+
+   **Answer (2026-11-23, Matt):** No. Use "Unit N, all sections". Applied in commit 6829f2f.
 2. Part C: exempt `output/` snapshots in the validator, or remove `output/chem-u02/shull-lab-tokens.css`?
    Removal is a deletion and needs Matt's explicit confirmation.
+
+   **Answer (2026-11-23, Matt):** Remove it. Removed in commit ef106b4.

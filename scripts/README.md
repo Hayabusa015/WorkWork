@@ -10,6 +10,7 @@
 | `validate_references.py` | Any file points at a repository path that does not exist |
 | `validate_notes.py` | A guided-notes spec asks a question instead of stating recall content (SHULL-CHG-0023) |
 | `validate_profiles.py` | A worksheet course profile doesn't actually refuse what it claims to refuse |
+| `validate_change_ids.py` | Two `governance/proposals/` records share a Change ID, beyond the allow-listed duplicates kept under SHULL-CHG-0078 option 1 |
 | `audit_fonts.py` | A rendered PDF uses any face but the brand face |
 | `audit_print_ink.py` | — read-only; measures marked/heavy ink coverage on a print document |
 | `audit_slide_geometry.py` | A built deck has colliding or clipped text, type below the 16pt floor, or a contrast failure |

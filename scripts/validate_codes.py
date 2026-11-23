@@ -95,7 +95,9 @@ def main():
             if code.lower() == "code" or set(code) <= set("-: "):
                 continue
             checked += 1
-            if code[:1].upper() != "U" and code not in valid[c]:
+            # REF keys the course-wide reference packet's short title (SHULL-CHG-0068 reference
+            # packet; accepted as a non-section key by SHULL-CHG-0076 part A).
+            if code[:1].upper() != "U" and code != "REF" and code not in valid[c]:
                 errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} is not a section in this file")
             if len(short) > 20:
                 errors.append(f"courses/{c}/DECISIONS.md Short titles — {code} {short!r} is "
