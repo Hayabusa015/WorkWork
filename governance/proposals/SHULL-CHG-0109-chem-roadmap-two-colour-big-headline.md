@@ -23,8 +23,8 @@
 | **Affected Courses** | Chemistry only in effect. Mechanism wording is general; Physics and Geology list nothing and are unchanged. |
 | **Risk** | Low-medium. Grey: Energy Orange Deep 93 vs Ice Blue ≈172, but no distinction is carried by colour. Header height grows on two one-page documents only; both builders fail unless the page count is 1, so overflow is caught. Title size and rule weight are PROVISIONAL until built. |
 | **Recommendation** | Approve. Builder switch and the rebuild of 16 roadmaps plus the outline are a separate Overseer job (§4), not bundled. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-23: "both colors, outline too, and the big headline" |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 

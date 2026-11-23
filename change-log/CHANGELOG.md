@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0109 | — | Chem roadmaps/outline: mixed pairing, display header | PROPOSED | `governance/proposals/SHULL-CHG-0109-chem-roadmap-two-colour-big-headline.md` |
+| SHULL-CHG-0109 | 2026-11-23 | Chem roadmaps/outline: mixed pairing, display header | APPROVED | `governance/proposals/SHULL-CHG-0109-chem-roadmap-two-colour-big-headline.md` |
 | SHULL-CHG-0108 | 2026-11-23 | Chemistry Ice Blue Deep; blue print pairing | CONFIRMED | `governance/proposals/SHULL-CHG-0108-chem-ice-blue-deep.md` |
 | SHULL-CHG-0107 | 2026-11-23 | Chemistry Ohio standards code list in DECISIONS | PROPOSED | `governance/proposals/SHULL-CHG-0107-chem-ohio-standards-list.md` |
 | SHULL-CHG-0106 | 2026-11-23 | Chemistry Course Outline gets REF title | CONFIRMED | `governance/proposals/SHULL-CHG-0106-chem-course-outline-ref-title.md` |
