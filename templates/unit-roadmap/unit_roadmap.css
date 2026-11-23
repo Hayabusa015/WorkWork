@@ -21,28 +21,8 @@
 /* The two course colours on this page. Repoint these two lines to recolour every roadmap
    (rules, borders, number boxes, standard outlines, dividers | accent text). Token variables only. */
 body { --rm-rule: var(--accent-display); --rm-text: var(--accent); }
-/* TEMPORARY preview of the mixed pairing (SHULL-CHG-0109) until body.chem.pair-mixed is generated:
-   the builder adds pair-blue (Ice Blue rules) and this points accent text back at the root
-   Chemistry primaryDeep. Delete once the generated class exists; the builder stops using it by itself. */
-:root { --rm-root-accent: var(--accent); }
-body.pair-mixed-preview { --rm-text: var(--rm-root-accent); }
-
-/* Roadmap / Course Outline header (Matt's original layout, SHULL-CHG-0109). Scoped to .rm-head; the
-   shared header (templates/_shull_header.css, SHULL-CHG-0101) is not changed for any other document.
-   Outlined chip on its own line, course · phase kicker, large condensed title, teacher block right,
-   one rule under it. Teacher, school and course names still come from the token stylesheet. */
-.rm-head { border-bottom: 1.5pt solid var(--rm-rule); padding-bottom: 5px; margin-bottom: 10px; }
-.rm-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12pt; }
-.rm-chip { display: inline-block; font-family: "Archivo Narrow", var(--display); font-weight: 700; font-size: 8.5pt;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink);
-  border-radius: 3px; padding: 1px 7px 0; }
-.rm-kick { font-size: 8.5pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--rm-text); margin-top: 5px; }
-.rm-meta { flex: 0 0 auto; text-align: right; font-size: 8.5pt; line-height: 1.4; color: var(--label); margin-top: 2px; }
-.rm-meta b { color: var(--ink); }
-.rm-title { font-family: "Archivo Narrow", var(--display); font-weight: 700; font-size: 32pt; line-height: 1.0;
-  text-transform: uppercase; color: var(--ink); margin-top: 1px; }
-.rm-acc { color: var(--rm-text); }
+/* Page-1 header: templates/_shull_header.css with the .sh-display variant (SHULL-CHG-0109). */
+.sh-head { margin-bottom: 10px; }
 body { font-family: var(--body); color: var(--ink); font-size: 10.5pt; line-height: 1.32; background: var(--ground); }
 .code-string { string-set: code content(); display: block; height: 0; line-height: 0; overflow: hidden; font-size: 0; }
 sub, sup { line-height: 0; }

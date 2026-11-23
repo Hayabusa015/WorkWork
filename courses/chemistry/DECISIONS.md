@@ -362,23 +362,29 @@ PROVISIONAL until validated against real classroom pace.
 
 ## Course brand exceptions
 
-**One: a blue print pairing.** Chemistry's identity colours are `courses.chemistry` in
+**Print pairings and header.** Chemistry's identity colours are `courses.chemistry` in
 `brand/tokens.json`, inside the shared system (SHULL-CHG-0054). This file does not restate them.
-Chemistry has two print pairings (`brand/SHULL_DESIGN_SYSTEM.md` §3):
+Chemistry has three print pairings (`brand/SHULL_DESIGN_SYSTEM.md` §3):
 
 - **Orange (default):** `primary` for rules, borders and outline boxes; `primaryDeep` for accent
   text.
 - **Blue:** `secondary` (Ice Blue) for rules, borders and outline boxes; `secondaryDeep` (Ice Blue
-  Deep) for accent text: the headline accent word, kicker, labels and chips.
+  Deep) for accent text. Available; no document type uses it now.
+- **Mixed:** `secondary` (Ice Blue) for rules, borders, number boxes, standard outlines, checkboxes
+  and the measured box; `primaryDeep` (Energy Orange Deep) for accent text: the headline accent
+  word, kicker, labels and chevrons.
 
-A document uses one pairing throughout. Every document type not listed below uses orange.
+A document uses one pairing throughout. Every document type not listed below uses orange and the
+standard header.
 
-| Document type | Pairing | Since |
-|---|---|---|
-| Unit Roadmap (U0–U15) | Blue | SHULL-CHG-0108 |
+| Document type | Pairing | Header | Since |
+|---|---|---|---|
+| Unit Roadmap (U0–U15) | Mixed | Display | SHULL-CHG-0109 (Blue under SHULL-CHG-0108) |
+| Course Outline (Reference - Course Outline) | Mixed | Display | SHULL-CHG-0109 |
 
-Adding a document type to this table is a course decision (a dated log entry). It needs no brand
-change. Energy Orange is not retired.
+Adding a document type to this table is a course decision (a dated log entry) and needs no brand
+change, except that the display header is limited to the types `brand/SHULL_DESIGN_SYSTEM.md` §11
+names. Energy Orange is not retired.
 
 *Superseded 2026-09-07: this section previously named the base SHULL palette, which is now
 archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
@@ -434,6 +440,14 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-23 — Roadmaps and Course Outline: mixed pairing, display header
+Unit Roadmaps (U0–U15) and the Course Outline use the mixed pairing: Energy Orange Deep for accent
+text, Ice Blue for rules, borders and outlines. Both open with the display header (large condensed
+title, chip above the kicker, single rule). The blue pairing and Ice Blue Deep stay available,
+unused. Decided by Matt 2026-11-23 ("both colors, outline too, and the big headline").
+Supersedes: Course brand exceptions, Unit Roadmap → Blue (SHULL-CHG-0108).
+Status: CONFIRMED · SHULL-CHG-0109
 
 ### 2026-11-23 — Blue print pairing for Unit Roadmaps
 Chemistry gains a second print pairing: Ice Blue for rules, borders and outline boxes, and Ice Blue

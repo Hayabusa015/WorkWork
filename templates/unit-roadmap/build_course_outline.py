@@ -70,12 +70,11 @@ def render(course):
 <link rel="stylesheet" href="../../../templates/unit-roadmap/course_outline.css">
 </head><body class="{BODY[course]}">
 <span class="code-string">SHULL SCIENCE · {word.upper()} · U{units[0][0]}–U{units[-1][0]}</span>
-<header class="rm-head"><div class="rm-top"><div class="rm-left">
-<div class="rm-chip">Course Outline</div>
-<div class="rm-kick"><span class="sh-course"></span> · Phases 1–{len(phases)}</div></div>
-<div class="sh-meta rm-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
-<div>{len(units)} units · {n_sections} sections · {GRADES}</div></div></div>
-<h1 class="rm-title">{html.escape(word)} <span class="rm-acc">Roadmap</span></h1></header>
+<header class="sh-head sh-display"><div class="sh-left"><span class="sh-chip">Course Outline</span>
+<div class="sh-kick"><span class="sh-course"></span> · Phases 1–{len(phases)}</div></div>
+<div class="sh-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
+<div>{len(units)} units · {n_sections} sections · {GRADES}</div></div>
+<h1 class="sh-title">{html.escape(word)} <span class="sh-acc">Roadmap</span></h1></header>
 {"".join(bands)}
 <section class="okey"><span><b>U#</b> unit number</span>
 <span><b>S#.#</b> section: 7.4 (written S7.4) is Unit 7, Section 4</span>

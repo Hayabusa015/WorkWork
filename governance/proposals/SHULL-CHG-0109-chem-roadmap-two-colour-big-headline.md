@@ -24,9 +24,9 @@
 | **Risk** | Low-medium. Grey: Energy Orange Deep 93 vs Ice Blue ≈172, but no distinction is carried by colour. Header height grows on two one-page documents only; both builders fail unless the page count is 1, so overflow is caught. Title size and rule weight are PROVISIONAL until built. |
 | **Recommendation** | Approve. Builder switch and the rebuild of 16 roadmaps plus the outline are a separate Overseer job (§4), not bundled. |
 | **Decision** | Approved by the user, 2026-11-23: "both colors, outline too, and the big headline" |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | SHA pending. The Secretary made §2a and §2b (`brand/SHULL_DESIGN_SYSTEM.md` §3 and §11; `brand/tokens.json` `print.header.display`, version 1.3.0) and §2c (`courses/chemistry/DECISIONS.md` exception text and log entry; "Last updated" already 2026-11-23). The main session does §2d, §2e, regeneration and the commit. |
+| **Verified** | Pending. The Secretary acted on committed decision b1a1804 (seen in `.git/logs/HEAD`). Still to do: run `build_lab_css.py` and the validators, and record the final titlePt and rulePt from the designer's build. |
 
 ## 1. Current rule (verbatim)
 

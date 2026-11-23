@@ -23,15 +23,9 @@ from _shull_name import document_name, short_title  # noqa: E402
 SKIP = re.compile(r"RETIRED|DROPPED|FOLDED", re.I)
 ABBR = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
 # Body class = course colours. Chemistry roadmaps and the Course Outline use the mixed pairing
-# (primaryDeep type, secondary rules): courses/chemistry/DECISIONS.md "Course brand exceptions",
-# SHULL-CHG-0109. The values live in templates/lab/shull-lab-tokens.css (body.chem.pair-mixed).
-TOKENS_CSS = REPO / "templates" / "lab" / "shull-lab-tokens.css"
+# (primaryDeep for coloured type, secondary for rules and outlines): courses/chemistry/DECISIONS.md
+# "Course brand exceptions", SHULL-CHG-0109. Values: templates/lab/shull-lab-tokens.css body.chem.pair-mixed.
 CHEM_PAIR = "chem pair-mixed"
-# TEMPORARY until body.chem.pair-mixed is generated: pair-blue supplies the Ice Blue rule colour and
-# unit_roadmap.css (.pair-mixed-preview) points accent text back at the root Chemistry orange.
-CHEM_PREVIEW = "chem pair-blue pair-mixed-preview"
-if "pair-mixed" not in TOKENS_CSS.read_text():
-    CHEM_PAIR = CHEM_PREVIEW
 BODY = {"chemistry": CHEM_PAIR, "physics": "phys", "geology": "geo"}
 STRETCH_MAX = 30  # px added to one row at most; past that the rest stays at the foot of the page
 
@@ -150,12 +144,11 @@ def render(spec):
 <link rel="stylesheet" href="../../../templates/unit-roadmap/unit_roadmap.css">
 </head><body class="{BODY[course]}">
 <span class="code-string">SHULL · {ABBR[course]} · U{unit} Unit Roadmap · {codes}</span>
-<header class="rm-head"><div class="rm-top"><div class="rm-left">
-<div class="rm-chip">U{unit} · Unit Roadmap</div>
-<div class="rm-kick"><span class="sh-course"></span>{(" · " + html.escape(phase)) if phase else ""}</div></div>
-<div class="sh-meta rm-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
-<div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div></div>
-<h1 class="rm-title">{html.escape(head)}<span class="rm-acc">{html.escape(words[-1])}</span></h1></header>
+<header class="sh-head sh-display"><div class="sh-left"><span class="sh-chip">U{unit} · Unit Roadmap</span>
+<div class="sh-kick"><span class="sh-course"></span>{(" · " + html.escape(phase)) if phase else ""}</div></div>
+<div class="sh-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
+<div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div>
+<h1 class="sh-title">{html.escape(head)}<span class="sh-acc">{html.escape(words[-1])}</span></h1></header>
 <section class="intro"><div class="idea"><div class="label">Big Idea</div><p>{md(spec["big_idea"])}</p></div>
 <div class="prior"><div class="label">Builds On</div><ul>{prior}</ul></div></section>
 <table class="sec"><colgroup>{cols}</colgroup>
