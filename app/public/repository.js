@@ -3,7 +3,7 @@ const views = ['Needs Matt', 'In progress', 'Branches', 'Health', 'History'];
 const waiting = r => ['PENDING', 'DEFERRED'].includes(r.status);
 const progress = r => ['APPROVED', 'PARTIALLY IMPLEMENTED'].includes(r.status);
 
-export function startRepository(api, esc) {
+export function startRepository(api, esc, appState = () => ({})) {
   let view = views[0], data, issue = '', loading = false, local = {}, failures = [], timer, lastStart = 0;
   let active = false, notice = '', chosen = '', note = '', action = 'approve', sending = false;
   let expanded = new Set();
@@ -69,6 +69,18 @@ export function startRepository(api, esc) {
         '<h3>Recent failed submissions on this computer</h3>' +
         (failures.map(f => field(f.title + ' · ' + new Date(f.time).toLocaleString(), f.status)).join('') || '<p>None recorded.</p>');
       else body = '<h3>' + esc(view) + ' (' + list.length + ')</h3>' + (list.map(proposal).join('') || '<p>No records in this view.</p>');
+    }
+    if (!current && data && view === 'Needs Matt') {
+      const drafts = (appState()?.runs || []).filter(r => r.kind === 'maintenance')
+        .flatMap(r => (r.agents || []).filter(a => a.role === 'secretary' && a.report)
+          .map(a => ({id: r.id, title: r.title, body: a.report})));
+      const inbox = [...(appState()?.suggestions || []), ...drafts];
+      if (inbox.length) body += '<h3>Secretary drafts on this computer</h3>' +
+        inbox.map(d => details(d.id, d.title, '<pre>' + esc(d.body) + '</pre>')).join('');
+      if (data.branchProposals?.length) body += '<h3>Proposal changes on branches</h3>' +
+        data.branchProposals.map(p => details(p.name + p.file, p.title + ' · ' + p.name,
+          field('Branch status', p.status) + link('blob/' + p.tip + '/' + p.file, 'Read branch version') +
+          ' · ' + link('compare/main...' + encodeURIComponent(p.name), 'Review changes for main'))).join('');
     }
     const healthSummary = data ? '<p><strong>Repository health</strong> · Main checks ' + esc(health?.status || 'unavailable') +
       ' · ' + records.filter(waiting).length + ' awaiting decision · ' + records.filter(progress).length +

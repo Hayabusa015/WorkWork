@@ -1124,7 +1124,7 @@ function show(id) {
    Boot
 \* ------------------------------------------------------------------ */
 
-const repository = startRepository(api, esc);
+const repository = startRepository(api, esc, () => state);
 refresh().then(loadGallery).catch(error);
 
 setInterval(async () => {

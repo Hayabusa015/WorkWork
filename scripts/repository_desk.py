@@ -46,7 +46,7 @@ def snapshot(root):
     cache = Path(root) / "desk-index.json"
     if cache.exists():
         cached = json.loads(cache.read_text(encoding="utf-8"))
-        if tips == cached["tips"] and "decisions" in cached["snapshot"]:
+        if tips == cached["tips"] and "branchProposals" in cached["snapshot"]:
             return {**cached["snapshot"], "synced": datetime.now(timezone.utc).isoformat()}
     notes = json.loads(git(root, "show", sha + ":reports/branch-ledger-notes.json"))
     branches = []
@@ -66,6 +66,22 @@ def snapshot(root):
         blob = info.split()[-1]
         item = record(Path(filename), git(root, "cat-file", "blob", blob))["data"]
         records.append({**item, "blob": blob})
+    branch_proposals = []
+    canonical = {r["file"]: r["blob"] for r in records}
+    for branch in branches:
+        if branch["ahead"] == 0:
+            continue
+        ref = "refs/remotes/origin/" + branch["name"]
+        changed = git(root, "diff", "--name-only", "--diff-filter=AM", sha + "..." + ref, "--", "governance/proposals")
+        for filename in changed.splitlines():
+            if not RECORD.fullmatch(filename):
+                continue
+            blob = git(root, "rev-parse", ref + ":" + filename)
+            if canonical.get(filename) == blob:
+                continue
+            item = record(Path(filename), git(root, "cat-file", "blob", blob))["data"]
+            branch_proposals.append({"name": branch["name"], "file": filename, "title": item["title"],
+                                     "status": item["status"], "tip": git(root, "rev-parse", ref)})
     decisions = []
     for line in git(root, "log", "-30", "--format=%H%x09%s", "--grep=^governance: record user decision on", sha).splitlines():
         commit, title = line.split("\t", 1)
@@ -73,7 +89,7 @@ def snapshot(root):
         for filename in files:
             if RECORD.fullmatch(filename):
                 decisions.append({"commit": commit, "file": filename, "title": title, "status": "recorded"})
-    result = {"decisions": decisions, "main": sha, "records": records, "branches": sorted(branches, key=lambda b: b["date"], reverse=True),
+    result = {"branchProposals": branch_proposals, "decisions": decisions, "main": sha, "records": records, "branches": sorted(branches, key=lambda b: b["date"], reverse=True),
             "synced": datetime.now(timezone.utc).isoformat()}
 
     temp = cache.with_suffix(".tmp")
