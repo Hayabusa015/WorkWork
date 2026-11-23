@@ -36,7 +36,7 @@ Structure, wording, blocks, and the locked rules are **untouched**. Only brand v
 | "the print palette is identical for all three courses" | **False now.** The `<body>` course class drives a real accent. |
 
 The `<body class="chem\|phys\|geo">` hook was described in v1.0 as changing "nothing visual today."
-**It now does.** Setting it switches `--accent` to that course's `primaryDeep`. `chem pair-blue` switches to Chemistry's blue pairing (SHULL-CHG-0108).
+**It now does.** Setting it switches `--accent` to that course's `primaryDeep`. `chem pair-blue` switches to Chemistry's blue pairing (SHULL-CHG-0108). `chem pair-mixed` switches to Chemistry's mixed pairing (SHULL-CHG-0109).
 
 ### Known exception
 

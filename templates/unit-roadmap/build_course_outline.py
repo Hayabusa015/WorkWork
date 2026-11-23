@@ -18,12 +18,12 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(REPO / "templates"))
-from build_unit_roadmap import unit_from_decisions, tag_html  # noqa: E402
+from build_unit_roadmap import unit_from_decisions, tag_html, CHEM_PAIR  # noqa: E402
 from _shull_name import document_name, reference_titles  # noqa: E402
 
 TOPIC = "Course Outline"           # its REF row in the course Short titles table
 GRADES = "Grades 10–12"            # as on every Unit Roadmap spec
-BODY = {"chemistry": "chem", "physics": "phys", "geology": "geo"}
+BODY = {"chemistry": CHEM_PAIR, "physics": "phys", "geology": "geo"}   # same pairing as the roadmaps (SHULL-CHG-0109)
 
 
 def course_map(course):
@@ -70,11 +70,12 @@ def render(course):
 <link rel="stylesheet" href="../../../templates/unit-roadmap/course_outline.css">
 </head><body class="{BODY[course]}">
 <span class="code-string">SHULL SCIENCE · {word.upper()} · U{units[0][0]}–U{units[-1][0]}</span>
-<header class="sh-head"><div class="sh-left">
-<div class="sh-kick"><span class="sh-chip">Course Outline</span><span class="sh-course"></span></div>
-<h1 class="sh-title">{html.escape(word)} <span class="sh-acc">Roadmap</span></h1></div>
-<div class="sh-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
-<div>{len(units)} units · {n_sections} sections · {GRADES}</div></div></header>
+<header class="rm-head"><div class="rm-top"><div class="rm-left">
+<div class="rm-chip">Course Outline</div>
+<div class="rm-kick"><span class="sh-course"></span> · Phases 1–{len(phases)}</div></div>
+<div class="sh-meta rm-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
+<div>{len(units)} units · {n_sections} sections · {GRADES}</div></div></div>
+<h1 class="rm-title">{html.escape(word)} <span class="rm-acc">Roadmap</span></h1></header>
 {"".join(bands)}
 <section class="okey"><span><b>U#</b> unit number</span>
 <span><b>S#.#</b> section: 7.4 (written S7.4) is Unit 7, Section 4</span>

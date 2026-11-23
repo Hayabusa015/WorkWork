@@ -9,14 +9,14 @@
 .ph { font-size: 8pt; }
 
 .phase { margin-top: 9px; }
-.ph { display: flex; justify-content: space-between; border-top: 1.5px solid var(--ink); padding-top: 3px;
-  font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+.ph { display: flex; justify-content: space-between; border-top: 1.5px solid var(--rm-rule); padding-top: 3px;
+  font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--rm-text); }
 .ph .rng { color: var(--structure); }
 .units { display: flex; gap: 12px; margin-top: 5px; }
 .unit { flex: 1 1 0; min-width: 0; }
 .uh { display: flex; justify-content: space-between; align-items: center; }
 .ub { font-family: "Archivo Narrow", var(--display); font-weight: 700; font-size: 11pt; line-height: 1;
-  border: 1.5px solid var(--ink); border-radius: 3px; padding: 3px 5px 2px; }
+  border: 1.5px solid var(--rm-rule); border-radius: 3px; padding: 3px 5px 2px; }
 .cnt { font-size: 8pt; color: var(--label); }
 .ut { font-weight: 700; font-size: 9.2pt; line-height: 1.2; margin: 4px 0 3px; }
 .secs li { list-style: none; font-size: 8.4pt; line-height: 1.26; padding-left: 26px; text-indent: -26px; margin-bottom: 1.5px; }
@@ -26,4 +26,4 @@
 .okey { display: flex; gap: 22px; margin-top: 12px; border-top: 1px solid var(--rule-hairline); padding-top: 6px;
   font-size: 8.4pt; color: var(--label); }
 .okey b { color: var(--ink); margin-right: 4px; }
-.okey b.tag { color: var(--accent); }
+.okey b.tag { color: var(--rm-text); }
