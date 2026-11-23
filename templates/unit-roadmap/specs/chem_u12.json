@@ -3,11 +3,10 @@
   "course": "chemistry",
   "unit": 12,
   "grades": "Grades 10–12",
-  "big_idea": "Most chemistry in labs and in living things happens in solution. Students explain dissolving at the particle level, read **solubility** data, and use **molarity** to make solutions and to do stoichiometry with them.",
+  "big_idea": "Most chemistry in labs and living things happens in solution. Students explain dissolving, read **solubility** data, and use **molarity** in calculations.",
   "builds_on": [
     "U5 · S5.5 Intermolecular Forces",
-    "U10 · S10.2 Stoichiometric Calculations",
-    "Reference packet: solubility grid, equations"
+    "U10 · S10.2 Stoichiometric Calculations"
   ],
   "sections": {
     "12.1": {
