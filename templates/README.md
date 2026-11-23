@@ -11,6 +11,7 @@ detail lives there, not here.
 | `lab/` | Lab handout and teacher prep-and-key (HTML to PDF) | `lab/README.md` |
 | `practice/` | Course activity prototypes | `practice/build_practice.py` |
 | `snow_day/` | Snow-day packets | `snow_day/build_snow_day_docx.py` |
+| `unit-roadmap/` | One-page Unit Roadmap at the front of each unit's binder section (PDF) | `unit-roadmap/README.md` |
 
 `_shull_docx.py`, `_shull_name.py` and `shull_name.cjs` are shared helpers: document furniture and
 the filename rule from `standards/NAMING.md`.
