@@ -10,7 +10,7 @@
     "Reference packet: periodic table, polyatomic ions"
   ],
   "standards_label": "Ohio Standards",
-  "standards_source": "Ohio Learning Standards for Science (2018) · Chemistry",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
   "sections": {
     "6.1": {
       "focus": "Molecular compounds & prefixes",
@@ -28,7 +28,7 @@
         "I can **identify** common polyatomic ions by name, formula, and charge, using the reference packet when needed.",
         "I can **recognize** patterns in oxyanion names ([[-ate / -ite,]] [[per- / hypo-]])."
       ],
-      "standards": {"main": ["C.PM.3"], "support": ["C.PM.4"]}
+      "standards": {"main": ["C.PM.4"], "support": ["C.PM.3"]}
     },
     "6.3": {
       "focus": "Charge balance & the Stock system",
@@ -51,7 +51,7 @@
   },
   "standards_key": [
     ["C.PM.2", "Periodic table", "properties and trends; used here to predict ion charges."],
-    ["C.PM.3", "Chemical bonding", "ionic, polar/nonpolar covalent, metallic bonding; polyatomic ions."],
+    ["C.PM.3", "Chemical bonding", "ionic and polar/covalent bonds; metallic bonding also introduced."],
     ["C.PM.4", "Representing compounds", "formula writing, nomenclature, models and shapes."],
     ["C.IM.1", "Chemical reactions", "acids/bases. 6.4 introduces acid names; acid–base chemistry is taught in Unit 14."]
   ],

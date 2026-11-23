@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 4,
   "grades": "Grades 10–12",
@@ -13,46 +13,112 @@
     "4.1": {
       "focus": "Stability, energy & the octet rule",
       "ican": [
-        "I can **explain** that atoms bond because bonded atoms have lower energy than separate ones.",
+        "I can **explain** that bonded atoms have lower energy than separate atoms.",
         "I can **use** the octet rule to predict how many electrons an atom gains, loses, or shares."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
     },
     "4.2": {
       "focus": "Electron transfer & ionic compounds",
       "ican": [
-        "I can **describe** an ionic bond as the attraction between oppositely charged ions formed by electron transfer.",
-        "I can **connect** ionic bonding to high melting points, brittle crystals, and conducting when melted or dissolved."
-      ]
+        "I can **describe** an ionic bond as the attraction between ions formed by electron transfer.",
+        "I can **connect** ionic bonding to high melting points and brittle crystals."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
     },
     "4.3": {
       "focus": "Shared electron pairs",
       "ican": [
-        "I can **describe** a covalent bond as a pair of electrons shared between two nonmetal atoms.",
+        "I can **describe** a covalent bond as a pair of electrons shared by two nonmetals.",
         "I can **tell** single, double, and triple bonds apart by the number of shared pairs."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.4"
+        ]
+      }
     },
     "4.4": {
       "focus": "A sea of electrons",
       "ican": [
         "I can **describe** metallic bonding as metal cations in a sea of delocalized electrons.",
         "I can **use** that model to explain why metals conduct and can be hammered into shape."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
     },
     "4.5": {
       "focus": "Using EN difference to classify bonds",
       "ican": [
         "I can **calculate** the electronegativity difference between two bonded atoms.",
-        "I can **classify** a bond as nonpolar covalent, polar covalent, or ionic from that difference."
-      ]
+        "I can **classify** a bond as nonpolar covalent, polar covalent, or ionic."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.2"
+        ]
+      }
     },
     "4.6": {
       "focus": "Partial charges & dipole arrows",
       "ican": [
         "I can **draw** a dipole arrow on a polar bond and **label** its δ+ and δ− ends.",
         "I can **rank** bonds from least to most polar."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.2",
+      "Periodic table",
+      "properties and trends."
+    ],
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

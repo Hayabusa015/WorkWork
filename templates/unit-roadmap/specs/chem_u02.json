@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 2,
   "grades": "Grades 10–12",
@@ -16,23 +16,45 @@
         "I can **describe** the Bohr model and what it added to Rutherford's model.",
         "I can **draw** Bohr diagrams for the first 20 elements.",
         "I can **explain** why the Bohr model works for hydrogen but not for larger atoms."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": [
+          "C.PM.2"
+        ]
+      }
     },
     "2.2": {
       "focus": "Where electrons can be found",
       "ican": [
         "I can **describe** the difference between an energy level, a sublevel, and an orbital.",
-        "I can **state** how many orbitals the s, p, d, and f sublevels have and how many electrons each holds.",
+        "I can **state** the number of orbitals and electrons in the s, p, d, and f sublevels.",
         "I can **find** how many electrons an energy level can hold."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": []
+      }
     },
     "2.3": {
       "focus": "Aufbau, Pauli & Hund",
       "ican": [
         "I can **write** longhand and noble-gas electron configurations.",
-        "I can **draw** orbital diagrams using the Aufbau principle, the Pauli exclusion principle, and Hund's rule.",
+        "I can **draw** orbital diagrams using the Aufbau principle, Pauli exclusion, and Hund's rule.",
         "I can **use** the s, p, d, and f blocks of the periodic table to find the filling order."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": [
+          "C.PM.2"
+        ]
+      }
     },
     "2.4": {
       "focus": "Valence electrons, the octet & ions",
@@ -40,7 +62,15 @@
         "I can **count** valence electrons from a configuration or from the periodic table.",
         "I can **explain** why the noble gases are stable and unreactive.",
         "I can **predict** the ion a main-group atom forms to reach a stable octet."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
     },
     "2.5": {
       "focus": "Light, energy & line spectra",
@@ -48,9 +78,34 @@
         "I can **explain** how electrons moving between energy levels absorb or give off light.",
         "I can **rank** colors of light by wavelength, frequency, and energy.",
         "I can **identify** an element by matching its line spectrum to known spectra."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.2",
+      "Periodic table",
+      "properties and trends."
+    ],
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

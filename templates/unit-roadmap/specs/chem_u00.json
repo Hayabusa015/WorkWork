@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 0,
   "grades": "Grades 10–12",
@@ -14,8 +14,14 @@
       "ican": [
         "I can **identify** common lab equipment by name.",
         "I can **choose** the right tool to measure, heat, or hold a sample.",
-        "I can **tell** which glassware measures volume accurately and which only holds or estimates it."
-      ]
+        "I can **tell** which glassware measures volume accurately and which only estimates it."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.5"
+        ]
+      }
     },
     "0.2": {
       "focus": "Rules, goggles & emergency equipment",
@@ -23,7 +29,11 @@
         "I can **follow** the lab safety rules and explain the reason behind each one.",
         "I can **locate** the safety equipment in our room and say when each is used.",
         "I can **say what to do** if there is a spill, broken glass, or a chemical splash."
-      ]
+      ],
+      "standards": {
+        "main": [],
+        "support": []
+      }
     },
     "0.3": {
       "focus": "Measuring & recording with units",
@@ -31,17 +41,36 @@
         "I can **measure** mass, volume, and temperature and record each value with its unit.",
         "I can **read** a graduated cylinder at the bottom of the meniscus.",
         "I can **organize** measurements in a labeled data table."
-      ]
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.5"
+        ]
+      }
     },
     "0.4": {
       "focus": "Observations vs. inferences",
       "ican": [
         "I can **tell** an observation from an inference.",
         "I can **write** specific qualitative and quantitative observations.",
-        "I can **use** observations to identify an unknown by comparing it with known substances."
-      ]
+        "I can **use** observations to match an unknown to a known substance."
+      ],
+      "standards": {
+        "main": [],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.5",
+      "Quantifying matter",
+      "SI units, significant figures, dimensional analysis, the mole, molar mass."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

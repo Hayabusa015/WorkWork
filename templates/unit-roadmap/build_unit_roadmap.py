@@ -102,7 +102,7 @@ def render(spec):
         ican = "".join(f"<li>{md(t)}</li>" for t in s["ican"])
         std_td = ""
         if has_std:
-            stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"]["main"]) + \
+            stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"].get("main", [])) + \
                    "".join(f'<span class="std sup">{html.escape(c)}</span>' for c in s["standards"].get("support", []))
             std_td = f"<td>{stds}</td>"
         rows.append(f'<tr><td><span class="num">{code}</span><div class="sname">{html.escape(stitle)}{tag_html(tags)}</div>'
@@ -116,15 +116,24 @@ def render(spec):
         key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
         cols = '<col style="width:22%"><col style="width:57%"><col style="width:21%">'
         std_th = f'<th>{html.escape(spec["standards_label"])}</th>'
+        # The legend names only the box kinds this page uses (a unit can have supports and no main).
+        kinds = []
+        if any(spec["sections"][c]["standards"].get("main") for c in want):
+            kinds.append('<span class="std main">Bold box</span> main standard')
+        if any(spec["sections"][c]["standards"].get("support") for c in want):
+            kinds.append('<span class="std sup">Dashed box</span> supporting standard')
+        note = f'<p class="stdnote">{md(spec["standards_note"])}</p>' if spec.get("standards_note") else ""
         keyblock = (f'<div class="keyblock"><div class="label">{html.escape(spec["standards_source"])}</div>\n'
                     f'<div class="key">{key}</div>\n'
-                    '<p class="legend"><span class="std main">Bold box</span> main standard · '
-                    '<span class="std sup">Dashed box</span> supporting standard</p></div>\n')
+                    f'<p class="legend">{" · ".join(kinds)}</p>{note}</div>\n')
         bottom_cls = "bottom"
+        tail_note = ""
     else:
         cols = '<col style="width:28%"><col style="width:72%">'
         std_th = keyblock = ""
         bottom_cls = "bottom nostd"
+        # A unit with no content statement can say so in one line under the measured box.
+        tail_note = f'<p class="stdnote">{md(spec["standards_note"])}</p>' if spec.get("standards_note") else ""
 
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Unit {unit} Roadmap</title>
@@ -143,7 +152,7 @@ def render(spec):
 <table class="sec"><colgroup>{cols}</colgroup>
 <thead><tr><th>Section</th><th>I Can… (Learning Targets)</th>{std_th}</tr></thead>
 <tbody>{"".join(rows)}</tbody></table>
-<section class="{bottom_cls}">{keyblock}<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
+<section class="{bottom_cls}">{keyblock}<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>{tail_note}
 </body></html>''', course, unit, title
 
 

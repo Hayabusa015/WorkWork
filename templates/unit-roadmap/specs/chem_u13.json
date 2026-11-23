@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 13,
   "grades": "Grades 10–12",
@@ -16,7 +16,13 @@
         "I can **explain** that particles must collide with enough energy and the right orientation to react.",
         "I can **read** an energy diagram to find the activation energy.",
         "I can **explain** why most collisions do not lead to a reaction."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "13.2": {
       "focus": "Temperature, concentration, surface area & catalysts",
@@ -24,7 +30,13 @@
         "I can **predict** how temperature, concentration, surface area, and a catalyst change reaction rate.",
         "I can **explain** each of those effects with collision theory.",
         "I can **interpret** reaction-rate data from a graph or table."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "13.3": {
       "focus": "Reversible reactions & dynamic balance",
@@ -32,7 +44,13 @@
         "I can **explain** that at equilibrium the forward and reverse rates are equal and the reaction has not stopped.",
         "I can **explain** why equal rates do not mean equal amounts of reactants and products.",
         "I can **recognize** equilibrium on a graph of concentration over time."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "13.4": {
       "focus": "Concentration, temperature & pressure",
@@ -40,7 +58,13 @@
         "I can **predict** which way an equilibrium shifts when a reactant or product is added or removed.",
         "I can **predict** the shift caused by a temperature change, using ΔH.",
         "I can **predict** the shift caused by a pressure change in a gas equilibrium."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "13.5": {
       "focus": "Equilibrium in real systems",
@@ -48,9 +72,24 @@
         "I can **state** Le Châtelier's principle in my own words.",
         "I can **apply** it to a real system, such as making ammonia or carrying oxygen in blood.",
         "I can **explain** why a catalyst does not shift an equilibrium."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

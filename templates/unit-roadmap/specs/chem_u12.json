@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 12,
   "grades": "Grades 10–12",
@@ -15,51 +15,122 @@
       "ican": [
         "I can **identify** the solute and the solvent in a solution.",
         "I can **explain** dissolving at the particle level using “like dissolves like.”"
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.IM.3"
+        ]
+      }
     },
     "12.2": {
       "focus": "Saturation & solubility curves",
       "ican": [
         "I can **read** a solubility curve to find how much solute dissolves at a given temperature.",
         "I can **classify** a solution as unsaturated, saturated, or supersaturated."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": []
+      }
     },
     "12.3": {
       "focus": "How much dissolves vs. how fast",
       "ican": [
         "I can **explain** how temperature and pressure affect the solubility of solids and gases.",
         "I can **tell** what changes how much dissolves from what changes how fast it dissolves."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.IM.1"
+        ]
+      }
     },
     "12.4": {
       "focus": "Ions that carry current",
       "ican": [
         "I can **classify** a substance as a strong electrolyte, weak electrolyte, or nonelectrolyte.",
         "I can **write** the ions an ionic compound forms when it dissolves."
-      ]
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.6",
+          "C.PM.3"
+        ]
+      }
     },
     "12.5": {
       "focus": "Moles of solute per liter",
       "ican": [
         "I can **calculate** molarity from moles or grams of solute and the volume of solution.",
         "I can **describe** how to prepare a solution of a given molarity."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     },
     "12.6": {
       "focus": "M_{1}V_{1} = M_{2}V_{2}",
       "ican": [
         "I can **solve** dilution problems with M_{1}V_{1} = M_{2}V_{2}.",
         "I can **explain** why the moles of solute stay the same when a solution is diluted."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     },
     "12.7": {
       "focus": "Molarity in reaction problems",
       "ican": [
         "I can **use** molarity and volume to find moles in a stoichiometry problem.",
         "I can **calculate** the mass of precipitate formed when two solutions react."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ],
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ],
+    [
+      "C.IM.3",
+      "Stoichiometry",
+      "molar calculations; solutions; limiting reagents."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

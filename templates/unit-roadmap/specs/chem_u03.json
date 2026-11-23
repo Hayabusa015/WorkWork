@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 3,
   "grades": "Grades 10–12",
@@ -13,46 +13,110 @@
     "3.1": {
       "focus": "Periods, groups & named families",
       "ican": [
-        "I can **locate** periods, groups, and the alkali metals, alkaline earth metals, halogens, and noble gases.",
+        "I can **locate** periods, groups, and named families such as the halogens.",
         "I can **explain** why elements in the same group have similar properties."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
     },
     "3.2": {
       "focus": "Properties by region of the table",
       "ican": [
         "I can **locate** metals, nonmetals, and metalloids on the periodic table.",
         "I can **classify** an element from properties such as luster, conductivity, and malleability."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": []
+      }
     },
     "3.3": {
       "focus": "Size trends for atoms and ions",
       "ican": [
         "I can **describe** how atomic radius changes across a period and down a group.",
         "I can **compare** the size of an ion with the size of its neutral atom."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": []
+      }
     },
     "3.4": {
       "focus": "Holding and attracting electrons",
       "ican": [
         "I can **describe** the ionization energy and electronegativity trends.",
-        "I can **use** successive ionization energies to find how many valence electrons an atom has."
-      ]
+        "I can **use** successive ionization energies to find an atom's valence electrons."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
     },
     "3.6": {
       "focus": "Nuclear charge & shielding",
       "ican": [
         "I can **explain** periodic trends using nuclear charge, energy level, and shielding.",
-        "I can **predict** and **justify** which of two elements is larger or holds its electrons more tightly."
-      ]
+        "I can **predict** and **justify** which of two atoms is larger or harder to ionize."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
     },
     "3.7": {
       "focus": "Gaining and losing electrons",
       "ican": [
         "I can **predict** the charge of a main-group ion from the element's group.",
         "I can **write** the symbol and electron configuration of a main-group ion."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.2",
+          "C.PM.1"
+        ]
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.2",
+      "Periodic table",
+      "properties and trends."
+    ],
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

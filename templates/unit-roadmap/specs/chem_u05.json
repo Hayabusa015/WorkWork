@@ -1,9 +1,9 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 5,
   "grades": "Grades 10–12",
-  "big_idea": "A molecule's shape decides how it behaves. Students draw **Lewis structures**, use them to predict a molecule's 3-D shape and polarity, and explain how the **forces between molecules** set properties like boiling point.",
+  "big_idea": "A molecule's shape decides how it behaves. Students draw **Lewis structures**, use them to predict 3-D shape and polarity, and explain how **forces between molecules** set properties like boiling point.",
   "builds_on": [
     "U4 · S4.3 Covalent Bonding",
     "U4 · S4.6 Bond Polarity",
@@ -15,44 +15,106 @@
       "ican": [
         "I can **draw** Lewis structures, including molecules with double and triple bonds.",
         "I can **check** a Lewis structure by counting total valence electrons and octets."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
     },
     "5.2": {
       "focus": "Electron groups push apart",
       "ican": [
-        "I can **explain** that electron groups around a central atom spread as far apart as possible.",
-        "I can **count** bonding groups and lone pairs on a central atom and **write** its AXE notation."
-      ]
+        "I can **explain** that electron groups repel and spread as far apart as possible.",
+        "I can **count** bonding groups and lone pairs and **write** the AXE notation."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": []
+      }
     },
     "5.3": {
       "focus": "Shapes and bond angles",
       "ican": [
         "I can **predict** a molecule's shape and bond angle from its Lewis structure.",
         "I can **explain** why lone pairs squeeze bond angles, as in water and ammonia."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": []
+      }
     },
     "5.4": {
       "focus": "Bond polarity plus shape",
       "ican": [
         "I can **decide** whether a molecule is polar by checking its bonds and its shape.",
         "I can **explain** why CO_{2} is nonpolar even though its bonds are polar."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.4",
+          "C.PM.6"
+        ]
+      }
     },
     "5.5": {
       "focus": "London, dipole–dipole & hydrogen bonding",
       "ican": [
-        "I can **identify** the intermolecular forces a substance has and explain where each comes from.",
+        "I can **identify** the intermolecular forces in a substance and explain each one.",
         "I can **tell** a bond inside a molecule from a force between molecules."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": []
+      }
     },
     "5.6": {
       "focus": "Why boiling points differ",
       "ican": [
-        "I can **predict** which of two substances has the higher boiling point from its intermolecular forces.",
+        "I can **use** intermolecular forces to predict which of two substances boils higher.",
         "I can **use** boiling-point data to compare the strength of intermolecular forces."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

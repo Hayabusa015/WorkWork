@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 10,
   "grades": "Grades 10–12",
@@ -16,7 +16,13 @@
         "I can **write** mole ratios from the coefficients of a balanced equation.",
         "I can **explain** why coefficients compare moles, not grams.",
         "I can **show** a mole ratio with a particle diagram."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     },
     "10.2": {
       "focus": "Moles of one substance to moles of another",
@@ -24,7 +30,13 @@
         "I can **convert** moles of one substance to moles of another with a mole ratio.",
         "I can **set up** stoichiometry problems so the units cancel.",
         "I can **report** answers with units and correct significant figures."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     },
     "10.3": {
       "focus": "Grams, particles & multi-step conversions",
@@ -32,7 +44,15 @@
         "I can **solve** mass-to-mass problems: grams → moles → moles → grams.",
         "I can **solve** problems that start or end with particles.",
         "I can **check** whether an answer is reasonable from the mole ratio."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": [
+          "C.PM.5"
+        ]
+      }
     },
     "10.4": {
       "focus": "Which reactant runs out first",
@@ -40,7 +60,13 @@
         "I can **identify** the limiting and excess reactants from given amounts.",
         "I can **calculate** the amount of product the limiting reactant makes.",
         "I can **calculate** how much excess reactant is left over."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     },
     "10.5": {
       "focus": "Expected vs. actual product",
@@ -48,9 +74,29 @@
         "I can **calculate** the theoretical yield of a reaction.",
         "I can **calculate** percent yield from actual and theoretical yield.",
         "I can **explain** specific reasons a lab's percent yield is below 100%."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.5",
+      "Quantifying matter",
+      "SI units, significant figures, dimensional analysis, the mole, molar mass."
+    ],
+    [
+      "C.IM.3",
+      "Stoichiometry",
+      "molar calculations; solutions; limiting reagents."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",

@@ -1,5 +1,5 @@
 {
-  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. No standards yet: the Ohio codes are unverified (reports/chem-ohio-standards-verification.md). Add 'standards' to every section plus standards_label, standards_source and standards_key once they are checked.",
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
   "course": "chemistry",
   "unit": 8,
   "grades": "Grades 10–12",
@@ -16,7 +16,15 @@
         "I can **translate** a word equation into a chemical equation and back.",
         "I can **use** the state symbols (s), (l), (g), and (aq).",
         "I can **list** evidence of a reaction: gas, color change, precipitate, or temperature change."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": [
+          "C.PM.4"
+        ]
+      }
     },
     "8.2": {
       "focus": "Conservation of mass",
@@ -24,7 +32,13 @@
         "I can **balance** an equation with coefficients, never by changing subscripts.",
         "I can **explain** how a balanced equation shows conservation of mass.",
         "I can **check** a balanced equation by counting atoms of each element on both sides."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "8.3": {
       "focus": "Five common reaction types",
@@ -32,7 +46,13 @@
         "I can **classify** a reaction as synthesis, decomposition, single replacement, double replacement, or combustion.",
         "I can **recognize** each type from the pattern of its reactants and products.",
         "I can **write** a balanced equation for the complete combustion of a hydrocarbon."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     },
     "8.4": {
       "focus": "Activity series & solubility rules",
@@ -40,9 +60,29 @@
         "I can **predict** the products of a reaction from its type and **balance** the equation.",
         "I can **use** the activity series to decide whether a single-replacement reaction happens.",
         "I can **use** the solubility grid to decide whether a double-replacement reaction forms a precipitate."
-      ]
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
     }
   },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ],
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ]
+  ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",
     "Friday quizzes (versions A–D)",
