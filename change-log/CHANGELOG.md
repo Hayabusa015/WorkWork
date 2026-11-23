@@ -29,6 +29,9 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0101 | 2026-11-23 | One print document header, all builders | CONFIRMED | `governance/proposals/SHULL-CHG-0101-print-document-header.md` |
+| SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | CONFIRMED | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
+| SHULL-CHG-0099 | 2026-11-23 | Chemistry U6 reworked to four sections | CONFIRMED | `governance/proposals/SHULL-CHG-0099-chemistry-u6-four-sections.md` |
 | SHULL-CHG-0076 | 2026-11-23 | Four validators fixed; CI baseline green | CONFIRMED | `governance/proposals/SHULL-CHG-0076-main-ci-red-four-validators.md` |
 | SHULL-CHG-0075 | 2026-11-23 | Chem U3 notes cues made recall-only | CONFIRMED | `governance/proposals/SHULL-CHG-0075-chem-u3-notes-recall-violations.md` |
 | SHULL-CHG-0074 | 2026-11-23 | Physics 3.7 deck and solutions retired | PARTIAL | `governance/proposals/SHULL-CHG-0074-physics-u3-specs-stale-seven-section-map.md` |

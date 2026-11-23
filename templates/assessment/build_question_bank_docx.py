@@ -32,7 +32,7 @@ from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run, rich,
     fix_widths, no_split, page_setup, running_footer, cell_margins, gap, trim_tail,
-)
+    print_header)
 
 TEXT_W_IN = 7.50
 GUTTER_IN = 0.30
@@ -76,22 +76,8 @@ def check(spec, course):
 def header(doc, spec, pal, title, right_label):
     unit = f"U{int(spec['unit']):02d}"
     span = f"S{spec['sections'][0]}-S{spec['sections'][-1]}"
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [5.55, 1.95])
-    h, hr = t.rows[0].cells
-    for cc in (h, hr):
-        borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-    borders(h, pal.display, sz=30, edges=("left",))
-    cell_margins(h, top=80, bottom=80, left=160, right=80)
-    cell_margins(hr, top=80, bottom=80, left=80, right=60)
-    para(h, f"UNIT {int(spec['unit'])} — {unit_title(spec['course'], spec['unit']).upper()}",
-         7.5, bold=True, color=pal.accent, caps_track=True, first=True)
-    para(h, title, 15, bold=True, color=pal.ink)
-    p = para(hr, f"{unit} / {span}", 11, bold=True, color=pal.accent, caps_track=True,
-             first=True)
-    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    p = para(hr, right_label, 6.5, color=pal.label, caps_track=True)
-    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    # SHULL-CHG-0101: the shared print header.
+    print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span}", kind=right_label, title=title)
     return unit, span
 
 

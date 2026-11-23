@@ -22,6 +22,7 @@ g = tokens["ground"]
 c = tokens["courses"]
 sem = tokens["semantic"]
 typ = tokens["typography"]
+hdr = tokens["print"]["header"]
 
 css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_lab_css.py - DO NOT EDIT.
    Re-run the script after changing any token. Hand-editing a hex here is the
@@ -50,11 +51,21 @@ css = f"""/* GENERATED FROM brand/tokens.json BY scripts/build_lab_css.py - DO N
   /* Type */
   --display: "{typ['primary']['family']}", "{typ['fallback']['family']}", "{typ['lastResort']['family']}", sans-serif;
   --body:    "{typ['primary']['family']}", "{typ['fallback']['family']}", "{typ['lastResort']['family']}", sans-serif;
+  --condensed: "{typ['condensed']['family']}", "{typ['fallback']['family']}", sans-serif;
+
+  /* Document header, page 1 (SHULL-CHG-0101) - used by templates/_shull_header.css */
+  --header-title-size:  {hdr['titlePt']}pt;
+  --header-kicker-size: {hdr['kickerPt']}pt;
+  --header-meta-size:   {hdr['metaPt']}pt;
+  --header-teacher: "{hdr['teacher']}";
+  --header-school:  "{hdr['school']}";
+  --course-name:    "Chemistry";
 }}
 
-body.chem {{ --accent: {c['chemistry']['primaryDeep']['hex']}; --accent-display: {c['chemistry']['primary']['hex']}; }}
-body.phys {{ --accent: {c['physics']['primaryDeep']['hex']};   --accent-display: {c['physics']['primary']['hex']}; }}
-body.geo  {{ --accent: {c['geology']['primaryDeep']['hex']};   --accent-display: {c['geology']['primary']['hex']}; }}
+body.chem {{ --accent: {c['chemistry']['primaryDeep']['hex']}; --accent-display: {c['chemistry']['primary']['hex']}; --course-name: "Chemistry"; }}
+body.phys {{ --accent: {c['physics']['primaryDeep']['hex']};   --accent-display: {c['physics']['primary']['hex']}; --course-name: "Physics"; }}
+body.geo  {{ --accent: {c['geology']['primaryDeep']['hex']};   --accent-display: {c['geology']['primary']['hex']}; --course-name: "Geology"; }}
+body.neutral {{ --course-name: "Science"; }}
 
 /* The rule that makes this safe on paper: --accent is the text-safe deep
    variant and is the ONLY course colour permitted as type on a light ground.

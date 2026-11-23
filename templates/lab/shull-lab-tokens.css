@@ -25,11 +25,21 @@
   /* Type */
   --display: "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
   --body:    "Trade Gothic Next", "Archivo", "Liberation Sans", sans-serif;
+  --condensed: "Archivo Narrow", "Archivo", sans-serif;
+
+  /* Document header, page 1 (SHULL-CHG-0101) - used by templates/_shull_header.css */
+  --header-title-size:  17pt;
+  --header-kicker-size: 7.5pt;
+  --header-meta-size:   7pt;
+  --header-teacher: "Mr. Shull";
+  --header-school:  "James A. Garfield Local Schools";
+  --course-name:    "Chemistry";
 }
 
-body.chem { --accent: #B84100; --accent-display: #FF6B1A; }
-body.phys { --accent: #896107;   --accent-display: #F5B82E; }
-body.geo  { --accent: #0E766A;   --accent-display: #16B8A6; }
+body.chem { --accent: #B84100; --accent-display: #FF6B1A; --course-name: "Chemistry"; }
+body.phys { --accent: #896107;   --accent-display: #F5B82E; --course-name: "Physics"; }
+body.geo  { --accent: #0E766A;   --accent-display: #16B8A6; --course-name: "Geology"; }
+body.neutral { --course-name: "Science"; }
 
 /* The rule that makes this safe on paper: --accent is the text-safe deep
    variant and is the ONLY course colour permitted as type on a light ground.

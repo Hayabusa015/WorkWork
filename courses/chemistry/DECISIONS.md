@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-10-28
+**Last updated:** 2026-11-23
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -47,9 +47,9 @@ Electronegativity & Bond Type · 4.6 Bond Polarity
 5.1 Lewis Electron Structures · 5.2 VSEPR Theory · 5.3 Molecular Geometry · 5.4 Molecular
 Polarity · 5.5 Intermolecular Forces · 5.6 Structure & Physical Properties
 
-**U6 Chemical Nomenclature** (6 sections)
-6.1 Ions & Ionic Compounds · 6.2 Ionic Names & Formulas · 6.3 Transition Metals · 6.4
-Polyatomic Ions · 6.5 Covalent Names & Formulas · 6.6 Acids
+**U6 Chemical Nomenclature** (6 section codes, 4 taught) — *reworked 2026-11-23; see the log*
+6.1 Covalent Names & Formulas · 6.2 Polyatomic Ions · 6.3 Ionic Names & Formulas with Transition
+Metals · 6.4 Naming Acids & Formulas · 6.5 — RETIRED, never reused · 6.6 — RETIRED, never reused
 
 **U7 The Mole & Chemical Quantities** (7 sections)
 7.1 Mathematical Tools · 7.2 The Mole & Avogadro's Number · 7.3 Molar Mass · 7.4 Mole
@@ -418,6 +418,17 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Full Packet |
 
 ## Decision log
+
+### 2026-11-23 — U6 reworked to four sections
+U6 Chemical Nomenclature is taught as 6.1 Covalent Names & Formulas, 6.2 Polyatomic Ions, 6.3 Ionic
+Names & Formulas with Transition Metals, 6.4 Naming Acids & Formulas. The old ionic sections (Ions &
+Ionic Compounds, Ionic Names & Formulas, Transition Metals) are taught together in 6.3. Codes 6.5
+and 6.6 are retired and never reused. Unlike the U1 and U3 changes, 6.1–6.4 change meaning rather
+than retire, because Matt numbered the new sections that way. Decided by Matt 2026-11-19 ("Section
+rework: 6.1: Covalent Names and Formulas 6.2: Polyatomic Ions 6.3: Ioinic Names and Formulas with
+transition metals. 6.4 Naming acids and formulas.") and confirmed 2026-11-23.
+Supersedes: Curriculum map, U6 line (six sections).
+Status: CONFIRMED · SHULL-CHG-0099
 
 ### 2026-11-10 — Reference packet: VSEPR grid, solubility X mark
 Sheet 3 (VSEPR Geometry) is a grid on one landscape page: rows 2–6 electron domains labelled with

@@ -43,7 +43,7 @@ from _shull_docx import (          # noqa: E402
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
     text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
-)
+    print_header)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -1360,26 +1360,14 @@ def main():
         # saver" was his instruction. The shape survives: the eyebrow, the big title,
         # the code on the right. Only the slab goes, replaced by a heavy accent bar on
         # the left edge, which is the one place a solid mark earns its ink.
-        t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.55, 1.95])
-        h, hr = t.rows[0].cells
-        for cc in (h, hr):
-            borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-        borders(h, pal.display, sz=30, edges=("left",))
-        cell_margins(h, top=80, bottom=80, left=160, right=80)
-        cell_margins(hr, top=80, bottom=80, left=80, right=60)
-        para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()}"
-             + (f" · {sec['eyebrowNote']}" if sec.get("eyebrowNote") else ""), 7.5, bold=True,
-             color=pal.accent, caps_track=True, first=True)
-        para(h, title, 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
-                  caps_track=True, first=True)
-        pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        pp = para(hr, kind_label.replace("_", " ").upper()
-                  + (f"  ·  ~{spec['timeTargetMin']} MIN"
-                     if spec.get("timeTargetMin") else ""),
-                  6.5, color=pal.label, caps_track=True)
-        pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        # SHULL-CHG-0101: the shared print header (templates/_shull_docx.py print_header).
+        kind = kind_label.replace("_", " ")
+        if sec.get("eyebrowNote"):
+            kind += f" · {sec['eyebrowNote']}"
+        if spec.get("timeTargetMin"):
+            kind += f" · ~{spec['timeTargetMin']} min"
+        print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
+                     kind=kind, title=title)
 
     def id_row(labels, widths, total, blank_score=False):
         t = doc.add_table(rows=1, cols=len(labels))

@@ -1,0 +1,65 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'.",
+  "course": "chemistry",
+  "unit": 6,
+  "grades": "Grades 10–12",
+  "big_idea": "A chemical name and a chemical formula hold the same information in two forms. Students use what they know about **bond type** and **ion charges** to move between the name and the formula, following one set of rules instead of memorizing compounds one at a time.",
+  "builds_on": [
+    "U3 · S3.7 Ion Formation",
+    "U4 · Ionic vs. covalent bonding",
+    "Reference packet: periodic table, polyatomic ions"
+  ],
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio Learning Standards for Science (2018) · Chemistry",
+  "sections": {
+    "6.1": {
+      "focus": "Molecular compounds & prefixes",
+      "ican": [
+        "I can **classify** a compound as ionic or covalent from the elements it contains.",
+        "I can **use** Greek prefixes to name binary covalent compounds.",
+        "I can **write** the formula of a covalent compound from its name."
+      ],
+      "standards": {"main": ["C.PM.4"], "support": ["C.PM.3"]}
+    },
+    "6.2": {
+      "focus": "Charged groups of bonded atoms",
+      "ican": [
+        "I can **explain** that a polyatomic ion is a group of covalently bonded atoms that carries an overall charge.",
+        "I can **identify** common polyatomic ions by name, formula, and charge, using the reference packet when needed.",
+        "I can **recognize** patterns in oxyanion names ([[-ate / -ite,]] [[per- / hypo-]])."
+      ],
+      "standards": {"main": ["C.PM.3"], "support": ["C.PM.4"]}
+    },
+    "6.3": {
+      "focus": "Charge balance & the Stock system",
+      "ican": [
+        "I can **predict** main-group ion charges from the periodic table and **balance** charges to write ionic formulas.",
+        "I can **work out** a transition metal's charge from a formula and show it with a Roman numeral.",
+        "I can **name and write formulas** for ionic compounds, including those with polyatomic ions, using parentheses correctly."
+      ],
+      "standards": {"main": ["C.PM.4"], "support": ["C.PM.3", "C.PM.2"]}
+    },
+    "6.4": {
+      "focus": "Binary acids & oxyacids",
+      "ican": [
+        "I can **recognize** an acid from its formula.",
+        "I can **name** binary acids and oxyacids using the [[hydro-, -ic,]] and [[-ous]] rules.",
+        "I can **write** the formula of an acid from its name."
+      ],
+      "standards": {"main": ["C.PM.4"], "support": ["C.IM.1"]}
+    }
+  },
+  "standards_key": [
+    ["C.PM.2", "Periodic table", "properties and trends; used here to predict ion charges."],
+    ["C.PM.3", "Chemical bonding", "ionic, polar/nonpolar covalent, metallic bonding; polyatomic ions."],
+    ["C.PM.4", "Representing compounds", "formula writing, nomenclature, models and shapes."],
+    ["C.IM.1", "Chemical reactions", "acids/bases. 6.4 introduces acid names; acid–base chemistry is taught in Unit 14."]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown",
+    "Naming comes back on quizzes all year"
+  ]
+}

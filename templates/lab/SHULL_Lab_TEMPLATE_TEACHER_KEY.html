@@ -20,6 +20,7 @@
 -->
 
 <link rel="stylesheet" href="shull-lab-tokens.css">
+<link rel="stylesheet" href="../_shull_header.css">
 <style>
   @page {
     size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
@@ -87,13 +88,18 @@
   <span class="m-code">[[ U0 / S0.3 ]]</span>
 </div>
 
-<div class="masthead">
-  <div class="eyebrow">TEACHER PREP + KEY · UNIT [[ 0 ]] · SECTION [[ 3 ]] · NOT FOR STUDENTS</div>
-  <div class="titlerow">
-    <h1>[[ Lab Title ]]</h1>
-    <div class="chip">[[ U0 / S0.3 ]]</div>
+<!-- Document header: templates/_shull_header.css (SHULL-CHG-0101). -->
+<header class="sh-head">
+  <div class="sh-left">
+    <div class="sh-kick"><span class="sh-chip">[[ U0 / S0.3 ]]</span><span class="sh-course"></span> · Teacher Prep + Key · Not for students</div>
+    <h1 class="sh-title">[[ Lab Title ]] <span class="sh-acc">[[ Accent Word ]]</span></h1>
   </div>
-</div>
+  <div class="sh-meta">
+    <div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div>
+    <div class="sh-school"></div>
+    <div>Unit [[ 0 ]] · [[ Unit Title ]]</div>
+  </div>
+</header>
 
 <h2>PREP — [[ WHEN ]]</h2>
 <!-- BLOCK: advance prep timeline. Be specific enough that a sub or a future

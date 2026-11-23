@@ -51,7 +51,11 @@ with every other name, the course is not in it; the folder path (`[Course]/Refer
 `standards/DRIVE_ARCHITECTURE.md`) carries it.
 
 **Types:** `Slides` · `Guided_Notes` · `Practice_Set` · `Quiz` · `Test` · `Lab` · `Study_Guide` ·
-`Reference` · `Key` · `Rubric` · `Activity` · `Organizer`
+`Reference` · `Key` · `Rubric` · `Activity` · `Organizer` · `Roadmap`
+
+`Roadmap` is the one-page unit opener filed at the front of a unit's binder section: unit header,
+big idea, prerequisites, every section with its I-can statements and standards, and how learning is
+measured. Always unit-level, never keyed: `Unit 6 Roadmap - [Unit Title].pdf` (SHULL-CHG-0100).
 
 ### Worked examples
 

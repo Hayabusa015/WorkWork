@@ -31,6 +31,8 @@ G = T["ground"]
 FONT = T["typography"]["stack"].split(",")[0].strip().strip('"')
 FLOOR = T["typography"]["floors"]["printBody"]["pt"]
 FOOTER_FLOOR = T["typography"]["floors"]["printFooter"]["pt"]
+NARROW = T["typography"]["condensed"]["family"]
+HEADER = T["print"]["header"]
 
 BULLETS = "•·▸►‣-–— "
 
@@ -1028,3 +1030,62 @@ def estimate_height(el, width_in, base_pt=10.0):
             total += row
         return total
     return 0.0
+
+
+def _track(r, val=26):
+    el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(val))
+    r._element.get_or_add_rPr().append(el)
+
+
+def _run_box(r, hexval, sz=6):
+    """An outlined chip drawn as a run border: one line, no table, prints as a thin box."""
+    bdr = OxmlElement("w:bdr")
+    for k, v in (("val", "single"), ("sz", str(sz)), ("space", "1"), ("color", hexof(hexval))):
+        bdr.set(qn(f"w:{k}"), v)
+    r._element.get_or_add_rPr().append(bdr)
+
+
+def print_header(doc, pal, *, unit, code, kind, title, width=7.5):
+    """The document header on page 1 of every print builder (SHULL-CHG-0101).
+
+    Left: the outlined code chip and the COURSE · KIND line in the course's text-safe
+    colour, then the title in condensed capitals with one accent word (the last). Right:
+    teacher, school, and the unit, read from brand/tokens.json `print.header` and the
+    course DECISIONS.md. Under both, a double rule in the course display colour. Ruled,
+    never filled, and sized (titlePt) so it is no taller than the header it replaced.
+    """
+    course = pal.course
+    k, tp, mp = HEADER["kickerPt"], HEADER["titlePt"], HEADER["metaPt"]
+    t = doc.add_table(rows=1, cols=2)
+    fix_widths(t, [width - 2.35, 2.35])
+    left, right = t.rows[0].cells
+    for c in (left, right):
+        borders(c, pal.display, sz=6, edges=("bottom",), val="double")
+        c.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    cell_margins(left, top=0, bottom=30, left=0, right=80)
+    cell_margins(right, top=0, bottom=30, left=80, right=0)
+
+    p = para(left, "", k, first=True)
+    chip = run(p, f" {code} ", k, bold=True, color=pal.ink)
+    _run_box(chip, pal.ink); _track(chip)
+    _track(run(p, f" {course.title()} · {kind}".upper(), k, bold=True, color=pal.accent))
+    p.paragraph_format.space_after = Pt(1)
+
+    p = para(left, "", tp)
+    p.paragraph_format.space_after = Pt(0)
+    words = str(title).upper().split()
+    if len(words) > 1:
+        run(p, " ".join(words[:-1]) + " ", tp, bold=True, color=pal.ink).font.name = NARROW
+    run(p, words[-1], tp, bold=True, color=pal.accent if len(words) > 1 else pal.ink).font.name = NARROW
+
+    lines = [(f"{HEADER['teacher']}", f" · High School {course.title()}"),
+             (None, HEADER["school"]),
+             (None, f"Unit {int(unit)} · {unit_title(course, unit)}")]
+    for i, (bold, rest) in enumerate(lines):
+        q = para(right, "", mp, first=(i == 0))
+        q.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        q.paragraph_format.space_after = Pt(0)
+        if bold:
+            run(q, bold, mp, bold=True, color=pal.ink)
+        run(q, rest, mp, color=pal.label)
+    return t
