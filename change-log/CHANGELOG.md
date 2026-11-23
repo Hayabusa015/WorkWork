@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0107 | 2026-11-23 | Chemistry Ohio standards code list in DECISIONS | PROPOSED | `governance/proposals/SHULL-CHG-0107-chem-ohio-standards-list.md` |
 | SHULL-CHG-0106 | 2026-11-23 | Chemistry Course Outline gets REF title | CONFIRMED | `governance/proposals/SHULL-CHG-0106-chem-course-outline-ref-title.md` |
 | SHULL-CHG-0101 | 2026-11-23 | One print document header, all builders | CONFIRMED | `governance/proposals/SHULL-CHG-0101-print-document-header.md` |
 | SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | CONFIRMED | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
