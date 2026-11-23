@@ -16,8 +16,8 @@ Repeat of: SHULL-CHG-0052 (class: dashboard and repository out of step because o
 | **Affected Courses** | None. |
 | **Risk** | High. Approvals could attach to the wrong record. |
 | **Recommendation** | Adopt. Any desk click on a colliding ID should be held until the re-sync. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "Do all 4", answering the main session's proposal to approve SHULL-CHG-0077 and SHULL-CHG-0078 and then (1) give each hidden record its own desk card, (2) fix the export for the old record format, (3) add a rule against duplicate numbers, (4) re-sync the desk. |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
