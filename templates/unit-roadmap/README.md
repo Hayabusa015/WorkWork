@@ -70,7 +70,19 @@ Then run the QA tools as for any print document: `scripts/audit_print_ink.py`,
 
 ## Layout
 
-Header (unit chip, course · phase, unit title with one accent word, teacher block) → Big Idea and
-Builds On → section table (number box, title, focus | I-can checklist | standards, bold box = main,
-dashed box = supporting) → standards key and "How Learning Is Measured" → running footer with the
-`U# / S#.#` range. Outline treatments only; no solid fills (`brand/SHULL_DESIGN_SYSTEM.md`, ink rule).
+After Matt's original Unit 6 overview (2026-11-23). Shared header (`templates/_shull_header.css`,
+SHULL-CHG-0101, unchanged) → Big Idea (11pt) and Builds On (vertical rule, chevrons) → section table
+(26 / 57 / 17: number box, title, focus | I-can checklist at 10.5pt | standards, bold box = main,
+dashed box = supporting) → standards key left, "How Learning Is Measured" in a rounded box right →
+running footer: `SHULL · CHEM · U# Unit Roadmap · U# / S#.#–#.# · Page 1 of 1` left, the uncoded
+Ohio inquiry category right.
+
+**Rows fill the page.** The builder renders once, measures the height left under the bottom block,
+shares it out as row padding (at most 30px a row) and renders again. Only space changes, never type.
+
+**Colours.** Two variables at the top of `unit_roadmap.css`: `--rm-rule` (rules, borders, number
+boxes, standard outlines, dividers) and `--rm-text` (accent text). They read the course pairing from
+the body class. Chemistry roadmaps use the blue pairing (`BODY` in the builder → `chem pair-blue`),
+per `courses/chemistry/DECISIONS.md` "Course brand exceptions" (SHULL-CHG-0108). The Course Outline is
+not in that table and stays orange. Outline treatments only; no solid fills
+(`brand/SHULL_DESIGN_SYSTEM.md`, ink rule).
