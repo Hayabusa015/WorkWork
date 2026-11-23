@@ -1284,6 +1284,9 @@ def _run_box(r, hexval, sz=6):
     r._element.get_or_add_rPr().append(bdr)
 
 
+KICKER_MIN_PT = 6.0   # the smallest the header kicker may shrink to keep one line
+
+
 def print_header(doc, pal, *, unit, code, kind, title, width=7.5):
     """The document header on page 1 of every print builder (SHULL-CHG-0101).
 
@@ -1304,10 +1307,27 @@ def print_header(doc, pal, *, unit, code, kind, title, width=7.5):
     cell_margins(left, top=0, bottom=30, left=0, right=80)
     cell_margins(right, top=0, bottom=30, left=80, right=0)
 
+    # The chip and the COURSE · KIND line must stay on one line: a long label (a unit test's
+    # "UNIT TEST · WRITTEN · VERSION A · ~25 MIN", or "· ANSWER KEY") wrapped onto a second
+    # line under the chip. Measure the line as set (Archivo Bold plus the tracking, plus the
+    # chip's border) and step the size down until it fits the left column, never below
+    # KICKER_MIN_PT, then loosen the tracking. A line that already fits is unchanged.
+    chip_text, kick_text = f" {code} ", f" {course.title()} · {kind}".upper()
+    avail = (width - 2.35) - 80 / 1440 - 0.05
+
+    def kicker_w(size, track):
+        s = chip_text + kick_text
+        return text_width_in(s, size, bold=True) + len(s) * (track / 20) / 72 + 0.04
+
+    track = 26
+    while kicker_w(k, track) > avail and k > KICKER_MIN_PT:
+        k = round(k - 0.25, 2)
+    while kicker_w(k, track) > avail and track > 0:
+        track -= 6
     p = para(left, "", k, first=True)
-    chip = run(p, f" {code} ", k, bold=True, color=pal.ink)
-    _run_box(chip, pal.ink); _track(chip)
-    _track(run(p, f" {course.title()} · {kind}".upper(), k, bold=True, color=pal.accent))
+    chip = run(p, chip_text, k, bold=True, color=pal.ink)
+    _run_box(chip, pal.ink); _track(chip, track)
+    _track(run(p, kick_text, k, bold=True, color=pal.accent), track)
     p.paragraph_format.space_after = Pt(1)
 
     p = para(left, "", tp)
