@@ -176,7 +176,7 @@ docstring (SHULL-CHG-0071).
 
 A section (or the whole spec) may set `"layout": "grid"` to set draw-only questions as a grid of
 squares instead of one card per question: `columns` (default 3), `squareIn` (side, default 2.2;
-the gutters take what is left of the line (7.40 in since the SHULL-CHG-0075 binding margin; `TEXT_W_IN` in `_shull_docx.py`), and the build refuses a gutter under 0.12 in),
+the gutters take what is left of the line (7.40 in since the SHULL-CHG-0103 binding margin; `TEXT_W_IN` in `_shull_docx.py`), and the build refuses a gutter under 0.12 in),
 `gridPromptPt` (default 9.5) and `gridRowGapPt` (default 10). An item takes one square per `draw.panels`, each captioned from
 `draw.captions` inside its top; items flow left to right in order. `boxHeightIn` (default
 `squareIn`) lets a box run shorter than it is wide. `"tierTags": false` leaves the tier tag out of the

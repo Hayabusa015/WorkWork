@@ -12,7 +12,7 @@ from docx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-from _shull_docx import TEXT_W_IN   # the binding-era text block (SHULL-CHG-0075), not 7.5
+from _shull_docx import TEXT_W_IN   # the binding-era text block (SHULL-CHG-0103), not 7.5
 BUILDER = os.path.join(HERE, "build_worksheet_docx.py")
 KEY_BUILDER = os.path.join(HERE, "build_worksheet_key_docx.py")
 FBD = {"scene": "fbd", "forces": [{"label": "F_{N}", "dir": "up", "mag": 1},

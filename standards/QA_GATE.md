@@ -40,7 +40,7 @@ If over, fix **in this order**: reduce `@page` margins → reduce base font size
 → reduce block bottom margins.
 
 The inside (binding) margin and the hole zone are not on this list. They never shrink
-(SHULL-CHG-0075, `brand/SHULL_DESIGN_SYSTEM.md` §8).
+(SHULL-CHG-0103, `brand/SHULL_DESIGN_SYSTEM.md` §8).
 
 > **Never shrink a single question to fit.**
 

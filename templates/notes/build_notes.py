@@ -159,7 +159,7 @@ def main():
     doc = doc.replace("<body", f'<body class="{CLASS[course]}"', 1) \
         if "<body" in doc else f'<body class="{CLASS[course]}">' + doc
 
-    # SHULL-CHG-0075: margins mirrored, inside from tokens, hole guides drawn. The top,
+    # SHULL-CHG-0103: margins mirrored, inside from tokens, hole guides drawn. The top,
     # outside and bottom are this template's own (they were its @page margin).
     sys.path.insert(0, os.path.dirname(HERE))
     from _shull_print import inject_page_css

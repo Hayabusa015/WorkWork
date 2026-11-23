@@ -48,7 +48,7 @@ from build_worksheet_docx import (   # noqa: E402
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# TEXT_W_IN comes from _shull_docx (page less binding and outside margins, SHULL-CHG-0075).
+# TEXT_W_IN comes from _shull_docx (page less binding and outside margins, SHULL-CHG-0103).
 CARD_PAD_TW = 130           # the answer card's left and right cell margins, in twips
 # The handwritten solution image is 7.20 in by design; it may never be wider than the card's
 # inner width (TEXT_W_IN less both cell margins), or the renderer shrinks it and clips the

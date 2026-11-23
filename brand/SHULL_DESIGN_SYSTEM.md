@@ -244,7 +244,7 @@ study guides, reference sheets. Digital-only deliverables are exempt.
   margin is `print.binding.inside`, on the left of odd pages and the right of even pages. This
   applies to single-sided prints and answer keys too. Three hole guides (`print.holeGuides`) are
   drawn on the binding side. They are outline only, in `ground.ruleHairline`. Nothing else enters
-  the inside margin, and it never shrinks to fit a page budget. SHULL-CHG-0075.
+  the inside margin, and it never shrinks to fit a page budget. SHULL-CHG-0103.
 - Full-colour variants are preserved on request — **never shipped as the default print file.**
 
 Ink is a real cost, and this rule is stronger than "white is the default background." It survives at

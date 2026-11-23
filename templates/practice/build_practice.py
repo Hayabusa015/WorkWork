@@ -40,7 +40,7 @@ WHITE = TOKENS["ground"]["white"]["hex"].lstrip("#")
 FONT = TOKENS["typography"]["fallback"]["family"]
 CODE = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
 PAGE_W = 8.5
-# Mirrored (SHULL-CHG-0075): the token's right margin is the outside; the inside is
+# Mirrored (SHULL-CHG-0103): the token's right margin is the outside; the inside is
 # print.binding.inside. The text block is what is left between them.
 OUTSIDE = float(TOKENS["print"]["margins"]["right"].removesuffix("in"))
 WIDTH = text_block_in(OUTSIDE)

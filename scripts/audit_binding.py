@@ -4,7 +4,7 @@
     python3 scripts/audit_binding.py doc.pdf [--dpi 150]
     python3 scripts/audit_binding.py doc.docx          # rendered with LibreOffice first
 
-SHULL-CHG-0075 (brand/SHULL_DESIGN_SYSTEM.md §8). Every printed page has an inside
+SHULL-CHG-0103 (brand/SHULL_DESIGN_SYSTEM.md §8). Every printed page has an inside
 margin for three-hole punching - left on odd pages, right on even pages - and three
 faint guide circles where the holes land. All numbers come from brand/tokens.json
 (`print.binding`, `print.holeGuides`) through templates/_shull_print.py; none is typed

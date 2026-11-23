@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The binding side of every printed page: mirror margin and three-hole guides.
 
-SHULL-CHG-0075. Every printed page has an inside (binding) margin, on the left of odd
+SHULL-CHG-0103. Every printed page has an inside (binding) margin, on the left of odd
 pages and the right of even pages, and three faint circle outlines where a three-hole
 punch lands. The numbers live in brand/tokens.json (`print.binding`, `print.holeGuides`)
 and nowhere else; this module only reads them and turns them into geometry, so the Word
@@ -117,7 +117,7 @@ def page_css(top_in, outside_in, bottom_in):
             f"background: url(\"{url}\") no-repeat; "
             f"background-position: -{left}in -{top_in}in; "
             f"background-size: {PAGE_W_IN}in {PAGE_H_IN}in; }}")
-    return ("/* SHULL-CHG-0075 binding side, generated from brand/tokens.json "
+    return ("/* SHULL-CHG-0103 binding side, generated from brand/tokens.json "
             "(print.binding, print.holeGuides) by templates/_shull_print.py. */\n"
             + "\n".join(out) + "\n")
 

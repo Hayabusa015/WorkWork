@@ -24,7 +24,7 @@ def prepare(html):
 
     Lab margins are `print.margins` (top, outside, bottom) and `print.binding.inside`,
     all from brand/tokens.json, mirrored, with the hole guides drawn on the binding side
-    (SHULL-CHG-0075). A lab file's own @page sets size and running heads; the injected
+    (SHULL-CHG-0103). A lab file's own @page sets size and running heads; the injected
     rules come last and set the margins, so an older lab copy with hard-coded margins
     renders with the same geometry as a fresh one.
     """
@@ -76,7 +76,7 @@ def main() -> int:
             print(f"⚠  expected {want} pages, got {pages}. Tighten in this order: "
                   "base font-size → line-height → block margins. The margins, the "
                   "inside (binding) margin above all, are not on the list "
-                  "(SHULL-CHG-0075). Never shrink one question to fit.")
+                  "(SHULL-CHG-0103). Never shrink one question to fit.")
             return 1
 
     print("   Now rasterize and LOOK at it before it goes to the copier.")

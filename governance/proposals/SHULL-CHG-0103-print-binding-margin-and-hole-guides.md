@@ -1,4 +1,6 @@
-# SHULL-CHG-0075 — Print: mirror binding margin and three-hole guides, all courses
+# SHULL-CHG-0103 — Print: mirror binding margin and three-hole guides, all courses
+
+> **Renumbered 2026-11-23** from SHULL-CHG-0075 on branch `claude/focused-mendel-cefeca`, which collided with a different record of that number already on `main`. Commits made before the merge still say SHULL-CHG-0075; they mean this record. (SHULL-CHG-0078, `scripts/validate_change_ids.py`.)
 
 > **Implementation status: PARTIAL.** The documentation and token side is applied (uncommitted at
 > the time of writing): `brand/tokens.json` (`print.binding`, `print.holeGuides`),
@@ -27,7 +29,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0075 |
+| **Change ID** | SHULL-CHG-0103 |
 | **Date** | 2026-11-20 |
 | **Source** | User. Matt's request in chat on 2026-11-20, his answers to two offered questions, and his amendment "well, just make it a slight push.", all quoted verbatim in section 1 as relayed to the Secretary by the main session. The dimensions in section 2 are the main session's translation of "a slight push" (0.60 in inside, +0.25 in on the token value). Matt has not seen the numbers. |
 | **Current Rule** | (1) `brand/tokens.json` lines 477-483, `print.margins`: `"top": "0.30in", "left": "0.35in", "right": "0.35in", "bottom": "0.45in", "status": "PROVISIONAL"`. (2) `.claude/skills/build-lab/SKILL.md` line 33: "**Margins are locked.** Never adjust them to fix a page count; reduce body size or line-height." `templates/lab/README.md` lines 81-82: "**Margins.** Per `brand/tokens.json` → `print.margins`. **Don't touch them to fix a page-count problem**". (3) `standards/QA_GATE.md` lines 39-40: "If over, fix **in this order**: reduce `@page` margins → reduce base font size → tighten line-height → reduce block bottom margins." Restated in `.claude/skills/build-document/SKILL.md` line 150. (4) No rule for binding, duplex or punch holes anywhere in `brand/`, `standards/` or the skills. A grep for "binding", "hole" and "punch" finds none. (5) `brand/SHULL_DESIGN_SYSTEM.md` §8 "Print discipline — a hard rule" (lines 223-249) sets scope ("worksheets, practice sets, guided and Cornell notes, labs, study guides, reference sheets") but says nothing about margins. |
@@ -92,13 +94,13 @@ ID.
     "status": "PROVISIONAL"
   },
   "binding": {
-    "$comment": "SHULL-CHG-0075. Three-hole punch, mostly duplex. Inside = left on odd pages, right on even pages.",
+    "$comment": "SHULL-CHG-0103. Three-hole punch, mostly duplex. Inside = left on odd pages, right on even pages.",
     "mirror": true,
     "inside": "0.60in",
     "status": "PROVISIONAL"
   },
   "holeGuides": {
-    "$comment": "SHULL-CHG-0075. Three faint outlines where a standard US three-hole punch lands. Binding side of every page; flips on even pages.",
+    "$comment": "SHULL-CHG-0103. Three faint outlines where a standard US three-hole punch lands. Binding side of every page; flips on even pages.",
     "count": 3,
     "diameterIn": 0.26,
     "centreFromBindingEdgeIn": 0.38,
@@ -254,7 +256,7 @@ left out. **Suggested follow-up:** a separate record, possibly from the Janitor,
 | Deliverable | Files | Builder | Filed in Drive? | Proposal |
 |---|---|---|---|---|
 | Unit 3 Guided Notes | `Unit 3 Guided Notes.docx/.pdf`, `Unit 3 Guided Notes Key.docx/.pdf` | `build_notes_docx.py` | No ("Not filed (not approved)", `reports/drive-operations/2026-11-18_phys-u03-s03.2-fbd-practice-set-filing.md` line 51) | Rebuild after implementation |
-| 3.2 Practice Set - Net Force | student and key, `.docx/.pdf` | `build_worksheet_*` via `build_phys_u03_s03.2_net_force.py` | Not verified by the Secretary | Rebuild. Its 2-page cut (SHULL-CHG-0074 item 1) is at risk. |
+| 3.2 Practice Set - Net Force | student and key, `.docx/.pdf` | `build_worksheet_*` via `build_phys_u03_s03.2_net_force.py` | Not verified by the Secretary | Rebuild. Its 2-page cut (SHULL-CHG-0102 item 1) is at risk. |
 | 3.3 Practice Set - Frictionless Inclines | student and key, `.docx/.pdf` | `build_worksheet_*` | Not verified by the Secretary | Rebuild |
 | Unit 3 Practice Set - Free-Body Diagrams | student and key, `.docx/.pdf` | `build_worksheet_*` (grid layout) | **Yes**, filed 2026-11-18 to the Section 03.2 folder (same drive-operations log) | **Rebuild only if Matt asks.** If rebuilt and re-filed, the Librarian logs the replacement before the Drive mutation (CHANGE_CONTROL §7). |
 | 3.1 Lab - Newton's Laws | `3.1 Lab - Newton's Laws.html/.pdf`, `3.1 Lab Key - Newton's Laws.html/.pdf` | Lab template, `build_lab.py` | No (same log, line 51) | Rebuild after the lab template change. Re-check its page count (SHULL-CHG-0073). |
@@ -274,14 +276,14 @@ proposed.
   margin is `print.binding.inside`, on the left of odd pages and the right of even pages. Three
   hole guides (`print.holeGuides`) are drawn on the binding side. They are outline only, in
   `ground.ruleHairline`. Nothing else enters the inside margin, and it never shrinks to fit a page
-  budget. SHULL-CHG-0075.
+  budget. SHULL-CHG-0103.
 ```
 
 **`standards/QA_GATE.md` §2, after line 40:**
 
 ```markdown
 The inside (binding) margin and the hole zone are not on this list. They never shrink
-(SHULL-CHG-0075, `brand/SHULL_DESIGN_SYSTEM.md` §8).
+(SHULL-CHG-0103, `brand/SHULL_DESIGN_SYSTEM.md` §8).
 ```
 
 Plus a new numbered check: "No content in the hole zone", with the audit command once it exists.

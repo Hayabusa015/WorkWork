@@ -36,7 +36,7 @@ import sys as _sys
 _sys.path.insert(0, HERE)
 from _shull_print import BINDING, PAGE_W_IN, PAGE_H_IN, text_block_in, guides  # noqa: E402
 
-# The outside margin of a worksheet or key (SHULL-CHG-0075 left the outside, top and
+# The outside margin of a worksheet or key (SHULL-CHG-0103 left the outside, top and
 # bottom as they were). The inside is BINDING.inside_in, read from tokens.
 OUTSIDE_IN = 0.5
 TEXT_W_IN = text_block_in(OUTSIDE_IN)     # 7.40 at a 0.60 in inside margin
@@ -678,7 +678,7 @@ def diagram_block(cell, dgm, pal, inner_w, base_dir=HERE):
 def page_setup(doc, outside=OUTSIDE_IN, margin_tb=0.44, base_pt=10, margin_lr=None):
     """Letter, mirrored. `outside` is the margin away from the binding; the inside is
     `print.binding.inside` and is not a parameter, because it never shrinks to fit
-    (SHULL-CHG-0075). Call `apply_binding(doc)` immediately before `doc.save()`.
+    (SHULL-CHG-0103). Call `apply_binding(doc)` immediately before `doc.save()`.
 
     `margin_lr` is for a document that is never printed (snow-day work, done on a
     Chromebook): equal left and right margins, no binding side."""
@@ -697,7 +697,7 @@ def page_setup(doc, outside=OUTSIDE_IN, margin_tb=0.44, base_pt=10, margin_lr=No
 
 
 # ---------------------------------------------------------------------------------
-# Binding side (SHULL-CHG-0075). With w:mirrorMargins on, w:pgMar/@w:left is the
+# Binding side (SHULL-CHG-0103). With w:mirrorMargins on, w:pgMar/@w:left is the
 # INSIDE margin and @w:right the outside, in Word and in LibreOffice alike, so a section
 # sets left = inside once and both readers flip it on even pages. The hole guides are
 # three anchored ellipses positioned from the page edge; an absolute offset is not

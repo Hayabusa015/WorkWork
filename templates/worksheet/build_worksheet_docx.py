@@ -48,7 +48,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 
 # TEXT_W_IN comes from _shull_docx: the page less the binding (inside) margin and the
-# outside margin, SHULL-CHG-0075. It is 7.40 in, not the 7.50 it was.
+# outside margin, SHULL-CHG-0103. It is 7.40 in, not the 7.50 it was.
 NUM_W_IN = 0.30                                  # the question number's own column
 BODY_W_IN = TEXT_W_IN - NUM_W_IN
 
@@ -1213,7 +1213,7 @@ def main():
 
     def id_row(labels, widths, total):
         # Widths written for the old 7.50 in line lose the overflow from their widest
-        # field, so the row stays on the text block (SHULL-CHG-0075 narrowed it).
+        # field, so the row stays on the text block (SHULL-CHG-0103 narrowed it).
         widths = list(widths)
         over = round(sum(widths) - TEXT_W_IN, 4)
         if over > 0:

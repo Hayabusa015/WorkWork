@@ -70,7 +70,7 @@ SCHOOL = "James A. Garfield Local Schools"
 # and the rest of the text block as the capture column. Everything on the capture side is
 # measured off NOTES_INNER_IN, so moving the split moves every table, work box and
 # figure with it. The text block is the page less the binding (inside) margin and the
-# outside margin, SHULL-CHG-0075: 7.40 in, so the capture column is 6.12 in (was 6.22).
+# outside margin, SHULL-CHG-0103: 7.40 in, so the capture column is 6.12 in (was 6.22).
 MARGIN_OUTSIDE_IN = 0.50
 TEXT_W_IN = text_block_in(MARGIN_OUTSIDE_IN)
 CUE_W_IN = 1.28

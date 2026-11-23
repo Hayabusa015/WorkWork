@@ -60,7 +60,7 @@ horizontal rule separates it from the next block. It has no outer box and no cel
   colour, then the cue questions in small grey type. RECALL / RECAP / REVIEW blocks put their tag
   above the label. **No block number** (`01`, `02`): SHULL-CHG-0038 dropped it (choice d). **No
   line under a cue.** Recall happens in the RECALL block and on the concept review page.
-- **Capture side (6.12 in since the SHULL-CHG-0075 binding margin; was 6.22):** the **notes heading** in tracked bold caps in the same colour, then
+- **Capture side (6.12 in since the SHULL-CHG-0103 binding margin; was 6.22):** the **notes heading** in tracked bold caps in the same colour, then
   prompts with a writing line, fill-in tables, the flowchart, worked examples and must-write
   lines. **No inline underscore blanks** (`brand/SHULL_DESIGN_SYSTEM.md` §11, SHULL-CHG-0069): a
   prompt is a cue naming what to record, and the student writes on the ruled lines under it. A

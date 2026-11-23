@@ -1,10 +1,12 @@
-# SHULL-CHG-0074 — Physics: one-time exceptions for "3.2 Practice Set - Net Force"
+# SHULL-CHG-0102 — Physics: one-time exceptions for "3.2 Practice Set - Net Force"
+
+> **Renumbered 2026-11-23** from SHULL-CHG-0074 on branch `claude/focused-mendel-cefeca`, which collided with a different record of that number already on `main`. Commits made before the merge still say SHULL-CHG-0074; they mean this record. (SHULL-CHG-0078, `scripts/validate_change_ids.py`.)
 
 > **Change ID is provisional.** It is the next integer after `SHULL-CHG-0073`, the highest ID in the
 > local `governance/proposals/` on 2026-11-18. The Secretary session that wrote this record has no
 > git tool. It could not `git fetch origin main` and cannot push. Under
 > `governance/CHANGE_CONTROL.md` §2 this ID is **not allocated** until someone checks it against a
-> freshly fetched `origin/main` and pushes the record there. If `SHULL-CHG-0074` already exists on
+> freshly fetched `origin/main` and pushes the record there. If `SHULL-CHG-0102` already exists on
 > `origin/main`, renumber this file before pushing it. `change-log/CHANGELOG.md` has no row for it
 > yet.
 >
@@ -22,7 +24,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0074 (provisional, see banner) |
+| **Change ID** | SHULL-CHG-0102 (provisional, see banner) |
 | **Date** | 2026-11-18 |
 | **Source** | User. Matt chose from offered options in chat on 2026-11-18, while the Physics 3.2 net-force set was being built. His choices are quoted verbatim in section 1, as relayed to the Secretary by the main session. |
 | **Current Rule** | (1) Ramp: `RAMP["physics"]` 2 warm-up / 2 practice / 1 challenge / 1 multi-topic per section (SHULL-CHG-0019), restated in `courses/physics/DECISIONS.md` lines 575-577. (2) `courses/physics/DECISIONS.md` lines 119-121: "**Build at least one graph-reading item into every practice set** where kinematics, forces, or energy are in play." (3) `standards/NAMING.md` line 38: "**No row, no topic**". Physics "Short titles" (lines 234-242) has no `3.2` row. (4) `courses/physics/DECISIONS.md` lines 520-552, 2026-09-14 "Standing convention: character-based scenarios in Physics practice sets": "Physics practice-set questions default to **recognizable characters** as the scenario subject". (5) Tier tags are drawn on every card of the student page (`build_worksheet_docx.py` `question_card()`, lines 759-765, grey under SHULL-CHG-0055) and on every key entry (`build_worksheet_key_docx.py` `answer_block()`, lines 86-87). (6) No written rule on whether g = 9.8 m/s² counts toward significant figures. |
@@ -162,7 +164,7 @@ Departures from the standing Physics rules, for this one set only:
    `standards/NAMING.md` and the worksheet skills are **not** modified.
 
 Supersedes: None.
-Status: CONFIRMED · SHULL-CHG-0074 — Path A (course-specific; shared builders untouched, only used via a documented one-time override).
+Status: CONFIRMED · SHULL-CHG-0102 — Path A (course-specific; shared builders untouched, only used via a documented one-time override).
 ```
 
 ### 5.2 Separate standing entry, only if Matt confirms item 6 as a standing convention
@@ -176,7 +178,7 @@ In Physics answer keys and self-check brackets, g = 9.8 m/s² is treated as an e
 does not limit significant figures, and answers keep the precision of the measured givens (15.0 kg ×
 9.8 m/s² = 147 N, not 150 N). Matt, <date>: "<his words>".
 Supersedes: No written rule.
-Status: CONFIRMED · SHULL-CHG-0074
+Status: CONFIRMED · SHULL-CHG-0102
 ```
 
 **Placement question.** The entry's rule could instead be one sentence under "Sequencing —

@@ -79,7 +79,7 @@ hand-typed hexes permitted in this directory and `validate_tokens.py` must allow
 ## What's locked and why
 
 **Margins.** Per `brand/tokens.json` → `print.margins` and `print.binding` (the mirrored binding
-side and hole guides, `brand/SHULL_DESIGN_SYSTEM.md` §8, SHULL-CHG-0075). **Don't touch them to fix
+side and hole guides, `brand/SHULL_DESIGN_SYSTEM.md` §8, SHULL-CHG-0103). **Don't touch them to fix
 a page-count problem** — reduce body font size or line-height first.
 
 **Ink.** Outline and rule treatments only. No solid banners, no filled table headers, no shaded

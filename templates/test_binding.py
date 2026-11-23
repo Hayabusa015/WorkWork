@@ -1,4 +1,4 @@
-"""Checks for the binding side of printed pages, SHULL-CHG-0075.
+"""Checks for the binding side of printed pages, SHULL-CHG-0103.
 
     python3 templates/test_binding.py
 
