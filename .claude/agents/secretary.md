@@ -61,3 +61,12 @@ A table, newest first, blocking first:
 
 Then the detail for anything the user needs to decide. One question at a time where the answer
 changes what happens next.
+
+### Desktop implementation requests
+
+At session start, `scripts/desktop_queue.py` lists committed desktop requests.
+For each, fetch current main and read the named file in full. Under the desktop
+recorder in change control, a committed approval with an implementation request
+authorizes job 2 without another approval click. Confirm any required option
+is answered before changing the rule. If the current task is a report-only
+sweep, surface these as separate follow-up jobs.

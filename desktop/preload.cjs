@@ -3,6 +3,8 @@ const {contextBridge,ipcRenderer}=require('electron');
 // the renderer never receives ipcRenderer, an event object or a file path.
 contextBridge.exposeInMainWorld('shullDesktop',{
   openWorkspace:()=>ipcRenderer.invoke('workspace:open'),
+  selectCheckout:()=>ipcRenderer.invoke('repository:select'),
+  notifyRepository:message=>ipcRenderer.send('repository:notify',message),
   updates:{
     status:()=>ipcRenderer.invoke('updates:status'),
     check:()=>ipcRenderer.invoke('updates:check'),

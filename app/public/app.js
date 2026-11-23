@@ -1,3 +1,4 @@
+import {startRepository} from './repository.js';
 import {icon, mountLayoutEditor, isLayoutEditing} from './interface.js';
 
 /* ------------------------------------------------------------------ *\
@@ -48,6 +49,7 @@ const TABS = [
   {id: 'Library',     icon: 'folder',    sub: 'Your locally built materials. Google Drive connection comes next.'},
   {id: 'Desk',        icon: 'inbox',     sub: 'Briefings, notices and handoffs, in one place.',
    heading: "The Secretary's desk"},
+  {id: 'Repository', icon: 'stack', sub: 'WorkWork branches, decisions and checks.'},
   {id: 'Assignments', icon: 'clipboard', sub: 'Paper first. Keep track of materials you hand out.'},
   {id: 'Agents',      icon: 'team',      sub: 'Your repository team, handoffs, and reports.'},
   {id: 'Standards',   icon: 'target',    sub: 'The instructions and decisions behind your materials.'},
@@ -756,6 +758,7 @@ function render() {
 
   if (tab === 'Create') html = create();
   if (tab === 'Design') html = designView();
+  if (tab === 'Repository') html = '<section id="repository-panel" aria-label="Repository maintenance"></section>';
   if (tab === 'Desk') html = desk();
   if (tab === 'Templates') html = galleryView() + templateNames();
 
@@ -845,6 +848,7 @@ function render() {
 
   $('#content').innerHTML = html;
   mountLayoutEditor(tab);
+  if (tab === 'Repository') repository.mount();
   bind();
   if (tab === 'Templates' && !gallery) loadGallery();
   if (tab === 'Design') {
@@ -1120,6 +1124,7 @@ function show(id) {
    Boot
 \* ------------------------------------------------------------------ */
 
+const repository = startRepository(api, esc);
 refresh().then(loadGallery).catch(error);
 
 setInterval(async () => {

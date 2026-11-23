@@ -54,3 +54,22 @@ Agents → Run repository health review executes five repository validators, the
 The Secretary inbox appears on Today and Agents. Researcher findings from drafting are delivered through a separate Secretary call; Get updates runs a course briefing from course decisions, current focus items, and recent task metadata. Suggestions persist with source-run links. Add to today creates one linked focus item, Archive is reversible, and Send to Librarian creates one explicit handoff with a saved response. Failed/interrupted handoffs can be retried by the user. Drive filing remains pending. Drafts with research findings now include an additional Secretary call.
 
 Run `npm test` for validation, agent handoff, suggestion lifecycle, theme-drift, gallery and curriculum-picker checks. Live Anthropic calls require your key and API credits. Restarted in-progress jobs are marked interrupted; there are no automatic billable retries.
+
+### Repository
+
+Open **Repository** in SHULL OS. Git must be on PATH. Reading the public repo
+uses Git and GitHub's public API. The first sync downloads Git history into
+the app data folder. Open PRs, checks, decisions and remote branches refresh
+every minute and on focus when signed in. Anonymous GitHub API activity is
+cached for five minutes. Choose a WorkWork checkout under Branches to include
+local edits and tracking branches. Review and merge PRs on GitHub.
+
+To send a decision, install GitHub CLI and sign in as Hayabusa015 with
+`gh auth login`. The desktop checks that GitHub CLI is signed in as the repository
+owner, rechecks the exact proposal blob in an isolated checkout, and pushes a
+decision commit using your own credentials. Branch protections and concurrent
+updates can reject the push. Health shows the error and the last decision commits.
+The next Claude Code session
+picks up committed implementation requests through its SessionStart hook.
+An existing approval can be queued from In progress. While offline, the app
+shows its last saved Git snapshot and sync error.
