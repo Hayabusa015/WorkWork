@@ -15,7 +15,7 @@
    "title": "Unit 5 Test · Written · Version C",
    "conceptLabel": "REFERENCE",
    "concept": {
-    "summary": "Electronegativity (EN):  C 2.55 · N 3.04 · O 3.44 · F 3.98 · P 2.19 · S 2.58 · Cl 3.16 · Ge 2.01 · I 2.66"
+    "summary": "Electronegativity (EN):  C 2.55 · O 3.44 · P 2.19 · S 2.58 · Cl 3.16 · Si 1.90 · I 2.66 · Te 2.10"
    },
    "directions": "For each compound: add up the valence electrons and show the addition. Draw the Lewis structure with every lone pair. Name the shape. Find ΔEN for each different bond (higher EN − lower EN), then mark each bond PC (polar covalent) or NPC (nonpolar covalent). Then decide if the whole molecule is polar or nonpolar.",
    "questions": [],
@@ -27,7 +27,7 @@
      "headers": [
       "#",
       "Compound",
-      "Total valence e⁻ (show the addition) · 1",
+      "Total valence e− (show the addition) · 1",
       "Lewis structure, every lone pair · 2",
       "Shape name · 1",
       "ΔEN of each bond (show the subtraction) · 1",
@@ -59,11 +59,11 @@
      "rows": [
       [
        "1",
-       "GeCl₄",
+       "SiCl₄",
        "4 + 4(7) = 32",
        "",
        "Tetrahedral",
-       "Ge–Cl\n3.16 − 2.01 = 1.15",
+       "Si–Cl\n3.16 − 1.90 = 1.26",
        "PC",
        "Nonpolar"
       ],
@@ -89,28 +89,28 @@
       ],
       [
        "4",
-       "NOF",
-       "5 + 6 + 7 = 18",
+       "TeO₂",
+       "6 + 2(6) = 18",
        "",
        "Bent",
-       "N=O\n3.44 − 3.04 = 0.40\nN–F\n3.98 − 3.04 = 0.94",
-       "PC\nPC",
+       "Te=O, Te–O\n3.44 − 2.10 = 1.34",
+       "PC",
        "Polar"
       ]
      ],
      "keyImages": {
-      "0": "assets/chem_u05_test_v1/test_GeCl4.png",
+      "0": "assets/chem_u05_test_v1/test_SiCl4.png",
       "1": "assets/chem_u05_test_v1/test_PI3.png",
       "2": "assets/chem_u05_test_v1/test_CSCl2.png",
-      "3": "assets/chem_u05_test_v1/test_NOF.png"
+      "3": "assets/chem_u05_test_v1/test_TeO2.png"
      }
     }
    ],
    "keyNotes": [
-    "7 points per compound, 28 total: valence e⁻ with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
-    "Slots: nonpolar (GeCl₄), lone pair on the center (PI₃), three elements with carbon and a double bond (CSCl₂), challenge (NOF). OCS was dropped so C keeps one nonpolar molecule.",
-    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. NOF: N is the least EN atom, so it is the center. The double bond goes on O; F forms only one bond. N=O is exactly 0.40, which is polar covalent (0.40 to 1.80).",
-    "Ge is in group 14 (4 valence e⁻). GeCl₄: polar bonds, symmetric, so nonpolar. CSCl₂: double bond on S, not Cl.",
+    "7 points per compound, 28 total: valence e− with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
+    "Slots: easy nonpolar (SiCl₄), lone pair on the center (PI₃), three elements with carbon (CSCl₂), challenge (TeO₂). CSCl₂ is the only three-element compound.",
+    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. TeO₂: Te is in group 16 (6 valence e−), directly below Se. Te can hold more than 8, so accept O=Te=O as well; the shape is still bent and polar.",
+    "SiCl₄: polar bonds, symmetric, so nonpolar. CSCl₂: put the double bond on S; Cl forms only one bond. If on Cl, take off the drawing point only.",
     "Accept the subtraction written either way round if the difference is right."
    ]
   }

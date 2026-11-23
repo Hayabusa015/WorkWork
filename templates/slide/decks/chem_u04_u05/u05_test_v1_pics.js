@@ -72,6 +72,8 @@ const PICS = {
                        bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
   test_SO2:   { mol: { atoms: { X: ["S", 0, 0], A: ["O", ...at(150)], B: ["O", ...at(30)] },
                        bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
+  test_TeO2:  { mol: { atoms: { X: ["Te", 0, 0], A: ["O", ...at(150)], B: ["O", ...at(30)] },
+                       bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
   test_NOF:   { mol: { atoms: { X: ["N", 0, 0], A: ["O", ...at(150)], B: ["F", ...at(30)] },
                        bonds: [["X", "A", 2], ["X", "B", 1]], pairs: [["X", -90], ["A", 210], ["A", 90], ...outer3("B", 30)] }, u: 0.62, fs: 17, dy: -0.05 },
   /* study-guide symmetry check: shape given, students decide polar or nonpolar */

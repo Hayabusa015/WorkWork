@@ -27,7 +27,7 @@
      "headers": [
       "#",
       "Compound",
-      "Total valence e⁻ (show the addition) · 1",
+      "Total valence e− (show the addition) · 1",
       "Lewis structure, every lone pair · 2",
       "Shape name · 1",
       "ΔEN of each bond (show the subtraction) · 1",
@@ -107,9 +107,9 @@
     }
    ],
    "keyNotes": [
-    "7 points per compound, 28 total: valence e⁻ with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
+    "7 points per compound, 28 total: valence e− with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
     "Slots: lone pair on the center (PBr₃), double bonds and nonpolar (CS₂), three elements with carbon (COF₂), challenge (SeO₂).",
-    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. SeO₂: Se is in group 16 (6 valence e⁻), directly below S. Se is period 4, so accept O=Se=O as well; the shape is still bent (1 lone pair) and polar.",
+    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. SeO₂: Se is in group 16 (6 valence e−), directly below S. Se is period 4, so accept O=Se=O as well; the shape is still bent (1 lone pair) and polar.",
     "COF₂: put the double bond on O; F forms only one bond. If on F, take off the drawing point only.",
     "Accept the subtraction written either way round if the difference is right."
    ]
