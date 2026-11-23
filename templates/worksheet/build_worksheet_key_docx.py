@@ -451,6 +451,7 @@ def main():
             else:
                 return refuse(f"unknown key block kind {block['kind']!r}.")
 
+    span = spec.get("footerSpan", span)   # same opt-in as the student builder
     running_footer(s, f"SHULL SCIENCE          {unit} · {span} · KEY", pal,
                    with_page_numbers=True)
     trim_tail(doc)

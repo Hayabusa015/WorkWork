@@ -1719,6 +1719,9 @@ def main():
             for x in sec["close"].get("checklist", []):
                 check_item(c, x, pal)
 
+    # Opt-in "footerSpan": a unit test spans several sections, so its footer carries the
+    # same range as its header chip instead of the first section alone.
+    span = spec.get("footerSpan", span)
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal,
                    with_page_numbers=True)
     trim_tail(doc)
