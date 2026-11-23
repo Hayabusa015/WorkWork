@@ -65,7 +65,9 @@ of this workflow must, after updating `governance/proposals/`:
 
 1. Push the current state of every proposal into the `proposals` collection (`ArtifactData`
    `action: "batch"`, `set` per changed/new document) so the dashboard reflects reality. Build
-   the proposals documents with `python3 scripts/desk_export.py`.
+   the proposals documents with `python3 scripts/desk_export.py`. Delete any `proposals` document whose
+   key no longer matches a record file, and set `meta/sync` (`synced_at`, `records`) in the same
+   pass: the page's "last synced" line reads only that document.
 2. Query the `decisions` collection for `applied: false` documents. Each one is recorded by the
    main session as set out in `governance/CHANGE_CONTROL.md` section 4 item 1 (desk-click path and
    its safeguards; not restated here) — `approved` moves the record to APPROVED (implement only if
