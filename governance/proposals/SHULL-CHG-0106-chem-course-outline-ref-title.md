@@ -24,8 +24,8 @@
 | **Affected Courses** | **Chemistry only.** A course fact, so it belongs in `courses/chemistry/DECISIONS.md` (CLAUDE.md §2). It is filed as a record, as SHULL-CHG-0099 was, because the decisions file changes only against an approved record. Physics and Geology are untouched. |
 | **Risk** | **Low.** One table row and one log entry. The one real risk: "Reference packet contents" says *"each file's topic is its `REF` row in 'Short titles'"*. A builder could read every `REF` row as a packet sheet and put the outline into `Reference - Full Packet.pdf`. The decision-log entry rules this out. `REF \| Full Packet` already shows that not every `REF` row is a sheet (§4, open point). |
 | **Recommendation** | Approve as written. The approval should cover the row and the decision-log entry only. A clarifying sentence in "Reference packet contents" is a separate question (§4). Leave it out unless Matt names it. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-23: "a, file it as Reference - Course Outline" |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
