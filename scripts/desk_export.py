@@ -80,36 +80,39 @@ def summary_of(rows, body):
     return ""
 
 
-def export():
-    docs = []
-    for f in sorted(PROPOSALS.glob("SHULL-CHG-*.md")):
-        text = f.read_text(encoding="utf-8")
-        fm, body = frontmatter(text)
-        rows = table(body) or plain(body)
-        cid = f.name[:14]
-        stem = f.stem
-        h1 = re.search(r"^#\s+SHULL-CHG-\d+\s*[—-]\s*(.+)$", body, re.M)
-        raw_status = fm.get("status") or rows.get("status") or trail(body, "Status")
-        decision = fm.get("decided_by") and f"Approved by {fm['decided_by']}" or ""
-        decision = strip_md(rows.get("decision") or trail(body, "Decision") or decision)
-        slug = stem[15:].replace("-", " ").capitalize() if len(stem) > 15 else cid
-        docs.append({"id": stem, "data": {
-            "id": stem,
-            "change_id": cid,
-            "seq": int(cid[-4:]),
-            "title": strip_md(fm.get("title") or (h1.group(1) if h1 else rows.get("title") or slug)),
-            "status": status_of(raw_status),
-            "date": strip_md(fm.get("opened") or rows.get("date") or ""),
-            "risk": strip_md(rows.get("risk") or "")[:120],
-            "affects": strip_md(rows.get("affected courses") or rows.get("affected skills") or "")[:200],
-            "summary": summary_of(rows, body),
-            "decision": decision[:500],
-            "supersedes": strip_md(rows.get("supersedes") or "")[:300],
-            "implemented_by": strip_md(rows.get("implemented by") or "")[:200],
-            "file": f"governance/proposals/{f.name}",
-        }})
-    return docs
+def record(f, text):
+    fm, body = frontmatter(text)
+    rows = table(body) or plain(body)
+    cid = f.name[:14]
+    stem = f.stem
+    h1 = re.search(r"^#\s+SHULL-CHG-\d+\s*[—-]\s*(.+)$", body, re.M)
+    raw_status = fm.get("status") or rows.get("status") or trail(body, "Status")
+    decision = fm.get("decided_by") and f"Approved by {fm['decided_by']}" or ""
+    decision = strip_md(rows.get("decision") or trail(body, "Decision") or decision)
+    slug = stem[15:].replace("-", " ").capitalize() if len(stem) > 15 else cid
+    return {"id": stem, "data": {
+        "id": stem,
+        "change_id": cid,
+        "seq": int(cid[-4:]),
+        "title": strip_md(fm.get("title") or (h1.group(1) if h1 else rows.get("title") or slug)),
+        "status": status_of(raw_status),
+        "date": strip_md(fm.get("opened") or rows.get("date") or ""),
+        "risk": strip_md(rows.get("risk") or "")[:120],
+        "affects": strip_md(rows.get("affected courses") or rows.get("affected skills") or "")[:200],
+        "summary": summary_of(rows, body),
+        "current": rows.get("current rule", ""),
+        "proposed": rows.get("proposed rule") or rows.get("new rule", ""),
+        "verified": rows.get("verified", ""),
+        "decision": decision,
+        "supersedes": strip_md(rows.get("supersedes") or "")[:300],
+        "implemented_by": strip_md(rows.get("implemented by") or "")[:200],
+        "file": f"governance/proposals/{f.name}",
+    }}
 
+
+def export():
+    return [record(f, f.read_text(encoding="utf-8"))
+            for f in sorted(PROPOSALS.glob("SHULL-CHG-*.md"))]
 
 if __name__ == "__main__":
     docs = export()
