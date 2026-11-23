@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0078 | 2026-11-23 | Keep duplicate IDs; validator blocks new reuse | CONFIRMED | `governance/proposals/SHULL-CHG-0078-change-id-collisions-after-allocation-rule.md` |
 | SHULL-CHG-0077 | 2026-11-23 | Desk documents keyed on record filename | CONFIRMED | `governance/proposals/SHULL-CHG-0077-desk-export-keys-collide.md` |
 
 ## 2026-11-10
