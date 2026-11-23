@@ -63,7 +63,27 @@ const WORKING = ['Drafting', 'Building', 'Agent review'];
 \* ------------------------------------------------------------------ */
 
 $('#nav').innerHTML = TABS.map(t =>
-  `<button data-tab="${t.id}"><span>${icon(t.icon)}</span>${t.id}</button>`).join('');
+  `<button data-tab="${t.id}" title="${t.id}" aria-label="${t.id}"><span>${icon(t.icon)}</span><b class="nav-label">${t.id}</b></button>`).join('');
+const railToggle = $('#rail-toggle');
+function setRail(compact) {
+  document.body.classList.toggle('compact-rail', compact);
+  railToggle.setAttribute('aria-expanded', String(!compact));
+  const label = compact ? 'Expand navigation' : 'Collapse navigation';
+  railToggle.setAttribute('aria-label', label);
+  railToggle.title = label + ' (Ctrl+[)';
+}
+try { setRail(localStorage.getItem('shull-compact-rail') === 'true'); } catch { setRail(false); }
+railToggle.onclick = () => {
+  const compact = !document.body.classList.contains('compact-rail');
+  setRail(compact);
+  try { localStorage.setItem('shull-compact-rail', String(compact)); } catch {}
+};
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === '[' && railToggle.offsetWidth && !e.target.closest('input, textarea, select, [contenteditable=true]')) {
+    e.preventDefault();
+    railToggle.click();
+  }
+});
 $('#nav').onclick = e => {
   const b = e.target.closest('[data-tab]');
   if (b) { tab = b.dataset.tab; render(); }
@@ -728,7 +748,12 @@ function overview() {
 
 function render() {
   const meta = TABS.find(t => t.id === tab) || TABS[0];
-  $$('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  $$('[data-tab]').forEach(b => {
+    const active = b.dataset.tab === tab;
+    b.classList.toggle('active', active);
+    if (active) b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
+  });
   $('#heading').textContent = meta.heading || (tab === 'Today' ? 'Good morning, Shull' : tab);
   $('#subtitle').textContent = meta.sub;
 

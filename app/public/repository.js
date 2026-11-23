@@ -10,20 +10,22 @@ export function startRepository(api, esc, appState = () => ({})) {
   const panel = () => document.querySelector('#repository-panel');
   const link = (route, label) => '<a target="_blank" rel="noopener" href="' + base + esc(route) + '">' + esc(label) + '</a>';
   const field = (name, value) => value ? '<p><strong>' + esc(name) + '</strong> ' + esc(value) + '</p>' : '';
-  const details = (id, label, contents) => '<details data-key="' + esc(id) + '"' +
-    (expanded.has(id) ? ' open' : '') + '><summary>' + esc(label) + '</summary>' + contents + '</details>';
+  const details = (id, label, contents, meta = '', status = '') => '<details data-key="' + esc(id) + '"' +
+    (expanded.has(id) ? ' open' : '') + '><summary>' + '<span class="record-title">' + esc(label) + '</span>' +
+    (meta ? '<small>' + esc(meta) + '</small>' : '') + (status ? '<em>' + esc(status) + '</em>' : '') +
+    '</summary><div class="record-body">' + contents + '</div></details>';
   const runLink = r => link(r.commit ? 'commit/' + r.commit : 'actions/runs/' + Number(r.id), r.title + ' · ' + r.status);
   function proposal(r) {
     const idx = data.records.indexOf(r);
     const canRequest = r.status === 'APPROVED' && !r.decision.includes('Implementation requested via desktop.');
     const decide = waiting(r) || canRequest ? '<button data-pick="' + idx + '">' + (canRequest ? 'Request implementation' : 'Review decision') + '</button>' : '';
     const recent = (data.decisions || []).filter(a => a.file === r.file);
-    return details(r.file, r.change_id + ' · ' + r.title + ' · ' + r.status,
+    return details(r.file, r.title,
       field('Current rule', r.current) + field('Proposed change', r.proposed) + field('Reason', r.summary) +
       field('Decision', r.decision) + field('Implementation', r.implemented_by) + field('Verification', r.verified) +
       recent.map(a => '<p>' + runLink(a) + '</p>').join('') +
       '<div class="actions">' + link('blob/' + data.main + '/' + r.file, 'Read full proposal and options') +
-      link('commits/main/' + r.file, 'Commit history') + decide + '</div>');
+      link('commits/main/' + r.file, 'Commit history') + decide + '</div>', r.change_id, r.status);
   }
   function branches() {
     const localText = local.error || (local.connected ? local.root : 'Choose your local WorkWork folder to see your edits.');
@@ -35,12 +37,12 @@ export function startRepository(api, esc, appState = () => ({})) {
       (data.pullsError ? field('Pull requests unavailable', data.pullsError) : '') + data.branches.map(b => {
         const pull = data.pulls?.find(p => p.branch === b.name);
         const compare = 'compare/main...' + encodeURIComponent(b.name);
-        return details(b.name, (b.holds || b.subject) + ' · ' + b.name,
+        return details(b.name, b.holds || b.subject || b.name,
           field('Last commit', b.date + ' · ' + b.subject) +
           field('Compared with main', b.ahead + ' ahead, ' + b.behind + ' behind') +
           field('Previous review', [b.handled, b.note].filter(Boolean).join(' · ')) +
           link(compare, 'Inspect differences') + ' · ' + (pull ? link('pull/' + pull.number, 'Review PR #' + pull.number) :
-            b.ahead ? link(compare + '?expand=1', 'Open pull request on GitHub') : link('tree/' + encodeURIComponent(b.name), 'Browse branch')));
+            b.ahead ? link(compare + '?expand=1', 'Open pull request on GitHub') : link('tree/' + encodeURIComponent(b.name), 'Browse branch')), b.name, b.ahead ? b.ahead + ' ahead' : 'On main');
       }).join('');
   }
   function paint() {
@@ -82,14 +84,20 @@ export function startRepository(api, esc, appState = () => ({})) {
           field('Branch status', p.status) + link('blob/' + p.tip + '/' + p.file, 'Read branch version') +
           ' · ' + link('compare/main...' + encodeURIComponent(p.name), 'Review changes for main'))).join('');
     }
-    const healthSummary = data ? '<p><strong>Repository health</strong> · Main checks ' + esc(health?.status || 'unavailable') +
-      ' · ' + records.filter(waiting).length + ' awaiting decision · ' + records.filter(progress).length +
-      ' approved or partially implemented</p>' : '';
-    root.innerHTML = healthSummary + '<div class="actions">' + views.map(v => '<button data-view="' + v + '" aria-pressed="' +
+    const metrics = [
+      ['Needs Matt', records.filter(waiting).length, 'Awaiting decision'],
+      ['In progress', records.filter(progress).length, 'In progress'],
+      ['Branches', (data?.branches.length || 0) + 1, 'Remote branches'],
+      ['Health', health?.status || 'Unavailable', 'Main checks']
+    ];
+    const healthSummary = data ? '<div class="repo-metrics">' + metrics.map(([destination,value,label]) =>
+      '<button data-view="' + destination + '"><span>' + esc(label) + '</span><strong>' +
+      esc(value) + '</strong></button>').join('') + '</div>' : '';
+    root.innerHTML = healthSummary + '<div class="repo-tools">' + views.map(v => '<button data-view="' + v + '" aria-pressed="' +
       (v === view) + '" class="' + (v === view ? 'primary' : '') + '">' + v + '</button>').join('') +
       '<button data-sync>Refresh</button></div><p class="hint">' + esc(data ? 'Last sync ' + new Date(data.synced).toLocaleString() +
       ' · main ' + data.main.slice(0,8) : 'Fetching WorkWork…') + '</p>' +
-      (issue ? field('Sync unavailable', issue) : '') + (notice ? '<p role="status">' + esc(notice) + '</p>' : '') + body;
+      (issue ? field('Sync unavailable', issue) : '') + (notice ? '<p role="status">' + esc(notice) + '</p>' : '') + '<section class="repo-list">' + body + '</section>';
     root.querySelectorAll('details').forEach(d => d.ontoggle = () => d.open ? expanded.add(d.dataset.key) : expanded.delete(d.dataset.key));
     root.querySelectorAll('[data-view]').forEach(b => b.onclick = () => {view = b.dataset.view; chosen = ''; paint();});
     root.querySelector('[data-sync]').onclick = () => sync();
