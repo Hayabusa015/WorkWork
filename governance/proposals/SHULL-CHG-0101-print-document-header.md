@@ -19,7 +19,7 @@
 | **Affected Courses** | All three. |
 | **Risk** | Medium. Page budgets: same height, so page counts should hold; verified per builder in the implementing commit. Filed documents are not retrofitted. Guided notes are out of scope: their page opener is the SHULL-CHG-0038 section bar, measured by the notes pager; changing it is a follow-up. One-off builders for already-filed documents (Physics U2 test/quiz/study-guide set, the two Gizmo sheets, the U2 electron set, `build_u02_assessments.py`, `build_phys_u02_s2.1_front_back.py`, `build_quiz_s22_docx.py`) keep their own header until they are next used. |
 | **Recommendation** | Approve. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "All print documents" and "Layout + condensed title font", answering "Which WorkWork documents should get the new header?" and "What did you like about the original header: the look (layout), or also its fonts and colors?"; then "Reduce the font slightly to made the height of the old header than move ahead with the filing", answering the plan and preview. Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
