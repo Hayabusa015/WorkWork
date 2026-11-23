@@ -228,7 +228,7 @@ def sheet(path, data, key=False):
         fix_widths(t, [1.84] * 4)
         tight_cells(t, top=20, bottom=20, left=20, right=20)
         for k, (cell, f) in enumerate(zip(t.rows[0].cells, files)):
-            borders(cell, "#000000"[1:] if False else PAL.hair, sz=6)
+            borders(cell, PAL.hair, sz=6)
             cell.paragraphs[0].add_run().add_picture(f, width=Inches(1.5 if key else 1.76))
             if key and k == ans:
                 borders(cell, PAL.accent, sz=18)

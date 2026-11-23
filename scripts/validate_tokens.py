@@ -30,6 +30,16 @@ GENERATED = {
     "app/public/tokens.generated.css",          # scripts/build_app_css.py
 }
 
+# Named exceptions (SHULL-CHG-0076 part B, Matt, 2026-11-23): these files keep their own
+# colours, several of which have no token (the web demo's dark screen UI, and the reference
+# packet's figure greys and tints). Exempt as whole files. Adding a file here is a
+# governance change, not a fix.
+NAMED_EXCEPTION = {
+    "templates/activity/web/operation_periodic_table_demo.template.html",
+    "templates/reference/build_reference.py",
+    "templates/reference/vsepr_geometry.py",
+}
+
 # This file names the exception values it permits; that is not duplication.
 SELF = {"scripts/validate_tokens.py"}
 
@@ -39,7 +49,7 @@ def main():
     errors, checked = [], 0
     for rel in walk():
         norm0 = rel.replace(os.sep, "/")
-        if norm0 == SOURCE or norm0 in GENERATED or norm0 in SELF:
+        if norm0 == SOURCE or norm0 in GENERATED or norm0 in SELF or norm0 in NAMED_EXCEPTION:
             continue
         text = read(rel)
         found = HEX.findall(text)

@@ -48,6 +48,22 @@ def unit_titles():
     return out
 
 
+LABEL = re.compile(r"^\s*#|\"(?:[a-zA-Z]*[Tt]itle|unit[A-Za-z]*)\"\s*:|\bU\d{1,2}\b|\bUnit\s+\d", re.I)
+SECTION = re.compile(r"`\d{1,2}\.\d{1,2}`\s+([^`·]+?)\s*(?=·|`|$)", re.M)
+
+
+def section_titles():
+    """Section titles from the curriculum maps, longest first, so they can be blanked out."""
+    out = set()
+    for c in ("chemistry", "physics", "geology"):
+        text = read(os.path.join("courses", c, "DECISIONS.md"))
+        for m in SECTION.finditer(text):
+            s = " ".join(m.group(1).split())
+            if len(s.split()) >= 2:
+                out.add(s)
+    return sorted(out, key=len, reverse=True)
+
+
 def layer1_files():
     for d in LAYER1:
         root = os.path.join(REPO, d)
@@ -64,16 +80,31 @@ def main():
         print("validate_layers: no unit titles parsed — cannot validate")
         return 1
 
+    sections = section_titles()
     errors, checked = [], 0
     for rel in layer1_files():
         checked += 1
-        text = read(rel)
+        raw = read(rel)
         norm = rel.replace(os.sep, "/")
+        # A section title that contains a unit title ("The Geologic Time Scale") is not the
+        # unit title. Blank section titles out before matching (SHULL-CHG-0076 part D).
+        text = raw
+        for s in sections:
+            text = text.replace(s, " " * len(s))
+        lines = text.splitlines()
         for title, course in titles.items():
-            if title in text:
-                line = next((i for i, l in enumerate(text.splitlines(), 1) if title in l), "?")
-                errors.append(f"{norm}:{line} names the {course} unit \"{title}\" — "
+            pat = re.compile(rf"\b{re.escape(title)}\b")
+            single = len(title.split()) == 1
+            for i, l in enumerate(lines, 1):
+                if not pat.search(l):
+                    continue
+                # A one-word title ("Volcanoes") is also an ordinary noun. Count it only where
+                # it is used as a label: a heading, a title/unit field, or beside U5 / Unit 5.
+                if single and not LABEL.search(l):
+                    continue
+                errors.append(f"{norm}:{i} names the {course} unit \"{title}\" — "
                               f"course facts belong in courses/{course}/DECISIONS.md")
+                break
         for m in GRADING.finditer(text):
             line = text[: m.start()].count("\n") + 1
             errors.append(f"{norm}:{line} states a grading weight ({m.group(0).strip()}) — "

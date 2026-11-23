@@ -7,12 +7,16 @@ in both; the student copy leaves the answer boxes empty and the key fills them i
 course's text-safe colour. Ink only, hairline boxes, Archivo. Wording follows Matt's
 U3 slide deck, slide by slide.
 """
-import math, os, random, sys
+import json, math, os, random, sys
 from PIL import Image, ImageDraw, ImageFont
 REPO = "/home/user/WorkWork"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets")
 DPI = 300
-INK, LABEL, HAIR, WHITE, KEYC = "#14161B", "#55604F", "#C8CDC2", "#FFFFFF", "#0E766A"
+_T = json.load(open(os.path.join(REPO, "brand", "tokens.json"), encoding="utf-8"))
+_G = _T["ground"]
+INK, LABEL, HAIR, WHITE = (_G[k]["hex"] for k in ("asphalt", "label", "ruleHairline", "white"))
+KEYC = _T["courses"]["geology"]["primaryDeep"]["hex"]
+PARCH = _G["parchment"]["hex"]
 F = lambda w, pt: ImageFont.truetype(f"{REPO}/brand/fonts/Archivo-{w}.ttf", int(pt / 72 * DPI))
 px = lambda v: int(round(v * DPI))
 rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
@@ -136,8 +140,8 @@ def mohs(key):
     g = Fig(W, H)
     for half in range(2):
         x0 = 0.02 + half * 3.14
-        g.box(x0 + 0.3, 0.17, 0.6, 0.28, "1–5" if half == 0 else "6–10", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
-        g.box(x0 + 1.8, 0.17, 2.4, 0.28, "Mineral", pt=8, fill="#EDF0E5", edge=HAIR, lw=0.6)
+        g.box(x0 + 0.3, 0.17, 0.6, 0.28, "1–5" if half == 0 else "6–10", pt=8, fill=PARCH, edge=HAIR, lw=0.6)
+        g.box(x0 + 1.8, 0.17, 2.4, 0.28, "Mineral", pt=8, fill=PARCH, edge=HAIR, lw=0.6)
         for i in range(5):
             y = 0.46 + i * 0.28
             n = half * 5 + i
