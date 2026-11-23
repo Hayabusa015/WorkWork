@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the seven PHYS U03 section-deck specs (3.1-3.7) for build_deck.js.
+"""Write the PHYS U03 section-deck specs (3.1-3.6; 3.7 retired by SHULL-CHG-0074) for build_deck.js.
 
 Outline approved by Matt 2026-11-04: 46 slides, one problem slide per problem type, and each
 problem slide carries its problem, its diagram and its final answer together (layout 11). The
@@ -225,30 +225,6 @@ DECKS = {
             "A 10 kg block rests on a 35° incline. μs = 0.50, μk = 0.40. Does it slide? If so, find a.",
             "m = 10 kg, angle = 35°\nμs = 0.50, μk = 0.40", "test: mg sin vs μs N\nFnet = mg sin − μk N",
             "Slides (56.2 N > 40.1 N)  ·  a = 2.4 m/s²", "s36_incline_problem.png"),
-]),
-"3.7": ("Multi-Body Systems", [
-    title(7, "3.7", "Multi-Body Systems", "Solve pulley systems as one object for a, then one mass alone for tension.",
-          "a steel pulley wheel and rope hanging in a workshop"),
-    grouped("Ideal Strings and Pulleys", "Massless string, frictionless pulley: the string just changes direction.",
-            "WHAT IS THE SAME", "One tension T all\nalong the string.\nOne size of a for all.",
-            "TWO WAYS TO SOLVE", "System: a = Fnet/total m.\nThen one mass alone\nfor T.",
-            "Solve the whole system for a first, then one mass alone for T.", "s37_ideal.png"),
-    problem("Atwood Machine", "The heavier mass goes down. Use its direction as positive.",
-            "A 5.0 kg mass and a 3.0 kg mass hang over a pulley. Find a and the string tension.",
-            "m1 = 5.0 kg\nm2 = 3.0 kg", "a = (m1 − m2)g/(m1 + m2)\nT = m2(g + a)",
-            "a = 2.45 m/s²  ·  T = 36.8 N", "s37_atwood_problem.png"),
-    problem("Block on a Table", "Frictionless table. Only the hanging weight drives the system.",
-            "A 4.0 kg block on a table is tied over a pulley to a 2.0 kg hanging mass. Find a and T.",
-            "block 4.0 kg\nhanging 2.0 kg", "a = m2 g/(m1 + m2)\nT = m1 a",
-            "a = 3.27 m/s²  ·  T = 13.1 N", "s37_table_problem.png"),
-    problem("Block on a Table, with Friction", "Same setup, now μk = 0.20 between block and table.",
-            "Repeat the table problem with μk = 0.20. Find a and T.",
-            "block 4.0 kg, μk = 0.20\nhanging 2.0 kg", "Fnet = m2 g − μk m1 g\nT = m1 a + fk",
-            "a = 1.96 m/s²  ·  T = 15.7 N", "s37_table_friction.png"),
-    problem("Challenge: Incline and Pulley", "Frictionless incline. Decide which way it moves first.",
-            "A 6.0 kg block on a 30° incline is tied over a pulley to a 5.0 kg hanging mass. Find a and T.",
-            "block 6.0 kg, 30°\nhanging 5.0 kg", "Fnet = m2 g − m1 g sin(angle)\nT = m2(g − a)",
-            "a = 1.78 m/s²  ·  T = 40.1 N", "s37_incline_pulley.png"),
 ]),
 }
 
