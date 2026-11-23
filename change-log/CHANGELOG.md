@@ -25,6 +25,13 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-23
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | PARTIAL | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
+| SHULL-CHG-0099 | 2026-11-23 | Chemistry U6 reworked to four sections | PARTIAL | `governance/proposals/SHULL-CHG-0099-chemistry-u6-four-sections.md` |
+
 ## 2026-11-10
 
 | ID | Date | Change | Status | Record |

@@ -17,7 +17,7 @@
 | **Affected Courses** | All three. |
 | **Risk** | Low. One naming collision to note: the Chemistry course-level front-of-binder guide is also called a "Roadmap" in `courses/chemistry/DECISIONS.md` ("Matthew's front-of-binder Chemistry Roadmap"). The filenames cannot collide: that one is course-level, a Unit Roadmap always starts `Unit N`. |
 | **Recommendation** | Approve. Builder: `templates/unit-roadmap/`. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "Unit Roadmap", answering "For the Unit Launch page in WorkWork, which filename type should it use?" (offered: Organizer, or a new 'Unit Launch' type). Names the type `Roadmap`; the page is the Unit Roadmap. Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |

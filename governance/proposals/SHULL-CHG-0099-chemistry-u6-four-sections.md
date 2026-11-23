@@ -18,8 +18,8 @@
 | **Affected Courses** | Chemistry only (Path A content, recorded as a record because the decisions file is only changed against an approval). |
 | **Risk** | Low in the repository. Medium on Drive: if `Section 06.x` folders already exist under the old titles, the Librarian must rename them before anything is filed. Not checked; this session has no Drive access. |
 | **Recommendation** | Approve. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user in chat, 2026-11-23: "Yes, update it (Recommended)", answering "WorkWork's chemistry decisions file still lists the old 6 Unit 6 sections. OK to update it to your 4 sections (6.1 Covalent, 6.2 Polyatomic, 6.3 Ionic w/ Transition Metals, 6.4 Acids)?" Recorded by the main session (§4.1). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
