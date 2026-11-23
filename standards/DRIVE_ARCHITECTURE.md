@@ -12,9 +12,9 @@ is unchanged. See
 the system creates no content folders. The user adds them himself, and the folders named below are
 the ones it recognises when present. See
 `governance/proposals/SHULL-CHG-0035-drive-unit-folders.md`.
-**Amended by SHULL-CHG-0057** (2026-11-05): four unit-level content folders for new-layout units,
+**Amended by SHULL-CHG-0104** (2026-11-05): four unit-level content folders for new-layout units,
 created on demand. Supersedes in part 0029, 0030 and 0035, for new-layout units only. See
-`governance/proposals/SHULL-CHG-0057-unit-content-folders.md`.
+`governance/proposals/SHULL-CHG-0104-unit-content-folders.md`.
 **Folder IDs and operational notes:** `config/drive.json`. This file does not repeat them.
 **Google Drive is the canonical location for finished teaching documents.** The repository is
 canonical for the system. Claude Projects are working context, never storage.
@@ -37,7 +37,7 @@ SHULL Science/
 Each unit folder is one of two layouts, decided by the layout test in the Grammar below.
 
 ```
-New-layout unit (SHULL-CHG-0057; layout test in Grammar)
+New-layout unit (SHULL-CHG-0104; layout test in Grammar)
 └── [Course]/                        Chemistry · Physics · Geology
     └── Unit ## - Unit Name/
         ├── Presentations + Guided Notes/      created on demand
@@ -71,7 +71,7 @@ section-level `Labs-Case Studies-Projects` folder is recognised when present in 
 - Units: `Unit ##` zero-padded plus a short title — `Unit 08 - <Unit Name>`
 - Sections: `Section ##.#` plus a short title — `Section 08.4 - <Section Name>`
 - **Separator is a hyphen-minus, never an en dash.** An en dash creates a near-duplicate folder.
-- **Layout test (SHULL-CHG-0057). This is the only statement of it; other files point here.** Each
+- **Layout test (SHULL-CHG-0104). This is the only statement of it; other files point here.** Each
   unit folder is new-layout or legacy-layout, decided mechanically, in all three courses. Run the
   test on the unit folder before filing anything into it. Read the unit folder's direct children and
   each Section folder's direct children by `parentId` listing. Folder names match case-insensitively
@@ -90,12 +90,12 @@ section-level `Labs-Case Studies-Projects` folder is recognised when present in 
   A unit's layout is stable. A new unit gets one of the four folders at its first step-4-type
   filing, and from then on step 2 keeps it new. A legacy unit keeps its legacy files, so step 3 or 4
   keeps it legacy. Only a separate, approved retrofit changes a legacy unit; none is part of
-  SHULL-CHG-0057.
+  SHULL-CHG-0104.
 
   **Mixed unit** (step 2 matches, and a step-3 folder or step-4 file is also present, e.g. a
   `Presentations` folder beside `Worksheets`): it is new-layout. New files go to the four folders.
   The legacy folders and files are **left alone and reported**, never merged, moved or renamed.
-- **New-layout units — unit-level content folders (SHULL-CHG-0057):** `Presentations + Guided
+- **New-layout units — unit-level content folders (SHULL-CHG-0104):** `Presentations + Guided
   Notes`, `Quiz`, `Test`, `Worksheets` — **exactly** those four names, including the `+`. Siblings
   of the Section folders, one copy per unit, never duplicated into sections. Each is created on
   demand, only when a file is about to be filed into it; the four are not created together in
@@ -118,16 +118,16 @@ section-level `Labs-Case Studies-Projects` folder is recognised when present in 
 - **No `Homework` folder exists at any level, in either layout.** Homework files — practice sets,
   worksheets, take-home work, keys — are filed as loose files directly inside the Section folder
   itself in **legacy-layout units** (**SHULL-CHG-0030**), and in the unit's `Worksheets` folder in
-  **new-layout units** (**SHULL-CHG-0057**).
+  **new-layout units** (**SHULL-CHG-0104**).
 - **The system never creates a content folder** (SHULL-CHG-0035), **except the four unit-level
-  folders in a new-layout unit (SHULL-CHG-0057)**. Otherwise the user adds content folders himself,
+  folders in a new-layout unit (SHULL-CHG-0104)**. Otherwise the user adds content folders himself,
   and a legacy-layout unit that lacks one stays without it. If the matching folder is not there and
   may not be created, the file goes **loose in its parent**. This covers content subfolders only: a
   missing `Section ##.#` folder may still be created (§2 rule 3).
 
 ### What goes where
 
-#### New-layout units (SHULL-CHG-0057)
+#### New-layout units (SHULL-CHG-0104)
 
 The four unit-level folders are created on demand (Grammar above). A file spanning two units is
 filed once, in the first unit's folder, and not duplicated.
@@ -162,12 +162,12 @@ parent given in the Level column. Nothing is created.
 2. **Classify the unit's layout** (layout test, Grammar above), then **reuse existing folders
    exactly**, matching case-insensitively. **Never create a content folder** (SHULL-CHG-0035),
    **except** the four unit-level folders in a new-layout unit, created on demand after a
-   case-insensitive check (SHULL-CHG-0057). If the matching one does not exist and may not be
+   case-insensitive check (SHULL-CHG-0104). If the matching one does not exist and may not be
    created, file loose in the parent. In legacy-layout units, `Quiz` is the current name for the
    unit-level quiz folder (**SHULL-CHG-0030**). If the layout test says stop, report and ask.
 3. Create missing Unit and Section folders using the grammar above. Together with rule 2's four unit
    folders, this is the only folder creation the system does (SHULL-CHG-0035, decision D;
-   SHULL-CHG-0057).
+   SHULL-CHG-0104).
 4. **If the unit or section is unclear, ask.** Never default to a misc folder.
 5. The code on the document, in the filename, and in the folder path must all agree.
 6. **Never copy a template into a course folder.** Course decks reference `_Brand/Templates/`. One
@@ -179,7 +179,7 @@ parent given in the Level column. Nothing is created.
 | Operation | Permission |
 |---|---|
 | Read, search, retrieve | Allowed |
-| Create | Files: allowed in authorised teaching locations. Folders: `Unit ##`, `Section ##.#` (§2 rule 3), and, in a new-layout unit only, the four unit-level content folders (§2 rule 2, SHULL-CHG-0057). No other content folder (SHULL-CHG-0035). |
+| Create | Files: allowed in authorised teaching locations. Folders: `Unit ##`, `Section ##.#` (§2 rule 3), and, in a new-layout unit only, the four unit-level content folders (§2 rule 2, SHULL-CHG-0104). No other content folder (SHULL-CHG-0035). |
 | Rename | Allowed when deterministic — **log the prior name first** |
 | Move | **Allowed when deterministic.** `update_file` accepts `parentId` and replaces the existing parent — a true reparent that **preserves the file ID**, so links survive and rollback is exact. Log the prior parent first. |
 | Overwrite | Requires explicit workflow authorisation |

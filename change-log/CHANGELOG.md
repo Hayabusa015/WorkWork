@@ -29,13 +29,13 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0071 | 2026-11-11 | Every table cell is centred horizontally and vertically, in every document | IMPLEMENTED | `governance/proposals/SHULL-CHG-0071-table-cells-centered.md` |
+| SHULL-CHG-0105 | 2026-11-11 | Every table cell is centred horizontally and vertically, in every document | IMPLEMENTED | `governance/proposals/SHULL-CHG-0105-table-cells-centered.md` |
 
 ## 2026-11-05
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0057 | 2026-11-05 | New units in every course get four content folders: Quiz, Test, Presentations + Guided Notes, Worksheets | IMPLEMENTED | `governance/proposals/SHULL-CHG-0057-unit-content-folders.md` |
+| SHULL-CHG-0104 | 2026-11-05 | New units in every course get four content folders: Quiz, Test, Presentations + Guided Notes, Worksheets | IMPLEMENTED | `governance/proposals/SHULL-CHG-0104-unit-content-folders.md` |
 
 ## 2026-10-28
 

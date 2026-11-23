@@ -1,4 +1,6 @@
-# SHULL-CHG-0057 — Four unit-level content folders for new units: Quiz, Test, Presentations + Guided Notes, Worksheets
+# SHULL-CHG-0104 — Four unit-level content folders for new units: Quiz, Test, Presentations + Guided Notes, Worksheets
+
+> **Renumbered 2026-11-23** from SHULL-CHG-0057 on branch `claude/funny-heisenberg-vu0q4r`, which collided with a different record of that number already on `main`. Commits and Drive-operation logs written before the merge said SHULL-CHG-0057; they mean this record. (SHULL-CHG-0078, `scripts/validate_change_ids.py`.)
 
 > **ID note.** `SHULL-CHG-0056` is taken on another branch (`overseer-as-subagent-routing-brief`), so
 > this record is 0057. The Secretary that drafted it had no shell and could not run
@@ -14,7 +16,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0057 |
+| **Change ID** | SHULL-CHG-0104 |
 | **Date** | 2026-11-05 (drafted); answers to §5 recorded 2026-11-05 |
 | **Source** | User, 2026-11-05, in the main session. The Secretary did not hear him directly. His words, as relayed: **(1)** *"I added them but can you just make them for me. Quiz's / Test / Presentations + Guided Notes / Worksheets"*, about the four folders he had made by hand in Chemistry Unit 04, asking for the same set in Unit 05. **(2)** He agreed to *"draft a change proposal making your four folders the standard for every unit"*, then said *"yes draft the proposal"*. **(3)** His answers to the open questions: *"1 yes, 2 Worksheets, 3 all courses, new units only"* (§5). **None of these approves the rule text below.** Evidence: `reports/drive-operations/2026-11-05_chem-u04-u05-content-folders.md` and `reports/drive-operations/2026-11-05_chem-u04-u05-notes-filing.md`. |
 | **Current Rule** | See §1. Verbatim, from `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, and records SHULL-CHG-0029, 0030 and 0035. |
@@ -28,7 +30,7 @@
 | **Recommendation** | Approve. §5 is fully answered: Q1, Q2 and Q4 in his words, Q3, Q5 and Q6 by the stated defaults, which he did not object to. Before approving, the main session should put two points to him (§2a.1 definition wording; §2a.5 activities and organizers), since both go slightly beyond his literal words. No retrofit is part of this record (§2e). |
 | **Decision** | Approved by the user, 2026-11-05: "approve 0057" |
 | **Status** | **IMPLEMENTED** |
-| **Implemented By** | Secretary, 2026-11-05, against the APPROVED record at commit `113ca6f`. Files: `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/skills/retrieve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, `README.md`, and one-line pointer banners at the top of SHULL-CHG-0029, 0030 and 0035 (no field edits). Implementation commit: **`c5e64a0`** ("Implement SHULL-CHG-0057: four unit content folders for new units"; parent `113ca6f`, confirmed in the reflog by the Secretary). |
+| **Implemented By** | Secretary, 2026-11-05, against the APPROVED record at commit `113ca6f`. Files: `standards/DRIVE_ARCHITECTURE.md`, `config/drive.json`, `.claude/skills/shelve-drive-file/SKILL.md`, `.claude/skills/retrieve-drive-file/SKILL.md`, `.claude/agents/librarian.md`, `README.md`, and one-line pointer banners at the top of SHULL-CHG-0029, 0030 and 0035 (no field edits). Implementation commit: **`c5e64a0`** ("Implement SHULL-CHG-0104: four unit content folders for new units"; parent `113ca6f`, confirmed in the reflog by the Secretary). |
 | **Verified** | **Partly.** Done by the Secretary: grep outside `legacy/`, `docs/`, `reports/`, `governance/proposals/` finds no live "never creates a content folder" without the 0057 exception, no live "beside 'Quiz'" clause unqualified by legacy layout, and the layout test stated only in `DRIVE_ARCHITECTURE.md` §1 Grammar. `librarian.md` and both Drive skills point to it and do not restate it or the four names. `scripts/` reads none of the changed `folderGrammar` keys. Reported by the main session after commit `c5e64a0` (run in its shell, not by the Secretary): `json.load(config/drive.json)` OK, and `folderGrammar.newLayoutUnitFolders` = `['Presentations + Guided Notes', 'Quiz', 'Test', 'Worksheets']`. `validate_agents`, `validate_codes`, `validate_layers`, `validate_notes`, `validate_profiles`, `validate_references`, `validate_schemas` all OK; counts were not reported. `validate_tokens` FAILS, only on `templates/slide/decks/chem_u04_u05/motion_polarity.html` (raw hex). That file comes from an earlier, unrelated commit, not from 0057, and the main session is fixing it separately. **Not yet done:** the three read-only Librarian dry runs in §7. |
 
 ---
@@ -251,13 +253,13 @@ record, not an inference.
 
 ### 2b. Text for `standards/DRIVE_ARCHITECTURE.md`
 
-- **Header (lines 3–14):** add "**Amended by SHULL-CHG-0057** (2026-11-05): four unit-level content
+- **Header (lines 3–14):** add "**Amended by SHULL-CHG-0104** (2026-11-05): four unit-level content
   folders for new-layout units, created on demand. Supersedes in part 0029, 0030 and 0035, for
   new-layout units only." Leave the existing lines; history is appended.
 - **§1 tree (lines 30–38):** two trees, labelled.
 
 ```
-New-layout unit (SHULL-CHG-0057; layout test in §2)
+New-layout unit (SHULL-CHG-0104; layout test in §2)
 └── [Course]/                        Chemistry · Physics · Geology
     └── Unit ## - Unit Name/
         ├── Presentations + Guided Notes/      created on demand
@@ -287,7 +289,7 @@ Legacy-layout unit (existing units; unchanged)
   near-duplicates). Label the existing unit-level bullet "Legacy-layout units". Label the "No
   `Homework` folder" bullet: homework is loose in the Section in legacy-layout units and in
   `Worksheets` in new-layout units; no `Homework` folder in either. Narrow the "never creates a
-  content folder" bullet: "except the four unit-level folders in a new-layout unit (SHULL-CHG-0057)".
+  content folder" bullet: "except the four unit-level folders in a new-layout unit (SHULL-CHG-0104)".
 - **What goes where (lines 66–79):** add the §2a.5 table as "New-layout units". Keep the existing
   rows, headed "Legacy-layout units".
 - **§2 rule 2 (lines 84–86):** "Never create a content folder, **except** the four unit-level folders
@@ -296,7 +298,7 @@ Legacy-layout unit (existing units; unchanged)
 - **§2 rule 3 (lines 87–88):** "This is the only folder creation" becomes "Together with rule 2's
   four unit folders, this is the only folder creation".
 - **§3 Create row (line 100):** "Folders: `Unit ##`, `Section ##.#`, and, in a new-layout unit only,
-  the four unit-level content folders (SHULL-CHG-0057). No other content folder."
+  the four unit-level content folders (SHULL-CHG-0104). No other content folder."
 
 ### 2c. `config/drive.json`
 
@@ -312,10 +314,10 @@ Legacy-layout unit (existing units; unchanged)
   the history sentences, or move them to a pointer to 0029, 0030 and 0035.
 - `homeworkFiling`: "No Homework folder at any level. Legacy-layout units: homework loose in the
   Section folder (SHULL-CHG-0030). New-layout units: in the unit's `Worksheets` folder
-  (SHULL-CHG-0057). Layout test: `DRIVE_ARCHITECTURE.md` §2."
+  (SHULL-CHG-0104). Layout test: `DRIVE_ARCHITECTURE.md` §2."
 - `operations.createFolder`: "Used for the four unit-level content folders in a new-layout unit
-  (SHULL-CHG-0057), on demand, and for a missing Unit or Section folder. Nothing else."
-- `$comment`: "SHULL-CHG-0005 as amended by SHULL-CHG-0035 and SHULL-CHG-0057", plus the date.
+  (SHULL-CHG-0104), on demand, and for a missing Unit or Section folder. Nothing else."
+- `$comment`: "SHULL-CHG-0005 as amended by SHULL-CHG-0035 and SHULL-CHG-0104", plus the date.
 - Per-unit IDs for CHEM U04 and U05 (eight folder IDs, from the 2026-11-05 content-folders log)
   are **not** added unless config gets a per-unit map. 0035 §4 left that open, and this record does
   not open it again.
@@ -338,7 +340,7 @@ This is how 0035 left them, and it is kept.
   Nothing else."
 - `SKILL.md` line 50: Create row as in §2b §3.
 - `librarian.md` lines 33–36: replace "(SHULL-CHG-0035)" with "(SHULL-CHG-0035, as amended by
-  SHULL-CHG-0057)".
+  SHULL-CHG-0104)".
 - `librarian.md` line 43: "**Never a content folder.**" becomes "Content folders: only the four
   unit-level folders in a new-layout unit, on demand."
 - `librarian.md` lines 72–73: add "and the unit's layout" after "content type". Lines 81–83:
@@ -355,7 +357,7 @@ trashed; empty old folders left in place unless he separately approves trashing 
 ### 2f. The three records
 
 0029, 0030 and 0035 are **not edited**. History is appended, never rewritten. Optional, his choice:
-a one-line pointer at the top of each, "Superseded in part by SHULL-CHG-0057 (new-layout units
+a one-line pointer at the top of each, "Superseded in part by SHULL-CHG-0104 (new-layout units
 only)", as was done for the renumbering banners. `change-log/CHANGELOG.md` gets a row naming 0029,
 0030 and 0035 as partly superseded. That row belongs to the main session.
 
@@ -445,7 +447,7 @@ whole of §2, defaults included.
 
 ## 6. Rollback
 
-- **Repository.** Implementation is one commit carrying `SHULL-CHG-0057`. `git revert <sha>` restores
+- **Repository.** Implementation is one commit carrying `SHULL-CHG-0104`. `git revert <sha>` restores
   0035's rule exactly. 0029, 0030 and 0035 are not edited, so nothing in them needs restoring.
 - **Folders the system creates under this rule.** Each creation is logged before it happens. To roll
   back, first move any files out (reparent to the logged prior parent, or to where the legacy rule
@@ -463,7 +465,7 @@ whole of §2, defaults included.
 
 **Nothing is edited now.** §5 is answered; approval is still required.
 
-1. Edit files 1–6 in §4 per §2b–§2d. One commit, `SHULL-CHG-0057` in the message.
+1. Edit files 1–6 in §4 per §2b–§2d. One commit, `SHULL-CHG-0104` in the message.
 2. Main session: CHANGELOG row (§4 item 8).
 3. No Drive mutation is part of this commit. No retrofit (§2e).
 

@@ -1,4 +1,6 @@
-# SHULL-CHG-0071 — Every table cell is centred, horizontally and vertically, in every document
+# SHULL-CHG-0105 — Every table cell is centred, horizontally and vertically, in every document
+
+> **Renumbered 2026-11-23** from SHULL-CHG-0071 on branch `claude/funny-heisenberg-vu0q4r`, which collided with a different record of that number already on `main`. Commits and Drive-operation logs written before the merge said SHULL-CHG-0071; they mean this record. (SHULL-CHG-0078, `scripts/validate_change_ids.py`.)
 
 > **ID note.** IDs up to `SHULL-CHG-0070` are taken on other branches. The main session checked
 > `origin` and supplied 0071. The Secretary that drafted this record had no shell and could not run
@@ -8,7 +10,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0071 |
+| **Change ID** | SHULL-CHG-0105 |
 | **Date** | 2026-11-11 (drafted) |
 | **Source** | User, 2026-11-11, in the main session. The Secretary did not hear him directly; his words are as the main session relayed them. He edited the tables of the PhET activity (`templates/worksheet/specs/chem_u05_s05.3_phet_shapes.json`, Chemistry 5.3, *Molecular Geometry with PhET*) in Word himself and sent a screenshot. In his edit every table cell is centred horizontally and vertically: the header row and every body cell, the first column included. His words: *"note what i did with centering in the tables. i need this to be consistant in all documents from here on out, make it a rule and approve thew change in the repo"*. **This record is not the approval.** The main session records his decision under `governance/CHANGE_CONTROL.md` §4 once this record exists. |
 | **Current Rule** | **No written rule on cell alignment exists.** `brand/SHULL_DESIGN_SYSTEM.md` §8: *"**Table rows use hairline borders**, never alternating solid shading. If shading is genuinely needed for scanability, use a very light grey tint — never a brand colour at medium or full saturation."* §11: *"Dense tabular content uses real tables, never card or flexbox grids."* Neither says how a cell's contents are aligned. Alignment today is whatever each builder does (§1). |
@@ -22,7 +24,7 @@
 | **Recommendation** | Approve §2a as written, with **no exceptions** (his "consistent in all documents"). Two points to put to him before or with approval, one at a time: **Q1** the definition of "table" that keeps layout grids out (§4); **Q2** whether any §4 candidate is an exception. If he says nothing on Q2, the default is no exceptions. Rule applies to documents built from approval forward; finished files on Drive are not rebuilt ("from here on out"). |
 | **Decision** | Approved by the user, 2026-11-11: "note what i did with centering in the tables. i need this to be consistant in all documents from here on out, make it a rule and approve thew change in the repo" |
 | **Status** | **IMPLEMENTED** |
-| **Implemented By** | Two commits, both citing SHULL-CHG-0071 (§5). **(1) Rule, Secretary, 2026-11-11:** `brand/SHULL_DESIGN_SYSTEM.md` §11 Documents, new `### Tables` subsection after the "Dense tabular content uses real tables" bullet, §2a text verbatim. Q1 resolved as the §2a definition (visible fill-in grids only; layout grids excluded), stated in the rule's second paragraph. Q2: no exceptions, so "There are no exceptions." stands. Commit SHA: `38052ca`. **(2) Code, main session, separate commit:** `templates/_shull_docx.py` `fillin_table`, `templates/practice/build_practice.py` question tables, `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`, `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html` (§5 items 2–8). Commit SHA: `8488f8e`. |
+| **Implemented By** | Two commits, both citing SHULL-CHG-0105 (§5). **(1) Rule, Secretary, 2026-11-11:** `brand/SHULL_DESIGN_SYSTEM.md` §11 Documents, new `### Tables` subsection after the "Dense tabular content uses real tables" bullet, §2a text verbatim. Q1 resolved as the §2a definition (visible fill-in grids only; layout grids excluded), stated in the rule's second paragraph. Q2: no exceptions, so "There are no exceptions." stands. Commit SHA: `38052ca`. **(2) Code, main session, separate commit:** `templates/_shull_docx.py` `fillin_table`, `templates/practice/build_practice.py` question tables, `templates/lab/SHULL_Lab_TEMPLATE_MASTER.html`, `templates/lab/SHULL_Lab_TEMPLATE_TEACHER_KEY.html` (§5 items 2–8). Commit SHA: `8488f8e`. |
 | **Verified** | 2026-11-11, main session. All 8 validators OK (validate_profiles: 15 refusals fire, 2 allowances hold, 4 real specs build). Rebuilt 4.5 practice, 5.3 Practice Set, 5.3 Activity (student + key) and three notes packets (chem U4-U5, chem U1, geo U1): python-docx check, 0 of 770 grid cells not centred horizontally and vertically. 5.3 key rendered and inspected against the user's screenshot: matches. Branch `claude/bold-edison-rclt4e` (left-justified table rule) confirmed not merged into main and has no PR. |
 
 ---
@@ -78,7 +80,7 @@ so no section is renumbered and no existing `§` reference breaks.
 **Every cell is centred, horizontally and vertically.** The header row and every body cell, the
 first (label) column included. Student copy and key alike. This holds in every SHULL document that
 has a table: worksheets, practice sets, activities, guided and Cornell notes, keys, labs,
-assessments, and reference sheets. There are no exceptions. SHULL-CHG-0071.
+assessments, and reference sheets. There are no exceptions. SHULL-CHG-0105.
 
 A *table* here is a grid the reader sees as rows and columns: a header row naming the columns, or
 bordered cells holding values, blanks to fill in, or pictures. A grid used only to place things on
@@ -149,13 +151,13 @@ centred; c–d follow his Q1 answer.
 
 ## 5. What implementation touches
 
-**Two layers, two commits, both citing SHULL-CHG-0071.** The Secretary edits the rule; the main
+**Two layers, two commits, both citing SHULL-CHG-0105.** The Secretary edits the rule; the main
 session edits the code. Neither is bundled with anything else.
 
 | # | File | Who | Change |
 |---|---|---|---|
 | 1 | `brand/SHULL_DESIGN_SYSTEM.md` §11 | **Secretary** | Add the §2a `### Tables` subsection verbatim (amended only by his Q1/Q2 answers) |
-| 2 | `templates/_shull_docx.py` `fillin_table()` lines 579–600 | Main session | Header cells: `c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER` and `align=WD_ALIGN_PARAGRAPH.CENTER` on the header `para`. Body cells: keep vertical centring (line 594); add `align=WD_ALIGN_PARAGRAPH.CENTER` to both `para` calls (label column and the rest). Update the docstring to cite SHULL-CHG-0071 by pointer, not restate the rule. This one change carries #3 and #4 |
+| 2 | `templates/_shull_docx.py` `fillin_table()` lines 579–600 | Main session | Header cells: `c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER` and `align=WD_ALIGN_PARAGRAPH.CENTER` on the header `para`. Body cells: keep vertical centring (line 594); add `align=WD_ALIGN_PARAGRAPH.CENTER` to both `para` calls (label column and the rest). Update the docstring to cite SHULL-CHG-0105 by pointer, not restate the rule. This one change carries #3 and #4 |
 | 3 | `templates/worksheet/build_worksheet_docx.py` `table_block()` | Main session | No code change expected; inherits #2. Confirm the picture-cell path (line 402–406) still centres; add nothing unless the visual check shows a picture cell sitting off-centre vertically |
 | 4 | `templates/worksheet/build_worksheet_key_docx.py`, `templates/notes/build_notes_docx.py` line 665 | Main session | No code change expected; both call #2. Confirm by rebuild |
 | 5 | `templates/practice/build_practice.py` lines 336–343 | Main session | For each cell in the question table: `cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER`; pass `align=WD_ALIGN_PARAGRAPH.CENTER` to `para`. The equation grid (lines 212–227) is already compliant; leave it |
@@ -177,9 +179,9 @@ follows §2a.
 
 ## 6. Rollback
 
-- **Rule.** The Secretary's design-system edit is one commit carrying `SHULL-CHG-0071`. `git revert
+- **Rule.** The Secretary's design-system edit is one commit carrying `SHULL-CHG-0105`. `git revert
   <sha>` removes the `### Tables` subsection; no other section moves, so no reference breaks.
-- **Code.** The main session's code edit is one commit carrying `SHULL-CHG-0071`. `git revert <sha>`
+- **Code.** The main session's code edit is one commit carrying `SHULL-CHG-0105`. `git revert <sha>`
   restores the §1 behaviour exactly (left-aligned headers and bodies, top-aligned lab key cells).
   Revert both commits together; reverting only one leaves the rule and the builders disagreeing,
   which is the drift this system exists to prevent.

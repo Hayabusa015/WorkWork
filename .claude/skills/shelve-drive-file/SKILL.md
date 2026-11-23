@@ -22,7 +22,7 @@ the create call returning success. Not your intention. A confirmed lookup, after
 1. **Resolve Course → Unit → Section → content type *before* saving.** Not after.
 2. **Check the name** with `naming`. Fix it before filing, not after.
 3. **Classify the unit's layout** with the layout test in `standards/DRIVE_ARCHITECTURE.md` §1
-   Grammar (SHULL-CHG-0057), then **look for existing folders** and reuse them exactly, matching
+   Grammar (SHULL-CHG-0104), then **look for existing folders** and reuse them exactly, matching
    case-insensitively. New layout: if the destination unit-level content folder is absent, create
    it (log first, check case-insensitively, never a near-duplicate). Legacy layout, or any other
    absent content folder: file loose in its parent. If the test says stop, report and ask. Rules:
@@ -51,7 +51,7 @@ it into a Google Doc and the file stops being diffable.
 
 | | |
 |---|---|
-| Create, upload | Files: yes, in authorised teaching locations. Folders: Unit and Section, and, in a new-layout unit only, the four unit-level content folders (`standards/DRIVE_ARCHITECTURE.md` §3, SHULL-CHG-0057). No other content folder. Built binaries go through the Upload Inbox (`gws`, `drive.file` only). |
+| Create, upload | Files: yes, in authorised teaching locations. Folders: Unit and Section, and, in a new-layout unit only, the four unit-level content folders (`standards/DRIVE_ARCHITECTURE.md` §3, SHULL-CHG-0104). No other content folder. Built binaries go through the Upload Inbox (`gws`, `drive.file` only). |
 | Rename | Deterministic only — **log the prior name first** |
 | **Move** | **Allowed when deterministic.** `update_file` with a new `parentId` reparents in place and **keeps the file ID**. Log the prior parent first. **Never move by copy-and-trash** — that changes the ID and breaks links. |
 | Overwrite | Explicit workflow authorisation |

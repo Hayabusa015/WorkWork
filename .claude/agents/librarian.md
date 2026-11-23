@@ -32,7 +32,7 @@ use it to change repository files, system rules, or anything on Drive other than
 
 Resolve **Course → Unit → Section → content type before saving.** Reuse existing folders exactly,
 matching case-insensitively. Folder rules, including which folders you may create, are in
-`standards/DRIVE_ARCHITECTURE.md` §2 (SHULL-CHG-0035, as amended by SHULL-CHG-0057). **If the unit or section is unclear, ask.**
+`standards/DRIVE_ARCHITECTURE.md` §2 (SHULL-CHG-0035, as amended by SHULL-CHG-0104). **If the unit or section is unclear, ask.**
 Never default to a misc folder.
 
 ## Authority
