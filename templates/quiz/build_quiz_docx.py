@@ -37,7 +37,7 @@ from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run, fix_widths,
     no_split, page_setup, running_footer, cell_margins, gap, trim_tail, tight_cells,
     unpad_cell, rule_lines, text_width_in, hexof,
-)
+    print_header)
 
 THETA_FACE = "/usr/share/fonts/opentype/inter/Inter-Bold.otf"
 THETA_FACE_REGULAR = "/usr/share/fonts/opentype/inter/Inter-Regular.otf"
@@ -282,24 +282,10 @@ def equation_groups(doc, groups, pal, width=7.5, size=9.5, bold=False, italic_va
 
 
 def masthead(doc, spec, sec, pal):
+    # SHULL-CHG-0101: the shared print header.
     unit = f"U{int(spec['unit']):02d}"
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [5.55, 1.95])
-    h, hr = t.rows[0].cells
-    for cc in (h, hr):
-        borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-    borders(h, pal.display, sz=30, edges=("left",))
-    cell_margins(h, top=80, bottom=80, left=160, right=80)
-    cell_margins(hr, top=80, bottom=80, left=80, right=60)
-    para(h, f"UNIT {int(spec['unit'])} — {unit_title(spec['course'], spec['unit']).upper()}", 7.5,
-         bold=True, color=pal.accent, caps_track=True, first=True)
-    para(h, sec["title"], 15, bold=True, color=pal.ink)
-    pp = para(hr, f"{unit} / S{sec['code']}", 11, bold=True, color=pal.accent,
-              caps_track=True, first=True)
-    pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    pp = para(hr, spec.get("docType", "Quiz").replace("_", " ").upper(), 6.5, color=pal.label,
-              caps_track=True)
-    pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    print_header(doc, pal, unit=spec["unit"], code=f"{unit} / S{sec['code']}",
+                 kind=spec.get("docType", "Quiz").replace("_", " "), title=sec["title"])
 
 
 def name_row(doc, total, pal):

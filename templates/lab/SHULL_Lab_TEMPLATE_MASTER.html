@@ -33,6 +33,7 @@
 -->
 
 <link rel="stylesheet" href="shull-lab-tokens.css">
+<link rel="stylesheet" href="../_shull_header.css">
 <style>
   /* ---------- Locked SHULL print margins ---------- */
   @page {
@@ -258,13 +259,19 @@
      PAGE 1 — MASTHEAD · GOALS · PURPOSE · BACKGROUND
      ================================================================ -->
 
-<div class="masthead">
-  <div class="eyebrow">UNIT [[ 0 ]] — [[ FOUNDATIONS OF CHEMISTRY ]] · SECTION [[ 3 ]]</div>
-  <div class="titlerow">
-    <h1>[[ Lab Title ]]: <span class="accent">[[ Accent Word ]]</span> [[ rest of title ]]</h1>
-    <div class="chip">[[ U0 / S0.3 ]]</div>
+<!-- Document header: templates/_shull_header.css (SHULL-CHG-0101). Teacher, school and
+     course name fill themselves from the body class; type only the code, title and unit. -->
+<header class="sh-head">
+  <div class="sh-left">
+    <div class="sh-kick"><span class="sh-chip">[[ U0 / S0.3 ]]</span><span class="sh-course"></span> · Lab</div>
+    <h1 class="sh-title">[[ Lab Title ]] <span class="sh-acc">[[ Accent Word ]]</span></h1>
   </div>
-</div>
+  <div class="sh-meta">
+    <div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div>
+    <div class="sh-school"></div>
+    <div>Unit [[ 0 ]] · [[ Foundations of Chemistry ]]</div>
+  </div>
+</header>
 
 <div class="id-row">
   <div class="name"><div class="f">&nbsp;</div><div class="lbl">NAME</div></div>

@@ -8,7 +8,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (   # noqa: E402
     unit_title, borders, para, run, fix_widths, cell_margins, one_cell, shade,
-)
+    print_header)
 
 TEXT_W = 7.5
 
@@ -22,21 +22,8 @@ def page_break(doc):
 
 
 def header(doc, spec, pal, title, kind, code):
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [5.55, 1.95])
-    h, hr = t.rows[0].cells
-    for cc in (h, hr):
-        borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-    borders(h, pal.display, sz=30, edges=("left",))
-    cell_margins(h, top=80, bottom=80, left=160, right=80)
-    cell_margins(hr, top=80, bottom=80, left=80, right=60)
-    para(h, f"UNIT {int(spec['unit'])} — {unit_title(spec['course'], spec['unit']).upper()}", 7.5,
-         bold=True, color=pal.accent, caps_track=True, first=True)
-    para(h, title, 15, bold=True, color=pal.ink)
-    p = para(hr, code, 11, bold=True, color=pal.accent, caps_track=True, first=True)
-    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    p = para(hr, kind, 6.5, color=pal.label, caps_track=True)
-    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    # SHULL-CHG-0101: the shared print header.
+    return print_header(doc, pal, unit=spec["unit"], code=code, kind=kind, title=title)
 
 
 def fields(doc, pal, labels_widths):

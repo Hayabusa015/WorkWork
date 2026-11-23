@@ -293,6 +293,16 @@ Teacher-only information never appears on the student version.
 - Running footer with an auto-generated page count.
 - Every answer-bearing document has a **separate** key file.
 
+### The document header (SHULL-CHG-0101)
+
+Page 1 of every print document opens with the same header. Left: an outlined code chip
+(`U6 / S6.3`) and a `COURSE · DOCUMENT TYPE` kicker in the course's text-safe colour, then the
+title in condensed capitals with one accent word. Right: teacher, school, and the unit. Under both,
+a double rule in the course display colour. Ruled, never filled, and no taller than the rail header
+it replaced. Sizes, teacher and school live in `brand/tokens.json` `print.header`; the drawing lives
+in `templates/_shull_docx.py` `print_header()` and `templates/_shull_header.css`. A builder never
+draws its own header.
+
 ---
 
 ## 12. Presentations

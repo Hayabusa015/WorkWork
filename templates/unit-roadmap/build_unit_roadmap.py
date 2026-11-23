@@ -89,16 +89,15 @@ def render(spec):
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Unit {unit} Roadmap</title>
 <link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
+<link rel="stylesheet" href="../../../templates/_shull_header.css">
 <link rel="stylesheet" href="../../../templates/unit-roadmap/unit_roadmap.css">
 </head><body class="{ {"chemistry": "chem", "physics": "phys", "geology": "geo"}[course] }">
 <span class="code-string">SHULL SCIENCE · {course_word.upper()} · {codes}</span>
-<header class="head"><div>
-<div class="chip">U{unit} · UNIT ROADMAP</div>
-<div class="kicker">{course_word}{(" · " + html.escape(phase)) if phase else ""}</div>
-<h1>{html.escape(head)}<span class="acc">{html.escape(words[-1])}</span></h1></div>
-<div class="meta"><b>{html.escape(spec["teacher"])}</b> · High School {course_word}<br>{html.escape(spec["school"])}<br>
-{len(sections)} sections · {html.escape(spec["grades"])}</div></header>
-<div class="double"></div>
+<header class="sh-head"><div class="sh-left">
+<div class="sh-kick"><span class="sh-chip">U{unit}</span><span class="sh-course"></span> · Unit Roadmap{(" · " + html.escape(phase)) if phase else ""}</div>
+<h1 class="sh-title">{html.escape(head)}<span class="sh-acc">{html.escape(words[-1])}</span></h1></div>
+<div class="sh-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
+<div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div></header>
 <section class="intro"><div class="idea"><div class="label">Big Idea</div><p>{md(spec["big_idea"])}</p></div>
 <div class="prior"><div class="label">Builds On</div><ul>{prior}</ul></div></section>
 <table class="sec"><colgroup><col style="width:22%"><col style="width:57%"><col style="width:21%"></colgroup>

@@ -2,8 +2,6 @@
   "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'.",
   "course": "chemistry",
   "unit": 6,
-  "teacher": "Mr. Shull",
-  "school": "James A. Garfield Local Schools",
   "grades": "Grades 10–12",
   "big_idea": "A chemical name and a chemical formula hold the same information in two forms. Students use what they know about **bond type** and **ion charges** to move between the name and the formula, following one set of rules instead of memorizing compounds one at a time.",
   "builds_on": [
@@ -52,10 +50,10 @@
     }
   },
   "standards_key": [
-    ["C.PM.2", "Periodic Table", "properties and trends; used here to predict ion charges."],
-    ["C.PM.3", "Chemical Bonding", "ionic, polar/nonpolar covalent, metallic bonding; polyatomic ions."],
-    ["C.PM.4", "Representing Compounds", "formula writing, nomenclature, models and shapes."],
-    ["C.IM.1", "Chemical Reactions", "acids/bases. 6.4 introduces acid names; acid–base chemistry is taught in Unit 14."]
+    ["C.PM.2", "Periodic table", "properties and trends; used here to predict ion charges."],
+    ["C.PM.3", "Chemical bonding", "ionic, polar/nonpolar covalent, metallic bonding; polyatomic ions."],
+    ["C.PM.4", "Representing compounds", "formula writing, nomenclature, models and shapes."],
+    ["C.IM.1", "Chemical reactions", "acids/bases. 6.4 introduces acid names; acid–base chemistry is taught in Unit 14."]
   ],
   "measured": [
     "Daily practice that builds from basic to multi-step problems",

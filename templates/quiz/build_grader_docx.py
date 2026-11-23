@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, unit_title, borders, para, run, fix_widths, no_split, page_setup,
     running_footer, cell_margins, gap, trim_tail, shade,
-)
+    print_header)
 
 
 def clean(s):
@@ -94,21 +94,9 @@ def main():
     doc = Document()
     s = page_setup(doc)
 
-    t = doc.add_table(rows=1, cols=2)
-    fix_widths(t, [5.55, 1.95])
-    h, hr = t.rows[0].cells
-    for cc in (h, hr):
-        borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-    borders(h, pal.display, sz=30, edges=("left",))
-    cell_margins(h, top=80, bottom=80, left=160, right=80)
-    cell_margins(hr, top=80, bottom=80, left=80, right=60)
-    para(h, f"UNIT {int(sa['unit'])} — {unit_title(sa['course'], sa['unit']).upper()} · TEACHER KEY", 7.5,
-         bold=True, color=pal.accent, caps_track=True, first=True)
-    para(h, "Vectors Quiz: Quick Grader", 15, bold=True, color=pal.ink)
-    pp = para(hr, f"{unit} / S{code}", 11, bold=True, color=pal.accent, caps_track=True, first=True)
-    pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    pp = para(hr, f"{total} POINTS  ·  A AND B", 6.5, color=pal.label, caps_track=True)
-    pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    # SHULL-CHG-0101: the shared print header.
+    print_header(doc, pal, unit=sa["unit"], code=f"{unit} / S{code}",
+                 kind=f"Teacher Key · {total} points · A and B", title="Vectors Quiz: Quick Grader")
     gap(doc, 8)
 
     widths = [0.35, 0.40, 2.45, 2.45, 1.85]

@@ -32,8 +32,7 @@ def render(suffix, cls, course, html):
     html = re.sub(r"<!--.*?-->", "", html, flags=re.S)
     html = html.replace('<body class="neutral">', f'<body class="{cls}">')
     if course:
-        chip = f'<div class="chip">{course.upper()}</div>'
-        html = html.replace("</h1>\n  </div>", f"</h1>\n    {chip}\n  </div>", 1)
+        # The course now prints in the header kicker (SHULL-CHG-0101), so no separate chip.
         html = re.sub(r'<div class="course-select">.*?</div>\n', "", html, count=1, flags=re.S)
         html = html.replace('<div class="m-course"></div>',
                             f'<div class="m-course"> \\00b7  {course.upper()}</div>'.replace("\\00b7", "·"))

@@ -34,7 +34,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run,
     fix_widths, no_split, page_setup, running_footer, cell_margins, gap, trim_tail,
-)
+    print_header)
 
 from _shull_name import document_name, short_title   # noqa: E402
 # A project key is reference tables and grading notes, not worked questions. It draws them
@@ -324,23 +324,10 @@ def main():
         if si:
             page_break(doc)
 
-        t = doc.add_table(rows=1, cols=2)
-        fix_widths(t, [5.55, 1.95])
-        h, hr = t.rows[0].cells
-        for cc in (h, hr):
-            borders(cc, pal.hair, sz=4, edges=("top", "bottom"))
-        borders(h, pal.display, sz=30, edges=("left",))
-        cell_margins(h, top=80, bottom=80, left=160, right=80)
-        cell_margins(hr, top=80, bottom=80, left=80, right=60)
-        para(h, f"UNIT {int(spec['unit'])} — {utitle.upper()} · TEACHER KEY", 7.5,
-             bold=True, color=pal.accent, caps_track=True, first=True)
-        para(h, spec.get("key", {}).get("title", sec["title"]), 15, bold=True, color=pal.ink)
-        pp = para(hr, f"{unit} / {span_label(sec)}", 11, bold=True, color=pal.accent,
-                  caps_track=True, first=True)
-        pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        pp = para(hr, kind.replace("_", " ").upper() + "  ·  ANSWER KEY",
-                  6.5, color=pal.label, caps_track=True)
-        pp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        # SHULL-CHG-0101: the shared print header.
+        print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
+                     kind=kind.replace("_", " ") + " · Answer Key",
+                     title=spec.get("key", {}).get("title", sec["title"]))
 
         gap(doc, 6)
         from key_solution import MotionArrowError
