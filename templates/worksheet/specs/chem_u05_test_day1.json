@@ -1,0 +1,200 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Test",
+ "docLabel": "UNIT TEST · DAY 1",
+ "timeTargetMin": "25",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.5",
+   "title": "Unit 5 Test · Day 1: Multiple Choice",
+   "conceptLabel": "DIRECTIONS",
+   "concept": {
+    "summary": "Circle the letter of the best answer. Each question is worth 2 points."
+   },
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "mc",
+     "points": 30,
+     "items": [
+      {
+       "stem": "How many valence electrons go into the Lewis structure of PF₃?",
+       "options": [
+        "8",
+        "21",
+        "26",
+        "32"
+       ],
+       "answer": "C",
+       "why": "A counts each F as 1 (its bond). B forgets the P. D gives every atom 8. P 5 + F 7 × 3 = 26."
+      },
+      {
+       "stem": "After you COUNT, build the SKELETON and FILL, the central atom has only 6 electrons. What does the CHECK step tell you to do?",
+       "options": [
+        "Turn an outer lone pair into a double bond",
+        "Add 2 more electrons to the central atom",
+        "Swap the central atom with an outer atom",
+        "Leave it; every atom is stable with 6"
+       ],
+       "answer": "A",
+       "why": "B changes the electron total. C treats it as a skeleton error. D stretches the boron exception to every atom."
+      },
+      {
+       "stem": "Which atom goes in the center of the Lewis structure for HCN?",
+       "options": [
+        "H, because it is written first",
+        "C",
+        "N",
+        "None; a linear molecule has no center"
+       ],
+       "answer": "B",
+       "why": "A: H is never the center atom. C: the least EN atom goes in the center (C 2.55 < N 3.04). D confuses shape with skeleton."
+      },
+      {
+       "stem": "According to VSEPR theory, electron pairs around a central atom...",
+       "options": [
+        "spread as far apart as they can",
+        "crowd onto one side of the atom",
+        "attract each other to form bonds",
+        "always sit at 90° in one flat plane"
+       ],
+       "answer": "A",
+       "why": "Slide 13. B and C think the pairs attract. D is the flat-molecule picture."
+      },
+      {
+       "stem": "CCl₄ has 109.5° bond angles, but the angles in PCl₃ are less than 109.5°. Why?",
+       "options": [
+        "The lone pair on P repels more strongly and squeezes the bonds closer",
+        "P has fewer bonds, so its bonds are shorter",
+        "The Cl atoms attract each other",
+        "P is more electronegative and pulls the bonds in"
+       ],
+       "answer": "A",
+       "why": "Slide 13 must-write. B confuses length with angle. C puts IMF thinking inside a molecule. D is false (P 2.19 < C 2.55)."
+      },
+      {
+       "stem": "How many electron groups are on the central C in HCN?",
+       "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answer": "A",
+       "why": "C counts each pair of the triple bond; a triple bond is ONE group (slide 17). B adds a lone pair C does not have. D also counts N's lone pair."
+      },
+      {
+       "stem": "PCl₅ has 5 bonding pairs and 0 lone pairs on P. What is its shape?",
+       "options": [
+        "Tetrahedral",
+        "Trigonal bipyramidal",
+        "Square pyramidal",
+        "Octahedral"
+       ],
+       "answer": "B",
+       "why": "A assumes P cannot pass 8. C is the 5 bonds + 1 lone pair shape. D miscounts 6 groups."
+      },
+      {
+       "stem": "SO₂ has 2 bonding pairs and 1 lone pair on S. Which pair gives its electron geometry / molecular geometry?",
+       "options": [
+        "Trigonal planar / bent",
+        "Bent / trigonal planar",
+        "Linear / linear",
+        "Tetrahedral / bent"
+       ],
+       "answer": "A",
+       "why": "B swaps the two names. C ignores the lone pair (the CO₂ habit). D counts 4 groups."
+      },
+      {
+       "stem": "BCl₃ has three polar B–Cl bonds (ΔEN 1.12), but the molecule is nonpolar. Why?",
+       "options": [
+        "The three equal dipoles are spread symmetrically and cancel",
+        "Bonds between nonmetals are always nonpolar",
+        "B has only 6 electrons, so no dipole forms",
+        "The lone pairs on Cl cancel the dipoles"
+       ],
+       "answer": "A",
+       "why": "B equates bond type with polarity. C mixes up the octet exception with polarity. D thinks outer lone pairs decide polarity."
+      },
+      {
+       "stem": "Which molecule is polar?",
+       "options": [
+        "CCl₄",
+        "PCl₅",
+        "PCl₃",
+        "Cl₂"
+       ],
+       "answer": "C",
+       "why": "A and B: polar bonds, but symmetric, so they cancel. D: same atoms, ΔEN 0. PCl₃'s lone pair makes it a pyramid, so the pulls add."
+      },
+      {
+       "stem": "For the H–Cl bond, which way does the dipole arrow point?",
+       "options": [
+        "Toward Cl, the δ− end",
+        "Toward H, the δ+ end",
+        "Toward H, because it has fewer electrons",
+        "Both ways; HCl has no direction"
+       ],
+       "answer": "A",
+       "why": "Slide 10: the arrow points toward δ−, cross at δ+. B and C reverse it. D ignores the partial charges."
+      },
+      {
+       "stem": "When a molecular liquid boils, what is overcome?",
+       "options": [
+        "Attractions between molecules (IMFs)",
+        "Covalent bonds inside each molecule",
+        "Lone pairs on the central atom",
+        "Molecules splitting into atoms"
+       ],
+       "answer": "A",
+       "why": "Slide 32: bonds hold a molecule together; IMFs hold molecules to each other. B and D confuse intramolecular with intermolecular."
+      },
+      {
+       "stem": "Which substance can form hydrogen bonds with other molecules of itself?",
+       "options": [
+        "HCl",
+        "CH₄",
+        "F₂",
+        "HF"
+       ],
+       "answer": "D",
+       "why": "A has H, but it is on Cl. B has H on C. C has F but no H. Slide 33: H on N, O, or F."
+      },
+      {
+       "stem": "Which intermolecular force is present in every molecule?",
+       "options": [
+        "Hydrogen bonding",
+        "Dipole–dipole",
+        "London dispersion",
+        "Covalent bonding"
+       ],
+       "answer": "C",
+       "why": "Slide 35: every molecule. A is the strongest, not the most common. B needs a polar molecule. D is a bond, not an IMF."
+      },
+      {
+       "stem": "F₂ and Cl₂ are gases, Br₂ is a liquid and I₂ is a solid at room temperature. What explains this trend?",
+       "options": [
+        "I₂ is polar",
+        "I₂ forms hydrogen bonds",
+        "More electrons give stronger London dispersion forces",
+        "The I–I bond is the strongest bond"
+       ],
+       "answer": "C",
+       "why": "Slide 35: bigger = stronger, I₂ is a solid. A: all are nonpolar (ΔEN 0). B: no H. D confuses the bond inside the molecule with IMFs."
+      }
+     ]
+    }
+   ],
+   "keyNotes": [
+    "15 questions × 2 points = 30. Sections: 5.1 Q1–3, 5.2 Q4–5, 5.3 Q6–8, 5.4 Q9–11, 5.5 Q12–15.",
+    "No question uses a Day 2 chart molecule, so Day 1 does not hand out Day 2 answers."
+   ]
+  }
+ ]
+}

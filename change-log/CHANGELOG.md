@@ -59,6 +59,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0105 | 2026-11-11 | Every table cell is centred horizontally and vertically, in every document | IMPLEMENTED | `governance/proposals/SHULL-CHG-0105-table-cells-centered.md` |
 | SHULL-CHG-0072 | 2026-11-11 | Physics fallback face for math symbols | PARTIAL | `governance/proposals/SHULL-CHG-0072-physics-math-symbol-fallback-face.md` |
 | SHULL-CHG-0071 | 2026-11-11 | Key images (`fbd` scene) and Physics U3 FBD set | PARTIAL | `governance/proposals/SHULL-CHG-0071-physics-u3-fbd-set-and-key-images.md` |
 | SHULL-CHG-0070 | 2026-11-11 | Physics net force written as sum notation | PARTIAL | `governance/proposals/SHULL-CHG-0070-physics-sum-of-forces-notation.md` |
@@ -100,6 +101,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0104 | 2026-11-05 | New units in every course get four content folders: Quiz, Test, Presentations + Guided Notes, Worksheets | IMPLEMENTED | `governance/proposals/SHULL-CHG-0104-unit-content-folders.md` |
 | SHULL-CHG-0057 | 2026-11-05 | A Snow Day folder under each course holds snow-day assignments | IMPLEMENTED | `governance/proposals/SHULL-CHG-0057-snow-day-folder.md` |
 | SHULL-CHG-0056 | 2026-11-05 | An Overseer running as a sub-agent returns a routing brief and does not delegate | IMPLEMENTED | `governance/proposals/SHULL-CHG-0056-overseer-as-subagent-routing-brief.md` |
 

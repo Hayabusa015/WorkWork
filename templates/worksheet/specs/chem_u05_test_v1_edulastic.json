@@ -1,0 +1,307 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Test",
+ "docLabel": "EDULASTIC COPY SHEET",
+ "pagesPerSection": 4,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.4",
+   "title": "Unit 5 Test · Multiple Choice + Polarity Sort",
+   "conceptLabel": "FOR THE TEACHER",
+   "concept": {
+    "summary": "Copy these into Edulastic. Questions 1–17 are multiple choice. The sort uses the eight structure pictures, saved as separate image files (sort_*.png) in the same Drive folder. Suggested sort stem: \"Sort each molecule as polar or nonpolar. EN: H 2.20 · Be 1.57 · C 2.55 · N 3.04 · O 3.44 · F 3.98 · Si 1.90 · Cl 3.16.\""
+   },
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "mc",
+     "points": 17,
+     "items": [
+      {
+       "stem": "How many valence electrons go into the Lewis structure of SCl₂?",
+       "options": [
+        "8",
+        "14",
+        "20",
+        "24"
+       ],
+       "answer": "C",
+       "why": "A counts each Cl as 1. B forgets the S. D gives every atom 8. S 6 + Cl 7 × 2 = 20."
+      },
+      {
+       "stem": "After you COUNT, build the SKELETON and FILL, the central atom has only 6 electrons. What does the CHECK step tell you to do?",
+       "options": [
+        "Turn an outer lone pair into a double bond",
+        "Add 2 more electrons to the central atom",
+        "Swap the central atom with an outer atom",
+        "Leave it; every atom is stable with 6"
+       ],
+       "answer": "A",
+       "why": "B changes the electron total. C treats it as a skeleton error. D stretches the boron exception to every atom."
+      },
+      {
+       "stem": "Which atom goes in the center of the Lewis structure for HCN?",
+       "options": [
+        "H, because it is written first",
+        "C",
+        "N",
+        "None; a linear molecule has no center"
+       ],
+       "answer": "B",
+       "why": "A: H is never the center atom. C: the least EN atom goes in the center (C 2.55 < N 3.04). D confuses shape with skeleton."
+      },
+      {
+       "stem": "According to VSEPR theory, electron pairs around a central atom...",
+       "options": [
+        "spread as far apart as they can",
+        "crowd onto one side of the atom",
+        "attract each other to form bonds",
+        "always sit at 90° in one flat plane"
+       ],
+       "answer": "A",
+       "why": "Slide 13. B and C think the pairs attract. D is the flat-molecule picture."
+      },
+      {
+       "stem": "Molecule X has 4 bonding pairs on its central atom and 109.5° bond angles. Molecule Y has 3 bonding pairs and 1 lone pair, and its angles are less than 109.5°. Why?",
+       "options": [
+        "Y's lone pair repels more strongly and squeezes the bonds closer",
+        "Y has fewer bonds, so its bonds are shorter",
+        "The outer atoms in Y attract each other",
+        "Y's central atom is always more electronegative"
+       ],
+       "answer": "A",
+       "why": "Slide 13 must-write: lone pairs repel more strongly than bonding pairs. B confuses length with angle. C puts IMF thinking inside a molecule. D has nothing to do with the angle."
+      },
+      {
+       "stem": "How many electron groups are on the central C in HCN?",
+       "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answer": "A",
+       "why": "C counts each pair of the triple bond; a triple bond is ONE group (slide 17). B adds a lone pair C does not have. D also counts N's lone pair."
+      },
+      {
+       "stem": "PCl₅ has 5 bonding pairs and 0 lone pairs on P. What is its shape?",
+       "options": [
+        "Tetrahedral",
+        "Trigonal bipyramidal",
+        "Square pyramidal",
+        "Octahedral"
+       ],
+       "answer": "B",
+       "why": "A assumes P cannot pass 8. C is the 5 bonds + 1 lone pair shape. D miscounts 6 groups."
+      },
+      {
+       "stem": "SO₂ has 2 bonding pairs and 1 lone pair on S. Which pair gives its electron geometry / molecular geometry?",
+       "options": [
+        "Trigonal planar / bent",
+        "Bent / trigonal planar",
+        "Linear / linear",
+        "Tetrahedral / bent"
+       ],
+       "answer": "A",
+       "why": "B swaps the two names. C ignores the lone pair (the CO₂ habit). D counts 4 groups."
+      },
+      {
+       "stem": "BCl₃ has three polar B–Cl bonds (ΔEN 1.12), but the molecule is nonpolar. Why?",
+       "options": [
+        "The three equal dipoles are spread symmetrically and cancel",
+        "Bonds between nonmetals are always nonpolar",
+        "B has only 6 electrons, so no dipole forms",
+        "The lone pairs on Cl cancel the dipoles"
+       ],
+       "answer": "A",
+       "why": "B equates bond type with polarity. C mixes up the octet exception with polarity. D thinks outer lone pairs decide polarity."
+      },
+      {
+       "stem": "Which molecule is polar?",
+       "options": [
+        "SF₆",
+        "Br₂",
+        "SCl₂",
+        "XeF₄"
+       ],
+       "answer": "C",
+       "why": "SCl₂ is bent (2 lone pairs on S), so its polar S–Cl bonds do not cancel. SF₆ and XeF₄ are symmetric, so their polar bonds cancel. Br₂: same atoms, ΔEN 0."
+      },
+      {
+       "stem": "For the H–Cl bond, which way does the dipole arrow point?",
+       "options": [
+        "Toward Cl, the δ− end",
+        "Toward H, the δ+ end",
+        "Toward H, because it has fewer electrons",
+        "Both ways; HCl has no direction"
+       ],
+       "answer": "A",
+       "why": "Slide 10: the arrow points toward δ−, cross at δ+. B and C reverse it. D ignores the partial charges."
+      },
+      {
+       "stem": "An N–H bond has a ΔEN of 0.84. What type of bond is it?",
+       "options": [
+        "Nonpolar covalent",
+        "Polar covalent",
+        "Ionic",
+        "Metallic"
+       ],
+       "answer": "B",
+       "why": "0.40 to 1.80 is polar covalent. A needs under 0.40, C over 1.80. D is a metal–metal bond."
+      },
+      {
+       "stem": "Which bond is nonpolar covalent?",
+       "options": [
+        "P–H (2.19 and 2.20)",
+        "O–H (3.44 and 2.20)",
+        "C–O (2.55 and 3.44)",
+        "N–F (3.04 and 3.98)"
+       ],
+       "answer": "A",
+       "why": "P–H: 2.20 − 2.19 = 0.01, under 0.40. O–H 1.24, C–O 0.89 and N–F 0.94 are polar covalent."
+      },
+      {
+       "stem": "In a polar covalent bond, the atom with the higher electronegativity becomes...",
+       "options": [
+        "partially negative (δ−)",
+        "partially positive (δ+)",
+        "a positive ion",
+        "neutral, with no partial charge"
+       ],
+       "answer": "A",
+       "why": "Slide 9: the shared electrons shift toward the higher-EN atom. B reverses it. C is an ionic bond. D is a nonpolar bond."
+      },
+      {
+       "stem": "After the single bonds are drawn, where do the remaining electrons go first?",
+       "options": [
+        "On the outer atoms, as lone pairs",
+        "On the central atom",
+        "Into extra bonds right away",
+        "Nowhere; they are not used"
+       ],
+       "answer": "A",
+       "why": "Slide 14: FILL puts lone pairs on the outer atoms first; leftovers go on the center. C skips the CHECK step. D breaks the electron count."
+      },
+      {
+       "stem": "A central atom has 4 electron groups: 2 bonding pairs and 2 lone pairs. What is the molecular shape?",
+       "options": [
+        "Bent",
+        "Linear",
+        "Tetrahedral",
+        "Trigonal pyramidal"
+       ],
+       "answer": "A",
+       "why": "B ignores the lone pairs. C names the electron geometry, not the shape. D is 3 bonding pairs and 1 lone pair."
+      },
+      {
+       "stem": "Two molecules both have 4 electron groups on the central atom. One is tetrahedral and the other is bent. What is different?",
+       "options": [
+        "The bent one has 2 lone pairs on the central atom",
+        "The bent one has a double bond",
+        "The bent one is ionic",
+        "The tetrahedral one has lone pairs on the central atom"
+       ],
+       "answer": "A",
+       "why": "Same electron groups, but lone pairs are not counted in the shape name: 4 bonding pairs = tetrahedral, 2 bonding + 2 lone = bent. B: a double bond is still one group. C: bond type, not shape. D reverses it."
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "points": 8,
+     "label": "POLARITY SORT · 4 POLAR, 4 NONPOLAR",
+     "pageBreakBefore": true,
+     "heading": "Polarity Sort",
+     "headers": [
+      "#",
+      "Molecule",
+      "Structure",
+      "Polar or Nonpolar"
+     ],
+     "widths": [
+      0.06,
+      0.16,
+      0.48,
+      0.3
+     ],
+     "rowHeightIn": 1.1,
+     "bodySize": 11,
+     "blankCols": [
+      3
+     ],
+     "imageCol": 2,
+     "imageMaxIn": 2.0,
+     "rows": [
+      [
+       "1",
+       "H₂O",
+       "",
+       "Polar"
+      ],
+      [
+       "2",
+       "CH₄",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "3",
+       "NH₃",
+       "",
+       "Polar"
+      ],
+      [
+       "4",
+       "N₂",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "5",
+       "CH₃Cl",
+       "",
+       "Polar"
+      ],
+      [
+       "6",
+       "BeCl₂",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "7",
+       "HF",
+       "",
+       "Polar"
+      ],
+      [
+       "8",
+       "SiH₄",
+       "",
+       "Nonpolar"
+      ]
+     ],
+     "images": {
+      "0": "assets/chem_u05_test_v1/sort_H2O.png",
+      "1": "assets/chem_u05_test_v1/sort_CH4.png",
+      "2": "assets/chem_u05_test_v1/sort_NH3.png",
+      "3": "assets/chem_u05_test_v1/sort_N2.png",
+      "4": "assets/chem_u05_test_v1/sort_CH3Cl.png",
+      "5": "assets/chem_u05_test_v1/sort_BeCl2.png",
+      "6": "assets/chem_u05_test_v1/sort_HF.png",
+      "7": "assets/chem_u05_test_v1/sort_SiH4.png"
+     }
+    }
+   ],
+   "keyNotes": [
+    "No multiple-choice or sort molecule is on the written test or the study guide.",
+    "Sort reasoning: H₂O, NH₃ have lone pairs on the center (asymmetric); CH₃Cl has one different atom; HF has one polar bond. CH₄ and SiH₄ have nonpolar bonds (0.35, 0.30); N₂ has ΔEN 0; BeCl₂ is linear, so its two polar bonds (1.59) cancel."
+   ]
+  }
+ ]
+}

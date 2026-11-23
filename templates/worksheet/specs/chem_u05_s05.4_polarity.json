@@ -1,0 +1,195 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.4"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "5.4",
+   "title": "Molecular Polarity",
+   "concept": {
+    "summary": "ΔEN = higher EN − lower EN. Under 0.40: nonpolar. 0.40 to 1.80: polar. Over 1.80: ionic.",
+    "keyIdeas": [
+     "Symmetric: same outer atoms, spread evenly. Polar bonds in a symmetric shape cancel, so the molecule is nonpolar.",
+     "Asymmetric: different outer atoms, or lone pairs on the central atom. The pulls don't cancel, so the molecule is polar."
+    ]
+   },
+   "directions": "For each molecule, find ΔEN for each bond listed and show the subtraction, then mark it PC or NPC. Name the shape and draw it, with a dipole arrow beside each polar bond pointing toward the δ− atom (cross at the δ+ end). Then decide whether the whole molecule is polar or nonpolar. We will do number 1 together.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 10,
+     "headers": [
+      "#",
+      "Molecule",
+      "Bond(s)",
+      "ΔEN (show the subtraction)",
+      "Bond polarity: PC or NPC",
+      "Shape name",
+      "Drawing: shape with dipole arrows",
+      "Molecular polarity: Polar or Nonpolar"
+     ],
+     "widths": [
+      0.04,
+      0.1,
+      0.08,
+      0.18,
+      0.1,
+      0.13,
+      0.25,
+      0.12
+     ],
+     "rowHeightIn": 1.32,
+     "bodySize": 10,
+     "blankCols": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "rows": [
+      [
+       "1",
+       "CO₂ (example)",
+       "C=O",
+       "3.44 − 2.55 = 0.89",
+       "PC",
+       "Linear",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "2",
+       "H₂O",
+       "O–H",
+       "3.44 − 2.20 = 1.24",
+       "PC",
+       "Bent",
+       "",
+       "Polar"
+      ],
+      [
+       "3",
+       "CH₄",
+       "C–H",
+       "2.55 − 2.20 = 0.35",
+       "NPC",
+       "Tetrahedral",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "4",
+       "NH₃",
+       "N–H",
+       "3.04 − 2.20 = 0.84",
+       "PC",
+       "Trigonal pyramidal",
+       "",
+       "Polar"
+      ],
+      [
+       "5",
+       "CCl₄",
+       "C–Cl",
+       "3.16 − 2.55 = 0.61",
+       "PC",
+       "Tetrahedral",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "6",
+       "CHCl₃",
+       "C–H\nC–Cl",
+       "C–H:\n2.55 − 2.20 = 0.35\nC–Cl:\n3.16 − 2.55 = 0.61",
+       "C–H: NPC\nC–Cl: PC",
+       "Tetrahedral",
+       "",
+       "Polar"
+      ],
+      [
+       "7",
+       "BCl₃",
+       "B–Cl",
+       "3.16 − 2.04 = 1.12",
+       "PC",
+       "Trigonal planar",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "8",
+       "SO₂",
+       "S–O",
+       "3.44 − 2.58 = 0.86",
+       "PC",
+       "Bent",
+       "",
+       "Polar"
+      ],
+      [
+       "9",
+       "PCl₅",
+       "P–Cl",
+       "3.16 − 2.19 = 0.97",
+       "PC",
+       "Trigonal bipyramidal",
+       "",
+       "Nonpolar"
+      ],
+      [
+       "10",
+       "PCl₃",
+       "P–Cl",
+       "3.16 − 2.19 = 0.97",
+       "PC",
+       "Trigonal pyramidal",
+       "",
+       "Polar"
+      ],
+      [
+       "11",
+       "HCN",
+       "H–C\nC≡N",
+       "H–C:\n2.55 − 2.20 = 0.35\nC≡N:\n3.04 − 2.55 = 0.49",
+       "H–C: NPC\nC≡N: PC",
+       "Linear",
+       "",
+       "Polar"
+      ]
+     ],
+     "imageCol": 6,
+     "keyImages": {
+      "0": "assets/chem_u05_s05.4_polarity/polar_CO2.png",
+      "1": "assets/chem_u05_s05.4_polarity/polar_H2O.png",
+      "2": "assets/chem_u05_s05.4_polarity/polar_CH4.png",
+      "3": "assets/chem_u05_s05.4_polarity/polar_NH3.png",
+      "4": "assets/chem_u05_s05.4_polarity/polar_CCl4.png",
+      "5": "assets/chem_u05_s05.4_polarity/polar_CHCl3.png",
+      "6": "assets/chem_u05_s05.4_polarity/polar_BCl3.png",
+      "7": "assets/chem_u05_s05.4_polarity/polar_SO2.png",
+      "8": "assets/chem_u05_s05.4_polarity/polar_PCl5.png",
+      "9": "assets/chem_u05_s05.4_polarity/polar_PCl3.png",
+      "10": "assets/chem_u05_s05.4_polarity/polar_HCN.png"
+     }
+    }
+   ],
+   "keyNotes": [
+    "Number 1 (CO₂) is done with the class (slide 23): blank on the student copy, not scored. 10 points: rows 2–11, 1 per molecule.",
+    "EN values (Pauling, as on the slides): H 2.20, B 2.04, C 2.55, N 3.04, O 3.44, P 2.19, S 2.58, Cl 3.16.",
+    "Drawings follow slides 24–30: outer lone pairs may be left off. Each polar bond gets an arrow toward δ− (cross at δ+, slide 10); a nonpolar bond (C–H, 0.35) gets none. Polar molecule: a long net arrow. Nonpolar: net = 0. Accept any clear placement pointing the right way.",
+    "CCl₄ vs CHCl₃: same shape, but in CHCl₃ the C–H pull is weaker, so the pulls do not cancel. Rows 6 and 11 need both bond lines for the point.",
+    "BCl₃: B has only 6 electrons, like BF₃ on slide 24. SO₂ is bent from the lone pair on S, so unlike CO₂ it is polar.",
+    "PCl₅ vs PCl₃: same bond (0.97). PCl₅'s pulls cancel; PCl₃'s lone pair makes a pyramid, so it is polar. HCN is linear but its ends differ: polar.",
+    "If a student asks: H₂S (0.38) and PH₃ (0.01) are slightly polar in real life because of the lone pair. The cutoffs are guidelines (slide 11)."
+   ]
+  }
+ ]
+}

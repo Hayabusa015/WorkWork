@@ -20,7 +20,9 @@ There is no recursive query, so scope the search rather than crawling the whole 
 **Check whether it already exists.** A duplicate built because nobody looked is the most avoidable
 kind of waste in this system, and the librarian's gap audits exist because it has happened.
 
-Search the section's content folder first, then the whole unit, then the course by title.
+Search the whole unit first (its unit-level content folders and its sections), then the course by
+title. Content may sit at the unit or the section level depending on the unit's layout
+(`standards/DRIVE_ARCHITECTURE.md` §1).
 
 ## Reading
 

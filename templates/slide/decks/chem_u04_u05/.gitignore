@@ -1,0 +1,2 @@
+# Built deck. Finished documents live on Drive, not in git; rebuild with build.js.
+*.pptx

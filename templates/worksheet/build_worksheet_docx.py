@@ -43,7 +43,7 @@ from _shull_docx import (          # noqa: E402
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
     text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
-    print_header, TEXT_W_IN, apply_binding,
+    print_header, TEXT_W_IN, apply_binding, fillin_table,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -448,7 +448,10 @@ def reflection_block(doc, block, pal):
     """The written close on his Geology sheet: italic prompts, a full-width rule under
     each. Ruled lines are for prose - this is the one place a Geology sheet writes."""
     c = one_cell(doc)
-    for i, q in enumerate(block["prompts"], 1):
+    # Opt-in "start": number on from an earlier block, so a study guide split into
+    # labelled sections reads 1-15 straight through instead of restarting at 1.
+    start = int(block.get("start", 1))
+    for i, q in enumerate(block["prompts"], start):
         # A prompt and the lines it is answered on are one thing. Left to flow, the
         # question ended a page and its answer lines started the next one - the student
         # turns over to two rules belonging to nothing.
@@ -457,7 +460,7 @@ def reflection_block(doc, block, pal):
         no_split(t.rows[0])
         cc = t.rows[0].cells[0]
         cell_margins(cc, top=0, bottom=0, left=0, right=0)
-        if i == 1:
+        if i == start:
             # The heading goes INSIDE the first non-splitting row. Kept outside it, it
             # ended a page on its own with the question it introduces on the next one -
             # the same stranding the diagram block hit, one level up.
@@ -859,6 +862,108 @@ def rubric_block(doc, block, pal, spec, sheet=False):
     unpad_cell(c)
     total_line(doc, spec, pal)
     return c
+
+
+def table_rows(block, key=False):
+    """The spec stores each row once, answers included. The student copy blanks the
+    columns named in `blankCols`; the key prints every cell. One source for both, so
+    the student sheet and its key cannot drift apart."""
+    if key:
+        return [list(r) for r in block["rows"]]
+    blank = set(block.get("blankCols", []))
+    # Opt-in "studentFill": text printed on the STUDENT copy in a blanked column, such as
+    # the choices to circle ("Hydrogen bonding / Dipole–dipole / London dispersion"),
+    # while the key prints the row's own answer there. Absent, a blanked cell stays empty.
+    fill = {int(k): v for k, v in block.get("studentFill", {}).items()}
+    return [[fill.get(i, "") if i in blank else v for i, v in enumerate(r)] for r in block["rows"]]
+
+
+def fillin_block(doc, block, pal, key=False):
+    """A fill-in table straight on the page: a row per item, a blank per answer.
+    Reached as kind "table" when the block has `blankCols` (the reference table is
+    `table_block`, a station chart has `columns`).
+
+    For an identification drill (twenty formulas, four things to decide about each)
+    a card per item costs twenty cards and four pages; a table costs one. Drawn by
+    `fillin_table`, the primitive the guided notes already use, so there is one table
+    style in the system rather than two.
+    """
+    n = len(block["headers"])
+    bad = [i for i, r in enumerate(block["rows"], 1) if len(r) != n]
+    if bad:
+        raise SystemExit(f"table block: row(s) {bad} do not have {n} cells.")
+    if block.get("label"):
+        c = one_cell(doc)
+        label(c, block["label"], pal, first=True)
+    t = fillin_table(doc, {"headers": block["headers"],
+                           "rows": table_rows(block, key),
+                           "widths": block.get("widths"),
+                           "rowHeightIn": block.get("rowHeightIn", 0.34)},
+                     pal, TEXT_W_IN, header_fill=pal.surface, header_caps=False,
+                     header_size=float(block.get("headerSize", 7.5)),
+                     body_size=float(block.get("bodySize", 9.5)))
+    # The header row repeats if the table runs onto a second page, so every page says which
+    # column is which.
+    from docx.oxml import OxmlElement as _Ox
+    from docx.oxml.ns import qn as _qn
+    _trPr = t.rows[0]._tr.get_or_add_trPr()
+    if _trPr.find(_qn("w:tblHeader")) is None:
+        _trPr.append(_Ox("w:tblHeader"))
+    # Opt-in picture cells: "images" (both copies) and "keyImages" (key only) map a row
+    # index (0-based, as a string) to a PNG path relative to templates/worksheet/. The
+    # picture goes in column "imageCol", sized to the cell.
+    pics = dict(block.get("images", {}))
+    if key:
+        pics.update(block.get("keyImages", {}))
+    if pics:
+        col = int(block["imageCol"])
+        widths = block.get("widths") or [1 / n] * n
+        cell_w = TEXT_W_IN * widths[col] - 0.12
+        # Opt-in "imageMaxIn": cap the picture width so a wide column does not make a
+        # picture taller than its row (the row would grow and push the table to a new page).
+        if block.get("imageMaxIn"):
+            cell_w = min(cell_w, float(block["imageMaxIn"]))
+        for r, rel in pics.items():
+            path = os.path.join(HERE, rel)
+            if not os.path.exists(path):
+                raise SystemExit(f"table block: image not found: {path}")
+            # Opt-in "row,col" key: a picture in a column other than imageCol, so a
+            # table can hold two items per row (a compact two-across layout).
+            rr, cc_ = (r.split(",") + [None])[:2] if "," in str(r) else (r, None)
+            c = t.rows[int(rr) + 1].cells[int(cc_) if cc_ is not None else col]
+            p = c.paragraphs[0]
+            p.text = ""
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.add_run().add_picture(path, width=Inches(cell_w))
+    gap(doc, 4)
+    return t
+
+
+def mc_block(doc, block, pal):
+    """Multiple choice: a numbered stem and four lettered options per item, each item in
+    one cell that does not split across a page. Students circle the letter. The answers
+    live in the same spec; the key builder prints them as a table (`mc_key_rows`)."""
+    start = int(block.get("start", 1))
+    for i, item in enumerate(block["items"], start=start):
+        if len(item["options"]) != 4 or item["answer"] not in "ABCD":
+            raise SystemExit(f"mc block: item {i} needs 4 options and an answer A-D.")
+        c = one_cell(doc, protect=True)
+        cell_margins(c, top=40, bottom=60, left=60, right=60)
+        para(c, f"{i}.  {item['stem']}", 10, bold=True, color=pal.ink, first=True)
+        for letter, opt in zip("ABCD", item["options"]):
+            para(c, f"      {letter}.   {opt}", 10, color=pal.ink)
+        gap(doc, 3)
+
+
+def mc_key_rows(block):
+    """One row per item for the key: number, the answer, and why each other option is
+    wrong. One source with the student copy, so the two cannot drift."""
+    start = int(block.get("start", 1))
+    rows = []
+    for i, item in enumerate(block["items"], start=start):
+        k = "ABCD".index(item["answer"])
+        rows.append([str(i), f"{item['answer']}. {item['options'][k]}", item.get("why", "")])
+    return rows
 
 
 # ------------------------------------------------------------------------ questions
@@ -1381,7 +1486,12 @@ def main():
             kind += f" · {sec['eyebrowNote']}"
         if spec.get("timeTargetMin"):
             kind += f" · ~{spec['timeTargetMin']} min"
-        print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
+        # Opt-in "chip" / "docLabel": a unit test spans several sections, so its chip
+        # reads "U05 / S5.1–S5.5" and its label "UNIT TEST · DAY 1".
+        if spec.get("docLabel"):
+            kind = spec["docLabel"] + (f" · ~{spec['timeTargetMin']} min" if spec.get("timeTargetMin") else "")
+        print_header(doc, pal, unit=spec["unit"],
+                     code=sec.get("chip", f"{unit} / {span_label(sec)}"),
                      kind=kind, title=title, width=TEXT_W_IN)
 
     def id_row(labels, widths, total, blank_score=False):
@@ -1399,14 +1509,25 @@ def main():
             cell_margins(cc, top=0, bottom=40, left=0, right=120)
             p = para(cc, lab, 6.5, bold=True, color=pal.label, caps_track=True,
                      first=True)
+            # Opt-in "scorePoints" overrides the summed total (a study guide's practice
+            # chart is not graded the way the test is); opt-in "scoreInline" sets the
+            # total right after the label instead of at the cell's right edge, and sits
+            # every label on the rule so SCORE lines up with the rest.
+            if spec.get("scoreInline"):
+                cc.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
             if lab == "SCORE":
-                p.paragraph_format.tab_stops.add_tab_stop(
-                    Inches(widths[-1] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
-                run(p, "\t", 9)
                 # `blankScore`: the sheet has no established point value, so the total
                 # is not invented on a student page; it prints as a blank to fill in.
-                run(p, "/  ________" if blank_score else f"/  {total}", 10,
-                    bold=True, color=pal.ink)
+                # Opt-in `scorePoints` prints a set total instead of the summed one, and
+                # `scoreInline` sets it beside the label rather than at the right edge.
+                shown = "________" if blank_score else spec.get("scorePoints", total)
+                if spec.get("scoreInline"):
+                    run(p, f"    /  {shown}", 10, bold=True, color=pal.ink)
+                else:
+                    p.paragraph_format.tab_stops.add_tab_stop(
+                        Inches(widths[-1] - 0.10), WD_TAB_ALIGNMENT.RIGHT)
+                    run(p, "\t", 9)
+                    run(p, f"/  {shown}", 10, bold=True, color=pal.ink)
 
     if sheet_mode:
         # ---- The grading sheet: the same rubric rows, drawn as the teacher's sheet.
@@ -1561,7 +1682,13 @@ def main():
             elif kindb == "table":
                 # Two shapes share the kind: a reference table gives `headers`; a
                 # station data chart (rows to fill in) gives `columns`.
-                (chart_block if "columns" in block else table_block)(doc, block, pal)
+                # A fill-in table (answers stored once, blanked by `blankCols`) is a third.
+                if "columns" in block:
+                    chart_block(doc, block, pal)
+                elif "blankCols" in block:
+                    fillin_block(doc, block, pal)
+                else:
+                    table_block(doc, block, pal)
             elif kindb == "reference":
                 reference_block(doc, block, pal)
             elif kindb == "notes":
@@ -1572,6 +1699,8 @@ def main():
                 plan_block(doc, block, pal)
             elif kindb == "rubric":
                 rubric_block(doc, block, pal, spec)
+            elif kindb == "mc":
+                mc_block(doc, block, pal)
             else:
                 return refuse(f"unknown block kind {kindb!r} in section {sec['code']}.")
 

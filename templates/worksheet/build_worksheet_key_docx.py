@@ -49,6 +49,9 @@ from build_worksheet_docx import span_codes, span_label, check_spans   # noqa: E
 from build_worksheet_docx import (   # noqa: E402
     grid_opts, grid_check, grid_rows, grid_table, grid_head, square, grid_prompt_cell,
 )
+# A fill-in table (`blankCols`) is drawn by the student builder's own function with the
+# answers filled, so the two copies are one structure and cannot drift.
+from build_worksheet_docx import fillin_block, mc_key_rows, fillin_table   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # TEXT_W_IN comes from _shull_docx (page less binding and outside margins, SHULL-CHG-0103).
@@ -381,8 +384,9 @@ def main():
             page_break(doc)
 
         # SHULL-CHG-0101: the shared print header.
-        print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
-                     kind=kind.replace("_", " ") + " · Answer Key",
+        print_header(doc, pal, unit=spec["unit"],
+                     code=sec.get("chip", f"{unit} / {span_label(sec)}"),
+                     kind=spec.get("docLabel", kind.replace("_", " ")) + " · Answer Key",
                      title=spec.get("key", {}).get("title", sec["title"]), width=TEXT_W_IN)
 
         gap(doc, 6)
@@ -406,6 +410,36 @@ def main():
             except MotionArrowError as e:
                 return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)
+        # Section blocks the key answers: fill-in tables (`blankCols`), reflections that carry
+        # answers, and multiple choice. Anything else (a reference table, a reflection with no
+        # answers) stays off the key, as it always has.
+        for block in sec.get("blocks", []):
+            if block["kind"] == "table" and "blankCols" in block:
+                # Same opt-in as the student builder: a block can start its own page, so a
+                # second table never leaves its label and header stranded at a page foot.
+                if block.get("pageBreakBefore"):
+                    page_break(doc)
+                fillin_block(doc, block, pal, key=True)
+            elif block["kind"] == "reflection" and block.get("answers"):
+                # Prompts with their answers, numbered as on the student copy.
+                gap(doc, 4)
+                para(doc, block.get("label", "REFLECTION"), 7.5, bold=True, color=pal.accent,
+                     caps_track=True)
+                for i, (q, a) in enumerate(zip(block["prompts"], block.get("answers", [])),
+                                           int(block.get("start", 1))):
+                    para(doc, f"{i}. {q}", 9.5, bold=True, color=pal.ink)
+                    para(doc, a, 9.5, color=pal.accent)
+            elif block["kind"] == "mc":
+                fillin_table(doc, {"headers": ["#", "Answer", "Why the other options are wrong"],
+                                   "rows": mc_key_rows(block), "widths": [0.06, 0.34, 0.60],
+                                   "rowHeightIn": 0.3}, pal, TEXT_W_IN, header_fill=pal.surface,
+                             header_caps=False, header_size=7.5, body_size=9)
+        notes = sec.get("keyNotes", [])
+        if notes:
+            gap(doc, 4)
+            para(doc, "TEACHER NOTES", 7.5, bold=True, color=pal.accent, caps_track=True)
+            for line in notes:
+                para(doc, "•  " + line, 9, color=pal.ink)
 
         for block in spec.get("key", {}).get("blocks", []) if si == 0 else []:
             if block.get("gapBefore"):

@@ -114,6 +114,8 @@ def overflow_check(shapes, fills, label):
         box = rect(sh)
         box_w = box[2] - box[0]
         total_lines, size = 0, None
+        # Measure a paragraph as one string. A paragraph split into runs - a superscript
+        # charge, a bold word - still wraps as one line of text, not one line per run.
         for para in sh.text_frame.paragraphs:
             # Wrap the paragraph as one string. A paragraph with superscript/subscript
             # runs (build_deck.js ^{ } and _{ } markup) is several runs but one flow of
@@ -124,7 +126,7 @@ def overflow_check(shapes, fills, label):
                 continue
             sized = [r for r in runs if r.font.size]
             size = max((r.font.size.pt for r in sized), default=18)
-            bold = any(r.font.bold for r in runs)
+            bold = any(r.font.bold for r in runs if r.text.strip())
             total_lines += wrapped_lines(text, size, bool(bold), box_w)
         if not size or not total_lines:
             continue

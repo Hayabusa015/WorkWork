@@ -1,0 +1,301 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Study_Guide",
+ "docLabel": "STUDY GUIDE",
+ "pagesPerSection": 3,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.4",
+   "title": "Unit 5 Study Guide: Molecular Structure & Polarity",
+   "conceptLabel": "HOW TO USE THIS",
+   "concept": {
+    "summary": "Work each section, then check it against your notes. Anything you miss tells you what to practise before the test. The back is a practice version of the written test. EN: H 2.20 · C 2.55 · O 3.44 · F 3.98."
+   },
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "reflection",
+     "label": "S4.5–S4.6 · BOND TYPES",
+     "start": 1,
+     "linesEach": 2,
+     "prompts": [
+      "What is electronegativity (EN)?"
+     ],
+     "answers": [
+      "How strongly an atom pulls on shared electrons."
+     ]
+    },
+    {
+     "kind": "table",
+     "label": "2 · COMPLETE THE BOND TYPE TABLE",
+     "headers": [
+      "Bond type",
+      "ΔEN range",
+      "What the electrons do",
+      "Charges on the atoms"
+     ],
+     "widths": [
+      0.22,
+      0.2,
+      0.29,
+      0.29
+     ],
+     "rowHeightIn": 0.5,
+     "bodySize": 10,
+     "blankCols": [
+      1,
+      2,
+      3
+     ],
+     "rows": [
+      [
+       "Nonpolar covalent",
+       "Under 0.40",
+       "Shared equally",
+       "None"
+      ],
+      [
+       "Polar covalent",
+       "0.40 to 1.80",
+       "Shared unequally",
+       "Partial charges (δ+ and δ−)"
+      ],
+      [
+       "Ionic",
+       "Over 1.80",
+       "Transferred",
+       "Full charges (+ and − ions)"
+      ]
+     ]
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.1 · LEWIS STRUCTURES",
+     "start": 3,
+     "linesEach": 2,
+     "prompts": [
+      "How do you find an element's number of valence electrons from the periodic table? How many does chlorine have?",
+      "Which atom goes in the center of a Lewis structure? Why is H never the center?",
+      "List the four steps for drawing a Lewis structure.",
+      "The center atom has fewer than 8 electrons and none are left to place. What do you do?",
+      "Name the octet-rule exceptions from class."
+     ],
+     "answers": [
+      "For main-group elements, use the last digit of the group number. Chlorine is in group 17, so it has 7.",
+      "The atom with the lowest electronegativity (not counting H). H can only make one bond, and the center atom bonds to every other atom.",
+      "Count all valence e⁻. Skeleton: center atom, single bonds. Fill: lone pairs on outer atoms (leftovers on the center). Check: center short? Make a double bond.",
+      "Turn a lone pair on an outer atom into a second (or third) bond with the center: a double or triple bond.",
+      "Boron is stable with 6 and beryllium with 4. Atoms in period 3 and below can hold more than 8 (phosphorus can make 5 bonds and hold 10)."
+     ]
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.2–S5.3 · VSEPR & SHAPES",
+     "start": 8,
+     "linesEach": 2,
+     "prompts": [
+      "What does VSEPR stand for, and what is its main idea?",
+      "Why do lone pairs make bond angles smaller?",
+      "A central atom has 3 bonding pairs and 1 lone pair. Name its electron geometry and its molecular shape. Why are they different?"
+     ],
+     "answers": [
+      "Valence Shell Electron Pair Repulsion: electron groups around the center push as far apart as they can.",
+      "Lone pairs repel more strongly than bonding pairs, so they push the bonds closer together.",
+      "Electron geometry: tetrahedral (4 groups). Molecular shape: trigonal pyramidal. The shape is named only by where the atoms are; the lone pair takes up space but is not part of the name."
+     ],
+     "pageBreakBefore": true,
+     "heading": "Shapes, Polarity & Symmetry"
+    },
+    {
+     "kind": "reflection",
+     "label": "S5.4 · POLARITY",
+     "start": 11,
+     "linesEach": 1,
+     "prompts": [
+      "What is the difference between bond polarity and molecular polarity?",
+      "How can a molecule with polar bonds still be nonpolar?",
+      "Why do lone pairs on the central atom usually make a molecule polar?"
+     ],
+     "answers": [
+      "Bond polarity is one bond, set by ΔEN. Molecular polarity is the whole molecule, set by the bond polarity AND the shape.",
+      "When the polar bonds are arranged symmetrically (evenly around the center), their pulls cancel.",
+      "They make the shape lopsided (asymmetric), so the bond pulls do not cancel."
+     ]
+    },
+    {
+     "kind": "table",
+     "label": "14 · SYMMETRY CHECK · THE SHAPE IS GIVEN. CIRCLE ONE.",
+     "headers": [
+      "#",
+      "Molecule",
+      "Shape",
+      "Circle one",
+      "#",
+      "Molecule",
+      "Shape",
+      "Circle one"
+     ],
+     "widths": [
+      0.04,
+      0.08,
+      0.19,
+      0.19,
+      0.04,
+      0.08,
+      0.19,
+      0.19
+     ],
+     "rowHeightIn": 1.25,
+     "bodySize": 9.5,
+     "blankCols": [
+      3,
+      7
+     ],
+     "imageCol": 2,
+     "imageMaxIn": 1.6,
+     "studentFill": {
+      "3": "Polar (asymmetrical)\nNonpolar (symmetrical)",
+      "7": "Polar (asymmetrical)\nNonpolar (symmetrical)"
+     },
+     "rows": [
+      [
+       "1",
+       "CCl₄",
+       "",
+       "Nonpolar (symmetrical)",
+       "2",
+       "PCl₃",
+       "",
+       "Polar (asymmetrical)"
+      ],
+      [
+       "3",
+       "C₂H₂",
+       "",
+       "Nonpolar (symmetrical)",
+       "4",
+       "CHCl₃",
+       "",
+       "Polar (asymmetrical)"
+      ],
+      [
+       "5",
+       "BBr₃",
+       "",
+       "Nonpolar (symmetrical)",
+       "6",
+       "NOCl",
+       "",
+       "Polar (asymmetrical)"
+      ]
+     ],
+     "images": {
+      "0,2": "assets/chem_u05_test_v1/sym_CCl4.png",
+      "0,6": "assets/chem_u05_test_v1/sym_PCl3.png",
+      "1,2": "assets/chem_u05_test_v1/sym_C2H2.png",
+      "1,6": "assets/chem_u05_test_v1/sym_CHCl3.png",
+      "2,2": "assets/chem_u05_test_v1/sym_BBr3.png",
+      "2,6": "assets/chem_u05_test_v1/sym_NOCl.png"
+     }
+    },
+    {
+     "kind": "table",
+     "points": 28,
+     "label": "PRACTICE TEST · THE SAME CHART YOU WILL SEE ON THE TEST",
+     "headers": [
+      "#",
+      "Compound",
+      "Total valence e⁻ (show the addition) · 1",
+      "Lewis structure, every lone pair · 2",
+      "Shape name · 1",
+      "ΔEN of each bond (show the subtraction) · 1",
+      "Bond polarity (PC or NPC) · 1",
+      "Molecular polarity · 1"
+     ],
+     "widths": [
+      0.04,
+      0.09,
+      0.12,
+      0.25,
+      0.12,
+      0.18,
+      0.09,
+      0.11
+     ],
+     "rowHeightIn": 1.95,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "imageCol": 3,
+     "imageMaxIn": 1.85,
+     "rows": [
+      [
+       "1",
+       "CF₄",
+       "4 + 4(7) = 32",
+       "",
+       "Tetrahedral",
+       "C–F\n3.98 − 2.55 = 1.43",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "2",
+       "OF₂",
+       "6 + 2(7) = 20",
+       "",
+       "Bent",
+       "O–F\n3.98 − 3.44 = 0.54",
+       "PC",
+       "Polar"
+      ],
+      [
+       "3",
+       "CO₂",
+       "4 + 2(6) = 16",
+       "",
+       "Linear",
+       "C=O\n3.44 − 2.55 = 0.89",
+       "PC",
+       "Nonpolar"
+      ],
+      [
+       "4",
+       "CH₂O",
+       "4 + 2(1) + 6 = 12",
+       "",
+       "Trigonal planar",
+       "C=O\n3.44 − 2.55 = 0.89\nC–H\n2.55 − 2.20 = 0.35",
+       "PC\nNPC",
+       "Polar"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_test_v1/guide_CF4.png",
+      "1": "assets/chem_u05_test_v1/guide_OF2.png",
+      "2": "assets/chem_u05_test_v1/guide_CO2.png",
+      "3": "assets/chem_u05_test_v1/guide_CH2O.png"
+     },
+     "pageBreakBefore": true,
+     "heading": "Practice Test"
+    }
+   ],
+   "keyNotes": [
+    "No compound on this guide appears on any version of the test. Symmetry check: CCl₄, BBr₃, C₂H₂ are even, so the pulls cancel; PCl₃ (lone pair), CHCl₃ (one different atom) and NOCl are lopsided. Back chart: scored like the test, 7 per compound."
+   ]
+  }
+ ],
+ "scorePoints": 10,
+ "scoreInline": true
+}

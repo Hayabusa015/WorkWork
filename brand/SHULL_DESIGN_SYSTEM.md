@@ -308,6 +308,20 @@ it replaced. Sizes, teacher and school live in `brand/tokens.json` `print.header
 in `templates/_shull_docx.py` `print_header()` and `templates/_shull_header.css`. A builder never
 draws its own header.
 
+### Tables
+
+**Every cell is centred, horizontally and vertically.** The header row and every body cell, the
+first (label) column included. Student copy and key alike. This holds in every SHULL document that
+has a table: worksheets, practice sets, activities, guided and Cornell notes, keys, labs,
+assessments, and reference sheets. There are no exceptions. SHULL-CHG-0105.
+
+A *table* here is a grid the reader sees as rows and columns: a header row naming the columns, or
+bordered cells holding values, blanks to fill in, or pictures. A grid used only to place things on
+the page (a question card, the Cornell cue and notes columns, a title bar, a two-column layout) is
+page layout, not a table, and this rule does not reach it.
+
+Borders and header shading are §8's rule, not this one.
+
 ---
 
 ## 12. Presentations

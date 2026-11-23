@@ -1,0 +1,118 @@
+{
+ "course": "chemistry",
+ "unit": 5,
+ "sections": [
+  "5.1"
+ ],
+ "docType": "Test",
+ "docLabel": "UNIT TEST · WRITTEN · VERSION B",
+ "timeTargetMin": "25",
+ "pagesPerSection": 1,
+ "sectionsContent": [
+  {
+   "code": "5.1",
+   "chip": "U05 / S5.1–S5.4",
+   "title": "Unit 5 Test · Written · Version B",
+   "conceptLabel": "REFERENCE",
+   "concept": {
+    "summary": "Electronegativity (EN):  C 2.55 · N 3.04 · O 3.44 · F 3.98 · S 2.58 · Se 2.55 · Cl 3.16"
+   },
+   "directions": "For each compound: add up the valence electrons and show the addition. Draw the Lewis structure with every lone pair. Name the shape. Find ΔEN for each different bond (higher EN − lower EN), then mark each bond PC (polar covalent) or NPC (nonpolar covalent). Then decide if the whole molecule is polar or nonpolar.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "points": 28,
+     "label": "DRAW AND DECIDE (7 points per compound)",
+     "headers": [
+      "#",
+      "Compound",
+      "Total valence e⁻ (show the addition) · 1",
+      "Lewis structure, every lone pair · 2",
+      "Shape name · 1",
+      "ΔEN of each bond (show the subtraction) · 1",
+      "Bond polarity (PC or NPC) · 1",
+      "Molecular polarity · 1"
+     ],
+     "widths": [
+      0.04,
+      0.09,
+      0.12,
+      0.25,
+      0.12,
+      0.18,
+      0.09,
+      0.11
+     ],
+     "rowHeightIn": 1.6,
+     "bodySize": 10,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "imageCol": 3,
+     "imageMaxIn": 1.85,
+     "rows": [
+      [
+       "1",
+       "NF₃",
+       "5 + 3(7) = 26",
+       "",
+       "Trigonal pyramidal",
+       "N–F\n3.98 − 3.04 = 0.94",
+       "PC",
+       "Polar"
+      ],
+      [
+       "2",
+       "CSe₂",
+       "4 + 2(6) = 16",
+       "",
+       "Linear",
+       "C=Se\n2.55 − 2.55 = 0.00",
+       "NPC",
+       "Nonpolar"
+      ],
+      [
+       "3",
+       "COCl₂",
+       "4 + 6 + 2(7) = 24",
+       "",
+       "Trigonal planar",
+       "C=O\n3.44 − 2.55 = 0.89\nC–Cl\n3.16 − 2.55 = 0.61",
+       "PC\nPC",
+       "Polar"
+      ],
+      [
+       "4",
+       "SO₂",
+       "6 + 2(6) = 18",
+       "",
+       "Bent",
+       "S=O, S–O\n3.44 − 2.58 = 0.86",
+       "PC",
+       "Polar"
+      ]
+     ],
+     "keyImages": {
+      "0": "assets/chem_u05_test_v1/test_NF3.png",
+      "1": "assets/chem_u05_test_v1/test_CSe2.png",
+      "2": "assets/chem_u05_test_v1/test_COCl2.png",
+      "3": "assets/chem_u05_test_v1/test_SO2.png"
+     }
+    }
+   ],
+   "keyNotes": [
+    "7 points per compound, 28 total: valence e⁻ with the addition 1; Lewis structure 2 (1 right bonds incl. double bonds, 1 every lone pair with the total matching); shape 1; ΔEN 1; bond polarity 1; molecular polarity 1.",
+    "Slots: lone pair on the center (NF₃), double bonds and nonpolar (CSe₂), three elements with carbon (COCl₂), challenge (SO₂).",
+    "Challenge row: after the single bonds and lone pairs, the center has a lone pair but only 6 electrons, so the CHECK step makes one double bond. 3 groups (2 bonded atoms + 1 lone pair): bent, polar. SO₂: accept O=S=O as well (S is period 3); the shape is still bent and polar.",
+    "CSe₂: Se is in group 16. C=Se is 0.00, so a nonpolar molecule. COCl₂: double bond on O, not Cl.",
+    "Accept the subtraction written either way round if the difference is right."
+   ]
+  }
+ ]
+}

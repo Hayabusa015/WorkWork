@@ -17,3 +17,6 @@ templates/slide/*.pdf
 # JSON specs (templates/worksheet/specs/*.json) and image assets are source.
 templates/worksheet/*.docx
 templates/worksheet/*.pdf
+
+# Local build output. Finished documents are filed to Drive, not committed.
+build/
