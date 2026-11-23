@@ -416,8 +416,21 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Strong Acids & Bases |
 | REF | Specific Heats |
 | REF | Full Packet |
+| REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-23 — Course Outline filed as a Reference
+A one-page Chemistry Course Outline sits at the front of the class binder. It lists all 16 units by
+phase, with each unit's sections from the curriculum map, and has no dates or pacing. It spans the
+year, so it is course-level: `Reference - Course Outline.pdf` in `Chemistry/Reference/` (folder to
+be created on Matt's approval) (`standards/NAMING.md` §2), short title `Course Outline` in "Short
+titles". It is **not** one of the twelve reference-packet sheets and is not combined into
+`Reference - Full Packet.pdf`. "Reference packet contents" and the 2026-11-06 entry are unchanged.
+Decided by Matt 2026-11-23 ("a, file it as Reference - Course Outline"), choosing a `REF` title over
+a new course-level Roadmap type.
+Supersedes: None (new short-title row; no rule replaced).
+Status: CONFIRMED · SHULL-CHG-0106
 
 ### 2026-11-23 — U6 reworked to four sections
 U6 Chemical Nomenclature is taught as 6.1 Covalent Names & Formulas, 6.2 Polyatomic Ions, 6.3 Ionic

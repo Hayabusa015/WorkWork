@@ -25,9 +25,9 @@
 | **Risk** | **Low.** One table row and one log entry. The one real risk: "Reference packet contents" says *"each file's topic is its `REF` row in 'Short titles'"*. A builder could read every `REF` row as a packet sheet and put the outline into `Reference - Full Packet.pdf`. The decision-log entry rules this out. `REF \| Full Packet` already shows that not every `REF` row is a sheet (§4, open point). |
 | **Recommendation** | Approve as written. The approval should cover the row and the decision-log entry only. A clarifying sentence in "Reference packet contents" is a separate question (§4). Leave it out unless Matt names it. |
 | **Decision** | Approved by the user, 2026-11-23: "a, file it as Reference - Course Outline" |
-| **Status** | **APPROVED** |
-| **Implemented By** | |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** (commit pending; see Implemented By) |
+| **Implemented By** | Secretary, 2026-11-23, against the APPROVED record committed by the main session in `b05a8bb`. That SHA was relayed by the main session; the Secretary has no shell and did not check it in git history. `courses/chemistry/DECISIONS.md`: (i) the §3 row `\| REF \| Course Outline \|` was inserted after `\| REF \| Full Packet \|`; (ii) the §3 decision-log entry was put at the top of the log, with one amendment the main session asked for: after `Chemistry/Reference/` it adds "(folder to be created on Matt's approval)", because the Librarian found on 2026-11-23 that the Drive folder does not exist yet. The amendment states a fact about Drive and adds no rule. Nothing else was edited. **Implementation commit SHA: _pending_.** The main session commits and fills it in here. |
+| **Verified** | **Partial**, 2026-11-23, Secretary. (1) Grep: `Course Outline` is in `courses/chemistry/DECISIONS.md` only in the table row (line 419) and the new log entry (lines 423–430). Outside `legacy/` it is otherwise only in this record and `change-log/CHANGELOG.md`, and no standard or skill restates it. (2) "Reference packet contents" still lists twelve sheets and was not edited. (3) **Not run:** `python3 scripts/validate_codes.py` (§6 item 1), because the Secretary has no shell. The main session runs it before committing, records the result here, and then sets the CHANGELOG row to CONFIRMED. |
 
 ---
 

@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0106 | 2026-11-23 | Chemistry Course Outline gets REF title | APPROVED | `governance/proposals/SHULL-CHG-0106-chem-course-outline-ref-title.md` |
+| SHULL-CHG-0106 | 2026-11-23 | Chemistry Course Outline gets REF title | PARTIAL | `governance/proposals/SHULL-CHG-0106-chem-course-outline-ref-title.md` |
 | SHULL-CHG-0101 | 2026-11-23 | One print document header, all builders | CONFIRMED | `governance/proposals/SHULL-CHG-0101-print-document-header.md` |
 | SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | CONFIRMED | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
 | SHULL-CHG-0099 | 2026-11-23 | Chemistry U6 reworked to four sections | CONFIRMED | `governance/proposals/SHULL-CHG-0099-chemistry-u6-four-sections.md` |
