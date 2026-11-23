@@ -11,10 +11,10 @@
   ],
   "sections": {
     "12.1": {
-      "focus": "Solute, solvent & like dissolves like",
+      "focus": "Solute & solvent",
       "ican": [
         "I can **identify** the solute and the solvent in a solution.",
-        "I can **explain** dissolving at the particle level using “like dissolves like.”"
+        "I can **explain** dissolving with “like dissolves like.”"
       ],
       "standards": {
         "main": [
@@ -26,10 +26,10 @@
       }
     },
     "12.2": {
-      "focus": "Saturation & solubility curves",
+      "focus": "Solubility curves",
       "ican": [
-        "I can **read** a solubility curve to find how much solute dissolves at a given temperature.",
-        "I can **classify** a solution as unsaturated, saturated, or supersaturated."
+        "I can **read** a solubility curve at a given temperature.",
+        "I can **tell** saturated, unsaturated, and supersaturated apart."
       ],
       "standards": {
         "main": [
@@ -39,10 +39,10 @@
       }
     },
     "12.3": {
-      "focus": "How much dissolves vs. how fast",
+      "focus": "Amount vs. rate",
       "ican": [
-        "I can **explain** how temperature and pressure affect the solubility of solids and gases.",
-        "I can **tell** what changes how much dissolves from what changes how fast it dissolves."
+        "I can **explain** temperature and pressure effects on solubility.",
+        "I can **tell** solubility apart from dissolving rate."
       ],
       "standards": {
         "main": [
@@ -56,7 +56,7 @@
     "12.4": {
       "focus": "Ions that carry current",
       "ican": [
-        "I can **classify** a substance as a strong electrolyte, weak electrolyte, or nonelectrolyte.",
+        "I can **classify** strong, weak, and nonelectrolytes.",
         "I can **write** the ions an ionic compound forms when it dissolves."
       ],
       "standards": {
@@ -70,7 +70,7 @@
     "12.5": {
       "focus": "Moles of solute per liter",
       "ican": [
-        "I can **calculate** molarity from moles or grams of solute and the volume of solution.",
+        "I can **calculate** molarity from grams or moles of solute.",
         "I can **describe** how to prepare a solution of a given molarity."
       ],
       "standards": {
@@ -84,7 +84,7 @@
       "focus": "M_{1}V_{1} = M_{2}V_{2}",
       "ican": [
         "I can **solve** dilution problems with M_{1}V_{1} = M_{2}V_{2}.",
-        "I can **explain** why the moles of solute stay the same when a solution is diluted."
+        "I can **explain** why diluting does not change moles of solute."
       ],
       "standards": {
         "main": [
@@ -94,10 +94,10 @@
       }
     },
     "12.7": {
-      "focus": "Molarity in reaction problems",
+      "focus": "Molarity in reactions",
       "ican": [
-        "I can **use** molarity and volume to find moles in a stoichiometry problem.",
-        "I can **calculate** the mass of precipitate formed when two solutions react."
+        "I can **use** molarity and volume in stoichiometry problems.",
+        "I can **calculate** how much precipitate two solutions form."
       ],
       "standards": {
         "main": [

@@ -63,3 +63,5 @@ table.sec tr:last-child td { border-bottom: 1.5px solid var(--ink); }
 .bottom.nostd .assess { display: flex; flex-wrap: wrap; column-gap: 22px; }
 .bottom.nostd .assess li { width: calc(50% - 11px); }
 .stdnote { font-size: 8pt; color: var(--label); margin-top: 6px; }
+/* Sub/superscripts (CO2, 10^23, H+) must not push their line taller than its neighbours. */
+sub, sup { line-height: 0; }

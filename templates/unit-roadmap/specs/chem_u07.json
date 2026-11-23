@@ -11,7 +11,7 @@
   ],
   "sections": {
     "7.1": {
-      "focus": "Scientific notation & unit conversions",
+      "focus": "Notation & conversions",
       "ican": [
         "I can **write** and **calculate** with numbers in scientific notation.",
         "I can **set up** a unit conversion so the units cancel."
@@ -27,7 +27,7 @@
       "focus": "Counting particles in moles",
       "ican": [
         "I can **explain** that one mole is 6.02 × 10^{23} particles.",
-        "I can **convert** between moles and numbers of atoms, molecules, or formula units."
+        "I can **convert** between moles and numbers of particles."
       ],
       "standards": {
         "main": [
@@ -40,7 +40,7 @@
       "focus": "Mass of one mole, in g/mol",
       "ican": [
         "I can **calculate** the molar mass of an element or compound.",
-        "I can **connect** an element's average atomic mass to its molar mass in g/mol."
+        "I can **connect** average atomic mass to molar mass."
       ],
       "standards": {
         "main": [
@@ -52,8 +52,8 @@
     "7.4": {
       "focus": "Grams ↔ moles ↔ particles",
       "ican": [
-        "I can **convert** between mass, moles, and particles, including two-step problems.",
-        "I can **check** whether an answer is reasonable from its size and units."
+        "I can **convert** between mass, moles, and particles.",
+        "I can **check** whether an answer is reasonable."
       ],
       "standards": {
         "main": [
@@ -63,9 +63,9 @@
       }
     },
     "7.5": {
-      "focus": "Mass percent of each element",
+      "focus": "Percent by mass",
       "ican": [
-        "I can **calculate** the percent by mass of each element from a compound's formula.",
+        "I can **calculate** percent by mass from a formula.",
         "I can **calculate** percent composition from lab mass data."
       ],
       "standards": {
@@ -80,8 +80,8 @@
     "7.6": {
       "focus": "Simplest whole-number ratio",
       "ican": [
-        "I can **find** an empirical formula from percent composition or mass data.",
-        "I can **explain** why an empirical formula may not show the actual molecule."
+        "I can **find** an empirical formula from mass or percent data.",
+        "I can **explain** what an empirical formula does not show."
       ],
       "standards": {
         "main": [
@@ -93,9 +93,9 @@
       }
     },
     "7.7": {
-      "focus": "From empirical to actual formula",
+      "focus": "Empirical to molecular",
       "ican": [
-        "I can **find** a molecular formula from the empirical formula and the molar mass.",
+        "I can **find** a molecular formula from molar mass.",
         "I can **tell** whether a formula is empirical, molecular, or both."
       ],
       "standards": {

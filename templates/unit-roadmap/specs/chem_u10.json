@@ -13,7 +13,7 @@
     "10.1": {
       "focus": "Coefficients as mole ratios",
       "ican": [
-        "I can **write** mole ratios from the coefficients of a balanced equation.",
+        "I can **write** mole ratios from a balanced equation.",
         "I can **explain** why coefficients compare moles, not grams.",
         "I can **show** a mole ratio with a particle diagram."
       ],
@@ -25,9 +25,9 @@
       }
     },
     "10.2": {
-      "focus": "Moles of one substance to moles of another",
+      "focus": "Mole-to-mole steps",
       "ican": [
-        "I can **convert** moles of one substance to moles of another with a mole ratio.",
+        "I can **convert** moles of one substance to moles of another.",
         "I can **set up** stoichiometry problems so the units cancel.",
         "I can **report** answers with units and correct significant figures."
       ],
@@ -39,9 +39,9 @@
       }
     },
     "10.3": {
-      "focus": "Grams, particles & multi-step conversions",
+      "focus": "Grams & particles",
       "ican": [
-        "I can **solve** mass-to-mass problems: grams → moles → moles → grams.",
+        "I can **solve** grams → moles → moles → grams problems.",
         "I can **solve** problems that start or end with particles.",
         "I can **check** whether an answer is reasonable from the mole ratio."
       ],
@@ -57,7 +57,7 @@
     "10.4": {
       "focus": "Which reactant runs out first",
       "ican": [
-        "I can **identify** the limiting and excess reactants from given amounts.",
+        "I can **identify** the limiting and excess reactants.",
         "I can **calculate** the amount of product the limiting reactant makes.",
         "I can **calculate** how much excess reactant is left over."
       ],

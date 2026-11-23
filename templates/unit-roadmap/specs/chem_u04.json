@@ -11,9 +11,9 @@
   ],
   "sections": {
     "4.1": {
-      "focus": "Stability, energy & the octet rule",
+      "focus": "Energy & the octet rule",
       "ican": [
-        "I can **explain** that bonded atoms have lower energy than separate atoms.",
+        "I can **explain** why bonded atoms have lower energy.",
         "I can **use** the octet rule to predict how many electrons an atom gains, loses, or shares."
       ],
       "standards": {
@@ -24,10 +24,10 @@
       }
     },
     "4.2": {
-      "focus": "Electron transfer & ionic compounds",
+      "focus": "Electron transfer",
       "ican": [
         "I can **describe** an ionic bond as the attraction between ions formed by electron transfer.",
-        "I can **connect** ionic bonding to high melting points and brittle crystals."
+        "I can **connect** ionic bonding to high melting points."
       ],
       "standards": {
         "main": [
@@ -41,8 +41,8 @@
     "4.3": {
       "focus": "Shared electron pairs",
       "ican": [
-        "I can **describe** a covalent bond as a pair of electrons shared by two nonmetals.",
-        "I can **tell** single, double, and triple bonds apart by the number of shared pairs."
+        "I can **describe** a covalent bond as a shared electron pair.",
+        "I can **tell** single, double, and triple bonds apart."
       ],
       "standards": {
         "main": [
@@ -56,7 +56,7 @@
     "4.4": {
       "focus": "A sea of electrons",
       "ican": [
-        "I can **describe** metallic bonding as metal cations in a sea of delocalized electrons.",
+        "I can **describe** metallic bonding as a sea of electrons.",
         "I can **use** that model to explain why metals conduct and can be hammered into shape."
       ],
       "standards": {
@@ -67,9 +67,9 @@
       }
     },
     "4.5": {
-      "focus": "Using EN difference to classify bonds",
+      "focus": "Classifying bonds",
       "ican": [
-        "I can **calculate** the electronegativity difference between two bonded atoms.",
+        "I can **calculate** the electronegativity difference of a bond.",
         "I can **classify** a bond as nonpolar covalent, polar covalent, or ionic."
       ],
       "standards": {
@@ -82,9 +82,9 @@
       }
     },
     "4.6": {
-      "focus": "Partial charges & dipole arrows",
+      "focus": "Partial charges",
       "ican": [
-        "I can **draw** a dipole arrow on a polar bond and **label** its δ+ and δ− ends.",
+        "I can **draw** a dipole arrow and **label** δ+ and δ− ends.",
         "I can **rank** bonds from least to most polar."
       ],
       "standards": {

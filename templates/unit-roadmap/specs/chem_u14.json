@@ -14,7 +14,7 @@
       "focus": "Arrhenius & Brønsted–Lowry",
       "ican": [
         "I can **describe** the properties of acids and bases.",
-        "I can **identify** acids, bases, and conjugate pairs using both definitions."
+        "I can **identify** acids, bases, and conjugate pairs."
       ],
       "standards": {
         "main": [
@@ -24,10 +24,10 @@
       }
     },
     "14.2": {
-      "focus": "Complete vs. partial ionization",
+      "focus": "How much ionizes",
       "ican": [
-        "I can **explain** the difference between strong and weak acids and bases.",
-        "I can **tell** the difference between a strong acid and a concentrated one."
+        "I can **explain** strong vs. weak acids and bases.",
+        "I can **tell** a strong acid from a concentrated one."
       ],
       "standards": {
         "main": [],
@@ -52,8 +52,8 @@
     "14.4": {
       "focus": "Acid + base → salt + water",
       "ican": [
-        "I can **write** a balanced neutralization equation and **name** the salt formed.",
-        "I can **explain** what happens to H^{+} and OH^{−} ions during neutralization."
+        "I can **write** a neutralization equation and **name** the salt.",
+        "I can **explain** what happens to H^{+} and OH^{−} ions."
       ],
       "standards": {
         "main": [
@@ -65,8 +65,8 @@
     "14.5": {
       "focus": "Moles of acid and base",
       "ican": [
-        "I can **use** a balanced neutralization equation to relate moles of acid and base.",
-        "I can **calculate** the volume or concentration needed to neutralize a solution."
+        "I can **use** mole ratios for acid–base reactions.",
+        "I can **calculate** the volume or concentration to neutralize."
       ],
       "standards": {
         "main": [
@@ -78,7 +78,7 @@
       }
     },
     "14.6": {
-      "focus": "Finding an unknown concentration",
+      "focus": "Unknown concentration",
       "ican": [
         "I can **explain** how an indicator shows the endpoint of a titration.",
         "I can **calculate** an unknown concentration from titration data."

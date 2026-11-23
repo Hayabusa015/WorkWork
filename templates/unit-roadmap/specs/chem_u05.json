@@ -13,8 +13,8 @@
     "5.1": {
       "focus": "Count, connect, fill, check",
       "ican": [
-        "I can **draw** Lewis structures, including molecules with double and triple bonds.",
-        "I can **check** a Lewis structure by counting total valence electrons and octets."
+        "I can **draw** Lewis structures, including multiple bonds.",
+        "I can **check** a Lewis structure by counting electrons."
       ],
       "standards": {
         "main": [
@@ -28,8 +28,8 @@
     "5.2": {
       "focus": "Electron groups push apart",
       "ican": [
-        "I can **explain** that electron groups repel and spread as far apart as possible.",
-        "I can **count** bonding groups and lone pairs and **write** the AXE notation."
+        "I can **explain** how repulsion spreads out electron groups.",
+        "I can **write** the AXE notation for a central atom."
       ],
       "standards": {
         "main": [
@@ -41,8 +41,8 @@
     "5.3": {
       "focus": "Shapes and bond angles",
       "ican": [
-        "I can **predict** a molecule's shape and bond angle from its Lewis structure.",
-        "I can **explain** why lone pairs squeeze bond angles, as in water and ammonia."
+        "I can **predict** shape and bond angle from a Lewis structure.",
+        "I can **explain** why lone pairs shrink bond angles."
       ],
       "standards": {
         "main": [
@@ -54,7 +54,7 @@
     "5.4": {
       "focus": "Bond polarity plus shape",
       "ican": [
-        "I can **decide** whether a molecule is polar by checking its bonds and its shape.",
+        "I can **decide** if a molecule is polar from bonds and shape.",
         "I can **explain** why CO_{2} is nonpolar even though its bonds are polar."
       ],
       "standards": {
@@ -70,8 +70,8 @@
     "5.5": {
       "focus": "London, dipole–dipole & hydrogen bonding",
       "ican": [
-        "I can **identify** the intermolecular forces in a substance and explain each one.",
-        "I can **tell** a bond inside a molecule from a force between molecules."
+        "I can **identify** the intermolecular forces in a substance.",
+        "I can **tell** a bond from a force between molecules."
       ],
       "standards": {
         "main": [
@@ -83,8 +83,8 @@
     "5.6": {
       "focus": "Why boiling points differ",
       "ican": [
-        "I can **use** intermolecular forces to predict which of two substances boils higher.",
-        "I can **use** boiling-point data to compare the strength of intermolecular forces."
+        "I can **predict** which substance boils higher from its forces.",
+        "I can **use** boiling-point data to compare force strength."
       ],
       "standards": {
         "main": [

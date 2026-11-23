@@ -11,10 +11,10 @@
   ],
   "sections": {
     "3.1": {
-      "focus": "Periods, groups & named families",
+      "focus": "Layout of the table",
       "ican": [
-        "I can **locate** periods, groups, and named families such as the halogens.",
-        "I can **explain** why elements in the same group have similar properties."
+        "I can **locate** periods, groups, and named families.",
+        "I can **explain** why a group's elements behave alike."
       ],
       "standards": {
         "main": [
@@ -26,9 +26,9 @@
       }
     },
     "3.2": {
-      "focus": "Properties by region of the table",
+      "focus": "Properties by region",
       "ican": [
-        "I can **locate** metals, nonmetals, and metalloids on the periodic table.",
+        "I can **locate** metals, nonmetals, and metalloids.",
         "I can **classify** an element from properties such as luster, conductivity, and malleability."
       ],
       "standards": {
@@ -39,7 +39,7 @@
       }
     },
     "3.3": {
-      "focus": "Size trends for atoms and ions",
+      "focus": "Size trends",
       "ican": [
         "I can **describe** how atomic radius changes across a period and down a group.",
         "I can **compare** the size of an ion with the size of its neutral atom."
@@ -52,10 +52,10 @@
       }
     },
     "3.4": {
-      "focus": "Holding and attracting electrons",
+      "focus": "Holding electrons",
       "ican": [
         "I can **describe** the ionization energy and electronegativity trends.",
-        "I can **use** successive ionization energies to find an atom's valence electrons."
+        "I can **find** valence electrons from ionization-energy jumps."
       ],
       "standards": {
         "main": [
@@ -69,8 +69,8 @@
     "3.6": {
       "focus": "Nuclear charge & shielding",
       "ican": [
-        "I can **explain** periodic trends using nuclear charge, energy level, and shielding.",
-        "I can **predict** and **justify** which of two atoms is larger or harder to ionize."
+        "I can **explain** trends with nuclear charge and shielding.",
+        "I can **use** trends to compare two atoms and justify my answer."
       ],
       "standards": {
         "main": [
@@ -84,8 +84,8 @@
     "3.7": {
       "focus": "Gaining and losing electrons",
       "ican": [
-        "I can **predict** the charge of a main-group ion from the element's group.",
-        "I can **write** the symbol and electron configuration of a main-group ion."
+        "I can **predict** an ion's charge from its group.",
+        "I can **write** the symbol and configuration of an ion."
       ],
       "standards": {
         "main": [

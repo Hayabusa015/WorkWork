@@ -24,11 +24,11 @@
       }
     },
     "0.2": {
-      "focus": "Rules, goggles & emergency equipment",
+      "focus": "Rules & safety equipment",
       "ican": [
-        "I can **follow** the lab safety rules and explain the reason behind each one.",
-        "I can **locate** the safety equipment in our room and say when each is used.",
-        "I can **say what to do** if there is a spill, broken glass, or a chemical splash."
+        "I can **follow** each lab safety rule and explain its purpose.",
+        "I can **locate** each piece of safety equipment in our room.",
+        "I can **respond** correctly to a spill, broken glass, or a splash."
       ],
       "standards": {
         "main": [],
@@ -36,7 +36,7 @@
       }
     },
     "0.3": {
-      "focus": "Measuring & recording with units",
+      "focus": "Measuring with units",
       "ican": [
         "I can **measure** mass, volume, and temperature and record each value with its unit.",
         "I can **read** a graduated cylinder at the bottom of the meniscus.",
@@ -54,7 +54,7 @@
       "ican": [
         "I can **tell** an observation from an inference.",
         "I can **write** specific qualitative and quantitative observations.",
-        "I can **use** observations to match an unknown to a known substance."
+        "I can **use** observations to identify an unknown substance."
       ],
       "standards": {
         "main": [],

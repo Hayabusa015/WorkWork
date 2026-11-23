@@ -11,10 +11,10 @@
   ],
   "sections": {
     "9.1": {
-      "focus": "Temperature, heat & specific heat",
+      "focus": "Heat vs. temperature",
       "ican": [
         "I can **tell** the difference between temperature and heat.",
-        "I can **explain** what specific heat means and why water warms up slowly.",
+        "I can **explain** specific heat and why water warms slowly.",
         "I can **calculate** heat gained or lost with q = mcΔT."
       ],
       "standards": {
@@ -25,11 +25,11 @@
       }
     },
     "9.2": {
-      "focus": "System, surroundings & heat flow",
+      "focus": "Direction of heat flow",
       "ican": [
         "I can **identify** the system and the surroundings in a process.",
-        "I can **classify** a change as endothermic or exothermic from temperature data.",
-        "I can **read** an energy diagram to tell whether a reaction absorbs or releases energy."
+        "I can **classify** a change as endothermic or exothermic.",
+        "I can **read** endothermic and exothermic energy diagrams."
       ],
       "standards": {
         "main": [
@@ -41,7 +41,7 @@
       }
     },
     "9.3": {
-      "focus": "ΔH & thermochemical equations",
+      "focus": "ΔH in equations",
       "ican": [
         "I can **explain** what the sign of ΔH tells about a reaction.",
         "I can **write** a thermochemical equation that includes ΔH.",
@@ -58,8 +58,8 @@
       "focus": "Measuring heat in the lab",
       "ican": [
         "I can **explain** how a calorimeter measures heat from the temperature change of water.",
-        "I can **calculate** the heat released or absorbed from calorimetry data.",
-        "I can **use** heat lost = heat gained to find the specific heat of a metal."
+        "I can **calculate** heat from calorimetry data.",
+        "I can **use** heat lost = heat gained to find specific heat."
       ],
       "standards": {
         "main": [
@@ -69,11 +69,11 @@
       }
     },
     "9.5": {
-      "focus": "Enthalpy, entropy & free energy",
+      "focus": "Entropy & free energy",
       "ican": [
         "I can **describe** entropy as the spreading out of energy and matter.",
         "I can **predict** whether entropy increases or decreases in a change.",
-        "I can **use** the signs of ΔH and ΔS to decide whether a reaction is spontaneous."
+        "I can **use** the signs of ΔH and ΔS to predict spontaneity."
       ],
       "standards": {
         "main": [

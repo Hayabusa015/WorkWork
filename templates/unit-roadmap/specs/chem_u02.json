@@ -11,11 +11,11 @@
   ],
   "sections": {
     "2.1": {
-      "focus": "Electrons in fixed energy levels",
+      "focus": "Fixed energy levels",
       "ican": [
-        "I can **describe** the Bohr model and what it added to Rutherford's model.",
+        "I can **describe** the Bohr model and what it added.",
         "I can **draw** Bohr diagrams for the first 20 elements.",
-        "I can **explain** why the Bohr model works for hydrogen but not for larger atoms."
+        "I can **explain** why the Bohr model fails for larger atoms."
       ],
       "standards": {
         "main": [
@@ -27,10 +27,10 @@
       }
     },
     "2.2": {
-      "focus": "Where electrons can be found",
+      "focus": "Locating electrons",
       "ican": [
         "I can **describe** the difference between an energy level, a sublevel, and an orbital.",
-        "I can **state** the number of orbitals and electrons in the s, p, d, and f sublevels.",
+        "I can **state** how many electrons s, p, d, and f sublevels hold.",
         "I can **find** how many electrons an energy level can hold."
       ],
       "standards": {
@@ -45,7 +45,7 @@
       "ican": [
         "I can **write** longhand and noble-gas electron configurations.",
         "I can **draw** orbital diagrams using the Aufbau principle, Pauli exclusion, and Hund's rule.",
-        "I can **use** the s, p, d, and f blocks of the periodic table to find the filling order."
+        "I can **use** s, p, d, and f blocks to find the filling order."
       ],
       "standards": {
         "main": [
@@ -57,11 +57,11 @@
       }
     },
     "2.4": {
-      "focus": "Valence electrons, the octet & ions",
+      "focus": "Valence electrons & ions",
       "ican": [
-        "I can **count** valence electrons from a configuration or from the periodic table.",
+        "I can **count** valence electrons from the periodic table.",
         "I can **explain** why the noble gases are stable and unreactive.",
-        "I can **predict** the ion a main-group atom forms to reach a stable octet."
+        "I can **predict** the ion a main-group atom forms."
       ],
       "standards": {
         "main": [
@@ -77,7 +77,7 @@
       "ican": [
         "I can **explain** how electrons moving between energy levels absorb or give off light.",
         "I can **rank** colors of light by wavelength, frequency, and energy.",
-        "I can **identify** an element by matching its line spectrum to known spectra."
+        "I can **identify** an element by its line spectrum."
       ],
       "standards": {
         "main": [
