@@ -2,7 +2,11 @@
    page box, body type and the .tag marker. Colours only from ../lab/shull-lab-tokens.css.
    Print, one page, ink-light: rules and outlines, no fills. Type never smaller than the Unit Roadmap. */
 
-@page { @bottom-right { content: "COURSE OUTLINE · PAGE " counter(page) " OF " counter(pages); } }
+@page {
+  @bottom-left  { content: string(code); font: 7.4pt var(--body); color: var(--footer); letter-spacing: .08em; }
+  @bottom-right { content: "COURSE OUTLINE · PAGE " counter(page) " OF " counter(pages); font: 7.4pt var(--body); color: var(--footer); letter-spacing: .08em; }
+}
+.ph { font-size: 8pt; }
 
 .phase { margin-top: 9px; }
 .ph { display: flex; justify-content: space-between; border-top: 1.5px solid var(--ink); padding-top: 3px;

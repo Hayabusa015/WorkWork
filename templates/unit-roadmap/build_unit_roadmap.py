@@ -21,6 +21,8 @@ sys.path.insert(0, str(REPO / "templates"))
 from _shull_name import document_name, short_title  # noqa: E402
 
 SKIP = re.compile(r"RETIRED|DROPPED|FOLDED", re.I)
+ABBR = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
+STRETCH_MAX = 30  # px added to one row at most; past that the rest stays at the foot of the page
 
 
 TAG = re.compile(r"\s*`([A-Z]+)`")
@@ -37,15 +39,15 @@ def tag_html(tags):
 
 
 def unit_from_decisions(course, unit):
-    """(phase name, unit title, [(code, title, tags)] of taught sections) from the curriculum map.
+    """("Phase N: Name", unit title, [(code, title, tags)] of taught sections) from the curriculum map.
     tags is a list such as ['EXT']; the title never carries the backticks."""
     text = (REPO / "courses" / course / "DECISIONS.md").read_text()
     phase = None
     lines = text.splitlines()
     for i, line in enumerate(lines):
-        m = re.match(r"^### Phase \d+ — (.+?) \(", line)
+        m = re.match(r"^### (Phase \d+) — (.+?) \(", line)
         if m:
-            phase = m.group(1)
+            phase = f"{m.group(1)}: {m.group(2)}"
         m = re.match(rf"^\*\*U{unit} (.+?)\*\*", line)
         if not m:
             continue
@@ -111,7 +113,6 @@ def render(spec):
     prior = "".join(f"<li>{md(p)}</li>" for p in spec["builds_on"])
     measured = "".join(f"<li>{md(m)}</li>" for m in spec["measured"])
     codes = f"U{unit} / S{sections[0][0]}–{sections[-1][0]}" if len(sections) > 1 else f"U{unit} / S{sections[0][0]}"
-    course_word = course.title()
     if has_std:
         key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
         cols = '<col style="width:22%"><col style="width:57%"><col style="width:21%">'
@@ -137,7 +138,7 @@ def render(spec):
 <link rel="stylesheet" href="../../../templates/_shull_header.css">
 <link rel="stylesheet" href="../../../templates/unit-roadmap/unit_roadmap.css">
 </head><body class="{ {"chemistry": "chem", "physics": "phys", "geology": "geo"}[course] }">
-<span class="code-string">SHULL SCIENCE · {course_word.upper()} · {codes}</span>
+<span class="code-string">SHULL · {ABBR[course]} · U{unit} Unit Roadmap · {codes}</span>
 <header class="sh-head"><div class="sh-left">
 <div class="sh-kick"><span class="sh-chip">U{unit}</span><span class="sh-course"></span> · Unit Roadmap{(" · " + html.escape(phase)) if phase else ""}</div>
 <h1 class="sh-title">{html.escape(head)}<span class="sh-acc">{html.escape(words[-1])}</span></h1></div>
@@ -150,6 +151,15 @@ def render(spec):
 <tbody>{"".join(rows)}</tbody></table>
 <section class="{bottom_cls}">{keyblock}<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
 </body></html>''', course, unit, title
+
+
+def leftover(pg):
+    """CSS px between the bottom of the page content and the bottom of the page area, less a
+    hair of slack so rounding cannot push the page over."""
+    box = pg._page_box
+    body = box.children[0].children[0]
+    bottom = max((b.position_y + b.margin_height() for b in body.children), default=0)
+    return box.content_box_y() + box.height - bottom - 3
 
 
 def main():
@@ -166,6 +176,18 @@ def main():
 
     from weasyprint import HTML
     doc = HTML(filename=str(html_path)).render()
+    # Rows fill the page: measure the height left under the bottom block on a one-page render and
+    # share it out as row padding, then render again. Type is never changed, only the space.
+    if len(doc.pages) == 1:
+        spare = leftover(doc.pages[0])
+        rows = page.count("<tr><td>")
+        add = min(spare / rows, STRETCH_MAX) if rows and spare > 4 else 0
+        if add:
+            top, bot = add / 2, add - add / 2
+            page = page.replace("</head>", f"<style>table.sec tbody td {{ padding-top: {6 + top:.1f}px; "
+                                f"padding-bottom: {6 + bot:.1f}px; }}</style></head>", 1)
+            html_path.write_text(page)
+            doc = HTML(filename=str(html_path)).render()
     pdf = out / name
     doc.write_pdf(pdf)
     pages = len(doc.pages)

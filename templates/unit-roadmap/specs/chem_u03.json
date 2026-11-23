@@ -3,11 +3,11 @@
   "course": "chemistry",
   "unit": 3,
   "grades": "Grades 10–12",
-  "big_idea": "The periodic table is arranged by electron structure, so an element's position predicts how it behaves. Students read the table's layout, describe the **trends** in size, ionization energy and electronegativity, and explain those trends with nuclear charge and shielding.",
+  "big_idea": "An element's place on the periodic table predicts how it behaves. Students describe **trends** in size, ionization energy and electronegativity, and explain them with nuclear charge and shielding.",
   "builds_on": [
     "U2 · S2.3 Electron Configurations",
-    "U2 · S2.4 Electron Stability & Valence Electrons",
-    "Reference packet: periodic table, electronegativity table"
+    "U2 · S2.4 Valence electrons",
+    "Reference packet: periodic table"
   ],
   "sections": {
     "3.1": {
@@ -29,7 +29,7 @@
       "focus": "Properties by region",
       "ican": [
         "I can **locate** metals, nonmetals, and metalloids.",
-        "I can **classify** an element from properties such as luster, conductivity, and malleability."
+        "I can **classify** an element by its properties."
       ],
       "standards": {
         "main": [
@@ -41,8 +41,8 @@
     "3.3": {
       "focus": "Size trends",
       "ican": [
-        "I can **describe** how atomic radius changes across a period and down a group.",
-        "I can **compare** the size of an ion with the size of its neutral atom."
+        "I can **describe** the atomic radius trend.",
+        "I can **compare** an ion's size with its atom's."
       ],
       "standards": {
         "main": [
@@ -54,7 +54,7 @@
     "3.4": {
       "focus": "Holding electrons",
       "ican": [
-        "I can **describe** the ionization energy and electronegativity trends.",
+        "I can **describe** ionization energy and electronegativity trends.",
         "I can **find** valence electrons from ionization-energy jumps."
       ],
       "standards": {
@@ -70,7 +70,7 @@
       "focus": "Nuclear charge & shielding",
       "ican": [
         "I can **explain** trends with nuclear charge and shielding.",
-        "I can **use** trends to compare two atoms and justify my answer."
+        "I can **justify** which of two atoms is larger."
       ],
       "standards": {
         "main": [
@@ -82,7 +82,7 @@
       }
     },
     "3.7": {
-      "focus": "Gaining and losing electrons",
+      "focus": "Electron gain & loss",
       "ican": [
         "I can **predict** an ion's charge from its group.",
         "I can **write** the symbol and configuration of an ion."

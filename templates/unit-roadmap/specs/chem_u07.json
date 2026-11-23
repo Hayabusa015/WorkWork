@@ -3,7 +3,7 @@
   "course": "chemistry",
   "unit": 7,
   "grades": "Grades 10–12",
-  "big_idea": "Atoms are far too small to count one at a time, so chemists count them in moles. Students use **molar mass** as the bridge between grams, moles, and particles, then use mass data to work out a compound's **formula**.",
+  "big_idea": "Atoms are too small to count one by one, so chemists count them in moles. Students use **molar mass** to move between grams, moles, and particles, and use mass data to find a **formula**.",
   "builds_on": [
     "U1 · S1.5 Average Atomic Mass",
     "U6 · Writing chemical formulas",
@@ -50,7 +50,7 @@
       }
     },
     "7.4": {
-      "focus": "Grams ↔ moles ↔ particles",
+      "focus": "Grams, moles, particles",
       "ican": [
         "I can **convert** between mass, moles, and particles.",
         "I can **check** whether an answer is reasonable."
@@ -78,7 +78,7 @@
       }
     },
     "7.6": {
-      "focus": "Simplest whole-number ratio",
+      "focus": "Simplest ratio",
       "ican": [
         "I can **find** an empirical formula from mass or percent data.",
         "I can **explain** what an empirical formula does not show."

@@ -3,7 +3,7 @@
   "course": "chemistry",
   "unit": 12,
   "grades": "Grades 10–12",
-  "big_idea": "Most chemistry in labs and living things happens in solution. Students explain dissolving, read **solubility** data, and use **molarity** in calculations.",
+  "big_idea": "Most chemistry happens in solution. Students explain dissolving, read **solubility** data, and use **molarity** in calculations.",
   "builds_on": [
     "U5 · S5.5 Intermolecular Forces",
     "U10 · S10.2 Stoichiometric Calculations"
@@ -56,7 +56,7 @@
       "focus": "Ions that carry current",
       "ican": [
         "I can **classify** strong, weak, and nonelectrolytes.",
-        "I can **write** the ions an ionic compound forms when it dissolves."
+        "I can **write** the ions a salt forms in water."
       ],
       "standards": {
         "main": [],
