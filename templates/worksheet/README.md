@@ -208,9 +208,13 @@ docstring (SHULL-CHG-0071).
 
 A section (or the whole spec) may set `"layout": "grid"` to set draw-only questions as a grid of
 squares instead of one card per question: `columns` (default 3), `squareIn` (side, default 2.2;
-the gutters take what is left of the 7.50 in line, and the build refuses a gutter under 0.12 in),
+the gutters take what is left of the line (7.40 in since the SHULL-CHG-0103 binding margin; `TEXT_W_IN` in `_shull_docx.py`), and the build refuses a gutter under 0.12 in),
 `gridPromptPt` (default 9.5) and `gridRowGapPt` (default 10). An item takes one square per `draw.panels`, each captioned from
-`draw.captions` inside its top; items flow left to right in order. A grid item carries a prompt and
+`draw.captions` inside its top; items flow left to right in order. `boxHeightIn` (default
+`squareIn`) lets a box run shorter than it is wide. `"tierTags": false` leaves the tier tag out of the
+boxes (the tiers stay in the spec for the ramp check). A prompt sits exactly over its own box or
+boxes: same left edge, same right edge, never in the gutter beside it; prompts share a row's top
+and the boxes share theirs. A grid item carries a prompt and
 squares only: `math`, `answerLines`, `parts`, `diagram`, `given` and `need` are refused. The key
 builder draws the same grid, each `fbd` panel in its own square (one magnitude scale per item, one
 drawing size for the whole key) with the item's `steps` handwritten underneath.

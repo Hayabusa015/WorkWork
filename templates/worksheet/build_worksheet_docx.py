@@ -43,12 +43,14 @@ from _shull_docx import (          # noqa: E402
     borders, para, run, check_item, rule_lines, fix_widths, one_cell, no_split,
     equation_bar, work_box, given_need, diagram_block, page_setup, running_footer,
     text_width_in, cell_margins, gap, shade, unpad_cell, T, trim_tail, rich, hexof,
-    print_header)
+    print_header, TEXT_W_IN, apply_binding,
+)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 
-TEXT_W_IN = 7.50
+# TEXT_W_IN comes from _shull_docx: the page less the binding (inside) margin and the
+# outside margin, SHULL-CHG-0103. It is 7.40 in, not the 7.50 it was.
 NUM_W_IN = 0.30                                  # the question number's own column
 BODY_W_IN = TEXT_W_IN - NUM_W_IN
 
@@ -861,7 +863,7 @@ def rubric_block(doc, block, pal, spec, sheet=False):
 
 # ------------------------------------------------------------------------ questions
 
-def question_card(cell, q, n, pal, course, base_dir, width):
+def question_card(cell, q, n, pal, course, base_dir, width, tier_tags=True):
     """One question, in its own bordered card.
 
     From his Master_Physics layout: a card per question, the number top left and the
@@ -879,7 +881,9 @@ def question_card(cell, q, n, pal, course, base_dir, width):
     # Just the number. No box, no square, no circle. SHULL-CHG-0015 - his own sheets
     # set these in solid squares, which is the withdrawn number box and a fill besides.
     run(p, f"{n}.", 10.5, bold=True, color=pal.ink)
-    if q.get("tier"):
+    # "tierTags": false (opt-in, section or spec) leaves the tag off the card. The tier stays in
+    # the spec, where the ramp check reads it. The default prints it, as before.
+    if q.get("tier") and tier_tags:
         colour = tier_colour(q["tier"], pal)
         run(p, "\t", TIER_PT)
         run(p, "•  ", TIER_PT + 1, bold=True, color=colour)
@@ -919,7 +923,7 @@ def question_card(cell, q, n, pal, course, base_dir, width):
     return cell
 
 
-def render_questions(doc, questions, pal, course, base_dir):
+def render_questions(doc, questions, pal, course, base_dir, tier_tags=True):
     """Cards down the page, two across where both questions are short.
 
     His layout pairs the two warm-ups on one row and gives the longer questions the
@@ -937,8 +941,8 @@ def render_questions(doc, questions, pal, course, base_dir):
             t = doc.add_table(rows=1, cols=3)
             fix_widths(t, [half, gutter, half])
             no_split(t.rows[0])
-            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, half)
-            question_card(t.rows[0].cells[2], nxt, i + 2, pal, course, base_dir, half)
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, half, tier_tags)
+            question_card(t.rows[0].cells[2], nxt, i + 2, pal, course, base_dir, half, tier_tags)
             i += 2
         else:
             t = doc.add_table(rows=1, cols=1)
@@ -946,7 +950,7 @@ def render_questions(doc, questions, pal, course, base_dir):
             # A question stays whole. Split across a page break, the parts and the work
             # box land on the next sheet with no number above them.
             no_split(t.rows[0])
-            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, TEXT_W_IN)
+            question_card(t.rows[0].cells[0], q, i + 1, pal, course, base_dir, TEXT_W_IN, tier_tags)
             i += 1
         gap(doc, 3)
 
@@ -958,7 +962,6 @@ def render_questions(doc, questions, pal, course, base_dir):
 
 GRID_GUTTER_MIN_IN = 0.12
 GRID_ROW_GAP_PT = 10           # between one row's squares and the next row's prompts
-GRID_PROMPT_GAP_TW = 230        # a prompt stops this far short of the next one (twips)
 
 
 def label_bank(doc, entries, pal, label_text, cols=2):
@@ -999,15 +1002,21 @@ def grid_opts(spec, sec):
     cols = int(get("columns", 3))
     square = float(get("squareIn", 2.2))
     gutter = round((TEXT_W_IN - cols * square) / (cols - 1), 3) if cols > 1 else 0
+    # `squareIn` is the box width; `boxHeightIn` lets a box run a little shorter than it
+    # is wide when true squares at the column width will not fit the page budget.
     return {"columns": cols, "square": square, "gutter": gutter,
+            "height": float(get("boxHeightIn", square)),
+            # "tierTags": false keeps the tier out of the boxes; the tiers stay in the spec,
+            # where the ramp check reads them.
+            "tierTags": bool(get("tierTags", True)),
             "promptPt": float(get("gridPromptPt", 9.5)),
             "rowGapPt": float(get("gridRowGapPt", GRID_ROW_GAP_PT))}
 
 
 def grid_check(questions, g):
     """Why these questions cannot be set as this grid, or None."""
-    if g["columns"] < 1 or g["square"] <= 0:
-        return "grid needs columns >= 1 and squareIn > 0."
+    if g["columns"] < 1 or g["square"] <= 0 or g["height"] <= 0:
+        return "grid needs columns >= 1, squareIn > 0 and boxHeightIn > 0."
     if g["columns"] > 1 and g["gutter"] < GRID_GUTTER_MIN_IN:
         return (f"{g['columns']} squares of {g['square']} in leave a {g['gutter']} in gutter "
                 f"on a {TEXT_W_IN} in page. Use smaller squares or fewer columns.")
@@ -1052,10 +1061,11 @@ def grid_widths(g):
     return w
 
 
-def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False, right=0):
+def grid_head(cell, n, q, pal, prompt_pt=9.5, prompt_color=None, italic=False):
     """The item number, run in at the start of the prompt. The tier tag goes in the top
-    corner of the item's first square (`square`), so it costs the prompt no line."""
-    cell_margins(cell, top=0, bottom=40, left=0, right=right)
+    corner of the item's first square (`square`), so it costs the prompt no line. No side
+    margins: the text's edges are the box's edges."""
+    cell_margins(cell, top=0, bottom=40, left=0, right=0)
     p = cell.paragraphs[0]
     p.paragraph_format.space_after = Pt(0)
     run(p, f"{n}.  ", 10.5, bold=True, color=pal.ink)
@@ -1071,6 +1081,16 @@ def tier_tag(p, tier, pal, colour=None):
     r = run(p, tier.upper(), TIER_PT, bold=True, color=colour)
     el = OxmlElement("w:spacing"); el.set(qn("w:val"), "26")
     r._element.get_or_add_rPr().append(el)
+
+
+def grid_prompt_cell(t, row, col, span):
+    """The cell an item's prompt (or note) goes in: exactly over its own box or boxes,
+    merged across the gutter between two boxes and never into the gutter beside them, so
+    every column of words and boxes shares one left and one right edge (Matt, 2026-11-16)."""
+    c = t.rows[row].cells[col * 2]
+    if span > 1:
+        c = c.merge(t.rows[row].cells[(col + span - 1) * 2])
+    return c
 
 
 def grid_table(doc, g, nrows):
@@ -1115,7 +1135,7 @@ def render_grid(doc, questions, pal, g):
             gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 2)
         for ri in range(2):
-            h = g["square"] if ri == 1 else None
+            h = g["height"] if ri == 1 else None
             trPr = t.rows[ri]._tr.get_or_add_trPr()
             trPr.append(OxmlElement("w:cantSplit"))
             if h:
@@ -1123,21 +1143,16 @@ def render_grid(doc, questions, pal, g):
                 e.set(qn("w:val"), str(int(h * 1440))); e.set(qn("w:hRule"), "exact")
                 trPr.append(e)
         for n, q, col, span in row:
-            # The prompt may run on across the gutter to its right, stopping short of the
-            # next prompt: a narrow column sets a long scenario two lines taller.
-            last = col + span == g["columns"]
-            head = t.rows[0].cells[col * 2]
-            end = (col + span - 1) * 2 + (0 if last else 1)
-            if end > col * 2:
-                head = head.merge(t.rows[0].cells[end])
+            # Prompts share the row's top; the boxes sit in their own table row below,
+            # so a short prompt leaves space above the box, never moves it.
+            head = grid_prompt_cell(t, 0, col, span)
             head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-            grid_head(head, n, q, pal, prompt_pt=g["promptPt"],
-                      right=0 if last else GRID_PROMPT_GAP_TW)
+            grid_head(head, n, q, pal, prompt_pt=g["promptPt"])
             caps = (q.get("draw") or {}).get("captions") or []
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
                 square(sq, pal, g["square"], caps[k] if span > 1 and k < len(caps) else None,
-                       q.get("tier") if k == 0 else None)
+                       q.get("tier") if k == 0 and g["tierTags"] else None)
         unpad_cell(outer)
 
 
@@ -1367,9 +1382,16 @@ def main():
         if spec.get("timeTargetMin"):
             kind += f" · ~{spec['timeTargetMin']} min"
         print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
-                     kind=kind, title=title)
+                     kind=kind, title=title, width=TEXT_W_IN)
 
     def id_row(labels, widths, total, blank_score=False):
+        # Widths written for the old 7.50 in line lose the overflow from their widest
+        # field, so the row stays on the text block (SHULL-CHG-0103 narrowed it).
+        widths = list(widths)
+        over = round(sum(widths) - TEXT_W_IN, 4)
+        if over > 0:
+            i = widths.index(max(widths))
+            widths[i] = round(widths[i] - over, 3)
         t = doc.add_table(rows=1, cols=len(labels))
         fix_widths(t, widths)
         for cc, lab in zip(t.rows[0].cells, labels):
@@ -1502,7 +1524,8 @@ def main():
                 return refuse(f"section {sec['code']}: {err}")
             render_grid(doc, sec.get("questions", []), pal, g)
         else:
-            render_questions(doc, sec.get("questions", []), pal, course, HERE)
+            render_questions(doc, sec.get("questions", []), pal, course, HERE,
+                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))))
 
         for bi, block in enumerate(sec.get("blocks", [])):
             kindb = block["kind"]
@@ -1570,6 +1593,7 @@ def main():
     running_footer(s, f"SHULL SCIENCE          {unit} · {span}", pal,
                    with_page_numbers=True)
     trim_tail(doc)
+    apply_binding(doc)
     doc.save(out)
     nq = sum(len(x.get("questions", [])) for x in sections)
     print(f"wrote {out}  —  {code} {unit} {span}, "

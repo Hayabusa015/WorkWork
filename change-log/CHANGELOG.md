@@ -38,6 +38,12 @@ supersedes it, exactly as the decision logs work.
 | SHULL-CHG-0078 | 2026-11-23 | Keep duplicate IDs; validator blocks new reuse | CONFIRMED | `governance/proposals/SHULL-CHG-0078-change-id-collisions-after-allocation-rule.md` |
 | SHULL-CHG-0077 | 2026-11-23 | Desk documents keyed on record filename | CONFIRMED | `governance/proposals/SHULL-CHG-0077-desk-export-keys-collide.md` |
 
+## 2026-11-20
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0103 | 2026-11-20 | Print: mirror binding margin and hole guides | PARTIAL | `governance/proposals/SHULL-CHG-0103-print-binding-margin-and-hole-guides.md` |
+
 ## 2026-11-10
 
 | ID | Date | Change | Status | Record |

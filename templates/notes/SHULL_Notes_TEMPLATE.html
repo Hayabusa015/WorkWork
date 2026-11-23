@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="shull-notes-tokens.css">
 <style>
-  @page { size: letter; margin: 0.5in 0.5in 0.55in 0.5in;
+  /* Margins: set by build_notes.py, mirrored, with hole guides (SHULL-CHG-0103). */
+  @page { size: letter;
     @bottom-left  { content: string(brandfoot); font-family: var(--body); font-size: 7pt;
                     letter-spacing: 0.14em; color: var(--footer); }
     @bottom-right { content: string(codefoot) "   ·   p " counter(page) " / " counter(pages);

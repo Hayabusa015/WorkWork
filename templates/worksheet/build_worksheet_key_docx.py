@@ -34,7 +34,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_docx import (          # noqa: E402
     COURSE_CODE, Palette, known_sections, unit_title, borders, para, run,
     fix_widths, no_split, page_setup, running_footer, cell_margins, gap, trim_tail,
-    print_header)
+    print_header, TEXT_W_IN, apply_binding,
+)
 
 from _shull_name import document_name, short_title   # noqa: E402
 # A project key is reference tables and grading notes, not worked questions. It draws them
@@ -46,12 +47,16 @@ from build_worksheet_docx import span_codes, span_label, check_spans   # noqa: E
 # The opt-in grid layout ("layout": "grid") is the student sheet's; the key draws the same
 # grid so a teacher grades square against square.
 from build_worksheet_docx import (   # noqa: E402
-    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, GRID_PROMPT_GAP_TW,
+    grid_opts, grid_check, grid_rows, grid_table, grid_head, square, grid_prompt_cell,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TEXT_W_IN = 7.50
-HAND_W_IN = 7.20            # handwritten solution image width; fits the 7.50 in card less its margins
+# TEXT_W_IN comes from _shull_docx (page less binding and outside margins, SHULL-CHG-0103).
+CARD_PAD_TW = 130           # the answer card's left and right cell margins, in twips
+# The handwritten solution image is 7.20 in by design; it may never be wider than the card's
+# inner width (TEXT_W_IN less both cell margins), or the renderer shrinks it and clips the
+# drawing. At the 7.40 in binding-era line the inner width is 7.22 in, so 7.20 still fits.
+HAND_W_IN = min(7.20, int((TEXT_W_IN - 2 * CARD_PAD_TW / 1440) * 100) / 100)
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), "scripts"))
 _TMP = tempfile.mkdtemp(prefix="shull_key_")
 
@@ -73,7 +78,57 @@ def page_break(doc):
     r._element.append(br)
 
 
-def answer_block(doc, n, q, pal):
+def side_opts(spec, sec):
+    """Opt-in compact key: "keyLayout": "side" (section or spec) sets each item's FBD beside its
+    handwritten steps instead of above them. "keyFbdIn" is the drawing column (default 2.6 in);
+    "keyStepScale" (default 1.0) sets the steps slightly smaller than full key size. None when
+    the spec does not ask for it, and then nothing changes."""
+    get = lambda k, d=None: sec.get(k, spec.get(k, d))
+    if get("keyLayout", "stacked") != "side":
+        return None
+    return {"fbd_in": float(get("keyFbdIn", 2.6)), "scale": float(get("keyStepScale", 1.0))}
+
+
+SIDE_GUTTER_IN = 0.12
+SIDE_INNER_IN = HAND_W_IN    # the same width the stacked key gives its full image; a row as wide as
+                             # the card's inner width gets shrunk by the renderer and clips the drawing
+
+
+def side_by_side(c, n, q, side):
+    """Draw the item's scene and its steps as two images in a two-column row. The scene keeps
+    its own magnitude scale (one image per item), cropped to its ink and fitted to the column;
+    the steps are drawn on a canvas `scale` times wider than their column, then fitted, so the
+    handwriting comes out at `scale` of full key size. Returns False if the scene cannot be drawn."""
+    from key_solution import solution_image, SceneUnsupported
+    scene_q = {k: v for k, v in q.items() if k != "steps"}
+    steps_q = {k: v for k, v in q.items() if k not in ("keyImage", "sketch")}
+    fbd_png = os.path.join(_TMP, f"q{n}_fbd.png")
+    try:
+        solution_image(scene_q, fbd_png, width_in=HAND_W_IN)     # full canvas, then cropped
+    except SceneUnsupported:
+        return False
+    fw, fh = _crop_to_ink(fbd_png)
+    steps_w = SIDE_INNER_IN - side["fbd_in"] - SIDE_GUTTER_IN
+    steps_png = os.path.join(_TMP, f"q{n}_steps.png")
+    solution_image(steps_q, steps_png, width_in=steps_w / side["scale"])
+    t = c.add_table(rows=1, cols=3)
+    fix_widths(t, [side["fbd_in"], SIDE_GUTTER_IN, steps_w])
+    for cell in t.rows[0].cells:
+        cell_margins(cell, top=0, bottom=0, left=0, right=0)
+    from docx.enum.table import WD_ALIGN_VERTICAL
+    lc, _, rc = t.rows[0].cells
+    lc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+    lp = lc.paragraphs[0]
+    lp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    pics = [lp.add_run().add_picture(fbd_png, width=Inches(min(fw, side["fbd_in"]))),
+            rc.paragraphs[0].add_run().add_picture(steps_png, width=Inches(steps_w))]
+    for pic in pics:                 # zero wrap distances, or LibreOffice insets each picture
+        for k in ("distT", "distB", "distL", "distR"):     # ~0.13 in and clips its right edge
+            pic._inline.set(k, "0")  # (same fix as the grid key's notes)
+    return True
+
+
+def answer_block(doc, n, q, pal, tier_tags=True, side=None):
     """One question's key entry: number + tier, the prompt restated small, the full
     worked solution, and the final answer set apart so it can be read at a glance
     while grading - never just the bracket the student sheet withholds."""
@@ -82,11 +137,11 @@ def answer_block(doc, n, q, pal):
     no_split(t.rows[0])          # a question's key entry stays whole across a page break,
     c = t.rows[0].cells[0]       # same rule the student handout's cards follow.
     borders(c, pal.hair, sz=4)
-    cell_margins(c, top=70, bottom=70, left=130, right=130)
+    cell_margins(c, top=70, bottom=70, left=CARD_PAD_TW, right=CARD_PAD_TW)
 
     head = c.paragraphs[0]
     r = run(head, f"{n}.  ", 11, bold=True, color=pal.ink)
-    if q.get("tier"):
+    if q.get("tier") and tier_tags:          # "tierTags": false hides it, as on the handout
         run(head, q["tier"].upper(), 7, bold=True, color=pal.accent)
 
     p = para(c, q["prompt"].replace("**", ""), 9, color=pal.label)   # the key restates; bold is the handout's job
@@ -96,6 +151,8 @@ def answer_block(doc, n, q, pal):
         p.runs[0].italic = True
 
     gap(c, 2)
+    if side and q.get("keyImage") and q.get("steps") and side_by_side(c, n, q, side):
+        return c
     if q.get("steps") or q.get("keyImage"):
         # Handwritten worked solution in the key-handwriting face (standards/ANSWER_KEYS.md):
         # the key image, the steps, any scene sketch and the boxed answer are drawn, so no
@@ -207,9 +264,9 @@ def render_key_grid(doc, questions, pal, g):
     key is set at one size, the largest that lets the biggest diagram fit its square."""
     from docx.shared import Pt
     from docx.enum.table import WD_ALIGN_VERTICAL
-    S = g["square"]
+    S, H = g["square"], g["height"]
     avail_w = S - 0.20
-    avail_h = S - 0.30                     # the tier / caption line sits inside the top
+    avail_h = H - 0.30                     # the tier / caption line sits inside the top
     drawn = {n: grid_panels(n, q) for n, q in enumerate(questions, 1)}
     fits = [min(avail_w / w, avail_h / h) for ps in drawn.values() if ps for _, w, h in ps]
     scale = min([1.0] + fits)
@@ -217,27 +274,22 @@ def render_key_grid(doc, questions, pal, g):
         if gi:
             gap(doc, g["rowGapPt"])
         outer, t = grid_table(doc, g, 3)
-        _pin_row(t, 0); _pin_row(t, 1, S); _pin_row(t, 2)
+        _pin_row(t, 0); _pin_row(t, 1, H); _pin_row(t, 2)
         for n, q, col, span in row:
-            last = col + span == g["columns"]
-            end = (col + span - 1) * 2 + (0 if last else 1)
-            right = 0 if last else GRID_PROMPT_GAP_TW
-            head = t.rows[0].cells[col * 2]
-            note = t.rows[2].cells[col * 2]
-            if end > col * 2:
-                head = head.merge(t.rows[0].cells[end])
-                note = note.merge(t.rows[2].cells[end])
+            # Prompt and note sit exactly over and under their own boxes, as on the sheet.
+            head = grid_prompt_cell(t, 0, col, span)
+            note = grid_prompt_cell(t, 2, col, span)
             head.vertical_alignment = WD_ALIGN_VERTICAL.TOP
             # The prompt restated small and grey, as on the card key.
             grid_head(head, n, q, pal, prompt_pt=8.5, prompt_color=pal.label,
-                      italic=True, right=right)
+                      italic=True)
             caps = [p.get("caption") for p in (q.get("keyImage") or {}).get("panels", [])] \
                 or (q.get("draw") or {}).get("captions") or []
             ps = drawn.get(n)
             for k in range(span):
                 sq = t.rows[1].cells[(col + k) * 2]
                 square(sq, pal, S, caps[k] if span > 1 and k < len(caps) else None,
-                       q.get("tier") if k == 0 else None)
+                       q.get("tier") if k == 0 and g["tierTags"] else None)
                 if ps and k < len(ps):
                     png, w, h = ps[k]
                     pp = sq.add_paragraph()
@@ -245,9 +297,8 @@ def render_key_grid(doc, questions, pal, g):
                     pp.paragraph_format.space_after = Pt(0)
                     pp.paragraph_format.space_before = Pt(max(0, (avail_h - h * scale) / 2 * 72))
                     pp.add_run().add_picture(png, width=Inches(w * scale))
-            cell_margins(note, top=30, bottom=0, left=0, right=right)
-            width = S * span + g["gutter"] * (span - 1) + (0 if last else g["gutter"]) \
-                - right / 1440
+            cell_margins(note, top=30, bottom=0, left=0, right=0)
+            width = S * span + g["gutter"] * (span - 1)
             if not ps:
                 # The drawing is the answer; with no drawing the typed solution goes here.
                 para(note, str(q["solution"]), 9, color=pal.ink, first=True)
@@ -257,7 +308,12 @@ def render_key_grid(doc, questions, pal, g):
                 from PIL import Image
                 with Image.open(png) as im:      # cropped to ink, so set by scale, not width
                     w_in = im.width / KEY_PX_PER_IN * KEY_NOTE_SCALE
-                note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
+                pic = note.paragraphs[0].add_run().add_picture(png, width=Inches(min(w_in, width)))
+                # python-docx writes the inline picture with no wrap distances, and
+                # LibreOffice then insets it about 0.13 in: the note would start right of
+                # its box's edge and a full-width note would clip at the right.
+                for k in ("distT", "distB", "distL", "distR"):
+                    pic._inline.set(k, "0")
         from _shull_docx import unpad_cell
         unpad_cell(outer)
     return scale
@@ -327,7 +383,7 @@ def main():
         # SHULL-CHG-0101: the shared print header.
         print_header(doc, pal, unit=spec["unit"], code=f"{unit} / {span_label(sec)}",
                      kind=kind.replace("_", " ") + " · Answer Key",
-                     title=spec.get("key", {}).get("title", sec["title"]))
+                     title=spec.get("key", {}).get("title", sec["title"]), width=TEXT_W_IN)
 
         gap(doc, 6)
         from key_solution import MotionArrowError
@@ -344,7 +400,9 @@ def main():
                   file=sys.stderr)
         for i, q in enumerate([] if g else sec.get("questions", []), start=1):
             try:
-                answer_block(doc, i, q, pal)
+                answer_block(doc, i, q, pal,
+                             tier_tags=bool(sec.get("tierTags", spec.get("tierTags", True))),
+                             side=side_opts(spec, sec))
             except MotionArrowError as e:
                 return refuse(f"{sec['code']} Q{i}: {e}")
             gap(doc, 4)
@@ -362,6 +420,7 @@ def main():
     running_footer(s, f"SHULL SCIENCE          {unit} · {span} · KEY", pal,
                    with_page_numbers=True)
     trim_tail(doc)
+    apply_binding(doc)
     doc.save(out)
     nq = sum(len(x.get("questions", [])) for x in sections)
     print(f"wrote {out}  —  {code} {unit} {span} KEY, "

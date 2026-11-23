@@ -42,6 +42,7 @@ are vectors and keep the arrow ink (standards/ANSWER_KEYS.md §2, §6).
          ]}
       ]}
 
+"labelPad" (scene level, default 12 logical px) sets the gap between each arrowhead and its label.
 "dir" is "up" / "down" / "left" / "right" or degrees counter-clockwise from the +x axis (right).
 "offset" (-0.45 to 0.45, a fraction of the box side) slides an arrow's tail sideways so two
 parallel arrows do not sit on top of each other. A single-object diagram may give "forces" (and
@@ -254,6 +255,7 @@ def fbd_scene(P, x0, y0, width, sc):
     half = 34                                     # half the box side, logical px
     big = max(f["mag"] for p in panels for f in p["forces"])
     full = float(sc.get("arrowPx", 118))          # the largest force's arrow beyond the object
+    pad = float(sc.get("labelPad", 12))           # gap from an arrowhead to its label (opt-in)
     unit = full / big
     pw = width / len(panels)
     lay, ys = [], [-half - 10, half + 10]
@@ -284,10 +286,10 @@ def fbd_scene(P, x0, y0, width, sc):
             w, h = P.width(lab, fs), fs * 1.15
             if abs(dx) < 0.2:                        # vertical arrow: label beside the head,
                 side = 1 if px >= 0 else -1          # on the side the arrow was shifted to
-                gx, gy = ex + side * (w / 2 + 14), ey + dy * 6
+                gx, gy = ex + side * (w / 2 + pad + 2), ey + dy * 6
             else:
-                gx = ex + dx * (12 + abs(dx) * w / 2 + abs(dy) * h / 2)
-                gy = ey + dy * (12 + abs(dy) * h / 2 + abs(dx) * w / 2)
+                gx = ex + dx * (pad + abs(dx) * w / 2 + abs(dy) * h / 2)
+                gy = ey + dy * (pad + abs(dy) * h / 2 + abs(dx) * w / 2)
             arrows.append((sx, sy, ex, ey, lab, gx - w / 2, gy - h / 2))
             ys += [ey, gy - h / 2 - 4, gy + h / 2 + 4]
         lay.append((p, cx, ct, st_, dot, arrows))

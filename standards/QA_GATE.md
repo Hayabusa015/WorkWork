@@ -39,6 +39,9 @@ Practice set is exactly 2 pages. Everything else is whatever was specified.
 If over, fix **in this order**: reduce `@page` margins → reduce base font size → tighten line-height
 → reduce block bottom margins.
 
+The inside (binding) margin and the hole zone are not on this list. They never shrink
+(SHULL-CHG-0103, `brand/SHULL_DESIGN_SYSTEM.md` §8).
+
 > **Never shrink a single question to fit.**
 
 ## 3. No clipped text

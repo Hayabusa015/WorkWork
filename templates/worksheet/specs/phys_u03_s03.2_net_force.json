@@ -1,0 +1,708 @@
+{
+ "$comment": "Physics 3.2 practice set, Net Force: Matt's 7-problem restructure (1D x3 incl. his tractor pull; compass + angled x2; two more angled). Tier tags hidden (tierTags: false). One-time build override: RAMP['physics'] = 2/3/1/1 in memory for 7 items. No graph item (Matt: skip it this time). Everyday scenarios at Matt's request. Not a precedent.",
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.2"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30–40",
+ "equationLabel": "EQUATIONS YOU MAY USE",
+ "pagesPerSection": 1,
+ "equationStyle": "inline",
+ "equationColumns": 2,
+ "tierTags": false,
+ "keyLayout": "side",
+ "keyFbdIn": 2.6,
+ "keyStepScale": 0.85,
+ "sectionsContent": [
+  {
+   "code": "3.2",
+   "title": "Net Force",
+   "compactTop": true,
+   "priorKnowledge": {
+    "items": [
+     "A free-body diagram shows the object as a box with one labelled arrow per force, and no arrow for motion (S3.2).",
+     "A force at an angle splits into an east–west part and a north–south part (S2.1). Add those parts, then use tan⁻¹ to find the angle of the total (S2.2)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "net force",
+     "plain": "∑F = F_{1} + F_{2} + …  (east and north +)"
+    },
+    {
+     "note": "magnitude",
+     "plain": "∑F = √((∑F_{x})² + (∑F_{y})²)"
+    },
+    {
+     "note": "angled force",
+     "plain": "F_{x} = F cos θ     F_{y} = F sin θ"
+    },
+    {
+     "note": "direction",
+     "plain": "θ = tan⁻¹(∑F_{y} / ∑F_{x})"
+    }
+   ],
+   "directions": "Draw a free-body diagram for each problem, then find the net force (size and direction). Work in your notebook. In problems 4–7 you are looking down from above, so north is up the page and weight and the normal force cancel out.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  45 N west  ]",
+     "prompt": "Jess and her dad are moving a couch west toward the front door. Jess pushes with 140 N and her dad pushes with 110 N. The carpet drags on the couch with 205 N of friction. What is the net force on the couch?",
+     "solution": "West is positive. ∑F = 140 N + 110 N − 205 N = 45 N. ∑F = 45 N west.",
+     "finalAnswer": "45 N west",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "140 N",
+          "dir": "left",
+          "mag": 140,
+          "offset": -0.4
+         },
+         {
+          "label": "110 N",
+          "dir": "left",
+          "mag": 110,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 205 N",
+          "dir": "right",
+          "mag": 205
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 205
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 205
+         }
+        ]
+       }
+      ],
+      "arrowPx": 130,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "west = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 140 N + 110 N − 205 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "45 N west"
+      },
+      {
+       "say": "Friction points east, against the slide. F_{N} and F_{g} balance; their size is not given, so they are drawn equal.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  470 N east  ]",
+     "prompt": "Your car dies a block west of the gas station, so two friends hop out and push it east. One pushes with 345 N and the other with 310 N. Rolling friction on the tires is 185 N. Find the net force on the car.",
+     "solution": "East is positive. ∑F = 345 N + 310 N − 185 N = 470 N. ∑F = 470 N east.",
+     "finalAnswer": "470 N east",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "345 N",
+          "dir": "right",
+          "mag": 345,
+          "offset": -0.4
+         },
+         {
+          "label": "310 N",
+          "dir": "right",
+          "mag": 310,
+          "offset": 0.4
+         },
+         {
+          "label": "f = 185 N",
+          "dir": "left",
+          "mag": 185
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 345
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 345
+         }
+        ]
+       }
+      ],
+      "arrowPx": 130,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 345 N + 310 N − 185 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "470 N east"
+      },
+      {
+       "say": "F_{N} and F_{g} are not to scale: the car's weight is far larger than the pushes.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  0 N  ]",
+     "prompt": "At a tractor pull, four tractors are chained to one heavy load that starts at rest. Tractors A and B pull east with 5000 N and 4000 N. Tractors C and D pull west with 4500 N and 3500 N. Friction from the ground on the load is 1000 N. Find the net force on the load. Does it start moving?",
+     "solution": "East is positive. The pulls give 5000 + 4000 − 4500 − 3500 = 1000 N east, so friction (1000 N) points west. ∑F = 5000 N + 4000 N − 4500 N − 3500 N − 1000 N = 0 N. The load stays at rest; it does not start moving.",
+     "finalAnswer": "0 N; the load does not start moving",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "A 5000 N",
+          "dir": "right",
+          "mag": 5000,
+          "offset": -0.4
+         },
+         {
+          "label": "B 4000 N",
+          "dir": "right",
+          "mag": 4000,
+          "offset": 0.4
+         },
+         {
+          "label": "C 4500 N",
+          "dir": "left",
+          "mag": 4500
+         },
+         {
+          "label": "D 3500 N",
+          "dir": "left",
+          "mag": 3500,
+          "offset": 0.45
+         },
+         {
+          "label": "f = 1000 N",
+          "dir": "left",
+          "mag": 1000,
+          "offset": -0.45
+         }
+        ]
+       }
+      ],
+      "arrowPx": 150,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +"
+       ]
+      },
+      {
+       "row": [
+        "pulls: 5000 N + 4000 N − 4500 N − 3500 N = 1000 N east"
+       ]
+      },
+      {
+       "row": [
+        "friction resists that, so f = 1000 N west"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 5000 N + 4000 N − 4500 N − 3500 N − 1000 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "0 N"
+      },
+      {
+       "say": "Balanced: the load stays at rest. It does not start moving.",
+       "ink": "pen"
+      },
+      {
+       "say": "This is static friction holding the load. It adjusts up to a maximum; here it is 1000 N. Weight and F_{N} balance and are left off to keep the pulls readable.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  114 N at 17.6° north of east  ]",
+     "prompt": "Maya and Leo pull their little sister across a frozen pond on a sled. Maya pulls 80.0 N east. Leo pulls 45.0 N at 50.0° north of east. Ignore friction on the ice. Find the net force on the sled.",
+     "solution": "Leo: east part 45.0 cos 50.0° = 28.9 N, north part 45.0 sin 50.0° = 34.5 N. ∑Fx = 80.0 + 28.9 = 108.9 N east. ∑Fy = 34.5 N north. ∑F = √(108.9² + 34.5²) = 114 N. θ = tan⁻¹(34.5/108.9) = 17.6°. Both sums positive: north of east. ∑F = 114 N at 17.6° north of east.",
+     "finalAnswer": "114 N at 17.6° north of east",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "80.0 N",
+          "dir": "right",
+          "mag": 80.0
+         },
+         {
+          "label": "45.0 N",
+          "dir": 50,
+          "mag": 45.0
+         }
+        ],
+        "object": "dot",
+        "caption": "seen from above"
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +x, north = +y"
+       ]
+      },
+      {
+       "row": [
+        "Leo:  F_{x} = 45.0 N cos 50.0° = 28.9 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 45.0 N sin 50.0° = 34.5 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 80.0 N + 28.9 N = 108.9 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 34.5 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(∑F_{x})^{2} + (∑F_{y})^{2}"
+        }
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(108.9 N)^{2} + (34.5 N)^{2}"
+        },
+        "= 114 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "∑F_{y}",
+          "∑F_{x}"
+         ]
+        },
+        ")"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "34.5 N",
+          "108.9 N"
+         ]
+        },
+        ") = 17.6°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "114 N at 17.6° north of east"
+      },
+      {
+       "say": "x and y both positive, so the force points north of east.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  224 N at 57.9° north of west  ]",
+     "prompt": "Jordan and Ava drag a kayak across the sand to the lake. Ava pulls 90.0 N straight north. Jordan pulls 155 N at 40.0° north of west. Find the net force their two ropes put on the kayak.",
+     "solution": "Jordan: west part 155 cos 40.0° = 118.7 N, north part 155 sin 40.0° = 99.6 N. ∑Fx = −118.7 N (west). ∑Fy = 90.0 + 99.6 = 189.6 N north. ∑F = √(118.7² + 189.6²) = 224 N. θ = tan⁻¹(189.6/118.7) = 57.9°. x negative, y positive: north of west. ∑F = 224 N at 57.9° north of west.",
+     "finalAnswer": "224 N at 57.9° north of west",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "90.0 N",
+          "dir": "up",
+          "mag": 90.0
+         },
+         {
+          "label": "155 N",
+          "dir": 140,
+          "mag": 155
+         }
+        ],
+        "object": "dot",
+        "caption": "seen from above"
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +x, north = +y"
+       ]
+      },
+      {
+       "row": [
+        "Jordan:  F_{x} = −155 N cos 40.0° = −118.7 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 155 N sin 40.0° = 99.6 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = −118.7 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 90.0 N + 99.6 N = 189.6 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(∑F_{x})^{2} + (∑F_{y})^{2}"
+        }
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(118.7 N)^{2} + (189.6 N)^{2}"
+        },
+        "= 224 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "∑F_{y}",
+          "∑F_{x}"
+         ]
+        },
+        ")"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "189.6 N",
+          "118.7 N"
+         ]
+        },
+        ") = 57.9°"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "224 N at 57.9° north of west"
+      },
+      {
+       "say": "x negative, y positive: the force points north of west, so the angle is measured from west.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  139 N east  ·  170 N east  ]",
+     "prompt": "A delivery crew drags a heavy box across the warehouse floor with two straps. One strap pulls 85.0 N at 35.0° north of east, and the other pulls 85.0 N at 35.0° south of east.",
+     "parts": [
+      "a.  Find the net force the straps put on the box.",
+      "b.  What would the net force be if both straps pulled straight east? Do the angled straps give more or less, and why?"
+     ],
+     "solution": "a. East parts: 85.0 cos 35.0° = 69.6 N each, ∑Fx = 139 N. North and south parts: 48.8 N each, opposite, ∑Fy = 0. ∑F = 139 N east.\nb. 85.0 + 85.0 = 170 N east. The angled straps give less: only the east parts move the box, and the north and south parts (48.8 N each) cancel.",
+     "finalAnswer": "a. 139 N east. b. 170 N east; the angled straps give less, because their north and south parts cancel.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "85.0 N",
+          "dir": 35,
+          "mag": 85.0
+         },
+         {
+          "label": "85.0 N",
+          "dir": -35,
+          "mag": 85.0
+         }
+        ],
+        "object": "dot",
+        "caption": "seen from above"
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +x, north = +y"
+       ]
+      },
+      {
+       "row": [
+        "each strap:  F_{x} = 85.0 N cos 35.0° = 69.6 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 85.0 N sin 35.0° = 48.8 N north, and 48.8 N south"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 69.6 N + 69.6 N = 139 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 48.8 N − 48.8 N = 0 N"
+       ]
+      },
+      {
+       "answer": [
+        "a.  ∑F ="
+       ],
+       "value": "139 N east"
+      },
+      {
+       "answer": [
+        "b.  ∑F = 85.0 N + 85.0 N ="
+       ],
+       "value": "170 N east"
+      },
+      {
+       "say": "Less. Only the east parts move the box; the north and south parts cancel each other.",
+       "ink": "pen"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "Sam is walking his two dogs when they spot a squirrel. Max lunges with 80.0 N at 30.0° north of east, and Bella pulls with 75.0 N at 55.0° south of east. Sam digs in his heels and doesn't move.",
+     "parts": [
+      "a.  Find the net force the two leashes put on Sam.",
+      "b.  Sam stays put. What friction force does the ground put on his shoes?"
+     ],
+     "solution": "a. Max: 80.0 cos 30.0° = 69.3 N east, 80.0 sin 30.0° = 40.0 N north. Bella: 75.0 cos 55.0° = 43.0 N east, 75.0 sin 55.0° = 61.4 N south. ∑Fx = 112.3 N, ∑Fy = 40.0 − 61.4 = −21.4 N. ∑F = √(112.3² + 21.4²) = 114 N. θ = tan⁻¹(21.4/112.3) = 10.8°, south of east because ∑Fy is negative. Leashes: 114 N at 10.8° south of east.\nb. Sam is at rest, so all forces on him add to zero (S3.1). Ground friction is equal and opposite: 114 N at 10.8° north of west.",
+     "finalAnswer": "a. 114 N at 10.8° south of east. b. 114 N at 10.8° north of west.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "80.0 N",
+          "dir": 30,
+          "mag": 80.0
+         },
+         {
+          "label": "75.0 N",
+          "dir": -55,
+          "mag": 75.0
+         },
+         {
+          "label": "ground 114 N",
+          "dir": 169.2,
+          "mag": 114.3
+         }
+        ],
+        "object": "dot",
+        "caption": "seen from above"
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +x, north = +y"
+       ]
+      },
+      {
+       "row": [
+        "Max:  F_{x} = 80.0 N cos 30.0° = 69.3 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = 80.0 N sin 30.0° = 40.0 N"
+       ]
+      },
+      {
+       "row": [
+        "Bella:  F_{x} = 75.0 N cos 55.0° = 43.0 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = −75.0 N sin 55.0° = −61.4 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{x} = 69.3 N + 43.0 N = 112.3 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F_{y} = 40.0 N − 61.4 N = −21.4 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(∑F_{x})^{2} + (∑F_{y})^{2}"
+        }
+       ]
+      },
+      {
+       "row": [
+        "∑F =",
+        {
+         "sqrt": "(112.3 N)^{2} + (21.4 N)^{2}"
+        },
+        "= 114 N"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "∑F_{y}",
+          "∑F_{x}"
+         ]
+        },
+        ")"
+       ]
+      },
+      {
+       "row": [
+        "θ = tan^{-1}(",
+        {
+         "frac": [
+          "21.4 N",
+          "112.3 N"
+         ]
+        },
+        ") = 10.8°"
+       ]
+      },
+      {
+       "answer": [
+        "a.  leashes:"
+       ],
+       "value": "114 N at 10.8° south of east"
+      },
+      {
+       "answer": [
+        "b.  ground:"
+       ],
+       "value": "114 N at 10.8° north of west"
+      },
+      {
+       "say": "x positive, y negative: south of east. At rest, so the ground's force is equal and opposite to the leashes' net force.",
+       "ink": "arrow"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

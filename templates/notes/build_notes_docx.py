@@ -54,8 +54,10 @@ from _shull_docx import (          # noqa: E402
     T, FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
     diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
-    schema_order, estimate_height, text_width_in,
+    schema_order, estimate_height, text_width_in, set_mirror_margins, apply_binding,
+    PAGE_W_IN, PAGE_H_IN,
 )
+from _shull_print import text_block_in   # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCHOOL = "James A. Garfield Local Schools"
@@ -65,19 +67,19 @@ SCHOOL = "James A. Garfield Local Schools"
 # Geometry.
 #
 # The Cornell split is SHULL-CHG-0018's and is decided here once: a 1.28 in cue column
-# and 6.22 in capture column on a 7.50 in text block. Everything on the capture side is
+# and the rest of the text block as the capture column. Everything on the capture side is
 # measured off NOTES_INNER_IN, so moving the split moves every table, work box and
-# figure with it.
-TEXT_W_IN = 7.50
+# figure with it. The text block is the page less the binding (inside) margin and the
+# outside margin, SHULL-CHG-0103: 7.40 in, so the capture column is 6.12 in (was 6.22).
+MARGIN_OUTSIDE_IN = 0.50
+TEXT_W_IN = text_block_in(MARGIN_OUTSIDE_IN)
 CUE_W_IN = 1.28
-NOTES_W_IN = TEXT_W_IN - CUE_W_IN           # 6.22
+NOTES_W_IN = round(TEXT_W_IN - CUE_W_IN, 4)
 CUE_PAD_R_IN = 0.08                         # air between cue text and the column rule
 NOTES_PAD_L_IN = 0.20                       # air between the column rule and the notes
 CUE_INNER_IN = round(CUE_W_IN - CUE_PAD_R_IN, 2)      # 1.20
-NOTES_INNER_IN = round(NOTES_W_IN - NOTES_PAD_L_IN, 2)  # 6.02
+NOTES_INNER_IN = round(NOTES_W_IN - NOTES_PAD_L_IN, 2)  # 5.92
 
-PAGE_W_IN, PAGE_H_IN = 8.5, 11.0
-MARGIN_LR_IN = 0.50
 MARGIN_TOP_IN = 0.42
 MARGIN_BOTTOM_IN = 0.72                     # the ruled footer lives in here
 FOOTER_DIST_IN = 0.30
@@ -1703,7 +1705,7 @@ def main():
     st.element.rPr.rFonts.set(qn("w:eastAsia"), FONT)
     s = doc.sections[0]
     s.page_width, s.page_height = Inches(PAGE_W_IN), Inches(PAGE_H_IN)
-    s.left_margin = s.right_margin = Inches(MARGIN_LR_IN)
+    set_mirror_margins(s, MARGIN_OUTSIDE_IN)
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     # The header is empty, but LibreOffice still reserves its one empty line below
     # the header distance. Set equal to the top margin, that line pushed every page's
@@ -1742,6 +1744,7 @@ def main():
     nobreak_hyphens(doc.element.body)
     trim_tail(doc)
     schema_order(doc)
+    apply_binding(doc)
     doc.save(out)
 
     print(f"wrote {out}  —  {code} {u} {span}  —  {designed} designed pages"

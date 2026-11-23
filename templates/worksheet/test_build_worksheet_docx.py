@@ -11,6 +11,8 @@ from docx import Document
 from docx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
+from _shull_docx import TEXT_W_IN   # the binding-era text block (SHULL-CHG-0103), not 7.5
 BUILDER = os.path.join(HERE, "build_worksheet_docx.py")
 KEY_BUILDER = os.path.join(HERE, "build_worksheet_key_docx.py")
 FBD = {"scene": "fbd", "forces": [{"label": "F_{N}", "dir": "up", "mag": 1},
@@ -88,9 +90,81 @@ class Grid(Builder):
     def test_grid_columns_are_square_wide(self):
         r, doc = self.build(grid_spec())
         cols = [int(c.get(qn("w:w"))) for c in doc.element.body.iter(qn("w:gridCol"))]
-        side, gutter = 2.05 * 1440, (7.5 - 3 * 2.05) / 2 * 1440
+        side, gutter = 2.05 * 1440, (TEXT_W_IN - 3 * 2.05) / 2 * 1440
         self.assertEqual(sum(1 for c in cols if abs(c - side) <= 1), 3 * 2)   # 2 grid rows
         self.assertEqual(sum(1 for c in cols if abs(c - gutter) <= 1), 2 * 2)
+
+    def test_prompts_sit_exactly_over_their_boxes(self):
+        """Each prompt cell starts on its box's grid column and ends on its last box's:
+        one column for a single box, box-gutter-box for a two-box item, never a gutter
+        beside it (Matt, 2026-11-16)."""
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(grid_spec(), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            grids = [t for t in doc.element.body.iter(qn("w:tbl"))
+                     if len(t.find(qn("w:tblGrid"))) == 5]
+            self.assertEqual(len(grids), 2)
+            spans = []
+            for t in grids:
+                head, boxes = t.findall(qn("w:tr"))[:2]
+                col = 0
+                for tc in head.findall(qn("w:tc")):
+                    gs = tc.find(qn("w:tcPr")).find(qn("w:gridSpan"))
+                    span = int(gs.get(qn("w:val"))) if gs is not None else 1
+                    if "".join(x.text or "" for x in tc.iter(qn("w:t"))).strip():
+                        self.assertEqual(col % 2, 0, "a prompt starts in a gutter")
+                        self.assertEqual(span % 2, 1, "a prompt ends in a gutter")
+                        mar = tc.find(qn("w:tcPr")).find(qn("w:tcMar"))
+                        self.assertEqual(mar.find(qn("w:left")).get(qn("w:w")), "0")
+                        self.assertEqual(mar.find(qn("w:right")).get(qn("w:w")), "0")
+                        spans.append(span)
+                    col += span
+            self.assertEqual(spans, [1, 1, 1, 1, 3])     # item 5 spans its two boxes
+
+    def test_tier_tags_false_keeps_tiers_out_of_the_boxes(self):
+        tags = (">WARM-UP<", ">PRACTICE<", ">CHALLENGE<", ">MULTI-TOPIC<")
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(grid_spec(), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue(all(t in doc.element.body.xml for t in tags))   # default prints them
+            r, doc = self.build(grid_spec(tierTags=False), builder)
+            self.assertEqual(r.returncode, 0, r.stderr)   # tiers still in the data: ramp passes
+            x = doc.element.body.xml
+            self.assertFalse(any(t in x for t in tags), builder)
+            self.assertNotIn("•  ", x)
+            self.assertIn(">Book<", x)                    # captions still print
+
+    def test_tier_tags_false_on_standard_cards(self):
+        """The same opt-in for the default card layout: no tag on the handout or the key,
+        tiers still in the data (the ramp check passes), default unchanged."""
+        tags = (">WARM-UP<", ">PRACTICE<", ">CHALLENGE<", ">MULTI-TOPIC<")
+        base = cards_spec({"panels": 1})
+        for q in base["sectionsContent"][0]["questions"]:
+            q["keyImage"] = copy.deepcopy(FBD)
+        for builder in (BUILDER, KEY_BUILDER):
+            r, doc = self.build(base, builder)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue(all(t in doc.element.body.xml for t in tags), builder)
+            for where in ("spec", "section"):
+                s = copy.deepcopy(base)
+                (s if where == "spec" else s["sectionsContent"][0])["tierTags"] = False
+                r, doc = self.build(s, builder)
+                self.assertEqual(r.returncode, 0, r.stderr)
+                x = doc.element.body.xml
+                self.assertFalse(any(t in x for t in tags), (builder, where))
+                self.assertIn(">1.<", x.replace(" ", "")) if builder == BUILDER else None
+
+    def test_box_height_can_differ_from_width(self):
+        r, doc = self.build(grid_spec(squareIn=2.35, boxHeightIn=2.0))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        heights = [h for h in trheights(doc) if h[1] == "exact"]
+        self.assertEqual(len(heights), 2)
+        self.assertTrue(all(abs(int(h) - 2.0 * 1440) <= 1 for h, _ in heights), heights)
+        # Skip the first table: the shared print header (SHULL-CHG-0101) also has a 2.35 in
+        # column, and only the grid's squares are being counted here.
+        cols = [int(c.get(qn("w:w"))) for tb in doc.tables[1:]
+                for c in tb._tbl.iter(qn("w:gridCol"))]
+        self.assertEqual(sum(1 for c in cols if abs(c - 2.35 * 1440) <= 1), 6)
 
     def test_grid_text_has_numbers_tiers_and_captions(self):
         r, doc = self.build(grid_spec())
@@ -239,7 +313,7 @@ class LabelBank(Builder):
     def test_equation_columns_sets_bar_width(self):
         r, doc = self.build(grid_spec(equationColumns=3))
         self.assertEqual(r.returncode, 0, r.stderr)
-        w = round(7.5 / 3 - 0.13, 2) * 1440
+        w = round(TEXT_W_IN / 3 - 0.13, 2) * 1440
         cols = [int(c.get(qn("w:w"))) for c in doc.element.body.iter(qn("w:gridCol"))]
         self.assertEqual(sum(1 for c in cols if abs(c - w) <= 1), 3)
 

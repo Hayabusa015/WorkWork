@@ -21,8 +21,10 @@
 
 <link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
 <style>
+  /* No margin here: build_lab.py sets all four, mirrored, from brand/tokens.json and draws
+     the hole guides (SHULL-CHG-0103). */
   @page {
-    size: letter; margin: 0.30in 0.35in 0.45in 0.35in;
+    size: letter;
     @bottom-left { content: "SHULL SCIENCE · " string(coursename) " · " string(unitcode)
                             " · TEACHER COPY";
                    font-family: var(--display); font-size: 6.2pt; letter-spacing: 0.14em;
@@ -32,7 +34,8 @@
                     color: var(--footer); margin-bottom: 0.14in; }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--body); font-size: 10.2pt;
+  body { font-family: var(--body); font-size: 10.1pt;   /* 10.2 before SHULL-CHG-0103 (binding margin; 5 pages at 10.2) */
+        
          line-height: 1.40; color: var(--ink); }
   sub { font-size: 7pt; vertical-align: -0.15em; }
   .meta { font-size: 0; line-height: 0; height: 0; overflow: hidden; }
