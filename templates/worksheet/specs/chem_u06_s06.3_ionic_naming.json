@@ -1,0 +1,396 @@
+{
+ "course": "chemistry",
+ "unit": 6,
+ "sections": [
+  "6.3"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "6.3",
+   "title": "Ionic Naming",
+   "concept": {
+    "summary": "Cation first · charges add to zero · Roman numeral = charge on one metal ion · polyatomic ions stay whole; use ( ) for 2 or more",
+    "keyIdeas": []
+   },
+   "directions": "Front: write the cation first, record both charges, criss-cross the charge numbers, prove the charges cancel, then write the formula (reduce if needed). Back: un-cross to find the cation's charge, prove the charges cancel, then name it. Use your reference packet for polyatomic ions.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Name",
+      "1 · Cation (write first)",
+      "Charge",
+      "2 · Anion",
+      "Charge",
+      "3 · Criss-cross ( ) if 2 or more polyatomic ions",
+      "4 · Charges cancel? show the math",
+      "5 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.19,
+      0.1,
+      0.07,
+      0.09,
+      0.07,
+      0.15,
+      0.15,
+      0.13
+     ],
+     "rows": [
+      [
+       "EX",
+       "barium chloride",
+       "Ba",
+       "2+",
+       "Cl",
+       "1−",
+       "Ba₁Cl₂",
+       "(+2) + 2(−1) = 0",
+       "BaCl₂"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": []
+    },
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Name",
+      "1 · Cation (write first)",
+      "Charge",
+      "2 · Anion",
+      "Charge",
+      "3 · Criss-cross ( ) if 2 or more polyatomic ions",
+      "4 · Charges cancel? show the math",
+      "5 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.19,
+      0.1,
+      0.07,
+      0.09,
+      0.07,
+      0.15,
+      0.15,
+      0.13
+     ],
+     "rows": [
+      [
+       "1",
+       "sodium chloride",
+       "Na",
+       "1+",
+       "Cl",
+       "1−",
+       "Na₁Cl₁",
+       "(+1) + (−1) = 0",
+       "NaCl"
+      ],
+      [
+       "2",
+       "calcium oxide",
+       "Ca",
+       "2+",
+       "O",
+       "2−",
+       "Ca₂O₂ → reduce",
+       "(+2) + (−2) = 0",
+       "CaO"
+      ],
+      [
+       "3",
+       "aluminum sulfide",
+       "Al",
+       "3+",
+       "S",
+       "2−",
+       "Al₂S₃",
+       "2(+3) + 3(−2) = 0",
+       "Al₂S₃"
+      ],
+      [
+       "4",
+       "iron(III) oxide",
+       "Fe",
+       "3+",
+       "O",
+       "2−",
+       "Fe₂O₃",
+       "2(+3) + 3(−2) = 0",
+       "Fe₂O₃"
+      ],
+      [
+       "5",
+       "magnesium nitrate",
+       "Mg",
+       "2+",
+       "NO₃",
+       "1−",
+       "Mg₁(NO₃)₂",
+       "(+2) + 2(−1) = 0",
+       "Mg(NO₃)₂"
+      ]
+     ],
+     "rowHeightIn": 0.58,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · ON YOUR OWN",
+     "headers": [
+      "#",
+      "Name",
+      "Formula"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "potassium oxide",
+       "K₂O"
+      ],
+      [
+       "7",
+       "copper(II) chloride",
+       "CuCl₂"
+      ],
+      [
+       "8",
+       "ammonium phosphate",
+       "(NH₄)₃PO₄"
+      ],
+      [
+       "9",
+       "lead(IV) oxide",
+       "PbO₂"
+      ],
+      [
+       "10",
+       "aluminum hydroxide",
+       "Al(OH)₃"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    },
+    {
+     "kind": "table",
+     "label": "WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · Cation (write first)",
+      "2 · Anion",
+      "Anion charge",
+      "3 · Un-cross: cation charge",
+      "4 · Charges cancel? show the math",
+      "5 · Name"
+     ],
+     "widths": [
+      0.05,
+      0.12,
+      0.1,
+      0.09,
+      0.09,
+      0.12,
+      0.17,
+      0.26
+     ],
+     "rows": [
+      [
+       "EX",
+       "CoCl₂",
+       "Co",
+       "Cl",
+       "1−",
+       "2+",
+       "(+2) + 2(−1) = 0",
+       "cobalt(II) chloride"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [],
+     "pageBreakBefore": true,
+     "heading": "Part B · Formula → Name"
+    },
+    {
+     "kind": "table",
+     "label": "GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · Cation (write first)",
+      "2 · Anion",
+      "Anion charge",
+      "3 · Un-cross: cation charge",
+      "4 · Charges cancel? show the math",
+      "5 · Name"
+     ],
+     "widths": [
+      0.05,
+      0.12,
+      0.1,
+      0.09,
+      0.09,
+      0.12,
+      0.17,
+      0.26
+     ],
+     "rows": [
+      [
+       "1",
+       "KBr",
+       "K",
+       "Br",
+       "1−",
+       "1+",
+       "(+1) + (−1) = 0",
+       "potassium bromide"
+      ],
+      [
+       "2",
+       "Li₂S",
+       "Li",
+       "S",
+       "2−",
+       "1+",
+       "2(+1) + (−2) = 0",
+       "lithium sulfide"
+      ],
+      [
+       "3",
+       "FeCl₂",
+       "Fe",
+       "Cl",
+       "1−",
+       "2+",
+       "(+2) + 2(−1) = 0",
+       "iron(II) chloride"
+      ],
+      [
+       "4",
+       "Cr₂O₃",
+       "Cr",
+       "O",
+       "2−",
+       "3+",
+       "2(+3) + 3(−2) = 0",
+       "chromium(III) oxide"
+      ],
+      [
+       "5",
+       "Ca(OH)₂",
+       "Ca",
+       "OH",
+       "1−",
+       "2+",
+       "(+2) + 2(−1) = 0",
+       "calcium hydroxide"
+      ]
+     ],
+     "rowHeightIn": 0.74,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "ON YOUR OWN",
+     "headers": [
+      "#",
+      "Formula",
+      "Name"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "AlCl₃",
+       "aluminum chloride"
+      ],
+      [
+       "7",
+       "CuSO₄",
+       "copper(II) sulfate"
+      ],
+      [
+       "8",
+       "NH₄NO₃",
+       "ammonium nitrate"
+      ],
+      [
+       "9",
+       "SnF₄",
+       "tin(IV) fluoride"
+      ],
+      [
+       "10",
+       "BaCO₃",
+       "barium carbonate"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    }
+   ],
+   "keyNotes": [
+    "A2 calcium oxide is the guided reduction (Ca₂O₂ → CaO); A9 lead(IV) oxide repeats it on their own (Pb₂O₄ → PbO₂).",
+    "A8 and B8: the ammonium cation is polyatomic and has no metal.",
+    "B4 and B9 need the un-cross: 3 O^{2−} is −6 across 2 Cr, so each Cr is +3; 4 F^{−} makes Sn +4."
+   ]
+  }
+ ]
+}

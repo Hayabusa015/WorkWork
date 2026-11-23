@@ -1,0 +1,385 @@
+{
+ "course": "chemistry",
+ "unit": 6,
+ "sections": [
+  "6.4"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "6.4",
+   "title": "Acid Naming",
+   "concept": {
+    "summary": "-ide → hydro-…-ic · -ate → -ic · -ite → -ous · one H^{+} per negative charge · keep per- and hypo-",
+    "keyIdeas": []
+   },
+   "directions": "Front: translate the acid ending back to the anion ending, name the anion, write its formula and charge, criss-cross with H^{+}, prove the charges cancel, then write the formula with (aq). Back: count the H^{+} to find the anion's charge, name the anion, translate its ending, then name the acid.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "label": "PART A · ACID NAME → FORMULA · WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Acid name",
+      "1 · Ending: acid → anion",
+      "2 · Anion name",
+      "3 · Anion formula + charge",
+      "4 · Criss-cross with H^{+}",
+      "5 · Charges cancel?",
+      "6 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.15,
+      0.13,
+      0.11,
+      0.12,
+      0.13,
+      0.17,
+      0.14
+     ],
+     "rows": [
+      [
+       "EX",
+       "sulfuric acid",
+       "-ic → -ate",
+       "sulfate",
+       "SO₄^{2−}",
+       "H₂(SO₄)₁",
+       "2(+1) + (−2) = 0",
+       "H₂SO₄(aq)"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": []
+    },
+    {
+     "kind": "table",
+     "label": "PART A · ACID NAME → FORMULA · GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Acid name",
+      "1 · Ending: acid → anion",
+      "2 · Anion name",
+      "3 · Anion formula + charge",
+      "4 · Criss-cross with H^{+}",
+      "5 · Charges cancel?",
+      "6 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.15,
+      0.13,
+      0.11,
+      0.12,
+      0.13,
+      0.17,
+      0.14
+     ],
+     "rows": [
+      [
+       "1",
+       "hydrochloric acid",
+       "hydro-…-ic → -ide",
+       "chloride",
+       "Cl^{−}",
+       "H₁Cl₁",
+       "(+1) + (−1) = 0",
+       "HCl(aq)"
+      ],
+      [
+       "2",
+       "nitric acid",
+       "-ic → -ate",
+       "nitrate",
+       "NO₃^{−}",
+       "H₁(NO₃)₁",
+       "(+1) + (−1) = 0",
+       "HNO₃(aq)"
+      ],
+      [
+       "3",
+       "hydrofluoric acid",
+       "hydro-…-ic → -ide",
+       "fluoride",
+       "F^{−}",
+       "H₁F₁",
+       "(+1) + (−1) = 0",
+       "HF(aq)"
+      ],
+      [
+       "4",
+       "phosphoric acid",
+       "-ic → -ate",
+       "phosphate",
+       "PO₄^{3−}",
+       "H₃(PO₄)₁",
+       "3(+1) + (−3) = 0",
+       "H₃PO₄(aq)"
+      ],
+      [
+       "5",
+       "sulfurous acid",
+       "-ous → -ite",
+       "sulfite",
+       "SO₃^{2−}",
+       "H₂(SO₃)₁",
+       "2(+1) + (−2) = 0",
+       "H₂SO₃(aq)"
+      ]
+     ],
+     "rowHeightIn": 0.52,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "PART A · ACID NAME → FORMULA · ON YOUR OWN",
+     "headers": [
+      "#",
+      "Acid name",
+      "Formula"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "nitrous acid",
+       "HNO₂(aq)"
+      ],
+      [
+       "7",
+       "hydrobromic acid",
+       "HBr(aq)"
+      ],
+      [
+       "8",
+       "chromic acid",
+       "H₂CrO₄(aq)"
+      ],
+      [
+       "9",
+       "hydrocyanic acid",
+       "HCN(aq)"
+      ],
+      [
+       "10",
+       "chlorous acid",
+       "HClO₂(aq)"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    },
+    {
+     "kind": "table",
+     "label": "WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · H^{+} count",
+      "2 · Anion formula + charge",
+      "3 · Charges cancel?",
+      "4 · Anion name",
+      "5 · Ending: anion → acid",
+      "6 · Acid name"
+     ],
+     "widths": [
+      0.05,
+      0.13,
+      0.07,
+      0.12,
+      0.17,
+      0.14,
+      0.14,
+      0.18
+     ],
+     "rows": [
+      [
+       "EX",
+       "H₂CO₃(aq)",
+       "2",
+       "CO₃^{2−}",
+       "2(+1) + (−2) = 0",
+       "carbonate",
+       "-ate → -ic",
+       "carbonic acid"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [],
+     "pageBreakBefore": true,
+     "heading": "Part B · Formula → Acid Name"
+    },
+    {
+     "kind": "table",
+     "label": "GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · H^{+} count",
+      "2 · Anion formula + charge",
+      "3 · Charges cancel?",
+      "4 · Anion name",
+      "5 · Ending: anion → acid",
+      "6 · Acid name"
+     ],
+     "widths": [
+      0.05,
+      0.13,
+      0.07,
+      0.12,
+      0.17,
+      0.14,
+      0.14,
+      0.18
+     ],
+     "rows": [
+      [
+       "1",
+       "HI(aq)",
+       "1",
+       "I^{−}",
+       "(+1) + (−1) = 0",
+       "iodide",
+       "-ide → hydro-…-ic",
+       "hydroiodic acid"
+      ],
+      [
+       "2",
+       "HClO₃(aq)",
+       "1",
+       "ClO₃^{−}",
+       "(+1) + (−1) = 0",
+       "chlorate",
+       "-ate → -ic",
+       "chloric acid"
+      ],
+      [
+       "3",
+       "H₂S(aq)",
+       "2",
+       "S^{2−}",
+       "2(+1) + (−2) = 0",
+       "sulfide",
+       "-ide → hydro-…-ic",
+       "hydrosulfuric acid"
+      ],
+      [
+       "4",
+       "HClO(aq)",
+       "1",
+       "ClO^{−}",
+       "(+1) + (−1) = 0",
+       "hypochlorite",
+       "-ite → -ous",
+       "hypochlorous acid"
+      ],
+      [
+       "5",
+       "HMnO₄(aq)",
+       "1",
+       "MnO₄^{−}",
+       "(+1) + (−1) = 0",
+       "permanganate",
+       "-ate → -ic",
+       "permanganic acid"
+      ]
+     ],
+     "rowHeightIn": 0.7,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "ON YOUR OWN",
+     "headers": [
+      "#",
+      "Formula",
+      "Acid name"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "HClO₄(aq)",
+       "perchloric acid"
+      ],
+      [
+       "7",
+       "HC₂H₃O₂(aq)",
+       "acetic acid"
+      ],
+      [
+       "8",
+       "H₂Se(aq)",
+       "hydroselenic acid"
+      ],
+      [
+       "9",
+       "H₃PO₃(aq)",
+       "phosphorous acid"
+      ],
+      [
+       "10",
+       "H₂Cr₂O₇(aq)",
+       "dichromic acid"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    }
+   ],
+   "keyNotes": [
+    "Phosphite and dichromate are reference-only (unstarred) in the packet; chromate and permanganate are starred.",
+    "B8 H₂Se: selenide is not in the packet; students reason from S^{2−} (same group, 2−).",
+    "A9 / HCN: cyanide has no oxygen, so the acid takes hydro-."
+   ]
+  }
+ ]
+}

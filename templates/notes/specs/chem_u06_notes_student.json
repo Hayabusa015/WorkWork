@@ -1,0 +1,715 @@
+{
+  "course": "chemistry",
+  "unit": 6,
+  "key": false,
+  "noEquationBar": true,
+  "cover": {
+    "kicker": "GUIDED NOTES  ·  PHASE 02  ·  4 SECTIONS",
+    "sectionList": [
+      "S06.1   Covalent Names & Formulas",
+      "S06.2   Polyatomic Ions",
+      "S06.3   Ionic Names & Formulas with Transition Metals",
+      "S06.4   Naming Acids & Formulas"
+    ],
+    "keyTerms": [
+      {
+        "code": "6.1",
+        "terms": [
+          "Molecular compound",
+          "prefix",
+          "subscript"
+        ]
+      },
+      {
+        "code": "6.2",
+        "terms": [
+          "Polyatomic ion",
+          "ammonium",
+          "parentheses"
+        ]
+      },
+      {
+        "code": "6.3",
+        "terms": [
+          "Cation",
+          "anion",
+          "net charge",
+          "criss-cross",
+          "Roman numeral"
+        ]
+      },
+      {
+        "code": "6.4",
+        "terms": [
+          "Binary acid",
+          "oxyacid",
+          "(aq)",
+          "-ic / -ous"
+        ]
+      }
+    ],
+    "howToUse": "Each block names its slides. When a slide is up, write what its prompts ask for in your own words on the lines. Copy each worked example into its box."
+  },
+  "sectionsContent": [
+    {
+      "code": "6.1",
+      "title": "Covalent Names & Formulas",
+      "learningTarget": "I can classify a compound as ionic or covalent and name and write formulas for molecular compounds.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slides 2–3 · Names and formulas",
+              "cues": [
+                "S06"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Always do this first",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Order of checks",
+                  "lines": 2
+                }
+              ],
+              "notesFirst": true,
+              "table": {
+                "headers": [
+                  "",
+                  "Molecular · CO₂",
+                  "Ionic · CaCl₂",
+                  "Acid · HCl(aq)"
+                ],
+                "rows": [
+                  [
+                    "How to spot it",
+                    "",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Naming rule",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.22,
+                  0.26,
+                  0.26,
+                  0.26
+                ],
+                "rowHeightIn": 0.48
+              }
+            },
+            {
+              "title": "Slides 5–6 · Naming molecular compounds",
+              "cues": [
+                "S06.1"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Rule 1 · first element",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Rule 2 · second element",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Rule 3 · formula",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Meaning of a subscript",
+                  "lines": 2
+                }
+              ],
+              "notesFirst": true
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 7 · Molecular prefixes",
+              "cues": [
+                "S06.1"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Slide examples",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Prefixes and subscripts",
+                  "lines": 2
+                }
+              ],
+              "table": {
+                "headers": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10"
+                ],
+                "rows": [
+                  [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "rowHeightIn": 0.46
+              }
+            },
+            {
+              "kind": "example",
+              "title": "Slides 8–9 · How do you name N₂O₄?",
+              "cues": [
+                "S06.1"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Prefix rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "No subscript means",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 8–9 · Name N₂O₄: the prefix for each element. Then name CO and PCl₃.",
+                "workHeightIn": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Slides 10–11 · Writing molecular formulas",
+              "cues": [
+                "S06.1"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "From name to formula",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Steps",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 10–11 · Write the formulas: dinitrogen pentoxide, sulfur hexafluoride",
+                "workHeightIn": 1.5
+              }
+            },
+            {
+              "title": "Slide 12 · Why N₂O₄ stays N₂O₄",
+              "cues": [
+                "S06.1"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Conclusion",
+                  "lines": 2
+                }
+              ],
+              "table": {
+                "headers": [
+                  "Formula",
+                  "Name",
+                  "Atoms in one molecule"
+                ],
+                "rows": [
+                  [
+                    "N₂O₄",
+                    "",
+                    ""
+                  ],
+                  [
+                    "NO₂",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.2,
+                  0.42,
+                  0.38
+                ],
+                "rowHeightIn": 0.42
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.2",
+      "title": "Polyatomic Ions · Ionic Names & Formulas",
+      "learningTarget": "I can explain what a polyatomic ion is, balance ion charges to write ionic formulas, and name ionic compounds, including transition metals.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slide 14 · How can a group of atoms be an ion?",
+              "cues": [
+                "S06.2"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Definition",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Formation of NH₄^{+} from NH₃ + H^{+}",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Reason for the +1 charge",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Bonds and charge",
+                  "lines": 2
+                }
+              ],
+              "notesFirst": true
+            },
+            {
+              "title": "Slides 15–16 · Naming ionic compounds",
+              "cues": [
+                "S06.3"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Step 1 · cation",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Step 2 · anion",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Step 3 · writing a formula",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Ion written first",
+                  "lines": 1
+                }
+              ],
+              "notesFirst": true,
+              "table": {
+                "headers": [
+                  "Group 1",
+                  "Group 2",
+                  "Aluminum",
+                  "Group 17",
+                  "Group 16",
+                  "Group 15"
+                ],
+                "rows": [
+                  [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.16666666666666666,
+                  0.16666666666666666,
+                  0.16666666666666666,
+                  0.16666666666666666,
+                  0.16666666666666666,
+                  0.16666666666666666
+                ],
+                "rowHeightIn": 0.42
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Slides 17–19 · The criss-cross method",
+              "cues": [
+                "S06.3"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Charge rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "After crossing",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 17–19 · MgCl₂ and Al₂O₃: write the ions, cross the numbers, check the charge",
+                "workHeightIn": 1.9
+              }
+            },
+            {
+              "kind": "example",
+              "title": "Slides 20–21 · The simplest ionic ratio",
+              "cues": [
+                "S06.3"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Reducing rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Equal and opposite charges give",
+                  "lines": 1
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 20–21 · Reduce Ca₂O₂. Write strontium sulfide.",
+                "workHeightIn": 1.4
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slides 22–23 · Naming ions with fixed charges",
+              "cues": [
+                "S06.3"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Break down NaCl",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Naming rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "One-element anions",
+                  "lines": 1
+                }
+              ],
+              "notesFirst": true,
+              "table": {
+                "headers": [
+                  "Formula",
+                  "Name"
+                ],
+                "rows": [
+                  [
+                    "MgBr₂",
+                    ""
+                  ],
+                  [
+                    "Al₂S₃",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.3,
+                  0.7
+                ],
+                "rowHeightIn": 0.4
+              }
+            },
+            {
+              "kind": "example",
+              "title": "Slides 24–26 · Metals with variable charges",
+              "cues": [
+                "S06.3"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Iron’s two ions",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Fixed charges, no numeral",
+                  "lines": 1
+                },
+                {
+                  "prompt": "The Roman numeral gives",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Finding the metal charge",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 25–26 · Name FeCl₂ and FeCl₃. Write copper(II) oxide.",
+                "workHeightIn": 1.6
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "title": "Slide 27 · Recognizing common polyatomic ions",
+              "cues": [
+                "S06.2"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Keep the group intact",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Ammonium",
+                  "lines": 1
+                }
+              ],
+              "table": {
+                "headers": [
+                  "NO₃^{−}",
+                  "NH₄^{+}",
+                  "OH^{−}",
+                  "SO₄^{2−}"
+                ],
+                "rows": [
+                  [
+                    "",
+                    "",
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.25,
+                  0.25,
+                  0.25,
+                  0.25
+                ],
+                "rowHeightIn": 0.42
+              }
+            },
+            {
+              "kind": "example",
+              "title": "Slides 28–29 · Parentheses count whole ions",
+              "cues": [
+                "S06.2"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "Meaning of Ca(NO₃)₂",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Parentheses rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Inside vs. outside subscripts",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 28–29 · Write calcium nitrate and ammonium sulfate. Check the charge.",
+                "workHeightIn": 1.5
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.4",
+      "title": "Naming Acids & Formulas",
+      "learningTarget": "I can recognize an acid, name binary acids and oxyacids, and write an acid’s formula from its name.",
+      "pages": [
+        {
+          "rows": [
+            {
+              "title": "Slides 31–32 · Naming acids",
+              "cues": [
+                "S06.4"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Binary acid pattern",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Oxyacid patterns",
+                  "lines": 2
+                },
+                {
+                  "prompt": "HCl(g) vs. HCl(aq)",
+                  "lines": 2
+                },
+                {
+                  "prompt": "(aq) means",
+                  "lines": 1
+                }
+              ],
+              "notesFirst": true
+            },
+            {
+              "title": "Slide 33 · Naming binary acids and oxyacids",
+              "cues": [
+                "S06.4"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Summary rule",
+                  "lines": 2
+                }
+              ],
+              "table": {
+                "headers": [
+                  "No oxygen · binary acid",
+                  "Contains oxygen · oxyacid"
+                ],
+                "rows": [
+                  [
+                    "",
+                    ""
+                  ]
+                ],
+                "widths": [
+                  0.5,
+                  0.5
+                ],
+                "rowHeightIn": 1.5
+              }
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "example",
+              "title": "Slides 34–36 · Acid formulas",
+              "cues": [
+                "S06.4"
+              ],
+              "extraNotes": false,
+              "notesFirst": true,
+              "notes": [
+                {
+                  "prompt": "H^{+} needed for NO₃^{−}, SO₄^{2−}, PO₄^{3−}",
+                  "lines": 1
+                },
+                {
+                  "prompt": "Hydrogen rule",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Working backward from a name",
+                  "lines": 2
+                }
+              ],
+              "problem": {
+                "workLabel": "Slides 34–36 · Name HBr(aq) and HNO₂(aq). Write hydrosulfuric acid and sulfuric acid.",
+                "workHeightIn": 1.6
+              }
+            },
+            {
+              "title": "Slide 37 · Choosing the naming rules",
+              "cues": [
+                "S06"
+              ],
+              "noWorkBox": true,
+              "extraNotes": false,
+              "notes": [
+                {
+                  "prompt": "Clue 1 · acid in water",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Clue 2 · ionic compound",
+                  "lines": 2
+                },
+                {
+                  "prompt": "Clue 3 · two nonmetals",
+                  "lines": 2
+                },
+                {
+                  "prompt": "The big three",
+                  "lines": 2
+                }
+              ],
+              "notesFirst": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
