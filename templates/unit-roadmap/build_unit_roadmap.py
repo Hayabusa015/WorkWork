@@ -115,7 +115,7 @@ def render(spec):
     codes = f"U{unit} / S{sections[0][0]}–{sections[-1][0]}" if len(sections) > 1 else f"U{unit} / S{sections[0][0]}"
     if has_std:
         key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
-        cols = '<col style="width:22%"><col style="width:57%"><col style="width:21%">'
+        cols = '<col style="width:26%"><col style="width:57%"><col style="width:17%">'
         std_th = f'<th>{html.escape(spec["standards_label"])}</th>'
         # The legend names only the box kinds this page uses (a unit can have supports and no main).
         kinds = []
