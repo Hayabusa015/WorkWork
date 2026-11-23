@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-23
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0077 | 2026-11-23 | Desk documents keyed on record filename | CONFIRMED | `governance/proposals/SHULL-CHG-0077-desk-export-keys-collide.md` |
+
 ## 2026-11-10
 
 | ID | Date | Change | Status | Record |
