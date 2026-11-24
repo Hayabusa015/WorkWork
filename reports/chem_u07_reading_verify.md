@@ -143,3 +143,27 @@ I re-solved every new number. I did not open the `.docx` separately.
 | Round 1 #11 stale PNGs | FIXED | `build/chem_u07_reading/png/` is now empty |
 | No molar volume / STP / UNVERIFIED / standard codes | PASS | None found in the rebuilt spec or PDF |
 | Every other unchanged fact and number | PASS | Re-checked against the Round 1 tables. Values unchanged |
+
+---
+
+## Round 3: rebuilt packet (2026-11-24)
+
+**Checked:**
+- The current spec (`why.text`, the 7.3 and 7.7 connections, `key.teacherNotes`)
+- Student PDF p.1, as a rendered image
+- The regenerated `build/chem_u07_reading/fig/fig7_5_water_percent.png`, viewed directly
+
+This is a short round covering only the six claims listed below.
+
+**Result:** 0 Critical, 0 Major, 1 Minor. Everything else passes.
+
+| # | Claim | Result | Working / evidence | Severity | Recommendation |
+|---|---|---|---|---|---|
+| R3-1 | 7.7: "benzene is a liquid used to make plastics such as polystyrene" | PASS | Accurate and current. Benzene + ethylene → ethylbenzene → styrene → polystyrene, and making styrene is one of benzene's largest uses. There is no health claim, as the brief requires. Fixes R2-1 | — | None |
+| R3-2 | 7.3: "a natural sample of an element has nearly the same mix of isotopes wherever it comes from" | PASS | True at high-school level. The IUPAC standard atomic weights depend on this. "Nearly" covers the small natural variation, for which IUPAC gives ranges for elements such as H, Li, B, C, N, O, S and Cl. Fixes R2-3. Optionally add "on Earth" for strictness; not needed | — | None (optional "on Earth") |
+| R3-3 | Why It Matters close: "extra of one ingredient is wasted and too little of it leaves some of the others unused" | PASS on the idea; wording Minor | The idea is right: it previews limiting and excess reactants. Two wording points. (a) "Wasted" is too strong for the fertilizer example. In ammonia synthesis (Haber–Bosch), the unreacted N₂ and H₂ are recycled, so the excess is left over, not necessarily wasted. (b) "Mixing a solution" is not a reaction. There, the right amount matters for concentration, not for leftover ingredients. The sentence still reads acceptably as a general statement. | Minor | "…because extra of one ingredient is left over and too little of it leaves some of the others unused." |
+| R3-4 | Why It Matters: "react in fixed ratios by count" and "in the lab a chemist measures amounts by weighing them on a balance" | PASS | Both are accurate and match R2-2's recommendation word for word. Rendered on p.1 | — | None |
+| R3-5 | Key note: methane 16.05 (student table) vs 16.04 (IUPAC) | PASS | IUPAC values: 12.011 + 4 × 1.008 = 16.043, which rounds to 16.04. Student table: 12.01 + 4.04 = 16.05. Added to the existing glucose/benzene note, key only. Fixes R2-4 | — | None |
+| R3-6 | Fig 7.5: H–O–H angle on the regenerated PNG | PASS | By eye on the 1050 px PNG, I read the bond lines as roughly (398,72)→(505,153) and (545,153)→(652,72). Each is about 52.9° from vertical (atan 107/81), so about 106° in total. From the atom label centres, H (380,60), O (523,170), H (668,60), I get about 105°. This was done by eye, with no image analysis run, so treat it as ±3°. That is consistent with the designer's 104.8° and with the true value of 104.5°. Earlier it was about 120°, so this fixes Round 1 #8 / R2-5. The labels H, H, O and 2 H are correct | — | None |
+
+**Open after Round 3:** R3-3 wording only (Minor). Every earlier finding is closed.
