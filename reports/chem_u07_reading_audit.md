@@ -280,3 +280,84 @@ What is still open: #2 waits on Matt. Naming and Drive filing are still pending,
 | "Reading" type in NAMING; U7 short title in DECISIONS; Drive filing | PENDING (known). No proposal is filed yet. Not filed to Drive |
 | Sibling specs teach 22.4 L / STP; 7.1 dozen setup vs "worked examples only in 7.3/7.4" | OPEN / confirm with Matt (unchanged). The On Your Own items are in 7.3 and 7.4 only, matching that decision |
 | PROVISIONAL tokens (`keyHandwriting`, `keyInk.*`, `print.binding`, `print.holeGuides`) | Used as specified. The R3-3 test print should be done alongside the hole-guide test punch |
+
+---
+
+# Round 4: Re-audit after the R3 fixes and verify R2 wording
+
+**Date:** 2026-11-24 · **Auditor:** independent, report-only. Nothing was modified except this appended section.
+**Files:** the same four files in `/home/user/WorkWork/build/chem_u07_reading/` (rebuilt 10:54), plus `fig/`.
+**Scope note:** verify-content is running in parallel on the new wording, so the science was spot-checked only.
+
+## Verdict: **PASS**
+
+- Every R3 finding is resolved or accepted.
+- The remaining R3-7 split (the precision definition line) is judged acceptable; reasoning below.
+- The tab sits 0.22 in from the edge on all 10 pages, and its vertical "UNIT 7" is legible.
+- No regressions.
+- #2 is still recorded as Unresolved, pending Matt.
+
+## Checklist (Round 4)
+
+| Check | Result |
+|---|---|
+| Rendered and viewed, every page | DONE. Student pp 1–8 and key pp 1–2 at 100 dpi. Tab zooms at 300 dpi on an odd page (p1) and an even page (p2) |
+| Page count | PASS. Student 8 (even). Key 2 |
+| Fonts (`audit_fonts.py`; `--key` on the key) | PASS. Student copy is Archivo only. Key uses Archivo plus the handwriting face and its fallback |
+| Ink | PASS. Worst page 8.22% toner (p1 and p2), under the 9% ceiling. Average about 5.7%. Key worst 5.42%. No fills, widest solid band 0.00 in |
+| Clipped text / collisions | PASS. The p1 opener's left-column text now clears the column rule by 14.7 pt (rule x = 298.8; rightmost word ends at 284.1). No clipping anywhere |
+| Binding margin / hole guides | PASS. 3 hole guides on every page, mirrored. Inside margin clear apart from the ≤ 0.5 pt residual on box rules, unchanged |
+| Thumb tab | PASS. Box at 581.8–596.2 pt on odd pages and 15.9–30.2 pt on even pages, **0.220 in from the paper edge on all 10 pages**, always on the outside edge. Inner edge at 0.42 in, inside the 0.50 in outside margin, with about 6 pt clearance to body text. "UNIT 7" is set vertically at 7.5 pt in `primaryDeep`, 0.24 in from the edge. It is clear and legible at 300 dpi, reading top-to-bottom on odd pages and bottom-to-top on even pages (mirrored, so it reads inward from each fore-edge) |
+| Header / footer | PASS. Both halves of the running header now use `ground.footer` #61675B. Footer is the centred auto `PAGE` field |
+| Figures beside their text | PASS. Same placements as Round 3. Fig 7.6 stays with its text on p5. The 7.6 step list is now whole on p6 |
+| Line length | PASS. Body columns about 56 characters a line. Every other block ≤ 76, except the one-line vocabulary-preview direction (R4-1) |
+| Term flow | PASS. 16 bold terms = 16 definition lines = 16 preview terms = 16 vocab-page terms = 16 key definitions. Every definition line and key definition matches the spec word for word |
+| Key matches student copy | PASS. All 7 Reading Checks, both On Your Own stems and all 3 questions appear word for word in both files |
+| On Your Own (spot check) | PASS. CH₄ 16.05 g/mol (the key note adds the IUPAC 16.04). 64.0 g O₂ = 2.00 mol. The builder re-solved both |
+| Answer-key standard | PASS. Pencil ink for math, box ink for answers, division stacked |
+| No teacher / PROVISIONAL / standards-code content; no 22.4, STP or litres | PASS (grep found 0) |
+| Codes | PASS. `validate_codes.py` OK |
+| Rebuildable from the spec | PASS. A clean rebuild matches the shipped PDFs page for page (text and raster). Every `.docx` part and all 7 figure PNGs are byte-identical |
+| Drive | NOT FILED (known-pending) |
+
+## R3 findings: status
+
+| # | Finding | Status | Evidence |
+|---|---|---|---|
+| R3-1 | Opener text into the column rule | **RESOLVED** | 14.7 pt clearance. "Each term in **bold** is" now wraps well short of the rule |
+| R3-2 | K / S / N with no legend | **RESOLVED** | p1: "Before you read, mark one box for each term. K = I know it · S = I've seen it · N = it's new." |
+| R3-3 | Tab 0.14 in from the edge | **RESOLVED** | 0.220 in on every page, odd and even. Tab narrowed to 0.20 in, so it stays inside the 0.50 in margin. Confirm on Matt's copier with the hole-guide test punch (PROVISIONAL tokens) |
+| R3-4 | Benzene "liquid solvent" | **RESOLVED** (wording; verify-content owns the final call) | p6 Connection: "benzene is a liquid used to make plastics such as polystyrene." Spot check: benzene → ethylbenzene → styrene, ✓ |
+| R3-5 | Pharmacist point repeated | **RESOLVED** | Why It Matters now uses "a lab mixing a solution or a plant making fertilizer". The pharmacist appears only in Connection 7.4 |
+| R3-6 | Title duplication on p1 | **RESOLVED** (Minor part). Matt question still OPEN | The "UNIT 7" eyebrow is gone. Header title, meta line and display title still each carry the unit title. That overlap comes from the LOCKED CHG-0101 header plus Matt's approved display-title opener. Whether readings should drop the header's title line is a question for Matt |
+| R3-7 | Splits across a sheet flip | **(b) RESOLVED. (a) ACCEPTED.** See the judgement below | (b) The 7.6 five-step list is whole on p6. (a) The precision definition line still starts p2 |
+| R3-8 | Key: answer split after "=" | **RESOLVED** | On Your Own 7.3: "= [16.05 g/mol]" on one line. On Your Own 7.4: the boxed "2.00 mol O₂" sits directly under the "=" with no gap |
+| R3-9 | Running header token | **RESOLVED** | Both halves #61675B (`ground.footer`) |
+
+### Judgement on R3-7(a): the precision definition line on p2
+
+**Accepted as is. Not a failed check.** Three reasons:
+
+1. QA_GATE §10's adjacency rule covers diagrams, images and tables. Figure 7.1 is exactly that, and it now sits beside its text on p1. That was the Round 1 #1 fix, and it outranks a text restatement.
+2. The set-off line restates a definition that is already complete in the bolded sentence on p1: "**Precision** describes how finely a tool measures … and it also describes how closely repeated measurements agree with each other." A student at the foot of p1 has the full definition without turning the page.
+3. The designer reports that keeping the line on p1 pushes Fig 7.1 off p1, which would reopen a Major finding to close a nice-to-have.
+
+Recorded as a nice-to-have only. If a later edit shortens p1 by two lines, pull the definition line back onto p1.
+
+## New findings (Round 4)
+
+| # | Check | Problem | Fix | Severity |
+|---|---|---|---|---|
+| R4-1 | Line length | The p1 vocabulary-preview direction with its new legend runs as one full-width line, about 110 characters of text after the letter-spaced label. It is one line of directions, not running prose. | Optionally break the legend onto a second line under the label. | Nice-to-have |
+| R4-2 | Type floor (observation) | Tab text is 7.5 pt, below the 8 pt `printBody` floor. Like the 7 pt running header, it is page furniture carried in the header/footer parts, and the floor's only stated exception is the running footer (`printFooter` 7 pt, PROVISIONAL). Legible at 300 dpi. | No change needed. If Matt wants the exception written down, a one-line standards note would cover page furniture (running header and thumb tab). | Nice-to-have |
+
+## Unresolved / decided (unchanged)
+
+| Item | State |
+|---|---|
+| #2 Molecule-script exception (SHULL-CHG-0042) | **UNRESOLVED: pending Matt's decision.** Labels are computed, and drawings come from the local RDKit routine |
+| Precision bolding | **DECIDED** (Matt approved the chat sample before "Create the packet") |
+| Display title vs. CHG-0101 header title on readings (R3-6) | OPEN: question for Matt |
+| "Reading" type in NAMING; U7 short title in DECISIONS; Drive filing | PENDING (known). No proposal filed. Not filed to Drive |
+| Sibling specs teach 22.4 L / STP; 7.1 dozen setup vs "worked examples only in 7.3/7.4" | OPEN / confirm with Matt |
+| PROVISIONAL tokens (`keyHandwriting`, `keyInk.*`, `print.binding`, `print.holeGuides`) | Test print / punch on Matt's copier should cover the tab at 0.22 in too |
