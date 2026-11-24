@@ -64,8 +64,8 @@ BODY = T["typography"]["printScale"]["body"]
 BODY_LINE = round(BODY * 1.2, 1)   # tightened from 1.33 when the Connection boxes were added (QA_GATE §2 order)
 SUB = 10.5
 FOOTER_PT = T["typography"]["floors"]["printFooter"]["pt"]
-TAB_W_IN, TAB_H_IN = 0.28, 0.52     # thumb tab; 'UNIT' at the footer floor fits 0.24 in
-TAB_EDGE_IN = 0.14                 # from the outside page edge, inside the 0.50 in margin
+TAB_W_IN, TAB_H_IN = 0.20, 0.70   # text runs vertically, so the tab is narrow     # thumb tab; 'UNIT' at the footer floor fits 0.24 in
+TAB_EDGE_IN = 0.22                 # from the outside page edge, inside the 0.50 in margin
 TAB_TOP_IN = 2.40
 DISPLAY_PT = 24                  # the chapter title on page 1 (Archivo Bold)
 SUB_CAPS = 9                     # all-caps sub-heads in primaryDeep (textbook convention)
@@ -520,6 +520,9 @@ def steps(doc, blk, pal):
         pf.tab_stops.add_tab_stop(Inches(0.24))
         add(p, f"{i}.\t", BODY, color=pal.ink, bold=True)     # just the number, SHULL-CHG-0015
         add(p, s, BODY, color=pal.ink)
+        if blk.get("keepTogether"):
+            p.paragraph_format.keep_together = True
+            p.paragraph_format.keep_with_next = i < len(blk["items"])
     doc.paragraphs[-1].paragraph_format.space_after = Pt(6)
 
 
@@ -568,7 +571,7 @@ def _running_header(hf, pal, chapter, info, outside_right):
     first, second = (info, chapter) if outside_right else (chapter, info)
     for i, txt in enumerate((first, "\t", second)):
         bold = txt == chapter
-        add(p, txt, FOOTER_PT, color=pal.footer if not bold else pal.label, bold=bold, track=10)
+        add(p, txt, FOOTER_PT, color=pal.footer, bold=bold, track=10)
 
 
 def _page_footer(hf, pal):
@@ -598,7 +601,7 @@ _TAB_XML = (
     '</a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/>'
     '<a:ln w="12700"><a:solidFill><a:srgbClr val="{line}"/></a:solidFill></a:ln></wps:spPr>'
     '<wps:txbx><w:txbxContent>{paras}</w:txbxContent></wps:txbx>'
-    '<wps:bodyPr wrap="square" lIns="0" tIns="45720" rIns="0" bIns="27432" anchor="t">'
+    '<wps:bodyPr vert="{vert}" wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" anchor="ctr">'
     '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
 
 
@@ -620,9 +623,10 @@ def thumb_tab(hf, pal, unit, page_no, id_base):
     from _shull_docx import EMU_IN
     w_in, h_in, edge_in, top_in = TAB_W_IN, TAB_H_IN, TAB_EDGE_IN, TAB_TOP_IN
     x_in = (PAGE_W_IN - edge_in - w_in) if page_no % 2 else edge_in
-    paras = _tab_para("UNIT", FOOTER_PT, hexof(pal.accent)) + _tab_para(str(unit), 13, hexof(pal.accent))
+    paras = _tab_para(f"UNIT {unit}", 7.5, hexof(pal.accent))
     xml = _TAB_XML.format(x=int(x_in * EMU_IN), y=int(top_in * EMU_IN), w=int(w_in * EMU_IN),
-                          h=int(h_in * EMU_IN), id=id_base, line=hexof(pal.display), paras=paras)
+                          h=int(h_in * EMU_IN), id=id_base, line=hexof(pal.display), paras=paras,
+                          vert="vert" if page_no % 2 else "vert270")
     p = hf.paragraphs[0] if hf.paragraphs else hf.add_paragraph()
     p._p.append(parse_xml(xml))
 
@@ -735,13 +739,12 @@ def front(doc, spec, pal):
     t = doc.add_table(rows=1, cols=2)
     fix_widths(t, [COL_W_IN, TEXT_W_IN - COL_W_IN])
     left, right = t.rows[0].cells
-    cell_margins(left, 0, 0, 0, 0)
+    cell_margins(left, 0, 0, 0, int(0.18 * 1440))      # clears the sidebar rule (R3-1)
     cell_margins(right, 0, 0, int(0.22 * 1440), 0)
     borders(right, pal.display, sz=12, edges=("left",))
-    label(left, f"Unit {unit}", pal, first=True, after=0)
     title = unit_title(spec["course"], unit)
     words = title.split()
-    p = para_in(left)
+    p = para_in(left, first=True)
     _spacing(p, 0, 6, DISPLAY_PT * 1.08)
     add(p, " ".join(words[:-1]) + " ", DISPLAY_PT, color=pal.ink, bold=True)
     add(p, words[-1], DISPLAY_PT, color=pal.accent, bold=True)      # one accent word
@@ -771,7 +774,7 @@ def vocab_strip(doc, spec, pal):
     q = doc.add_paragraph()
     _spacing(q, 0, 2, 11)
     add(q, fr["vocabTitle"].upper(), LABEL, color=pal.accent, bold=True, track=26)
-    add(q, "   " + fr["vocabDirections"], 8.5, color=pal.label)
+    add(q, "   " + fr["vocabDirections"] + "  " + fr["vocabLegend"] + ".", 8.5, color=pal.label)
     t = doc.add_table(rows=per + 1, cols=len(widths))
     fix_widths(t, widths)
     step = 5
@@ -979,12 +982,14 @@ def build_student(spec, out_path, fig_dir):
             if bi and body[bi - 1]["type"] == "p":
                 bp.paragraph_format.first_line_indent = Inches(INDENT_IN)
             terms = re.findall(r"\*\*(.+?)\*\*", blk["text"])
+            if blk.get("keepWithDefinition"):
+                keep_next(bp)
             # No keep-with-next here: LibreOffice then moves the whole paragraph, which
             # left an inch of white at the foot of four pages and cost a sheet.
             for term in terms:
                 definition(doc, vocab_of(spec, term), pal)
             # a sentence that introduces a display ("…so it cancels:") stays with it (R2-1)
-            if bi + 1 < len(body) and body[bi + 1]["type"] in ("math", "equation"):
+            if bi + 1 < len(body) and body[bi + 1]["type"] in ("math", "equation", "steps"):
                 keep_next(bp)
         elif t == "onYourOwn":
             on_your_own(doc, blk, pal)
@@ -1093,18 +1098,26 @@ def build_key(spec, out_path):
         qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.34))
         add(qp, f"{blk['n']}\t", 9.5, color=pal.accent, bold=True)
         add(qp, blk["q"], 9.5, color=pal.ink)
-        for st in sol.get("steps", []):
+        # the boxed answer sits on the same line as the last "=" (R3-8)
+        steps = sol.get("steps", [])
+        for k, st in enumerate(steps):
             sp = cc.add_paragraph()
-            _spacing(sp, 0, 0, 17)
+            _spacing(sp, 0, 0, 18)
             sp.paragraph_format.left_indent = Inches(0.34)
             hand(sp, st, 12, ink="pencil")
+            if k == len(steps) - 1:
+                hand(sp, " ", 12)
+                hand(sp, sol["answer"], 12.5, ink="pen", boxed=True)
         if sol.get("math"):
+            # the row is too wide to carry the answer too, so the boxed answer goes
+            # directly under the row's "=", with no empty line between (R3-8)
             math_row(cc, sol["math"], pal, COL_W_IN - 0.4, size=11, write=pencil,
                      rule=T["keyInk"]["pencil"]["hex"])
-        ap = cc.add_paragraph()
-        _spacing(ap, 2, 0, 18)
-        ap.paragraph_format.left_indent = Inches(0.34)
-        hand(ap, sol["answer"], 12.5, ink="pen", boxed=True)
+            ap = cc.paragraphs[-1]          # the paragraph python-docx adds after the row
+            _spacing(ap, 0, 0, 18)
+            ap.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            ap.paragraph_format.right_indent = Inches(0.25)
+            hand(ap, sol["answer"], 12.5, ink="pen", boxed=True)
         if sol.get("note"):
             ep = cc.add_paragraph()
             _spacing(ep, 1, 0, 11.5)

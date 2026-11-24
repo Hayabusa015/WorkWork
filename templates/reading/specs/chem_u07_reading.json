@@ -41,8 +41,9 @@
     ],
     "why": {
       "title": "Why It Matters",
-      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react by count, one particle at a time. The problem is that no one can count atoms. They are far too small and far too many, and a chemist can only weigh things on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. Pharmacists use this idea when they measure a medicine by mass, because what matters in the body is how many molecules arrive."
-    }
+      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react in fixed ratios by count. The problem is that no one can count atoms. They are far too small and far too many, and in the lab a chemist measures amounts by weighing them on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. A lab mixing a solution or a plant making fertilizer needs the right amounts, because extra of one ingredient is wasted and too little of it leaves some of the others unused."
+    },
+    "vocabLegend": "K = I know it · S = I've seen it · N = it's new"
   },
   "vocab": [
     {
@@ -368,7 +369,7 @@
     {
       "type": "connection",
       "title": "Counting coins by weighing",
-      "text": "A U.S. nickel has a mass of 5.00 g, so a pile of nickels with a mass of 200 g holds 40 nickels. That works because every nickel has the same mass. Atoms of one element don't all have the same mass (remember isotopes from Unit 1), so chemists use the average atomic mass, which works because even a tiny sample holds an enormous number of atoms."
+      "text": "A U.S. nickel has a mass of 5.00 g, so a pile of nickels with a mass of 200 g holds 40 nickels. That works because every nickel has the same mass. Atoms of one element don't all have the same mass (remember isotopes from Unit 1), so chemists use the average atomic mass. That works because a natural sample of an element has nearly the same mix of isotopes wherever it comes from, and even a tiny sample holds an enormous number of atoms."
     },
     {
       "type": "check",
@@ -553,7 +554,8 @@
         "Divide every mole value by the smallest one.",
         "Round to whole numbers. If a value lands near x.5, multiply all of the values by 2. Near x.33 or x.67, multiply by 3. Near x.25, multiply by 4.",
         "Use the whole numbers as the subscripts."
-      ]
+      ],
+      "keepTogether": true
     },
     {
       "type": "p",
@@ -609,7 +611,7 @@
     {
       "type": "connection",
       "title": "Same ratio, different jobs",
-      "text": "Acetylene is a welding gas, and benzene is used as a liquid solvent. Their atoms come in the same 1 : 1 ratio of carbon to hydrogen, yet one is a gas and the other a liquid at room temperature. A molecule's size and structure, not just its ratio, decide how a substance behaves."
+      "text": "Acetylene is a welding gas, and benzene is a liquid used to make plastics such as polystyrene. Their atoms come in the same 1 : 1 ratio of carbon to hydrogen, yet one is a gas and the other a liquid at room temperature. A molecule's size and structure, not just its ratio, decide how a substance behaves."
     },
     {
       "type": "check",
@@ -650,7 +652,7 @@
   },
   "key": {
     "teacherNotes": [
-      "Glucose molar mass: the reading prints 180.18 g/mol, which is what students get from their periodic table (C 12.01, H 1.01, O 16.00). Published sources that use IUPAC atomic weights give 180.16 g/mol. A student who looks it up will see the 0.02 g/mol difference; both are correct for the values used. The same logic gives benzene 78.12 (student table) vs 78.11 (IUPAC).",
+      "Glucose molar mass: the reading prints 180.18 g/mol, which is what students get from their periodic table (C 12.01, H 1.01, O 16.00). Published sources that use IUPAC atomic weights give 180.16 g/mol. A student who looks it up will see the 0.02 g/mol difference; both are correct for the values used. The same logic gives benzene 78.12 (student table) vs 78.11 (IUPAC). Methane in On Your Own 7.3 is 16.05 g/mol from the student table and 16.04 g/mol with IUPAC values.",
       "Precision is bolded and defined in 7.1 with both meanings: how finely a tool measures (the place value of the last digit) and how closely repeated measurements agree. Accept either meaning on the vocabulary page.",
       "The 7.4 map (Figure 7.4) shows the boxes and arrows only. The factors are in the text, so the worksheet's blank map is not given away."
     ],
