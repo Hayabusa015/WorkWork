@@ -30,7 +30,7 @@ supersedes it, exactly as the decision logs work.
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
 | SHULL-CHG-0115 | 2026-11-24 | Molecule builder: explicit H, carbon labels, no-caption | CONFIRMED | `governance/proposals/SHULL-CHG-0115-molecule-builder-explicit-h-and-caption-options.md` |
-| SHULL-CHG-0114 | 2026-11-24 | Reading document type; Chem U7 short title | APPROVED | `governance/proposals/SHULL-CHG-0114-reading-type-and-chem-u7-short-title.md` |
+| SHULL-CHG-0114 | 2026-11-24 | Reading document type; Chem U7 short title | CONFIRMED | `governance/proposals/SHULL-CHG-0114-reading-type-and-chem-u7-short-title.md` |
 | SHULL-CHG-0113 | 2026-11-24 | Renumber branch-side 0106/0107 to 0111/0112 | CONFIRMED | `governance/proposals/SHULL-CHG-0113-renumber-branch-0106-0107.md` |
 | SHULL-CHG-0110 | 2026-11-24 | Chem U7 to five sections; U11/U12 swap | APPROVED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
 | SHULL-CHG-0107 | 2026-11-24 | Unit reading and duplex tear-off | IMPLEMENTED | `governance/proposals/SHULL-CHG-0107-textbook-reading-and-tear-off.md` |
