@@ -15,6 +15,6 @@
 | Risk | Low. Long section lists require careful layout to preserve writing space on one sheet. |
 | Recommendation | Document the rule in the reusable textbook workflow and audit the exported page order. |
 | Decision | 2026-11-24, user: “I need you to create these rules for the textbook creation and then add them to the textbook instructions for the GitHub repository.” |
-| Status | APPROVED |
-| Implemented By | Pending. |
-| Verified | Pending. |
+| Status | IMPLEMENTED |
+| Implemented By | `8c6e688246998f00a97310544812ddb934f972f1` |
+| Verified | 2026-11-24. Reopened the updated workflow on main, verified the duplex sequence, exact due statement and exported-PDF review, and passed the reference and change-ID validators. |
