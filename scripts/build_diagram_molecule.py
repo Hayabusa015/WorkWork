@@ -12,6 +12,10 @@ as build_diagram_nuclear_notation.py.
 
     python3 scripts/build_diagram_molecule.py --smiles "CC(=O)O" --name "acetic acid" \\
         --course chemistry --out /path/to/figure.png
+
+Optional flags (SHULL-CHG-0115), all off by default so the output above is unchanged:
+--explicit-h draws every hydrogen as its own atom, --label-carbons labels every carbon,
+and --no-caption writes the structure panel alone (cropped), for a page that captions it.
 """
 import argparse, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -43,11 +47,19 @@ def draw_formula(draw, cx, y, formula, fonts, fill):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--smiles", required=True)
-    ap.add_argument("--name", required=True, help="label shown above the structure")
+    ap.add_argument("--name", help="label shown above the structure (required unless --no-caption)")
     ap.add_argument("--course", default="chemistry", choices=["chemistry", "physics", "geology"])
     ap.add_argument("--out", required=True, help="output .png path")
     ap.add_argument("--no-mass", action="store_true", help="omit the molar mass line")
+    ap.add_argument("--explicit-h", action="store_true",
+                    help="draw every hydrogen as its own atom and bond (RDKit AddHs)")
+    ap.add_argument("--label-carbons", action="store_true",
+                    help="label every carbon 'C' instead of skeletal corners")
+    ap.add_argument("--no-caption", action="store_true",
+                    help="write the structure only, cropped: no name, rule, formula or mass")
     a = ap.parse_args()
+    if not a.no_caption and not a.name:
+        ap.error("--name is required unless --no-caption is given")
 
     st.require("rdkit")
     from rdkit import Chem
@@ -59,6 +71,8 @@ def main():
     mol = Chem.MolFromSmiles(a.smiles)
     if mol is None:
         sys.exit(f"RDKit could not parse SMILES: {a.smiles!r}")
+    if a.explicit_h:
+        mol = Chem.AddHs(mol)
 
     pal = st.palette(a.course)
     formula = rdMolDescriptors.CalcMolFormula(mol)
@@ -81,9 +95,27 @@ def main():
     fp = st.font_path("Archivo-SemiBold.ttf")
     if os.path.exists(fp):
         o.fontFile = fp
+    if a.label_carbons:
+        for atom in mol.GetAtoms():
+            if atom.GetSymbol() == "C":
+                o.atomLabels[atom.GetIdx()] = "C"
     drawer.DrawMolecule(mol)
     drawer.FinishDrawing()
     struct = Image.open(io.BytesIO(drawer.GetDrawingText())).convert("RGB")
+
+    if a.no_caption:
+        from PIL import ImageChops
+        bg = Image.new("RGB", struct.size, pal["white"])
+        box = ImageChops.difference(struct, bg).getbbox()
+        if box:
+            m = 12 * SCALE
+            box = (max(0, box[0] - m), max(0, box[1] - m),
+                   min(struct.width, box[2] + m), min(struct.height, box[3] + m))
+            struct = struct.crop(box)
+        os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+        struct.save(a.out)
+        print(f"wrote {a.out}  {struct.width}x{struct.height}  {formula}  {mass:.3f} g/mol")
+        return 0
 
     im = Image.new("RGB", (W * SCALE, H * SCALE), pal["white"])
     d = ImageDraw.Draw(im)

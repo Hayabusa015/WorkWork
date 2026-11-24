@@ -25,7 +25,7 @@
 | `measure_tokens.py` | Contrast and grayscale measurements, written back into `brand/tokens.json` | `brand/tokens.json` itself |
 | `build_app_css.py` | `app/public/tokens.generated.css`, `app/public/icon.svg` | `brand/tokens.json` |
 | `build_template_previews.py` | `app/public/previews/` — a page image per document template, plus `catalog.json` | each template's own builder |
-| `build_diagram_molecule.py` | A branded structure figure (`--out` path) with formula and molar mass | a SMILES string, via RDKit; colours from `brand/tokens.json` |
+| `build_diagram_molecule.py` | A branded structure figure (`--out` path) with formula and molar mass; optional explicit H (`--explicit-h`), every C labelled (`--label-carbons`), structure only (`--no-caption`) | a SMILES string, via RDKit; colours from `brand/tokens.json` |
 | `build_diagram_nuclear_notation.py` | The carbon-14 nuclear-symbol / hyphen-notation figure for CHEM U01 S1.4 | `brand/tokens.json` |
 | `build_lab_css.py` | `templates/lab/shull-lab-tokens.css` | `brand/tokens.json` |
 | `build_slide_tokens.py` | `templates/slide/tokens.generated.js` | `brand/tokens.json` |
