@@ -4,23 +4,26 @@
     python3 templates/reading/build_reading_docx.py templates/reading/specs/<spec>.json OUT_DIR
         [--no-pdf] [--no-figures]
 
-PILOT DOCUMENT TYPE. standards/NAMING.md has no "Reading" type yet; the spec carries the
-working filenames Matt gave until a NAMING proposal settles it.
+Document type `Reading`, `standards/NAMING.md` section 2 (SHULL-CHG-0114). Filenames come
+from templates/_shull_name.py with the unit's full section list, so the name is unit-level.
+Format: workflows/unit-textbook.md, "Prepare the unit reading and its detachable submission".
 
 What it makes, from one spec so the student copy and the key cannot drift:
 
-    student   page 1: the shared print header (SHULL-CHG-0101), Name/Date/Period, how to
-              read the chapter, a vocabulary self-rating table. Then the chapter in two
+    student   page 1 is the cover: the shared print header (SHULL-CHG-0101), the display
+              title, the numbered section list read from courses/<course>/DECISIONS.md,
+              and Why It Matters; the chapter starts below it. The chapter runs in two
               columns (SHULL-CHG-0023 line length): section heads, sub-heads, prose with
-              bold defined terms, numbered figures with captions, Example boxes, and a
-              boxed Reading Check closing every section. Then, on new pages, the three
-              questions (Day 1 answer | End-of-unit revision) and vocabulary in your own
-              words.
-    key       the shared header, teacher notes, then every Reading Check answer, the
-              exemplar answers to the questions, and the accepted vocabulary definitions.
-              Answers are in the key-handwriting face and keyInk.pen
-              (standards/ANSWER_KEYS.md section 2), digits in the face's fallback
-              (section 7, legibility).
+              at most ten bold defined terms and their set-off definition lines,
+              numbered figures, Example banners, On Your Own boxes and one Connection per
+              section. The tear-off leaf is the last physical sheet: front (odd page) a
+              Name line, the due instruction and one question per section; reverse (last
+              even page) the ten terms and definitions. If the chapter ends on an odd
+              page, one blank back is inserted so the leaf starts on an odd page.
+    key       the shared header, teacher notes, the tear-off answers, every On Your Own
+              solution, and the ten definitions. Answers are in the key-handwriting face
+              and keyInk.pen (standards/ANSWER_KEYS.md section 2), digits in the face's
+              fallback (section 7, legibility).
 
 Spec markup in text: **bold**, *italic*, _{subscript}, ^{superscript}.
 
@@ -48,6 +51,23 @@ from _shull_docx import (  # noqa: E402
     text_width_in, TEXT_W_IN, PAGE_W_IN,
 )
 from build_notes_docx import _spacing, footer as notes_footer, pin  # noqa: E402
+from _shull_name import document_name, short_title  # noqa: E402
+
+
+def section_titles(course, unit):
+    """{"7.1": "Mathematical Tools", ...} for the taught sections of one unit, read from
+    the curriculum map in courses/<course>/DECISIONS.md. A course fact lives there only;
+    the spec carries section codes, never titles. Retired codes are skipped."""
+    text = open(os.path.join(REPO, "courses", course, "DECISIONS.md")).read()
+    m = re.search(r"^\*\*U%d [^*]+\*\*[^\n]*\n((?:.+\n)+?)(?:\n|$)" % int(unit), text, re.M)
+    if not m:
+        raise SystemExit(f"U{unit} is not in courses/{course}/DECISIONS.md - stop and ask")
+    block = " ".join(m.group(1).split())
+    out = {}
+    for code, title in re.findall(r"(\d+\.\d+) ([^·]+?)\s*(?=·|$)", block):
+        if "RETIRED" not in title:
+            out[code] = title.strip()
+    return out
 
 # ---------------------------------------------------------------------------------
 # Geometry and type. Body size is printScale.body from tokens.json. The column gap is set
@@ -74,6 +94,7 @@ SEC_NUM, SEC_TITLE = 15, 15
 CAPTION, CAPTION_LINE = 8.5, 11
 LABEL = 8                        # caps labels sit on the print floor, never under it
 WRITE_LINE_PT = 22               # one handwriting line
+TEAR_LINE_PT = 24                # a tear-off answer line: a little taller, for a full sentence
 W_HAIR = 6                       # eighths of a point: 0.75 pt, print.weights.writingLine
 W_ACCENT = 18                    # the course rule under a section head, 2.25 pt
 
@@ -187,7 +208,7 @@ def body_p(container, text, pal, *, first=False, before=0, after=5, size=BODY, l
     return p
 
 
-def write_lines(cell, n, pal, first=False, width=None):
+def write_lines(cell, n, pal, first=False, width=None, line_pt=WRITE_LINE_PT):
     """N writing lines as the rows of a table, each row exactly one handwriting line tall
     with a hairline under it. Ruled paragraphs do not work: consecutive paragraphs with
     the same bottom border are one border group, and both readers draw only the last."""
@@ -199,32 +220,12 @@ def write_lines(cell, n, pal, first=False, width=None):
     for row in t.rows:
         tr = row._tr.get_or_add_trPr()
         h = OxmlElement("w:trHeight")
-        h.set(qn("w:val"), str(int(WRITE_LINE_PT * 20))); h.set(qn("w:hRule"), "exact")
+        h.set(qn("w:val"), str(int(line_pt * 20))); h.set(qn("w:hRule"), "exact")
         tr.append(h)
         c = row.cells[0]
         cell_margins(c, 0, 0, 0, 0)
         borders(c, pal.hair, sz=W_HAIR, edges=("bottom",))
         pin(c.paragraphs[0], 1)
-    return t
-
-
-def box_check(cell, pal, side_in=0.15):
-    """An empty tick box: a tiny bordered table centred in the cell. Not U+2610 (not in
-    Archivo, it pulls in a second font) and not a bordered run of spaces
-    (_shull_docx.checkbox): LibreOffice drew nothing for that run in a centred cell."""
-    t = cell.add_table(rows=1, cols=1)
-    t.alignment = WD_TABLE_ALIGNMENT.CENTER
-    fix_widths(t, [side_in])
-    row = t.rows[0]
-    tr = row._tr.get_or_add_trPr()
-    h = OxmlElement("w:trHeight")
-    h.set(qn("w:val"), str(int(side_in * 1440))); h.set(qn("w:hRule"), "exact")
-    tr.append(h)
-    c = row.cells[0]
-    cell_margins(c, 0, 0, 0, 0)
-    borders(c, pal.ink, sz=6)
-    pin(c.paragraphs[0], 1)
-    end_cell(cell)
     return t
 
 
@@ -422,7 +423,8 @@ def example(doc, blk, pal):
     if blk.get("intro"):
         body_p(c, blk["intro"], pal, after=4, size=9.5, line=12.5)
     if blk.get("rows"):
-        widths = [0.50, 1.60, 0.22, inner - 0.50 - 1.60 - 0.22 - 0.02]
+        w3 = blk.get("widths", [0.50, 1.60, 0.22])
+        widths = w3 + [inner - sum(w3) - 0.02]
         t = c.add_table(rows=len(blk["rows"]), cols=4)
         fix_widths(t, widths)
         for ri, row in enumerate(blk["rows"]):
@@ -437,6 +439,9 @@ def example(doc, blk, pal):
                     borders(cc, pal.ink, sz=6, edges=("top",))
                 else:
                     borders(cc, pal.hair, sz=4, edges=("bottom",))
+        pin(c.paragraphs[-1], 2)        # the paragraph python-docx adds after a nested table
+    if blk.get("grid"):
+        grid(c, blk["grid"], pal, inner)
     if blk.get("math"):
         math_row(c, blk["math"], pal, inner, size=9.5)
         pin(c.paragraphs[-1], 1)        # the paragraph python-docx adds after a nested table
@@ -444,6 +449,33 @@ def example(doc, blk, pal):
         body_p(c, blk["after"], pal, before=4, after=0, size=9.5, line=12.5)
     end_cell(c)
     after_box(doc)
+
+
+def grid(cell, g, pal, inner):
+    """A worked-step table inside an Example: a caps header row over a rule, hairlines
+    between steps, the first column left-aligned for the step name, the rest centred
+    (SHULL-CHG-0105). No fills."""
+    first = 1.22
+    rest = (inner - first - 0.02) / (len(g["head"]) - 1)
+    t = cell.add_table(rows=len(g["rows"]) + 1, cols=len(g["head"]))
+    fix_widths(t, [first] + [rest] * (len(g["head"]) - 1))
+    for ri, row in enumerate([g["head"]] + g["rows"]):
+        no_split(t.rows[ri])
+        for ci, (cc, txt) in enumerate(zip(t.rows[ri].cells, row)):
+            cell_margins(cc, 30, 30, 20, 20)
+            cc.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            q = cc.paragraphs[0]
+            _spacing(q, 0, 0, 12.5)
+            q.alignment = WD_ALIGN_PARAGRAPH.LEFT if ci == 0 else WD_ALIGN_PARAGRAPH.CENTER
+            if ri == 0:
+                add(q, txt.upper(), LABEL, color=pal.accent, bold=True, track=20)
+                borders(cc, pal.ink, sz=6, edges=("bottom",))
+            else:
+                add(q, txt, 9, color=pal.ink, bold=(ri == len(g["rows"])))
+                if ri < len(g["rows"]):
+                    borders(cc, pal.hair, sz=4, edges=("bottom",))
+    pin(cell.paragraphs[-1], 2)     # the paragraph python-docx adds after a nested table
+    return t
 
 
 def opener(doc, blk, pal):
@@ -457,13 +489,13 @@ def opener(doc, blk, pal):
 
 def definition(doc, v, pal):
     """The set-off definition under the paragraph that bolds a term, in the text-safe
-    course colour. The words come from spec["vocab"], the same source as the vocabulary
-    page and the key, so the three cannot drift."""
+    course colour. The words come from definition_text(), the same source as the
+    tear-off reverse and the key, so the three cannot drift."""
     term = v["term"][0].upper() + v["term"][1:]
     p = doc.add_paragraph()
     _spacing(p, 0, 3, 11.4)
     p.paragraph_format.left_indent = Inches(INDENT_IN)
-    add(p, f"**{term}** \u2014 {v['def']}.", 9, color=pal.accent)
+    add(p, f"**{term}** \u2014 {definition_text(v)}", 9, color=pal.accent)
     return p
 
 
@@ -483,10 +515,10 @@ def on_your_own(doc, blk, pal):
 
 
 def connection(doc, blk, pal):
-    """A real-world sidebar. Told apart from the Reading Check by shape, not only by
-    colour: the Check is a closed box with a course rail on the left and writing lines;
-    a Connection is open at the sides, a course rule above and a hairline below, and
-    smaller type with no lines to write on."""
+    """A real-world sidebar, one per section. Told apart from the On Your Own box by
+    shape, not only by colour: On Your Own is a closed box with room to work; a
+    Connection is open at the sides, a course rule above and a hairline below, and
+    smaller type with no space to write."""
     t = doc.add_table(rows=1, cols=1)
     fix_widths(t, [COL_W_IN])
     c = t.rows[0].cells[0]
@@ -499,15 +531,6 @@ def connection(doc, blk, pal):
     body_p(c, blk["text"], pal, after=0, size=9, line=11.6)
     end_cell(c)
     after_box(doc, 5)
-
-
-def reading_check(doc, blk, pal):
-    c = box(doc, pal, accent=True)
-    label(c, f"Reading Check {blk['n']}", pal, first=True)
-    body_p(c, blk["q"], pal, after=0, size=BODY, line=BODY_LINE)
-    write_lines(c, int(blk.get("lines", 3)), pal, width=COL_W_IN - (140 + 110) / 1440)
-    end_cell(c)
-    after_box(doc, 6)
 
 
 def steps(doc, blk, pal):
@@ -673,67 +696,13 @@ def furniture_after_binding(doc, spec, pal, chapter, info):
                 thumb_tab(hf, pal, unit, page, id_base); id_base += 1
 
 
-def name_row(doc, pal):
-    t = doc.add_table(rows=1, cols=6)
-    widths = [0.50, 3.40, 0.45, 1.35, 0.62, 1.06]
-    fix_widths(t, widths)
-    for i, (c, txt) in enumerate(zip(t.rows[0].cells, ["NAME", "", "DATE", "", "PERIOD", ""])):
-        cell_margins(c, 0, 20, 0, 40)
-        c.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
-        p = c.paragraphs[0]
-        _spacing(p, 0, 0, 14)
-        if txt:
-            add(p, txt, LABEL, color=pal.label, bold=True, track=26)
-        else:
-            borders(c, pal.label, sz=6, edges=("bottom",))
-    return t
 
 
-def vocab_preview(doc, spec, pal):
-    fr = spec["front"]
-    terms = [v["term"] for v in spec["vocab"]]
-    half = (len(terms) + 1) // 2
-    cols3 = fr["vocabColumns"]
-    gap = 0.20
-    side = (TEXT_W_IN - gap) / 2
-    cw = 0.68
-    widths = [side - 3 * cw] + [cw] * 3 + [gap] + [side - 3 * cw] + [cw] * 3
-    t = doc.add_table(rows=half + 1, cols=9)
-    fix_widths(t, widths)
-    for ri, row in enumerate(t.rows):
-        no_split(row)
-        for ci, c in enumerate(row.cells):
-            cell_margins(c, 14, 14, 30, 30)
-            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-            p = c.paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER          # SHULL-CHG-0105
-            _spacing(p, 0, 0, 12)
-            if ci == 4:
-                continue
-            k = ci if ci < 4 else ci - 5
-            idx = (ri - 1) + (0 if ci < 4 else half)
-            edges = ("bottom",)
-            if ri == 0:
-                txt = "Term" if k == 0 else cols3[k - 1]
-                add(p, txt.upper(), LABEL, color=pal.accent, bold=True, track=0)
-                borders(c, pal.ink, sz=6, edges=edges)
-                continue
-            borders(c, pal.hair, sz=4, edges=edges)
-            if idx >= len(terms):
-                continue
-            if k == 0:
-                add(p, terms[idx], 9, color=pal.ink, bold=True)
-            else:
-                pin(p, 1)
-                box_check(c, pal)
-    return t
-
-
-def front(doc, spec, pal):
-    """Page 1 under the SHULL header: the chapter opener. Left, the unit kicker, the
-    display title and how to read the chapter; right, the Why It Matters sidebar at the
-    body column measure, set off by a course rule. Then a compact Name/Date/Period strip
-    and the vocabulary self-rating strip."""
+def front(doc, spec, pal, titles):
+    """Page 1, the cover, under the SHULL header. Left: the display title, the unit
+    breakdown (every taught section in order, code and title from DECISIONS.md) and one
+    line on how to use the packet. Right: Why It Matters at the body measure, set off by
+    a course rule. The chapter starts below on the same page."""
     fr = spec["front"]
     unit = int(spec["unit"])
     t = doc.add_table(rows=1, cols=2)
@@ -748,122 +717,86 @@ def front(doc, spec, pal):
     _spacing(p, 0, 6, DISPLAY_PT * 1.08)
     add(p, " ".join(words[:-1]) + " ", DISPLAY_PT, color=pal.ink, bold=True)
     add(p, words[-1], DISPLAY_PT, color=pal.accent, bold=True)      # one accent word
-    label(left, fr["howTitle"], pal, before=2, after=1)
-    for txt in fr["how"]:
-        body_p(left, txt, pal, after=3, size=9.5, line=12.4)
+    label(left, fr["listTitle"], pal, before=2, after=2)
+    for code in spec["sections"]:
+        q = left.add_paragraph()
+        _spacing(q, 0, 2, 13)
+        q.paragraph_format.left_indent = Inches(0.34)
+        q.paragraph_format.first_line_indent = Inches(-0.34)
+        q.paragraph_format.tab_stops.add_tab_stop(Inches(0.34))
+        add(q, f"{code}\t", 10, color=pal.accent, bold=True, face=NARROW)
+        add(q, titles[code], 10, color=pal.ink, bold=True)
+    body_p(left, fr["how"], pal, before=4, after=0, size=9, line=11.8)
     label(right, fr["why"]["title"], pal, first=True, after=2)
     body_p(right, fr["why"]["text"], pal, after=0, size=BODY, line=BODY_LINE)
-    p = doc.add_paragraph(); pin(p, 8)
-    name_row(doc, pal)
-    p = doc.add_paragraph(); pin(p, 8)
-    vocab_strip(doc, spec, pal)
-    p = doc.add_paragraph(); pin(p, 2)
+    p = doc.add_paragraph(); pin(p, 6)
 
 
-def vocab_strip(doc, spec, pal):
-    """The vocabulary self-rating as a compact strip: four groups of term + three boxes
-    (K = know it, S = seen it, N = new). Every cell centred (SHULL-CHG-0105)."""
-    fr = spec["front"]
-    terms = [v["term"] for v in spec["vocab"]]
-    groups, per = 4, (len(terms) + 3) // 4
-    box_w, gap = 0.17, 0.05
-    term_w = (TEXT_W_IN - groups * 3 * box_w - (groups - 1) * gap) / groups
-    widths = []
-    for g in range(groups):
-        widths += [term_w] + [box_w] * 3 + ([gap] if g < groups - 1 else [])
-    q = doc.add_paragraph()
-    _spacing(q, 0, 2, 11)
-    add(q, fr["vocabTitle"].upper(), LABEL, color=pal.accent, bold=True, track=26)
-    add(q, "   " + fr["vocabDirections"] + "  " + fr["vocabLegend"] + ".", 8.5, color=pal.label)
-    t = doc.add_table(rows=per + 1, cols=len(widths))
-    fix_widths(t, widths)
-    step = 5
-    for ri, row in enumerate(t.rows):
-        no_split(row)
-        for ci, c in enumerate(row.cells):
-            cell_margins(c, 10, 10, 10, 10)
-            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-            p = c.paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            _spacing(p, 0, 0, 11.5)
-            g, k = divmod(ci, step)
-            if k == 4:
-                continue
-            if ri == 0:
-                add(p, ("TERM", "K", "S", "N")[k], LABEL, color=pal.accent, bold=True)
-                borders(c, pal.ink, sz=6, edges=("bottom",))
-                continue
-            idx = g * per + ri - 1
-            borders(c, pal.hair, sz=4, edges=("bottom",))
-            if idx >= len(terms):
-                continue
-            if k == 0:
-                add(p, terms[idx], 8, color=pal.ink, bold=True)
-            else:
-                pin(p, 1)
-                box_check(c, pal, 0.13)
-    return t
-
-
-def back_pages(doc, spec, pal):
-    bk = spec["back"]
-    p = doc.add_paragraph()
-    _spacing(p, 0, 2, SEC_TITLE * 1.25)
-    add(p, bk["questionsTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
-    bottom_rule(p, pal.display, W_ACCENT, 2)
-    q = body_p(doc, bk["questionsDirections"], pal, before=4, after=8, size=9.5, line=12.6)
-    q.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN)
-    half = (TEXT_W_IN - 0.25) / 2
-    for i, q in enumerate(bk["questions"], 1):
-        t = doc.add_table(rows=1, cols=1)
-        fix_widths(t, [TEXT_W_IN])
-        c = t.rows[0].cells[0]
-        cell_margins(c, 0, 0, 0, 0)
-        no_split(t.rows[0])
-        qp = para_in(c, first=True)
-        _spacing(qp, 0, 4, BODY_LINE)
-        qp.paragraph_format.left_indent = Inches(0.26)
-        qp.paragraph_format.first_line_indent = Inches(-0.26)
-        qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.26))
-        add(qp, f"{i}.\t", BODY, color=pal.ink, bold=True)
-        add(qp, q["q"], BODY, color=pal.ink)
-        qp.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN - 0.4)   # R2-2
-        inner = c.add_table(rows=1, cols=3)
-        fix_widths(inner, [half, 0.25, half])
-        for j, cc in enumerate((inner.rows[0].cells[0], inner.rows[0].cells[2])):
-            cell_margins(cc, 0, 0, 0, 0)
-            label(cc, bk["columns"][j], pal, first=True, after=0)
-            write_lines(cc, int(q["lines"]), pal, width=half)
-        cell_margins(inner.rows[0].cells[1], 0, 0, 0, 0)
-        end_cell(c)
-        p = doc.add_paragraph(); pin(p, 12)
-    # vocabulary page
+def page_break(doc):
     from docx.enum.text import WD_BREAK
     p = doc.add_paragraph(); pin(p, 1)
-    p.runs[0].add_break(WD_BREAK.PAGE)
+    p.runs[0].add_break(WD_BREAK.PAGE) if p.runs else p.add_run().add_break(WD_BREAK.PAGE)
+    return p
+
+
+def tear_off(doc, spec, pal):
+    """The detachable leaf (workflows/unit-textbook.md steps 3-5). Front: a Name line,
+    the due instruction verbatim, one single-part question per section with writing
+    lines. Reverse: the ten terms with the same definitions the set-off lines print."""
+    to = spec["tearOff"]
+    # front
+    t = doc.add_table(rows=1, cols=2)
+    fix_widths(t, [0.62, 4.2])
+    a, b = t.rows[0].cells
+    for c in (a, b):
+        cell_margins(c, 0, 20, 0, 40)
+        c.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    p = a.paragraphs[0]; _spacing(p, 0, 0, 16)
+    add(p, "NAME", LABEL + 1, color=pal.label, bold=True, track=26)
+    _spacing(b.paragraphs[0], 0, 0, 16)
+    borders(b, pal.label, sz=6, edges=("bottom",))
+    p = doc.add_paragraph()
+    _spacing(p, 12, 10, 15)
+    add(p, to["instruction"], 11.5, color=pal.ink, bold=True)
+    bottom_rule(p, pal.display, W_ACCENT, 6)
+    for q in to["questions"]:
+        tt = doc.add_table(rows=1, cols=1)
+        fix_widths(tt, [TEXT_W_IN])
+        c = tt.rows[0].cells[0]
+        cell_margins(c, 0, 0, 0, 0)
+        no_split(tt.rows[0])
+        qp = para_in(c, first=True)
+        _spacing(qp, 6, 0, BODY_LINE + 1)
+        qp.paragraph_format.left_indent = Inches(0.42)
+        qp.paragraph_format.first_line_indent = Inches(-0.42)
+        qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.42))
+        add(qp, f"{q['n']}\t", BODY + 0.5, color=pal.accent, bold=True, face=NARROW)
+        add(qp, q["q"], BODY + 0.5, color=pal.ink)
+        write_lines(c, int(q.get("lines", to.get("lines", 4))), pal, width=TEXT_W_IN,
+                    line_pt=TEAR_LINE_PT)
+        end_cell(c)
+    page_break(doc)
+    # reverse
     p = doc.add_paragraph()
     _spacing(p, 0, 2, SEC_TITLE * 1.25)
-    add(p, bk["vocabTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
+    add(p, to["vocabTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
     bottom_rule(p, pal.display, W_ACCENT, 2)
-    q = body_p(doc, bk["vocabDirections"], pal, before=4, after=8, size=9.5, line=12.6)
-    q.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN)
+    body_p(doc, to["vocabNote"], pal, before=4, after=8, size=9.5, line=12.6)
     terms = spec["vocab"]
-    rows = (len(terms) + 1) // 2
-    t = doc.add_table(rows=rows, cols=3)
-    fix_widths(t, [half, 0.25, half])
-    for ri in range(rows):
+    t = doc.add_table(rows=len(terms), cols=2)
+    fix_widths(t, [2.15, TEXT_W_IN - 2.15])
+    for ri, v in enumerate(terms):
         no_split(t.rows[ri])
-        for j, ci in enumerate((0, 2)):
-            idx = ri + j * rows
-            cc = t.rows[ri].cells[ci]
-            cell_margins(cc, 0, 140, 0, 0)
-            if idx >= len(terms):
-                continue
-            p = para_in(cc, first=True)
-            _spacing(p, 0, 0, 13)
-            add(p, terms[idx]["term"], BODY, color=pal.ink, bold=True)
-            add(p, f"   {terms[idx]['section']}", 8, color=pal.label)
-            write_lines(cc, int(bk.get("vocabLines", 2)), pal, width=half)
+        for ci, cc in enumerate(t.rows[ri].cells):
+            cell_margins(cc, 90, 90, 0, 80)
+            borders(cc, pal.hair, sz=4, edges=("bottom",))
+            p = cc.paragraphs[0]
+            _spacing(p, 0, 0, 14)
+            if ci == 0:
+                add(p, v["term"], BODY + 0.5, color=pal.ink, bold=True)
+                add(p, f"   {v['section']}", 8, color=pal.label)
+            else:
+                add(p, definition_text(v), BODY + 0.5, color=pal.ink)
 
 
 # ---------------------------------------------------------------------------------
@@ -875,75 +808,135 @@ def vocab_of(spec, term):
     raise SystemExit(f"bold term {term!r} has no vocabulary entry")
 
 
-def check_on_your_own(spec):
-    """Re-solve each On Your Own answer from the student periodic table
-    (templates/reference/chem_data.py) and stop the build on any disagreement."""
+def check_worked(spec):
+    """Re-solve every Example and On Your Own that carries a `verify` block from the
+    student periodic table (templates/reference/chem_data.py) and stop the build on any
+    disagreement."""
     sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
     from chem_data import ELEMENTS
     mass = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
 
+    def counts(formula):
+        out = {}
+        for e, n in re.findall(r"([A-Z][a-z]?)(\d*)", formula):
+            out[e] = out.get(e, 0) + int(n or 1)
+        return out
+
     def mm(formula):
-        return round(sum(mass[e] * int(n or 1)
-                         for e, n in re.findall(r"([A-Z][a-z]?)(\d*)", formula)), 2)
+        return round(sum(mass[e] * n for e, n in counts(formula).items()), 2)
+
+    def sig(x, n):
+        return float(f"{x:.{n}g}")
+
     for b in spec["body"]:
-        if b["type"] != "onYourOwn":
+        if b["type"] not in ("onYourOwn", "example") or "verify" not in b:
             continue
         v = b["verify"]
-        if v["kind"] == "molarMass":
-            got = mm(v["formula"])
-        elif v["kind"] == "gramsToMoles":
-            got = float(f"{v['grams'] / mm(v['formula']):.{v['sigFigs']}g}")
+        k = v["kind"]
+        if k == "molarMass":
+            got, want = mm(v["formula"]), v["answer"]
+        elif k == "gramsToMoles":
+            got, want = sig(v["grams"] / mm(v["formula"]), v["sigFigs"]), v["answer"]
+        elif k == "convert":
+            x = v["value"] * v["factor"] if v["op"] == "multiply" else v["value"] / v["factor"]
+            got, want = sig(x, v["sigFigs"]), v["answer"]
+        elif k == "empirical":
+            mol = {e: pc / mass[e] for e, pc in v["percent"].items()}
+            low = min(mol.values())
+            r = {e: m / low for e, m in mol.items()}
+            for mult in range(1, 7):
+                if all(abs(x * mult - round(x * mult)) < 0.08 for x in r.values()):
+                    break
+            else:
+                raise SystemExit(f"{b['type']} {b['n']}: no whole-number ratio in {r}")
+            got, want = {e: round(x * mult) for e, x in r.items()}, counts(v["answer"])
+        elif k == "molecular":
+            ratio = v["molarMass"] / mm(v["empirical"])
+            if abs(ratio - round(ratio)) > 0.01:
+                raise SystemExit(f"{b['type']} {b['n']}: multiplier {ratio:.3f} is not whole")
+            got = {e: n * round(ratio) for e, n in counts(v["empirical"]).items()}
+            want = counts(v["answer"])
         else:
-            raise SystemExit(f"unknown verify kind {v['kind']}")
-        if abs(got - v["answer"]) > 1e-9:
-            raise SystemExit(f"On Your Own {b['n']}: computed {got}, spec says {v['answer']}")
-        print(f"On Your Own {b['n']}: {v['kind']} re-solved = {got}")
+            raise SystemExit(f"unknown verify kind {k}")
+        bad = (got != want) if isinstance(got, dict) else abs(got - want) > 1e-9
+        if bad:
+            raise SystemExit(f"{b['type']} {b['n']}: computed {got}, spec says {want}")
+        print(f"{b['type']} {b['n']}: {k} re-solved = {got}")
 
 
-def check_spec(spec):
+VOCAB_MAX = 10      # workflows/unit-textbook.md, "Reading pages": up to ten terms
+
+
+def check_spec(spec, titles):
     course = spec["course"]
     known = known_sections(course)
     for s in spec["sections"]:
-        if s not in known:
-            raise SystemExit(f"section {s} is not in courses/{course}/DECISIONS.md - stop and ask")
-    for blk in spec["body"]:
-        if blk["type"] == "section" and blk["code"] not in spec["sections"]:
-            raise SystemExit(f"section head {blk['code']} is not in the spec's sections")
-    text = json.dumps(spec)
-    for banned in ("22.4", "STP", "molar volume"):
-        if banned in text.replace("Molar volume, STP", ""):
-            raise SystemExit(f"'{banned}' appears in the spec; molar volume is 11.5, out of U7")
-    # every bold term in the body is a vocabulary term, and every vocabulary term is bolded
-    bolded = set()
+        if s not in known or s not in titles:
+            raise SystemExit(f"section {s} is not a taught section in courses/{course}/DECISIONS.md "
+                             "- stop and ask")
+    if sorted(spec["sections"]) != sorted(titles):
+        raise SystemExit(f"the spec's sections {spec['sections']} are not the unit's taught sections "
+                         f"{sorted(titles)}; a unit reading covers the whole unit")
+    heads = [b["code"] for b in spec["body"] if b["type"] == "section"]
+    if heads != spec["sections"]:
+        raise SystemExit(f"section heads {heads} do not match the spec's sections in order")
+    for b in spec["body"]:
+        if b["type"] == "section" and "title" in b:
+            raise SystemExit(f"section {b['code']} types a title; titles come from DECISIONS.md")
+        if b["type"] == "check":
+            raise SystemExit("Reading Check boxes are not part of the unit reading; the tear-off "
+                             "questions replace them")
+    text = json.dumps(spec, ensure_ascii=False)
+    for banned in ("22.4", "STP", "molar volume", "Molar volume"):
+        if banned in text:
+            raise SystemExit(f"'{banned}' appears in the spec; molar volume is 12.5, out of U7")
+    # stale section numbers: a "Section 7.x" pointer to a code that is not taught
+    for m in re.finditer(r"(?:Section|Example|On Your Own) (\d+\.\d+)", text):
+        if m.group(1) not in spec["sections"]:
+            raise SystemExit(f"pointer {m.group(0)!r} names a code that is not a taught section")
+    # every bold term in the body is a vocabulary term, and every vocabulary term is bolded once
+    bolded = []
     for blk in spec["body"]:
         if blk["type"] == "p":
-            bolded |= {m.lower() for m in re.findall(r"\*\*(.+?)\*\*", blk["text"])}
-    vocab = {v["term"].lower() for v in spec["vocab"]}
-    if bolded != vocab:
-        raise SystemExit(f"bold terms and vocabulary disagree: bold-only {sorted(bolded - vocab)}, "
-                         f"vocab-only {sorted(vocab - bolded)}")
-    # every section closes with a reading check
-    cur = None
-    for blk in spec["body"] + [{"type": "section", "code": "end"}]:
-        if blk["type"] == "section":
-            if cur is not None and not cur:
-                raise SystemExit("a section has no Reading Check")
-            cur = False
-        elif blk["type"] == "check":
-            cur = True
-    secs = [b["code"] for b in spec["body"] if b["type"] == "section"]
-    conns = []
-    cur_sec = None
+            bolded += [m.lower() for m in re.findall(r"\*\*(.+?)\*\*", blk["text"])]
+    vocab = [v["term"].lower() for v in spec["vocab"]]
+    if len(vocab) > VOCAB_MAX:
+        raise SystemExit(f"{len(vocab)} vocabulary terms; the limit is {VOCAB_MAX}")
+    if sorted(bolded) != sorted(vocab):
+        raise SystemExit(f"bold terms and vocabulary disagree: bold {sorted(bolded)}, vocab {sorted(vocab)}")
+    for v in spec["vocab"]:
+        if v["section"] not in spec["sections"]:
+            raise SystemExit(f"term {v['term']!r} points at section {v['section']}")
+    # exactly one Connection per section; Examples and On Your Owns numbered by their section
+    cur, conns = None, {}
     for b in spec["body"]:
         if b["type"] == "section":
-            cur_sec = b["code"]
+            cur = b["code"]; conns[cur] = 0
         elif b["type"] == "connection":
-            conns.append(cur_sec)
-    if conns and sorted(conns) != sorted(secs):
-        raise SystemExit(f"every section needs exactly one Connection box: {conns} vs {secs}")
+            conns[cur] += 1
+        elif b["type"] in ("example", "onYourOwn") and b["n"] != cur:
+            raise SystemExit(f"{b['type']} {b['n']} sits in section {cur}")
+    if any(n != 1 for n in conns.values()):
+        raise SystemExit(f"every section needs exactly one Connection box: {conns}")
     for b in spec["body"]:
         if b["type"] in ("opener", "connection") and "**" in b["text"]:
             raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
+    # the tear-off: one single-part question per section, labelled with its code, in order
+    to = spec["tearOff"]
+    if to["instruction"] != "Due ASAP. No late work will be accepted. We will start the unit with this.":
+        raise SystemExit("the tear-off instruction must be the workflow's text, verbatim")
+    labels = [q["n"] for q in to["questions"]]
+    if labels != spec["sections"]:
+        raise SystemExit(f"tear-off questions {labels} must be exactly one per section, in order")
+    for q in to["questions"]:
+        if q["q"].count("?") != 1:
+            raise SystemExit(f"tear-off question {q['n']} is not a single question")
+
+
+def definition_text(v):
+    """One wording for a term's meaning, used by the set-off line under its bold, the
+    tear-off reverse and the key, so the three cannot drift."""
+    return v["def"] + "."
 
 
 def chars_per_line(size):
@@ -953,17 +946,17 @@ def chars_per_line(size):
     return COL_W_IN / per_char
 
 
-def build_student(spec, out_path, fig_dir):
+def build_student(spec, out_path, fig_dir, titles, blank_back=False):
     pal = Palette(spec["course"])
     doc = Document()
     s = page_setup(doc, base_pt=BODY)
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     unit = int(spec["unit"])
-    code = f"U{unit:02d} / S{spec['sections'][0]}\u2013S{spec['sections'][-1]}"
+    code = f"U{unit:02d} / S{spec['sections'][0]}–S{spec['sections'][-1]}"
     print_header(doc, pal, unit=unit, code=code, kind=spec["kind"], title=unit_title(spec["course"], spec["unit"]),
                  width=TEXT_W_IN)
     p = doc.add_paragraph(); pin(p, 8)
-    front(doc, spec, pal)
+    front(doc, spec, pal, titles)
     # chapter: two columns, continuing on page 1
     sec = doc.add_section(WD_SECTION.CONTINUOUS)
     set_cols(sec, 2)
@@ -972,9 +965,9 @@ def build_student(spec, out_path, fig_dir):
     for bi, blk in enumerate(body):
         t = blk["type"]
         if t == "section":
-            hp = section_head(doc, blk, pal)
+            hp = section_head(doc, dict(blk, title=titles[blk["code"]]), pal)
             if first:
-                _spacing(hp, 4, 6, SEC_TITLE * 1.25); first = False
+                _spacing(hp, 2, 6, SEC_TITLE * 1.25); first = False
         elif t == "sub":
             sub_head(doc, blk["text"], pal)
         elif t == "p":
@@ -982,8 +975,6 @@ def build_student(spec, out_path, fig_dir):
             if bi and body[bi - 1]["type"] == "p":
                 bp.paragraph_format.first_line_indent = Inches(INDENT_IN)
             terms = re.findall(r"\*\*(.+?)\*\*", blk["text"])
-            if blk.get("keepWithDefinition"):
-                keep_next(bp)
             # No keep-with-next here: LibreOffice then moves the whole paragraph, which
             # left an inch of white at the foot of four pages and cost a sheet.
             for term in terms:
@@ -1004,15 +995,15 @@ def build_student(spec, out_path, fig_dir):
             equation(doc, blk, pal)
         elif t == "example":
             example(doc, blk, pal)
-        elif t == "check":
-            reading_check(doc, blk, pal)
         elif t == "steps":
             steps(doc, blk, pal)
         else:
             raise SystemExit(f"unknown block type {t!r}")
     sec = doc.add_section(WD_SECTION.NEW_PAGE)
     set_cols(sec, 1)
-    back_pages(doc, spec, pal)
+    if blank_back:
+        page_break(doc)         # the blank back of an odd last reading page
+    tear_off(doc, spec, pal)
     chapter, info = furniture(doc, spec, pal)
     trim_tail(doc)
     apply_binding(doc)
@@ -1021,13 +1012,13 @@ def build_student(spec, out_path, fig_dir):
     doc.save(out_path)
 
 
-def build_key(spec, out_path):
+def build_key(spec, out_path, tear_page):
     pal = Palette(spec["course"])
     doc = Document()
     s = page_setup(doc, base_pt=BODY)
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     unit = int(spec["unit"])
-    code = f"U{unit:02d} / S{spec['sections'][0]}\u2013S{spec['sections'][-1]}"
+    code = f"U{unit:02d} / S{spec['sections'][0]}–S{spec['sections'][-1]}"
     print_header(doc, pal, unit=unit, code=code, kind=spec["kind"] + " · Answer Key",
                  title=unit_title(spec["course"], spec["unit"]), width=TEXT_W_IN)
     p = doc.add_paragraph(); pin(p, 8)
@@ -1076,11 +1067,12 @@ def build_key(spec, out_path):
             ep.paragraph_format.left_indent = Inches(0.34)
             add(ep, extra, 8.5, color=pal.label, italic=True)
 
-    head("Reading Checks")
-    for blk in spec["body"]:
-        if blk["type"] == "check":
-            qa(blk["n"], blk["q"], blk["answer"])
-    head("On Your Own \u2014 solutions")
+    head(f"Tear-off questions (page {tear_page}) — expected answers")
+    for q in spec["tearOff"]["questions"]:
+        qa(q["n"], q["q"], q["answer"],
+           " ".join(x for x in (q.get("accept"), "Accept any answer that makes the same point "
+                                "in the student's own words.") if x))
+    head("On Your Own — solutions")
     pencil = lambda q, x, z: hand(q, x, 12, ink="pencil")
     for blk in spec["body"]:
         if blk["type"] != "onYourOwn":
@@ -1099,13 +1091,13 @@ def build_key(spec, out_path):
         add(qp, f"{blk['n']}\t", 9.5, color=pal.accent, bold=True)
         add(qp, blk["q"], 9.5, color=pal.ink)
         # the boxed answer sits on the same line as the last "=" (R3-8)
-        steps = sol.get("steps", [])
-        for k, st in enumerate(steps):
+        steps_ = sol.get("steps", [])
+        for k, st in enumerate(steps_):
             sp = cc.add_paragraph()
             _spacing(sp, 0, 0, 18)
             sp.paragraph_format.left_indent = Inches(0.34)
             hand(sp, st, 12, ink="pencil")
-            if k == len(steps) - 1:
+            if k == len(steps_) - 1:
                 hand(sp, " ", 12)
                 hand(sp, sol["answer"], 12.5, ink="pen", boxed=True)
         if sol.get("math"):
@@ -1123,27 +1115,18 @@ def build_key(spec, out_path):
             _spacing(ep, 1, 0, 11.5)
             ep.paragraph_format.left_indent = Inches(0.34)
             add(ep, sol["note"], 8.5, color=pal.label, italic=True)
-    head(f"Questions (page {spec['key']['questionsPage']}) — exemplar answers")
-    for i, q in enumerate(spec["back"]["questions"], 1):
-        qa(f"{i}.", q["q"], q["answer"],
-           " ".join(x for x in (q.get("accept"), "Accept any answer that makes the same points "
-                                "in the student's own words.") if x))
-    head("Vocabulary — accepted definitions")
+    head(f"Vocabulary (page {tear_page + 1}) — the ten printed definitions")
     for v in spec["vocab"]:
         tt = doc.add_table(rows=1, cols=1)
         fix_widths(tt, [COL_W_IN])
         cc = tt.rows[0].cells[0]
-        cell_margins(cc, 10, 30, 0, 0)
+        cell_margins(cc, 10, 40, 0, 0)
         no_split(tt.rows[0])
         p = para_in(cc, first=True)
-        _spacing(p, 0, 0, 16.5)
+        _spacing(p, 0, 0, 12.6)
         add(p, v["term"], 9.5, color=pal.ink, bold=True)
         add(p, f"  {v['section']}   ", 8, color=pal.label)
-        hand(p, v["def"], 12)
-        if v.get("accept"):
-            ep = cc.add_paragraph()
-            _spacing(ep, 0, 0, 11.5)
-            add(ep, v["accept"], 8.5, color=pal.label, italic=True)
+        add(p, definition_text(v), 9.5, color=pal.ink)
     chapter, info = furniture(doc, spec, pal, key=True)
     trim_tail(doc)
     apply_binding(doc)
@@ -1185,6 +1168,34 @@ def to_pdf(docx_path, out_dir):
         return dst, d.page_count
 
 
+def leaf_pages(pdf_path, spec):
+    """-> (page count, tear-off front page, reverse page), 1-based physical pages, found
+    by the printed text, not assumed."""
+    import fitz
+    front_p = back_p = None
+    with fitz.open(pdf_path) as d:
+        n = d.page_count
+        for i, page in enumerate(d, 1):
+            txt = " ".join(page.get_text().split())
+            if "Due ASAP. No late work will be accepted." in txt:
+                front_p = i
+            if spec["tearOff"]["vocabTitle"] in txt:
+                back_p = i
+    return n, front_p, back_p
+
+
+def filenames(spec):
+    """Unit-level names from the shared helper: the full section list makes the name
+    unit-level, and the topic is the unit's short title in DECISIONS.md."""
+    topic = short_title(spec["course"], f"U{int(spec['unit'])}")
+    if not topic:
+        raise SystemExit(f"U{spec['unit']} has no short title in courses/{spec['course']}/DECISIONS.md "
+                         "- stop and ask")
+    stu = document_name("Reading", spec["sections"], spec["unit"], unit_title=topic, ext="docx")
+    key = document_name("Reading", spec["sections"], spec["unit"], unit_title=topic, key=True, ext="docx")
+    return stu, key
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     flags = {a for a in sys.argv[1:] if a.startswith("--")}
@@ -1192,8 +1203,9 @@ def main():
         print(__doc__.strip(), file=sys.stderr); return 2
     spec_path, out_dir = args
     spec = json.load(open(spec_path))
-    check_spec(spec)
-    check_on_your_own(spec)
+    titles = section_titles(spec["course"], spec["unit"])
+    check_spec(spec, titles)
+    check_worked(spec)
     cpl = chars_per_line(BODY)
     if not 50 <= cpl <= 75:
         raise SystemExit(f"column measure is {cpl:.0f} characters a line; the band is 50-75")
@@ -1203,28 +1215,44 @@ def main():
     if "--no-figures" not in flags:
         subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(spec_path)),
                         spec["figures"]["script"]), fig_dir], check=True, capture_output=True)
-    names = spec["workingFilename"]
-    stu = os.path.join(out_dir, names["student"] + ".docx")
-    key = os.path.join(out_dir, names["key"] + ".docx")
-    build_student(spec, stu, fig_dir)
-    build_key(spec, key)
-    print("wrote", stu); print("wrote", key)
+    stu_name, key_name = filenames(spec)
+    stu = os.path.join(out_dir, stu_name)
+    key = os.path.join(out_dir, key_name)
+    build_student(spec, stu, fig_dir, titles)
+    print("wrote", stu)
     if "--no-pdf" in flags:
+        build_key(spec, key, 0)
+        print("wrote", key)
         return 0
     budget = spec.get("pageBudget", {})
     ok = True
-    for path, is_key in ((stu, False), (key, True)):
-        pdf, n = to_pdf(path, out_dir)
-        print(f"wrote {pdf}  ({n} pages)")
-        for b in check_margins(pdf):
-            print("  MARGIN:", b); ok = False
-        if not is_key:
-            if n > budget.get("max", 99):
-                print(f"  OVER BUDGET: {n} pages, cap {budget['max']}"); ok = False
-            if budget.get("even") and n % 2:
-                print(f"  ODD PAGE COUNT: {n} (duplex needs even)"); ok = False
-        elif n % 2:
-            print(f"  ODD PAGE COUNT on key: {n}"); ok = False
+    pdf, n = to_pdf(stu, out_dir)
+    n, fp, bp = leaf_pages(pdf, spec)
+    blank = False
+    if fp and fp % 2 == 0:
+        # the chapter ended on an odd page: insert one blank back (workflow step 3)
+        blank = True
+        build_student(spec, stu, fig_dir, titles, blank_back=True)
+        pdf, n = to_pdf(stu, out_dir)
+        n, fp, bp = leaf_pages(pdf, spec)
+    last_reading = fp - (2 if blank else 1) if fp else None
+    print(f"wrote {pdf}  ({n} pages)")
+    print(f"  final reading page {last_reading}; blank back: {'page ' + str(fp - 1) if blank else 'none'}; "
+          f"tear-off front {fp}, reverse {bp}")
+    if not (fp and bp and fp % 2 == 1 and bp == fp + 1 == n):
+        print("  LEAF: the tear-off is not the last physical sheet, odd front / even back"); ok = False
+    for b in check_margins(pdf):
+        print("  MARGIN:", b); ok = False
+    if n > budget.get("max", 99):
+        print(f"  OVER BUDGET: {n} pages, cap {budget['max']}"); ok = False
+    build_key(spec, key, fp or 0)
+    print("wrote", key)
+    kpdf, kn = to_pdf(key, out_dir)
+    print(f"wrote {kpdf}  ({kn} pages)")
+    for b in check_margins(kpdf):
+        print("  MARGIN:", b); ok = False
+    if kn % 2:
+        print(f"  ODD PAGE COUNT on key: {kn}"); ok = False
     return 0 if ok else 1
 
 

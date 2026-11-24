@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures 7.1-7.7 for the Chemistry U7 unit reading (Unit 7 Reading - The Mole).
+"""Figures 7.1-7.7 for the Chemistry U7 unit reading.
 
     python3 templates/reading/specs/make_chem_u07_figures.py OUT_DIR
 
@@ -7,15 +7,14 @@ Formulas, molar masses and percentages on the molecule figures (7.3, 7.5, 7.7) a
 computed, not typed: element counts come from the RDKit molecule (or, for graphite and
 sodium chloride, from the formula), and atomic masses from the student periodic table,
 templates/reference/chem_data.py (2 decimals). Each computed value is checked against
-the verified table in reports/chem_u07_reading_content_brief.md section 1, and a
+the source dossier, reports/chem_u07_reading_dossier.md section B, and a
 mismatch stops the build.
 
-Molecules are drawn by RDKit from SMILES, with the same drawing options as
-scripts/build_diagram_molecule.py (tokens palette, Archivo SemiBold atom labels,
-heteroatoms in the course text colour). The difference is that hydrogens are kept:
-build_diagram_molecule.py parses with RDKit's default, which strips explicit H, so
-"[H]C#C[H]" came out as a bare triple bond with no atoms on it. Whether to extend that
-script or keep this exception is waiting on Matt (audit finding #2).
+Molecules (Figures 7.5 and 7.7) are drawn by the shared builder,
+scripts/build_diagram_molecule.py, with --explicit-h --label-carbons --no-caption
+(SHULL-CHG-0042, SHULL-CHG-0115), and placed at one common scale. Its 2D layout draws
+water near 120 degrees; Figure 7.5 is about atom count versus mass, so no angle is
+labelled or claimed. RDKit is also used, without drawing, to count atoms from SMILES.
 
 Print discipline (brand/SHULL_DESIGN_SYSTEM.md section 8): outlines and hatching only,
 no tinted areas. Colour is read from brand/tokens.json; no hex is typed here.
@@ -52,7 +51,7 @@ sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
 from chem_data import ELEMENTS                                    # noqa: E402
 MASS = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
 
-# The verified values (content brief section 1). A computed label must equal these.
+# The verified values (dossier section B). A computed label must equal these.
 BRIEF = {"C": 12.01, "H2O": 18.02, "NaCl": 58.44, "C2H2": 26.04, "C6H6": 78.12, "CH": 13.02,
          "H2O %H": 11.2, "H2O %O": 88.8}
 
@@ -66,7 +65,9 @@ def counts_of(smiles=None, formula=None):
         mol = Chem.MolFromSmiles(smiles, ps)
         out = {}
         for a in mol.GetAtoms():
-            out[a.GetSymbol()] = out.get(a.GetSymbol(), 0) + 1 + a.GetTotalNumHs()
+            out[a.GetSymbol()] = out.get(a.GetSymbol(), 0) + 1
+            if a.GetTotalNumHs():
+                out["H"] = out.get("H", 0) + a.GetTotalNumHs()
         return out
     out = {}
     for sym, n in _re.findall(r"([A-Z][a-z]?)(\d*)", formula):
@@ -176,42 +177,28 @@ def arrow(d, a, b, fill=INK, width=4, head=18):
                fill=fill, width=width)
 
 
-def molecule(smiles, w_px, h_px, coords=None):
-    """RDKit drawing with explicit H kept, in the build_diagram_molecule.py style."""
-    from rdkit import Chem
-    from rdkit.Chem.Draw import rdMolDraw2D
-    ps = Chem.SmilesParserParams()
-    ps.removeHs = False
-    mol = Chem.MolFromSmiles(smiles, ps)
-    if mol is None:
-        sys.exit(f"RDKit could not parse SMILES {smiles!r}")
-    if coords:
-        # fixed 2D positions (atom index -> (x, y)), e.g. water drawn at its real
-        # 104.5 degree angle instead of RDKit's 120 degree default
-        from rdkit import Geometry
-        from rdkit.Chem import rdDepictor
-        rdDepictor.Compute2DCoords(mol)
-        conf = mol.GetConformer()
-        for i, (x, y) in coords.items():
-            conf.SetAtomPosition(i, Geometry.Point3D(x, y, 0.0))
-    dr = rdMolDraw2D.MolDraw2DCairo(w_px, h_px)
-    o = dr.drawOptions()
-    for at in mol.GetAtoms():           # show every C: students have not met skeletal drawings
-        if at.GetSymbol() == "C":
-            o.atomLabels[at.GetIdx()] = "C"
-    o.setBackgroundColour(tuple(c / 255 for c in WHITE))
-    o.bondLineWidth = 4
-    o.padding = 0.08
-    o.setAtomPalette({0: tuple(c / 255 for c in INK)})
-    for z in (7, 8, 9, 15, 16, 17, 35, 53):
-        o.updateAtomPalette({z: tuple(c / 255 for c in ACCENT)})
-    o.updateAtomPalette({6: tuple(c / 255 for c in INK)})
-    o.updateAtomPalette({1: tuple(c / 255 for c in INK)})
-    o.fixedFontSize = pt(9.5)
-    o.fontFile = os.path.join(FONTS, "Archivo-SemiBold.ttf")
-    dr.DrawMolecule(mol)
-    dr.FinishDrawing()
-    return Image.open(io.BytesIO(dr.GetDrawingText())).convert("RGB")
+MOL_SCALE = 0.30     # builder px -> figure px: its 136 px atom labels land at about 9.8 pt
+MOLECULE_SCRIPT = os.path.join(REPO, "scripts", "build_diagram_molecule.py")
+
+
+def molecule(smiles, expect):
+    """A structure drawn by the shared builder, scripts/build_diagram_molecule.py
+    (SHULL-CHG-0042), with every hydrogen and every carbon shown and no caption
+    (SHULL-CHG-0115). The page captions it. Every molecule is placed at the same
+    MOL_SCALE so atom labels match across figures. The builder prints the formula it
+    drew; that must equal `expect`, the formula this figure labels."""
+    import subprocess, tempfile, re as _re
+    with tempfile.TemporaryDirectory() as td:
+        out = os.path.join(td, "m.png")
+        r = subprocess.run([sys.executable, MOLECULE_SCRIPT, "--smiles", smiles, "--explicit-h",
+                            "--label-carbons", "--no-caption", "--course", "chemistry",
+                            "--out", out], check=True, capture_output=True, text=True)
+        m = _re.search(r"\d+x\d+\s+(\S+)\s+[\d.]+ g/mol", r.stdout)
+        if not m or m.group(1) != expect:
+            sys.exit(f"molecule builder drew {m.group(1) if m else '?'} for {smiles!r}, expected {expect}")
+        im = Image.open(out).convert("RGB")
+        im.load()
+    return im.resize((int(im.width * MOL_SCALE), int(im.height * MOL_SCALE)), Image.LANCZOS)
 
 
 # ---------------------------------------------------------------------------------
@@ -254,10 +241,11 @@ def fig_rulers(out):
 
 
 def fig_ladder(out):
-    """7.2: pair, dozen, ream, mole as a staircase of counting words."""
+    """7.2: pair, dozen, mole as a staircase of counting words. (No ream: the dossier
+    lists "ream = 500 sheets" as unsourced, section F.)"""
     rows = [("pair", "2", "shoes", 2), ("dozen", "12", "eggs", 12),
-            ("ream", "500", "sheets of paper", None), ("mole", "6.022 × 10^{23}", "particles", "mole")]
-    im, d = canvas(2.15)
+            ("mole", "6.022 × 10^{23}", "particles", "mole")]
+    im, d = canvas(1.46)
     rh, gap = 128, 14
     for i, (word, num, what, icon) in enumerate(rows):
         y = 8 + i * (rh + gap)
@@ -284,8 +272,8 @@ def fig_ladder(out):
                 cx = ix + k * 40
                 d.ellipse([cx - 14, cy - 14, cx + 14, cy + 14], outline=INK, width=3)
             draw_text(d, (ix + 4 * 40 - 10, cy - pt(6)), "…", 11, "Bold", INK)
-            draw_text(d, (ix + 4 * 40 + 40, cy - pt(5)), "atoms, molecules,", 8.5, "Regular", LABEL)
-            draw_text(d, (ix + 4 * 40 + 40, cy - pt(5) + pt(11)), "or formula units", 8.5, "Regular", LABEL)
+            draw_text(d, (ix + 4 * 40 + 62, cy - pt(5)), "atoms, molecules,", 8.5, "Regular", LABEL)
+            draw_text(d, (ix + 4 * 40 + 62, cy - pt(5) + pt(11)), "or formula units", 8.5, "Regular", LABEL)
     im.save(out, dpi=(DPI, DPI))
 
 
@@ -293,7 +281,7 @@ def fig_one_mole(out):
     """7.3: one mole of carbon, water, sodium chloride. Values from the student table."""
     im, d = canvas(1.62)
     mc = check("C", molar_mass(counts_of(formula="C")))
-    mw = check("H2O", molar_mass(counts_of(smiles="[H]O[H]")))
+    mw = check("H2O", molar_mass(counts_of(smiles="O")))
     ms = check("NaCl", molar_mass(counts_of(formula="NaCl")))
     cols = [("Carbon", "(graphite)", f"{mc:.2f} g", None, "atoms"),
             ("Water", "", f"{mw:.2f} g", "about 18 mL", "molecules"),
@@ -376,13 +364,10 @@ def fig_map(out):
 
 def fig_water_percent(out):
     """7.5: water by atom count (2 of 3 = 67 % H) vs by mass (11.2 % H, 88.8 % O)."""
-    im, d = canvas(2.05)
-    import math
-    half = math.radians(104.5 / 2)          # H-O-H 104.5 degrees (U5 VSEPR); no angle label
-    mol = molecule("[H]O[H]", 420, 230,
-                   coords={0: (-math.sin(half), math.cos(half)), 1: (0.0, 0.0),
-                           2: (math.sin(half), math.cos(half))})
-    im.paste(mol, (int((W - 420) / 2), 0))
+    mol = molecule("O", "H2O")
+    im, d = canvas(round((mol.height + 30) / DPI + 1.42, 2))
+    im.paste(mol, (int((W - mol.width) / 2), 0))
+    top = mol.height + 30
     x0, x1 = 30, W - 30
     bh = 74
 
@@ -408,12 +393,12 @@ def fig_water_percent(out):
             x += w
         return y + bh
 
-    c = counts_of(smiles="[H]O[H]")
+    c = counts_of(smiles="O")
     total = molar_mass(c)
     ph = check("H2O %H", round(100 * c["H"] * MASS["H"] / total, 1))
     po = check("H2O %O", round(100 * c["O"] * MASS["O"] / total, 1))
     n_atoms = sum(c.values())
-    y = bar(240, "BY NUMBER OF ATOMS", [("H", 1 / n_atoms, "H")] * c["H"] + [("O", 1 / n_atoms, "O")] * c["O"])
+    y = bar(top, "BY NUMBER OF ATOMS", [("H", 1 / n_atoms, "H")] * c["H"] + [("O", 1 / n_atoms, "O")] * c["O"])
     draw_text(d, (x1, y + 6), f"{c['H']} of {n_atoms} atoms are H ({round(100 * c['H'] / n_atoms)}%)",
               8, "Regular", LABEL, "r")
     y = bar(y + 60, "BY MASS", [("H", ph / 100, "H"), ("O", po / 100, f"O  {po:.1f}%")])
@@ -448,36 +433,47 @@ def fig_reduce(out):
 
 
 def fig_ch(out):
-    """7.7: acetylene and benzene share empirical formula CH (13.02 g/mol)."""
-    im, d = canvas(2.15)
+    """7.7: acetylene and benzene share empirical formula CH (13.02 g/mol). Stacked, so
+    acetylene, which the builder lays out long and flat, can use the full column at the
+    common molecule scale."""
     import math
-    smiles = {"Acetylene": "[H]C#C[H]", "Benzene": "[H]c1c([H])c([H])c([H])c([H])c1[H]"}
-    data = {}
-    for name, smi in smiles.items():
+    smiles = {"Acetylene": ("C#C", "C2H2"), "Benzene": ("c1ccccc1", "C6H6")}
+    data, pics = {}, {}
+    for name, (smi, f) in smiles.items():
         c = counts_of(smiles=smi)
         g = math.gcd(*c.values())
         emp = {e: n // g for e, n in c.items()}
         data[name] = (c, molar_mass(c), emp, molar_mass(emp), g)
+        pics[name] = molecule(smi, f)
     (ca, ma, ea, mea, ga), (cb, mb, eb, meb, gb) = data["Acetylene"], data["Benzene"]
     if ea != eb:
         sys.exit("figure 7.7: the two molecules do not share an empirical formula")
     check("C2H2", ma); check("C6H6", mb); check("CH", mea)
-    ban = [20, 10, W - 20, 100]
-    d.rectangle(ban, outline=DISPLAY, width=6)
-    draw_text(d, (W / 2, 10 + 26), f"Empirical formula of both:  {hill(ea)},  {mea:.2f} g/mol",
+    a, b = pics["Acetylene"], pics["Benzene"]
+    if a.width > W - 20:
+        sys.exit(f"figure 7.7: acetylene is {a.width} px, wider than the column")
+    h = 100 + 26 + a.height + pt(30) + 24 + b.height + 10
+    im, d = canvas(h / DPI)
+    d.rectangle([20, 6, W - 20, 96], outline=DISPLAY, width=6)
+    draw_text(d, (W / 2, 6 + 26), f"Empirical formula of both:  {hill(ea)},  {mea:.2f} g/mol",
               9.5, "Bold", INK, "m")
-    half = W / 2
-    a = molecule(smiles["Acetylene"], 500, 300)
-    b = molecule(smiles["Benzene"], 500, 360)
-    im.paste(a, (int(half / 2 - 250), 150))
-    im.paste(b, (int(half + half / 2 - 250), 115))
-    d.line([(half, 130), (half, 600)], fill=HAIR, width=3)
-    for cx, name in ((half / 2, "Acetylene"), (half + half / 2, "Benzene")):
+
+    def caption(x, y, name, anchor):
         c, m, emp, me, g = data[name]
-        y = 485
-        draw_text(d, (cx, y), f"{name}, {hill(c)}", 9.5, "Bold", INK, "m")
-        draw_text(d, (cx, y + pt(13)), f"{m:.2f} g/mol", 9.5, "Bold", ACCENT, "m")
-        draw_text(d, (cx, y + pt(25)), f"= {g} × {me:.2f}", 8.5, "Regular", LABEL, "m")
+        draw_text(d, (x, y), f"{name}, {hill(c)}", 9.5, "Bold", INK, anchor)
+        draw_text(d, (x, y + pt(13)), f"{m:.2f} g/mol", 9.5, "Bold", ACCENT, anchor)
+        draw_text(d, (x, y + pt(25)), f"= {g} × {me:.2f}", 8.5, "Regular", LABEL, anchor)
+
+    y = 126
+    im.paste(a, (int((W - a.width) / 2), y))
+    y += a.height + 8
+    draw_text(d, (W / 2, y), f"Acetylene, {hill(ca)}   ", 9.5, "Bold", INK, "r")
+    draw_text(d, (W / 2, y), f"{ma:.2f} g/mol = {ga} × {mea:.2f}", 9.5, "Bold", ACCENT, "l")
+    y += pt(16)
+    d.line([(20, y), (W - 20, y)], fill=HAIR, width=3)
+    y += 24
+    im.paste(b, (10, y))
+    caption(b.width + 60, y + b.height / 2 - pt(18), "Benzene", "l")
     im.save(out, dpi=(DPI, DPI))
 
 
