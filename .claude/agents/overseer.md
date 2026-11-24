@@ -45,6 +45,7 @@ to and why.
 |---|---|
 | Content accuracy, examples, currency | `researcher` |
 | Build the deliverable to the design system | `designer` |
+| Unit textbook, textbook-style unit reading, or chapter revision | `textbook-page-designer` via `workflows/unit-textbook.md` |
 | Independent QA | `auditor` |
 | Retrieve, name, file, verify on Drive | `librarian` |
 | System health, broken references, duplicates | `janitor` |

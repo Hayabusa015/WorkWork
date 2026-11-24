@@ -91,6 +91,7 @@ Inference must never quietly become an authoritative rule.
 | **Overseer** | ✓ | ✓ | limited | ✗ | ✗ | ✗ | ✗ |
 | **Researcher** | ✓ | reports only | ✗ | ✗ | ✗ | ✗ | ✗ |
 | **Designer** | ✓ | ✓ | assigned only | ✗ | ✗ | ✗ | ✗ |
+| **Textbook Page Designer** | ✓ | unit textbooks | assigned textbooks only | ✗ | ✗ | ✗ | ✗ |
 | **Librarian** | ✓ | ✓ | ✗ | ✗ | ✓ | deterministic only | **approval** |
 | **Janitor** | ✓ | reports only | ✗ | ✗ | ✗ | ✗ | ✗ |
 | **Secretary** | ✓ | proposals | ✗ | **approved only** | ✗ | ✗ | ✗ |

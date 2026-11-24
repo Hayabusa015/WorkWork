@@ -13,6 +13,8 @@ You are the independent check. Your value comes entirely from your independence.
 
 Run `standards/QA_GATE.md` in full.
 
+For a unit textbook, run the page-by-page science and print review in `workflows/unit-textbook.md`. Report findings to the Overseer for the textbook-page-designer and recheck the corrected edition.
+
 ## Verify
 
 1. **The deliverable exists.** Open it. Do not take a message's word for it.

@@ -12,7 +12,7 @@ AGENTS = os.path.join(REPO, ".claude", "agents")
 # Agents that may NOT hold a write tool that can reach authoritative files.
 REPORT_ONLY = {"researcher", "janitor", "auditor"}
 # Only this agent may hold Edit.
-MAY_EDIT = {"secretary", "designer"}
+MAY_EDIT = {"secretary", "designer", "textbook-page-designer"}
 # Drive mutation tools; only the librarian may hold them.
 DRIVE_WRITE = ("create_file", "update_file", "copy_file", "trash_file")
 MAY_DRIVE_WRITE = {"librarian"}
@@ -21,8 +21,10 @@ REQUIRED = ("name", "description", "tools")
 errors, notes = [], []
 
 files = sorted(f for f in os.listdir(AGENTS) if f.endswith(".md") and f != "README.md")
-if len(files) != 7:
-    errors.append(f"expected 7 agents, found {len(files)}: {files}")
+expected = REPORT_ONLY | MAY_EDIT | MAY_DRIVE_WRITE | {"overseer"}
+actual = {os.path.splitext(f)[0] for f in files}
+if actual != expected:
+    errors.append(f"agent roster mismatch: missing {sorted(expected - actual)}, unexpected {sorted(actual - expected)}")
 
 for fn in files:
     path = os.path.join(AGENTS, fn)
@@ -74,4 +76,4 @@ if errors:
     for e in errors:
         print("  -", e)
     sys.exit(1)
-print("\nOK - all 7 agents match the authority matrix")
+print(f"\nOK - all {len(files)} agents match the authority matrix")

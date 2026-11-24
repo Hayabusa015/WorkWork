@@ -4,7 +4,7 @@ The operating system for Matthew Shull's teaching workflow — Chemistry, Physic
 James A. Garfield Local Schools, Ohio.
 
 **Status: Phases 8–13 complete; Phase 14's acceptance test (T-7, T-10) passed 2026-09-08.**
-Governance, standards, all seven agents (`.claude/agents/`), and all twelve skills
+Governance, standards, the agent definitions (`.claude/agents/`), and all twelve skills
 (`.claude/skills/`) exist and are validated — do not reason about this repo as if they are unbuilt.
 Phase 13 (the weekly `researcher`/`janitor` sweep) was activated 2026-09-24: a Routine runs it
 Sundays and writes findings as `PENDING` proposals, surfaced in the Secretary's Desk dashboard (see
