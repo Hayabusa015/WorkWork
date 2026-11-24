@@ -24,10 +24,11 @@
       }
     },
     "7.2": {
-      "focus": "Counting particles in moles",
+      "focus": "Counting particles; g/mol",
       "ican": [
         "I can **explain** that one mole is 6.02 × 10^{23} particles.",
-        "I can **convert** between moles and numbers of particles."
+        "I can **convert** between moles and numbers of particles.",
+        "I can **calculate** the molar mass of an element or compound."
       ],
       "standards": {
         "main": [
@@ -37,19 +38,6 @@
       }
     },
     "7.3": {
-      "focus": "Mass of one mole, in g/mol",
-      "ican": [
-        "I can **calculate** the molar mass of an element or compound.",
-        "I can **connect** average atomic mass to molar mass."
-      ],
-      "standards": {
-        "main": [
-          "C.PM.5"
-        ],
-        "support": []
-      }
-    },
-    "7.4": {
       "focus": "Grams, moles, particles",
       "ican": [
         "I can **convert** between mass, moles, and particles.",
@@ -62,24 +50,10 @@
         "support": []
       }
     },
-    "7.5": {
-      "focus": "Percent by mass",
+    "7.4": {
+      "focus": "Percent by mass; simplest ratio",
       "ican": [
         "I can **calculate** percent by mass from a formula.",
-        "I can **calculate** percent composition from lab mass data."
-      ],
-      "standards": {
-        "main": [
-          "C.PM.5"
-        ],
-        "support": [
-          "C.PM.4"
-        ]
-      }
-    },
-    "7.6": {
-      "focus": "Simplest ratio",
-      "ican": [
         "I can **find** an empirical formula from mass or percent data.",
         "I can **explain** what an empirical formula does not show."
       ],
@@ -92,7 +66,7 @@
         ]
       }
     },
-    "7.7": {
+    "7.5": {
       "focus": "Empirical to molecular",
       "ican": [
         "I can **find** a molecular formula from molar mass.",

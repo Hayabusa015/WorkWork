@@ -3,89 +3,104 @@
   "course": "chemistry",
   "unit": 11,
   "grades": "Grades 10–12",
-  "big_idea": "Gas particles are far apart and always moving, and that one model explains how gases behave. Students relate **pressure, volume, temperature** and amount, and use the gas laws to predict what a gas does when one of them changes.",
+  "big_idea": "Most chemistry happens in solution. Students explain dissolving, read **solubility** data, and use **molarity** in calculations.",
   "builds_on": [
     "U5 · S5.5 Intermolecular Forces",
-    "U7 · S7.4 Mole Conversions",
-    "Reference packet: gas laws, constants"
+    "U10 · S10.2 Stoichiometric Calculations"
   ],
   "sections": {
     "11.1": {
-      "focus": "The particle model of a gas",
+      "focus": "Solute & solvent",
       "ican": [
-        "I can **state** the main assumptions of kinetic molecular theory.",
-        "I can **use** the theory to explain pressure and temperature."
+        "I can **identify** the solute and the solvent in a solution.",
+        "I can **explain** dissolving with “like dissolves like.”"
       ],
       "standards": {
         "main": [
-          "C.IM.2"
-        ],
-        "support": []
-      }
-    },
-    "11.2": {
-      "focus": "Pressure & Kelvin",
-      "ican": [
-        "I can **convert** between pressure units: atm, mmHg, and kPa.",
-        "I can **convert** °C to K and **explain** why gas laws need K."
-      ],
-      "standards": {
-        "main": [
-          "C.IM.2"
-        ],
-        "support": []
-      }
-    },
-    "11.3": {
-      "focus": "Two variables at a time",
-      "ican": [
-        "I can **use** Boyle's, Charles's, and Gay-Lussac's laws.",
-        "I can **identify** direct and inverse relationships from data."
-      ],
-      "standards": {
-        "main": [
-          "C.IM.2"
-        ],
-        "support": []
-      }
-    },
-    "11.4": {
-      "focus": "P, V & T change together",
-      "ican": [
-        "I can **use** the combined gas law when pressure, volume, and temperature all change.",
-        "I can **derive** each simple gas law from the combined law."
-      ],
-      "standards": {
-        "main": [
-          "C.IM.2"
-        ],
-        "support": []
-      }
-    },
-    "11.5": {
-      "focus": "Moles, volume & STP",
-      "ican": [
-        "I can **use** Avogadro's law to relate gas volume to moles.",
-        "I can **use** 22.4 L/mol at STP to convert liters and moles."
-      ],
-      "standards": {
-        "main": [
-          "C.IM.2"
+          "C.PM.6"
         ],
         "support": [
           "C.IM.3"
         ]
       }
     },
-    "11.6": {
-      "focus": "PV = nRT",
+    "11.2": {
+      "focus": "Solubility curves",
       "ican": [
-        "I can **solve** PV = nRT for any variable, choosing the right R.",
-        "I can **explain** when real gases stop acting ideal."
+        "I can **read** a solubility curve at a given temperature.",
+        "I can **tell** saturated, unsaturated, and supersaturated apart."
       ],
       "standards": {
         "main": [
-          "C.IM.2"
+          "C.PM.6"
+        ],
+        "support": []
+      }
+    },
+    "11.3": {
+      "focus": "Amount vs. rate",
+      "ican": [
+        "I can **explain** temperature and pressure effects on solubility.",
+        "I can **tell** solubility apart from dissolving rate."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.IM.1"
+        ]
+      }
+    },
+    "11.4": {
+      "focus": "Ions that carry current",
+      "ican": [
+        "I can **classify** strong, weak, and nonelectrolytes.",
+        "I can **write** the ions a salt forms in water."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.6",
+          "C.PM.3"
+        ]
+      }
+    },
+    "11.5": {
+      "focus": "Moles of solute per liter",
+      "ican": [
+        "I can **calculate** molarity from grams or moles of solute.",
+        "I can **describe** how to prepare a solution of a given molarity."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
+    },
+    "11.6": {
+      "focus": "M_{1}V_{1} = M_{2}V_{2}",
+      "ican": [
+        "I can **solve** dilution problems with M_{1}V_{1} = M_{2}V_{2}.",
+        "I can **explain** why diluting does not change moles of solute."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
+    },
+    "11.7": {
+      "focus": "Molarity in reactions",
+      "ican": [
+        "I can **use** molarity and volume in stoichiometry problems.",
+        "I can **calculate** how much precipitate two solutions form."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
         ],
         "support": []
       }
@@ -95,9 +110,19 @@
   "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
   "standards_key": [
     [
-      "C.IM.2",
-      "Gas laws",
-      "pressure, volume and temperature; ideal gas law."
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ],
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
     ],
     [
       "C.IM.3",
