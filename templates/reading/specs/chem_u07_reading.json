@@ -1,0 +1,570 @@
+{
+  "$comment": "Chemistry U7 unit reading (pilot document type). Facts, numbers, terms, figure labels and questions come from reports/chem_u07_reading_content_brief.md (verified table, section 1). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u07_reading.json OUT_DIR",
+  "course": "chemistry",
+  "unit": 7,
+  "sections": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4",
+    "7.5",
+    "7.6",
+    "7.7"
+  ],
+  "kind": "Unit Reading",
+  "pageBudget": {
+    "target": 8,
+    "max": 10,
+    "even": true
+  },
+  "workingFilename": {
+    "$comment": "PENDING: standards/NAMING.md has no Reading type and courses/chemistry/DECISIONS.md has no U7 short title. These are the working names Matt gave; they change if the NAMING proposal lands differently.",
+    "student": "Unit 7 Reading - The Mole",
+    "key": "Unit 7 Reading Key - The Mole"
+  },
+  "figures": {
+    "script": "make_chem_u07_figures.py",
+    "dir": "fig"
+  },
+  "front": {
+    "howTitle": "How to read this chapter",
+    "how": [
+      "This reading covers all seven sections of Unit 7. Read it one section at a time, with a pencil. Each term in **bold** is defined in the sentence where it first appears, and those are the words you are responsible for. Figures are numbered, and the text tells you when to look at each one.",
+      "Every section ends with a Reading Check. Answer it in a sentence or two before you go on. If you can't, reread the section, because the answer is in the text. The last two pages hold three questions and the vocabulary. Answer the questions in the Day 1 column now, then revise them at the end of the unit."
+    ],
+    "vocabTitle": "Vocabulary preview",
+    "vocabDirections": "Before you read, mark one box for each term.",
+    "vocabColumns": [
+      "Know it",
+      "Seen it",
+      "New"
+    ]
+  },
+  "vocab": [
+    {
+      "term": "precision",
+      "section": "7.1",
+      "def": "how finely a measurement is made, which shows in how many digits the tool lets you record",
+      "accept": "Also accept: how closely repeated measurements agree with each other."
+    },
+    {
+      "term": "significant figures",
+      "section": "7.1",
+      "def": "the digits in a measurement that are known for certain, plus one estimated digit"
+    },
+    {
+      "term": "measured number",
+      "section": "7.1",
+      "def": "a number obtained with a tool, which always has some uncertainty"
+    },
+    {
+      "term": "exact number",
+      "section": "7.1",
+      "def": "a number known with no uncertainty because it was counted or defined (12 eggs in a dozen)"
+    },
+    {
+      "term": "scientific notation",
+      "section": "7.1",
+      "def": "a way to write a number as a value from 1 to less than 10 times a power of ten"
+    },
+    {
+      "term": "conversion factor",
+      "section": "7.1",
+      "def": "a fraction whose top and bottom are equal amounts in different units, so multiplying by it changes the unit but not the amount"
+    },
+    {
+      "term": "dimensional analysis",
+      "section": "7.1",
+      "def": "solving a problem by multiplying by conversion factors so that units cancel, leaving the unit you want"
+    },
+    {
+      "term": "mole (mol)",
+      "section": "7.2",
+      "def": "the SI counting unit for particles; one mole is 6.022 × 10^{23} particles"
+    },
+    {
+      "term": "Avogadro's number",
+      "section": "7.2",
+      "def": "6.022 × 10^{23}, the number of particles in one mole"
+    },
+    {
+      "term": "representative particle",
+      "section": "7.2",
+      "def": "the smallest unit a substance is counted in: atom, molecule, or formula unit"
+    },
+    {
+      "term": "formula unit",
+      "section": "7.2",
+      "def": "the lowest whole-number ratio of ions in an ionic compound, such as one Na^{+} and one Cl^{−} in NaCl"
+    },
+    {
+      "term": "molar mass",
+      "section": "7.3",
+      "def": "the mass of one mole of a substance, in grams per mole (g/mol)"
+    },
+    {
+      "term": "percent composition",
+      "section": "7.5",
+      "def": "the percent by mass of each element in a compound"
+    },
+    {
+      "term": "empirical formula",
+      "section": "7.6",
+      "def": "the simplest whole-number ratio of the atoms in a compound"
+    },
+    {
+      "term": "molecular formula",
+      "section": "7.7",
+      "def": "the actual number of each kind of atom in one molecule of a compound"
+    },
+    {
+      "term": "empirical formula mass",
+      "section": "7.7",
+      "def": "the sum of the atomic masses in the empirical formula"
+    }
+  ],
+  "body": [
+    {
+      "type": "section",
+      "code": "7.1",
+      "title": "Mathematical Tools"
+    },
+    {
+      "type": "sub",
+      "text": "How many digits should you write down?"
+    },
+    {
+      "type": "p",
+      "text": "Have you ever finished a math problem, looked at your calculator showing 8.333333333, and wondered how many of those digits you should actually write down? The calculator can't tell you. It shows as many digits as its screen holds, and it has no idea whether the numbers you typed came from a careful measurement or a rough guess. Deciding which digits mean something is your job, and chemists have a system for it."
+    },
+    {
+      "type": "p",
+      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 150 lb. It reads in whole pounds, so it can't tell 150 lb from 150.4 lb. A kitchen scale reads to a tenth of a gram, so it can report a spoonful of flour as 12.4 g. The kitchen scale gives you more digits because it measures more finely. **Precision** describes how finely a measurement is made, and it shows in how many digits a tool lets you record. (Scientists also use the word for how closely repeated measurements agree with each other.)"
+    },
+    {
+      "type": "p",
+      "text": "You see the same idea at the gas pump. A price of $3.299 per gallon is set to a tenth of a cent, even though you can only pay to the cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24. The number of digits in a value tells you how finely it was measured or set."
+    },
+    {
+      "type": "sub",
+      "text": "The estimated digit"
+    },
+    {
+      "type": "p",
+      "text": "Here is the rule for how many digits to record: write down every digit you are sure of, plus one digit you estimate. Suppose you measure a pencil with a ruler marked only in whole centimeters (Figure 7.1, top). The tip lands past the 4 cm mark, a little more than halfway to 5. You are sure of the 4, and you can estimate the next digit by eye, so you record 4.6 cm. Writing 4.6382 cm would claim you can see ten-thousandths of a centimeter on a ruler that shows only whole centimeters. Writing 4 cm would throw away a digit you actually have."
+    },
+    {
+      "type": "p",
+      "text": "A ruler with millimeter marks (Figure 7.1, bottom) lets you be sure of 4.6 and estimate one more digit, so the same tip reads 4.63 cm. **Significant figures** are the digits in a measurement that are known for certain, plus one estimated digit. The reading 4.6 cm has two significant figures, and 4.63 cm has three."
+    },
+    {
+      "type": "p",
+      "text": "An answer calculated from measurements can't be more certain than the measurements that went into it. That is why you round the calculator's display instead of copying all of it. Keep every digit while you work, and round once, at the end. Reference Sheet 2, Significant Figure Rules, lists the rules for deciding which digits count. The short version is that nonzero digits always count, and whether a zero counts depends on where it sits in the number."
+    },
+    {
+      "type": "figure",
+      "n": "7.1",
+      "image": "fig7_1_rulers.png",
+      "caption": "The same pencil tip on two rulers. A better tool earns you one more digit, and every measurement ends with one estimated digit."
+    },
+    {
+      "type": "p",
+      "text": "Not every number in a problem is a measurement. A **measured number** is obtained with a tool, so it always has some uncertainty. An **exact number** is known with no uncertainty because it was counted or defined. There are exactly 12 eggs in a dozen, and 1 inch is defined as exactly 2.54 cm. Exact numbers never limit how many significant figures an answer gets."
+    },
+    {
+      "type": "sub",
+      "text": "Scientific notation"
+    },
+    {
+      "type": "p",
+      "text": "Chemistry is full of numbers too large or too small to write out comfortably. **Scientific notation** writes a number as a value from 1 to less than 10 times a power of ten. In Section 7.2 you will meet the number 602,200,000,000,000,000,000,000. In scientific notation it is 6.022 × 10^{23}, which is far easier to read and to copy correctly. Small numbers get negative exponents: one molecule of water has a mass of 2.99 × 10^{−23} g. Every digit written before the “× 10” is significant, so 6.022 × 10^{23} has four significant figures."
+    },
+    {
+      "type": "sub",
+      "text": "Conversion factors and dimensional analysis"
+    },
+    {
+      "type": "p",
+      "text": "A **conversion factor** is a fraction whose top and bottom are equal amounts in different units, so multiplying by it changes the unit but not the amount. Twelve eggs and one dozen are the same amount, so they can sit on the top and bottom of one conversion factor. **Dimensional analysis** is solving a problem by multiplying by conversion factors so that units cancel, leaving the unit you want. To find the number of eggs in 3 dozen, write the factor with dozen on the bottom so it cancels:"
+    },
+    {
+      "type": "math",
+      "parts": [
+        "3 dozen  ×",
+        {
+          "num": "12 eggs",
+          "den": "1 dozen"
+        },
+        "=  36 eggs"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Flip the factor and the units come out as dozen squared per egg, which tells you the setup is wrong before you look at the number. Every conversion in this unit works the same way. The only difference is that the factors involve moles."
+    },
+    {
+      "type": "check",
+      "n": "7.1",
+      "q": "A ruler has only centimeter marks. Why is writing 4.6382 cm claiming more than you know?",
+      "lines": 3,
+      "answer": "You can estimate only one digit past the smallest mark, which is the tenths place. The 3, 8 and 2 are guesses the ruler can't support, so the reading is 4.6 cm."
+    },
+    {
+      "type": "section",
+      "code": "7.2",
+      "title": "The Mole & Avogadro's Number"
+    },
+    {
+      "type": "sub",
+      "text": "Counting by groups"
+    },
+    {
+      "type": "p",
+      "text": "You already count things in groups. Shoes come in pairs, eggs come by the dozen, and printer paper comes in reams of 500 sheets (Figure 7.2). Each counting word stands for a fixed number, no matter what is being counted. A dozen eggs and a dozen cars are both 12 items."
+    },
+    {
+      "type": "figure",
+      "n": "7.2",
+      "image": "fig7_2_ladder.png",
+      "caption": "A mole is a counting word, like “dozen,” just far bigger, because atoms are far smaller."
+    },
+    {
+      "type": "p",
+      "text": "Chemists need a counting word for atoms, and atoms are so small that a dozen or a ream is useless. The **mole (mol)** is the SI counting unit for particles: one mole is 6.022 × 10^{23} particles of whatever you are counting. That number is **Avogadro's number**, the number of particles in one mole. It is named in honor of Amedeo Avogadro, an Italian scientist of the early 1800s, who never knew its value. Since 2019 the mole has been defined as exactly 6.022 140 76 × 10^{23} particles, so the number will not change. This unit rounds it to 6.022 × 10^{23}."
+    },
+    {
+      "type": "sub",
+      "text": "How big is a mole?"
+    },
+    {
+      "type": "p",
+      "text": "If you counted one particle every second without stopping, counting out one mole would take about 19 quadrillion years, roughly 1.4 million times the age of the universe. If all of the roughly 8.2 billion people on Earth counted at the same time, one particle per second each, it would still take more than 2 million years. Yet a mole of water molecules fills only about 18 mL, a little more than a tablespoon. The number is huge because the particles are tiny."
+    },
+    {
+      "type": "sub",
+      "text": "What are we counting?"
+    },
+    {
+      "type": "p",
+      "text": "A mole always means 6.022 × 10^{23} of something, so you have to say what. The **representative particle** is the smallest unit a substance is counted in: an atom, a molecule, or a formula unit. For most elements, such as carbon (C) and iron (Fe), it is an atom. For molecular substances, such as water (H_{2}O) and oxygen gas (O_{2}), it is a molecule. Ionic compounds such as sodium chloride (NaCl) are not made of molecules, so they are counted in formula units. A **formula unit** is the lowest whole-number ratio of ions in an ionic compound. For NaCl it is one Na^{+} ion and one Cl^{−} ion."
+    },
+    {
+      "type": "p",
+      "text": "A mole is a count, not a mass, and it works the same for solids, liquids, and gases. One mole of one substance also does not have the same mass as one mole of another. Section 7.3 explains why."
+    },
+    {
+      "type": "check",
+      "n": "7.2",
+      "q": "Give two ways a mole is like a dozen and one way it is different.",
+      "lines": 3,
+      "answer": "Both are counting words, and both stand for a fixed number no matter what is counted. A mole is 6.022 × 10^{23} instead of 12."
+    },
+    {
+      "type": "section",
+      "code": "7.3",
+      "title": "Molar Mass"
+    },
+    {
+      "type": "sub",
+      "text": "Counting by weighing"
+    },
+    {
+      "type": "p",
+      "text": "Nobody counts out 6.022 × 10^{23} atoms one at a time. Chemists count particles by weighing them, the same way you could count coins. A U.S. nickel has a mass of 5.00 g, so a pile of nickels with a mass of 200 g holds 40 nickels. If you know the mass of one item, the scale does the counting for you."
+    },
+    {
+      "type": "p",
+      "text": "**Molar mass** is the mass of one mole of a substance, in grams per mole (g/mol). For an element, you read it from the periodic table. It is the average atomic mass, the decimal number in the element's box, not the atomic number. In Unit 1 you read that number in atomic mass units (amu). The same number in g/mol is the mass of one mole of atoms. Carbon's average atomic mass is 12.01 amu, so one mole of carbon atoms has a mass of 12.01 g."
+    },
+    {
+      "type": "sub",
+      "text": "The molar mass of a compound"
+    },
+    {
+      "type": "p",
+      "text": "For a compound, add up the molar mass of every atom in the formula. A subscript tells you how many of that atom there are, so multiply each atomic mass by its subscript before you add. Two mistakes are common here: adding atomic numbers instead of atomic masses, and skipping the subscripts. Watch the diatomic elements, too. Oxygen gas is O_{2}, so its molar mass is 32.00 g/mol, not 16.00 g/mol."
+    },
+    {
+      "type": "example",
+      "n": "7.1",
+      "title": "The molar mass of water, H_{2}O",
+      "intro": "Use the atomic masses on your periodic table: H is 1.01 and O is 16.00.",
+      "rows": [
+        [
+          "H",
+          "2 × 1.01 g/mol",
+          "=",
+          "2.02 g/mol"
+        ],
+        [
+          "O",
+          "1 × 16.00 g/mol",
+          "=",
+          "16.00 g/mol"
+        ],
+        [
+          "H_{2}O",
+          "2.02 g/mol + 16.00 g/mol",
+          "=",
+          "**18.02 g/mol**"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Figure 7.3 puts one mole of three substances side by side. Each sample holds 6.022 × 10^{23} particles, but the masses differ because the particles themselves differ. A water molecule has more mass than a carbon atom, and a sodium chloride formula unit has more mass than either."
+    },
+    {
+      "type": "figure",
+      "n": "7.3",
+      "image": "fig7_3_one_mole.png",
+      "caption": "One mole of each. Same number of particles, different masses, because the particles themselves have different masses."
+    },
+    {
+      "type": "p",
+      "text": "Keep two quantities apart. The molar mass of water is always 18.02 g/mol. The mass of a sample of water, in grams, is whatever you put on the balance."
+    },
+    {
+      "type": "check",
+      "n": "7.3",
+      "q": "A mole of water and a mole of carbon have the same number of particles. Why does the water have more mass?",
+      "lines": 3,
+      "answer": "Each water molecule has more mass than a carbon atom (18.02 g/mol vs 12.01 g/mol), and there are the same number of them."
+    },
+    {
+      "type": "section",
+      "code": "7.4",
+      "title": "Mole Conversions"
+    },
+    {
+      "type": "sub",
+      "text": "Every path runs through moles"
+    },
+    {
+      "type": "p",
+      "text": "A balance measures grams. A chemical formula counts particles. Moles connect the two, and every conversion in this unit runs through them (Figure 7.4). Grams and particles never convert directly into each other."
+    },
+    {
+      "type": "figure",
+      "n": "7.4",
+      "image": "fig7_4_map.png",
+      "caption": "Grams and particles never touch. Every path runs through moles."
+    },
+    {
+      "type": "p",
+      "text": "To go from grams to moles, divide by the molar mass. To go from moles to grams, multiply by the molar mass. To go from moles to particles, multiply by Avogadro's number:"
+    },
+    {
+      "type": "equation",
+      "text": "N  =  n × 6.022 × 10^{23}"
+    },
+    {
+      "type": "p",
+      "text": "Here N is the number of particles and n is the number of moles. To go from particles back to moles, divide by 6.022 × 10^{23}. Your reference sheet writes this relationship as particles = n × N_{A}. N_{A} is just a symbol for Avogadro's number, 6.022 × 10^{23}."
+    },
+    {
+      "type": "sub",
+      "text": "Let the units check your setup"
+    },
+    {
+      "type": "p",
+      "text": "Write each step as a conversion factor and put a unit on every number. Molar mass gives you a conversion factor that can be written either way up, grams on top or moles on top. Choose the one that puts the unit you already have on the bottom, so it cancels. If you multiply grams by the molar mass when you meant to divide, the units come out as grams squared per mole, which is not an amount of anything. The other common slip is using 6.022 × 10^{23} on a mass. Avogadro's number connects moles and particles, never grams."
+    },
+    {
+      "type": "example",
+      "n": "7.2",
+      "title": "How many moles are in 36.0 g of water?",
+      "math": [
+        "36.0 g H_{2}O  ×",
+        {
+          "num": "1 mol H_{2}O",
+          "den": "18.02 g H_{2}O"
+        },
+        "=  **2.00 mol H_{2}O**"
+      ],
+      "after": "Grams of water cancel, leaving moles. The calculator shows 1.9978. The given mass, 36.0 g, has three significant figures, so the answer rounds to 2.00 mol."
+    },
+    {
+      "type": "p",
+      "text": "Pharmacists and lab technicians measure medicine by mass, because a balance can't count molecules. What a substance does in the body depends on how many molecules arrive. Molar mass is what turns a measured mass into a count."
+    },
+    {
+      "type": "check",
+      "n": "7.4",
+      "q": "What quantity is always in the middle of a mole conversion, and why?",
+      "lines": 3,
+      "answer": "Moles. Molar mass connects grams to moles, and Avogadro's number connects moles to particles. Nothing connects grams to particles directly."
+    },
+    {
+      "type": "section",
+      "code": "7.5",
+      "title": "Percent Composition"
+    },
+    {
+      "type": "p",
+      "text": "**Percent composition** is the percent by mass of each element in a compound. It answers a plain question: of a compound's total mass, how much belongs to each element?"
+    },
+    {
+      "type": "sub",
+      "text": "Finding percent composition"
+    },
+    {
+      "type": "p",
+      "text": "Start with one mole of the compound. Find the mass of each element in that mole by multiplying its atomic mass by its subscript. Divide that mass by the molar mass of the whole compound, then multiply by 100. Repeat for each element. The percentages for all the elements add up to 100%."
+    },
+    {
+      "type": "p",
+      "text": "Water works out to 11.2% hydrogen and 88.8% oxygen by mass, and that surprises most people. Two of the three atoms in a water molecule are hydrogen, so by atom count water is two-thirds hydrogen. By mass it is mostly oxygen, because each hydrogen atom (1.01) has far less mass than the oxygen atom (16.00). Percent by atom count and percent by mass answer different questions (Figure 7.5). A common error is leaving out the subscript, which counts only one of the two hydrogen atoms."
+    },
+    {
+      "type": "figure",
+      "n": "7.5",
+      "image": "fig7_5_water_percent.png",
+      "caption": "Water is mostly hydrogen by atom count, but mostly oxygen by mass."
+    },
+    {
+      "type": "sub",
+      "text": "Same compound, same percentages"
+    },
+    {
+      "type": "p",
+      "text": "A pure compound always has the same percent composition, however much of it you have. A drop of pure water and a full tank of pure water are both 11.2% hydrogen by mass, because every molecule in them is the same H_{2}O. That has practical consequences. If you split water to make hydrogen fuel, only about 112 g of every 1 kg of water is hydrogen."
+    },
+    {
+      "type": "check",
+      "n": "7.5",
+      "q": "Two-thirds of the atoms in water are hydrogen. Why is water only 11.2% hydrogen by mass?",
+      "lines": 3,
+      "answer": "Hydrogen atoms (1.01) are much lighter than oxygen atoms (16.00), so the one oxygen atom holds most of the mass."
+    },
+    {
+      "type": "section",
+      "code": "7.6",
+      "title": "Empirical Formulas"
+    },
+    {
+      "type": "p",
+      "text": "An **empirical formula** is the simplest whole-number ratio of the atoms in a compound. Glucose, the sugar carried in your blood, has the formula C_{6}H_{12}O_{6}. Every subscript divides evenly by 6, which gives CH_{2}O, so CH_{2}O is the empirical formula of glucose. Hydrogen peroxide, H_{2}O_{2}, reduces the same way to HO. Some formulas can't be reduced at all. The empirical formulas of H_{2}O and CO_{2} are just H_{2}O and CO_{2}. Ionic formulas such as NaCl are already written as the lowest ratio."
+    },
+    {
+      "type": "sub",
+      "text": "From percent data to a formula"
+    },
+    {
+      "type": "p",
+      "text": "When chemists make or discover a new compound, a lab instrument can report the percent by mass of each element in it. The empirical formula is the first thing they can work out from that data, in five steps:"
+    },
+    {
+      "type": "steps",
+      "items": [
+        "Assume a 100 g sample, so each percent becomes a mass in grams.",
+        "Change each mass to moles by dividing by that element's atomic mass.",
+        "Divide every mole value by the smallest one.",
+        "Round to whole numbers. If a value lands near x.5 or x.33, multiply all of the values by 2 or 3 instead of rounding.",
+        "Use the whole numbers as the subscripts."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Step 2 is the one people skip. Subscripts are a ratio of moles of atoms, never a ratio of masses, so a percentage can never be used as a subscript. Step 4 catches the other common mistake: rounding 1.5 up to 2 gives the wrong formula, while doubling every value keeps the ratio intact."
+    },
+    {
+      "type": "sub",
+      "text": "One ratio, several compounds"
+    },
+    {
+      "type": "p",
+      "text": "An empirical formula does not identify a compound. CH_{2}O is the empirical formula of glucose and of acetic acid, C_{2}H_{4}O_{2}, the acid in vinegar. It is also the actual formula of formaldehyde, a preservative (Figure 7.6). All three have the same percent composition, 40.0% carbon by mass, so percent data alone can't tell them apart. Section 7.7 shows what can."
+    },
+    {
+      "type": "figure",
+      "n": "7.6",
+      "image": "fig7_6_reduce.png",
+      "caption": "Three different substances, one simplest ratio."
+    },
+    {
+      "type": "check",
+      "n": "7.6",
+      "q": "What does an empirical formula tell you, and what does it not tell you?",
+      "lines": 3,
+      "answer": "It tells the simplest ratio of atoms. It does not tell how many atoms are actually in one molecule, so it can't identify the compound by itself."
+    },
+    {
+      "type": "section",
+      "code": "7.7",
+      "title": "Molecular Formulas"
+    },
+    {
+      "type": "p",
+      "text": "The **molecular formula** gives the actual number of each kind of atom in one molecule of a compound. It is always a whole-number multiple of the empirical formula. The molecular formula of glucose, C_{6}H_{12}O_{6}, is six times its empirical formula, CH_{2}O."
+    },
+    {
+      "type": "sub",
+      "text": "Finding a molecular formula"
+    },
+    {
+      "type": "p",
+      "text": "You need the empirical formula and one more piece of data: the compound's molar mass, which has to be measured separately. First find the **empirical formula mass**, the sum of the atomic masses in the empirical formula. Then divide the compound's molar mass by the empirical formula mass. The result is a whole number, and you multiply every subscript in the empirical formula by it. For glucose, the empirical formula mass of CH_{2}O is 30.03 g/mol, and 180.18 g/mol divided by 30.03 g/mol is 6. If your result is not close to a whole number, check your work. A molecule can't hold a fraction of an atom."
+    },
+    {
+      "type": "sub",
+      "text": "Same ratio, different molecules"
+    },
+    {
+      "type": "p",
+      "text": "Acetylene, C_{2}H_{2}, is the gas burned in oxy-acetylene welding torches. Benzene, C_{6}H_{6}, is a flammable liquid at room temperature. Both reduce to the same empirical formula, CH, with an empirical formula mass of 13.02 g/mol, and both are 92.2% carbon by mass. Percent composition can't tell them apart. Molar mass can: acetylene's is 26.04 g/mol, which is 2 × 13.02, and benzene's is 78.12 g/mol, which is 6 × 13.02 (Figure 7.7)."
+    },
+    {
+      "type": "figure",
+      "n": "7.7",
+      "image": "fig7_7_ch.png",
+      "caption": "Same ratio, same percent carbon, different molecules. Molar mass tells them apart."
+    },
+    {
+      "type": "p",
+      "text": "Sometimes the multiplier is 1. Water's empirical formula and molecular formula are both H_{2}O. Ionic compounds are counted in formula units, not molecules, so they have no molecular formula at all."
+    },
+    {
+      "type": "check",
+      "n": "7.7",
+      "q": "Water's empirical and molecular formulas are both H_{2}O. How can that be?",
+      "lines": 3,
+      "answer": "The ratio of two H atoms to one O atom can't be reduced any further, so the multiplier is 1 and the two formulas are the same."
+    }
+  ],
+  "back": {
+    "questionsTitle": "Questions",
+    "questionsDirections": "Answer each question in the Day 1 column, using what the reading says. At the end of the unit, reread your answer. In the End-of-unit revision column, fix anything that was wrong and add what you have learned since.",
+    "columns": [
+      "Day 1 answer",
+      "End-of-unit revision"
+    ],
+    "questions": [
+      {
+        "q": "What is a mole, and how many particles are in one mole?",
+        "lines": 5,
+        "answer": "A mole is a counting unit, like a dozen. One mole is 6.022 × 10^{23} particles (atoms, molecules, or formula units)."
+      },
+      {
+        "q": "You have one mole of water and one mole of sodium chloride. Do the samples have the same number of particles? The same mass? Explain using the reading.",
+        "lines": 6,
+        "answer": "Same number: each has 6.022 × 10^{23} particles (molecules of water, formula units of NaCl). Different mass: 18.02 g vs 58.44 g, because each NaCl formula unit has more mass than a water molecule."
+      },
+      {
+        "q": "A lab report says an unknown compound has the empirical formula CH. Your lab has acetylene (C_{2}H_{2}) and benzene (C_{6}H_{6}). Can you tell which one it is from the empirical formula alone? What one measurement would settle it, and how?",
+        "lines": 7,
+        "answer": "No. Both reduce to CH and both are 92.2% carbon. Measure the molar mass: about 26 g/mol is 2 × CH (acetylene) and about 78 g/mol is 6 × CH (benzene)."
+      }
+    ],
+    "vocabTitle": "Vocabulary in your own words",
+    "vocabDirections": "Explain each term in your own words. Don't copy the reading. An example is fine if it makes your meaning clear.",
+    "vocabLines": 2
+  },
+  "key": {
+    "teacherNotes": [
+      "Glucose molar mass: the reading prints 180.18 g/mol, which is what students get from their periodic table (C 12.01, H 1.01, O 16.00). Published sources that use IUPAC atomic weights give 180.16 g/mol. A student who looks it up will see the 0.02 g/mol difference; both are correct for the values used. The same logic gives benzene 78.12 (student table) vs 78.11 (IUPAC).",
+      "Precision is bolded and defined in 7.1 as how finely a measurement is made, at your request. The parenthetical also gives the repeated-measurements meaning. Accept either meaning on the vocabulary page.",
+      "The 7.4 map (Figure 7.4) shows the boxes and arrows only. The factors are in the text, so the worksheet's blank map is not given away."
+    ]
+  }
+}
