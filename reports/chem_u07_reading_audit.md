@@ -200,3 +200,83 @@ What is still open: #2 waits on Matt. Naming and Drive filing are still pending,
 | Sibling specs teach 22.4 L / STP in U7 | OPEN, outside this deliverable (brief F2). Matt to decide |
 | 7.1 dozen-to-eggs displayed setup vs "worked examples only in 7.3/7.4" | CONFIRM WITH MATT. It is not boxed or labelled as an Example |
 | `keyHandwriting`, `keyInk.*`, `print.binding`, `print.holeGuides` | PROVISIONAL tokens, used as specified |
+
+---
+
+# Round 3: "Option B" textbook redesign
+
+**Date:** 2026-11-24 · **Auditor:** independent, report-only. Nothing was modified except this appended section.
+**Files:** the same four files in `/home/user/WorkWork/build/chem_u07_reading/` (rebuilt 10:45–10:46), plus `fig/`.
+**Approved by Matt (not re-litigated here):**
+- Why It Matters opener.
+- Seven Connection boxes.
+- Option B layout: two columns, display-title opener, first-line indents, set-off definition lines, caps headings, rule-only Example banners, On Your Own boxes, running header, outside thumb tab, centred page numbers.
+- Stay within SHULL rules: Archivo only, no fills.
+
+**Scope note:** verify-content is running in parallel, so the science was spot-checked only.
+
+## Verdict: **INCOMPLETE**
+
+- No Blocking findings.
+- Two Major checks fail:
+  - Opener text runs into the column rule on p1 (R3-1).
+  - The vocabulary preview's K / S / N columns have no legend (R3-2).
+- One Major printability risk, which you asked me to judge: the thumb tab sits 0.14 in from the paper edge on **every** page, odd and even alike (R3-3).
+- Everything else passes: ink, fonts, binding margin, hole guides, term flow (16 / 16 / 16 / 16 / 16), key match including On Your Own, answer-key standard, line length, and rebuildability.
+
+## Checklist (Round 3)
+
+| Check | Result |
+|---|---|
+| Rendered and viewed, every page | DONE. Student pp 1–8 and key pp 1–2 at 100 dpi. Zooms at 200 dpi of the p1 opener and vocab preview, and of the key's On Your Own solutions |
+| Page count | PASS. Student 8 (even). Key 2 |
+| Fonts (`pdffonts`, `audit_fonts.py`, `--key`) | PASS. Student copy is Archivo / Archivo Narrow only. Key adds ShullHand and its token fallback, Patrick Hand |
+| Ink (`audit_print_ink.py`) | PASS. Worst page 8.22% toner (p2), under the 9% ceiling. Average 5.69%. Key worst 4.87%. Widest solid band 0.00 in on both. Highest pages yet (p1 8.09%, p2 8.22%), but within budget |
+| Fills / print discipline | PASS. No fills anywhere. Example banners are a rule only. On Your Own boxes are hairline outlines. Connection boxes are a course rule above and a hairline below. Reading Checks are outlined. Thumb tab is outline only |
+| Coloured type on white | PASS. Coloured type is only `primaryDeep` #B84100: caps headings, definition lines, labels, display-title accent, tab text. `primaryDeep` measures 5.53 on white against a 5.5 target, so the 9 pt definition lines clear the type rule. The display orange is used only for rules. The key uses `keyInk.pen` #4A2466 for prose, `keyInk.pencil` #5A6068 for On Your Own math and `keyInk.box` #9F1D2C for answer boxes, as `ANSWER_KEYS` §2 requires |
+| Grayscale | PASS. Each box type differs by shape as well as colour: Reading Check is a full outline with a heavy left edge, Connection has a top rule plus a hairline, Example is a banner rule, On Your Own is a hairline box. Definition lines differ from body by indent, em dash and bold term |
+| Clipped text | **FAIL** (R3-1). No hard clip at any page or box edge. But the p1 opener's left-column text runs up to the vertical column rule |
+| Binding margin / hole guides | PASS. Hole guides sit at 18.0 pt (odd) and 575.3 pt (even), at y 80.7, 386.6 and 692.7, outline only, mirrored on every page. Nothing enters the 0.60 in inside margin beyond the ≤ 1.5 pt residual of box rules and a trailing-space glyph box, unchanged since Round 1 and well clear of the holes |
+| Thumb tab: outside edge, clear of the binding margin | PASS on placement. Right edge on odd pages (581.7–601.8 pt) and left edge on even pages (10.1–30.2 pt), at the same height (y 173–210 pt) on all 10 pages. Never on the binding side. Its inner edge stays inside the 0.50 in outside margin (builder `TAB_EDGE_IN` 0.14 + `TAB_W_IN` 0.28) |
+| Thumb tab: printability | **RISK, Major** (R3-3) |
+| Page numbers | PASS. Centred, from an auto `PAGE` field in every footer part (`footer1`–`footer5.xml`), which satisfies DS §11's "auto-generated page count" |
+| Header / footer duplication | PASS on pp 2–8, with a Minor on p1 (R3-6). The running header carries course and doc type on the inside and unit plus title on the outside. The footer carries only the page number and no longer repeats the path. On p1, the unit title is printed three times |
+| Figures and boxes beside their text | PASS. Figs 7.1 (p1), 7.3 and 7.4 (p4), 7.5 and 7.6 (p5) and 7.7 (p6) sit with their text. Fig 7.2 is referenced at the foot of p2 and placed at the top of p3. Those pages face each other in a binder, so no flip is needed. Accepted, as Fig 7.5 was in Round 1 |
+| Example 7.3 → On Your Own 7.3 (the designer's reported p3→p4 flip) | **Not present in this build.** Example 7.3 and On Your Own 7.3 are both on p3 (right column, one above the other). Example 7.4 and On Your Own 7.4 are both on p4. On Your Own 7.4's pointer back to "Section 7.3 gives the molar mass of O₂" is a back-reference to the previous page (32.00 g/mol, p3), which is acceptable. The designer's note likely describes an earlier layout. Nothing to fix |
+| Line length | PASS. Body columns about 56 characters a line (builder-measured). Why It Matters about 58. Connection text ≤ 65. Directions on pp 7–8 ≤ 76. Question stems now wrap at the column measure (Round 2's R2-2 is resolved). Key lines ≤ 64 |
+| Term flow | PASS. 16 bold terms in the body = 16 set-off definition lines = 16 preview terms = 16 vocab-page terms = 16 key definitions. String check: every definition line reads "Term — [definition]", identical to the spec vocab definition, and appears word for word in the key. Every bold term is defined in its own sentence, precision included (p1) |
+| Key matches student copy | PASS. All 7 Reading Check stems, both On Your Own stems and all 3 question stems appear word for word in both files |
+| On Your Own solutions (spot check) | PASS. CH₄: 12.01 + 4(1.01) = 16.05 g/mol. 64.0 g ÷ 32.00 g/mol = 2.00 mol (3 sig figs). The builder re-solves both at build time ("molarMass re-solved = 16.05", "gramsToMoles re-solved = 2.0") |
+| Answer-key standard | PASS (Minor polish in R3-8). On Your Own math is in pencil ink with answers boxed in box ink, each step on its own line, and the 7.4 division stacked. g/mol inline is allowed by §5. Digits and decimal points are legible. "Cl" is set in the fallback face |
+| New prose: voice / anti-slop | PASS with Minor findings (R3-4, R3-5). The opener and the seven Connections read as plain, concrete textbook prose with no brochure language. Spot-checked facts: "1,000 times finer" (0.0001 vs 0.1 g) ✓. "$73 trillion" ✓ (6.022e23 ÷ 8.2e9). "888 g oxygen" ✓. Nickels, isotopes, medicine ✓ |
+| No teacher / PROVISIONAL / standards-code content; no 22.4, STP or litres | PASS (grep) |
+| Codes | PASS. Chip `U07 / S7.1–S7.7`. `validate_codes.py` OK. Sections match DECISIONS l.54–56 |
+| Rebuildable from the spec | PASS. A clean rebuild into scratch gave identical text and raster on every page of both PDFs. Every `.docx` XML part and all 7 figure PNGs are byte-identical |
+| Drive | NOT FILED (known-pending) |
+
+## Findings (Round 3)
+
+| # | Check | Problem | Fix | Severity |
+|---|---|---|---|---|
+| R3-1 | Clipped text / collision (QA §3) | **On p1, the opener's left-column text runs into the vertical orange column rule.** "Each term in **bold** is defined in" ends about 1 pt from the rule (rule at x = 298.8 pt; the line box is 300.5 pt with its trailing space). "reread the" ends about 3 pt from it. At reading size, "in" looks like it touches the rule. The left cell has no gutter padding. | Designer: add right padding to the opener's left cell (or move the rule into the gutter) so text clears the rule by at least the column gap. Re-render and check the p1 zoom. | **Major** |
+| R3-2 | Directions / usability | **The vocabulary preview headers are abbreviated to "K S N" with no legend.** The directions say only "Before you read, mark one box for each term." Rounds 1–2 printed "KNOW IT · SEEN IT · NEW". A student cannot tell what K, S and N mean. | Add the legend to the directions, e.g. "Before you read, mark one box for each term: K = I know it, S = I've seen it, N = it's new." Or restore the full headers if they fit. | **Major** |
+| R3-3 | Printability (thumb tab) | **The tab's outer stroke is 0.14 in from the paper edge on every page, odd and even** (0.141 in odd, 0.140 in even). The "UNIT" text is 0.159–0.164 in from the edge. Many laser printers and copiers cannot print the outer 0.167 in (4.2 mm) or more. On the classroom copier, the outer stroke would likely drop and the "UNIT" letters could be shaved. That would be clipped text that the PDF render cannot show. The tab sits inside the outside margin and never touches the binding side, so placement is otherwise correct. | Designer: move the tab inward. `TAB_EDGE_IN` 0.22 puts the stroke at 0.22 in and the inner edge exactly at the 0.50 in margin (0.22 + 0.28). Or narrow the tab. Then confirm on a test print on Matt's copier, together with the PROVISIONAL hole-guide test punch. | **Major** (risk) |
+| R3-4 | Science wording (for verify-content) | Connection 7.7: "benzene is used as a liquid solvent." Today benzene is mainly a feedstock for plastics and other chemicals. In the US, solvent use has largely been phased out because of toxicity, so the present-tense claim is dated. The content brief's own framing ("a liquid solvent") carried this in. | "benzene is a liquid used to make plastics and other chemicals." Leave final wording to verify-content. | Minor |
+| R3-5 | Voice: repetition (ANTI_AI_SLOP §6) | The pharmacist point appears twice: Why It Matters ("Pharmacists use this idea when they measure a medicine by mass, because what matters in the body is how many molecules arrive") and Connection 7.4 ("A pharmacist measures a medicine on a balance, but the body responds to how many molecules arrive"). | Cut the last sentence of Why It Matters, or give the 7.4 Connection a different example. | Minor |
+| R3-6 | Header duplication | On p1, the unit title is printed three times (SHULL-CHG-0101 header title, header meta line "Unit 7 · The Mole & Chemical Quantities", and the display title) and "Unit 7" four times (chip, meta line, "UNIT 7" eyebrow, thumb tab). The display title is Matt-approved and the header is LOCKED, so the overlap is structural. The "UNIT 7" eyebrow above the display title adds nothing the tab and chip don't already say. | Drop the "UNIT 7" eyebrow. Ask Matt whether the display-title opener should replace the header's title line on readings (that would be a CHG-0101 question). | Minor |
+| R3-7 | Adjacency across a flip | Two text splits cross a sheet flip. (a) The precision sentence ends at the foot of p1, and its set-off definition line starts p2 (back of the same sheet). (b) The 7.6 five-step list splits: steps 1–3 on p5, steps 4–5 on p6 (back of the sheet). The definition is still complete in the p1 sentence, and the list is continuous text, so neither is a figure split. | Keep each definition line with its sentence, and keep the 7.6 list together (keep-with-next / keep-lines). | Minor |
+| R3-8 | Key polish | On Your Own 7.4 in the key: the equation ends with "=" and the boxed "2.00 mol O₂" sits about two lines lower, with empty space between. On Your Own 7.3 also breaks after "=". | Put the boxed result on the same line as the "=", or directly below it with no gap. | Nice-to-have |
+| R3-9 | Token use | The running-header unit title is set in `ground.label` (#55604F, bold 7 pt). The token that names this role is `ground.footer` ("Running header and footer text only"), which the course/doc-type half of the same header already uses. | Use `ground.footer` for both halves of the running header. | Nice-to-have |
+
+## Prior-round status
+
+| Item | Status |
+|---|---|
+| Round 1 #1, #3–#12 | Still resolved in the redesign: Fig 7.1 on p1; Fig 7.2 clear of the binding margin; precision defined in its own sentence; Examples 7.3 and 7.4; en-dash chip; the 8-billion wording; line length; Q2 prompt; docstring; "Cl" in the fallback face. The "Questions (page 7)" heading and Example spacing are fine |
+| R2-1 (dozen lead-in split from its equation) | **Resolved.** p2: "To find the number of eggs in 3 dozen, write the factor with dozen on the bottom so it cancels:" sits directly above the equation in the right column |
+| R2-2 (full-width question stems) | **Resolved.** The p7 stems wrap at the column measure |
+| #2 Molecule-script exception (SHULL-CHG-0042) | **UNRESOLVED: pending Matt's decision.** Unchanged: figure labels are computed, and the drawings come from the local RDKit routine. Not failed, per coordinator |
+| Precision bolding | **DECIDED** (Matt approved the chat sample before "Create the packet") |
+| "Reading" type in NAMING; U7 short title in DECISIONS; Drive filing | PENDING (known). No proposal is filed yet. Not filed to Drive |
+| Sibling specs teach 22.4 L / STP; 7.1 dozen setup vs "worked examples only in 7.3/7.4" | OPEN / confirm with Matt (unchanged). The On Your Own items are in 7.3 and 7.4 only, matching that decision |
+| PROVISIONAL tokens (`keyHandwriting`, `keyInk.*`, `print.binding`, `print.holeGuides`) | Used as specified. The R3-3 test print should be done alongside the hole-guide test punch |
