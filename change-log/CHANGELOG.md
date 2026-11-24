@@ -29,6 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0107 | 2026-11-24 | Unit reading and duplex tear-off | PENDING | `governance/proposals/SHULL-CHG-0107-textbook-reading-and-tear-off.md` |
 | SHULL-CHG-0106 | 2026-11-24 | Unit textbook page designer and independent science review | IMPLEMENTED | `governance/proposals/SHULL-CHG-0106-textbook-page-designer.md` |
 
 ## 2026-11-23

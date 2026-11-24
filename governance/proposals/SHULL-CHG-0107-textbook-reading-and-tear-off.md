@@ -1,0 +1,20 @@
+# SHULL-CHG-0107 — Unit reading and duplex tear-off
+
+| Field | Value |
+|---|---|
+| Change ID | SHULL-CHG-0107 |
+| Date | 2026-11-24 |
+| Source | User request in the main session. |
+| Current Rule | The unit textbook workflow covers illustrations, examples, checks and a separate teacher key. It leaves the shape of the student submission open. |
+| Proposed Rule | Give the cover a unit breakdown, use compact illustrated reading pages, and finish every unit reading with a removable duplex leaf. Collect one simple comprehension response per numbered section on the front and up to ten vocabulary definitions on the reverse. Check the final export for independent removal and matching vocabulary. |
+| Supersedes | The open choice of student response location in workflows/unit-textbook.md. |
+| Reason | The teacher collects reading evidence at the start of the unit. Students keep a complete reference chapter in their binders. |
+| Affected Agents | Textbook Page Designer, Overseer and Auditor through their existing textbook workflow. |
+| Affected Skills | Existing textbook build and audit routes. |
+| Affected Courses | Chemistry, Physics and Geology. |
+| Risk | Low. Long section lists require careful layout to preserve writing space on one sheet. |
+| Recommendation | Document the rule in the reusable textbook workflow and audit the exported page order. |
+| Decision | Awaiting main-session decision record. |
+| Status | PENDING |
+| Implemented By | Pending. |
+| Verified | Pending. |
