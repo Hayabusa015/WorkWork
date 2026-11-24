@@ -58,10 +58,10 @@ COL_W_IN = round((TEXT_W_IN - COL_GAP_IN) / 2, 3)
 FIG_W_IN = 3.30
 DIRECTIONS_W_IN = 4.40          # full-width directions held under ~75 characters a line
 MARGIN_TOP_IN = 0.45
-MARGIN_BOTTOM_IN = 0.72          # the ruled running footer lives in here (notes geometry)
+MARGIN_BOTTOM_IN = 0.64          # the ruled running footer lives in here (notes geometry)
 
 BODY = T["typography"]["printScale"]["body"]
-BODY_LINE = round(BODY * 1.33, 1)
+BODY_LINE = round(BODY * 1.26, 1)   # tightened from 1.33 when the Connection boxes were added (QA_GATE §2 order)
 SUB = 10.5
 SEC_NUM, SEC_TITLE = 15, 15
 CAPTION, CAPTION_LINE = 8.5, 11
@@ -341,7 +341,7 @@ def math_row(container, parts, pal, width, size=BODY):
 
 def section_head(doc, blk, pal):
     p = doc.add_paragraph()
-    _spacing(p, 12, 6, SEC_TITLE * 1.25)
+    _spacing(p, 9, 5, SEC_TITLE * 1.25)
     keep_next(p)
     p.paragraph_format.keep_together = True
     r = add(p, blk["code"] + "  ", SEC_NUM, color=pal.accent, bold=True, face=NARROW)
@@ -370,7 +370,7 @@ def figure(doc, blk, pal, fig_dir):
     # the binding margin of an even page (audit #3). check_margins() measures every image.
     r.add_picture(path, width=Inches(FIG_W_IN))
     c = doc.add_paragraph()
-    _spacing(c, 0, 8, CAPTION_LINE)
+    _spacing(c, 0, 6, CAPTION_LINE)
     add(c, f"Figure {blk['n']} — ", CAPTION, color=pal.ink, bold=True)
     add(c, blk["caption"], CAPTION, color=pal.label)
     return c
@@ -427,13 +427,41 @@ def example(doc, blk, pal):
     after_box(doc)
 
 
+def opener(doc, blk, pal):
+    """The chapter opener ("Why It Matters"): a caps label and one paragraph a little
+    larger than the body. No box - it is the chapter's introduction, not a task."""
+    label(doc, blk["title"], pal, before=2, after=3)
+    p = body_p(doc, blk["text"], pal, size=BODY + 0.5, line=round((BODY + 0.5) * 1.33, 1), after=4)
+    bottom_rule(p, pal.display, 12, 6)
+    q = doc.add_paragraph(); pin(q, 6)
+
+
+def connection(doc, blk, pal):
+    """A real-world sidebar. Told apart from the Reading Check by shape, not only by
+    colour: the Check is a closed box with a course rail on the left and writing lines;
+    a Connection is open at the sides, a course rule above and a hairline below, and
+    smaller type with no lines to write on."""
+    t = doc.add_table(rows=1, cols=1)
+    fix_widths(t, [COL_W_IN])
+    c = t.rows[0].cells[0]
+    borders(c, pal.display, sz=12, edges=("top",))
+    borders(c, pal.hair, sz=W_HAIR, edges=("bottom",))
+    cell_margins(c, top=60, bottom=80, left=0, right=0)
+    no_split(t.rows[0])
+    q = label(c, "Connection", pal, first=True, after=1)
+    add(q, "   " + blk["title"], 9, color=pal.ink, bold=True)
+    body_p(c, blk["text"], pal, after=0, size=9.5, line=12.6)
+    end_cell(c)
+    after_box(doc, 6)
+
+
 def reading_check(doc, blk, pal):
     c = box(doc, pal, accent=True)
     label(c, f"Reading Check {blk['n']}", pal, first=True)
     body_p(c, blk["q"], pal, after=0, size=BODY, line=BODY_LINE)
     write_lines(c, int(blk.get("lines", 3)), pal, width=COL_W_IN - (140 + 110) / 1440)
     end_cell(c)
-    after_box(doc, 9)
+    after_box(doc, 6)
 
 
 def steps(doc, blk, pal):
@@ -587,6 +615,7 @@ def back_pages(doc, spec, pal):
         qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.26))
         add(qp, f"{i}.\t", BODY, color=pal.ink, bold=True)
         add(qp, q["q"], BODY, color=pal.ink)
+        qp.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN - 0.4)   # R2-2
         inner = c.add_table(rows=1, cols=3)
         fix_widths(inner, [half, 0.25, half])
         for j, cc in enumerate((inner.rows[0].cells[0], inner.rows[0].cells[2])):
@@ -658,6 +687,19 @@ def check_spec(spec):
             cur = False
         elif blk["type"] == "check":
             cur = True
+    secs = [b["code"] for b in spec["body"] if b["type"] == "section"]
+    conns = []
+    cur_sec = None
+    for b in spec["body"]:
+        if b["type"] == "section":
+            cur_sec = b["code"]
+        elif b["type"] == "connection":
+            conns.append(cur_sec)
+    if conns and sorted(conns) != sorted(secs):
+        raise SystemExit(f"every section needs exactly one Connection box: {conns} vs {secs}")
+    for b in spec["body"]:
+        if b["type"] in ("opener", "connection") and "**" in b["text"]:
+            raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
 
 
 def chars_per_line(size):
@@ -682,7 +724,8 @@ def build_student(spec, out_path, fig_dir):
     sec = doc.add_section(WD_SECTION.CONTINUOUS)
     set_cols(sec, 2)
     first = True
-    for blk in spec["body"]:
+    body = spec["body"]
+    for bi, blk in enumerate(body):
         t = blk["type"]
         if t == "section":
             hp = section_head(doc, blk, pal)
@@ -691,7 +734,14 @@ def build_student(spec, out_path, fig_dir):
         elif t == "sub":
             sub_head(doc, blk["text"], pal)
         elif t == "p":
-            body_p(doc, blk["text"], pal)
+            bp = body_p(doc, blk["text"], pal)
+            # a sentence that introduces a display ("…so it cancels:") stays with it (R2-1)
+            if bi + 1 < len(body) and body[bi + 1]["type"] in ("math", "equation"):
+                keep_next(bp)
+        elif t == "opener":
+            opener(doc, blk, pal)
+        elif t == "connection":
+            connection(doc, blk, pal)
         elif t == "figure":
             figure(doc, blk, pal, fig_dir)
         elif t == "math":

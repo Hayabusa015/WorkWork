@@ -29,8 +29,8 @@
   "front": {
     "howTitle": "How to read this chapter",
     "how": [
-      "This reading covers all seven sections of Unit 7. Read it one section at a time, with a pencil. Each term in **bold** is defined in the sentence where it first appears, and those are the words you are responsible for. Figures are numbered, and the text tells you when to look at each one.",
-      "Every section ends with a Reading Check. Answer it in a sentence or two before you go on. If you can't, reread the section, because the answer is in the text. The last two pages hold three questions and the vocabulary. Answer the questions in the Day 1 column now, then revise them at the end of the unit."
+      "This reading covers all seven sections of Unit 7. Read one section at a time, with a pencil. Each term in **bold** is defined in the sentence where it first appears, and those are the words you are responsible for.",
+      "Each section ends with a Reading Check. Answer it in a sentence or two before you go on, and if you can't, reread the section. Answer the questions on the last two pages in the Day 1 column now, then revise them at the end of the unit."
     ],
     "vocabTitle": "Vocabulary preview",
     "vocabDirections": "Before you read, mark one box for each term.",
@@ -125,6 +125,11 @@
   ],
   "body": [
     {
+      "type": "opener",
+      "title": "Why It Matters",
+      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react by count, one particle at a time. The problem is that no one can count atoms. They are far too small and far too many, and a chemist can only weigh things on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. Pharmacists use this idea when they measure a medicine by mass, because what matters in the body is how many molecules arrive."
+    },
+    {
       "type": "section",
       "code": "7.1",
       "title": "Mathematical Tools"
@@ -136,10 +141,6 @@
     {
       "type": "p",
       "text": "Have you ever finished a math problem, looked at your calculator showing 8.333333333, and wondered how many of those digits you should actually write down? The calculator can't tell you. It shows as many digits as its screen holds, and it has no idea whether the numbers you typed came from a careful measurement or a rough guess. Deciding which digits mean something is your job, and chemists have a system for it."
-    },
-    {
-      "type": "p",
-      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. **Precision** describes how finely a tool measures, which shows in the place value of the last digit you can record, and it also describes how closely repeated measurements agree with each other."
     },
     {
       "type": "sub",
@@ -158,6 +159,14 @@
       "n": "7.1",
       "image": "fig7_1_rulers.png",
       "caption": "The same pencil tip on two rulers. A better tool earns you one more digit, and every measurement ends with one estimated digit."
+    },
+    {
+      "type": "sub",
+      "text": "Precision"
+    },
+    {
+      "type": "p",
+      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. **Precision** describes how finely a tool measures, which shows in the place value of the last digit you can record, and it also describes how closely repeated measurements agree with each other."
     },
     {
       "type": "p",
@@ -203,6 +212,11 @@
       "text": "Flip the factor and the units come out as dozen squared per egg, which tells you the setup is wrong before you look at the number. The mole conversions in Section 7.4 use this same setup, with factors that involve moles."
     },
     {
+      "type": "connection",
+      "title": "Honest digits",
+      "text": "A recorded number is a claim about how carefully something was measured. Writing 12.4382 g from a scale that reads to a tenth of a gram claims a measurement 1,000 times finer than the scale can make. Rounding to 12.4 g keeps the record honest, so the next person who uses your number knows how far to trust it."
+    },
+    {
       "type": "check",
       "n": "7.1",
       "q": "A ruler has only centimeter marks. Why is writing 4.6382 cm claiming more than you know?",
@@ -223,14 +237,14 @@
       "text": "You already count things in groups. Shoes come in pairs, eggs come by the dozen, and printer paper comes in reams of 500 sheets (Figure 7.2). Each counting word stands for a fixed number, no matter what is being counted. A dozen eggs and a dozen cars are both 12 items."
     },
     {
+      "type": "p",
+      "text": "Chemists need a counting word for atoms, and atoms are so small that a dozen or a ream is useless. The **mole (mol)** is the SI counting unit for particles: one mole is 6.022 × 10^{23} particles of whatever you are counting. That number is **Avogadro's number**, the number of particles in one mole. It is named in honor of Amedeo Avogadro, an Italian scientist of the early 1800s, who never knew its value. Since 2019 the mole has been defined as exactly 6.022 140 76 × 10^{23} particles, so the number will not change. This unit rounds it to 6.022 × 10^{23}."
+    },
+    {
       "type": "figure",
       "n": "7.2",
       "image": "fig7_2_ladder.png",
       "caption": "A mole is a counting word, like “dozen,” just far bigger, because atoms are far smaller."
-    },
-    {
-      "type": "p",
-      "text": "Chemists need a counting word for atoms, and atoms are so small that a dozen or a ream is useless. The **mole (mol)** is the SI counting unit for particles: one mole is 6.022 × 10^{23} particles of whatever you are counting. That number is **Avogadro's number**, the number of particles in one mole. It is named in honor of Amedeo Avogadro, an Italian scientist of the early 1800s, who never knew its value. Since 2019 the mole has been defined as exactly 6.022 140 76 × 10^{23} particles, so the number will not change. This unit rounds it to 6.022 × 10^{23}."
     },
     {
       "type": "sub",
@@ -253,6 +267,11 @@
       "text": "A mole is a count, not a mass, and it works the same for solids, liquids, and gases. One mole of one substance also does not have the same mass as one mole of another. Section 7.3 explains why."
     },
     {
+      "type": "connection",
+      "title": "Counting in bulk",
+      "text": "A grocery store prices eggs by the dozen, and paper is sold by the ream, so nobody has to count single items. Chemists need a bulk unit too, and it has to be enormous. A mole of dollar bills, shared equally among everyone on Earth, would give each person about $73 trillion."
+    },
+    {
       "type": "check",
       "n": "7.2",
       "q": "Give two ways a mole is like a dozen and one way it is different.",
@@ -270,7 +289,7 @@
     },
     {
       "type": "p",
-      "text": "Nobody counts out 6.022 × 10^{23} atoms one at a time. Chemists count particles by weighing them, the same way you could count coins. A U.S. nickel has a mass of 5.00 g, so a pile of nickels with a mass of 200 g holds 40 nickels. If you know the mass of one item, the scale does the counting for you."
+      "text": "Nobody counts out 6.022 × 10^{23} atoms one at a time. Chemists count particles by weighing them. If you know the mass of one particle, or of one mole of particles, a balance does the counting for you."
     },
     {
       "type": "p",
@@ -323,6 +342,11 @@
     {
       "type": "p",
       "text": "Don't confuse the molar mass of a substance with the mass of a sample of it. The molar mass of water is always 18.02 g/mol. A sample of water can have any mass, and you find that mass with a balance."
+    },
+    {
+      "type": "connection",
+      "title": "Counting coins by weighing",
+      "text": "A U.S. nickel has a mass of 5.00 g, so a pile of nickels with a mass of 200 g holds 40 nickels. That works because every nickel has the same mass. Atoms of one element don't all have the same mass (remember isotopes from Unit 1), so chemists use the average atomic mass, which works because even a tiny sample holds an enormous number of atoms."
     },
     {
       "type": "check",
@@ -385,8 +409,9 @@
       "after": "Grams of water cancel, leaving moles. The calculator shows 1.99778… The given mass, 36.0 g, has three significant figures, so the answer rounds to 2.00 mol."
     },
     {
-      "type": "p",
-      "text": "Pharmacists and lab technicians measure medicine by mass, because a balance can't count molecules. What a substance does in the body depends on how many molecules arrive. Molar mass turns a measured mass into a count."
+      "type": "connection",
+      "title": "Medicine by mass",
+      "text": "A pharmacist measures a medicine on a balance, but the body responds to how many molecules arrive. Equal masses of two different medicines do not hold equal numbers of molecules. Gram for gram, the one with the smaller molar mass delivers more molecules."
     },
     {
       "type": "check",
@@ -428,7 +453,12 @@
     },
     {
       "type": "p",
-      "text": "A pure compound always has the same percent composition, however much of it you have. A drop of pure water and a full tank of pure water are both 11.2% hydrogen by mass, because every molecule in them is the same H_{2}O. So if you split water to make hydrogen fuel, only about 112 g of every 1 kg of water is hydrogen."
+      "text": "A pure compound always has the same percent composition, however much of it you have. A drop of pure water and a full tank of pure water are both 11.2% hydrogen by mass, because every molecule in them is the same H_{2}O."
+    },
+    {
+      "type": "connection",
+      "title": "Hydrogen from water",
+      "text": "Splitting water is one way to make hydrogen fuel. Because water is only 11.2% hydrogen by mass, every 1 kg of water holds only about 112 g of hydrogen. The other 888 g is oxygen."
     },
     {
       "type": "check",
@@ -448,11 +478,25 @@
     },
     {
       "type": "sub",
+      "text": "One ratio, several compounds"
+    },
+    {
+      "type": "p",
+      "text": "An empirical formula does not identify a compound. CH_{2}O is the empirical formula of glucose and of acetic acid, C_{2}H_{4}O_{2}, the acid in vinegar. It is also the actual formula of formaldehyde, a preservative (Figure 7.6). All three have the same percent composition, 40.0% carbon by mass, so percent data alone can't tell them apart. Section 7.7 shows what can."
+    },
+    {
+      "type": "figure",
+      "n": "7.6",
+      "image": "fig7_6_reduce.png",
+      "caption": "Three different substances, one simplest ratio."
+    },
+    {
+      "type": "sub",
       "text": "From percent data to a formula"
     },
     {
       "type": "p",
-      "text": "When chemists make or discover a new compound, a lab instrument can report the percent by mass of each element in it. The empirical formula is the first thing they can work out from that data, in five steps:"
+      "text": "To work out an empirical formula from percent data, follow five steps:"
     },
     {
       "type": "steps",
@@ -469,18 +513,9 @@
       "text": "Step 2 is the one people skip. Subscripts are a ratio of moles of atoms, never a ratio of masses, so a percentage can never be used as a subscript. Step 4 catches the other common mistake: rounding 1.5 up to 2 gives the wrong formula, while doubling every value keeps the ratio intact."
     },
     {
-      "type": "sub",
-      "text": "One ratio, several compounds"
-    },
-    {
-      "type": "p",
-      "text": "An empirical formula does not identify a compound. CH_{2}O is the empirical formula of glucose and of acetic acid, C_{2}H_{4}O_{2}, the acid in vinegar. It is also the actual formula of formaldehyde, a preservative (Figure 7.6). All three have the same percent composition, 40.0% carbon by mass, so percent data alone can't tell them apart. Section 7.7 shows what can."
-    },
-    {
-      "type": "figure",
-      "n": "7.6",
-      "image": "fig7_6_reduce.png",
-      "caption": "Three different substances, one simplest ratio."
+      "type": "connection",
+      "title": "A new compound's first formula",
+      "text": "When chemists make or discover a new compound, one of the first things they learn is the percent by mass of each element. The empirical formula is the first formula they can work out from that data. The actual molecular formula has to wait for one more measurement, which Section 7.7 describes."
     },
     {
       "type": "check",
@@ -523,6 +558,11 @@
     {
       "type": "p",
       "text": "Sometimes the multiplier is 1. Water's empirical formula and molecular formula are both H_{2}O. Ionic compounds are counted in formula units, not molecules, so they have no molecular formula at all."
+    },
+    {
+      "type": "connection",
+      "title": "Same ratio, different jobs",
+      "text": "Acetylene is a welding gas, and benzene is used as a liquid solvent. Their atoms come in the same 1 : 1 ratio of carbon to hydrogen, yet one is a gas and the other a liquid at room temperature. A molecule's size and structure, not just its ratio, decide how a substance behaves."
     },
     {
       "type": "check",
