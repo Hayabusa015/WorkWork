@@ -14,7 +14,7 @@
 | Affected Courses | Chemistry, Physics and Geology. |
 | Risk | Low. Long section lists require careful layout to preserve writing space on one sheet. |
 | Recommendation | Document the rule in the reusable textbook workflow and audit the exported page order. |
-| Decision | Awaiting main-session decision record. |
-| Status | PENDING |
+| Decision | 2026-11-24, user: “I need you to create these rules for the textbook creation and then add them to the textbook instructions for the GitHub repository.” |
+| Status | APPROVED |
 | Implemented By | Pending. |
 | Verified | Pending. |
