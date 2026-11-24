@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-24
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0110 | — | Chem U7 to five sections; U11/U12 swap | PROPOSED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
+
 ## 2026-11-23
 
 | ID | Date | Change | Status | Record |
