@@ -125,3 +125,78 @@ Under the gate, any failed check makes the deliverable INCOMPLETE.
 - All 7 figures byte-identical.
 
 The deliverable is fully reproducible from the spec.
+
+---
+
+# Round 2: Re-audit after the Designer's rebuild
+
+**Date:** 2026-11-24 · **Auditor:** independent, report-only. Nothing was modified except this appended section.
+**Files:** the same four files in `/home/user/WorkWork/build/chem_u07_reading/` (rebuilt 02:14), plus `fig/` (7 PNGs, regenerated).
+**Coordinator instructions for this round:**
+- Record #2 as Unresolved, pending Matt's decision. Do not fail the gate on it.
+- Record precision bolding as decided. Matt approved a sample in chat that bolded and defined precision, before he said "Create the packet."
+
+## Verdict: **PASS** (with #2 recorded as Unresolved, pending Matt)
+
+- Every Round 1 finding except #2 is resolved, confirmed in the rendered PDFs.
+- The fixes broke nothing. Page count, fonts, ink, colour, term flow, key match and rebuildability all still pass.
+- Two new Minor/nice-to-have items appear below (R2-1, R2-2). Neither is a failed gate check.
+
+What is still open: #2 waits on Matt. Naming and Drive filing are still pending, as known.
+
+## Checklist (Round 2)
+
+| Check | Result |
+|---|---|
+| Rendered and viewed, every page | DONE. Student pp 1–8 and key pp 1–2 at 100 dpi. Key handwriting ("NaCl") at 250 dpi |
+| Page count / budget | PASS. Student 8 (even, spec target 8). Key 2 |
+| Fonts (`pdffonts`, `audit_fonts.py`, `--key`) | PASS. Student copy is Archivo only. Key is Archivo plus ShullHand and Patrick Hand (the token's named fallback) |
+| Ink (`audit_print_ink.py`) | PASS. Student worst page 7.15% toner (p2). Key worst 5.28%. Widest solid band 0.00 in |
+| Colour inventory | PASS. Type is only #14161B, #B84100 (`primaryDeep`), #55604F, #61675B, #4A2466 (`keyInk.pen`, key only). No display colour is used as type |
+| Clipped text | PASS. None on any of the 10 pages |
+| Figure adjacency | PASS. Fig 7.1 is now on p1, directly under the ruler paragraphs. Figs 7.2–7.7 stay with their text. Fig 7.5 crosses p4→p5, which face each other in a binder |
+| Binding margin | PASS. Fig 7.2 right edge is now 559.8 pt (limit 568.8). Residuals on even pages are ≤ 1.5 pt: a trailing-space glyph box on p2, and box rules at 569.2–569.4 pt. Both were present in Round 1, are within rendering tolerance, and stay well clear of the hole guides at 575.3 pt |
+| p1 reflow and paragraph order | PASS. The new p1 order is: opener, scales, precision, "The estimated digit", the cm and mm ruler paragraphs, sig-fig definition, Figure 7.1. p2 continues with rounding, then the gas pump ("The place value of the last digit matters outside the lab, too"), then measured and exact numbers, scientific notation, and conversion factors. The logic reads in order and every cross-reference still points the right way |
+| Line length | PASS. Body columns are about 56 characters a line (builder-measured). p7 and p8 directions are narrowed (longest line 74 characters). The key is now two-column (longest line 64) |
+| Term flow | PASS. 16 bold body terms. All 16 are defined in the sentence that bolds them, including **precision**: "**Precision** describes how finely a tool measures, …, and it also describes how closely repeated measurements agree with each other." Preview, vocab page and key each list the same 16 terms |
+| Key matches student copy | PASS. All 7 Reading Check stems and all 3 question stems (including the revised Q2) appear word for word in both files (string-compared) |
+| Numbers | PASS. Every Round 1 value is unchanged and still present in the text. Figure labels are now computed from the RDKit molecule or formula plus `chem_data.py`, and the build stops on any mismatch with the brief. The rendered figure values (12.01, 18.02, 58.44, 26.04, 78.12, 13.02, 11.2/88.8) match the brief |
+| No teacher / PROVISIONAL / standards-code content on student pages; no 22.4, STP or litres | PASS (grep) |
+| Rebuildable from the spec | PASS. A clean rebuild into scratch gave identical text and raster on every page of both PDFs. Every `.docx` XML part and all 7 figure PNGs are byte-identical. The builder reported "8 pages", "2 pages" and "about 56 characters a line" |
+| Drive | NOT FILED (known-pending) |
+
+## Round 1 findings: status
+
+| # | Finding | Status | Evidence (Round 2 render) |
+|---|---|---|---|
+| 1 | Fig 7.1 on the back of its text | **RESOLVED** | p1 right column: the ruler paragraphs, then Figure 7.1 and its caption, on the same side of the sheet |
+| 2 | Molecules not made by `build_diagram_molecule.py` (CHG-0042) | **UNRESOLVED: pending Matt's decision** (not failed, per coordinator) | Partial fix confirmed: formulas, molar masses and percentages on Figs 7.3, 7.5 and 7.7 are now computed (`counts_of`, `molar_mass`, `hill`) and checked against the brief, and the build stops on a mismatch. The drawing itself still uses the local `molecule()` routine with explicit H kept. The figure script's docstring now records the exception as waiting on Matt |
+| 3 | Fig 7.2 in the binding margin | **RESOLVED** | p2 image right edge is 559.8 pt (was 574.25) |
+| 4 | Precision not defined in its own sentence | **RESOLVED** | p1: "**Precision** describes how finely a tool measures, which shows in the place value of the last digit you can record, and it also describes how closely repeated measurements agree with each other." The filler "you will see both" is gone |
+| 5 | Example numbering | **RESOLVED** | p3 "EXAMPLE 7.3" (in 7.3), p4 "EXAMPLE 7.4" (in 7.4). No "Example 7.1" or "7.2" remains |
+| 6 | Chip hyphen | **RESOLVED** | Chip on student and key reads `U07 / S7.1–S7.7` (en dash, U+2013). Builder l.676 and l.727 |
+| 7 | "all of the more than 8 billion" | **RESOLVED** | p3: "If every person on Earth, more than 8 billion people, counted at the same time…" |
+| 8 | Over-long directions and key prose | **RESOLVED** | p7 and p8 directions wrap at ≤ 74 characters. The key is two-column, with teacher notes in the left column (≤ 64 characters). See R2-2 for the question stems |
+| 9 | Q2 "Explain using the reading" | **RESOLVED** | p7 Q2 and key: "Use Figure 7.3 and Section 7.3 to explain." |
+| 10 | Docstring cites a missing build report | **RESOLVED** | The docstring now says "Whether to extend that script or keep this exception is waiting on Matt (audit finding #2)." There is no dangling reference |
+| 11 | "NaCl" reads as "NaCI" in ShullHand | **RESOLVED** | "Cl" is now set in Patrick Hand (all 4 occurrences checked). Its l has a curved tail and reads clearly as "NaCl" at 250 dpi |
+| 12 | Example 7.2 gap; "Questions (back page)" | **RESOLVED** | The Example 7.4 box is tight. Key heading reads "Questions (page 7) — exemplar answers" |
+
+## New findings (Round 2)
+
+| # | Check | Problem | Fix | Severity |
+|---|---|---|---|---|
+| R2-1 | Adjacency (QA §10), introduced by the reflow | On p2, "write the factor with dozen on the bottom so it cancels:" ends the left column, and the displayed equation (3 dozen × 12 eggs / 1 dozen = 36 eggs) starts the right column. The colon's lead-in and its equation are split by a column break. Same page, so no flip is needed. | Keep the lead-in sentence with the equation (keep-with-next on the paragraph), or move one line. | Minor |
+| R2-2 | Line length | The p7 question stems are still set full width (longest line about 105 characters). They are short, one to three lines, and are not running prose, so the body rule is met in spirit. | Optionally indent or narrow the stems to the column measure. | Nice-to-have |
+
+## Unresolved / decided (Round 2)
+
+| Item | State |
+|---|---|
+| #2 Molecule-script exception (SHULL-CHG-0042) | **UNRESOLVED: pending Matt's decision.** The options are: (a) extend `scripts/build_diagram_molecule.py` with an explicit-H / fixed-coordinate option and rebuild Figs 7.5 and 7.7 through it, or (b) record Matt's approval of the local routine as an exception. Structures are verified correct, and labels are now computed and checked |
+| Precision bolded and in the vocab list | **DECIDED.** Matt approved, in chat, a sample that bolded and defined precision, before he said "Create the packet." Precedence 1 (Matt's direct instruction) overrides content brief §2. The repo holds no copy of that chat. It is recorded here on the coordinator's report |
+| "Reading" type in NAMING.md; U7 short title in DECISIONS | PENDING (known). No proposal is filed yet. Filenames are working names |
+| Drive filing | PENDING (known; waits for Matt). Folder-path code agreement can be checked only after filing |
+| Sibling specs teach 22.4 L / STP in U7 | OPEN, outside this deliverable (brief F2). Matt to decide |
+| 7.1 dozen-to-eggs displayed setup vs "worked examples only in 7.3/7.4" | CONFIRM WITH MATT. It is not boxed or labelled as an Example |
+| `keyHandwriting`, `keyInk.*`, `print.binding`, `print.holeGuides` | PROVISIONAL tokens, used as specified |
