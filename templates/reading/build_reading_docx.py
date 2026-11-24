@@ -55,6 +55,8 @@ from build_notes_docx import _spacing, footer as notes_footer, pin  # noqa: E402
 # build outside the band.
 COL_GAP_IN = 0.30
 COL_W_IN = round((TEXT_W_IN - COL_GAP_IN) / 2, 3)
+FIG_W_IN = 3.30
+DIRECTIONS_W_IN = 4.40          # full-width directions held under ~75 characters a line
 MARGIN_TOP_IN = 0.45
 MARGIN_BOTTOM_IN = 0.72          # the ruled running footer lives in here (notes geometry)
 
@@ -260,8 +262,10 @@ def _face_for(ch):
 def hand(p, text, size=12):
     for chunk, b, i, vert in tokens(text):
         groups, cur, face = [], "", None
-        for ch in chunk:
-            f = _face_for(ch)
+        # element symbols whose lowercase l reads as I in the key face (NaCl, Cl-)
+        forced = {k for m in re.finditer(r"Cl(?![a-z])", chunk) for k in (m.start(), m.start() + 1)}
+        for idx, ch in enumerate(chunk):
+            f = HAND_FALLBACK if idx in forced else _face_for(ch)
             if face is not None and f != face and not ch.isspace():
                 groups.append((cur, face)); cur = ""
             if not ch.isspace() or face is None:
@@ -362,7 +366,9 @@ def figure(doc, blk, pal, fig_dir):
     keep_next(p)
     path = os.path.join(fig_dir, blk["image"])
     r = p.add_run()
-    r.add_picture(path, width=Inches(min(COL_W_IN, 3.50)))
+    # FIG_W_IN, not the full column: at 3.50 in LibreOffice let Figure 7.2 run 0.08 in into
+    # the binding margin of an even page (audit #3). check_margins() measures every image.
+    r.add_picture(path, width=Inches(FIG_W_IN))
     c = doc.add_paragraph()
     _spacing(c, 0, 8, CAPTION_LINE)
     add(c, f"Figure {blk['n']} — ", CAPTION, color=pal.ink, bold=True)
@@ -414,6 +420,7 @@ def example(doc, blk, pal):
                     borders(cc, pal.hair, sz=4, edges=("bottom",))
     if blk.get("math"):
         math_row(c, blk["math"], pal, inner, size=9.5)
+        pin(c.paragraphs[-1], 1)        # the paragraph python-docx adds after a nested table
     if blk.get("after"):
         body_p(c, blk["after"], pal, before=4, after=0, size=9.5, line=12.5)
     end_cell(c)
@@ -503,11 +510,11 @@ def vocab_preview(doc, spec, pal):
     for ri, row in enumerate(t.rows):
         no_split(row)
         for ci, c in enumerate(row.cells):
-            cell_margins(c, 25, 25, 30, 30)
+            cell_margins(c, 14, 14, 30, 30)
             c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
             p = c.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER          # SHULL-CHG-0105
-            _spacing(p, 0, 0, 13)
+            _spacing(p, 0, 0, 12)
             if ci == 4:
                 continue
             k = ci if ci < 4 else ci - 5
@@ -532,7 +539,7 @@ def vocab_preview(doc, spec, pal):
 def front(doc, spec, pal):
     fr = spec["front"]
     name_row(doc, pal)
-    p = doc.add_paragraph(); pin(p, 10)
+    p = doc.add_paragraph(); pin(p, 7)
     t = doc.add_table(rows=1, cols=1)
     fix_widths(t, [TEXT_W_IN])
     c = t.rows[0].cells[0]
@@ -546,7 +553,7 @@ def front(doc, spec, pal):
         cell_margins(cc, 0, 0, 0 if i == 0 else int(COL_GAP_IN * 1440), 0)
         body_p(cc, txt, pal, first=True, after=0, size=9.5, line=12.6)
     end_cell(c)
-    p = doc.add_paragraph(); pin(p, 10)
+    p = doc.add_paragraph(); pin(p, 6)
     t2 = doc.add_table(rows=1, cols=1)
     fix_widths(t2, [TEXT_W_IN])
     c2 = t2.rows[0].cells[0]
@@ -564,7 +571,8 @@ def back_pages(doc, spec, pal):
     _spacing(p, 0, 2, SEC_TITLE * 1.25)
     add(p, bk["questionsTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
     bottom_rule(p, pal.display, W_ACCENT, 2)
-    body_p(doc, bk["questionsDirections"], pal, before=4, after=8, size=9.5, line=12.6)
+    q = body_p(doc, bk["questionsDirections"], pal, before=4, after=8, size=9.5, line=12.6)
+    q.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN)
     half = (TEXT_W_IN - 0.25) / 2
     for i, q in enumerate(bk["questions"], 1):
         t = doc.add_table(rows=1, cols=1)
@@ -596,7 +604,8 @@ def back_pages(doc, spec, pal):
     _spacing(p, 0, 2, SEC_TITLE * 1.25)
     add(p, bk["vocabTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
     bottom_rule(p, pal.display, W_ACCENT, 2)
-    body_p(doc, bk["vocabDirections"], pal, before=4, after=8, size=9.5, line=12.6)
+    q = body_p(doc, bk["vocabDirections"], pal, before=4, after=8, size=9.5, line=12.6)
+    q.paragraph_format.right_indent = Inches(TEXT_W_IN - DIRECTIONS_W_IN)
     terms = spec["vocab"]
     rows = (len(terms) + 1) // 2
     t = doc.add_table(rows=rows, cols=3)
@@ -664,7 +673,7 @@ def build_student(spec, out_path, fig_dir):
     s = page_setup(doc, base_pt=BODY)
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     unit = int(spec["unit"])
-    code = f"U{unit:02d} / S{spec['sections'][0]}-S{spec['sections'][-1]}"
+    code = f"U{unit:02d} / S{spec['sections'][0]}\u2013S{spec['sections'][-1]}"
     print_header(doc, pal, unit=unit, code=code, kind=spec["kind"], title=unit_title(spec["course"], spec["unit"]),
                  width=TEXT_W_IN)
     p = doc.add_paragraph(); pin(p, 8)
@@ -715,14 +724,17 @@ def build_key(spec, out_path):
     s = page_setup(doc, base_pt=BODY)
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     unit = int(spec["unit"])
-    code = f"U{unit:02d} / S{spec['sections'][0]}-S{spec['sections'][-1]}"
+    code = f"U{unit:02d} / S{spec['sections'][0]}\u2013S{spec['sections'][-1]}"
     print_header(doc, pal, unit=unit, code=code, kind=spec["kind"] + " · Answer Key",
                  title=unit_title(spec["course"], spec["unit"]), width=TEXT_W_IN)
     p = doc.add_paragraph(); pin(p, 8)
+    # two columns under the header, so key prose keeps the body line length (audit #8)
+    sec = doc.add_section(WD_SECTION.CONTINUOUS)
+    set_cols(sec, 2)
 
     # teacher notes: one outlined box, brand face
     t = doc.add_table(rows=1, cols=1)
-    fix_widths(t, [TEXT_W_IN])
+    fix_widths(t, [COL_W_IN])
     c = t.rows[0].cells[0]
     borders(c, pal.hair, sz=W_HAIR)
     cell_margins(c, 80, 100, 140, 140)
@@ -731,41 +743,41 @@ def build_key(spec, out_path):
         body_p(c, n, pal, after=4, size=9, line=11.8)
     end_cell(c)
 
-    def head(text):
+    def head(text, first=False):
         p = doc.add_paragraph()
-        _spacing(p, 12, 4, 15)
+        _spacing(p, 4 if first else 12, 4, 15)
         keep_next(p)
         add(p, text, 13, color=pal.ink, bold=True, face=NARROW)
         bottom_rule(p, pal.display, 12, 2)
 
     def qa(num, question, answer, extra=None):
         tt = doc.add_table(rows=1, cols=1)
-        fix_widths(tt, [TEXT_W_IN])
+        fix_widths(tt, [COL_W_IN])
         cc = tt.rows[0].cells[0]
         cell_margins(cc, 20, 60, 0, 0)
         no_split(tt.rows[0])
         qp = para_in(cc, first=True)
         _spacing(qp, 0, 1, 12.6)
-        qp.paragraph_format.left_indent = Inches(0.42)
-        qp.paragraph_format.first_line_indent = Inches(-0.42)
-        qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.42))
+        qp.paragraph_format.left_indent = Inches(0.34)
+        qp.paragraph_format.first_line_indent = Inches(-0.34)
+        qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.34))
         add(qp, f"{num}\t", 9.5, color=pal.accent, bold=True)
         add(qp, question, 9.5, color=pal.ink)
         ap = cc.add_paragraph()
         _spacing(ap, 0, 0, 17)
-        ap.paragraph_format.left_indent = Inches(0.42)
+        ap.paragraph_format.left_indent = Inches(0.34)
         hand(ap, answer, 12.5)
         if extra:
             ep = cc.add_paragraph()
             _spacing(ep, 1, 0, 11.5)
-            ep.paragraph_format.left_indent = Inches(0.42)
+            ep.paragraph_format.left_indent = Inches(0.34)
             add(ep, extra, 8.5, color=pal.label, italic=True)
 
     head("Reading Checks")
     for blk in spec["body"]:
         if blk["type"] == "check":
             qa(blk["n"], blk["q"], blk["answer"])
-    head("Questions (back page) — exemplar answers")
+    head(f"Questions (page {spec['key']['questionsPage']}) — exemplar answers")
     for i, q in enumerate(spec["back"]["questions"], 1):
         qa(f"{i}.", q["q"], q["answer"],
            " ".join(x for x in (q.get("accept"), "Accept any answer that makes the same points "
@@ -773,7 +785,7 @@ def build_key(spec, out_path):
     head("Vocabulary — accepted definitions")
     for v in spec["vocab"]:
         tt = doc.add_table(rows=1, cols=1)
-        fix_widths(tt, [TEXT_W_IN])
+        fix_widths(tt, [COL_W_IN])
         cc = tt.rows[0].cells[0]
         cell_margins(cc, 10, 30, 0, 0)
         no_split(tt.rows[0])
@@ -792,6 +804,24 @@ def build_key(spec, out_path):
     apply_binding(doc)
     schema_order(doc)
     doc.save(out_path)
+
+
+def check_margins(pdf_path):
+    """Every image stays inside the text block: nothing enters the binding margin
+    (SHULL-CHG-0103), on odd pages (inside left) or even (inside right). Returns problems."""
+    import fitz
+    from _shull_print import BINDING
+    inside, outside = BINDING.inside_in * 72, 0.50 * 72
+    bad = []
+    with fitz.open(pdf_path) as d:
+        for i, page in enumerate(d, 1):
+            w = page.rect.width
+            lo, hi = (inside, w - outside) if i % 2 else (outside, w - inside)
+            for info in page.get_image_info():
+                x0, _, x1, _ = info["bbox"]
+                if x0 < lo - 0.5 or x1 > hi + 0.5:
+                    bad.append(f"p{i}: image x {x0:.1f}-{x1:.1f} pt outside {lo:.1f}-{hi:.1f}")
+    return bad
 
 
 def to_pdf(docx_path, out_dir):
@@ -839,6 +869,8 @@ def main():
     for path, is_key in ((stu, False), (key, True)):
         pdf, n = to_pdf(path, out_dir)
         print(f"wrote {pdf}  ({n} pages)")
+        for b in check_margins(pdf):
+            print("  MARGIN:", b); ok = False
         if not is_key:
             if n > budget.get("max", 99):
                 print(f"  OVER BUDGET: {n} pages, cap {budget['max']}"); ok = False

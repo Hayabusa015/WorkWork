@@ -3,16 +3,19 @@
 
     python3 templates/reading/specs/make_chem_u07_figures.py OUT_DIR
 
-Every number on a figure comes from the verified table in
-reports/chem_u07_reading_content_brief.md section 1 (student periodic table values:
-H 1.01, C 12.01, O 16.00, Na 22.99, Cl 35.45). Nothing here computes a value that
-reaches a student page; the numbers are typed once, below, and checked by verify-content.
+Formulas, molar masses and percentages on the molecule figures (7.3, 7.5, 7.7) are
+computed, not typed: element counts come from the RDKit molecule (or, for graphite and
+sodium chloride, from the formula), and atomic masses from the student periodic table,
+templates/reference/chem_data.py (2 decimals). Each computed value is checked against
+the verified table in reports/chem_u07_reading_content_brief.md section 1, and a
+mismatch stops the build.
 
 Molecules are drawn by RDKit from SMILES, with the same drawing options as
 scripts/build_diagram_molecule.py (tokens palette, Archivo SemiBold atom labels,
 heteroatoms in the course text colour). The difference is that hydrogens are kept:
 build_diagram_molecule.py parses with RDKit's default, which strips explicit H, so
-"[H]C#C[H]" came out as a bare triple bond with no atoms on it. See the build report.
+"[H]C#C[H]" came out as a bare triple bond with no atoms on it. Whether to extend that
+script or keep this exception is waiting on Matt (audit finding #2).
 
 Print discipline (brand/SHULL_DESIGN_SYSTEM.md section 8): outlines and hatching only,
 no tinted areas. Colour is read from brand/tokens.json; no hex is typed here.
@@ -44,6 +47,51 @@ HAIR = rgb(T["ground"]["ruleHairline"]["hex"])
 WHITE = rgb(T["ground"]["white"]["hex"])
 ACCENT = rgb(T["courses"]["chemistry"]["primaryDeep"]["hex"])   # type on white
 DISPLAY = rgb(T["courses"]["chemistry"]["primary"]["hex"])      # rules only, never type
+
+sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
+from chem_data import ELEMENTS                                    # noqa: E402
+MASS = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
+
+# The verified values (content brief section 1). A computed label must equal these.
+BRIEF = {"C": 12.01, "H2O": 18.02, "NaCl": 58.44, "C2H2": 26.04, "C6H6": 78.12, "CH": 13.02,
+         "H2O %H": 11.2, "H2O %O": 88.8}
+
+
+def counts_of(smiles=None, formula=None):
+    """{element: count} from a SMILES (RDKit, explicit H kept) or a plain formula."""
+    import re as _re
+    if smiles:
+        from rdkit import Chem
+        ps = Chem.SmilesParserParams(); ps.removeHs = False
+        mol = Chem.MolFromSmiles(smiles, ps)
+        out = {}
+        for a in mol.GetAtoms():
+            out[a.GetSymbol()] = out.get(a.GetSymbol(), 0) + 1 + a.GetTotalNumHs()
+        return out
+    out = {}
+    for sym, n in _re.findall(r"([A-Z][a-z]?)(\d*)", formula):
+        out[sym] = out.get(sym, 0) + int(n or 1)
+    return out
+
+
+def molar_mass(counts):
+    return round(sum(MASS[e] * n for e, n in counts.items()), 2)
+
+
+def hill(counts, markup=True):
+    """Formula in Hill order (C, H, then alphabetical); _{n} subscripts when markup."""
+    keys = (["C", "H"] if "C" in counts else []) + sorted(k for k in counts if not ("C" in counts and k in "CH" and len(k) == 1))
+    parts = []
+    for k in keys:
+        n = counts[k]
+        parts.append(k + (("_{%d}" % n if markup else str(n)) if n > 1 else ""))
+    return "".join(parts)
+
+
+def check(key, value):
+    if abs(value - BRIEF[key]) > 1e-9:
+        sys.exit(f"figure value {key} = {value} disagrees with the verified brief ({BRIEF[key]})")
+    return value
 
 
 def pt(p):
@@ -169,7 +217,7 @@ def molecule(smiles, w_px, h_px, coords=None):
 # ---------------------------------------------------------------------------------
 def fig_rulers(out):
     """7.1: one pencil tip, two rulers. Tip at 4.63 cm: 4.6 on the cm ruler, 4.63 on the mm ruler."""
-    im, d = canvas(1.80)
+    im, d = canvas(1.68)
     x0, x1 = 60, W - 60
     cm = (x1 - x0) / 6.0
     tip = 4.63
@@ -185,7 +233,7 @@ def fig_rulers(out):
         d.polygon([(tx - 70, py), (tx, py + 15), (tx - 70, py + 30)], outline=INK, width=3)
         d.polygon([(tx - 22, py + 10), (tx, py + 15), (tx - 22, py + 20)], fill=INK)
         ry = py + 44
-        d.rectangle([x0 - 36, ry, x1 + 36, ry + 90], outline=INK, width=3)
+        d.rectangle([x0 - 36, ry, x1 + 36, ry + 80], outline=INK, width=3)
         for i in range(0, 61 if mm else 7):
             v = i / 10 if mm else i
             x = x0 + v * cm
@@ -193,15 +241,15 @@ def fig_rulers(out):
                 ln = 30 if i % 5 == 0 else 20
                 d.line([(x, ry), (x, ry + ln)], fill=INK, width=2)
             else:
-                d.line([(x, ry), (x, ry + 44)], fill=INK, width=4)
-                d.text((x, ry + 50), str(int(v)), font=font(8.5, "SemiBold"), fill=INK, anchor="ma")
-        d.line([(tx, py + 15), (tx, ry + 90)], fill=ACCENT, width=2)
-        draw_text(d, (x0 - 36, ry + 102), reading, 9, "Bold", INK)
-        draw_text(d, (x0 - 36 + text_w(d, reading, 9, "Bold") + 18, ry + 102), note, 8.5, "Regular", LABEL)
-        return ry + 102 + pt(13)
+                d.line([(x, ry), (x, ry + 40)], fill=INK, width=4)
+                d.text((x, ry + 44), str(int(v)), font=font(8.5, "SemiBold"), fill=INK, anchor="ma")
+        d.line([(tx, py + 15), (tx, ry + 80)], fill=ACCENT, width=2)
+        draw_text(d, (x0 - 36, ry + 88), reading, 9, "Bold", INK)
+        draw_text(d, (x0 - 36 + text_w(d, reading, 9, "Bold") + 18, ry + 88), note, 8.5, "Regular", LABEL)
+        return ry + 88 + pt(12)
 
     y = panel(10, False, "CENTIMETER MARKS ONLY", "4.6 cm", "4 is certain, 6 is estimated")
-    panel(y + 26, True, "CENTIMETER AND MILLIMETER MARKS", "4.63 cm", "4.6 is certain, 3 is estimated")
+    panel(y + 14, True, "CENTIMETER AND MILLIMETER MARKS", "4.63 cm", "4.6 is certain, 3 is estimated")
     im.save(out, dpi=(DPI, DPI))
 
 
@@ -244,9 +292,12 @@ def fig_ladder(out):
 def fig_one_mole(out):
     """7.3: one mole of carbon, water, sodium chloride. Values from the student table."""
     im, d = canvas(1.62)
-    cols = [("Carbon", "(graphite)", "12.01 g", None, "atoms"),
-            ("Water", "", "18.02 g", "about 18 mL", "molecules"),
-            ("Sodium chloride", "(table salt)", "58.44 g", None, "formula units")]
+    mc = check("C", molar_mass(counts_of(formula="C")))
+    mw = check("H2O", molar_mass(counts_of(smiles="[H]O[H]")))
+    ms = check("NaCl", molar_mass(counts_of(formula="NaCl")))
+    cols = [("Carbon", "(graphite)", f"{mc:.2f} g", None, "atoms"),
+            ("Water", "", f"{mw:.2f} g", "about 18 mL", "molecules"),
+            ("Sodium chloride", "(table salt)", f"{ms:.2f} g", None, "formula units")]
     cw = W / 3
     base = 180
     for i, (name, sub, mass, extra, part) in enumerate(cols):
@@ -357,10 +408,16 @@ def fig_water_percent(out):
             x += w
         return y + bh
 
-    y = bar(240, "BY NUMBER OF ATOMS", [("H", 1 / 3, "H"), ("H", 1 / 3, "H"), ("O", 1 / 3, "O")])
-    draw_text(d, (x1, y + 6), "2 of 3 atoms are H (67%)", 8, "Regular", LABEL, "r")
-    y = bar(y + 60, "BY MASS", [("H", 0.112, "H"), ("O", 0.888, "O  88.8%")])
-    draw_text(d, (x0 + (x1 - x0) * 0.112 + 14, y + 6), "H  11.2%", 8.5, "Bold", INK)
+    c = counts_of(smiles="[H]O[H]")
+    total = molar_mass(c)
+    ph = check("H2O %H", round(100 * c["H"] * MASS["H"] / total, 1))
+    po = check("H2O %O", round(100 * c["O"] * MASS["O"] / total, 1))
+    n_atoms = sum(c.values())
+    y = bar(240, "BY NUMBER OF ATOMS", [("H", 1 / n_atoms, "H")] * c["H"] + [("O", 1 / n_atoms, "O")] * c["O"])
+    draw_text(d, (x1, y + 6), f"{c['H']} of {n_atoms} atoms are H ({round(100 * c['H'] / n_atoms)}%)",
+              8, "Regular", LABEL, "r")
+    y = bar(y + 60, "BY MASS", [("H", ph / 100, "H"), ("O", po / 100, f"O  {po:.1f}%")])
+    draw_text(d, (x0 + (x1 - x0) * ph / 100 + 14, y + 6), f"H  {ph:.1f}%", 8.5, "Bold", INK)
     im.save(out, dpi=(DPI, DPI))
 
 
@@ -393,21 +450,34 @@ def fig_reduce(out):
 def fig_ch(out):
     """7.7: acetylene and benzene share empirical formula CH (13.02 g/mol)."""
     im, d = canvas(2.15)
+    import math
+    smiles = {"Acetylene": "[H]C#C[H]", "Benzene": "[H]c1c([H])c([H])c([H])c([H])c1[H]"}
+    data = {}
+    for name, smi in smiles.items():
+        c = counts_of(smiles=smi)
+        g = math.gcd(*c.values())
+        emp = {e: n // g for e, n in c.items()}
+        data[name] = (c, molar_mass(c), emp, molar_mass(emp), g)
+    (ca, ma, ea, mea, ga), (cb, mb, eb, meb, gb) = data["Acetylene"], data["Benzene"]
+    if ea != eb:
+        sys.exit("figure 7.7: the two molecules do not share an empirical formula")
+    check("C2H2", ma); check("C6H6", mb); check("CH", mea)
     ban = [20, 10, W - 20, 100]
     d.rectangle(ban, outline=DISPLAY, width=6)
-    draw_text(d, (W / 2, 10 + 26), "Empirical formula of both:  CH,  13.02 g/mol", 9.5, "Bold", INK, "m")
+    draw_text(d, (W / 2, 10 + 26), f"Empirical formula of both:  {hill(ea)},  {mea:.2f} g/mol",
+              9.5, "Bold", INK, "m")
     half = W / 2
-    a = molecule("[H]C#C[H]", 500, 300)
-    b = molecule("[H]c1c([H])c([H])c([H])c([H])c1[H]", 500, 360)
+    a = molecule(smiles["Acetylene"], 500, 300)
+    b = molecule(smiles["Benzene"], 500, 360)
     im.paste(a, (int(half / 2 - 250), 150))
     im.paste(b, (int(half + half / 2 - 250), 115))
     d.line([(half, 130), (half, 600)], fill=HAIR, width=3)
-    for cx, name, mass, mult in ((half / 2, "Acetylene, C_{2}H_{2}", "26.04 g/mol", "= 2 × 13.02"),
-                                 (half + half / 2, "Benzene, C_{6}H_{6}", "78.12 g/mol", "= 6 × 13.02")):
+    for cx, name in ((half / 2, "Acetylene"), (half + half / 2, "Benzene")):
+        c, m, emp, me, g = data[name]
         y = 485
-        draw_text(d, (cx, y), name, 9.5, "Bold", INK, "m")
-        draw_text(d, (cx, y + pt(13)), mass, 9.5, "Bold", ACCENT, "m")
-        draw_text(d, (cx, y + pt(25)), mult, 8.5, "Regular", LABEL, "m")
+        draw_text(d, (cx, y), f"{name}, {hill(c)}", 9.5, "Bold", INK, "m")
+        draw_text(d, (cx, y + pt(13)), f"{m:.2f} g/mol", 9.5, "Bold", ACCENT, "m")
+        draw_text(d, (cx, y + pt(25)), f"= {g} × {me:.2f}", 8.5, "Regular", LABEL, "m")
     im.save(out, dpi=(DPI, DPI))
 
 

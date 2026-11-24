@@ -139,11 +139,7 @@
     },
     {
       "type": "p",
-      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. **Precision** has two meanings, and you will see both. It describes how finely a tool measures, which shows in the place value of the last digit you can record. It also describes how closely repeated measurements agree with each other."
-    },
-    {
-      "type": "p",
-      "text": "You see the same idea at the gas pump. A price of $3.299 per gallon has its last digit in the thousandths of a dollar, a tenth of a cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24, because money is rounded to the cent by rule. The place value of the last digit tells you how finely a value was measured or set."
+      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. **Precision** describes how finely a tool measures, which shows in the place value of the last digit you can record, and it also describes how closely repeated measurements agree with each other."
     },
     {
       "type": "sub",
@@ -158,14 +154,18 @@
       "text": "A ruler with millimeter marks (Figure 7.1, bottom) lets you be sure of 4.6 and estimate one more digit, so the same tip reads 4.63 cm. **Significant figures** are the digits in a measurement that are known for certain, plus one estimated digit. The reading 4.6 cm has two significant figures, and 4.63 cm has three."
     },
     {
-      "type": "p",
-      "text": "An answer calculated from measurements can't be more certain than the measurements that went into it. That is why you round the calculator's display instead of copying all of it. Keep every digit while you work, and round once, at the end. Reference Sheet 2, Significant Figure Rules, lists the rules for deciding which digits count. The short version is that nonzero digits always count, and whether a zero counts depends on where it sits in the number."
-    },
-    {
       "type": "figure",
       "n": "7.1",
       "image": "fig7_1_rulers.png",
       "caption": "The same pencil tip on two rulers. A better tool earns you one more digit, and every measurement ends with one estimated digit."
+    },
+    {
+      "type": "p",
+      "text": "An answer calculated from measurements can't be more certain than the measurements that went into it. That is why you round the calculator's display instead of copying all of it. Keep every digit while you work, and round once, at the end. Reference Sheet 2, Significant Figure Rules, lists the rules for deciding which digits count. The short version is that nonzero digits always count, and whether a zero counts depends on where it sits in the number."
+    },
+    {
+      "type": "p",
+      "text": "The place value of the last digit matters outside the lab, too. A gas price of $3.299 per gallon has its last digit in the thousandths of a dollar, a tenth of a cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24, because money is rounded to the cent by rule. The place value of the last digit tells you how finely a value was measured or set."
     },
     {
       "type": "p",
@@ -238,7 +238,7 @@
     },
     {
       "type": "p",
-      "text": "If you counted one particle every second without stopping, counting out one mole would take about 19 quadrillion years, roughly 1.4 million times the age of the universe. If all of the more than 8 billion people on Earth counted at the same time, one particle per second each, it would still take more than 2 million years. Yet a mole of water molecules fills only about 18 mL, a little more than a tablespoon, because each molecule is extremely small."
+      "text": "If you counted one particle every second without stopping, counting out one mole would take about 19 quadrillion years, roughly 1.4 million times the age of the universe. If every person on Earth, more than 8 billion people, counted at the same time, one particle per second each, it would still take more than 2 million years. Yet a mole of water molecules fills only about 18 mL, a little more than a tablespoon, because each molecule is extremely small."
     },
     {
       "type": "sub",
@@ -286,7 +286,7 @@
     },
     {
       "type": "example",
-      "n": "7.1",
+      "n": "7.3",
       "title": "The molar mass of water, H_{2}O",
       "intro": "Use the atomic masses on your periodic table: H is 1.01 and O is 16.00.",
       "rows": [
@@ -372,7 +372,7 @@
     },
     {
       "type": "example",
-      "n": "7.2",
+      "n": "7.4",
       "title": "How many moles are in 36.0 g of water?",
       "math": [
         "36.0 g H_{2}O  ×",
@@ -546,7 +546,7 @@
         "answer": "A mole is a counting unit, like a dozen. One mole is 6.022 × 10^{23} particles (atoms, molecules, or formula units)."
       },
       {
-        "q": "You have one mole of water and one mole of sodium chloride. Do the samples have the same number of particles? The same mass? Explain using the reading.",
+        "q": "You have one mole of water and one mole of sodium chloride. Do the samples have the same number of particles? The same mass? Use Figure 7.3 and Section 7.3 to explain.",
         "lines": 6,
         "answer": "Same number: each has 6.022 × 10^{23} particles (molecules of water, formula units of NaCl). Different mass: 18.02 g vs 58.44 g, because each NaCl formula unit has more mass than a water molecule."
       },
@@ -566,6 +566,7 @@
       "Glucose molar mass: the reading prints 180.18 g/mol, which is what students get from their periodic table (C 12.01, H 1.01, O 16.00). Published sources that use IUPAC atomic weights give 180.16 g/mol. A student who looks it up will see the 0.02 g/mol difference; both are correct for the values used. The same logic gives benzene 78.12 (student table) vs 78.11 (IUPAC).",
       "Precision is bolded and defined in 7.1 with both meanings: how finely a tool measures (the place value of the last digit) and how closely repeated measurements agree. Accept either meaning on the vocabulary page.",
       "The 7.4 map (Figure 7.4) shows the boxes and arrows only. The factors are in the text, so the worksheet's blank map is not given away."
-    ]
+    ],
+    "questionsPage": 7
   }
 }
