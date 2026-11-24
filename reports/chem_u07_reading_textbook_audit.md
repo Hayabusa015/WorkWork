@@ -133,3 +133,62 @@ All Example, On Your Own and key arithmetic, sig figs and units (§3). Every sec
 ## 8. Release condition
 
 Fix A-1, then re-run the Auditor on p1 (figure and pagination). A one-figure change that keeps the text unchanged can reuse this content evidence for pp 2–8 after their identity is confirmed by hash or text diff. A-2 stays open until the locators are opened or Matt accepts them on the record. Minor items are the designer's call, routed through the Overseer.
+
+---
+
+# Round 2: recheck of the corrected export
+
+**Date:** 2026-11-24 · **Auditor:** independent, report-only. Nothing was modified except this appended section.
+
+## Verdict: **PASS**
+
+A-1 is fixed and verified. The applied minor findings introduce no errors. There are no regressions in page count, leaf position, ink, fonts, thumb tab, margins, vocabulary or due line. A-2 (primary locators unreachable) **stays open as a recorded limitation**. It is not a content defect: every claim re-derives and is robust (Round 1 §4). Matt either accepts it on the record or has the hosts allowed for a recheck.
+
+## Version and identity
+
+| Item | Value |
+|---|---|
+| Commit | `7fa9b47` "U7 reading: fix Fig 7.1 pencil at zero (audit A-1) and apply minor audit findings". It changes 2 files: the spec (8 text lines) and the figure script (1 line, `body_l = x0`) |
+| Student PDF | sha256 `e52e57c98c113d3f51a44e871238372e7c4e17f637f7bd5d191c323cda79ffdd`. 8 pages. Matches the coordinator's hash |
+| Key PDF | sha256 `e7d21724e5e453e28598cfd6b6b64f4eeb65b032cbd78b8e847e9304afbd42d2`. 2 pages. Matches |
+| Round 1 baseline | The scratchpad `audited/` copies hash to `7c481e32…` and `1ee63b05…`, identical to the Round 1 files |
+| Evidence reuse (my own diff) | Per-page `pdftotext -layout` and 72 dpi grayscale raster comparison of Round 1 against Round 2. **pp 3, 6, 7, 8: text identical and raster byte-identical.** Round 1 evidence for those pages is reused. pp 1, 2, 4, 5 changed and were re-inspected. Both key pages were re-inspected |
+| Proof method | Screen proof only. PyMuPDF DeviceGray at 110 dpi at print size; Fig 7.1 zoomed at 400 dpi. No physical photocopy |
+
+## Rechecks
+
+| Page / item | Check | Result | Severity | Disposition |
+|---|---|---|---|---|
+| p1 Fig 7.1 (A-1) | Pencil back end on 0, tip at 4.63 cm, labels match text | In the source PNG at row y = 76, the leftmost dark pixel is x = 60, which is the 0 mark (`x0`), so the back end is at **0.00 cm**. On the print-size render, the back end sits on the 0 tick (x 237) and the tip is at x 1057 against 4 cm at x 945 and 177 px/cm, giving **4.63 cm**. Labels read "4.6 cm, 4 is certain, 6 is estimated" and "4.63 cm, 4.6 is certain, 3 is estimated", matching the prose ("record 4.6 cm", "reads 4.63 cm", "4.6 cm has two… 4.63 cm has three"). The pencil is now 4.63 cm long, so the measurement model is correct | — | **CLOSED** |
+| p1 Why It Matters (A-5) | "tastes soapy and metallic" | Matches the dossier WIM-a excerpt ("metallic, soapy aftertaste"). Reflow stays inside the opener band and clear of the column rule | — | CLOSED |
+| p1 Precision (A-3) | Leads with agreement of repeated measurements; "also used for" fineness | Consistent with VIM 2.15 / 4.14 as I know them. The locator is still unreachable (A-2) | — | CLOSED (wording) |
+| p1–2 gas pump (A-4) | "rounded to the cent by rule, not by significant figures" | Removes the apparent sig-fig counterexample. The paragraph now breaks across p1 and p2 mid-sentence ("…rounded to the / cent by rule"). That is an ordinary column continuation at the foot of p1, and reading order is preserved | — | CLOSED |
+| p4 Medicine Connection (A-11) | "what reaches the body is a number of molecules, not just a mass" | Now a definitional statement that follows from the mole concept. No physiological claim needs a locator. The box fits, with no clip | — | CLOSED |
+| p5 (A-9) | "Most ionic formulas, such as NaCl, …" | Correct. Reflow moves the Fig 7.6 caption about 1 line; the figure stays with its text and nothing clips | — | CLOSED |
+| Key p2 OYO 7.4 (A-10) | 1.881 ÷ 1.252 | I compute 1.5024, so 1.502 ✓. The note now says "Rounding 1.502 to 2". Answer Fe₂O₃ ✓ | — | CLOSED |
+| Key p1 tear-off 7.4 (A-8, key side) | "Hydrogen (1.01 g/mol) has much less mass per atom than oxygen (16.00 g/mol)" | Correct. The ratio of molar masses equals the ratio of atomic masses. Pairing g/mol with "per atom" is slightly loose; "1.01 amu" would match "per atom" more exactly | Minor | Optional polish; does not block |
+| p4 student prose (A-8, student side) | "each hydrogen atom (1.01) has far less mass than the oxygen atom (16.00)" is still unitless | **Does not matter for release.** The two numbers are used only as a comparison, so units cancel. Both are the periodic-table atomic masses the same section has just used ("multiplying its atomic mass by its subscript"). No student calculation depends on them. Adding "amu" (consistent with "12.01 amu" on p3) is polish | Minor | Accept; optional next revision |
+| A-12 Example treatment | Top rule plus hairline box | Unchanged. The coordinator reports it matches the approved pilot. No fill | — | Accepted on the coordinator's report |
+| Every number | Re-solved on changed pages | All Examples, On Your Own items and key values on pp 1, 2, 4, 5 and key pp 1–2 match Round 1 §3. The only numeric change is 1.503 → 1.502, now correct | — | PASS |
+
+## Regression checks
+
+| Check | Result |
+|---|---|
+| Page count | Student 8, key 2. Unchanged |
+| Leaf position | Final reading page p6 (even), so no blank back. Tear-off p7 (questions) and p8 (vocabulary) are text- and raster-identical to Round 1. Removing the last leaf still leaves all reading content in pp 1–6 |
+| Tear-off parity | Unchanged. 5 questions; labels 7.1–7.5 = cover = headings = key. Due line found verbatim (1 match). Name line present |
+| Vocabulary | The same 10 bold terms on pp 1–6, defined in place. p8 is identical |
+| Ink | Student worst 8.47% (p1, was 8.35%), average 5.75%. Key worst 5.53%. Widest solid band 0.00 in, no fills. PASS |
+| Fonts | `audit_fonts.py`: "Archivo only"; `--key`: "Archivo and the key handwriting face only". `pdffonts`: ArchivoRoman Bold and Regular, ArchivoNarrow. PASS |
+| Thumb tab | Outer gap 0.22 in on all 8 pages, outline only. PASS |
+| Margins / clipping | No non-whitespace span crosses the 0.60 in inside or 0.50 in outside margin. No clipped text on the re-inspected pages. PASS |
+| Molar volume | 0 matches for 22.4, STP, liter or "molar volume". PASS |
+
+## Items still open (unchanged from Round 1; none blocking)
+
+- **A-2:** primary locators (Planck 2018 Table 2, NIST WebBook water density, HB44 tablespoon, VIM, BIPM SI Brochure, CODATA, CIAAW). They were unreachable through the proxy (403). This is recorded, not closed.
+- **A-6 and A-7:** water drawn at about 120° (accepted with the teacher note). Light bond lines should be confirmed on a physical photocopy.
+- **A-13:** the teacher-note "rust" sentence (accepted).
+- **Physical photocopy proof:** not performed. The hole guides and binding margin are PROVISIONAL tokens pending the test punch.
+- **Drive filing:** not yet done. The normal approval-to-file gate applies.
