@@ -28,8 +28,8 @@
 | **Affected Courses** | Chemistry, citation only: one `Status:` line in `courses/chemistry/DECISIONS.md`. No course fact changes. |
 | **Risk** | **Low.** The edits are identifier text only. One risk: changing a reference that means the main-side 0106/0107. Inventory §1 classifies each occurrence. Commit subjects made before the renumber cannot change and will still cite the old IDs. |
 | **Recommendation** | Approve as written. The main session records Matt's verbatim words already given, if it judges they answer this record. They name the renumber and its targets ("the next free IDs"). |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-24, user, in the main session, answering the question "How should I get the U7 change onto main?" (which named the colliding 0106 and 0107 records): "Merge everything, fix IDs (Recommended)". |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
