@@ -19,8 +19,8 @@
 | **Affected Courses** | Chemistry only. Taught sections go from 86 to 84. Codes the validator accepts go from 88 to 86. |
 | **Risk** | Medium. The repository change is small, but existing U7, U11 and U12 materials keep passing the validator under numbers that now mean something else. |
 | **Recommendation** | Approve. Apply the follow-ups below before anything new is built for U7, U11 or U12. |
-| **Decision** | |
-| **Status** | **PENDING** |
+| **Decision** | Approved by the user, 2026-11-24: "I want to combine 7.2 and 7.3 into one section and 7.5 and 7.6 into one section Also, id like to swap.unit 11 and 12. I want solution chemistru before gases. I thi k that makes more sense." Then, answering the main session's questions: "Renumber 7.1–7.5 (Recommended)", "Use these names (Recommended)", "Keep ranges (Recommended)" |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 

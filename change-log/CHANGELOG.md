@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0110 | — | Chem U7 to five sections; U11/U12 swap | PROPOSED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
+| SHULL-CHG-0110 | 2026-11-24 | Chem U7 to five sections; U11/U12 swap | APPROVED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
 
 ## 2026-11-23
 
