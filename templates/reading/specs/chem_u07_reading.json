@@ -38,7 +38,11 @@
       "Know it",
       "Seen it",
       "New"
-    ]
+    ],
+    "why": {
+      "title": "Why It Matters",
+      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react by count, one particle at a time. The problem is that no one can count atoms. They are far too small and far too many, and a chemist can only weigh things on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. Pharmacists use this idea when they measure a medicine by mass, because what matters in the body is how many molecules arrive."
+    }
   },
   "vocab": [
     {
@@ -125,11 +129,6 @@
   ],
   "body": [
     {
-      "type": "opener",
-      "title": "Why It Matters",
-      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react by count, one particle at a time. The problem is that no one can count atoms. They are far too small and far too many, and a chemist can only weigh things on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. Pharmacists use this idea when they measure a medicine by mass, because what matters in the body is how many molecules arrive."
-    },
-    {
       "type": "section",
       "code": "7.1",
       "title": "Mathematical Tools"
@@ -194,7 +193,11 @@
     },
     {
       "type": "p",
-      "text": "A **conversion factor** is a fraction whose top and bottom are equal amounts in different units, so multiplying by it changes the unit but not the amount. Twelve eggs and one dozen are the same amount, so they can sit on the top and bottom of one conversion factor. **Dimensional analysis** is solving a problem by multiplying by conversion factors so that units cancel, leaving the unit you want. To find the number of eggs in 3 dozen, write the factor with dozen on the bottom so it cancels:"
+      "text": "A **conversion factor** is a fraction whose top and bottom are equal amounts in different units, so multiplying by it changes the unit but not the amount. Twelve eggs and one dozen are the same amount, so they can sit on the top and bottom of one conversion factor. **Dimensional analysis** is solving a problem by multiplying by conversion factors so that units cancel, leaving the unit you want."
+    },
+    {
+      "type": "p",
+      "text": "To find the number of eggs in 3 dozen, write the factor with dozen on the bottom so it cancels:"
     },
     {
       "type": "math",
@@ -330,6 +333,25 @@
       ]
     },
     {
+      "type": "onYourOwn",
+      "n": "7.3",
+      "q": "Find the molar mass of methane, CH_{4}, the main gas in natural gas. Show the sum the way Example 7.3 does.",
+      "workIn": 1.45,
+      "verify": {
+        "kind": "molarMass",
+        "formula": "CH4",
+        "answer": 16.05
+      },
+      "solution": {
+        "steps": [
+          "C: 1 × 12.01 g/mol = 12.01 g/mol",
+          "H: 4 × 1.01 g/mol = 4.04 g/mol",
+          "CH_{4}: 12.01 g/mol + 4.04 g/mol ="
+        ],
+        "answer": "16.05 g/mol"
+      }
+    },
+    {
       "type": "p",
       "text": "Figure 7.3 puts one mole of three substances side by side. Each sample holds 6.022 × 10^{23} particles, but the masses differ because the particles themselves differ. A water molecule has more mass than a carbon atom, and a sodium chloride formula unit has more mass than either."
     },
@@ -407,6 +429,31 @@
         "=  **2.00 mol H_{2}O**"
       ],
       "after": "Grams of water cancel, leaving moles. The calculator shows 1.99778… The given mass, 36.0 g, has three significant figures, so the answer rounds to 2.00 mol."
+    },
+    {
+      "type": "onYourOwn",
+      "n": "7.4",
+      "q": "How many moles are in 64.0 g of oxygen gas, O_{2}? Section 7.3 gives the molar mass of O_{2}.",
+      "workIn": 1.35,
+      "verify": {
+        "kind": "gramsToMoles",
+        "grams": 64.0,
+        "formula": "O2",
+        "sigFigs": 3,
+        "answer": 2.0
+      },
+      "solution": {
+        "math": [
+          "64.0 g O_{2}  ×",
+          {
+            "num": "1 mol O_{2}",
+            "den": "32.00 g O_{2}"
+          },
+          "="
+        ],
+        "answer": "2.00 mol O_{2}",
+        "note": "64.0 g has three significant figures, so the answer is 2.00 mol."
+      }
     },
     {
       "type": "connection",

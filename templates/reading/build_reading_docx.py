@@ -45,7 +45,7 @@ sys.path.insert(0, os.path.join(TEMPLATES, "notes"))
 from _shull_docx import (  # noqa: E402
     T, FONT, NARROW, REPO, Palette, unit_title, hexof, known_sections, borders, fix_widths, cell_margins,
     no_split, page_setup, print_header, checkbox, apply_binding, schema_order, trim_tail,
-    text_width_in, TEXT_W_IN,
+    text_width_in, TEXT_W_IN, PAGE_W_IN,
 )
 from build_notes_docx import _spacing, footer as notes_footer, pin  # noqa: E402
 
@@ -55,14 +55,21 @@ from build_notes_docx import _spacing, footer as notes_footer, pin  # noqa: E402
 # build outside the band.
 COL_GAP_IN = 0.30
 COL_W_IN = round((TEXT_W_IN - COL_GAP_IN) / 2, 3)
-FIG_W_IN = 3.30
+FIG_W_IN = 3.0
 DIRECTIONS_W_IN = 4.40          # full-width directions held under ~75 characters a line
 MARGIN_TOP_IN = 0.45
-MARGIN_BOTTOM_IN = 0.64          # the ruled running footer lives in here (notes geometry)
+MARGIN_BOTTOM_IN = 0.56          # the ruled running footer lives in here (notes geometry)
 
 BODY = T["typography"]["printScale"]["body"]
-BODY_LINE = round(BODY * 1.26, 1)   # tightened from 1.33 when the Connection boxes were added (QA_GATE §2 order)
+BODY_LINE = round(BODY * 1.2, 1)   # tightened from 1.33 when the Connection boxes were added (QA_GATE §2 order)
 SUB = 10.5
+FOOTER_PT = T["typography"]["floors"]["printFooter"]["pt"]
+TAB_W_IN, TAB_H_IN = 0.28, 0.52     # thumb tab; 'UNIT' at the footer floor fits 0.24 in
+TAB_EDGE_IN = 0.14                 # from the outside page edge, inside the 0.50 in margin
+TAB_TOP_IN = 2.40
+DISPLAY_PT = 24                  # the chapter title on page 1 (Archivo Bold)
+SUB_CAPS = 9                     # all-caps sub-heads in primaryDeep (textbook convention)
+INDENT_IN = 0.20                 # first-line indent of a running paragraph
 SEC_NUM, SEC_TITLE = 15, 15
 CAPTION, CAPTION_LINE = 8.5, 11
 LABEL = 8                        # caps labels sit on the print floor, never under it
@@ -259,7 +266,10 @@ def _face_for(ch):
     return FONT
 
 
-def hand(p, text, size=12):
+def hand(p, text, size=12, ink="pen", boxed=False):
+    """Key handwriting. `ink` is a keyInk token name (pen for written answers, pencil for
+    math, ANSWER_KEYS.md section 2); `boxed` draws the final-answer box in keyInk.box."""
+    colour = T["keyInk"][ink]["hex"]
     for chunk, b, i, vert in tokens(text):
         groups, cur, face = [], "", None
         # element symbols whose lowercase l reads as I in the key face (NaCl, Cl-)
@@ -277,7 +287,13 @@ def hand(p, text, size=12):
             r = p.add_run(s)
             _font(r, f)
             r.font.size = Pt(size)
-            r.font.color.rgb = RGBColor.from_string(hexof(PEN))
+            r.font.color.rgb = RGBColor.from_string(hexof(colour))
+            if boxed:
+                bdr = OxmlElement("w:bdr")
+                for k, v in (("val", "single"), ("sz", "8"), ("space", "1"),
+                             ("color", hexof(T["keyInk"]["box"]["hex"]))):
+                    bdr.set(qn(f"w:{k}"), v)
+                r._element.get_or_add_rPr().append(bdr)
             if vert == "subscript":
                 r.font.subscript = True
             elif vert == "superscript":
@@ -287,7 +303,7 @@ def hand(p, text, size=12):
 # ---------------------------------------------------------------------------------
 # Building blocks.
 
-def stacked(cell, num, den, pal, size=BODY):
+def stacked(cell, num, den, pal, size=BODY, write=None, rule=None):
     """A stacked fraction (SHULL_DESIGN_SYSTEM section 8, SHULL-CHG-0017), the shared
     ruled two-row construction from _shull_docx.stacked_frac, with markup in the terms."""
     t = cell.add_table(rows=2, cols=1)
@@ -297,16 +313,16 @@ def stacked(cell, num, den, pal, size=BODY):
     w = max(text_width_in(plain_text(num), size), text_width_in(plain_text(den), size))
     fix_widths(t, [max(0.40, round(w + 0.16, 3))])
     top, bot = t.rows[0].cells[0], t.rows[1].cells[0]
-    borders(top, pal.ink, sz=6, edges=("bottom",))
+    borders(top, rule or pal.ink, sz=6, edges=("bottom",))
     for c, txt in ((top, num), (bot, den)):
         p = c.paragraphs[0]
         _spacing(p, 0, 0, size * 1.45)
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        add(p, txt, size, color=pal.ink)
+        (write or (lambda q, x, z: add(q, x, z, color=pal.ink)))(p, txt, size)
     return t
 
 
-def math_row(container, parts, pal, width, size=BODY):
+def math_row(container, parts, pal, width, size=BODY, write=None, rule=None):
     """text | fraction | text on one line, centred in `width`. A nested table always
     starts its own line, so each part has its own cell."""
     widths = []
@@ -327,34 +343,35 @@ def math_row(container, parts, pal, width, size=BODY):
         c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
         if isinstance(part, dict):
             p = c.paragraphs[0]
-            stacked(c, part["num"], part["den"], pal, size)
+            stacked(c, part["num"], part["den"], pal, size, write, rule)
             pin(p, 1)
             end_cell(c)
         else:
             p = c.paragraphs[0]
             _spacing(p, 0, 0, size * 1.45)
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            add(p, part.replace("  ", "  "), size, color=pal.ink)
+            (write or (lambda q, x, z: add(q, x, z, color=pal.ink)))(
+                p, part.replace("  ", "  "), size)
     no_split(t.rows[0])
     return t
 
 
 def section_head(doc, blk, pal):
     p = doc.add_paragraph()
-    _spacing(p, 9, 5, SEC_TITLE * 1.25)
+    _spacing(p, 7, 4, SEC_TITLE * 1.2)
     keep_next(p)
     p.paragraph_format.keep_together = True
-    r = add(p, blk["code"] + "  ", SEC_NUM, color=pal.accent, bold=True, face=NARROW)
-    add(p, blk["title"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
+    add(p, blk["code"] + "  ", SEC_NUM, color=pal.accent, bold=True, face=NARROW)
+    add(p, blk["title"].upper(), SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
     bottom_rule(p, pal.display, W_ACCENT, 2)
     return p
 
 
 def sub_head(doc, text, pal):
     p = doc.add_paragraph()
-    _spacing(p, 5, 2, SUB * 1.3)
+    _spacing(p, 4, 1, 12)
     keep_next(p)
-    add(p, text, SUB, color=pal.ink, bold=True)
+    add(p, text.upper(), SUB_CAPS, color=pal.accent, bold=True, track=20)
     return p
 
 
@@ -395,6 +412,8 @@ def after_box(doc, pt_=7):
 
 def example(doc, blk, pal):
     c = box(doc, pal)
+    # banner-style header made of rules only: a heavy course rule across the top
+    borders(c, pal.display, sz=24, edges=("top",))
     label(c, f"Example {blk['n']}", pal, first=True)
     p = para_in(c)
     _spacing(p, 0, 4, 13)
@@ -436,6 +455,33 @@ def opener(doc, blk, pal):
     q = doc.add_paragraph(); pin(q, 6)
 
 
+def definition(doc, v, pal):
+    """The set-off definition under the paragraph that bolds a term, in the text-safe
+    course colour. The words come from spec["vocab"], the same source as the vocabulary
+    page and the key, so the three cannot drift."""
+    term = v["term"][0].upper() + v["term"][1:]
+    p = doc.add_paragraph()
+    _spacing(p, 0, 3, 11.4)
+    p.paragraph_format.left_indent = Inches(INDENT_IN)
+    add(p, f"**{term}** \u2014 {v['def']}.", 9, color=pal.accent)
+    return p
+
+
+def on_your_own(doc, blk, pal):
+    """One practice problem after a worked example: an outlined box with the problem and
+    open space to work in (open boxes are for math, SHULL_DESIGN_SYSTEM section 11)."""
+    t = doc.add_table(rows=1, cols=1)
+    fix_widths(t, [COL_W_IN])
+    c = t.rows[0].cells[0]
+    borders(c, pal.hair, sz=W_HAIR)
+    cell_margins(c, top=70, bottom=90, left=140, right=110)
+    no_split(t.rows[0], float(blk.get("workIn", 1.3)))
+    label(c, f"On Your Own {blk['n']}", pal, first=True)
+    body_p(c, blk["q"], pal, after=0)
+    end_cell(c)
+    after_box(doc, 6)
+
+
 def connection(doc, blk, pal):
     """A real-world sidebar. Told apart from the Reading Check by shape, not only by
     colour: the Check is a closed box with a course rail on the left and writing lines;
@@ -446,13 +492,13 @@ def connection(doc, blk, pal):
     c = t.rows[0].cells[0]
     borders(c, pal.display, sz=12, edges=("top",))
     borders(c, pal.hair, sz=W_HAIR, edges=("bottom",))
-    cell_margins(c, top=60, bottom=80, left=0, right=0)
+    cell_margins(c, top=50, bottom=60, left=0, right=0)
     no_split(t.rows[0])
     q = label(c, "Connection", pal, first=True, after=1)
     add(q, "   " + blk["title"], 9, color=pal.ink, bold=True)
-    body_p(c, blk["text"], pal, after=0, size=9.5, line=12.6)
+    body_p(c, blk["text"], pal, after=0, size=9, line=11.6)
     end_cell(c)
-    after_box(doc, 6)
+    after_box(doc, 5)
 
 
 def reading_check(doc, blk, pal):
@@ -501,11 +547,126 @@ def set_cols(section, n, space_in=COL_GAP_IN):
         cols.set(qn("w:equalWidth"), "1")
 
 
-def footers(doc, ctx):
+def _hf_para(hf):
+    p = hf.paragraphs[0] if hf.paragraphs else hf.add_paragraph()
+    for r in list(p.runs):
+        r._r.getparent().remove(r._r)
+    return p
+
+
+def _running_header(hf, pal, chapter, info, outside_right):
+    """One line: the SHULL course line on the inside, the chapter name on the outside,
+    a hairline under it. Merges the old footer text into the header (one place)."""
+    from docx.enum.text import WD_TAB_ALIGNMENT
+    p = _hf_para(hf)
+    _spacing(p, 0, 0, 11)
+    bottom_rule(p, pal.hair, W_HAIR, 3)
+    ts = p.paragraph_format.tab_stops
+    for pos in (3.25, 6.5):                    # the stock Header style's own tab stops
+        ts.add_tab_stop(Inches(pos), WD_TAB_ALIGNMENT.CLEAR)
+    ts.add_tab_stop(Inches(TEXT_W_IN - 0.02), WD_TAB_ALIGNMENT.RIGHT)
+    first, second = (info, chapter) if outside_right else (chapter, info)
+    for i, txt in enumerate((first, "\t", second)):
+        bold = txt == chapter
+        add(p, txt, FOOTER_PT, color=pal.footer if not bold else pal.label, bold=bold, track=10)
+
+
+def _page_footer(hf, pal):
+    """Centred page number, computed by the reader."""
+    from _shull_docx import field
+    p = _hf_para(hf)
+    _spacing(p, 0, 0, 12)
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    field(p, "PAGE", pal, size=8.5, bold=True, color=pal.ink)
+
+
+_TAB_XML = (
+    '<w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
+    'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+    'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+    'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+    '<w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+    'relativeHeight="251660000" behindDoc="0" locked="1" layoutInCell="0" allowOverlap="1">'
+    '<wp:simplePos x="0" y="0"/>'
+    '<wp:positionH relativeFrom="page"><wp:posOffset>{x}</wp:posOffset></wp:positionH>'
+    '<wp:positionV relativeFrom="page"><wp:posOffset>{y}</wp:posOffset></wp:positionV>'
+    '<wp:extent cx="{w}" cy="{h}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+    '<wp:docPr id="{id}" name="SHULL thumb tab {id}" descr="Unit thumb tab"/>'
+    '<wp:cNvGraphicFramePr/><a:graphic><a:graphicData '
+    'uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp>'
+    '<wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{w}" cy="{h}"/>'
+    '</a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/>'
+    '<a:ln w="12700"><a:solidFill><a:srgbClr val="{line}"/></a:solidFill></a:ln></wps:spPr>'
+    '<wps:txbx><w:txbxContent>{paras}</w:txbxContent></wps:txbx>'
+    '<wps:bodyPr wrap="square" lIns="0" tIns="45720" rIns="0" bIns="27432" anchor="t">'
+    '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+
+
+def _tab_para(text, pt, colour):
+    font = FONT
+    return ('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" '
+            f'w:line="{int(pt * 1.15 * 20)}" w:lineRule="exact"/></w:pPr><w:r><w:rPr>'
+            f'<w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:cs="{font}"/><w:b/>'
+            f'<w:color w:val="{colour}"/><w:sz w:val="{int(pt * 2)}"/></w:rPr>'
+            f'<w:t>{text}</w:t></w:r></w:p>')
+
+
+def thumb_tab(hf, pal, unit, page_no, id_base):
+    """'UNIT n' in a small outlined tab on the OUTSIDE edge: the right of odd pages, the
+    left of even ones. Drawn from the page edge in the odd and even footers, the same
+    way the hole guides are, because an 'outside' float is not mirrored by LibreOffice.
+    It stays inside the outside margin and never enters the binding side."""
+    from docx.oxml import parse_xml
+    from _shull_docx import EMU_IN
+    w_in, h_in, edge_in, top_in = TAB_W_IN, TAB_H_IN, TAB_EDGE_IN, TAB_TOP_IN
+    x_in = (PAGE_W_IN - edge_in - w_in) if page_no % 2 else edge_in
+    paras = _tab_para("UNIT", FOOTER_PT, hexof(pal.accent)) + _tab_para(str(unit), 13, hexof(pal.accent))
+    xml = _TAB_XML.format(x=int(x_in * EMU_IN), y=int(top_in * EMU_IN), w=int(w_in * EMU_IN),
+                          h=int(h_in * EMU_IN), id=id_base, line=hexof(pal.display), paras=paras)
+    p = hf.paragraphs[0] if hf.paragraphs else hf.add_paragraph()
+    p._p.append(parse_xml(xml))
+
+
+def furniture(doc, spec, pal, key=False):
+    """Running header (pages 2+), centred page number, before apply_binding()."""
+    unit = int(spec["unit"])
+    chapter = f"UNIT {unit} \u00b7 {unit_title(spec['course'], unit).upper()}"
+    info = f"SHULL SCIENCE \u00b7 {spec['course'].upper()} \u00b7 READING" + \
+        (" \u00b7 TEACHER KEY" if key else "")
     for i, s in enumerate(doc.sections):
         if i:
+            s.header.is_linked_to_previous = False
             s.footer.is_linked_to_previous = False
-        notes_footer(s, ctx)
+        s.header_distance = Inches(0.28)
+        s.footer_distance = Inches(0.30)
+        _running_header(s.header, pal, chapter, info, outside_right=True)
+        _page_footer(s.footer, pal)
+    s0 = doc.sections[0]
+    s0.different_first_page_header_footer = True          # page 1 carries the SHULL header
+    _hf_para(s0.first_page_header)
+    _page_footer(s0.first_page_footer, pal)
+    return chapter, info
+
+
+def furniture_after_binding(doc, spec, pal, chapter, info):
+    """apply_binding copies the odd header and footer to the even page. On even pages
+    the outside is the left, so the header is re-set mirrored, and each footer gets its
+    thumb tab on its own outside edge."""
+    unit = int(spec["unit"])
+    id_base = 95000
+    done = set()        # a linked even footer is one part shared by several sections
+    for s in doc.sections:
+        stories = [(s.even_page_header, None), (s.footer, 1), (s.even_page_footer, 2)]
+        if s.different_first_page_header_footer:
+            stories.append((s.first_page_footer, 1))
+        for hf, page in stories:
+            if id(hf.part) in done and page != 1 or (hf.part, page) in done:
+                continue
+            done.add((hf.part, page)); done.add(id(hf.part)) if page != 1 else None
+            if page is None:
+                _running_header(hf, pal, chapter, info, outside_right=False)
+            else:
+                thumb_tab(hf, pal, unit, page, id_base); id_base += 1
 
 
 def name_row(doc, pal):
@@ -565,32 +726,80 @@ def vocab_preview(doc, spec, pal):
 
 
 def front(doc, spec, pal):
+    """Page 1 under the SHULL header: the chapter opener. Left, the unit kicker, the
+    display title and how to read the chapter; right, the Why It Matters sidebar at the
+    body column measure, set off by a course rule. Then a compact Name/Date/Period strip
+    and the vocabulary self-rating strip."""
     fr = spec["front"]
+    unit = int(spec["unit"])
+    t = doc.add_table(rows=1, cols=2)
+    fix_widths(t, [COL_W_IN, TEXT_W_IN - COL_W_IN])
+    left, right = t.rows[0].cells
+    cell_margins(left, 0, 0, 0, 0)
+    cell_margins(right, 0, 0, int(0.22 * 1440), 0)
+    borders(right, pal.display, sz=12, edges=("left",))
+    label(left, f"Unit {unit}", pal, first=True, after=0)
+    title = unit_title(spec["course"], unit)
+    words = title.split()
+    p = para_in(left)
+    _spacing(p, 0, 6, DISPLAY_PT * 1.08)
+    add(p, " ".join(words[:-1]) + " ", DISPLAY_PT, color=pal.ink, bold=True)
+    add(p, words[-1], DISPLAY_PT, color=pal.accent, bold=True)      # one accent word
+    label(left, fr["howTitle"], pal, before=2, after=1)
+    for txt in fr["how"]:
+        body_p(left, txt, pal, after=3, size=9.5, line=12.4)
+    label(right, fr["why"]["title"], pal, first=True, after=2)
+    body_p(right, fr["why"]["text"], pal, after=0, size=BODY, line=BODY_LINE)
+    p = doc.add_paragraph(); pin(p, 8)
     name_row(doc, pal)
-    p = doc.add_paragraph(); pin(p, 7)
-    t = doc.add_table(rows=1, cols=1)
-    fix_widths(t, [TEXT_W_IN])
-    c = t.rows[0].cells[0]
-    cell_margins(c, 0, 0, 0, 0)
-    label(c, fr["howTitle"], pal, first=True, after=3)
-    # the how-to note reads across the full width; two short paragraphs side by side
-    # would keep it near 60 characters a line, so it is set as two columns of its own
-    inner = c.add_table(rows=1, cols=2)
-    fix_widths(inner, [COL_W_IN, TEXT_W_IN - COL_W_IN])
-    for i, (cc, txt) in enumerate(zip(inner.rows[0].cells, fr["how"])):
-        cell_margins(cc, 0, 0, 0 if i == 0 else int(COL_GAP_IN * 1440), 0)
-        body_p(cc, txt, pal, first=True, after=0, size=9.5, line=12.6)
-    end_cell(c)
-    p = doc.add_paragraph(); pin(p, 6)
-    t2 = doc.add_table(rows=1, cols=1)
-    fix_widths(t2, [TEXT_W_IN])
-    c2 = t2.rows[0].cells[0]
-    cell_margins(c2, 0, 0, 0, 0)
-    q = label(c2, fr["vocabTitle"], pal, first=True, after=0)
-    add(q, "   " + fr["vocabDirections"], 9, color=pal.label)
-    end_cell(c2)
-    vocab_preview(doc, spec, pal)
-    p = doc.add_paragraph(); pin(p, 4)
+    p = doc.add_paragraph(); pin(p, 8)
+    vocab_strip(doc, spec, pal)
+    p = doc.add_paragraph(); pin(p, 2)
+
+
+def vocab_strip(doc, spec, pal):
+    """The vocabulary self-rating as a compact strip: four groups of term + three boxes
+    (K = know it, S = seen it, N = new). Every cell centred (SHULL-CHG-0105)."""
+    fr = spec["front"]
+    terms = [v["term"] for v in spec["vocab"]]
+    groups, per = 4, (len(terms) + 3) // 4
+    box_w, gap = 0.17, 0.05
+    term_w = (TEXT_W_IN - groups * 3 * box_w - (groups - 1) * gap) / groups
+    widths = []
+    for g in range(groups):
+        widths += [term_w] + [box_w] * 3 + ([gap] if g < groups - 1 else [])
+    q = doc.add_paragraph()
+    _spacing(q, 0, 2, 11)
+    add(q, fr["vocabTitle"].upper(), LABEL, color=pal.accent, bold=True, track=26)
+    add(q, "   " + fr["vocabDirections"], 8.5, color=pal.label)
+    t = doc.add_table(rows=per + 1, cols=len(widths))
+    fix_widths(t, widths)
+    step = 5
+    for ri, row in enumerate(t.rows):
+        no_split(row)
+        for ci, c in enumerate(row.cells):
+            cell_margins(c, 10, 10, 10, 10)
+            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            p = c.paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            _spacing(p, 0, 0, 11.5)
+            g, k = divmod(ci, step)
+            if k == 4:
+                continue
+            if ri == 0:
+                add(p, ("TERM", "K", "S", "N")[k], LABEL, color=pal.accent, bold=True)
+                borders(c, pal.ink, sz=6, edges=("bottom",))
+                continue
+            idx = g * per + ri - 1
+            borders(c, pal.hair, sz=4, edges=("bottom",))
+            if idx >= len(terms):
+                continue
+            if k == 0:
+                add(p, terms[idx], 8, color=pal.ink, bold=True)
+            else:
+                pin(p, 1)
+                box_check(c, pal, 0.13)
+    return t
 
 
 def back_pages(doc, spec, pal):
@@ -655,6 +864,38 @@ def back_pages(doc, spec, pal):
 
 
 # ---------------------------------------------------------------------------------
+
+def vocab_of(spec, term):
+    for v in spec["vocab"]:
+        if v["term"].lower() == term.lower():
+            return v
+    raise SystemExit(f"bold term {term!r} has no vocabulary entry")
+
+
+def check_on_your_own(spec):
+    """Re-solve each On Your Own answer from the student periodic table
+    (templates/reference/chem_data.py) and stop the build on any disagreement."""
+    sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
+    from chem_data import ELEMENTS
+    mass = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
+
+    def mm(formula):
+        return round(sum(mass[e] * int(n or 1)
+                         for e, n in re.findall(r"([A-Z][a-z]?)(\d*)", formula)), 2)
+    for b in spec["body"]:
+        if b["type"] != "onYourOwn":
+            continue
+        v = b["verify"]
+        if v["kind"] == "molarMass":
+            got = mm(v["formula"])
+        elif v["kind"] == "gramsToMoles":
+            got = float(f"{v['grams'] / mm(v['formula']):.{v['sigFigs']}g}")
+        else:
+            raise SystemExit(f"unknown verify kind {v['kind']}")
+        if abs(got - v["answer"]) > 1e-9:
+            raise SystemExit(f"On Your Own {b['n']}: computed {got}, spec says {v['answer']}")
+        print(f"On Your Own {b['n']}: {v['kind']} re-solved = {got}")
+
 
 def check_spec(spec):
     course = spec["course"]
@@ -734,12 +975,19 @@ def build_student(spec, out_path, fig_dir):
         elif t == "sub":
             sub_head(doc, blk["text"], pal)
         elif t == "p":
-            bp = body_p(doc, blk["text"], pal)
+            bp = body_p(doc, blk["text"], pal, after=2)
+            if bi and body[bi - 1]["type"] == "p":
+                bp.paragraph_format.first_line_indent = Inches(INDENT_IN)
+            terms = re.findall(r"\*\*(.+?)\*\*", blk["text"])
+            # No keep-with-next here: LibreOffice then moves the whole paragraph, which
+            # left an inch of white at the foot of four pages and cost a sheet.
+            for term in terms:
+                definition(doc, vocab_of(spec, term), pal)
             # a sentence that introduces a display ("…so it cancels:") stays with it (R2-1)
             if bi + 1 < len(body) and body[bi + 1]["type"] in ("math", "equation"):
                 keep_next(bp)
-        elif t == "opener":
-            opener(doc, blk, pal)
+        elif t == "onYourOwn":
+            on_your_own(doc, blk, pal)
         elif t == "connection":
             connection(doc, blk, pal)
         elif t == "figure":
@@ -760,10 +1008,10 @@ def build_student(spec, out_path, fig_dir):
     sec = doc.add_section(WD_SECTION.NEW_PAGE)
     set_cols(sec, 1)
     back_pages(doc, spec, pal)
-    ctx = {"pal": pal, "footer": f"SHULL SCIENCE / {spec['course'].upper()} / UNIT {unit:02d} / READING"}
-    footers(doc, ctx)
+    chapter, info = furniture(doc, spec, pal)
     trim_tail(doc)
     apply_binding(doc)
+    furniture_after_binding(doc, spec, pal, chapter, info)
     schema_order(doc)
     doc.save(out_path)
 
@@ -827,6 +1075,41 @@ def build_key(spec, out_path):
     for blk in spec["body"]:
         if blk["type"] == "check":
             qa(blk["n"], blk["q"], blk["answer"])
+    head("On Your Own \u2014 solutions")
+    pencil = lambda q, x, z: hand(q, x, 12, ink="pencil")
+    for blk in spec["body"]:
+        if blk["type"] != "onYourOwn":
+            continue
+        sol = blk["solution"]
+        tt = doc.add_table(rows=1, cols=1)
+        fix_widths(tt, [COL_W_IN])
+        cc = tt.rows[0].cells[0]
+        cell_margins(cc, 20, 60, 0, 0)
+        no_split(tt.rows[0])
+        qp = para_in(cc, first=True)
+        _spacing(qp, 0, 2, 12.6)
+        qp.paragraph_format.left_indent = Inches(0.34)
+        qp.paragraph_format.first_line_indent = Inches(-0.34)
+        qp.paragraph_format.tab_stops.add_tab_stop(Inches(0.34))
+        add(qp, f"{blk['n']}\t", 9.5, color=pal.accent, bold=True)
+        add(qp, blk["q"], 9.5, color=pal.ink)
+        for st in sol.get("steps", []):
+            sp = cc.add_paragraph()
+            _spacing(sp, 0, 0, 17)
+            sp.paragraph_format.left_indent = Inches(0.34)
+            hand(sp, st, 12, ink="pencil")
+        if sol.get("math"):
+            math_row(cc, sol["math"], pal, COL_W_IN - 0.4, size=11, write=pencil,
+                     rule=T["keyInk"]["pencil"]["hex"])
+        ap = cc.add_paragraph()
+        _spacing(ap, 2, 0, 18)
+        ap.paragraph_format.left_indent = Inches(0.34)
+        hand(ap, sol["answer"], 12.5, ink="pen", boxed=True)
+        if sol.get("note"):
+            ep = cc.add_paragraph()
+            _spacing(ep, 1, 0, 11.5)
+            ep.paragraph_format.left_indent = Inches(0.34)
+            add(ep, sol["note"], 8.5, color=pal.label, italic=True)
     head(f"Questions (page {spec['key']['questionsPage']}) — exemplar answers")
     for i, q in enumerate(spec["back"]["questions"], 1):
         qa(f"{i}.", q["q"], q["answer"],
@@ -848,10 +1131,10 @@ def build_key(spec, out_path):
             ep = cc.add_paragraph()
             _spacing(ep, 0, 0, 11.5)
             add(ep, v["accept"], 8.5, color=pal.label, italic=True)
-    ctx = {"pal": pal, "footer": f"SHULL SCIENCE / {spec['course'].upper()} / UNIT {unit:02d} / READING / TEACHER KEY"}
-    footers(doc, ctx)
+    chapter, info = furniture(doc, spec, pal, key=True)
     trim_tail(doc)
     apply_binding(doc)
+    furniture_after_binding(doc, spec, pal, chapter, info)
     schema_order(doc)
     doc.save(out_path)
 
@@ -897,6 +1180,7 @@ def main():
     spec_path, out_dir = args
     spec = json.load(open(spec_path))
     check_spec(spec)
+    check_on_your_own(spec)
     cpl = chars_per_line(BODY)
     if not 50 <= cpl <= 75:
         raise SystemExit(f"column measure is {cpl:.0f} characters a line; the band is 50-75")
