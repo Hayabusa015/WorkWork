@@ -30,7 +30,7 @@
 | **Recommendation** | Approve as written. The main session records Matt's verbatim words already given, if it judges they answer this record. They name the renumber and its targets ("the next free IDs"). |
 | **Decision** | 2026-11-24, user, in the main session, answering the question "How should I get the U7 change onto main?" (which named the colliding 0106 and 0107 records): "Merge everything, fix IDs (Recommended)". |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
+| **Implemented By** | Pending commit. Secretary, 2026-11-24, against this record as APPROVED on disk on `merge-0110` (the main session's recording commit was relayed; the Secretary has no shell and did not check it in git history). Renames by `git mv`, done by the main session. Text edits by the Secretary, as listed in §1, with three changes: the old ID notes in 0111/0112 got a bracketed "[History, kept as written ...]" prefix; 0112's own ID note got "[now SHULL-CHG-0111]" after its citation of 0106; and the Change ID fields read the new ID only (the renumber note carries the old one). |
 | **Verified** | |
 
 ## 1. Inventory of occurrences (grep `0106\|0107`, repo minus `legacy/`, 2026-11-24)

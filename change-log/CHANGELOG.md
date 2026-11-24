@@ -40,8 +40,8 @@ supersedes it, exactly as the decision logs work.
 |---|---|---|---|---|
 | SHULL-CHG-0109 | 2026-11-23 | Chem roadmaps/outline: mixed pairing, display header | PARTIAL | `governance/proposals/SHULL-CHG-0109-chem-roadmap-two-colour-big-headline.md` |
 | SHULL-CHG-0108 | 2026-11-23 | Chemistry Ice Blue Deep; blue print pairing | CONFIRMED | `governance/proposals/SHULL-CHG-0108-chem-ice-blue-deep.md` |
-| SHULL-CHG-0107 | 2026-11-23 | Chemistry Ohio standards code list in DECISIONS | PROPOSED | `governance/proposals/SHULL-CHG-0107-chem-ohio-standards-list.md` |
-| SHULL-CHG-0106 | 2026-11-23 | Chemistry Course Outline gets REF title | CONFIRMED | `governance/proposals/SHULL-CHG-0106-chem-course-outline-ref-title.md` |
+| SHULL-CHG-0112 | 2026-11-23 | Chemistry Ohio standards code list in DECISIONS | PROPOSED | `governance/proposals/SHULL-CHG-0112-chem-ohio-standards-list.md` |
+| SHULL-CHG-0111 | 2026-11-23 | Chemistry Course Outline gets REF title | CONFIRMED | `governance/proposals/SHULL-CHG-0111-chem-course-outline-ref-title.md` |
 | SHULL-CHG-0101 | 2026-11-23 | One print document header, all builders | CONFIRMED | `governance/proposals/SHULL-CHG-0101-print-document-header.md` |
 | SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | CONFIRMED | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
 | SHULL-CHG-0099 | 2026-11-23 | Chemistry U6 reworked to four sections | CONFIRMED | `governance/proposals/SHULL-CHG-0099-chemistry-u6-four-sections.md` |

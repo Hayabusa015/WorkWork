@@ -1,7 +1,11 @@
-# SHULL-CHG-0107 — Chemistry: one verified Ohio standards code list in `DECISIONS.md`
+# SHULL-CHG-0112 — Chemistry: one verified Ohio standards code list in `DECISIONS.md`
 
-> **ID note.** The main session supplied 0107 and confirmed it is free on `origin/main` (highest
-> record there: SHULL-CHG-0106). The Secretary that drafted this record has no shell and could not
+> **Renumber note.** Originally committed as SHULL-CHG-0107 on branch claude/amazing-ritchie-hql8dw;
+> renumbered 2026-11-24 because the ID collided with a different record merged to main first. Commit
+> messages before the renumber still cite the old ID. (SHULL-CHG-0113)
+
+> **ID note.** [History, kept as written; this record is now SHULL-CHG-0112.] The main session supplied 0107 and confirmed it is free on `origin/main` (highest
+> record there: SHULL-CHG-0106 [now SHULL-CHG-0111]). The Secretary that drafted this record has no shell and could not
 > run `git fetch origin main` itself (`governance/CHANGE_CONTROL.md` §2, "Allocating a new Change
 > ID"). Locally the highest record is also SHULL-CHG-0106, and nothing outside `legacy/` mentions
 > 0107. Under that rule the ID is not allocated until this file is pushed to `origin/main`.
@@ -12,13 +16,13 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0107 |
+| **Change ID** | SHULL-CHG-0112 |
 | **Date** | 2026-11-23 (drafted) |
 | **Source** | User, from a Researcher finding. Finding F4 of `reports/chem-ohio-standards-verification.md` (researcher, 2026-11-23): "Codes still live only in per-unit specs. There is no single authoritative list". The main session offered to put the verified list in one place in the Chemistry decisions file. Matt's words in chat, 2026-11-23, as the main session relayed them: *"yes, have the secretary add the codes list"*. The Secretary did not hear him directly. **This record is not the approval.** The main session records his decision under `governance/CHANGE_CONTROL.md` §4. |
 | **Current Rule** | **None.** `courses/chemistry/DECISIONS.md` has no Ohio standards section. Its only mention of Ohio is the hour requirement under "Pacing and calendar — 2026–2027". Ohio codes, titles and key wording live only in the 15 roadmap specs (`templates/unit-roadmap/specs/chem_u00.json`–`chem_u14.json`, fields `standards_source`, `standards_key`, and `standards` per section). Each spec restates them, and they already differ from one another (§3). The only standing instruction is in `.claude/skills/build-assessment/SKILL.md`: *"Maps to a learning target, and to an Ohio standard when alignment is requested."* |
 | **Proposed Rule** | Add a new section, **"Ohio standards — verified code list"**, to `courses/chemistry/DECISIONS.md`, between "Pacing and calendar — 2026–2027" and "Course brand exceptions". That is the same position as "Ohio standards" in `courses/physics/DECISIONS.md`. It is the **one** authoritative home for: the source line; the 9 content statements with code, official title, official sub-points and the key wording roadmaps print; notes on inquiry, U15, the mole definition and Ohio scope limits; and the rule that specs cite this table and do not restate different wording. Plus a decision-log entry at the top of the log. Exact text in §2. |
 | **Supersedes** | **No rule.** No decision is replaced. In practice, the per-unit `standards_source` and `standards_key` values in the roadmap specs stop being independent statements and become copies of the new table. If a copy differs, the table wins and the spec is reported stale (CLAUDE.md §2). |
-| **Reason** | (1) CLAUDE.md §1: a fact lives in exactly one place. Ohio codes and key wording are written 15 times, once per spec. This is the third pass at them (F3 in `reports/u2-content-briefs.md` 2026-10-04; the secondary-source draft; the 2026-11-23 primary-source report). (2) The copies have already drifted (§3). (3) The list is now verified against the official PDF, so there is a settled text to hold. (4) The change-control test: it affects **one course**, so it belongs in `courses/chemistry/DECISIONS.md` (CLAUDE.md §2). It is filed as a record, as SHULL-CHG-0099 and SHULL-CHG-0106 were, because that file changes only against an approved record. |
+| **Reason** | (1) CLAUDE.md §1: a fact lives in exactly one place. Ohio codes and key wording are written 15 times, once per spec. This is the third pass at them (F3 in `reports/u2-content-briefs.md` 2026-10-04; the secondary-source draft; the 2026-11-23 primary-source report). (2) The copies have already drifted (§3). (3) The list is now verified against the official PDF, so there is a settled text to hold. (4) The change-control test: it affects **one course**, so it belongs in `courses/chemistry/DECISIONS.md` (CLAUDE.md §2). It is filed as a record, as SHULL-CHG-0099 and SHULL-CHG-0111 were, because that file changes only against an approved record. |
 | **Affected Agents** | Overseer (routes roadmap builds; checks codes against the table). Designer (builds roadmaps from the specs). Auditor (QA: printed codes and key wording must match the table). Researcher (future Ohio checks start from the table). Secretary (this record and the decisions-file edit). No responsibilities change. No agent file is edited. |
 | **Affected Skills** | None edited. `.claude/skills/build-assessment/SKILL.md` ("an Ohio standard when alignment is requested") does not restate any code, so it does not conflict; for Chemistry it would now resolve to this table. `templates/unit-roadmap/build_unit_roadmap.py` is unchanged: it prints what the specs hold. |
 | **Affected Courses** | **Chemistry only.** Physics ("Ohio standards" in `courses/physics/DECISIONS.md`) and Geology are untouched. The PS.M.5 and P.E.5 codes named in the notes belong to other courses. They are mentioned only to say where nuclear content lives, and they are not added to any table. |
@@ -124,7 +128,7 @@ roadmap specs and uses only those codes. Inquiry has no code, and U15 has no Che
 statement. Decided by Matt 2026-11-23 ("yes, have the secretary add the codes list").
 Supersedes: None (first record of Ohio codes in this file; the specs' standards keys become copies
 of it).
-Status: CONFIRMED · SHULL-CHG-0107
+Status: CONFIRMED · SHULL-CHG-0112
 ```
 
 Nothing else in `courses/chemistry/DECISIONS.md` is edited. "Last updated" already reads
@@ -176,7 +180,7 @@ drafted, and does not choose on his behalf.
 
 ## 6. Rollback
 
-One commit carrying `SHULL-CHG-0107` that touches only `courses/chemistry/DECISIONS.md`.
+One commit carrying `SHULL-CHG-0112` that touches only `courses/chemistry/DECISIONS.md`.
 `git revert <sha>` removes the section and the log entry. No Drive mutation is part of this change.
 
 ## 7. Verification plan (only after APPROVED and implemented)

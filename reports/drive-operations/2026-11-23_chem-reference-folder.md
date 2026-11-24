@@ -3,7 +3,7 @@
 Approved by Matt in conversation, 2026-11-23 ("go ahead, create the folder and trash the old one").
 Logged just after execution. Note: `config/drive.json` `operations.createFolder` limits folder
 creation to unit-level folders; this folder was created on Matt's direct instruction (CLAUDE.md §2,
-precedence 1) for the course outline under SHULL-CHG-0106.
+precedence 1) for the course outline under SHULL-CHG-0106 [now SHULL-CHG-0111].
 
 | Op | Object | Location | Result |
 |---|---|---|---|

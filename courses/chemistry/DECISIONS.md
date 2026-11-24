@@ -484,7 +484,7 @@ titles". It is **not** one of the twelve reference-packet sheets and is not comb
 Decided by Matt 2026-11-23 ("a, file it as Reference - Course Outline"), choosing a `REF` title over
 a new course-level Roadmap type.
 Supersedes: None (new short-title row; no rule replaced).
-Status: CONFIRMED · SHULL-CHG-0106
+Status: CONFIRMED · SHULL-CHG-0111 (committed as SHULL-CHG-0106; renumbered 2026-11-24, SHULL-CHG-0113)
 
 ### 2026-11-23 — U6 reworked to four sections
 U6 Chemical Nomenclature is taught as 6.1 Covalent Names & Formulas, 6.2 Polyatomic Ions, 6.3 Ionic

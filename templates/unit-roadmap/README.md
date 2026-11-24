@@ -8,7 +8,7 @@ The one-page opener filed at the front of each unit's binder section. Document t
 | `build_unit_roadmap.py` | Spec → HTML → PDF (WeasyPrint, like `templates/lab/`), with the checks below |
 | `unit_roadmap.css` | Layout. Colours only through `../lab/shull-lab-tokens.css`; fonts from `brand/fonts/` |
 | `specs/<course>_u<NN>.json` | One per unit. Chemistry has all sixteen, `chem_u00`–`chem_u15` |
-| `build_course_outline.py` | The one-page Course Outline (SHULL-CHG-0106): every unit by phase with its taught sections |
+| `build_course_outline.py` | The one-page Course Outline (SHULL-CHG-0111): every unit by phase with its taught sections |
 | `course_outline.css` | Outline layout, loaded after `unit_roadmap.css` (same fonts, page box and type sizes) |
 
 ## Build

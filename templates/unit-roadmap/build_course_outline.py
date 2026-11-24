@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Course Outline builder (SHULL-CHG-0106).
+"""Course Outline builder (SHULL-CHG-0111).
 
     python3 templates/unit-roadmap/build_course_outline.py chemistry
 

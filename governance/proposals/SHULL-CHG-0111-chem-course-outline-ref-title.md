@@ -1,6 +1,10 @@
-# SHULL-CHG-0106 — Chemistry Course Outline: a `REF` short title, filed as a Reference
+# SHULL-CHG-0111 — Chemistry Course Outline: a `REF` short title, filed as a Reference
 
-> **ID note.** The main session supplied 0106. The Secretary that drafted this record had no shell
+> **Renumber note.** Originally committed as SHULL-CHG-0106 on branch claude/amazing-ritchie-hql8dw;
+> renumbered 2026-11-24 because the ID collided with a different record merged to main first. Commit
+> messages before the renumber still cite the old ID. (SHULL-CHG-0113)
+
+> **ID note.** [History, kept as written; this record is now SHULL-CHG-0111.] The main session supplied 0106. The Secretary that drafted this record had no shell
 > and could not run `git fetch origin main` (`governance/CHANGE_CONTROL.md` §2, "Allocating a new
 > Change ID"). The local checkout's highest record is SHULL-CHG-0105, and nothing outside `legacy/`
 > mentions 0106. Under that rule the ID is not allocated until this file is pushed to `origin/main`.
@@ -12,7 +16,7 @@
 
 | Field | Value |
 |---|---|
-| **Change ID** | SHULL-CHG-0106 |
+| **Change ID** | SHULL-CHG-0111 |
 | **Date** | 2026-11-23 (drafted) |
 | **Source** | User. Matt chose option (a) in the main session on 2026-11-23. His words, as the main session relayed them: *"a, file it as Reference - Course Outline"*. The Secretary did not hear him directly. **This record is not the approval.** The main session records his decision under `governance/CHANGE_CONTROL.md` §4 once this record exists. The question came from an Overseer routing brief for a one-page Chemistry Course Outline. The brief found no legal course-level name for it: `Roadmap` is unit-level only (`standards/NAMING.md` §2, SHULL-CHG-0100), and a course-level name needs a `REF` row (SHULL-CHG-0069). Option (b), a new course-level Roadmap type, was declined. |
 | **Current Rule** | `courses/chemistry/DECISIONS.md`, "Short titles": *"The topic in a filename (`standards/NAMING.md` §2, SHULL-CHG-0041). **At most 20 characters.** … A section or unit with no row here gets no topic in its filename. Never shorten a title automatically; add a row when the user approves one."* The table has thirteen `REF` rows: the twelve packet sheets plus `Full Packet`. It has **no row for a course outline**. `standards/NAMING.md` §2: *"a course-level name always has a topic, so with no `REF` row there is no course-level name (SHULL-CHG-0069)."* So no legal filename exists for the outline today. |

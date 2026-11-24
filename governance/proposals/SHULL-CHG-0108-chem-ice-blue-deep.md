@@ -1,9 +1,9 @@
 # SHULL-CHG-0108 — Chemistry: Ice Blue Deep token and a blue print pairing
 
 > **ID note.** The main session supplied 0108 and confirmed it is free on `origin/main` (highest
-> record there: SHULL-CHG-0107, PENDING). The Secretary that drafted this record has no shell and
+> record there: SHULL-CHG-0107 [now SHULL-CHG-0112], PENDING). The Secretary that drafted this record has no shell and
 > could not run `git fetch origin main` itself (`governance/CHANGE_CONTROL.md` §2, "Allocating a new
-> Change ID"). Locally the highest record is also SHULL-CHG-0107. Under that rule the ID is not
+> Change ID"). Locally the highest record is also SHULL-CHG-0107 [now SHULL-CHG-0112]. Under that rule the ID is not
 > allocated until this file is pushed to `origin/main`.
 
 > **CONFLICT with a design rule, marked and not resolved.** `brand/SHULL_DESIGN_SYSTEM.md` §3, "The
@@ -172,7 +172,7 @@ change. Energy Orange is not retired.
 The `*Superseded 2026-09-07...*` line under it stays.
 
 Decision-log entry, at the **top** of the log (above whatever entry is on top at implementation;
-SHULL-CHG-0107, if implemented first, puts its own entry there):
+SHULL-CHG-0112, if implemented first, puts its own entry there):
 
 ```markdown
 ### YYYY-MM-DD — Blue print pairing for Unit Roadmaps
@@ -242,7 +242,7 @@ agent) makes them in the same commit, as was done for SHULL-CHG-0054 §2b.
 5. **Derived, not supplied.** Like Energy Orange Deep, the shade was derived, so it starts
    PROVISIONAL. Matt has not seen it on paper.
 6. **Nothing propagates on its own.** Roadmaps already in `output/chemistry/` and on Drive stay
-   orange until rebuilt. The Course Outline (SHULL-CHG-0106) uses the same stylesheet, is not in the
+   orange until rebuilt. The Course Outline (SHULL-CHG-0111) uses the same stylesheet, is not in the
    first-use table, and stays orange unless Matt adds it.
 
 ## 4. Conflict check against LOCKED rules
