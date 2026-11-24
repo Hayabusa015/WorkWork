@@ -420,6 +420,7 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | Code | Short title |
 |---|---|
 | U1 | Matter & Atoms |
+| U7 | The Mole |
 | 0.4 | Observations |
 | 1.1 | Matter & Changes |
 | 1.4 | Isotopes |
@@ -441,6 +442,14 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-24 — U7 short title
+U7 The Mole & Chemical Quantities gets the short title "The Mole", so its unit-level files are named
+`Unit 7 [Type] - The Mole`, starting with the unit reading (`Unit 7 Reading - The Mole`,
+`Unit 7 Reading Key - The Mole`). Files already built under U7 keep their names until a confirmed,
+logged rename. Decided by Matt 2026-11-24 ("Approve A and B").
+Supersedes: None (new short-title row; no rule replaced).
+Status: CONFIRMED · SHULL-CHG-0114
 
 ### 2026-11-24 — U7 to five sections; U11 and U12 swap
 U7 The Mole & Chemical Quantities is taught as 7.1 Mathematical Tools, 7.2 The Mole & Molar Mass,
