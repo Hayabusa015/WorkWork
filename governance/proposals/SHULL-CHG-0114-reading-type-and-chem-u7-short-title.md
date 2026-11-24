@@ -13,7 +13,7 @@
 |---|---|
 | **Change ID** | SHULL-CHG-0114 |
 | **Date** | 2026-11-24 |
-| **Source** | User. Matt, main session, 2026-11-24, while rebuilding the Chemistry U7 unit reading under `workflows/unit-textbook.md` (SHULL-CHG-0106/0107). He answered "Yes." to a plan whose decision D5 read: "File names: 'Unit 7 Reading - The Mole' and 'Unit 7 Reading Key - The Mole'. I'll file that as a naming proposal." That "Yes." approved the plan and the drafting of this proposal. It is not recorded here as approval of this record (see Decision). |
+| **Source** | User. Matt, main session, 2026-11-24, while rebuilding the Chemistry U7 unit reading under `workflows/unit-textbook.md` (SHULL-CHG-0106/0107). He answered "Yes." to a plan whose decision D5 read: "File names: 'Unit 7 Reading - The Mole' and 'Unit 7 Reading Key - The Mole'. I'll file that as a naming proposal." That "Yes." approved the plan and the drafting of this proposal, not the record itself. Matt approved the record separately afterwards (see Decision). |
 | **Current Rule** | **A.** `standards/NAMING.md` §2, verbatim: "**Types:** `Slides` · `Guided_Notes` · `Practice_Set` · `Quiz` · `Test` · `Lab` · `Study_Guide` · `Reference` · `Key` · `Rubric` · `Activity` · `Organizer` · `Roadmap`". No type covers a textbook-style unit reading. **B.** `courses/chemistry/DECISIONS.md`, "Short titles": the only unit row is `\| U1 \| Matter & Atoms \|`. U7 has no row, so under NAMING §2 ("No row, no topic") a U7 unit-level file takes no topic: `Unit 7 Reading.pdf`, as `output/chemistry/u07/Unit 7 Roadmap.pdf` already does. |
 | **Proposed Rule** | **A.** The Types line becomes "**Types:** `Slides` · `Guided_Notes` · `Practice_Set` · `Quiz` · `Test` · `Lab` · `Study_Guide` · `Reference` · `Key` · `Rubric` · `Activity` · `Organizer` · `Roadmap` · `Reading`". A new paragraph follows the existing `Roadmap` paragraph, separated from it by a blank line, verbatim: "`Reading` is the textbook-style unit reading built under `workflows/unit-textbook.md`: the cover with the unit breakdown, the illustrated reading pages, and the duplex tear-off leaf at the end of the student copy. Always unit-level, since it covers every section of the unit. Its answer key is a separate file: `Unit [X] Reading - [Unit Title].[ext]` and `Unit [X] Reading Key - [Unit Title].[ext]` (SHULL-CHG-0114)." **B.** In "Short titles", a new row directly after `\| U1 \| Matter & Atoms \|`: `\| U7 \| The Mole \|`. A decision-log entry goes at the top of the Chemistry decision log (draft below). |
 | **Supersedes** | **A.** `standards/NAMING.md` §2, Types list (extends it; nothing removed). **B.** None. A new short-title row; no rule replaced. |
@@ -25,7 +25,7 @@
 | **Recommendation** | Approve both parts. A and B can be decided separately. Declining A leaves the reading with no type in the grammar. Declining B gives `Unit 7 Reading.pdf` with no topic. |
 | **Decision** | 2026-11-24, user, in the main session, answering "Approve SHULL-CHG-0114: Part A adds a new 'Reading' document type to your naming standard (all three courses), and Part B gives Chemistry U7 the short title 'The Mole'?": "Approve A and B". (Supersedes the earlier recording of a plan-level "Yes.", which did not approve this record.) |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
+| **Implemented By** | Secretary, pending commit. Part A: `standards/NAMING.md` §2. Part B: `courses/chemistry/DECISIONS.md` "Short titles" and "Decision log". The `templates/reading/` follow-ups are left to the U7 rebuild. |
 | **Verified** | |
 
 ---
@@ -78,6 +78,7 @@ Status: CONFIRMED · SHULL-CHG-0114
 
 ## Not done by this record
 
-No standard, course file, template or app file was edited. Implementation waits for a committed
-record whose `Status:` reads APPROVED and whose `Decision:` quotes Matt verbatim
-(`governance/CHANGE_CONTROL.md` §4). The main session records that decision.
+The two template follow-ups in the table above (`templates/reading/build_reading_docx.py` lines 7–8
+and `templates/reading/specs/chem_u07_reading.json` `workingFilename.$comment`) were not edited when
+Parts A and B were implemented. They are left to the U7 rebuild. No app file was edited, and none
+needs to be (see "Code that does not need to change").
