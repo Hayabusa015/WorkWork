@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0113 | 2026-11-24 | Renumber branch-side 0106/0107 to 0111/0112 | APPROVED | `governance/proposals/SHULL-CHG-0113-renumber-branch-0106-0107.md` |
+| SHULL-CHG-0113 | 2026-11-24 | Renumber branch-side 0106/0107 to 0111/0112 | CONFIRMED | `governance/proposals/SHULL-CHG-0113-renumber-branch-0106-0107.md` |
 | SHULL-CHG-0110 | 2026-11-24 | Chem U7 to five sections; U11/U12 swap | APPROVED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
 | SHULL-CHG-0107 | 2026-11-24 | Unit reading and duplex tear-off | IMPLEMENTED | `governance/proposals/SHULL-CHG-0107-textbook-reading-and-tear-off.md` |
 | SHULL-CHG-0106 | 2026-11-24 | Unit textbook page designer and independent science review | IMPLEMENTED | `governance/proposals/SHULL-CHG-0106-textbook-page-designer.md` |
