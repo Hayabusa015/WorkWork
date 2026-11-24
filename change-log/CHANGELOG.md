@@ -25,10 +25,23 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-24
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0113 | 2026-11-24 | Renumber branch-side 0106/0107 to 0111/0112 | CONFIRMED | `governance/proposals/SHULL-CHG-0113-renumber-branch-0106-0107.md` |
+| SHULL-CHG-0110 | 2026-11-24 | Chem U7 to five sections; U11/U12 swap | APPROVED | `governance/proposals/SHULL-CHG-0110-chem-u7-merge-u11-u12-swap.md` |
+| SHULL-CHG-0107 | 2026-11-24 | Unit reading and duplex tear-off | IMPLEMENTED | `governance/proposals/SHULL-CHG-0107-textbook-reading-and-tear-off.md` |
+| SHULL-CHG-0106 | 2026-11-24 | Unit textbook page designer and independent science review | IMPLEMENTED | `governance/proposals/SHULL-CHG-0106-textbook-page-designer.md` |
+
 ## 2026-11-23
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
+| SHULL-CHG-0109 | 2026-11-23 | Chem roadmaps/outline: mixed pairing, display header | PARTIAL | `governance/proposals/SHULL-CHG-0109-chem-roadmap-two-colour-big-headline.md` |
+| SHULL-CHG-0108 | 2026-11-23 | Chemistry Ice Blue Deep; blue print pairing | CONFIRMED | `governance/proposals/SHULL-CHG-0108-chem-ice-blue-deep.md` |
+| SHULL-CHG-0112 | 2026-11-23 | Chemistry Ohio standards code list in DECISIONS | PROPOSED | `governance/proposals/SHULL-CHG-0112-chem-ohio-standards-list.md` |
+| SHULL-CHG-0111 | 2026-11-23 | Chemistry Course Outline gets REF title | CONFIRMED | `governance/proposals/SHULL-CHG-0111-chem-course-outline-ref-title.md` |
 | SHULL-CHG-0101 | 2026-11-23 | One print document header, all builders | CONFIRMED | `governance/proposals/SHULL-CHG-0101-print-document-header.md` |
 | SHULL-CHG-0100 | 2026-11-23 | New document type: Roadmap | CONFIRMED | `governance/proposals/SHULL-CHG-0100-roadmap-document-type.md` |
 | SHULL-CHG-0099 | 2026-11-23 | Chemistry U6 reworked to four sections | CONFIRMED | `governance/proposals/SHULL-CHG-0099-chemistry-u6-four-sections.md` |

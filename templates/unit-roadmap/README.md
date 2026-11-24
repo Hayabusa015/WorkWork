@@ -7,7 +7,9 @@ The one-page opener filed at the front of each unit's binder section. Document t
 |---|---|
 | `build_unit_roadmap.py` | Spec → HTML → PDF (WeasyPrint, like `templates/lab/`), with the checks below |
 | `unit_roadmap.css` | Layout. Colours only through `../lab/shull-lab-tokens.css`; fonts from `brand/fonts/` |
-| `specs/<course>_u<NN>.json` | One per unit. `chem_u06.json` is the first |
+| `specs/<course>_u<NN>.json` | One per unit. Chemistry has all sixteen, `chem_u00`–`chem_u15` |
+| `build_course_outline.py` | The one-page Course Outline (SHULL-CHG-0111): every unit by phase with its taught sections |
+| `course_outline.css` | Outline layout, loaded after `unit_roadmap.css` (same fonts, page box and type sizes) |
 
 ## Build
 
@@ -31,6 +33,17 @@ focus line, I-can statements and standards (main and supporting), the standards 
 "How Learning Is Measured" lines. Those lines must agree with "Assessment shape" in the course
 decisions file; if that changes, update the specs.
 
+**Standards are optional.** A spec whose sections carry no `standards` (omitted or `null`) prints no
+standards column, standards key or bold/dashed legend; the I-can column widens and "How Learning Is
+Measured" spans the bottom (Chemistry U15: no Chemistry content statement covers nuclear chemistry).
+A spec with standards must give them on every section (`{"main": [...], "support": [...]}`; either
+list may be empty, which leaves that cell blank) plus `standards_label`, `standards_source` and
+`standards_key`. The legend shows only the box kinds the page uses. Chemistry codes and key wording
+follow `reports/chem-ohio-standards-verification.md`.
+
+A backticked marker in a curriculum-map title (`9.5 Spontaneity \`EXT\``) prints as a small outline
+tag, never as backticks.
+
 Spec text accepts `**bold**`, `_{sub}`, `^{sup}`, and `[[no line break]]` (keeps `-ate / -ite`
 together).
 
@@ -40,12 +53,36 @@ together).
    the build: a code is never built from a spec alone (CLAUDE.md §3).
 2. Exactly one page. If it overflows, shorten the spec text; never shrink the type.
 
+## Course Outline
+
+```
+python3 templates/unit-roadmap/build_course_outline.py chemistry
+```
+
+Writes `output/<course>/reference/Reference - Course Outline.pdf` (and the HTML). Everything comes from
+the curriculum map through the same parser as the roadmaps: phases, units, taught sections, `EXT`
+tags. Retired, dropped and folded codes are left out. The unit and section counts in the header are
+counted, not typed. No dates, quarters or pacing. The build stops if `Course Outline` is not a `REF`
+row in the course Short titles, and fails unless the page count is exactly 1.
+
 Then run the QA tools as for any print document: `scripts/audit_print_ink.py`,
 `scripts/audit_fonts.py`, `scripts/validate_tokens.py`.
 
 ## Layout
 
-Header (unit chip, course · phase, unit title with one accent word, teacher block) → Big Idea and
-Builds On → section table (number box, title, focus | I-can checklist | standards, bold box = main,
-dashed box = supporting) → standards key and "How Learning Is Measured" → running footer with the
-`U# / S#.#` range. Outline treatments only; no solid fills (`brand/SHULL_DESIGN_SYSTEM.md`, ink rule).
+After Matt's original Unit 6 overview (2026-11-23). Shared header (`templates/_shull_header.css`,
+SHULL-CHG-0101, unchanged) → Big Idea (11pt) and Builds On (vertical rule, chevrons) → section table
+(26 / 57 / 17: number box, title, focus | I-can checklist at 10.5pt | standards, bold box = main,
+dashed box = supporting) → standards key left, "How Learning Is Measured" in a rounded box right →
+running footer: `SHULL · CHEM · U# Unit Roadmap · U# / S#.#–#.# · Page 1 of 1` left, the uncoded
+Ohio inquiry category right.
+
+**Rows fill the page.** The builder renders once, measures the height left under the bottom block,
+shares it out as row padding (at most 30px a row) and renders again. Only space changes, never type.
+
+**Colours.** Two variables at the top of `unit_roadmap.css`: `--rm-rule` (rules, borders, number
+boxes, standard outlines, dividers) and `--rm-text` (accent text). They read the course pairing from
+the body class. Chemistry roadmaps use the blue pairing (`BODY` in the builder → `chem pair-blue`),
+per `courses/chemistry/DECISIONS.md` "Course brand exceptions" (SHULL-CHG-0108). The Course Outline is
+not in that table and stays orange. Outline treatments only; no solid fills
+(`brand/SHULL_DESIGN_SYSTEM.md`, ink rule).

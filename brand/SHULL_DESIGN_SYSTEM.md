@@ -105,12 +105,20 @@ Every course primary and secondary was selected for a **dark** ground. When whit
 background, four of the six stopped clearing WCAG as text on white and the other two reached
 large-text-only. None passes body text. So:
 
-> **On a light ground, coloured type uses the course's `primaryDeep`.
+> **On a light ground, coloured type uses the course's text-safe deep token: `primaryDeep`, or
+> `secondaryDeep` where the course has one and its `DECISIONS.md` says which documents use it.
 > On a dark ground, coloured type uses `primary` or `secondary`.
 > Neither is ever used as type on the other.**
 
 The display colours are unchanged for every non-type use: fills, highlight blocks, rules, chips, tag
 pills, borders, dividers, and dark-ground accents.
+
+A course with a `secondaryDeep` has a second print pairing: `secondary` for rules, borders and
+outline boxes, and `secondaryDeep` for coloured type. Any course may also use a mixed pairing:
+`secondary` for rules, borders and outline boxes, and `primaryDeep` for coloured type. A document
+uses one pairing throughout and never mixes two deep tokens as type on one document. Which documents
+use a pairing other than the default is a course decision, recorded under "Course brand
+exceptions" in that course's `DECISIONS.md`. SHULL-CHG-0108, SHULL-CHG-0109.
 
 Consult `measured.onWhiteVerdict` and `measured.onAsphaltVerdict` in `tokens.json` before using any
 colour as type. Those fields are computed, not asserted. See SHULL-CHG-0008.
@@ -300,13 +308,21 @@ Teacher-only information never appears on the student version.
 
 ### The document header (SHULL-CHG-0101)
 
-Page 1 of every print document opens with the same header. Left: an outlined code chip
+Page 1 of every print document opens with the same header, except the display header below. Left: an outlined code chip
 (`U6 / S6.3`) and a `COURSE · DOCUMENT TYPE` kicker in the course's text-safe colour, then the
 title in condensed capitals with one accent word. Right: teacher, school, and the unit. Under both,
 a double rule in the course display colour. Ruled, never filled, and no taller than the rail header
 it replaced. Sizes, teacher and school live in `brand/tokens.json` `print.header`; the drawing lives
 in `templates/_shull_docx.py` `print_header()` and `templates/_shull_header.css`. A builder never
 draws its own header.
+
+**Display header (SHULL-CHG-0109).** A Unit Roadmap or Course Outline may open with a display
+header instead, where its course's `DECISIONS.md` lists it under "Course brand exceptions". No
+other document type may. The outlined chip sits on its own line above the `COURSE · PHASE`
+kicker; the title is large condensed capitals (Archivo Narrow bold), in ink except one accent
+word; a single rule in the course display colour replaces the double rule. The right-hand meta is
+unchanged. It is exempt from the height limit above. Same drawing files; sizes in
+`brand/tokens.json` `print.header.display`.
 
 ### Tables
 

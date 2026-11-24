@@ -1,0 +1,99 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 13,
+  "grades": "Grades 10–12",
+  "big_idea": "Reactions happen when particles collide hard enough and in the right orientation. Students explain what speeds reactions up, then study reversible reactions that reach **equilibrium** and predict how a system at equilibrium responds when it is disturbed.",
+  "builds_on": [
+    "U9 · S9.3 Enthalpy",
+    "U12 · S12.1 Kinetic Molecular Theory",
+    "U8 · S8.2 Balancing Equations"
+  ],
+  "sections": {
+    "13.1": {
+      "focus": "Energy & orientation",
+      "ican": [
+        "I can **explain** that particles must collide with enough energy and the right orientation to react.",
+        "I can **read** an energy diagram to find the activation energy.",
+        "I can **explain** why most collisions do not lead to a reaction."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "13.2": {
+      "focus": "What speeds reactions",
+      "ican": [
+        "I can **predict** how temperature, concentration, surface area, and a catalyst change reaction rate.",
+        "I can **explain** each of those effects with collision theory.",
+        "I can **interpret** reaction-rate data from a graph or table."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "13.3": {
+      "focus": "Dynamic balance",
+      "ican": [
+        "I can **explain** that at equilibrium the forward and reverse rates are equal and the reaction has not stopped.",
+        "I can **explain** why equal rates do not mean equal amounts of reactants and products.",
+        "I can **recognize** equilibrium on a concentration graph."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "13.4": {
+      "focus": "Stresses on a system",
+      "ican": [
+        "I can **predict** which way an equilibrium shifts when a reactant or product is added or removed.",
+        "I can **predict** the shift caused by a temperature change, using ΔH.",
+        "I can **predict** the shift from a pressure change in gases."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "13.5": {
+      "focus": "Equilibrium in real systems",
+      "ican": [
+        "I can **state** Le Châtelier's principle in my own words.",
+        "I can **apply** it to a real system, such as making ammonia or carrying oxygen in blood.",
+        "I can **explain** why a catalyst does not shift an equilibrium."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

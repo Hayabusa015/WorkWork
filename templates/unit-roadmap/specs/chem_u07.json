@@ -1,0 +1,104 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 7,
+  "grades": "Grades 10–12",
+  "big_idea": "Atoms are too small to count one by one, so chemists count them in moles. Students use **molar mass** to move between grams, moles, and particles, and use mass data to find a **formula**.",
+  "builds_on": [
+    "U1 · S1.5 Average Atomic Mass",
+    "U6 · Writing chemical formulas",
+    "Reference packet: periodic table, equations"
+  ],
+  "sections": {
+    "7.1": {
+      "focus": "Notation & conversions",
+      "ican": [
+        "I can **write** and **calculate** with numbers in scientific notation.",
+        "I can **set up** a unit conversion so the units cancel."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.5"
+        ],
+        "support": []
+      }
+    },
+    "7.2": {
+      "focus": "Counting particles; g/mol",
+      "ican": [
+        "I can **explain** that one mole is 6.02 × 10^{23} particles.",
+        "I can **convert** between moles and numbers of particles.",
+        "I can **calculate** the molar mass of an element or compound."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.5"
+        ],
+        "support": []
+      }
+    },
+    "7.3": {
+      "focus": "Grams, moles, particles",
+      "ican": [
+        "I can **convert** between mass, moles, and particles.",
+        "I can **check** whether an answer is reasonable."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.5"
+        ],
+        "support": []
+      }
+    },
+    "7.4": {
+      "focus": "Percent by mass; simplest ratio",
+      "ican": [
+        "I can **calculate** percent by mass from a formula.",
+        "I can **find** an empirical formula from mass or percent data.",
+        "I can **explain** what an empirical formula does not show."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.5"
+        ],
+        "support": [
+          "C.PM.4"
+        ]
+      }
+    },
+    "7.5": {
+      "focus": "Empirical to molecular",
+      "ican": [
+        "I can **find** a molecular formula from molar mass.",
+        "I can **tell** whether a formula is empirical, molecular, or both."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.5",
+          "C.PM.4"
+        ]
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ],
+    [
+      "C.PM.5",
+      "Quantifying matter",
+      "SI units, significant figures, dimensional analysis, the mole, molar mass."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

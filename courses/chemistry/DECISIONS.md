@@ -1,7 +1,7 @@
 # CHEMISTRY — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-11-23
+**Last updated:** 2026-11-24
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -51,9 +51,10 @@ Polarity · 5.5 Intermolecular Forces · 5.6 Structure & Physical Properties
 6.1 Covalent Names & Formulas · 6.2 Polyatomic Ions · 6.3 Ionic Names & Formulas with Transition
 Metals · 6.4 Naming Acids & Formulas · 6.5 — RETIRED, never reused · 6.6 — RETIRED, never reused
 
-**U7 The Mole & Chemical Quantities** (7 sections)
-7.1 Mathematical Tools · 7.2 The Mole & Avogadro's Number · 7.3 Molar Mass · 7.4 Mole
-Conversions · 7.5 Percent Composition · 7.6 Empirical Formulas · 7.7 Molecular Formulas
+**U7 The Mole & Chemical Quantities** (7 section codes, 5 taught) — *reworked 2026-11-24; see the log*
+7.1 Mathematical Tools · 7.2 The Mole & Molar Mass · 7.3 Mole Conversions · 7.4 Percent
+Composition & Empirical Formulas · 7.5 Molecular Formulas · 7.6 — RETIRED, never reused · 7.7 —
+RETIRED, never reused
 
 ### Phase 3 — Reaction Math (U8–U11)
 
@@ -69,16 +70,16 @@ Predicting Products
 10.1 Mole Ratios · 10.2 Stoichiometric Calculations · 10.3 Mass–Mass & Other Conversions ·
 10.4 Limiting Reactants · 10.5 Theoretical & Percent Yield
 
-**U11 Gases** (6 sections)
-11.1 Kinetic Molecular Theory · 11.2 Gas Pressure & Variables · 11.3 Boyle's, Charles's &
-Gay-Lussac's Laws · 11.4 Combined Gas Law · 11.5 Avogadro's Law & Molar Volume · 11.6 Ideal
-Gas Law
+**U11 Solution Chemistry** (7 sections) — *was U12 until 2026-11-24; codes changed meaning, see the log*
+11.1 Solutions & Dissolving · 11.2 Solubility · 11.3 Factors Affecting Solubility & Dissolving
+Rate · 11.4 Electrolytes · 11.5 Molarity · 11.6 Dilutions · 11.7 Solution Stoichiometry
 
 ### Phase 4 — Systems (U12–U15)
 
-**U12 Solution Chemistry** (7 sections)
-12.1 Solutions & Dissolving · 12.2 Solubility · 12.3 Factors Affecting Solubility & Dissolving
-Rate · 12.4 Electrolytes · 12.5 Molarity · 12.6 Dilutions · 12.7 Solution Stoichiometry
+**U12 Gases** (6 sections) — *was U11 until 2026-11-24; codes changed meaning, see the log*
+12.1 Kinetic Molecular Theory · 12.2 Gas Pressure & Variables · 12.3 Boyle's, Charles's &
+Gay-Lussac's Laws · 12.4 Combined Gas Law · 12.5 Avogadro's Law & Molar Volume · 12.6 Ideal
+Gas Law
 
 **U13 Reaction Rates & Equilibrium** (5 sections)
 13.1 Collision Theory · 13.2 Factors Affecting Reaction Rate · 13.3 Chemical Equilibrium ·
@@ -362,8 +363,29 @@ PROVISIONAL until validated against real classroom pace.
 
 ## Course brand exceptions
 
-**None.** Chemistry's identity colours are `courses.chemistry` in `brand/tokens.json`, inside the
-shared system (SHULL-CHG-0054). This file does not restate them.
+**Print pairings and header.** Chemistry's identity colours are `courses.chemistry` in
+`brand/tokens.json`, inside the shared system (SHULL-CHG-0054). This file does not restate them.
+Chemistry has three print pairings (`brand/SHULL_DESIGN_SYSTEM.md` §3):
+
+- **Orange (default):** `primary` for rules, borders and outline boxes; `primaryDeep` for accent
+  text.
+- **Blue:** `secondary` (Ice Blue) for rules, borders and outline boxes; `secondaryDeep` (Ice Blue
+  Deep) for accent text. Available; no document type uses it now.
+- **Mixed:** `secondary` (Ice Blue) for rules, borders, number boxes, standard outlines, checkboxes
+  and the measured box; `primaryDeep` (Energy Orange Deep) for accent text: the headline accent
+  word, kicker, labels and chevrons.
+
+A document uses one pairing throughout. Every document type not listed below uses orange and the
+standard header.
+
+| Document type | Pairing | Header | Since |
+|---|---|---|---|
+| Unit Roadmap (U0–U15) | Mixed | Display | SHULL-CHG-0109 (Blue under SHULL-CHG-0108) |
+| Course Outline (Reference - Course Outline) | Mixed | Display | SHULL-CHG-0109 |
+
+Adding a document type to this table is a course decision (a dated log entry) and needs no brand
+change, except that the display header is limited to the types `brand/SHULL_DESIGN_SYSTEM.md` §11
+names. Energy Orange is not retired.
 
 *Superseded 2026-09-07: this section previously named the base SHULL palette, which is now
 archived in `brand/palette-archive/base-parchment-bio-lime.md`.*
@@ -416,8 +438,53 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Strong Acids & Bases |
 | REF | Specific Heats |
 | REF | Full Packet |
+| REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-24 — U7 to five sections; U11 and U12 swap
+U7 The Mole & Chemical Quantities is taught as 7.1 Mathematical Tools, 7.2 The Mole & Molar Mass,
+7.3 Mole Conversions, 7.4 Percent Composition & Empirical Formulas, 7.5 Molecular Formulas. Old 7.2
+and 7.3 merge into 7.2, old 7.4 is now 7.3, old 7.5 and 7.6 merge into 7.4, and old 7.7 is now 7.5.
+Codes 7.6 and 7.7 are retired and never reused. As with U6, 7.2–7.5 change meaning. Solution
+Chemistry is now U11, the end of Phase 3, and Gases is now U12, the start of Phase 4. The phase
+ranges and the section titles are unchanged. Every 11.x and 12.x code changes meaning, so never read
+a document numbered under the old order as if it used the new one. Chemistry now has 84 taught
+sections. Decided by Matt 2026-11-24 ("I want to combine 7.2 and 7.3 into one section and 7.5 and
+7.6 into one section Also, id like to swap.unit 11 and 12. I want solution chemistru before gases.
+I thi k that makes more sense."). He then chose to renumber 7.1–7.5, accepted the two merged names
+and kept the phase ranges.
+Supersedes: Curriculum map, U7, U11 and U12 lines.
+Status: CONFIRMED · SHULL-CHG-0110
+
+### 2026-11-23 — Roadmaps and Course Outline: mixed pairing, display header
+Unit Roadmaps (U0–U15) and the Course Outline use the mixed pairing: Energy Orange Deep for accent
+text, Ice Blue for rules, borders and outlines. Both open with the display header (large condensed
+title, chip above the kicker, single rule). The blue pairing and Ice Blue Deep stay available,
+unused. Decided by Matt 2026-11-23 ("both colors, outline too, and the big headline").
+Supersedes: Course brand exceptions, Unit Roadmap → Blue (SHULL-CHG-0108).
+Status: CONFIRMED · SHULL-CHG-0109
+
+### 2026-11-23 — Blue print pairing for Unit Roadmaps
+Chemistry gains a second print pairing: Ice Blue for rules, borders and outline boxes, and Ice Blue
+Deep (a new PROVISIONAL token, `courses.chemistry.secondaryDeep`) for accent text. It is used in
+place of the orange pairing on the document types listed under "Course brand exceptions". The first
+is the Unit Roadmaps, U0–U15. Energy Orange is unchanged and stays the default. Decided by Matt
+2026-11-23 ("B, go with the dark blue").
+Supersedes: "Course brand exceptions" (None), SHULL-CHG-0054.
+Status: CONFIRMED · SHULL-CHG-0108
+
+### 2026-11-23 — Course Outline filed as a Reference
+A one-page Chemistry Course Outline sits at the front of the class binder. It lists all 16 units by
+phase, with each unit's sections from the curriculum map, and has no dates or pacing. It spans the
+year, so it is course-level: `Reference - Course Outline.pdf` in `Chemistry/Reference/` (folder to
+be created on Matt's approval) (`standards/NAMING.md` §2), short title `Course Outline` in "Short
+titles". It is **not** one of the twelve reference-packet sheets and is not combined into
+`Reference - Full Packet.pdf`. "Reference packet contents" and the 2026-11-06 entry are unchanged.
+Decided by Matt 2026-11-23 ("a, file it as Reference - Course Outline"), choosing a `REF` title over
+a new course-level Roadmap type.
+Supersedes: None (new short-title row; no rule replaced).
+Status: CONFIRMED · SHULL-CHG-0111 (committed as SHULL-CHG-0106; renumbered 2026-11-24, SHULL-CHG-0113)
 
 ### 2026-11-23 — U6 reworked to four sections
 U6 Chemical Nomenclature is taught as 6.1 Covalent Names & Formulas, 6.2 Polyatomic Ions, 6.3 Ionic

@@ -30,7 +30,7 @@ the duplicate must point at the authoritative source.
 | `brand/` | `tokens.json` — the only place a hex is written, every colour carrying computed contrast and grayscale — plus the design system, the five archived palettes, and the Archivo fonts |
 | `standards/` | Anti-slop, voice, naming, Drive architecture, QA gate |
 | `governance/` | The two-layer rule, precedence, authority matrix, change control |
-| `.claude/agents/` | All seven agents, validated against the authority matrix |
+| `.claude/agents/` | Specialist agents, validated against the authority matrix |
 | `.claude/skills/` | All twelve skills and their enforcement hooks |
 | `.claude/settings.json` | SessionStart hook that builds the environment |
 | `workflows/` | The build-deliverable, weekly-system-review, and legacy-migration chains |

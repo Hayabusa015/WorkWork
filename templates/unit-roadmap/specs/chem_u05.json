@@ -1,0 +1,124 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 5,
+  "grades": "Grades 10–12",
+  "big_idea": "A molecule's shape decides how it behaves. Students draw **Lewis structures**, use them to predict 3-D shape and polarity, and explain how **forces between molecules** set properties like boiling point.",
+  "builds_on": [
+    "U4 · S4.3 Covalent Bonding",
+    "U4 · S4.6 Bond Polarity",
+    "Reference packet: VSEPR geometry, electronegativity table"
+  ],
+  "sections": {
+    "5.1": {
+      "focus": "Count, connect, fill, check",
+      "ican": [
+        "I can **draw** Lewis structures, including multiple bonds.",
+        "I can **check** a Lewis structure by counting electrons."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
+    },
+    "5.2": {
+      "focus": "Electron groups push apart",
+      "ican": [
+        "I can **explain** how repulsion spreads out electron groups.",
+        "I can **write** the AXE notation for a central atom."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": []
+      }
+    },
+    "5.3": {
+      "focus": "Shapes and bond angles",
+      "ican": [
+        "I can **predict** shape and bond angle from a Lewis structure.",
+        "I can **explain** why lone pairs shrink bond angles."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.4"
+        ],
+        "support": []
+      }
+    },
+    "5.4": {
+      "focus": "Bond polarity plus shape",
+      "ican": [
+        "I can **decide** if a molecule is polar from bonds and shape.",
+        "I can **explain** why CO_{2} is nonpolar despite polar bonds."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.4",
+          "C.PM.6"
+        ]
+      }
+    },
+    "5.5": {
+      "focus": "London, dipole–dipole & hydrogen bonding",
+      "ican": [
+        "I can **identify** the intermolecular forces in a substance.",
+        "I can **tell** a bond from a force between molecules."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": []
+      }
+    },
+    "5.6": {
+      "focus": "Why boiling points differ",
+      "ican": [
+        "I can **predict** which substance boils higher from its forces.",
+        "I can **use** boiling-point data to compare force strength."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

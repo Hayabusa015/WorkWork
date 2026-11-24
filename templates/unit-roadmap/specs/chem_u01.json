@@ -1,0 +1,99 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 1,
+  "grades": "Grades 10–12",
+  "big_idea": "Everything in this room is matter, and all of it is built from atoms. Students sort matter into **pure substances and mixtures**, follow the experiments that changed the model of the atom, and use an atom's **atomic number and mass number** to count its particles.",
+  "builds_on": [
+    "U0 · S0.4 Scientific Observations",
+    "U0 · Lab equipment and safety",
+    "Middle-school idea of atoms and elements"
+  ],
+  "sections": {
+    "1.1": {
+      "focus": "Types of matter & change",
+      "ican": [
+        "I can **classify** matter as an element, compound, or mixture, and a mixture as homogeneous or heterogeneous.",
+        "I can **tell** physical from chemical change using evidence.",
+        "I can **explain** how mixtures are separated physically."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.6"
+        ]
+      }
+    },
+    "1.2": {
+      "focus": "Evidence changes models",
+      "ican": [
+        "I can **compare** atomic models from Dalton to Rutherford.",
+        "I can **explain** what cathode rays and gold foil revealed.",
+        "I can **explain** why scientists replace a model when new evidence does not fit it."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": []
+      }
+    },
+    "1.3": {
+      "focus": "Protons, neutrons & isotopes",
+      "ican": [
+        "I can **find** the protons, neutrons, and electrons in an atom or ion from its symbol and mass number.",
+        "I can **explain** what makes two atoms isotopes.",
+        "I can **write** an isotope as carbon-14 or as ^{14}C."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.1"
+        ],
+        "support": [
+          "C.PM.5"
+        ]
+      }
+    },
+    "1.5": {
+      "focus": "Weighting isotopes",
+      "ican": [
+        "I can **explain** why average atomic mass is a weighted average, not a simple one.",
+        "I can **calculate** average atomic mass from isotope data.",
+        "I can **predict** the most common isotope."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.5"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.5",
+      "Quantifying matter",
+      "SI units, significant figures, dimensional analysis, the mole, molar mass."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

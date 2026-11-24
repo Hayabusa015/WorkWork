@@ -1,0 +1,125 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 3,
+  "grades": "Grades 10–12",
+  "big_idea": "An element's place on the periodic table predicts how it behaves. Students describe **trends** in size, ionization energy and electronegativity, and explain them with nuclear charge and shielding.",
+  "builds_on": [
+    "U2 · S2.3 Electron Configurations",
+    "U2 · S2.4 Valence electrons",
+    "Reference packet: periodic table"
+  ],
+  "sections": {
+    "3.1": {
+      "focus": "Layout of the table",
+      "ican": [
+        "I can **locate** periods, groups, and named families.",
+        "I can **explain** why a group's elements behave alike."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
+    },
+    "3.2": {
+      "focus": "Properties by region",
+      "ican": [
+        "I can **locate** metals, nonmetals, and metalloids.",
+        "I can **classify** an element by its properties."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": []
+      }
+    },
+    "3.3": {
+      "focus": "Size trends",
+      "ican": [
+        "I can **describe** the atomic radius trend.",
+        "I can **compare** an ion's size with its atom's."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": []
+      }
+    },
+    "3.4": {
+      "focus": "Holding electrons",
+      "ican": [
+        "I can **describe** the trend in each property.",
+        "I can **find** valence electrons from ionization-energy jumps."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
+    },
+    "3.6": {
+      "focus": "Nuclear charge & shielding",
+      "ican": [
+        "I can **explain** trends with nuclear charge and shielding.",
+        "I can **justify** which of two atoms is larger."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.2"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
+    },
+    "3.7": {
+      "focus": "Electron gain & loss",
+      "ican": [
+        "I can **predict** an ion's charge from its group.",
+        "I can **write** the symbol and configuration of an ion."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.2",
+          "C.PM.1"
+        ]
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.2",
+      "Periodic table",
+      "properties and trends."
+    ],
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "One end-of-unit quiz in place of a unit test"
+  ]
+}

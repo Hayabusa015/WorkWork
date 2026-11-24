@@ -1,0 +1,106 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 9,
+  "grades": "Grades 10–12",
+  "big_idea": "Every chemical and physical change moves energy. Students track heat flowing into and out of a system, tell **endothermic** from **exothermic** changes, and measure heat with q = mcΔT.",
+  "builds_on": [
+    "U7 · S7.3 Mole Conversions",
+    "U8 · S8.2 Balancing Equations",
+    "Reference packet: specific heats, equations"
+  ],
+  "sections": {
+    "9.1": {
+      "focus": "Heat vs. temperature",
+      "ican": [
+        "I can **tell** the difference between temperature and heat.",
+        "I can **explain** specific heat and why water warms slowly.",
+        "I can **calculate** heat gained or lost with q = mcΔT."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "9.2": {
+      "focus": "Direction of heat flow",
+      "ican": [
+        "I can **identify** the system and the surroundings in a process.",
+        "I can **classify** a change as endothermic or exothermic.",
+        "I can **read** endothermic and exothermic energy diagrams."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": [
+          "C.PM.3"
+        ]
+      }
+    },
+    "9.3": {
+      "focus": "ΔH in equations",
+      "ican": [
+        "I can **explain** what the sign of ΔH tells about a reaction.",
+        "I can **write** a thermochemical equation that includes ΔH.",
+        "I can **use** a thermochemical equation to find the heat for a given amount of reactant."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "9.4": {
+      "focus": "Measuring heat in the lab",
+      "ican": [
+        "I can **explain** how a calorimeter measures heat from the temperature change of water.",
+        "I can **calculate** heat from calorimetry data.",
+        "I can **use** heat lost = heat gained to find specific heat."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "9.5": {
+      "focus": "Entropy & free energy",
+      "ican": [
+        "I can **describe** entropy as the spread of energy.",
+        "I can **predict** whether entropy increases or decreases.",
+        "I can **use** the signs of ΔH and ΔS to predict spontaneity."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

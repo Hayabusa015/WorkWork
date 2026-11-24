@@ -28,6 +28,8 @@ OVERSEER      verify deployment · task report
 An Overseer running as a sub-agent cannot dispatch these steps. It returns a routing brief and the
 main session dispatches: `.claude/agents/overseer.md`, "When you are running as a sub-agent".
 
+For a unit textbook or a textbook chapter revision, the designer step belongs to the textbook-page-designer. Follow `workflows/unit-textbook.md` for its research, build, and independent review.
+
 ## Step 0 — before anything is built
 
 The Overseer:
