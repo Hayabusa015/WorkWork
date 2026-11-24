@@ -214,7 +214,7 @@ def fig_rulers(out):
         py = top + pt(14)
         # pencil: outline body, sharpened cone, graphite point at `tip`
         tx = x0 + tip * cm
-        body_l = x0 + 0.4 * cm
+        body_l = x0                     # the pencil starts at the zero mark (audit A-1)
         d.rectangle([body_l, py, tx - 70, py + 30], outline=INK, width=3)
         d.line([(body_l, py + 15), (tx - 70, py + 15)], fill=HAIR, width=2)
         d.polygon([(tx - 70, py), (tx, py + 15), (tx - 70, py + 30)], outline=INK, width=3)

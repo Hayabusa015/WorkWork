@@ -18,7 +18,7 @@
     "how": "Read one section at a time, with a pencil. Each term in **bold** is defined where it first appears, and the last page lists all ten. Tear off the last sheet, answer its five questions, and turn it in.",
     "why": {
       "title": "Why It Matters",
-      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes bitter. Chemistry works the same way, except the ingredients are atoms and molecules, and they react in fixed ratios by count. The problem is that no one can count atoms. They are far too small and far too many, and in the lab a chemist measures amounts by weighing them on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. A lab mixing a solution or a plant making fertilizer needs the right amounts, because extra of one ingredient is left over and too little of it leaves some of the others unused."
+      "text": "Every recipe depends on amounts. Use too little baking soda and the bread stays flat; use too much and it tastes soapy and metallic. Chemistry works the same way, except the ingredients are atoms and molecules, and they react in fixed ratios by count. The problem is that no one can count atoms. They are far too small and far too many, and in the lab a chemist measures amounts by weighing them on a balance. This chapter is about the tool that connects the two: the mole, which lets you count particles by weighing them. A lab mixing a solution or a plant making fertilizer needs the right amounts, because extra of one ingredient is left over and too little of it leaves some of the others unused."
     }
   },
   "vocab": [
@@ -98,7 +98,7 @@
     { "type": "sub", "text": "Precision" },
     {
       "type": "p",
-      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. Precision describes how finely a tool measures, which shows in the place value of the last digit you can record. The same word also describes how closely repeated measurements agree with each other."
+      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. Precision describes how closely repeated measurements agree with each other. The word is also used for how finely a tool measures, which shows in the place value of the last digit you can record."
     },
     {
       "type": "p",
@@ -106,7 +106,7 @@
     },
     {
       "type": "p",
-      "text": "The place value of the last digit matters outside the lab, too. A gas price of $3.299 per gallon has its last digit in the thousandths of a dollar, a tenth of a cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24, because money is rounded to the cent by rule. The place value of the last digit tells you how finely a value was measured or set."
+      "text": "The place value of the last digit matters outside the lab, too. A gas price of $3.299 per gallon has its last digit in the thousandths of a dollar, a tenth of a cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24, because money is rounded to the cent by rule, not by significant figures. The place value of the last digit tells you how finely a value was measured or set."
     },
     {
       "type": "p",
@@ -301,7 +301,7 @@
     {
       "type": "connection",
       "title": "Medicine by mass",
-      "text": "A pharmacist measures a medicine on a balance, but the body responds to how many molecules arrive. Equal masses of two different medicines do not hold equal numbers of molecules. Gram for gram, the one with the smaller molar mass delivers more molecules."
+      "text": "A pharmacist measures a medicine on a balance, but what reaches the body is a number of molecules, not just a mass. Equal masses of two different medicines do not hold equal numbers of molecules. Gram for gram, the one with the smaller molar mass delivers more molecules."
     },
 
     { "type": "section", "code": "7.4" },
@@ -331,7 +331,7 @@
     { "type": "sub", "text": "The simplest ratio" },
     {
       "type": "p",
-      "text": "An **empirical formula** is the simplest whole-number ratio of the atoms in a compound. Glucose, the sugar carried in your blood, has the formula C_{6}H_{12}O_{6}. Every subscript divides evenly by 6, which gives CH_{2}O, so CH_{2}O is the empirical formula of glucose. Hydrogen peroxide, H_{2}O_{2}, reduces the same way to HO. Some formulas can't be reduced at all. The empirical formulas of H_{2}O and CO_{2} are just H_{2}O and CO_{2}. Ionic formulas such as NaCl are already written as the lowest ratio."
+      "text": "An **empirical formula** is the simplest whole-number ratio of the atoms in a compound. Glucose, the sugar carried in your blood, has the formula C_{6}H_{12}O_{6}. Every subscript divides evenly by 6, which gives CH_{2}O, so CH_{2}O is the empirical formula of glucose. Hydrogen peroxide, H_{2}O_{2}, reduces the same way to HO. Some formulas can't be reduced at all. The empirical formulas of H_{2}O and CO_{2} are just H_{2}O and CO_{2}. Most ionic formulas, such as NaCl, are already written as the lowest ratio."
     },
     {
       "type": "p",
@@ -389,11 +389,11 @@
         "steps": [
           "Fe: 69.9 g ÷ 55.85 g/mol = 1.252 mol",
           "O: 30.1 g ÷ 16.00 g/mol = 1.881 mol",
-          "÷ 1.252:  Fe 1.000,  O 1.503",
+          "÷ 1.252:  Fe 1.000,  O 1.502",
           "O is near x.5, so × 2:  Fe 2,  O 3 ="
         ],
         "answer": "Fe_{2}O_{3}",
-        "note": "Rounding 1.503 to 2 would give FeO_{2}, which is wrong. Fe_{2}O_{3} is ionic, so this is the ratio in its formula unit."
+        "note": "Rounding 1.502 to 2 would give FeO_{2}, which is wrong. Fe_{2}O_{3} is ionic, so this is the ratio in its formula unit."
       }
     },
     {
@@ -483,7 +483,7 @@
       {
         "n": "7.4",
         "q": "Two-thirds of the atoms in water are hydrogen. Why is water only 11.2% hydrogen by mass?",
-        "answer": "Hydrogen atoms (1.01) have much less mass than the oxygen atom (16.00), so the one oxygen atom holds most of the mass."
+        "answer": "Hydrogen (1.01 g/mol) has much less mass per atom than oxygen (16.00 g/mol), so the one oxygen atom holds most of the mass."
       },
       {
         "n": "7.5",
