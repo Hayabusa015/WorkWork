@@ -34,3 +34,23 @@
 .sh-teacher::before { content: var(--header-teacher); }
 .sh-school::before  { content: var(--header-school); }
 .sh-course::before  { content: var(--course-name); }
+
+/* Display variant (SHULL-CHG-0109): the Unit Roadmap and the Course Outline only. Add `sh-display` to
+   the header. Chip on its own line above the kicker, a large condensed title across the full width,
+   teacher block right, ONE rule in the course display colour. Title size and rule weight come from
+   tokens (`print.header.display` → --header-display-title-size, --header-display-rule). Nothing
+   above changes, so every other document keeps the standard header.
+
+   <header class="sh-head sh-display">
+     <div class="sh-left"><span class="sh-chip">U6 · Unit Roadmap</span>
+       <div class="sh-kick"><span class="sh-course"></span> · Phase 2: Bonding Logic</div></div>
+     <div class="sh-meta">…</div>
+     <h1 class="sh-title">Chemical <span class="sh-acc">Nomenclature</span></h1>
+   </header>
+*/
+.sh-head.sh-display { flex-wrap: wrap; align-items: flex-start; row-gap: 0;
+  border-bottom: var(--header-display-rule) solid var(--accent-display); padding-bottom: 4pt; }
+.sh-display .sh-chip { font-family: var(--body); font-size: var(--header-kicker-size); font-weight: 700;
+  text-transform: uppercase; line-height: 1.5; margin: 0 0 3pt; }
+.sh-display .sh-title { flex: 1 0 100%; order: 3; font-size: var(--header-display-title-size); line-height: 1.0;
+  margin-top: 2pt; }

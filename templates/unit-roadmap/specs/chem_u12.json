@@ -1,0 +1,114 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 12,
+  "grades": "Grades 10–12",
+  "big_idea": "Gas particles are far apart and always moving, and that one model explains how gases behave. Students relate **pressure, volume, temperature** and amount, and use the gas laws to predict what a gas does when one of them changes.",
+  "builds_on": [
+    "U5 · S5.5 Intermolecular Forces",
+    "U7 · S7.3 Mole Conversions",
+    "Reference packet: gas laws, constants"
+  ],
+  "sections": {
+    "12.1": {
+      "focus": "The particle model of a gas",
+      "ican": [
+        "I can **state** the main assumptions of kinetic molecular theory.",
+        "I can **use** the theory to explain pressure and temperature."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": []
+      }
+    },
+    "12.2": {
+      "focus": "Pressure & Kelvin",
+      "ican": [
+        "I can **convert** between pressure units: atm, mmHg, and kPa.",
+        "I can **convert** °C to K and **explain** why gas laws need K."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": []
+      }
+    },
+    "12.3": {
+      "focus": "Two variables at a time",
+      "ican": [
+        "I can **use** Boyle's, Charles's, and Gay-Lussac's laws.",
+        "I can **identify** direct and inverse relationships from data."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": []
+      }
+    },
+    "12.4": {
+      "focus": "P, V & T change together",
+      "ican": [
+        "I can **use** the combined gas law when pressure, volume, and temperature all change.",
+        "I can **derive** each simple gas law from the combined law."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": []
+      }
+    },
+    "12.5": {
+      "focus": "Moles, volume & STP",
+      "ican": [
+        "I can **use** Avogadro's law to relate gas volume to moles.",
+        "I can **use** 22.4 L/mol at STP to convert liters and moles."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": [
+          "C.IM.3"
+        ]
+      }
+    },
+    "12.6": {
+      "focus": "PV = nRT",
+      "ican": [
+        "I can **solve** PV = nRT for any variable, choosing the right R.",
+        "I can **explain** when real gases stop acting ideal."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.2"
+        ],
+        "support": []
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.IM.2",
+      "Gas laws",
+      "pressure, volume and temperature; ideal gas law."
+    ],
+    [
+      "C.IM.3",
+      "Stoichiometry",
+      "molar calculations; solutions; limiting reagents."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

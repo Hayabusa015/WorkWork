@@ -21,17 +21,38 @@ sys.path.insert(0, str(REPO / "templates"))
 from _shull_name import document_name, short_title  # noqa: E402
 
 SKIP = re.compile(r"RETIRED|DROPPED|FOLDED", re.I)
+ABBR = {"chemistry": "CHEM", "physics": "PHYS", "geology": "GEO"}
+# Body class = course colours. Chemistry roadmaps and the Course Outline use the mixed pairing
+# (primaryDeep for coloured type, secondary for rules and outlines): courses/chemistry/DECISIONS.md
+# "Course brand exceptions", SHULL-CHG-0109. Values: templates/lab/shull-lab-tokens.css body.chem.pair-mixed.
+CHEM_PAIR = "chem pair-mixed"
+BODY = {"chemistry": CHEM_PAIR, "physics": "phys", "geology": "geo"}
+STRETCH_MAX = 30  # px added to one row at most; past that the rest stays at the foot of the page
+
+
+TAG = re.compile(r"\s*`([A-Z]+)`")
+
+
+def split_tags(title):
+    """'Spontaneity `EXT`' -> ('Spontaneity', ['EXT']). A backticked word in the curriculum map
+    is a marker (EXT = extension/bonus section), never part of the printed title."""
+    return TAG.sub("", title).strip(), TAG.findall(title)
+
+
+def tag_html(tags):
+    return "".join(f' <span class="tag">{html.escape(t)}</span>' for t in tags)
 
 
 def unit_from_decisions(course, unit):
-    """(phase name, unit title, [(code, title)] of taught sections) from the curriculum map."""
+    """("Phase N: Name", unit title, [(code, title, tags)] of taught sections) from the curriculum map.
+    tags is a list such as ['EXT']; the title never carries the backticks."""
     text = (REPO / "courses" / course / "DECISIONS.md").read_text()
     phase = None
     lines = text.splitlines()
     for i, line in enumerate(lines):
-        m = re.match(r"^### Phase \d+ — (.+?) \(", line)
+        m = re.match(r"^### (Phase \d+) — (.+?) \(", line)
         if m:
-            phase = m.group(1)
+            phase = f"{m.group(1)}: {m.group(2)}"
         m = re.match(rf"^\*\*U{unit} (.+?)\*\*", line)
         if not m:
             continue
@@ -45,7 +66,8 @@ def unit_from_decisions(course, unit):
         for part in " ".join(body).split(" · "):
             m2 = re.match(rf"^({unit}\.\d+)\s+(.+)$", part.strip())
             if m2 and not SKIP.search(part):
-                sections.append((m2.group(1), m2.group(2).strip()))
+                stitle, tags = split_tags(m2.group(2))
+                sections.append((m2.group(1), stitle, tags))
         return phase, title, sections
     raise SystemExit(f"U{unit} is not in courses/{course}/DECISIONS.md. Never build against a code "
                      "that is not there (CLAUDE.md §3).")
@@ -64,50 +86,85 @@ def render(spec):
     course, unit = spec["course"], int(spec["unit"])
     phase, title, sections = unit_from_decisions(course, unit)
 
-    have, want = set(spec["sections"]), {c for c, _ in sections}
+    have, want = set(spec["sections"]), {c for c, _, _ in sections}
     if have != want:
         raise SystemExit(f"spec and DECISIONS.md disagree on U{unit} sections: "
                          f"missing from spec {sorted(want - have)}, not in DECISIONS {sorted(have - want)}")
 
+    # Standards are optional. A spec with none (no "standards" on any section, or null) prints no
+    # standards column, key or legend. A spec with any must carry them on every section, plus the
+    # key, label and source.
+    has_std = any(spec["sections"][c].get("standards") for c in want)
+    if has_std:
+        bare = sorted(c for c in want if not spec["sections"][c].get("standards"))
+        if bare or not spec.get("standards_key"):
+            raise SystemExit(f"U{unit}: standards are all or nothing; sections without standards {bare}, "
+                             f"standards_key {'present' if spec.get('standards_key') else 'missing'}")
+
     words = title.split()
     head = " ".join(words[:-1]) + (" " if len(words) > 1 else "")
     rows = []
-    for code, stitle in sections:
+    for code, stitle, tags in sections:
         s = spec["sections"][code]
         ican = "".join(f"<li>{md(t)}</li>" for t in s["ican"])
-        stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"]["main"]) + \
-               "".join(f'<span class="std sup">{html.escape(c)}</span>' for c in s["standards"].get("support", []))
-        rows.append(f'<tr><td><span class="num">{code}</span><div class="sname">{html.escape(stitle)}</div>'
+        std_td = ""
+        if has_std:
+            stds = "".join(f'<span class="std main">{html.escape(c)}</span>' for c in s["standards"].get("main", [])) + \
+                   "".join(f'<span class="std sup">{html.escape(c)}</span>' for c in s["standards"].get("support", []))
+            std_td = f"<td>{stds}</td>"
+        rows.append(f'<tr><td><span class="num">{code}</span><div class="sname">{html.escape(stitle)}{tag_html(tags)}</div>'
                     f'<div class="focus">{md(s.get("focus", ""))}</div></td>'
-                    f'<td><ul class="ican">{ican}</ul></td><td>{stds}</td></tr>')
-    key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
+                    f'<td><ul class="ican">{ican}</ul></td>{std_td}</tr>')
     prior = "".join(f"<li>{md(p)}</li>" for p in spec["builds_on"])
     measured = "".join(f"<li>{md(m)}</li>" for m in spec["measured"])
     codes = f"U{unit} / S{sections[0][0]}–{sections[-1][0]}" if len(sections) > 1 else f"U{unit} / S{sections[0][0]}"
-    course_word = course.title()
+    if has_std:
+        key = "".join(f"<div><b>{html.escape(c)} {html.escape(n)}:</b> {md(d)}</div>" for c, n, d in spec["standards_key"])
+        cols = '<col style="width:26%"><col style="width:57%"><col style="width:17%">'
+        std_th = f'<th>{html.escape(spec["standards_label"])}</th>'
+        # The legend names only the box kinds this page uses (a unit can have supports and no main).
+        kinds = []
+        if any(spec["sections"][c]["standards"].get("main") for c in want):
+            kinds.append('<span class="std main">Bold box</span> main standard')
+        if any(spec["sections"][c]["standards"].get("support") for c in want):
+            kinds.append('<span class="std sup">Dashed box</span> supporting standard')
+        keyblock = (f'<div class="keyblock"><div class="label">{html.escape(spec["standards_source"])}</div>\n'
+                    f'<div class="key">{key}</div>\n'
+                    f'<p class="legend">{" · ".join(kinds)}</p></div>\n')
+        bottom_cls = "bottom"
+    else:
+        cols = '<col style="width:28%"><col style="width:72%">'
+        std_th = keyblock = ""
+        bottom_cls = "bottom nostd"
 
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Unit {unit} Roadmap</title>
 <link rel="stylesheet" href="../../../templates/lab/shull-lab-tokens.css">
 <link rel="stylesheet" href="../../../templates/_shull_header.css">
 <link rel="stylesheet" href="../../../templates/unit-roadmap/unit_roadmap.css">
-</head><body class="{ {"chemistry": "chem", "physics": "phys", "geology": "geo"}[course] }">
-<span class="code-string">SHULL SCIENCE · {course_word.upper()} · {codes}</span>
-<header class="sh-head"><div class="sh-left">
-<div class="sh-kick"><span class="sh-chip">U{unit}</span><span class="sh-course"></span> · Unit Roadmap{(" · " + html.escape(phase)) if phase else ""}</div>
-<h1 class="sh-title">{html.escape(head)}<span class="sh-acc">{html.escape(words[-1])}</span></h1></div>
+</head><body class="{BODY[course]}">
+<span class="code-string">SHULL · {ABBR[course]} · U{unit} Unit Roadmap · {codes}</span>
+<header class="sh-head sh-display"><div class="sh-left"><span class="sh-chip">U{unit} · Unit Roadmap</span>
+<div class="sh-kick"><span class="sh-course"></span>{(" · " + html.escape(phase)) if phase else ""}</div></div>
 <div class="sh-meta"><div><b class="sh-teacher"></b> · High School <span class="sh-course"></span></div><div class="sh-school"></div>
-<div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div></header>
+<div>{len(sections)} sections · {html.escape(spec["grades"])}</div></div>
+<h1 class="sh-title">{html.escape(head)}<span class="sh-acc">{html.escape(words[-1])}</span></h1></header>
 <section class="intro"><div class="idea"><div class="label">Big Idea</div><p>{md(spec["big_idea"])}</p></div>
 <div class="prior"><div class="label">Builds On</div><ul>{prior}</ul></div></section>
-<table class="sec"><colgroup><col style="width:22%"><col style="width:57%"><col style="width:21%"></colgroup>
-<thead><tr><th>Section</th><th>I Can… (Learning Targets)</th><th>{html.escape(spec["standards_label"])}</th></tr></thead>
+<table class="sec"><colgroup>{cols}</colgroup>
+<thead><tr><th>Section</th><th>I Can… (Learning Targets)</th>{std_th}</tr></thead>
 <tbody>{"".join(rows)}</tbody></table>
-<section class="bottom"><div class="keyblock"><div class="label">{html.escape(spec["standards_source"])}</div>
-<div class="key">{key}</div>
-<p class="legend"><span class="std main">Bold box</span> main standard · <span class="std sup">Dashed box</span> supporting standard</p></div>
-<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
+<section class="{bottom_cls}">{keyblock}<div class="box"><div class="label">How Learning Is Measured</div><ul class="assess">{measured}</ul></div></section>
 </body></html>''', course, unit, title
+
+
+def leftover(pg):
+    """CSS px between the bottom of the page content and the bottom of the page area, less a
+    hair of slack so rounding cannot push the page over."""
+    box = pg._page_box
+    body = box.children[0].children[0]
+    bottom = max((b.position_y + b.margin_height() for b in body.children), default=0)
+    return box.content_box_y() + box.height - bottom - 3
 
 
 def main():
@@ -124,6 +181,18 @@ def main():
 
     from weasyprint import HTML
     doc = HTML(filename=str(html_path)).render()
+    # Rows fill the page: measure the height left under the bottom block on a one-page render and
+    # share it out as row padding, then render again. Type is never changed, only the space.
+    if len(doc.pages) == 1:
+        spare = leftover(doc.pages[0])
+        rows = page.count("<tr><td>")
+        add = min(spare / rows, STRETCH_MAX) if rows and spare > 4 else 0
+        if add:
+            top, bot = add / 2, add - add / 2
+            page = page.replace("</head>", f"<style>table.sec tbody td {{ padding-top: {6 + top:.1f}px; "
+                                f"padding-bottom: {6 + bot:.1f}px; }}</style></head>", 1)
+            html_path.write_text(page)
+            doc = HTML(filename=str(html_path)).render()
     pdf = out / name
     doc.write_pdf(pdf)
     pages = len(doc.pages)

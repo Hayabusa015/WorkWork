@@ -1,6 +1,9 @@
 /* Unit Roadmap page (SHULL-CHG-0100). Print, one page, ink-light.
+   Layout after Matt's original Unit 6 overview (2026-11-23): larger reading type, rows that fill the
+   page height (the builder adds the leftover height to the rows), key left, measured box right.
    Colours come only from ../lab/shull-lab-tokens.css (generated from brand/tokens.json).
-   Never type a hex here: validate_tokens.py checks. */
+   The page-1 header is templates/_shull_header.css (SHULL-CHG-0101, LOCKED); nothing here restyles it.
+   Never type a hex here: validate_tokens.py checks. No text below 8pt except the running footer (7pt+). */
 
 @font-face { font-family: "Archivo"; font-weight: 400; src: url("../../brand/fonts/Archivo-Regular.ttf"); }
 @font-face { font-family: "Archivo"; font-weight: 400; font-style: italic; src: url("../../brand/fonts/Archivo-RegularItalic.ttf"); }
@@ -9,46 +12,59 @@
 @font-face { font-family: "Archivo"; font-weight: 700; src: url("../../brand/fonts/Archivo-Bold.ttf"); }
 @font-face { font-family: "Archivo Narrow"; src: url("../../brand/fonts/ArchivoNarrow[wght].ttf"); }
 
-@page { size: Letter; margin: 0.42in 0.55in 0.45in;
-  @bottom-left  { content: string(code); font: 6.4pt var(--body); color: var(--footer); letter-spacing: .08em; }
-  @bottom-right { content: "UNIT ROADMAP · PAGE " counter(page) " OF " counter(pages); font: 6.4pt var(--body); color: var(--footer); letter-spacing: .08em; }
+@page { size: Letter; margin: 0.42in 0.55in 0.48in;
+  @bottom-left  { content: string(code) " · Page " counter(page) " of " counter(pages); font: 7.4pt var(--body); color: var(--footer); }
+  @bottom-right { content: "Scientific Inquiry, Practice and Applications are built into every section."; font: 7.4pt var(--body); color: var(--footer); }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--body); color: var(--ink); font-size: 9.6pt; line-height: 1.36; background: var(--ground); }
-.code-string { string-set: code content(); height: 0; overflow: hidden; font-size: 0; }
-
-/* Header: templates/_shull_header.css (SHULL-CHG-0101). */
+/* The two course colours on this page. Repoint these two lines to recolour every roadmap
+   (rules, borders, number boxes, standard outlines, dividers | accent text). Token variables only. */
+body { --rm-rule: var(--accent-display); --rm-text: var(--accent); }
+/* Page-1 header: templates/_shull_header.css with the .sh-display variant (SHULL-CHG-0109). */
 .sh-head { margin-bottom: 10px; }
-.intro { display: flex; gap: 18px; }
-.intro .idea { flex: 1.6; }
-.intro .prior { flex: 1; border-left: 1.5px solid var(--structure); padding-left: 10px; font-size: 8.8pt; }
-.label { font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
-.prior .label { color: var(--structure); }
-.prior li { list-style: none; }
-.prior li::before { content: "› "; font-weight: 700; color: var(--structure); }
+body { font-family: var(--body); color: var(--ink); font-size: 10.5pt; line-height: 1.32; background: var(--ground); }
+.code-string { string-set: code content(); display: block; height: 0; line-height: 0; overflow: hidden; font-size: 0; }
+sub, sup { line-height: 0; }
+
+.intro { display: flex; gap: 20px; }
+.intro .idea { flex: 1.65; }
+.intro .idea p { font-size: 11pt; line-height: 1.38; }
+.intro .prior { flex: 1; border-left: 1.2px solid var(--rm-rule); padding-left: 11px; font-size: 9.4pt; line-height: 1.35; }
+.label { font-size: 8pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--rm-text); margin-bottom: 4px; }
+.prior li { list-style: none; padding-left: 10px; text-indent: -10px; }
+.prior li::before { content: "› "; font-weight: 700; color: var(--rm-text); }
 
 table.sec { width: 100%; border-collapse: collapse; margin-top: 14px; }
-table.sec th { font-family: "Archivo Narrow", var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: 8.6pt; text-align: left; padding: 0 8px 5px; border-bottom: 1.5px solid var(--ink); }
-table.sec td { padding: 8px; vertical-align: top; border-bottom: 1px solid var(--rule-hairline); }
-table.sec tr:last-child td { border-bottom: 1.5px solid var(--ink); }
-.num { display: inline-block; font-family: "Archivo Narrow", var(--display); font-weight: 700; font-size: 13pt; line-height: 1; border: 1.5px solid var(--ink); border-radius: 3px; padding: 4px 6px 3px; }
-.sname { font-weight: 700; font-size: 9.8pt; margin-top: 5px; line-height: 1.22; }
-.focus { color: var(--label); font-size: 8.2pt; margin-top: 2px; line-height: 1.3; }
-.ican li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 4px; }
+table.sec th { font-family: "Archivo Narrow", var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: 9pt; text-align: left; padding: 0 8px 5px; border-bottom: 1.5px solid var(--rm-rule); white-space: nowrap; }
+table.sec td { padding: 6px 8px; vertical-align: top; border-bottom: 1px solid var(--rule-hairline); }
+table.sec tr:last-child td { border-bottom: 1.5px solid var(--rm-rule); }
+.num { display: inline-block; font-family: "Archivo Narrow", var(--display); font-weight: 700; font-size: 14pt; line-height: 1; border: 1.5px solid var(--rm-rule); border-radius: 3px; padding: 3px 7px 2px; }
+.sname { font-weight: 700; font-size: 10pt; margin-top: 4px; line-height: 1.22; }
+.focus { color: var(--label); font-size: 8.6pt; margin-top: 2px; line-height: 1.3; }
+.ican li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 4px; }
 .ican li:last-child { margin-bottom: 0; }
-.ican li::before { content: ""; position: absolute; left: 0; top: .36em; width: 7px; height: 7px; border: 1.2px solid var(--accent); border-radius: 1px; }
+.ican li::before { content: ""; position: absolute; left: 0; top: .38em; width: 7.5px; height: 7.5px; border: 1.1px solid var(--rm-rule); border-radius: 1px; }
 .ican b { font-weight: 600; }
 .nw { white-space: nowrap; }
-.std { display: inline-block; font-size: 8pt; border-radius: 3px; padding: 0 5px; margin: 0 3px 4px 0; white-space: nowrap; }
-.std.main { font-weight: 700; border: 1.6px solid var(--ink); }
+.std { display: inline-block; font-size: 8.4pt; border-radius: 3px; padding: 0 5px; margin: 0 3px 4px 0; white-space: nowrap; }
+.std.main { font-weight: 700; border: 1.5px solid var(--rm-rule); }
 .std.sup { font-weight: 400; border: 1px dashed var(--label); color: var(--label); }
 
-.bottom { display: flex; gap: 18px; margin-top: 13px; }
-.bottom .keyblock { flex: 1.4; }
-.bottom .box { flex: 1; border: 1px solid var(--rule-hairline); border-radius: 5px; padding: 8px 11px; }
-.key div { font-size: 8.4pt; margin-bottom: 3px; line-height: 1.32; }
-.legend { font-size: 7.8pt; color: var(--label); margin-top: 5px; }
-.assess li { list-style: none; font-size: 8.4pt; margin-bottom: 2px; padding-left: 11px; position: relative; }
-.assess li::before { content: ""; position: absolute; left: 0; top: .45em; width: 5px; height: 5px; border: 1px solid var(--structure); }
-.note { margin-top: 10px; font-size: 7.6pt; color: var(--label); border-top: 1px solid var(--rule-hairline); padding-top: 4px; }
+/* Curriculum-map marker such as EXT (extension/bonus section): a small outline tag, never backticks. */
+.tag { display: inline-block; font-family: var(--body); font-size: 8pt; font-weight: 700; letter-spacing: .08em;
+  line-height: 1.2; color: var(--rm-text); border: 1px solid var(--rm-rule); border-radius: 2px; padding: 0 3px;
+  vertical-align: 1px; white-space: nowrap; }
+
+.bottom { display: flex; gap: 20px; margin-top: 13px; align-items: flex-start; }
+.bottom .keyblock { flex: 1.6; }
+.bottom .box { flex: 1; border: 1px solid var(--rm-rule); border-radius: 6px; padding: 8px 12px 9px; }
+.key div { font-size: 8.6pt; margin-bottom: 3px; line-height: 1.32; }
+.legend { font-size: 8pt; color: var(--label); margin-top: 6px; }
+.assess li { list-style: none; font-size: 8.8pt; line-height: 1.3; margin-bottom: 3px; padding-left: 12px; position: relative; }
+.assess li::before { content: ""; position: absolute; left: 0; top: .4em; width: 5.5px; height: 5.5px; border: 1px solid var(--rm-rule); }
+
+/* A spec with no standards: no key block, so the measured box spans the page in two columns. */
+.bottom.nostd .box { flex: 1; }
+.bottom.nostd .assess { display: flex; flex-wrap: wrap; column-gap: 22px; }
+.bottom.nostd .assess li { width: calc(50% - 11px); }

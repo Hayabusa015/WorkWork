@@ -1,0 +1,116 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 14,
+  "grades": "Grades 10–12",
+  "big_idea": "Acids and bases are defined by what they do with hydrogen ions. Students describe them with the **Arrhenius and Brønsted–Lowry** definitions, measure them on the **pH** scale, and use neutralization and titration to find an unknown concentration.",
+  "builds_on": [
+    "U6 · S6.4 Naming Acids & Formulas",
+    "U11 · S11.5 Molarity",
+    "Reference packet: strong acids & bases, equations"
+  ],
+  "sections": {
+    "14.1": {
+      "focus": "Arrhenius & Brønsted–Lowry",
+      "ican": [
+        "I can **describe** the properties of acids and bases.",
+        "I can **identify** acids, bases, and conjugate pairs."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "14.2": {
+      "focus": "How much ionizes",
+      "ican": [
+        "I can **explain** strong vs. weak acids and bases.",
+        "I can **tell** a strong acid from a concentrated one."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.IM.1"
+        ]
+      }
+    },
+    "14.3": {
+      "focus": "The pH scale",
+      "ican": [
+        "I can **calculate** pH, pOH, [H^{+}], and [OH^{−}].",
+        "I can **explain** that each pH unit is a tenfold change in [H^{+}]."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "14.4": {
+      "focus": "Acid + base → salt + water",
+      "ican": [
+        "I can **write** a neutralization equation and **name** the salt.",
+        "I can **explain** what happens to H^{+} and OH^{−} ions."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": []
+      }
+    },
+    "14.5": {
+      "focus": "Moles of acid and base",
+      "ican": [
+        "I can **use** mole ratios for acid–base reactions.",
+        "I can **calculate** the volume or concentration to neutralize."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": [
+          "C.IM.3"
+        ]
+      }
+    },
+    "14.6": {
+      "focus": "Unknown concentration",
+      "ican": [
+        "I can **explain** how an indicator shows the endpoint.",
+        "I can **calculate** an unknown concentration from titration data."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.1"
+        ],
+        "support": [
+          "C.IM.3"
+        ]
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ],
+    [
+      "C.IM.3",
+      "Stoichiometry",
+      "molar calculations; solutions; limiting reagents."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

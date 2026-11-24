@@ -31,12 +31,16 @@
   --header-title-size:  17pt;
   --header-kicker-size: 7.5pt;
   --header-meta-size:   7pt;
+  --header-display-title-size: 32pt;
+  --header-display-rule:       1.5pt;
   --header-teacher: "Mr. Shull";
   --header-school:  "James A. Garfield Local Schools";
   --course-name:    "Chemistry";
 }
 
 body.chem { --accent: #B84100; --accent-display: #FF6B1A; --course-name: "Chemistry"; }
+body.chem.pair-blue { --accent: #066679; --accent-display: #3DD6F4; }
+body.chem.pair-mixed { --accent: #B84100; --accent-display: #3DD6F4; }
 body.phys { --accent: #896107;   --accent-display: #F5B82E; --course-name: "Physics"; }
 body.geo  { --accent: #0E766A;   --accent-display: #16B8A6; --course-name: "Geology"; }
 body.neutral { --course-name: "Science"; }
@@ -44,4 +48,9 @@ body.neutral { --course-name: "Science"; }
 /* The rule that makes this safe on paper: --accent is the text-safe deep
    variant and is the ONLY course colour permitted as type on a light ground.
    --accent-display is a fill, rule or marker. Never body text on white.
-   See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008. */
+   See brand/SHULL_DESIGN_SYSTEM.md section 3 and SHULL-CHG-0008.
+   body.chem.pair-blue switches Chemistry to its blue pairing (secondaryDeep as
+   type, secondary as rule). See courses/chemistry/DECISIONS.md, Course brand
+   exceptions (SHULL-CHG-0108).
+   body.chem.pair-mixed: primaryDeep as type, secondary as rule
+   (SHULL-CHG-0109). */

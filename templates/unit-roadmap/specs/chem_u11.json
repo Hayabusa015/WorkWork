@@ -1,0 +1,139 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 11,
+  "grades": "Grades 10–12",
+  "big_idea": "Most chemistry happens in solution. Students explain dissolving, read **solubility** data, and use **molarity** in calculations.",
+  "builds_on": [
+    "U5 · S5.5 Intermolecular Forces",
+    "U10 · S10.2 Stoichiometric Calculations"
+  ],
+  "sections": {
+    "11.1": {
+      "focus": "Solute & solvent",
+      "ican": [
+        "I can **identify** the solute and the solvent in a solution.",
+        "I can **explain** dissolving with “like dissolves like.”"
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.IM.3"
+        ]
+      }
+    },
+    "11.2": {
+      "focus": "Solubility curves",
+      "ican": [
+        "I can **read** a solubility curve at a given temperature.",
+        "I can **tell** saturated, unsaturated, and supersaturated apart."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": []
+      }
+    },
+    "11.3": {
+      "focus": "Amount vs. rate",
+      "ican": [
+        "I can **explain** temperature and pressure effects on solubility.",
+        "I can **tell** solubility apart from dissolving rate."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.6"
+        ],
+        "support": [
+          "C.IM.1"
+        ]
+      }
+    },
+    "11.4": {
+      "focus": "Ions that carry current",
+      "ican": [
+        "I can **classify** strong, weak, and nonelectrolytes.",
+        "I can **write** the ions a salt forms in water."
+      ],
+      "standards": {
+        "main": [],
+        "support": [
+          "C.PM.6",
+          "C.PM.3"
+        ]
+      }
+    },
+    "11.5": {
+      "focus": "Moles of solute per liter",
+      "ican": [
+        "I can **calculate** molarity from grams or moles of solute.",
+        "I can **describe** how to prepare a solution of a given molarity."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
+    },
+    "11.6": {
+      "focus": "M_{1}V_{1} = M_{2}V_{2}",
+      "ican": [
+        "I can **solve** dilution problems with M_{1}V_{1} = M_{2}V_{2}.",
+        "I can **explain** why diluting does not change moles of solute."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
+    },
+    "11.7": {
+      "focus": "Molarity in reactions",
+      "ican": [
+        "I can **use** molarity and volume in stoichiometry problems.",
+        "I can **calculate** how much precipitate two solutions form."
+      ],
+      "standards": {
+        "main": [
+          "C.IM.3"
+        ],
+        "support": []
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.6",
+      "Intermolecular forces of attraction",
+      "types and strengths; effects on melting/boiling point, solubility, vapor pressure."
+    ],
+    [
+      "C.IM.1",
+      "Chemical reactions",
+      "types of reactions; kinetics; energy; equilibrium; acids/bases."
+    ],
+    [
+      "C.IM.3",
+      "Stoichiometry",
+      "molar calculations; solutions; limiting reagents."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

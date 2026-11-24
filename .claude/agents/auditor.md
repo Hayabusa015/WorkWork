@@ -33,7 +33,7 @@ For a unit textbook, run the page-by-page science and print review in `workflows
 - **Render it and look at it.** Then check `pdffonts`: Archivo or Archivo Narrow. DejaVu or
   Liberation means the render used different metrics than the classroom copy will.
 - **Clipped text** at any box, column, or slide edge.
-- **Coloured type on white** using a display colour instead of `primaryDeep`.
+- **Coloured type on white** using a display colour instead of the course's text-safe deep token (`primaryDeep` or `secondaryDeep`), setting two deep tokens as type on one document, or using a non-default pairing or the display header on a document type its course's `DECISIONS.md` does not list.
 - **Grayscale** — would a photocopy still distinguish the categories?
 - **Ink** — any solid fill larger than a small tag, chip, or icon on a print document.
 - **Codes** agreeing across document, filename, and folder path.

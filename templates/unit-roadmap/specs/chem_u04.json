@@ -1,0 +1,128 @@
+{
+  "_comment": "Unit Roadmap spec. Unit title, phase and section titles come from courses/chemistry/DECISIONS.md; do not add them here. 'measured' must agree with DECISIONS.md 'Assessment shape'. Standards follow reports/chem-ohio-standards-verification.md §5 (CONFIRMED rows as main; inference-only, conditional and VIP-for-a-NONE-section rows as support only); key wording from §4.",
+  "course": "chemistry",
+  "unit": 4,
+  "grades": "Grades 10–12",
+  "big_idea": "Atoms bond because bonded atoms are more stable than separate ones. Students use **valence electrons** and **electronegativity** to decide whether atoms transfer, share, or pool electrons, and connect each bond type to the properties of the substance it makes.",
+  "builds_on": [
+    "U2 · S2.4 Electron Stability & Valence Electrons",
+    "U3 · S3.4 Ionization Energy & Electronegativity",
+    "U3 · S3.7 Ion Formation"
+  ],
+  "sections": {
+    "4.1": {
+      "focus": "Energy & the octet rule",
+      "ican": [
+        "I can **explain** why bonded atoms have lower energy.",
+        "I can **use** the octet rule to predict how many electrons an atom gains, loses, or shares."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
+    },
+    "4.2": {
+      "focus": "Electron transfer",
+      "ican": [
+        "I can **describe** an ionic bond as the attraction between ions formed by electron transfer.",
+        "I can **connect** ionic bonding to high melting points."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.1"
+        ]
+      }
+    },
+    "4.3": {
+      "focus": "Shared electron pairs",
+      "ican": [
+        "I can **describe** a covalent bond as a shared electron pair.",
+        "I can **tell** single, double, and triple bonds apart."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.4"
+        ]
+      }
+    },
+    "4.4": {
+      "focus": "A sea of electrons",
+      "ican": [
+        "I can **describe** metallic bonding as a sea of electrons.",
+        "I can **use** that model to explain why metals conduct and can be hammered into shape."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
+    },
+    "4.5": {
+      "focus": "Classifying bonds",
+      "ican": [
+        "I can **calculate** the electronegativity difference of a bond.",
+        "I can **classify** a bond as nonpolar, polar, or ionic."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": [
+          "C.PM.2"
+        ]
+      }
+    },
+    "4.6": {
+      "focus": "Partial charges",
+      "ican": [
+        "I can **draw** a dipole arrow and **label** the partial charges.",
+        "I can **rank** bonds from least to most polar."
+      ],
+      "standards": {
+        "main": [
+          "C.PM.3"
+        ],
+        "support": []
+      }
+    }
+  },
+  "standards_label": "Ohio Standards",
+  "standards_source": "Ohio's Learning Standards for Science (adopted 2018) · Chemistry",
+  "standards_key": [
+    [
+      "C.PM.1",
+      "Atomic structure",
+      "evolution of atomic models/theory; electrons; electron configurations."
+    ],
+    [
+      "C.PM.2",
+      "Periodic table",
+      "properties and trends."
+    ],
+    [
+      "C.PM.3",
+      "Chemical bonding",
+      "ionic and polar/covalent bonds; metallic bonding also introduced."
+    ],
+    [
+      "C.PM.4",
+      "Representing compounds",
+      "formula writing; nomenclature; models and shapes."
+    ]
+  ],
+  "measured": [
+    "Daily practice that builds from basic to multi-step problems",
+    "Friday quizzes (versions A–D)",
+    "Unit test, Day 1: about 25 conceptual multiple-choice questions",
+    "Unit test, Day 2: free-response problems, work shown"
+  ]
+}

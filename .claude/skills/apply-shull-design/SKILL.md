@@ -17,9 +17,10 @@ Rules: `brand/SHULL_DESIGN_SYSTEM.md`. Values: `brand/tokens.json`. This is the 
 
 ## The rule most often broken
 
-> On a light ground, coloured type uses the course's **`primaryDeep`**.
+> On a light ground, coloured type uses the course's text-safe deep token: **`primaryDeep`**, or
+> **`secondaryDeep`** where the course has one and its `DECISIONS.md` says which documents use it.
 > On a dark ground, coloured type uses **`primary`** or **`secondary`**.
-> Neither is ever type on the other.
+> Neither is ever used as type on the other.
 
 **Check `measured.onWhiteVerdict` in `tokens.json` before colouring any text.** Four of the six
 display colours read `NOT TYPE` on white — they were selected for a dark ground before white became
