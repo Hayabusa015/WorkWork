@@ -128,7 +128,7 @@ def arrow(d, a, b, fill=INK, width=4, head=18):
                fill=fill, width=width)
 
 
-def molecule(smiles, w_px, h_px):
+def molecule(smiles, w_px, h_px, coords=None):
     """RDKit drawing with explicit H kept, in the build_diagram_molecule.py style."""
     from rdkit import Chem
     from rdkit.Chem.Draw import rdMolDraw2D
@@ -137,6 +137,15 @@ def molecule(smiles, w_px, h_px):
     mol = Chem.MolFromSmiles(smiles, ps)
     if mol is None:
         sys.exit(f"RDKit could not parse SMILES {smiles!r}")
+    if coords:
+        # fixed 2D positions (atom index -> (x, y)), e.g. water drawn at its real
+        # 104.5 degree angle instead of RDKit's 120 degree default
+        from rdkit import Geometry
+        from rdkit.Chem import rdDepictor
+        rdDepictor.Compute2DCoords(mol)
+        conf = mol.GetConformer()
+        for i, (x, y) in coords.items():
+            conf.SetAtomPosition(i, Geometry.Point3D(x, y, 0.0))
     dr = rdMolDraw2D.MolDraw2DCairo(w_px, h_px)
     o = dr.drawOptions()
     for at in mol.GetAtoms():           # show every C: students have not met skeletal drawings
@@ -317,7 +326,11 @@ def fig_map(out):
 def fig_water_percent(out):
     """7.5: water by atom count (2 of 3 = 67 % H) vs by mass (11.2 % H, 88.8 % O)."""
     im, d = canvas(2.05)
-    mol = molecule("[H]O[H]", 420, 230)
+    import math
+    half = math.radians(104.5 / 2)          # H-O-H 104.5 degrees (U5 VSEPR); no angle label
+    mol = molecule("[H]O[H]", 420, 230,
+                   coords={0: (-math.sin(half), math.cos(half)), 1: (0.0, 0.0),
+                           2: (math.sin(half), math.cos(half))})
     im.paste(mol, (int((W - 420) / 2), 0))
     x0, x1 = 30, W - 30
     bh = 74

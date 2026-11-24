@@ -44,8 +44,8 @@
     {
       "term": "precision",
       "section": "7.1",
-      "def": "how finely a measurement is made, which shows in how many digits the tool lets you record",
-      "accept": "Also accept: how closely repeated measurements agree with each other."
+      "def": "how finely a tool measures, shown by the place value of the last digit it can record; also, how closely repeated measurements agree with each other",
+      "accept": "Accept either meaning."
     },
     {
       "term": "significant figures",
@@ -120,7 +120,7 @@
     {
       "term": "empirical formula mass",
       "section": "7.7",
-      "def": "the sum of the atomic masses in the empirical formula"
+      "def": "the sum of the atomic masses of all the atoms in the empirical formula (count each subscript)"
     }
   ],
   "body": [
@@ -139,11 +139,11 @@
     },
     {
       "type": "p",
-      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 150 lb. It reads in whole pounds, so it can't tell 150 lb from 150.4 lb. A kitchen scale reads to a tenth of a gram, so it can report a spoonful of flour as 12.4 g. The kitchen scale gives you more digits because it measures more finely. **Precision** describes how finely a measurement is made, and it shows in how many digits a tool lets you record. (Scientists also use the word for how closely repeated measurements agree with each other.)"
+      "text": "Every measurement comes from a tool, and every tool has a limit. A bathroom scale might say you weigh 148 lb. It reads in whole pounds, so it can't tell 148 lb from 148.4 lb. A kitchen scale might report a spoonful of flour as 12.4 g. Its last digit is in the tenths place, so it measures more finely than a scale whose last digit is in the ones place. **Precision** has two meanings, and you will see both. It describes how finely a tool measures, which shows in the place value of the last digit you can record. It also describes how closely repeated measurements agree with each other."
     },
     {
       "type": "p",
-      "text": "You see the same idea at the gas pump. A price of $3.299 per gallon is set to a tenth of a cent, even though you can only pay to the cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24. The number of digits in a value tells you how finely it was measured or set."
+      "text": "You see the same idea at the gas pump. A price of $3.299 per gallon has its last digit in the thousandths of a dollar, a tenth of a cent. Pump 12.5 gallons and the math comes to $41.2375, but you pay $41.24, because money is rounded to the cent by rule. The place value of the last digit tells you how finely a value was measured or set."
     },
     {
       "type": "sub",
@@ -151,7 +151,7 @@
     },
     {
       "type": "p",
-      "text": "Here is the rule for how many digits to record: write down every digit you are sure of, plus one digit you estimate. Suppose you measure a pencil with a ruler marked only in whole centimeters (Figure 7.1, top). The tip lands past the 4 cm mark, a little more than halfway to 5. You are sure of the 4, and you can estimate the next digit by eye, so you record 4.6 cm. Writing 4.6382 cm would claim you can see ten-thousandths of a centimeter on a ruler that shows only whole centimeters. Writing 4 cm would throw away a digit you actually have."
+      "text": "When you record a measurement, write down every digit you are sure of, plus one digit you estimate. Suppose you measure a pencil with a ruler marked only in whole centimeters (Figure 7.1, top). The tip lands past the 4 cm mark, a little more than halfway to 5. You are sure of the 4, and you can estimate the next digit by eye, so you record 4.6 cm. Writing 4.6382 cm would claim you can see ten-thousandths of a centimeter on a ruler that shows only whole centimeters. Writing 4 cm would throw away a digit you actually have."
     },
     {
       "type": "p",
@@ -200,7 +200,7 @@
     },
     {
       "type": "p",
-      "text": "Flip the factor and the units come out as dozen squared per egg, which tells you the setup is wrong before you look at the number. Every conversion in this unit works the same way. The only difference is that the factors involve moles."
+      "text": "Flip the factor and the units come out as dozen squared per egg, which tells you the setup is wrong before you look at the number. The mole conversions in Section 7.4 use this same setup, with factors that involve moles."
     },
     {
       "type": "check",
@@ -238,7 +238,7 @@
     },
     {
       "type": "p",
-      "text": "If you counted one particle every second without stopping, counting out one mole would take about 19 quadrillion years, roughly 1.4 million times the age of the universe. If all of the roughly 8.2 billion people on Earth counted at the same time, one particle per second each, it would still take more than 2 million years. Yet a mole of water molecules fills only about 18 mL, a little more than a tablespoon. The number is huge because the particles are tiny."
+      "text": "If you counted one particle every second without stopping, counting out one mole would take about 19 quadrillion years, roughly 1.4 million times the age of the universe. If all of the more than 8 billion people on Earth counted at the same time, one particle per second each, it would still take more than 2 million years. Yet a mole of water molecules fills only about 18 mL, a little more than a tablespoon, because each molecule is extremely small."
     },
     {
       "type": "sub",
@@ -322,7 +322,7 @@
     },
     {
       "type": "p",
-      "text": "Keep two quantities apart. The molar mass of water is always 18.02 g/mol. The mass of a sample of water, in grams, is whatever you put on the balance."
+      "text": "Don't confuse the molar mass of a substance with the mass of a sample of it. The molar mass of water is always 18.02 g/mol. A sample of water can have any mass, and you find that mass with a balance."
     },
     {
       "type": "check",
@@ -360,7 +360,7 @@
     },
     {
       "type": "p",
-      "text": "Here N is the number of particles and n is the number of moles. To go from particles back to moles, divide by 6.022 × 10^{23}. Your reference sheet writes this relationship as particles = n × N_{A}. N_{A} is just a symbol for Avogadro's number, 6.022 × 10^{23}."
+      "text": "Here N is the number of particles and n is the number of moles. To go from particles back to moles, divide by 6.022 × 10^{23}. Reference Sheet 1, Equations & Constants, writes this relationship as particles = n × N_{A}. N_{A} is just a symbol for Avogadro's number, 6.022 × 10^{23} particles per mole."
     },
     {
       "type": "sub",
@@ -382,11 +382,11 @@
         },
         "=  **2.00 mol H_{2}O**"
       ],
-      "after": "Grams of water cancel, leaving moles. The calculator shows 1.9978. The given mass, 36.0 g, has three significant figures, so the answer rounds to 2.00 mol."
+      "after": "Grams of water cancel, leaving moles. The calculator shows 1.99778… The given mass, 36.0 g, has three significant figures, so the answer rounds to 2.00 mol."
     },
     {
       "type": "p",
-      "text": "Pharmacists and lab technicians measure medicine by mass, because a balance can't count molecules. What a substance does in the body depends on how many molecules arrive. Molar mass is what turns a measured mass into a count."
+      "text": "Pharmacists and lab technicians measure medicine by mass, because a balance can't count molecules. What a substance does in the body depends on how many molecules arrive. Molar mass turns a measured mass into a count."
     },
     {
       "type": "check",
@@ -402,7 +402,7 @@
     },
     {
       "type": "p",
-      "text": "**Percent composition** is the percent by mass of each element in a compound. It answers a plain question: of a compound's total mass, how much belongs to each element?"
+      "text": "**Percent composition** is the percent by mass of each element in a compound. It tells you how much of a compound's total mass belongs to each element."
     },
     {
       "type": "sub",
@@ -414,7 +414,7 @@
     },
     {
       "type": "p",
-      "text": "Water works out to 11.2% hydrogen and 88.8% oxygen by mass, and that surprises most people. Two of the three atoms in a water molecule are hydrogen, so by atom count water is two-thirds hydrogen. By mass it is mostly oxygen, because each hydrogen atom (1.01) has far less mass than the oxygen atom (16.00). Percent by atom count and percent by mass answer different questions (Figure 7.5). A common error is leaving out the subscript, which counts only one of the two hydrogen atoms."
+      "text": "Water works out to 11.2% hydrogen and 88.8% oxygen by mass. Two of the three atoms in a water molecule are hydrogen, so by atom count water is two-thirds hydrogen. By mass it is mostly oxygen, because each hydrogen atom (1.01) has far less mass than the oxygen atom (16.00). Percent by atom count and percent by mass answer different questions (Figure 7.5). A common error is leaving out the subscript, which counts only one of the two hydrogen atoms."
     },
     {
       "type": "figure",
@@ -428,7 +428,7 @@
     },
     {
       "type": "p",
-      "text": "A pure compound always has the same percent composition, however much of it you have. A drop of pure water and a full tank of pure water are both 11.2% hydrogen by mass, because every molecule in them is the same H_{2}O. That has practical consequences. If you split water to make hydrogen fuel, only about 112 g of every 1 kg of water is hydrogen."
+      "text": "A pure compound always has the same percent composition, however much of it you have. A drop of pure water and a full tank of pure water are both 11.2% hydrogen by mass, because every molecule in them is the same H_{2}O. So if you split water to make hydrogen fuel, only about 112 g of every 1 kg of water is hydrogen."
     },
     {
       "type": "check",
@@ -460,7 +460,7 @@
         "Assume a 100 g sample, so each percent becomes a mass in grams.",
         "Change each mass to moles by dividing by that element's atomic mass.",
         "Divide every mole value by the smallest one.",
-        "Round to whole numbers. If a value lands near x.5 or x.33, multiply all of the values by 2 or 3 instead of rounding.",
+        "Round to whole numbers. If a value lands near x.5, multiply all of the values by 2. Near x.33 or x.67, multiply by 3. Near x.25, multiply by 4.",
         "Use the whole numbers as the subscripts."
       ]
     },
@@ -504,7 +504,7 @@
     },
     {
       "type": "p",
-      "text": "You need the empirical formula and one more piece of data: the compound's molar mass, which has to be measured separately. First find the **empirical formula mass**, the sum of the atomic masses in the empirical formula. Then divide the compound's molar mass by the empirical formula mass. The result is a whole number, and you multiply every subscript in the empirical formula by it. For glucose, the empirical formula mass of CH_{2}O is 30.03 g/mol, and 180.18 g/mol divided by 30.03 g/mol is 6. If your result is not close to a whole number, check your work. A molecule can't hold a fraction of an atom."
+      "text": "You need the empirical formula and one more piece of data: the compound's molar mass, which has to be measured separately. First find the **empirical formula mass**, the sum of the atomic masses of all the atoms in the empirical formula, counting each subscript. Then divide the compound's molar mass by the empirical formula mass. The result is a whole number, and you multiply every subscript in the empirical formula by it. For glucose, the empirical formula mass of CH_{2}O is 30.03 g/mol, and 180.18 g/mol divided by 30.03 g/mol is 6. If your result is not close to a whole number, check your work. A molecule can't hold a fraction of an atom."
     },
     {
       "type": "sub",
@@ -553,7 +553,8 @@
       {
         "q": "A lab report says an unknown compound has the empirical formula CH. Your lab has acetylene (C_{2}H_{2}) and benzene (C_{6}H_{6}). Can you tell which one it is from the empirical formula alone? What one measurement would settle it, and how?",
         "lines": 7,
-        "answer": "No. Both reduce to CH and both are 92.2% carbon. Measure the molar mass: about 26 g/mol is 2 × CH (acetylene) and about 78 g/mol is 6 × CH (benzene)."
+        "answer": "No. Both reduce to CH and both are 92.2% carbon. Measure the molar mass: about 26 g/mol is 2 × CH (acetylene) and about 78 g/mol is 6 × CH (benzene).",
+        "accept": "Also accept: state (gas vs liquid), as stated in 7.7."
       }
     ],
     "vocabTitle": "Vocabulary in your own words",
@@ -563,7 +564,7 @@
   "key": {
     "teacherNotes": [
       "Glucose molar mass: the reading prints 180.18 g/mol, which is what students get from their periodic table (C 12.01, H 1.01, O 16.00). Published sources that use IUPAC atomic weights give 180.16 g/mol. A student who looks it up will see the 0.02 g/mol difference; both are correct for the values used. The same logic gives benzene 78.12 (student table) vs 78.11 (IUPAC).",
-      "Precision is bolded and defined in 7.1 as how finely a measurement is made, at your request. The parenthetical also gives the repeated-measurements meaning. Accept either meaning on the vocabulary page.",
+      "Precision is bolded and defined in 7.1 with both meanings: how finely a tool measures (the place value of the last digit) and how closely repeated measurements agree. Accept either meaning on the vocabulary page.",
       "The 7.4 map (Figure 7.4) shows the boxes and arrows only. The factors are in the text, so the worksheet's blank map is not given away."
     ]
   }

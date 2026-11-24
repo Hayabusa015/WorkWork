@@ -768,7 +768,8 @@ def build_key(spec, out_path):
     head("Questions (back page) — exemplar answers")
     for i, q in enumerate(spec["back"]["questions"], 1):
         qa(f"{i}.", q["q"], q["answer"],
-           "Accept any answer that makes the same points in the student's own words.")
+           " ".join(x for x in (q.get("accept"), "Accept any answer that makes the same points "
+                                "in the student's own words.") if x))
     head("Vocabulary — accepted definitions")
     for v in spec["vocab"]:
         tt = doc.add_table(rows=1, cols=1)
