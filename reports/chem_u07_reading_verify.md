@@ -87,3 +87,59 @@ I re-solved every number myself. I did not open the `.docx` files separately. Th
 
 - **Observed:** the key says precision was bolded "at your request". I have no record of that request in the repo. It conflicts with brief §2, which said precision should be informal and not bold, because it is not in DECISIONS. Treated as Matt's instruction (precedence 1). Flagged only so Matt can confirm.
 - **Inferred:** the stale 9-page PNG set comes from an earlier build. It is not referenced by the spec.
+
+---
+
+## Round 2: rebuilt packet (2026-11-24)
+
+**Checked:**
+- The rebuilt student PDF: all 8 pages, read as rendered images
+- The rebuilt key PDF: both pages
+- The current `templates/reading/specs/chem_u07_reading.json`
+
+**Checked against:**
+- `chem_data.py` and Reference Sheet 2 rules (`build_reference.py` l.162–168)
+- DECISIONS U1 (isotopes folded into 1.3, l.25–27) and U5 (l.46–48)
+
+I re-solved every new number. I did not open the `.docx` separately.
+
+**Result:** 0 Critical, 1 Major, 4 Minor. 10 of the 11 Round 1 findings are fixed. Round 1 #8, the figure angle, is optional and unchanged.
+
+### Round 2 findings
+
+| # | Item | Finding | Evidence (page, exact quote) | Severity | Recommendation |
+|---|---|---|---|---|---|
+| R2-1 | 7.7 Connection: benzene as a solvent | **Outdated, and it touches safety.** Benzene is a known human carcinogen: IARC Group 1, with an OSHA benzene standard (29 CFR 1910.1028) setting a PEL of 1 ppm. Its use as a general solvent has been largely phased out. Most benzene today is a feedstock for other chemicals, for example benzene → ethylbenzene → styrene → polystyrene. Saying in the present tense that it "is used as a liquid solvent" describes a past use as current. It could also suggest benzene is an ordinary lab or shop solvent. The brief said to add no health claims, and that still holds: the fix is to change the use, not to add a warning. | p.6: "Acetylene is a welding gas, and benzene is used as a liquid solvent." | **Major** | "Acetylene is a welding gas, and benzene is a liquid used to make plastics such as polystyrene." Keep the rest of the box. Its chemistry is correct: same 1 : 1 C:H ratio, acetylene is a gas (sublimes at −84 °C) and benzene is a liquid (boils at 80.1 °C), and "size and structure" decide this, which is U5 5.6 prior knowledge. |
+| R2-2 | Why It Matters: two overstated phrases | (a) "they react by count, one particle at a time" is not quite right: particles react in fixed whole-number ratios by count, not "one at a time". (b) "a chemist can only weigh things on a balance" overstates it, since chemists also measure volumes. The baking-soda example is fine: too little gives poor rise, and too much gives a soapy, bitter taste. | p.1: "they react by count, one particle at a time … a chemist can only weigh things on a balance" | Minor | (a) "they react in fixed ratios by count". (b) "and in the lab a chemist measures amounts by weighing them on a balance". |
+| R2-3 | 7.3 Connection: isotopes and average atomic mass | **Only half of the reason is given.** An average atomic mass works because (1) a sample holds an enormous number of atoms, **and** (2) natural samples of an element contain nearly the same mix of isotopes. The printed reason gives only (1). The U1 isotope reference is valid: isotopes are taught inside 1.3 (DECISIONS l.25–27). | p.4: "chemists use the average atomic mass, which works because even a tiny sample holds an enormous number of atoms." | Minor | "…which works because a natural sample of an element has nearly the same mix of isotopes, and even a tiny sample holds an enormous number of atoms." |
+| R2-4 | On Your Own 7.3: CH₄ value from published sources | **Students who look it up will see a different number.** Published sources using IUPAC values give 16.04 g/mol (12.011 + 4 × 1.008 = 16.043). This is the same issue as glucose and benzene, which the key already explains in a teacher note, but CH₄ is not mentioned. The printed 16.05 is correct for the student table. | Key p.1 OYO 7.3: "16.05 g/mol". Teacher notes cover glucose and benzene only | Minor | Add "methane 16.05 (student table) vs 16.04 (IUPAC)" to the existing glucose/benzene teacher note. Do not add it to the student page. |
+| R2-5 | Fig 7.5 water angle (Round 1 #8) | Unchanged. It is still drawn at about 120°. | p.5 | Minor (optional) | Same as Round 1 #8. |
+
+### Round 2 confirmations (all PASS unless noted)
+
+| Check | Result | Working / evidence |
+|---|---|---|
+| 7.1 Connection: "12.4382 g … 1,000 times finer" | PASS | The last digit of 12.4382 is in the 0.0001 g place, and the scale reads to 0.1 g. 0.1 ÷ 0.0001 = 1,000 ✓. Rounding to 12.4 g is correct |
+| 7.2 Connection: about $73 trillion per person | PASS | 6.022 × 10²³ ÷ 8.2 × 10⁹ = 7.34 × 10¹³. With 8.3 × 10⁹ it is 7.26 × 10¹³. Both round to about $73 trillion. This fits the text's "more than 8 billion" (8.0 × 10⁹ would give $75 trillion, so "about" is fair) |
+| 7.3 Connection: nickels | PASS (R2-3) | 200 ÷ 5.00 = 40. "Every nickel has the same mass" is fine at this level (US Mint 5.000 g) |
+| 7.4 Connection: medicine | PASS | n = m ÷ M, so at equal mass, a smaller M gives a larger n, and more molecules ✓. "Do not hold equal numbers" is true unless the molar masses are equal; fine at this level |
+| 7.5 Connection: 112 g H / 888 g O per kg | PASS | 0.112 × 1000 = 112. 0.888 × 1000 = 888. 112 + 888 = 1000 ✓ |
+| 7.6 Connection: percent data first | PASS | Consistent with brief §2 7.6 (kept general, no instruments named) |
+| 7.7 Connection: same ratio, different state | **Major** (R2-1) for "solvent"; the rest PASS | See R2-1 |
+| On Your Own 7.3: CH₄ | PASS | 1 × 12.01 + 4 × 1.01 = 12.01 + 4.04 = **16.05 g/mol**. Addition rule: both terms have 2 decimal places, so 16.05 ✓. "Methane, the main gas in natural gas" is correct (methane is the major component) |
+| On Your Own 7.4: 64.0 g O₂ | PASS | 64.0 ÷ 32.00 = 2.000. 3 sig figs (set by 64.0) gives **2.00 mol** ✓. The key note is correct. Uses the O₂ molar mass printed in 7.3 (32.00). No untaught step |
+| On Your Own: no duplication with sibling specs | PASS | Neither CH₄ nor 64.0 g appears in any other `*chem_u07*` spec |
+| On Your Own: key matches student | PASS | Stems are identical. Key steps match the Example 7.3 / 7.4 layout. Examples are renumbered 7.3 and 7.4 consistently in the text, the stems and the key |
+| Definition lines vs `spec.vocab` | PASS | All 16 lines on student pp.1–6 match the `vocab[].def` strings word for word (only the first letter is capitalised), including precision ("…shown by the place value of the last digit it can record; also, how closely repeated measurements agree with each other") and empirical formula mass ("…(count each subscript)"). Key p.2 vocab matches too |
+| Round 1 #1 scale (148 lb / 12.4 g, place value) | FIXED | p.1 |
+| Round 1 #2 precision wording | FIXED | p.1–2, both meanings, place value; key note updated |
+| Round 1 #3 gas pump framing | FIXED | p.2 "money is rounded to the cent by rule" |
+| Round 1 #4 Q3 accept | FIXED | Key p.2 "Also accept: state (gas vs liquid)" |
+| Round 1 #5 N_A unit / sheet name | FIXED | p.4 "Reference Sheet 1 … 6.022 × 10²³ particles per mole" |
+| Round 1 #6 empirical formula mass | FIXED | Text, definition line and key |
+| Round 1 #7 x.67 / x.25 | FIXED | p.6 step 4 |
+| Round 1 #9 calculator 1.99778… | FIXED | p.4 |
+| Round 1 #10 population | FIXED | p.3 "more than 8 billion people" |
+| Round 1 #11 stale PNGs | FIXED | `build/chem_u07_reading/png/` is now empty |
+| No molar volume / STP / UNVERIFIED / standard codes | PASS | None found in the rebuilt spec or PDF |
+| Every other unchanged fact and number | PASS | Re-checked against the Round 1 tables. Values unchanged |
