@@ -315,3 +315,104 @@ I rebuilt U7 at `041566b` into the scratchpad and compared it with `build/chem_u
 ## R3-8. Release note
 
 QA passes on student `4f2814f5…` / key `c5002297…`. The edition can go to the ordinary approval-to-file gate, with A-3 and A-6 carried on the record and R3-1/R3-2 at the designer's discretion. If the designer applies R3-1 or R3-2, the change is text-only on p1/p3. I would then recheck those pages, pagination, and the leaf position.
+
+---
+
+# Round 4: recheck after the stacked cover
+
+Auditor | 2026-11-25 | Same workflow (including SHULL-CHG-0117 and SHULL-CHG-0118). Report only: no deliverable, spec or other file was changed.
+
+## Verdict: **PASS**
+
+- **The stacked cover is in the confirmed order** and every claim on it traces to a source.
+- **The charge table matches 3.7**, and R3-1 (aluminum) and R3-2 ("a monatomic ion") are fixed.
+- **The How to Use steps match the actual tear-off**, and both changed key notes are accurate.
+- **The p2–p5 reflow changed no wording besides R3-2**, and no figure is separated from its reference.
+- **p6–p8 are pixel-identical to Round 3.** The leaf, ink, fonts, binding, thumb tab and U7 regression all pass.
+- **Four minor or info items (R4-1 to R4-4) are recorded below; none blocks release.** A-3 (sources unreachable) and A-6 (phosphite) stay open as before.
+
+## R4-1. Version and evidence reuse
+
+| Item | Value |
+|---|---|
+| Commit | `0947c27` (HEAD), "U6 reading: stacked cover…; R3-2 wording". It changes the builder (`front.layout`: `stacked` default, or `columns`), the U6 spec, and the U7 spec (pins `layout: columns`) |
+| Student PDF | sha256 `0cdc631632ed9df76b04e7a47bb3e4bb1004ffca118128c5b3125b957ecdecdf`, 8 pp. DOCX `03c9add6…8b857` |
+| Key PDF | sha256 `b384a4e7778bd4000af534dc39257498359f5759c7acee9975cbe62dd24c0798`, 2 pp. DOCX `56148586…f336fef` |
+| Round 3 baseline | `scratchpad/old/` student `4f2814f5…` and key `c5002297…`, identical to the Round 3 export |
+| Rebuild at HEAD | U6 rebuilt into the scratchpad. Both DOCX files match the shipped ones part for part; both PDFs have identical text and 0 differing pixels |
+| My diff, Round 3 → Round 4 | **p6, p7, p8: text identical and 0 differing pixels.** Round 3 evidence is reused for them. p1–p5 and both key pages changed. A word-sequence diff over the whole student PDF shows the only text changes are: the new cover (shortened Why It Matters, How to Use, the charge table) and "the ion" → "a monatomic ion" (p3). Everything else in p2–p5 is the same words in the same order, only reflowed. Key: two notes changed (R4-3) |
+| Proof method | Screen proof only (110 dpi full-page grayscale; a 220 dpi crop of the refresher table). No physical photocopy |
+
+## R4-2. Cover
+
+| Check | Result |
+|---|---|
+| Order (Matt, 2026-11-25, recorded in the spec `$comment`) | PASS: title → Why It Matters → In This Unit → Key Refreshers → How to Use This Reading → 6.1. Single column; blocks separated by rules |
+| Why It Matters | "The box in your kitchen says baking soda. The FDA lists it as sodium bicarbonate, and a chemist may call it sodium hydrogen carbonate. All three names mean one compound, NaHCO₃. A systematic name tells you which ions it contains and in what ratio, so you can write its formula." Four lines. The FDA claim traces to dossier WIM-a (21 CFR 184.1736, S; primary still refused, A-3). Science correct. HCO₃⁻ is no longer printed (see the key note, R4-3) |
+| In This Unit | PASS. 6.1–6.4 with titles verbatim from DECISIONS l.50–52 |
+| How to Use, step 1: "Read one section at a time, with a pencil and your Polyatomic Ions, Naming Toolkit and Metals with Multiple Charges sheets." | PASS. These are sheets 6, 7 and 8 (DECISIONS l.205–217) |
+| Step 2: "Each term in **bold** is defined where it first appears." | PASS. Ten bold body terms, each with its definition in the sentence |
+| Step 3: "Tear off the last sheet. Answer its four questions, write the ten definitions, and turn it in." | PASS. p7 has four questions (6.1–6.4); p8 lists ten terms with write-in lines (SHULL-CHG-0118); the leaf is the last physical sheet |
+| Line length | Why It Matters and How to Use wrap at about 70 characters. Refresher items are single lines at 9 pt (rule-mandated one-liners) |
+
+## R4-3. Key Refreshers (SHULL-CHG-0117), the charge table and the box question
+
+| Check | Result |
+|---|---|
+| Placement | PASS. After the section list and Why It Matters, before 6.1 |
+| Count / form | PASS. Three items, each led by "Unit N (N.n):": "Unit 3 (3.7):", "Unit 3 (3.7):", "Unit 4 (4.2, 4.3):". Items 1 and 3 are single lines, unchanged from Round 3 and traced there (U3 quiz 3.7; deck slides 16, 22; U4 deck l.170–186) |
+| Item 2 with inline table | Lead line "Main-group ion charges follow the group:" followed by a one-row table: GROUP 1 / 2 / 13 / 15 / 16 / 17 → CHARGE 1+ / 2+ / 3+ / 3− / 2− / 1−, with "aluminum (Al³⁺)" under 13. **Every value is correct** and matches 3.7: U3 quiz 3.7 solutions (`chem_u03_quiz.json` l.61, 113, 192: Sr²⁺ group 2, Br⁻ 17, Al³⁺ 13, K⁺ 1, S²⁻ 16, N³⁻ 15, Rb⁺, Se²⁻, P³⁻) and U6 deck slide 16 ("Group 1 +1, Group 2 +2, Aluminum +3 … Group 17 −1, Group 16 −2, Group 15 −3"). Tying 13 to aluminum specifically is right: it avoids implying that boron forms B³⁺. The table is live text (Archivo 9 pt; the note is 8 pt with a 4.6 pt superscript), outline only, and legible in grayscale. **R3-1 is closed.** See R4-1 on the "one-line" wording |
+| Reminders only | PASS. No teaching sentence, example or bold term. The lead-ins are grey label type |
+| Tear-off independence | PASS (p7 unchanged; no question draws on a refresher) |
+| One fact, one place | PASS. 6.3 still points to the refreshers ("Main-group ions have the charges listed in the Key Refreshers on page 1"), and the list now includes aluminum |
+| **Designer's question: rules, not an outlined box** | **Acceptable.** SHULL-CHG-0117 asks for a "short Key Refreshers block", not a box. On the stacked cover every block (Why It Matters, In This Unit, Key Refreshers, How to Use) uses the same treatment: a letterspaced label kicker and a rule above and below. The block is clearly separated in grayscale by its "KEY REFRESHERS" label and rules. Uniform treatment avoids giving one cover block more visual weight than the others. Ink and no-fill rules are unaffected either way |
+
+## R4-4. Reflow (p2–p5) and R3-2
+
+| Check | Result |
+|---|---|
+| R3-2 | p3 now reads "That subscript 2 belongs to the element. It never carries over to a monatomic ion inside a compound: sodium chloride is NaCl, not NaCl₂." Correct; the peroxide reading is excluded. **CLOSED** |
+| Figure adjacency | PASS. Fig 6.1: p1, beside its reference in the same section. Fig 6.2: p2, directly under "Which naming system?" (reference). Figs 6.3 and 6.4: p3, each under its reference. Fig 6.5: p4, under "Writing the formula". Fig 6.6: p4, under its reference with Example 6.3 above. Fig 6.7: p5, under its reference. Numbering 6.1–6.7 is in order; all cross-references are correct |
+| Splits | No Example, On Your Own or Connection box is split across a column or page. 6.4 now starts at the top of p5. Only prose sentences cross page boundaries. One margin note is separated; see R4-2 in the table below |
+| Clipped text / margins | PASS. No span crosses the outside margin on any page of either PDF. No line ends in a bare suffix hyphen |
+| Science | Unchanged wording, re-read on the reflowed pages; all as verified in Rounds 1–3 |
+
+## R4-5. Key notes
+
+| Note | Result |
+|---|---|
+| Key Refreshers note: "…three one-line reminders from 3.7 Ion Formation and 4.2/4.3 … The main-group charges are stated only in the refresher, as a small group/charge table that includes Group 13, aluminum (Al³⁺), and Section 6.3 points back to it." | Accurate as to content and sources. "One-line" sits slightly oddly beside "table" (see R4-1) |
+| Phosphite note: "Carbonate → hydrogen carbonate was not used because sodium hydrogen carbonate, NaHCO₃, is named in Why It Matters." | Accurate for the shortened Why It Matters (it names sodium hydrogen carbonate and NaHCO₃; it no longer prints HCO₃⁻) |
+| Everything else in the key | Unchanged text: tear-off answers, On Your Own solutions, and the ten expected definitions matching the reading word for word (Round 3). It reflowed: key p1 now ends after tear-off 6.1, and p2 carries 6.2–6.4, the solutions and the vocabulary. Nothing clipped |
+
+## R4-6. Leaf and gate re-run
+
+| Check | Result |
+|---|---|
+| Leaf | Reading ends on **p5**; **p6** blank back; leaf **p7/p8**. All three are pixel-identical to Round 3, so Round 3's leaf evidence holds: NAME line; exact due line; four single-part questions 6.1–6.4; ten write-in terms with no printed definitions; key definitions match the reading; long-edge orientation. Removing p7/p8 keeps all reading content |
+| Fonts | PASS. Student: ArchivoRoman Regular and Bold, plus ArchivoNarrow; `audit_fonts.py` OK. Key: `--key` OK |
+| Ink | PASS. Student worst 7.57% (p3), average 4.34%; key worst 6.74%. "No fill" on every page; widest solid band 0.00 in |
+| Binding | PASS. `audit_binding.py` OK for 8 + 2 pages |
+| Thumb tab | PASS. Outline only, 0.220 in from the outside edge on all 8 pages |
+| Coloured type / codes / banned grep | PASS. Same token palette; chip `U06 / S6.1–S6.4`; `validate_codes.py` OK; banned list: no hits |
+
+## R4-7. U7 regression
+
+`build/chem_u07_reading/` (student `e52e57c9…`, key `e7d21724…`, unchanged since Round 2) was compared with `scratchpad/u7_before/`, `scratchpad/u7_after/` and my own HEAD rebuild. **All three match exactly** (DOCX part for part; PDF text identical and 0 differing pixels, 8 + 2 pages). The `layout: columns` pin keeps U7's two-column cover.
+
+## R4-8. Findings
+
+| # | Page / item | Claim | Evidence / result | Severity | Disposition |
+|---|---|---|---|---|---|
+| R4-1 | p1 refresher item 2 | SHULL-CHG-0117 "two to five one-line items" | Item 2 is a one-line lead plus an inline one-row data table and a note: about three printed lines. It is still a single reminder with no teaching, and the coordinator relayed the table as the answer to R3-1. I judge it within the rule's intent and pass it. It is the one place where the cover departs from the letter of "one-line" | Minor | Accept on the record. If Matt wants the letter of the rule, the fallback is Round 3's single text line with ", Group 13 (aluminum) is 3+" added |
+| R4-2 | p1 → p2 | Margin note "Molecular compound — …" | The bold in-text definition is on p1 (last lines of the right column). Its optional margin note was pushed to the top of p2, the back of the same sheet. The definition itself is not separated, since the workflow keeps the definition in the prose | Minor | Optional: keep the margin note with its paragraph |
+| R4-3 | p1, 6.1 left column | Column fill | The left column ends about 1.3 in early because Fig 6.1 did not fit under the first paragraph and moved to the top of the right column. Reading order is still correct, and the figure sits beside its reference | Nice-to-have | Optional |
+| R4-4 | Builder, `front.layout` default | Cover layout for future readings | The builder now defaults every new reading spec (any course) to the stacked cover, attributed to Matt, 2026-11-25. The recorded decision is U6's cover. Whether it is the default for all Chemistry, Physics and Geology readings is a cross-course design choice (CLAUDE.md §2 test). U7 is pinned and unchanged | Info (process, not this deliverable) | Overseer: confirm with Matt that "stacked by default" is meant for all readings, or record it through change control |
+| R3-1 | Refresher charges | Aluminum | Now in the table | CLOSED | — |
+| R3-2 | p3 | "a monatomic ion" | Applied | CLOSED | — |
+| A-3 | External locators | — | Unchanged; hosts refused (proxy 403) | OPEN, recorded limitation | As before |
+| A-6 | p3 On Your Own 6.2, phosphite | — | Unchanged | OPEN, minor | Matt to confirm Option A |
+
+## R4-9. Release note
+
+QA passes on student `0cdc6316…` / key `b384a4e7…`. Any filing-queue status set after Round 3 should now point at these hashes. The edition can go to the ordinary approval-to-file gate, with A-3 and A-6 carried on the record. R4-1 to R4-3 are at the designer's or Matt's discretion; R4-4 goes to the Overseer.
