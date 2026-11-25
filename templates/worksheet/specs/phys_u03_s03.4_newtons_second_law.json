@@ -1,0 +1,684 @@
+{
+ "$comment": "Physics 3.4 practice set, Newton's Second Law: 7 problems, Matt's net-force-set style. One-time build override: RAMP['physics'] = 2/3/1/1 in memory for 7 items (see build script). Tier tags hidden (tierTags: false). No graph item and everyday scenarios: rule conflicts reported, not resolved. No μ (3.5 Friction not yet taught); friction and drag are given forces. Descriptor 'Newton's Second Law' pending Matt's OK.",
+ "course": "physics",
+ "unit": 3,
+ "sections": [
+  "3.4"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30–40",
+ "equationLabel": "EQUATIONS YOU MAY USE",
+ "pagesPerSection": 1,
+ "equationStyle": "inline",
+ "equationColumns": 2,
+ "tierTags": false,
+ "keyLayout": "side",
+ "keyFbdIn": 2.6,
+ "keyStepScale": 0.85,
+ "sectionsContent": [
+  {
+   "code": "3.4",
+   "title": "Newton's Second Law",
+   "compactTop": true,
+   "priorKnowledge": {
+    "items": [
+     "∑F adds every force, with signs for direction (S3.2). Split an angled force with sin and cos (S2.1)."
+    ]
+   },
+   "equations": [
+    {
+     "note": "second law",
+     "plain": "∑F = ma     a = ∑F / m"
+    },
+    {
+     "note": "weight",
+     "plain": "F_{g} = mg     g = 9.8 m/s²"
+    },
+    {
+     "note": "frictionless ramp",
+     "plain": "a = g sin θ"
+    },
+    {
+     "note": "elevator (up +)",
+     "plain": "F_{N} − mg = ma"
+    }
+   ],
+   "directions": "Draw a free-body diagram, then solve. Forward, east, up and down a slide are positive. Answers need units and directions.",
+   "questions": [
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  2.00 m/s² forward  ]",
+     "prompt": "Priya pushes a 15.0 kg grocery cart with 45.0 N forward. Wheel friction pushes back with 15.0 N. Find its acceleration.",
+     "solution": "Forward is positive. ∑F = 45.0 − 15.0 = 30.0 N forward. a = ∑F/m = 30.0/15.0 = 2.00 m/s² forward.",
+     "finalAnswer": "2.00 m/s² forward",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "45.0 N",
+          "dir": "right",
+          "mag": 45.0
+         },
+         {
+          "label": "f = 15.0 N",
+          "dir": "left",
+          "mag": 15.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 22.0
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 22.0
+         }
+        ],
+        "surface": true
+       }
+      ],
+      "arrowPx": 150,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "forward = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 45.0 N − 15.0 N = 30.0 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "∑F",
+          "m"
+         ]
+        },
+        "=",
+        {
+         "frac": [
+          "30.0 N",
+          "15.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.00 m/s^{2} forward"
+      },
+      {
+       "say": "F_{N} and F_{g} balance and are not to scale; the cart's weight is 147 N.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "warm-up",
+     "points": 2,
+     "calculation": true,
+     "selfCheck": "[  80.0 kg  ]",
+     "prompt": "Your electric scooter's motor drives you forward with 180 N, and air drag plus rolling friction push back with 60.0 N. You speed up at 1.50 m/s². What is the mass of you and the scooter together?",
+     "solution": "Forward is positive. ∑F = 180 − 60.0 = 120 N forward. m = ∑F/a = 120/1.50 = 80.0 kg.",
+     "finalAnswer": "80.0 kg",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "180 N",
+          "dir": "right",
+          "mag": 180
+         },
+         {
+          "label": "60.0 N",
+          "dir": "left",
+          "mag": 60.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 90.0
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 90.0
+         }
+        ],
+        "surface": true
+       }
+      ],
+      "arrowPx": 150,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "forward = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 180 N − 60.0 N = 120 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F = ma, so m =",
+        {
+         "frac": [
+          "∑F",
+          "a"
+         ]
+        }
+       ]
+      },
+      {
+       "row": [
+        "m =",
+        {
+         "frac": [
+          "120 N",
+          "1.50 m/s^{2}"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "m ="
+       ],
+       "value": "80.0 kg"
+      },
+      {
+       "say": "1 N = 1 kg·m/s^{2}, so N ÷ m/s^{2} leaves kg. Mass has no direction.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  150 N west  ·  2.50 m/s² west  ]",
+     "prompt": "Jada is coasting east on her bike when a dog darts out, so she brakes. She and the bike are 60.0 kg. Her brakes give 105 N west and air drag 45.0 N west. Find ∑F and her acceleration. Which way does she accelerate while rolling east?",
+     "solution": "East is positive. ∑F = −105 − 45.0 = −150 N, so 150 N west. a = −150/60.0 = −2.50 m/s², so 2.50 m/s² west. She accelerates west, the direction of ∑F, even though she is still moving east: she is slowing down.",
+     "finalAnswer": "∑F = 150 N west; a = 2.50 m/s² west, while she still moves east (slowing down)",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "brakes 105 N",
+          "dir": "left",
+          "mag": 105,
+          "offset": -0.3
+         },
+         {
+          "label": "drag 45.0 N",
+          "dir": "left",
+          "mag": 45.0,
+          "offset": 0.3
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 55.0
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 55.0
+         }
+        ],
+        "surface": true
+       }
+      ],
+      "arrowPx": 130,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "east = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = −105 N − 45.0 N"
+       ]
+      },
+      {
+       "answer": [
+        "∑F ="
+       ],
+       "value": "150 N west"
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "∑F",
+          "m"
+         ]
+        },
+        "=",
+        {
+         "frac": [
+          "−150 N",
+          "60.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.50 m/s^{2} west"
+      },
+      {
+       "say": "West, the way ∑F points. She is still moving east, so she is slowing down.",
+       "ink": "pen"
+      },
+      {
+       "say": "No arrow for her motion east. F_{N} and F_{g} (588 N) balance; not to scale.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  2.30 m/s² forward  ·  118 N  ]",
+     "prompt": "Running late for her flight, Nora pulls her 15.0 kg rolling suitcase by its handle with 45.0 N at 40.0° above the horizontal. Ignore friction.",
+     "parts": [
+      "a.  Find the suitcase's acceleration.",
+      "b.  Find the normal force from the floor."
+     ],
+     "solution": "Forward and up are positive. Horizontal part 45.0 cos 40.0° = 34.5 N; vertical part 45.0 sin 40.0° = 28.9 N.\na. a = 34.5/15.0 = 2.30 m/s² forward.\nb. No vertical acceleration: FN + 28.9 − 147 = 0, so FN = 118 N up.",
+     "finalAnswer": "a. 2.30 m/s² forward. b. 118 N up.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "45.0 N",
+          "dir": 40,
+          "mag": 45.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 118.07455756410573
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 147.0
+         }
+        ],
+        "surface": true
+       }
+      ],
+      "arrowPx": 170,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "forward = +, up = +"
+       ]
+      },
+      {
+       "row": [
+        "F_{x} = (45.0 N) cos 40.0° = 34.5 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{y} = (45.0 N) sin 40.0° = 28.9 N"
+       ]
+      },
+      {
+       "row": [
+        "a. a =",
+        {
+         "frac": [
+          "F_{x}",
+          "m"
+         ]
+        },
+        "=",
+        {
+         "frac": [
+          "34.5 N",
+          "15.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "2.30 m/s^{2} forward"
+      },
+      {
+       "row": [
+        "b. F_{N} + F_{y} − mg = 0"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} = 147 N − 28.9 N"
+       ]
+      },
+      {
+       "answer": [
+        "F_{N} ="
+       ],
+       "value": "118 N up"
+      },
+      {
+       "say": "The handle lifts part of the weight, so F_{N} is less than mg.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "practice",
+     "points": 3,
+     "calculation": true,
+     "selfCheck": "[  5.19 m/s²  ·  same  ]",
+     "prompt": "At the water park, Liam (52.0 kg) and his little sister Emma (24.0 kg) take turns on a straight slide tilted 32.0° above the horizontal. Treat the slide as frictionless.",
+     "parts": [
+      "a.  Find Liam's acceleration.",
+      "b.  Does Emma speed up faster, slower or at the same rate? Show why."
+     ],
+     "solution": "Down the slide is positive. ∑F = mg sin θ, so ma = mg sin θ and a = g sin θ.\na. a = 9.8 sin 32.0° = 5.19 m/s² down the slide.\nb. The same, 5.19 m/s² down the slide. Mass cancels: a = g sin θ has no m in it. Emma has less force down the slide, but also less mass to speed up.",
+     "finalAnswer": "a. 5.19 m/s² down the slide. b. The same, 5.19 m/s² down the slide; mass cancels in a = g sin θ.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N}",
+          "dir": 122,
+          "mag": 432.16530980131466
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 509.6
+         }
+        ],
+        "tiltDeg": 32,
+        "surface": true,
+        "caption": "Liam"
+       }
+      ],
+      "arrowPx": 130,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "down the slide = +"
+       ]
+      },
+      {
+       "row": [
+        "∑F = mg sin θ"
+       ]
+      },
+      {
+       "row": [
+        "ma = mg sin θ, so a = g sin θ"
+       ]
+      },
+      {
+       "row": [
+        "a. a = (9.8 m/s^{2}) sin 32.0°"
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "5.19 m/s^{2} down the slide"
+      },
+      {
+       "say": "b. The same rate. m cancels, so a = g sin θ for any rider.",
+       "ink": "pen"
+      },
+      {
+       "say": "Emma's diagram has the same shape, scaled down. She has less pull down the slide, but less mass to speed up.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "challenge",
+     "points": 4,
+     "calculation": true,
+     "selfCheck": "[  660 N  ·  516 N  ]",
+     "prompt": "Zoe, whose mass is 60.0 kg, stands on a bathroom scale in a hotel elevator. The scale reads in newtons.",
+     "parts": [
+      "a.  Leaving the lobby, the elevator speeds up going up at 1.20 m/s². What does the scale read?",
+      "b.  Later, leaving the top floor, it speeds up going down at 1.20 m/s². What does the scale read now?"
+     ],
+     "solution": "Up is positive. The scale reads FN. mg = 60.0 × 9.8 = 588 N. FN − mg = ma, so FN = mg + ma.\na. a = +1.20 m/s²: FN = 588 + 60.0(1.20) = 660 N.\nb. a = −1.20 m/s²: FN = 588 + 60.0(−1.20) = 516 N.",
+     "finalAnswer": "a. 660 N. b. 516 N. (Both are the upward normal force; her weight is 588 N.)",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "F_{N} = 660 N",
+          "dir": "up",
+          "mag": 660.0
+         },
+         {
+          "label": "F_{g} = 588 N",
+          "dir": "down",
+          "mag": 588.0
+         }
+        ],
+        "surface": true,
+        "caption": "a. speeding up, going up"
+       }
+      ],
+      "arrowPx": 120,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "up = +"
+       ]
+      },
+      {
+       "row": [
+        "mg = (60.0 kg)(9.8 m/s^{2}) = 588 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} − mg = ma, so F_{N} = mg + ma"
+       ]
+      },
+      {
+       "row": [
+        "a. F_{N} = 588 N + (60.0 kg)(1.20 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "a.  scale:"
+       ],
+       "value": "660 N"
+      },
+      {
+       "row": [
+        "b. a = −1.20 m/s^{2}"
+       ]
+      },
+      {
+       "row": [
+        "F_{N} = 588 N + (60.0 kg)(−1.20 m/s^{2})"
+       ]
+      },
+      {
+       "answer": [
+        "b.  scale:"
+       ],
+       "value": "516 N"
+      },
+      {
+       "say": "In b, F_{N} (516 N) is shorter than F_{g}. The scale reads F_{N}; it changes with the acceleration, not with which way she rides.",
+       "ink": "arrow"
+      }
+     ]
+    },
+    {
+     "tier": "multi-topic",
+     "points": 5,
+     "calculation": true,
+     "prompt": "Grandpa pulls his grandson in a wagon by a handle tilted 30.0° above the horizontal. Wagon and grandson have a mass of 30.0 kg, and rolling friction on the wheels is 30.0 N.",
+     "parts": [
+      "a.  He pulls with 80.0 N. Find the wagon's acceleration.",
+      "b.  How hard would he have to pull, at the same angle, to speed up at 0.500 m/s² instead?"
+     ],
+     "solution": "Forward is positive.\na. Fx = 80.0 cos 30.0° = 69.3 N. ∑F = 69.3 − 30.0 = 39.3 N forward. a = 39.3/30.0 = 1.31 m/s² forward.\nb. ∑F = ma = 30.0 × 0.500 = 15.0 N. Fx − 30.0 = 15.0, so Fx = 45.0 N. F = 45.0/cos 30.0° = 52.0 N at 30.0° above the horizontal.",
+     "finalAnswer": "a. 1.31 m/s² forward. b. 52.0 N at 30.0° above the horizontal.",
+     "keyImage": {
+      "scene": "fbd",
+      "panels": [
+       {
+        "forces": [
+         {
+          "label": "80.0 N",
+          "dir": 30,
+          "mag": 80.0
+         },
+         {
+          "label": "f = 30.0 N",
+          "dir": "left",
+          "mag": 30.0
+         },
+         {
+          "label": "F_{N}",
+          "dir": "up",
+          "mag": 51.83673469387755
+         },
+         {
+          "label": "F_{g}",
+          "dir": "down",
+          "mag": 60.0
+         }
+        ],
+        "surface": true
+       }
+      ],
+      "arrowPx": 150,
+      "labelPad": 24
+     },
+     "steps": [
+      {
+       "row": [
+        "forward = +"
+       ]
+      },
+      {
+       "row": [
+        "a. F_{x} = (80.0 N) cos 30.0° = 69.3 N"
+       ]
+      },
+      {
+       "row": [
+        "∑F = 69.3 N − 30.0 N = 39.3 N"
+       ]
+      },
+      {
+       "row": [
+        "a =",
+        {
+         "frac": [
+          "39.3 N",
+          "30.0 kg"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "a ="
+       ],
+       "value": "1.31 m/s^{2} forward"
+      },
+      {
+       "row": [
+        "b. ∑F = ma = (30.0 kg)(0.500 m/s^{2}) = 15.0 N"
+       ]
+      },
+      {
+       "row": [
+        "F_{x} − 30.0 N = 15.0 N, so F_{x} = 45.0 N"
+       ]
+      },
+      {
+       "row": [
+        "F =",
+        {
+         "frac": [
+          "F_{x}",
+          "cos θ"
+         ]
+        },
+        "=",
+        {
+         "frac": [
+          "45.0 N",
+          "cos 30.0°"
+         ]
+        }
+       ]
+      },
+      {
+       "answer": [
+        "F ="
+       ],
+       "value": "52.0 N at 30.0° above horizontal"
+      },
+      {
+       "say": "F_{N} (254 N) and F_{g} (294 N) are drawn shorter than scale.",
+       "ink": "arrow"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
