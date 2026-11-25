@@ -35,9 +35,9 @@
 | **Risk** | Low. (1) **Page 1 space.** Matt's chosen option says the stacked cover "uses more of page 1". The chapter starts lower, so a reading near its page budget may gain a page, and the even-page and tear-off parity checks still apply. (2) **Builder vs. rule.** The builder enforces 1–4 steps for `front.how` and the block order. It does **not** check the "about four lines" length of Why It Matters, so the designer and the Auditor have to check that by eye. (3) **If rejected.** The builder default added in `0947c27` would contradict the decision. It would need reverting to `"columns"`, or changing to whatever Matt chooses instead, before the next reading is built. (4) **Older readings.** Chemistry U7 is pinned to `"columns"`. The proposed text keeps covers on readings filed before this rule unless the teacher asks, so U7 has no forced reprint. |
 | **Recommendation** | Approve. It records what Matt chose for U6 and what the builder already does. Matt has not yet agreed to the scope-in-time sentence or to the builder-derived details named in Source. If he wants either changed, it can be changed before approval. |
 | **Decision** | 2026-11-25, user, in the main session, answering "Approve SHULL-CHG-0119, the stacked cover layout for every new or revised unit reading in all three courses, with the wording shown above?" (the proposed Cover layout paragraph was shown verbatim): "Approve". |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit; builder side 0947c27 |
-| **Verified** | — |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Workflow: `045f81eb792f0da71a2b98413b7fda272691fe3d` (Secretary, 2026-11-25), which appends the approved Cover layout paragraph to `workflows/unit-textbook.md` item 1. Builder: `0947c27e50ee7cc28b4a405ee8b791ff2fc81902` (stacked default in `templates/reading/build_reading_docx.py`; Chemistry U7 pinned to `"columns"`). |
+| **Verified** | Yes, 2026-11-25, by the main session, not the implementer. The diff of `045f81e` adds only the approved Cover layout paragraph, as the third paragraph of item 1 in `workflows/unit-textbook.md`, and touches this record's Implemented By. `validate_references` OK, `validate_change_ids` OK, and `hook-validate.sh` reports "validators clean". Builder side: `0947c27` was independently audited PASS (Round 4, `reports/chem_u06_reading_textbook_audit.md`). Chemistry U7 is unchanged because its spec pins `"columns"`. |
 
 ---
 
