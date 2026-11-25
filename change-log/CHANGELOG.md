@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0118 | 2026-11-25 | Tear-off vocabulary: students write definitions | PROPOSED | `governance/proposals/SHULL-CHG-0118-tear-off-vocabulary-write-in.md` |
+| SHULL-CHG-0118 | 2026-11-25 | Tear-off vocabulary: students write definitions | APPROVED | `governance/proposals/SHULL-CHG-0118-tear-off-vocabulary-write-in.md` |
 | SHULL-CHG-0117 | 2026-11-25 | Unit readings open with Key Refreshers | APPROVED | `governance/proposals/SHULL-CHG-0117-unit-reading-key-refreshers.md` |
 | SHULL-CHG-0116 | 2026-11-25 | Chemistry U6 short title | CONFIRMED | `governance/proposals/SHULL-CHG-0116-chem-u6-short-title.md` |
 

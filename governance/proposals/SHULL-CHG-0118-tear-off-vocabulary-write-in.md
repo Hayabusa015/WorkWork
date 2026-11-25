@@ -27,8 +27,8 @@
 | **Affected Courses** | Chemistry, Physics and Geology (all unit readings). No course fact changes. Chemistry U6 follows the new rule now (classroom work, via the Overseer). Chemistry U7 is filed with printed definitions and is unchanged unless Matt asks. |
 | **Risk** | Low. (1) **Writing space.** Ten terms with handwriting lines take more room than ten printed pairs. The reverse is one page, so the builder must fit ten terms with enough lines, or the term count or line count has to be resolved with the teacher (the same fit rule as the front). (2) **Builder.** `templates/reading/build_reading_docx.py` currently prints the definitions on the reverse; until it changes, a reading cannot follow the rule. (3) **Students keep no printed glossary on the leaf.** The definitions stay in the reading pages that students keep (bold term plus the set-off definition line), so the retained packet is still a complete reference. |
 | **Recommendation** | Approve. Matt's choice above named this exact change; the text below is the wording for it. |
-| **Decision** | PENDING |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-25, user, in the main session, answering "For the tear-off back, students would see the 10 terms with blank lines and write each definition themselves, finding it bolded in the reading. Should this apply only to Unit 6, or become the rule for every unit reading?": "Rule for all readings (Recommended)" (option text: "Change the textbook rule (SHULL-CHG-0107) so every reading's tear-off back lists the terms with write-in lines. Unit 6 follows now. Unit 7 is filed with printed definitions and changes only if you ask."). |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
