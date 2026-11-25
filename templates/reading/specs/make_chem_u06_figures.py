@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures 6.1-6.6 for the Chemistry U6 unit reading (Chemical Nomenclature).
+"""Figures 6.1-6.7 for the Chemistry U6 unit reading (Chemical Nomenclature).
 
     python3 templates/reading/specs/make_chem_u06_figures.py OUT_DIR
 
@@ -190,13 +190,49 @@ def tiles(ax, y, specs, unit, x0, h=0.34):
     return x
 
 
+def fig_ions(out):
+    """6.4: monatomic anion names. The charge comes from the group (dossier 6.3-a:
+    Group 17 1-, Group 16 2-, Group 15 3-); the name is the element root + -ide. Two
+    groups of four side by side, hairline rows, no fills. Suffix hyphens are U+2011."""
+    group_charge = {17: 1, 16: 2, 15: 3}
+    data = [("fluorine", "fluoride", "F", 17), ("chlorine", "chloride", "Cl", 17),
+            ("bromine", "bromide", "Br", 17), ("iodine", "iodide", "I", 17),
+            ("oxygen", "oxide", "O", 16), ("sulfur", "sulfide", "S", 16),
+            ("nitrogen", "nitride", "N", 15), ("phosphorus", "phosphide", "P", 15)]
+    expect = {"F": 1, "Cl": 1, "Br": 1, "I": 1, "O": 2, "S": 2, "N": 3, "P": 3}
+    for _, ion, sym, g in data:
+        if group_charge[g] != expect[sym] or not ion.endswith("ide"):
+            sys.exit(f"figure 6.4: {sym} does not match the dossier")
+    fig, ax = canvas(2.04)
+    rh, top = 0.19, 1.94
+    xs = (0.10, 1.10, 2.30)
+    for x, hd, ha in zip(xs, ("ELEMENT", "ION NAME", "SYMBOL"), ("left", "left", "center")):
+        text(ax, x, top, hd, 8, "bold", ACCENT, ha=ha)
+    ax.plot([0.04, 2.96], [top - 0.10, top - 0.10], color=INK, linewidth=0.8)
+    for i, (el, ion, sym, g) in enumerate(data):
+        y = top - 0.21 - i * rh
+        q = group_charge[g]
+        text(ax, xs[0], y, el, 8.5, "regular", LABEL, ha="left")
+        text(ax, xs[1], y, ion, 8.5, "bold", ha="left")
+        text(ax, xs[2], y, sym + "^{" + ("" if q == 1 else str(q)) + "-}", 9.5, "bold")
+        if i < len(data) - 1:
+            nxt = data[i + 1][3]
+            ax.plot([0.04, 2.96], [y - rh / 2, y - rh / 2], color=INK if nxt != g else HAIR,
+                    linewidth=0.8 if nxt != g else 0.5)
+    yb = top - 0.21 - 7 * rh - rh / 2
+    ax.plot([0.04, 2.96], [yb, yb], color=INK, linewidth=0.8)
+    text(ax, 0.06, yb - 0.13, "Element root + \u2011ide. The charge comes from the group.",
+         7.6, "regular", LABEL, ha="left")
+    save(fig, out)
+
+
 def fig_al2o3(out):
-    """6.4: two Al3+ tiles against three O2- tiles; each row totals 6 units (dossier B)."""
+    """6.5: two Al3+ tiles against three O2- tiles; each row totals 6 units (dossier B)."""
     al, o = ("Al", 3), ("O", -2)
     n_al, n_o = 2, 3
     tot_p, tot_n = n_al * al[1], n_o * o[1]
     if tot_p + tot_n != 0 or (tot_p, tot_n) != (6, -6):
-        sys.exit(f"figure 6.4: charges {tot_p} and {tot_n} do not match the dossier (+6, -6)")
+        sys.exit(f"figure 6.5: charges {tot_p} and {tot_n} do not match the dossier (+6, -6)")
     fig, ax = canvas(1.46)
     unit, x0 = 0.36, 0.08
     tiles(ax, 0.92, [("Al^{3+}", 3, "+3")] * n_al, unit, x0)
@@ -212,11 +248,11 @@ def fig_al2o3(out):
 
 
 def fig_fe2o3(out):
-    """6.5: work back from the anion. Three O2- = -6, so two Fe share +6: +3 each."""
+    """6.6: work back from the anion. Three O2- = -6, so two Fe share +6: +3 each."""
     n_o, q_o, n_fe = 3, -2, 2
     total = -(n_o * q_o)
     if total % n_fe or total // n_fe != 3:
-        sys.exit("figure 6.5: Fe charge does not come out +3 (dossier B)")
+        sys.exit("figure 6.6: Fe charge does not come out +3 (dossier B)")
     each = total // n_fe
     fig, ax = canvas(1.78)
     unit, x0 = 0.36, 0.08
@@ -232,7 +268,7 @@ def fig_fe2o3(out):
 
 
 def fig_acids(out):
-    """6.6: acid names come from the anion's ending (deck slides 31, 33; A-5)."""
+    """6.7: acid names come from the anion's ending (deck slides 31, 33; A-5)."""
     rows = [("-ide", "hydro- + root + -ic acid", "chloride → hydrochloric acid"),
             ("-ate", "root + -ic acid", "nitrate → nitric acid"),
             ("-ite", "root + -ous acid", "nitrite → nitrous acid")]
@@ -254,7 +290,8 @@ def fig_acids(out):
 
 
 FIGS = {"fig6_1_co_co2.png": fig_co_co2, "fig6_2_sort.png": fig_sort, "fig6_3_ladder.png": fig_ladder,
-        "fig6_4_al2o3.png": fig_al2o3, "fig6_5_fe2o3.png": fig_fe2o3, "fig6_6_acids.png": fig_acids}
+        "fig6_4_ions.png": fig_ions, "fig6_5_al2o3.png": fig_al2o3, "fig6_6_fe2o3.png": fig_fe2o3,
+        "fig6_7_acids.png": fig_acids}
 
 
 def main():

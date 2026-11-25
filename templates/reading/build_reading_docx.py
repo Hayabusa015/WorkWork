@@ -773,7 +773,72 @@ def front(doc, spec, pal, titles):
     body_p(left, fr["how"], pal, before=4, after=0, size=9, line=11.8)
     label(right, fr["why"]["title"], pal, first=True, after=2)
     body_p(right, fr["why"]["text"], pal, after=0, size=BODY, line=BODY_LINE)
+    if fr.get("refreshers"):
+        p = doc.add_paragraph(); pin(p, 6)
+        refreshers(doc, spec, fr["refreshers"], pal)
     p = doc.add_paragraph(); pin(p, 6)
+
+
+REFRESH_MIN, REFRESH_MAX = 2, 5      # SHULL-CHG-0117: 2-5 one-line reminders
+REFRESH_PT = 9
+
+
+def refresher_label(spec, codes):
+    """['4.2', '4.3'] -> 'Unit 4 (4.2, 4.3)'. Every code must be a taught section of one
+    EARLIER unit in DECISIONS.md; the unit number is derived from the code, never typed."""
+    units = {int(c.split(".")[0]) for c in codes}
+    if len(units) != 1:
+        raise SystemExit(f"Key Refresher {codes} mixes units; one unit per item")
+    unit = units.pop()
+    if unit >= int(spec["unit"]):
+        raise SystemExit(f"Key Refresher {codes} is not from an earlier unit")
+    titles = section_titles(spec["course"], unit)
+    for c in codes:
+        if c not in titles:
+            raise SystemExit(f"Key Refresher cites {c}, which is not a taught section in "
+                             f"courses/{spec['course']}/DECISIONS.md - stop and ask")
+    return f"Unit {unit} ({', '.join(codes)}): "
+
+
+def refresher_inner_w():
+    return TEXT_W_IN - 280 / 1440
+
+
+def check_refreshers(spec):
+    items = spec["front"].get("refreshers", {}).get("items")
+    if items is None:
+        return
+    if not REFRESH_MIN <= len(items) <= REFRESH_MAX:
+        raise SystemExit(f"{len(items)} Key Refreshers; the rule is {REFRESH_MIN}-{REFRESH_MAX}")
+    for item in items:
+        if "**" in item["text"]:
+            raise SystemExit("a Key Refresher carries a bold term; refreshers remind, they don't define")
+        lab = refresher_label(spec, item["codes"])
+        w = text_width_in(lab, REFRESH_PT, bold=True) + text_width_in(plain_text(item["text"]), REFRESH_PT)
+        if w > refresher_inner_w() - 0.05:
+            raise SystemExit(f"Key Refresher {lab!r} runs {w:.2f} in, more than one line "
+                             f"({refresher_inner_w():.2f} in); shorten it")
+
+
+def refreshers(doc, spec, rf, pal):
+    """KEY REFRESHERS (SHULL-CHG-0117): 2-5 one-line reminders of earlier-unit knowledge,
+    on the cover before the chapter, each led by 'Unit N (N.n):'. Full text width and
+    outlined on all four sides in the course rule colour, so it is told apart by shape
+    from the column-width Connection (rule above, hairline below, open sides) and the
+    hairline On Your Own box. No fill, no bold terms."""
+    t = doc.add_table(rows=1, cols=1)
+    fix_widths(t, [TEXT_W_IN])
+    c = t.rows[0].cells[0]
+    borders(c, pal.display, sz=10)
+    cell_margins(c, top=60, bottom=70, left=140, right=140)
+    no_split(t.rows[0])
+    label(c, rf.get("title", "Key Refreshers"), pal, first=True, after=3)
+    for item in rf["items"]:
+        p = c.add_paragraph()
+        _spacing(p, 0, 2, 12)
+        add(p, refresher_label(spec, item["codes"]), REFRESH_PT, color=pal.accent, bold=True)
+        add(p, item["text"], REFRESH_PT, color=pal.ink)
+    end_cell(c)
 
 
 def page_break(doc):
@@ -1085,6 +1150,7 @@ def check_spec(spec, titles):
     for b in spec["body"]:
         if b["type"] in ("opener", "connection") and "**" in b["text"] + b.get("after", ""):
             raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
+    check_refreshers(spec)
     # the tear-off: one single-part question per section, labelled with its code, in order
     to = spec["tearOff"]
     if to["instruction"] != "Due ASAP. No late work will be accepted. We will start the unit with this.":

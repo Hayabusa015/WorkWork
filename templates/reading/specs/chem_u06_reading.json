@@ -1,5 +1,5 @@
 {
-  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading D4 student note, Matt-approved text (2026-11-25), printed unaltered in 6.3: \"You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge.\" Suffix hyphens are U+2011 (non-breaking) so -ide/-ate/-ite do not split at a line end.",
+  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading D4 student note, Matt-approved text (2026-11-25), printed unaltered in 6.3: \"You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge.\" Suffix hyphens are U+2011 (non-breaking) so -ide/-ate/-ite do not split at a line end. Key Refreshers on the cover and the 6.3 ion-naming and element-vs-ion additions: Matt, 2026-11-25 (main session).",
   "course": "chemistry",
   "unit": 6,
   "sections": [
@@ -70,10 +70,34 @@
   },
   "front": {
     "listTitle": "In this unit",
-    "how": "Read one section at a time, with a pencil, and keep the Polyatomic Ions sheet from your reference packet beside you. Each term in **bold** is defined where it first appears, and the last page lists all ten. Tear off the last sheet, answer its four questions, and turn it in.",
+    "how": "Read one section at a time, with a pencil, with the Polyatomic Ions, Naming Toolkit and Metals with Multiple Charges sheets beside you. Each term in **bold** is defined where it first appears, and the last page lists all ten. Tear off the last sheet, answer its four questions, and turn it in.",
     "why": {
       "title": "Why It Matters",
       "text": "The box in your kitchen says baking soda. The FDA lists the same white powder as sodium bicarbonate, and a chemist may call it sodium hydrogen carbonate. All three names mean one compound, NaHCO_{3}: one sodium ion, Na^{+}, for every hydrogen carbonate ion, HCO_{3}^{−}. A common name like baking soda is easy to remember, but it tells you nothing about what is in the box. A systematic name does. Once you know the rules, “sodium hydrogen carbonate” tells you which ions are present and in what ratio, and you can write the formula without looking it up. Going the other way, a formula tells you the name. This unit teaches those rules for four kinds of compounds: covalent compounds, compounds that contain polyatomic ions, ionic compounds of metals that form more than one ion, and acids."
+    },
+    "refreshers": {
+      "title": "Key Refreshers",
+      "items": [
+        {
+          "codes": [
+            "3.7"
+          ],
+          "text": "Metals lose electrons to become cations; nonmetals gain electrons to become anions."
+        },
+        {
+          "codes": [
+            "3.7"
+          ],
+          "text": "Main-group charges follow the group: Group 1 is 1+, Group 2 is 2+, Group 17 is 1−, Group 16 is 2−, Group 15 is 3−."
+        },
+        {
+          "codes": [
+            "4.2",
+            "4.3"
+          ],
+          "text": "Metals and nonmetals transfer electrons (ionic); nonmetals share electrons (covalent)."
+        }
+      ]
     }
   },
   "vocab": [
@@ -376,11 +400,29 @@
     },
     {
       "type": "sub",
+      "text": "Naming monatomic ions"
+    },
+    {
+      "type": "p",
+      "text": "A monatomic cation keeps the element's name: Na^{+} is the sodium ion, and Ca^{2+} is the calcium ion. A monatomic anion takes the ending ‑ide, so chlorine becomes chloride and oxygen becomes oxide (Figure 6.4)."
+    },
+    {
+      "type": "figure",
+      "n": "6.4",
+      "image": "fig6_4_ions.png",
+      "caption": "Monatomic anions. Keep the root of the element's name, add ‑ide, and read the charge from the group."
+    },
+    {
+      "type": "p",
+      "text": "Don't mix up an element's name with its ion's name. Chlorine is Cl_{2}, a gas made of molecules. Chloride is Cl^{−}, an ion found in compounds such as NaCl. Sodium is a soft metal; the sodium ion is Na^{+}. Seven elements exist as diatomic molecules: H_{2}, N_{2}, O_{2}, F_{2}, Cl_{2}, Br_{2} and I_{2}. They are listed on your Naming Toolkit sheet. That subscript 2 belongs to the element. It never carries over to the ion inside a compound: sodium chloride is NaCl, not NaCl_{2}."
+    },
+    {
+      "type": "sub",
       "text": "Charges set the ratio"
     },
     {
       "type": "p",
-      "text": "An ionic compound is held together by the attraction between positive and negative ions (Unit 4). Main-group elements form predictable ions. Group 1 metals form 1+ ions, Group 2 metals form 2+ ions, and aluminum forms Al^{3+}. Group 17 nonmetals form 1− ions, Group 16 form 2− and Group 15 form 3−. In every ionic compound, the positive and negative charges add up to zero."
+      "text": "An ionic compound is held together by the attraction between positive and negative ions (Unit 4). Main-group ions have the charges listed in the Key Refreshers on page 1. In every ionic compound, the positive and negative charges add up to zero."
     },
     {
       "type": "p",
@@ -392,12 +434,12 @@
     },
     {
       "type": "p",
-      "text": "To write the formula, find the smallest number of each ion that makes the charges cancel. In aluminum oxide, aluminum forms Al^{3+} and oxygen forms O^{2−}. Two Al^{3+} ions give +6 and three O^{2−} ions give −6 (Figure 6.4), so the formula is Al_{2}O_{3}. A shortcut is to cross the charge numbers: aluminum's 3 becomes oxygen's subscript, and oxygen's 2 becomes aluminum's. Then reduce if both subscripts share a factor. Ca^{2+} and O^{2−} give CaO, not Ca_{2}O_{2}. Either way, check that the total is zero."
+      "text": "To write the formula, find the smallest number of each ion that makes the charges cancel. In aluminum oxide, aluminum forms Al^{3+} and oxygen forms O^{2−}. Two Al^{3+} ions give +6 and three O^{2−} ions give −6 (Figure 6.5), so the formula is Al_{2}O_{3}. A shortcut is to cross the charge numbers: aluminum's 3 becomes oxygen's subscript, and oxygen's 2 becomes aluminum's. Then reduce if both subscripts share a factor. Ca^{2+} and O^{2−} give CaO, not Ca_{2}O_{2}. Either way, check that the total is zero."
     },
     {
       "type": "figure",
-      "n": "6.4",
-      "image": "fig6_4_al2o3.png",
+      "n": "6.5",
+      "image": "fig6_5_al2o3.png",
       "caption": "Charge tiles for aluminum oxide. Each tile's length is its charge. Two 3+ tiles match three 2− tiles."
     },
     {
@@ -406,7 +448,7 @@
     },
     {
       "type": "p",
-      "text": "To name an ionic compound, name the cation first and the anion second. A monatomic anion takes the ending ‑ide, so chlorine becomes chloride. A polyatomic ion keeps its name. Ionic names don't use prefixes to count ions. CaCl_{2} is calcium chloride, because the charges already fix the ratio."
+      "text": "To name an ionic compound, name the cation first and the anion second, each as above. A polyatomic ion keeps its name. Ionic names don't use prefixes to count ions. CaCl_{2} is calcium chloride, because the charges already fix the ratio."
     },
     {
       "type": "sub",
@@ -422,7 +464,7 @@
     },
     {
       "type": "p",
-      "text": "Starting from a formula, work back from the anion, because you know its charge (Figure 6.5). The total negative charge tells you the total positive charge. Divide that total by the number of metal ions to get the charge on each one."
+      "text": "Starting from a formula, work back from the anion, because you know its charge (Figure 6.6). The total negative charge tells you the total positive charge. Divide that total by the number of metal ions to get the charge on each one."
     },
     {
       "type": "example",
@@ -463,8 +505,8 @@
     },
     {
       "type": "figure",
-      "n": "6.5",
-      "image": "fig6_5_fe2o3.png",
+      "n": "6.6",
+      "image": "fig6_6_fe2o3.png",
       "caption": "Working back from the anion. The oxide ions fix the total, and the two iron ions split it."
     },
     {
@@ -522,12 +564,12 @@
     },
     {
       "type": "p",
-      "text": "Each acid in this section is hydrogen ions paired with an anion. The name comes from the anion's ending, and the formula comes from the anion's charge: one H^{+} for each negative charge (Figure 6.6)."
+      "text": "Each acid in this section is hydrogen ions paired with an anion. The name comes from the anion's ending, and the formula comes from the anion's charge: one H^{+} for each negative charge (Figure 6.7)."
     },
     {
       "type": "figure",
-      "n": "6.6",
-      "image": "fig6_6_acids.png",
+      "n": "6.7",
+      "image": "fig6_7_acids.png",
       "caption": "The anion's ending decides the acid's name. Only an ‑ide anion takes hydro-."
     },
     {
@@ -673,6 +715,8 @@
   "key": {
     "teacherNotes": [
       "Not test-allowed. The reading teaches the ionic, covalent and acid naming procedures that the reference packet deliberately leaves out (Naming Toolkit, sheet 7: no naming procedure, so the test packet does not answer naming items). Treat it as not test-allowed material.",
+      "Key Refreshers (cover, SHULL-CHG-0117) are three one-line reminders from 3.7 Ion Formation and 4.2/4.3 Ionic and Covalent Bonding, the unit's builds-on in the U6 roadmap. They reteach nothing and are not on the tear-off. Cation and anion appear there unbolded; the ten bold terms are unchanged. The main-group charges are stated only in the refresher, and Section 6.3 points back to it.",
+      "Element vs ion names (6.3). Watch for NaCl_{2} and “chlorine” used for Cl^{−}. The diatomic list is the Naming Toolkit's seven (H, N, O, F, Cl, Br, I). The ion table (Figure 6.4) gives the eight monatomic anions students name most; each charge comes from its group.",
       "Oxide spelling (Matt's D5). The reading drops the vowel before “oxide” (monoxide, tetroxide, pentoxide), as most US textbooks and the deck do. IUPAC (2005) keeps it (tetraoxide, pentaoxide) and elides only “monoxide.” Accept either spelling.",
       "Classical names (D4). The student note gives Fe and Cu only. Others on the Metals with Multiple Charges sheet: stannous Sn^{2+} / stannic Sn^{4+}; plumbous Pb^{2+} / plumbic Pb^{4+}; cobaltous Co^{2+} / cobaltic Co^{3+} (cobaltic chloride, CoCl_{3}, is a disputed compound). Mercury is left out on purpose: mercurous is Hg_{2}^{2+}, and printing mercuric alone invites the wrong guess Hg^{+}. IUPAC no longer recommends ‑ous/‑ic metal names; they are still used on labels and in older books.",
       "Carbonated drinks (Connection 6.4). Most dissolved CO_{2} stays as CO_{2}; only a small fraction becomes H_{2}CO_{3} (hydration constant about 1.7 × 10^{−3} at 25 °C). The reading says “some” for that reason.",
