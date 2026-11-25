@@ -179,7 +179,7 @@ def add(p, text, size, *, color=None, bold=False, italic=False, face=None, track
                                face=face, track=track)
                 if k < len(pieces) - 1:
                     r = p.add_run()
-                    r.add_picture(_equilibrium_png(color or "#000000"), height=Pt(size * 0.50))
+                    r.add_picture(_equilibrium_png(color or T["ground"]["asphalt"]["hex"]), height=Pt(size * 0.50))
             continue
         r = p.add_run(chunk)
         _font(r, face or FONT)
