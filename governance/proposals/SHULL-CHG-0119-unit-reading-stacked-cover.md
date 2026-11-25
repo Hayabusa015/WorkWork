@@ -34,8 +34,8 @@
 | **Affected Courses** | Chemistry, Physics and Geology (all unit readings). No course fact changes. |
 | **Risk** | Low. (1) **Page 1 space.** Matt's chosen option says the stacked cover "uses more of page 1". The chapter starts lower, so a reading near its page budget may gain a page, and the even-page and tear-off parity checks still apply. (2) **Builder vs. rule.** The builder enforces 1–4 steps for `front.how` and the block order. It does **not** check the "about four lines" length of Why It Matters, so the designer and the Auditor have to check that by eye. (3) **If rejected.** The builder default added in `0947c27` would contradict the decision. It would need reverting to `"columns"`, or changing to whatever Matt chooses instead, before the next reading is built. (4) **Older readings.** Chemistry U7 is pinned to `"columns"`. The proposed text keeps covers on readings filed before this rule unless the teacher asks, so U7 has no forced reprint. |
 | **Recommendation** | Approve. It records what Matt chose for U6 and what the builder already does. Matt has not yet agreed to the scope-in-time sentence or to the builder-derived details named in Source. If he wants either changed, it can be changed before approval. |
-| **Decision** | PENDING |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-25, user, in the main session, answering "Approve SHULL-CHG-0119, the stacked cover layout for every new or revised unit reading in all three courses, with the wording shown above?" (the proposed Cover layout paragraph was shown verbatim): "Approve". |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | — |
 
