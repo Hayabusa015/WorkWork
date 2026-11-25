@@ -17,6 +17,7 @@
     "dir": "fig"
   },
   "front": {
+    "layout": "columns",
     "listTitle": "In this unit",
     "how": "Read one section at a time, with a pencil. Each term in **bold** is defined where it first appears, and the last page lists all ten. Tear off the last sheet, answer its five questions, and turn it in.",
     "why": {

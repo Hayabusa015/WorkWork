@@ -10,9 +10,16 @@ Format: workflows/unit-textbook.md, "Prepare the unit reading and its detachable
 
 What it makes, from one spec so the student copy and the key cannot drift:
 
-    student   page 1 is the cover: the shared print header (SHULL-CHG-0101), the display
-              title, the numbered section list read from courses/<course>/DECISIONS.md,
-              and Why It Matters; the chapter starts below it. The chapter runs in two
+    student   page 1 is the cover under the shared print header (SHULL-CHG-0101), laid out
+              by front.layout:
+                "stacked" (the default; Matt, 2026-11-25) - one column, top to bottom: the
+                         display title, Why It Matters, In This Unit (the numbered section
+                         list read from courses/<course>/DECISIONS.md), Key Refreshers, and
+                         How to Use This Reading as numbered steps (front.how is a list);
+                "columns" - the earlier cover: title, section list and a one-paragraph
+                         how-to (front.how is a string) beside Why It Matters, with the Key
+                         Refreshers box below. A reading built that way sets it explicitly.
+              The chapter starts below the cover on page 1. The chapter runs in two
               columns (SHULL-CHG-0023 line length): section heads, sub-heads, prose with
               at most ten bold defined terms and their set-off definition lines,
               numbered figures, Example banners, On Your Own boxes and one Connection per
@@ -752,10 +759,113 @@ def furniture_after_binding(doc, spec, pal, chapter, info):
 
 
 
+FRONT_LAYOUTS = ("stacked", "columns")   # front.layout; the first is the default (Matt, 2026-11-25)
+COVER_MEASURE_IN = 4.60                    # cover prose at BODY: about 72 characters, inside 50-75
+COVER_RULE_GAP = 6                         # pt above and below each rule between cover blocks
+HOW_PT = BODY
+
+
+def front_layout(spec):
+    return spec["front"].get("layout", FRONT_LAYOUTS[0])
+
+
 def front(doc, spec, pal, titles):
-    """Page 1, the cover, under the SHULL header. Left: the display title, the unit
-    breakdown (every taught section in order, code and title from DECISIONS.md) and one
-    line on how to use the packet. Right: Why It Matters at the body measure, set off by
+    if front_layout(spec) == "columns":
+        front_columns(doc, spec, pal, titles)
+    else:
+        front_stacked(doc, spec, pal, titles)
+
+
+def check_front(spec):
+    fr = spec["front"]
+    lay = front_layout(spec)
+    if lay not in FRONT_LAYOUTS:
+        raise SystemExit(f"front.layout {lay!r}: use one of {FRONT_LAYOUTS}")
+    if lay == "stacked":
+        if not (isinstance(fr["how"], list) and 1 <= len(fr["how"]) <= 4):
+            raise SystemExit("front.how on a stacked cover is a list of 1-4 short numbered steps")
+    elif not isinstance(fr["how"], str):
+        raise SystemExit("front.how on a columns cover is one paragraph (a string)")
+    for item in fr.get("refreshers", {}).get("items", []):
+        if "table" in item and lay == "columns":
+            raise SystemExit("a Key Refresher table needs the stacked cover")
+
+
+def cover_rule(doc, pal):
+    """The rule that closes one cover block and opens the next: a 1 pt course rule with
+    equal space above and below, the same between every pair of blocks."""
+    p = doc.add_paragraph()
+    pin(p, 1)
+    p.paragraph_format.space_before = Pt(COVER_RULE_GAP - 2)
+    p.paragraph_format.space_after = Pt(COVER_RULE_GAP + 2)
+    bottom_rule(p, pal.display, 8, 0)
+    return p
+
+
+def measure(p, width_in=COVER_MEASURE_IN):
+    p.paragraph_format.right_indent = Inches(TEXT_W_IN - width_in)
+    return p
+
+
+def front_stacked(doc, spec, pal, titles):
+    """front.layout "stacked" (the default; Matt, 2026-11-25): page 1 reads straight down,
+    one block under the next at the full text width, each led by a caps label in the
+    text-safe course colour and closed by the same course rule: the display title; Why It
+    Matters (a short paragraph); In This Unit (every taught section in order, code and
+    title from DECISIONS.md); Key Refreshers when the spec has them (SHULL-CHG-0117:
+    after the section list, before the first section); How to Use This Reading (a few
+    numbered steps). Prose is held to COVER_MEASURE_IN so a line stays in the 50-75
+    character band. No boxes, no fills. The chapter starts below on the same page."""
+    fr = spec["front"]
+    unit = int(spec["unit"])
+    words = unit_title(spec["course"], unit).split()
+    p = doc.add_paragraph()
+    _spacing(p, 0, 0, DISPLAY_PT * 1.12)
+    keep_next(p)
+    add(p, " ".join(words[:-1]) + " ", DISPLAY_PT, color=pal.ink, bold=True)
+    add(p, words[-1], DISPLAY_PT, color=pal.accent, bold=True)      # one accent word
+    cover_rule(doc, pal)
+
+    label(doc, fr["why"]["title"], pal, after=2)
+    measure(body_p(doc, fr["why"]["text"], pal, after=0, size=BODY, line=BODY_LINE))
+    cover_rule(doc, pal)
+
+    label(doc, fr["listTitle"], pal, after=2)
+    for code in spec["sections"]:
+        q = doc.add_paragraph()
+        _spacing(q, 0, 1, 13)
+        q.paragraph_format.left_indent = Inches(0.34)
+        q.paragraph_format.first_line_indent = Inches(-0.34)
+        q.paragraph_format.tab_stops.add_tab_stop(Inches(0.34))
+        add(q, f"{code}\t", 10, color=pal.accent, bold=True, face=NARROW)
+        add(q, titles[code], 10, color=pal.ink, bold=True)
+    cover_rule(doc, pal)
+
+    if fr.get("refreshers"):
+        rf = fr["refreshers"]
+        label(doc, rf.get("title", "Key Refreshers"), pal, after=3)
+        for item in rf["items"]:
+            refresher_item(doc, spec, item, pal, TEXT_W_IN)
+        cover_rule(doc, pal)
+
+    label(doc, fr.get("howTitle", "How to use this reading"), pal, after=2)
+    for i, step in enumerate(fr["how"], 1):
+        q = doc.add_paragraph()
+        _spacing(q, 0, 2, round(HOW_PT * 1.25, 1))
+        pf = q.paragraph_format
+        pf.left_indent = Inches(0.24)
+        pf.first_line_indent = Inches(-0.24)
+        pf.tab_stops.add_tab_stop(Inches(0.24))
+        measure(q)
+        add(q, f"{i}.\t", HOW_PT, color=pal.ink, bold=True)     # just the number, SHULL-CHG-0015
+        add(q, step, HOW_PT, color=pal.ink)
+    cover_rule(doc, pal)
+
+
+def front_columns(doc, spec, pal, titles):
+    """front.layout "columns" (the cover before 2026-11-25; U7 pins it): page 1 under the
+    SHULL header. Left: the display title, the unit breakdown (every taught section in
+    order, code and title from DECISIONS.md) and one line on how to use the packet. Right: Why It Matters at the body measure, set off by
     a course rule. The chapter starts below on the same page."""
     fr = spec["front"]
     unit = int(spec["unit"])
@@ -814,6 +924,14 @@ def refresher_inner_w():
     return TEXT_W_IN - 280 / 1440
 
 
+REF_TAB_LABEL_W, REF_TAB_COL_W = 0.62, 0.46   # a refresher's inline table: row-label and value columns
+REF_TAB_GAP_IN = 0.20
+
+
+def ref_table_w(tb):
+    return REF_TAB_LABEL_W + REF_TAB_COL_W * (len(tb["head"]) - 1)
+
+
 def check_refreshers(spec):
     items = spec["front"].get("refreshers", {}).get("items")
     if items is None:
@@ -821,13 +939,95 @@ def check_refreshers(spec):
     if not REFRESH_MIN <= len(items) <= REFRESH_MAX:
         raise SystemExit(f"{len(items)} Key Refreshers; the rule is {REFRESH_MIN}-{REFRESH_MAX}")
     for item in items:
-        if "**" in item["text"]:
+        if "**" in json.dumps(item, ensure_ascii=False):
             raise SystemExit("a Key Refresher carries a bold term; refreshers remind, they don't define")
         lab = refresher_label(spec, item["codes"])
+        room = refresher_inner_w()
+        if front_layout(spec) == "stacked":
+            room = TEXT_W_IN
+        if "table" in item:
+            tb = item["table"]
+            n = len(tb["head"])
+            if any(len(r) != n for r in tb["rows"]):
+                raise SystemExit(f"Key Refresher table {lab!r}: every row needs {n} cells")
+            if "note" in tb and tb["note"]["col"] not in tb["head"][1:]:
+                raise SystemExit(f"Key Refresher table note points at {tb['note']['col']!r}, not a column")
+            room -= ref_table_w(tb) + REF_TAB_GAP_IN
+            for cell in tb["head"][1:] + [c for r in tb["rows"] for c in r[1:]]:
+                if text_width_in(plain_text(cell), REFRESH_PT, bold=True) > REF_TAB_COL_W - 0.06:
+                    raise SystemExit(f"Key Refresher table cell {cell!r} is wider than its column")
         w = text_width_in(lab, REFRESH_PT, bold=True) + text_width_in(plain_text(item["text"]), REFRESH_PT)
-        if w > refresher_inner_w() - 0.05:
+        if w > room - 0.05:
             raise SystemExit(f"Key Refresher {lab!r} runs {w:.2f} in, more than one line "
-                             f"({refresher_inner_w():.2f} in); shorten it")
+                             f"({room:.2f} in); shorten it")
+
+
+def refresher_line(container, spec, item, pal, first=False):
+    p = para_in(container, first)
+    _spacing(p, 0, 2, 12)
+    add(p, refresher_label(spec, item["codes"]), REFRESH_PT, color=pal.accent, bold=True)
+    add(p, item["text"], REFRESH_PT, color=pal.ink)
+    return p
+
+
+def refresher_item(container, spec, item, pal, width):
+    """One Key Refresher: its one line, or, when it carries a `table`, the line on the
+    left and a small open table on the right in the same row - a caps row label, a rule
+    under the head row, hairline-free values, and an optional note centred under one
+    column (e.g. which element a group's charge belongs to). No fills; ink and the
+    text-safe course colour only, so it reads in grayscale."""
+    if "table" not in item:
+        return refresher_line(container, spec, item, pal)
+    tb = item["table"]
+    tw = ref_table_w(tb)
+    lw = (text_width_in(refresher_label(spec, item["codes"]), REFRESH_PT, bold=True)
+          + text_width_in(plain_text(item["text"]), REFRESH_PT) + 0.08 + REF_TAB_GAP_IN)
+    lw = min(lw, width - tw)            # the table sits right after its line, not at the margin
+    if hasattr(container, "add_section"):
+        p = container.add_paragraph(); pin(p, 3)
+    row = container.add_table(rows=1, cols=2)
+    fix_widths(row, [lw, tw])
+    left, right = row.rows[0].cells
+    no_split(row.rows[0])
+    cell_margins(left, 0, 0, 0, int(REF_TAB_GAP_IN * 1440))
+    cell_margins(right, 0, 0, 0, 0)
+    left.vertical_alignment = right.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+    lp = refresher_line(left, spec, item, pal, first=True)
+    lp.paragraph_format.space_after = Pt(0)
+    lp.paragraph_format.space_before = Pt(7.5)      # level with the head and value rows
+    n = len(tb["head"])
+    rows = [tb["head"]] + tb["rows"] + ([None] if "note" in tb else [])
+    t = right.add_table(rows=len(rows), cols=n)
+    lead = right.paragraphs[0]._p        # the empty paragraph python-docx puts before it
+    lead.getparent().remove(lead)
+    fix_widths(t, [REF_TAB_LABEL_W] + [REF_TAB_COL_W] * (n - 1))
+    for ri, vals in enumerate(rows):
+        no_split(t.rows[ri])
+        cells = t.rows[ri].cells
+        if vals is None:            # the note row: one cell spanning the noted column +-1
+            k = tb["head"].index(tb["note"]["col"])
+            lo, hi = max(1, k - 1), min(n - 1, k + 1)
+            c = cells[lo].merge(cells[hi])
+            cell_margins(c, 10, 0, 0, 0)
+            q = c.paragraphs[0]
+            _spacing(q, 0, 0, 10)
+            q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            add(q, tb["note"]["text"], LABEL, color=pal.label)
+            continue
+        for ci, (cc, txt) in enumerate(zip(cells, vals)):
+            cell_margins(cc, 10, 10, 0, 0)
+            q = cc.paragraphs[0]
+            _spacing(q, 0, 0, 11.5)
+            if ci == 0:
+                add(q, txt.upper(), LABEL, color=pal.accent, bold=True, track=20)
+            else:
+                q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                add(q, txt, REFRESH_PT, color=pal.ink, bold=(ri == 0))
+            if ri == 0:
+                borders(cc, pal.ink, sz=4, edges=("bottom",))
+    end_cell(right)
+    end_cell(left)
+    return row
 
 
 def refreshers(doc, spec, rf, pal):
@@ -844,10 +1044,7 @@ def refreshers(doc, spec, rf, pal):
     no_split(t.rows[0])
     label(c, rf.get("title", "Key Refreshers"), pal, first=True, after=3)
     for item in rf["items"]:
-        p = c.add_paragraph()
-        _spacing(p, 0, 2, 12)
-        add(p, refresher_label(spec, item["codes"]), REFRESH_PT, color=pal.accent, bold=True)
-        add(p, item["text"], REFRESH_PT, color=pal.ink)
+        refresher_line(c, spec, item, pal)
     end_cell(c)
 
 
@@ -1202,6 +1399,7 @@ def check_spec(spec, titles):
     for b in spec["body"]:
         if b["type"] in ("opener", "connection") and "**" in b["text"] + b.get("after", ""):
             raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
+    check_front(spec)
     check_refreshers(spec)
     # the tear-off: one single-part question per section, labelled with its code, in order
     to = spec["tearOff"]

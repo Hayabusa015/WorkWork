@@ -1,5 +1,5 @@
 {
-  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading D4 student note, Matt-approved text (2026-11-25), printed unaltered in 6.3: \"You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge.\" Suffix hyphens are U+2011 (non-breaking) so -ide/-ate/-ite do not split at a line end. Key Refreshers on the cover and the 6.3 ion-naming and element-vs-ion additions: Matt, 2026-11-25 (main session).",
+  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading D4 student note, Matt-approved text (2026-11-25), printed unaltered in 6.3: \"You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge.\" Suffix hyphens are U+2011 (non-breaking) so -ide/-ate/-ite do not split at a line end. Key Refreshers on the cover and the 6.3 ion-naming and element-vs-ion additions: Matt, 2026-11-25 (main session). Cover: stacked layout (builder default, front.layout; Matt, 2026-11-25), Why It Matters cut to the baking soda / NaHCO_{3} idea (dossier WIM-a), refresher charge table with Al^{3+} (audit R3-1), three how-to steps reflecting the write-in vocabulary (SHULL-CHG-0118).",
   "course": "chemistry",
   "unit": 6,
   "sections": [
@@ -70,10 +70,14 @@
   },
   "front": {
     "listTitle": "In this unit",
-    "how": "Read one section at a time, with a pencil, with the Polyatomic Ions, Naming Toolkit and Metals with Multiple Charges sheets beside you. Each term in **bold** is defined where it first appears, and the last page lists all ten. Tear off the last sheet, answer its four questions, and turn it in.",
+    "how": [
+      "Read one section at a time, with a pencil and your Polyatomic Ions, Naming Toolkit and Metals with Multiple Charges sheets.",
+      "Each term in **bold** is defined where it first appears.",
+      "Tear off the last sheet. Answer its four questions, write the ten definitions, and turn it in."
+    ],
     "why": {
       "title": "Why It Matters",
-      "text": "The box in your kitchen says baking soda. The FDA lists the same white powder as sodium bicarbonate, and a chemist may call it sodium hydrogen carbonate. All three names mean one compound, NaHCO_{3}: one sodium ion, Na^{+}, for every hydrogen carbonate ion, HCO_{3}^{−}. A common name like baking soda is easy to remember, but it tells you nothing about what is in the box. A systematic name does. Once you know the rules, “sodium hydrogen carbonate” tells you which ions are present and in what ratio, and you can write the formula without looking it up. Going the other way, a formula tells you the name. This unit teaches those rules for four kinds of compounds: covalent compounds, compounds that contain polyatomic ions, ionic compounds of metals that form more than one ion, and acids."
+      "text": "The box in your kitchen says baking soda. The FDA lists it as sodium bicarbonate, and a chemist may call it sodium hydrogen carbonate. All three names mean one compound, NaHCO_{3}. A systematic name tells you which ions it contains and in what ratio, so you can write its formula."
     },
     "refreshers": {
       "title": "Key Refreshers",
@@ -88,7 +92,33 @@
           "codes": [
             "3.7"
           ],
-          "text": "Main-group charges follow the group: Group 1 is 1+, Group 2 is 2+, Group 17 is 1−, Group 16 is 2−, Group 15 is 3−."
+          "text": "Main-group ion charges follow the group:",
+          "table": {
+            "head": [
+              "Group",
+              "1",
+              "2",
+              "13",
+              "15",
+              "16",
+              "17"
+            ],
+            "rows": [
+              [
+                "Charge",
+                "1+",
+                "2+",
+                "3+",
+                "3−",
+                "2−",
+                "1−"
+              ]
+            ],
+            "note": {
+              "col": "13",
+              "text": "aluminum (Al^{3+})"
+            }
+          }
         },
         {
           "codes": [
@@ -414,7 +444,7 @@
     },
     {
       "type": "p",
-      "text": "Don't mix up an element's name with its ion's name. Chlorine is Cl_{2}, a gas made of molecules. Chloride is Cl^{−}, an ion found in compounds such as NaCl. Sodium is a soft metal; the sodium ion is Na^{+}. Seven elements exist as diatomic molecules: H_{2}, N_{2}, O_{2}, F_{2}, Cl_{2}, Br_{2} and I_{2}. They are listed on your Naming Toolkit sheet. That subscript 2 belongs to the element. It never carries over to the ion inside a compound: sodium chloride is NaCl, not NaCl_{2}."
+      "text": "Don't mix up an element's name with its ion's name. Chlorine is Cl_{2}, a gas made of molecules. Chloride is Cl^{−}, an ion found in compounds such as NaCl. Sodium is a soft metal; the sodium ion is Na^{+}. Seven elements exist as diatomic molecules: H_{2}, N_{2}, O_{2}, F_{2}, Cl_{2}, Br_{2} and I_{2}. They are listed on your Naming Toolkit sheet. That subscript 2 belongs to the element. It never carries over to a monatomic ion inside a compound: sodium chloride is NaCl, not NaCl_{2}."
     },
     {
       "type": "sub",
@@ -717,12 +747,12 @@
   "key": {
     "teacherNotes": [
       "Not test-allowed. The reading teaches the ionic, covalent and acid naming procedures that the reference packet deliberately leaves out (Naming Toolkit, sheet 7: no naming procedure, so the test packet does not answer naming items). Treat it as not test-allowed material.",
-      "Key Refreshers (cover, SHULL-CHG-0117) are three one-line reminders from 3.7 Ion Formation and 4.2/4.3 Ionic and Covalent Bonding, the unit's builds-on in the U6 roadmap. They reteach nothing and are not on the tear-off. Cation and anion appear there unbolded; the ten bold terms are unchanged. The main-group charges are stated only in the refresher, and Section 6.3 points back to it.",
+      "Key Refreshers (cover, SHULL-CHG-0117) are three one-line reminders from 3.7 Ion Formation and 4.2/4.3 Ionic and Covalent Bonding, the unit's builds-on in the U6 roadmap. They reteach nothing and are not on the tear-off. Cation and anion appear there unbolded; the ten bold terms are unchanged. The main-group charges are stated only in the refresher, as a small group/charge table that includes Group 13, aluminum (Al^{3+}), and Section 6.3 points back to it.",
       "Element vs ion names (6.3). Watch for NaCl_{2} and “chlorine” used for Cl^{−}. The diatomic list is the Naming Toolkit's seven (H, N, O, F, Cl, Br, I). The ion table (Figure 6.4) gives the eight monatomic anions students name most; each charge comes from its group.",
       "Oxide spelling (Matt's D5). The reading drops the vowel before “oxide” (monoxide, tetroxide, pentoxide), as most US textbooks and the deck do. IUPAC (2005) keeps it (tetraoxide, pentaoxide) and elides only “monoxide.” Accept either spelling.",
       "Classical names (D4). The student note gives Fe and Cu only. Others on the Metals with Multiple Charges sheet: stannous Sn^{2+} / stannic Sn^{4+}; plumbous Pb^{2+} / plumbic Pb^{4+}; cobaltous Co^{2+} / cobaltic Co^{3+} (cobaltic chloride, CoCl_{3}, is a disputed compound). Mercury is left out on purpose: mercurous is Hg_{2}^{2+}, and printing mercuric alone invites the wrong guess Hg^{+}. IUPAC no longer recommends ‑ous/‑ic metal names; they are still used on labels and in older books.",
       "Carbonated drinks (Connection 6.4). Most dissolved CO_{2} stays as CO_{2}; only a small fraction becomes H_{2}CO_{3} (hydration constant about 1.7 × 10^{−3} at 25 °C). The reading says “some” for that reason.",
-      "On Your Own 6.2 uses phosphite, which is on sheet 6 but unstarred; it is a pattern item built on starred phosphate. Carbonate → hydrogen carbonate was not used because HCO_{3}^{−} is printed in Why It Matters. Don't extend phosphite to an acid item: phosphorous acid, H_{3}PO_{3}, has one H bonded to P and gives up only two H^{+}, and free PO_{3}^{3−} is not a real species in water.",
+      "On Your Own 6.2 uses phosphite, which is on sheet 6 but unstarred; it is a pattern item built on starred phosphate. Carbonate → hydrogen carbonate was not used because sodium hydrogen carbonate, NaHCO_{3}, is named in Why It Matters. Don't extend phosphite to an acid item: phosphorous acid, H_{3}PO_{3}, has one H bonded to P and gives up only two H^{+}, and free PO_{3}^{3−} is not a real species in water.",
       "The per-/‑ate/‑ite/hypo- ladder is stated for the halogens only. Permanganate is a name to memorize, not a ladder member (manganate, MnO_{4}^{2−}, differs in charge, not oxygen count). Dichromate, thiosulfate and thiocyanate are not ladder members either. Hydroxide is not usually counted as an oxyanion.",
       "HCN is kept out of student items. If it comes up: cyanide ends in ‑ide, so HCN(aq) is hydrocyanic acid, but it has three elements and is not a binary acid. That is why 6.4 teaches the rule by the anion's ending.",
       "The common name of N_{2}O (Example 6.1) is nitrous oxide. It is kept off the student page so it is not confused with nitrous acid. Sheet 6 calls HS^{−} “hydrogen sulfide,” the usual name for H_{2}S gas; the reading avoids both.",
