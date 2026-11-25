@@ -26,8 +26,8 @@
 | **Affected Courses** | Chemistry only. |
 | **Risk** | Low. (1) **Future builds only.** Once the row exists, every Chemistry U6 unit-level file built afterwards takes the topic: `Unit 6 Reading - Nomenclature`, `Unit 6 Reading Key - Nomenclature`, `Unit 6 Roadmap - Nomenclature.pdf`. Files already built keep their names until a confirmed, logged rename (NAMING §5). (2) **One unfiled file is affected:** `reports/filing-queue.md` line 14 lists `output/chemistry/u06/Unit 6 Roadmap.pdf` (status Ready, not filed). Filed as-is after this change, it would carry a name that no longer matches the rule. See "Follow-up". (3) `templates/unit-roadmap/specs/chem_u06.json` carries no filename or title (its `_comment` says titles come from the decisions file), so no spec edit is needed. |
 | **Recommendation** | Approve. Declining leaves U6 unit-level files with no topic (`Unit 6 Reading.pdf`). |
-| **Decision** | PENDING. Recorded by the main session only (`governance/CHANGE_CONTROL.md` §4). |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-25, user, in the main session, answering D2 of the U6 reading plan ("U6 short title for the file name — Recommendation: 'Nomenclature', so the file is 'Unit 6 Reading - Nomenclature'. Apply it to the unfiled U6 Roadmap too."): "Yeah do that". |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | — |
 
