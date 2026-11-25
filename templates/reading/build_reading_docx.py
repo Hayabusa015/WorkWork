@@ -144,9 +144,43 @@ def _font(r, face):
         rf.set(qn(a), face)
 
 
+EQUILIBRIUM = "\u21cc"      # Archivo has no U+21CC, so it is drawn, not typed (audit_fonts)
+_EQ_PNG = {}
+
+
+def _equilibrium_png(color):
+    """The double harpoon as a small drawn image in `color`: a right harpoon (barb up)
+    over a left harpoon (barb down). Lines only; no font is involved."""
+    if color not in _EQ_PNG:
+        from PIL import Image, ImageDraw
+        w, h, lw = 230, 96, 14
+        im = Image.new("RGB", (w, h), (255, 255, 255))
+        d = ImageDraw.Draw(im)
+        ink = tuple(int(hexof(color)[k:k + 2], 16) for k in (0, 2, 4))
+        y1, y2, x0, x1 = 30, 62, 4, w - 4
+        d.line([(x0, y1), (x1, y1)], fill=ink, width=lw)
+        d.line([(x1, y1), (x1 - 44, y1 - 30)], fill=ink, width=lw)
+        d.line([(x0, y2), (x1, y2)], fill=ink, width=lw)
+        d.line([(x0, y2), (x0 + 44, y2 + 30)], fill=ink, width=lw)
+        path = os.path.join(tempfile.mkdtemp(prefix="shull_eq_"), "eq.png")
+        im.save(path, dpi=(600, 600))
+        _EQ_PNG[color] = path
+    return _EQ_PNG[color]
+
+
 def add(p, text, size, *, color=None, bold=False, italic=False, face=None, track=None):
     last = None
     for chunk, b, i, vert in tokens(text):
+        if EQUILIBRIUM in chunk:
+            pieces = chunk.split(EQUILIBRIUM)
+            for k, piece in enumerate(pieces):
+                if piece:
+                    last = add(p, piece, size, color=color, bold=bold or b, italic=italic or i,
+                               face=face, track=track)
+                if k < len(pieces) - 1:
+                    r = p.add_run()
+                    r.add_picture(_equilibrium_png(color or "#000000"), height=Pt(size * 0.50))
+            continue
         r = p.add_run(chunk)
         _font(r, face or FONT)
         r.font.size = Pt(size)
@@ -529,6 +563,14 @@ def connection(doc, blk, pal):
     q = label(c, "Connection", pal, first=True, after=1)
     add(q, "   " + blk["title"], 9, color=pal.ink, bold=True)
     body_p(c, blk["text"], pal, after=0, size=9, line=11.6)
+    if blk.get("equation"):
+        # an equation in a sidebar gets its own centred line, so it never wraps
+        q = para_in(c)
+        _spacing(q, 3, 3, 14)
+        q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        add(q, blk["equation"], 10, color=pal.ink, bold=True)
+    if blk.get("after"):
+        body_p(c, blk["after"], pal, after=0, size=9, line=11.6)
     end_cell(c)
     after_box(doc, 5)
 
@@ -831,37 +873,152 @@ def check_worked(spec):
     for b in spec["body"]:
         if b["type"] not in ("onYourOwn", "example") or "verify" not in b:
             continue
-        v = b["verify"]
-        k = v["kind"]
-        if k == "molarMass":
-            got, want = mm(v["formula"]), v["answer"]
-        elif k == "gramsToMoles":
-            got, want = sig(v["grams"] / mm(v["formula"]), v["sigFigs"]), v["answer"]
-        elif k == "convert":
-            x = v["value"] * v["factor"] if v["op"] == "multiply" else v["value"] / v["factor"]
-            got, want = sig(x, v["sigFigs"]), v["answer"]
-        elif k == "empirical":
-            mol = {e: pc / mass[e] for e, pc in v["percent"].items()}
-            low = min(mol.values())
-            r = {e: m / low for e, m in mol.items()}
-            for mult in range(1, 7):
-                if all(abs(x * mult - round(x * mult)) < 0.08 for x in r.values()):
+        for v in (b["verify"] if isinstance(b["verify"], list) else [b["verify"]]):
+            _check_one(b, v, mass, mm, sig, counts)
+
+
+def _check_one(b, v, mass, mm, sig, counts):
+    k = v["kind"]
+    if k in NOMENCLATURE:
+        got, want = NOMENCLATURE[k](v), v["answer"]
+        if got != want:
+            raise SystemExit(f"{b['type']} {b['n']}: {k} gives {got!r}, spec says {want!r}")
+        print(f"{b['type']} {b['n']}: {k} re-derived = {got}")
+        return
+    if k == "molarMass":
+        got, want = mm(v["formula"]), v["answer"]
+    elif k == "gramsToMoles":
+        got, want = sig(v["grams"] / mm(v["formula"]), v["sigFigs"]), v["answer"]
+    elif k == "convert":
+        x = v["value"] * v["factor"] if v["op"] == "multiply" else v["value"] / v["factor"]
+        got, want = sig(x, v["sigFigs"]), v["answer"]
+    elif k == "empirical":
+        mol = {e: pc / mass[e] for e, pc in v["percent"].items()}
+        low = min(mol.values())
+        r = {e: m / low for e, m in mol.items()}
+        for mult in range(1, 7):
+            if all(abs(x * mult - round(x * mult)) < 0.08 for x in r.values()):
+                break
+        else:
+            raise SystemExit(f"{b['type']} {b['n']}: no whole-number ratio in {r}")
+        got, want = {e: round(x * mult) for e, x in r.items()}, counts(v["answer"])
+    elif k == "molecular":
+        ratio = v["molarMass"] / mm(v["empirical"])
+        if abs(ratio - round(ratio)) > 0.01:
+            raise SystemExit(f"{b['type']} {b['n']}: multiplier {ratio:.3f} is not whole")
+        got = {e: n * round(ratio) for e, n in counts(v["empirical"]).items()}
+        want = counts(v["answer"])
+    else:
+        raise SystemExit(f"unknown verify kind {k}")
+    bad = (got != want) if isinstance(got, dict) else abs(got - want) > 1e-9
+    if bad:
+        raise SystemExit(f"{b['type']} {b['n']}: computed {got}, spec says {want}")
+    print(f"{b['type']} {b['n']}: {k} re-solved = {got}")
+
+
+# ---------------------------------------------------------------------------------
+# Nomenclature verify kinds (Chemistry U6). Each re-derives a name or formula from the
+# rule the reading teaches, so a typo in an Example or a key stops the build.
+PREFIX = ["", "mono", "di", "tri", "tetra", "penta", "hexa", "hepta", "octa", "nona", "deca"]
+ELEMENT = {"H": ("hydrogen", "hydride"), "B": ("boron", "boride"), "C": ("carbon", "carbide"),
+           "N": ("nitrogen", "nitride"), "O": ("oxygen", "oxide"), "F": ("fluorine", "fluoride"),
+           "Si": ("silicon", "silicide"), "P": ("phosphorus", "phosphide"), "S": ("sulfur", "sulfide"),
+           "Cl": ("chlorine", "chloride"), "Se": ("selenium", "selenide"), "Br": ("bromine", "bromide"),
+           "I": ("iodine", "iodide")}
+ACID_STEM = {"sulf": "sulfur", "phosph": "phosphor"}           # sulfuric, phosphoric
+HYDRO_ROOT = {"chloride": "chlor", "bromide": "brom", "iodide": "iod", "fluoride": "fluor",
+              "sulfide": "sulfur"}
+ROMAN = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII"}
+
+
+def _pairs(formula):
+    return [(e, int(n or 1)) for e, n in re.findall(r"([A-Z][a-z]?)(\d*)", formula)]
+
+
+def covalent_name(v):
+    """N2O -> dinitrogen monoxide: no mono- on the first element; a prefix and -ide on the
+    second; the prefix's final a/o drops before 'oxide' only (Matt's D5)."""
+    (e1, n1), (e2, n2) = _pairs(v["formula"])
+    first = ("" if n1 == 1 else PREFIX[n1]) + ELEMENT[e1][0]
+    pre, ide = PREFIX[n2], ELEMENT[e2][1]
+    if ide == "oxide" and pre[-1] in "ao":
+        pre = pre[:-1]
+    return f"{first} {pre}{ide}"
+
+
+def covalent_formula(v):
+    """sulfur hexafluoride -> SF6: each prefix becomes a subscript, no prefix means one."""
+    by_name = {}
+    for sym, (el, ide) in ELEMENT.items():
+        by_name[el] = sym; by_name[ide] = sym
+    out = ""
+    for word in v["name"].split():
+        n = 1
+        for i in range(len(PREFIX) - 1, 0, -1):
+            p = PREFIX[i]
+            for cand in (p, p[:-1]):
+                if word.startswith(cand) and word[len(cand):] in by_name:
+                    n, word = i, word[len(cand):]
                     break
             else:
-                raise SystemExit(f"{b['type']} {b['n']}: no whole-number ratio in {r}")
-            got, want = {e: round(x * mult) for e, x in r.items()}, counts(v["answer"])
-        elif k == "molecular":
-            ratio = v["molarMass"] / mm(v["empirical"])
-            if abs(ratio - round(ratio)) > 0.01:
-                raise SystemExit(f"{b['type']} {b['n']}: multiplier {ratio:.3f} is not whole")
-            got = {e: n * round(ratio) for e, n in counts(v["empirical"]).items()}
-            want = counts(v["answer"])
-        else:
-            raise SystemExit(f"unknown verify kind {k}")
-        bad = (got != want) if isinstance(got, dict) else abs(got - want) > 1e-9
-        if bad:
-            raise SystemExit(f"{b['type']} {b['n']}: computed {got}, spec says {want}")
-        print(f"{b['type']} {b['n']}: {k} re-solved = {got}")
+                continue
+            break
+        out += by_name[word] + (str(n) if n > 1 else "")
+    return out
+
+
+def ionic_formula(v):
+    """[[symbol, charge], [symbol, charge]] -> the lowest ratio whose charges sum to zero,
+    with parentheses round a polyatomic ion used more than once ("Pb(NO3)2")."""
+    from math import gcd
+    (c, qc), (a, qa) = v["ions"]
+    l = abs(qc * qa) // gcd(abs(qc), abs(qa))
+    nc, na = l // abs(qc), l // abs(qa)
+    if nc * qc + na * qa:
+        raise SystemExit(f"charges in {v['ions']} do not balance")
+
+    def part(sym, n):
+        poly = len(_pairs(sym)) > 1 or any(k > 1 for _, k in _pairs(sym))
+        if n == 1:
+            return sym
+        return f"({sym}){n}" if poly else f"{sym}{n}"
+    return part(c, nc) + part(a, na)
+
+
+def metal_charge(v):
+    """Fe2O3 -> 'III': the anion total, shared by the metal ions, as a Stock numeral."""
+    total = -v["anionCharge"] * v["anionCount"]
+    if total % v["metalCount"]:
+        raise SystemExit(f"{v} does not give a whole charge per metal ion")
+    return ROMAN[total // v["metalCount"]]
+
+
+def ate_to_ite(v):
+    """SO4 2- -> SO3 2-: -ite has one fewer oxygen than -ate, same charge."""
+    parts = _pairs(v["ate"])
+    out = ""
+    for e, n in parts:
+        if e == "O":
+            n -= 1
+        out += e + (str(n) if n > 1 else "")
+    return [out, v["charge"]]
+
+
+def acid_name(v):
+    """Named from the anion's ending: -ide -> hydro-...-ic, -ate -> -ic, -ite -> -ous."""
+    an = v["anion"]
+    if an.endswith("ide"):
+        return f"hydro{HYDRO_ROOT[an]}ic acid"
+    for end, acid in (("ate", "ic"), ("ite", "ous")):
+        if an.endswith(end):
+            stem = an[:-len(end)]
+            return f"{ACID_STEM.get(stem, stem)}{acid} acid"
+    raise SystemExit(f"anion name {an!r} has no acid ending")
+
+
+NOMENCLATURE = {"covalentName": covalent_name, "covalentFormula": covalent_formula,
+                "ionicFormula": ionic_formula, "metalCharge": metal_charge,
+                "ateToIte": ate_to_ite, "acidName": acid_name}
 
 
 VOCAB_MAX = 10      # workflows/unit-textbook.md, "Reading pages": up to ten terms
@@ -887,9 +1044,14 @@ def check_spec(spec, titles):
             raise SystemExit("Reading Check boxes are not part of the unit reading; the tear-off "
                              "questions replace them")
     text = json.dumps(spec, ensure_ascii=False)
-    for banned in ("22.4", "STP", "molar volume", "Molar volume"):
-        if banned in text:
-            raise SystemExit(f"'{banned}' appears in the spec; molar volume is 12.5, out of U7")
+    # Unit-specific bans live in the spec ("banned": [{"text": regex, "why": reason}]): a
+    # term the dossier marks out of scope or UNVERIFIED for this unit. Student-facing text
+    # only - the teacher key may name the thing in order to explain why it is absent.
+    student = student_text(spec)
+    for b in spec.get("banned", []):
+        m = re.search(b["text"], student)
+        if m:
+            raise SystemExit(f"'{m.group(0)}' appears in student text: {b['why']}")
     # stale section numbers: a "Section 7.x" pointer to a code that is not taught
     for m in re.finditer(r"(?:Section|Example|On Your Own) (\d+\.\d+)", text):
         if m.group(1) not in spec["sections"]:
@@ -919,7 +1081,7 @@ def check_spec(spec, titles):
     if any(n != 1 for n in conns.values()):
         raise SystemExit(f"every section needs exactly one Connection box: {conns}")
     for b in spec["body"]:
-        if b["type"] in ("opener", "connection") and "**" in b["text"]:
+        if b["type"] in ("opener", "connection") and "**" in b["text"] + b.get("after", ""):
             raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
     # the tear-off: one single-part question per section, labelled with its code, in order
     to = spec["tearOff"]
@@ -931,6 +1093,19 @@ def check_spec(spec, titles):
     for q in to["questions"]:
         if q["q"].count("?") != 1:
             raise SystemExit(f"tear-off question {q['n']} is not a single question")
+
+
+def student_text(spec):
+    """Every string a student sees, as one blob: the spec without the teacher key, the
+    tear-off answers and the On Your Own solutions."""
+    def strip(o):
+        if isinstance(o, dict):
+            return {k: strip(v) for k, v in o.items()
+                    if k not in ("key", "answer", "accept", "solution", "verify", "banned", "$comment")}
+        if isinstance(o, list):
+            return [strip(x) for x in o]
+        return o
+    return json.dumps(strip(spec), ensure_ascii=False)
 
 
 def definition_text(v):

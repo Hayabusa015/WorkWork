@@ -4,6 +4,9 @@
   "unit": 7,
   "sections": ["7.1", "7.2", "7.3", "7.4", "7.5"],
   "kind": "Unit Reading",
+  "banned": [
+    { "text": "22\\.4|STP|[Mm]olar volume", "why": "molar volume is 12.5, out of U7" }
+  ],
   "pageBudget": {
     "target": 8,
     "max": 10,
