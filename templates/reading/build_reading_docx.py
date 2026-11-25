@@ -18,10 +18,17 @@ What it makes, from one spec so the student copy and the key cannot drift:
               numbered figures, Example banners, On Your Own boxes and one Connection per
               section. The tear-off leaf is the last physical sheet: front (odd page) a
               Name line, the due instruction and one question per section; reverse (last
-              even page) the ten terms and definitions. If the chapter ends on an odd
-              page, one blank back is inserted so the leaf starts on an odd page.
+              even page) the vocabulary, in one of two modes set by tearOff.vocabMode:
+                "write" (the default; SHULL-CHG-0118) - each term and its section code
+                         with tearOff.vocabLines ruled write-in lines (default 2, at least
+                         2) and no printed definition; students write their own;
+                "print" - each term beside its printed definition (the format before
+                         SHULL-CHG-0118; a filed reading built that way sets it explicitly).
+              If the chapter ends on an odd page, one blank back is inserted so the leaf
+              starts on an odd page.
     key       the shared header, teacher notes, the tear-off answers, every On Your Own
-              solution, and the ten definitions. Answers are in the key-handwriting face
+              solution, and the ten definitions (in "write" mode as the expected
+              definitions, handwritten like the other answers). Answers are in the key-handwriting face
               and keyInk.pen (standards/ANSWER_KEYS.md section 2), digits in the face's
               fallback (section 7, legibility).
 
@@ -95,6 +102,9 @@ CAPTION, CAPTION_LINE = 8.5, 11
 LABEL = 8                        # caps labels sit on the print floor, never under it
 WRITE_LINE_PT = 22               # one handwriting line
 TEAR_LINE_PT = 24                # a tear-off answer line: a little taller, for a full sentence
+VOCAB_MODES = ("write", "print") # tearOff.vocabMode; the first is the default (SHULL-CHG-0118)
+VOCAB_LINES_MIN = 2              # a one- to two-sentence definition needs two lines at least
+VOCAB_TERM_W_IN = 2.15           # the term column on the reverse, both modes
 W_HAIR = 6                       # eighths of a point: 0.75 pt, print.weights.writingLine
 W_ACCENT = 18                    # the course rule under a section head, 2.25 pt
 
@@ -848,10 +858,24 @@ def page_break(doc):
     return p
 
 
+def vocab_mode(spec):
+    return spec["tearOff"].get("vocabMode", VOCAB_MODES[0])
+
+
+def vocab_lines(spec):
+    return int(spec["tearOff"].get("vocabLines", VOCAB_LINES_MIN))
+
+
+VOCAB_WRITE_NOTE = ("Write each definition in your own words, using the reading. "
+                    "Each term is in bold where it is first defined.")
+
+
 def tear_off(doc, spec, pal):
     """The detachable leaf (workflows/unit-textbook.md steps 3-5). Front: a Name line,
     the due instruction verbatim, one single-part question per section with writing
-    lines. Reverse: the ten terms with the same definitions the set-off lines print."""
+    lines. Reverse, by vocab_mode(): "write" - each term with ruled write-in lines and
+    no definition; "print" - the ten terms with the same definitions the set-off lines
+    print."""
     to = spec["tearOff"]
     # front
     t = doc.add_table(rows=1, cols=2)
@@ -890,6 +914,11 @@ def tear_off(doc, spec, pal):
     _spacing(p, 0, 2, SEC_TITLE * 1.25)
     add(p, to["vocabTitle"], SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
     bottom_rule(p, pal.display, W_ACCENT, 2)
+    if vocab_mode(spec) == "write":
+        body_p(doc, to.get("vocabNote", VOCAB_WRITE_NOTE), pal, before=4, after=4, size=BODY,
+               line=BODY_LINE + 1)
+        vocab_write(doc, spec, pal)
+        return
     body_p(doc, to["vocabNote"], pal, before=4, after=8, size=9.5, line=12.6)
     terms = spec["vocab"]
     t = doc.add_table(rows=len(terms), cols=2)
@@ -906,6 +935,29 @@ def tear_off(doc, spec, pal):
                 add(p, f"   {v['section']}", 8, color=pal.label)
             else:
                 add(p, definition_text(v), BODY + 0.5, color=pal.ink)
+
+
+def vocab_write(doc, spec, pal):
+    """The write-in reverse (SHULL-CHG-0118): one row per term, the term and its section
+    code on the left, vocab_lines() ruled lines on the right. The lines are table rows
+    (write_lines), because stacked ruled paragraphs collapse into one border."""
+    terms = spec["vocab"]
+    n = vocab_lines(spec)
+    lines_w = TEXT_W_IN - VOCAB_TERM_W_IN
+    t = doc.add_table(rows=len(terms), cols=2)
+    fix_widths(t, [VOCAB_TERM_W_IN, lines_w])
+    for ri, v in enumerate(terms):
+        no_split(t.rows[ri])
+        a, b = t.rows[ri].cells
+        cell_margins(a, 150, 0, 0, 80)
+        cell_margins(b, 150, 0, 0, 0)
+        p = a.paragraphs[0]
+        # the term sits on the first line: its baseline lands just above the first rule
+        _spacing(p, TEAR_LINE_PT - 13, 0, 14)
+        add(p, v["term"], BODY + 0.5, color=pal.ink, bold=True)
+        add(p, f"   {v['section']}", 8, color=pal.label)
+        write_lines(b, n, pal, first=True, width=lines_w, line_pt=TEAR_LINE_PT)
+        end_cell(b)
 
 
 # ---------------------------------------------------------------------------------
@@ -1153,6 +1205,17 @@ def check_spec(spec, titles):
     check_refreshers(spec)
     # the tear-off: one single-part question per section, labelled with its code, in order
     to = spec["tearOff"]
+    if vocab_mode(spec) not in VOCAB_MODES:
+        raise SystemExit(f"tearOff.vocabMode {to['vocabMode']!r}: use one of {VOCAB_MODES}")
+    if vocab_mode(spec) == "write":
+        if vocab_lines(spec) < VOCAB_LINES_MIN:
+            raise SystemExit(f"tearOff.vocabLines {vocab_lines(spec)}: a written definition needs "
+                             f"at least {VOCAB_LINES_MIN} lines")
+        if re.search(r"defined the same way", to.get("vocabNote", ""), re.I):
+            raise SystemExit("tearOff.vocabNote describes printed definitions, but vocabMode is "
+                             "'write'")
+    elif "vocabLines" in to:
+        raise SystemExit("tearOff.vocabLines applies only when vocabMode is 'write'")
     if to["instruction"] != "Due ASAP. No late work will be accepted. We will start the unit with this.":
         raise SystemExit("the tear-off instruction must be the workflow's text, verbatim")
     labels = [q["n"] for q in to["questions"]]
@@ -1358,6 +1421,33 @@ def build_key(spec, out_path, tear_page):
             _spacing(ep, 1, 0, 11.5)
             ep.paragraph_format.left_indent = Inches(0.34)
             add(ep, sol["note"], 8.5, color=pal.label, italic=True)
+    if vocab_mode(spec) == "write":
+        head(f"Vocabulary (page {tear_page + 1}) — expected definitions")
+        for v in spec["vocab"]:
+            tt = doc.add_table(rows=1, cols=1)
+            fix_widths(tt, [COL_W_IN])
+            cc = tt.rows[0].cells[0]
+            cell_margins(cc, 10, 40, 0, 0)
+            no_split(tt.rows[0])
+            p = para_in(cc, first=True)
+            _spacing(p, 0, 0, 12.6)
+            add(p, v["term"], 9.5, color=pal.ink, bold=True)
+            add(p, f"  {v['section']}", 8, color=pal.label)
+            ap = cc.add_paragraph()
+            _spacing(ap, 0, 0, 17)
+            ap.paragraph_format.left_indent = Inches(0.20)
+            hand(ap, definition_text(v), 12.5)
+        ep = doc.add_paragraph()
+        _spacing(ep, 3, 0, 11.5)
+        add(ep, "Each definition is worded as in the reading. Accept any definition that makes "
+            "the same point in the student's own words.", 8.5, color=pal.label, italic=True)
+        chapter, info = furniture(doc, spec, pal, key=True)
+        trim_tail(doc)
+        apply_binding(doc)
+        furniture_after_binding(doc, spec, pal, chapter, info)
+        schema_order(doc)
+        doc.save(out_path)
+        return
     head(f"Vocabulary (page {tear_page + 1}) — the ten printed definitions")
     for v in spec["vocab"]:
         tt = doc.add_table(rows=1, cols=1)
@@ -1427,6 +1517,42 @@ def leaf_pages(pdf_path, spec):
     return n, front_p, back_p
 
 
+def check_reverse(pdf_path, spec, back_p):
+    """The vocabulary reverse is one page, the last one, and carries every term. In
+    "write" mode it carries no definition and each term has its ruled lines (SHULL-CHG-0118
+    fit check: ten terms that do not fit with the minimum lines fail the build)."""
+    import fitz
+    bad = []
+    if not back_p:
+        return ["the reverse page was not found"]
+    flat = lambda x: re.sub(r"[_^]\{([^}]*)\}", r"\1", " ".join(x.split()))
+    with fitz.open(pdf_path) as d:
+        if back_p != d.page_count:
+            bad.append(f"the reverse (page {back_p}) is not the last page ({d.page_count}); "
+                       "it spilled or something follows it")
+        page = d[back_p - 1]
+        txt = " ".join(page.get_text().split())
+        for v in spec["vocab"]:
+            if v["term"] not in txt:
+                bad.append(f"term {v['term']!r} is not on the reverse page")
+            if vocab_mode(spec) == "write" and flat(v["def"])[:40] in flat(txt):
+                bad.append(f"the definition of {v['term']!r} is printed on the reverse")
+        if vocab_mode(spec) == "write":
+            # each write-in line is a hairline the width of the lines column
+            want = len(spec["vocab"]) * vocab_lines(spec)
+            lw = (TEXT_W_IN - VOCAB_TERM_W_IN) * 72
+            rules = 0
+            for dr in page.get_drawings():
+                for it in dr["items"]:
+                    if it[0] == "l" and abs(it[1].y - it[2].y) < 0.5 and abs(abs(it[2].x - it[1].x) - lw) < 6:
+                        rules += 1
+                    elif it[0] == "re" and it[1].height < 1.5 and abs(it[1].width - lw) < 6:
+                        rules += 1
+            if rules < want:
+                bad.append(f"{rules} write-in lines drawn on the reverse; {want} expected")
+    return bad
+
+
 def filenames(spec):
     """Unit-level names from the shared helper: the full section list makes the name
     unit-level, and the topic is the unit's short title in DECISIONS.md."""
@@ -1484,6 +1610,8 @@ def main():
           f"tear-off front {fp}, reverse {bp}")
     if not (fp and bp and fp % 2 == 1 and bp == fp + 1 == n):
         print("  LEAF: the tear-off is not the last physical sheet, odd front / even back"); ok = False
+    for b in check_reverse(pdf, spec, bp):
+        print("  REVERSE:", b); ok = False
     for b in check_margins(pdf):
         print("  MARGIN:", b); ok = False
     if n > budget.get("max", 99):

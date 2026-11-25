@@ -709,8 +709,10 @@
         "accept": "An example such as nitrate → nitric acid, nitrite → nitrous acid shows the rule."
       }
     ],
+    "vocabMode": "write",
+    "vocabLines": 2,
     "vocabTitle": "Unit 6 vocabulary",
-    "vocabNote": "These are the ten bold terms from the reading, defined the same way."
+    "vocabNote": "Write each definition in your own words, using the reading. Each term is in bold where it is first defined."
   },
   "key": {
     "teacherNotes": [

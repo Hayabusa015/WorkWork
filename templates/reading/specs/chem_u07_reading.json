@@ -495,6 +495,7 @@
         "accept": "Percent composition does not work: both are 92.2% carbon. A student who also notes gas vs liquid has read 7.5 correctly, but the measurement the section names is molar mass."
       }
     ],
+    "vocabMode": "print",
     "vocabTitle": "Unit 7 vocabulary",
     "vocabNote": "These are the ten bold terms from the reading, defined the same way."
   },
