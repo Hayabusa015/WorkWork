@@ -8,10 +8,6 @@
 > **One layer: Path B, a build rule** (`governance/CHANGE_CONTROL.md` §1). It applies to unit
 > readings in all three courses, so it belongs in the workflow (CLAUDE.md §2 test). No course fact
 > changes, and no `DECISIONS.md` entry is needed.
->
-> **ID allocation.** No `SHULL-CHG-0118` exists in the local checkout's `governance/proposals/`. The
-> main session confirms the ID is free on a freshly fetched `origin/main` before this record is
-> committed. Until it is pushed, the ID is not allocated (`governance/CHANGE_CONTROL.md` §2).
 
 | Field | Value |
 |---|---|
@@ -28,9 +24,9 @@
 | **Risk** | Low. (1) **Writing space.** Ten terms with handwriting lines take more room than ten printed pairs. The reverse is one page, so the builder must fit ten terms with enough lines, or the term count or line count has to be resolved with the teacher (the same fit rule as the front). (2) **Builder.** `templates/reading/build_reading_docx.py` currently prints the definitions on the reverse; until it changes, a reading cannot follow the rule. (3) **Students keep no printed glossary on the leaf.** The definitions stay in the reading pages that students keep (bold term plus the set-off definition line), so the retained packet is still a complete reference. |
 | **Recommendation** | Approve. Matt's choice above named this exact change; the text below is the wording for it. |
 | **Decision** | 2026-11-25, user, in the main session, answering "For the tear-off back, students would see the 10 terms with blank lines and write each definition themselves, finding it bolded in the reading. Should this apply only to Unit 6, or become the rule for every unit reading?": "Rule for all readings (Recommended)" (option text: "Change the textbook rule (SHULL-CHG-0107) so every reading's tear-off back lists the terms with write-in lines. Unit 6 follows now. Unit 7 is filed with printed definitions and changes only if you ask."). |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit; builder side by the U6 rebuild |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | Workflow: `63349ddca980bb2c6cdad84e1ca69b071d374ab9`, texts (A) and (B) in `workflows/unit-textbook.md` (Secretary). Builder: `041566b0a629a35993f09012e11751736b054c72` (textbook-page-designer). It adds `tearOff.vocabMode` to `templates/reading/build_reading_docx.py`, with "write" as the default and "print" as the alternative, plus `tearOff.vocabLines` and the `check_reverse` fit check. The same commit sets `vocabMode` "write", `vocabLines` 2 and write-in directions in `vocabNote` in the U6 spec, and pins `vocabMode` "print" in the U7 spec. |
+| **Verified** | Yes for the rule and the builder, 2026-11-25; Auditor pass on the U6 export pending. Checked by the main session, which implemented neither part: `hook-validate.sh` returned "validators clean". The designer's regression shows the U7 rebuild identical in text and pixels, with byte-identical docx XML. A spec with no `vocabMode` builds in write mode. `vocabLines` 4 fails the build as designed. The U6 reverse prints the 10 terms with 2 ruled lines each and no definitions, on one page. The U6 key carries the expected definitions, worded as in the reading. **Pending:** the independent Auditor is re-checking the U6 export; record its result here when it returns. |
 
 ---
 
@@ -78,7 +74,8 @@ The rest of that bullet is unchanged.
 |---|---|
 | `workflows/unit-textbook.md` | Text (A) and (B), verbatim |
 | `templates/reading/build_reading_docx.py` | Reverse renders write-in lines instead of definitions; key heading and docstrings updated (step 2) |
-| `templates/reading/specs/chem_u06_reading.json` | `tearOff.vocabNote` reworded for write-in use (step 3, classroom work) |
+| `templates/reading/specs/chem_u06_reading.json` | `tearOff.vocabMode` "write", `tearOff.vocabLines` 2, and `tearOff.vocabNote` reworded as write-in directions (step 3, classroom work; in commit 041566b) |
+| `templates/reading/specs/chem_u07_reading.json` | `tearOff.vocabMode` pinned to "print" (commit 041566b). Made on the main session's instruction so that the filed U7 keeps its printed definitions once write mode became the builder default. It changes no output: the U7 rebuild is identical in text and pixels, with byte-identical docx XML. This is how "U7 is not touched unless Matt asks" (step 3 below, Affected Courses) is kept. U7's content and its filed edition are unchanged. |
 
 1. **Secretary:** replace item 5 with text (A) and the audit sentence with text (B) in
    `workflows/unit-textbook.md`, in one commit that carries SHULL-CHG-0118.
