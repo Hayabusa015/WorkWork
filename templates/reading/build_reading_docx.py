@@ -697,11 +697,13 @@ def thumb_tab(hf, pal, unit, page_no, id_base):
 
 
 def furniture(doc, spec, pal, key=False):
-    """Running header (pages 2+), centred page number, before apply_binding()."""
+    """Running header (pages 2+), centred page number, before apply_binding(). A spec's
+    `keyLabel` names the key once, in both the header kicker and the running head; without
+    it the two keep their older labels (Answer Key / Teacher Key) so U7 is unchanged."""
     unit = int(spec["unit"])
     chapter = f"UNIT {unit} \u00b7 {unit_title(spec['course'], unit).upper()}"
     info = f"SHULL SCIENCE \u00b7 {spec['course'].upper()} \u00b7 READING" + \
-        (" \u00b7 TEACHER KEY" if key else "")
+        ((" \u00b7 " + spec.get("keyLabel", "Teacher Key").upper()) if key else "")
     for i, s in enumerate(doc.sections):
         if i:
             s.header.is_linked_to_previous = False
@@ -1194,7 +1196,7 @@ def build_key(spec, out_path, tear_page):
     s.top_margin, s.bottom_margin = Inches(MARGIN_TOP_IN), Inches(MARGIN_BOTTOM_IN)
     unit = int(spec["unit"])
     code = f"U{unit:02d} / S{spec['sections'][0]}–S{spec['sections'][-1]}"
-    print_header(doc, pal, unit=unit, code=code, kind=spec["kind"] + " · Answer Key",
+    print_header(doc, pal, unit=unit, code=code, kind=spec["kind"] + " · " + spec.get("keyLabel", "Answer Key"),
                  title=unit_title(spec["course"], spec["unit"]), width=TEXT_W_IN)
     p = doc.add_paragraph(); pin(p, 8)
     # two columns under the header, so key prose keeps the body line length (audit #8)

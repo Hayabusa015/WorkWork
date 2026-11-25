@@ -9,13 +9,11 @@ and charge total traces to reports/chem_u06_reading_dossier.md section B; the ch
 totals on Figures 6.4 and 6.5 are computed here and checked, and a mismatch stops the
 build.
 
-Figure 6.1 is a formula panel, not the shared molecule builder. The builder
+Figure 6.1 is a counts-only panel with no structure (Matt's ruling, 2026-11-25): two
+labelled boxes with formula, name and atom tally. The shared molecule builder
 (scripts/build_diagram_molecule.py --explicit-h --label-carbons --no-caption) was tried
-for CO on 2026-11-25: "[C-]#[O+]" draws O+ and drops the C- label, a misleading formal
-charge; "[C]=O" draws a double bond and a lone pair on carbon. CO2 ("O=C=O") drew
-correctly, but one molecule drawn by the builder beside one drawn by hand would compare
-two drawing styles, not two molecules. So both are drawn here as labelled atom counts,
-with no bonds, no charges and no sizes claimed.
+for CO on 2026-11-25 and drew it badly ("[C-]#[O+]" shows O+ and drops the C- label;
+"[C]=O" draws a double bond and a lone pair on carbon), so no molecule is drawn.
 
 Print discipline (brand/SHULL_DESIGN_SYSTEM.md section 8): outlines only, no fills.
 Distinctions are carried by line style and label, never by hue alone. Type is Archivo.
@@ -96,24 +94,20 @@ def save(fig, out):
 
 # ---------------------------------------------------------------------------------
 def fig_co_co2(out):
-    """6.1: CO and CO2 as atom counts. Same two elements, different ratio, different
-    substance. No bonds or charges are drawn (see the module note)."""
-    fig, ax = canvas(1.42)
-    r = 0.17
-    panels = [(0.75, ["C", "O"], "CO", "carbon monoxide", "1 C + 1 O"),
-              (2.25, ["O", "C", "O"], "CO_{2}", "carbon dioxide", "1 C + 2 O")]
-    for cx, atoms, formula, name, count in panels:
-        n = len(atoms)
-        x0 = cx - (n - 1) * r * 2.08 / 2
-        for k, a in enumerate(atoms):
-            x = x0 + k * r * 2.08
-            ax.add_patch(Circle((x, 1.08), r, fill=False, edgecolor=INK,
-                                linewidth=1.3 if a == "C" else 0.9, linestyle="-" if a == "C" else (0, (3, 1.6))))
-            text(ax, x, 1.08, a, 9.5, "bold")
-        text(ax, cx, 0.68, formula, 12, "bold")
-        text(ax, cx, 0.40, name, 8.5, "semibold", ACCENT)
-        text(ax, cx, 0.17, count, 8, "regular", LABEL)
-    ax.plot([1.5, 1.5], [0.12, 1.32], color=HAIR, linewidth=0.8)
+    """6.1: CO and CO2 as a counts-only panel (Matt's ruling, 2026-11-25, "Counts-only
+    panel"): two labelled boxes giving formula, name and atom tally. No atoms are drawn,
+    so nothing shows arrangement, bonds, charges or sizes (SHULL-CHG-0042 does not apply)."""
+    fig, ax = canvas(1.30)
+    panels = [(0.06, "CO", "carbon monoxide", ["1 carbon atom", "1 oxygen atom"]),
+              (1.53, "CO_{2}", "carbon dioxide", ["1 carbon atom", "2 oxygen atoms"])]
+    w, y0, h = 1.41, 0.06, 1.18
+    for x, formula, name, counts in panels:
+        box(ax, x, y0, w, h, color=INK, lw=1.0)
+        text(ax, x + w / 2, y0 + h - 0.24, formula, 14, "bold")
+        text(ax, x + w / 2, y0 + h - 0.52, name, 8.5, "semibold", ACCENT)
+        ax.plot([x + 0.14, x + w - 0.14], [y0 + h - 0.68, y0 + h - 0.68], color=HAIR, linewidth=0.6)
+        for k, c in enumerate(counts):
+            text(ax, x + w / 2, y0 + 0.36 - k * 0.19, c, 8.5, "regular", INK)
     save(fig, out)
 
 
@@ -146,7 +140,7 @@ def fig_sort(out):
     text(ax, qx + 0.12, y + h * 0.30, "only nonmetals: prefixes count atoms", 8, ha="left")
     text(ax, rx + rw / 2, y + h * 0.70, "Section 6.1", 8, "regular", ACCENT)
     text(ax, rx + rw / 2, y + h * 0.30, "CO_{2}", 8.5, "semibold")
-    text(ax, FIG_IN / 2, 0.08, "Ionic names never use prefixes; the charges set the ratio.", 8, "regular", LABEL)
+    text(ax, FIG_IN / 2, 0.08, "Ionic names don't use prefixes to count ions.", 8, "regular", LABEL)
     save(fig, out)
 
 
@@ -158,7 +152,7 @@ def fig_ladder(out):
             ("-ite", "chlorite", "ClO_{2}^{-}", 2),
             ("hypo-  -ite", "hypochlorite", "ClO^{-}", 1)]
     fig, ax = canvas(1.52)
-    cols = [0.06, 0.84, 1.80, 2.42]           # left edges: prefix/ending, name, formula, O
+    cols = [0.10, 0.86, 1.80, 2.42]           # left edges: prefix/ending, name, formula, O
     heads = ["ENDING", "NAME", "FORMULA", "O ATOMS"]
     top = 1.42
     for x, hd in zip(cols, heads):
@@ -173,7 +167,7 @@ def fig_ladder(out):
         text(ax, cols[2] + 0.25, y, f, 9.5, "bold")
         text(ax, cols[3] + 0.25, y, str(n), 9.5, "bold")
         if name == "chlorate":
-            box(ax, 0.03, y - rh / 2 + 0.02, 2.93, rh - 0.04, color=DISPLAY, lw=1.6, round_=False)
+            box(ax, 0.005, y - rh / 2 + 0.01, 2.99, rh - 0.02, color=INK, lw=1.6, round_=False)
         elif i < len(rows) - 1 and name != "perchlorate":
             ax.plot([0.04, 2.96], [y - rh / 2, y - rh / 2], color=HAIR, linewidth=0.6)
     yb = top - 0.24 - 3 * rh - rh / 2

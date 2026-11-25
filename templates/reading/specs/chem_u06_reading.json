@@ -1,22 +1,63 @@
 {
-  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading",
+  "$comment": "Chemistry U6 unit reading, four sections (SHULL-CHG-0099), built under workflows/unit-textbook.md from the Overseer outline and Matt's decisions D1, D3-D5 (2026-11-25). Every fact, name and formula traces to reports/chem_u06_reading_dossier.md; nothing it marks UNVERIFIED is printed. Section titles and the unit title are read from courses/chemistry/DECISIONS.md, never typed here. Filenames come from templates/_shull_name.py (document type Reading; U6 short title 'Nomenclature', SHULL-CHG-0116). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/chem_u06_reading.json build/chem_u06_reading D4 student note, Matt-approved text (2026-11-25), printed unaltered in 6.3: \"You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge.\" Suffix hyphens are U+2011 (non-breaking) so -ide/-ate/-ite do not split at a line end.",
   "course": "chemistry",
   "unit": 6,
-  "sections": ["6.1", "6.2", "6.3", "6.4"],
+  "sections": [
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4"
+  ],
   "kind": "Unit Reading",
   "banned": [
-    { "text": "\\b[Rr]ust\\b", "why": "dossier A-13: Fe2O3 is not called rust" },
-    { "text": "[Pp]ink|ppm", "why": "dossier A-14: no 'pink', no ppm figures for cured meat" },
-    { "text": "[Rr]eject", "why": "dossier WIM-d: no claim that IUPAC rejects 'bicarbonate' (UNVERIFIED)" },
-    { "text": "[Mm]ercur|Hg", "why": "Matt's D4 and dossier A-2: no mercury on the student page" },
-    { "text": "[Ss]tann|[Pp]lumb|[Cc]obalt", "why": "Matt's D4: Sn/Pb/Co classical names go in the key only" },
-    { "text": "HCN|[Hh]ydrocyanic", "why": "dossier A-5: HCN stays out of student items" },
-    { "text": "[Nn]itrous oxide", "why": "dossier 6.1-c: keep 'nitrous' for nitrous acid in 6.4" },
-    { "text": "tetraoxide|pentaoxide|monooxide", "why": "Matt's D5: drop the vowel before 'oxide' on the student page" },
-    { "text": "[Pp]hosphorous acid|H_\\{3\\}PO_\\{3\\}", "why": "dossier A-3 and 6.4-j: not an acid-naming item" },
-    { "text": "HS\\^", "why": "dossier A-10: HS- is not used, to avoid confusion with H2S gas" },
-    { "text": "Alfred|Arrhenius|Brønsted|Bronsted", "why": "dossier 6.3-f and A-9: not sourced or not named in U6" },
-    { "text": "pH", "why": "dossier A-17: no pH value for carbonated drinks" }
+    {
+      "text": "\\b[Rr]ust\\b",
+      "why": "dossier A-13: Fe2O3 is not called rust"
+    },
+    {
+      "text": "[Pp]ink|ppm",
+      "why": "dossier A-14: no 'pink', no ppm figures for cured meat"
+    },
+    {
+      "text": "[Rr]eject",
+      "why": "dossier WIM-d: no claim that IUPAC rejects 'bicarbonate' (UNVERIFIED)"
+    },
+    {
+      "text": "[Mm]ercur|Hg",
+      "why": "Matt's D4 and dossier A-2: no mercury on the student page"
+    },
+    {
+      "text": "[Ss]tann|[Pp]lumb|[Cc]obalt",
+      "why": "Matt's D4: Sn/Pb/Co classical names go in the key only"
+    },
+    {
+      "text": "HCN|[Hh]ydrocyanic",
+      "why": "dossier A-5: HCN stays out of student items"
+    },
+    {
+      "text": "[Nn]itrous oxide",
+      "why": "dossier 6.1-c: keep 'nitrous' for nitrous acid in 6.4"
+    },
+    {
+      "text": "tetraoxide|pentaoxide|monooxide",
+      "why": "Matt's D5: drop the vowel before 'oxide' on the student page"
+    },
+    {
+      "text": "[Pp]hosphorous acid|H_\\{3\\}PO_\\{3\\}",
+      "why": "dossier A-3 and 6.4-j: not an acid-naming item"
+    },
+    {
+      "text": "HS\\^",
+      "why": "dossier A-10: HS- is not used, to avoid confusion with H2S gas"
+    },
+    {
+      "text": "Alfred|Arrhenius|Brønsted|Bronsted",
+      "why": "dossier 6.3-f and A-9: not sourced or not named in U6"
+    },
+    {
+      "text": "pH",
+      "why": "dossier A-17: no pH value for carbonated drinks"
+    }
   ],
   "pageBudget": {
     "target": 8,
@@ -36,29 +77,75 @@
     }
   },
   "vocab": [
-    { "term": "binary compound", "section": "6.1", "def": "a compound made of exactly two elements" },
-    { "term": "molecular compound", "section": "6.1", "def": "a compound made of molecules, in which atoms (usually nonmetals) share electrons in covalent bonds" },
-    { "term": "monatomic ion", "section": "6.2", "def": "an ion made of a single atom, such as Na^{+} or Cl^{−}" },
-    { "term": "polyatomic ion", "section": "6.2", "def": "a group of covalently bonded atoms that carries an overall charge" },
-    { "term": "oxyanion", "section": "6.2", "def": "a negative polyatomic ion in which an element is bonded to oxygen atoms, such as sulfate, SO_{4}^{2−}" },
-    { "term": "formula unit", "section": "6.3", "def": "the lowest whole-number ratio of ions in an ionic compound" },
-    { "term": "Stock system", "section": "6.3", "def": "the naming system that shows a metal ion's charge with a Roman numeral in parentheses, as in iron(III)" },
-    { "term": "acid", "section": "6.4", "def": "a compound that produces hydrogen ions (H^{+}) when it dissolves in water" },
-    { "term": "binary acid", "section": "6.4", "def": "an acid made of hydrogen and one other element, such as HCl" },
-    { "term": "oxyacid", "section": "6.4", "def": "an acid that contains hydrogen, oxygen and at least one other element" }
+    {
+      "term": "binary compound",
+      "section": "6.1",
+      "def": "a compound made of exactly two elements"
+    },
+    {
+      "term": "molecular compound",
+      "section": "6.1",
+      "def": "a compound made of molecules, in which atoms (usually nonmetals) share electrons in covalent bonds"
+    },
+    {
+      "term": "monatomic ion",
+      "section": "6.2",
+      "def": "an ion made of a single atom, such as Na^{+} or Cl^{−}"
+    },
+    {
+      "term": "polyatomic ion",
+      "section": "6.2",
+      "def": "a group of covalently bonded atoms that carries an overall charge"
+    },
+    {
+      "term": "oxyanion",
+      "section": "6.2",
+      "def": "a negative polyatomic ion in which an element is bonded to oxygen atoms, such as sulfate, SO_{4}^{2−}"
+    },
+    {
+      "term": "formula unit",
+      "section": "6.3",
+      "def": "the lowest whole-number ratio of ions in an ionic compound"
+    },
+    {
+      "term": "Stock system",
+      "section": "6.3",
+      "def": "the naming system that shows a metal ion's charge with a Roman numeral in parentheses, as in iron(III)"
+    },
+    {
+      "term": "acid",
+      "section": "6.4",
+      "def": "a compound that produces hydrogen ions (H^{+}) when it dissolves in water"
+    },
+    {
+      "term": "binary acid",
+      "section": "6.4",
+      "def": "an acid made of hydrogen and one other element, such as HCl"
+    },
+    {
+      "term": "oxyacid",
+      "section": "6.4",
+      "def": "an acid that contains hydrogen, oxygen and at least one other element"
+    }
   ],
   "body": [
-    { "type": "section", "code": "6.1" },
-    { "type": "sub", "text": "Two nonmetals, more than one compound" },
+    {
+      "type": "section",
+      "code": "6.1"
+    },
+    {
+      "type": "sub",
+      "text": "Two nonmetals, more than one compound"
+    },
     {
       "type": "p",
-      "text": "Carbon and oxygen are both nonmetals, and they combine in more than one ratio. One carbon atom with one oxygen atom makes carbon monoxide, CO. One carbon atom with two oxygen atoms makes carbon dioxide, CO_{2} (Figure 6.1). These are different substances. Carbon dioxide is the gas you breathe out. Carbon monoxide is a colorless, odorless, poisonous gas. A name like “carbon oxide” would not tell you which one you had."
+      "text": "Carbon and oxygen are both nonmetals, and they combine in more than one ratio. One carbon atom with one oxygen atom makes carbon monoxide, CO. One carbon atom with two oxygen atoms makes carbon dioxide, CO_{2} (Figure 6.1). These are different substances. Carbon dioxide is the waste gas you breathe out. Carbon monoxide is a colorless, odorless, poisonous gas. A name like “carbon oxide” would not tell you which one you had."
     },
     {
       "type": "figure",
       "n": "6.1",
       "image": "fig6_1_co_co2.png",
-      "caption": "Same two elements, different ratio, different substance. The drawing shows atom counts only, not bonds or atom sizes."
+      "caption": "Same two elements, different ratio, different substance. The panel lists atom counts only; it is not a drawing of either molecule."
     },
     {
       "type": "p",
@@ -68,7 +155,10 @@
       "type": "p",
       "text": "An ionic compound gets its ratio from the charges on its ions, as you will see in Section 6.3. A covalent compound has no ion charges to set the ratio, and the same two nonmetals can often form more than one compound. So a covalent name has to state how many atoms of each element are in the molecule. It does that with prefixes."
     },
-    { "type": "sub", "text": "Naming with prefixes" },
+    {
+      "type": "sub",
+      "text": "Naming with prefixes"
+    },
     {
       "type": "p",
       "text": "The prefixes run from mono- (1) through di- (2), tri- (3), tetra- (4), penta- (5), hexa- (6), hepta- (7), octa- (8) and nona- (9) to deca- (10). They are on your Naming Toolkit sheet. To name a binary covalent compound from its formula:"
@@ -77,7 +167,7 @@
       "type": "steps",
       "items": [
         "Name the first element in full. Add a prefix only if there are two or more atoms of it. A name never starts with mono-.",
-        "Name the second element with a prefix, mono- included, and change its ending to -ide: oxygen becomes oxide, chlorine becomes chloride.",
+        "Name the second element with a prefix, mono- included, and change its ending to ‑ide: oxygen becomes oxide, chlorine becomes chloride.",
         "Before “oxide,” drop the last a or o of the prefix: monoxide, tetroxide, pentoxide."
       ],
       "keepTogether": true
@@ -95,23 +185,46 @@
       "n": "6.1",
       "title": "Name N_{2}O.",
       "grid": {
-        "head": ["Step", "Result"],
+        "head": [
+          "Step",
+          "Result"
+        ],
         "rows": [
-          ["First element", "2 N → dinitrogen"],
-          ["Second element", "1 O → mono + oxide"],
-          ["Drop the o", "monoxide"],
-          ["Name", "dinitrogen monoxide"]
+          [
+            "First element",
+            "2 N → dinitrogen"
+          ],
+          [
+            "Second element",
+            "1 O → mono + oxide"
+          ],
+          [
+            "Drop the o",
+            "monoxide"
+          ],
+          [
+            "Name",
+            "dinitrogen monoxide"
+          ]
         ]
       },
       "after": "Nitrogen gets di- because there are two atoms. Oxygen gets mono- because a second element always takes a prefix, and the o of mono drops before oxide. Check by going back: di- and mono- rebuild N_{2}O.",
-      "verify": { "kind": "covalentName", "formula": "N2O", "answer": "dinitrogen monoxide" }
+      "verify": {
+        "kind": "covalentName",
+        "formula": "N2O",
+        "answer": "dinitrogen monoxide"
+      }
     },
     {
       "type": "onYourOwn",
       "n": "6.1",
       "q": "Write the formula for sulfur hexafluoride.",
       "workIn": 1.0,
-      "verify": { "kind": "covalentFormula", "name": "sulfur hexafluoride", "answer": "SF6" },
+      "verify": {
+        "kind": "covalentFormula",
+        "name": "sulfur hexafluoride",
+        "answer": "SF6"
+      },
       "solution": {
         "steps": [
           "sulfur, no prefix → 1 S",
@@ -121,7 +234,10 @@
         "note": "The missing prefix on sulfur means one atom; a name never starts with mono-."
       }
     },
-    { "type": "sub", "text": "Which naming system?" },
+    {
+      "type": "sub",
+      "text": "Which naming system?"
+    },
     {
       "type": "p",
       "text": "Before you name anything, decide what kind of compound you have (Figure 6.2). Check for an acid first: a formula that starts with H and is written (aq) is an acid in water, and Section 6.4 names it. Next, look for ions. A metal or the ammonium ion, NH_{4}^{+}, means the compound is ionic, and Sections 6.2 and 6.3 apply. Only nonmetals means covalent, so use prefixes."
@@ -137,9 +253,14 @@
       "title": "One oxygen atom apart",
       "text": "The CDC describes carbon monoxide as an odorless, colorless gas that can kill you. Furnaces, generators and charcoal grills can all give it off, and you will not see or smell it. Carbon dioxide, with one more oxygen atom, is the waste gas your cells make and your lungs breathe out. The prefix in the name marks the difference."
     },
-
-    { "type": "section", "code": "6.2" },
-    { "type": "sub", "text": "Ions made of several atoms" },
+    {
+      "type": "section",
+      "code": "6.2"
+    },
+    {
+      "type": "sub",
+      "text": "Ions made of several atoms"
+    },
     {
       "type": "p",
       "text": "Every ion you have used so far, such as Na^{+} or Cl^{−}, has been a **monatomic ion**, an ion made of a single atom. Many ions are not. A **polyatomic ion** is a group of covalently bonded atoms that carries an overall charge."
@@ -152,14 +273,17 @@
       "type": "p",
       "text": "Your Polyatomic Ions sheet lists 37 ions. The 15 marked with a star are the ones to memorize, and you can look up the rest. This reading does not reprint the list, so keep the sheet beside you."
     },
-    { "type": "sub", "text": "Oxyanions and their endings" },
+    {
+      "type": "sub",
+      "text": "Oxyanions and their endings"
+    },
     {
       "type": "p",
       "text": "Look down the negative ions on the sheet and most of them contain oxygen. Each of those is an **oxyanion**, a negative polyatomic ion in which an element is bonded to oxygen atoms, such as sulfate, SO_{4}^{2−}."
     },
     {
       "type": "p",
-      "text": "Many elements form two oxyanions with the same charge. The one ending in -ate has one more oxygen atom than the one ending in -ite. Nitrate is NO_{3}^{−} and nitrite is NO_{2}^{−}. Sulfate is SO_{4}^{2−} and sulfite is SO_{3}^{2−}. The ending tells you which of the pair has more oxygen. It does not tell you how many: nitrate has three oxygen atoms and sulfate has four. Learn each -ate ion, and work out its -ite partner from it."
+      "text": "Many elements form two oxyanions with the same charge. The one ending in ‑ate has one more oxygen atom than the one ending in ‑ite. Nitrate is NO_{3}^{−} and nitrite is NO_{2}^{−}. Sulfate is SO_{4}^{2−} and sulfite is SO_{3}^{2−}. The ending tells you which of the pair has more oxygen. It does not tell you how many: nitrate has three oxygen atoms and sulfate has four. Learn each ‑ate ion, and work out its ‑ite partner from it."
     },
     {
       "type": "p",
@@ -184,26 +308,57 @@
       "n": "6.2",
       "title": "Sulfate is SO_{4}^{2−}. Write the formula and charge of sulfite.",
       "grid": {
-        "head": ["Step", "Result"],
+        "head": [
+          "Step",
+          "Result"
+        ],
         "rows": [
-          ["Ending", "-ate → -ite"],
-          ["Oxygen atoms", "one fewer: 4 → 3"],
-          ["Charge", "stays 2−"],
-          ["Sulfite", "SO_{3}^{2−}"]
+          [
+            "Ending",
+            "‑ate → ‑ite"
+          ],
+          [
+            "Oxygen atoms",
+            "one fewer: 4 → 3"
+          ],
+          [
+            "Charge",
+            "stays 2−"
+          ],
+          [
+            "Sulfite",
+            "SO_{3}^{2−}"
+          ]
         ]
       },
       "after": "Only the oxygen count changes. Sulfur is still the central element and the charge is still 2−.",
-      "verify": { "kind": "ateToIte", "ate": "SO4", "charge": "2−", "answer": ["SO3", "2−"] }
+      "verify": {
+        "kind": "ateToIte",
+        "ate": "SO4",
+        "charge": "2−",
+        "answer": [
+          "SO3",
+          "2−"
+        ]
+      }
     },
     {
       "type": "onYourOwn",
       "n": "6.2",
       "q": "Phosphate, PO_{4}^{3−}, is starred on your sheet. Phosphite is not, but it follows the same pattern. Write the formula and charge of phosphite.",
       "workIn": 0.95,
-      "verify": { "kind": "ateToIte", "ate": "PO4", "charge": "3−", "answer": ["PO3", "3−"] },
+      "verify": {
+        "kind": "ateToIte",
+        "ate": "PO4",
+        "charge": "3−",
+        "answer": [
+          "PO3",
+          "3−"
+        ]
+      },
       "solution": {
         "steps": [
-          "-ate → -ite: one fewer O, 4 → 3",
+          "‑ate → ‑ite: one fewer O, 4 → 3",
           "charge stays 3− ="
         ],
         "answer": "PO_{3}^{3−}",
@@ -213,11 +368,16 @@
     {
       "type": "connection",
       "title": "Nitrite in cured meat",
-      "text": "Cured meats such as bacon can contain sodium nitrite, NaNO_{2}. According to the USDA Food Safety and Inspection Service, nitrite helps prevent botulism and keeps cured meat's red color. Sodium nitrate, NaNO_{3}, has one more oxygen atom and is a different compound. On an ingredient label, -ite or -ate is the difference."
+      "text": "Cured meats such as bacon can contain sodium nitrite, NaNO_{2}. According to the USDA Food Safety and Inspection Service, nitrite helps prevent botulism and keeps cured meat's red color. Sodium nitrate, NaNO_{3}, has one more oxygen atom and is a different compound. On an ingredient label, ‑ite or ‑ate is the difference."
     },
-
-    { "type": "section", "code": "6.3" },
-    { "type": "sub", "text": "Charges set the ratio" },
+    {
+      "type": "section",
+      "code": "6.3"
+    },
+    {
+      "type": "sub",
+      "text": "Charges set the ratio"
+    },
     {
       "type": "p",
       "text": "An ionic compound is held together by the attraction between positive and negative ions (Unit 4). Main-group elements form predictable ions. Group 1 metals form 1+ ions, Group 2 metals form 2+ ions, and aluminum forms Al^{3+}. Group 17 nonmetals form 1− ions, Group 16 form 2− and Group 15 form 3−. In every ionic compound, the positive and negative charges add up to zero."
@@ -226,7 +386,10 @@
       "type": "p",
       "text": "Ionic compounds are not made of molecules. A crystal of sodium chloride is a huge, repeating arrangement of Na^{+} and Cl^{−} ions, so its formula gives a ratio, not a count. A **formula unit** is the lowest whole-number ratio of ions in an ionic compound. For NaCl, it is one Na^{+} ion for every Cl^{−} ion."
     },
-    { "type": "sub", "text": "Writing the formula" },
+    {
+      "type": "sub",
+      "text": "Writing the formula"
+    },
     {
       "type": "p",
       "text": "To write the formula, find the smallest number of each ion that makes the charges cancel. In aluminum oxide, aluminum forms Al^{3+} and oxygen forms O^{2−}. Two Al^{3+} ions give +6 and three O^{2−} ions give −6 (Figure 6.4), so the formula is Al_{2}O_{3}. A shortcut is to cross the charge numbers: aluminum's 3 becomes oxygen's subscript, and oxygen's 2 becomes aluminum's. Then reduce if both subscripts share a factor. Ca^{2+} and O^{2−} give CaO, not Ca_{2}O_{2}. Either way, check that the total is zero."
@@ -243,16 +406,19 @@
     },
     {
       "type": "p",
-      "text": "To name an ionic compound, name the cation first and the anion second. A monatomic anion takes the ending -ide, so chlorine becomes chloride. A polyatomic ion keeps its name. Ionic names never use prefixes. CaCl_{2} is calcium chloride, because the charges already fix the ratio."
+      "text": "To name an ionic compound, name the cation first and the anion second. A monatomic anion takes the ending ‑ide, so chlorine becomes chloride. A polyatomic ion keeps its name. Ionic names don't use prefixes to count ions. CaCl_{2} is calcium chloride, because the charges already fix the ratio."
     },
-    { "type": "sub", "text": "Metals with more than one charge" },
+    {
+      "type": "sub",
+      "text": "Metals with more than one charge"
+    },
     {
       "type": "p",
       "text": "Sodium forms only one ion, Na^{+}, so “sodium chloride” can only mean NaCl. Many transition metals form more than one ion. Iron forms Fe^{2+} and Fe^{3+}, so “iron chloride” could mean FeCl_{2} or FeCl_{3}. The **Stock system** is the naming system that shows a metal ion's charge with a Roman numeral in parentheses, as in iron(III). FeCl_{2} is iron(II) chloride, and FeCl_{3} is iron(III) chloride. The numeral is the charge on one metal ion. It is not the number of metal atoms."
     },
     {
       "type": "p",
-      "text": "Your Metals with Multiple Charges sheet lists the metals that need a numeral. Silver (Ag^{+}), zinc (Zn^{2+}) and cadmium (Cd^{2+}) are transition metals with one common charge, so their names take no numeral."
+      "text": "Your Metals with Multiple Charges sheet lists the metals that need a numeral. Metals such as silver (Ag^{+}), zinc (Zn^{2+}) and cadmium (Cd^{2+}) have one common charge, so their names take no numeral."
     },
     {
       "type": "p",
@@ -263,16 +429,37 @@
       "n": "6.3",
       "title": "Name Fe_{2}O_{3}.",
       "grid": {
-        "head": ["Step", "Result"],
+        "head": [
+          "Step",
+          "Result"
+        ],
         "rows": [
-          ["Anion total", "3 O^{2−} = −6"],
-          ["Iron total", "+6"],
-          ["One Fe ion", "+6 ÷ 2 = +3"],
-          ["Name", "iron(III) oxide"]
+          [
+            "Anion total",
+            "3 O^{2−} = −6"
+          ],
+          [
+            "Iron total",
+            "+6"
+          ],
+          [
+            "One Fe ion",
+            "+6 ÷ 2 = +3"
+          ],
+          [
+            "Name",
+            "iron(III) oxide"
+          ]
         ]
       },
       "after": "Iron forms two ions, so the name needs the numeral. The III is the charge on each iron ion, not the two iron atoms in the formula.",
-      "verify": { "kind": "metalCharge", "metalCount": 2, "anionCharge": -2, "anionCount": 3, "answer": "III" }
+      "verify": {
+        "kind": "metalCharge",
+        "metalCount": 2,
+        "anionCharge": -2,
+        "anionCount": 3,
+        "answer": "III"
+      }
     },
     {
       "type": "figure",
@@ -285,7 +472,20 @@
       "n": "6.3",
       "q": "Write the formula for lead(II) nitrate. Check that the charges add up to zero.",
       "workIn": 1.1,
-      "verify": { "kind": "ionicFormula", "ions": [["Pb", 2], ["NO3", -1]], "answer": "Pb(NO3)2" },
+      "verify": {
+        "kind": "ionicFormula",
+        "ions": [
+          [
+            "Pb",
+            2
+          ],
+          [
+            "NO3",
+            -1
+          ]
+        ],
+        "answer": "Pb(NO3)2"
+      },
       "solution": {
         "steps": [
           "lead(II) → Pb^{2+};  nitrate → NO_{3}^{−}",
@@ -295,19 +495,27 @@
         "note": "Parentheses because there are two nitrate ions. The II is lead's charge, not a subscript."
       }
     },
-    { "type": "sub", "text": "Older names" },
+    {
+      "type": "sub",
+      "text": "Older names"
+    },
     {
       "type": "p",
-      "text": "You may see older names like ferrous (Fe^{2+}) and ferric (Fe^{3+}), or cuprous (Cu^{+}) and cupric (Cu^{2+}), on labels and in older books. The ending -ous is the lower charge and -ic the higher. It tells you lower or higher, not the number: ferrous is 2+ but cuprous is 1+. The Roman-numeral name is the modern standard because it states the charge. These metal endings have nothing to do with the acid endings in Section 6.4."
+      "text": "You may see older names like ferrous (Fe^{2+}) and ferric (Fe^{3+}), or cuprous (Cu^{+}) and cupric (Cu^{2+}), on labels and in older books. ‑ous is the lower charge and ‑ic the higher. The Roman-numeral name is the modern standard because it states the charge. The ending tells you lower or higher, not the number: ferrous is 2+ but cuprous is 1+. These metal endings have nothing to do with the acid endings in Section 6.4."
     },
     {
       "type": "connection",
       "title": "Two iron oxides",
       "text": "Iron(II) oxide, FeO, is a black solid. Iron(III) oxide, Fe_{2}O_{3}, is red-brown; it is the mineral hematite, and red ochre is colored by it. The two oxides have the same elements, a different charge on iron, a different ratio and a different color. The Roman numeral tells you which one you have."
     },
-
-    { "type": "section", "code": "6.4" },
-    { "type": "sub", "text": "What makes an acid" },
+    {
+      "type": "section",
+      "code": "6.4"
+    },
+    {
+      "type": "sub",
+      "text": "What makes an acid"
+    },
     {
       "type": "p",
       "text": "An **acid** is a compound that produces hydrogen ions (H^{+}) when it dissolves in water. Unit 14 widens this definition. Acid names depend on that water. Hydrogen chloride, HCl, is a gas. Dissolved in water and written HCl(aq), it is hydrochloric acid. The (aq) means dissolved in water, and it is your signal to use an acid name."
@@ -320,38 +528,73 @@
       "type": "figure",
       "n": "6.6",
       "image": "fig6_6_acids.png",
-      "caption": "The anion's ending decides the acid's name. Only an -ide anion takes hydro-."
-    },
-    { "type": "sub", "text": "Binary acids and oxyacids" },
-    {
-      "type": "p",
-      "text": "A **binary acid** is an acid made of hydrogen and one other element, such as HCl. Its anion ends in -ide, so its name takes hydro- at the front and -ic acid at the end. Chloride gives hydrochloric acid, and bromide gives hydrobromic acid, HBr(aq)."
+      "caption": "The anion's ending decides the acid's name. Only an ‑ide anion takes hydro-."
     },
     {
-      "type": "p",
-      "text": "An **oxyacid** is an acid that contains hydrogen, oxygen and at least one other element. Its anion is an oxyanion, and its name has no hydro-. An -ate ion gives an -ic acid, and an -ite ion gives an -ous acid. Nitrate gives nitric acid, HNO_{3}, and nitrite gives nitrous acid, HNO_{2}. A per- or hypo- prefix stays, so perchlorate gives perchloric acid and hypochlorite gives hypochlorous acid."
+      "type": "sub",
+      "text": "Binary acids and oxyacids"
     },
     {
       "type": "p",
-      "text": "Sulfur and phosphorus keep more of the element's name. Sulfate gives sulfuric acid, H_{2}SO_{4}, sulfite gives sulfurous acid, H_{2}SO_{3}, and phosphate gives phosphoric acid, H_{3}PO_{4}. Here -ous and -ic come from the anion's -ite or -ate ending, not from a metal's charge as in the older names of Section 6.3."
+      "text": "A **binary acid** is an acid made of hydrogen and one other element, such as HCl. Its anion ends in ‑ide, so its name takes hydro- at the front and ‑ic acid at the end. Chloride gives hydrochloric acid, and bromide gives hydrobromic acid, HBr(aq)."
+    },
+    {
+      "type": "p",
+      "text": "An **oxyacid** is an acid that contains hydrogen, oxygen and at least one other element. Its anion is an oxyanion, and its name has no hydro-. An ‑ate ion gives an ‑ic acid, and an ‑ite ion gives an ‑ous acid. Nitrate gives nitric acid, HNO_{3}, and nitrite gives nitrous acid, HNO_{2}. A per- or hypo- prefix stays, so perchlorate gives perchloric acid and hypochlorite gives hypochlorous acid."
+    },
+    {
+      "type": "p",
+      "text": "Sulfur and phosphorus keep more of the element's name. Sulfate gives sulfuric acid, H_{2}SO_{4}, sulfite gives sulfurous acid, H_{2}SO_{3}, and phosphate gives phosphoric acid, H_{3}PO_{4}. Here ‑ous and ‑ic come from the anion's ‑ite or ‑ate ending, not from a metal's charge as in the older names of Section 6.3."
     },
     {
       "type": "example",
       "n": "6.4",
       "title": "Name HNO_{3}(aq).",
       "grid": {
-        "head": ["Step", "Result"],
+        "head": [
+          "Step",
+          "Result"
+        ],
         "rows": [
-          ["Anion", "NO_{3}^{−}, nitrate"],
-          ["Ending", "-ate → -ic, no hydro-"],
-          ["Check the H", "1− charge → 1 H"],
-          ["Name", "nitric acid"]
+          [
+            "Anion",
+            "NO_{3}^{−}, nitrate"
+          ],
+          [
+            "Ending",
+            "‑ate → ‑ic, no hydro-"
+          ],
+          [
+            "Check the H",
+            "1− charge → 1 H"
+          ],
+          [
+            "Name",
+            "nitric acid"
+          ]
         ]
       },
       "after": "The anion contains oxygen, so this is an oxyacid and hydro- is not used. One H balances nitrate's 1− charge, which matches the formula.",
       "verify": [
-        { "kind": "acidName", "anion": "nitrate", "answer": "nitric acid" },
-        { "kind": "ionicFormula", "ions": [["H", 1], ["NO3", -1]], "answer": "HNO3" }
+        {
+          "kind": "acidName",
+          "anion": "nitrate",
+          "answer": "nitric acid"
+        },
+        {
+          "kind": "ionicFormula",
+          "ions": [
+            [
+              "H",
+              1
+            ],
+            [
+              "NO3",
+              -1
+            ]
+          ],
+          "answer": "HNO3"
+        }
       ]
     },
     {
@@ -360,12 +603,29 @@
       "q": "Write the formula for carbonic acid. Name the anion it comes from first.",
       "workIn": 1.0,
       "verify": [
-        { "kind": "acidName", "anion": "carbonate", "answer": "carbonic acid" },
-        { "kind": "ionicFormula", "ions": [["H", 1], ["CO3", -2]], "answer": "H2CO3" }
+        {
+          "kind": "acidName",
+          "anion": "carbonate",
+          "answer": "carbonic acid"
+        },
+        {
+          "kind": "ionicFormula",
+          "ions": [
+            [
+              "H",
+              1
+            ],
+            [
+              "CO3",
+              -2
+            ]
+          ],
+          "answer": "H2CO3"
+        }
       ],
       "solution": {
         "steps": [
-          "-ic acid ← -ate ion: carbonate, CO_{3}^{2−}",
+          "‑ic acid ← ‑ate ion: carbonate, CO_{3}^{2−}",
           "2− charge → 2 H^{+} ="
         ],
         "answer": "H_{2}CO_{3}"
@@ -391,8 +651,8 @@
       },
       {
         "n": "6.2",
-        "q": "What do the endings -ate and -ite tell you about nitrate and nitrite?",
-        "answer": "The -ate ion has one more oxygen atom than the -ite ion, with the same charge: nitrate is NO_{3}^{−} and nitrite is NO_{2}^{−}.",
+        "q": "What do the endings ‑ate and ‑ite tell you about nitrate and nitrite?",
+        "answer": "The ‑ate ion has one more oxygen atom than the ‑ite ion, with the same charge: nitrate is NO_{3}^{−} and nitrite is NO_{2}^{−}.",
         "accept": "The ending gives more or fewer oxygen atoms, not the number. A student who writes only the formulas without stating the one-oxygen difference has not answered the question."
       },
       {
@@ -403,7 +663,7 @@
       {
         "n": "6.4",
         "q": "How does an acid's name show which anion it came from?",
-        "answer": "The ending follows the anion's ending: an -ate ion gives an -ic acid, an -ite ion gives an -ous acid, and an -ide ion gives a hydro- … -ic acid.",
+        "answer": "The ending follows the anion's ending: an ‑ate ion gives an ‑ic acid, an ‑ite ion gives an ‑ous acid, and an ‑ide ion gives a hydro- … ‑ic acid.",
         "accept": "An example such as nitrate → nitric acid, nitrite → nitrous acid shows the rule."
       }
     ],
@@ -414,16 +674,17 @@
     "teacherNotes": [
       "Not test-allowed. The reading teaches the ionic, covalent and acid naming procedures that the reference packet deliberately leaves out (Naming Toolkit, sheet 7: no naming procedure, so the test packet does not answer naming items). Treat it as not test-allowed material.",
       "Oxide spelling (Matt's D5). The reading drops the vowel before “oxide” (monoxide, tetroxide, pentoxide), as most US textbooks and the deck do. IUPAC (2005) keeps it (tetraoxide, pentaoxide) and elides only “monoxide.” Accept either spelling.",
-      "Classical names (D4). The student note gives Fe and Cu only. Others on the Metals with Multiple Charges sheet: stannous Sn^{2+} / stannic Sn^{4+}; plumbous Pb^{2+} / plumbic Pb^{4+}; cobaltous Co^{2+} / cobaltic Co^{3+} (cobaltic chloride, CoCl_{3}, is a disputed compound). Mercury is left out on purpose: mercurous is Hg_{2}^{2+}, and printing mercuric alone invites the wrong guess Hg^{+}. IUPAC no longer recommends -ous/-ic metal names; they are still used on labels and in older books.",
+      "Classical names (D4). The student note gives Fe and Cu only. Others on the Metals with Multiple Charges sheet: stannous Sn^{2+} / stannic Sn^{4+}; plumbous Pb^{2+} / plumbic Pb^{4+}; cobaltous Co^{2+} / cobaltic Co^{3+} (cobaltic chloride, CoCl_{3}, is a disputed compound). Mercury is left out on purpose: mercurous is Hg_{2}^{2+}, and printing mercuric alone invites the wrong guess Hg^{+}. IUPAC no longer recommends ‑ous/‑ic metal names; they are still used on labels and in older books.",
       "Carbonated drinks (Connection 6.4). Most dissolved CO_{2} stays as CO_{2}; only a small fraction becomes H_{2}CO_{3} (hydration constant about 1.7 × 10^{−3} at 25 °C). The reading says “some” for that reason.",
       "On Your Own 6.2 uses phosphite, which is on sheet 6 but unstarred; it is a pattern item built on starred phosphate. Carbonate → hydrogen carbonate was not used because HCO_{3}^{−} is printed in Why It Matters. Don't extend phosphite to an acid item: phosphorous acid, H_{3}PO_{3}, has one H bonded to P and gives up only two H^{+}, and free PO_{3}^{3−} is not a real species in water.",
-      "The per-/-ate/-ite/hypo- ladder is stated for the halogens only. Permanganate is a name to memorize, not a ladder member (manganate, MnO_{4}^{2−}, differs in charge, not oxygen count). Dichromate, thiosulfate and thiocyanate are not ladder members either. Hydroxide is not usually counted as an oxyanion.",
-      "HCN is kept out of student items. If it comes up: cyanide ends in -ide, so HCN(aq) is hydrocyanic acid, but it has three elements and is not a binary acid. That is why 6.4 teaches the rule by the anion's ending.",
+      "The per-/‑ate/‑ite/hypo- ladder is stated for the halogens only. Permanganate is a name to memorize, not a ladder member (manganate, MnO_{4}^{2−}, differs in charge, not oxygen count). Dichromate, thiosulfate and thiocyanate are not ladder members either. Hydroxide is not usually counted as an oxyanion.",
+      "HCN is kept out of student items. If it comes up: cyanide ends in ‑ide, so HCN(aq) is hydrocyanic acid, but it has three elements and is not a binary acid. That is why 6.4 teaches the rule by the anion's ending.",
       "The common name of N_{2}O (Example 6.1) is nitrous oxide. It is kept off the student page so it is not confused with nitrous acid. Sheet 6 calls HS^{−} “hydrogen sulfide,” the usual name for H_{2}S gas; the reading avoids both.",
       "Acid definition: in water, H^{+} attaches to a water molecule as H_{3}O^{+} (hydronium, starred on sheet 6). Unit 14 widens the definition. The Roman numeral in a Stock name is the oxidation number, which equals the charge for a monatomic ion.",
       "IUPAC spellings differ from the school ones used here: oxoacid, oxoanion, monoatomic, hydrogencarbonate (one word). The reading keeps the spellings on the student's sheets.",
-      "Figure 6.1 is a drawn atom-count panel. The shared molecule builder drew CO with a misleading formal charge (O^{+} with no C^{−} label) or as a double bond, so it was not used for either molecule.",
+      "Figure 6.1 is a counts-only panel with no structure: two labelled boxes giving each formula, name and atom tally (Matt's ruling, 2026-11-25, “Counts-only panel”). The shared molecule builder drew CO with a misleading formal charge (O^{+} with no C^{−} label) or as a double bond, so no molecule is drawn in this reading.",
       "FYI on the existing deck: the speaker note on slide 9 (“CO2 is carbon dioxide. N2O4 is dinitrogen tetroxide.”) and on slide 21 (“Calcium oxide is CaO.”) describe other slides. The chemistry in each is correct; the notes are on the wrong slides."
     ]
-  }
+  },
+  "keyLabel": "Answer Key"
 }
