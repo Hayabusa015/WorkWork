@@ -1,0 +1,362 @@
+{
+ "course": "chemistry",
+ "unit": 6,
+ "sections": [
+  "6.1"
+ ],
+ "docType": "Practice_Set",
+ "timeTargetMin": "30",
+ "pagesPerSection": 2,
+ "sectionsContent": [
+  {
+   "code": "6.1",
+   "title": "Molecular Naming",
+   "concept": {
+    "summary": "Two nonmetals · prefixes count the atoms · no mono- on the first element · second element ends in -ide · never reduce",
+    "keyIdeas": []
+   },
+   "directions": "Front: split each name into its two elements and turn each prefix into a number; the numbers are the subscripts. Back: count the atoms and turn each count into a prefix. Fill in every column on the guided rows.",
+   "questions": [],
+   "blocks": [
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Name",
+      "1 · 1st element (symbol)",
+      "Prefix → #",
+      "2 · 2nd element (symbol)",
+      "Prefix → #",
+      "3 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.25,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.18
+     ],
+     "rows": [
+      [
+       "EX",
+       "carbon dioxide",
+       "C",
+       "none → 1",
+       "O",
+       "di- → 2",
+       "CO₂"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": []
+    },
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Name",
+      "1 · 1st element (symbol)",
+      "Prefix → #",
+      "2 · 2nd element (symbol)",
+      "Prefix → #",
+      "3 · Formula"
+     ],
+     "widths": [
+      0.05,
+      0.25,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.18
+     ],
+     "rows": [
+      [
+       "1",
+       "carbon monoxide",
+       "C",
+       "none → 1",
+       "O",
+       "mono- → 1",
+       "CO"
+      ],
+      [
+       "2",
+       "sulfur trioxide",
+       "S",
+       "none → 1",
+       "O",
+       "tri- → 3",
+       "SO₃"
+      ],
+      [
+       "3",
+       "dinitrogen trioxide",
+       "N",
+       "di- → 2",
+       "O",
+       "tri- → 3",
+       "N₂O₃"
+      ],
+      [
+       "4",
+       "phosphorus pentachloride",
+       "P",
+       "none → 1",
+       "Cl",
+       "penta- → 5",
+       "PCl₅"
+      ],
+      [
+       "5",
+       "carbon tetrachloride",
+       "C",
+       "none → 1",
+       "Cl",
+       "tetra- → 4",
+       "CCl₄"
+      ]
+     ],
+     "rowHeightIn": 0.58,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "PART A · NAME → FORMULA · ON YOUR OWN",
+     "headers": [
+      "#",
+      "Name",
+      "Formula"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "nitrogen triiodide",
+       "NI₃"
+      ],
+      [
+       "7",
+       "diphosphorus pentoxide",
+       "P₂O₅"
+      ],
+      [
+       "8",
+       "dinitrogen monoxide",
+       "N₂O"
+      ],
+      [
+       "9",
+       "silicon dioxide",
+       "SiO₂"
+      ],
+      [
+       "10",
+       "tetraphosphorus decoxide",
+       "P₄O₁₀"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    },
+    {
+     "kind": "table",
+     "label": "WORKED EXAMPLE",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · 1st element (name)",
+      "# → prefix",
+      "2 · 2nd element (root + -ide)",
+      "# → prefix",
+      "3 · Name"
+     ],
+     "widths": [
+      0.05,
+      0.12,
+      0.15,
+      0.12,
+      0.17,
+      0.12,
+      0.27
+     ],
+     "rows": [
+      [
+       "EX",
+       "CBr₄",
+       "carbon",
+       "1 → none",
+       "bromide",
+       "4 → tetra-",
+       "carbon tetrabromide"
+      ]
+     ],
+     "rowHeightIn": 0.3,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [],
+     "pageBreakBefore": true,
+     "heading": "Part B · Formula → Name"
+    },
+    {
+     "kind": "table",
+     "label": "GUIDED · FILL IN EVERY STEP",
+     "headers": [
+      "#",
+      "Formula",
+      "1 · 1st element (name)",
+      "# → prefix",
+      "2 · 2nd element (root + -ide)",
+      "# → prefix",
+      "3 · Name"
+     ],
+     "widths": [
+      0.05,
+      0.12,
+      0.15,
+      0.12,
+      0.17,
+      0.12,
+      0.27
+     ],
+     "rows": [
+      [
+       "1",
+       "SO₂",
+       "sulfur",
+       "1 → none",
+       "oxide",
+       "2 → di-",
+       "sulfur dioxide"
+      ],
+      [
+       "2",
+       "PBr₃",
+       "phosphorus",
+       "1 → none",
+       "bromide",
+       "3 → tri-",
+       "phosphorus tribromide"
+      ],
+      [
+       "3",
+       "Cl₂O₇",
+       "chlorine",
+       "2 → di-",
+       "oxide",
+       "7 → hepta-",
+       "dichlorine heptoxide"
+      ],
+      [
+       "4",
+       "SiF₄",
+       "silicon",
+       "1 → none",
+       "fluoride",
+       "4 → tetra-",
+       "silicon tetrafluoride"
+      ],
+      [
+       "5",
+       "S₂Cl₂",
+       "sulfur",
+       "2 → di-",
+       "chloride",
+       "2 → di-",
+       "disulfur dichloride"
+      ]
+     ],
+     "rowHeightIn": 0.74,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "points": 5
+    },
+    {
+     "kind": "table",
+     "label": "ON YOUR OWN",
+     "headers": [
+      "#",
+      "Formula",
+      "Name"
+     ],
+     "widths": [
+      0.06,
+      0.4,
+      0.54
+     ],
+     "rows": [
+      [
+       "6",
+       "NO",
+       "nitrogen monoxide"
+      ],
+      [
+       "7",
+       "CS₂",
+       "carbon disulfide"
+      ],
+      [
+       "8",
+       "P₄S₃",
+       "tetraphosphorus trisulfide"
+      ],
+      [
+       "9",
+       "XeF₆",
+       "xenon hexafluoride"
+      ],
+      [
+       "10",
+       "BCl₃",
+       "boron trichloride"
+      ]
+     ],
+     "rowHeightIn": 0.4,
+     "bodySize": 9.5,
+     "boldFirst": false,
+     "blankCols": [
+      2
+     ],
+     "points": 5,
+     "gapBefore": 8
+    }
+   ],
+   "keyNotes": [
+    "Prefix drops its final a or o before oxide: heptoxide, decoxide, monoxide.",
+    "Molecular formulas are never reduced: N₂O₄ is not NO₂ (deck slide 12)."
+   ]
+  }
+ ]
+}

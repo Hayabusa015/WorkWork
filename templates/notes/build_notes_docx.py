@@ -52,7 +52,7 @@ import recall                      # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from _shull_name import document_name, short_title   # noqa: E402
 from _shull_docx import (          # noqa: E402
-    T, FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections,
+    T, FONT, FOOTER_FLOOR, COURSE_CODE, REPO, Palette, hexof, debullet, known_sections, pieces,
     unit_title, unit_phase, shade, borders, checkbox, fix_widths, stacked_frac, work_box,
     diagram_block, fillin_table, cell_margins, trim_tail, field, page_number_format,
     schema_order, estimate_height, text_width_in, set_mirror_margins, apply_binding,
@@ -188,15 +188,21 @@ def _spacing(p, before=0, after=0, line=None):
 
 
 def _run(p, text, size, *, bold=False, color=None, track=None):
-    r = p.add_run(text)
-    r.font.name = FONT
-    r.font.size = Pt(size)
-    r.bold = bold
-    if color:
-        r.font.color.rgb = RGBColor.from_string(hexof(color))
-    if track:
-        el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(int(track)))
-        r._element.get_or_add_rPr().append(el)
+    # `^{2+}` sets an ion charge as a superscript run, as the worksheet builder does
+    # (_shull_docx.pieces): Archivo has no U+207A/U+207B glyphs, so a typed ⁺ or ⁻
+    # pulls in a substitute face and fails audit_fonts.
+    r = None
+    for piece, sup in pieces(text):
+        r = p.add_run(piece)
+        r.font.name = FONT
+        r.font.size = Pt(size)
+        r.bold = bold
+        r.font.superscript = sup or None
+        if color:
+            r.font.color.rgb = RGBColor.from_string(hexof(color))
+        if track:
+            el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(int(track)))
+            r._element.get_or_add_rPr().append(el)
     return r
 
 
