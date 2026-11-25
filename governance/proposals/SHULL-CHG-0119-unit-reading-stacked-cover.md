@@ -36,7 +36,7 @@
 | **Recommendation** | Approve. It records what Matt chose for U6 and what the builder already does. Matt has not yet agreed to the scope-in-time sentence or to the builder-derived details named in Source. If he wants either changed, it can be changed before approval. |
 | **Decision** | 2026-11-25, user, in the main session, answering "Approve SHULL-CHG-0119, the stacked cover layout for every new or revised unit reading in all three courses, with the wording shown above?" (the proposed Cover layout paragraph was shown verbatim): "Approve". |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
+| **Implemented By** | pending commit; builder side 0947c27 |
 | **Verified** | — |
 
 ---
