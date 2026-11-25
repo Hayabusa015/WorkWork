@@ -149,3 +149,66 @@ I found no wrong science. Every printed compound, ion, Example, On Your Own item
 - **Minor fixes:** A-4 and A-5. Optional polish: A-7 through A-11.
 
 After the corrected export, I will recheck p1 (Fig 6.1), p3 and p4 (A-4, A-5, A-2 text and reflow), the key, pagination, and the leaf position. The verified content evidence for unaffected pages can be reused once their identity is confirmed.
+
+---
+
+# Round 2: recheck of the corrected export
+
+Auditor | 2026-11-25 | Same workflow and gate as Round 1. Report only: no deliverable, spec or other file was changed.
+
+## Verdict: **PASS**
+
+- **A-1 and A-2 are fixed and verified** against the rulings as relayed by the coordinator.
+- **The minor fixes (A-4, A-5, A-7, A-8, A-9, A-11) are applied correctly and add no errors.**
+- **No regressions** in page breaks, leaf position, ink, fonts, binding, thumb tab, vocabulary or due line, and U7 is unchanged.
+- **Two items stay open, neither blocking.** A-3 (primary locators unreachable) **stays open as a recorded limitation**, as in the U7 precedent (`reports/chem_u07_reading_textbook_audit.md`, Round 2). Every claim agrees with its dossier excerpt and none is contradicted. Matt either accepts this on the record or has the hosts allowed for a recheck. A-6 (Matt to confirm Option A for phosphite) also stays open as a minor item.
+
+## R2-1. Version and evidence reuse
+
+| Item | Value |
+|---|---|
+| Commit | `d7b001a` (HEAD), "U6 reading: apply audit fixes…". It changes `build_reading_docx.py` (a `keyLabel` option that defaults to the old labels), `make_chem_u06_figures.py` and `chem_u06_reading.json`. Round 1's report was committed separately at `919af39` |
+| Student PDF | sha256 `74ddf5a4de99…6cd08fba`, 8 pp. DOCX `d4f031e7…44bc8` |
+| Key PDF | sha256 `9ba316042ebc…cddebe76a1`, 2 pp. DOCX `4a2b93a0…e54927` |
+| Round 1 baseline | `scratchpad/audited/` U6 copies hash `27bb35fb…` and `884670c2…`, identical to the edition audited in Round 1 |
+| Rebuild at HEAD | U6 rebuilt from the committed spec into the scratchpad. Both DOCX files match the shipped ones part for part; PDFs have identical text and 0 differing pixels |
+| My own diff, Round 1 → Round 2 (text, with U+2011 normalised to "-", plus a 100 dpi grayscale raster) | **p6, p8: identical (0 px).** p5 (164 px) and p7 (190 px): text identical, differences are hyphen glyphs only. p2: text identical; the differences are Fig 6.2 (caption line) and Fig 6.3 (box). p1, p3, p4: text changed exactly at A-9 + Fig 6.1 caption, A-4 + A-8, and A-2 + the Fig 6.6 caption respectively. Key p1: teacher-note reflow (Fig 6.1 note). Key p2: running head plus the 6.4 line break. **This matches the designer's description.** No page break moved: p1 ends "…keep their common names.", p3 ends "…the charge on each one.", p4 ends "…Hydrogen", and the reading ends on p5 |
+| Reuse | Round 1 content evidence is reused for p5–p8. p1–p4 and both key pages were re-inspected in full |
+| Proof method | Screen proof only (110 dpi full-page grayscale, 200–250 dpi crops). No physical photocopy |
+
+## R2-2. Closure of Round 1 findings
+
+| # | Page / item | Check | Result | Disposition |
+|---|---|---|---|---|
+| A-1 | p1 Fig 6.1 | Matt's "Counts-only panel" (relayed; recorded in the spec and key notes) | The figure has two ink-outline boxes (no fill). Each shows formula, name (primaryDeep), a hairline and a tally: "CO / carbon monoxide / 1 carbon atom / 1 oxygen atom" and "CO₂ / carbon dioxide / 1 carbon atom / 2 oxygen atoms". **No atoms are drawn, so there is no arrangement, no bonds, no charges and no sizes.** The tallies are correct. The caption ("The panel lists atom counts only; it is not a drawing of either molecule.") and the key note ("a counts-only panel with no structure: two labelled boxes giving each formula, name and atom tally (Matt's ruling, 2026-11-25…)") agree with the figure and with each other. SHULL-CHG-0042 no longer applies | CLOSED |
+| A-2 | p4 Older names | Approved D4 text, verbatim | The PDF text contains the approved passage exactly, with superscripts flattened for the comparison: "You may see older names like ferrous (Fe²⁺) and ferric (Fe³⁺), or cuprous (Cu⁺) and cupric (Cu²⁺), on labels and in older books. -ous is the lower charge and -ic the higher. The Roman-numeral name is the modern standard because it states the charge." The designer's two following sentences ("The ending tells you lower or higher… ferrous is 2+ but cuprous is 1+." and "These metal endings have nothing to do with the acid endings…") are correct. The only difference from the approved string is the suffix hyphen: U+2011, which renders the same as "-". Matt's main-session message was not seen by me; the text was checked against the wording relayed by the coordinator, which is also recorded in the spec `$comment` | CLOSED |
+| A-4 | p3 + Fig 6.2 | "prefixes" rule | The prose reads "Ionic names don't use prefixes to count ions." The Fig 6.2 footnote matches. The sheet's "dihydrogen phosphate" and "dichromate" no longer contradict it | CLOSED |
+| A-5 | Suffix hyphens | U+2011 renders; no split | The DOCX files hold 27 (student) + 19 (key) U+2011. Every Archivo face in `brand/fonts` maps U+2011. The PDF hyphens render as normal hyphens, with no missing-glyph boxes. In the key's handwriting, ShullHand has no U+2011 glyph, so the hyphen comes from Patrick Hand, which is already an approved key face. It looks consistent at 250 dpi. A scan of every line on all 10 pages finds no line ending in a bare hyphen and none starting with an orphaned suffix. The Fig 6.6 caption now reads "Only an / -ide anion…", and key 6.4 reads "an / -ate ion…". `audit_fonts.py`: student "OK — Archivo only"; key `--key` "OK — Archivo and the key handwriting face only". `pdffonts` shows the same font set as Round 1 | CLOSED |
+| A-7 | p2 Fig 6.3 | Chlorate box | The stroke is now ink (asphalt) at 1.6 pt, clearly heavier than the hairline row rules in grayscale. Columns are shifted right, giving about 3–4 pt inside the box ahead of "-ate". Not clipped | CLOSED |
+| A-8 | p3 | Zn/Cd classification | Now reads "Metals such as silver (Ag⁺), zinc (Zn²⁺) and cadmium (Cd²⁺) have one common charge, so their names take no numeral." Accurate, and consistent with sheet 8 | CLOSED |
+| A-9 | p1 | "Carbon dioxide is the waste gas you breathe out." | Judged accurate: CO₂ is the metabolic waste gas removed by breathing (NHLBI excerpt, dossier 6.1-g), and the sentence no longer implies exhaled air is CO₂. Consistent with the p2 Connection | CLOSED |
+| A-11 | Key | Labels | The p1 kicker reads "CHEMISTRY · UNIT READING · ANSWER KEY" and the p2 running head reads "…READING · ANSWER KEY": consistent. The builder change is opt-in (`keyLabel`), and the U7 key is unchanged (R2-4) | CLOSED |
+| A-3 | External locators | Retried this round | cdc.gov, ecfr.gov, fsis.usda.gov, pubchem.ncbi.nlm.nih.gov, goldbook.iupac.org: all `CONNECT tunnel failed, response 403` | OPEN, recorded limitation (not a content defect) |
+| A-6 | p3 On Your Own 6.2, phosphite | Not part of this revision | Unchanged | OPEN, minor (Matt to confirm Option A) |
+| A-10, A-12 | — | Not part of this revision | Unchanged; acceptable | No action |
+
+## R2-3. Regression checks
+
+| Check | Result |
+|---|---|
+| Science on the changed pages | Re-read p1–p4 and both key pages in full. No new claims beyond those listed in R2-2. Every compound, ion and answer is unchanged and still correct (Round 1 §3) |
+| Ink | PASS. Student: worst 8.06% (p1), average 4.32%. Key: worst 6.63%. "No fill" on every page; widest solid band 0.00 in |
+| Binding | PASS. `audit_binding.py` OK for 8 + 2 pages |
+| Fonts | PASS (A-5). No DejaVu or Liberation |
+| Clipped text | PASS. The only span past the outside margin is the same 3 pt handwriting glyph box on key p1 as in Round 1, fully on the page |
+| Thumb tab, coloured type, codes, naming | Unchanged from Round 1 (pages identical apart from the listed edits). Fig 6.1 adds only ink outlines, a hairline and primaryDeep type |
+| Tear-off leaf | PASS. Reading ends on p5; p6 is the blank back (0 px change); p7/p8 is the leaf (p7 hyphen glyphs only, p8 0 px). Cover list = headings = question labels = key (6.1–6.4). Name line and exact due line are present. Four single-part questions. 10 vocabulary pairs, identical to the unchanged bold and margin definitions. Long-edge orientation. Removing p7/p8 leaves all reading content in the packet |
+| Key ↔ student | The key's tear-off answers, On Your Own solutions and vocabulary still match the student pages one-to-one. The Fig 6.1 key note matches the new figure |
+
+## R2-4. U7 regression
+
+I rebuilt U7 with the builder at `d7b001a` into the scratchpad and compared it with `build/chem_u07_reading/` (student sha256 `e52e57c9…`, key `e7d21724…`). The designer's `scratchpad/u7r2/` copy was compared with the same files. **Both match exactly:** DOCX files part for part, PDFs with identical text and 0 differing pixels on 8 + 2 pages. U7 is unchanged, including the key's "Answer Key" / "Teacher Key" labels. (The two U7 PDFs in `scratchpad/audited/` are an older U7 audit copy with different hashes, so they were not used as the baseline.)
+
+## R2-5. Release note
+
+QA passes. The edition can go to the ordinary approval-to-file gate. Carry A-3 (and A-6) forward on the record: they need Matt to accept them, or a recheck once the hosts are allowed. Drive destination is not yet checked, because the file has not been filed.
