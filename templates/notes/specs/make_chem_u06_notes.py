@@ -183,7 +183,7 @@ spec = {
            P("Keep the group intact", "Keep the ion name and its inside subscripts.", 1),
            P("Ammonium", "NH₄⁺ is a cation even though it has no metal.", 1),
          ], table=T(["NO₃⁻", "NH₄⁺", "OH⁻", "SO₄²⁻"], [["", "", "", ""]],
-                    [["nitrate", "ammonium", "hydroxide", "sulfate"]], [0.25] * 4, 0.28), table_first=True),
+                    [["nitrate", "ammonium", "hydroxide", "sulfate"]], [0.25] * 4, 0.32), table_first=True),
          example("Slides 28–29 · Parentheses count whole ions", ["S06.2"], [
            P("Meaning of Ca(NO₃)₂", "1 Ca²⁺ + 2 NO₃⁻ → 1 Ca, 2 N, 6 O atoms.", 1),
            P("Parentheses rule", "Use ( ) around a polyatomic ion when you need more than one.", 2),
