@@ -27,7 +27,7 @@
 | **Recommendation** | Approve. Each open choice is answered below. If any answer is wrong, it can be changed before approval. |
 | **Decision** | 2026-11-25, user, in the main session, answering "Approve the shortened Key Refreshers rule (SHULL-CHG-0117): 2–5 one-line items on the cover, each naming the unit (and section) where it was covered plus a quick concept reminder, reminders only, for every new or revised unit reading in all three courses?": "Approve". |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
+| **Implemented By** | Pending commit (Secretary, 2026-11-25). Step 1: text (A) appended to `workflows/unit-textbook.md` item 1 (Cover) as a second paragraph, and bullet (B) inserted after the "Audit the **exported student PDF**" bullet in "Independent accuracy and print review"; items 1–5 keep their numbering. Step 2: the optional builder field `front.refreshers` was already added to `templates/reading/build_reading_docx.py` during the Chemistry U6 build (commit 15968a1, "U6 reading: Key Refreshers box…"), not in this implementation. Its shape differs from step 2 as written: entries are `front.refreshers.items[]` of `{ "codes": ["4.2", "4.3"], "text": "…" }` (one or more codes from one earlier unit, label "Unit N (codes):"), with an optional `title`. It enforces the 2–5 count, no `**`, the one-line fit, codes present in the course decisions, and an earlier unit. |
 | **Verified** | |
 
 ---
