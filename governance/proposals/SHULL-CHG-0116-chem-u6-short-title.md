@@ -5,12 +5,6 @@
 >
 > **One layer: Path A, a course fact** (`governance/CHANGE_CONTROL.md` §1). A short title affects
 > Chemistry only (CLAUDE.md §2 test). No standard, skill or template is touched.
->
-> **ID note.** The Secretary that drafted this record has no shell and could not `git fetch origin
-> main`. 0116 is the next integer after the highest record in the local checkout (SHULL-CHG-0115) on
-> branch `claude/ecstatic-pascal-9cro1w`, which the main session reported up to date with `main`
-> through SHULL-CHG-0115. Nothing outside `legacy/` mentions 0116 or higher. Under §2 the ID is real
-> only once this file is pushed to `origin/main`; the main session confirms that before citing it.
 
 | Field | Value |
 |---|---|
@@ -28,7 +22,7 @@
 | **Recommendation** | Approve. Declining leaves U6 unit-level files with no topic (`Unit 6 Reading.pdf`). |
 | **Decision** | 2026-11-25, user, in the main session, answering D2 of the U6 reading plan ("U6 short title for the file name — Recommendation: 'Nomenclature', so the file is 'Unit 6 Reading - Nomenclature'. Apply it to the unfiled U6 Roadmap too."): "Yeah do that". |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
+| **Implemented By** | pending commit |
 | **Verified** | — |
 
 ---

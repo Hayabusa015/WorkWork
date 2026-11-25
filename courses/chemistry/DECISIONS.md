@@ -420,6 +420,7 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | Code | Short title |
 |---|---|
 | U1 | Matter & Atoms |
+| U6 | Nomenclature |
 | U7 | The Mole |
 | 0.4 | Observations |
 | 1.1 | Matter & Changes |
@@ -442,6 +443,16 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | REF | Course Outline |
 
 ## Decision log
+
+### 2026-11-25 — U6 short title
+U6 Chemical Nomenclature gets the short title "Nomenclature", so its unit-level files are named
+`Unit 6 [Type] - Nomenclature`, e.g. `Unit 6 Reading - Nomenclature` and
+`Unit 6 Roadmap - Nomenclature.pdf`. The unit title stays "Chemical Nomenclature". Files already built
+under U6 keep their names until a confirmed, logged rename. Decided by Matt 2026-11-25 ("Yeah do
+that"), answering the plan's question on the U6 short title; he also chose to keep "Chemical
+Nomenclature" ("Keep 'Chemical Nomenclature'").
+Supersedes: None (new short-title row; no rule replaced).
+Status: CONFIRMED · SHULL-CHG-0116
 
 ### 2026-11-24 — U7 short title
 U7 The Mole & Chemical Quantities gets the short title "The Mole", so its unit-level files are named
