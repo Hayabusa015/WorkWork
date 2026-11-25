@@ -212,3 +212,106 @@ I rebuilt U7 with the builder at `d7b001a` into the scratchpad and compared it w
 ## R2-5. Release note
 
 QA passes. The edition can go to the ordinary approval-to-file gate. Carry A-3 (and A-6) forward on the record: they need Matt to accept them, or a recheck once the hosts are allowed. Drive destination is not yet checked, because the file has not been filed.
+
+---
+
+# Round 3: recheck after the Key Refreshers, monatomic-ion and write-in vocabulary changes
+
+Auditor | 2026-11-25 | Same workflow, now including SHULL-CHG-0117 (Key Refreshers) and SHULL-CHG-0118 (write-in vocabulary): `workflows/unit-textbook.md` item 1, item 5 and the two audit bullets (l.17, l.21, l.55–56). Report only: no deliverable, spec or other file was changed.
+
+## Verdict: **PASS**
+
+- **The three approved additions are correct, sourced from classroom materials, and comply with both new rules.** The additions are the Key Refreshers box, "Naming monatomic ions" with the new Fig 6.4, and the element-vs-ion paragraph. Both rules are recorded as approved by the user in `governance/proposals/SHULL-CHG-0117…` and `…0118…`. The additions are recorded in the spec `$comment` (Matt, 2026-11-25, main session).
+- **No science errors.** Figures are renumbered 6.1–6.7, and every cross-reference matches its figure.
+- **The leaf, ink, fonts, binding, thumb tab and U7 regression all pass.**
+- **Two new minor items (R3-1, R3-2), neither blocking.** A-3 (primary sources unreachable) stays open as a recorded limitation, and A-6 stays open as a minor item.
+
+Note: the Round 2 PASS had led to a filing-queue row being marked Ready (`201e91d`). The edition then changed, so that PASS does not cover the current export. This Round 3 verdict is the one that applies to student `4f2814f5…` / key `c5002297…`.
+
+## R3-1. Version and evidence reuse
+
+| Item | Value |
+|---|---|
+| Commit | `041566b` (HEAD). Content commit `15968a1` (refreshers, 6.3 additions); builder write-in mode in `041566b` (U7 spec pins `vocabMode: print`) |
+| Student PDF | sha256 `4f2814f5caca77b550261e1437fdaf2bf7f2357f5553cf8a40e5feaa11165bb2`, 8 pp. DOCX `7d7bb33f…e2396` |
+| Key PDF | sha256 `c50022974d960c397f4195debb8347d4c2e4acec8c3e15e0fc91a07ed9749071`, 2 pp. DOCX `f7a702f3…c5386a` |
+| Rebuild at HEAD | U6 rebuilt into the scratchpad. Both DOCX files match the shipped ones part for part; both PDFs have identical text and 0 differing pixels |
+| Diff against Round 2 (my HEAD-of-R2 rebuild, identical to the R2 export) | **p6: identical (0 px).** **p7: text identical**; the 130 differing pixels are confined to the "UNIT 6" thumb-tab label (x 586–592 pt, y 186–210 pt, max grey delta 40), an anti-aliasing change with no content effect. p1–p5, p8 and both key pages changed. The text changes are exactly the three additions, the 6.3 charge sentence now pointing back to the refreshers, "each as above", the cover's sheet list, figure renumbering, and the write-in reverse |
+| Reuse | Round 1/2 evidence is reused for p6 and p7 only. p1–p5, p8 and both key pages were re-inspected in full |
+| Proof method | Screen proof only (110 dpi full-page grayscale). No physical photocopy |
+
+## R3-2. Key Refreshers (SHULL-CHG-0117)
+
+| Check | Result |
+|---|---|
+| Placement | PASS. Full-width outline box on p1, below the section list / Why It Matters band and above "6.1 Covalent Names & Formulas" |
+| Count / form | PASS. Three items, each a single line at print size, each in the form "Unit N (N.n): reminder" |
+| Sections exist | PASS. 3.7 Ion Formation (DECISIONS l.38); 4.2 Ionic Bonding and 4.3 Covalent Bonding (DECISIONS l.43). These are also the unit's builds-on in `templates/unit-roadmap/specs/chem_u06.json` l.7–9 |
+| Item 1, "Unit 3 (3.7): Metals lose electrons to become cations; nonmetals gain electrons to become anions." | Correct. Traced to the U3 quiz, 3.7 items (`templates/activity/specs/chem_u03_quiz.json` l.58–72: Sr²⁺, Br⁻, Al³⁺; Ca loses two electrons to form Ca²⁺) and U6 deck slide 16 "Cations and anions" (deck extract l.60) (R) |
+| Item 2, "Unit 3 (3.7): Main-group charges follow the group: Group 1 is 1+, Group 2 is 2+, Group 17 is 1−, Group 16 is 2−, Group 15 is 3−." | Correct. Traced to the U3 quiz 3.7 solutions (l.61, 113, 192: groups 1, 2, 13, 15, 16, 17) and deck slide 16 (R). See R3-1 (aluminum omitted) |
+| Item 3, "Unit 4 (4.2, 4.3): Metals and nonmetals transfer electrons (ionic); nonmetals share electrons (covalent)." | Correct. Traced to the U4 deck `chem_u04_u05/build.js` l.170–186 ("Metal + nonmetal / Electrons transferred"; "Nonmetal + nonmetal / Electrons shared in pairs") (R) |
+| Reminders only | PASS. No teaching, example or figure. The "Unit 3 (3.7):" lead-ins are grey label type, not bold terms. Bold body terms are still exactly the ten. "Cation" and "anion" appear unbolded |
+| Tear-off independence | PASS. No question draws on a refresher: 6.1 prefixes, 6.2 -ate/-ite, 6.3 Roman numeral (key answer relies on "Sodium forms only one ion, Na⁺" in 6.3 body), 6.4 acid endings |
+| One fact, one place | PASS. 6.3 now reads "Main-group ions have the charges listed in the Key Refreshers on page 1"; the group list is no longer restated in 6.3 |
+
+## R3-3. New 6.3 content and figures
+
+| Item | My independent result | Printed | Match |
+|---|---|---|---|
+| "A monatomic cation keeps the element's name: Na⁺ … sodium ion, Ca²⁺ … calcium ion. A monatomic anion takes the ending -ide, so chlorine becomes chloride and oxygen becomes oxide" | Correct. Deck slide 22 (R) | — | ✓ |
+| Fig 6.4 ion table | fluorine → fluoride F⁻ · chlorine → chloride Cl⁻ · bromine → bromide Br⁻ · iodine → iodide I⁻ (Group 17, 1−) · oxygen → oxide O²⁻ · sulfur → sulfide S²⁻ (Group 16, 2−) · nitrogen → nitride N³⁻ · phosphorus → phosphide P³⁻ (Group 15, 3−) | all eight as printed. The charges agree with refresher item 2. Group bands are separated by rules, legible in grayscale. Outline only | ✓ |
+| Fig 6.4 caption / footnote: "Keep the root of the element's name, add -ide, and read the charge from the group." | Correct | — | ✓ |
+| "Chlorine is Cl₂, a gas made of molecules. Chloride is Cl⁻, an ion found in compounds such as NaCl." | Correct (K; low risk) | — | ✓ |
+| "Sodium is a soft metal; the sodium ion is Na⁺." | Correct (K; PubChem refused, under A-3) | — | ✓ |
+| Diatomic elements: H₂, N₂, O₂, F₂, Cl₂, Br₂, I₂, "listed on your Naming Toolkit sheet" | Matches DECISIONS l.214–215: "the seven diatomic elements (H, N, O, F, Cl, Br, I)" | same seven | ✓ |
+| "That subscript 2 belongs to the element… sodium chloride is NaCl, not NaCl₂." | Na⁺ + Cl⁻ → 1:1, NaCl | — | ✓ (wording note R3-2) |
+| "To name an ionic compound, name the cation first and the anion second, each as above." | Points back to the new monatomic-ion paragraph, which comes before it in 6.3. Polyatomic and prefix sentences unchanged | — | ✓ |
+| Figure numbering and cross-references | Fig 6.1 (p1), 6.2 (p2), 6.3 (p3), 6.4 (p3, new), 6.5 Al₂O₃ tiles (p4), 6.6 Fe₂O₃ working-back (p4), 6.7 acid endings (p5). Every "(Figure 6.n)" in the prose points at the correct figure, in order, on the same page as the figure | — | ✓ |
+| All other compounds, Examples, On Your Own items, key answers | Unchanged text; re-read on the reflowed pages; still as in Round 1 §3 | — | ✓ |
+
+Round 1's A-10 (Fig 6.5/6.6 one page turn after the reference) is resolved by the reflow: the Fe₂O₃ reference and Figure 6.6 now share p4.
+
+## R3-4. Leaf and write-in vocabulary (SHULL-CHG-0118)
+
+| Check | Result |
+|---|---|
+| Final reading page / blank back / leaf | Reading ends on **p5** (6.4 Connection). **p6** blank back (identical to R2). Leaf **p7 / p8**, the last two physical pages |
+| Front (p7) | Unchanged text: NAME line; exact due line "Due ASAP. No late work will be accepted. We will start the unit with this."; four single-part questions 6.1–6.4, each answerable from its section; five ruled lines each |
+| Cover = headings = labels = key | PASS: 6.1–6.4 throughout. The cover's "the last page lists all ten" is still accurate (the terms are listed) |
+| Reverse (p8) | PASS. "Unit 6 vocabulary" with the instruction "Write each definition in your own words, using the reading. Each term is in bold where it is first defined." **10 terms, no definitions printed** (definitions-on-p8 check: 0 of 10). Two ruled lines per term, about 0.33 in apart and about 5.25 in long: adequate for a one- or two-sentence handwritten definition |
+| Terms trace to bold definitions | PASS. Each p8 term is bolded where first defined (p1 binary compound, molecular compound; p2 monatomic ion, polyatomic ion, oxyanion; p3 formula unit; p4 Stock system, acid; p5 binary acid, oxyacid) with its margin definition |
+| Key definitions = reading wording | PASS. Key p2 "Vocabulary (page 8) — expected definitions" gives all ten in the key hand; each matches the reading's margin definition word for word (programmatic comparison, 10/10). Accept-own-words note present |
+| Formula unit = U7 | PASS, unchanged |
+| Orientation / removal | PASS. Portrait, upright, hole guides left (p7) and right (p8), correct for long-edge duplex. Removing p7/p8 keeps p1–p6, which hold all reading content |
+
+## R3-5. Gate re-run
+
+| Check | Result |
+|---|---|
+| Fonts | PASS. `pdffonts`: student ArchivoRoman Regular and Bold, plus ArchivoNarrow; key adds ShullHand, Patrick Hand and Archivo SemiBold Italic. `audit_fonts.py` "OK — Archivo only"; `--key` "OK — Archivo and the key handwriting face only" |
+| Ink | PASS. Student worst 7.72% (p1), average 4.42%; key worst 7.11%. "No fill" on every page; widest solid band 0.00 in. The refresher box and Fig 6.4 are outline only |
+| Binding | PASS. `audit_binding.py` OK for 8 + 2 pages |
+| Thumb tab | PASS. Outline only, 0.220 in from the outside edge on all 8 pages |
+| Coloured type | PASS. Same palette as Round 1 (primaryDeep accent, label and footer greys; the key adds keyInk pen and pencil) |
+| Clipped text / margins | PASS. No span crosses the outside margin on any page (the key-p1 handwriting overrun from Rounds 1–2 is gone after the reflow). No line ends in a bare suffix hyphen |
+| Banned-content grep | PASS (no hits) |
+| Codes | PASS. Chip `U06 / S6.1–S6.4`; `validate_codes.py` OK |
+| Key notes | Accurate: refresher note (sections, builds-on, unbolded cation/anion), element-vs-ion note (NaCl₂ misconception; Naming Toolkit seven; Fig 6.4 eight anions). Earlier notes unchanged |
+
+## R3-6. U7 regression
+
+I rebuilt U7 at `041566b` into the scratchpad and compared it with `build/chem_u07_reading/` (student `e52e57c9…`, key `e7d21724…`, the same hashes as in Round 2). DOCX files match part for part; PDFs have identical text and 0 differing pixels on 8 + 2 pages. **U7 is unchanged**, including its printed-definition reverse (`vocabMode: print`).
+
+## R3-7. Findings
+
+| # | Page / item | Claim | Evidence / result | Severity | Disposition |
+|---|---|---|---|---|---|
+| R3-1 | p1 refresher item 2; p3 "Main-group ions have the charges listed in the Key Refreshers" | Main-group charge list | The list omits aluminum, Al³⁺ (Group 13), which 3.7 teaches (U3 quiz l.61) and deck slide 16 lists. Not wrong: Al³⁺ is stated where it is used ("In aluminum oxide, aluminum forms Al³⁺", p4). But 6.3 now sends students to a list that lacks it | Minor | Designer's choice: add "aluminum is 3+" to item 2 if it stays on one line, or leave as is |
+| R3-2 | p3 element-vs-ion paragraph | "That subscript 2 … never carries over to the ion inside a compound" | True for the monatomic ions under discussion. The students' sheet 6 lists peroxide, O₂²⁻ (unstarred), which a literal reader could take as a counterexample | Minor | Optional: "…never carries over to a monatomic ion…" |
+| A-3 | External locators (now also Cl₂ gas, soft Na) | — | Hosts still refused (proxy 403); the new facts are standard, low risk | OPEN, recorded limitation | Matt accepts on the record, or allow the hosts and recheck |
+| A-6 | p3 On Your Own 6.2, phosphite | — | Unchanged | OPEN, minor | Matt to confirm Option A |
+| A-10 | Fig 6.5/6.6 adjacency | — | Resolved by the reflow | CLOSED | — |
+
+## R3-8. Release note
+
+QA passes on student `4f2814f5…` / key `c5002297…`. The edition can go to the ordinary approval-to-file gate, with A-3 and A-6 carried on the record and R3-1/R3-2 at the designer's discretion. If the designer applies R3-1 or R3-2, the change is text-only on p1/p3. I would then recheck those pages, pagination, and the leaf position.
