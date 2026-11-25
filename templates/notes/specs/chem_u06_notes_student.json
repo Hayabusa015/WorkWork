@@ -103,7 +103,7 @@
                   0.26,
                   0.26
                 ],
-                "rowHeightIn": 0.48
+                "rowHeightIn": 0.4
               }
             },
             {
@@ -120,7 +120,7 @@
                 },
                 {
                   "prompt": "Rule 2 · second element",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Rule 3 · formula",
@@ -128,15 +128,11 @@
                 },
                 {
                   "prompt": "Meaning of a subscript",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "notesFirst": true
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 7 · Molecular prefixes",
               "cues": [
@@ -151,7 +147,7 @@
                 },
                 {
                   "prompt": "Prefixes and subscripts",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "table": {
@@ -195,7 +191,11 @@
                 ],
                 "rowHeightIn": 0.46
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slides 8–9 · How do you name N₂O₄?",
@@ -211,18 +211,14 @@
                 },
                 {
                   "prompt": "No subscript means",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "problem": {
                 "workLabel": "Slides 8–9 · Name N₂O₄: the prefix for each element. Then name CO and PCl₃.",
-                "workHeightIn": 1.6
+                "workHeightIn": 1.5
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "kind": "example",
               "title": "Slides 10–11 · Writing molecular formulas",
@@ -234,7 +230,7 @@
               "notes": [
                 {
                   "prompt": "From name to formula",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Steps",
@@ -243,7 +239,7 @@
               ],
               "problem": {
                 "workLabel": "Slides 10–11 · Write the formulas: dinitrogen pentoxide, sulfur hexafluoride",
-                "workHeightIn": 1.5
+                "workHeightIn": 1.4
               }
             },
             {
@@ -306,7 +302,7 @@
               "notes": [
                 {
                   "prompt": "Definition",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Formation of NH₄^{+} from NH₃ + H^{+}",
@@ -341,7 +337,7 @@
                 },
                 {
                   "prompt": "Step 3 · writing a formula",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Ion written first",
@@ -394,16 +390,16 @@
               "notes": [
                 {
                   "prompt": "Charge rule",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "After crossing",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "problem": {
                 "workLabel": "Slides 17–19 · MgCl₂ and Al₂O₃: write the ions, cross the numbers, check the charge",
-                "workHeightIn": 1.9
+                "workHeightIn": 1.6
               }
             },
             {
@@ -417,7 +413,7 @@
               "notes": [
                 {
                   "prompt": "Reducing rule",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Equal and opposite charges give",
@@ -428,11 +424,7 @@
                 "workLabel": "Slides 20–21 · Reduce Ca₂O₂. Write strontium sulfide.",
                 "workHeightIn": 1.4
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slides 22–23 · Naming ions with fixed charges",
               "cues": [
@@ -447,7 +439,7 @@
                 },
                 {
                   "prompt": "Naming rule",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "One-element anions",
@@ -476,7 +468,11 @@
                 ],
                 "rowHeightIn": 0.4
               }
-            },
+            }
+          ]
+        },
+        {
+          "rows": [
             {
               "kind": "example",
               "title": "Slides 24–26 · Metals with variable charges",
@@ -487,12 +483,8 @@
               "notesFirst": true,
               "notes": [
                 {
-                  "prompt": "Iron’s two ions",
-                  "lines": 1
-                },
-                {
-                  "prompt": "Fixed charges, no numeral",
-                  "lines": 1
+                  "prompt": "Iron’s two ions · fixed-charge metals",
+                  "lines": 2
                 },
                 {
                   "prompt": "The Roman numeral gives",
@@ -500,18 +492,14 @@
                 },
                 {
                   "prompt": "Finding the metal charge",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "problem": {
                 "workLabel": "Slides 25–26 · Name FeCl₂ and FeCl₃. Write copper(II) oxide.",
-                "workHeightIn": 1.6
+                "workHeightIn": 1.4
               }
-            }
-          ]
-        },
-        {
-          "rows": [
+            },
             {
               "title": "Slide 27 · Recognizing common polyatomic ions",
               "cues": [
@@ -522,7 +510,7 @@
               "notes": [
                 {
                   "prompt": "Keep the group intact",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Ammonium",
@@ -550,7 +538,7 @@
                   0.25,
                   0.25
                 ],
-                "rowHeightIn": 0.42
+                "rowHeightIn": 0.28
               }
             },
             {
@@ -564,7 +552,7 @@
               "notes": [
                 {
                   "prompt": "Meaning of Ca(NO₃)₂",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "Parentheses rule",
@@ -572,12 +560,12 @@
                 },
                 {
                   "prompt": "Inside vs. outside subscripts",
-                  "lines": 2
+                  "lines": 1
                 }
               ],
               "problem": {
                 "workLabel": "Slides 28–29 · Write calcium nitrate and ammonium sulfate. Check the charge.",
-                "workHeightIn": 1.5
+                "workHeightIn": 1.4
               }
             }
           ]
@@ -698,7 +686,7 @@
                 },
                 {
                   "prompt": "Clue 3 · two nonmetals",
-                  "lines": 2
+                  "lines": 1
                 },
                 {
                   "prompt": "The big three",

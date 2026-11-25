@@ -98,34 +98,32 @@ spec = {
                     [["How to spot it", "", "", ""], ["Naming rule", "", "", ""]],
                     [["How to spot it", "Two nonmetals", "Cation + anion", "H compound in water (aq)"],
                      ["Naming rule", "Prefixes count atoms", "Balance + and − charge", "Name from the anion"]],
-                    [0.22, 0.26, 0.26, 0.26], 0.48)),
+                    [0.22, 0.26, 0.26, 0.26], 0.40)),
          notes("Slides 5–6 · Naming molecular compounds", ["S06.1"], [
            P("Rule 1 · first element", "Keep its name. Prefix only for 2+ atoms (no mono-).", 2),
-           P("Rule 2 · second element", "Use a prefix; change the ending to -ide.", 2),
+           P("Rule 2 · second element", "Use a prefix; change the ending to -ide.", 1),
            P("Rule 3 · formula", "Keep the actual atom counts.", 1),
-           P("Meaning of a subscript", "Atoms of the element just before it.", 2),
+           P("Meaning of a subscript", "Atoms of the element just before it.", 1),
          ]),
-       ]},
-       {"rows": [
          notes("Slide 7 · Molecular prefixes", ["S06.1"], [
            P("Slide examples", "CO = carbon monoxide · CO₂ = carbon dioxide", 1),
-           P("Prefixes and subscripts", "Prefixes become subscripts in the formula.", 2),
+           P("Prefixes and subscripts", "Prefixes become subscripts in the formula.", 1),
          ], table=T(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
                     [["", "", "", "", "", "", "", "", "", ""]],
                     [["mono-", "di-", "tri-", "tetra-", "penta-", "hexa-", "hepta-", "octa-", "nona-", "deca-"]],
                     [0.1] * 10, 0.46), table_first=True),
-         example("Slides 8–9 · How do you name N₂O₄?", ["S06.1"], [
-           P("Prefix rule", "Skip mono- on the first element; prefix the second.", 2),
-           P("No subscript means", "One atom. Use mono- only on the second element.", 2),
-         ], "Slides 8–9 · Name N₂O₄: the prefix for each element. Then name CO and PCl₃.", 1.6,
-            ["N₂ → di- + nitrogen = dinitrogen", "O₄ → tetra- + oxide = tetroxide → dinitrogen tetroxide",
-             "CO = carbon monoxide · PCl₃ = phosphorus trichloride"]),
        ]},
        {"rows": [
+         example("Slides 8–9 · How do you name N₂O₄?", ["S06.1"], [
+           P("Prefix rule", "Skip mono- on the first element; prefix the second.", 2),
+           P("No subscript means", "One atom. Use mono- only on the second element.", 1),
+         ], "Slides 8–9 · Name N₂O₄: the prefix for each element. Then name CO and PCl₃.", 1.5,
+            ["N₂ → di- + nitrogen = dinitrogen", "O₄ → tetra- + oxide = tetroxide → dinitrogen tetroxide",
+             "CO = carbon monoxide · PCl₃ = phosphorus trichloride"]),
          example("Slides 10–11 · Writing molecular formulas", ["S06.1"], [
-           P("From name to formula", "Prefixes count actual atoms; keep those counts.", 2),
+           P("From name to formula", "Prefixes count actual atoms; keep those counts.", 1),
            P("Steps", "Write the symbols in order; each prefix gives a subscript.", 2),
-         ], "Slides 10–11 · Write the formulas: dinitrogen pentoxide, sulfur hexafluoride", 1.5,
+         ], "Slides 10–11 · Write the formulas: dinitrogen pentoxide, sulfur hexafluoride", 1.4,
             ["di- = 2, penta- = 5 → N₂O₅", "sulfur = 1, hexa- = 6 → SF₆"]),
          notes("Slide 12 · Why N₂O₄ stays N₂O₄", ["S06.1"], [
            P("Conclusion", "N₂O₄ and NO₂ are different molecules: never reduce a molecular formula.", 2),
@@ -141,7 +139,7 @@ spec = {
      "pages": [
        {"rows": [
          notes("Slide 14 · How can a group of atoms be an ion?", ["S06.2"], [
-           P("Definition", "A group of bonded atoms with an overall charge.", 2),
+           P("Definition", "A group of bonded atoms with an overall charge.", 1),
            P("Formation of NH₄⁺ from NH₃ + H⁺", "H⁺ is attracted to N's lone pair; N shares it: new N–H bond.", 2),
            P("Reason for the +1 charge", "11 protons, 10 electrons.", 1),
            P("Bonds and charge", "Atoms share electrons (covalent); charge belongs to the whole group.", 2),
@@ -149,7 +147,7 @@ spec = {
          notes("Slides 15–16 · Naming ionic compounds", ["S06.3"], [
            P("Step 1 · cation", "Cation first (usually a metal). Variable charge → Roman numeral.", 2),
            P("Step 2 · anion", "One-element anion → -ide. Polyatomic ion keeps its name.", 2),
-           P("Step 3 · writing a formula", "Criss-cross, reduce, check for zero net charge.", 2),
+           P("Step 3 · writing a formula", "Criss-cross, reduce, check for zero net charge.", 1),
            P("Ion written first", "The positive ion, usually a metal.", 1),
          ], table=T(["Group 1", "Group 2", "Aluminum", "Group 17", "Group 16", "Group 15"],
                     [["", "", "", "", "", ""]], [["+1", "+2", "+3", "−1", "−2", "−3"]],
@@ -157,43 +155,40 @@ spec = {
        ]},
        {"rows": [
          example("Slides 17–19 · The criss-cross method", ["S06.3"], [
-           P("Charge rule", "Total positive charge + total negative charge = 0.", 2),
-           P("After crossing", "Reduce if needed; check the charges add to zero.", 2),
-         ], "Slides 17–19 · MgCl₂ and Al₂O₃: write the ions, cross the numbers, check the charge", 1.9,
+           P("Charge rule", "Total positive charge + total negative charge = 0.", 1),
+           P("After crossing", "Reduce if needed; check the charges add to zero.", 1),
+         ], "Slides 17–19 · MgCl₂ and Al₂O₃: write the ions, cross the numbers, check the charge", 1.6,
             ["Mg²⁺ + 2 Cl⁻: (+2) + 2(−1) = 0 → MgCl₂", "Al³⁺, O²⁻ → Al₂O₃: 2(+3) + 3(−2) = 0"]),
          example("Slides 20–21 · The simplest ionic ratio", ["S06.3"], [
-           P("Reducing rule", "Reduce the ratio of ions; omit subscripts of 1.", 2),
+           P("Reducing rule", "Reduce the ratio of ions; omit subscripts of 1.", 1),
            P("Equal and opposite charges give", "A 1 : 1 ratio.", 1),
          ], "Slides 20–21 · Reduce Ca₂O₂. Write strontium sulfide.", 1.4,
             ["Ca₂O₂: 2 : 2 ÷ 2 → CaO", "Sr²⁺, S²⁻: cross 2 : 2 → reduce 1 : 1 → SrS"]),
-       ]},
-       {"rows": [
          notes("Slides 22–23 · Naming ions with fixed charges", ["S06.3"], [
            P("Break down NaCl", "Na⁺ = sodium (cation name); Cl⁻ = chloride (root + -ide).", 2),
-           P("Naming rule", "Cation, then anion. No counting prefixes.", 2),
+           P("Naming rule", "Cation, then anion. No counting prefixes.", 1),
            P("One-element anions", "Take the -ide ending.", 1),
          ], table=T(["Formula", "Name"], [["MgBr₂", ""], ["Al₂S₃", ""]],
                     [["MgBr₂", "magnesium bromide"], ["Al₂S₃", "aluminum sulfide"]], [0.3, 0.7], 0.40)),
-         example("Slides 24–26 · Metals with variable charges", ["S06.3"], [
-           P("Iron’s two ions", "Fe²⁺ = iron(II); Fe³⁺ = iron(III).", 1),
-           P("Fixed charges, no numeral", "Ag⁺, Zn²⁺, Cd²⁺", 1),
-           P("The Roman numeral gives", "The charge on one metal ion.", 1),
-           P("Finding the metal charge", "Anions’ total charge ÷ number of metal ions = charge on one ion.", 2),
-         ], "Slides 25–26 · Name FeCl₂ and FeCl₃. Write copper(II) oxide.", 1.6,
-            ["2 Cl⁻ = −2 → Fe²⁺ → iron(II) chloride", "3 Cl⁻ = −3 → Fe³⁺ → iron(III) chloride",
-             "Cu²⁺ + O²⁻ → cross 2 : 2 → reduce → CuO"]),
        ]},
        {"rows": [
+         example("Slides 24–26 · Metals with variable charges", ["S06.3"], [
+           P("Iron’s two ions · fixed-charge metals", "Fe²⁺ = iron(II), Fe³⁺ = iron(III) · Ag⁺, Zn²⁺, Cd²⁺ (no numeral)", 2),
+           P("The Roman numeral gives", "The charge on one metal ion.", 1),
+           P("Finding the metal charge", "Anion total charge ÷ number of metal ions", 1),
+         ], "Slides 25–26 · Name FeCl₂ and FeCl₃. Write copper(II) oxide.", 1.4,
+            ["2 Cl⁻ = −2 → Fe²⁺ → iron(II) chloride", "3 Cl⁻ = −3 → Fe³⁺ → iron(III) chloride",
+             "Cu²⁺ + O²⁻ → cross 2 : 2 → reduce → CuO"]),
          notes("Slide 27 · Recognizing common polyatomic ions", ["S06.2"], [
-           P("Keep the group intact", "Keep the ion name and its inside subscripts.", 2),
+           P("Keep the group intact", "Keep the ion name and its inside subscripts.", 1),
            P("Ammonium", "NH₄⁺ is a cation even though it has no metal.", 1),
          ], table=T(["NO₃⁻", "NH₄⁺", "OH⁻", "SO₄²⁻"], [["", "", "", ""]],
-                    [["nitrate", "ammonium", "hydroxide", "sulfate"]], [0.25] * 4, 0.42), table_first=True),
+                    [["nitrate", "ammonium", "hydroxide", "sulfate"]], [0.25] * 4, 0.28), table_first=True),
          example("Slides 28–29 · Parentheses count whole ions", ["S06.2"], [
-           P("Meaning of Ca(NO₃)₂", "1 Ca²⁺ + 2 NO₃⁻ → 1 Ca, 2 N, 6 O atoms.", 2),
+           P("Meaning of Ca(NO₃)₂", "1 Ca²⁺ + 2 NO₃⁻ → 1 Ca, 2 N, 6 O atoms.", 1),
            P("Parentheses rule", "Use ( ) around a polyatomic ion when you need more than one.", 2),
-           P("Inside vs. outside subscripts", "Outside counts whole ions; inside never changes.", 2),
-         ], "Slides 28–29 · Write calcium nitrate and ammonium sulfate. Check the charge.", 1.5,
+           P("Inside vs. outside subscripts", "Outside counts whole ions; inside never changes.", 1),
+         ], "Slides 28–29 · Write calcium nitrate and ammonium sulfate. Check the charge.", 1.4,
             ["Ca²⁺ + 2 NO₃⁻ → Ca(NO₃)₂: (+2) + 2(−1) = 0", "2 NH₄⁺ + SO₄²⁻ → (NH₄)₂SO₄: 2(+1) + (−2) = 0"]),
        ]},
      ]},
@@ -226,7 +221,7 @@ spec = {
          notes("Slide 37 · Choosing the naming rules", ["S06"], [
            P("Clue 1 · acid in water", "Check whether the anion contains oxygen.", 2),
            P("Clue 2 · ionic compound", "Name the cation first; use charges for the formula.", 2),
-           P("Clue 3 · two nonmetals", "Use prefixes to count atoms.", 2),
+           P("Clue 3 · two nonmetals", "Use prefixes to count atoms.", 1),
            P("The big three", "Prefixes count atoms. Charges balance. Acid names follow the anion.", 2),
          ]),
        ]},
