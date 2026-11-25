@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-25
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0116 | 2026-11-25 | Chemistry U6 short title | PROPOSED | `governance/proposals/SHULL-CHG-0116-chem-u6-short-title.md` |
+
 ## 2026-11-24
 
 | ID | Date | Change | Status | Record |
