@@ -25,8 +25,8 @@
 | **Affected Courses** | Chemistry, Physics and Geology (all unit readings). No course fact changes. |
 | **Risk** | Low. (1) **Page budget.** The block adds two to six lines to page 1 and pushes the first section down. A reading close to its page budget may gain a page, and the even-page and tear-off parity checks still apply. (2) **Builder support.** `build_reading_docx.py` has no field for the block. Until one is added (see "Implementation"), a reading cannot carry it. (3) **Gap in the source data.** No course `DECISIONS.md` lists prerequisites per unit. Unit roadmap specs with `builds_on` exist only for Chemistry (`templates/unit-roadmap/specs/chem_u*.json`), and their entries are not always section codes: `chem_u06.json` lists "U4 · Ionic vs. covalent bonding", and `chem_u07.json` lists "U6 · Writing chemical formulas" and a reference-packet line. So the rule requires each item to name a unit and section that exist in the course decisions file (CLAUDE.md §3). A unit-only `builds_on` entry has to be resolved to a section before it can be used, and reference-packet entries are left out. |
 | **Recommendation** | Approve. Each open choice is answered below. If any answer is wrong, it can be changed before approval. |
-| **Decision** | PENDING |
-| **Status** | PENDING |
+| **Decision** | 2026-11-25, user, in the main session, answering "Approve the shortened Key Refreshers rule (SHULL-CHG-0117): 2–5 one-line items on the cover, each naming the unit (and section) where it was covered plus a quick concept reminder, reminders only, for every new or revised unit reading in all three courses?": "Approve". |
+| **Status** | **APPROVED** |
 | **Implemented By** | |
 | **Verified** | |
 
