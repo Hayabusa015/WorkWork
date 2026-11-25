@@ -29,7 +29,7 @@
 | **Recommendation** | Approve. Matt's choice above named this exact change; the text below is the wording for it. |
 | **Decision** | 2026-11-25, user, in the main session, answering "For the tear-off back, students would see the 10 terms with blank lines and write each definition themselves, finding it bolded in the reading. Should this apply only to Unit 6, or become the rule for every unit reading?": "Rule for all readings (Recommended)" (option text: "Change the textbook rule (SHULL-CHG-0107) so every reading's tear-off back lists the terms with write-in lines. Unit 6 follows now. Unit 7 is filed with printed definitions and changes only if you ask."). |
 | **Status** | **APPROVED** |
-| **Implemented By** | |
+| **Implemented By** | pending commit; builder side by the U6 rebuild |
 | **Verified** | |
 
 ---
