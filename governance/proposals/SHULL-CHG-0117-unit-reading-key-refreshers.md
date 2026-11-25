@@ -8,16 +8,14 @@
 > readings in all three courses, so it belongs in the workflow (CLAUDE.md §2 test). No course fact
 > changes, and no `DECISIONS.md` entry is needed.
 >
-> **ID allocation caveat.** This session had no shell, so it could not run `git fetch origin main`
-> as §2 requires. A grep of this checkout found SHULL-CHG-0116 as the highest ID and no reference to
-> 0117 or above. Under §2, this ID is not allocated until the main session has fetched
-> `origin/main`, confirmed 0117 is still free, and pushed this file.
+> **ID allocation.** The main session confirmed SHULL-CHG-0117 free on `origin/main` and committed
+> the first PENDING draft. This revision shortens the rule at Matt's request (see Source).
 
 | Field | Value |
 |---|---|
 | **Change ID** | SHULL-CHG-0117 |
 | **Date** | 2026-11-25 |
-| **Source** | User. Matt, main session, 2026-11-25, while approving additions to the Chemistry U6 reading. His words: "Lets add something important to the beginning of all these reading that are key refreshers we need that we have done before. On this unit and for future units. I want to make this a rule". |
+| **Source** | User. Matt, main session, 2026-11-25, while approving additions to the Chemistry U6 reading. His words: "Lets add something important to the beginning of all these reading that are key refreshers we need that we have done before. On this unit and for future units. I want to make this a rule". After reviewing the first draft of this record he asked for it shorter: "Just make it a quick review. Unit we covered it and a quick concept reminder." The rule text below is the shortened version. |
 | **Current Rule** | `workflows/unit-textbook.md`, "Prepare the unit reading and its detachable submission", item 1: "**Cover.** Introduce the unit and give students its breakdown: list the confirmed numbered sections in order with their short topic titles. Use those same section numbers and sequence throughout the reading and response sheet." The "Independent accuracy and print review" section has no check for prior-unit content on the cover. The builder (`templates/reading/build_reading_docx.py`, `front()`) lays out the cover as the title, "In this unit" list and how-to line on the left, Why It Matters on the right, with the chapter starting below on the same page. |
 | **Proposed Rule** | Two additions to `workflows/unit-textbook.md`, quoted in full under "Exact text" below: (A) a **Key Refreshers** paragraph appended to item 1 (Cover), and (B) a new bullet in "Independent accuracy and print review". |
 | **Supersedes** | `workflows/unit-textbook.md` "Prepare the unit reading…" item 1 (Cover), which lists only the breakdown. This record adds to that item and does not replace it. SHULL-CHG-0107 (`governance/proposals/SHULL-CHG-0107-textbook-reading-and-tear-off.md`) is not changed. |
@@ -25,7 +23,7 @@
 | **Affected Agents** | Textbook Page Designer (writes the block). Overseer (supplies the confirmed prerequisites at commissioning, step 1). Researcher (sources the block's facts like the rest of the reading). Auditor (new check). Secretary (implementation only, and only on approval). `.claude/agents/textbook-page-designer.md` needs no change: it defers to the workflow and does not list the format. |
 | **Affected Skills** | None. `.claude/skills/verify-content/SKILL.md` and `standards/QA_GATE.md` do not list the reading format, so the workflow's audit section is the only place to add the check. `standards/NAMING.md` describes a Reading only to explain its filename and needs no change. |
 | **Affected Courses** | Chemistry, Physics and Geology (all unit readings). No course fact changes. |
-| **Risk** | Low. (1) **Page budget.** The block adds a few lines to page 1 and pushes the first section down. A reading close to its page budget may gain a page, and the even-page and tear-off parity checks still apply. (2) **Builder support.** `build_reading_docx.py` has no field for the block. Until one is added (see "Implementation"), a reading cannot carry it. (3) **Gap in the source data.** No course `DECISIONS.md` lists prerequisites per unit. Unit roadmap specs with `builds_on` exist only for Chemistry (`templates/unit-roadmap/specs/chem_u*.json`), and their entries are not always section codes: `chem_u06.json` lists "U4 · Ionic vs. covalent bonding", and `chem_u07.json` lists "U6 · Writing chemical formulas" and a reference-packet line. So the rule requires each item to cite a section code that exists in the course decisions file (CLAUDE.md §3). A unit-only `builds_on` entry has to be resolved to a code before it can be used, and reference-packet entries are left out. |
+| **Risk** | Low. (1) **Page budget.** The block adds two to six lines to page 1 and pushes the first section down. A reading close to its page budget may gain a page, and the even-page and tear-off parity checks still apply. (2) **Builder support.** `build_reading_docx.py` has no field for the block. Until one is added (see "Implementation"), a reading cannot carry it. (3) **Gap in the source data.** No course `DECISIONS.md` lists prerequisites per unit. Unit roadmap specs with `builds_on` exist only for Chemistry (`templates/unit-roadmap/specs/chem_u*.json`), and their entries are not always section codes: `chem_u06.json` lists "U4 · Ionic vs. covalent bonding", and `chem_u07.json` lists "U6 · Writing chemical formulas" and a reference-packet line. So the rule requires each item to name a unit and section that exist in the course decisions file (CLAUDE.md §3). A unit-only `builds_on` entry has to be resolved to a section before it can be used, and reference-packet entries are left out. |
 | **Recommendation** | Approve. Each open choice is answered below. If any answer is wrong, it can be changed before approval. |
 | **Decision** | PENDING |
 | **Status** | PENDING |
@@ -40,51 +38,53 @@
 item: renumbering would make items 3–5 stale where `templates/reading/build_reading_docx.py` cites
 them ("workflows/unit-textbook.md steps 3-5").
 
-> **Key Refreshers.** Below the breakdown and Why It Matters, and before the first section heading,
-> print a short block titled **Key Refreshers** so students read it before the chapter begins. List
-> two to five skills or facts from earlier units that this unit depends on. Take them from the
-> prerequisites the Overseer confirmed in commissioning step 1, using the unit roadmap's builds-on
-> list where one exists. Open each item with the earlier section code it comes from, as it appears in
-> the course decisions, e.g. "From 3.7: …". State each item in one to three lines. The block reminds
-> students; it does not reteach, work an example, or introduce anything new. It adds no bold terms and
-> does not count toward the ten, and no tear-off question draws on it. Source its facts like the rest
-> of the reading. Omit the block when a unit has no earlier unit to draw on. This applies to every new
-> unit reading and every revision. A reading filed before SHULL-CHG-0117 gains the block on a later
-> revision only if the teacher asks for it.
+> **Key Refreshers.** After the section list and Why It Matters, and before the first section, print
+> a short **Key Refreshers** block. Give two to five one-line items, each in the form "Unit N (N.n):
+> concept reminder". Each item names the earlier unit and section where the idea was covered, e.g.
+> "Unit 3 (3.7): Metals lose electrons to become cations; nonmetals gain electrons to become anions."
+> These are reminders only: no teaching, examples, bold terms or tear-off questions. Source the facts
+> like the rest of the reading. Omit the block when there is no earlier unit. This applies to every
+> new or revised unit reading in all three courses. A reading filed before SHULL-CHG-0117 gets the
+> block only on a revision, and only if the teacher asks.
 
 **(B) New bullet in "Independent accuracy and print review"**, inserted directly after the bullet
 that begins "Audit the **exported student PDF** for the detachable leaf":
 
-> - Check the Key Refreshers block on the cover: it sits after Why It Matters and before the first
->   section, and it has two to five items. Each item opens with a section code that exists in the
->   course decisions and comes from an earlier unit. Trace each item to that section (its decisions
->   entry, the filed material for it, or a dossier source) and confirm it says nothing that section did
->   not teach. Confirm the block has no bold term and that no tear-off question draws on it.
+> - Check the Key Refreshers block: it sits before the first section and has two to five one-line
+>   items. Each item names an earlier unit and a section that exists in the course decisions. Trace
+>   each reminder to that section. Confirm it has no bold term, teaching or example, and that no
+>   tear-off question draws on it.
 
 ## The choices this record makes
 
 | Question | Answer in the rule | Why |
 |---|---|---|
 | Placement | Full width on the cover, after "In this unit" and Why It Matters, before the first section heading | The cover is a two-column table: a narrow left column with the title, list and how-to line, and Why It Matters on the right. The chapter starts below it on page 1. A full-width block in that gap is read immediately before section 1 and needs no new page. Placing it above Why It Matters would push the hook down, and the narrow left column has no room for 2–5 items. |
-| Source | Overseer-confirmed prerequisites, plus roadmap `builds_on` where it exists; every item cites a code that exists in DECISIONS | The decisions files list no prerequisites per unit, and only Chemistry has roadmap specs. Without the code requirement, an item could cite a code that appears only in a skill file (CLAUDE.md §3). |
-| Earlier units only | Yes | Matt's words were "we have done before". The reading is handed out at the start of the unit, so nothing from the same unit has been taught yet. |
-| Count and length | 2–5 items, 1–3 lines each | Matches the brief's "a few lines per item". It keeps the block a reminder, not a section. |
+| Source | Overseer-confirmed prerequisites (commissioning step 1), plus roadmap `builds_on` where it exists; every item names a unit and section that exist in DECISIONS | The decisions files list no prerequisites per unit, and only Chemistry has roadmap specs. Without this requirement, an item could cite a code that appears only in a skill file (CLAUDE.md §3). This guidance stays in the record; the workflow text was kept short at Matt's request. |
+| Earlier units only | Yes | Matt's words were "we have done before" and "Unit we covered it". The reading is handed out at the start of the unit, so nothing from the same unit has been taught yet. |
+| Count and form | 2–5 items, one line each, "Unit N (N.n): concept reminder" | Matt's refinement: "Just make it a quick review. Unit we covered it and a quick concept reminder." |
 | Bold and tear-off | No bold; outside the ten; no tear-off question | The ten-term limit and the one-question-per-section tear-off from SHULL-CHG-0107 stay as written. The block is not a numbered section, so it gets no question. |
 | Verification | Facts sourced like the rest of the reading; Auditor traces each item to the cited section | Same evidence standard as the rest of the student page. |
 | First unit of a course | The block is omitted | There is no earlier unit to draw on. |
 | Scope in time | All new readings and all revisions. Readings filed before this rule (Chemistry U7) add it only on request at a later revision. | "On this unit and for future units" means U6 onward in Chemistry and readings built from now on in Physics and Geology. U7 was filed before the rule, so it is optional and gets no forced reprint. The workflow text gives the general rule. The U7 case is recorded only here, so the course fact lives in one place. |
 
-## Implementation (after approval, in this order)
+## Affected files and implementation (after approval, in this order)
+
+| File | Change |
+|---|---|
+| `workflows/unit-textbook.md` | Text (A) and (B), verbatim |
+| `templates/reading/build_reading_docx.py` | Optional `front.refreshers` list, with build checks (step 2) |
 
 1. **Secretary:** add text (A) and (B) to `workflows/unit-textbook.md`, verbatim, in one commit that
    carries SHULL-CHG-0117.
 2. **Builder support** (build tooling, not a protected rule directory; do it under this record's ID):
    add an optional `front.refreshers` list to `templates/reading/build_reading_docx.py`. Each entry
    should be `{ "code": "3.7", "text": "…" }`. Render it full width between the cover table and the
-   first section, under the label "Key Refreshers", with each line opening "From <code>:". The build
-   should fail when the list has fewer than 2 or more than 5 entries, when an entry contains `**`,
-   when a code is not a section in the course decisions, or when a code's unit is not earlier than
-   the spec's unit.
+   first section, under the label "Key Refreshers", with each line printed as
+   "Unit N (N.n): text" (unit taken from the code). The build should fail when the list has fewer
+   than 2 or more than 5 entries, when an entry does not fit on one line at the cover's full width,
+   when an entry contains `**`, when a code is not a section in the course decisions, or when a
+   code's unit is not earlier than the spec's unit.
 3. **Not part of this record:** adding the block to the Chemistry U6 reading
    (`templates/reading/specs/chem_u06_reading.json`). That is classroom work and routes through the
    Overseer (CLAUDE.md §6). A likely source for its items is `templates/unit-roadmap/specs/chem_u06.json`
@@ -97,6 +97,6 @@ that begins "Audit the **exported student PDF** for the detachable leaf":
    the numbering of items 1–5 does not change.
 2. `python3 scripts/validate_references.py` and `python3 scripts/validate_change_ids.py` pass.
 3. If step 2 of Implementation is done: build a test spec with 1, 2, 5 and 6 refreshers, then with a
-   bold entry, an unknown code and a same-unit code. Only the 2- and 5-item cases build. The rendered
+   bold entry, an over-long entry, an unknown code and a same-unit code. Only the 2- and 5-item cases build. The rendered
    page 1 shows the block after Why It Matters and before the first section.
 4. Fill in `Implemented By` with the commit SHA(s) and `Verified` with the results.
