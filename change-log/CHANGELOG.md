@@ -29,7 +29,7 @@ supersedes it, exactly as the decision logs work.
 
 | ID | Date | Change | Status | Record |
 |---|---|---|---|---|
-| SHULL-CHG-0121 | 2026-11-26 | Physics U4 short title | APPROVED | `governance/proposals/SHULL-CHG-0121-physics-u4-short-title.md` |
+| SHULL-CHG-0121 | 2026-11-26 | Physics U4 short title | CONFIRMED | `governance/proposals/SHULL-CHG-0121-physics-u4-short-title.md` |
 | SHULL-CHG-0120 | 2026-11-26 | Reading cover: chapter-opener layout; wrapping refreshers (amends 0117, 0119 in part) | APPROVED | `governance/proposals/SHULL-CHG-0120-reading-cover-chapter-opener.md` |
 
 ## 2026-11-25

@@ -24,9 +24,9 @@
 | **Risk** | Low. (1) **Future builds only.** Once the row exists, every Physics U4 unit-level file built afterwards takes the topic: `Unit 4 <Type> - Work & Energy`, e.g. `Unit 4 Reading - Work & Energy` and `Unit 4 Reading Key - Work & Energy`. Files already built keep their names until a confirmed, logged rename (NAMING §5). (2) **No existing file is affected** as checked in this working tree: no `output/physics/u04/` files, and no Physics U4 entry in `reports/filing-queue.md`. (3) Section-level files (`4.1`–`4.4`) are unaffected; they have no rows and this record adds none. |
 | **Recommendation** | Approve. Declining leaves U4 unit-level files with no topic (`Unit 4 Reading`). |
 | **Decision** | 2026-11-26, user, in the main session, answering "What short title should Physics Unit 4 files use? (The full title is too long for file names.)" (option text: "Files: 'Unit 4 Reading - Work & Energy' and 'Unit 4 Reading Key - Work & Energy'."): "Work & Energy (Recommended)". |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit |
-| **Verified** | |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `6b51962e4cfc332605961d7ab17ea8cfe57678a1` (`courses/physics/DECISIONS.md` "Short titles" and "Decision log", and this record only). |
+| **Verified** | Yes. Run by the main session (not the implementer), 2026-11-26. (1) `validate_codes.py` OK. (2) `validate_references.py` OK. (3) `validate_change_ids.py` OK. (4) `_shull_name`: `short_title('physics','U4')` = "Work & Energy"; `document_name` gives `Unit 4 Reading - Work & Energy.pdf` and `Unit 4 Reading Key - Work & Energy.pdf`. (5) The unit title line is unchanged: `**U4 · Work, Energy & Power**`. |
 
 ---
 
