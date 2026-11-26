@@ -28,9 +28,9 @@
 | **Risk** | Low. (1) **No validator changes.** Confirmed: `scripts/validate_profiles.py` builds only `templates/worksheet/build_worksheet_docx.py` (l.17 `BUILD`), using worksheet specs from `templates/worksheet/specs/`. It never invokes `templates/reading/build_reading_docx.py`. The reading builder has no Physics no-work-area check. (2) **No builder change.** `build_reading_docx.py` `on_your_own()` (l.703–715) already reserves open work space in every course (`workIn`, default 1.3 in). The docstring reads "open space to work in". So the Chemistry-style box is the builder's default. (3) **The scope is the risk.** If the entry is read as a precedent, it weakens the worksheet rule. The draft says "not a precedent" explicitly. (4) No Physics reading spec exists yet in `templates/reading/specs/`, so nothing already built is affected. |
 | **Recommendation** | Approve, as Matt chose it. Declining would mean "No space, 'use notebook'", the other option he was offered. |
 | **Decision** | 2026-11-26, user, in the main session, answering "Your Physics rule says no work areas on student pages (students work in notebooks). How should the On Your Own boxes look?" (option text: "Give each On Your Own box room to work, like the Chemistry readings."): "Add work space". |
-| **Status** | **APPROVED** |
-| **Implemented By** | pending commit |
-| **Verified** | — |
+| **Status** | **IMPLEMENTED** |
+| **Implemented By** | `c4cf87a4fa369cbe9add7049c89dd0d8ef64e0fb` (`courses/physics/DECISIONS.md` "Decision log", and this record only). |
+| **Verified** | Yes. Run by the main session (not the implementer), 2026-11-26. (1) The diff touches only `courses/physics/DECISIONS.md` (one 20-line insertion at l.269, the decision-log entry; the Worksheets section is untouched) and this record's Implemented By line. (2) `validate_profiles.py`: "OK - 15 refusals fire, 2 allowances hold, 4 real specs build", including "physics refuses a work box" and "physics refuses ruled answers". (3) `validate_references.py` OK. (4) `validate_change_ids.py` OK. |
 
 ---
 
