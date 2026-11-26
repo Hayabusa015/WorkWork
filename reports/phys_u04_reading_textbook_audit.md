@@ -256,3 +256,42 @@ unresolved status). Once that phrase is corrected, I can sign off by checking ke
 | R3-2 | p6, last sentence | "…you get momentum and impulse (Unit 5)." | Loose. A force acting over a time gives an impulse, which changes momentum; a force does not "get" momentum. It is acceptable as a pointer, and fixing it would add U5 content | Nice-to-have | Optional, e.g. "When a force acts over a time instead of a distance, it leads to Unit 5, Momentum & Impulse." |
 | R3-3 | p6, Route B | "So v = 4.00 m/s" | The speed has no direction, though Route A says "along the motion". The question asks "How fast", so speed is correct | Nice-to-have | Optional "along the motion" |
 | m-7, m-8 | — | Primary sources blocked; hairline grey on photocopies | Unchanged | Open, non-blocking | As before |
+
+---
+
+# Round 4: narrow recheck of the Round 3 fixes
+
+Auditor | 2026-11-26 | Report only. Nothing outside `reports/` was edited.
+
+## Verdict: PASS
+
+R3-1 and R3-2 are closed. Nothing else changed. The edition is ready for the approval-to-file gate.
+m-7 (primary sources blocked) and m-8 (hairline grey on photocopies) stay open and non-blocking, as
+in Rounds 1–3.
+
+## Version and coverage
+
+| Item | Value |
+|---|---|
+| Commit | `2bd6811` "Physics U4 reading: closer last sentence tightened (impulse changes momentum); key note cites SHULL-CHG-0123" |
+| Student PDF | 8 pp, sha256 `c33d15134556541801b19b3296824311abeb4422aef449e1d058268ca084bd81` ✓ |
+| Key PDF | 2 pp, sha256 `3098fd729820865ccb86d7057653132f9ce037ff26bbe8b6ff96ae863f1b35ef` ✓ |
+| Identity check (my own) | I compared 100 dpi grayscale renders against my Round 3 renders. Student pp. 1–5 and 7–8: identical (difference bbox None). Student p6: changed only in the region (435, 933)–(789, 982) px, which is the last sentence below Fig 4.8. Key p2: identical. Key p1: changed only in (281, 899)–(393, 912) px. A sentence-level text diff of the key shows one change only: "record in progress):" → "SHULL-CHG-0123):" |
+| Inspected | The p6 sentence and the key p1 note at 150 dpi grayscale. Everything else reuses Round 3 evidence after the identity check above. Screen proof only |
+
+## Findings recheck
+
+| # | Item | Now printed | Independent check | Result |
+|---|---|---|---|---|
+| R3-1 | Key p1 Teacher Notes | "Putting It Together (Matt, 2026-11-26; SHULL-CHG-0123): …" | SHULL-CHG-0123 is CONFIRMED in `courses/physics/DECISIONS.md`. The note now cites it, and nothing calls it unsettled | **Closed** ✓ |
+| R3-2 | p6, last sentence | "When a force acts over a time instead of a distance, it delivers an impulse that changes an object's momentum (Unit 5)." | The physics is correct: force × time is impulse, and impulse changes momentum. Strictly, it is the *net* impulse that equals the momentum change. The sentence is at the same level as "a force does work" earlier in the reading, which is acceptable for a one-line pointer. It is still one sentence, it names Unit 5 with the words of its map title, and it adds no bold term. The text scan finds "momentum" and "impulse" only in this sentence, and the spec's `except` (l.48) matches it exactly. No clipping; it wraps cleanly in three lines | **Closed** ✓ |
+| R3-3 | Route B direction | Unchanged (nice-to-have; the question asks "How fast") | — | Left as is |
+
+## Mechanical audits
+
+| Audit | Result |
+|---|---|
+| Fonts | Student: "OK — Archivo only". Key `--key`: "OK — Archivo and the key handwriting face only" ✓ |
+| Ink | Student PASS, 6.80% toner at worst, no fill. Key PASS, 6.52% ✓ |
+| Binding | Student, 8 pp, and key, 2 pp: hole zone clear, guides on the binding side ✓ |
+| Leaf | p7/p8 are pixel-identical to Round 3 (and to Rounds 1–2). The reading still ends on p6, so there is no blank back. Cover list = headings = labels = key (4.1–4.4). 10 write-in terms. Removing p7/p8 leaves p6 and the closer in the packet ✓ |
