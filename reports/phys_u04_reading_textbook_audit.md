@@ -119,3 +119,75 @@ outlines and the leaf's write-in rules (m-8).
 Matt. **Not advisable as a fix for this edition.** The default pairing is compliant and legible.
 The mixed pairing would not fix the hairline issue, which is where the real copier risk is. If
 physical copies come out too pale, it is a reasonable course-level proposal for Matt.
+
+---
+
+# Round 2: recheck of the corrected export
+
+Auditor | 2026-11-26 | Report only. Nothing outside `reports/` was edited.
+
+## Verdict: PASS
+
+B-1 and M-1 are fixed, and so are m-1 to m-6, n-4 and n-6 to n-8. Nothing new is blocking or major.
+m-7 (primary sources blocked) and m-8 (hairline grey on photocopies) stay open. As in Round 1,
+neither blocks this edition. The reading is ready for the approval-to-file gate.
+
+## Version and coverage
+
+| Item | Value |
+|---|---|
+| Commit | `26bbe37` "Physics U4 reading: apply audit round 1 fixes (stairs wording, spring sentence, minor wording, f_k, DOE credit)". It changes only the spec and the figure script. The Round 1 build commit now shows in history as `dd164c8` (Round 1 recorded `bac0846`; same message) |
+| Student PDF | same path, 8 pp, sha256 `30dd0218d2a55790ad3dd66b186f2c959330731262ff51b5d0339e24028d18c0` ✓ |
+| Key PDF | same path, 2 pp, sha256 `04eb69760fd2778a5afcebf923d0d492f1013910c43d64ddde31df0a26d03848` ✓ |
+| Inspected in full | Student pp. 1–6 and key pp. 1–2, rendered in grayscale at 100 dpi. I diffed every sentence of the key text against my Round 1 conversion |
+| Reused evidence | Student pp. 7–8. The new 100 dpi grayscale renders are **pixel-identical** to my own Round 1 renders of sha `61456978…` (PIL difference bbox = None), and the leaf text is identical (same md5). The Round 1 leaf evidence stands |
+| Proof method | Screen proof only. No physical photocopy |
+
+## Round 1 findings: disposition
+
+| # | Round 1 finding | What is printed now | Result |
+|---|---|---|---|
+| B-1 | "Two students… same work" | p2: "You climb the same stairs twice, once walking and once running. You do the same work against gravity both times, but running does it in less time." Same person, so the same mg and h | **Closed** ✓ |
+| M-1 | Spring sentence reversed | p5: "Stretching the spring 0.150 m instead of compressing it stores the same energy…", which matches the example's compressed givens | **Closed** ✓ |
+| m-1 | Conservation condition | p6: "…conserved only when friction and other outside pushes are negligible…", which agrees with p5 | Closed ✓ |
+| m-2 | "more slowly" | p5/6: "reaches the bottom at a lower speed" | Closed ✓ |
+| m-3 | Brakes do the work | p4: "friction from the road on the tires does negative work on the car… If that braking force stays the same…" The same-force condition is kept | Closed ✓ |
+| m-4 | Fig 4.1 on the far side of a page turn | Fig 4.1 now heads p2, directly above "you need the two pictures in Figure 4.1" | Closed ✓ |
+| m-5 | Note split the sentence | The sentence now ends before the note, and a lead-in follows it ("For a constant force, the work is" / "In symbols," / "For an object of mass m moving at speed v," / "For an object of mass m at height h," / "For a spring with spring constant k stretched or compressed a distance x,"). Every lead-in is correct | Closed ✓ |
+| m-6 | NREL credit | p5: "The U.S. Department of Energy calls pumped storage 'the most dominant form of energy storage on the electric grid today.'" This matches dossier 4.3-j word for word. "National Renewable" no longer appears | Closed ✓ (the dossier's excerpt is a search-result excerpt; see m-7) |
+| m-7 | Primary hosts blocked | Not rechecked; no proxy change was reported | **Open**, non-blocking |
+| m-8 | Hairline grey on photocopies | Unchanged (affects all courses) | **Open**, non-blocking |
+| n-2 | Bold-italic W | W is now upright everywhere (prose, displays, Example rows, P = W/t). p1 adds "Don't confuse W for work, a quantity, with W for the watt, the unit of power below." **Judged acceptable.** Every other quantity symbol in this reading (F, d, m, v, h, k, x) is already upright, so upright W is consistent. The p1 sentence addresses dossier A-11, and the student pages never put W (work) next to W (watt) in one expression. The pdffonts output confirms no italic face is left on the student PDF | Closed (alternative fix accepted) |
+| n-3 | FBD scaling | Unchanged; Pass | — |
+| n-4 | f vs fk | The Fig 4.1 label is f<sub>k</sub>, the Example 4.1 row reads "Friction f<sub>k</sub>, θ = 180°", and the key note says "f_k, as in the Unit 3 notes". Consistent | Closed ✓ |
+| n-5 | Fig 4.5 lift path | Unchanged; optional | Left as is |
+| n-6 | Solve step | Example 4.2 has a new row "Solve for F: F = 2.40 × 10⁵ J ÷ 48.0 m", then "5.00 × 10³ N, opposite the car's motion". I re-solved it: 5000 N ✓ | Closed ✓ |
+| n-7 | Horsepower non sequitur | p3: "…you do no work on it and deliver no power to it… A car engine is the opposite case: it does a lot of work quickly, and its power is often given in horsepower, where one horsepower is about 746 W." The horsepower sentence is now connected and correct, and still says ≈ 746 W only | Closed ✓ |
+| n-8 | Key reference level | Key p2, OYO 4.4: "Reference level at the bottom: PE_f = 0", then "ME_f = ½(60.0 kg)(7.0 m/s)² + 0 = 1470 J" → 4.1 × 10² J ✓ | Closed ✓ |
+
+## New findings (Round 2)
+
+| # | Page / item | Observation | Severity | Disposition |
+|---|---|---|---|---|
+| R2-1 | Key p1, Teacher Notes "Notation" | "(Italic was dropped because the container render sets it bold-italic, which reads like a vocabulary term.)" This is build-tooling detail on a teacher-facing page and tells Matt nothing he can act on | Nice-to-have | Designer, optional: cut the parenthesis and keep "W for work is set upright; the reading says once not to confuse it with the watt." |
+| R2-2 | p1, p2 and p4 line breaks | "cos θ" never splits: θ is an inline picture that sits on the same line as "cos" in every rendered instance (p1 ×6, p2 ×3, refresher). Some breaks still fall right after "=" ("θ =" / "0°", p1; "(cos 30.0°) =" / "43.3 N", p2; "g =" / "9.8 m/s²", p4). These carried over from Round 1 and are readable | Nice-to-have | Designer, optional: non-breaking space after "=" in those runs |
+
+## Content recheck
+
+| Check | Result |
+|---|---|
+| Givens and answers | No given changed. My Round 1 solutions all still match the reading and the key (480/−360/0/+120 J; 217 J; 1764 J, 4.4 × 10² W, 4.5 × 10² W accepted; 2.40 × 10⁵ J, 5.00 × 10³ N opposite the motion; 116 J; 192 m; 4.50 J; 24 J; 7.9 m/s; 4.1 × 10² J) ✓ |
+| Key | Sentence-level diff against Round 1: only the notation note, the f_k note, the OYO 4.4 reference-level lines, and the 4.3/4.4 labels, which moved with the reflow. The answers are unchanged. The key's vocabulary definitions still match the reading word for word ✓ |
+| Student words | No Δ, η, Σ (U+03A3), "lost", "used up", "wasted", "efficiency", "%", "stopping distance", Fnet or 9.81 on pp. 1–6. ∑ (U+2211) appears 3 times ✓ |
+| Figure adjacency | 4.1 p2 above its reference; 4.2 p2, opposite column to its reference; 4.3 p2; 4.4 p3, same page as its reference; 4.5 and 4.6 p4; 4.7 p5. No figure is a page turn away from its first reference ✓ |
+| Clipped text | None on pp. 1–6 or key pp. 1–2 ✓ |
+| Leaf | The reading still ends on p6 (even), and the leaf is p7/p8. The 10 bold terms keep their pages (work, joule p1; power p2; KE, work-energy theorem p3; GPE, spring constant, EPE p4; ME p5; law of conservation p6). Cover list = headings = labels = key (4.1–4.4). Simulated removal of p7/p8 leaves all reading content, including OYO 4.4 and the regenerative-braking connection on p6 ✓ |
+
+## Mechanical audits
+
+| Audit | Result |
+|---|---|
+| Fonts | Student: Archivo Bold, Regular and Narrow only, "OK — Archivo only" ✓. Key `--key`: "OK — Archivo and the key handwriting face only" ✓ |
+| Ink | Student PASS, 6.80% toner at worst, widest solid band 0.00 in. Key PASS, 6.03% ✓ |
+| Binding | Student, 8 pp, and key, 2 pp: hole zone clear, guides on the binding side, outline only ✓ |
+| Codes | `validate_codes.py` OK; names unchanged ✓ |
