@@ -416,3 +416,98 @@ Auditor | 2026-11-25 | Same workflow (including SHULL-CHG-0117 and SHULL-CHG-011
 ## R4-9. Release note
 
 QA passes on student `0cdc6316…` / key `b384a4e7…`. Any filing-queue status set after Round 3 should now point at these hashes. The edition can go to the ordinary approval-to-file gate, with A-3 and A-6 carried on the record. R4-1 to R4-3 are at the designer's or Matt's discretion; R4-4 goes to the Overseer.
+
+---
+
+# Round 5: full-document review after the chapter-opener cover (SHULL-CHG-0120)
+
+Auditor | 2026-11-26 | Workflow as amended by SHULL-CHG-0120: item 1's Key Refreshers paragraph (b), Cover layout paragraph (a), and the Key Refreshers audit bullet (c), `workflows/unit-textbook.md` l.17, l.19, l.56. SHULL-CHG-0120 is APPROVED, with the user's decision recorded 2026-11-26, including "Just 'short'" for refresher length. Report only: no deliverable, spec or other file was changed.
+
+## Verdict: **PASS**
+
+- **The cover meets 0120 (a), (b) and (c)** clause by clause.
+- **Reflow:** every page was re-inspected. No figure is separated from its reference, no box is split, all cross-references are correct, and the only white-space gaps are column-bottom gaps from keeping headings with their first paragraph.
+- **Content:** no student-facing wording changed outside the cover's headings; the science is as verified in Rounds 1–4.
+- **How to Use and the key:** the steps match the actual leaf, and the changed key note is accurate.
+- **Gate:** the leaf, ink, fonts, binding and thumb tab pass. The filed U7 artifacts are untouched, and its PDF output is unchanged.
+- **Two findings, neither blocking:** a nice-to-have (R5-1) and an info note on the U7 DOCX (R5-2). A-3 (sources unreachable) and A-6 (phosphite) stay open as before.
+
+## R5-1. Version and evidence reuse
+
+| Item | Value |
+|---|---|
+| Commit | `d11bf4f` (HEAD of `claude/ecstatic-pascal-9cro1w`), "SHULL-CHG-0120 (builder): chapter-opener cover as default…; U6 rebuilt". Preceded by `aa60728` (workflow text) and `23f4e74` (decision record) |
+| Student PDF | sha256 `85b86d2bc5c1d39558b2379e142d175e256e9d2b0832e9c5c51f147ea481f95d`, 8 pp. DOCX `a55738e2…4ebc17` |
+| Key PDF | sha256 `c7ce54557fe9a067ad55ece37ddec3934c726cbd4b70bdbea0aa537dbb6125d8`, 2 pp. DOCX `8454ab0d…ee122` |
+| Rebuild at HEAD | U6 rebuilt into the scratchpad. Both DOCX files match the shipped ones part for part; both PDFs have identical text and 0 differing pixels |
+| My diff against Round 4 (my R4 HEAD rebuild, identical to the R4 export) | **p5, p6, p7, p8 and key p2: text identical and 0 differing pixels.** p1–p4 changed. A whole-document word diff shows the only text changes are cover furniture: the "UNIT 6" numeral; the "BEFORE YOU BEGIN ·" prefix on the refresher heading; the How to Use label shortened from "HOW TO USE THIS READING"; and step numbers set as numerals. Key p1 has one changed note. **No body wording changed on p1–p4.** It only reflowed |
+| Coverage | Full document: p1–p8 and key pp. 1–2 inspected rendered. p1–p4 and key p1 were read in full again. Rounds 1–4 content evidence (science, sources, leaf) is reused for text that is unchanged by word diff, and for pages that are pixel-identical |
+| Proof method | Screen proof only (110 dpi full-page grayscale; vector geometry measured with PyMuPDF). No physical photocopy |
+
+## R5-2. Cover against SHULL-CHG-0120
+
+| 0120 clause | Edition | Result |
+|---|---|---|
+| (a) Title block: large "Unit" numeral and a thick vertical course rule beside the display title | "UNIT" letterspaced label over a large "6" (primaryDeep, about 41 pt tall). A **2.25 pt** vertical rule in course display orange (#FF6B1A; 1 pt elsewhere) at x 105 pt, 64 pt tall. Display title "Chemical Nomenclature" 34 pt, accent word in primaryDeep | PASS. The rule reads as mid-grey in grayscale and is clearly heavier than the 1 pt box rules |
+| (a) Why It Matters: unboxed intro, about four lines, slightly larger than body | Unboxed; 11.5 pt (body 10.5 pt); five lines at this measure; same text as Round 4 (FDA claim → dossier WIM-a) | PASS ("about four"). See R5-1 |
+| (a) Outlined In This Unit box beside it on the right | Outlined box at x 392–577 pt, 1 pt display-orange outline, no fill; 6.1–6.4 with titles verbatim from DECISIONS l.50–52 | PASS. It stays inside the 0.50 in outside margin (box right edge 576.6 pt; thumb tab starts at 581.8 pt) |
+| (a) One full-width outlined Key Refreshers box; each refresher in its own column; hairlines between columns | Box x 43–577 pt (full text width), 1 pt orange outline, no fill. Three columns separated by 0.75 pt ruleHairline verticals; the charge table has its own (wide middle) column | PASS |
+| (a) How to Use: a single quiet row of 1–4 short numbered steps describing the reading and tear-off as printed, just above the first section | One row: grey "HOW TO USE" label plus three numbered steps in small type, directly above "6.1 Covalent Names & Formulas". Step 1: read one section at a time with a pencil and sheets 6–8 (DECISIONS l.205–217). Step 2: bold terms are defined where they first appear (true: the ten bold terms, each defined in its sentence). Step 3: "Tear off the last sheet. Answer its four questions, write the ten definitions, and turn it in." True: the leaf is the last sheet (p7/p8), with four questions on p7 and ten write-in terms on p8 | PASS |
+| (a) Then the first section; outlines and rules only, no fills | 6.1 follows; `audit_print_ink.py` "no fill" on p1 (the only filled shapes are type glyphs) | PASS |
+| (b) Heading may read "Before You Begin · Key Refreshers" | "BEFORE YOU BEGIN · KEY REFRESHERS" | PASS |
+| (b)/(c) Two to five items, each one short reminder opening "Unit N (N.n):", may wrap within its column | Three items: "Unit 3 (3.7):" cations/anions (three lines in its column); "Unit 3 (3.7):" main-group charges plus the group/charge table (1+, 2+, 3+ with "aluminum (Al³⁺)", 3−, 2−, 1−); "Unit 4 (4.2, 4.3):" transfer (ionic) vs share (covalent) (three lines). All are short. Sections exist (DECISIONS l.38, l.43). Sources as traced in Rounds 3–4: U3 quiz 3.7 l.58–72, 113, 192; U6 deck slides 16 and 22; U4 deck l.170–186 | PASS. Round 4's R4-1 ("one-line") is **closed**: 0120 removed the one-line limit, and the table item is within "short" |
+| (c) No bold term, teaching or example; no tear-off question draws on it | Lead-ins are grey labels; no bold body terms; p7 unchanged (6.1 prefixes, 6.2 -ate/-ite, 6.3 Roman numeral, 6.4 acid endings) | PASS |
+
+## R5-3. Reflow, page by page
+
+| Page | Check | Result |
+|---|---|---|
+| p1 | Fig 6.1 | In the left column directly under its reference ("…CO₂ (Figure 6.1)"), caption intact. The right column continues 6.1: bold "binary compound" and "molecular compound" with both margin notes **beside their paragraph** (Round 4's R4-2 is closed). The left column is now full (R4-3 closed). The right column ends about 1.2 in early because "Naming with prefixes" was kept with its first paragraph and moved to p2 (R5-1) |
+| p2 | Fig 6.2; Example 6.1; On Your Own 6.1 | Fig 6.2 is at the top of the right column, beside "Which naming system?… (Figure 6.2)" at the foot of the left column, on the same page. Example 6.1 and On Your Own 6.1 boxes are whole. Connection 6.1 is whole. The 6.2 heading is kept with its first paragraph |
+| p3 | Figs 6.3, 6.4; Example 6.2; On Your Own 6.2; Connection 6.2 | Each figure sits under its reference. The boxes are whole (Example 6.2 left; On Your Own 6.2 and the Connection at the top of the right column). The 6.3 heading is kept with "Naming monatomic ions" |
+| p4 | Figs 6.5, 6.6; Example 6.3; On Your Own 6.3; Older Names; Connection 6.3 | Fig 6.5 is under "Writing the formula… (Figure 6.5)". Fig 6.6 (right column) is beside its reference at the foot of the left column. All boxes are whole. The right column ends about 1.6 in early because 6.4's heading is kept with its first paragraph on p5 (R5-1) |
+| p5 | 6.4 at top; Fig 6.7; Example 6.4; On Your Own 6.4; Connection 6.4 | Pixel-identical to Round 4; verified there |
+| All | Figure numbering / cross-references | Fourteen "Figure 6.n" strings: each of 6.1–6.7 appears once in the prose and once as a caption, in order and on the same page |
+| All | Clipping / margins / hyphen splits | No span crosses the outside margin in either PDF; no line ends in a bare suffix hyphen |
+
+## R5-4. Key
+
+| Item | Result |
+|---|---|
+| Changed note: "Key Refreshers (cover, SHULL-CHG-0117) are three short reminders, one per column of the Before You Begin box, from 3.7 Ion Formation and 4.2/4.3 … as a small group/charge table that includes Group 13, aluminum (Al³⁺), and Section 6.3 points back to it." | Accurate for the printed cover. The Round 4 "one-line beside table" oddity is gone |
+| Everything else | Key p2 is pixel-identical to Round 4. Key p1's other notes and tear-off answer 6.1 are unchanged text, reflowed. Tear-off answers, On Your Own solutions and the ten expected definitions still match the student pages (verified in Round 3, unchanged since) |
+
+## R5-5. Leaf and gate
+
+| Check | Result |
+|---|---|
+| Leaf | Reading ends on **p5**; **p6** blank back; leaf **p7/p8** (pixel-identical to Rounds 3–4). NAME line; exact due line; four single-part questions 6.1–6.4; ten write-in terms, no definitions printed, each traced to its bold definition; key definitions match the reading; long-edge orientation. Removing p7/p8 keeps p1–p6, which hold all reading content |
+| Fonts | PASS. `pdffonts`: ArchivoRoman Regular and Bold, plus ArchivoNarrow; `audit_fonts.py` OK; key `--key` OK |
+| Ink | PASS. Student worst 7.36% (p3), average 4.36%; key worst 6.80%. "No fill" on every page; widest solid band 0.00 in |
+| Binding | PASS. `audit_binding.py` OK for 8 + 2 pages |
+| Thumb tab | PASS. Outline only, 0.220 in from the outside edge on all 8 pages; clear of the In This Unit box |
+| Colour | PASS. Accent type primaryDeep #B84100 only; display orange #FF6B1A only on rules and outlines; greys are tokens |
+| Codes / banned grep | PASS. `U06 / S6.1–S6.4`; `validate_codes.py` OK; banned list: no hits |
+
+## R5-6. U7 regression
+
+| Comparison | Result |
+|---|---|
+| Filed U7 artifacts (`build/chem_u07_reading/`, student `e52e57c9…`, key `e7d21724…`; filed 2026-11-25 per `reports/filing-queue.md`) | Unchanged on disk (timestamps 2026-11-24) |
+| HEAD rebuild of U7 (spec pins `layout: columns`) vs the filed files | **PDF:** student and key text identical, 0 differing pixels (8 + 2 pages). **Key DOCX:** identical part for part. **Student DOCX:** `word/document.xml` differs. The rebuild adds `<w:keepLines/>` to five paragraphs (the new "section head keeps with its first paragraph" rule). LibreOffice renders it identically. See R5-2 |
+
+## R5-7. Findings
+
+| # | Page / item | Claim | Evidence / result | Severity | Disposition |
+|---|---|---|---|---|---|
+| R5-1 | p1 right column, p4 right column; Why It Matters length | White space and length | Keeping headings with their first paragraph leaves about 1.2 in (p1) and about 1.6 in (p4) empty at the foot of the right column. Nothing is separated and reading order is clear. Why It Matters is five lines against "about four" | Nice-to-have | Optional. Accept as is |
+| R5-2 | U7 DOCX (process note) | Commit message: "U7 (columns) output unchanged" | True for the PDFs (0 px) and the key DOCX. A U7 student DOCX rebuilt today would differ from the filed one by five `keepLines` flags. Pagination is the same in LibreOffice; Word may paginate differently. The filed U7 files are not touched | Info | No action unless U7 is rebuilt; then re-check its pagination |
+| R4-1 | Refresher "one-line" | — | The rule is now "short" (0120 (b)) | CLOSED | — |
+| R4-2 / R4-3 | p1 margin note; p1 left column | — | Both resolved by the reflow | CLOSED | — |
+| R4-4 | Builder default cover for all readings | — | Now governed by SHULL-CHG-0119/0120 (all three courses, approved) | CLOSED | — |
+| A-3 | External locators | — | Unchanged; hosts refused (proxy 403) | OPEN, recorded limitation | As before |
+| A-6 | p3 On Your Own 6.2, phosphite | — | Unchanged | OPEN, minor | Matt to confirm Option A |
+
+## R5-8. Release note
+
+QA passes on student `85b86d2b…` / key `c7ce5455…`. The filing-queue row should point at these hashes, not Round 4's. The edition can go to the ordinary approval-to-file gate, with A-3 and A-6 carried on the record.
