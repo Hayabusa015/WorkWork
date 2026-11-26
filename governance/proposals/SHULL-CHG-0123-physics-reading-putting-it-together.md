@@ -33,8 +33,8 @@
 | **Affected Courses** | Physics only. It covers every Physics unit reading from U1 onward that is new or revised after approval. U0 is excluded (see the rule). **U4 is the first application.** Matt chose "Yes, revise and re-file" for the filed `Unit 4 Reading - Work & Energy`. That revision is a classroom deliverable. It goes through the Overseer as its own build and is not part of this record's implementation. |
 | **Risk** | Low. (1) **Builder:** `build_reading_docx.py` has no block for this section yet. It needs a new optional block, which the U4 revision will add (builder notes below). Until then, no Physics reading can be built to the rule. Only U4 exists, so nothing else is affected. (2) **Pagination:** the section adds roughly half a page to a page. The existing blank-back rule (`workflows/unit-textbook.md` step 3) absorbs parity changes before the tear-off. (3) **Scope creep:** the main risk is the section turning into a second lesson. The limits in the rule and the audit check guard against that. |
 | **Recommendation** | Approve. Matt chose it ("Physics readings (Recommended)"). One open sub-question for the main session, listed at the end: what U10's next-unit line should say. The draft omits that line for U10. |
-| **Decision** | PENDING |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-26, user, in the main session. Asked "Approve SHULL-CHG-0123 ('Putting It Together' for every Physics unit reading) as summarized above?" (the rule's placement, three contents, limits, home and audit check were summarized): "Approve". Asked "Unit 10 is the last unit, so it has no 'next unit.' What should its closing line be?": "Look back over the year (Recommended)" — so U10 closes with one sentence tying the course together instead of omitting the line. |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | — |
 
