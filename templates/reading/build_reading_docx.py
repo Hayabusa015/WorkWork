@@ -43,11 +43,24 @@ What it makes, from one spec so the student copy and the key cannot drift:
 
 Spec markup in text: **bold**, *italic*, _{subscript}, ^{superscript}.
 
+Pointers (check_pointers): "Section / Example / On Your Own N.n" refer only to this unit's
+sections, in student text and key notes alike. An earlier unit is cited as "Unit N" or
+"Unit N (N.n, ...)", the Key Refresher form; those codes are checked against DECISIONS.md.
+
+Worked-example checks (check_worked): Chemistry kinds (chem_data, imported only when
+used, plus the nomenclature kinds) and Physics kinds (PHYSICS: work, power,
+kineticEnergy, netWork, gravitationalPE, springPE, conservationSpeed), each compared at
+the block's sigFigs. A Physics spec may set "constants": {"g": ...}; the default is 9.8.
+
+Glyphs (SHULL-CHG-0072): for a course named in typography.mathFallback.scope (Physics), a
+character in its ranges that the run's face lacks (θ, η, Σ, ω, ⁻; Δ in Archivo Narrow) is
+drawn from the fallback face as an inline picture, as the quiz builder does.
+
 Colour comes from brand/tokens.json through _shull_docx.Palette; no hex is typed here.
 Course colour is a thin accent only: rules and box edges in the course `primary`, label
 type in the text-safe `primaryDeep`. Fills: none.
 """
-import json, os, re, shutil, subprocess, sys, tempfile
+import json, math, os, re, shutil, subprocess, sys, tempfile
 
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
@@ -73,16 +86,34 @@ from _shull_name import document_name, short_title  # noqa: E402
 def section_titles(course, unit):
     """{"7.1": "Mathematical Tools", ...} for the taught sections of one unit, read from
     the curriculum map in courses/<course>/DECISIONS.md. A course fact lives there only;
-    the spec carries section codes, never titles. Retired codes are skipped."""
+    the spec carries section codes, never titles. Retired codes are skipped.
+
+    The three maps are written differently, and all three are read as they stand:
+        Chemistry  **U7 The Mole ...** (7 sections)      7.1 Mathematical Tools · 7.2 ...
+        Physics    **U4 · Work, Energy & Power** — 4 ...  `4.1` Work & Power · `4.2` ...
+        Geology    ### U4 · Plate Tectonics — 5 ...       `4.1` Layers of the Earth · ...
+    The section list is the lines under the unit heading, up to the first blank line or
+    the first note line (one opening with a single `*` or `>`, e.g. Chemistry U1's
+    "*Guided-notes difficulty...*"). A backtick round a section code is dropped (backticks
+    elsewhere, e.g. `EXT`, stay). A code marked RETIRED, FOLDED or DROPPED, in any case
+    ("1.4 Isotopes — FOLDED into 1.3, code retired"), is not a taught section."""
     text = open(os.path.join(REPO, "courses", course, "DECISIONS.md")).read()
-    m = re.search(r"^\*\*U%d [^*]+\*\*[^\n]*\n((?:.+\n)+?)(?:\n|$)" % int(unit), text, re.M)
+    m = re.search(r"^(?:#+[ \t]*)?\*{0,2}U0*%d\b[^\n]*\n((?:.+\n)+?)(?:\n|$)" % int(unit), text, re.M)
     if not m:
         raise SystemExit(f"U{unit} is not in courses/{course}/DECISIONS.md - stop and ask")
-    block = " ".join(m.group(1).split())
+    lines = []
+    for ln in m.group(1).splitlines():
+        if re.match(r"\s*(?:\*(?!\*)|>)", ln):
+            break
+        lines.append(ln)
+    block = re.sub(r"`(\d+\.\d+)`", r"\1", " ".join(" ".join(lines).split()))
     out = {}
     for code, title in re.findall(r"(\d+\.\d+) ([^·]+?)\s*(?=·|$)", block):
-        if "RETIRED" not in title:
+        if not re.search(r"\b(?:RETIRED|FOLDED|DROPPED)\b", title, re.I):
             out[code] = title.strip()
+    if not out:
+        raise SystemExit(f"no section codes read under U{unit} in courses/{course}/DECISIONS.md "
+                         "- stop and ask")
     return out
 
 # ---------------------------------------------------------------------------------
@@ -187,34 +218,148 @@ def _equilibrium_png(color):
     return _EQ_PNG[color]
 
 
+# ---------------------------------------------------------------------------------
+# Math glyphs the brand face lacks (SHULL-CHG-0072; brand/tokens.json typography.mathFallback).
+# The token names the face, the courses ("scope") and the Unicode ranges. A character in
+# those ranges that the run's own face cannot set (θ, η, Σ, ω, ⁻ in Archivo; Δ too in
+# Archivo Narrow, which lacks it) is drawn as a small inline picture cut from the fallback
+# face, the same way templates/quiz/build_quiz_docx.py draws θ and Δ (THETA_FACE). Every
+# other character stays in the brand face. A picture is not a font, so pdffonts still shows
+# Archivo only and scripts/audit_fonts.py passes without its pending --physics mode. The
+# drawn glyph is not searchable text: the PDF checks below never look for one.
+# Characters Archivo carries (∑ U+2211, Δ U+0394 in the regular and bold faces, √, ½, ², ·,
+# ×, −, ≈, π, μ, Ω) are typed as usual. Active only for a course the token's scope names;
+# set per build by math_fallback_for().
+MATHFB = T["typography"]["mathFallback"]
+MATH_RANGES = [(int(a, 16), int(b, 16)) for a, b in
+               re.findall(r"U\+([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})", MATHFB["glyphs"])]
+MATH_COURSES = {c for c in T["courses"] if c.lower() in MATHFB["scope"].lower()}
+_MATH = {"on": False}
+_GLYPH_PNG = {}
+_FACE_FILES = {(FONT, False): "Archivo-Regular.ttf", (FONT, True): "Archivo-Bold.ttf",
+               (NARROW, False): "ArchivoNarrow[wght].ttf", (NARROW, True): "ArchivoNarrow[wght].ttf"}
+
+
+def math_fallback_for(course):
+    """Turn the per-glyph fallback on for a course the token's scope names (Physics)."""
+    _MATH["on"] = course in MATH_COURSES
+    return _MATH["on"]
+
+
+def _needs_math(ch, face, bold):
+    """True when ch is drawn from the fallback face: the fallback is on, ch is inside the
+    token's ranges, and the run's face cannot set it."""
+    if not _MATH["on"] or not any(lo <= ord(ch) <= hi for lo, hi in MATH_RANGES):
+        return False
+    f = _FACE_FILES.get((face, bold), "Archivo-Bold.ttf" if bold else "Archivo-Regular.ttf")
+    return ord(ch) not in _cmap(f)
+
+
+def _math_face_file(bold, italic):
+    """The fallback face files: the quiz builder's (THETA_FACE, THETA_FACE_REGULAR), and the
+    italic cuts beside them."""
+    sys.path.insert(0, os.path.join(TEMPLATES, "quiz"))
+    from build_quiz_docx import THETA_FACE, THETA_FACE_REGULAR
+    if MATHFB["family"].lower() not in os.path.basename(THETA_FACE).lower():
+        raise SystemExit(f"the quiz THETA_FACE {THETA_FACE} is not typography.mathFallback "
+                         f"({MATHFB['family']})")
+    path = THETA_FACE if bold else THETA_FACE_REGULAR
+    if italic:
+        path = os.path.join(os.path.dirname(path), "Inter-BoldItalic.otf" if bold else "Inter-Italic.otf")
+    if not os.path.exists(path):
+        raise SystemExit(f"math fallback face {path} is not installed")
+    return path
+
+
+def _glyph_png(ch, color, bold, italic):
+    """-> (png, height as a fraction of the type size, drop below the baseline as a
+    fraction of the type size). The glyph keeps its own side bearings and the box runs
+    from its top to the baseline (or to its descender), so it sits on the line like type."""
+    key = (ch, hexof(color), bold, italic)
+    if key not in _GLYPH_PNG:
+        from PIL import Image, ImageDraw, ImageFont
+        em = 1000
+        font = ImageFont.truetype(_math_face_file(bold, italic), em)
+        adv = font.getlength(ch)
+        base = int(em * 1.3)
+        canvas = Image.new("L", (int(adv + em), int(em * 2)), 0)
+        ImageDraw.Draw(canvas).text((em // 2, base), ch, font=font, fill=255, anchor="ls")
+        x0, y0, x1, y1 = canvas.getbbox()
+        top, bottom = y0, max(y1, base)
+        left, right = em // 2, int(round(em // 2 + adv))       # the advance box, side bearings kept
+        alpha = canvas.crop((min(left, x0), top, max(right, x1), bottom))
+        ink = tuple(int(hexof(color)[k:k + 2], 16) for k in (0, 2, 4))
+        im = Image.new("RGBA", alpha.size, ink + (0,))
+        im.putalpha(alpha)
+        path = os.path.join(tempfile.mkdtemp(prefix="shull_glyph_"), f"g{ord(ch):x}.png")
+        im.save(path, dpi=(1200, 1200))
+        _GLYPH_PNG[key] = (path, (bottom - top) / em, (bottom - base) / em)
+    return _GLYPH_PNG[key]
+
+
+def math_glyph(p, ch, size, color, *, bold=False, italic=False, vert=None):
+    """One fallback glyph as an inline picture, sized to the type and lowered by its
+    descender. A subscript or superscript glyph is set at 65 % and shifted like the run."""
+    png, h, drop = _glyph_png(ch, color or T["ground"]["asphalt"]["hex"], bold, italic)
+    s = size * (0.65 if vert else 1.0)
+    r = p.add_run()
+    pic = r.add_picture(png, height=Pt(s * h))
+    for att in ("distT", "distB", "distL", "distR"):   # LibreOffice pads an inline picture
+        pic._inline.set(att, "0")                       # unless the margins are stated
+    shift = -drop * s + (size * 0.33 if vert == "superscript" else -size * 0.14 if vert == "subscript" else 0)
+    if abs(shift) >= 0.25:
+        pos = OxmlElement("w:position"); pos.set(qn("w:val"), str(int(round(shift * 2))))
+        r._element.get_or_add_rPr().append(pos)
+    return r
+
+
+def _text_run(p, chunk, size, color, bold, italic, face, track, vert):
+    """One run of brand-face text, no markup parsing."""
+    r = p.add_run(chunk)
+    _font(r, face or FONT)
+    r.font.size = Pt(size)
+    r.bold = bold
+    r.italic = italic
+    if vert == "subscript":
+        r.font.subscript = True
+    elif vert == "superscript":
+        r.font.superscript = True
+    if color:
+        r.font.color.rgb = RGBColor.from_string(hexof(color))
+    if track:
+        el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(int(track)))
+        r._element.get_or_add_rPr().append(el)
+    return r
+
+
 def add(p, text, size, *, color=None, bold=False, italic=False, face=None, track=None):
     last = None
     for chunk, b, i, vert in tokens(text):
+        bb, ii = bold or b, italic or i
+        if _MATH["on"] and any(_needs_math(ch, face or FONT, bb) for ch in chunk):
+            # split round each fallback glyph; the rest stays brand-face text
+            buf = ""
+            for ch in chunk:
+                if not _needs_math(ch, face or FONT, bb):
+                    buf += ch
+                    continue
+                if buf:
+                    last = _text_run(p, buf, size, color, bb, ii, face, track, vert); buf = ""
+                last = math_glyph(p, ch, size, color, bold=bb, italic=ii, vert=vert)
+            if buf:
+                last = _text_run(p, buf, size, color, bb, ii, face, track, vert)
+            continue
         if EQUILIBRIUM in chunk:
             pieces = chunk.split(EQUILIBRIUM)
             for k, piece in enumerate(pieces):
                 if piece:
-                    last = add(p, piece, size, color=color, bold=bold or b, italic=italic or i,
+                    last = add(p, piece, size, color=color, bold=bb, italic=ii,
                                face=face, track=track)
                 if k < len(pieces) - 1:
                     r = p.add_run()
                     r.add_picture(_equilibrium_png(color or T["ground"]["asphalt"]["hex"]), height=Pt(size * 0.50))
             continue
-        r = p.add_run(chunk)
-        _font(r, face or FONT)
-        r.font.size = Pt(size)
-        r.bold = bold or b
-        r.italic = italic or i
-        if vert == "subscript":
-            r.font.subscript = True
-        elif vert == "superscript":
-            r.font.superscript = True
-        if color:
-            r.font.color.rgb = RGBColor.from_string(hexof(color))
-        if track:
-            el = OxmlElement("w:spacing"); el.set(qn("w:val"), str(int(track)))
-            r._element.get_or_add_rPr().append(el)
-        last = r
+        last = _text_run(p, chunk, size, color, bb, ii, face, track, vert)
     return last
 
 
@@ -320,6 +465,9 @@ def _face_for(ch):
     return FONT
 
 
+MATH_GLYPH = "<math fallback glyph>"     # a face marker for hand(), never a font name
+
+
 def hand(p, text, size=12, ink="pen", boxed=False):
     """Key handwriting. `ink` is a keyInk token name (pen for written answers, pencil for
     math, ANSWER_KEYS.md section 2); `boxed` draws the final-answer box in keyInk.box."""
@@ -330,6 +478,8 @@ def hand(p, text, size=12, ink="pen", boxed=False):
         forced = {k for m in re.finditer(r"Cl(?![a-z])", chunk) for k in (m.start(), m.start() + 1)}
         for idx, ch in enumerate(chunk):
             f = HAND_FALLBACK if idx in forced else _face_for(ch)
+            if f == FONT and _needs_math(ch, FONT, False):
+                f = MATH_GLYPH          # in neither key face nor Archivo: drawn (SHULL-CHG-0072)
             if face is not None and f != face and not ch.isspace():
                 groups.append((cur, face)); cur = ""
             if not ch.isspace() or face is None:
@@ -337,17 +487,28 @@ def hand(p, text, size=12, ink="pen", boxed=False):
             cur += ch
         if cur:
             groups.append((cur, face or HAND))
-        for s, f in groups:
-            r = p.add_run(s)
-            _font(r, f)
-            r.font.size = Pt(size)
-            r.font.color.rgb = RGBColor.from_string(hexof(colour))
+        def box_it(r):
             if boxed:
                 bdr = OxmlElement("w:bdr")
                 for k, v in (("val", "single"), ("sz", "8"), ("space", "1"),
                              ("color", hexof(T["keyInk"]["box"]["hex"]))):
                     bdr.set(qn(f"w:{k}"), v)
                 r._element.get_or_add_rPr().append(bdr)
+
+        for s, f in groups:
+            if f == MATH_GLYPH:
+                for ch in s:
+                    if ch.isspace():
+                        r = _text_run(p, ch, size, colour, False, False, HAND, None, vert)
+                    else:
+                        r = math_glyph(p, ch, size, colour, vert=vert)
+                    box_it(r)
+                continue
+            r = p.add_run(s)
+            _font(r, f)
+            r.font.size = Pt(size)
+            r.font.color.rgb = RGBColor.from_string(hexof(colour))
+            box_it(r)
             if vert == "subscript":
                 r.font.subscript = True
             elif vert == "superscript":
@@ -1264,33 +1425,48 @@ def vocab_of(spec, term):
 
 
 def check_worked(spec):
-    """Re-solve every Example and On Your Own that carries a `verify` block from the
-    student periodic table (templates/reference/chem_data.py) and stop the build on any
-    disagreement."""
-    sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
-    from chem_data import ELEMENTS
-    mass = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
+    """Re-solve every Example and On Your Own that carries a `verify` block and stop the
+    build on any disagreement. Chemistry kinds read the student periodic table
+    (templates/reference/chem_data.py), imported only when a Chemistry kind is met, so a
+    Physics or Geology build never needs it. Physics kinds re-solve from the givens in the
+    block (PHYSICS, below)."""
+    chem = _ChemData()
+    for b in spec["body"]:
+        if b["type"] not in ("onYourOwn", "example") or "verify" not in b:
+            continue
+        for v in (b["verify"] if isinstance(b["verify"], list) else [b["verify"]]):
+            _check_one(spec, b, v, chem)
 
+
+def sig(x, n):
+    """x rounded to n significant figures, as the printed answer is."""
+    return float(f"{x:.{n}g}")
+
+
+class _ChemData:
+    """The periodic-table lookups, loaded on first use (lazy chem_data import)."""
+    _mass = None
+
+    @property
+    def mass(self):
+        if self._mass is None:
+            sys.path.insert(0, os.path.join(REPO, "templates", "reference"))
+            from chem_data import ELEMENTS
+            self._mass = {sym: float(m) for _, sym, _, m in ELEMENTS if not m.startswith("[")}
+        return self._mass
+
+    @staticmethod
     def counts(formula):
         out = {}
         for e, n in re.findall(r"([A-Z][a-z]?)(\d*)", formula):
             out[e] = out.get(e, 0) + int(n or 1)
         return out
 
-    def mm(formula):
-        return round(sum(mass[e] * n for e, n in counts(formula).items()), 2)
-
-    def sig(x, n):
-        return float(f"{x:.{n}g}")
-
-    for b in spec["body"]:
-        if b["type"] not in ("onYourOwn", "example") or "verify" not in b:
-            continue
-        for v in (b["verify"] if isinstance(b["verify"], list) else [b["verify"]]):
-            _check_one(b, v, mass, mm, sig, counts)
+    def mm(self, formula):
+        return round(sum(self.mass[e] * n for e, n in self.counts(formula).items()), 2)
 
 
-def _check_one(b, v, mass, mm, sig, counts):
+def _check_one(spec, b, v, chem):
     k = v["kind"]
     if k in NOMENCLATURE:
         got, want = NOMENCLATURE[k](v), v["answer"]
@@ -1298,6 +1474,17 @@ def _check_one(b, v, mass, mm, sig, counts):
             raise SystemExit(f"{b['type']} {b['n']}: {k} gives {got!r}, spec says {want!r}")
         print(f"{b['type']} {b['n']}: {k} re-derived = {got}")
         return
+    if k in PHYSICS:
+        if "sigFigs" not in v:
+            raise SystemExit(f"{b['type']} {b['n']}: verify {k} needs sigFigs (the printed precision)")
+        raw = PHYSICS[k](v, spec)
+        got, want = sig(raw, v["sigFigs"]), v["answer"]
+        if abs(got - want) > 1e-9 * max(1.0, abs(want)):
+            raise SystemExit(f"{b['type']} {b['n']}: {k} gives {raw:.6g} -> {got} at "
+                             f"{v['sigFigs']} s.f., spec says {want}")
+        print(f"{b['type']} {b['n']}: {k} re-solved = {got}")
+        return
+    mass, mm, counts = (lambda: chem.mass), chem.mm, chem.counts
     if k == "molarMass":
         got, want = mm(v["formula"]), v["answer"]
     elif k == "gramsToMoles":
@@ -1306,7 +1493,7 @@ def _check_one(b, v, mass, mm, sig, counts):
         x = v["value"] * v["factor"] if v["op"] == "multiply" else v["value"] / v["factor"]
         got, want = sig(x, v["sigFigs"]), v["answer"]
     elif k == "empirical":
-        mol = {e: pc / mass[e] for e, pc in v["percent"].items()}
+        mol = {e: pc / mass()[e] for e, pc in v["percent"].items()}
         low = min(mol.values())
         r = {e: m / low for e, m in mol.items()}
         for mult in range(1, 7):
@@ -1322,11 +1509,56 @@ def _check_one(b, v, mass, mm, sig, counts):
         got = {e: n * round(ratio) for e, n in counts(v["empirical"]).items()}
         want = counts(v["answer"])
     else:
-        raise SystemExit(f"unknown verify kind {k}")
+        raise SystemExit(f"unknown verify kind {k}; known: {sorted(CHEM_KINDS | set(NOMENCLATURE) | set(PHYSICS))}")
     bad = (got != want) if isinstance(got, dict) else abs(got - want) > 1e-9
     if bad:
         raise SystemExit(f"{b['type']} {b['n']}: computed {got}, spec says {want}")
     print(f"{b['type']} {b['n']}: {k} re-solved = {got}")
+
+
+CHEM_KINDS = {"molarMass", "gramsToMoles", "convert", "empirical", "molecular"}
+
+
+# ---------------------------------------------------------------------------------
+# Physics verify kinds (Physics U4, Work, Energy & Power). Each re-solves the printed
+# answer from the givens in the verify block, in SI units, and compares at the block's
+# sigFigs (required) the way the Chemistry kinds do. Angles are in degrees. g comes from
+# the block, else the spec's "constants": {"g": ...}, else 9.8 m/s^2 (the course value is
+# a course fact; a spec that uses 9.81 says so).
+#   work               F, d, theta (optional, default 0)  W = F d cos(theta)
+#   power              W, t                               P = W / t
+#   kineticEnergy      m, v                               KE = 1/2 m v^2
+#   netWork            m, vi, vf                          W_net = dKE = 1/2 m (vf^2 - vi^2)
+#                      solve "vf" with m, vi, W           vf = sqrt(vi^2 + 2 W / m)
+#   gravitationalPE    m, h (the height change), g        PE = m g dh
+#   springPE           k, x                               PE = 1/2 k x^2
+#   conservationSpeed  h, g, v0 (optional, default 0)     v = sqrt(v0^2 + 2 g h), frictionless
+def _g(v, spec):
+    return float(v.get("g", spec.get("constants", {}).get("g", 9.8)))
+
+
+def _cos_deg(theta):
+    return round(math.cos(math.radians(theta)), 12)     # cos 90 deg is 0, not 6e-17
+
+
+def _net_work(v, spec):
+    if v.get("solve", "W") == "vf":
+        s = v["vi"] ** 2 + 2 * v["W"] / v["m"]
+        if s < 0:
+            raise SystemExit(f"netWork: W = {v['W']} J removes more than the starting KE")
+        return math.sqrt(s)
+    return 0.5 * v["m"] * (v["vf"] ** 2 - v["vi"] ** 2)
+
+
+PHYSICS = {
+    "work": lambda v, s: v["F"] * v["d"] * _cos_deg(v.get("theta", 0)),
+    "power": lambda v, s: v["W"] / v["t"],
+    "kineticEnergy": lambda v, s: 0.5 * v["m"] * v["v"] ** 2,
+    "netWork": _net_work,
+    "gravitationalPE": lambda v, s: v["m"] * _g(v, s) * v["h"],
+    "springPE": lambda v, s: 0.5 * v["k"] * v["x"] ** 2,
+    "conservationSpeed": lambda v, s: math.sqrt(v.get("v0", 0) ** 2 + 2 * _g(v, s) * v["h"]),
+}
 
 
 # ---------------------------------------------------------------------------------
@@ -1465,10 +1697,7 @@ def check_spec(spec, titles):
         m = re.search(b["text"], student)
         if m:
             raise SystemExit(f"'{m.group(0)}' appears in student text: {b['why']}")
-    # stale section numbers: a "Section 7.x" pointer to a code that is not taught
-    for m in re.finditer(r"(?:Section|Example|On Your Own) (\d+\.\d+)", text):
-        if m.group(1) not in spec["sections"]:
-            raise SystemExit(f"pointer {m.group(0)!r} names a code that is not a taught section")
+    check_pointers(spec, text)
     # every bold term in the body is a vocabulary term, and every vocabulary term is bolded once
     bolded = []
     for blk in spec["body"]:
@@ -1521,6 +1750,34 @@ def check_spec(spec, titles):
             raise SystemExit(f"tear-off question {q['n']} is not a single question")
 
 
+def check_pointers(spec, text):
+    """Stale section numbers, anywhere in the spec (student text and key notes alike).
+
+    The convention, the same one the Key Refreshers print:
+      * "Section N.n", "Example N.n" and "On Your Own N.n" point INSIDE this reading. The
+        code must be one of this unit's taught sections (Examples and On Your Owns are
+        numbered by their section).
+      * Anything from an earlier unit is cited by unit: "Unit 3" or "Unit 3 (3.4)" /
+        "Unit 3 (3.4, 3.5)". Those pass the in-unit check. The codes in the brackets must
+        belong to that unit and be taught sections in courses/<course>/DECISIONS.md, so a
+        renumbered or retired earlier section still stops the build. Never write "Section
+        3.4" for an earlier unit's section; that is refused as out of the unit.
+    """
+    for m in re.finditer(r"(?:Section|Example|On Your Own) (\d+\.\d+)", text):
+        if m.group(1) not in spec["sections"]:
+            raise SystemExit(f"pointer {m.group(0)!r} names a code that is not a taught section "
+                             f"of this unit; cite an earlier unit as 'Unit N (N.n)'")
+    cache = {}
+    for m in re.finditer(r"\bUnit (\d+) \(([\d.,\s]+)\)", text):
+        unit = int(m.group(1))
+        if unit not in cache:
+            cache[unit] = section_titles(spec["course"], unit)
+        for code in re.findall(r"\d+\.\d+", m.group(2)):
+            if int(code.split(".")[0]) != unit or code not in cache[unit]:
+                raise SystemExit(f"pointer {m.group(0)!r}: {code} is not a taught section of "
+                                 f"Unit {unit} in courses/{spec['course']}/DECISIONS.md - stop and ask")
+
+
 def student_text(spec):
     """Every string a student sees, as one blob: the spec without the teacher key, the
     tear-off answers and the On Your Own solutions."""
@@ -1548,6 +1805,7 @@ def chars_per_line(size):
 
 
 def build_student(spec, out_path, fig_dir, titles, blank_back=False):
+    math_fallback_for(spec["course"])
     pal = Palette(spec["course"])
     doc = Document()
     s = page_setup(doc, base_pt=BODY)
@@ -1619,6 +1877,7 @@ def build_student(spec, out_path, fig_dir, titles, blank_back=False):
 
 
 def build_key(spec, out_path, tear_page):
+    math_fallback_for(spec["course"])
     pal = Palette(spec["course"])
     doc = Document()
     s = page_setup(doc, base_pt=BODY)
@@ -1801,6 +2060,12 @@ def to_pdf(docx_path, out_dir):
         return dst, d.page_count
 
 
+def printed(text, face=None, bold=False):
+    """text as the PDF's text layer carries it: fallback glyphs are pictures, not text,
+    so they are dropped (and the spacing re-joined) before a text search."""
+    return " ".join("".join(c for c in plain_text(text) if not _needs_math(c, face or FONT, bold)).split())
+
+
 def leaf_pages(pdf_path, spec):
     """-> (page count, tear-off front page, reverse page), 1-based physical pages, found
     by the printed text, not assumed."""
@@ -1812,7 +2077,7 @@ def leaf_pages(pdf_path, spec):
             txt = " ".join(page.get_text().split())
             if "Due ASAP. No late work will be accepted." in txt:
                 front_p = i
-            if spec["tearOff"]["vocabTitle"] in txt:
+            if printed(spec["tearOff"]["vocabTitle"], NARROW, True) in txt:
                 back_p = i
     return n, front_p, back_p
 
@@ -1833,9 +2098,9 @@ def check_reverse(pdf_path, spec, back_p):
         page = d[back_p - 1]
         txt = " ".join(page.get_text().split())
         for v in spec["vocab"]:
-            if v["term"] not in txt:
+            if printed(v["term"], bold=True) not in txt:
                 bad.append(f"term {v['term']!r} is not on the reverse page")
-            if vocab_mode(spec) == "write" and flat(v["def"])[:40] in flat(txt):
+            if vocab_mode(spec) == "write" and flat(printed(v["def"]))[:40] in flat(txt):
                 bad.append(f"the definition of {v['term']!r} is printed on the reverse")
         if vocab_mode(spec) == "write":
             # each write-in line is a hairline the width of the lines column
