@@ -23,8 +23,8 @@
 | **Affected Courses** | Physics only. |
 | **Risk** | Low. (1) **Future builds only.** Once the row exists, every Physics U4 unit-level file built afterwards takes the topic: `Unit 4 <Type> - Work & Energy`, e.g. `Unit 4 Reading - Work & Energy` and `Unit 4 Reading Key - Work & Energy`. Files already built keep their names until a confirmed, logged rename (NAMING §5). (2) **No existing file is affected** as checked in this working tree: no `output/physics/u04/` files, and no Physics U4 entry in `reports/filing-queue.md`. (3) Section-level files (`4.1`–`4.4`) are unaffected; they have no rows and this record adds none. |
 | **Recommendation** | Approve. Declining leaves U4 unit-level files with no topic (`Unit 4 Reading`). |
-| **Decision** | PENDING |
-| **Status** | **PENDING** |
+| **Decision** | 2026-11-26, user, in the main session, answering "What short title should Physics Unit 4 files use? (The full title is too long for file names.)" (option text: "Files: 'Unit 4 Reading - Work & Energy' and 'Unit 4 Reading Key - Work & Energy'."): "Work & Energy (Recommended)". |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | — |
 
