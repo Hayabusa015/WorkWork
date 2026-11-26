@@ -25,6 +25,12 @@ supersedes it, exactly as the decision logs work.
 
 ---
 
+## 2026-11-26
+
+| ID | Date | Change | Status | Record |
+|---|---|---|---|---|
+| SHULL-CHG-0120 | — | Reading cover: chapter-opener layout; wrapping refreshers (amends 0117, 0119 in part) | PROPOSED | `governance/proposals/SHULL-CHG-0120-reading-cover-chapter-opener.md` |
+
 ## 2026-11-25
 
 | ID | Date | Change | Status | Record |
