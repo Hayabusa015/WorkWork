@@ -20,7 +20,7 @@ Logged before any mutation.
 | Earlier edition | None. A title search for "Unit 6 Reading", "Unit 06 Reading", and Reading + Nomenclature returns nothing on Drive |
 | Layout test | Steps 1–3: no match. Step 4: no file with a readable step-4 type. **Step 5: match.** The deck has moved from the unit root into Section 06.1, but its name is unchanged and still has no Type word (NAMING §2). Step 4 looks anywhere inside the unit, so its type still cannot be read. Result: **Stop. Report and ask** |
 
-## Result: NOT FILED. Blocked at layout-test step 5
+## First pass result: NOT FILED. Blocked at layout-test step 5
 
 No upload was made and nothing on Drive was changed. The survey's P-10 gate
 (2026-11-25_chem-folder-survey.md) said the deck needed to be renamed **and** moved. It has been
@@ -31,15 +31,54 @@ above"; legacy layout: "unit-scope files with no matching folder"). So the desti
 depend on how step 5 is resolved. But the standard says to stop at step 5, and this agent may not
 override it. The upload needs Matt's decision first.
 
-## Intended operations (not executed; pending Matt's answer)
+## Matt's decision: step 5 overridden
 
-These are new objects, so they have no prior name or prior parent. Route: `create_file` with a
-file reference, `disableConversionToGoogleType: true`, and parentId 1C3ln5w958kkA9QS9Dmt9cMerhTiBNhG3
-(loose in the unit). Rollback: trash the new files, which needs user approval.
+The coordinator relayed Matt's answer from the main session, 2026-11-26: "Gile it anyway" (a typo
+for "file it anyway"). This chooses option 2 from the first-pass report: file the Reading loose in
+Unit 06 without settling the unit's layout. Logged before execution.
 
-| # | Final name | contentMimeType | Bytes | Result |
+- **Override:** the layout-test step-5 stop is waived **for this filing only**, on Matt's direct
+  instruction. The unit's layout is **still unsettled**. Run the test again before the next filing
+  into Unit 06, especially for a step-4 type (Slides, Guided Notes, Quiz, Test, Practice Set,
+  Activity, Organizer), where the layout does decide the folder.
+- **Still open:** `SHULL_Chemistry_Chemical_Nomenclature (1).pptx` (15bOPjF9SqSH95Ro3EcmJiN5yyQfuUB6I)
+  in Section 06.1 still has no name that follows the standard. The connector reports canEdit false,
+  so only Matt can rename it, in Drive.
+- **Re-checked just before upload:** all four hashes and sizes are unchanged (pre-flight table).
+  Unit 06 still has only its four Section folders, and Drive still has no "Unit 6 Reading" file.
+
+## Intended operations
+
+These are new objects, so they have no prior name or prior parent. Route: Drive connector
+`create_file` with a file reference (`sha256:<hex>:<path>`), `disableConversionToGoogleType: true`,
+and parentId 1C3ln5w958kkA9QS9Dmt9cMerhTiBNhG3 (loose in the unit). This is the same route as the
+U7 re-file (2026-11-25_chem-u07-reading-filing.md). Rollback: trash the new files, which needs user
+approval.
+
+| # | Final name | contentMimeType | Bytes | New ID | Result |
+|---|---|---|---|---|---|
+| 1 | Unit 6 Reading - Nomenclature.docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 507753 | 1hmvgfEM6EgRFhKQcMs5fIufAN3__Zl5d | Filed, verified |
+| 2 | Unit 6 Reading - Nomenclature.pdf | application/pdf | 543492 | 1HLLO0akKAAnJQ5ZMuwHkLCvP0ih2yeTQ | Filed, verified |
+| 3 | Unit 6 Reading Key - Nomenclature.docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 51463 | 1Be0t-VBY2xLfcv8rwZ3l4B6wfrQlF011 | Filed, verified |
+| 4 | Unit 6 Reading Key - Nomenclature.pdf | application/pdf | 155056 | 11fmCUuInMwQwS9W-nmZlYj4TmXibMiG0 | Filed, verified |
+
+## Result: FILED
+
+After creation, each file was checked with its own `get_file_metadata` call, and Unit 06 was then
+listed by parentId:
+
+| ID | parentId = Unit 06 | Title exact | Size = local | mimeType (not converted) |
 |---|---|---|---|---|
-| 1 | Unit 6 Reading - Nomenclature.docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 507753 | Not executed |
-| 2 | Unit 6 Reading - Nomenclature.pdf | application/pdf | 543492 | Not executed |
-| 3 | Unit 6 Reading Key - Nomenclature.docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 51463 | Not executed |
-| 4 | Unit 6 Reading Key - Nomenclature.pdf | application/pdf | 155056 | Not executed |
+| 1hmvgfEM6EgRFhKQcMs5fIufAN3__Zl5d | yes | Unit 6 Reading - Nomenclature.docx | 507753 = 507753 | application/vnd.openxmlformats-officedocument.wordprocessingml.document |
+| 1HLLO0akKAAnJQ5ZMuwHkLCvP0ih2yeTQ | yes | Unit 6 Reading - Nomenclature.pdf | 543492 = 543492 | application/pdf |
+| 1Be0t-VBY2xLfcv8rwZ3l4B6wfrQlF011 | yes | Unit 6 Reading Key - Nomenclature.docx | 51463 = 51463 | application/vnd.openxmlformats-officedocument.wordprocessingml.document |
+| 11fmCUuInMwQwS9W-nmZlYj4TmXibMiG0 | yes | Unit 6 Reading Key - Nomenclature.pdf | 155056 = 155056 | application/pdf |
+
+All four are not trashed. The connector reports canEdit, canMoveItemWithinDrive and canTrash as true
+on all four.
+
+**Unit 06 listing** (parentId 1C3ln5w958kkA9QS9Dmt9cMerhTiBNhG3): the four files above, plus
+Section 06.1–06.4. Nothing else.
+
+Filing-queue row updated: Status Filed, path, folder ID, four file IDs, date 2026-11-26. Box not
+ticked. Nothing committed.
