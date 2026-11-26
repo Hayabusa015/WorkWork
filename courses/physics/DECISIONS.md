@@ -266,6 +266,26 @@ filename. Never shorten a title automatically; add a row when the user approves 
 
 ## Decision log
 
+### 2026-11-26 — Scoped exception: work space in the U4 reading's On Your Own boxes
+In the U4 unit reading, each On Your Own box gets open space to work in, like the Chemistry
+readings. Matt was asked "Your Physics rule says no work areas on student pages (students work in
+notebooks). How should the On Your Own boxes look?" and chose "Add work space" ("Give each On Your
+Own box room to work, like the Chemistry readings."). The tear-off leaf keeps its handwriting space
+and ruled vocabulary write-in lines, which `workflows/unit-textbook.md` requires for every unit
+reading whatever this entry says.
+
+**Scope, stated plainly:**
+1. Scoped to the U4 unit reading only: `Unit 4 Reading - Work & Energy` and its
+   `Unit 4 Reading Key - Work & Energy`.
+2. **Not a precedent.** The Worksheets rule above stays in force everywhere else: practice sets,
+   homework worksheets, study guides, pre-lab and post-lab prompts. Another Physics reading
+   needing work space needs its own explicit request and its own record. It may not cite this one.
+3. No validator or builder changes. `scripts/validate_profiles.py` exercises only the worksheet
+   builder, and the reading builder's On Your Own box already reserves work space.
+
+Supersedes: None. A scoped exception to the Worksheets rule, whose text is unchanged.
+Status: CONFIRMED · SHULL-CHG-0122 — Path A (course-specific; no standard, skill, builder or validator touched).
+
 ### 2026-11-26 — U4 short title
 U4 Work, Energy & Power gets the short title "Work & Energy", so its unit-level files are named
 `Unit 4 [Type] - Work & Energy`, e.g. `Unit 4 Reading - Work & Energy` and

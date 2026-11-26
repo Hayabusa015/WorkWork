@@ -29,7 +29,7 @@
 | **Recommendation** | Approve, as Matt chose it. Declining would mean "No space, 'use notebook'", the other option he was offered. |
 | **Decision** | 2026-11-26, user, in the main session, answering "Your Physics rule says no work areas on student pages (students work in notebooks). How should the On Your Own boxes look?" (option text: "Give each On Your Own box room to work, like the Chemistry readings."): "Add work space". |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
+| **Implemented By** | pending commit |
 | **Verified** | — |
 
 ---
