@@ -191,3 +191,68 @@ neither blocks this edition. The reading is ready for the approval-to-file gate.
 | Ink | Student PASS, 6.80% toner at worst, widest solid band 0.00 in. Key PASS, 6.03% ✓ |
 | Binding | Student, 8 pp, and key, 2 pp: hole zone clear, guides on the binding side, outline only ✓ |
 | Codes | `validate_codes.py` OK; names unchanged ✓ |
+
+---
+
+# Round 3: revision adding "Putting It Together" (SHULL-CHG-0123)
+
+Auditor | 2026-11-26 | Report only. Nothing outside `reports/` was edited.
+
+## Verdict: FAIL (INCOMPLETE)
+
+The fix is one phrase on the teacher key. The student PDF passes in full. The closer passes every
+item of the Physics DECISIONS audit check, and the science is correct. A teacher note on key p1
+still calls SHULL-CHG-0123 "record in progress", but that record is CONFIRMED in
+`courses/physics/DECISIONS.md`. A settled rule is shown as unsettled on the filed key (QA check 10,
+unresolved status). Once that phrase is corrected, I can sign off by checking key p1 alone.
+
+## Version and coverage
+
+| Item | Value |
+|---|---|
+| Commit | `e8f0b37` "SHULL-CHG-0123 (builder) and Physics U4 revision: Putting It Together closer…", on top of `b7ef299` (DECISIONS rule and workflow pointer) |
+| Student PDF | 8 pp, sha256 `2c62330f8e02bb02499775fb4882ca232bb305db26debb152772803e2742f8dd` ✓ |
+| Key PDF | 2 pp, sha256 `a79dbca81ed5e9528db10977822cc2d763877b3f51fb342b22be935929b61e8b` ✓ |
+| Filed baseline | `/tmp/claude-0/-home-user/3da17e47-8c6d-54ca-81fc-464404b893fa/scratchpad/reg/phys_filed_30dd.pdf`. Its sha256 is `30dd0218…`, the Round 2 PASS edition |
+| Identity check (my own) | Student pp. 1–5 and 7–8: the extracted text is identical **and** the 100 dpi grayscale pixels are identical to the filed PDF and to my Round 2 renders. Only p6 differs. Key p2: pixel-identical to Round 2. Key p1 differs only in the one added Teacher Notes paragraph (sentence diff, render bbox at the foot of the notes box) |
+| Inspected fresh | Student p6 (full page plus a 150 dpi crop of Fig 4.8) and key p1. All other pages reuse the Round 2 evidence after the identity check above |
+| Proof method | Screen proof only |
+| Not checked | The commit also changes `templates/reading/build_reading_docx.py`, and its message says "Chem U6/U7 output unchanged". I did not verify that claim. It is outside this audit |
+
+## SHULL-CHG-0123 audit check, item by item
+
+| Check (DECISIONS "Unit readings: Putting It Together") | Evidence | Result |
+|---|---|---|
+| Placement: after the last numbered section, before the leaf and any blank back | p6 order: 4.4 text → OYO 4.4 → Regenerative braking Connection → PUTTING IT TOGETHER → Fig 4.8 → next-unit sentence. The leaf starts on p7. The reading still ends on p6 (even), so there is no blank back. The heading has no section code. In This Unit (p1) is unchanged | ✓ |
+| Both routes, solved independently from the printed givens: same answer, same sig figs | Givens: ∑F = 120. − 90.0 = 30.0 N, m = 15.0 kg, from rest, d = 4.00 m. **Route A:** a = 30.0/15.0 = 2.00 m/s²; v² = 0 + 2(2.00)(4.00) = 16.0 m²/s²; v = 4.00 m/s. **Route B:** W_net = 120. J (Ex 4.1); v² = 2(120.)/15.0 = 16.0 m²/s²; v = 4.00 m/s. Both are 3 sf, and every given has 3 sf (g is not used). Units cancel in both. The sign convention is stated ("+ is the way it moves"). ∑F is U+2211. The text says "Both routes give 4.00 m/s" | ✓ |
+| Second tool belongs to an earlier unit | ∑F = ma is `3.4` Net Force and Acceleration (map; U3 notes spec l.398). v² = v₀² + 2aΔx is `1.2` Acceleration & Kinematic Equations (map title; U1 notes spec equation list l.376; 1.2 problem givens v₀, a, Δx at l.175). The reading's labels "Unit 3 (3.4)" and "Unit 1 (1.2)" are correct | ✓ |
+| The derivation claim | "For a constant force, the work-energy theorem follows from ∑F = ma combined with v² = v₀² + 2ad": ∑F·d = ma·d = ½m(v² − v₀²) ✓. "Time taken out" is correct because that kinematic equation has no t | ✓ |
+| Chain titles match the map | Fig 4.8 reads "Motion in One Dimension; Motion in Two Dimensions", "Forces and Motion", "Work, Energy & Power", "Momentum & Impulse". These match the curriculum map exactly. `unit_titles()` in the figure script reads them from DECISIONS with a regex, so none is typed. The short heads (Kinematics, Forces, Energy, Momentum) follow the rule's own wording "U1/U2 kinematics → U3 forces → U4 energy → U5 momentum" | ✓ |
+| Highlighted unit is the current one, with no fill | Unit 4 has a 2.0 pt box plus a 0.6 pt outer outline. Unit 5 is dashed (next). There is no fill | ✓ |
+| Grayscale at print size | 150 dpi grayscale crop: every head, title, equation and link label is legible. The current and next units differ by line weight and dash, not hue. The titles are in label grey #55604F (6.62:1) | ✓ |
+| Next-unit sentence | "When a force acts over a time instead of a distance, you get momentum and impulse (Unit 5)." It names the correct next unit by number, and its title words match the map ("Momentum & Impulse"). It is one sentence | ✓ (wording note R3-2) |
+| No bold term, nothing untaught, no tear-off question | The bold spans on p6 are only the 4.4 vocabulary term and box/route labels; no new term. Every equation used (∑F = ma, v² = v₀² + 2ad, W_net = KE_f − KE_i, KE = ½mv²) is taught in U1, U3 or U4. The tear-off p7/p8 is pixel-identical to Round 2, and no question draws on the closer | ✓ |
+
+## Other requested checks
+
+| Check | Result |
+|---|---|
+| Momentum/impulse exception | **Acceptable.** The ban is a spec-level build guard (`phys_u04_reading.json` "banned"), not a DECISIONS rule. The CONFIRMED SHULL-CHG-0123 rule *requires* the closer to name U5 and its map title and to show U5 in the chain. The builder scopes the `except` to the closer and to exactly one occurrence. A text scan of the student PDF finds "momentum" and "impulse" only in that sentence. Fig 4.8 carries "UNIT 5 · MOMENTUM", "Momentum & Impulse" and "F · t" as raster image text, which the guard does not scan. All three are required by, or follow from, the chain rule. Info: the builder's ban does not reach figure text, so figures need the visual check done here |
+| d versus Δx note | U1 writes v² = v₀² + 2aΔx (U1 notes spec l.376; Δx throughout). The reading says "Unit 1 (1.2) then gives the final speed, with d for the displacement", which flags the substitution accurately and keeps Matt's no-Δ rule for student pages. v₀ matches U1's symbol ✓ |
+| Notation and terms on student pages | No Δ, η or U+03A3 Σ; ∑ ×6. No "lost", "used up", "waste", "efficiency", "stopping distance", Fnet or 9.81 ✓ |
+| Figure adjacency | Fig 4.8 sits directly below "Figure 4.8 shows how the units link together." ✓ |
+| Clipped text | None on p6 or key p1 ✓ |
+| Fonts | Student: "OK — Archivo only". Key `--key`: "OK — Archivo and the key handwriting face only" ✓ |
+| Ink | Student PASS, 6.80% toner at worst (p6 5.33%), no fill. Key PASS, 6.52% ✓ |
+| Binding | Student, 8 pp, and key, 2 pp: hole zone clear, guides on the binding side ✓ |
+| Codes | `validate_codes.py` OK ✓ |
+| Leaf | Unchanged and pixel-identical. Cover list = headings = labels = key (4.1–4.4). 10 terms on their Round 2 pages. The leaf is p7/p8. Removing p7/p8 leaves p6, including the closer, in the packet ✓ |
+
+## Findings (Round 3)
+
+| # | Page / item | Claim | Independent evidence | Severity | Disposition |
+|---|---|---|---|---|---|
+| R3-1 | Key p1, Teacher Notes, "Putting It Together (Matt, 2026-11-26; record in progress)" | The record's status | SHULL-CHG-0123 is CONFIRMED in `courses/physics/DECISIONS.md` ("Unit readings: Putting It Together", decision log 2026-11-26) and implemented in `b7ef299`. The key shows a settled rule as unsettled | Should-fix (fails QA check 10). **Makes the edition INCOMPLETE** | Designer: replace "record in progress" with "SHULL-CHG-0123". Recheck key p1 only |
+| R3-2 | p6, last sentence | "…you get momentum and impulse (Unit 5)." | Loose. A force acting over a time gives an impulse, which changes momentum; a force does not "get" momentum. It is acceptable as a pointer, and fixing it would add U5 content | Nice-to-have | Optional, e.g. "When a force acts over a time instead of a distance, it leads to Unit 5, Momentum & Impulse." |
+| R3-3 | p6, Route B | "So v = 4.00 m/s" | The speed has no direction, though Route A says "along the motion". The question asks "How fast", so speed is correct | Nice-to-have | Optional "along the motion" |
+| m-7, m-8 | — | Primary sources blocked; hairline grey on photocopies | Unchanged | Open, non-blocking | As before |
