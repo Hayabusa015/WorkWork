@@ -144,7 +144,7 @@ def check(name, got, want, tol=1e-6):
 
 # ---------------------------------------------------------------------------------
 def fig_crate(out):
-    """4.1: Example 4.1. (a) FBD of the crate: F_push 120. N, f 90.0 N, F_N, F_g - four
+    """4.1: Example 4.1. (a) FBD of the crate: F_push 120. N, f_k 90.0 N, F_N, F_g - four
     arrows, one per force, horizontal pair scaled 120 : 90, F_N = F_g (the vertical pair is
     not to scale with the horizontal pair; no mass is given). No motion arrow. (b) A
     separate scene sketch: start and end positions, d = 4.00 m as a dimension bracket."""
@@ -160,7 +160,7 @@ def fig_crate(out):
     arrow(ax, (cx + s / 2, cy), (cx + s / 2 + lp, cy))
     text(ax, cx + s / 2 + lp, cy + 0.17, "F_{push} =\n120. N", 7.6, "semibold", ha="right")
     arrow(ax, (cx - s / 2, cy), (cx - s / 2 - lf, cy))
-    text(ax, cx - s / 2 - lf, cy + 0.17, "f =\n90.0 N", 7.6, "semibold", ha="left")
+    text(ax, cx - s / 2 - lf, cy + 0.17, "f_{k} =\n90.0 N", 7.6, "semibold", ha="left")
     lv = 0.36
     arrow(ax, (cx, cy + s / 2), (cx, cy + s / 2 + lv))
     text(ax, cx + 0.06, cy + s / 2 + lv - 0.05, "F_{N}", 8, "semibold", ha="left")

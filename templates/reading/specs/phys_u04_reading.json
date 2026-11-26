@@ -1,5 +1,5 @@
 {
-  "$comment": "Physics U4 unit reading, four sections (courses/physics/DECISIONS.md U4; titles are read from there), built under workflows/unit-textbook.md from the Overseer outline as corrected by reports/phys_u04_reading_dossier.md and Matt's decisions of 2026-11-26 (plan approved 2026-11-26). Every fact and number traces to the dossier; nothing it marks UNVERIFIED is printed (the U0 0.3 'solve in symbols first' refresher is left out). Blocking fixes applied: A-1 braking distance with the same-force condition, no NHTSA quote; A-2 no lost/wasted energy, 'transformed into thermal energy'; A-3 'ramp 3.20 m high'. Majors: A-4 key carries 1764 J unrounded and accepts 4.4 x 10^2 W and 4.5 x 10^2 W; A-5 displacement is a bracket on a separate scene sketch (Figure 4.1b), never an arrow on the FBD; A-6 braking force has a direction; A-7 givens '120. N', '1200. kg'. A-9: the stairs givens are 72.0 kg and 2.50 m (OpenStax 7.7 uses 60.0 kg, 3.00 m, 3.50 s); m x h = 180 kg m keeps W = 1764 J and every A-4 number. Matt's decisions: W = Fd cos theta in one angled pull (50.0 N at 30.0 deg over 5.00 m, 217 J, pull's work only); horsepower as one sentence in the 4.1 Connection; no efficiency; On Your Own work space (SHULL-CHG-0122, scoped, not a precedent); notation W_net, KE_f - KE_i (no Delta), PE_g, PE_s, ME; work W set in italic to keep it apart from the watt (A-11). Short title 'Work & Energy' (SHULL-CHG-0121). Section titles and the unit title are read from DECISIONS.md, never typed here. The angled pull is worked in prose; its verify entry rides on Example 4.1 (the builder re-solves only Example and On Your Own blocks). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/phys_u04_reading.json build/phys_u04_reading",
+  "$comment": "Physics U4 unit reading, four sections (courses/physics/DECISIONS.md U4; titles are read from there), built under workflows/unit-textbook.md from the Overseer outline as corrected by reports/phys_u04_reading_dossier.md and Matt's decisions of 2026-11-26 (plan approved 2026-11-26). Every fact and number traces to the dossier; nothing it marks UNVERIFIED is printed (the U0 0.3 'solve in symbols first' refresher is left out). Blocking fixes applied: A-1 braking distance with the same-force condition, no NHTSA quote; A-2 no lost/wasted energy, 'transformed into thermal energy'; A-3 'ramp 3.20 m high'. Majors: A-4 key carries 1764 J unrounded and accepts 4.4 x 10^2 W and 4.5 x 10^2 W; A-5 displacement is a bracket on a separate scene sketch (Figure 4.1b), never an arrow on the FBD; A-6 braking force has a direction; A-7 givens '120. N', '1200. kg'. A-9: the stairs givens are 72.0 kg and 2.50 m (OpenStax 7.7 uses 60.0 kg, 3.00 m, 3.50 s); m x h = 180 kg m keeps W = 1764 J and every A-4 number. Matt's decisions: W = Fd cos theta in one angled pull (50.0 N at 30.0 deg over 5.00 m, 217 J, pull's work only); horsepower as one sentence in the 4.1 Connection; no efficiency; On Your Own work space (SHULL-CHG-0122, scoped, not a precedent); notation W_net, KE_f - KE_i (no Delta), PE_g, PE_s, ME; work W upright with one 'don't confuse W with the watt' sentence (A-11; italic dropped after audit n-2). Short title 'Work & Energy' (SHULL-CHG-0121). Section titles and the unit title are read from DECISIONS.md, never typed here. The angled pull is worked in prose; its verify entry rides on Example 4.1 (the builder re-solves only Example and On Your Own blocks). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/phys_u04_reading.json build/phys_u04_reading Audit round 1 (reports/phys_u04_reading_textbook_audit.md) fixes: B-1, M-1, m-1 to m-6, n-2, n-4, n-6, n-7, n-8.",
   "course": "physics",
   "unit": 4,
   "sections": [
@@ -106,7 +106,7 @@
           "codes": [
             "3.2"
           ],
-          "text": "A force F at an angle θ to the x-axis has an x-component F_{x} = F cos θ."
+          "text": "A force F at an angle θ to the x-axis has an x-component F_{x} = F cos θ."
         },
         {
           "codes": [
@@ -121,7 +121,7 @@
     {
       "term": "work",
       "section": "4.1",
-      "def": "the energy transferred to or from an object when a force acts on it through a displacement, *W* = Fd cos θ"
+      "def": "the energy transferred to or from an object when a force acts on it through a displacement, W = Fd cos θ"
     },
     {
       "term": "joule",
@@ -141,7 +141,7 @@
     {
       "term": "work-energy theorem",
       "section": "4.2",
-      "def": "the net work done on an object equals its change in kinetic energy, *W*_{net} = KE_{f} − KE_{i}"
+      "def": "the net work done on an object equals its change in kinetic energy, W_{net} = KE_{f} − KE_{i}"
     },
     {
       "term": "gravitational potential energy",
@@ -180,33 +180,37 @@
     },
     {
       "type": "p",
-      "text": "Hold a heavy backpack still for a minute and your arms will tell you it was hard work. In physics it was no work at all, because the backpack never moved. Physics uses the word in a narrower sense. **Work** is the energy transferred to or from an object when a force acts on it through a displacement. For a constant force,"
+      "text": "Hold a heavy backpack still for a minute and your arms will tell you it was hard work. In physics it was no work at all, because the backpack never moved. Physics uses the word in a narrower sense. **Work** is the energy transferred to or from an object when a force acts on it through a displacement."
+    },
+    {
+      "type": "p",
+      "text": "For a constant force, the work is"
     },
     {
       "type": "equation",
-      "text": "*W*  =  Fd cos θ"
+      "text": "W  =  Fd cos θ"
     },
     {
       "type": "p",
-      "text": "Here F is the size of the force, d is the size of the displacement, and θ is the angle between the force and the displacement. Force and displacement are vectors, but work is a scalar. It has no direction. It can be positive, negative or zero, and cos θ decides which."
+      "text": "Here F is the size of the force, d is the size of the displacement, and θ is the angle between the force and the displacement. Force and displacement are vectors, but work is a scalar. It has no direction. It can be positive, negative or zero, and cos θ decides which."
     },
     {
       "type": "p",
-      "text": "When a force points the way the object moves, θ = 0° and cos θ = 1, so the force does positive work and transfers energy to the object. When a force points opposite the motion, as friction does, θ = 180° and cos θ = −1. The work is negative, and the force takes energy away. When a force is perpendicular to the motion, θ = 90° and cos θ = 0, so the force does no work. Carry a backpack across a level hall at a steady speed and your upward force on it is perpendicular to its displacement, so that force does zero work on the backpack. A force also does no work when the displacement is zero."
+      "text": "When a force points the way the object moves, θ = 0° and cos θ = 1, so the force does positive work and transfers energy to the object. When a force points opposite the motion, as friction does, θ = 180° and cos θ = −1. The work is negative, and the force takes energy away. When a force is perpendicular to the motion, θ = 90° and cos θ = 0, so the force does no work. Carry a backpack across a level hall at a steady speed and your upward force on it is perpendicular to its displacement, so that force does zero work on the backpack. A force also does no work when the displacement is zero."
     },
     {
       "type": "p",
-      "text": "A force in newtons times a displacement in meters gives newton-meters, and that unit has its own name. The **joule** (J) is the SI unit of work and energy, equal to one newton-meter: 1 J = 1 N·m = 1 kg·m²/s². In this reading the work symbol is italic, *W*, so you don't confuse it with W for the watt, the unit of power below."
-    },
-    {
-      "type": "p",
-      "text": "To find the work a force does, you need two pictures (Figure 4.1). The free-body diagram shows each force on the object as one arrow. The scene sketch shows where the object starts and stops, so you can measure d. The displacement is not a force, so it never goes on the free-body diagram."
+      "text": "A force in newtons times a displacement in meters gives newton-meters, and that unit has its own name. The **joule** (J) is the SI unit of work and energy, equal to one newton-meter: 1 J = 1 N·m = 1 kg·m²/s². Don't confuse W for work, a quantity, with W for the watt, the unit of power below."
     },
     {
       "type": "figure",
       "n": "4.1",
       "image": "fig4_1_crate.png",
       "caption": "The crate in Example 4.1. (a) One arrow per force; the 120. N and 90.0 N arrows are scaled to each other, and F_{N} equals F_{g}. (b) The displacement is a dimension, measured on a separate sketch."
+    },
+    {
+      "type": "p",
+      "text": "To find the work a force does, you need the two pictures in Figure 4.1. The free-body diagram shows each force on the object as one arrow. The scene sketch shows where the object starts and stops, so you can measure d. The displacement is not a force, so it never goes on the free-body diagram."
     },
     {
       "type": "example",
@@ -224,14 +228,14 @@
           ],
           [
             "Law",
-            "*W* = Fd cos θ for each force"
+            "W = Fd cos θ for each force"
           ],
           [
             "Push, θ = 0°",
             "(120. N)(4.00 m)(1) = +480. J"
           ],
           [
-            "Friction, θ = 180°",
+            "Friction f_{k}, θ = 180°",
             "(90.0 N)(4.00 m)(−1) = −360. J"
           ],
           [
@@ -316,11 +320,11 @@
     },
     {
       "type": "p",
-      "text": "A force often acts at an angle to the motion. Suppose you drag a crate 5.00 m across the floor with a rope, pulling with 50.0 N at 30.0° above the horizontal (Figure 4.3). How much work does the pull do? Only the part of the pull along the displacement does work. That is its horizontal component, F cos θ = (50.0 N)(cos 30.0°) = 43.3 N (Unit 3 (3.2)). The upward component, 25.0 N, is perpendicular to the motion and does no work. So the pull does"
+      "text": "A force often acts at an angle to the motion. Suppose you drag a crate 5.00 m across the floor with a rope, pulling with 50.0 N at 30.0° above the horizontal (Figure 4.3). How much work does the pull do? Only the part of the pull along the displacement does work. That is its horizontal component, F cos θ = (50.0 N)(cos 30.0°) = 43.3 N (Unit 3 (3.2)). The upward component, 25.0 N, is perpendicular to the motion and does no work. So the pull does"
     },
     {
       "type": "equation",
-      "text": "*W*  =  (50.0 N)(5.00 m)(cos 30.0°)  =  217 J"
+      "text": "W  =  (50.0 N)(5.00 m)(cos 30.0°)  =  217 J"
     },
     {
       "type": "p",
@@ -338,21 +342,25 @@
     },
     {
       "type": "p",
-      "text": "Two students climb the same stairs, one walking and one running. They do the same work against gravity, but the runner does it in less time. **Power** is the rate at which work is done, or energy is transferred, measured in watts (one watt is one joule per second):"
+      "text": "You climb the same stairs twice, once walking and once running. You do the same work against gravity both times, but running does it in less time. **Power** is the rate at which work is done, or energy is transferred, measured in watts (one watt is one joule per second)."
+    },
+    {
+      "type": "p",
+      "text": "In symbols, power is work divided by time:"
     },
     {
       "type": "math",
       "parts": [
         "P  =",
         {
-          "num": "*W*",
+          "num": "W",
           "den": "t"
         }
       ]
     },
     {
       "type": "p",
-      "text": "To lift something at a steady speed, you push up with a force equal to its weight, mg, through a height h. The force and the displacement point the same way, so the work done against gravity is *W* = mgh."
+      "text": "To lift something at a steady speed, you push up with a force equal to its weight, mg, through a height h. The force and the displacement point the same way, so the work done against gravity is W = mgh."
     },
     {
       "type": "onYourOwn",
@@ -392,7 +400,7 @@
       ],
       "solution": {
         "steps": [
-          "*W* = mgh = (72.0 kg)(9.8 m/s²)(2.50 m) = 1764 J ≈ 1.8 × 10^{3} J",
+          "W = mgh = (72.0 kg)(9.8 m/s²)(2.50 m) = 1764 J ≈ 1.8 × 10^{3} J",
           "P = 1764 J ÷ 4.00 s ="
         ],
         "answer": "4.4 × 10^{2} W",
@@ -402,7 +410,7 @@
     {
       "type": "connection",
       "title": "Pushing on a wall",
-      "text": "Push hard on a brick wall for a minute and your arms ache, but the wall doesn't move. Its displacement is zero, so you do no work on it. Your muscles still transform chemical energy into thermal energy, which is why you warm up and tire. Engines are often rated in horsepower instead of watts, and one horsepower is about 746 W."
+      "text": "Push hard on a brick wall for a minute and your arms ache, but the wall doesn't move. Its displacement is zero, so you do no work on it and deliver no power to it. Your muscles still transform chemical energy into thermal energy, which is why you warm up and tire. A car engine is the opposite case: it does a lot of work quickly, and its power is often given in horsepower, where one horsepower is about 746 W."
     },
     {
       "type": "section",
@@ -414,7 +422,11 @@
     },
     {
       "type": "p",
-      "text": "A moving object can do work on whatever it hits. A rolling bowling ball pushes pins out of the way, and a moving hammer drives a nail. **Kinetic energy** is the energy an object has because it is moving:"
+      "text": "A moving object can do work on whatever it hits. A rolling bowling ball pushes pins out of the way, and a moving hammer drives a nail. **Kinetic energy** is the energy an object has because it is moving."
+    },
+    {
+      "type": "p",
+      "text": "For an object of mass m moving at speed v,"
     },
     {
       "type": "equation",
@@ -436,15 +448,19 @@
     },
     {
       "type": "p",
-      "text": "In Example 4.1 the net work on the crate was +120. J. That energy didn't vanish. The crate's kinetic energy increased by 120. J. The **work-energy theorem** says the net work done on an object equals its change in kinetic energy:"
-    },
-    {
-      "type": "equation",
-      "text": "*W*_{net}  =  KE_{f} − KE_{i}"
+      "text": "In Example 4.1 the net work on the crate was +120. J. That energy didn't vanish. The crate's kinetic energy increased by 120. J. The **work-energy theorem** says the net work done on an object equals its change in kinetic energy."
     },
     {
       "type": "p",
-      "text": "*W*_{net} is the total work done by all the forces, which is the same as the work done by ∑F. Positive net work speeds an object up, negative net work slows it down, and zero net work leaves its speed unchanged. The theorem connects forces (Unit 3) to motion without needing the time or the acceleration."
+      "text": "In symbols,"
+    },
+    {
+      "type": "equation",
+      "text": "W_{net}  =  KE_{f} − KE_{i}"
+    },
+    {
+      "type": "p",
+      "text": "W_{net} is the total work done by all the forces, which is the same as the work done by ∑F. Positive net work speeds an object up, negative net work slows it down, and zero net work leaves its speed unchanged. The theorem connects forces (Unit 3) to motion without needing the time or the acceleration."
     },
     {
       "type": "example",
@@ -470,11 +486,15 @@
           ],
           [
             "Law",
-            "*W*_{net} = KE_{f} − KE_{i} = −2.40 × 10^{5} J"
+            "W_{net} = KE_{f} − KE_{i} = −2.40 × 10^{5} J"
           ],
           [
             "Braking work",
             "F(48.0 m)(cos 180°) = −2.40 × 10^{5} J"
+          ],
+          [
+            "Solve for F",
+            "F = 2.40 × 10^{5} J ÷ 48.0 m"
           ],
           [
             "Braking force",
@@ -551,7 +571,7 @@
       ],
       "solution": {
         "steps": [
-          "*W*_{net} = KE_{f} − KE_{i}",
+          "W_{net} = KE_{f} − KE_{i}",
           "= ½(0.145 kg)(40.0 m/s)² − 0 ="
         ],
         "answer": "116 J",
@@ -561,7 +581,7 @@
     {
       "type": "connection",
       "title": "Braking distance",
-      "text": "When a driver brakes, the brakes and tires do negative work on the car until its kinetic energy is gone. If the brakes supply the same force, the braking distance depends on KE, and so on v². Double the speed and the car travels about four times as far while braking. The car in Example 4.2 would need about 192 m instead of 48.0 m. The distance a car covers before the driver even reacts is extra, and it grows only in step with speed."
+      "text": "When a driver brakes, friction from the road on the tires does negative work on the car until its kinetic energy is gone. If that braking force stays the same, the braking distance depends on KE, and so on v². Double the speed and the car travels about four times as far while braking. The car in Example 4.2 would need about 192 m instead of 48.0 m. The distance a car covers before the driver even reacts is extra, and it grows only in step with speed."
     },
     {
       "type": "section",
@@ -573,7 +593,11 @@
     },
     {
       "type": "p",
-      "text": "Lift a book onto a shelf at a steady speed and you do work against gravity, mgh, but the book's kinetic energy doesn't change. The energy is stored, and it comes back as kinetic energy if the book falls. **Gravitational potential energy** is energy stored in an object–Earth system because of the object's height above a chosen reference level:"
+      "text": "Lift a book onto a shelf at a steady speed and you do work against gravity, mgh, but the book's kinetic energy doesn't change. The energy is stored, and it comes back as kinetic energy if the book falls. **Gravitational potential energy** is energy stored in an object–Earth system because of the object's height above a chosen reference level."
+    },
+    {
+      "type": "p",
+      "text": "For an object of mass m at height h,"
     },
     {
       "type": "equation",
@@ -589,7 +613,7 @@
     },
     {
       "type": "p",
-      "text": "Now push an identical book up a frictionless ramp to the same shelf (Figure 4.5). Along the ramp you push with a smaller force, mg sin θ (Unit 3 (3.3)), but over a longer distance, L. The ramp's height is h = L sin θ, so the work against gravity is (mg sin θ)(L) = mgh, the same as lifting straight up. The change in gravitational potential energy depends only on the change in height, not on the path."
+      "text": "Now push an identical book up a frictionless ramp to the same shelf (Figure 4.5). Along the ramp you push with a smaller force, mg sin θ (Unit 3 (3.3)), but over a longer distance, L. The ramp's height is h = L sin θ, so the work against gravity is (mg sin θ)(L) = mgh, the same as lifting straight up. The change in gravitational potential energy depends only on the change in height, not on the path."
     },
     {
       "type": "figure",
@@ -615,7 +639,11 @@
     },
     {
       "type": "p",
-      "text": "Stretching a spring takes work, and the spring stores it. The force grows from 0 to kx as the spring stretches, so the force-position graph is a straight line through the origin, and the work is the triangle under it: ½(x)(kx) = ½kx² (Figure 4.6). **Elastic potential energy** is energy stored in a stretched or compressed spring or other elastic object:"
+      "text": "Stretching a spring takes work, and the spring stores it. The force grows from 0 to kx as the spring stretches, so the force-position graph is a straight line through the origin, and the work is the triangle under it: ½(x)(kx) = ½kx² (Figure 4.6). **Elastic potential energy** is energy stored in a stretched or compressed spring or other elastic object."
+    },
+    {
+      "type": "p",
+      "text": "For a spring with spring constant k stretched or compressed a distance x,"
     },
     {
       "type": "equation",
@@ -659,7 +687,7 @@
           ]
         ]
       },
-      "after": "Check with the graph: F = kx = (400. N/m)(0.150 m) = 60.0 N, and the triangle's area is ½(0.150 m)(60.0 N) = 4.50 J. Compressing the spring 0.150 m instead of stretching it stores the same energy, because x is squared, and PE_{s} can never come out negative.",
+      "after": "Check with the graph: F = kx = (400. N/m)(0.150 m) = 60.0 N, and the triangle's area is ½(0.150 m)(60.0 N) = 4.50 J. Stretching the spring 0.150 m instead of compressing it stores the same energy, because x is squared, and PE_{s} can never come out negative.",
       "verify": [
         {
           "kind": "springPE",
@@ -721,7 +749,7 @@
     {
       "type": "connection",
       "title": "Pumped-storage hydropower",
-      "text": "When demand for electricity is low, a pumped-storage plant uses extra electricity to pump water from a lower reservoir to an upper one, which raises the gravitational potential energy of the water–Earth system. When demand is high, the water flows back down through turbines that turn generators. The National Renewable Energy Laboratory calls it the most common type of grid-level energy storage. The plant returns less electrical energy than it used for pumping, because some energy becomes thermal energy in the pumps, turbines and pipes."
+      "text": "When demand for electricity is low, a pumped-storage plant uses extra electricity to pump water from a lower reservoir to an upper one, which raises the gravitational potential energy of the water–Earth system. When demand is high, the water flows back down through turbines that turn generators. The U.S. Department of Energy calls pumped storage “the most dominant form of energy storage on the electric grid today.” The plant returns less electrical energy than it used for pumping, because some energy becomes thermal energy in the pumps, turbines and pipes."
     },
     {
       "type": "section",
@@ -733,7 +761,11 @@
     },
     {
       "type": "p",
-      "text": "A skateboarder at the top of a ramp has gravitational potential energy. As she rolls down, she drops lower and speeds up. **Mechanical energy** is the sum of an object's kinetic and potential energy:"
+      "text": "A skateboarder at the top of a ramp has gravitational potential energy. As she rolls down, she drops lower and speeds up. **Mechanical energy** is the sum of an object's kinetic and potential energy."
+    },
+    {
+      "type": "p",
+      "text": "In symbols,"
     },
     {
       "type": "equation",
@@ -808,11 +840,11 @@
     },
     {
       "type": "p",
-      "text": "Real ramps have friction. Friction does negative work on the skateboarder, so her mechanical energy decreases and she reaches the bottom more slowly. The energy is not destroyed. It is transformed into thermal energy in the board, the wheels and the ramp, and a little becomes sound. In the bottom chart of Figure 4.7, KE is smaller than the starting PE_{g}, and a thermal bar makes up the difference."
+      "text": "Real ramps have friction. Friction does negative work on the skateboarder, so her mechanical energy decreases and she reaches the bottom at a lower speed. The energy is not destroyed. It is transformed into thermal energy in the board, the wheels and the ramp, and a little becomes sound. In the bottom chart of Figure 4.7, KE is smaller than the starting PE_{g}, and a thermal bar makes up the difference."
     },
     {
       "type": "p",
-      "text": "So mechanical energy is conserved only when friction is negligible, but total energy is conserved in every case. The **law of conservation of energy** states that energy is never created or destroyed. It changes form or is transferred, and the total stays the same."
+      "text": "So mechanical energy is conserved only when friction and other outside pushes are negligible, but total energy is conserved in every case. The **law of conservation of energy** states that energy is never created or destroyed. It changes form or is transferred, and the total stays the same."
     },
     {
       "type": "onYourOwn",
@@ -845,8 +877,9 @@
       ],
       "solution": {
         "steps": [
+          "Reference level at the bottom: PE_{f} = 0",
           "ME_{i} = (60.0 kg)(9.8 m/s²)(3.20 m) = 1881.6 J",
-          "ME_{f} = ½(60.0 kg)(7.0 m/s)² = 1470 J",
+          "ME_{f} = ½(60.0 kg)(7.0 m/s)² + 0 = 1470 J",
           "1881.6 J − 1470 J ="
         ],
         "answer": "4.1 × 10^{2} J",
@@ -897,8 +930,8 @@
       "Sources. Every fact and number traces to reports/phys_u04_reading_dossier.md (2026-11-26); primary pages were seen as search excerpts (the dossier's network note). Nothing it marks UNVERIFIED is printed. No U4 deck exists, so these ten terms are the U4 vocabulary.",
       "Work space in the On Your Own boxes is Matt's scoped exception for this reading only (SHULL-CHG-0122), not a precedent for Physics worksheets.",
       "Key Refreshers: Unit 1 (1.1), Unit 3 (3.1), Unit 3 (3.2), Unit 3 (3.4). Reminders only; no tear-off question uses them. A Unit 0 (0.3) refresher was left out because no U0 material confirms how it was taught.",
-      "Notation (Matt, 2026-11-26): W_net, KE_f − KE_i, PE_g,f − PE_g,i, with no Δ on student pages. ∑F for net force. g = 9.8 m/s², so answers using g get two significant figures. Work is an italic W, kept apart from the watt.",
-      "Trig: one angled pull (50.0 N at 30.0°, 217 J), by Matt's decision. Friction is left out of it because an upward pull lowers F_N. This does not settle open question 2 (SHULL-CHG-0095 pending). Friction's work as −fd is the usual simplification; the thermal energy goes to both crate and floor.",
+      "Notation (Matt, 2026-11-26): W_net, KE_f − KE_i, PE_g,f − PE_g,i, with no Δ on student pages. ∑F for net force. g = 9.8 m/s², so answers using g get two significant figures. W for work is set upright; the reading says once not to confuse it with the watt. (Italic was dropped because the container render sets it bold-italic, which reads like a vocabulary term.)",
+      "Trig: one angled pull (50.0 N at 30.0°, 217 J), by Matt's decision. Friction is left out of it because an upward pull lowers F_N. This does not settle open question 2 (SHULL-CHG-0095 pending). Friction (f_k, as in the Unit 3 notes) doing work −f_k d is the usual simplification; the thermal energy goes to both crate and floor.",
       "Braking (4.2): braking distance is proportional to v² only at the same braking force. Total stopping distance adds a reaction distance proportional to v, so it does not quadruple (20.0 to 40.0 m/s with a 1.5 s reaction: about 78 m to 252 m). The NHTSA brochure line is not quoted.",
       "PE_g belongs to the object–Earth system; “the book has PE” is shorthand. Springs: F = kx is a magnitude with the direction in words (advanced texts write F = −kx); OpenStax calls k the force constant. The Hooke's-law limit comes before the elastic limit.",
       "“No friction and no other outside pushes” stands in for “only conservative forces do work.” Horsepower: 1 hp (550 ft·lbf/s) = 745.7 W, electric hp 746 W; the stair climber's 441 W is about 0.59 hp. No percentages and no efficiency anywhere, by Matt's decision.",
