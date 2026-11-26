@@ -39,7 +39,7 @@
 | **Recommendation** | Approve, on condition that the builder work in "Implementation" step 2 is done under this ID before the next reading is built. Matt should answer the open choices below first. Each one changes the text he is approving. |
 | **Decision** | 2026-11-26, user, in the main session. Asked "Approve SHULL-CHG-0120: cover layout A (chapter opener) for every new or revised reading in all three courses, plus the Key Refreshers update (items may wrap within their column; optional 'Before You Begin' heading), with the wording shown above?" (texts (a) and (b) were shown): "Approve". Asked "How long can one refresher be inside its column?" with options "At most 3 lines" and "Just 'short'": "Just 'short'" (no hard line limit; judged by eye). The count stays 2–5 and the heading stays optional, as drafted. |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
+| **Implemented By** | pending commit; builder side by the U6 layout A rebuild |
 | **Verified** | — |
 
 ---
