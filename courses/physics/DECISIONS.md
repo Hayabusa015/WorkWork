@@ -256,6 +256,7 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | Code | Short title |
 |---|---|
 | U1 | 1D Motion |
+| U4 | Work & Energy |
 | 0.4 | Physics Graphing |
 | 1.1 | Distance & Velocity |
 | 1.2 | Acceleration |
@@ -264,6 +265,15 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 3.1 | Newton's Laws |
 
 ## Decision log
+
+### 2026-11-26 — U4 short title
+U4 Work, Energy & Power gets the short title "Work & Energy", so its unit-level files are named
+`Unit 4 [Type] - Work & Energy`, e.g. `Unit 4 Reading - Work & Energy` and
+`Unit 4 Reading Key - Work & Energy`. The unit title stays "Work, Energy & Power". Files already built
+under U4 keep their names until a confirmed, logged rename. Decided by Matt 2026-11-26 ("Work & Energy
+(Recommended)"), answering the question on the Physics U4 short title.
+Supersedes: None (new short-title row; no rule replaced).
+Status: CONFIRMED · SHULL-CHG-0121
 
 ### 2026-11-12 — Lab equipment inventory
 Confirmed by Matt in chat: 10 Vernier Go Direct Sensor Carts, 2 of them broken · 5 lab groups ·

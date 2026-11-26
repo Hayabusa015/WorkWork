@@ -25,8 +25,8 @@
 | **Recommendation** | Approve. Declining leaves U4 unit-level files with no topic (`Unit 4 Reading`). |
 | **Decision** | 2026-11-26, user, in the main session, answering "What short title should Physics Unit 4 files use? (The full title is too long for file names.)" (option text: "Files: 'Unit 4 Reading - Work & Energy' and 'Unit 4 Reading Key - Work & Energy'."): "Work & Energy (Recommended)". |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
-| **Verified** | — |
+| **Implemented By** | pending commit |
+| **Verified** | |
 
 ---
 
