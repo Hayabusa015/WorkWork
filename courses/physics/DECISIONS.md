@@ -1,7 +1,7 @@
 # PHYSICS — Course Decisions
 
 **Owner:** Matthew Shull · James A. Garfield Local Schools
-**Last updated:** 2026-11-12
+**Last updated:** 2026-11-26
 **Authority:** This file wins over any course fact stated in a skill or standard. If a skill
 disagrees with anything here, the skill is stale and gets reported, not obeyed.
 **Governed by:** `governance/GOVERNANCE.md`
@@ -172,6 +172,59 @@ test architecture question comes up.
 
 ---
 
+## Unit readings: Putting It Together — CONFIRMED
+
+> **Every Physics unit reading ends with a "Putting It Together" section.** It shows how this
+> unit connects to earlier ones. It does not introduce new content.
+
+**Placement.** After the last numbered section's content, and before the tear-off leaf and any
+blank back placed before it (`workflows/unit-textbook.md` step 3). It has no section code. It is
+not listed in the cover's In This Unit box, and it gets no tear-off question.
+
+**Contents, in this order:**
+1. **One problem, solved two ways.** Solve one problem twice: once with this unit's tool, and
+   once with a tool from an earlier unit. Both solutions reach the same answer, and the text says
+   so. Example (U4): a crate's final speed, found first from ∑F = ma plus a kinematic equation,
+   then from W_net = KE_f − KE_i. Both solutions follow the build rules above: units cancel, the
+   sign convention is stated, net force is written ∑F, and g = 9.8 m/s² with its significant
+   figures.
+2. **A small chain diagram.** For U1–U5 it shows the mechanics units: U1/U2 kinematics → U3
+   forces → U4 energy → U5 momentum. From U6 onward it shows the relevant chain of earlier units
+   this unit builds on. The Overseer names that chain at intake. Either way, the current unit is
+   highlighted by outline or line weight, not a solid fill. Unit numbers and titles come from the
+   curriculum map above. They are never typed from memory.
+3. **What's next.** One sentence pointing to the next unit, by its number and title from the
+   curriculum map. U10 is the last unit, so instead it closes with one sentence looking back over
+   the course and tying it together.
+
+**Limits.**
+- No new bold terms. Nothing here counts toward the ten vocabulary terms.
+- No tear-off question draws on this section, on either side of the leaf.
+- No new content. Every equation and idea used has already been taught in this unit or an
+  earlier one.
+- Facts and numbers are sourced, solved independently and audited like the rest of the reading.
+- It does not replace the per-section Connection box or the cover's Key Refreshers.
+- U0 has no earlier unit, so it gets no Putting It Together section, just as it gets no Key
+  Refreshers. A reading filed before SHULL-CHG-0123 gets the section only at a revision, and
+  only if the teacher asks. U4 is the first application.
+
+**Audit check.** The Auditor confirms that:
+- the section sits after the last numbered section and before the tear-off leaf and any blank
+  back;
+- both solutions, solved independently from the printed givens, agree on the same answer to the
+  same significant figures;
+- the second tool really belongs to an earlier unit in the curriculum map;
+- the chain diagram's unit numbers and titles match the map, the highlighted unit is the current
+  one, and the diagram reads in grayscale at print size;
+- the closing sentence names the correct next unit, or, in U10, is one sentence that looks back
+  over the course and introduces nothing new;
+- there is no bold term and nothing not already taught, and no tear-off question draws on the
+  section.
+
+A failure goes back to the designer, like any other reading finding.
+
+---
+
 ## Ohio standards
 
 Ohio's model Physics curriculum runs on motion, forces and momentum, energy, waves, and electricity
@@ -265,6 +318,21 @@ filename. Never shorten a title automatically; add a row when the user approves 
 | 3.1 | Newton's Laws |
 
 ## Decision log
+
+### 2026-11-26 — Unit readings end with "Putting It Together"
+Every Physics unit reading from U1 onward ends with a "Putting It Together" section, placed after
+the last section and before the tear-off leaf. It has one problem solved two ways (this unit's
+tool and an earlier unit's), a small chain diagram of the units with the current one highlighted,
+and one sentence about the next unit. U10, the last unit, closes instead with one sentence looking
+back over the course. The section adds no bold terms, no tear-off question and no new content. The
+rule and its audit check are the "Unit readings: Putting It Together" section above. Asked "Approve
+SHULL-CHG-0123 ('Putting It Together' for every Physics unit reading) as summarized above?", Matt
+answered "Approve". Asked "Unit 10 is the last unit, so it has no 'next unit.' What should its
+closing line be?", he chose "Look back over the year (Recommended)". Earlier he had chosen "Physics
+readings (Recommended)" ("Make it a rule for Physics readings."), and "Yes, revise and re-file" for
+the filed U4 reading. U4 is the first application.
+Supersedes: None (new rule; the Connection box and Key Refreshers rules are unchanged).
+Status: CONFIRMED · SHULL-CHG-0123
 
 ### 2026-11-26 — Scoped exception: work space in the U4 reading's On Your Own boxes
 In the U4 unit reading, each On Your Own box gets open space to work in, like the Chemistry

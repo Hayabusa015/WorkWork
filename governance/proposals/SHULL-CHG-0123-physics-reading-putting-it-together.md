@@ -35,7 +35,7 @@
 | **Recommendation** | Approve. Matt chose it ("Physics readings (Recommended)"). One open sub-question for the main session, listed at the end: what U10's next-unit line should say. The draft omits that line for U10. |
 | **Decision** | 2026-11-26, user, in the main session. Asked "Approve SHULL-CHG-0123 ('Putting It Together' for every Physics unit reading) as summarized above?" (the rule's placement, three contents, limits, home and audit check were summarized): "Approve". Asked "Unit 10 is the last unit, so it has no 'next unit.' What should its closing line be?": "Look back over the year (Recommended)" — so U10 closes with one sentence tying the course together instead of omitting the line. |
 | **Status** | **APPROVED** |
-| **Implemented By** | — |
+| **Implemented By** | pending commit; builder block by the U4 revision |
 | **Verified** | — |
 
 ---
@@ -77,7 +77,8 @@ not listed in the cover's In This Unit box, and it gets no tear-off question.
    highlighted by outline or line weight, not a solid fill. Unit numbers and titles come from the
    curriculum map above. They are never typed from memory.
 3. **What's next.** One sentence pointing to the next unit, by its number and title from the
-   curriculum map. U10 is the last unit and omits this sentence.
+   curriculum map. U10 is the last unit, so instead it closes with one sentence looking back over
+   the course and tying it together.
 
 **Limits.**
 - No new bold terms. Nothing here counts toward the ten vocabulary terms.
@@ -98,7 +99,8 @@ not listed in the cover's In This Unit box, and it gets no tear-off question.
 - the second tool really belongs to an earlier unit in the curriculum map;
 - the chain diagram's unit numbers and titles match the map, the highlighted unit is the current
   one, and the diagram reads in grayscale at print size;
-- the next-unit sentence names the correct unit;
+- the closing sentence names the correct next unit, or, in U10, is one sentence that looks back
+  over the course and introduces nothing new;
 - there is no bold term and nothing not already taught, and no tear-off question draws on the
   section.
 
@@ -115,11 +117,14 @@ there, verbatim, into the quoted part.
 Every Physics unit reading from U1 onward ends with a "Putting It Together" section, placed after
 the last section and before the tear-off leaf. It has one problem solved two ways (this unit's
 tool and an earlier unit's), a small chain diagram of the units with the current one highlighted,
-and one sentence about the next unit. It adds no bold terms, no tear-off question and no new
-content. The rule and its audit check are the "Unit readings: Putting It Together" section above.
-Asked whether every Physics unit reading should end this way, Matt chose "Physics readings
-(Recommended)" ("Make it a rule for Physics readings."). Asked whether to add it to the filed U4
-reading now, he chose "Yes, revise and re-file". U4 is the first application.
+and one sentence about the next unit. U10, the last unit, closes instead with one sentence looking
+back over the course. The section adds no bold terms, no tear-off question and no new content. The
+rule and its audit check are the "Unit readings: Putting It Together" section above. Asked "Approve
+SHULL-CHG-0123 ('Putting It Together' for every Physics unit reading) as summarized above?", Matt
+answered "Approve". Asked "Unit 10 is the last unit, so it has no 'next unit.' What should its
+closing line be?", he chose "Look back over the year (Recommended)". Earlier he had chosen "Physics
+readings (Recommended)" ("Make it a rule for Physics readings."), and "Yes, revise and re-file" for
+the filed U4 reading. U4 is the first application.
 Supersedes: None (new rule; the Connection box and Key Refreshers rules are unchanged).
 Status: CONFIRMED · SHULL-CHG-0123
 ```
@@ -130,17 +135,16 @@ After item 5 of "Prepare the unit reading and its detachable submission", before
 intended scale…", insert:
 
 ```markdown
-**Course-specific reading elements.** A course's `DECISIONS.md` may add a reading element for that
-course alone, e.g. the Physics "Unit readings: Putting It Together" section. Build it as that file
-says; this workflow does not restate it.
+**Course-specific reading elements.** A course's `DECISIONS.md` may add a reading element for that course alone, e.g. the Physics "Unit readings: Putting It Together" section. Build it as that file says; this workflow does not restate it.
 ```
 
 At the end of the "Independent accuracy and print review" bullet list, append:
 
 ```markdown
-- Check any course-specific reading element against the audit check in that course's
-  `DECISIONS.md`.
+- Check any course-specific reading element against the audit check in that course's `DECISIONS.md`.
 ```
+
+(Each is one unwrapped line, matching the workflow file's one-line-per-paragraph style.)
 
 ## Builder note (for the U4 revision; not part of this record's implementation)
 
@@ -162,17 +166,18 @@ The reading builder needs a new **optional** block, e.g. `"type": "puttingTogeth
   unaffected. The Physics requirement is enforced by the Auditor through Edit 1a. Making the builder
   require it for Physics would need its own record.
 
-## Open sub-question for the main session (one question)
+## Open sub-question for the main session (one question) — answered
 
-For U10, the last unit, the draft **omits** the next-unit sentence. The alternative is a closing
-sentence that looks back over the course. This only matters when U10 is built, so it does not block
-approval.
+For U10, the last unit, the draft **omitted** the next-unit sentence. The alternative was a closing
+sentence that looks back over the course. **Answered 2026-11-26** (see Decision): Matt chose "Look
+back over the year (Recommended)". At implementation, item 3, the audit check and the log entry
+above were amended to match. U10 closes with one sentence looking back over the course.
 
 ## Verification plan (for a checker other than the implementer, after approval)
 
 1. The implementing commit's diff touches only `courses/physics/DECISIONS.md` (Edits 1a–1c),
-   `workflows/unit-textbook.md` (Edit 2), this record's `Implemented By`/`Verified`, and its
-   `change-log/CHANGELOG.md` row. The commit message carries SHULL-CHG-0123.
+   `workflows/unit-textbook.md` (Edit 2), this record (`Implemented By`/`Verified`, plus the draft
+   text amended for the U10 answer), and its `change-log/CHANGELOG.md` row. The commit message carries SHULL-CHG-0123.
 2. The new DECISIONS text matches Edit 1a byte for byte. The Worksheets, Tests and curriculum-map
    sections are byte-identical before and after.
 3. The quoted words in the log entry match the recorded Decision field verbatim.
