@@ -27,8 +27,8 @@
 | **Affected Courses** | Physics only, and only the U4 unit reading. |
 | **Risk** | Low. (1) **No validator changes.** Confirmed: `scripts/validate_profiles.py` builds only `templates/worksheet/build_worksheet_docx.py` (l.17 `BUILD`), using worksheet specs from `templates/worksheet/specs/`. It never invokes `templates/reading/build_reading_docx.py`. The reading builder has no Physics no-work-area check. (2) **No builder change.** `build_reading_docx.py` `on_your_own()` (l.703–715) already reserves open work space in every course (`workIn`, default 1.3 in). The docstring reads "open space to work in". So the Chemistry-style box is the builder's default. (3) **The scope is the risk.** If the entry is read as a precedent, it weakens the worksheet rule. The draft says "not a precedent" explicitly. (4) No Physics reading spec exists yet in `templates/reading/specs/`, so nothing already built is affected. |
 | **Recommendation** | Approve, as Matt chose it. Declining would mean "No space, 'use notebook'", the other option he was offered. |
-| **Decision** | PENDING |
-| **Status** | PENDING |
+| **Decision** | 2026-11-26, user, in the main session, answering "Your Physics rule says no work areas on student pages (students work in notebooks). How should the On Your Own boxes look?" (option text: "Give each On Your Own box room to work, like the Chemistry readings."): "Add work space". |
+| **Status** | **APPROVED** |
 | **Implemented By** | — |
 | **Verified** | — |
 
