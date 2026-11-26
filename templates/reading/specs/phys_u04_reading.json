@@ -45,7 +45,7 @@
       "text": "[Mm]omentum|[Ii]mpulse",
       "why": "U5 content, out of scope; one closer sentence pointing ahead to Unit 5 is allowed (Matt, Putting It Together, 2026-11-26)",
       "except": [
-        "When a force acts over a time instead of a distance, you get momentum and impulse (Unit 5)."
+        "When a force acts over a time instead of a distance, it delivers an impulse that changes an object's momentum (Unit 5)."
       ]
     },
     {
@@ -939,7 +939,7 @@
       "PE_g belongs to the object–Earth system; “the book has PE” is shorthand. Springs: F = kx is a magnitude with the direction in words (advanced texts write F = −kx); OpenStax calls k the force constant. The Hooke's-law limit comes before the elastic limit.",
       "“No friction and no other outside pushes” stands in for “only conservative forces do work.” Horsepower: 1 hp (550 ft·lbf/s) = 745.7 W, electric hp 746 W; the stair climber's 441 W is about 0.59 hp. No percentages and no efficiency anywhere, by Matt's decision.",
       "On Your Own 4.1 uses 72.0 kg and 2.50 m so it is not a copy of OpenStax 7.7 (60.0 kg, 3.00 m, 3.50 s; its 538 W includes KE). W is still 1764 J. Handwritten units here omit the middle dot, which the key face prints as a heavy bullet.",
-      "Putting It Together (Matt, 2026-11-26; record in progress): no new terms, no tear-off question. Example 4.1's forces plus a 15.0 kg mass from rest: Route A a = 2.00 m/s², v = 4.00 m/s; Route B ½(15.0 kg)v² = 120. J, v = 4.00 m/s. Unit 1 writes v² = v₀² + 2aΔx; the reading writes d. Momentum and impulse appear only in its last sentence and the Unit 5 title in Figure 4.8."
+      "Putting It Together (Matt, 2026-11-26; SHULL-CHG-0123): no new terms, no tear-off question. Example 4.1's forces plus a 15.0 kg mass from rest: Route A a = 2.00 m/s², v = 4.00 m/s; Route B ½(15.0 kg)v² = 120. J, v = 4.00 m/s. Unit 1 writes v² = v₀² + 2aΔx; the reading writes d. Momentum and impulse appear only in its last sentence and the Unit 5 title in Figure 4.8."
     ]
   },
   "keyLabel": "Answer Key",
@@ -1045,7 +1045,7 @@
       },
       {
         "type": "p",
-        "text": "When a force acts over a time instead of a distance, you get momentum and impulse (Unit 5)."
+        "text": "When a force acts over a time instead of a distance, it delivers an impulse that changes an object's momentum (Unit 5)."
       }
     ]
   }
