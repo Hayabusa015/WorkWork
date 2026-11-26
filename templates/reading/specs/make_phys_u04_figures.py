@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures 4.1-4.7 for the Physics U4 unit reading (Work, Energy & Power).
+"""Figures 4.1-4.8 for the Physics U4 unit reading (Work, Energy & Power).
 
     python3 templates/reading/specs/make_phys_u04_figures.py OUT_DIR
 
@@ -371,9 +371,56 @@ def fig_bars(out):
     save(fig, out)
 
 
+def unit_titles():
+    """{1: 'Motion in One Dimension', ...} read from the curriculum map in
+    courses/physics/DECISIONS.md ("**U1 · Motion in One Dimension** — 4 sections"), so no
+    unit title is typed here."""
+    import re
+    text = open(os.path.join(REPO, "courses", "physics", "DECISIONS.md")).read()
+    out = {int(n): t.strip() for n, t in re.findall(r"^\*\*U(\d+) · ([^*]+)\*\*", text, re.M)}
+    for n in (1, 2, 3, 4, 5):
+        if n not in out:
+            sys.exit(f"figure 4.8: U{n} is not in courses/physics/DECISIONS.md")
+    return out
+
+
+def fig_chain(out):
+    """4.8 (Putting It Together, Matt 2026-11-26): the chain of units. Kinematics
+    (Units 1-2) -> Forces (Unit 3, sum F = ma) -> Energy (Unit 4, W_net = KE_f - KE_i,
+    highlighted with a heavy double outline) -> Momentum (Unit 5, dashed: next unit).
+    Each link is labelled: a links motion to forces; F x d links forces to energy;
+    F x t points on to momentum. Unit titles come from DECISIONS.md. Outlines only."""
+    U = unit_titles()
+    fig, ax = canvas(3.30)
+    bx, bw, bh = 0.10, 2.80, 0.50
+    rows = [
+        (2.70, "UNITS 1–2 · KINEMATICS", f"{U[1]}; {U[2]}", "describes motion: x, v, a, t", "solid"),
+        (1.86, "UNIT 3 · FORCES", U[3], "∑F = ma", "solid"),
+        (1.02, "UNIT 4 · ENERGY", U[4], "W_{net} = KE_{f} − KE_{i}", "heavy"),
+        (0.18, "UNIT 5 · MOMENTUM", U[5], "next unit", "dashed"),
+    ]
+    for y, head, title, line, style in rows:
+        ls = (0, (3, 2)) if style == "dashed" else "-"
+        lw = 2.0 if style == "heavy" else 0.9
+        crate(ax, bx, y, bw, bh, ls=ls, lw=lw)
+        if style == "heavy":
+            crate(ax, bx - 0.05, y - 0.05, bw + 0.10, bh + 0.10, lw=0.6)
+        text(ax, bx + 0.10, y + bh - 0.11, head, 7.8, "bold", ACCENT, ha="left")
+        text(ax, bx + 0.10, y + bh / 2 - 0.02, title, 7.6, "regular", LABEL, ha="left")
+        text(ax, bx + 0.10, y + 0.10, line, 8, "semibold", INK, ha="left")
+    links = [(2.70, 1.86 + bh, "a links motion to forces"), (1.86, 1.02 + bh + 0.05, "F · d: work"),
+             (1.02 - 0.05, 0.18 + bh, "F · t")]
+    for y0, y1, lab in links:
+        arrow(ax, (bx + bw / 2, y0 - 0.02), (bx + bw / 2, y1 + 0.03), lw=1.0, head=4.5,
+              ls=(0, (3, 2)) if lab == "F · t" else "-")
+        text(ax, bx + bw / 2 + 0.10, (y0 + y1) / 2, lab, 7.8, "semibold", INK, ha="left")
+    save(fig, out)
+
+
 FIGS = {"fig4_1_crate.png": fig_crate, "fig4_2_fx_area.png": fig_fx_rect, "fig4_3_angle.png": fig_angle,
         "fig4_4_ke_v.png": fig_ke_v, "fig4_5_paths.png": fig_paths, "fig4_6_spring.png": fig_spring,
-        "fig4_7_bars.png": fig_bars}
+        "fig4_7_bars.png": fig_bars,
+        "fig4_8_chain.png": fig_chain}
 
 
 def main():

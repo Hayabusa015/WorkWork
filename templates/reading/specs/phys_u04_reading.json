@@ -1,5 +1,5 @@
 {
-  "$comment": "Physics U4 unit reading, four sections (courses/physics/DECISIONS.md U4; titles are read from there), built under workflows/unit-textbook.md from the Overseer outline as corrected by reports/phys_u04_reading_dossier.md and Matt's decisions of 2026-11-26 (plan approved 2026-11-26). Every fact and number traces to the dossier; nothing it marks UNVERIFIED is printed (the U0 0.3 'solve in symbols first' refresher is left out). Blocking fixes applied: A-1 braking distance with the same-force condition, no NHTSA quote; A-2 no lost/wasted energy, 'transformed into thermal energy'; A-3 'ramp 3.20 m high'. Majors: A-4 key carries 1764 J unrounded and accepts 4.4 x 10^2 W and 4.5 x 10^2 W; A-5 displacement is a bracket on a separate scene sketch (Figure 4.1b), never an arrow on the FBD; A-6 braking force has a direction; A-7 givens '120. N', '1200. kg'. A-9: the stairs givens are 72.0 kg and 2.50 m (OpenStax 7.7 uses 60.0 kg, 3.00 m, 3.50 s); m x h = 180 kg m keeps W = 1764 J and every A-4 number. Matt's decisions: W = Fd cos theta in one angled pull (50.0 N at 30.0 deg over 5.00 m, 217 J, pull's work only); horsepower as one sentence in the 4.1 Connection; no efficiency; On Your Own work space (SHULL-CHG-0122, scoped, not a precedent); notation W_net, KE_f - KE_i (no Delta), PE_g, PE_s, ME; work W upright with one 'don't confuse W with the watt' sentence (A-11; italic dropped after audit n-2). Short title 'Work & Energy' (SHULL-CHG-0121). Section titles and the unit title are read from DECISIONS.md, never typed here. The angled pull is worked in prose; its verify entry rides on Example 4.1 (the builder re-solves only Example and On Your Own blocks). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/phys_u04_reading.json build/phys_u04_reading Audit round 1 (reports/phys_u04_reading_textbook_audit.md) fixes: B-1, M-1, m-1 to m-6, n-2, n-4, n-6, n-7, n-8.",
+  "$comment": "Physics U4 unit reading, four sections (courses/physics/DECISIONS.md U4; titles are read from there), built under workflows/unit-textbook.md from the Overseer outline as corrected by reports/phys_u04_reading_dossier.md and Matt's decisions of 2026-11-26 (plan approved 2026-11-26). Every fact and number traces to the dossier; nothing it marks UNVERIFIED is printed (the U0 0.3 'solve in symbols first' refresher is left out). Blocking fixes applied: A-1 braking distance with the same-force condition, no NHTSA quote; A-2 no lost/wasted energy, 'transformed into thermal energy'; A-3 'ramp 3.20 m high'. Majors: A-4 key carries 1764 J unrounded and accepts 4.4 x 10^2 W and 4.5 x 10^2 W; A-5 displacement is a bracket on a separate scene sketch (Figure 4.1b), never an arrow on the FBD; A-6 braking force has a direction; A-7 givens '120. N', '1200. kg'. A-9: the stairs givens are 72.0 kg and 2.50 m (OpenStax 7.7 uses 60.0 kg, 3.00 m, 3.50 s); m x h = 180 kg m keeps W = 1764 J and every A-4 number. Matt's decisions: W = Fd cos theta in one angled pull (50.0 N at 30.0 deg over 5.00 m, 217 J, pull's work only); horsepower as one sentence in the 4.1 Connection; no efficiency; On Your Own work space (SHULL-CHG-0122, scoped, not a precedent); notation W_net, KE_f - KE_i (no Delta), PE_g, PE_s, ME; work W upright with one 'don't confuse W with the watt' sentence (A-11; italic dropped after audit n-2). Short title 'Work & Energy' (SHULL-CHG-0121). Section titles and the unit title are read from DECISIONS.md, never typed here. The angled pull is worked in prose; its verify entry rides on Example 4.1 (the builder re-solves only Example and On Your Own blocks). Markup: **bold term**, *italic*, _{subscript}, ^{superscript}. Build: python3 templates/reading/build_reading_docx.py templates/reading/specs/phys_u04_reading.json build/phys_u04_reading Audit round 1 (reports/phys_u04_reading_textbook_audit.md) fixes: B-1, M-1, m-1 to m-6, n-2, n-4, n-6, n-7, n-8. Revision 2 (Matt-approved, 2026-11-26): 'Putting It Together' closer (spec key 'closer', builder support added), Figure 4.8 (unit chain, titles read from DECISIONS), and a scoped 'except' on the momentum/impulse ban for the single Unit 5 sentence.",
   "course": "physics",
   "unit": 4,
   "sections": [
@@ -43,7 +43,10 @@
     },
     {
       "text": "[Mm]omentum|[Ii]mpulse",
-      "why": "U5 content, out of scope"
+      "why": "U5 content, out of scope; one closer sentence pointing ahead to Unit 5 is allowed (Matt, Putting It Together, 2026-11-26)",
+      "except": [
+        "When a force acts over a time instead of a distance, you get momentum and impulse (Unit 5)."
+      ]
     },
     {
       "text": "\\u03b7",
@@ -935,8 +938,115 @@
       "Braking (4.2): braking distance is proportional to v² only at the same braking force. Total stopping distance adds a reaction distance proportional to v, so it does not quadruple (20.0 to 40.0 m/s with a 1.5 s reaction: about 78 m to 252 m). The NHTSA brochure line is not quoted.",
       "PE_g belongs to the object–Earth system; “the book has PE” is shorthand. Springs: F = kx is a magnitude with the direction in words (advanced texts write F = −kx); OpenStax calls k the force constant. The Hooke's-law limit comes before the elastic limit.",
       "“No friction and no other outside pushes” stands in for “only conservative forces do work.” Horsepower: 1 hp (550 ft·lbf/s) = 745.7 W, electric hp 746 W; the stair climber's 441 W is about 0.59 hp. No percentages and no efficiency anywhere, by Matt's decision.",
-      "On Your Own 4.1 uses 72.0 kg and 2.50 m so it is not a copy of OpenStax 7.7 (60.0 kg, 3.00 m, 3.50 s; its 538 W includes KE). W is still 1764 J. Handwritten units here omit the middle dot, which the key face prints as a heavy bullet."
+      "On Your Own 4.1 uses 72.0 kg and 2.50 m so it is not a copy of OpenStax 7.7 (60.0 kg, 3.00 m, 3.50 s; its 538 W includes KE). W is still 1764 J. Handwritten units here omit the middle dot, which the key face prints as a heavy bullet.",
+      "Putting It Together (Matt, 2026-11-26; record in progress): no new terms, no tear-off question. Example 4.1's forces plus a 15.0 kg mass from rest: Route A a = 2.00 m/s², v = 4.00 m/s; Route B ½(15.0 kg)v² = 120. J, v = 4.00 m/s. Unit 1 writes v² = v₀² + 2aΔx; the reading writes d. Momentum and impulse appear only in its last sentence and the Unit 5 title in Figure 4.8."
     ]
   },
-  "keyLabel": "Answer Key"
+  "keyLabel": "Answer Key",
+  "closer": {
+    "title": "Putting It Together",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Units 1, 3 and 4 give you two routes to the same answer. Try one problem both ways. Suppose the crate in Example 4.1 has a mass of 15.0 kg and starts from rest. The forces are the same, so ∑F = 120. N − 90.0 N = 30.0 N along the motion, and the crate moves d = 4.00 m. How fast is it moving at the end?"
+      },
+      {
+        "type": "example",
+        "label": "Route A · Forces, then motion",
+        "title": "Find the acceleration, then use kinematics.",
+        "intro": "System: the crate; + is the way it moves. Unit 3 (3.4) gives the acceleration:",
+        "math": [
+          "a  =",
+          {
+            "num": "∑F",
+            "den": "m"
+          },
+          "=",
+          {
+            "num": "30.0 N",
+            "den": "15.0 kg"
+          },
+          "=  2.00 m/s²"
+        ],
+        "after": "Unit 1 (1.2) then gives the final speed, with d for the displacement: v² = v₀² + 2ad = 0 + 2(2.00 m/s²)(4.00 m) = 16.0 m²/s², so v = 4.00 m/s along the motion. Units: N ÷ kg = (kg·m/s²) ÷ kg = m/s².",
+        "verify": [
+          {
+            "kind": "acceleration",
+            "F": 30.0,
+            "m": 15.0,
+            "sigFigs": 3,
+            "answer": 2.0
+          },
+          {
+            "kind": "kinematicsSpeed",
+            "a": 2.0,
+            "d": 4.0,
+            "v0": 0,
+            "sigFigs": 3,
+            "answer": 4.0
+          }
+        ]
+      },
+      {
+        "type": "example",
+        "label": "Route B · Energy",
+        "title": "Use the work-energy theorem.",
+        "intro": "Example 4.1 found W_{net} = +120. J. The crate starts from rest, so W_{net} = KE_{f} − KE_{i} = ½mv² − 0. Solve for v²:",
+        "math": [
+          "v²  =",
+          {
+            "num": "2W_{net}",
+            "den": "m"
+          },
+          "=",
+          {
+            "num": "2(120. J)",
+            "den": "15.0 kg"
+          },
+          "=  16.0 m²/s²"
+        ],
+        "after": "So v = 4.00 m/s. Units: J ÷ kg = (kg·m²/s²) ÷ kg = m²/s². This route never needed the acceleration or the time.",
+        "verify": [
+          {
+            "kind": "netWork",
+            "solve": "vf",
+            "m": 15.0,
+            "vi": 0.0,
+            "W": 120.0,
+            "sigFigs": 3,
+            "answer": 4.0
+          },
+          {
+            "kind": "kineticEnergy",
+            "m": 15.0,
+            "v": 4.0,
+            "sigFigs": 3,
+            "answer": 120.0
+          },
+          {
+            "kind": "netWork",
+            "m": 15.0,
+            "vi": 0.0,
+            "vf": 4.0,
+            "sigFigs": 3,
+            "answer": 120.0
+          }
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Both routes give 4.00 m/s. For a constant force, the work-energy theorem follows from ∑F = ma combined with v² = v₀² + 2ad, so energy is the same physics with time taken out. Figure 4.8 shows how the units link together."
+      },
+      {
+        "type": "figure",
+        "n": "4.8",
+        "image": "fig4_8_chain.png",
+        "caption": "How the units connect. Each arrow names what links one unit to the next. The heavy box is this unit."
+      },
+      {
+        "type": "p",
+        "text": "When a force acts over a time instead of a distance, you get momentum and impulse (Unit 5)."
+      }
+    ]
+  }
 }

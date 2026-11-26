@@ -25,7 +25,11 @@ What it makes, from one spec so the student copy and the key cannot drift:
               columns (SHULL-CHG-0023 line length): section heads, sub-heads, prose with
               at most ten bold defined terms and their set-off definition lines,
               numbered figures, Example banners, On Your Own boxes and one Connection per
-              section. The tear-off leaf is the last physical sheet: front (odd page) a
+              section, then an optional closing section ("closer": a title and blocks of
+              p / example (with "label") / figure / equation / math; no bold terms, no
+              tear-off question; Matt's "Putting It Together", first used in Physics U4).
+              A spec's "banned" entry may list "except" sentences, which must sit in the
+              closer and appear once. The tear-off leaf is the last physical sheet: front (odd page) a
               Name line, the due instruction and one question per section; reverse (last
               even page) the vocabulary, in one of two modes set by tearOff.vocabMode:
                 "write" (the default; SHULL-CHG-0118) - each term and its section code
@@ -49,7 +53,8 @@ sections, in student text and key notes alike. An earlier unit is cited as "Unit
 
 Worked-example checks (check_worked): Chemistry kinds (chem_data, imported only when
 used, plus the nomenclature kinds) and Physics kinds (PHYSICS: work, power,
-kineticEnergy, netWork, gravitationalPE, springPE, conservationSpeed), each compared at
+kineticEnergy, netWork, gravitationalPE, springPE, conservationSpeed, acceleration,
+kinematicsSpeed), each compared at
 the block's sigFigs. A Physics spec may set "constants": {"g": ...}; the default is 9.8.
 
 Glyphs (SHULL-CHG-0072): for a course named in typography.mathFallback.scope (Physics), a
@@ -629,7 +634,7 @@ def example(doc, blk, pal):
     c = box(doc, pal)
     # banner-style header made of rules only: a heavy course rule across the top
     borders(c, pal.display, sz=24, edges=("top",))
-    label(c, f"Example {blk['n']}", pal, first=True)
+    label(c, blk["label"] if "label" in blk else f"Example {blk['n']}", pal, first=True)  # a closer box names itself
     p = para_in(c)
     _spacing(p, 0, 4, 13)
     add(p, blk["title"], BODY, color=pal.ink, bold=True)
@@ -1431,7 +1436,7 @@ def check_worked(spec):
     Physics or Geology build never needs it. Physics kinds re-solve from the givens in the
     block (PHYSICS, below)."""
     chem = _ChemData()
-    for b in spec["body"]:
+    for b in spec["body"] + closer_blocks(spec):
         if b["type"] not in ("onYourOwn", "example") or "verify" not in b:
             continue
         for v in (b["verify"] if isinstance(b["verify"], list) else [b["verify"]]):
@@ -1467,6 +1472,8 @@ class _ChemData:
 
 
 def _check_one(spec, b, v, chem):
+    if "n" not in b:                       # a closer box: name it by its label in messages
+        b = dict(b, n=b.get("label", "closer"))
     k = v["kind"]
     if k in NOMENCLATURE:
         got, want = NOMENCLATURE[k](v), v["answer"]
@@ -1533,6 +1540,8 @@ CHEM_KINDS = {"molarMass", "gramsToMoles", "convert", "empirical", "molecular"}
 #   gravitationalPE    m, h (the height change), g        PE = m g dh
 #   springPE           k, x                               PE = 1/2 k x^2
 #   conservationSpeed  h, g, v0 (optional, default 0)     v = sqrt(v0^2 + 2 g h), frictionless
+#   acceleration       F (the sum of the forces), m       a = F / m (Newton's second law)
+#   kinematicsSpeed    a, d, v0 (optional, default 0)     v = sqrt(v0^2 + 2 a d), constant a
 def _g(v, spec):
     return float(v.get("g", spec.get("constants", {}).get("g", 9.8)))
 
@@ -1558,6 +1567,8 @@ PHYSICS = {
     "gravitationalPE": lambda v, s: v["m"] * _g(v, s) * v["h"],
     "springPE": lambda v, s: 0.5 * v["k"] * v["x"] ** 2,
     "conservationSpeed": lambda v, s: math.sqrt(v.get("v0", 0) ** 2 + 2 * _g(v, s) * v["h"]),
+    "acceleration": lambda v, s: v["F"] / v["m"],
+    "kinematicsSpeed": lambda v, s: math.sqrt(v.get("v0", 0) ** 2 + 2 * v["a"] * v["d"]),
 }
 
 
@@ -1693,8 +1704,20 @@ def check_spec(spec, titles):
     # term the dossier marks out of scope or UNVERIFIED for this unit. Student-facing text
     # only - the teacher key may name the thing in order to explain why it is absent.
     student = student_text(spec)
+    closer_txt = json.dumps(spec.get("closer", {}), ensure_ascii=False)
     for b in spec.get("banned", []):
-        m = re.search(b["text"], student)
+        hay = student
+        # "except": exact sentences allowed to carry a banned term. Each must sit in the
+        # closer, appear exactly once in student text, and is removed before the search,
+        # so the term stays banned everywhere else.
+        for ok in b.get("except", []):
+            if ok not in closer_txt:
+                raise SystemExit(f"banned-term exception {ok[:50]!r} is not in the closer; "
+                                 "exceptions are scoped to the closer only")
+            if hay.count(ok) != 1:
+                raise SystemExit(f"banned-term exception {ok[:50]!r} must appear exactly once")
+            hay = hay.replace(ok, "")
+        m = re.search(b["text"], hay)
         if m:
             raise SystemExit(f"'{m.group(0)}' appears in student text: {b['why']}")
     check_pointers(spec, text)
@@ -1725,6 +1748,7 @@ def check_spec(spec, titles):
     for b in spec["body"]:
         if b["type"] in ("opener", "connection") and "**" in b["text"] + b.get("after", ""):
             raise SystemExit(f"{b['type']} carries a bold term; bold stays at the defining sentence")
+    check_closer(spec)
     check_front(spec)
     check_refreshers(spec)
     # the tear-off: one single-part question per section, labelled with its code, in order
@@ -1748,6 +1772,70 @@ def check_spec(spec, titles):
     for q in to["questions"]:
         if q["q"].count("?") != 1:
             raise SystemExit(f"tear-off question {q['n']} is not a single question")
+
+
+CLOSER_TYPES = ("p", "example", "figure", "equation", "math")
+
+
+def closer_blocks(spec):
+    return spec.get("closer", {}).get("blocks", [])
+
+
+def check_closer(spec):
+    """The optional closing section ("closer": {"title", "blocks"}), printed after the last
+    numbered section and before the tear-off leaf. It reviews and connects; it does not
+    teach new terms: no bold anywhere in it, no On Your Own or Connection, every box
+    names itself with "label", and no tear-off question may point at it (the questions are
+    one per numbered section, checked below)."""
+    cl = spec.get("closer")
+    if cl is None:
+        return
+    if not cl.get("title") or not cl.get("blocks"):
+        raise SystemExit("closer needs a title and at least one block")
+    if "**" in json.dumps(cl, ensure_ascii=False):
+        raise SystemExit("the closer carries a bold term; it adds no vocabulary")
+    for b in cl["blocks"]:
+        if b["type"] not in CLOSER_TYPES:
+            raise SystemExit(f"closer block {b['type']!r}: use one of {CLOSER_TYPES}")
+        if b["type"] == "example" and "label" not in b:
+            raise SystemExit("a closer box needs a 'label' (it is not a numbered Example)")
+
+
+def closer_head(doc, title, pal):
+    """The closer's heading: the section-head family (Narrow caps over the course rule),
+    with no section number, because the closer is not a numbered section."""
+    p = doc.add_paragraph()
+    _spacing(p, 9, 4, SEC_TITLE * 1.2)
+    keep_next(p)
+    p.paragraph_format.keep_together = True
+    add(p, title.upper(), SEC_TITLE, color=pal.ink, bold=True, face=NARROW)
+    bottom_rule(p, pal.display, W_ACCENT, 2)
+    return p
+
+
+def closer(doc, spec, pal, fig_dir):
+    cl = spec.get("closer")
+    if not cl:
+        return
+    closer_head(doc, cl["title"], pal)
+    blocks = cl["blocks"]
+    for bi, blk in enumerate(blocks):
+        t = blk["type"]
+        if t == "p":
+            bp = body_p(doc, blk["text"], pal, after=2)
+            if bi and blocks[bi - 1]["type"] == "p":
+                bp.paragraph_format.first_line_indent = Inches(INDENT_IN)
+            if bi + 1 < len(blocks) and blocks[bi + 1]["type"] in ("math", "equation"):
+                keep_next(bp)
+        elif t == "example":
+            example(doc, blk, pal)
+        elif t == "figure":
+            figure(doc, blk, pal, fig_dir)
+        elif t == "equation":
+            equation(doc, blk, pal)
+        elif t == "math":
+            math_row(doc, blk["parts"], pal, COL_W_IN)
+            after_box(doc, 6)
 
 
 def check_pointers(spec, text):
@@ -1863,6 +1951,7 @@ def build_student(spec, out_path, fig_dir, titles, blank_back=False):
             steps(doc, blk, pal)
         else:
             raise SystemExit(f"unknown block type {t!r}")
+    closer(doc, spec, pal, fig_dir)       # optional closing section, before the leaf
     sec = doc.add_section(WD_SECTION.NEW_PAGE)
     set_cols(sec, 1)
     if blank_back:
